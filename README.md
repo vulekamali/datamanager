@@ -8,15 +8,16 @@ About this template
 
 This template makes it easy to build Django apps that fit the Code for South Africa best practices and guidelines.
 
-On the server
-
+On the server:
 * easy to deploy on Heroku or Dokku
 * uses [dj-database-url](https://crate.io/packages/dj-database-url/) for database URL injection
 * uses [django-assets](https://django-assets.readthedocs.org/en/latest/) for asset compilation and fingerprinting
+* uses [pyscss](http://pyscss.readthedocs.org/en/latest/) for compiling SCSS to CSS
 * New Relic for monitoring
 * Bower to install assets
 * better debugging with ``python manage.py runserver_plus`` from [django-extensions](http://django-extensions.readthedocs.org/en/latest/)
 * sane logging to stdout
+* cookies for session storage
 
 On the client:
 * Code for South Africa app templates and layouts
