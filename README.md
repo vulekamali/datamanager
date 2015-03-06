@@ -71,7 +71,6 @@ You will need:
 ```bash
 heroku create
 heroku addons:add heroku-postgresql
-heroku addons:add newrelic:stark
 heroku config:set DJANGO_DEBUG=false \
                   DISABLE_COLLECTSTATIC=1 \
                   DJANGO_SECRET_KEY=some-secret-key \
