@@ -21,6 +21,7 @@ On the server:
 
 On the client:
 * Code for South Africa app templates and layouts
+* JQuery
 * Google Analytics
 * Bootstrap
 * FontAwesome
@@ -39,7 +40,7 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-Edit ``settings.py`` and set some options
+Edit ``code4sa/settings.py`` and set some options
 
 * ``GOOGLE_ANALYTICS_ID`` to the GA tracking code
 
@@ -56,7 +57,8 @@ Using the template
 
 * Put javascript into ``code4sa/static/javascript/app.js``
 * Put SCSS stylesheets into ``code4sa/static/stylesheets/app.scss``
-* To install new asset packs, using ``bower install -Sp package-to-install``
+* Install new asset packs with Bower: ``bower install -Sp package-to-install``
+* Get better debugging with ``python manage.py runserver_plus``
 
 Production deployment
 ---------------------
