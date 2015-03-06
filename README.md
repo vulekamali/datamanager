@@ -8,18 +8,21 @@ About this template
 
 This template makes it easy to build Django apps that fit the Code for South Africa best practices and guidelines.
 
-* On the server:
- * easy to deploy on Heroku or Dokku
- * uses [dj-database-url](https://crate.io/packages/dj-database-url/) for database URL injection
- * uses [django-assets](https://django-assets.readthedocs.org/en/latest/) for asset compilation and fingerprinting
- * New Relic for monitoring
- * better debugging with ``python manage.py runserver_plus`` from [django-extensions](http://django-extensions.readthedocs.org/en/latest/)
- * sane logging to stdout
-* On the client:
- * Code for South Africa app templates and layouts
- * Google Analytics
- * Bootstrap
- * FontAwesome
+On the server
+
+* easy to deploy on Heroku or Dokku
+* uses [dj-database-url](https://crate.io/packages/dj-database-url/) for database URL injection
+* uses [django-assets](https://django-assets.readthedocs.org/en/latest/) for asset compilation and fingerprinting
+* New Relic for monitoring
+* Bower to install assets
+* better debugging with ``python manage.py runserver_plus`` from [django-extensions](http://django-extensions.readthedocs.org/en/latest/)
+* sane logging to stdout
+
+On the client:
+* Code for South Africa app templates and layouts
+* Google Analytics
+* Bootstrap
+* FontAwesome
 
 Setting up the template
 -----------------------
@@ -52,6 +55,7 @@ Using the template
 
 * Put javascript into ``code4sa/static/javascript/app.js``
 * Put SCSS stylesheets into ``code4sa/static/stylesheets/app.scss``
+* To install new asset packs, using ``bower install -Sp package-to-install``
 
 Production deployment
 ---------------------

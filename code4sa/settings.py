@@ -26,7 +26,7 @@ else:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # XXX set me
-GOOGLE_ANALYTICS_ID = set this to something
+GOOGLE_ANALYTICS_ID = 'set this to something'
 
 ALLOWED_HOSTS = ['*']
 
@@ -116,6 +116,12 @@ STATICFILES_FINDERS = (
    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
    "django_assets.finders.AssetsFinder"
 )
+
+import scss
+scss.config.LOAD_PATHS = [
+        os.path.join(BASE_DIR, 'code4sa', 'static'),
+        os.path.join(BASE_DIR, 'code4sa', 'static', 'bower_components'),
+        ]
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
