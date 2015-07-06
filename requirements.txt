@@ -3,7 +3,9 @@ Werkzeug==0.10.1
 dj-database-url==0.3.0
 django-assets==0.10
 django-extensions==1.5.0
+django-pipeline==1.5.1
 enum34==1.0.4
+futures==3.0.2
 gevent==1.0.1
 greenlet==0.4.5
 gunicorn==19.2.1

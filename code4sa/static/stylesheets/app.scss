@@ -1,4 +1,6 @@
-@import 'bootstrap-sass/assets/stylesheets/bootstrap';
-@import 'bootstrap-sass/assets/stylesheets/bootstrap/theme';
+$icon-font-path: '../bower_components/bootstrap-sass/assets/fonts/bootstrap/';
+
+@import 'bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import 'bootstrap-sass/assets/stylesheets/bootstrap/theme.scss';
 
 // put application-specific styles here
