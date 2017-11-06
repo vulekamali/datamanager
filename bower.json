@@ -1,10 +1,10 @@
 {
-  "name": "code4sa-django-template",
+  "name": "budget-portal",
   "version": "0.0.1",
   "authors": [
     "Greg Kempe <greg@code4sa.org>"
   ],
-  "description": "Code4SA Django Template",
+  "description": "Treasury Budget Portal",
   "moduleType": [
     "globals"
   ],
@@ -15,7 +15,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "code4sa/static/bower_components",
+    "budgetportal/static/bower_components",
     "test",
     "tests"
   ],
