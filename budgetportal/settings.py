@@ -1,5 +1,5 @@
 """
-Django settings for code4sa project.
+Django settings for budgetportal project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -25,8 +25,7 @@ if DEBUG:
 else:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
-# XXX set me
-GOOGLE_ANALYTICS_ID = set this to something
+GOOGLE_ANALYTICS_ID = "UA-93649482-8"
 
 ALLOWED_HOSTS = ['*']
 
@@ -43,7 +42,7 @@ INSTALLED_APPS = (
     'pipeline',
     'django_extensions',
 
-    'code4sa',
+    'budgetportal',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,9 +55,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'code4sa.urls'
+ROOT_URLCONF = 'budgetportal.urls'
 
-WSGI_APPLICATION = 'code4sa.wsgi.application'
+WSGI_APPLICATION = 'budgetportal.wsgi.application'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
@@ -95,7 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    "code4sa.context_processors.google_analytics",
+    "budgetportal.context_processors.google_analytics",
 )
 
 
@@ -119,8 +118,8 @@ STATICFILES_FINDERS = (
 )
 
 PYSCSS_LOAD_PATHS = [
-    os.path.join(BASE_DIR, 'code4sa', 'static'),
-    os.path.join(BASE_DIR, 'code4sa', 'static', 'bower_components'),
+    os.path.join(BASE_DIR, 'budgetportal', 'static'),
+    os.path.join(BASE_DIR, 'budgetportal', 'static', 'bower_components'),
 ]
 
 PIPELINE_CSS = {
@@ -145,12 +144,12 @@ PIPELINE_CSS_COMPRESSOR = None
 PIPELINE_JS_COMPRESSOR = None
 
 PIPELINE_COMPILERS = (
-    'code4sa.pipeline.PyScssCompiler',
+    'budgetportal.pipeline.PyScssCompiler',
 )
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'code4sa.pipeline.GzipManifestPipelineStorage'
+STATICFILES_STORAGE = 'budgetportal.pipeline.GzipManifestPipelineStorage'
 
 
 # Logging

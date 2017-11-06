@@ -10,11 +10,7 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-Edit ``code4sa/settings.py`` and set some options
-
-* ``GOOGLE_ANALYTICS_ID`` to the GA tracking code
-
-Finally, setup the database:
+Setup the database:
 
 ```
 python manage.py migrate
@@ -25,8 +21,8 @@ python manage.py runserver
 Development
 -----------
 
-* Put javascript into ``code4sa/static/javascript/app.js``
-* Put SCSS stylesheets into ``code4sa/static/stylesheets/app.scss``
+* Put javascript into ``budgetportal/static/javascript/app.js``
+* Put SCSS stylesheets into ``budgetportal/static/stylesheets/app.scss``
 * Install new asset packs with Bower: ``bower install -Sp package-to-install``
 * Get better debugging with ``python manage.py runserver_plus``
 
