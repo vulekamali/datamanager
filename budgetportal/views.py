@@ -1,5 +1,4 @@
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponse, Http404
 from models import FinancialYear
 import yaml
 
@@ -9,12 +8,14 @@ def department_list(request, financial_year_id):
         'financial_years': [],
     }
 
-    selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
-
-    for year in FinancialYear.objects.all().order_by('slug'):
+    selected_year = None
+    for year in FinancialYear.get_all():
+        is_selected = year.id == financial_year_id
+        if is_selected:
+            selected_year = year
         context['financial_years'].append({
-            'id': year.slug,
-            'is_selected': year == selected_year,
+            'id': year.id,
+            'is_selected': is_selected,
         })
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
