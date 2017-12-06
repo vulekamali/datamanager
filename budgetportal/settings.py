@@ -65,7 +65,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 import dj_database_url
-db_config = dj_database_url.config(default='sqlite:///db.sqlite3')
+db_config = dj_database_url.config(default='postgres://budgetportal@localhost/budgetportal')
 db_config['ATOMIC_REQUESTS'] = True
 DATABASES = {
     'default': db_config,
@@ -88,18 +88,20 @@ USE_L10N = True
 USE_TZ = True
 
 # Templates
-TEMPLATE_DEBUG = DEBUG
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    "budgetportal.context_processors.google_analytics",
-)
-
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "budgetportal.context_processors.google_analytics",
+            ],
+        },
+    },
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -125,30 +127,31 @@ PYSCSS_LOAD_PATHS = [
     os.path.join(BASE_DIR, 'budgetportal', 'static', 'bower_components'),
 ]
 
-PIPELINE_CSS = {
-    'css': {
-        'source_filenames': (
-            'bower_components/fontawesome/css/font-awesome.css',
-            'stylesheets/app.scss',
-        ),
-        'output_filename': 'app.css',
+PIPELINE = {
+    'STYLESHEETS': {
+        'css': {
+            'source_filenames': (
+                'bower_components/fontawesome/css/font-awesome.css',
+                'stylesheets/app.scss',
+            ),
+            'output_filename': 'app.css',
+        },
     },
-}
-PIPELINE_JS = {
-    'js': {
-        'source_filenames': (
-            'bower_components/jquery/dist/jquery.min.js',
-            'javascript/app.js',
-        ),
-        'output_filename': 'app.js',
+    'JAVASCRIPT': {
+        'js': {
+            'source_filenames': (
+                'bower_components/jquery/dist/jquery.min.js',
+                'javascript/app.js',
+            ),
+            'output_filename': 'app.js',
+        },
     },
+    'CSS_COMPRESSOR': None,
+    'JS_COMPRESSOR': None,
+    'COMPILERS': (
+        'budgetportal.pipeline.PyScssCompiler',
+    ),
 }
-PIPELINE_CSS_COMPRESSOR = None
-PIPELINE_JS_COMPRESSOR = None
-
-PIPELINE_COMPILERS = (
-    'budgetportal.pipeline.PyScssCompiler',
-)
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
