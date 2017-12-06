@@ -71,6 +71,9 @@ DATABASES = {
     'default': db_config,
 }
 
+from ckanapi import RemoteCKAN
+CKAN = RemoteCKAN('https://treasurydata.openup.org.za')
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 

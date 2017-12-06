@@ -9,14 +9,7 @@ urlpatterns = patterns(
     '',
     url(r'^$', 'budgetportal.views.home', name='home'),
 
+    # Department List
     url(r'^(?P<financial_year>[\w-]+)'
-        '/national'
-        '/departments'
-        '/(?P<department_name_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department),
-        kwargs={'sphere': 'national', 'geographic_region_slug': 'south-africa'}),
-    url(r'^(?P<financial_year>[\w]+)'
-        '/(?P<sphere>[\w]+)'
-        '/(?P<geographic_region_slug>[\w_]+)'
-        '/departments'
-        '/(?P<department_slug>[\w_]+)$', cache_page(CACHE_SECS)(views.department)),
+        '/departments.yaml', cache_page(CACHE_SECS)(views.department_list)),
 )

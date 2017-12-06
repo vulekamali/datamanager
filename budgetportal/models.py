@@ -1,6 +1,9 @@
 from django.utils.text import slugify
 import requests
 from requests.adapters import HTTPAdapter
+from django.conf import settings
+
+ckan = settings.CKAN
 
 
 class Government():
@@ -117,6 +120,15 @@ class FinancialYear():
 
     def get_sphere(self, name):
         return getattr(self, name)
+
+    @staticmethod
+    def get_all():
+        response = ckan.action.package_search(**{
+            'q':'', 'facet.field':'["vocab_financial_years"]', 'rows':0})
+        years_facet = response['search_facets']['vocab_financial_years']['items']
+        years_facet.sort(key=lambda f: f['name'])
+        for year in years_facet:
+            yield FinancialYear(year['name'])
 
 
 def extras_get(extras, key):
