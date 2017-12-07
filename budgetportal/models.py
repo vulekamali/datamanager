@@ -1,9 +1,11 @@
 from django.conf import settings
 from django.utils.text import slugify
 from requests.adapters import HTTPAdapter
+import logging
 import re
 import requests
 
+logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
 
@@ -44,7 +46,7 @@ class Department():
             if re.match('^(ENE|EPRE) Section', resource['name']):
                 name = re.sub('^(ENE|EPRE) Section - ', '', resource['name'])
                 name_slug = slugify(name)
-                print "Downloading %s" % resource['url']
+                logger.info("Downloading %s" % resource['url'])
                 r = requests.get(resource['url'])
                 r.raise_for_status()
                 r.encoding = 'utf-8'
