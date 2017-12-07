@@ -80,6 +80,8 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'slug': str(department.government.slug),
         },
         'financial_years': financial_years_context,
+        'narratives': department.narratives,
+        'resources': department.resources,
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')

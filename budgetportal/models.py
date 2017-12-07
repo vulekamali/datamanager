@@ -1,5 +1,8 @@
-from django.utils.text import slugify
 from django.conf import settings
+from django.utils.text import slugify
+from requests.adapters import HTTPAdapter
+import re
+import requests
 
 ckan = settings.CKAN
 
@@ -7,14 +10,71 @@ ckan = settings.CKAN
 class Department():
     organisational_unit = 'department'
 
-    def __init__(self, government, name, vote_number):
+    def __init__(self, government, name, vote_number, ckan_package_name):
+        self._ckan_package_name = ckan_package_name
         self.government = government
         self.name = name
         self.slug = slugify(self.name)
         self.vote_number = vote_number
+        self._narratives = None
+        self._resources = None
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
+
+    @property
+    def narratives(self):
+        if self._narratives is None:
+            self._fetch_resources()
+        return self._narratives
+
+    @property
+    def resources(self):
+        if self._resources is None:
+            self._fetch_resources()
+        return self._resources
+
+    def _fetch_resources(self):
+        self._narratives = []
+        self._resources = {}
+
+        package = ckan.action.package_show(id=self._ckan_package_name)
+
+        for resource in package['resources']:
+            if re.match('^(ENE|EPRE) Section', resource['name']):
+                name = re.sub('^(ENE|EPRE) Section - ', '', resource['name'])
+                name_slug = slugify(name)
+                print "Downloading %s" % resource['url']
+                r = requests.get(resource['url'])
+                r.raise_for_status()
+                r.encoding = 'utf-8'
+                content = r.text
+                self._narratives.append({
+                    'name': name,
+                    'content': content,
+                }),
+            if resource['name'].startswith('Vote'):
+                if self.government.sphere.name == 'provincial':
+                    doc_short = "EPRE"
+                    doc_long = "Estimates of Provincial Revenue and Expenditure"
+                elif self.government.sphere.name == 'national':
+                    doc_short = "ENE"
+                    doc_long = "Estimates of National Expenditure"
+                else:
+                    raise Exception("unexpected sphere")
+                name = "%s for %s" % (doc_short, resource['name'])
+                description = ("The %s (%s) sets out the detailed spending "
+                               "plans of each government department for the "
+                               "coming year.") % (doc_long, doc_short)
+                if name not in self._resources:
+                    self._resources[name] = {
+                        'description': description,
+                        'formats': [],
+                    }
+                self._resources[name]['formats'].append({
+                    'url': resource['url'],
+                    'format': resource['format'],
+                })
 
 
 class Government():
@@ -65,7 +125,8 @@ class Government():
         for package in response['results']:
             department_name = extras_get(package['extras'], 'department_name')
             vote_number = extras_get(package['extras'], 'vote_number')
-            self._departments.append(Department(self, department_name, int(vote_number)))
+            department = Department(self, department_name, int(vote_number), package['name'])
+            self._departments.append(department)
 
 
 class Sphere():
