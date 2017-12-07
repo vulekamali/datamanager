@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.utils.text import slugify
-from requests.adapters import HTTPAdapter
 import logging
 import re
 import requests
