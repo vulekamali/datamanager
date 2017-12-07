@@ -45,3 +45,22 @@ def department_list(request, financial_year_id):
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def department(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    context = {
+        'financial_years': [],
+    }
+
+    selected_year = None
+    for year in FinancialYear.get_all():
+        is_selected = year.id == financial_year_id
+        if is_selected:
+            selected_year = year
+        context['financial_years'].append({
+            'id': year.id,
+            'is_selected': is_selected,
+        })
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
