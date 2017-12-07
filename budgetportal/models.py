@@ -65,7 +65,7 @@ class Government():
         for package in response['results']:
             department_name = extras_get(package['extras'], 'department_name')
             vote_number = extras_get(package['extras'], 'vote_number')
-            self._departments.append(Department(self, department_name, vote_number))
+            self._departments.append(Department(self, department_name, int(vote_number)))
 
 
 
