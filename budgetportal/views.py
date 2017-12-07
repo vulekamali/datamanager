@@ -47,12 +47,8 @@ def department_list(request, financial_year_id):
 
 
 def department(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    context = {
-    }
-
-    financial_years_context = []
-
     department = None
+
     years = list(FinancialYear.get_all())
     for year in years:
         if year.id == financial_year_id:
@@ -61,6 +57,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             government = sphere.get_government_by_slug(government_slug)
             department = government.get_department_by_slug(department_slug)
 
+    financial_years_context = []
     for year in years:
         closest_match, closest_is_exact = year.get_closest_match(department)
         financial_years_context.append({
@@ -74,7 +71,16 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
                 'is_exact_match': closest_is_exact,
             },
         })
-    context['financial_years'] = financial_years_context
+    context = {
+        'name': department.name,
+        'slug': str(department.slug),
+        'vote_number': department.vote_number,
+        'government': {
+            'name': department.government.name,
+            'slug': str(department.government.slug),
+        },
+        'financial_years': financial_years_context,
+    }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
