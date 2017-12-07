@@ -6,6 +6,66 @@ from django.conf import settings
 ckan = settings.CKAN
 
 
+class Government():
+    organisational_unit = 'government'
+
+    def __init__(self, name, sphere):
+        self.name = name
+        self.slug = slugify(self.name)
+        self.sphere = sphere
+        self.departments = []
+
+    def get_url_path(self):
+        if self.sphere.name == 'national':
+            return self.sphere.get_url_path()
+        else:
+            return "%s/%s" % (self.sphere.get_url_path(), self.slug)
+
+    def get_department_by_slug(self, slug):
+        departments = [d for d in self.departments if d.slug == slug]
+        if len(departments) == 0:
+            return None
+        elif len(departments) == 1:
+            return departments[0]
+        else:
+            raise Exception("More matching slugs than expected")
+
+
+class Sphere():
+    organisational_unit = 'sphere'
+
+    def __init__(self, financial_year, name):
+        self.financial_year = financial_year
+        self.name = name
+        self._governments = None
+
+    @property
+    def governments(self):
+        if self._governments is None:
+            self._fetch_governments()
+        return self._governments
+
+    def _fetch_governments(self):
+        if self.name == 'national':
+            self._governments = [Government('South Africa', self)]
+        else:
+            self._governments = []
+            response = ckan.action.package_search(**{
+                'q': '',
+                'facet.field': '["vocab_provinces"]',
+                'rows': 0
+            })
+            province_facet = response['search_facets']['vocab_provinces']['items']
+            for province in province_facet:
+                self._governments.append(Government(province['name'], self))
+
+    def get_url_path(self):
+        return "%s/%s" % (self.financial_year.get_url_path(), self.name)
+
+    def get_government_by_slug(self, slug):
+        return [g for g in self.governments.values() if g.slug == slug][0]
+
+
 class FinancialYear():
     organisational_unit = 'financial_year'
 
@@ -14,6 +74,8 @@ class FinancialYear():
 
     def __init__(self, id):
         self.id = id
+        self.national = Sphere(self, 'national')
+        self.provincial = Sphere(self, 'provincial')
 
     def get_url_path(self):
         return "/%s" % self.id
@@ -21,8 +83,14 @@ class FinancialYear():
     @staticmethod
     def get_all():
         response = ckan.action.package_search(**{
-            'q':'', 'facet.field':'["vocab_financial_years"]', 'rows':0})
+            'q': '',
+            'facet.field': '["vocab_financial_years"]',
+            'rows': 0
+        })
         years_facet = response['search_facets']['vocab_financial_years']['items']
         years_facet.sort(key=lambda f: f['name'])
         for year in years_facet:
             yield FinancialYear(year['name'])
+
+    def get_sphere(self, name):
+        return getattr(self, name)
