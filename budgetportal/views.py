@@ -16,6 +16,13 @@ def department_list(request, financial_year_id):
         context['financial_years'].append({
             'id': year.id,
             'is_selected': is_selected,
+            'closest_match': {
+                'is_exact_match': True,
+                'name': 'Departments',
+                'slug': 'departments',
+                'organisational_unit': 'financial_year',
+                'url_path': "%s/departments" % year.id,
+            },
         })
 
     for sphere_name in ('national', 'provincial'):
