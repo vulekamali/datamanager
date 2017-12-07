@@ -21,9 +21,19 @@ def department_list(request, financial_year_id):
     for sphere_name in ('national', 'provincial'):
         context[sphere_name] = []
         for government in selected_year.get_sphere(sphere_name).governments:
+            departments = []
+            for department in government.departments:
+                departments.append({
+                    'name': department.name,
+                    'slug': str(department.slug),
+                    'vote_number': department.vote_number,
+                    'url_path': department.get_url_path()
+                })
+            departments = sorted(departments, key=lambda d: d['vote_number'])
             context[sphere_name].append({
                 'name': government.name,
                 'slug': str(government.slug),
+                'departments': departments,
             })
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')

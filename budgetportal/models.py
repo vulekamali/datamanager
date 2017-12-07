@@ -1,9 +1,20 @@
 from django.utils.text import slugify
-import requests
-from requests.adapters import HTTPAdapter
 from django.conf import settings
 
 ckan = settings.CKAN
+
+
+class Department():
+    organisational_unit = 'department'
+
+    def __init__(self, government, name, vote_number):
+        self.government = government
+        self.name = name
+        self.slug = slugify(self.name)
+        self.vote_number = vote_number
+
+    def get_url_path(self):
+        return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 
 
 class Government():
@@ -13,7 +24,7 @@ class Government():
         self.name = name
         self.slug = slugify(self.name)
         self.sphere = sphere
-        self.departments = []
+        self._departments = None
 
     def get_url_path(self):
         if self.sphere.name == 'national':
@@ -29,6 +40,33 @@ class Government():
             return departments[0]
         else:
             raise Exception("More matching slugs than expected")
+
+    @property
+    def departments(self):
+        if self._departments is None:
+            self._fetch_departments()
+        return self._departments
+
+    def _fetch_departments(self):
+        self._departments = []
+
+        response = ckan.action.package_search(**{
+            'q': '',
+            'fq': ('vocab_financial_years:"%s"'
+                   '+vocab_spheres:"%s"'
+                   '+extras_geographic_region_slug:"%s"') % (
+                       self.sphere.financial_year.id,
+                       self.sphere.name,
+                       self.slug
+                   ),
+            'rows': 1000,
+        })
+
+        for package in response['results']:
+            department_name = extras_get(package['extras'], 'department_name')
+            vote_number = extras_get(package['extras'], 'vote_number')
+            self._departments.append(Department(self, department_name, vote_number))
+
 
 
 class Sphere():
@@ -52,8 +90,9 @@ class Sphere():
             self._governments = []
             response = ckan.action.package_search(**{
                 'q': '',
+                'fq': 'vocab_financial_years:"%s"' % self.financial_year.id,
                 'facet.field': '["vocab_provinces"]',
-                'rows': 0
+                'rows': 0,
             })
             province_facet = response['search_facets']['vocab_provinces']['items']
             for province in province_facet:
@@ -94,3 +133,7 @@ class FinancialYear():
 
     def get_sphere(self, name):
         return getattr(self, name)
+
+
+def extras_get(extras, key):
+    return [e['value'] for e in extras if e['key'] == key][0]
