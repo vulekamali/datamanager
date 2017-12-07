@@ -68,7 +68,6 @@ class Government():
             self._departments.append(Department(self, department_name, int(vote_number)))
 
 
-
 class Sphere():
     organisational_unit = 'sphere'
 
@@ -102,7 +101,7 @@ class Sphere():
         return "%s/%s" % (self.financial_year.get_url_path(), self.name)
 
     def get_government_by_slug(self, slug):
-        return [g for g in self.governments.values() if g.slug == slug][0]
+        return [g for g in self.governments if g.slug == slug][0]
 
 
 class FinancialYear():
@@ -121,11 +120,12 @@ class FinancialYear():
 
     @staticmethod
     def get_all():
-        response = ckan.action.package_search(**{
+        query = {
             'q': '',
             'facet.field': '["vocab_financial_years"]',
-            'rows': 0
-        })
+            'rows': 0,
+        }
+        response = ckan.action.package_search(**query)
         years_facet = response['search_facets']['vocab_financial_years']['items']
         years_facet.sort(key=lambda f: f['name'])
         for year in years_facet:
@@ -133,6 +133,14 @@ class FinancialYear():
 
     def get_sphere(self, name):
         return getattr(self, name)
+
+    def get_closest_match(self, department):
+        sphere = getattr(self, department.government.sphere.name)
+        government = sphere.get_government_by_slug(department.government.slug)
+        department = government.get_department_by_slug(department.slug)
+        if not department:
+            return government, False
+        return department, True
 
 
 def extras_get(extras, key):
