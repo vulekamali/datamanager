@@ -1,9 +1,6 @@
 from django.conf import settings
 from django.db import models
-from django.utils.text import slugify
 import logging
-import re
-import requests
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -160,5 +157,8 @@ class Department(models.Model):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
-def extras_get(extras, key):
-    return [e['value'] for e in extras if e['key'] == key][0]
+class Programme(models.Model):
+    organisational_unit = 'programme'
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="programmes")
+    slug = models.SlugField(max_length=200)
+    name = models.CharField(max_length=200)
