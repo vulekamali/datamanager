@@ -51,11 +51,9 @@ class FinancialYear(models.Model):
 
 class Sphere(models.Model):
     organisational_unit = 'sphere'
+    slug = models.SlugField(max_length=200, unique=True)
+    name = models.CharField(max_length=200, unique=True)
     financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
-
-    def __init__(self, financial_year, name):
-        self.name = name
-        self._governments = None
 
     @property
     def governments(self):
@@ -90,12 +88,6 @@ class Government(models.Model):
     sphere = models.ForeignKey(Sphere, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=200, unique=True)
     name = models.CharField(max_length=200, unique=True)
-
-    def __init__(self, name, sphere):
-        self.name = name
-        self.slug = slugify(self.name)
-        self.sphere = sphere
-        self._departments = None
 
     def get_url_path(self):
         if self.sphere.name == 'national':
@@ -145,12 +137,8 @@ class Department(models.Model):
     government = models.ForeignKey(Government, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=200, unique=True)
     name = models.CharField(max_length=200, unique=True)
-    vote_number = models.Integer(unique=True)
+    vote_number = models.IntegerField(unique=True)
     intro = models.TextField()
-
-    def __init__(self, government, name, vote_number, ckan_package_name):
-        self._narratives = None
-        self._resources = None
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
