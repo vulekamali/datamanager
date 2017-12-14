@@ -9,27 +9,27 @@ def department_list(request, financial_year_id):
     }
 
     selected_year = None
-    for year in FinancialYear.get_all():
-        is_selected = year.id == financial_year_id
+    for year in FinancialYear.objects.order_by('slug'):
+        is_selected = year.slug == financial_year_id
         if is_selected:
             selected_year = year
         context['financial_years'].append({
-            'id': year.id,
+            'id': year.slug,
             'is_selected': is_selected,
             'closest_match': {
                 'is_exact_match': True,
                 'name': 'Departments',
                 'slug': 'departments',
                 'organisational_unit': 'financial_year',
-                'url_path': "%s/departments" % year.id,
+                'url_path': "%s/departments" % year.slug,
             },
         })
 
     for sphere_name in ('national', 'provincial'):
         context[sphere_name] = []
-        for government in selected_year.get_sphere(sphere_name).governments:
+        for government in selected_year.spheres.filter(slug=sphere_name).first().governments.all():
             departments = []
-            for department in government.departments:
+            for department in government.departments.all():
                 departments.append({
                     'name': department.name,
                     'slug': str(department.slug),
@@ -50,20 +50,20 @@ def department_list(request, financial_year_id):
 def department(request, financial_year_id, sphere_slug, government_slug, department_slug):
     department = None
 
-    years = list(FinancialYear.get_all())
+    years = list(FinancialYear.objects.order_by('slug'))
     for year in years:
-        if year.id == financial_year_id:
+        if year.slug == financial_year_id:
             selected_year = year
-            sphere = selected_year.get_sphere(sphere_slug)
-            government = sphere.get_government_by_slug(government_slug)
-            department = government.get_department_by_slug(department_slug)
+            sphere = selected_year.spheres.filter(slug=sphere_slug).first()
+            government = sphere.governments.filter(slug=government_slug).first()
+            department = government.departments.filter(slug=department_slug).first()
 
     financial_years_context = []
     for year in years:
         closest_match, closest_is_exact = year.get_closest_match(department)
         financial_years_context.append({
-            'id': year.id,
-            'is_selected': year.id == financial_year_id,
+            'id': year.slug,
+            'is_selected': year.slug == financial_year_id,
             'closest_match': {
                 'name': closest_match.name,
                 'slug': str(closest_match.slug),
@@ -81,8 +81,8 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'slug': str(department.government.slug),
         },
         'financial_years': financial_years_context,
-        'narratives': department.narratives,
-        'resources': department.resources,
+        'intro': department.intro,
+        'resources': department.get_resources(),
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
