@@ -74,15 +74,18 @@ class Sphere(models.Model):
 
     @property
     def governments(self):
-        if self._governments is None:
+        if not self.government_set.all():
             self._fetch_governments()
-        return self._governments
+        return self.government_set.all()
 
     def _fetch_governments(self):
         if self.name == 'national':
-            self._governments = [Government('South Africa', self)]
+            Government.objects.get_or_create(
+                name='South Africa',
+                slug='south-africa',
+                sphere=self,
+            )
         else:
-            self._governments = []
             response = ckan.action.package_search(**{
                 'q': '',
                 'fq': 'vocab_financial_years:"%s"' % self.financial_year.slug,
@@ -91,7 +94,11 @@ class Sphere(models.Model):
             })
             province_facet = response['search_facets']['vocab_provinces']['items']
             for province in province_facet:
-                self._governments.append(Government(province['name'], self))
+                Government.objects.get_or_create(
+                    name=province['name'],
+                    slug=slugify(province['name']),
+                    sphere=self,
+                )
 
     def get_url_path(self):
         return "%s/%s" % (self.financial_year.get_url_path(), self.name)
