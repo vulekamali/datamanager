@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from . import views
 
-CACHE_SECS = 0 # 12 * 60 * 60
+CACHE_SECS = 12 * 60 * 60
 
 
 urlpatterns = [
