@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db import models
 from django.utils.text import slugify
 import logging
 import re
@@ -8,15 +9,146 @@ logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
 
-class Department():
-    organisational_unit = 'department'
+class FinancialYear(models.Model):
+    organisational_unit = 'financial_year'
+    slug = models.SlugField(max_length=7, unique=True)
 
-    def __init__(self, government, name, vote_number, ckan_package_name):
-        self._ckan_package_name = ckan_package_name
-        self.government = government
+    @property
+    def national(self):
+        return self.spheres.objects.filter(slug='national')[0]
+
+    @property
+    def provincial(self):
+        return self.spheres.objects.filter(slug='provincial')[0]
+
+    def get_url_path(self):
+        return "/%s" % self.id
+
+    @staticmethod
+    def get_all():
+        query = {
+            'q': '',
+            'facet.field': '["vocab_financial_years"]',
+            'rows': 0,
+        }
+        response = ckan.action.package_search(**query)
+        years_facet = response['search_facets']['vocab_financial_years']['items']
+        years_facet.sort(key=lambda f: f['name'])
+        for year in years_facet:
+            yield FinancialYear(slug=year['name'])
+
+    def get_sphere(self, name):
+        return getattr(self, name)
+
+    def get_closest_match(self, department):
+        sphere = getattr(self, department.government.sphere.name)
+        government = sphere.get_government_by_slug(department.government.slug)
+        department = government.get_department_by_slug(department.slug)
+        if not department:
+            return government, False
+        return department, True
+
+
+class Sphere(models.Model):
+    organisational_unit = 'sphere'
+    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
+
+    def __init__(self, financial_year, name):
+        self.name = name
+        self._governments = None
+
+    @property
+    def governments(self):
+        if self._governments is None:
+            self._fetch_governments()
+        return self._governments
+
+    def _fetch_governments(self):
+        if self.name == 'national':
+            self._governments = [Government('South Africa', self)]
+        else:
+            self._governments = []
+            response = ckan.action.package_search(**{
+                'q': '',
+                'fq': 'vocab_financial_years:"%s"' % self.financial_year.id,
+                'facet.field': '["vocab_provinces"]',
+                'rows': 0,
+            })
+            province_facet = response['search_facets']['vocab_provinces']['items']
+            for province in province_facet:
+                self._governments.append(Government(province['name'], self))
+
+    def get_url_path(self):
+        return "%s/%s" % (self.financial_year.get_url_path(), self.name)
+
+    def get_government_by_slug(self, slug):
+        return [g for g in self.governments if g.slug == slug][0]
+
+
+class Government(models.Model):
+    organisational_unit = 'government'
+    sphere = models.ForeignKey(Sphere, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=200, unique=True)
+    name = models.CharField(max_length=200, unique=True)
+
+    def __init__(self, name, sphere):
         self.name = name
         self.slug = slugify(self.name)
-        self.vote_number = vote_number
+        self.sphere = sphere
+        self._departments = None
+
+    def get_url_path(self):
+        if self.sphere.name == 'national':
+            return self.sphere.get_url_path()
+        else:
+            return "%s/%s" % (self.sphere.get_url_path(), self.slug)
+
+    def get_department_by_slug(self, slug):
+        departments = [d for d in self.departments if d.slug == slug]
+        if len(departments) == 0:
+            return None
+        elif len(departments) == 1:
+            return departments[0]
+        else:
+            raise Exception("More matching slugs than expected")
+
+    @property
+    def departments(self):
+        if self._departments is None:
+            self._fetch_departments()
+        return self._departments
+
+    def _fetch_departments(self):
+        self._departments = []
+
+        response = ckan.action.package_search(**{
+            'q': '',
+            'fq': ('vocab_financial_years:"%s"'
+                   '+vocab_spheres:"%s"'
+                   '+extras_geographic_region_slug:"%s"') % (
+                       self.sphere.financial_year.id,
+                       self.sphere.name,
+                       self.slug
+                   ),
+            'rows': 1000,
+        })
+
+        for package in response['results']:
+            department_name = extras_get(package['extras'], 'department_name')
+            vote_number = extras_get(package['extras'], 'vote_number')
+            department = Department(self, department_name, int(vote_number), package['name'])
+            self._departments.append(department)
+
+
+class Department(models.Model):
+    organisational_unit = 'department'
+    government = models.ForeignKey(Government, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=200, unique=True)
+    name = models.CharField(max_length=200, unique=True)
+    vote_number = models.Integer(unique=True)
+    intro = models.TextField()
+
+    def __init__(self, government, name, vote_number, ckan_package_name):
         self._narratives = None
         self._resources = None
 
@@ -76,133 +208,6 @@ class Department():
                     'url': resource['url'],
                     'format': resource['format'],
                 })
-
-
-class Government():
-    organisational_unit = 'government'
-
-    def __init__(self, name, sphere):
-        self.name = name
-        self.slug = slugify(self.name)
-        self.sphere = sphere
-        self._departments = None
-
-    def get_url_path(self):
-        if self.sphere.name == 'national':
-            return self.sphere.get_url_path()
-        else:
-            return "%s/%s" % (self.sphere.get_url_path(), self.slug)
-
-    def get_department_by_slug(self, slug):
-        departments = [d for d in self.departments if d.slug == slug]
-        if len(departments) == 0:
-            return None
-        elif len(departments) == 1:
-            return departments[0]
-        else:
-            raise Exception("More matching slugs than expected")
-
-    @property
-    def departments(self):
-        if self._departments is None:
-            self._fetch_departments()
-        return self._departments
-
-    def _fetch_departments(self):
-        self._departments = []
-
-        response = ckan.action.package_search(**{
-            'q': '',
-            'fq': ('vocab_financial_years:"%s"'
-                   '+vocab_spheres:"%s"'
-                   '+extras_geographic_region_slug:"%s"') % (
-                       self.sphere.financial_year.id,
-                       self.sphere.name,
-                       self.slug
-                   ),
-            'rows': 1000,
-        })
-
-        for package in response['results']:
-            department_name = extras_get(package['extras'], 'department_name')
-            vote_number = extras_get(package['extras'], 'vote_number')
-            department = Department(self, department_name, int(vote_number), package['name'])
-            self._departments.append(department)
-
-
-class Sphere():
-    organisational_unit = 'sphere'
-
-    def __init__(self, financial_year, name):
-        self.financial_year = financial_year
-        self.name = name
-        self._governments = None
-
-    @property
-    def governments(self):
-        if self._governments is None:
-            self._fetch_governments()
-        return self._governments
-
-    def _fetch_governments(self):
-        if self.name == 'national':
-            self._governments = [Government('South Africa', self)]
-        else:
-            self._governments = []
-            response = ckan.action.package_search(**{
-                'q': '',
-                'fq': 'vocab_financial_years:"%s"' % self.financial_year.id,
-                'facet.field': '["vocab_provinces"]',
-                'rows': 0,
-            })
-            province_facet = response['search_facets']['vocab_provinces']['items']
-            for province in province_facet:
-                self._governments.append(Government(province['name'], self))
-
-    def get_url_path(self):
-        return "%s/%s" % (self.financial_year.get_url_path(), self.name)
-
-    def get_government_by_slug(self, slug):
-        return [g for g in self.governments if g.slug == slug][0]
-
-
-class FinancialYear():
-    organisational_unit = 'financial_year'
-
-    class Meta:
-        managed = False
-
-    def __init__(self, id):
-        self.id = id
-        self.national = Sphere(self, 'national')
-        self.provincial = Sphere(self, 'provincial')
-
-    def get_url_path(self):
-        return "/%s" % self.id
-
-    @staticmethod
-    def get_all():
-        query = {
-            'q': '',
-            'facet.field': '["vocab_financial_years"]',
-            'rows': 0,
-        }
-        response = ckan.action.package_search(**query)
-        years_facet = response['search_facets']['vocab_financial_years']['items']
-        years_facet.sort(key=lambda f: f['name'])
-        for year in years_facet:
-            yield FinancialYear(year['name'])
-
-    def get_sphere(self, name):
-        return getattr(self, name)
-
-    def get_closest_match(self, department):
-        sphere = getattr(self, department.government.sphere.name)
-        government = sphere.get_government_by_slug(department.government.slug)
-        department = government.get_department_by_slug(department.slug)
-        if not department:
-            return government, False
-        return department, True
 
 
 def extras_get(extras, key):
