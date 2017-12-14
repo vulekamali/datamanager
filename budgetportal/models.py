@@ -15,14 +15,14 @@ class FinancialYear(models.Model):
 
     @property
     def national(self):
-        return self.spheres.objects.filter(slug='national')[0]
+        return self.spheres.filter(slug='national')[0]
 
     @property
     def provincial(self):
-        return self.spheres.objects.filter(slug='provincial')[0]
+        return self.spheres.filter(slug='provincial')[0]
 
     def get_url_path(self):
-        return "/%s" % self.id
+        return "/%s" % self.slug
 
     @staticmethod
     def get_all():
@@ -35,7 +35,18 @@ class FinancialYear(models.Model):
         years_facet = response['search_facets']['vocab_financial_years']['items']
         years_facet.sort(key=lambda f: f['name'])
         for year in years_facet:
-            yield FinancialYear(slug=year['name'])
+            year_obj, created = FinancialYear.objects.get_or_create(slug=year['name'])
+            obj, created = Sphere.objects.get_or_create(
+                financial_year=year_obj,
+                name='National',
+                slug='national'
+            )
+            obj, created = Sphere.objects.get_or_create(
+                financial_year=year_obj,
+                name='Provincial',
+                slug='provincial'
+            )
+            yield year_obj
 
     def get_sphere(self, name):
         return getattr(self, name)
@@ -51,9 +62,15 @@ class FinancialYear(models.Model):
 
 class Sphere(models.Model):
     organisational_unit = 'sphere'
-    slug = models.SlugField(max_length=200, unique=True)
-    name = models.CharField(max_length=200, unique=True)
-    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=200)
+    name = models.CharField(max_length=200)
+    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE, related_name="spheres")
+
+    class Meta:
+        unique_together = (
+            ('financial_year', 'slug'),
+            ('financial_year', 'name'),
+        )
 
     @property
     def governments(self):
@@ -68,7 +85,7 @@ class Sphere(models.Model):
             self._governments = []
             response = ckan.action.package_search(**{
                 'q': '',
-                'fq': 'vocab_financial_years:"%s"' % self.financial_year.id,
+                'fq': 'vocab_financial_years:"%s"' % self.financial_year.slug,
                 'facet.field': '["vocab_provinces"]',
                 'rows': 0,
             })
@@ -118,7 +135,7 @@ class Government(models.Model):
             'fq': ('vocab_financial_years:"%s"'
                    '+vocab_spheres:"%s"'
                    '+extras_geographic_region_slug:"%s"') % (
-                       self.sphere.financial_year.id,
+                       self.sphere.financial_year.slug,
                        self.sphere.name,
                        self.slug
                    ),

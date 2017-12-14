@@ -10,18 +10,18 @@ def department_list(request, financial_year_id):
 
     selected_year = None
     for year in FinancialYear.get_all():
-        is_selected = year.id == financial_year_id
+        is_selected = year.slug == financial_year_id
         if is_selected:
             selected_year = year
         context['financial_years'].append({
-            'id': year.id,
+            'id': year.slug,
             'is_selected': is_selected,
             'closest_match': {
                 'is_exact_match': True,
                 'name': 'Departments',
                 'slug': 'departments',
                 'organisational_unit': 'financial_year',
-                'url_path': "%s/departments" % year.id,
+                'url_path': "%s/departments" % year.slug,
             },
         })
 
@@ -52,7 +52,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
 
     years = list(FinancialYear.get_all())
     for year in years:
-        if year.id == financial_year_id:
+        if year.slug == financial_year_id:
             selected_year = year
             sphere = selected_year.get_sphere(sphere_slug)
             government = sphere.get_government_by_slug(government_slug)
@@ -62,8 +62,8 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     for year in years:
         closest_match, closest_is_exact = year.get_closest_match(department)
         financial_years_context.append({
-            'id': year.id,
-            'is_selected': year.id == financial_year_id,
+            'id': year.slug,
+            'is_selected': year.slug == financial_year_id,
             'closest_match': {
                 'name': closest_match.name,
                 'slug': str(closest_match.slug),
