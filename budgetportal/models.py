@@ -52,7 +52,7 @@ class FinancialYear(models.Model):
         return getattr(self, name)
 
     def get_closest_match(self, department):
-        sphere = getattr(self, department.government.sphere.name)
+        sphere = self.spheres.filter(slug=department.government.sphere.slug)[0]
         government = sphere.get_government_by_slug(department.government.slug)
         department = government.get_department_by_slug(department.slug)
         if not department:
@@ -110,7 +110,7 @@ class Sphere(models.Model):
                 )
 
     def get_url_path(self):
-        return "%s/%s" % (self.financial_year.get_url_path(), self.name)
+        return "%s/%s" % (self.financial_year.get_url_path(), self.slug)
 
     def get_government_by_slug(self, slug):
         return [g for g in self.governments if g.slug == slug][0]
@@ -132,7 +132,7 @@ class Government(models.Model):
         )
 
     def get_url_path(self):
-        if self.sphere.name == 'national':
+        if self.sphere.slug == 'national':
             return self.sphere.get_url_path()
         else:
             return "%s/%s" % (self.sphere.get_url_path(), self.slug)
@@ -213,30 +213,32 @@ class Department(models.Model):
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 
-    @property
-    def narratives(self):
-        if self._narratives is None:
-            self._fetch_resources()
-        return self._narratives
+    def get_resources(self):
+        resources = {}
 
-    @property
-    def resources(self):
-        if self._resources is None:
-            self._fetch_resources()
-        return self._resources
-
-    def _fetch_resources(self):
-        self._narratives = []
-        self._resources = {}
-
-        package = ckan.action.package_show(id=self._ckan_package_name)
+        query = {
+            'q': '',
+            'fq': ('vocab_financial_years:"%s"'
+                   '+vocab_spheres:"%s"'
+                   '+extras_geographic_region_slug:"%s"'
+                   '+extras_department_name_slug:"%s"') % (
+                       self.government.sphere.financial_year.slug,
+                       self.government.sphere.slug,
+                       self.government.slug,
+                       self.slug,
+                   ),
+            'rows': 1,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info("query %r returned %d results", query, len(response['results']))
+        package = response['results'][0]
 
         for resource in package['resources']:
             if resource['name'].startswith('Vote'):
-                if self.government.sphere.name == 'provincial':
+                if self.government.sphere.slug == 'provincial':
                     doc_short = "EPRE"
                     doc_long = "Estimates of Provincial Revenue and Expenditure"
-                elif self.government.sphere.name == 'national':
+                elif self.government.sphere.slug == 'national':
                     doc_short = "ENE"
                     doc_long = "Estimates of National Expenditure"
                 else:
@@ -245,15 +247,16 @@ class Department(models.Model):
                 description = ("The %s (%s) sets out the detailed spending "
                                "plans of each government department for the "
                                "coming year.") % (doc_long, doc_short)
-                if name not in self._resources:
-                    self._resources[name] = {
+                if name not in resources:
+                    resources[name] = {
                         'description': description,
                         'formats': [],
                     }
-                self._resources[name]['formats'].append({
+                resources[name]['formats'].append({
                     'url': resource['url'],
                     'format': resource['format'],
                 })
+        return resources
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())

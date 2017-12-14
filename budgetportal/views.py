@@ -27,7 +27,7 @@ def department_list(request, financial_year_id):
 
     for sphere_name in ('national', 'provincial'):
         context[sphere_name] = []
-        for government in selected_year.get_sphere(sphere_name).governments:
+        for government in selected_year.spheres.filter(slug=sphere_name)[0].governments:
             departments = []
             for department in government.departments:
                 departments.append({
@@ -54,7 +54,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     for year in years:
         if year.slug == financial_year_id:
             selected_year = year
-            sphere = selected_year.get_sphere(sphere_slug)
+            sphere = selected_year.spheres.filter(slug=sphere_slug)[0]
             government = sphere.get_government_by_slug(government_slug)
             department = government.get_department_by_slug(department_slug)
 
@@ -81,8 +81,8 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'slug': str(department.government.slug),
         },
         'financial_years': financial_years_context,
-        'narratives': department.narratives,
-        'resources': department.resources,
+        'intro': department.intro,
+        'resources': department.get_resources(),
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
