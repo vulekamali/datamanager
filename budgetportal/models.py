@@ -64,7 +64,11 @@ class Sphere(models.Model):
     organisational_unit = 'sphere'
     slug = models.SlugField(max_length=200)
     name = models.CharField(max_length=200)
-    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE, related_name="spheres")
+    financial_year = models.ForeignKey(
+        FinancialYear,
+        on_delete=models.CASCADE,
+        related_name="spheres",
+    )
 
     class Meta:
         unique_together = (
@@ -79,7 +83,7 @@ class Sphere(models.Model):
         return self.government_set.all()
 
     def _fetch_governments(self):
-        if self.name == 'national':
+        if self.slug == 'national':
             Government.objects.get_or_create(
                 name='South Africa',
                 slug='south-africa',
@@ -110,8 +114,14 @@ class Sphere(models.Model):
 class Government(models.Model):
     organisational_unit = 'government'
     sphere = models.ForeignKey(Sphere, on_delete=models.CASCADE)
-    slug = models.SlugField(max_length=200, unique=True)
-    name = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200)
+    name = models.CharField(max_length=200)
+
+    class Meta:
+        unique_together = (
+            ('sphere', 'slug'),
+            ('sphere', 'name'),
+        )
 
     def get_url_path(self):
         if self.sphere.name == 'national':
@@ -130,13 +140,11 @@ class Government(models.Model):
 
     @property
     def departments(self):
-        if self._departments is None:
+        if not self.department_set.all():
             self._fetch_departments()
-        return self._departments
+        return self.department_set.all()
 
     def _fetch_departments(self):
-        self._departments = []
-
         response = ckan.action.package_search(**{
             'q': '',
             'fq': ('vocab_financial_years:"%s"'
@@ -152,8 +160,25 @@ class Government(models.Model):
         for package in response['results']:
             department_name = extras_get(package['extras'], 'department_name')
             vote_number = extras_get(package['extras'], 'vote_number')
-            department = Department(self, department_name, int(vote_number), package['name'])
-            self._departments.append(department)
+
+            intro = ""
+            for resource in package['resources']:
+                if re.match('^(ENE|EPRE) Section', resource['name']):
+                    name = re.sub('^(ENE|EPRE) Section - ', '', resource['name'])
+                    name_slug = slugify(name)
+                    logger.info("Downloading %s" % resource['url'])
+                    r = requests.get(resource['url'])
+                    r.raise_for_status()
+                    r.encoding = 'utf-8'
+                    content = r.text
+                    intro += "## %s\n\n%s" % (name, content)
+
+            Department.objects.get_or_create(
+                government=self,
+                name=department_name,
+                vote_number=int(vote_number),
+                intro=intro,
+            )
 
 
 class Department(models.Model):
@@ -186,18 +211,6 @@ class Department(models.Model):
         package = ckan.action.package_show(id=self._ckan_package_name)
 
         for resource in package['resources']:
-            if re.match('^(ENE|EPRE) Section', resource['name']):
-                name = re.sub('^(ENE|EPRE) Section - ', '', resource['name'])
-                name_slug = slugify(name)
-                logger.info("Downloading %s" % resource['url'])
-                r = requests.get(resource['url'])
-                r.raise_for_status()
-                r.encoding = 'utf-8'
-                content = r.text
-                self._narratives.append({
-                    'name': name,
-                    'content': content,
-                }),
             if resource['name'].startswith('Vote'):
                 if self.government.sphere.name == 'provincial':
                     doc_short = "EPRE"
