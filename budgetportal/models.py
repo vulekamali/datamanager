@@ -59,6 +59,9 @@ class FinancialYear(models.Model):
             return government, False
         return department, True
 
+    def __str__(self):
+        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
+
 
 class Sphere(models.Model):
     organisational_unit = 'sphere'
@@ -78,7 +81,7 @@ class Sphere(models.Model):
 
     @property
     def governments(self):
-        if not self.government_set.all():
+        if not self.government_set.count():
             self._fetch_governments()
         return self.government_set.all()
 
@@ -90,12 +93,14 @@ class Sphere(models.Model):
                 sphere=self,
             )
         else:
-            response = ckan.action.package_search(**{
+            query = {
                 'q': '',
                 'fq': 'vocab_financial_years:"%s"' % self.financial_year.slug,
                 'facet.field': '["vocab_provinces"]',
                 'rows': 0,
-            })
+            }
+            response = ckan.action.package_search(**query)
+            logger.info("query %r returned %d results", query, len(response['results']))
             province_facet = response['search_facets']['vocab_provinces']['items']
             for province in province_facet:
                 Government.objects.get_or_create(
@@ -109,6 +114,9 @@ class Sphere(models.Model):
 
     def get_government_by_slug(self, slug):
         return [g for g in self.governments if g.slug == slug][0]
+
+    def __str__(self):
+        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
 class Government(models.Model):
@@ -140,28 +148,30 @@ class Government(models.Model):
 
     @property
     def departments(self):
-        if not self.department_set.all():
+        if not self.department_set.count():
             self._fetch_departments()
         return self.department_set.all()
 
     def _fetch_departments(self):
-        response = ckan.action.package_search(**{
+        query = {
             'q': '',
             'fq': ('vocab_financial_years:"%s"'
                    '+vocab_spheres:"%s"'
                    '+extras_geographic_region_slug:"%s"') % (
                        self.sphere.financial_year.slug,
-                       self.sphere.name,
+                       self.sphere.slug,
                        self.slug
                    ),
             'rows': 1000,
-        })
+        }
+        response = ckan.action.package_search(**query)
+        logger.info("query %r returned %d results", query, len(response['results']))
 
         for package in response['results']:
             department_name = extras_get(package['extras'], 'department_name')
             vote_number = extras_get(package['extras'], 'vote_number')
 
-            intro = ""
+            intro_parts = []
             for resource in package['resources']:
                 if re.match('^(ENE|EPRE) Section', resource['name']):
                     name = re.sub('^(ENE|EPRE) Section - ', '', resource['name'])
@@ -171,23 +181,34 @@ class Government(models.Model):
                     r.raise_for_status()
                     r.encoding = 'utf-8'
                     content = r.text
-                    intro += "## %s\n\n%s" % (name, content)
+                    intro_parts.append("## %s\n\n%s" % (name, content))
 
             Department.objects.get_or_create(
                 government=self,
                 name=department_name,
+                slug=slugify(department_name),
                 vote_number=int(vote_number),
-                intro=intro,
+                intro="\n\n".join(intro_parts),
             )
+
+    def __str__(self):
+        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
 class Department(models.Model):
     organisational_unit = 'department'
     government = models.ForeignKey(Government, on_delete=models.CASCADE)
-    slug = models.SlugField(max_length=200, unique=True)
-    name = models.CharField(max_length=200, unique=True)
-    vote_number = models.IntegerField(unique=True)
+    slug = models.SlugField(max_length=200)
+    name = models.CharField(max_length=200)
+    vote_number = models.IntegerField()
     intro = models.TextField()
+
+    class Meta:
+        unique_together = (
+            ('government', 'slug'),
+            ('government', 'name'),
+            ('government', 'vote_number'),
+        )
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -233,6 +254,9 @@ class Department(models.Model):
                     'url': resource['url'],
                     'format': resource['format'],
                 })
+
+    def __str__(self):
+        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
 def extras_get(extras, key):

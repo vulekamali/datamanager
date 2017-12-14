@@ -179,10 +179,9 @@ LOGGING = {
         'level': 'ERROR'
     },
     'loggers': {
-        # put any custom loggers here
-        # 'your_package_name': {
-        #    'level': 'DEBUG' if DEBUG else 'INFO',
-        # },
+        'budgetportal': {
+           'level': 'DEBUG' if DEBUG else 'INFO',
+        },
         'django': {
             'level': 'DEBUG' if DEBUG else 'INFO',
         }
