@@ -9,7 +9,7 @@ def department_list(request, financial_year_id):
     }
 
     selected_year = None
-    for year in FinancialYear.get_all():
+    for year in FinancialYear.objects.order_by('slug'):
         is_selected = year.slug == financial_year_id
         if is_selected:
             selected_year = year
@@ -27,9 +27,9 @@ def department_list(request, financial_year_id):
 
     for sphere_name in ('national', 'provincial'):
         context[sphere_name] = []
-        for government in selected_year.spheres.filter(slug=sphere_name)[0].governments:
+        for government in selected_year.spheres.filter(slug=sphere_name).first().governments.all():
             departments = []
-            for department in government.departments:
+            for department in government.departments.all():
                 departments.append({
                     'name': department.name,
                     'slug': str(department.slug),
@@ -50,13 +50,13 @@ def department_list(request, financial_year_id):
 def department(request, financial_year_id, sphere_slug, government_slug, department_slug):
     department = None
 
-    years = list(FinancialYear.get_all())
+    years = list(FinancialYear.objects.order_by('slug'))
     for year in years:
         if year.slug == financial_year_id:
             selected_year = year
-            sphere = selected_year.spheres.filter(slug=sphere_slug)[0]
-            government = sphere.get_government_by_slug(government_slug)
-            department = government.get_department_by_slug(department_slug)
+            sphere = selected_year.spheres.filter(slug=sphere_slug).first()
+            government = sphere.governments.filter(slug=government_slug).first()
+            department = government.departments.filter(slug=department_slug).first()
 
     financial_years_context = []
     for year in years:
