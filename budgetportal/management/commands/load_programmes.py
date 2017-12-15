@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from budgetportal.models import Department, Programme
 import csv
 from django.utils.text import slugify
+import re
 
 
 class Command(BaseCommand):
@@ -20,8 +21,11 @@ class Command(BaseCommand):
                     government__sphere__slug=row['sphere'],
                     government__sphere__financial_year__slug=row['financial_year'],
                 )
+                programme_name = row['Programme']
+                if not re.search('[a-z]', programme_name):
+                    programme_name = programme_name.title()
                 Programme.objects.get_or_create(
-                    name=row['Programme'],
+                    name=programme_name,
                     slug=slugify(row['Programme']),
                     department=department,
                     programme_number=row['Programme No.'],

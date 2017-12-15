@@ -170,3 +170,9 @@ class Programme(models.Model):
             ('department', 'name'),
             ('department', 'programme_number'),
         )
+
+    def get_url_path(self):
+        return "%s/programmes/%s" % (self.department.get_url_path(), self.slug)
+
+    def __str__(self):
+        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
