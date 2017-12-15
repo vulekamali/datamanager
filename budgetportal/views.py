@@ -83,6 +83,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'financial_years': financial_years_context,
         'intro': department.intro,
         'resources': department.get_resources(),
+        'programmes': [{'name': p.name} for p in department.programmes.order_by('programme_number')],
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')

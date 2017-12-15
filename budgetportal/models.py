@@ -1,9 +1,6 @@
 from django.conf import settings
 from django.db import models
-from django.utils.text import slugify
 import logging
-import re
-import requests
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -129,36 +126,47 @@ class Department(models.Model):
         }
         response = ckan.action.package_search(**query)
         logger.info("query %r returned %d results", query, len(response['results']))
-        package = response['results'][0]
-
-        for resource in package['resources']:
-            if resource['name'].startswith('Vote'):
-                if self.government.sphere.slug == 'provincial':
-                    doc_short = "EPRE"
-                    doc_long = "Estimates of Provincial Revenue and Expenditure"
-                elif self.government.sphere.slug == 'national':
-                    doc_short = "ENE"
-                    doc_long = "Estimates of National Expenditure"
-                else:
-                    raise Exception("unexpected sphere")
-                name = "%s for %s" % (doc_short, resource['name'])
-                description = ("The %s (%s) sets out the detailed spending "
-                               "plans of each government department for the "
-                               "coming year.") % (doc_long, doc_short)
-                if name not in resources:
-                    resources[name] = {
-                        'description': description,
-                        'formats': [],
-                    }
-                resources[name]['formats'].append({
-                    'url': resource['url'],
-                    'format': resource['format'],
-                })
+        if response['results']:
+            package = response['results'][0]
+            for resource in package['resources']:
+                if resource['name'].startswith('Vote'):
+                    if self.government.sphere.slug == 'provincial':
+                        doc_short = "EPRE"
+                        doc_long = "Estimates of Provincial Revenue and Expenditure"
+                    elif self.government.sphere.slug == 'national':
+                        doc_short = "ENE"
+                        doc_long = "Estimates of National Expenditure"
+                    else:
+                        raise Exception("unexpected sphere")
+                    name = "%s for %s" % (doc_short, resource['name'])
+                    description = ("The %s (%s) sets out the detailed spending "
+                                   "plans of each government department for the "
+                                   "coming year.") % (doc_long, doc_short)
+                    if name not in resources:
+                        resources[name] = {
+                            'description': description,
+                            'formats': [],
+                        }
+                    resources[name]['formats'].append({
+                        'url': resource['url'],
+                        'format': resource['format'],
+                    })
         return resources
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
-def extras_get(extras, key):
-    return [e['value'] for e in extras if e['key'] == key][0]
+class Programme(models.Model):
+    organisational_unit = 'programme'
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="programmes")
+    slug = models.SlugField(max_length=200)
+    name = models.CharField(max_length=200)
+    programme_number = models.IntegerField()
+
+    class Meta:
+        unique_together = (
+            ('department', 'slug'),
+            ('department', 'name'),
+            ('department', 'programme_number'),
+        )

@@ -1,9 +1,10 @@
 from django.contrib import admin
 from budgetportal.models import (
-    FinancialYear,
-    Sphere,
-    Government,
     Department,
+    FinancialYear,
+    Government,
+    Programme,
+    Sphere,
 )
 
 
@@ -23,7 +24,12 @@ class DepartmentAdmin(admin.ModelAdmin):
     pass
 
 
+class ProgrammeAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(FinancialYear, FinancialYearAdmin)
 admin.site.register(Sphere, SphereAdmin)
 admin.site.register(Government, GovernmentAdmin)
 admin.site.register(Department, DepartmentAdmin)
+admin.site.register(Programme, ProgrammeAdmin)
