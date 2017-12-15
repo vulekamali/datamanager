@@ -23,5 +23,6 @@ class Command(BaseCommand):
                 Programme.objects.get_or_create(
                     name=row['Programme'],
                     slug=slugify(row['Programme']),
-                    department=department
+                    department=department,
+                    programme_number=row['Programme No.'],
                 )
