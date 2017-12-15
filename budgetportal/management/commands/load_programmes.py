@@ -13,20 +13,25 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         with open(options['filename']) as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                department = Department.objects.get(
-                    slug=slugify(row['Department']),
-                    government__slug=slugify(row['government']),
-                    government__sphere__slug=row['sphere'],
-                    government__sphere__financial_year__slug=row['financial_year'],
-                )
-                programme_name = row['Programme']
-                if not re.search('[a-z]', programme_name):
-                    programme_name = programme_name.title()
-                Programme.objects.get_or_create(
-                    name=programme_name,
-                    slug=slugify(row['Programme']),
-                    department=department,
-                    programme_number=row['Programme No.'],
-                )
+            with open('missing_departments.txt', 'w') as missing_departments:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    departments = Department.objects.filter(
+                        slug=slugify(row['Department']),
+                        government__slug=slugify(row['government']),
+                        government__sphere__slug=row['sphere'],
+                        government__sphere__financial_year__slug=row['financial_year'],
+                    )
+                    if departments.count():
+                        department = departments.first()
+                        programme_name = row['Programme']
+                        if not re.search('[a-z]', programme_name):
+                            programme_name = programme_name.title()
+                        Programme.objects.get_or_create(
+                            name=programme_name,
+                            slug=slugify(row['Programme']),
+                            department=department,
+                            programme_number=row['Programme No.'],
+                        )
+                    else:
+                        missing_departments.write("%r\n" % row)
