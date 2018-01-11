@@ -28,6 +28,10 @@ class DepartmentAdmin(admin.ModelAdmin):
         'get_sphere',
         'get_financial_year',
     )
+    list_display_links = (
+        'vote_number',
+        'name',
+    )
     list_filter = (
         'government__sphere__financial_year__slug',
         'government__sphere__name',
