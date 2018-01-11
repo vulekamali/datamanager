@@ -21,7 +21,28 @@ class GovernmentAdmin(admin.ModelAdmin):
 
 
 class DepartmentAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'vote_number',
+        'name',
+        'get_government',
+        'get_sphere',
+        'get_financial_year',
+    )
+    list_filter = (
+        'government__sphere__financial_year__slug',
+        'government__sphere__name',
+        'government__name',
+    )
+    search_fields = ('name', 'government__name', 'government__sphere__name')
+
+    def get_government(self, obj):
+        return obj.government.name
+
+    def get_sphere(self, obj):
+        return obj.government.sphere.name
+
+    def get_financial_year(self, obj):
+        return obj.government.sphere.financial_year.slug
 
 
 class ProgrammeAdmin(admin.ModelAdmin):
