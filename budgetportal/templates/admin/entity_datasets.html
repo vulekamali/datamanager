@@ -10,6 +10,13 @@
           {% for government in sphere.governments.all %}
           <li>
             {{ government.name }}
+            <ul>
+              {% for department in government.departments.all %}
+              <li>
+                {{ department.name }} ({{ department.get_resources | length }})
+              </li>
+              {% endfor %}
+            </ul>
           </li>
           {% endfor %}
         </ul>
