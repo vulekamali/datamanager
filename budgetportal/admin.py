@@ -12,7 +12,7 @@ from budgetportal.models import (
 
 
 class FinancialYearAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug',)
+    pass
 
 
 class SphereAdmin(admin.ModelAdmin):
