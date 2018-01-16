@@ -1,20 +1,13 @@
-<h1>{{ financial_year.slug }} Entity Datasets</h1>
+<h1>Entity Datasets - {{ sphere.financial_year.slug }} {{ sphere.name }}</h1>
 
 <ul>
-  {% for sphere in financial_year.spheres.all %}
+  {% for government in sphere.governments.all %}
   <li>
-    {{ sphere.name }}
+    {{ government.name }}
     <ul>
-      {% for government in sphere.governments.all %}
+      {% for department in government.departments.all %}
       <li>
-        {{ government.name }}
-        <ul>
-          {% for department in government.departments.all %}
-          <li>
-            {{ department.name }} ({{ department.get_resources | length }})
-          </li>
-          {% endfor %}
-        </ul>
+        {{ department.name }} ({{ department.get_resources | length }})
       </li>
       {% endfor %}
     </ul>

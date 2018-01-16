@@ -64,19 +64,27 @@ class ProgrammeAdmin(admin.ModelAdmin):
 class EntityDatasetsView(TemplateView):
     template_name = "admin/entity_datasets.html"
     financial_year_slug = None
+    sphere_slug = None
 
     def get_context_data(self, **kwargs):
-        financial_year = FinancialYear.objects.get(slug=self.financial_year_slug)
+        sphere = Sphere.objects.get(
+            financial_year__slug=self.financial_year_slug,
+            slug=self.sphere_slug,
+        )
         return {
-            'financial_year': financial_year,
+            'sphere': sphere,
         }
 
 
 for financial_year in FinancialYear.objects.all():
-    view = EntityDatasetsView.as_view(financial_year_slug=financial_year.slug)
-    path = "%s/entity_datasets" % financial_year.slug
-    label = "%s Entity Datasets" % financial_year.slug
-    admin.site.register_view(path, label, view=view)
+    for sphere in financial_year.spheres.all():
+        view = EntityDatasetsView.as_view(
+            financial_year_slug=financial_year.slug,
+            sphere_slug=sphere.slug,
+        )
+        path = "%s/%s/entity_datasets" % (financial_year.slug, sphere.slug)
+        label = "Entity Datasets - %s %s" % (financial_year.slug, sphere.name)
+        admin.site.register_view(path, label, view=view)
 
 admin.site.register(FinancialYear, FinancialYearAdmin)
 admin.site.register(Sphere, SphereAdmin)
