@@ -6,6 +6,7 @@ import yaml
 def department_list(request, financial_year_id):
     context = {
         'financial_years': [],
+        'selected_financial_year': financial_year_id,
     }
 
     selected_year = None
@@ -80,6 +81,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'name': department.government.name,
             'slug': str(department.government.slug),
         },
+        'selected_financial_year': financial_year_id,
         'financial_years': financial_years_context,
         'intro': department.intro,
         'resources': department.get_resources(),
