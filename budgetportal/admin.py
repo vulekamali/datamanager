@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 from budgetportal.models import (
     Department,
@@ -61,12 +61,16 @@ class ProgrammeAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.site.register_view('entity_datasets', 'Entity Datasets')
-def my_view(request, *args, **kwargs):
-    return render(request, 'admin/entity_datasets.html', {
-        'financial_years': FinancialYear.objects.all(),
-    })
+class EntityDatasetsView(TemplateView):
+    template_name = "admin/entity_datasets.html"
 
+    def get_context_data(self, **kwargs):
+        return {
+            'financial_years': FinancialYear.objects.all(),
+        }
+
+
+admin.site.register_view('entity_datasets', 'Entity Datasets', view=EntityDatasetsView.as_view())
 
 admin.site.register(FinancialYear, FinancialYearAdmin)
 admin.site.register(Sphere, SphereAdmin)
