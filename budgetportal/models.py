@@ -33,6 +33,18 @@ class FinancialYear(models.Model):
             return government, False
         return department, True
 
+    def get_contributed_datasets(self):
+        query = {
+            'q': '',
+            'fq': '-organization:"national-treasury"',
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info("query %r returned %d results", query, len(response['results']))
+        for package in response['results']:
+            yield Dataset(self, package['name'])
+
+
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
@@ -181,3 +193,12 @@ class Programme(models.Model):
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
+
+
+class Dataset():
+    def __init__(self, financial_year, slug):
+        self.slug = slug
+        self.financial_year = financial_year
+
+    def get_url_path(self):
+        return "%s/datasets/%s" % (self.financial_year.get_url_path(), self.slug)

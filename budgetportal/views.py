@@ -94,3 +94,34 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_list(request, financial_year_id):
+    context = {
+        'financial_years': [],
+        'selected_financial_year': financial_year_id,
+        'datasets': [],
+    }
+
+    selected_year = None
+    for year in FinancialYear.objects.order_by('slug'):
+        is_selected = year.slug == financial_year_id
+        if is_selected:
+            selected_year = year
+        context['financial_years'].append({
+            'id': year.slug,
+            'is_selected': is_selected,
+            'closest_match': {
+                'is_exact_match': True,
+                'name': 'Datasets',
+                'slug': 'datasets',
+                'organisational_unit': 'financial_year',
+                'url_path': "%s/datasets" % year.slug,
+            },
+        })
+
+    for dataset in selected_year.get_contributed_datasets():
+        context['datasets'].append({'url_path': dataset.get_url_path()})
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
