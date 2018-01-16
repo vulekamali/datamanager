@@ -83,7 +83,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         },
         'sphere': {
             'name': department.government.sphere.name,
-            'sphere': department.government.sphere.slug,
+            'slug': department.government.sphere.slug,
         },
         'selected_financial_year': financial_year_id,
         'financial_years': financial_years_context,
