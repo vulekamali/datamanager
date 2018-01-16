@@ -46,6 +46,7 @@ class DepartmentAdmin(admin.ModelAdmin):
         'government__name',
         'name',
     )
+    readonly_fields = ('slug',)
 
     def get_government(self, obj):
         return obj.government.name

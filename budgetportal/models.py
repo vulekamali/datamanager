@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.conf import settings
 from django.db import models
 import logging
@@ -38,8 +39,8 @@ class FinancialYear(models.Model):
 
 class Sphere(models.Model):
     organisational_unit = 'sphere'
-    slug = models.SlugField(max_length=200)
     name = models.CharField(max_length=200)
+    slug = AutoSlugField(populate_from='name', max_length=200, always_update=True)
     financial_year = models.ForeignKey(
         FinancialYear,
         on_delete=models.CASCADE,
@@ -62,8 +63,8 @@ class Sphere(models.Model):
 class Government(models.Model):
     organisational_unit = 'government'
     sphere = models.ForeignKey(Sphere, on_delete=models.CASCADE, related_name="governments")
-    slug = models.SlugField(max_length=200)
     name = models.CharField(max_length=200)
+    slug = AutoSlugField(populate_from='name', max_length=200, always_update=True)
 
     class Meta:
         unique_together = (
@@ -93,8 +94,8 @@ class Government(models.Model):
 class Department(models.Model):
     organisational_unit = 'department'
     government = models.ForeignKey(Government, on_delete=models.CASCADE, related_name="departments")
-    slug = models.SlugField(max_length=200)
     name = models.CharField(max_length=200)
+    slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, editable=True)
     vote_number = models.IntegerField()
     intro = models.TextField()
 
@@ -160,8 +161,8 @@ class Department(models.Model):
 class Programme(models.Model):
     organisational_unit = 'programme'
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="programmes")
-    slug = models.SlugField(max_length=200)
     name = models.CharField(max_length=200)
+    slug = AutoSlugField(populate_from='name', max_length=200, always_update=True)
     programme_number = models.IntegerField()
 
     class Meta:
