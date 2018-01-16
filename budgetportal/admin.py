@@ -12,15 +12,15 @@ from budgetportal.models import (
 
 
 class FinancialYearAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('slug',)
 
 
 class SphereAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('slug',)
 
 
 class GovernmentAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('slug',)
 
 
 class DepartmentAdmin(admin.ModelAdmin):
@@ -59,7 +59,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 
 class ProgrammeAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('slug',)
 
 
 class EntityDatasetsView(TemplateView):
