@@ -16,11 +16,11 @@ class FinancialYearAdmin(admin.ModelAdmin):
 
 
 class SphereAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('slug',)
 
 
 class GovernmentAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('slug',)
 
 
 class DepartmentAdmin(admin.ModelAdmin):
@@ -46,6 +46,7 @@ class DepartmentAdmin(admin.ModelAdmin):
         'government__name',
         'name',
     )
+    readonly_fields = ('slug',)
 
     def get_government(self, obj):
         return obj.government.name
@@ -58,7 +59,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 
 class ProgrammeAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('slug',)
 
 
 class EntityDatasetsView(TemplateView):
