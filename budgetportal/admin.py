@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.http import HttpResponse
+from django.shortcuts import render
+
 from budgetportal.models import (
     Department,
     FinancialYear,
@@ -37,7 +40,12 @@ class DepartmentAdmin(admin.ModelAdmin):
         'government__sphere__name',
         'government__name',
     )
-    search_fields = ('name', 'government__name', 'government__sphere__name')
+    search_fields = (
+        'government__sphere__financial_year__slug',
+        'government__sphere__name',
+        'government__name',
+        'name',
+    )
 
     def get_government(self, obj):
         return obj.government.name
@@ -51,6 +59,13 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 class ProgrammeAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.site.register_view('entity_datasets', 'Entity Datasets')
+def my_view(request, *args, **kwargs):
+    return render(request, 'admin/entity_datasets.html', {
+        'financial_years': FinancialYear.objects.all(),
+    })
 
 
 admin.site.register(FinancialYear, FinancialYearAdmin)

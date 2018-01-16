@@ -1,0 +1,21 @@
+<ul>
+  {% for financial_year in financial_years %}
+  <li>
+    {{ financial_year.slug }}
+    <ul>
+      {% for sphere in financial_year.spheres.all %}
+      <li>
+        {{ sphere.name }}
+        <ul>
+          {% for government in sphere.governments.all %}
+          <li>
+            {{ government.name }}
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endfor %}
+</ul>
