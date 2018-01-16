@@ -106,6 +106,8 @@ class Department(models.Model):
             ('government', 'vote_number'),
         )
 
+        ordering = ['vote_number']
+
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 
@@ -171,6 +173,8 @@ class Programme(models.Model):
             ('department', 'name'),
             ('department', 'programme_number'),
         )
+
+        ordering = ['programme_number']
 
     def get_url_path(self):
         return "%s/programmes/%s" % (self.department.get_url_path(), self.slug)
