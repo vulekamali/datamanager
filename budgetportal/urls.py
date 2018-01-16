@@ -1,8 +1,12 @@
 from django.conf.urls import url
 from django.views.decorators.cache import cache_page
 from django.contrib import admin
+from adminplus.sites import AdminSitePlus
 
 from . import views
+
+admin.site = AdminSitePlus()
+admin.autodiscover()
 
 CACHE_SECS = 12 * 60 * 60
 

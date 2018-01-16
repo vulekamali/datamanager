@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.shortcuts import render
+from django.views.generic import TemplateView
+
 from budgetportal.models import (
     Department,
     FinancialYear,
@@ -37,7 +40,12 @@ class DepartmentAdmin(admin.ModelAdmin):
         'government__sphere__name',
         'government__name',
     )
-    search_fields = ('name', 'government__name', 'government__sphere__name')
+    search_fields = (
+        'government__sphere__financial_year__slug',
+        'government__sphere__name',
+        'government__name',
+        'name',
+    )
 
     def get_government(self, obj):
         return obj.government.name
@@ -52,6 +60,31 @@ class DepartmentAdmin(admin.ModelAdmin):
 class ProgrammeAdmin(admin.ModelAdmin):
     pass
 
+
+class EntityDatasetsView(TemplateView):
+    template_name = "admin/entity_datasets.html"
+    financial_year_slug = None
+    sphere_slug = None
+
+    def get_context_data(self, **kwargs):
+        sphere = Sphere.objects.get(
+            financial_year__slug=self.financial_year_slug,
+            slug=self.sphere_slug,
+        )
+        return {
+            'sphere': sphere,
+        }
+
+
+for financial_year in FinancialYear.objects.all():
+    for sphere in financial_year.spheres.all():
+        view = EntityDatasetsView.as_view(
+            financial_year_slug=financial_year.slug,
+            sphere_slug=sphere.slug,
+        )
+        path = "%s/%s/entity_datasets" % (financial_year.slug, sphere.slug)
+        label = "Entity Datasets - %s %s" % (financial_year.slug, sphere.name)
+        admin.site.register_view(path, label, view=view)
 
 admin.site.register(FinancialYear, FinancialYearAdmin)
 admin.site.register(Sphere, SphereAdmin)
