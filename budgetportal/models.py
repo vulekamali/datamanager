@@ -196,16 +196,18 @@ class Programme(models.Model):
 
 
 class Dataset():
-    def __init__(self, financial_year, slug, name, author, license, organization, created_date, last_updated_date, resources):
-        self.author = author
-        self.created_date = created_date
-        self.financial_year = financial_year
-        self.last_updated_date = last_updated_date
-        self.license = license
-        self.name = name
-        self.organization = organization
-        self.resources = resources
-        self.slug = slug
+    def __init__(self, **kwargs):
+        self.author = kwargs['author']
+        self.created_date = kwargs['created_date']
+        self.financial_year = kwargs['financial_year']
+        self.last_updated_date = kwargs['last_updated_date']
+        self.license = kwargs['license']
+        self.name = kwargs['name']
+        self.organization = kwargs['organization']
+        self.resources = kwargs['resources']
+        self.slug = kwargs['slug']
+        self.intro = kwargs['intro']
+        self.methodology = kwargs['methodology']
 
     @classmethod
     def from_package(cls, financial_year, package):
@@ -230,8 +232,11 @@ class Dataset():
                 'slug': package['organization']['name'],
             },
             license={
-                'name': package['license_title']
+                'name': package['license_title'],
+                'url': package['license_url'] if 'license_url' in package else None,
             },
+            intro=package['notes'],
+            methodology=package['methodology'] if 'methodology' in package else None,
             resources=resources,
         )
 

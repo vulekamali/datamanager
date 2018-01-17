@@ -121,7 +121,10 @@ def dataset_list(request, financial_year_id):
         })
 
     for dataset in selected_year.get_contributed_datasets():
-        context['datasets'].append({'url_path': dataset.get_url_path()})
+        context['datasets'].append({
+            'url_path': dataset.get_url_path(),
+            'slug': dataset.slug,
+        })
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
@@ -163,6 +166,7 @@ def dataset(request, financial_year_id, dataset_slug):
             })
 
     context.update({
+        'slug': dataset.slug,
         'name': dataset.name,
         'resources': dataset.resources,
         'organization': dataset.organization,
@@ -170,6 +174,8 @@ def dataset(request, financial_year_id, dataset_slug):
         'created': dataset.created_date,
         'last_updated': dataset.last_updated_date,
         'license': dataset.license,
+        'intro': dataset.intro,
+        'methodology': dataset.methodology,
     })
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
