@@ -42,7 +42,7 @@ class FinancialYear(models.Model):
         response = ckan.action.package_search(**query)
         logger.info("query %r returned %d results", query, len(response['results']))
         for package in response['results']:
-            yield Dataset(self, package['name'])
+            yield Dataset.from_package(self, package)
 
 
     def __str__(self):
@@ -196,9 +196,68 @@ class Programme(models.Model):
 
 
 class Dataset():
-    def __init__(self, financial_year, slug):
-        self.slug = slug
+    def __init__(self, financial_year, slug, name, author, license, organization, created_date, last_updated_date, resources):
+        self.author = author
+        self.created_date = created_date
         self.financial_year = financial_year
+        self.last_updated_date = last_updated_date
+        self.license = license
+        self.name = name
+        self.organization = organization
+        self.resources = resources
+        self.slug = slug
+
+    @classmethod
+    def from_package(cls, financial_year, package):
+        resources = []
+        for resource in package['resources']:
+            resources.append({
+                'name': resource['name'],
+                'description': resource['description'],
+                'format': resource['format'],
+                'url': resource['url'],
+            })
+        return cls(
+            financial_year=financial_year,
+            slug=package['name'],
+            name=package['title'],
+            created_date=package['metadata_created'],
+            last_updated_date=package['metadata_modified'],
+            author=package['author'],
+            organization={
+                'name': package['organization']['title'],
+                'logo_url': package['organization']['image_url'],
+                'slug': package['organization']['name'],
+            },
+            license={
+                'name': package['license_title']
+            },
+            resources=resources,
+        )
+
+    @classmethod
+    def fetch(cls, financial_year, dataset_slug):
+        query = {
+            'id': dataset_slug,
+        }
+        package = ckan.action.package_show(**query)
+        return cls.from_package(financial_year, package)
 
     def get_url_path(self):
         return "%s/datasets/%s" % (self.financial_year.get_url_path(), self.slug)
+
+    # Organization
+        #  url: spii.org.za
+        #  telephone: "+27 (0) 11 833 0161"
+        #  email: advocacy@spii.org.za
+        # facebook: facebook.com
+        # twitter: twitter.com
+
+    # License
+        # name: Creative Commons Attribution Share-Alike 4.0
+        # url: https://creativecommons.org/licenses/by-sa/4.0/
+
+        # def get_related(self):
+        # url: "2017-18/national/departments/health"
+        # label: "National Department: Health"
+        #return []
