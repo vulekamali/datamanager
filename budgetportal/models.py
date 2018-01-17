@@ -235,7 +235,7 @@ class Dataset():
                 'name': package['license_title'],
                 'url': package['license_url'] if 'license_url' in package else None,
             },
-            intro=package['notes'],
+            intro=package['notes'] if package['notes'] else None,
             methodology=package['methodology'] if 'methodology' in package else None,
             resources=resources,
         )
