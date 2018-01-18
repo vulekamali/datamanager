@@ -72,6 +72,21 @@ DATABASES = {
     'default': db_config,
 }
 
+# Caches
+if DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': '/var/tmp/django_cache',
+        }
+    }
+
 from ckanapi import RemoteCKAN
 CKAN_URL = os.environ.get('CKAN_URL', 'https://treasurydata.openup.org.za')
 CKAN = RemoteCKAN(CKAN_URL)

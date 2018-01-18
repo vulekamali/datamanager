@@ -169,7 +169,7 @@ def dataset(request, financial_year_id, dataset_slug):
         'slug': dataset.slug,
         'name': dataset.name,
         'resources': dataset.resources,
-        'organization': dataset.organization,
+        'organization': dataset.get_organization(),
         'author': dataset.author,
         'created': dataset.created_date,
         'last_updated': dataset.last_updated_date,
