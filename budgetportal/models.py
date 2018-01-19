@@ -33,6 +33,18 @@ class FinancialYear(models.Model):
             return government, False
         return department, True
 
+    def get_contributed_datasets(self):
+        query = {
+            'q': '',
+            'fq': '-organization:"national-treasury"',
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info("query %r returned %d results", query, len(response['results']))
+        for package in response['results']:
+            yield Dataset.from_package(self, package)
+
+
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
@@ -181,3 +193,72 @@ class Programme(models.Model):
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
+
+
+class Dataset():
+    def __init__(self, **kwargs):
+        self.author = kwargs['author']
+        self.created_date = kwargs['created_date']
+        self.financial_year = kwargs['financial_year']
+        self.last_updated_date = kwargs['last_updated_date']
+        self.license = kwargs['license']
+        self.name = kwargs['name']
+        self.resources = kwargs['resources']
+        self.slug = kwargs['slug']
+        self.intro = kwargs['intro']
+        self.methodology = kwargs['methodology']
+        self.organization_slug = kwargs['organization_slug']
+
+    @classmethod
+    def from_package(cls, financial_year, package):
+        resources = []
+        for resource in package['resources']:
+            resources.append({
+                'name': resource['name'],
+                'description': resource['description'],
+                'format': resource['format'],
+                'url': resource['url'],
+            })
+        return cls(
+            financial_year=financial_year,
+            slug=package['name'],
+            name=package['title'],
+            created_date=package['metadata_created'],
+            last_updated_date=package['metadata_modified'],
+            author=package['author'],
+            license={
+                'name': package['license_title'],
+                'url': package['license_url'] if 'license_url' in package else None,
+            },
+            intro=package['notes'] if package['notes'] else None,
+            methodology=package['methodology'] if 'methodology' in package else None,
+            resources=resources,
+            organization_slug=package['organization']['name'],
+        )
+
+    @classmethod
+    def fetch(cls, financial_year, dataset_slug):
+        package = ckan.action.package_show(id=dataset_slug)
+        return cls.from_package(financial_year, package)
+
+    def get_url_path(self):
+        return "%s/datasets/%s" % (self.financial_year.get_url_path(), self.slug)
+
+    def get_organization(self):
+        org = ckan.action.organization_show(id=self.organization_slug)
+        return {
+            'name': org['title'],
+            'logo_url': org['image_url'],
+            'slug': org['name'],
+            'url': org['url'] if 'url' in org else None,
+            'telephone': org['telephone'] if 'telephone' in org else None,
+            'email': org['email'] if 'email' in org else None,
+            'facebook': org['facebook_id'] if 'facebook_id' in org else None,
+            'twitter': org['twitter_id'] if 'twitter_id' in org else None,
+        }
+
+
+        # def get_related(self):
+        # url: "2017-18/national/departments/health"
+        # label: "National Department: Health"
+        #return []

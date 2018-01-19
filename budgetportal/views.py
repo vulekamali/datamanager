@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from models import FinancialYear
+from models import FinancialYear, Dataset
 import yaml
 
 
@@ -91,6 +91,92 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'resources': department.get_resources(),
         'programmes': [{'name': p.name} for p in department.programmes.order_by('programme_number')],
     }
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_list(request, financial_year_id):
+    context = {
+        'financial_years': [],
+        'selected_financial_year': financial_year_id,
+        'datasets': [],
+    }
+
+    selected_year = None
+    for year in FinancialYear.objects.order_by('slug'):
+        is_selected = year.slug == financial_year_id
+        if is_selected:
+            selected_year = year
+        context['financial_years'].append({
+            'id': year.slug,
+            'is_selected': is_selected,
+            'closest_match': {
+                'is_exact_match': True,
+                'name': 'Datasets',
+                'slug': 'datasets',
+                'organisational_unit': 'financial_year',
+                'url_path': "%s/datasets" % year.slug,
+            },
+        })
+
+    for dataset in selected_year.get_contributed_datasets():
+        context['datasets'].append({
+            'url_path': dataset.get_url_path(),
+            'slug': dataset.slug,
+        })
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset(request, financial_year_id, dataset_slug):
+    context = {
+        'financial_years': [],
+        'selected_financial_year': financial_year_id,
+    }
+
+    for year in FinancialYear.objects.order_by('slug'):
+        is_selected = year.slug == financial_year_id
+        if is_selected:
+            dataset = Dataset.fetch(year, dataset_slug)
+
+            context['financial_years'].append({
+                'id': year.slug,
+                'is_selected': is_selected,
+                'closest_match': {
+                    'is_exact_match': True,
+                    'name': dataset.name,
+                    'slug': dataset.slug,
+                    'organisational_unit': 'dataset',
+                    'url_path': dataset.get_url_path(),
+                },
+            })
+        else:
+            context['financial_years'].append({
+                'id': year.slug,
+                'is_selected': is_selected,
+                'closest_match': {
+                    'is_exact_match': False,
+                    'name': year.slug,
+                    'slug': year.slug,
+                    'organisational_unit': 'financial_year',
+                    'url_path': year.get_url_path(),
+                },
+            })
+
+    context.update({
+        'slug': dataset.slug,
+        'name': dataset.name,
+        'resources': dataset.resources,
+        'organization': dataset.get_organization(),
+        'author': dataset.author,
+        'created': dataset.created_date,
+        'last_updated': dataset.last_updated_date,
+        'license': dataset.license,
+        'intro': dataset.intro,
+        'methodology': dataset.methodology,
+    })
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')

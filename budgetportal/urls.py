@@ -29,6 +29,14 @@ urlpatterns = [
         '/departments'
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
 
+    # Dataset List
+    url(r'^(?P<financial_year_id>[\w-]+)'
+        '/datasets.yaml', cache_page(CACHE_SECS)(views.dataset_list)),
+
+    # Dataset
+    url(r'^(?P<financial_year_id>[\w-]+)'
+        '/datasets'
+        '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
 
     # Admin
     url(r'^admin/', admin.site.urls),
