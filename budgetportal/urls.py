@@ -8,7 +8,7 @@ from . import views
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
-CACHE_SECS = 12 * 60 * 60
+CACHE_SECS = 0
 
 
 urlpatterns = [
