@@ -225,7 +225,10 @@ class Dataset():
             name=package['title'],
             created_date=package['metadata_created'],
             last_updated_date=package['metadata_modified'],
-            author=package['author'],
+            author={
+                'name': package['author'],
+                'email': package['author_email'],
+            },
             license={
                 'name': package['license_title'],
                 'url': package['license_url'] if 'license_url' in package else None,
