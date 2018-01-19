@@ -248,7 +248,7 @@ class Dataset():
         org = ckan.action.organization_show(id=self.organization_slug)
         return {
             'name': org['title'],
-            'logo_url': org['image_url'],
+            'logo_url': org['image_display_url'],
             'slug': org['name'],
             'url': org['url'] if 'url' in org else None,
             'telephone': org['telephone'] if 'telephone' in org else None,
