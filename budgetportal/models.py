@@ -172,12 +172,21 @@ class Department(models.Model):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
+class GovtFunction(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, unique=True)
+
+    def __str__(self):
+        return '<%s %s>' % (self.__class__.__name__, self.slug)
+
+
 class Programme(models.Model):
     organisational_unit = 'programme'
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="programmes")
     name = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True)
     programme_number = models.IntegerField()
+    govt_functions = models.ManyToManyField(GovtFunction)
 
     class Meta:
         unique_together = (
