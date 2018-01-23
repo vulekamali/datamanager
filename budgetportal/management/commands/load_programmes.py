@@ -13,9 +13,14 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         with open(options['filename']) as csvfile:
-            with open('missing_departments.txt', 'w') as missing_departments:
+            with open('missing_departments.csv', 'w') as missing_departments_file:
                 reader = csv.DictReader(csvfile)
+                missing_departments = None
                 for row in reader:
+                    if not missing_departments:
+                        missing_departments = csv.DictWriter(missing_departments_file, reader.fieldnames)
+                        missing_departments.writeheader()
+
                     departments = Department.objects.filter(
                         slug=slugify(row['Department']),
                         government__slug=slugify(row['government']),
@@ -34,4 +39,4 @@ class Command(BaseCommand):
                             programme_number=row['Programme No.'],
                         )
                     else:
-                        missing_departments.write("%r\n" % row)
+                        missing_departments.writerow(row)
