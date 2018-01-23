@@ -13,13 +13,21 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         with open(options['filename']) as csvfile:
-            with open('missing_programmes.csv', 'w') as missing_programmes:
+            with open('missing_programmes.csv', 'w') as missing_programmes_file:
                 with open('missing_functions.csv', 'w') as missing_functions:
                     reader = csv.DictReader(csvfile)
+
+                    # Set up function cache
                     functions = GovtFunction.objects.all()
                     functions_by_slug = {}
                     for function in functions:
                         functions_by_slug[function.slug] = function
+
+                    # Set up missing programme CSV
+                    missing_programmes = None
+                    if not missing_programmes:
+                        missing_programmes = csv.DictWriter(missing_programmes_file, reader.fieldnames)
+                        missing_programmes.writeheader()
 
                     for row in reader:
                         programmes = Programme.objects.filter(
@@ -36,6 +44,6 @@ class Command(BaseCommand):
                                     programme.govt_functions.add(function)
                                     programme.save()
                             else:
-                                missing_programmes.write("%r\n" % row)
+                                missing_programmes.writerow(row)
                         else:
                             missing_functions.write("%s\n" % function_slug)
