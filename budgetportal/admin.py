@@ -27,10 +27,6 @@ class GovtFunctionAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
 
 
-class ProgrammeInline(admin.StackedInline):
-    model = Programme
-
-
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = (
         'vote_number',
@@ -55,9 +51,6 @@ class DepartmentAdmin(admin.ModelAdmin):
         'name',
     )
     readonly_fields = ('slug',)
-    inlines = [
-        ProgrammeInline
-    ]
 
     def get_government(self, obj):
         return obj.government.name
