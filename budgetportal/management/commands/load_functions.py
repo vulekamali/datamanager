@@ -2,6 +2,11 @@ from django.core.management.base import BaseCommand
 from budgetportal.models import GovtFunction, Programme
 import csv
 from django.utils.text import slugify
+import re
+
+
+def clean_programme_name(name):
+    return re.sub('^\d+\. ', '', name)
 
 
 class Command(BaseCommand):
@@ -31,7 +36,7 @@ class Command(BaseCommand):
 
                     for row in reader:
                         programmes = Programme.objects.filter(
-                            slug=slugify(row['Programme']),
+                            slug=slugify(clean_programme_name(row['Programme'])),
                             department__slug=slugify(row['Department']),
                             department__government__slug=slugify(row['Government']),
                             department__government__sphere__financial_year__slug=options['financial_year'],
