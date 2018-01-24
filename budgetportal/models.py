@@ -1,7 +1,9 @@
 from autoslug import AutoSlugField
+from collections import OrderedDict
 from django.conf import settings
 from django.db import models
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -123,12 +125,13 @@ class Department(models.Model):
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 
-    def get_resources(self):
+    def get_treasury_datasets(self):
         resources = {}
 
         query = {
             'q': '',
-            'fq': ('vocab_financial_years:"%s"'
+            'fq': ('+organization:"national-treasury"'
+                   '+vocab_financial_years:"%s"'
                    '+vocab_spheres:"%s"'
                    '+extras_geographic_region_slug:"%s"'
                    '+extras_department_name_slug:"%s"') % (
@@ -168,8 +171,76 @@ class Department(models.Model):
                     })
         return resources
 
+    def get_govt_functions(self):
+        return GovtFunction.objects.filter(programme__department=self).distinct()
+
+    def get_financial_year(self):
+        return self.government.sphere.financial_year
+
+    def _get_financial_year_query(self):
+        return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
+
+    def _get_government_query(self):
+        if self.government.sphere.slug == 'provincial':
+            return '+vocab_provinces:"%s"' % self.government.name
+        else:
+            return none_selected_query('vocab_provinces')
+
+    def _get_functions_query(self):
+        function_names = [f.name for f in self.get_govt_functions()]
+        ckan_tag_names = [re.sub('[^\w -]', '', n) for n in function_names]
+        if len(ckan_tag_names) == 0:
+            # We select datasets with no functions rather than datasets
+            # with any function (e.g. a blank query) because this query
+            # is intended to restrict datasets to matching functions.
+            return none_selected_query('vocab_functions')
+        else:
+            options = ['+vocab_functions:"%s"' % n for n in ckan_tag_names]
+            return '+(%s)' % ' OR '.join(options)
+
+    def get_contributed_datasets(self):
+        # We use an OrderedDict like an Ordered Set to ensure we include each
+        # match just once, and at the highest rank it came up in.
+        datasets = OrderedDict()
+
+        fq_org = '-organization:"national-treasury"'
+        fq_year = self._get_financial_year_query()
+        fq_sphere = '+vocab_spheres:"%s"' % self.government.sphere.slug
+        fq_government = self._get_government_query()
+        fq_functions = self._get_functions_query()
+        fq_no_functions = none_selected_query('vocab_functions')
+        queries = [
+            (fq_org, fq_year, fq_sphere, fq_government, fq_functions),
+            (fq_org, fq_sphere, fq_government, fq_functions),
+            (fq_org, fq_year, fq_sphere, fq_functions),
+            (fq_org, fq_sphere, fq_functions),
+            (fq_org, fq_functions),
+            (fq_org, fq_no_functions),
+        ]
+        for query in queries:
+            params = {
+                'q': '',
+                'fq': "".join(query),
+                'rows': 1000,
+            }
+            response = ckan.action.package_search(**params)
+            logger.info("query %r returned %d results", params, len(response['results']))
+            for package in response['results']:
+                if package['name'] not in datasets:
+                    dataset = Dataset.from_package(self.get_financial_year(), package)
+                    datasets[package['name']] = dataset
+        return datasets.values()
+
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
+
+
+class GovtFunction(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, unique=True)
+
+    def __str__(self):
+        return '<%s %s>' % (self.__class__.__name__, self.slug)
 
 
 class Programme(models.Model):
@@ -178,6 +249,7 @@ class Programme(models.Model):
     name = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True)
     programme_number = models.IntegerField()
+    govt_functions = models.ManyToManyField(GovtFunction)
 
     class Meta:
         unique_together = (
@@ -265,3 +337,8 @@ class Dataset():
         # url: "2017-18/national/departments/health"
         # label: "National Department: Health"
         #return []
+
+# https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
+def none_selected_query(vocab_name):
+    """Match items where none of the options in a custom vocab tag is selected"""
+    return '+(*:* NOT %s:["" TO *])' % vocab_name

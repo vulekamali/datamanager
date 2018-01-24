@@ -73,6 +73,13 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
                 'is_exact_match': closest_is_exact,
             },
         })
+    contributed_datasets = []
+    for dataset in department.get_contributed_datasets():
+        contributed_datasets.append({
+            'name': dataset.name,
+            'contributor': dataset.get_organization()['name'],
+            'url_path': dataset.get_url_path(),
+        })
     context = {
         'name': department.name,
         'slug': str(department.slug),
@@ -88,8 +95,10 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'selected_financial_year': financial_year_id,
         'financial_years': financial_years_context,
         'intro': department.intro,
-        'resources': department.get_resources(),
+        'treasury_datasets': department.get_treasury_datasets(),
+        'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'programmes': [{'name': p.name} for p in department.programmes.order_by('programme_number')],
+        'government_functions': [f.name for f in department.get_govt_functions()],
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
