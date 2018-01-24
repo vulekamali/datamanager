@@ -2,6 +2,7 @@ from autoslug import AutoSlugField
 from django.conf import settings
 from django.db import models
 import logging
+from collections import OrderedDict
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -167,6 +168,31 @@ class Department(models.Model):
                         'format': resource['format'],
                     })
         return resources
+
+    def get_related_contributed_datasets(self):
+        datasets = OrderedDict()
+
+        fq_org = '-organization:"national-treasury"'
+        fq_year = '+vocab_financial_years:"%s"' % self.government.sphere.financial_year.slug
+        fq_sphere = '+vocab_spheres:"%s"' % self.government.sphere.slug
+        if self.government.sphere.slug == 'provincial':
+            fq_government = '+vocab_provinces:"%s"' % self.government.name
+        else:
+            fq_government = '+(*:* NOT vocab_provinces:["" TO *])'
+        fq_department = '+extras_department_name_slug:"%s"' % self.slug,
+        queries = [
+            (fq_org, fq_year, fq_sphere, fq_government, fq_department)
+        ]
+        for query in queries:
+            params = {
+                'q': '',
+                'fq': "".join(query),
+                'rows': 1000,
+            }
+            response = ckan.action.package_search(**params)
+            for package in response['results']:
+                datasets[package['name']] = package
+        return datasets
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
