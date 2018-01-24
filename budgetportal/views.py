@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from models import FinancialYear, Dataset
+from models import FinancialYear, Dataset, Department
 import yaml
 
 
@@ -179,4 +179,37 @@ def dataset(request, financial_year_id, dataset_slug):
     })
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def department_program_budget(request, financial_slug, department_slug):
+    dept_name = Department.objects.filter(slug=department_slug).first()
+    context = {
+        'selected_financial_year': financial_slug,
+        'sphere': 'national',
+        'department': dept_name.name,
+        'slug': department_slug,
+        'vote_number': department.vote_number,
+        'total_amount': 7055539,
+        'results': [
+            {
+                'programme_number': 2,
+                'programme': "Citizen Affairs",
+                'total_amount': 3574710
+            },
+            {
+                'programme_number': 1,
+                'programme': 'Administration',
+                'total_amount': 2259495
+             },
+            {
+                'programme_number': 3,
+                'programme': 'Immagration affairs',
+                'total_amount': 1221334
+            }
+        ]
+    }
+    response_yaml = yaml.safe_dump(context,
+                                   default_flow_style=False,
+                                   encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
