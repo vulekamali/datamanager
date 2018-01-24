@@ -1,8 +1,9 @@
 from autoslug import AutoSlugField
+from collections import OrderedDict
 from django.conf import settings
 from django.db import models
 import logging
-from collections import OrderedDict
+import re
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -169,19 +170,43 @@ class Department(models.Model):
                     })
         return resources
 
+    def get_govt_functions(self):
+        return GovtFunction.objects.filter(programme__department=self).distinct()
+
+    def _get_financial_year_query(self):
+        return '+vocab_financial_years:"%s"' % self.government.sphere.financial_year.slug
+
+    def _get_government_query(self):
+        if self.government.sphere.slug == 'provincial':
+            return '+vocab_provinces:"%s"' % self.government.name
+        else:
+            return none_selected_query('vocab_provinces')
+
+    def _get_functions_query(self):
+        function_names = [f.name for f in self.get_govt_functions()]
+        ckan_tag_names = [re.sub('[^\w -]', '', n) for n in function_names]
+        if len(ckan_tag_names) == 0:
+            return ''
+        else:
+            options = ['+vocab_functions:"%s"' % n for n in ckan_tag_names]
+            return '+(%s)' % ' OR '.join(options)
+
     def get_related_contributed_datasets(self):
         datasets = OrderedDict()
 
         fq_org = '-organization:"national-treasury"'
-        fq_year = '+vocab_financial_years:"%s"' % self.government.sphere.financial_year.slug
+        fq_year = self._get_financial_year_query()
         fq_sphere = '+vocab_spheres:"%s"' % self.government.sphere.slug
-        if self.government.sphere.slug == 'provincial':
-            fq_government = '+vocab_provinces:"%s"' % self.government.name
-        else:
-            fq_government = '+(*:* NOT vocab_provinces:["" TO *])'
-        fq_department = '+extras_department_name_slug:"%s"' % self.slug,
+        fq_government = self._get_government_query()
+        fq_functions = self._get_functions_query()
+        fq_no_functions = none_selected_query('vocab_functions')
         queries = [
-            (fq_org, fq_year, fq_sphere, fq_government, fq_department)
+            (fq_org, fq_year, fq_sphere, fq_government, fq_functions),
+            (fq_org, fq_sphere, fq_government, fq_functions),
+            (fq_org, fq_year, fq_sphere, fq_functions),
+            (fq_org, fq_sphere, fq_functions),
+            (fq_org, fq_functions),
+            (fq_org, fq_no_functions),
         ]
         for query in queries:
             params = {
@@ -190,9 +215,10 @@ class Department(models.Model):
                 'rows': 1000,
             }
             response = ckan.action.package_search(**params)
+            logger.info("query %r returned %d results", params, len(response['results']))
             for package in response['results']:
-                datasets[package['name']] = package
-        return datasets
+                datasets[package['name']] = package['name']
+        return datasets.values()
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
@@ -300,3 +326,8 @@ class Dataset():
         # url: "2017-18/national/departments/health"
         # label: "National Department: Health"
         #return []
+
+# https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
+def none_selected_query(vocab_name):
+    """Match items where none of the options in a custom vocab tag is selected"""
+    return '+(*:* NOT %s:["" TO *])' % vocab_name

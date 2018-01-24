@@ -89,6 +89,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'financial_years': financial_years_context,
         'intro': department.intro,
         'resources': department.get_resources(),
+        'related_contributed_datasets': department.get_related_contributed_datasets(),
         'programmes': [{'name': p.name} for p in department.programmes.order_by('programme_number')],
     }
 
