@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from models import FinancialYear, Dataset, Department
 import yaml
 
+from .utils import get_budget_resources
+
 
 def department_list(request, financial_year_id):
     context = {
@@ -192,33 +194,35 @@ def dataset(request, financial_year_id, dataset_slug):
 
 
 def department_program_budget(request, financial_slug, department_slug):
+    context = {}
     dept_name = Department.objects.filter(slug=department_slug).first()
-    context = {
-        'selected_financial_year': financial_slug,
-        'sphere': 'national',
-        'department': dept_name.name,
-        'slug': department_slug,
-        'vote_number': department.vote_number,
-        'total_amount': 7055539,
-        'results': [
-            {
-                'programme_number': 2,
-                'programme': "Citizen Affairs",
-                'total_amount': 3574710
-            },
-            {
-                'programme_number': 1,
-                'programme': 'Administration',
-                'total_amount': 2259495
-             },
-            {
-                'programme_number': 3,
-                'programme': 'Immagration affairs',
-                'total_amount': 1221334
-            }
-        ]
-    }
+    budget = get_budget_resources(financial_slug, dept_name.name)
+    if budget:
+        context['results'] = []
+        for cells in budget['cells']:
+            context['results'].append(
+                {
+                    'programme_number': cells['activity_programme_number.programme_number'],
+                    'programme': cells['activity_programme_number.programme'],
+                    'total_amount': cells['value.sum']
+                }
+            )
+        context.update({
+            'selected_financial_year': '2017-18',
+            'sphere': 'national',
+            'department': dept_name.name,
+            'slug': department_slug,
+            'vote_number': dept_name.vote_number,
+            'total_amount': budget['summary']['value.sum'],
+        })
+        response_yaml = yaml.safe_dump(context,
+                                       default_flow_style=False,
+                                       encoding='utf-8')
+        return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+    context['status'] = 'error'
+    context['message'] = 'Unable to fetch details from api service'
     response_yaml = yaml.safe_dump(context,
                                    default_flow_style=False,
-                                   encoding='utf-8')
+                                   encoding='utf8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
