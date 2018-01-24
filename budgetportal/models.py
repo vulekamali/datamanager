@@ -178,7 +178,7 @@ class Department(models.Model):
         return self.government.sphere.financial_year
 
     def _get_financial_year_query(self):
-        return '+vocab_financial_years:"%s"' % self.government.sphere.financial_year.slug
+        return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
 
     def _get_government_query(self):
         if self.government.sphere.slug == 'provincial':
@@ -190,6 +190,9 @@ class Department(models.Model):
         function_names = [f.name for f in self.get_govt_functions()]
         ckan_tag_names = [re.sub('[^\w -]', '', n) for n in function_names]
         if len(ckan_tag_names) == 0:
+            # We select datasets with no functions rather than datasets
+            # with any function (e.g. a blank query) because this query
+            # is intended to restrict datasets to matching functions.
             return none_selected_query('vocab_functions')
         else:
             options = ['+vocab_functions:"%s"' % n for n in ckan_tag_names]
