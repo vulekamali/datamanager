@@ -190,12 +190,14 @@ class Department(models.Model):
         function_names = [f.name for f in self.get_govt_functions()]
         ckan_tag_names = [re.sub('[^\w -]', '', n) for n in function_names]
         if len(ckan_tag_names) == 0:
-            return ''
+            return none_selected_query('vocab_functions')
         else:
             options = ['+vocab_functions:"%s"' % n for n in ckan_tag_names]
             return '+(%s)' % ' OR '.join(options)
 
     def get_contributed_datasets(self):
+        # We use an OrderedDict like an Ordered Set to ensure we include each
+        # match just once, and at the highest rank it came up in.
         datasets = OrderedDict()
 
         fq_org = '-organization:"national-treasury"'

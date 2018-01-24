@@ -98,6 +98,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'treasury_datasets': department.get_treasury_datasets(),
         'contributed_datasets': contributed_datasets,
         'programmes': [{'name': p.name} for p in department.programmes.order_by('programme_number')],
+        'government_functions': [f.name for f in department.get_govt_functions()],
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
