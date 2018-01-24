@@ -125,12 +125,13 @@ class Department(models.Model):
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 
-    def get_resources(self):
+    def get_treasury_datasets(self):
         resources = {}
 
         query = {
             'q': '',
-            'fq': ('vocab_financial_years:"%s"'
+            'fq': ('+organization:"national-treasury"'
+                   '+vocab_financial_years:"%s"'
                    '+vocab_spheres:"%s"'
                    '+extras_geographic_region_slug:"%s"'
                    '+extras_department_name_slug:"%s"') % (
@@ -173,6 +174,9 @@ class Department(models.Model):
     def get_govt_functions(self):
         return GovtFunction.objects.filter(programme__department=self).distinct()
 
+    def get_financial_year(self):
+        return self.government.sphere.financial_year
+
     def _get_financial_year_query(self):
         return '+vocab_financial_years:"%s"' % self.government.sphere.financial_year.slug
 
@@ -191,7 +195,7 @@ class Department(models.Model):
             options = ['+vocab_functions:"%s"' % n for n in ckan_tag_names]
             return '+(%s)' % ' OR '.join(options)
 
-    def get_related_contributed_datasets(self):
+    def get_contributed_datasets(self):
         datasets = OrderedDict()
 
         fq_org = '-organization:"national-treasury"'
@@ -217,7 +221,9 @@ class Department(models.Model):
             response = ckan.action.package_search(**params)
             logger.info("query %r returned %d results", params, len(response['results']))
             for package in response['results']:
-                datasets[package['name']] = package['name']
+                if package['name'] not in datasets:
+                    dataset = Dataset.from_package(self.get_financial_year(), package)
+                    datasets[package['name']] = dataset
         return datasets.values()
 
     def __str__(self):
