@@ -196,7 +196,7 @@ def dataset(request, financial_year_id, dataset_slug):
 def department_program_budget(request, financial_slug, department_slug):
     context = {}
     dept_name = Department.objects.filter(slug=department_slug).first()
-    budget = get_budget_resources(financial_slug, dept_name.name)
+    budget = get_budget_resources(financial_slug[:4], dept_name.name)
     if budget:
         context['results'] = []
         for cells in budget['cells']:
@@ -208,7 +208,7 @@ def department_program_budget(request, financial_slug, department_slug):
                 }
             )
         context.update({
-            'selected_financial_year': '2017-18',
+            'selected_financial_year': financial_slug,
             'sphere': 'national',
             'department': dept_name.name,
             'slug': department_slug,
