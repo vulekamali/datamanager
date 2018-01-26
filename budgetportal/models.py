@@ -254,14 +254,9 @@ class Department(models.Model):
         url = ('https://openspending.org/api/3/cubes/'
                'fb2fa9b200eb3e56facc4c287002fc4d:{}'
                'aggregate/').format(resource[year.slug[:4]])
-        try:
-            result = requests.get(url, params=params)
-            if result.status_code == 200:
-                if result.json()['status'] == 'ok':
-                    return result.json()
-        except (HTTPError, ConnectionError) as e:
-            return None
-        return None
+        result = requests.get(url, params=params)
+        result.raise_for_status()
+        return result.json()
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
