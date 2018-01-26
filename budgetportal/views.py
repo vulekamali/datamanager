@@ -57,9 +57,18 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     for year in years:
         if year.slug == financial_year_id:
             selected_year = year
-            sphere = selected_year.spheres.filter(slug=sphere_slug).first()
-            government = sphere.governments.filter(slug=government_slug).first()
-            department = government.departments.filter(slug=department_slug).first()
+            sphere = selected_year \
+                     .spheres \
+                     .filter(slug=sphere_slug) \
+                     .first()
+            government = sphere \
+                         .governments \
+                         .filter(slug=government_slug) \
+                         .first()
+            department = government \
+                         .departments \
+                         .filter(slug=department_slug) \
+                         .first()
 
     financial_years_context = []
     for year in years:
@@ -82,10 +91,28 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'contributor': dataset.get_organization()['name'],
             'url_path': dataset.get_url_path(),
         })
+    budget = []
+    budget_data = department.get_budget_totals(selected_year)
+    if budget_data:
+        for cells in budget_data['cells']:
+            budget.append(
+                {
+                    'name': cells['activity_programme_number.programme'],
+                    'total_budget': cells['value.sum']
+                }
+            )
+    else:
+        budget.append(
+            {'name': p.name,
+             'total_budget': None}
+            for p in department.programmes.order_by('programme_number')
+        )
+
     context = {
         'name': department.name,
         'slug': str(department.slug),
         'vote_number': department.vote_number,
+        'total_budget': budget_data['summary']['value.sum'] if budget_data else None,
         'government': {
             'name': department.government.name,
             'slug': str(department.government.slug),
@@ -99,7 +126,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'intro': department.intro,
         'treasury_datasets': department.get_treasury_datasets(),
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
-        'programmes': [{'name': p.name} for p in department.programmes.order_by('programme_number')],
+        'programmes': budget,
         'government_functions': [f.name for f in department.get_govt_functions()],
     }
 
@@ -190,39 +217,4 @@ def dataset(request, financial_year_id, dataset_slug):
     })
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def department_program_budget(request, financial_slug, department_slug):
-    context = {}
-    dept_name = Department.objects.filter(slug=department_slug).first()
-    budget = get_budget_resources(financial_slug[:4], dept_name.name)
-    if budget:
-        context['results'] = []
-        for cells in budget['cells']:
-            context['results'].append(
-                {
-                    'programme_number': cells['activity_programme_number.programme_number'],
-                    'programme': cells['activity_programme_number.programme'],
-                    'total_amount': cells['value.sum']
-                }
-            )
-        context.update({
-            'selected_financial_year': financial_slug,
-            'sphere': 'national',
-            'department': dept_name.name,
-            'slug': department_slug,
-            'vote_number': dept_name.vote_number,
-            'total_amount': budget['summary']['value.sum'],
-        })
-        response_yaml = yaml.safe_dump(context,
-                                       default_flow_style=False,
-                                       encoding='utf-8')
-        return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-    context['status'] = 'error'
-    context['message'] = 'Unable to fetch details from api service'
-    response_yaml = yaml.safe_dump(context,
-                                   default_flow_style=False,
-                                   encoding='utf8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
