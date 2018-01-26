@@ -134,7 +134,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset_list(request, financial_year_id):
+def contributed_dataset_list(request, financial_year_id):
     context = {
         'financial_years': [],
         'selected_financial_year': financial_year_id,
@@ -151,18 +151,18 @@ def dataset_list(request, financial_year_id):
             'is_selected': is_selected,
             'closest_match': {
                 'is_exact_match': True,
-                'name': 'Datasets',
-                'slug': 'datasets',
+                'name': 'Contributed Data',
+                'slug': 'contributed-data',
                 'organisational_unit': 'financial_year',
-                'url_path': "%s/datasets" % year.slug,
+                'url_path': "%s/contributed-data" % year.slug,
             },
         })
 
     for dataset in selected_year.get_contributed_datasets():
-        context['datasets'].append({
-            'url_path': dataset.get_url_path(),
-            'slug': dataset.slug,
-        })
+        field_subset = dataset_fields(dataset)
+        del field_subset['intro']
+        del field_subset['methodology']
+        context['datasets'].append(field_subset)
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
@@ -203,7 +203,14 @@ def dataset(request, financial_year_id, dataset_slug):
                 },
             })
 
-    context.update({
+    context.update(dataset_fields(dataset))
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_fields(dataset):
+    return {
         'slug': dataset.slug,
         'name': dataset.name,
         'resources': dataset.resources,
@@ -214,7 +221,5 @@ def dataset(request, financial_year_id, dataset_slug):
         'license': dataset.license,
         'intro': dataset.intro,
         'methodology': dataset.methodology,
-    })
-
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
+        'url_path': dataset.get_url_path(),
+    }
