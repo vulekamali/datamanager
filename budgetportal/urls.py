@@ -28,10 +28,6 @@ urlpatterns = [
         '/(?P<government_slug>[\w-]+)'
         '/departments'
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
-    # Department Budget Totals
-    url(r'^(?P<financial_slug>[\w-]+)/national/departments/(?P<department_slug>[\w-]+)/budget.yaml',
-        cache_page(CACHE_SECS)(views.department_program_budget)),
-
     # Dataset List
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/datasets.yaml', cache_page(CACHE_SECS)(views.dataset_list)),
