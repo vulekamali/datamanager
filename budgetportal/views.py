@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from models import FinancialYear, Dataset, Department
 import yaml
 
-from .utils import get_budget_resources
 
 
 def department_list(request, financial_year_id):
@@ -91,18 +90,18 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'contributor': dataset.get_organization()['name'],
             'url_path': dataset.get_url_path(),
         })
-    budget = []
+    programme_budgets = []
     budget_data = department.get_budget_totals(selected_year)
     if budget_data:
         for cells in budget_data['cells']:
-            budget.append(
+            programme_budgets.append(
                 {
                     'name': cells['activity_programme_number.programme'],
                     'total_budget': cells['value.sum']
                 }
             )
     else:
-        budget.append(
+        programme_budgets.append(
             {'name': p.name,
              'total_budget': None}
             for p in department.programmes.order_by('programme_number')
@@ -126,7 +125,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'intro': department.intro,
         'treasury_datasets': department.get_treasury_datasets(),
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
-        'programmes': budget,
+        'programmes': programme_budgets,
         'government_functions': [f.name for f in department.get_govt_functions()],
     }
 
