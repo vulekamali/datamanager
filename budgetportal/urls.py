@@ -28,7 +28,7 @@ urlpatterns = [
         '/(?P<government_slug>[\w-]+)'
         '/departments'
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
-
+    
     # Contributed Dataset List
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),

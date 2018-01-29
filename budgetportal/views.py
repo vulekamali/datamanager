@@ -1,6 +1,7 @@
 from django.http import HttpResponse
-from models import FinancialYear, Dataset
+from models import FinancialYear, Dataset, Department
 import yaml
+
 
 
 def department_list(request, financial_year_id):
@@ -55,9 +56,18 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     for year in years:
         if year.slug == financial_year_id:
             selected_year = year
-            sphere = selected_year.spheres.filter(slug=sphere_slug).first()
-            government = sphere.governments.filter(slug=government_slug).first()
-            department = government.departments.filter(slug=department_slug).first()
+            sphere = selected_year \
+                     .spheres \
+                     .filter(slug=sphere_slug) \
+                     .first()
+            government = sphere \
+                         .governments \
+                         .filter(slug=government_slug) \
+                         .first()
+            department = government \
+                         .departments \
+                         .filter(slug=department_slug) \
+                         .first()
 
     financial_years_context = []
     for year in years:
@@ -80,10 +90,28 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'contributor': dataset.get_organization()['name'],
             'url_path': dataset.get_url_path(),
         })
+    programme_budgets = []
+    budget_data = department.get_budget_totals(selected_year)
+    if budget_data:
+        for cells in budget_data['cells']:
+            programme_budgets.append(
+                {
+                    'name': cells['activity_programme_number.programme'],
+                    'total_budget': cells['value.sum']
+                }
+            )
+    else:
+        programme_budgets.append(
+            {'name': p.name,
+             'total_budget': None}
+            for p in department.programmes.order_by('programme_number')
+        )
+
     context = {
         'name': department.name,
         'slug': str(department.slug),
         'vote_number': department.vote_number,
+        'total_budget': budget_data['summary']['value.sum'] if budget_data else None,
         'government': {
             'name': department.government.name,
             'slug': str(department.government.slug),
@@ -97,7 +125,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'intro': department.intro,
         'treasury_datasets': department.get_treasury_datasets(),
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
-        'programmes': [{'name': p.name} for p in department.programmes.order_by('programme_number')],
+        'programmes': programme_budgets,
         'government_functions': [f.name for f in department.get_govt_functions()],
     }
 
