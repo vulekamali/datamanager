@@ -92,7 +92,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         })
     programme_budgets = []
     budget_data = department.get_budget_totals(selected_year)
-    if budget_data:
+    if budget_data and budget_data['cells']:
         for cells in budget_data['cells']:
             programme_budgets.append(
                 {
@@ -102,10 +102,11 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             )
     else:
         programme_budgets.append(
-            {'name': p.name,
-             'total_budget': None}
-            for p in department.programmes.order_by('programme_number')
+             {'name': p.name,
+              'total_budget': None}
+                for p in department.programmes.order_by('programme_number')
         )
+        programme_budgets = list(programme_budgets[0])
 
     context = {
         'name': department.name,
