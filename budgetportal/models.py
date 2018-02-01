@@ -2,13 +2,15 @@ from autoslug import AutoSlugField
 from collections import OrderedDict
 from django.conf import settings
 from django.db import models
-from requests.exceptions import HTTPError, ConnectionError
 import logging
 import re
 import requests
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
+
+
+OPENSPENDING_ACCOUNT_ID = 'fb2fa9b200eb3e56facc4c287002fc4d'
 
 
 class FinancialYear(models.Model):
@@ -25,6 +27,9 @@ class FinancialYear(models.Model):
 
     def get_url_path(self):
         return "/%s" % self.slug
+
+    def get_starting_year(self):
+        return self.slug[:4]
 
     def get_sphere(self, name):
         return getattr(self, name)
@@ -127,6 +132,21 @@ class Department(models.Model):
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 
+    def get_govt_functions(self):
+        return GovtFunction.objects.filter(programme__department=self).distinct()
+
+    def get_financial_year(self):
+        return self.government.sphere.financial_year
+
+    def _get_financial_year_query(self):
+        return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
+
+    def _get_government_query(self):
+        if self.government.sphere.slug == 'provincial':
+            return '+vocab_provinces:"%s"' % self.government.name
+        else:
+            return none_selected_query('vocab_provinces')
+
     def get_treasury_datasets(self):
         resources = {}
 
@@ -173,21 +193,6 @@ class Department(models.Model):
                     })
         return resources
 
-    def get_govt_functions(self):
-        return GovtFunction.objects.filter(programme__department=self).distinct()
-
-    def get_financial_year(self):
-        return self.government.sphere.financial_year
-
-    def _get_financial_year_query(self):
-        return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
-
-    def _get_government_query(self):
-        if self.government.sphere.slug == 'provincial':
-            return '+vocab_provinces:"%s"' % self.government.name
-        else:
-            return none_selected_query('vocab_provinces')
-
     def _get_functions_query(self):
         function_names = [f.name for f in self.get_govt_functions()]
         ckan_tag_names = [re.sub('[^\w -]', '', n) for n in function_names]
@@ -233,30 +238,34 @@ class Department(models.Model):
                     datasets[package['name']] = dataset
         return datasets.values()
 
-    def get_budget_totals(self, year):
+    def get_program_budgets(self):
         """
         get the budget totals for all the department programmes
         """
-        resource = {
-            '2015': 'estimates-of-national-expenditure-south-africa-2015-16/',
-            '2016': 'estimates-of-national-expenditure-south-africa-2016-17/',
-            '2017': 'estimates-of-national-expenditure-south-africa-2017-18/'
-        }
+        dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
+            self.government.sphere.slug,
+            self.get_financial_year().slug,
+        )
+        cube_url = ('https://openspending.org/api/3/cubes/'
+                    '{}:{}/').format(OPENSPENDING_ACCOUNT_ID, dataset_id)
+        model_url = cube_url + 'model/'
+        model_result = requests.get(model_url)
+        model_result.raise_for_status()
+        model = model_result.json()['model']
+        programme_dimension = model['hierarchies']['activity']['levels'][0]
         params = {
             'cut': ('date_2.financial_year:{}|'
                     'administrative_classification_2.department:"{}"')
-            .format(year.slug[:4], self.name),
-            'drilldown': ('activity_programme_number.programme_number|'
-                          'activity_programme_number.programme'),
-            'order': 'activity_programme_number.programme_number:asc',
+            .format(self.get_financial_year().get_starting_year(), self.name),
+            'drilldown': programme_dimension + '.programme_number|'
+                         + programme_dimension + '.programme',
             'pagesize': 30
         }
-        url = ('https://openspending.org/api/3/cubes/'
-               'fb2fa9b200eb3e56facc4c287002fc4d:{}'
-               'aggregate/').format(resource[year.slug[:4]])
-        result = requests.get(url, params=params)
-        result.raise_for_status()
-        return result.json()
+        aggregate_url = cube_url + 'aggregate/'
+        aggregate_result = requests.get(aggregate_url, params=params)
+        aggregate_result.raise_for_status()
+        programmes = aggregate_result.json()['cells']
+        return programmes
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
