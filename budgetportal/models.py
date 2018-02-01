@@ -5,6 +5,7 @@ from django.db import models
 import logging
 import re
 import requests
+from pprint import pformat
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -49,7 +50,11 @@ class FinancialYear(models.Model):
             'rows': 1000,
         }
         response = ckan.action.package_search(**query)
-        logger.info("query %r returned %d results", query, len(response['results']))
+        logger.info(
+            "query %s\nto ckan returned %d results",
+            pformat(query),
+            len(response['results'])
+        )
         for package in response['results']:
             yield Dataset.from_package(self, package)
 
@@ -165,7 +170,11 @@ class Department(models.Model):
             'rows': 1,
         }
         response = ckan.action.package_search(**query)
-        logger.info("query %r returned %d results", query, len(response['results']))
+        logger.info(
+            "query %s\nreturned %d results",
+            pformat(query),
+            len(response['results'])
+        )
         if response['results']:
             package = response['results'][0]
             for resource in package['resources']:
@@ -231,7 +240,10 @@ class Department(models.Model):
                 'rows': 1000,
             }
             response = ckan.action.package_search(**params)
-            logger.info("query %r returned %d results", params, len(response['results']))
+            logger.info(
+                "query %s\nto ckan returned %d results",
+                pformat(params),
+                len(response['results']))
             for package in response['results']:
                 if package['name'] not in datasets:
                     dataset = Dataset.from_package(self.get_financial_year(), package)
@@ -250,6 +262,11 @@ class Department(models.Model):
                     '{}:{}/').format(OPENSPENDING_ACCOUNT_ID, dataset_id)
         model_url = cube_url + 'model/'
         model_result = requests.get(model_url)
+        logger.info(
+            "request to %s took %dms",
+            model_url,
+            model_result.elapsed.microseconds / 1000
+        )
         model_result.raise_for_status()
         model = model_result.json()['model']
         programme_dimension = model['hierarchies']['activity']['levels'][0]
@@ -263,6 +280,12 @@ class Department(models.Model):
         }
         aggregate_url = cube_url + 'aggregate/'
         aggregate_result = requests.get(aggregate_url, params=params)
+        logger.info(
+            "request %s with query %r took %dms",
+            aggregate_result.url,
+            pformat(params),
+            aggregate_result.elapsed.microseconds / 1000
+        )
         aggregate_result.raise_for_status()
         programmes = aggregate_result.json()['cells']
         return programmes
