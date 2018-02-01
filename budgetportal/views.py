@@ -83,6 +83,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
                 'is_exact_match': closest_is_exact,
             },
         })
+
     contributed_datasets = []
     for dataset in department.get_contributed_datasets():
         contributed_datasets.append({
@@ -90,10 +91,11 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'contributor': dataset.get_organization()['name'],
             'url_path': dataset.get_url_path(),
         })
+
     programme_budgets = []
-    budget_data = department.get_budget_totals(selected_year)
-    if budget_data and budget_data['cells']:
-        for cells in budget_data['cells']:
+    budget_data = department.get_program_budgets()
+    if budget_data:
+        for cells in budget_data:
             programme_budgets.append(
                 {
                     'name': cells['activity_programme_number.programme'],
@@ -102,9 +104,9 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             )
     else:
         programme_budgets.append(
-             {'name': p.name,
-              'total_budget': None}
-                for p in department.programmes.order_by('programme_number')
+            {'name': p.name,
+             'total_budget': None}
+            for p in department.programmes.order_by('programme_number')
         )
         programme_budgets = list(programme_budgets[0])
 
@@ -112,7 +114,6 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'name': department.name,
         'slug': str(department.slug),
         'vote_number': department.vote_number,
-        'total_budget': budget_data['summary']['value.sum'] if budget_data else None,
         'government': {
             'name': department.government.name,
             'slug': str(department.government.slug),
