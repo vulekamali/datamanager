@@ -92,23 +92,12 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'url_path': dataset.get_url_path(),
         })
 
-    programme_budgets = []
-    budget_data = department.get_program_budgets()
-    if budget_data:
-        for cells in budget_data:
-            programme_budgets.append(
-                {
-                    'name': cells['activity_programme_number.programme'],
-                    'total_budget': cells['value.sum']
-                }
-            )
-    else:
-        programme_budgets.append(
-            {'name': p.name,
-             'total_budget': None}
+    programme_budgets = department.get_program_budgets()
+    if not programme_budgets:
+        programme_budgets = [
+            {'name': p.name, 'total_budget': None}
             for p in department.programmes.order_by('programme_number')
-        )
-        programme_budgets = list(programme_budgets[0])
+        ]
 
     context = {
         'name': department.name,
