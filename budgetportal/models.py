@@ -270,12 +270,19 @@ class Department(models.Model):
         model_result.raise_for_status()
         model = model_result.json()['model']
         programme_dimension = model['hierarchies']['activity']['levels'][0]
+        financial_year_start = self.get_financial_year().get_starting_year()
+        cuts = [
+            'date_2.financial_year:' + financial_year_start,
+            'administrative_classification_2.department:"' + self.name + '"'
+        ]
+        if self.government.sphere.slug == 'provincial':
+            cuts.append('geo_source_2.government:"%s"' % self.government.name)
         params = {
-            'cut': ('date_2.financial_year:{}|'
-                    'administrative_classification_2.department:"{}"')
-            .format(self.get_financial_year().get_starting_year(), self.name),
-            'drilldown': programme_dimension + '.programme_number|'
-                         + programme_dimension + '.programme',
+            'cut': "|".join(cuts),
+            'drilldown': "|".join([
+                programme_dimension + '.programme_number',
+                programme_dimension + '.programme',
+            ]),
             'pagesize': 30
         }
         aggregate_url = cube_url + 'aggregate/'
@@ -287,7 +294,12 @@ class Department(models.Model):
             aggregate_result.elapsed.microseconds / 1000
         )
         aggregate_result.raise_for_status()
-        programmes = aggregate_result.json()['cells']
+        programmes = []
+        for cell in aggregate_result.json()['cells']:
+            programmes.append({
+                'name': cell[programme_dimension + '.programme'],
+                'total_budget': cell['value.sum']
+            })
         return programmes
 
     def __str__(self):
