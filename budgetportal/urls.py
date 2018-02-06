@@ -13,6 +13,8 @@ CACHE_SECS = 0
 
 urlpatterns = [
 
+    # Home Page revenue
+    url(r'^(?P<financial_year_id>[\w-]+).yaml$', views.home),
     # Department List
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list)),
