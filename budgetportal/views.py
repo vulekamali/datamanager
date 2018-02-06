@@ -1,8 +1,32 @@
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from models import FinancialYear, Dataset, Department
 import yaml
 
 
+def home(request, financial_year_id):
+    """
+    Generate and show national budget revenue
+    """
+    revenue = []
+    year = get_object_or_404(FinancialYear, slug=financial_year_id)
+    revenue_data = year.get_budget_revenue()
+    for r in revenue_data:
+        revenue.append(
+            {
+                'category': r['category_two'],
+                'amount': r['amount']
+            }
+        )
+
+    context = {
+        'selected_financial_year': financial_year_id,
+        'revenue': revenue
+    }
+    response_yaml = yaml.safe_dump(context,
+                                   default_flow_style=False,
+                                   encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 def department_list(request, financial_year_id):
     context = {

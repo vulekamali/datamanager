@@ -58,6 +58,33 @@ class FinancialYear(models.Model):
         for package in response['results']:
             yield Dataset.from_package(self, package)
 
+    def get_budget_revenue(self):
+        """
+        Get revenue data for the financial year
+        """
+        url = 'https://data.vulekamali.gov.za' \
+              '/api/3/action' \
+              '/datastore_search_sql'
+
+        dataset_id = {
+            '2015-16': '',
+            '2016-17': '',
+            '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
+        }
+        sql = '''
+        SELECT category_two,SUM(amount) AS amount FROM "{}"
+         WHERE "phase"='After tax proposals'
+         GROUP BY "category_two" ORDER BY amount DESC
+        '''.format(dataset_id[self.slug])
+
+        params = {
+            'sql': sql
+        }
+        revenue_result = requests.get(url, params=params)
+
+        revenue_result.raise_for_status()
+        revenue_data = revenue_result.json()['result']['records']
+        return revenue_data
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
