@@ -36,6 +36,7 @@ You will need:
 * a django secret key
 * a New Relic license key
 * a cool app name
+* API key for a CKAN user who can modify datasets in the `national-treasury` organisation
 
 ```bash
 heroku create
@@ -44,7 +45,8 @@ heroku config:set DJANGO_DEBUG=false \
                   DISABLE_COLLECTSTATIC=1 \
                   DJANGO_SECRET_KEY=some-secret-key \
                   NEW_RELIC_APP_NAME=cool app name \
-                  NEW_RELIC_LICENSE_KEY=new relic license key
+                  NEW_RELIC_LICENSE_KEY=new relic license key \
+                  CKAN_API_KEY=...
 git push heroku master
 heroku run python manage.py migrate
 heroku run python manage.py createsuperuser
