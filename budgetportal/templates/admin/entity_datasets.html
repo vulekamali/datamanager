@@ -7,7 +7,7 @@
     <ul>
       {% for department in government.departments.all %}
       <li>
-        {{ department.vote_number }} - {{ department.name }} ({{ department.get_treasury_datasets | length }})
+        {{ department.vote_number }} - {{ department.name }} ({{ department.get_treasury_resources | length }})
         <div><code>{{ department.slug }}</code></div>
       </li>
       {% endfor %}

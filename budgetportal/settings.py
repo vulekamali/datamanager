@@ -87,9 +87,12 @@ else:
         }
     }
 
+
 from ckanapi import RemoteCKAN
 CKAN_URL = os.environ.get('CKAN_URL', 'https://treasurydata.openup.org.za')
-CKAN = RemoteCKAN(CKAN_URL)
+CKAN_API_KEY = os.environ.get('CKAN_API_KEY', None)
+CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

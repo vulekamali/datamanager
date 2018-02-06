@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from models import FinancialYear, Dataset, Department
+from models import FinancialYear, Dataset
 import yaml
 
 
@@ -27,6 +27,7 @@ def home(request, financial_year_id):
                                    default_flow_style=False,
                                    encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
 
 def department_list(request, financial_year_id):
     context = {
@@ -138,7 +139,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'selected_financial_year': financial_year_id,
         'financial_years': financial_years_context,
         'intro': department.intro,
-        'treasury_datasets': department.get_treasury_datasets(),
+        'treasury_datasets': department.get_treasury_resources(),
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'programmes': programme_budgets,
         'government_functions': [f.name for f in department.get_govt_functions()],
