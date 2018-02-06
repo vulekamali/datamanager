@@ -91,7 +91,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'url_path': dataset.get_url_path(),
         })
 
-    programme_budgets = department.get_program_budgets()
+    programme_budgets = department.get_programme_budgets()
     if not programme_budgets:
         programme_budgets = [
             {'name': p.name, 'total_budget': None}

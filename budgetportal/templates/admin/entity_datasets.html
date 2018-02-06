@@ -10,9 +10,15 @@
     {{ government.name }}
     <ul>
       {% for department in government.departments.all %}
-      <li class="{% if department.get_treasury_resources|length == 0 %} errornote {% endif %}">
-        {{ department.vote_number }} - {{ department.name }} ({{ department.get_treasury_resources | length }})
+      <li>
+        <h2>{{ department.vote_number }} - {{ department.name }}</h2>
         <div><code>{{ department.slug }}</code></div>
+        <div class="{% if department.get_treasury_resources|length == 0 %} errornote {% endif %}">
+          {{ department.get_treasury_resources | length }} Treasury Resources
+        </div>
+        <div class="{% if not department.get_programme_budgets.0.total_budget %} errornote {% endif %}">
+          {{ department.get_programme_budgets.0.total_budget }} for first programme budget
+        </div>
       </li>
       {% endfor %}
     </ul>
