@@ -1,3 +1,7 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
 <h1>Entity Datasets - {{ sphere.financial_year.slug }} {{ sphere.name }}</h1>
 
 <ul>
@@ -6,7 +10,7 @@
     {{ government.name }}
     <ul>
       {% for department in government.departments.all %}
-      <li>
+      <li class="{% if department.get_treasury_resources|length == 0 %} errornote {% endif %}">
         {{ department.vote_number }} - {{ department.name }} ({{ department.get_treasury_resources | length }})
         <div><code>{{ department.slug }}</code></div>
       </li>
@@ -15,3 +19,6 @@
   </li>
   {% endfor %}
 </ul>
+
+
+{% endblock content %}
