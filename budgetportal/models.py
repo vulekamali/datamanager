@@ -2,10 +2,11 @@ from autoslug import AutoSlugField
 from collections import OrderedDict
 from django.conf import settings
 from django.db import models
+from django.utils.text import slugify
+from pprint import pformat
 import logging
 import re
 import requests
-from pprint import pformat
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -125,6 +126,12 @@ class Department(models.Model):
     vote_number = models.IntegerField()
     intro = models.TextField()
 
+    def __init__(self, *args, **kwargs):
+        super(Department, self).__init__(*args, **kwargs)
+        self.treasury_datasets = self.get_treasury_datasets()
+        self.old_name = self.name
+        self.old_slug = self.slug
+
     class Meta:
         unique_together = (
             ('government', 'slug'),
@@ -133,6 +140,29 @@ class Department(models.Model):
         )
 
         ordering = ['vote_number']
+
+    def save(self, force_insert=False, force_update=False):
+        if self.old_name != self.name:
+            self._update_datasets()
+        super(Department, self).save(force_insert, force_update)
+
+    def _update_datasets(self):
+        if len(self.name) > 5:  # If it's a really short name we can break stuff
+            for dataset in self.treasury_datasets:
+                new_slug = slugify(self.name)
+                dataset['title'] = dataset['title'].replace(self.old_name, self.name)
+                dataset['name'] = dataset['name'].replace(self.slug, new_slug)
+                extras_set(dataset['extras'], 'Department Name', self.name)
+                extras_set(dataset['extras'], 'department_name', self.name)
+                extras_set(dataset['extras'], 'department_name_slug', new_slug)
+                logger.info("Updating package %s with new name", dataset['id'])
+                ckan.action.package_update(**dataset)
+                for resource in dataset['resources']:
+                    resource['name'] = resource['name'].replace(self.old_name, self.name)
+                    logger.info("Updating resource %s with new name", resource['id'])
+                    ckan.action.resource_update(**resource)
+        else:
+            logger.warn("Not updating datasets for %s", self.get_url_path())
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -153,8 +183,6 @@ class Department(models.Model):
             return none_selected_query('vocab_provinces')
 
     def get_treasury_datasets(self):
-        resources = {}
-
         query = {
             'q': '',
             'fq': ('+organization:"national-treasury"'
@@ -175,8 +203,13 @@ class Department(models.Model):
             pformat(query),
             len(response['results'])
         )
-        if response['results']:
-            package = response['results'][0]
+        return response['results']
+
+    def get_treasury_resources(self):
+        resources = {}
+        datasets = self.get_treasury_datasets()
+        if datasets:
+            package = datasets[0]
             for resource in package['resources']:
                 if resource['name'].startswith('Vote'):
                     if self.government.sphere.slug == 'provincial':
@@ -403,13 +436,14 @@ class Dataset():
             'twitter': org['twitter_id'] if 'twitter_id' in org else None,
         }
 
-
-        # def get_related(self):
-        # url: "2017-18/national/departments/health"
-        # label: "National Department: Health"
-        #return []
-
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
 def none_selected_query(vocab_name):
     """Match items where none of the options in a custom vocab tag is selected"""
     return '+(*:* NOT %s:["" TO *])' % vocab_name
+
+
+def extras_set(extras, key, value):
+    for extra in extras:
+        if extra['key'] == key:
+            extra['value'] = value
+            break
