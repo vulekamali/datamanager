@@ -58,7 +58,7 @@ def department_list(request, financial_year_id):
                 'name': 'Departments',
                 'slug': 'departments',
                 'organisational_unit': 'department-list',
-                'url_path': "%s/departments" % year.slug,
+                'url_path': "/%s/departments" % year.slug,
             },
         })
 
@@ -182,7 +182,7 @@ def contributed_dataset_list(request, financial_year_id):
                 'name': 'Contributed Data',
                 'slug': 'contributed-data',
                 'organisational_unit': 'dataset-list',
-                'url_path': "%s/contributed-data" % year.slug,
+                'url_path': "/%s/contributed-data" % year.slug,
             },
         })
 
