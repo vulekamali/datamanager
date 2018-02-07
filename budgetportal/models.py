@@ -152,6 +152,7 @@ class Department(models.Model):
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, editable=True)
     vote_number = models.IntegerField()
     intro = models.TextField()
+    _programme_budgets = None
 
     def __init__(self, *args, **kwargs):
         super(Department, self).__init__(*args, **kwargs)
@@ -310,10 +311,14 @@ class Department(models.Model):
                     datasets[package['name']] = dataset
         return datasets.values()
 
-    def get_program_budgets(self):
+    def get_programme_budgets(self):
         """
         get the budget totals for all the department programmes
         """
+
+        if self._programme_budgets is not None:
+            return self._programme_budgets
+
         dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
             self.government.sphere.slug,
             self.get_financial_year().slug,
@@ -360,7 +365,8 @@ class Department(models.Model):
                 'name': cell[programme_dimension + '.programme'],
                 'total_budget': cell['value.sum']
             })
-        return programmes
+        self._programme_budgets = programmes
+        return self._programme_budgets
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())

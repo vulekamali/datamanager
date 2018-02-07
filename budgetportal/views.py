@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.views import View
 from models import FinancialYear, Dataset
 import yaml
 
@@ -29,10 +30,45 @@ def home(request, financial_year_id):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
+class Page(View):
+    slug = None
+    organisational_unit = None
+
+    def get(self, request, financial_year_id):
+        context = {
+            'selected_financial_year': financial_year_id,
+            'financial_years': [],
+            'slug': self.slug,
+            'url_path': '/%s/%s' % (financial_year_id, self.slug),
+            'organisational_unit': self.organisational_unit,
+        }
+
+        for year in FinancialYear.objects.order_by('slug'):
+            is_selected = year.slug == financial_year_id
+            context['financial_years'].append({
+                'id': year.slug,
+                'is_selected': is_selected,
+                'closest_match': {
+                    'is_exact_match': True,
+                    'slug': self.slug,
+                    'url_path': "/%s/%s" % (year.slug, self.slug),
+                },
+            })
+
+        response_yaml = yaml.safe_dump(
+            context,
+            default_flow_style=False,
+            encoding='utf-8'
+        )
+        return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
 def department_list(request, financial_year_id):
     context = {
         'financial_years': [],
         'selected_financial_year': financial_year_id,
+        'organisational_unit': 'department-list',
+        'slug': 'departments',
     }
 
     selected_year = None
@@ -47,8 +83,8 @@ def department_list(request, financial_year_id):
                 'is_exact_match': True,
                 'name': 'Departments',
                 'slug': 'departments',
-                'organisational_unit': 'financial_year',
-                'url_path': "%s/departments" % year.slug,
+                'organisational_unit': 'department-list',
+                'url_path': "/%s/departments" % year.slug,
             },
         })
 
@@ -117,7 +153,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'url_path': dataset.get_url_path(),
         })
 
-    programme_budgets = department.get_program_budgets()
+    programme_budgets = department.get_programme_budgets()
     if not programme_budgets:
         programme_budgets = [
             {'name': p.name, 'total_budget': None}
@@ -143,6 +179,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'programmes': programme_budgets,
         'government_functions': [f.name for f in department.get_govt_functions()],
+        'organisational_unit': 'department',
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
@@ -154,6 +191,8 @@ def contributed_dataset_list(request, financial_year_id):
         'financial_years': [],
         'selected_financial_year': financial_year_id,
         'datasets': [],
+        'organisational_unit': 'dataset-list',
+        'slug': 'contributed-data',
     }
 
     selected_year = None
@@ -168,8 +207,8 @@ def contributed_dataset_list(request, financial_year_id):
                 'is_exact_match': True,
                 'name': 'Contributed Data',
                 'slug': 'contributed-data',
-                'organisational_unit': 'financial_year',
-                'url_path': "%s/contributed-data" % year.slug,
+                'organisational_unit': 'dataset-list',
+                'url_path': "/%s/contributed-data" % year.slug,
             },
         })
 
@@ -187,6 +226,7 @@ def dataset(request, financial_year_id, dataset_slug):
     context = {
         'financial_years': [],
         'selected_financial_year': financial_year_id,
+        'organisational_unit': 'dataset',
     }
 
     for year in FinancialYear.objects.order_by('slug'):
@@ -213,8 +253,8 @@ def dataset(request, financial_year_id, dataset_slug):
                     'is_exact_match': False,
                     'name': year.slug,
                     'slug': year.slug,
-                    'organisational_unit': 'financial_year',
-                    'url_path': year.get_url_path(),
+                    'organisational_unit': 'department-list',
+                    'url_path': "%s/departments" % year.get_url_path(),
                 },
             })
 
