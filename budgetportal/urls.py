@@ -19,16 +19,6 @@ urlpatterns = [
 
 
     # Basic pages
-    url(r'^(?P<financial_year_id>[\w-]+).yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='index',
-            organisational_unit='financial_year',
-        ))),
-    url(r'^index.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='index',
-            organisational_unit='financial_year',
-        ))),
 
     url(r'^(?P<financial_year_id>[\w-]+)/about.yaml',
         cache_page(CACHE_SECS)(views.Page.as_view(

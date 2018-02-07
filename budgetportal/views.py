@@ -22,8 +22,24 @@ def home(request, financial_year_id):
 
     context = {
         'selected_financial_year': financial_year_id,
-        'revenue': revenue
+        'revenue': revenue,
+        'organisational_unit': 'financial_year',
+        'slug': financial_year_id,
+        'url_path': year.get_url_path(),
+        'financial_years': [],
     }
+    for year in FinancialYear.objects.order_by('slug'):
+        is_selected = year.slug == financial_year_id
+        context['financial_years'].append({
+            'id': year.slug,
+            'is_selected': is_selected,
+            'closest_match': {
+                'is_exact_match': True,
+                'slug': year.slug,
+                'url_path': "/%s" % year.slug,
+            },
+        })
+
     response_yaml = yaml.safe_dump(context,
                                    default_flow_style=False,
                                    encoding='utf-8')
