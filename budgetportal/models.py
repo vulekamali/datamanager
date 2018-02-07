@@ -218,8 +218,8 @@ class Department(models.Model):
             'fq': ('+organization:"national-treasury"'
                    '+vocab_financial_years:"%s"'
                    '+vocab_spheres:"%s"'
-                   '+extras_geographic_region_slug:"%s"'
-                   '+extras_department_name_slug:"%s"') % (
+                   '+extras_s_geographic_region_slug:"%s"'
+                   '+extras_s_department_name_slug:"%s"') % (
                        self.government.sphere.financial_year.slug,
                        self.government.sphere.slug,
                        self.government.slug,
