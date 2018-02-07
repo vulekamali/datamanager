@@ -227,8 +227,8 @@ def dataset(request, financial_year_id, dataset_slug):
                     'is_exact_match': False,
                     'name': year.slug,
                     'slug': year.slug,
-                    'organisational_unit': 'dataset',
-                    'url_path': year.get_url_path(),
+                    'organisational_unit': 'department-list',
+                    'url_path': "%s/departments" % year.get_url_path(),
                 },
             })
 
