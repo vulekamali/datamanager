@@ -13,6 +13,11 @@ CACHE_SECS = 0
 
 urlpatterns = [
 
+    # Home Page revenue
+    url(r'^(?P<financial_year_id>[\w-]+).yaml$', views.home),
+
+
+    # Basic pages
     url(r'^(?P<financial_year_id>[\w-]+).yaml',
         cache_page(CACHE_SECS)(views.Page.as_view(
             slug='index',
@@ -50,6 +55,7 @@ urlpatterns = [
             organisational_unit='learning',
         ))),
 
+
     # Department List
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list)),
@@ -66,14 +72,17 @@ urlpatterns = [
         '/departments'
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
 
+
     # Contributed Dataset List
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),
+
 
     # Dataset
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/datasets'
         '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
+
 
     # Admin
     url(r'^admin/', admin.site.urls),
