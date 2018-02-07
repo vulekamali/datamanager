@@ -68,10 +68,12 @@ class FinancialYear(models.Model):
               '/datastore_search_sql'
 
         dataset_id = {
-            '2015-16': '',
-            '2016-17': '',
             '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
         }
+
+        if self.slug not in dataset_id:
+            return []
+
         sql = '''
         SELECT category_two,SUM(amount) AS amount FROM "{}"
          WHERE "phase"='After tax proposals'
