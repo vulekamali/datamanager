@@ -14,7 +14,8 @@ CACHE_SECS = 0
 urlpatterns = [
 
     # Home Page revenue
-    url(r'^(?P<financial_year_id>[\w-]+).yaml$', views.home),
+    url(r'^(?P<financial_year_id>[\w-]+).yaml$',
+        cache_page(CACHE_SECS)(views.home)),
 
 
     # Basic pages
