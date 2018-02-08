@@ -14,21 +14,21 @@ def sort_categories(revenue_data):
         elif 'income tax' in r['category_two']:
             revenue.append(
                 {
-                    'category': r['category_two'],
+                    'category': r['category_two'].upper(),
                     'amount': r['amount']
                 }
             )
         elif 'Value-added tax' in r['category_two']:
             revenue.append(
                 {
-                    'category': r['category_two'],
+                    'category': 'VAT',
                     'amount': r['amount']
                 }
             )
         elif 'General fuel levy' in r['category_two']:
             revenue.append(
                 {
-                    'category': r['category_two'],
+                    'category': 'FUEL LEVIES',
                     'amount': r['amount']
                 }
             )
@@ -36,13 +36,13 @@ def sort_categories(revenue_data):
             other_total += int(r['amount'])
     revenue.append(
         {
-            'category': 'Customs and Excise Duties',
+            'category': 'CUSTOMS AND EXCISE DUTIES',
             'amount': str(duties_total)
         }
     )
     revenue.append(
         {
-            'category': 'Other',
+            'category': 'OTHER',
             'amount': str(other_total)
         }
     )
