@@ -8,7 +8,7 @@ def sort_categories(revenue_data):
     duties_total = 0
     other_total = 0
     for r in revenue_data:
-        if ('duties' in r['category_two']) or ('duty' in r['category_two']):
+        if ('Customs duties' in r['category_two']) or ('excise duties' in r['category_two']):
             duties_total += int(r['amount'])
 
         elif 'income tax' in r['category_two']:
