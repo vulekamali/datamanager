@@ -4,25 +4,19 @@ from django.views import View
 from models import FinancialYear, Dataset
 import yaml
 
+from . import revenue
+
 
 def home(request, financial_year_id):
     """
     Generate and show national budget revenue
     """
-    revenue = []
     year = get_object_or_404(FinancialYear, slug=financial_year_id)
     revenue_data = year.get_budget_revenue()
-    for r in revenue_data:
-        revenue.append(
-            {
-                'category': r['category_two'],
-                'amount': r['amount']
-            }
-        )
 
     context = {
         'selected_financial_year': financial_year_id,
-        'revenue': revenue,
+        'revenue': revenue.sort_categories(revenue_data),
         'organisational_unit': 'financial_year',
         'slug': financial_year_id,
         'url_path': year.get_url_path(),
