@@ -4,7 +4,7 @@ from django.views import View
 from models import FinancialYear, Dataset
 import yaml
 
-from . import utils
+from . import revenue
 
 
 def home(request, financial_year_id):
@@ -16,7 +16,7 @@ def home(request, financial_year_id):
 
     context = {
         'selected_financial_year': financial_year_id,
-        'revenue': utils.sort_categories(revenue_data),
+        'revenue': revenue.sort_categories(revenue_data),
         'organisational_unit': 'financial_year',
         'slug': financial_year_id,
         'url_path': year.get_url_path(),
