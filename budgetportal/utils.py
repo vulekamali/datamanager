@@ -37,13 +37,13 @@ def sort_categories(revenue_data):
     revenue.append(
         {
             'category': 'Customs and Excise Duties',
-            'amount': duties_total
+            'amount': str(duties_total)
         }
     )
     revenue.append(
         {
             'category': 'Other',
-            'amount': other_total
+            'amount': str(other_total)
         }
     )
     return revenue
