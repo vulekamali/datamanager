@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
 
-OPENSPENDING_ACCOUNT_ID = 'fb2fa9b200eb3e56facc4c287002fc4d'
+OPENSPENDING_ACCOUNT_ID = 'b9d2af843f3a7ca223eea07fb608e62a'
 
 
 class FinancialYear(models.Model):
