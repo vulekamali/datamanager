@@ -1,8 +1,10 @@
 from autoslug import AutoSlugField
 from collections import OrderedDict
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
+from partial_index import PartialIndex
 from pprint import pformat
 import logging
 import re
@@ -155,6 +157,7 @@ class Department(models.Model):
     name = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, editable=True)
     vote_number = models.IntegerField()
+    is_vote_primary = models.BooleanField(default=True)
     intro = models.TextField()
     _programme_budgets = None
 
@@ -168,8 +171,12 @@ class Department(models.Model):
         unique_together = (
             ('government', 'slug'),
             ('government', 'name'),
-            ('government', 'vote_number'),
         )
+        indexes = [
+            PartialIndex(fields=['government', 'vote_number'],
+                         unique=True,
+                         where='is_vote_primary'),
+        ]
 
         ordering = ['vote_number']
 
@@ -177,6 +184,15 @@ class Department(models.Model):
         if self.old_name != self.name:
             self._update_datasets()
         super(Department, self).save(force_insert, force_update)
+
+    def clean(self):
+        # This is only for user feedback in admin.
+        # The constraint must be enforced elsewhere.
+        if self.is_vote_primary and \
+           Department.objects.filter(government=self.government,
+                                     vote_number=self.vote_number):
+            raise ValidationError('There is already a primary department for '
+                                  'vote %d' % self.vote_number)
 
     def _update_datasets(self):
         if len(self.name) > 5:  # If it's a really short name we can break stuff
