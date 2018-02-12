@@ -1,8 +1,10 @@
 from autoslug import AutoSlugField
 from collections import OrderedDict
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
+from partial_index import PartialIndex
 from pprint import pformat
 import logging
 import re
@@ -123,6 +125,7 @@ class Government(models.Model):
     sphere = models.ForeignKey(Sphere, on_delete=models.CASCADE, related_name="governments")
     name = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True)
+    _function_budgets = None
 
     class Meta:
         unique_together = (
@@ -145,6 +148,73 @@ class Government(models.Model):
         else:
             raise Exception("More matching slugs than expected")
 
+    def get_vote_primary_departments(self):
+        return Department.objects.filter(government=self, is_vote_primary=True).all()
+
+    def get_function_budgets(self):
+        """
+        get the budget totals for all the government functions
+        """
+
+        if self._function_budgets is not None:
+            return self._function_budgets
+
+        dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
+            self.sphere.slug,
+            self.sphere.financial_year.slug,
+        )
+        cube_url = ('https://openspending.org/api/3/cubes/'
+                    '{}:{}/').format(OPENSPENDING_ACCOUNT_ID, dataset_id)
+        model_url = cube_url + 'model/'
+        model_result = requests.get(model_url)
+        logger.info(
+            "request to %s took %dms",
+            model_url,
+            model_result.elapsed.microseconds / 1000
+        )
+        model_result.raise_for_status()
+        model = model_result.json()['model']
+        if not 'functional_classification' in model['hierarchies']:
+            return None
+        function_dimension = model['hierarchies']['functional_classification']['levels'][0]
+        date_dimension = model['hierarchies']['date']['levels'][0]
+        department_dimension = model['hierarchies']['administrative_classification']['levels'][0]
+        financial_year_start = self.sphere.financial_year.get_starting_year()
+        vote_numbers = [str(d.vote_number)
+                        for d in self.get_vote_primary_departments()]
+        votes = '"%s"' % '";"'.join(vote_numbers)
+        cuts = [
+            date_dimension + '.financial_year:' + financial_year_start,
+            department_dimension + '.vote_number:' + votes
+        ]
+        if self.sphere.slug == 'provincial':
+            geo_dimension = model['hierarchies']['geo_source']['levels'][0]
+            cuts.append(geo_dimension + '.government:"%s"' % self.name)
+        params = {
+            'cut': "|".join(cuts),
+            'drilldown': "|".join([
+                function_dimension + '.government_function',
+            ]),
+            'pagesize': 30
+        }
+        aggregate_url = cube_url + 'aggregate/'
+        aggregate_result = requests.get(aggregate_url, params=params)
+        logger.info(
+            "request %s with query %r took %dms",
+            aggregate_result.url,
+            pformat(params),
+            aggregate_result.elapsed.microseconds / 1000
+        )
+        aggregate_result.raise_for_status()
+        functions = []
+        for cell in aggregate_result.json()['cells']:
+            functions.append({
+                'name': cell[function_dimension + '.government_function'],
+                'total_budget': cell['value.sum']
+            })
+        self._function_budgets = functions
+        return self._function_budgets
+
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
@@ -155,6 +225,7 @@ class Department(models.Model):
     name = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, editable=True)
     vote_number = models.IntegerField()
+    is_vote_primary = models.BooleanField(default=True)
     intro = models.TextField()
     _programme_budgets = None
 
@@ -168,8 +239,12 @@ class Department(models.Model):
         unique_together = (
             ('government', 'slug'),
             ('government', 'name'),
-            ('government', 'vote_number'),
         )
+        indexes = [
+            PartialIndex(fields=['government', 'vote_number'],
+                         unique=True,
+                         where='is_vote_primary'),
+        ]
 
         ordering = ['vote_number']
 
@@ -177,6 +252,15 @@ class Department(models.Model):
         if self.old_name != self.name:
             self._update_datasets()
         super(Department, self).save(force_insert, force_update)
+
+    def clean(self):
+        # This is only for user feedback in admin.
+        # The constraint must be enforced elsewhere.
+        if self.is_vote_primary and \
+           Department.objects.filter(government=self.government,
+                                     vote_number=self.vote_number):
+            raise ValidationError('There is already a primary department for '
+                                  'vote %d' % self.vote_number)
 
     def _update_datasets(self):
         if len(self.name) > 5:  # If it's a really short name we can break stuff
