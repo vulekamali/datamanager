@@ -21,6 +21,7 @@ def home(request, financial_year_id):
         'slug': financial_year_id,
         'url_path': year.get_url_path(),
         'financial_years': [],
+        'government_functions': year.national.governments.first().get_function_budgets()
     }
     for year in FinancialYear.objects.order_by('slug'):
         is_selected = year.slug == financial_year_id
