@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-from models import FinancialYear, Dataset
+from models import FinancialYear, Dataset, GovtFunction
 import yaml
 
 from . import revenue
@@ -13,6 +13,16 @@ def home(request, financial_year_id):
     """
     year = get_object_or_404(FinancialYear, slug=financial_year_id)
     revenue_data = year.get_budget_revenue()
+    government_functions = year.national.governments.first().get_function_budgets()
+    if not government_functions:
+        government_functions = []
+        for f in GovtFunction.objects.filter(
+                programme__department__government__sphere__financial_year__slug='2017-18'
+        ).distinct():
+            government_functions.append({
+                'name': f.name,
+                'total_budget': None,
+            })
 
     context = {
         'selected_financial_year': financial_year_id,
@@ -21,7 +31,7 @@ def home(request, financial_year_id):
         'slug': financial_year_id,
         'url_path': year.get_url_path(),
         'financial_years': [],
-        'government_functions': year.national.governments.first().get_function_budgets()
+        'government_functions': government_functions,
     }
     for year in FinancialYear.objects.order_by('slug'):
         is_selected = year.slug == financial_year_id
