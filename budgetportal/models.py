@@ -310,6 +310,8 @@ class Department(models.Model):
                             is_vote_primary=True,
                             government=self.government)
             except MultipleObjectsReturned:
+                logger.exception("Department %s has multiple primary "
+                                 "departments" % self.slug)
                 raise
             else:
                 return name.slug
