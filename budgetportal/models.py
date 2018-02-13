@@ -1,7 +1,7 @@
 from autoslug import AutoSlugField
 from collections import OrderedDict
 from django.conf import settings
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
 from django.utils.text import slugify
 from partial_index import PartialIndex
@@ -298,6 +298,23 @@ class Department(models.Model):
         else:
             return none_selected_query('vocab_provinces')
 
+    def _get_primary_department(self):
+        """
+        Check if department is primary
+        """
+        if not self.is_vote_primary:
+            try:
+                name = Department\
+                       .objects \
+                       .get(vote_number=self.vote_number,
+                            is_vote_primary=True,
+                            government=self.government)
+            except MultipleObjectsReturned:
+                raise
+            else:
+                return name.slug
+        return self.slug
+
     def get_treasury_datasets(self):
         query = {
             'q': '',
@@ -309,7 +326,7 @@ class Department(models.Model):
                        self.government.sphere.financial_year.slug,
                        self.government.sphere.slug,
                        self.government.slug,
-                       self.slug,
+                       self._get_primary_department(),
                    ),
             'rows': 1,
         }
