@@ -298,7 +298,7 @@ class Department(models.Model):
         else:
             return none_selected_query('vocab_provinces')
 
-    def _get_primary_department(self):
+    def get_primary_department(self):
         """
         Check if department is primary
         """
@@ -314,8 +314,8 @@ class Department(models.Model):
                                  "departments" % self.slug)
                 raise
             else:
-                return name.slug
-        return self.slug
+                return name
+        return self
 
     def get_treasury_datasets(self):
         query = {
@@ -328,7 +328,7 @@ class Department(models.Model):
                        self.government.sphere.financial_year.slug,
                        self.government.sphere.slug,
                        self.government.slug,
-                       self._get_primary_department(),
+                       self.get_primary_department().slug,
                    ),
             'rows': 1,
         }

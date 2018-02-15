@@ -180,6 +180,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             {'name': p.name, 'total_budget': None}
             for p in department.programmes.order_by('programme_number')
         ]
+    primary_department = department.get_primary_department()
 
     context = {
         'name': department.name,
@@ -201,6 +202,12 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'programmes': programme_budgets,
         'government_functions': [f.name for f in department.get_govt_functions()],
         'organisational_unit': 'department',
+        'is_vote_primary': department.is_vote_primary,
+        'vote_primary': {
+            'url_path': primary_department.get_url_path(),
+            'name': primary_department.name,
+            'slug': primary_department.slug
+        }
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
