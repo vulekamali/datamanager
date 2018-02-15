@@ -263,7 +263,7 @@ class Department(models.Model):
                                   'vote %d' % self.vote_number)
 
     def _update_datasets(self):
-        if len(self.name) > 5:  # If it's a really short name we can break stuff
+        if len(self.name) > 5 and self.is_vote_primary:  # If it's a really short name we can break stuff
             for dataset in self.treasury_datasets:
                 new_slug = slugify(self.name)
                 dataset['title'] = dataset['title'].replace(self.old_name, self.name)
@@ -298,13 +298,13 @@ class Department(models.Model):
         else:
             return none_selected_query('vocab_provinces')
 
-    def _get_primary_department(self):
+    def get_primary_department(self):
         """
         Check if department is primary
         """
         if not self.is_vote_primary:
             try:
-                name = Department\
+                dept = Department\
                        .objects \
                        .get(vote_number=self.vote_number,
                             is_vote_primary=True,
@@ -314,8 +314,8 @@ class Department(models.Model):
                                  "departments" % self.slug)
                 raise
             else:
-                return name.slug
-        return self.slug
+                return dept
+        return self
 
     def get_treasury_datasets(self):
         query = {
@@ -328,7 +328,7 @@ class Department(models.Model):
                        self.government.sphere.financial_year.slug,
                        self.government.sphere.slug,
                        self.government.slug,
-                       self._get_primary_department(),
+                       self.get_primary_department().slug,
                    ),
             'rows': 1,
         }
