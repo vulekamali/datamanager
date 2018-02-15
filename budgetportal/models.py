@@ -263,7 +263,7 @@ class Department(models.Model):
                                   'vote %d' % self.vote_number)
 
     def _update_datasets(self):
-        if len(self.name) > 5:  # If it's a really short name we can break stuff
+        if len(self.name) > 5 and self.is_vote_primary:  # If it's a really short name we can break stuff
             for dataset in self.treasury_datasets:
                 new_slug = slugify(self.name)
                 dataset['title'] = dataset['title'].replace(self.old_name, self.name)
@@ -304,7 +304,7 @@ class Department(models.Model):
         """
         if not self.is_vote_primary:
             try:
-                name = Department\
+                dept = Department\
                        .objects \
                        .get(vote_number=self.vote_number,
                             is_vote_primary=True,
@@ -314,7 +314,7 @@ class Department(models.Model):
                                  "departments" % self.slug)
                 raise
             else:
-                return name
+                return dept
         return self
 
     def get_treasury_datasets(self):
