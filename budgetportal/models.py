@@ -252,10 +252,10 @@ class Department(models.Model):
 
         ordering = ['vote_number']
 
-    def save(self, force_insert=False, force_update=False):
+    def save(self, *args, **kwargs):
         if self.pk and self.old_name != self.name:
             self._update_datasets()
-        super(Department, self).save(force_insert, force_update)
+        super(Department, self).save(*args, **kwargs)
 
     def clean(self):
         # This is only for user feedback in admin.
