@@ -51,6 +51,7 @@ class DepartmentAdmin(admin.ModelAdmin):
         'name',
     )
     readonly_fields = ('slug',)
+    list_per_page = 20
 
     def get_government(self, obj):
         return obj.government.name

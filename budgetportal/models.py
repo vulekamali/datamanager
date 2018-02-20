@@ -256,9 +256,10 @@ class Department(models.Model):
     def clean(self):
         # This is only for user feedback in admin.
         # The constraint must be enforced elsewhere.
-        if self.is_vote_primary and \
-           Department.objects.filter(government=self.government,
-                                     vote_number=self.vote_number):
+        existing_vote_primary = Department.objects.filter(
+            government=self.government, vote_number=self.vote_number)
+        if self.is_vote_primary and existing_vote_primary \
+           and existing_vote_primary.first() != self:
             raise ValidationError('There is already a primary department for '
                                   'vote %d' % self.vote_number)
 
