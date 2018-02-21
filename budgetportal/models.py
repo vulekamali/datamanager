@@ -3,18 +3,33 @@ from collections import OrderedDict
 from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
-from django.utils.text import slugify
+from django.utils.text import slugify as django_slugify
+from slugify import slugify as extended_slugify
 from partial_index import PartialIndex
 from pprint import pformat
 import logging
 import re
 import requests
+import urlparse
+from os.path import splitext, basename
+import shutil
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
 
 OPENSPENDING_ACCOUNT_ID = 'b9d2af843f3a7ca223eea07fb608e62a'
+prov_abbrev = {
+    'Eastern Cape': 'EC',
+    'Free State': 'FS',
+    'Gauteng': 'GT',
+    'KwaZulu-Natal': 'NL',
+    'Limpopo': 'LP',
+    'Mpumalanga': 'MP',
+    'Northern Cape': 'NC',
+    'North West': 'NW',
+    'Western Cape': 'WC',
+}
 
 
 class FinancialYear(models.Model):
@@ -270,7 +285,7 @@ class Department(models.Model):
     def _update_datasets(self):
         if len(self.name) > 5 and self.is_vote_primary:  # If it's a really short name we can break stuff
             for dataset in self.treasury_datasets:
-                new_slug = slugify(self.name)
+                new_slug = django_slugify(self.name)
                 dataset['title'] = dataset['title'].replace(self.old_name, self.name)
                 dataset['name'] = dataset['name'].replace(self.slug, new_slug)
                 extras_set(dataset['extras'], 'Department Name', self.name)
@@ -284,6 +299,57 @@ class Department(models.Model):
                     ckan.action.resource_update(**resource)
         else:
             logger.warn("Not updating datasets for %s", self.get_url_path())
+
+    def _create_treasury_dataset(self):
+        vocab_map = {}
+        for vocab in ckan.action.vocabulary_list():
+            vocab_map[vocab['name']] = vocab['id']
+        dataset_fields = {
+            'title': package_title(self),
+            'name': package_id(self),
+            'extras': [],
+            'owner_org': 'national-treasury',
+            'license_id': 'other-pd',
+            'tags': [
+                { 'vocabulary_id': vocab_map['spheres'],
+                  'name': self.government.sphere.name },
+                { 'vocabulary_id': vocab_map['financial_years'],
+                  'name': self.get_financial_year().slug },
+            ],
+        }
+        extras_set(dataset_fields['extras'], 'Department Name', self.name)
+        extras_set(dataset_fields['extras'], 'department_name', self.name)
+        extras_set(dataset_fields['extras'], 'department_name_slug', self.slug)
+        extras_set(dataset_fields['extras'], 'Vote Number', self.vote_number)
+        extras_set(dataset_fields['extras'], 'vote_number', self.vote_number)
+        extras_set(dataset_fields['extras'], 'geographic_region_slug', self.government.slug)
+        extras_set(dataset_fields['extras'], 'organisational_unit', 'department')
+        ckan.action.package_create(**dataset_fields)
+
+    def upload_resource(self, local_path):
+        if not self.treasury_datasets:
+            self._create_treasury_dataset()
+        self.treasury_datasets = self.get_treasury_datasets()
+        assert(len(self.treasury_datasets) == 1)
+        dataset = self.treasury_datasets[0]
+        resource = None
+        for existing_resource in dataset['resources']:
+            existing_path = urlparse.urlparse(existing_resource['url']).path
+            existing_ext = splitext(basename(existing_path))[1]
+            ext = splitext(local_path)[1]
+            if existing_ext == ext:
+                resource = existing_resource
+        resource_fields = {
+            'package_id': pid,
+            'name': name,
+            'upload': open(local_path, 'rb')
+        }
+        if resource:
+            resource_fields['id'] = resource['id']
+            result = ckan.action.resource_patch(**resource_fields)
+        else:
+            result = ckan.action.resource_create(**resource_fields)
+        logger.info("Uploading resource result: %r", result)
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -594,3 +660,30 @@ def extras_set(extras, key, value):
         if extra['key'] == key:
             extra['value'] = value
             break
+
+
+def package_id(department):
+    financial_year = department.get_financial_year()
+    sphere = department.government.sphere
+    geo_region = department.government.name
+    if sphere.slug == 'provincial':
+        short_dept = extended_slugify(department.name, max_length=85, word_boundary=True)
+        return extended_slugify('prov dept %s %s %s' % (
+            prov_abbrev[geo_region], short_dept, financial_year))
+    elif sphere.slug == 'national':
+        short_dept = extended_slugify(department.name, max_length=96, word_boundary=True)
+        return extended_slugify('nat dept %s %s' % (short_dept, financial_year))
+    else:
+        raise Exception('unknown sphere %r' % sphere)
+
+
+def package_title(department):
+    financial_year = department.get_financial_year()
+    sphere = department.government.sphere
+    geo_region = department.government.name
+    if sphere.slug == 'provincial':
+        return "%s Department: %s %s" % (geo_region, department.name, financial_year)
+    elif sphere.slug == 'national':
+        return "National Department: %s %s" % (department.name, financial_year)
+    else:
+        raise Exception('unknown sphere %r' % sphere)
