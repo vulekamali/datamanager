@@ -445,7 +445,7 @@ class Department(models.Model):
             model_url,
             model_result.elapsed.microseconds / 1000
         )
-        if model_result.status_code == 404 or self.get_financial_year.slug == '2018-19':
+        if model_result.status_code == 404 or self.get_financial_year().slug == '2018-19':
             return None
         model_result.raise_for_status()
         model = model_result.json()['model']
