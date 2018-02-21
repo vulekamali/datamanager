@@ -70,6 +70,7 @@ class FinancialYear(models.Model):
               '/datastore_search_sql'
 
         dataset_id = {
+            '2018-19': '42f27cf7-188a-41ee-a627-1fc658e74dca',
             '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
             '2016-17': '69b54066-00e0-4d7b-8b33-1ccbace5ba8e',
             '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
