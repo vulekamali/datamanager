@@ -172,6 +172,9 @@ class Government(models.Model):
             model_url,
             model_result.elapsed.microseconds / 1000
         )
+        if model_result.status_code == 404:
+            logger.info("No budget API found for %r", self)
+            return None
         model_result.raise_for_status()
         model = model_result.json()['model']
         if not 'functional_classification' in model['hierarchies']:
@@ -231,9 +234,10 @@ class Department(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Department, self).__init__(*args, **kwargs)
-        self.treasury_datasets = self.get_treasury_datasets()
-        self.old_name = self.name
-        self.old_slug = self.slug
+        if self.pk:
+            self.treasury_datasets = self.get_treasury_datasets()
+            self.old_name = self.name
+            self.old_slug = self.slug
 
     class Meta:
         unique_together = (
@@ -248,10 +252,10 @@ class Department(models.Model):
 
         ordering = ['vote_number']
 
-    def save(self, force_insert=False, force_update=False):
-        if self.old_name != self.name:
+    def save(self, *args, **kwargs):
+        if self.pk and self.old_name != self.name:
             self._update_datasets()
-        super(Department, self).save(force_insert, force_update)
+        super(Department, self).save(*args, **kwargs)
 
     def clean(self):
         # This is only for user feedback in admin.
@@ -440,6 +444,8 @@ class Department(models.Model):
             model_url,
             model_result.elapsed.microseconds / 1000
         )
+        if model_result.status_code == 404:
+            return None
         model_result.raise_for_status()
         model = model_result.json()['model']
         programme_dimension = model['hierarchies']['activity']['levels'][0]
