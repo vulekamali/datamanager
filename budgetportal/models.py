@@ -12,7 +12,6 @@ import re
 import requests
 import urlparse
 from os.path import splitext, basename
-import shutil
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -307,23 +306,24 @@ class Department(models.Model):
         dataset_fields = {
             'title': package_title(self),
             'name': package_id(self),
-            'extras': [],
+            'extras': [
+                {'key': 'department_name', 'value': self.name},
+                {'key': 'Department Name', 'value': self.name},
+                {'key': 'department_name_slug', 'value': self.slug},
+                {'key': 'Vote Number', 'value': self.vote_number},
+                {'key': 'vote_number', 'value': self.vote_number},
+                {'key': 'geographic_region_slug', 'value': self.government.slug},
+                {'key': 'organisational_unit', 'value': 'department'},
+            ],
             'owner_org': 'national-treasury',
             'license_id': 'other-pd',
             'tags': [
                 { 'vocabulary_id': vocab_map['spheres'],
-                  'name': self.government.sphere.name },
+                  'name': self.government.sphere.slug },
                 { 'vocabulary_id': vocab_map['financial_years'],
                   'name': self.get_financial_year().slug },
             ],
         }
-        extras_set(dataset_fields['extras'], 'Department Name', self.name)
-        extras_set(dataset_fields['extras'], 'department_name', self.name)
-        extras_set(dataset_fields['extras'], 'department_name_slug', self.slug)
-        extras_set(dataset_fields['extras'], 'Vote Number', self.vote_number)
-        extras_set(dataset_fields['extras'], 'vote_number', self.vote_number)
-        extras_set(dataset_fields['extras'], 'geographic_region_slug', self.government.slug)
-        extras_set(dataset_fields['extras'], 'organisational_unit', 'department')
         ckan.action.package_create(**dataset_fields)
 
     def upload_resource(self, local_path):
@@ -663,7 +663,7 @@ def extras_set(extras, key, value):
 
 
 def package_id(department):
-    financial_year = department.get_financial_year()
+    financial_year = department.get_financial_year().slug
     sphere = department.government.sphere
     geo_region = department.government.name
     if sphere.slug == 'provincial':
@@ -678,7 +678,7 @@ def package_id(department):
 
 
 def package_title(department):
-    financial_year = department.get_financial_year()
+    financial_year = department.get_financial_year().slug
     sphere = department.government.sphere
     geo_region = department.government.name
     if sphere.slug == 'provincial':
