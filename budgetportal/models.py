@@ -473,7 +473,7 @@ class Department(models.Model):
             pformat(params),
             aggregate_result.elapsed.microseconds / 1000
         )
-        if model_result.status_code == 404:
+        if aggregate_result.status_code == 404:
             logger.info("No budget API found for %r", self)
             return None
         aggregate_result.raise_for_status()
