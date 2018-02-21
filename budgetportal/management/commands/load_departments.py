@@ -6,7 +6,7 @@ import re
 
 
 class Command(BaseCommand):
-    help = 'load programmes'
+    help = 'load departments'
 
     def add_arguments(self, parser):
         parser.add_argument('financial_year', type=str)
