@@ -172,6 +172,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     primary_department = department.get_primary_department()
 
     context = {
+        'expenditure_over_time': department.get_expenditure_over_time(),
         'name': department.name,
         'slug': str(department.slug),
         'vote_number': department.vote_number,

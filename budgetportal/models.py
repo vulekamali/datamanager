@@ -6,15 +6,13 @@ from django.db import models
 from django.utils.text import slugify
 from partial_index import PartialIndex
 from pprint import pformat
+from budgetportal.openspending import EstimatesOfExpenditure
 import logging
 import re
 import requests
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
-
-
-OPENSPENDING_ACCOUNT_ID = 'b9d2af843f3a7ca223eea07fb608e62a'
 
 
 class FinancialYear(models.Model):
@@ -428,63 +426,45 @@ class Department(models.Model):
         """
         get the budget totals for all the department programmes
         """
-
         if self._programme_budgets is not None:
             return self._programme_budgets
-
-        dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
-            self.government.sphere.slug,
-            self.get_financial_year().slug,
+        budget = EstimatesOfExpenditure(
+            financial_year_slug=self.get_financial_year().slug,
+            sphere_slug=self.government.sphere.slug,
         )
-        cube_url = ('https://openspending.org/api/3/cubes/'
-                    '{}:{}/').format(OPENSPENDING_ACCOUNT_ID, dataset_id)
-        model_url = cube_url + 'model/'
-        model_result = requests.get(model_url)
-        logger.info(
-            "request to %s took %dms",
-            model_url,
-            model_result.elapsed.microseconds / 1000
-        )
-        if model_result.status_code == 404:
-            return None
-        model_result.raise_for_status()
-        model = model_result.json()['model']
-        programme_dimension = model['hierarchies']['activity']['levels'][0]
+        programme_dimension = budget.get_programme_dimension()
+        financial_year_dimension = budget.get_financial_year_dimension()
+        department_dimension = budget.get_department_dimension()
         financial_year_start = self.get_financial_year().get_starting_year()
+        geo_dimension = budget.get_geo_dimension()
         cuts = [
-            'date_2.financial_year:' + financial_year_start,
-            'administrative_classification_2.department:"' + self.name + '"'
+            financial_year_dimension + '.financial_year:' + financial_year_start,
+            department_dimension + '.department:"' + self.name + '"',
         ]
-        if self.government.sphere.slug == 'provincial':
-            cuts.append('geo_source_2.government:"%s"' % self.government.name)
-        params = {
-            'cut': "|".join(cuts),
-            'drilldown': "|".join([
-                programme_dimension + '.programme_number',
-                programme_dimension + '.programme',
-            ]),
-            'pagesize': 30
-        }
-        aggregate_url = cube_url + 'aggregate/'
-        aggregate_result = requests.get(aggregate_url, params=params)
-        logger.info(
-            "request %s with query %r took %dms",
-            aggregate_result.url,
-            pformat(params),
-            aggregate_result.elapsed.microseconds / 1000
-        )
-        if aggregate_result.status_code == 404:
-            logger.info("No budget API found for %r", self)
-            return None
-        aggregate_result.raise_for_status()
+        if self.sphere_slug == 'provincial':
+            cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
+        drilldowns = [
+            programme_dimension + '.programme_number',
+            programme_dimension + '.programme',
+        ]
+        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
         programmes = []
-        for cell in aggregate_result.json()['cells']:
+        for cell in result['cells']:
             programmes.append({
                 'name': cell[programme_dimension + '.programme'],
                 'total_budget': cell['value.sum']
             })
         self._programme_budgets = programmes
         return self._programme_budgets
+
+    def get_expenditure_over_time(self):
+        expenditure = {
+            'base_calendar_year': '2017',
+            'nominal': [],
+            'real': [],
+        }
+
+        return expenditure
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
