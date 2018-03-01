@@ -32,6 +32,9 @@ class EstimatesOfExpenditure():
     def get_programme_dimension(self):
         return self.model['hierarchies']['activity']['levels'][0]
 
+    def get_department_dimension(self):
+        return self.model['hierarchies']['administrative_classification']['levels'][0]
+
     def get_geo_dimension(self):
         return self.model['hierarchies']['geo_source']['levels'][0]
 
@@ -41,12 +44,14 @@ class EstimatesOfExpenditure():
     def get_function_dimension(self):
         return self.model['hierarchies']['functional_classification']['levels'][0]
 
-    def aggregate(self, cuts=[], drilldowns=[]):
+    def aggregate(self, cuts=None, drilldowns=None):
         params = {
-            'cut': "|".join(cuts),
-            'drilldown': "|".join(drilldowns),
             'pagesize': 30
         }
+        if cuts is not None:
+            params['cut'] = "|".join(cuts)
+        if drilldowns is not None:
+            params['drilldown'] = "|".join(drilldowns)
         aggregate_url = self.cube_url + 'aggregate/'
         aggregate_result = requests.get(aggregate_url, params=params)
         logger.info(

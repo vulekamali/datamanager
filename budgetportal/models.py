@@ -35,7 +35,7 @@ class FinancialYear(models.Model):
 
     @staticmethod
     def slug_from_year_start(year):
-        return year + '-' + str(int(year[5:])+1)
+        return year + '-' + str(int(year[2:])+1)
 
     def get_sphere(self, name):
         return getattr(self, name)
@@ -169,7 +169,6 @@ class Government(models.Model):
         financial_year_dimension = budget.get_financial_year_dimension()
         department_dimension = budget.get_department_dimension()
         financial_year_start = self.sphere.financial_year.get_starting_year()
-        geo_dimension = budget.get_geo_dimension()
         vote_numbers = [str(d.vote_number)
                         for d in self.get_vote_primary_departments()]
         votes = '"%s"' % '";"'.join(vote_numbers)
@@ -178,6 +177,7 @@ class Government(models.Model):
             department_dimension + '.vote_number:' + votes
         ]
         if self.sphere.slug == 'provincial':
+            geo_dimension = budget.get_geo_dimension()
             cuts.append(geo_dimension + '.government:"%s"' % self.name)
         drilldowns = [
             function_dimension + '.government_function',
@@ -411,12 +411,12 @@ class Department(models.Model):
         financial_year_dimension = budget.get_financial_year_dimension()
         department_dimension = budget.get_department_dimension()
         financial_year_start = self.get_financial_year().get_starting_year()
-        geo_dimension = budget.get_geo_dimension()
         cuts = [
             financial_year_dimension + '.financial_year:' + financial_year_start,
             department_dimension + '.department:"' + self.name + '"',
         ]
-        if self.sphere_slug == 'provincial':
+        if self.government.sphere.slug == 'provincial':
+            geo_dimension = budget.get_geo_dimension()
             cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
         drilldowns = [
             programme_dimension + '.programme_number',
@@ -440,27 +440,27 @@ class Department(models.Model):
         }
         financial_year_start = self.get_financial_year().get_starting_year()
         budget_year_int = int(financial_year_start)
-        budget_years = [str(y) for y in xrange(budget_year_int-4, budget_year_int+1)]
-        for budget_year in in budget_years
+        budget_years = [str(y) for y in xrange(budget_year_int-3, budget_year_int+1)]
+        for budget_year in budget_years:
+            financial_year_slug = FinancialYear.slug_from_year_start(budget_year)
             budget = EstimatesOfExpenditure(
-                financial_year_slug=self.get_financial_year().slug,
+                financial_year_slug=financial_year_slug,
                 sphere_slug=self.government.sphere.slug,
             )
             programme_dimension = budget.get_programme_dimension()
             financial_year_dimension = budget.get_financial_year_dimension()
             department_dimension = budget.get_department_dimension()
-            financial_year_start = self.get_financial_year().get_starting_year()
-            geo_dimension = budget.get_geo_dimension()
             cuts = [
-                financial_year_dimension + '.financial_year:' + financial_year_start,
+                financial_year_dimension + '.financial_year:' + budget_year,
                 department_dimension + '.department:"' + self.name + '"',
             ]
-            if self.sphere_slug == 'provincial':
+            if self.government.sphere.slug == 'provincial':
+                geo_dimension = budget.get_geo_dimension()
                 cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
             result = budget.aggregate(cuts=cuts)
             for cell in result['cells']:
                 expenditure['nominal'].append({
-                    'financial_year': FinancialYear.slug_from_year_start(budget_year),
+                    'financial_year': financial_year_slug,
                     'amount': cell['value.sum'],
                 })
 
