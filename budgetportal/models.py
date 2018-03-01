@@ -157,59 +157,30 @@ class Government(models.Model):
 
         if self._function_budgets is not None:
             return self._function_budgets
-
-        dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
-            self.sphere.slug,
-            self.sphere.financial_year.slug,
+        budget = EstimatesOfExpenditure(
+            financial_year_slug=self.get_financial_year().slug,
+            sphere_slug=self.government.sphere.slug,
         )
-        cube_url = ('https://openspending.org/api/3/cubes/'
-                    '{}:{}/').format(OPENSPENDING_ACCOUNT_ID, dataset_id)
-        model_url = cube_url + 'model/'
-        model_result = requests.get(model_url)
-        logger.info(
-            "request to %s took %dms",
-            model_url,
-            model_result.elapsed.microseconds / 1000
-        )
-        if model_result.status_code == 404:
-            logger.info("No budget API found for %r", self)
-            return None
-        model_result.raise_for_status()
-        model = model_result.json()['model']
-        if not 'functional_classification' in model['hierarchies']:
-            return None
-        function_dimension = model['hierarchies']['functional_classification']['levels'][0]
-        date_dimension = model['hierarchies']['date']['levels'][0]
-        department_dimension = model['hierarchies']['administrative_classification']['levels'][0]
+        function_dimension = budget.get_function_dimension()
+        financial_year_dimension = budget.get_financial_year_dimension()
+        department_dimension = budget.get_department_dimension()
         financial_year_start = self.sphere.financial_year.get_starting_year()
+        geo_dimension = budget.get_geo_dimension()
         vote_numbers = [str(d.vote_number)
                         for d in self.get_vote_primary_departments()]
         votes = '"%s"' % '";"'.join(vote_numbers)
         cuts = [
-            date_dimension + '.financial_year:' + financial_year_start,
+            financial_year_dimension + '.financial_year:' + financial_year_start,
             department_dimension + '.vote_number:' + votes
         ]
         if self.sphere.slug == 'provincial':
-            geo_dimension = model['hierarchies']['geo_source']['levels'][0]
             cuts.append(geo_dimension + '.government:"%s"' % self.name)
-        params = {
-            'cut': "|".join(cuts),
-            'drilldown': "|".join([
-                function_dimension + '.government_function',
-            ]),
-            'pagesize': 30
-        }
-        aggregate_url = cube_url + 'aggregate/'
-        aggregate_result = requests.get(aggregate_url, params=params)
-        logger.info(
-            "request %s with query %r took %dms",
-            aggregate_result.url,
-            pformat(params),
-            aggregate_result.elapsed.microseconds / 1000
-        )
-        aggregate_result.raise_for_status()
+        drilldowns = [
+            function_dimension + '.government_function',
+        ]
+        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
         functions = []
-        for cell in aggregate_result.json()['cells']:
+        for cell in result['cells']:
             functions.append({
                 'name': cell[function_dimension + '.government_function'],
                 'total_budget': cell['value.sum']
