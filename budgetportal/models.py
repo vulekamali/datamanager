@@ -33,6 +33,10 @@ class FinancialYear(models.Model):
     def get_starting_year(self):
         return self.slug[:4]
 
+    @staticmethod
+    def slug_from_year_start(year):
+        return year + '-' + str(int(year[5:])+1)
+
     def get_sphere(self, name):
         return getattr(self, name)
 
@@ -434,6 +438,31 @@ class Department(models.Model):
             'nominal': [],
             'real': [],
         }
+        financial_year_start = self.get_financial_year().get_starting_year()
+        budget_year_int = int(financial_year_start)
+        budget_years = [str(y) for y in xrange(budget_year_int-4, budget_year_int+1)]
+        for budget_year in in budget_years
+            budget = EstimatesOfExpenditure(
+                financial_year_slug=self.get_financial_year().slug,
+                sphere_slug=self.government.sphere.slug,
+            )
+            programme_dimension = budget.get_programme_dimension()
+            financial_year_dimension = budget.get_financial_year_dimension()
+            department_dimension = budget.get_department_dimension()
+            financial_year_start = self.get_financial_year().get_starting_year()
+            geo_dimension = budget.get_geo_dimension()
+            cuts = [
+                financial_year_dimension + '.financial_year:' + financial_year_start,
+                department_dimension + '.department:"' + self.name + '"',
+            ]
+            if self.sphere_slug == 'provincial':
+                cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
+            result = budget.aggregate(cuts=cuts)
+            for cell in result['cells']:
+                expenditure['nominal'].append({
+                    'financial_year': FinancialYear.slug_from_year_start(budget_year),
+                    'amount': cell['value.sum'],
+                })
 
         return expenditure
 

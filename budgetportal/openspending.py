@@ -38,7 +38,10 @@ class EstimatesOfExpenditure():
     def get_financial_year_dimension(self):
         return self.model['hierarchies']['date']['levels'][0]
 
-    def aggregate(self, cuts, drilldowns):
+    def get_function_dimension(self):
+        return self.model['hierarchies']['functional_classification']['levels'][0]
+
+    def aggregate(self, cuts=[], drilldowns=[]):
         params = {
             'cut': "|".join(cuts),
             'drilldown': "|".join(drilldowns),
