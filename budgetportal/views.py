@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-from models import FinancialYear, Dataset, GovtFunction
+from models import FinancialYear, Dataset
 import yaml
 
 from . import revenue
@@ -40,7 +40,7 @@ def home(request, financial_year_id):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-class Page(View):
+class FinancialYearPage(View):
     slug = None
     organisational_unit = None
 
@@ -203,33 +203,14 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def contributed_dataset_list(request, financial_year_id):
+def contributed_dataset_list(request):
     context = {
-        'financial_years': [],
-        'selected_financial_year': financial_year_id,
         'datasets': [],
         'organisational_unit': 'dataset-list',
         'slug': 'contributed-data',
     }
 
-    selected_year = None
-    for year in FinancialYear.objects.order_by('slug'):
-        is_selected = year.slug == financial_year_id
-        if is_selected:
-            selected_year = year
-        context['financial_years'].append({
-            'id': year.slug,
-            'is_selected': is_selected,
-            'closest_match': {
-                'is_exact_match': True,
-                'name': 'Contributed Data',
-                'slug': 'contributed-data',
-                'organisational_unit': 'dataset-list',
-                'url_path': "/%s/contributed-data" % year.slug,
-            },
-        })
-
-    for dataset in selected_year.get_contributed_datasets():
+    for dataset in Dataset.get_contributed_datasets():
         field_subset = dataset_fields(dataset)
         del field_subset['intro']
         del field_subset['methodology']
@@ -239,42 +220,12 @@ def contributed_dataset_list(request, financial_year_id):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset(request, financial_year_id, dataset_slug):
+def dataset(request, dataset_slug):
     context = {
-        'financial_years': [],
-        'selected_financial_year': financial_year_id,
         'organisational_unit': 'dataset',
     }
 
-    for year in FinancialYear.objects.order_by('slug'):
-        is_selected = year.slug == financial_year_id
-        if is_selected:
-            dataset = Dataset.fetch(year, dataset_slug)
-
-            context['financial_years'].append({
-                'id': year.slug,
-                'is_selected': is_selected,
-                'closest_match': {
-                    'is_exact_match': True,
-                    'name': dataset.name,
-                    'slug': dataset.slug,
-                    'organisational_unit': 'dataset',
-                    'url_path': dataset.get_url_path(),
-                },
-            })
-        else:
-            context['financial_years'].append({
-                'id': year.slug,
-                'is_selected': is_selected,
-                'closest_match': {
-                    'is_exact_match': False,
-                    'name': year.slug,
-                    'slug': year.slug,
-                    'organisational_unit': 'department-list',
-                    'url_path': "%s/departments" % year.get_url_path(),
-                },
-            })
-
+    dataset = Dataset.fetch(dataset_slug)
     context.update(dataset_fields(dataset))
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
