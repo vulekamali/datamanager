@@ -44,6 +44,9 @@ class EstimatesOfExpenditure():
     def get_function_dimension(self):
         return self.model['hierarchies']['functional_classification']['levels'][0]
 
+    def get_phase_dimension(self):
+        return self.model['hierarchies']['phase']['levels'][0]
+
     def aggregate(self, cuts=None, drilldowns=None):
         params = {
             'pagesize': 30

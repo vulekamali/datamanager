@@ -14,6 +14,17 @@ import requests
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
+REVENUE_RESOURCE_IDS = {
+    '2018-19': '42f27cf7-188a-41ee-a627-1fc658e74dca',
+    '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
+    '2016-17': '69b54066-00e0-4d7b-8b33-1ccbace5ba8e',
+    '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
+}
+
+REAL_GDP_GROWTH_RESOURCE_IDS = {
+    '2018-19': '6eea7ffd-27a9-47fd-875e-a47d89fc4ede',
+}
+
 
 class FinancialYear(models.Model):
     organisational_unit = 'financial_year'
@@ -71,21 +82,14 @@ class FinancialYear(models.Model):
               '/api/3/action' \
               '/datastore_search_sql'
 
-        dataset_id = {
-            '2018-19': '42f27cf7-188a-41ee-a627-1fc658e74dca',
-            '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
-            '2016-17': '69b54066-00e0-4d7b-8b33-1ccbace5ba8e',
-            '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
-        }
-
-        if self.slug not in dataset_id:
+        if self.slug not in REVENUE_RESOURCE_IDS:
             return []
 
         sql = '''
         SELECT category_two,SUM(amount) AS amount FROM "{}"
          WHERE "phase"='After tax proposals'
          GROUP BY "category_two" ORDER BY amount DESC
-        '''.format(dataset_id[self.slug])
+        '''.format(REVENUE_RESOURCE_IDS[self.slug])
 
         params = {
             'sql': sql
@@ -433,8 +437,10 @@ class Department(models.Model):
         return self._programme_budgets
 
     def get_expenditure_over_time(self):
+        real_gdp_growth_year_slug = max(REAL_GDP_GROWTH_RESOURCE_IDS.keys())
+        base_year = int(real_gdp_growth_year_slug[:4])-1
         expenditure = {
-            'base_calendar_year': '2017',
+            'base_calendar_year': str(base_year),
             'nominal': [],
             'real': [],
         }
@@ -450,6 +456,7 @@ class Department(models.Model):
             programme_dimension = budget.get_programme_dimension()
             financial_year_dimension = budget.get_financial_year_dimension()
             department_dimension = budget.get_department_dimension()
+            phase_dimension = budget.get_phase_dimension()
             cuts = [
                 financial_year_dimension + '.financial_year:' + budget_year,
                 department_dimension + '.department:"' + self.name + '"',
@@ -458,11 +465,10 @@ class Department(models.Model):
                 geo_dimension = budget.get_geo_dimension()
                 cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
             result = budget.aggregate(cuts=cuts)
-            for cell in result['cells']:
-                expenditure['nominal'].append({
-                    'financial_year': financial_year_slug,
-                    'amount': cell['value.sum'],
-                })
+            expenditure['nominal'].append({
+                'financial_year': financial_year_slug,
+                'amount': result['summary']['value.sum'],
+            })
 
         return expenditure
 
