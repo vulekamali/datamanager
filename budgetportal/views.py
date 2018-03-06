@@ -15,12 +15,13 @@ def home(request, financial_year_id):
     revenue_data = year.get_budget_revenue()
 
     context = {
-        'selected_financial_year': financial_year_id,
-        'revenue': revenue.sort_categories(revenue_data),
-        'organisational_unit': 'financial_year',
-        'slug': financial_year_id,
-        'url_path': year.get_url_path(),
         'financial_years': [],
+        'revenue': revenue.sort_categories(revenue_data),
+        'selected_financial_year': financial_year_id,
+        'selected_tab': 'homepage',
+        'slug': financial_year_id,
+        'title': "South African National Budget %s - vulekamali" % year.slug,
+        'url_path': year.get_url_path(),
     }
     for year in FinancialYear.objects.order_by('slug'):
         is_selected = year.slug == financial_year_id
@@ -42,15 +43,16 @@ def home(request, financial_year_id):
 
 class FinancialYearPage(View):
     slug = None
-    organisational_unit = None
+    selected_tab = None
 
     def get(self, request, financial_year_id):
         context = {
-            'selected_financial_year': financial_year_id,
             'financial_years': [],
+            'selected_financial_year': financial_year_id,
+            'selected_tab': self.selected_tab,
             'slug': self.slug,
+            'title': "Search Result - vulekamali",
             'url_path': '/%s/%s' % (financial_year_id, self.slug),
-            'organisational_unit': self.organisational_unit,
         }
 
         for year in FinancialYear.objects.order_by('slug'):
@@ -77,8 +79,9 @@ def department_list(request, financial_year_id):
     context = {
         'financial_years': [],
         'selected_financial_year': financial_year_id,
-        'organisational_unit': 'department-list',
+        'selected_tab': 'departments',
         'slug': 'departments',
+        'title': 'Department Budgets - vulekamali',
     }
 
     selected_year = None
@@ -93,7 +96,6 @@ def department_list(request, financial_year_id):
                 'is_exact_match': True,
                 'name': 'Departments',
                 'slug': 'departments',
-                'organisational_unit': 'department-list',
                 'url_path': "/%s/departments" % year.slug,
             },
         })
@@ -150,7 +152,6 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
                 'name': closest_match.name,
                 'slug': str(closest_match.slug),
                 'url_path': closest_match.get_url_path(),
-                'organisational_unit': closest_match.organisational_unit,
                 'is_exact_match': closest_is_exact,
             },
         })
@@ -172,31 +173,32 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     primary_department = department.get_primary_department()
 
     context = {
-        'name': department.name,
-        'slug': str(department.slug),
-        'vote_number': department.vote_number,
+        'contributed_datasets': contributed_datasets if contributed_datasets else None,
+        'financial_years': financial_years_context,
         'government': {
             'name': department.government.name,
             'slug': str(department.government.slug),
         },
+        'government_functions': [f.name for f in department.get_govt_functions()],
+        'intro': department.intro,
+        'is_vote_primary': department.is_vote_primary,
+        'name': department.name,
+        'slug': str(department.slug),
         'sphere': {
             'name': department.government.sphere.name,
             'slug': department.government.sphere.slug,
         },
-        'selected_financial_year': financial_year_id,
-        'financial_years': financial_years_context,
-        'intro': department.intro,
-        'treasury_datasets': department.get_treasury_resources(),
-        'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'programmes': programme_budgets,
-        'government_functions': [f.name for f in department.get_govt_functions()],
-        'organisational_unit': 'department',
-        'is_vote_primary': department.is_vote_primary,
+        'selected_financial_year': financial_year_id,
+        'selected_tab': 'departments',
+        'title': "%s - vulekamali" % department.name,
+        'treasury_datasets': department.get_treasury_resources(),
+        'vote_number': department.vote_number,
         'vote_primary': {
             'url_path': primary_department.get_url_path(),
             'name': primary_department.name,
             'slug': primary_department.slug
-        }
+        },
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
@@ -206,8 +208,9 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
 def contributed_dataset_list(request):
     context = {
         'datasets': [],
-        'organisational_unit': 'dataset-list',
+        'selected_tab': 'contributed-data',
         'slug': 'contributed-data',
+        'title': 'Contributed Data - vulekamali',
     }
 
     for dataset in Dataset.get_contributed_datasets():
@@ -221,11 +224,13 @@ def contributed_dataset_list(request):
 
 
 def dataset(request, dataset_slug):
+    dataset = Dataset.fetch(dataset_slug)
+
     context = {
-        'organisational_unit': 'dataset',
+        'selected_tab': 'contributed-data',
+        'title': "%s - vulekamali" % dataset.name,
     }
 
-    dataset = Dataset.fetch(dataset_slug)
     context.update(dataset_fields(dataset))
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')

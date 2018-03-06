@@ -21,7 +21,6 @@ urlpatterns = [
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result.yaml',
         cache_page(CACHE_SECS)(views.FinancialYearPage.as_view(
             slug='search-result',
-            organisational_unit='financial_year',
         ))),
 
     # Department List
