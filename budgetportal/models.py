@@ -236,7 +236,7 @@ class Department(models.Model):
                          where='is_vote_primary'),
         ]
 
-        ordering = ['vote_number']
+        ordering = ['vote_number', 'name']
 
     def save(self, *args, **kwargs):
         if self.pk and self.old_name != self.name:

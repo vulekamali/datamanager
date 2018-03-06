@@ -30,7 +30,6 @@ def home(request, financial_year_id):
             'is_selected': is_selected,
             'closest_match': {
                 'is_exact_match': True,
-                'slug': year.slug,
                 'url_path': "/%s" % year.slug,
             },
         })
@@ -62,7 +61,6 @@ class FinancialYearPage(View):
                 'is_selected': is_selected,
                 'closest_match': {
                     'is_exact_match': True,
-                    'slug': self.slug,
                     'url_path': "/%s/%s" % (year.slug, self.slug),
                 },
             })
@@ -94,8 +92,6 @@ def department_list(request, financial_year_id):
             'is_selected': is_selected,
             'closest_match': {
                 'is_exact_match': True,
-                'name': 'Departments',
-                'slug': 'departments',
                 'url_path': "/%s/departments" % year.slug,
             },
         })
@@ -149,8 +145,6 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'id': year.slug,
             'is_selected': year.slug == financial_year_id,
             'closest_match': {
-                'name': closest_match.name,
-                'slug': str(closest_match.slug),
                 'url_path': closest_match.get_url_path(),
                 'is_exact_match': closest_is_exact,
             },
