@@ -13,46 +13,22 @@ CACHE_SECS = 0
 
 urlpatterns = [
 
-    # Home Page revenue
-    url(r'^(?P<financial_year_id>[\w-]+).yaml$',
+    # Home Page
+    url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
         cache_page(CACHE_SECS)(views.home)),
 
-
-    # Basic pages
-
-    url(r'^(?P<financial_year_id>[\w-]+)/about.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='about',
-            organisational_unit='about',
-        ))),
-    url(r'^(?P<financial_year_id>[\w-]+)/glossary.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='glossary',
-            organisational_unit='learning',
-        ))),
-    url(r'^(?P<financial_year_id>[\w-]+)/resources.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='resources',
-            organisational_unit='learning',
-        ))),
-    url(r'^(?P<financial_year_id>[\w-]+)/search-result.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
+    # Search results
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result.yaml',
+        cache_page(CACHE_SECS)(views.FinancialYearPage.as_view(
             slug='search-result',
-            organisational_unit='financial_year',
         ))),
-    url(r'^(?P<financial_year_id>[\w-]+)/videos.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='videos',
-            organisational_unit='learning',
-        ))),
-
 
     # Department List
-    url(r'^(?P<financial_year_id>[\w-]+)'
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list)),
 
     # Department
-    url(r'^(?P<financial_year_id>[\w-]+)'
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/national'
         '/departments'
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department),
@@ -65,13 +41,11 @@ urlpatterns = [
 
 
     # Contributed Dataset List
-    url(r'^(?P<financial_year_id>[\w-]+)'
-        '/contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),
+    url(r'^contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),
 
 
     # Dataset
-    url(r'^(?P<financial_year_id>[\w-]+)'
-        '/datasets'
+    url(r'^datasets'
         '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
 
 

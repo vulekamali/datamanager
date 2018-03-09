@@ -46,21 +46,6 @@ class FinancialYear(models.Model):
             return government, False
         return department, True
 
-    def get_contributed_datasets(self):
-        query = {
-            'q': '',
-            'fq': '-organization:"national-treasury"',
-            'rows': 1000,
-        }
-        response = ckan.action.package_search(**query)
-        logger.info(
-            "query %s\nto ckan returned %d results",
-            pformat(query),
-            len(response['results'])
-        )
-        for package in response['results']:
-            yield Dataset.from_package(self, package)
-
     def get_budget_revenue(self):
         """
         Get revenue data for the financial year
@@ -251,7 +236,7 @@ class Department(models.Model):
                          where='is_vote_primary'),
         ]
 
-        ordering = ['vote_number']
+        ordering = ['vote_number', 'name']
 
     def save(self, *args, **kwargs):
         if self.pk and self.old_name != self.name:
@@ -420,7 +405,7 @@ class Department(models.Model):
                 len(response['results']))
             for package in response['results']:
                 if package['name'] not in datasets:
-                    dataset = Dataset.from_package(self.get_financial_year(), package)
+                    dataset = Dataset.from_package(package)
                     datasets[package['name']] = dataset
         return datasets.values()
 
@@ -526,7 +511,6 @@ class Dataset():
     def __init__(self, **kwargs):
         self.author = kwargs['author']
         self.created_date = kwargs['created_date']
-        self.financial_year = kwargs['financial_year']
         self.last_updated_date = kwargs['last_updated_date']
         self.license = kwargs['license']
         self.name = kwargs['name']
@@ -537,7 +521,7 @@ class Dataset():
         self.organization_slug = kwargs['organization_slug']
 
     @classmethod
-    def from_package(cls, financial_year, package):
+    def from_package(cls, package):
         resources = []
         for resource in package['resources']:
             resources.append({
@@ -547,7 +531,6 @@ class Dataset():
                 'url': resource['url'],
             })
         return cls(
-            financial_year=financial_year,
             slug=package['name'],
             name=package['title'],
             created_date=package['metadata_created'],
@@ -567,12 +550,12 @@ class Dataset():
         )
 
     @classmethod
-    def fetch(cls, financial_year, dataset_slug):
+    def fetch(cls, dataset_slug):
         package = ckan.action.package_show(id=dataset_slug)
-        return cls.from_package(financial_year, package)
+        return cls.from_package(package)
 
     def get_url_path(self):
-        return "%s/datasets/%s" % (self.financial_year.get_url_path(), self.slug)
+        return "/datasets/%s" % self.slug
 
     def get_organization(self):
         org = ckan.action.organization_show(id=self.organization_slug)
@@ -586,6 +569,23 @@ class Dataset():
             'facebook': org['facebook_id'] if 'facebook_id' in org else None,
             'twitter': org['twitter_id'] if 'twitter_id' in org else None,
         }
+
+    @staticmethod
+    def get_contributed_datasets():
+        query = {
+            'q': '',
+            'fq': '-organization:"national-treasury"',
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nto ckan returned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        for package in response['results']:
+            yield Dataset.from_package(package)
+
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
 def none_selected_query(vocab_name):
