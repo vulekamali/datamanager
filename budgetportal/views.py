@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-from models import FinancialYear, Dataset, GovtFunction
+from models import FinancialYear, Dataset
 import yaml
 
 from . import revenue
@@ -15,12 +15,13 @@ def home(request, financial_year_id):
     revenue_data = year.get_budget_revenue()
 
     context = {
-        'selected_financial_year': financial_year_id,
-        'revenue': revenue.sort_categories(revenue_data),
-        'organisational_unit': 'financial_year',
-        'slug': financial_year_id,
-        'url_path': year.get_url_path(),
         'financial_years': [],
+        'revenue': revenue.sort_categories(revenue_data),
+        'selected_financial_year': financial_year_id,
+        'selected_tab': 'homepage',
+        'slug': financial_year_id,
+        'title': "South African National Budget %s - vulekamali" % year.slug,
+        'url_path': year.get_url_path(),
     }
     for year in FinancialYear.objects.order_by('slug'):
         is_selected = year.slug == financial_year_id
@@ -29,7 +30,6 @@ def home(request, financial_year_id):
             'is_selected': is_selected,
             'closest_match': {
                 'is_exact_match': True,
-                'slug': year.slug,
                 'url_path': "/%s" % year.slug,
             },
         })
@@ -40,17 +40,18 @@ def home(request, financial_year_id):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-class Page(View):
+class FinancialYearPage(View):
     slug = None
-    organisational_unit = None
+    selected_tab = None
 
     def get(self, request, financial_year_id):
         context = {
-            'selected_financial_year': financial_year_id,
             'financial_years': [],
+            'selected_financial_year': financial_year_id,
+            'selected_tab': self.selected_tab,
             'slug': self.slug,
+            'title': "Search Result - vulekamali",
             'url_path': '/%s/%s' % (financial_year_id, self.slug),
-            'organisational_unit': self.organisational_unit,
         }
 
         for year in FinancialYear.objects.order_by('slug'):
@@ -60,7 +61,6 @@ class Page(View):
                 'is_selected': is_selected,
                 'closest_match': {
                     'is_exact_match': True,
-                    'slug': self.slug,
                     'url_path': "/%s/%s" % (year.slug, self.slug),
                 },
             })
@@ -77,8 +77,9 @@ def department_list(request, financial_year_id):
     context = {
         'financial_years': [],
         'selected_financial_year': financial_year_id,
-        'organisational_unit': 'department-list',
+        'selected_tab': 'departments',
         'slug': 'departments',
+        'title': 'Department Budgets - vulekamali',
     }
 
     selected_year = None
@@ -91,9 +92,6 @@ def department_list(request, financial_year_id):
             'is_selected': is_selected,
             'closest_match': {
                 'is_exact_match': True,
-                'name': 'Departments',
-                'slug': 'departments',
-                'organisational_unit': 'department-list',
                 'url_path': "/%s/departments" % year.slug,
             },
         })
@@ -147,10 +145,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'id': year.slug,
             'is_selected': year.slug == financial_year_id,
             'closest_match': {
-                'name': closest_match.name,
-                'slug': str(closest_match.slug),
                 'url_path': closest_match.get_url_path(),
-                'organisational_unit': closest_match.organisational_unit,
                 'is_exact_match': closest_is_exact,
             },
         })
@@ -172,64 +167,47 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     primary_department = department.get_primary_department()
 
     context = {
-        'name': department.name,
-        'slug': str(department.slug),
-        'vote_number': department.vote_number,
+        'contributed_datasets': contributed_datasets if contributed_datasets else None,
+        'financial_years': financial_years_context,
         'government': {
             'name': department.government.name,
             'slug': str(department.government.slug),
         },
+        'government_functions': [f.name for f in department.get_govt_functions()],
+        'intro': department.intro,
+        'is_vote_primary': department.is_vote_primary,
+        'name': department.name,
+        'slug': str(department.slug),
         'sphere': {
             'name': department.government.sphere.name,
             'slug': department.government.sphere.slug,
         },
-        'selected_financial_year': financial_year_id,
-        'financial_years': financial_years_context,
-        'intro': department.intro,
-        'treasury_datasets': department.get_treasury_resources(),
-        'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'programmes': programme_budgets,
-        'government_functions': [f.name for f in department.get_govt_functions()],
-        'organisational_unit': 'department',
-        'is_vote_primary': department.is_vote_primary,
+        'selected_financial_year': financial_year_id,
+        'selected_tab': 'departments',
+        'title': "%s - vulekamali" % department.name,
+        'treasury_datasets': department.get_treasury_resources(),
+        'vote_number': department.vote_number,
         'vote_primary': {
             'url_path': primary_department.get_url_path(),
             'name': primary_department.name,
             'slug': primary_department.slug
-        }
+        },
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def contributed_dataset_list(request, financial_year_id):
+def contributed_dataset_list(request):
     context = {
-        'financial_years': [],
-        'selected_financial_year': financial_year_id,
         'datasets': [],
-        'organisational_unit': 'dataset-list',
+        'selected_tab': 'contributed-data',
         'slug': 'contributed-data',
+        'title': 'Contributed Data - vulekamali',
     }
 
-    selected_year = None
-    for year in FinancialYear.objects.order_by('slug'):
-        is_selected = year.slug == financial_year_id
-        if is_selected:
-            selected_year = year
-        context['financial_years'].append({
-            'id': year.slug,
-            'is_selected': is_selected,
-            'closest_match': {
-                'is_exact_match': True,
-                'name': 'Contributed Data',
-                'slug': 'contributed-data',
-                'organisational_unit': 'dataset-list',
-                'url_path': "/%s/contributed-data" % year.slug,
-            },
-        })
-
-    for dataset in selected_year.get_contributed_datasets():
+    for dataset in Dataset.get_contributed_datasets():
         field_subset = dataset_fields(dataset)
         del field_subset['intro']
         del field_subset['methodology']
@@ -239,41 +217,13 @@ def contributed_dataset_list(request, financial_year_id):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset(request, financial_year_id, dataset_slug):
+def dataset(request, dataset_slug):
+    dataset = Dataset.fetch(dataset_slug)
+
     context = {
-        'financial_years': [],
-        'selected_financial_year': financial_year_id,
-        'organisational_unit': 'dataset',
+        'selected_tab': 'contributed-data',
+        'title': "%s - vulekamali" % dataset.name,
     }
-
-    for year in FinancialYear.objects.order_by('slug'):
-        is_selected = year.slug == financial_year_id
-        if is_selected:
-            dataset = Dataset.fetch(year, dataset_slug)
-
-            context['financial_years'].append({
-                'id': year.slug,
-                'is_selected': is_selected,
-                'closest_match': {
-                    'is_exact_match': True,
-                    'name': dataset.name,
-                    'slug': dataset.slug,
-                    'organisational_unit': 'dataset',
-                    'url_path': dataset.get_url_path(),
-                },
-            })
-        else:
-            context['financial_years'].append({
-                'id': year.slug,
-                'is_selected': is_selected,
-                'closest_match': {
-                    'is_exact_match': False,
-                    'name': year.slug,
-                    'slug': year.slug,
-                    'organisational_unit': 'department-list',
-                    'url_path': "%s/departments" % year.get_url_path(),
-                },
-            })
 
     context.update(dataset_fields(dataset))
 
