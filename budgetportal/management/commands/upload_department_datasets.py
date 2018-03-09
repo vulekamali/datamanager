@@ -8,7 +8,7 @@ import urlparse
 
 
 class Command(BaseCommand):
-    help = 'uload department datasets'
+    help = 'upload department datasets'
 
     def add_arguments(self, parser):
         parser.add_argument('financial_year', type=str)

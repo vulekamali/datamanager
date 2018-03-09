@@ -326,14 +326,16 @@ class Department(models.Model):
             if existing_ext == ext:
                 resource = existing_resource
         resource_fields = {
-            'package_id': pid,
-            'name': name,
+            'package_id': dataset['id'],
+            'name': resource_name(self),
             'upload': open(local_path, 'rb')
         }
         if resource:
+            logger.info("Re-uploading resource %s to package %s", local_path, dataset['id'])
             resource_fields['id'] = resource['id']
             result = ckan.action.resource_patch(**resource_fields)
         else:
+            logger.info("Uploading resource %s to package %s", local_path, dataset['id'])
             result = ckan.action.resource_create(**resource_fields)
         logger.info("Uploading resource result: %r", result)
 
@@ -691,3 +693,7 @@ def package_title(department):
         return "National Department: %s %s" % (department.name, financial_year)
     else:
         raise Exception('unknown sphere %r' % sphere)
+
+
+def resource_name(department):
+    return "Vote %d - %s" % (department.vote_number, department.name)
