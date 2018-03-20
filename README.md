@@ -61,7 +61,9 @@ dokku config:set budgetportal DJANGO_DEBUG=false \
                               NEW_RELIC_APP_NAME=cool app name \
                               NEW_RELIC_LICENSE_KEY=new relic license key \
                               CKAN_API_KEY=... \
-                              DATABASE_URL=postgresql://...
+                              DATABASE_URL=postgresql://... \
+                              EMAIL_HOST_PASSWORD=... \
+                              DISCOURSE_SSO_SECRET=...
 git push dokku master
 dokku run python manage.py migrate
 dokku run python manage.py createsuperuser
