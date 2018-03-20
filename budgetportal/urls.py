@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.views.decorators.cache import cache_page
 from django.contrib import admin
 from adminplus.sites import AdminSitePlus
+from discourse.views import sso
 
 from . import views
 
@@ -51,4 +52,7 @@ urlpatterns = [
 
     # Admin
     url(r'^admin/', admin.site.urls),
+
+    url(r'^discourse/sso$', sso),
+
 ]
