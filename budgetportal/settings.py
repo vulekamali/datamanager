@@ -105,6 +105,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'apikey')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'info@vulekamali.gov.za')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
