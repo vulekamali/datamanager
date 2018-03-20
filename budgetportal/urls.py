@@ -8,6 +8,9 @@ from . import views
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
+from registration.forms import RegistrationFormUniqueEmail
+from registration.backends.hmac.views import RegistrationView
+
 CACHE_SECS = 0
 
 
@@ -53,6 +56,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     # Registration
+    url(r'^accounts/register/$',
+        RegistrationView.as_view(form_class=RegistrationFormUniqueEmail),
+        name='registration_register'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
 
     # SSO
