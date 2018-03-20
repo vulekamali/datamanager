@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.views.decorators.cache import cache_page
 from django.contrib import admin
 from adminplus.sites import AdminSitePlus
-
+from discourse.views import sso
 from . import views
 
 admin.site = AdminSitePlus()
@@ -51,4 +51,11 @@ urlpatterns = [
 
     # Admin
     url(r'^admin/', admin.site.urls),
+
+    # Registration
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+
+    # SSO
+    url(r'^discourse/sso$', sso),
+
 ]

@@ -33,9 +33,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.auth',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'adminplus',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -92,6 +92,18 @@ from ckanapi import RemoteCKAN
 CKAN_URL = os.environ.get('CKAN_URL', 'https://treasurydata.openup.org.za')
 CKAN_API_KEY = os.environ.get('CKAN_API_KEY', None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
+
+DISCOURSE_BASE_URL = os.environ.get('DISCOURSE_BASE_URL', 'https://discourse.vulekamali.gov.za')
+DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET', None)
+
+ACCOUNT_ACTIVATION_DAYS = 7
+
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.sendgrid.net')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'apikey')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 
 
 # Internationalization
