@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.conf import settings
 
-from urlparse import parse_qs
+from urlparse import parse_qs, urljoin
 
 
 @login_required
@@ -54,5 +54,5 @@ def sso(request):
 
     ## Redirect back to Discourse
 
-    url = '%s/session/sso_login' % settings.DISCOURSE_BASE_URL
+    url = urljoin(settings.DISCOURSE_BASE_URL, 'session/sso_login')
     return HttpResponseRedirect('%s?%s' % (url, query_string))
