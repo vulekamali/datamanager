@@ -45,7 +45,9 @@ def sso(request):
         'nonce': qs['nonce'][0],
         'email': request.user.email,
         'external_id': request.user.id,
-        'username': request.user.username,
+        'username': request.user.email,
+        'name': request.user.name,
+        'require_activation': 'true',
     }
 
     return_payload = base64.encodestring(urllib.urlencode(params))
