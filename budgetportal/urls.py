@@ -8,9 +8,6 @@ from . import views
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
-from registration.forms import RegistrationFormUniqueEmail
-from registration.backends.hmac.views import RegistrationView
-
 CACHE_SECS = 0
 
 
@@ -51,17 +48,13 @@ urlpatterns = [
     url(r'^datasets'
         '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
 
+    # Authentication
+    url(r'^accounts/', include('allauth.urls')),
+
+    # SSO Provider
+    url(r'^discourse/sso$', sso),
 
     # Admin
     url(r'^admin/', admin.site.urls),
-
-    # Registration
-    url(r'^accounts/register/$',
-        RegistrationView.as_view(form_class=RegistrationFormUniqueEmail),
-        name='registration_register'),
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
-
-    # SSO
-    url(r'^discourse/sso$', sso),
 
 ]

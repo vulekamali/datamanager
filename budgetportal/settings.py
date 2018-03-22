@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = (
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'adminplus',
     'django.contrib.contenttypes',
@@ -42,6 +43,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'pipeline',
     'django_extensions',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
     'budgetportal',
 )
@@ -55,6 +61,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'budgetportal.urls'
 
@@ -96,8 +104,14 @@ CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
 DISCOURSE_BASE_URL = os.environ.get('DISCOURSE_BASE_URL', 'https://discourse.vulekamali.gov.za')
 DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET', None)
 
-ACCOUNT_ACTIVATION_DAYS = 7
-
+# http://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_ADAPTER = 'budgetportal.accountadapter.CustomAccountAdapter'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = False
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.sendgrid.net')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
@@ -131,6 +145,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "budgetportal.context_processors.google_analytics",
+                "django.template.context_processors.request",
             ],
         },
     },

@@ -4,11 +4,11 @@ ckanapi==4.1
 dj-database-url==0.3.0
 Django==1.11.8
 django-adminplus==0.5
+django-allauth==0.35.0
 django-autoslug==1.9.3
 django-extensions==1.9.6
 django-partial-index==0.4.0
 django-pipeline==1.6.13
-django_registration==2.4.1
 docopt==0.6.2
 enum34==1.0.4
 futures==3.0.3
