@@ -109,7 +109,8 @@ DISCOURSE_BASE_URL = os.environ.get('DISCOURSE_BASE_URL', 'https://discourse.vul
 DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET', None)
 
 # http://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = 'budgetportal.accountadapter.CustomAccountAdapter'
+ACCOUNT_ADAPTER = 'budgetportal.allauthadapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'budgetportal.allauthadapters.SocialAccountAdapter'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
