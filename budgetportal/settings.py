@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
+    'budgetportal',
+
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.admin.apps.SimpleAdminConfig',
@@ -49,7 +51,6 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-    'budgetportal',
 )
 
 MIDDLEWARE_CLASSES = (
