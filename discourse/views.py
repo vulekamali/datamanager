@@ -46,7 +46,7 @@ def sso(request):
         'email': request.user.email,
         'external_id': request.user.id,
         'username': request.user.email,
-        'name': request.user.name,
+        'name': request.user.get_full_name(),
         'require_activation': 'true',
     }
 
