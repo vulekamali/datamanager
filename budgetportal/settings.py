@@ -50,7 +50,6 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.linkedin_oauth2',
     'allauth.socialaccount.providers.twitter',
