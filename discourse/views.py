@@ -14,7 +14,7 @@ from allauth.account.decorators import verified_email_required
 
 
 @verified_email_required
-def sso(request):
+def sso(request, client_id):
     payload = request.GET.get('sso')
     signature = request.GET.get('sig')
 
@@ -55,5 +55,5 @@ def sso(request):
 
     ## Redirect back to Discourse
 
-    url = urljoin(settings.DISCOURSE_BASE_URL, 'session/sso_login')
+    url = settings.DISCOURSE_SSO_URLS[client_id]
     return HttpResponseRedirect('%s?%s' % (url, query_string))
