@@ -1,9 +1,7 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.account.models import EmailAddress
-import logging
-
-logger = logging.getLogger(__name__)
+from urllib import urlencode
 
 
 class AccountAdapter(DefaultAccountAdapter):
@@ -15,7 +13,7 @@ class AccountAdapter(DefaultAccountAdapter):
         next_url = request.POST.get('next')
         email_conf_url = super(AccountAdapter, self).get_email_confirmation_url(request, emailconfirmation)
         if next_url:
-            return '%s?next=%s' % (email_conf_url, next_url)
+            return '%s?%s' % (email_conf_url, urlencode({'next': next_url}))
         else:
             return email_conf_url
 
