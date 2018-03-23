@@ -1,8 +1,9 @@
-from django.conf.urls import url, include
-from django.views.decorators.cache import cache_page
-from django.contrib import admin
 from adminplus.sites import AdminSitePlus
 from discourse.views import sso
+from django.conf import settings
+from django.conf.urls import url, include
+from django.contrib import admin
+from django.views.decorators.cache import cache_page
 from . import views
 
 admin.site = AdminSitePlus()
@@ -58,3 +59,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
 ]
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
