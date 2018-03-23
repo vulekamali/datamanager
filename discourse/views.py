@@ -5,14 +5,15 @@ import hmac
 import hashlib
 import urllib
 
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.conf import settings
 
 from urlparse import parse_qs, urljoin
 
+from allauth.account.decorators import verified_email_required
 
-@login_required
+
+@verified_email_required
 def sso(request):
     payload = request.GET.get('sso')
     signature = request.GET.get('sig')
@@ -44,8 +45,8 @@ def sso(request):
         'nonce': qs['nonce'][0],
         'email': request.user.email,
         'external_id': request.user.id,
-        'username': request.user.username,
-        'require_activation': 'true'
+        'username': request.user.email,
+        'name': request.user.get_full_name(),
     }
 
     return_payload = base64.encodestring(urllib.urlencode(params))

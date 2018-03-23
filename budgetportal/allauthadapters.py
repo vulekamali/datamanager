@@ -1,6 +1,9 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.account.models import EmailAddress
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class AccountAdapter(DefaultAccountAdapter):
