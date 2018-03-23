@@ -5,11 +5,15 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.decorators.cache import cache_page
 from . import views
+from django.core.exceptions import PermissionDenied
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
 CACHE_SECS = 0
+
+def permission_denied(request):
+    raise PermissionDenied()
 
 
 urlpatterns = [
@@ -50,6 +54,7 @@ urlpatterns = [
         '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
 
     # Authentication
+    url(r'^accounts/email.*', permission_denied),
     url(r'^accounts/', include('allauth.urls')),
 
     # SSO Provider

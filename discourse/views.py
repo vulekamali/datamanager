@@ -47,7 +47,6 @@ def sso(request):
         'external_id': request.user.id,
         'username': request.user.email,
         'name': request.user.get_full_name(),
-        'require_activation': 'true',
     }
 
     return_payload = base64.encodestring(urllib.urlencode(params))

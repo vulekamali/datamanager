@@ -64,18 +64,3 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         # if it does, connect this new social login to the existing user
         user = email_address.user
         sociallogin.connect(request, user)
-
-    def authentication_error(self,
-                             request,
-                             provider_id,
-                             error=None,
-                             exception=None,
-                             extra_context=None):
-        """
-        Invoked when there is an error in the authentication cycle. In this
-        case, pre_social_login will not be reached.
-        You can use this hook to intervene, e.g. redirect to an
-        educational flow by raising an ImmediateHttpResponse.
-        """
-        logger.debug("\n\nAuthentication Error %r %r %r %r %r",
-                     request.GET, provider_id, error, exception, extra_context)
