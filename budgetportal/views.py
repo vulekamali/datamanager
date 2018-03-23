@@ -7,7 +7,7 @@ import yaml
 from . import revenue
 
 
-def home(request, financial_year_id):
+def year_home(request, financial_year_id):
     """
     Generate and show national budget revenue
     """

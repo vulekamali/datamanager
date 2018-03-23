@@ -6,21 +6,24 @@ from django.contrib import admin
 from django.views.decorators.cache import cache_page
 from . import views
 from django.core.exceptions import PermissionDenied
+from django.views.generic import TemplateView
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
 CACHE_SECS = 0
 
+
 def permission_denied(request):
     raise PermissionDenied()
 
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
 
     # Home Page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
-        cache_page(CACHE_SECS)(views.home)),
+        cache_page(CACHE_SECS)(views.year_home)),
 
     # Search results
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result.yaml',
