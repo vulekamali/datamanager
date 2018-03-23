@@ -51,7 +51,6 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.twitter',
 )
 
 MIDDLEWARE_CLASSES = (
