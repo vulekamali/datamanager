@@ -4,6 +4,17 @@ Budget Portal
 Setting up Development environment
 -----------------------
 
+Requires a recent Python 2.7 and Postgres 9 point release.
+
+Install system dependencies for psycopg2. e.g. on Ubuntu:
+
+```
+sudo apt-get update
+sudo apt-get install libpq-dev python-dev
+```
+
+Install python dependencies
+
 ```
 virtualenv --no-site-packages env
 source env/bin/activate
