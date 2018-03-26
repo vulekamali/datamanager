@@ -61,7 +61,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # SSO Provider
-    url(r'^discourse/sso$', sso),
+    url(r'^(?P<client_id>\w+)/sso$', sso),
 
     # Admin
     url(r'^admin/', admin.site.urls),

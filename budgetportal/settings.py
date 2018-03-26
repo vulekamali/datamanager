@@ -105,7 +105,12 @@ CKAN_URL = os.environ.get('CKAN_URL', 'https://treasurydata.openup.org.za')
 CKAN_API_KEY = os.environ.get('CKAN_API_KEY', None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
 
-DISCOURSE_BASE_URL = os.environ.get('DISCOURSE_BASE_URL', 'https://discourse.vulekamali.gov.za')
+DISCOURSE_SSO_URLS = {
+    'discourse': os.environ.get('DISCOURSE_SSO_URL',
+                                'https://discourse.vulekamali.gov.za/session/sso_login'),
+    'ckan': os.environ.get('CKAN_SSO_URL',
+                           'https://data.vulekamali.gov.za/user/login'),
+}
 DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET', None)
 
 # http://django-allauth.readthedocs.io/en/latest/configuration.html
