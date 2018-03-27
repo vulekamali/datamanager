@@ -45,7 +45,7 @@ def sso(request, client_id):
         'nonce': qs['nonce'][0],
         'email': request.user.email,
         'external_id': request.user.id,
-        'username': request.user.email,
+        'username': request.user.username,
         'name': request.user.get_full_name(),
     }
 
