@@ -27,12 +27,20 @@ Add the dokku remote to you local clone
 git remote add dokku@treasury1.openup.org.za:budgetportal
 ```
 
-Setup the database:
+Setup the database - either by running migrations against a new database, or by
+loading a dump from elsewhere:
+
+If you're setting up a new database:
 
 ```
 python manage.py migrate
 python manage.py createsuperuser
-python manage.py runserver
+```
+
+Then run the server
+
+```
+python manage.py runserver_plus
 ```
 
 ### Deploying an update
