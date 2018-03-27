@@ -1,0 +1,10 @@
+.Logo {
+  width: 244px;
+  height: 75px;
+  opacity: 0.2;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 0.4;
+  }
+}

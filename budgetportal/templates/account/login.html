@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<h1 class="Title">{% trans "Log in" %}</h1>
+
+<div class="Card u-marginAuto u-marginBottom20">
+
+  <div class="Card-content">
+    <h2 class="Card-title u-marginBottom20">Log in with social media</h2>
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}  
+  </div>
+
+  <div class="Card-content u-marginTop10">
+    <h2 class="Card-title u-marginBottom20">Log in with email</h2>
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+
+      <button class="Button is-secondary" type="submit">{% trans "Sign In" %}</button>
+
+      <a 
+        class="u-textAlignCenter u-displayBlock u-colorDarkGrey u-marginTop20"
+        href="{% url 'account_reset_password' %}"
+      >
+        {% trans "Forgot Password?" %}
+      </a>
+
+      <div class="u-marginTop20 u-marginBottom20">
+        <div class="Divider">
+          <div class="Divider-line"></div>
+          <div class="Divider-title">OR </div>
+          <div class="Divider-line"></div>
+        </div>
+      </div>
+
+      <a class="Button" href="{{ signup_url }}">Create account</a>
+
+    </form>
+  </div>
+
+</div>
+
+{% endblock %}

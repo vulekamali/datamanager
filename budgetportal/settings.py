@@ -199,7 +199,6 @@ PIPELINE = {
     'STYLESHEETS': {
         'css': {
             'source_filenames': (
-                'bower_components/fontawesome/css/font-awesome.css',
                 'stylesheets/app.scss',
             ),
             'output_filename': 'app.css',
@@ -208,7 +207,6 @@ PIPELINE = {
     'JAVASCRIPT': {
         'js': {
             'source_filenames': (
-                'bower_components/jquery/dist/jquery.min.js',
                 'javascript/app.js',
             ),
             'output_filename': 'app.js',
