@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Create Account" %}{% endblock %}
+
+{% block content %}
+<h1 class="Title">{% trans "Create Account" %}</h1>
+
+<div class="Card u-marginAuto u-marginBottom20">
+
+  <div class="Card-content">
+    <h2 class="Card-title u-marginBottom20">Sign up with email</h2>
+
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="Button" type="submit">{% trans "Sign Up" %}</button>
+    </form>
+    
+    <div class="u-textAlignCenter u-displayBlock u-marginTop20">
+      <span>Already have an account? </span>
+      <a 
+      class="u-colorDarkGrey"
+      href="{{ login_url }}"
+      >
+        {% trans "Log in" %}
+      </a>
+  </div>
+
+  </div>
+
+</div>
+{% endblock %}

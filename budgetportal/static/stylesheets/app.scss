@@ -1,6 +1,21 @@
-$icon-font-path: '../bower_components/bootstrap-sass/assets/fonts/bootstrap/';
+@import "utilities/global-styles/universal-selector.scss";
+@import "utilities/global-styles/html.scss";
+@import "utilities/global-styles/body.scss";
 
-@import 'bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-@import 'bootstrap-sass/assets/stylesheets/bootstrap/theme.scss';
+@import "components/Button.scss";
+@import "components/Card.scss";
+@import "components/Divider.scss";
+@import "components/Icon.scss";
+@import "components/Input.scss";
+@import "components/Page.scss";
+@import "components/Title.scss";
+@import "components/Logo.scss";
 
-// put application-specific styles here
+@import "utilities/utility-classes/u-display.scss";
+@import "utilities/utility-classes/u-color.scss";
+@import "utilities/utility-classes/u-textAlign.scss";
+@import "utilities/utility-classes/u-marginBottom.scss";
+@import "utilities/utility-classes/u-marginTop.scss";
+@import "utilities/utility-classes/u-margin.scss";
+
+@import "shame.scss";
