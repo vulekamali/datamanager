@@ -25,7 +25,7 @@ REVENUE_RESOURCE_IDS = {
 }
 
 
-REAL_GDP_GROWTH_RESOURCE_IDS = {
+CPI_RESOURCE_IDS = {
     '2018-19': '6eea7ffd-27a9-47fd-875e-a47d89fc4ede',
 }
 
@@ -40,6 +40,17 @@ prov_abbrev = {
     'North West': 'NW',
     'Western Cape': 'WC',
 }
+
+# Budget Phase IDs for the 7-year overview period
+TRENDS_AND_ESTIMATES_PHASES = [
+    'Audited Outcome',
+    'Audited Outcome',
+    'Audited Outcome',
+    'Adjusted appropriation',
+    'Original Budget',
+    'MTEF',
+    'MTEF',
+]
 
 
 class FinancialYear(models.Model):
@@ -492,36 +503,43 @@ class Department(models.Model):
         return self._programme_budgets
 
     def get_expenditure_over_time(self):
-        real_gdp_growth_year_slug = max(REAL_GDP_GROWTH_RESOURCE_IDS.keys())
-        base_year = int(real_gdp_growth_year_slug[:4])-1
+        cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
+        base_year = int(cpi_year_slug[:4])-1
         expenditure = {
             'base_calendar_year': str(base_year),
             'nominal': [],
             'real': [],
         }
         financial_year_start = self.get_financial_year().get_starting_year()
-        budget_year_int = int(financial_year_start)
-        budget_years = [str(y) for y in xrange(budget_year_int-3, budget_year_int+1)]
-        for budget_year in budget_years:
-            financial_year_slug = FinancialYear.slug_from_year_start(budget_year)
-            budget = EstimatesOfExpenditure(
-                financial_year_slug=financial_year_slug,
-                sphere_slug=self.government.sphere.slug,
-            )
-            financial_year_dimension = budget.get_financial_year_dimension()
-            department_dimension = budget.get_department_dimension()
-            phase_dimension = budget.get_phase_dimension()
-            cuts = [
-                financial_year_dimension + '.financial_year:' + budget_year,
-                department_dimension + '.department:"' + self.name + '"',
-            ]
-            if self.government.sphere.slug == 'provincial':
-                geo_dimension = budget.get_geo_dimension()
-                cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
-            result = budget.aggregate(cuts=cuts)
+        financial_year_start_int = int(financial_year_start)
+        financial_year_starts = [str(y) for y in xrange(financial_year_start_int-4, financial_year_start_int+3)]
+        financial_year_slug = FinancialYear.slug_from_year_start(financial_year_start)
+        budget = EstimatesOfExpenditure(
+            financial_year_slug=financial_year_slug,
+            sphere_slug=self.government.sphere.slug,
+        )
+        financial_year_dimension = budget.get_financial_year_dimension()
+        department_dimension = budget.get_department_dimension()
+        phase_dimension = budget.get_phase_dimension()
+        cuts = [
+            department_dimension + '.department:"' + self.name + '"',
+        ]
+        if self.government.sphere.slug == 'provincial':
+            geo_dimension = budget.get_geo_dimension()
+            cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
+        drilldowns = [
+            financial_year_dimension + '.financial_year',
+            phase_dimension + '.budget_phase',
+        ]
+        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
+        for idx, financial_year_start in enumerate(financial_year_starts):
+            financial_year_slug = FinancialYear.slug_from_year_start(financial_year_start)
+            cell = [c for c in result['cells']
+                    if c[financial_year_dimension + '.financial_year'] == int(financial_year_start)
+                    and c[phase_dimension + '.budget_phase'] == TRENDS_AND_ESTIMATES_PHASES[idx]][0]
             expenditure['nominal'].append({
                 'financial_year': financial_year_slug,
-                'amount': result['summary']['value.sum'],
+                'amount': cell['value.sum'],
             })
 
         return expenditure
