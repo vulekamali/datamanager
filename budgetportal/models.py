@@ -13,6 +13,7 @@ import re
 import requests
 import urlparse
 from os.path import splitext, basename
+from decimal import Decimal
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -541,6 +542,7 @@ class Department(models.Model):
                 'amount': cell['value.sum'],
             })
 
+        get_cpi()
         return expenditure
 
     def __str__(self):
@@ -708,17 +710,30 @@ def get_base_year():
     return int(cpi_year_slug[:4])-1
 
 
-def get_cpi_index():
+def get_cpi():
     cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
+    base_year = get_base_year()
 
     sql = '''
-    SELECT Year, CPI FROM "{}"
+    SELECT "Year", "CPI" FROM "{}"
+    ORDER BY "Year"
     '''.format(CPI_RESOURCE_IDS[cpi_year_slug])
-
     params = {
         'sql': sql
     }
     result = requests.get(CKAN_DATASTORE_URL, params=params)
-
     result.raise_for_status()
-    cpi = revenue_result.json()['result']['records']
+    cpi = result.json()['result']['records']
+    base_year_index = None
+    for idx, cell in enumerate(cpi):
+        financial_year_start = cell['Year'][:4]
+        cell['financial_year_start'] = financial_year_start
+        if financial_year_start == str(base_year):
+            base_year_index = idx
+            cell['index'] = 100
+    for idx in range(base_year_index-1, -1, -1):
+        cpi[idx]['index'] = cpi[idx+1]['index'] / (1 + Decimal(cpi[idx+1]['CPI']))
+    for idx in xrange(base_year_index+1, len(cpi)):
+        cpi[idx]['index'] = cpi[idx-1]['index'] * (1 + Decimal(cpi[idx]['CPI']))
+
+    raise Exception()
