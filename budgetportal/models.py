@@ -17,6 +17,10 @@ from os.path import splitext, basename
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
+CKAN_DATASTORE_URL = ('https://data.vulekamali.gov.za'
+                      '/api/3/action' \
+                      '/datastore_search_sql')
+
 REVENUE_RESOURCE_IDS = {
     '2018-19': '7ad5e908-5814-4581-a9df-a6f37c56d5bd',
     '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
@@ -26,7 +30,7 @@ REVENUE_RESOURCE_IDS = {
 
 
 CPI_RESOURCE_IDS = {
-    '2018-19': '6eea7ffd-27a9-47fd-875e-a47d89fc4ede',
+    '2018-19': '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d',
 }
 
 prov_abbrev = {
@@ -90,15 +94,11 @@ class FinancialYear(models.Model):
         """
         Get revenue data for the financial year
         """
-        url = 'https://data.vulekamali.gov.za' \
-              '/api/3/action' \
-              '/datastore_search_sql'
-
         if self.slug not in REVENUE_RESOURCE_IDS:
             return []
 
         sql = '''
-        SELECT category_two,SUM(amount) AS amount FROM "{}"
+        SELECT category_two, SUM(amount) AS amount FROM "{}"
          WHERE "phase"='After tax proposals'
          GROUP BY "category_two" ORDER BY amount DESC
         '''.format(REVENUE_RESOURCE_IDS[self.slug])
@@ -106,7 +106,7 @@ class FinancialYear(models.Model):
         params = {
             'sql': sql
         }
-        revenue_result = requests.get(url, params=params)
+        revenue_result = requests.get(CKAN_DATASTORE_URL, params=params)
 
         revenue_result.raise_for_status()
         revenue_data = revenue_result.json()['result']['records']
@@ -503,8 +503,7 @@ class Department(models.Model):
         return self._programme_budgets
 
     def get_expenditure_over_time(self):
-        cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
-        base_year = int(cpi_year_slug[:4])-1
+        base_year = get_base_year()
         expenditure = {
             'base_calendar_year': str(base_year),
             'nominal': [],
@@ -702,3 +701,24 @@ def package_title(department):
 
 def resource_name(department):
     return "Vote %d - %s" % (department.vote_number, department.name)
+
+
+def get_base_year():
+    cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
+    return int(cpi_year_slug[:4])-1
+
+
+def get_cpi_index():
+    cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
+
+    sql = '''
+    SELECT Year, CPI FROM "{}"
+    '''.format(CPI_RESOURCE_IDS[cpi_year_slug])
+
+    params = {
+        'sql': sql
+    }
+    result = requests.get(CKAN_DATASTORE_URL, params=params)
+
+    result.raise_for_status()
+    cpi = revenue_result.json()['result']['records']
