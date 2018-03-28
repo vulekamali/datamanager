@@ -1,9 +1,12 @@
-from django.conf.urls import url
-from django.views.decorators.cache import cache_page
-from django.contrib import admin
 from adminplus.sites import AdminSitePlus
-
+from discourse.views import sso
+from django.conf import settings
+from django.conf.urls import url, include
+from django.contrib import admin
+from django.views.decorators.cache import cache_page
 from . import views
+from django.core.exceptions import PermissionDenied
+from django.views.generic import TemplateView
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
@@ -11,48 +14,29 @@ admin.autodiscover()
 CACHE_SECS = 0
 
 
+def permission_denied(request):
+    raise PermissionDenied()
+
+
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
 
-    # Home Page revenue
-    url(r'^(?P<financial_year_id>[\w-]+).yaml$',
-        cache_page(CACHE_SECS)(views.home)),
+    # Home Page
+    url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
+        cache_page(CACHE_SECS)(views.year_home)),
 
-
-    # Basic pages
-
-    url(r'^(?P<financial_year_id>[\w-]+)/about.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='about',
-            organisational_unit='about',
-        ))),
-    url(r'^(?P<financial_year_id>[\w-]+)/glossary.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='glossary',
-            organisational_unit='learning',
-        ))),
-    url(r'^(?P<financial_year_id>[\w-]+)/resources.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='resources',
-            organisational_unit='learning',
-        ))),
-    url(r'^(?P<financial_year_id>[\w-]+)/search-result.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
+    # Search results
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result.yaml',
+        cache_page(CACHE_SECS)(views.FinancialYearPage.as_view(
             slug='search-result',
-            organisational_unit='financial_year',
         ))),
-    url(r'^(?P<financial_year_id>[\w-]+)/videos.yaml',
-        cache_page(CACHE_SECS)(views.Page.as_view(
-            slug='videos',
-            organisational_unit='learning',
-        ))),
-
 
     # Department List
-    url(r'^(?P<financial_year_id>[\w-]+)'
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list)),
 
     # Department
-    url(r'^(?P<financial_year_id>[\w-]+)'
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/national'
         '/departments'
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department),
@@ -65,16 +49,28 @@ urlpatterns = [
 
 
     # Contributed Dataset List
-    url(r'^(?P<financial_year_id>[\w-]+)'
-        '/contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),
+    url(r'^contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),
 
 
     # Dataset
-    url(r'^(?P<financial_year_id>[\w-]+)'
-        '/datasets'
+    url(r'^datasets'
         '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
 
+    # Authentication
+    url(r'^accounts/email.*', permission_denied),
+    url(r'^accounts/', include('allauth.urls')),
+
+    # SSO Provider
+    url(r'^(?P<client_id>\w+)/sso$', sso),
 
     # Admin
     url(r'^admin/', admin.site.urls),
+
 ]
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

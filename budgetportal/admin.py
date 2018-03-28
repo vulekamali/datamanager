@@ -9,7 +9,12 @@ from budgetportal.models import (
     Programme,
     Sphere,
 )
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
+
+admin.site.login = login_required(admin.site.login)
 
 class FinancialYearAdmin(admin.ModelAdmin):
     pass
@@ -119,6 +124,14 @@ class EntityDatasetsView(TemplateView):
         }
 
 
+class UserAdmin(admin.ModelAdmin):
+    pass
+
+
+class SiteAdmin(admin.ModelAdmin):
+    pass
+
+
 for financial_year in FinancialYear.objects.all():
     for sphere in financial_year.spheres.all():
         view = EntityDatasetsView.as_view(
@@ -135,3 +148,5 @@ admin.site.register(Government, GovernmentAdmin)
 admin.site.register(GovtFunction, GovtFunctionAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(Programme, ProgrammeAdmin)
+admin.site.register(User, UserAdmin)
+admin.site.register(Site, SiteAdmin)

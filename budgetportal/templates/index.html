@@ -1,8 +1,25 @@
-{% extends "layout.html" %}
+{% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Page Title{% endblock %}
 {% block content %}
+<h1 class="Title">{% trans "Success" %}</h1>
 
-<h1>Hi!</h1>
+<div class="Card u-marginAuto u-marginBottom20">
+  <div class="Card-content">
+    <h3 class="Card-title">Redirecting</h3>
+    <p>If redirection does not occur automatically, please continue by pressing the following button:</p>
+    <a href="https://discourse.vulekamali.gov.za" class="Button u-marginTop20 u-marginBottom20">Continue to vulekamali Talk</a>
+
+    <div class="u-marginTop20 u-marginBottom20">
+        <div class="Divider">
+          <div class="Divider-line"></div>
+          <div class="Divider-title">OR </div>
+          <div class="Divider-line"></div>
+        </div>
+      </div>
+
+      <a class="Button is-secondary" href="{{ login_url }}">Attempt to log in again</a>
+  </div>
+</div>
 
 {% endblock %}

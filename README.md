@@ -4,6 +4,17 @@ Budget Portal
 Setting up Development environment
 -----------------------
 
+Requires a recent Python 2.7 and Postgres 9 point release.
+
+Install system dependencies for psycopg2. e.g. on Ubuntu:
+
+```
+sudo apt-get update
+sudo apt-get install libpq-dev python-dev
+```
+
+Install python dependencies
+
 ```
 virtualenv --no-site-packages env
 source env/bin/activate
@@ -16,12 +27,20 @@ Add the dokku remote to you local clone
 git remote add dokku@treasury1.openup.org.za:budgetportal
 ```
 
-Setup the database:
+Setup the database - either by running migrations against a new database, or by
+loading a dump from elsewhere:
+
+If you're setting up a new database:
 
 ```
 python manage.py migrate
 python manage.py createsuperuser
-python manage.py runserver
+```
+
+Then run the server
+
+```
+python manage.py runserver_plus
 ```
 
 ### Deploying an update
@@ -61,7 +80,9 @@ dokku config:set budgetportal DJANGO_DEBUG=false \
                               NEW_RELIC_APP_NAME=cool app name \
                               NEW_RELIC_LICENSE_KEY=new relic license key \
                               CKAN_API_KEY=... \
-                              DATABASE_URL=postgresql://...
+                              DATABASE_URL=postgresql://... \
+                              EMAIL_HOST_PASSWORD=... \
+                              DISCOURSE_SSO_SECRET=...
 git push dokku master
 dokku run python manage.py migrate
 dokku run python manage.py createsuperuser

@@ -3,26 +3,42 @@ from collections import OrderedDict
 from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
-from django.utils.text import slugify
+from django.utils.text import slugify as django_slugify
+from slugify import slugify as extended_slugify
 from partial_index import PartialIndex
 from pprint import pformat
 from budgetportal.openspending import EstimatesOfExpenditure
 import logging
 import re
 import requests
+import urlparse
+from os.path import splitext, basename
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
 REVENUE_RESOURCE_IDS = {
-    '2018-19': '42f27cf7-188a-41ee-a627-1fc658e74dca',
+    '2018-19': '7ad5e908-5814-4581-a9df-a6f37c56d5bd',
     '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
     '2016-17': '69b54066-00e0-4d7b-8b33-1ccbace5ba8e',
     '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
 }
 
+
 REAL_GDP_GROWTH_RESOURCE_IDS = {
     '2018-19': '6eea7ffd-27a9-47fd-875e-a47d89fc4ede',
+}
+
+prov_abbrev = {
+    'Eastern Cape': 'EC',
+    'Free State': 'FS',
+    'Gauteng': 'GT',
+    'KwaZulu-Natal': 'NL',
+    'Limpopo': 'LP',
+    'Mpumalanga': 'MP',
+    'Northern Cape': 'NC',
+    'North West': 'NW',
+    'Western Cape': 'WC',
 }
 
 
@@ -58,21 +74,6 @@ class FinancialYear(models.Model):
         if not department:
             return government, False
         return department, True
-
-    def get_contributed_datasets(self):
-        query = {
-            'q': '',
-            'fq': '-organization:"national-treasury"',
-            'rows': 1000,
-        }
-        response = ckan.action.package_search(**query)
-        logger.info(
-            "query %s\nto ckan returned %d results",
-            pformat(query),
-            len(response['results'])
-        )
-        for package in response['results']:
-            yield Dataset.from_package(self, package)
 
     def get_budget_revenue(self):
         """
@@ -228,7 +229,7 @@ class Department(models.Model):
                          where='is_vote_primary'),
         ]
 
-        ordering = ['vote_number']
+        ordering = ['vote_number', 'name']
 
     def save(self, *args, **kwargs):
         if self.pk and self.old_name != self.name:
@@ -248,7 +249,7 @@ class Department(models.Model):
     def _update_datasets(self):
         if len(self.name) > 5 and self.is_vote_primary:  # If it's a really short name we can break stuff
             for dataset in self.treasury_datasets:
-                new_slug = slugify(self.name)
+                new_slug = django_slugify(self.name)
                 dataset['title'] = dataset['title'].replace(self.old_name, self.name)
                 dataset['name'] = dataset['name'].replace(self.slug, new_slug)
                 extras_set(dataset['extras'], 'Department Name', self.name)
@@ -262,6 +263,60 @@ class Department(models.Model):
                     ckan.action.resource_update(**resource)
         else:
             logger.warn("Not updating datasets for %s", self.get_url_path())
+
+    def _create_treasury_dataset(self):
+        vocab_map = {}
+        for vocab in ckan.action.vocabulary_list():
+            vocab_map[vocab['name']] = vocab['id']
+        dataset_fields = {
+            'title': package_title(self),
+            'name': package_id(self),
+            'extras': [
+                {'key': 'department_name', 'value': self.name},
+                {'key': 'Department Name', 'value': self.name},
+                {'key': 'department_name_slug', 'value': self.slug},
+                {'key': 'Vote Number', 'value': self.vote_number},
+                {'key': 'vote_number', 'value': self.vote_number},
+                {'key': 'geographic_region_slug', 'value': self.government.slug},
+                {'key': 'organisational_unit', 'value': 'department'},
+            ],
+            'owner_org': 'national-treasury',
+            'license_id': 'other-pd',
+            'tags': [
+                { 'vocabulary_id': vocab_map['spheres'],
+                  'name': self.government.sphere.slug },
+                { 'vocabulary_id': vocab_map['financial_years'],
+                  'name': self.get_financial_year().slug },
+            ],
+        }
+        ckan.action.package_create(**dataset_fields)
+
+    def upload_resource(self, local_path):
+        if not self.treasury_datasets:
+            self._create_treasury_dataset()
+        self.treasury_datasets = self.get_treasury_datasets()
+        assert(len(self.treasury_datasets) == 1)
+        dataset = self.treasury_datasets[0]
+        resource = None
+        for existing_resource in dataset['resources']:
+            existing_path = urlparse.urlparse(existing_resource['url']).path
+            existing_ext = splitext(basename(existing_path))[1]
+            ext = splitext(local_path)[1]
+            if existing_ext == ext:
+                resource = existing_resource
+        resource_fields = {
+            'package_id': dataset['id'],
+            'name': resource_name(self),
+            'upload': open(local_path, 'rb')
+        }
+        if resource:
+            logger.info("Re-uploading resource %s to package %s", local_path, dataset['id'])
+            resource_fields['id'] = resource['id']
+            result = ckan.action.resource_patch(**resource_fields)
+        else:
+            logger.info("Uploading resource %s to package %s", local_path, dataset['id'])
+            result = ckan.action.resource_create(**resource_fields)
+        logger.info("Uploading resource result: %r", result)
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -397,7 +452,7 @@ class Department(models.Model):
                 len(response['results']))
             for package in response['results']:
                 if package['name'] not in datasets:
-                    dataset = Dataset.from_package(self.get_financial_year(), package)
+                    dataset = Dataset.from_package(package)
                     datasets[package['name']] = dataset
         return datasets.values()
 
@@ -453,7 +508,6 @@ class Department(models.Model):
                 financial_year_slug=financial_year_slug,
                 sphere_slug=self.government.sphere.slug,
             )
-            programme_dimension = budget.get_programme_dimension()
             financial_year_dimension = budget.get_financial_year_dimension()
             department_dimension = budget.get_department_dimension()
             phase_dimension = budget.get_phase_dimension()
@@ -512,7 +566,6 @@ class Dataset():
     def __init__(self, **kwargs):
         self.author = kwargs['author']
         self.created_date = kwargs['created_date']
-        self.financial_year = kwargs['financial_year']
         self.last_updated_date = kwargs['last_updated_date']
         self.license = kwargs['license']
         self.name = kwargs['name']
@@ -523,7 +576,7 @@ class Dataset():
         self.organization_slug = kwargs['organization_slug']
 
     @classmethod
-    def from_package(cls, financial_year, package):
+    def from_package(cls, package):
         resources = []
         for resource in package['resources']:
             resources.append({
@@ -533,7 +586,6 @@ class Dataset():
                 'url': resource['url'],
             })
         return cls(
-            financial_year=financial_year,
             slug=package['name'],
             name=package['title'],
             created_date=package['metadata_created'],
@@ -553,12 +605,12 @@ class Dataset():
         )
 
     @classmethod
-    def fetch(cls, financial_year, dataset_slug):
+    def fetch(cls, dataset_slug):
         package = ckan.action.package_show(id=dataset_slug)
-        return cls.from_package(financial_year, package)
+        return cls.from_package(package)
 
     def get_url_path(self):
-        return "%s/datasets/%s" % (self.financial_year.get_url_path(), self.slug)
+        return "/datasets/%s" % self.slug
 
     def get_organization(self):
         org = ckan.action.organization_show(id=self.organization_slug)
@@ -573,6 +625,23 @@ class Dataset():
             'twitter': org['twitter_id'] if 'twitter_id' in org else None,
         }
 
+    @staticmethod
+    def get_contributed_datasets():
+        query = {
+            'q': '',
+            'fq': '-organization:"national-treasury"',
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nto ckan returned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        for package in response['results']:
+            yield Dataset.from_package(package)
+
+
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
 def none_selected_query(vocab_name):
     """Match items where none of the options in a custom vocab tag is selected"""
@@ -584,3 +653,34 @@ def extras_set(extras, key, value):
         if extra['key'] == key:
             extra['value'] = value
             break
+
+
+def package_id(department):
+    financial_year = department.get_financial_year().slug
+    sphere = department.government.sphere
+    geo_region = department.government.name
+    if sphere.slug == 'provincial':
+        short_dept = extended_slugify(department.name, max_length=85, word_boundary=True)
+        return extended_slugify('prov dept %s %s %s' % (
+            prov_abbrev[geo_region], short_dept, financial_year))
+    elif sphere.slug == 'national':
+        short_dept = extended_slugify(department.name, max_length=96, word_boundary=True)
+        return extended_slugify('nat dept %s %s' % (short_dept, financial_year))
+    else:
+        raise Exception('unknown sphere %r' % sphere)
+
+
+def package_title(department):
+    financial_year = department.get_financial_year().slug
+    sphere = department.government.sphere
+    geo_region = department.government.name
+    if sphere.slug == 'provincial':
+        return "%s Department: %s %s" % (geo_region, department.name, financial_year)
+    elif sphere.slug == 'national':
+        return "National Department: %s %s" % (department.name, financial_year)
+    else:
+        raise Exception('unknown sphere %r' % sphere)
+
+
+def resource_name(department):
+    return "Vote %d - %s" % (department.vote_number, department.name)

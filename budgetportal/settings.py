@@ -33,9 +33,12 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
+    'budgetportal',
+
+    'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'adminplus',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -43,10 +46,16 @@ INSTALLED_APPS = (
     'pipeline',
     'django_extensions',
 
-    'budgetportal',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'debug_toolbar',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,12 +65,15 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+SITE_ID = 1
+
 ROOT_URLCONF = 'budgetportal.urls'
 
 WSGI_APPLICATION = 'budgetportal.wsgi.application'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
+INTERNAL_IPS = ['127.0.0.1']
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -93,6 +105,43 @@ CKAN_URL = os.environ.get('CKAN_URL', 'https://treasurydata.openup.org.za')
 CKAN_API_KEY = os.environ.get('CKAN_API_KEY', None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
 
+DISCOURSE_SSO_URLS = {
+    'discourse': os.environ.get('DISCOURSE_SSO_URL',
+                                'https://discourse.vulekamali.gov.za/session/sso_login'),
+    'ckan': os.environ.get('CKAN_SSO_URL',
+                           'https://data.vulekamali.gov.za/user/login'),
+}
+DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET', None)
+
+# http://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_ADAPTER = 'budgetportal.allauthadapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'budgetportal.allauthadapters.SocialAccountAdapter'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = os.environ.get('HTTP_PROTOCOL', 'https')
+ACCOUNT_SESSION_REMEMBER = True
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'https://vulekamali.gov.za'
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.sendgrid.net')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'apikey')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', None)
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
+
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'info@vulekamali.gov.za')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -118,6 +167,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "budgetportal.context_processors.google_analytics",
+                "django.template.context_processors.request",
             ],
         },
     },
@@ -151,7 +201,6 @@ PIPELINE = {
     'STYLESHEETS': {
         'css': {
             'source_filenames': (
-                'bower_components/fontawesome/css/font-awesome.css',
                 'stylesheets/app.scss',
             ),
             'output_filename': 'app.css',
@@ -160,7 +209,6 @@ PIPELINE = {
     'JAVASCRIPT': {
         'js': {
             'source_filenames': (
-                'bower_components/jquery/dist/jquery.min.js',
                 'javascript/app.js',
             ),
             'output_filename': 'app.js',
