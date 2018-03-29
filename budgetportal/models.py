@@ -506,7 +506,7 @@ class Department(models.Model):
     def get_expenditure_over_time(self):
         base_year = get_base_year()
         expenditure = {
-            'base_calendar_year': str(base_year),
+            'base_financial_year': str(base_year),
             'nominal': [],
             'real': [],
         }
@@ -532,17 +532,22 @@ class Department(models.Model):
             phase_dimension + '.budget_phase',
         ]
         result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
+        cpi = get_cpi()
         for idx, financial_year_start in enumerate(financial_year_starts):
             financial_year_slug = FinancialYear.slug_from_year_start(financial_year_start)
             cell = [c for c in result['cells']
                     if c[financial_year_dimension + '.financial_year'] == int(financial_year_start)
                     and c[phase_dimension + '.budget_phase'] == TRENDS_AND_ESTIMATES_PHASES[idx]][0]
+            nominal = cell['value.sum']
             expenditure['nominal'].append({
                 'financial_year': financial_year_slug,
-                'amount': cell['value.sum'],
+                'amount': nominal,
+            })
+            expenditure['real'].append({
+                'financial_year': financial_year_slug,
+                'amount': int((Decimal(nominal)/cpi[financial_year_start]['index']) * 100),
             })
 
-        get_cpi()
         return expenditure
 
     def __str__(self):
@@ -735,5 +740,7 @@ def get_cpi():
         cpi[idx]['index'] = cpi[idx+1]['index'] / (1 + Decimal(cpi[idx+1]['CPI']))
     for idx in xrange(base_year_index+1, len(cpi)):
         cpi[idx]['index'] = cpi[idx-1]['index'] * (1 + Decimal(cpi[idx]['CPI']))
-
-    raise Exception()
+    cpi_dict = {}
+    for cell in cpi:
+        cpi_dict[cell['financial_year_start']] = cell
+    return cpi_dict
