@@ -47,12 +47,21 @@ prov_abbrev = {
 }
 
 # Budget Phase IDs for the 7-year overview period
-TRENDS_AND_ESTIMATES_PHASES = [
+TRENDS_AND_ESTIMATES_PHASES_NAT = [
     'Audited Outcome',
     'Audited Outcome',
     'Audited Outcome',
     'Adjusted appropriation',
     'Original Budget',
+    'MTEF',
+    'MTEF',
+]
+TRENDS_AND_ESTIMATES_PHASES_PROV = [
+    'Outcome',
+    'Outcome',
+    'Outcome',
+    'Adjusted appropriation',
+    'Budget',
     'MTEF',
     'MTEF',
 ]
@@ -527,6 +536,9 @@ class Department(models.Model):
         if self.government.sphere.slug == 'provincial':
             geo_dimension = budget.get_geo_dimension()
             cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
+            phases = TRENDS_AND_ESTIMATES_PHASES_PROV
+        else:
+            phases = TRENDS_AND_ESTIMATES_PHASES_NAT
         drilldowns = [
             financial_year_dimension + '.financial_year',
             phase_dimension + '.budget_phase',
@@ -535,17 +547,20 @@ class Department(models.Model):
         cpi = get_cpi()
         for idx, financial_year_start in enumerate(financial_year_starts):
             financial_year_slug = FinancialYear.slug_from_year_start(financial_year_start)
+            phase = phases[idx]
             cell = [c for c in result['cells']
                     if c[financial_year_dimension + '.financial_year'] == int(financial_year_start)
-                    and c[phase_dimension + '.budget_phase'] == TRENDS_AND_ESTIMATES_PHASES[idx]][0]
+                    and c[phase_dimension + '.budget_phase'] == phase][0]
             nominal = cell['value.sum']
             expenditure['nominal'].append({
                 'financial_year': financial_year_slug,
                 'amount': nominal,
+                'phase': phase,
             })
             expenditure['real'].append({
                 'financial_year': financial_year_slug,
                 'amount': int((Decimal(nominal)/cpi[financial_year_start]['index']) * 100),
+                'phase': phase,
             })
 
         return expenditure
