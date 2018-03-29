@@ -191,28 +191,22 @@ class Government(models.Model):
             financial_year_slug=self.get_financial_year().slug,
             sphere_slug=self.government.sphere.slug,
         )
-        function_dimension = budget.get_function_dimension()
-        financial_year_dimension = budget.get_financial_year_dimension()
-        department_dimension = budget.get_department_dimension()
         financial_year_start = self.sphere.financial_year.get_starting_year()
         vote_numbers = [str(d.vote_number)
                         for d in self.get_vote_primary_departments()]
         votes = '"%s"' % '";"'.join(vote_numbers)
         cuts = [
-            financial_year_dimension + '.financial_year:' + financial_year_start,
-            department_dimension + '.vote_number:' + votes
+            budget.get_financial_year_ref() + ':' + financial_year_start,
+            budget.get_vote_number_ref() + ':' + votes
         ]
         if self.sphere.slug == 'provincial':
-            geo_dimension = budget.get_geo_dimension()
-            cuts.append(geo_dimension + '.government:"%s"' % self.name)
-        drilldowns = [
-            function_dimension + '.government_function',
-        ]
+            cuts.append(budget.get_geo_ref() + ':"%s"' % self.name)
+        drilldowns = [budget.get_function_ref()]
         result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
         functions = []
         for cell in result['cells']:
             functions.append({
-                'name': cell[function_dimension + '.government_function'],
+                'name': cell[budget.get_function_ref()],
                 'total_budget': cell['value.sum']
             })
         self._function_budgets = functions
@@ -487,26 +481,22 @@ class Department(models.Model):
             financial_year_slug=self.get_financial_year().slug,
             sphere_slug=self.government.sphere.slug,
         )
-        programme_dimension = budget.get_programme_dimension()
-        financial_year_dimension = budget.get_financial_year_dimension()
-        department_dimension = budget.get_department_dimension()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
-            financial_year_dimension + '.financial_year:' + financial_year_start,
-            department_dimension + '.department:"' + self.name + '"',
+            budget.get_financial_year_ref() + ':' + financial_year_start,
+            budget.get_department_name_ref() + ':"' + self.name + '"',
         ]
         if self.government.sphere.slug == 'provincial':
-            geo_dimension = budget.get_geo_dimension()
-            cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
+            cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
         drilldowns = [
-            programme_dimension + '.programme_number',
-            programme_dimension + '.programme',
+            budget.get_programme_number_ref(),
+            budget.get_programme_name_ref(),
         ]
         result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
         programmes = []
         for cell in result['cells']:
             programmes.append({
-                'name': cell[programme_dimension + '.programme'],
+                'name': cell[budget.get_programme_name_ref()],
                 'total_budget': cell['value.sum']
             })
         self._programme_budgets = programmes
@@ -514,56 +504,60 @@ class Department(models.Model):
 
     def get_expenditure_over_time(self):
         base_year = get_base_year()
+        financial_year_start = self.get_financial_year().get_starting_year()
+        financial_year_start_int = int(financial_year_start)
+        financial_year_starts = [str(y) for y in xrange(financial_year_start_int-4, financial_year_start_int+3)]
         expenditure = {
             'base_financial_year': str(base_year),
             'nominal': [],
             'real': [],
         }
-        financial_year_start = self.get_financial_year().get_starting_year()
-        financial_year_start_int = int(financial_year_start)
-        financial_year_starts = [str(y) for y in xrange(financial_year_start_int-4, financial_year_start_int+3)]
-        financial_year_slug = FinancialYear.slug_from_year_start(financial_year_start)
+
         budget = EstimatesOfExpenditure(
-            financial_year_slug=financial_year_slug,
+            financial_year_slug=self.get_financial_year().slug,
             sphere_slug=self.government.sphere.slug,
         )
         financial_year_dimension = budget.get_financial_year_dimension()
-        department_dimension = budget.get_department_dimension()
         phase_dimension = budget.get_phase_dimension()
         cuts = [
-            department_dimension + '.department:"' + self.name + '"',
+            budget.get_department_name_ref() + ':"' + self.name + '"',
         ]
         if self.government.sphere.slug == 'provincial':
-            geo_dimension = budget.get_geo_dimension()
-            cuts.append(geo_dimension + '.government:"%s"' % self.government.name)
+            cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
             phases = TRENDS_AND_ESTIMATES_PHASES_PROV
         else:
             phases = TRENDS_AND_ESTIMATES_PHASES_NAT
         drilldowns = [
-            financial_year_dimension + '.financial_year',
-            phase_dimension + '.budget_phase',
+            budget.get_financial_year_ref(),
+            budget.get_phase_ref(),
         ]
         result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
-        cpi = get_cpi()
-        for idx, financial_year_start in enumerate(financial_year_starts):
-            financial_year_slug = FinancialYear.slug_from_year_start(financial_year_start)
-            phase = phases[idx]
-            cell = [c for c in result['cells']
-                    if c[financial_year_dimension + '.financial_year'] == int(financial_year_start)
-                    and c[phase_dimension + '.budget_phase'] == phase][0]
-            nominal = cell['value.sum']
-            expenditure['nominal'].append({
-                'financial_year': financial_year_slug,
-                'amount': nominal,
-                'phase': phase,
-            })
-            expenditure['real'].append({
-                'financial_year': financial_year_slug,
-                'amount': int((Decimal(nominal)/cpi[financial_year_start]['index']) * 100),
-                'phase': phase,
-            })
+        if result['cells']:
+            cpi = get_cpi()
+            for idx, financial_year_start in enumerate(financial_year_starts):
+                phase = phases[idx]
+                cell = [
+                    c for c in result['cells']
+                    if c[budget.get_financial_year_ref()] == int(financial_year_start)
+                    and c[phase_dimension + '.budget_phase'] == phase
+                ][0]
+                nominal = cell['value.sum']
+                expenditure['nominal'].append({
+                    'financial_year': self.get_financial_year().slug,
+                    'amount': nominal,
+                    'phase': phase,
+                })
+                expenditure['real'].append({
+                    'financial_year': self.get_financial_year().slug,
+                    'amount': int((Decimal(nominal)/cpi[financial_year_start]['index']) * 100),
+                    'phase': phase,
+                })
 
-        return expenditure
+            return expenditure
+        else:
+            logger.warning("Missing expenditure data for %r budget year %s",
+                           cuts, self.get_financial_year().slug)
+            return None
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
