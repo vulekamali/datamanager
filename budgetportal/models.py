@@ -508,7 +508,7 @@ class Department(models.Model):
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [str(y) for y in xrange(financial_year_start_int-4, financial_year_start_int+3)]
         expenditure = {
-            'base_financial_year': str(base_year),
+            'base_financial_year': FinancialYear.slug_from_year_start(str(base_year)),
             'nominal': [],
             'real': [],
         }
@@ -517,8 +517,6 @@ class Department(models.Model):
             financial_year_slug=self.get_financial_year().slug,
             sphere_slug=self.government.sphere.slug,
         )
-        financial_year_dimension = budget.get_financial_year_dimension()
-        phase_dimension = budget.get_phase_dimension()
         cuts = [
             budget.get_department_name_ref() + ':"' + self.name + '"',
         ]
@@ -539,16 +537,16 @@ class Department(models.Model):
                 cell = [
                     c for c in result['cells']
                     if c[budget.get_financial_year_ref()] == int(financial_year_start)
-                    and c[phase_dimension + '.budget_phase'] == phase
+                    and c[budget.get_phase_ref()] == phase
                 ][0]
                 nominal = cell['value.sum']
                 expenditure['nominal'].append({
-                    'financial_year': self.get_financial_year().slug,
+                    'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
                     'amount': nominal,
                     'phase': phase,
                 })
                 expenditure['real'].append({
-                    'financial_year': self.get_financial_year().slug,
+                    'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
                     'amount': int((Decimal(nominal)/cpi[financial_year_start]['index']) * 100),
                     'phase': phase,
                 })
