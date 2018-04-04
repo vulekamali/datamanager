@@ -7,17 +7,33 @@ from django.utils.text import slugify as django_slugify
 from slugify import slugify as extended_slugify
 from partial_index import PartialIndex
 from pprint import pformat
+from budgetportal.openspending import EstimatesOfExpenditure
 import logging
 import re
 import requests
 import urlparse
 from os.path import splitext, basename
+from decimal import Decimal
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
+CKAN_DATASTORE_URL = ('https://data.vulekamali.gov.za'
+                      '/api/3/action' \
+                      '/datastore_search_sql')
 
-OPENSPENDING_ACCOUNT_ID = 'b9d2af843f3a7ca223eea07fb608e62a'
+REVENUE_RESOURCE_IDS = {
+    '2018-19': '7ad5e908-5814-4581-a9df-a6f37c56d5bd',
+    '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
+    '2016-17': '69b54066-00e0-4d7b-8b33-1ccbace5ba8e',
+    '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
+}
+
+
+CPI_RESOURCE_IDS = {
+    '2018-19': '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d',
+}
+
 prov_abbrev = {
     'Eastern Cape': 'EC',
     'Free State': 'FS',
@@ -29,6 +45,26 @@ prov_abbrev = {
     'North West': 'NW',
     'Western Cape': 'WC',
 }
+
+# Budget Phase IDs for the 7-year overview period
+TRENDS_AND_ESTIMATES_PHASES_NAT = [
+    'Audited Outcome',
+    'Audited Outcome',
+    'Audited Outcome',
+    'Adjusted appropriation',
+    'Original Budget',
+    'MTEF',
+    'MTEF',
+]
+TRENDS_AND_ESTIMATES_PHASES_PROV = [
+    'Outcome',
+    'Outcome',
+    'Outcome',
+    'Adjusted appropriation',
+    'Budget',
+    'MTEF',
+    'MTEF',
+]
 
 
 class FinancialYear(models.Model):
@@ -49,6 +85,10 @@ class FinancialYear(models.Model):
     def get_starting_year(self):
         return self.slug[:4]
 
+    @staticmethod
+    def slug_from_year_start(year):
+        return year + '-' + str(int(year[2:])+1)
+
     def get_sphere(self, name):
         return getattr(self, name)
 
@@ -64,30 +104,19 @@ class FinancialYear(models.Model):
         """
         Get revenue data for the financial year
         """
-        url = 'https://data.vulekamali.gov.za' \
-              '/api/3/action' \
-              '/datastore_search_sql'
-
-        dataset_id = {
-            '2018-19': '7ad5e908-5814-4581-a9df-a6f37c56d5bd',
-            '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
-            '2016-17': '69b54066-00e0-4d7b-8b33-1ccbace5ba8e',
-            '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
-        }
-
-        if self.slug not in dataset_id:
+        if self.slug not in REVENUE_RESOURCE_IDS:
             return []
 
         sql = '''
-        SELECT category_two,SUM(amount) AS amount FROM "{}"
+        SELECT category_two, SUM(amount) AS amount FROM "{}"
          WHERE "phase"='After tax proposals'
          GROUP BY "category_two" ORDER BY amount DESC
-        '''.format(dataset_id[self.slug])
+        '''.format(REVENUE_RESOURCE_IDS[self.slug])
 
         params = {
             'sql': sql
         }
-        revenue_result = requests.get(url, params=params)
+        revenue_result = requests.get(CKAN_DATASTORE_URL, params=params)
 
         revenue_result.raise_for_status()
         revenue_data = revenue_result.json()['result']['records']
@@ -158,61 +187,26 @@ class Government(models.Model):
 
         if self._function_budgets is not None:
             return self._function_budgets
-
-        dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
-            self.sphere.slug,
-            self.sphere.financial_year.slug,
+        budget = EstimatesOfExpenditure(
+            financial_year_slug=self.get_financial_year().slug,
+            sphere_slug=self.government.sphere.slug,
         )
-        cube_url = ('https://openspending.org/api/3/cubes/'
-                    '{}:{}/').format(OPENSPENDING_ACCOUNT_ID, dataset_id)
-        model_url = cube_url + 'model/'
-        model_result = requests.get(model_url)
-        logger.info(
-            "request to %s took %dms",
-            model_url,
-            model_result.elapsed.microseconds / 1000
-        )
-        if model_result.status_code == 404:
-            logger.info("No budget API found for %r", self)
-            return None
-        model_result.raise_for_status()
-        model = model_result.json()['model']
-        if not 'functional_classification' in model['hierarchies']:
-            return None
-        function_dimension = model['hierarchies']['functional_classification']['levels'][0]
-        date_dimension = model['hierarchies']['date']['levels'][0]
-        department_dimension = model['hierarchies']['administrative_classification']['levels'][0]
         financial_year_start = self.sphere.financial_year.get_starting_year()
         vote_numbers = [str(d.vote_number)
                         for d in self.get_vote_primary_departments()]
         votes = '"%s"' % '";"'.join(vote_numbers)
         cuts = [
-            date_dimension + '.financial_year:' + financial_year_start,
-            department_dimension + '.vote_number:' + votes
+            budget.get_financial_year_ref() + ':' + financial_year_start,
+            budget.get_vote_number_ref() + ':' + votes
         ]
         if self.sphere.slug == 'provincial':
-            geo_dimension = model['hierarchies']['geo_source']['levels'][0]
-            cuts.append(geo_dimension + '.government:"%s"' % self.name)
-        params = {
-            'cut': "|".join(cuts),
-            'drilldown': "|".join([
-                function_dimension + '.government_function',
-            ]),
-            'pagesize': 30
-        }
-        aggregate_url = cube_url + 'aggregate/'
-        aggregate_result = requests.get(aggregate_url, params=params)
-        logger.info(
-            "request %s with query %r took %dms",
-            aggregate_result.url,
-            pformat(params),
-            aggregate_result.elapsed.microseconds / 1000
-        )
-        aggregate_result.raise_for_status()
+            cuts.append(budget.get_geo_ref() + ':"%s"' % self.name)
+        drilldowns = [budget.get_function_ref()]
+        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
         functions = []
-        for cell in aggregate_result.json()['cells']:
+        for cell in result['cells']:
             functions.append({
-                'name': cell[function_dimension + '.government_function'],
+                'name': cell[budget.get_function_ref()],
                 'total_budget': cell['value.sum']
             })
         self._function_budgets = functions
@@ -481,63 +475,87 @@ class Department(models.Model):
         """
         get the budget totals for all the department programmes
         """
-
         if self._programme_budgets is not None:
             return self._programme_budgets
-
-        dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
-            self.government.sphere.slug,
-            self.get_financial_year().slug,
+        budget = EstimatesOfExpenditure(
+            financial_year_slug=self.get_financial_year().slug,
+            sphere_slug=self.government.sphere.slug,
         )
-        cube_url = ('https://openspending.org/api/3/cubes/'
-                    '{}:{}/').format(OPENSPENDING_ACCOUNT_ID, dataset_id)
-        model_url = cube_url + 'model/'
-        model_result = requests.get(model_url)
-        logger.info(
-            "request to %s took %dms",
-            model_url,
-            model_result.elapsed.microseconds / 1000
-        )
-        if model_result.status_code == 404:
-            return None
-        model_result.raise_for_status()
-        model = model_result.json()['model']
-        programme_dimension = model['hierarchies']['activity']['levels'][0]
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
-            'date_2.financial_year:' + financial_year_start,
-            'administrative_classification_2.department:"' + self.name + '"'
+            budget.get_financial_year_ref() + ':' + financial_year_start,
+            budget.get_department_name_ref() + ':"' + self.name + '"',
         ]
         if self.government.sphere.slug == 'provincial':
-            cuts.append('geo_source_2.government:"%s"' % self.government.name)
-        params = {
-            'cut': "|".join(cuts),
-            'drilldown': "|".join([
-                programme_dimension + '.programme_number',
-                programme_dimension + '.programme',
-            ]),
-            'pagesize': 30
-        }
-        aggregate_url = cube_url + 'aggregate/'
-        aggregate_result = requests.get(aggregate_url, params=params)
-        logger.info(
-            "request %s with query %r took %dms",
-            aggregate_result.url,
-            pformat(params),
-            aggregate_result.elapsed.microseconds / 1000
-        )
-        if aggregate_result.status_code == 404:
-            logger.info("No budget API found for %r", self)
-            return None
-        aggregate_result.raise_for_status()
+            cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
+        drilldowns = [
+            budget.get_programme_number_ref(),
+            budget.get_programme_name_ref(),
+        ]
+        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
         programmes = []
-        for cell in aggregate_result.json()['cells']:
+        for cell in result['cells']:
             programmes.append({
-                'name': cell[programme_dimension + '.programme'],
+                'name': cell[budget.get_programme_name_ref()],
                 'total_budget': cell['value.sum']
             })
         self._programme_budgets = programmes
         return self._programme_budgets
+
+    def get_expenditure_over_time(self):
+        base_year = get_base_year()
+        financial_year_start = self.get_financial_year().get_starting_year()
+        financial_year_start_int = int(financial_year_start)
+        financial_year_starts = [str(y) for y in xrange(financial_year_start_int-4, financial_year_start_int+3)]
+        expenditure = {
+            'base_financial_year': FinancialYear.slug_from_year_start(str(base_year)),
+            'nominal': [],
+            'real': [],
+        }
+
+        budget = EstimatesOfExpenditure(
+            financial_year_slug=self.get_financial_year().slug,
+            sphere_slug=self.government.sphere.slug,
+        )
+        cuts = [
+            budget.get_department_name_ref() + ':"' + self.name + '"',
+        ]
+        if self.government.sphere.slug == 'provincial':
+            cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
+            phases = TRENDS_AND_ESTIMATES_PHASES_PROV
+        else:
+            phases = TRENDS_AND_ESTIMATES_PHASES_NAT
+        drilldowns = [
+            budget.get_financial_year_ref(),
+            budget.get_phase_ref(),
+        ]
+        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
+        if result['cells']:
+            cpi = get_cpi()
+            for idx, financial_year_start in enumerate(financial_year_starts):
+                phase = phases[idx]
+                cell = [
+                    c for c in result['cells']
+                    if c[budget.get_financial_year_ref()] == int(financial_year_start)
+                    and c[budget.get_phase_ref()] == phase
+                ][0]
+                nominal = cell['value.sum']
+                expenditure['nominal'].append({
+                    'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
+                    'amount': nominal,
+                    'phase': phase,
+                })
+                expenditure['real'].append({
+                    'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
+                    'amount': int((Decimal(nominal)/cpi[financial_year_start]['index']) * 100),
+                    'phase': phase,
+                })
+
+            return expenditure
+        else:
+            logger.warning("Missing expenditure data for %r budget year %s",
+                           cuts, self.get_financial_year().slug)
+            return None
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
@@ -697,3 +715,39 @@ def package_title(department):
 
 def resource_name(department):
     return "Vote %d - %s" % (department.vote_number, department.name)
+
+
+def get_base_year():
+    cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
+    return int(cpi_year_slug[:4])-1
+
+
+def get_cpi():
+    cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
+    base_year = get_base_year()
+
+    sql = '''
+    SELECT "Year", "CPI" FROM "{}"
+    ORDER BY "Year"
+    '''.format(CPI_RESOURCE_IDS[cpi_year_slug])
+    params = {
+        'sql': sql
+    }
+    result = requests.get(CKAN_DATASTORE_URL, params=params)
+    result.raise_for_status()
+    cpi = result.json()['result']['records']
+    base_year_index = None
+    for idx, cell in enumerate(cpi):
+        financial_year_start = cell['Year'][:4]
+        cell['financial_year_start'] = financial_year_start
+        if financial_year_start == str(base_year):
+            base_year_index = idx
+            cell['index'] = 100
+    for idx in range(base_year_index-1, -1, -1):
+        cpi[idx]['index'] = cpi[idx+1]['index'] / (1 + Decimal(cpi[idx+1]['CPI']))
+    for idx in xrange(base_year_index+1, len(cpi)):
+        cpi[idx]['index'] = cpi[idx-1]['index'] * (1 + Decimal(cpi[idx]['CPI']))
+    cpi_dict = {}
+    for cell in cpi:
+        cpi_dict[cell['financial_year_start']] = cell
+    return cpi_dict
