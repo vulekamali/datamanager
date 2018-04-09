@@ -82,7 +82,8 @@ dokku config:set budgetportal DJANGO_DEBUG=false \
                               CKAN_API_KEY=... \
                               DATABASE_URL=postgresql://... \
                               EMAIL_HOST_PASSWORD=... \
-                              DISCOURSE_SSO_SECRET=...
+                              DISCOURSE_SSO_SECRET=... \
+                              RECAPTCHA_PRIVATE_KEY=...
 git push dokku master
 dokku run python manage.py migrate
 dokku run python manage.py createsuperuser
