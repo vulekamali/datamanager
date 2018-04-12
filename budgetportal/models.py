@@ -47,23 +47,14 @@ prov_abbrev = {
 }
 
 # Budget Phase IDs for the 7-year overview period
-TRENDS_AND_ESTIMATES_PHASES_NAT = [
+TRENDS_AND_ESTIMATES_PHASES = [
     'Audited Outcome',
     'Audited Outcome',
     'Audited Outcome',
     'Adjusted appropriation',
-    'Original Budget',
-    'MTEF',
-    'MTEF',
-]
-TRENDS_AND_ESTIMATES_PHASES_PROV = [
-    'Outcome',
-    'Outcome',
-    'Outcome',
-    'Adjusted appropriation',
-    'Budget',
-    'MTEF',
-    'MTEF',
+    'Main appropriation',
+    'Medium Term Estimates',
+    'Medium Term Estimates',
 ]
 
 
@@ -522,9 +513,6 @@ class Department(models.Model):
         ]
         if self.government.sphere.slug == 'provincial':
             cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
-            phases = TRENDS_AND_ESTIMATES_PHASES_PROV
-        else:
-            phases = TRENDS_AND_ESTIMATES_PHASES_NAT
         drilldowns = [
             budget.get_financial_year_ref(),
             budget.get_phase_ref(),
@@ -533,7 +521,7 @@ class Department(models.Model):
         if result['cells']:
             cpi = get_cpi()
             for idx, financial_year_start in enumerate(financial_year_starts):
-                phase = phases[idx]
+                phase = TRENDS_AND_ESTIMATES_PHASES[idx]
                 cell = [
                     c for c in result['cells']
                     if c[budget.get_financial_year_ref()] == int(financial_year_start)
