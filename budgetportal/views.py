@@ -131,6 +131,7 @@ def department_list(request, financial_year_id):
 
 def department(request, financial_year_id, sphere_slug, government_slug, department_slug):
     department = None
+    selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
     years = list(FinancialYear.objects.order_by('slug'))
     for year in years:
@@ -177,6 +178,11 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         ]
     primary_department = department.get_primary_department()
 
+    if department.government.sphere.slug == 'national':
+        description_govt = "National"
+    elif department.government.sphere.slug == 'provincial':
+        description_govt = department.government.name
+
     context = {
         'expenditure_over_time': department.get_expenditure_over_time(),
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
@@ -197,7 +203,14 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'programmes': programme_budgets,
         'selected_financial_year': financial_year_id,
         'selected_tab': 'departments',
-        'title': "%s - vulekamali" % department.name,
+        'title': "%s budget %s  - vulekamali" % (
+            department.name, selected_year.slug),
+        'description': "%s department: %s budget data for the %s financial year %s" % (
+            description_govt,
+            department.name,
+            selected_year.slug,
+            COMMON_DESCRIPTION_ENDING,
+        ),
         'treasury_datasets': department.get_treasury_resources(),
         'vote_number': department.vote_number,
         'vote_primary': {
@@ -217,6 +230,9 @@ def contributed_dataset_list(request):
         'selected_tab': 'contributed-data',
         'slug': 'contributed-data',
         'title': 'Contributed Data - vulekamali',
+        'description': ("Contibuted data and documentation for South African"
+                        " government budgets. Hosted by National Treasury in"
+                        " partnership with IMALI YETHU.")
     }
 
     for dataset in Dataset.get_contributed_datasets():
@@ -235,6 +251,10 @@ def dataset(request, dataset_slug):
     context = {
         'selected_tab': 'contributed-data',
         'title': "%s - vulekamali" % dataset.name,
+        'description': ("Data and/or documentation related to South African"
+                        " government budgets contributed by %s and hosted"
+                        " by National Treasury in partnership with IMALI YETHU") %
+        dataset.get_organization()['name'],
     }
 
     context.update(dataset_fields(dataset))
