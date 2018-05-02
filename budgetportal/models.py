@@ -274,6 +274,17 @@ class Department(models.Model):
         vocab_map = {}
         for vocab in ckan.action.vocabulary_list():
             vocab_map[vocab['name']] = vocab['id']
+        tags = [
+            { 'vocabulary_id': vocab_map['spheres'],
+              'name': self.government.sphere.slug },
+            { 'vocabulary_id': vocab_map['financial_years'],
+              'name': self.get_financial_year().slug },
+        ]
+        if self.government.sphere.slug == 'provincial':
+            tags.append({
+                'vocabulary_id': vocab_map['provinces'],
+                'name': self.government.name,
+            })
         dataset_fields = {
             'title': package_title(self),
             'name': package_id(self),
@@ -288,12 +299,7 @@ class Department(models.Model):
             ],
             'owner_org': 'national-treasury',
             'license_id': 'other-pd',
-            'tags': [
-                { 'vocabulary_id': vocab_map['spheres'],
-                  'name': self.government.sphere.slug },
-                { 'vocabulary_id': vocab_map['financial_years'],
-                  'name': self.get_financial_year().slug },
-            ],
+            'tags': tags,
         }
         ckan.action.package_create(**dataset_fields)
 
