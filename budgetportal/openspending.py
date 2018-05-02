@@ -29,10 +29,10 @@ class EstimatesOfExpenditure():
         )
         if model_result.status_code == 404:
             logger.info("%s not found (404)" % model_result.url)
-            dataset_id = 'estimates_of_%s_expenditure_of_south_africa_%s' % (
+            dataset_id = ('estimates_of_%s_expenditure_of_south_africa_%s' % (
                 sphere_slug,
                 financial_year_slug,
-            ).replace('-', '_')
+            )).replace('-', '_')
             self.cube_url = ('https://openspending.org/api/3/cubes/'
                              '{}:{}/').format(ACCOUNT_ID, dataset_id)
             model_url = self.cube_url + 'model/'
