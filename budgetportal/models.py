@@ -297,7 +297,7 @@ class Department(models.Model):
         }
         ckan.action.package_create(**dataset_fields)
 
-    def upload_resource(self, local_path):
+    def upload_resource(self, local_path, overwrite=False):
         if not self.treasury_datasets:
             self._create_treasury_dataset()
         self.treasury_datasets = self.get_treasury_datasets()
@@ -315,6 +315,12 @@ class Department(models.Model):
             'name': resource_name(self),
             'upload': open(local_path, 'rb')
         }
+
+        if resource and not overwrite:
+            logger.info("Not overwriting existing resource %s to package %s",
+                        local_path, dataset['id'])
+            return
+
         if resource:
             logger.info("Re-uploading resource %s to package %s", local_path, dataset['id'])
             resource_fields['id'] = resource['id']
