@@ -5,11 +5,12 @@ conventions of how we name fields in our Fiscal Data Packages.
 import requests
 import logging
 from pprint import pformat
+import random
 
 logger = logging.getLogger(__name__)
 
 ACCOUNT_ID = 'b9d2af843f3a7ca223eea07fb608e62a'
-
+PAGE_SIZE = 300
 
 class EstimatesOfExpenditure():
     def __init__(self, financial_year_slug, sphere_slug):
@@ -93,7 +94,8 @@ class EstimatesOfExpenditure():
 
     def aggregate(self, cuts=None, drilldowns=None):
         params = {
-            'pagesize': 30
+            'pagesize': PAGE_SIZE,
+            'cache_bust': random.randint(1, 1000000),
         }
         if cuts is not None:
             params['cut'] = "|".join(cuts)
@@ -108,4 +110,6 @@ class EstimatesOfExpenditure():
             aggregate_result.elapsed.microseconds / 1000
         )
         aggregate_result.raise_for_status()
+        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
+            raise Exception("More cells than expected - perhaps we should start paging")
         return aggregate_result.json()
