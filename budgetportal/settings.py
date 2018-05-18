@@ -108,7 +108,7 @@ CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
 
 DISCOURSE_SSO_URLS = {
     'discourse': os.environ.get('DISCOURSE_SSO_URL',
-                                'https://discourse.vulekamali.gov.za/session/sso_login'),
+                                'https://discussions.vulekamali.gov.za/session/sso_login'),
     'ckan': os.environ.get('CKAN_SSO_URL',
                            'https://data.vulekamali.gov.za/user/login'),
 }
