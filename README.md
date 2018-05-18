@@ -62,7 +62,7 @@ git push dokku master
 
 ### Single Sign-on (SSO)
 
-To use the Single Sign-on functionality in local development, make sure you set the relevant environment variables to match our local setup, e.g.
+To use the Single Sign-on functionality in local development, make sure you set the relevant environment variables to match your local setup, e.g.
 
 ```
 HTTP_PROTOCOL=http \
