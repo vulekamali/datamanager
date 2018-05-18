@@ -53,13 +53,28 @@ From your repo, run
 git push dokku master
 ```
 
-Development
------------
+### Development
 
 * Put javascript into ``budgetportal/static/javascript/app.js``
 * Put SCSS stylesheets into ``budgetportal/static/stylesheets/app.scss``
 * Install new asset packs with Bower: ``bower install -Sp package-to-install``
 * Get better debugging with ``python manage.py runserver_plus``
+
+### Single Sign-on (SSO)
+
+To use the Single Sign-on functionality in local development, make sure you set the relevant environment variables to match our local setup, e.g.
+
+```
+HTTP_PROTOCOL=http \
+DISCOURSE_SSO_SECRET=... \
+CKAN_SSO_URL=http://localhost/user/login \
+EMAIL_HOST=localhost \
+EMAIL_PORT=2525 \
+EMAIL_USE_TLS= \
+python manage.py runserver
+```
+
+Logout from ckan might not send you to the right URL. You can manually go to logout from this app at http://localhost:8000/accounts/logout/.
 
 Production deployment
 ---------------------
