@@ -13,17 +13,19 @@ logger = logging.getLogger(__name__)
 ACCOUNT_ID = 'b9d2af843f3a7ca223eea07fb608e62a'
 PAGE_SIZE = 300
 
+
 class EstimatesOfExpenditure():
     def __init__(self, financial_year_slug, sphere_slug):
+        self.session = requests.Session()
         self.sphere_slug = sphere_slug
         dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
             sphere_slug,
             financial_year_slug,
         )
-        self.cube_url = ('https://openspending.org/api/3/cubes/'
-                         '{}:{}/').format(ACCOUNT_ID, dataset_id)
+        self.cube_url = ('{}/api/3/cubes/{}:{}/').format(
+            settings.OPENSPENDING_HOST, ACCOUNT_ID, dataset_id)
         model_url = self.cube_url + 'model/'
-        model_result = requests.get(model_url)
+        model_result = self.session.get(model_url)
         logger.info(
             "request to %s took %dms",
             model_url,
@@ -35,10 +37,11 @@ class EstimatesOfExpenditure():
                 sphere_slug,
                 financial_year_slug,
             )).replace('-', '_')
-            self.cube_url = ('https://openspending.org/api/3/cubes/'
-                             '{}:{}/').format(ACCOUNT_ID, dataset_id)
+            self.cube_url = ('{}/api/3/cubes/{}:{}/').format(
+                settings.OPENSPENDING_HOST, ACCOUNT_ID, dataset_id
+            )
             model_url = self.cube_url + 'model/'
-            model_result = requests.get(model_url)
+            model_result = self.session.get(model_url)
             logger.info(
                 "request to %s took %dms",
                 model_url,
@@ -105,7 +108,7 @@ class EstimatesOfExpenditure():
         if drilldowns is not None:
             params['drilldown'] = "|".join(drilldowns)
         aggregate_url = self.cube_url + 'aggregate/'
-        aggregate_result = requests.get(aggregate_url, params=params)
+        aggregate_result = self.session.get(aggregate_url, params=params)
         logger.info(
             "request %s with query %r took %dms",
             aggregate_result.url,
