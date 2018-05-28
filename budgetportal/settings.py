@@ -114,6 +114,8 @@ DISCOURSE_SSO_URLS = {
 }
 DISCOURSE_SSO_SECRET = os.environ.get('DISCOURSE_SSO_SECRET', None)
 
+BUST_OPENSPENDING_CACHE = os.environ.get('BUST_OPENSPENDING_CACHE', 'false').lower() == 'true'
+
 # http://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = 'budgetportal.allauthadapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'budgetportal.allauthadapters.SocialAccountAdapter'

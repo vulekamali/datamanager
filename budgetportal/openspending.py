@@ -2,10 +2,11 @@
 Abstracts away some of the mechanics of querying OpenSpending and some of the
 conventions of how we name fields in our Fiscal Data Packages.
 """
-import requests
-import logging
+from django.conf import settings
 from pprint import pformat
+import logging
 import random
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -95,8 +96,10 @@ class EstimatesOfExpenditure():
     def aggregate(self, cuts=None, drilldowns=None):
         params = {
             'pagesize': PAGE_SIZE,
-            'cache_bust': random.randint(1, 1000000),
         }
+        if settings.BUST_OPENSPENDING_CACHE:
+            params['cache_bust'] = random.randint(1, 1000000)
+
         if cuts is not None:
             params['cut'] = "|".join(cuts)
         if drilldowns is not None:
