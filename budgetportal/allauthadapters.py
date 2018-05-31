@@ -12,7 +12,6 @@ class AccountAdapter(DefaultAccountAdapter):
     def get_email_confirmation_url(self, request, emailconfirmation):
         print
         print "###"
-        print request.url
         print "POST %r" % request.POST
         print "GET %r" % request.GET
         print "###"
