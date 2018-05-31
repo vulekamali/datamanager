@@ -64,7 +64,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-SITE_ID = 1
+SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
 
 ROOT_URLCONF = 'budgetportal.urls'
 
