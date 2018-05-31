@@ -10,12 +10,6 @@ class AccountAdapter(DefaultAccountAdapter):
     where they were headed after authentication.
     """
     def get_email_confirmation_url(self, request, emailconfirmation):
-        print
-        print "###"
-        print "POST %r" % request.POST
-        print "GET %r" % request.GET
-        print "###"
-        print
         next_url = request.POST.get('next')
         email_conf_url = super(AccountAdapter, self).get_email_confirmation_url(request, emailconfirmation)
         if next_url:
