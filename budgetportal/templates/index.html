@@ -2,24 +2,34 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="Title">{% trans "Success" %}</h1>
+<h1 class="Title">{% trans "Welcome to vulekamali" %}</h1>
 
 <div class="Card u-marginAuto u-marginBottom20">
   <div class="Card-content">
-    <h3 class="Card-title">Redirecting</h3>
-    <p>If redirection does not occur automatically, please continue by pressing the following button:</p>
-    <a href="https://discussions.vulekamali.gov.za" class="Button u-marginTop20 u-marginBottom20">Continue to vulekamali Talk</a>
+    <p>Welcome to vulekamali accounts portal.</p>
+
+    <p>To upload and update datasets: </p>
+
+    <a href="https://data.vulekamali.gov.za/dataset" class="Button u-marginTop20 u-marginBottom20">Continue to vulekamali Datastore</a>
+
+    <p>To discuss datasets: </p>
+
+    <a href="https://discussions.vulekamali.gov.za" class="Button u-marginTop20 u-marginBottom20">Continue to vulekamali Discussions</a>
+
+    <p>To find and explore budget data:: </p>
+
+    <a href="https://vulekamali.gov.za" class="Button u-marginTop20 u-marginBottom20">Continue to vulekamali</a>
 
     <div class="u-marginTop20 u-marginBottom20">
-        <div class="Divider">
-          <div class="Divider-line"></div>
-          <div class="Divider-title">OR </div>
-          <div class="Divider-line"></div>
-        </div>
+      <div class="Divider">
+        <div class="Divider-line"></div>
+        <div class="Divider-title">OR </div>
+        <div class="Divider-line"></div>
       </div>
+    </div>
 
-      <a class="Button is-secondary" href="{{ login_url }}">Attempt to log in again</a>
-  </div>
+    <a href="/accounts/logout" class="Button u-marginTop20 u-marginBottom20">Sign out</a>
+
 </div>
 
 {% endblock %}

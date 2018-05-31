@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = (
     'budgetportal',
+    'allauth_facebook',
 
     'django.contrib.auth',
     'django.contrib.sites',
@@ -50,13 +51,10 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-    'debug_toolbar',
 )
 
 MIDDLEWARE = (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,7 +64,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-SITE_ID = 1
+SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
 
 ROOT_URLCONF = 'budgetportal.urls'
 
