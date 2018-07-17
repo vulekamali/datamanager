@@ -603,6 +603,7 @@ class Dataset():
         self.intro = kwargs['intro']
         self.methodology = kwargs['methodology']
         self.organization_slug = kwargs['organization_slug']
+        self.category = kwargs['category']
 
     @classmethod
     def from_package(cls, package):
@@ -614,6 +615,7 @@ class Dataset():
                 'format': resource['format'],
                 'url': resource['url'],
             })
+        assert(len(package['categories']) < 2)
         return cls(
             slug=package['name'],
             name=package['title'],
@@ -631,15 +633,21 @@ class Dataset():
             methodology=package['methodology'] if 'methodology' in package else None,
             resources=resources,
             organization_slug=package['organization']['name'],
+            category=package['categories'] and package['categories'][0]
         )
 
     @classmethod
     def fetch(cls, dataset_slug):
+        logger.info("package_show id=%s", dataset_slug)
         package = ckan.action.package_show(id=dataset_slug)
         return cls.from_package(package)
 
     def get_url_path(self):
-        return "/datasets/%s" % self.slug
+        if self.category:
+            category_slug = django_slugify(self.category)
+            return "/datasets/%s/%s" % (category_slug, self.slug)
+        else:
+            return "/datasets/%s" % self.slug
 
     def get_organization(self):
         org = ckan.action.organization_show(id=self.organization_slug)
