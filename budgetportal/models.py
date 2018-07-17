@@ -271,9 +271,7 @@ class Department(models.Model):
             logger.warn("Not updating datasets for %s", self.get_url_path())
 
     def _create_treasury_dataset(self):
-        vocab_map = {}
-        for vocab in ckan.action.vocabulary_list():
-            vocab_map[vocab['name']] = vocab['id']
+        vocab_map = get_vocab_map()
         tags = [
             { 'vocabulary_id': vocab_map['spheres'],
               'name': self.government.sphere.slug },
@@ -673,6 +671,37 @@ class Dataset():
             yield Dataset.from_package(package)
 
 
+class Category():
+    def __init__(self, **kwargs):
+        self.slug = kwargs['slug']
+        self.name = kwargs['name']
+
+    @classmethod
+    def get_by_slug(cls, category_slug):
+        for tag in ckan.action.vocabulary_show(id='categories')['tags']:
+            if django_slugify(tag['name']) == category_slug:
+                return cls(slug=category_slug, name=tag['name'])
+        raise Exception("Category %s not found" % category_slug)
+
+    def get_datasets(self):
+        query = {
+            'q': '',
+            'fq': 'vocab_categories:"%s"' % self.name,
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        if response['count'] > 1000:
+            raise Exception("Time to add paging")
+        logger.info(
+            "query %s\nto ckan returned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        for package in response['results']:
+            yield Dataset.from_package(package)
+
+
+
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
 def none_selected_query(vocab_name):
     """Match items where none of the options in a custom vocab tag is selected"""
@@ -751,3 +780,10 @@ def get_cpi():
     for cell in cpi:
         cpi_dict[cell['financial_year_start']] = cell
     return cpi_dict
+
+
+def get_vocab_map():
+    vocab_map = {}
+    for vocab in ckan.action.vocabulary_list():
+        vocab_map[vocab['name']] = vocab['id']
+    return vocab_map

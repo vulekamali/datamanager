@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-from models import FinancialYear, Dataset
+from models import FinancialYear, Dataset, Category
 import yaml
 
 from . import revenue
@@ -219,6 +219,28 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'slug': primary_department.slug
         },
     }
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_category(request, category_slug):
+    category = Category.get_by_slug(category_slug)
+    context = {
+        'datasets': [],
+        'selected_tab': 'datasets',
+        'slug': category.slug,
+        'title': '%s - vulekamali' % category.name,
+        'description': ("Contibuted data and documentation for South African"
+                        " government budgets. Hosted by National Treasury in"
+                        " partnership with IMALI YETHU.")
+    }
+
+    for dataset in category.get_datasets():
+        field_subset = dataset_fields(dataset)
+        field_subset['description'] = field_subset.pop('intro')
+        del field_subset['methodology']
+        context['datasets'].append(field_subset)
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
