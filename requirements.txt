@@ -16,7 +16,7 @@ enum34==1.0.4
 futures==3.0.3
 gevent==1.2.1
 greenlet==0.4.12
-gunicorn==19.2.1
+gunicorn==19.5.0
 idna==2.6
 newrelic==2.46.0.37
 pathlib==1.0.1
