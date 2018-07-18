@@ -230,6 +230,7 @@ def dataset_category(request, category_slug):
         'datasets': [],
         'selected_tab': 'datasets',
         'slug': category.slug,
+        'name': category.name,
         'title': '%s - vulekamali' % category.name,
         'description': "PERs involve the close scrutiny of both expenditure and programme performance data, and are widely used internationally for quantifying, assessing and improving the cost effectiveness of public policy and the cost-effectiveness of public spending. They are also used to cost the implications of legislative changes and policy choices."
     }
