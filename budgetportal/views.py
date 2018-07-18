@@ -272,12 +272,17 @@ def dataset(request, category_slug, dataset_slug):
 
     if dataset.category:
         selected_tab = 'datasets'
+        description = dataset.intro
     else:
         selected_tab = 'contributed-data'
+        description = ("Data and/or documentation related to South African"
+                       " government budgets contributed by %s and hosted"
+                       " by National Treasury in partnership with IMALI YETHU") % dataset.get_organization()['name']
 
     context = {
         'selected_tab': selected_tab,
         'title': "%s - vulekamali" % dataset.name,
+        'description': description,
     }
 
     context.update(dataset_fields(dataset))
