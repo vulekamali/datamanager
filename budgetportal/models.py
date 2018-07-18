@@ -606,7 +606,7 @@ class Dataset():
         self.category = kwargs['category']
 
     @classmethod
-    def from_package(cls, package):
+    def from_package(cls, package, category=None):
         resources = []
         for resource in package['resources']:
             resources.append({
@@ -616,6 +616,12 @@ class Dataset():
                 'url': resource['url'],
             })
         assert(len(package['categories']) < 2)
+        if not category and package['categories']:
+            category = Category.get_by_slug(django_slugify(package['categories'][0]))
+        assert(not category
+               or (category
+                   and package['categories']
+                   and category.name == package['categories'][0]))
         return cls(
             slug=package['name'],
             name=package['title'],
@@ -633,7 +639,7 @@ class Dataset():
             methodology=package['methodology'] if 'methodology' in package else None,
             resources=resources,
             organization_slug=package['organization']['name'],
-            category=package['categories'] and package['categories'][0]
+            category=category
         )
 
     @classmethod
@@ -644,10 +650,9 @@ class Dataset():
 
     def get_url_path(self):
         if self.organization_slug == 'national-treasury' and self.category:
-            category_slug = django_slugify(self.category)
-            return "/datasets/%s/%s" % (category_slug, self.slug)
+            return "/datasets/%s/%s" % (self.category.slug, self.slug)
         elif self.organization_slug != 'national-treasury':
-            return "/datasets/contributed-data/%s" % self.slug
+            return "/datasets/contributed/%s" % self.slug
         else:
             raise Exception("Not contributed and no category")
 
@@ -708,7 +713,7 @@ class Category():
             len(response['results'])
         )
         for package in response['results']:
-            yield Dataset.from_package(package)
+            yield Dataset.from_package(package, category=self)
 
 
 

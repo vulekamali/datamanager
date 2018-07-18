@@ -231,9 +231,7 @@ def dataset_category(request, category_slug):
         'selected_tab': 'datasets',
         'slug': category.slug,
         'title': '%s - vulekamali' % category.name,
-        'description': ("Contibuted data and documentation for South African"
-                        " government budgets. Hosted by National Treasury in"
-                        " partnership with IMALI YETHU.")
+        'description': "PERs involve the close scrutiny of both expenditure and programme performance data, and are widely used internationally for quantifying, assessing and improving the cost effectiveness of public policy and the cost-effectiveness of public spending. They are also used to cost the implications of legislative changes and policy choices."
     }
 
     for dataset in category.get_datasets():
@@ -269,14 +267,16 @@ def contributed_dataset_list(request):
 
 def dataset(request, category_slug, dataset_slug):
     dataset = Dataset.fetch(dataset_slug)
+    assert(not dataset.category or dataset.category.slug == category_slug)
+
+    if dataset.category:
+        selected_tab = 'datasets'
+    else:
+        selected_tab = 'contributed-data'
 
     context = {
-        'selected_tab': 'contributed-data',
+        'selected_tab': selected_tab,
         'title': "%s - vulekamali" % dataset.name,
-        'description': ("Data and/or documentation related to South African"
-                        " government budgets contributed by %s and hosted"
-                        " by National Treasury in partnership with IMALI YETHU") %
-        dataset.get_organization()['name'],
     }
 
     context.update(dataset_fields(dataset))
@@ -298,4 +298,8 @@ def dataset_fields(dataset):
         'intro': dataset.intro,
         'methodology': dataset.methodology,
         'url_path': dataset.get_url_path(),
+        'category': dataset.category and {
+            'name': dataset.category.name,
+            'slug': str(dataset.category.slug),
+        } or None
     }
