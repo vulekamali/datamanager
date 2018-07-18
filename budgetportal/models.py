@@ -643,11 +643,13 @@ class Dataset():
         return cls.from_package(package)
 
     def get_url_path(self):
-        if self.category:
+        if self.organization_slug == 'national-treasury' and self.category:
             category_slug = django_slugify(self.category)
             return "/datasets/%s/%s" % (category_slug, self.slug)
+        elif self.organization_slug != 'national-treasury':
+            return "/datasets/contributed-data/%s" % self.slug
         else:
-            return "/datasets/%s" % self.slug
+            raise Exception("Not contributed and no category")
 
     def get_organization(self):
         org = ckan.action.organization_show(id=self.organization_slug)

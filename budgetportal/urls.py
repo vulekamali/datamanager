@@ -57,10 +57,6 @@ urlpatterns = [
     # Contributed Dataset Index
     url(r'^contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),
 
-    # Dataset
-    url(r'^datasets'
-        '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
-
     # Authentication
     url(r'^accounts/email.*', permission_denied),
     url(r'^accounts/', include('allauth.urls')),

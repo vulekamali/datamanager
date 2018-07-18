@@ -267,7 +267,7 @@ def contributed_dataset_list(request):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset(request, dataset_slug):
+def dataset(request, category_slug, dataset_slug):
     dataset = Dataset.fetch(dataset_slug)
 
     context = {
