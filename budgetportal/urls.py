@@ -48,13 +48,14 @@ urlpatterns = [
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
 
 
-    # Contributed Dataset List
-    url(r'^contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),
-
-
-    # Dataset
     url(r'^datasets'
+        '/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category)),
+    url(r'^datasets'
+        '/(?P<category_slug>[\w-]+)'
         '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
+
+    # Contributed Dataset Index
+    url(r'^contributed-data.yaml', cache_page(CACHE_SECS)(views.contributed_dataset_list)),
 
     # Authentication
     url(r'^accounts/email.*', permission_denied),

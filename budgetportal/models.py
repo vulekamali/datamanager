@@ -271,9 +271,7 @@ class Department(models.Model):
             logger.warn("Not updating datasets for %s", self.get_url_path())
 
     def _create_treasury_dataset(self):
-        vocab_map = {}
-        for vocab in ckan.action.vocabulary_list():
-            vocab_map[vocab['name']] = vocab['id']
+        vocab_map = get_vocab_map()
         tags = [
             { 'vocabulary_id': vocab_map['spheres'],
               'name': self.government.sphere.slug },
@@ -605,9 +603,10 @@ class Dataset():
         self.intro = kwargs['intro']
         self.methodology = kwargs['methodology']
         self.organization_slug = kwargs['organization_slug']
+        self.category = kwargs['category']
 
     @classmethod
-    def from_package(cls, package):
+    def from_package(cls, package, category=None):
         resources = []
         for resource in package['resources']:
             resources.append({
@@ -616,6 +615,13 @@ class Dataset():
                 'format': resource['format'],
                 'url': resource['url'],
             })
+        assert(len(package['categories']) < 2)
+        if not category and package['categories']:
+            category = Category.get_by_slug(django_slugify(package['categories'][0]))
+        assert(not category
+               or (category
+                   and package['categories']
+                   and category.name == package['categories'][0]))
         return cls(
             slug=package['name'],
             name=package['title'],
@@ -633,15 +639,22 @@ class Dataset():
             methodology=package['methodology'] if 'methodology' in package else None,
             resources=resources,
             organization_slug=package['organization']['name'],
+            category=category
         )
 
     @classmethod
     def fetch(cls, dataset_slug):
+        logger.info("package_show id=%s", dataset_slug)
         package = ckan.action.package_show(id=dataset_slug)
         return cls.from_package(package)
 
     def get_url_path(self):
-        return "/datasets/%s" % self.slug
+        if self.organization_slug == 'national-treasury' and self.category:
+            return "/datasets/%s/%s" % (self.category.slug, self.slug)
+        elif self.organization_slug != 'national-treasury':
+            return "/datasets/contributed/%s" % self.slug
+        else:
+            raise Exception("Not contributed and no category")
 
     def get_organization(self):
         org = ckan.action.organization_show(id=self.organization_slug)
@@ -671,6 +684,37 @@ class Dataset():
         )
         for package in response['results']:
             yield Dataset.from_package(package)
+
+
+class Category():
+    def __init__(self, **kwargs):
+        self.slug = kwargs['slug']
+        self.name = kwargs['name']
+
+    @classmethod
+    def get_by_slug(cls, category_slug):
+        for tag in ckan.action.vocabulary_show(id='categories')['tags']:
+            if django_slugify(tag['name']) == category_slug:
+                return cls(slug=category_slug, name=tag['name'])
+        raise Exception("Category %s not found" % category_slug)
+
+    def get_datasets(self):
+        query = {
+            'q': '',
+            'fq': 'vocab_categories:"%s"' % self.name,
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        if response['count'] > 1000:
+            raise Exception("Time to add paging")
+        logger.info(
+            "query %s\nto ckan returned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        for package in response['results']:
+            yield Dataset.from_package(package, category=self)
+
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
@@ -751,3 +795,10 @@ def get_cpi():
     for cell in cpi:
         cpi_dict[cell['financial_year_start']] = cell
     return cpi_dict
+
+
+def get_vocab_map():
+    vocab_map = {}
+    for vocab in ckan.action.vocabulary_list():
+        vocab_map[vocab['name']] = vocab['id']
+    return vocab_map

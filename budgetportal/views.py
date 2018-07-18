@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-from models import FinancialYear, Dataset
+from models import FinancialYear, Dataset, Category
 import yaml
 
 from . import revenue
@@ -224,6 +224,27 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
+def dataset_category(request, category_slug):
+    category = Category.get_by_slug(category_slug)
+    context = {
+        'datasets': [],
+        'selected_tab': 'datasets',
+        'slug': category.slug,
+        'name': category.name,
+        'title': '%s - vulekamali' % category.name,
+        'description': "PERs involve the close scrutiny of both expenditure and programme performance data, and are widely used internationally for quantifying, assessing and improving the cost effectiveness of public policy and the cost-effectiveness of public spending. They are also used to cost the implications of legislative changes and policy choices."
+    }
+
+    for dataset in category.get_datasets():
+        field_subset = dataset_fields(dataset)
+        field_subset['description'] = field_subset.pop('intro')
+        del field_subset['methodology']
+        context['datasets'].append(field_subset)
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
 def contributed_dataset_list(request):
     context = {
         'datasets': [],
@@ -245,16 +266,23 @@ def contributed_dataset_list(request):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset(request, dataset_slug):
+def dataset(request, category_slug, dataset_slug):
     dataset = Dataset.fetch(dataset_slug)
+    assert(not dataset.category or dataset.category.slug == category_slug)
+
+    if dataset.category:
+        selected_tab = 'datasets'
+        description = dataset.intro
+    else:
+        selected_tab = 'contributed-data'
+        description = ("Data and/or documentation related to South African"
+                       " government budgets contributed by %s and hosted"
+                       " by National Treasury in partnership with IMALI YETHU") % dataset.get_organization()['name']
 
     context = {
-        'selected_tab': 'contributed-data',
+        'selected_tab': selected_tab,
         'title': "%s - vulekamali" % dataset.name,
-        'description': ("Data and/or documentation related to South African"
-                        " government budgets contributed by %s and hosted"
-                        " by National Treasury in partnership with IMALI YETHU") %
-        dataset.get_organization()['name'],
+        'description': description,
     }
 
     context.update(dataset_fields(dataset))
@@ -276,4 +304,8 @@ def dataset_fields(dataset):
         'intro': dataset.intro,
         'methodology': dataset.methodology,
         'url_path': dataset.get_url_path(),
+        'category': dataset.category and {
+            'name': dataset.category.name,
+            'slug': str(dataset.category.slug),
+        } or None
     }
