@@ -702,6 +702,7 @@ class Category():
         query = {
             'q': '',
             'fq': 'vocab_categories:"%s"' % self.name,
+            'sort': 'title_string asc',
             'rows': 1000,
         }
         response = ckan.action.package_search(**query)
