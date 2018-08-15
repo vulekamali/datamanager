@@ -106,6 +106,32 @@ dokku run python manage.py createsuperuser
 
 Also use `dokku domains` to configure the hostnames that your app will serve.
 
+Loading departments and their datasets
+--------------------------------------
+
+The departments, their metadata and their datasets are loaded using Django Manage Commands. The input format they expect is defined in the source header.
+
+e.g. loading department dataset resource files locally:
+
+```bash
+python manage.py upload_department_datasets 2018-19 provincial ../data/provincial/from-jonathan/2018/budget-info/department-mapping.csv
+```
+
+and in production:
+
+```bash
+DATABASE_URL=postgresql://budgetportal:.../budgetportal CKAN_API_KEY=... python manage.py upload_department_datasets 2018-19 provincial ../data/provincial/from-jonathan/2018/budget-info/department-mapping.csv
+```
+
+These commands have built in help if you run them with just `--help` where you can see accepted arguments.
+
+You can update resources uploaded previously with `--overwrite`
+
+e.g.
+
+```bash
+python manage.py upload_department_datasets --overwrite 2018-19 provincial ../data/provincial/from-jonathan/2018/budget-info/department-mapping-fix-mp-xls.csv
+```
 
 License
 -------
