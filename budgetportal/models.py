@@ -437,40 +437,8 @@ class Department(models.Model):
             return '+(%s)' % ' OR '.join(options)
 
     def get_contributed_datasets(self):
-        # We use an OrderedDict like an Ordered Set to ensure we include each
-        # match just once, and at the highest rank it came up in.
-        datasets = OrderedDict()
-
-        fq_org = '-organization:"national-treasury"'
-        fq_year = self._get_financial_year_query()
-        fq_sphere = '+vocab_spheres:"%s"' % self.government.sphere.slug
-        fq_government = self._get_government_query()
-        fq_functions = self._get_functions_query()
-        fq_no_functions = none_selected_query('vocab_functions')
-        queries = [
-            (fq_org, fq_year, fq_sphere, fq_government, fq_functions),
-            (fq_org, fq_sphere, fq_government, fq_functions),
-            (fq_org, fq_year, fq_sphere, fq_functions),
-            (fq_org, fq_sphere, fq_functions),
-            (fq_org, fq_functions),
-            (fq_org, fq_no_functions),
-        ]
-        for query in queries:
-            params = {
-                'q': '',
-                'fq': "".join(query),
-                'rows': 1000,
-            }
-            response = ckan.action.package_search(**params)
-            logger.info(
-                "query %s\nto ckan returned %d results",
-                pformat(params),
-                len(response['results']))
-            for package in response['results']:
-                if package['name'] not in datasets:
-                    dataset = Dataset.from_package(package)
-                    datasets[package['name']] = dataset
-        return datasets.values()
+        response = ckan.action.similar_datasets(id=package_id(self))
+        return [Dataset.from_package(p) for p in response]
 
     def get_programme_budgets(self):
         """
