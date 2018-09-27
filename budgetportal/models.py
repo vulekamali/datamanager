@@ -601,12 +601,16 @@ class Dataset():
         self.resources = kwargs['resources']
         self.slug = kwargs['slug']
         self.intro = kwargs['intro']
+        self.intro_short = kwargs['intro_short']
         self.methodology = kwargs['methodology']
+        self.key_points = kwargs['key_points']
+        self.importance = kwargs['importance']
+        self.usage = kwargs['usage']
         self.organization_slug = kwargs['organization_slug']
         self.category = kwargs['category']
 
     @classmethod
-    def from_package(cls, package, category=None):
+    def from_package(cls, package):
         resources = []
         for resource in package['resources']:
             resources.append({
@@ -615,13 +619,7 @@ class Dataset():
                 'format': resource['format'],
                 'url': resource['url'],
             })
-        assert(len(package['categories']) < 2)
-        if not category and package['categories']:
-            category = Category.get_by_slug(django_slugify(package['categories'][0]))
-        assert(not category
-               or (category
-                   and package['categories']
-                   and category.name == package['categories'][0]))
+        category = Category.from_group(package['groups'][0])
         return cls(
             slug=package['name'],
             name=package['title'],
@@ -636,10 +634,14 @@ class Dataset():
                 'url': package['license_url'] if 'license_url' in package else None,
             },
             intro=package['notes'] if package['notes'] else None,
+            intro_short=package.get('intro_short', None),
             methodology=package['methodology'] if 'methodology' in package else None,
+            key_points=package.get('key_points', None),
+            importance=package.get('importance', None),
+            usage=package.get('usage', None),
             resources=resources,
             organization_slug=package['organization']['name'],
-            category=category
+            category=category,
         )
 
     @classmethod
@@ -649,12 +651,7 @@ class Dataset():
         return cls.from_package(package)
 
     def get_url_path(self):
-        if self.organization_slug == 'national-treasury' and self.category:
-            return "/datasets/%s/%s" % (self.category.slug, self.slug)
-        elif self.organization_slug != 'national-treasury':
-            return "/datasets/contributed/%s" % self.slug
-        else:
-            raise Exception("Not contributed and no category")
+        return "/datasets/%s/%s" % (self.category.slug, self.slug)
 
     def get_organization(self):
         org = ckan.action.organization_show(id=self.organization_slug)
@@ -690,32 +687,27 @@ class Category():
     def __init__(self, **kwargs):
         self.slug = kwargs['slug']
         self.name = kwargs['name']
+        self.description = kwargs['description']
 
     @classmethod
     def get_by_slug(cls, category_slug):
-        for tag in ckan.action.vocabulary_show(id='categories')['tags']:
-            if django_slugify(tag['name']) == category_slug:
-                return cls(slug=category_slug, name=tag['name'])
-        raise Exception("Category %s not found" % category_slug)
+        group = ckan.action.group_show(id=category_slug)
+        return cls.from_group(group)
+
+    @classmethod
+    def from_group(cls, group):
+        return cls(
+            slug=group['name'],
+            description=group['description'],
+            name=group['title'],
+        )
 
     def get_datasets(self):
-        query = {
-            'q': '',
-            'fq': 'vocab_categories:"%s"' % self.name,
-            'sort': 'title_string asc',
-            'rows': 1000,
-        }
-        response = ckan.action.package_search(**query)
-        if response['count'] > 1000:
-            raise Exception("Time to add paging")
-        logger.info(
-            "query %s\nto ckan returned %d results",
-            pformat(query),
-            len(response['results'])
-        )
-        for package in response['results']:
-            yield Dataset.from_package(package, category=self)
+        for package in ckan.action.group_package_show(id=self.slug):
+            yield Dataset.from_package(package)
 
+    def get_url_path(self):
+        return "/datasets/%s" % self.slug
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
