@@ -249,27 +249,6 @@ def dataset_category(request, category_slug):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def contributed_dataset_list(request):
-    context = {
-        'datasets': [],
-        'selected_tab': 'contributed-data',
-        'slug': 'contributed-data',
-        'title': 'Contributed Data - vulekamali',
-        'description': ("Contibuted data and documentation for South African"
-                        " government budgets. Hosted by National Treasury in"
-                        " partnership with IMALI YETHU.")
-    }
-
-    for dataset in Dataset.get_contributed_datasets():
-        field_subset = dataset_fields(dataset)
-        del field_subset['intro']
-        del field_subset['methodology']
-        context['datasets'].append(field_subset)
-
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def dataset(request, category_slug, dataset_slug):
     dataset = Dataset.fetch(dataset_slug)
     assert(dataset.category.slug == category_slug)

@@ -619,7 +619,12 @@ class Dataset():
                 'format': resource['format'],
                 'url': resource['url'],
             })
-        category = Category.from_group(package['groups'][0])
+
+        if package_is_contributed(package):
+            category = Category.contributed()
+        else:
+            category = Category.from_group(package['groups'][0])
+
         return cls(
             slug=package['name'],
             name=package['title'],
@@ -670,10 +675,12 @@ class Dataset():
     def get_contributed_datasets():
         query = {
             'q': '',
-            'fq': '-organization:"national-treasury"',
+            'fq': '-organization:"national-treasury" AND (*:* NOT groups:["" TO *])',
             'rows': 1000,
         }
         response = ckan.action.package_search(**query)
+        if response['count'] > 1000:
+            raise Exception("Time to add paging")
         logger.info(
             "query %s\nto ckan returned %d results",
             pformat(query),
@@ -691,8 +698,11 @@ class Category():
 
     @classmethod
     def get_by_slug(cls, category_slug):
-        group = ckan.action.group_show(id=category_slug)
-        return cls.from_group(group)
+        if category_slug == 'contributed':
+            return cls.contributed()
+        else:
+            group = ckan.action.group_show(id=category_slug)
+            return cls.from_group(group)
 
     @classmethod
     def from_group(cls, group):
@@ -703,11 +713,25 @@ class Category():
         )
 
     def get_datasets(self):
-        for package in ckan.action.group_package_show(id=self.slug):
-            yield Dataset.from_package(package)
+        if self.slug == 'contributed':
+            for dataset in Dataset.get_contributed_datasets():
+                yield dataset
+        else:
+            for package in ckan.action.group_package_show(id=self.slug):
+                yield Dataset.from_package(package)
 
     def get_url_path(self):
         return "/datasets/%s" % self.slug
+
+    @classmethod
+    def contributed(cls):
+        return cls(
+            name='Contributed data and analysis',
+            slug='contributed',
+            description=("Contibuted data and documentation for South African "
+                         "government budgets. Hosted by National Treasury in "
+                         "partnership with IMALI YETHU.")
+        )
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
@@ -795,3 +819,8 @@ def get_vocab_map():
     for vocab in ckan.action.vocabulary_list():
         vocab_map[vocab['name']] = vocab['id']
     return vocab_map
+
+
+def package_is_contributed(package):
+    return len(package['groups']) == 0 \
+        and package['organization']['name'] != 'national-treasury'
