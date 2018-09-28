@@ -640,7 +640,7 @@ class Dataset():
                 'url': package['license_url'] if 'license_url' in package else None,
             },
             intro=package['notes'] if package['notes'] else None,
-            intro_short=package.get('intro_short', None),
+            intro_short=package.get('notes_short', None),
             methodology=package['methodology'] if 'methodology' in package else None,
             key_points=package.get('key_points', None),
             importance=package.get('importance', None),
