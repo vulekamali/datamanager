@@ -442,18 +442,19 @@ class Department(models.Model):
         datasets = OrderedDict()
 
         fq_org = '-organization:"national-treasury"'
+        fq_group = '+(*:* NOT groups:["" TO *])'
         fq_year = self._get_financial_year_query()
         fq_sphere = '+vocab_spheres:"%s"' % self.government.sphere.slug
         fq_government = self._get_government_query()
         fq_functions = self._get_functions_query()
         fq_no_functions = none_selected_query('vocab_functions')
         queries = [
-            (fq_org, fq_year, fq_sphere, fq_government, fq_functions),
-            (fq_org, fq_sphere, fq_government, fq_functions),
-            (fq_org, fq_year, fq_sphere, fq_functions),
-            (fq_org, fq_sphere, fq_functions),
-            (fq_org, fq_functions),
-            (fq_org, fq_no_functions),
+            (fq_org, fq_group, fq_year, fq_sphere, fq_government, fq_functions),
+            (fq_org, fq_group, fq_sphere, fq_government, fq_functions),
+            (fq_org, fq_group, fq_year, fq_sphere, fq_functions),
+            (fq_org, fq_group, fq_sphere, fq_functions),
+            (fq_org, fq_group, fq_functions),
+            (fq_org, fq_group, fq_no_functions),
         ]
         for query in queries:
             params = {
