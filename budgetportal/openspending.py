@@ -96,6 +96,18 @@ class EstimatesOfExpenditure():
     def get_phase_dimension(self):
         return self.model['hierarchies']['phase']['levels'][0]
 
+    def get_econ_class_1_ref(self):
+        return self.get_econ_class_1_dimension() + '.economic_classification_1'
+
+    def get_econ_class_1_dimension(self):
+        return self.model['hierarchies']['economic_classification']['levels'][0]
+
+    def get_econ_class_2_ref(self):
+        return self.get_econ_class_2_dimension() + '.economic_classification_2'
+
+    def get_econ_class_2_dimension(self):
+        return self.model['hierarchies']['economic_classification']['levels'][1]
+
     def aggregate(self, cuts=None, drilldowns=None):
         params = {
             'pagesize': PAGE_SIZE,

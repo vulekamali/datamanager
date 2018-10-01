@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
 from django.utils.text import slugify as django_slugify
+from itertools import groupby
 from slugify import slugify as extended_slugify
 from partial_index import PartialIndex
 from pprint import pformat
@@ -178,10 +179,7 @@ class Government(models.Model):
 
         if self._function_budgets is not None:
             return self._function_budgets
-        budget = EstimatesOfExpenditure(
-            financial_year_slug=self.get_financial_year().slug,
-            sphere_slug=self.government.sphere.slug,
-        )
+        budget = self._estimates_of_expenditure()
         financial_year_start = self.sphere.financial_year.get_starting_year()
         vote_numbers = [str(d.vote_number)
                         for d in self.get_vote_primary_departments()]
@@ -216,6 +214,7 @@ class Department(models.Model):
     is_vote_primary = models.BooleanField(default=True)
     intro = models.TextField()
     _programme_budgets = None
+    _econ_by_programme_budgets = None
 
     def __init__(self, *args, **kwargs):
         super(Department, self).__init__(*args, **kwargs)
@@ -473,16 +472,19 @@ class Department(models.Model):
                     datasets[package['name']] = dataset
         return datasets.values()
 
+    def _estimates_of_expenditure(self):
+        return EstimatesOfExpenditure(
+            financial_year_slug=self.get_financial_year().slug,
+            sphere_slug=self.government.sphere.slug,
+        )
+
     def get_programme_budgets(self):
         """
         get the budget totals for all the department programmes
         """
         if self._programme_budgets is not None:
             return self._programme_budgets
-        budget = EstimatesOfExpenditure(
-            financial_year_slug=self.get_financial_year().slug,
-            sphere_slug=self.government.sphere.slug,
-        )
+        budget = self._estimates_of_expenditure()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
             budget.get_financial_year_ref() + ':' + financial_year_start,
@@ -504,6 +506,56 @@ class Department(models.Model):
         self._programme_budgets = programmes
         return self._programme_budgets
 
+    def get_econ_by_programme_budgets(self):
+        """
+        get the econ class 2 budget totals for all the department programmes
+        """
+        if self._econ_by_programme_budgets is not None:
+            return self._econ_by_programme_budgets
+        budget = self._estimates_of_expenditure()
+        financial_year_start = self.get_financial_year().get_starting_year()
+        cuts = [
+            budget.get_financial_year_ref() + ':' + financial_year_start,
+            budget.get_department_name_ref() + ':"' + self.name + '"',
+        ]
+        if self.government.sphere.slug == 'provincial':
+            cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
+        drilldowns = [
+            budget.get_programme_number_ref(),
+            budget.get_programme_name_ref(),
+            budget.get_econ_class_1_ref(),
+            budget.get_econ_class_2_ref(),
+        ]
+        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
+        prog_func = lambda cell: cell[budget.get_programme_name_ref()]
+        econ1_func = lambda cell: cell[budget.get_econ_class_1_ref()]
+        programmes = []
+        prog_sorted = sorted(result['cells'], key=prog_func)
+        for programme_name, programme_group in groupby(prog_sorted, prog_func):
+            econ_class_1s = []
+            econ1_sorted = sorted(programme_group, key=econ1_func)
+            for econ1_name, econ1_group in groupby(econ1_sorted, econ1_func):
+                econ_class_2s = []
+                for cell in econ1_sorted:
+                    if cell['value.sum']:
+                        ref = budget.get_econ_class_2_ref()
+                        econ_class_2s.append({
+                            'economic_classification_2_name': cell[ref],
+                            'total_budget': cell['value.sum'],
+                        })
+                if econ_class_2s:
+                    econ_class_1s.append({
+                        'economic_classification_1_name': econ1_name,
+                        'items': econ_class_2s,
+                    })
+            programmes.append({
+                'programme_name': programme_name,
+                'items': econ_class_1s,
+            })
+
+        self._econ_by_programme_budgets = programmes
+        return self._econ_by_programme_budgets
+
     def get_expenditure_over_time(self):
         base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
@@ -515,10 +567,7 @@ class Department(models.Model):
             'real': [],
         }
 
-        budget = EstimatesOfExpenditure(
-            financial_year_slug=self.get_financial_year().slug,
-            sphere_slug=self.government.sphere.slug,
-        )
+        budget = self._estimates_of_expenditure()
         cuts = [
             budget.get_department_name_ref() + ':"' + self.name + '"',
         ]
