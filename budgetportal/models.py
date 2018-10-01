@@ -529,6 +529,7 @@ class Department(models.Model):
         result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
         prog_func = lambda cell: cell[budget.get_programme_name_ref()]
         econ1_func = lambda cell: cell[budget.get_econ_class_1_ref()]
+        total_budget_fun = lambda x: x['total_budget']
         programmes = []
         prog_sorted = sorted(result['cells'], key=prog_func)
         for programme_name, programme_group in groupby(prog_sorted, prog_func):
@@ -548,7 +549,7 @@ class Department(models.Model):
                     print "econ_class_1s", econ_class_1s
                     econ_class_1s.append({
                         'economic_classification_1_name': econ1_name,
-                        'items': econ_class_2s,
+                        'items': sorted(econ_class_2s, key=total_budget_fun, reverse=True),
                     })
             programmes.append({
                 'programme_name': programme_name,
