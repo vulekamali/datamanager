@@ -54,59 +54,65 @@ class EstimatesOfExpenditure():
     # These make assumptions about the OS Types we give Estimes of Expenditure
     # columns, and the level of which hierarchy they end up in.
 
+    def get_dimension(self, hierarchy_name, level=0):
+        return self.model['hierarchies'][hierarchy_name]['levels'][level]
+
+    def get_ref(self, dimension_name, ref_type):
+        return self.model['dimensions'][dimension_name][ref_type + "_ref"]
+
     def get_programme_name_ref(self):
-        return self.model['dimensions'][self.get_programme_dimension()]['label_ref']
+        return self.get_ref(self.get_programme_dimension(), 'label')
 
     def get_programme_number_ref(self):
-        return self.model['dimensions'][self.get_programme_dimension()]['key_ref']
+        return self.get_ref(self.get_programme_dimension(), 'key')
 
     def get_programme_dimension(self):
-        return self.model['hierarchies']['activity']['levels'][0]
+        return self.get_dimension('activity')
 
     def get_department_name_ref(self):
-        return self.model['dimensions'][self.get_department_dimension()]['label_ref']
+        return self.get_ref(self.get_department_dimension(), 'label')
 
     def get_vote_number_ref(self):
-        return self.model['dimensions'][self.get_department_dimension()]['key_ref']
+        return self.get_ref(self.get_department_dimension(), 'key')
 
     def get_department_dimension(self):
-        return self.model['hierarchies']['administrative_classification']['levels'][0]
+        return self.get_dimension('administrative_classification')
 
     def get_geo_ref(self):
-        return self.model['dimensions'][self.get_geo_dimension()]['label_ref']
+        return self.get_ref(self.get_geo_dimension(), 'label')
 
     def get_geo_dimension(self):
-        return self.model['hierarchies']['geo_source']['levels'][0]
+        return self.get_dimension('geo_source')
 
     def get_financial_year_ref(self):
-        return self.model['dimensions'][self.get_financial_year_dimension()]['label_ref']
+        return self.get_ref(self.get_financial_year_dimension(), 'label')
 
     def get_financial_year_dimension(self):
-        return self.model['hierarchies']['date']['levels'][0]
+        return self.get_dimension('date')
 
     def get_function_ref(self):
-        return self.model['dimensions'][self.get_function_dimension()]['label_ref']
+        return self.get_ref(self.get_function_dimension(), 'label')
 
     def get_function_dimension(self):
-        return self.model['hierarchies']['functional_classification']['levels'][0]
+        return self.get_dimension('functional_classification')
 
     def get_phase_ref(self):
-        return self.model['dimensions'][self.get_phase_dimension()]['label_ref']
+        return self.get_ref(self.get_phase_dimension(), 'label')
 
     def get_phase_dimension(self):
-        return self.model['hierarchies']['phase']['levels'][0]
+        return self.get_dimension('phase')
 
     def get_econ_class_1_ref(self):
-        return self.model['dimensions'][self.get_econ_class_1_dimension()]['key_ref']
+        return self.get_ref(self.get_econ_class_1_dimension(), 'key')
 
     def get_econ_class_1_dimension(self):
-        return self.model['hierarchies']['economic_classification']['levels'][0]
+        return self.get_dimension('economic_classification')
 
     def get_econ_class_2_ref(self):
-        return self.model['dimensions'][self.get_econ_class_2_dimension()]['key_ref']
+        return self.get_ref(self.get_econ_class_2_dimension(), 'key')
 
     def get_econ_class_2_dimension(self):
-        return self.model['hierarchies']['economic_classification']['levels'][1]
+        return self.get_dimension('economic_classification', level=1)
 
     def aggregate(self, cuts=None, drilldowns=None):
         params = {
