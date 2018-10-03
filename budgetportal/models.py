@@ -473,10 +473,19 @@ class Department(models.Model):
         return datasets.values()
 
     def _estimates_of_expenditure(self):
-        return EstimatesOfExpenditure(
-            financial_year_slug=self.get_financial_year().slug,
-            sphere_slug=self.government.sphere.slug,
-        )
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"estimates-of-%s-expenditure"' % self.government.sphere.slug,
+                '+financial_year:"%s"' % self.get_financial_year().slug,
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        package = response['results'][0]
+        api_resource = filter(lambda r: r['format'] == 'OpenSpending API', package)[0]
+        return EstimatesOfExpenditure(api_resource['url'])
 
     def get_programme_budgets(self):
         """

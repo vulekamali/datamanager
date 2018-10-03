@@ -7,47 +7,24 @@ from pprint import pformat
 import logging
 import random
 import requests
+import re
 
 logger = logging.getLogger(__name__)
 
-ACCOUNT_ID = 'b9d2af843f3a7ca223eea07fb608e62a'
 PAGE_SIZE = 300
 
 
 class EstimatesOfExpenditure():
-    def __init__(self, financial_year_slug, sphere_slug):
+    def __init__(self, model_url):
         self.session = requests.Session()
-        self.sphere_slug = sphere_slug
-        dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
-            sphere_slug,
-            financial_year_slug,
-        )
-        self.cube_url = ('{}/api/3/cubes/{}:{}/').format(
-            settings.OPENSPENDING_HOST, ACCOUNT_ID, dataset_id)
-        model_url = self.cube_url + 'model/'
+
+        self.cube_url = cube_url(model_url)
         model_result = self.session.get(model_url)
         logger.info(
             "request to %s took %dms",
             model_url,
             model_result.elapsed.microseconds / 1000
         )
-        if model_result.status_code == 404:
-            logger.info("%s not found (404)" % model_result.url)
-            dataset_id = ('estimates_of_%s_expenditure_of_south_africa_%s' % (
-                sphere_slug,
-                financial_year_slug,
-            )).replace('-', '_')
-            self.cube_url = ('{}/api/3/cubes/{}:{}/').format(
-                settings.OPENSPENDING_HOST, ACCOUNT_ID, dataset_id
-            )
-            model_url = self.cube_url + 'model/'
-            model_result = self.session.get(model_url)
-            logger.info(
-                "request to %s took %dms",
-                model_url,
-                model_result.elapsed.microseconds / 1000
-            )
-
         model_result.raise_for_status()
         self.model = model_result.json()['model']
 
@@ -137,3 +114,7 @@ class EstimatesOfExpenditure():
         if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
             raise Exception("More cells than expected - perhaps we should start paging")
         return aggregate_result.json()
+
+
+def cube_url(model_url):
+    return re.sub('model/?$', '', model_url)
