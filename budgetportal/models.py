@@ -539,14 +539,12 @@ class Department(models.Model):
                 econ_class_2s = []
                 for cell in econ1_group:
                     if cell['value.sum']:
-                        print "econ_class_2s", econ_class_2s
                         ref = budget.get_econ_class_2_ref()
                         econ_class_2s.append({
                             'economic_classification_2_name': cell[ref],
                             'total_budget': cell['value.sum'],
                         })
                 if econ_class_2s:
-                    print "econ_class_1s", econ_class_1s
                     econ_class_1s.append({
                         'economic_classification_1_name': econ1_name,
                         'items': sorted(econ_class_2s, key=total_budget_fun, reverse=True),
