@@ -554,16 +554,19 @@ class Department(models.Model):
                     if cell['value.sum']:
                         ref = openspending_api.get_econ_class_2_ref()
                         econ_class_2s.append({
-                            'economic_classification_2_name': cell[ref],
+                            'type': 'economic_classification_2',
+                            'name': cell[ref],
                             'total_budget': cell['value.sum'],
                         })
                 if econ_class_2s:
                     econ_class_1s.append({
-                        'economic_classification_1_name': econ1_name,
+                        'type': 'economic_classification_1',
+                        'name': econ1_name,
                         'items': sorted(econ_class_2s, key=total_budget_fun, reverse=True),
                     })
             programmes.append({
-                'programme_name': programme_name,
+                'type': 'programme',
+                'name': programme_name,
                 'items': econ_class_1s,
             })
 
