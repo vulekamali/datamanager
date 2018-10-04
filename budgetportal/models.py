@@ -682,7 +682,7 @@ class Dataset():
         self.intro_short = kwargs['intro_short']
         self.methodology = kwargs['methodology']
         self.key_points = kwargs['key_points']
-        self.importance = kwargs['importance']
+        self.use_for = kwargs['use_for']
         self.usage = kwargs['usage']
         self.organization_slug = kwargs['organization_slug']
         self.category = kwargs['category']
@@ -721,7 +721,7 @@ class Dataset():
             intro_short=package.get('notes_short', None),
             methodology=package['methodology'] if 'methodology' in package else None,
             key_points=package.get('key_points', None),
-            importance=package.get('importance', None),
+            use_for=package.get('use_for', None),
             usage=package.get('usage', None),
             resources=resources,
             organization_slug=package['organization']['name'],
