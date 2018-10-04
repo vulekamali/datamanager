@@ -179,7 +179,7 @@ class Government(models.Model):
 
         if self._function_budgets is not None:
             return self._function_budgets
-        budget = self._estimates_of_expenditure()
+        budget = self.get_estimates_of_expenditure_api()
         financial_year_start = self.sphere.financial_year.get_starting_year()
         vote_numbers = [str(d.vote_number)
                         for d in self.get_vote_primary_departments()]
@@ -215,6 +215,7 @@ class Department(models.Model):
     intro = models.TextField()
     _programme_budgets = None
     _econ_by_programme_budgets = None
+    _estimates_of_expenditure_api = None
 
     def __init__(self, *args, **kwargs):
         super(Department, self).__init__(*args, **kwargs)
@@ -472,20 +473,26 @@ class Department(models.Model):
                     datasets[package['name']] = dataset
         return datasets.values()
 
-    def _estimates_of_expenditure(self):
+    def get_estimates_of_expenditure_api(self):
+        if self._estimates_of_expenditure_api is not None:
+            return self._estimates_of_expenditure_api
         query = {
             'q': '',
             'fq': ''.join([
                 '+organization:"national-treasury"',
                 '+groups:"estimates-of-%s-expenditure"' % self.government.sphere.slug,
-                '+financial_year:"%s"' % self.get_financial_year().slug,
+                '+vocab_financial_years:"%s"' % self.get_financial_year().slug,
             ]),
             'rows': 1000,
         }
         response = ckan.action.package_search(**query)
         package = response['results'][0]
-        api_resource = filter(lambda r: r['format'] == 'OpenSpending API', package)[0]
-        return EstimatesOfExpenditure(api_resource['url'])
+        api_resource = filter(
+            lambda r: r['format'] == 'OpenSpending API',
+            package['resources']
+        )[0]
+        self._estimates_of_expenditure_api = EstimatesOfExpenditure(api_resource['url'])
+        return self._estimates_of_expenditure_api
 
     def get_programme_budgets(self):
         """
@@ -493,7 +500,7 @@ class Department(models.Model):
         """
         if self._programme_budgets is not None:
             return self._programme_budgets
-        budget = self._estimates_of_expenditure()
+        budget = self.get_estimates_of_expenditure_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
             budget.get_financial_year_ref() + ':' + financial_year_start,
@@ -521,7 +528,7 @@ class Department(models.Model):
         """
         if self._econ_by_programme_budgets is not None:
             return self._econ_by_programme_budgets
-        budget = self._estimates_of_expenditure()
+        budget = self.get_estimates_of_expenditure_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
             budget.get_financial_year_ref() + ':' + financial_year_start,
@@ -577,7 +584,7 @@ class Department(models.Model):
             'real': [],
         }
 
-        budget = self._estimates_of_expenditure()
+        budget = self.get_estimates_of_expenditure_api()
         cuts = [
             budget.get_department_name_ref() + ':"' + self.name + '"',
         ]
