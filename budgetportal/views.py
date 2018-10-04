@@ -170,9 +170,9 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'url_path': dataset.get_url_path(),
         })
 
-    programme_budgets = department.get_programme_budgets()
-    if not programme_budgets:
-        programme_budgets = [
+    programmes = department.get_programme_budgets()
+    if not programmes['programme_budgets']:
+        programmes['programme_budgets'] = [
             {'name': p.name, 'total_budget': None}
             for p in department.programmes.order_by('programme_number')
         ]
@@ -201,7 +201,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'name': department.government.sphere.name,
             'slug': department.government.sphere.slug,
         },
-        'programmes': programme_budgets,
+        'programmes': programmes,
         'selected_financial_year': financial_year_id,
         'selected_tab': 'departments',
         'title': "%s budget %s  - vulekamali" % (

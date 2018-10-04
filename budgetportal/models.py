@@ -496,26 +496,30 @@ class Department(models.Model):
         """
         if self._programme_budgets is not None:
             return self._programme_budgets
-        budget = self.get_estimates_of_expenditure_dataset().get_openspending_api()
+        dataset = self.get_estimates_of_expenditure_dataset()
+        openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
-            budget.get_financial_year_ref() + ':' + financial_year_start,
-            budget.get_department_name_ref() + ':"' + self.name + '"',
+            openspending_api.get_financial_year_ref() + ':' + financial_year_start,
+            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
         ]
         if self.government.sphere.slug == 'provincial':
-            cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
+            cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
         drilldowns = [
-            budget.get_programme_number_ref(),
-            budget.get_programme_name_ref(),
+            openspending_api.get_programme_number_ref(),
+            openspending_api.get_programme_name_ref(),
         ]
-        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
+        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
         programmes = []
         for cell in result['cells']:
             programmes.append({
-                'name': cell[budget.get_programme_name_ref()],
+                'name': cell[openspending_api.get_programme_name_ref()],
                 'total_budget': cell['value.sum']
             })
-        self._programme_budgets = programmes
+        self._programme_budgets = {
+            'programme_budgets': programmes,
+            'dataset_detail_page': dataset.get_url_path(),
+        }
         return self._programme_budgets
 
     def get_econ_by_programme_budgets(self):
@@ -587,25 +591,26 @@ class Department(models.Model):
             'real': [],
         }
 
-        budget = self.get_estimates_of_expenditure_dataset().get_openspending_api()
+        dataset = self.get_estimates_of_expenditure_dataset()
+        openspending_api = dataset.get_openspending_api()
         cuts = [
-            budget.get_department_name_ref() + ':"' + self.name + '"',
+            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
         ]
         if self.government.sphere.slug == 'provincial':
-            cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
+            cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
         drilldowns = [
-            budget.get_financial_year_ref(),
-            budget.get_phase_ref(),
+            openspending_api.get_financial_year_ref(),
+            openspending_api.get_phase_ref(),
         ]
-        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
+        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
         if result['cells']:
             cpi = get_cpi()
             for idx, financial_year_start in enumerate(financial_year_starts):
                 phase = TRENDS_AND_ESTIMATES_PHASES[idx]
                 cell = [
                     c for c in result['cells']
-                    if c[budget.get_financial_year_ref()] == int(financial_year_start)
-                    and c[budget.get_phase_ref()] == phase
+                    if c[openspending_api.get_financial_year_ref()] == int(financial_year_start)
+                    and c[openspending_api.get_phase_ref()] == phase
                 ][0]
                 nominal = cell['value.sum']
                 expenditure['nominal'].append({
@@ -619,7 +624,10 @@ class Department(models.Model):
                     'phase': phase,
                 })
 
-            return expenditure
+            return {
+                'expenditure': expenditure,
+                'dataset_detail_page': dataset.get_url_path(),
+            }
         else:
             logger.warning("Missing expenditure data for %r budget year %s",
                            cuts, self.get_financial_year().slug)
