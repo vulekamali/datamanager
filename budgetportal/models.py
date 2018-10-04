@@ -179,7 +179,7 @@ class Government(models.Model):
 
         if self._function_budgets is not None:
             return self._function_budgets
-        budget = self.get_estimates_of_expenditure_api()
+        budget = self.get_estimates_of_expenditure_dataset().get_openspending_api()
         financial_year_start = self.sphere.financial_year.get_starting_year()
         vote_numbers = [str(d.vote_number)
                         for d in self.get_vote_primary_departments()]
@@ -215,7 +215,7 @@ class Department(models.Model):
     intro = models.TextField()
     _programme_budgets = None
     _econ_by_programme_budgets = None
-    _estimates_of_expenditure_api = None
+    _estimates_of_expenditure_dataset = None
 
     def __init__(self, *args, **kwargs):
         super(Department, self).__init__(*args, **kwargs)
@@ -473,9 +473,9 @@ class Department(models.Model):
                     datasets[package['name']] = dataset
         return datasets.values()
 
-    def get_estimates_of_expenditure_api(self):
-        if self._estimates_of_expenditure_api is not None:
-            return self._estimates_of_expenditure_api
+    def get_estimates_of_expenditure_dataset(self):
+        if self._estimates_of_expenditure_dataset is not None:
+            return self._estimates_of_expenditure_dataset
         query = {
             'q': '',
             'fq': ''.join([
@@ -487,12 +487,8 @@ class Department(models.Model):
         }
         response = ckan.action.package_search(**query)
         package = response['results'][0]
-        api_resource = filter(
-            lambda r: r['format'] == 'OpenSpending API',
-            package['resources']
-        )[0]
-        self._estimates_of_expenditure_api = EstimatesOfExpenditure(api_resource['url'])
-        return self._estimates_of_expenditure_api
+        self._estimates_of_expenditure_dataset = Dataset.from_package(package)
+        return self._estimates_of_expenditure_dataset
 
     def get_programme_budgets(self):
         """
@@ -500,7 +496,7 @@ class Department(models.Model):
         """
         if self._programme_budgets is not None:
             return self._programme_budgets
-        budget = self.get_estimates_of_expenditure_api()
+        budget = self.get_estimates_of_expenditure_dataset().get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
             budget.get_financial_year_ref() + ':' + financial_year_start,
@@ -528,23 +524,24 @@ class Department(models.Model):
         """
         if self._econ_by_programme_budgets is not None:
             return self._econ_by_programme_budgets
-        budget = self.get_estimates_of_expenditure_api()
+        dataset = self.get_estimates_of_expenditure_dataset()
+        openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
-            budget.get_financial_year_ref() + ':' + financial_year_start,
-            budget.get_department_name_ref() + ':"' + self.name + '"',
+            openspending_api.get_financial_year_ref() + ':' + financial_year_start,
+            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
         ]
         if self.government.sphere.slug == 'provincial':
-            cuts.append(budget.get_geo_ref() + ':"%s"' % self.government.name)
+            cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
         drilldowns = [
-            budget.get_programme_number_ref(),
-            budget.get_programme_name_ref(),
-            budget.get_econ_class_1_ref(),
-            budget.get_econ_class_2_ref(),
+            openspending_api.get_programme_number_ref(),
+            openspending_api.get_programme_name_ref(),
+            openspending_api.get_econ_class_1_ref(),
+            openspending_api.get_econ_class_2_ref(),
         ]
-        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
-        prog_func = lambda cell: cell[budget.get_programme_name_ref()]
-        econ1_func = lambda cell: cell[budget.get_econ_class_1_ref()]
+        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        prog_func = lambda cell: cell[openspending_api.get_programme_name_ref()]
+        econ1_func = lambda cell: cell[openspending_api.get_econ_class_1_ref()]
         total_budget_fun = lambda x: x['total_budget']
         programmes = []
         prog_sorted = sorted(result['cells'], key=prog_func)
@@ -555,7 +552,7 @@ class Department(models.Model):
                 econ_class_2s = []
                 for cell in econ1_group:
                     if cell['value.sum']:
-                        ref = budget.get_econ_class_2_ref()
+                        ref = openspending_api.get_econ_class_2_ref()
                         econ_class_2s.append({
                             'economic_classification_2_name': cell[ref],
                             'total_budget': cell['value.sum'],
@@ -570,7 +567,10 @@ class Department(models.Model):
                 'items': econ_class_1s,
             })
 
-        self._econ_by_programme_budgets = programmes
+        self._econ_by_programme_budgets = {
+            'programmes': programmes,
+            'dataset_detail_page': dataset.get_url_path(),
+        }
         return self._econ_by_programme_budgets
 
     def get_expenditure_over_time(self):
@@ -584,7 +584,7 @@ class Department(models.Model):
             'real': [],
         }
 
-        budget = self.get_estimates_of_expenditure_api()
+        budget = self.get_estimates_of_expenditure_dataset().get_openspending_api()
         cuts = [
             budget.get_department_name_ref() + ':"' + self.name + '"',
         ]
@@ -675,6 +675,7 @@ class Dataset():
         self.usage = kwargs['usage']
         self.organization_slug = kwargs['organization_slug']
         self.category = kwargs['category']
+        self._openspending_api = None
 
     @classmethod
     def from_package(cls, package):
@@ -755,6 +756,17 @@ class Dataset():
         )
         for package in response['results']:
             yield Dataset.from_package(package)
+
+    def get_openspending_api(self):
+        if self._openspending_api is not None:
+            return self._openspending_api
+        api_resource = filter(
+            lambda r: r['format'] == 'OpenSpending API',
+            self.resources
+        )[0]
+        self._openspending_api = EstimatesOfExpenditure(api_resource['url'])
+        return self._openspending_api
+
 
 
 class Category():
