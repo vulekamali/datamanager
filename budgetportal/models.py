@@ -714,12 +714,13 @@ class Category():
         )
 
     def get_datasets(self):
+        datasets = []
         if self.slug == 'contributed':
-            for dataset in Dataset.get_contributed_datasets():
-                yield dataset
+            datasets = Dataset.get_contributed_datasets()
         else:
             for package in ckan.action.group_package_show(id=self.slug):
-                yield Dataset.from_package(package)
+                datasets.append(Dataset.from_package(package))
+        return sorted(datasets, key=lambda d: d.name)
 
     def get_url_path(self):
         return "/datasets/%s" % self.slug
