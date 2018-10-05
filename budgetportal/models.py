@@ -718,7 +718,10 @@ class Category():
         if self.slug == 'contributed':
             datasets = Dataset.get_contributed_datasets()
         else:
-            for package in ckan.action.group_package_show(id=self.slug):
+            packages = ckan.action.group_package_show(id=self.slug, limit=1000)
+            if len(packages) == 1000:
+                raise Exception("Too many packages to list like this")
+            for package in packages:
                 datasets.append(Dataset.from_package(package))
         return sorted(datasets, key=lambda d: d.name)
 
