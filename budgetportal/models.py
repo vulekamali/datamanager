@@ -215,6 +215,7 @@ class Department(models.Model):
     intro = models.TextField()
     _programme_budgets = None
     _econ_by_programme_budgets = None
+    _prog_by_econ_budgets = None
     _estimates_of_expenditure_dataset = None
 
     def __init__(self, *args, **kwargs):
@@ -579,6 +580,57 @@ class Department(models.Model):
             'dataset_detail_page': dataset.get_url_path(),
         }
         return self._econ_by_programme_budgets
+
+    def get_prog_by_econ_budgets(self):
+        """
+        get the programme budget totals for each economic classification at level 2
+        """
+        if self._prog_by_econ_budgets is not None:
+            return self._prog_by_econ_budgets
+        dataset = self.get_estimates_of_expenditure_dataset()
+        openspending_api = dataset.get_openspending_api()
+        financial_year_start = self.get_financial_year().get_starting_year()
+        cuts = [
+            openspending_api.get_financial_year_ref() + ':' + financial_year_start,
+            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+        ]
+        if self.government.sphere.slug == 'provincial':
+            cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
+        drilldowns = [
+            openspending_api.get_programme_number_ref(),
+            openspending_api.get_programme_name_ref(),
+            openspending_api.get_econ_class_1_ref(),
+            openspending_api.get_econ_class_2_ref(),
+        ]
+        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        econ1_2_func = lambda cell: " - ".join([
+            cell[openspending_api.get_econ_class_1_ref()],
+            cell[openspending_api.get_econ_class_2_ref()],
+        ])
+        prog_func = lambda cell: cell[openspending_api.get_programme_name_ref()]
+        total_budget_fun = lambda x: x['total_budget']
+        econ_classes = []
+        econ_sorted = sorted(result['cells'], key=econ1_2_func)
+        for econ_class_name, econ_class_group in groupby(econ_sorted, econ1_2_func):
+            programmes = []
+            for cell in econ_class_group:
+                if cell['value.sum']:
+                    programmes.append({
+                        'type': 'programme',
+                        'name': cell[openspending_api.get_programme_name_ref()],
+                        'total_budget': cell['value.sum'],
+                    })
+            if programmes:
+                econ_classes.append({
+                    'type': 'economic_classification_1_and_2',
+                    'name': econ_class_name,
+                    'items': sorted(programmes, key=total_budget_fun, reverse=True),
+                })
+        self._prog_by_econ_budgets = {
+            'econ_classes': econ_classes,
+            'dataset_detail_page': dataset.get_url_path(),
+        }
+        return self._prog_by_econ_budgets
 
     def get_expenditure_over_time(self):
         base_year = get_base_year()
