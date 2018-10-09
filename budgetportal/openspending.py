@@ -7,94 +7,89 @@ from pprint import pformat
 import logging
 import random
 import requests
+import re
 
 logger = logging.getLogger(__name__)
 
-ACCOUNT_ID = 'b9d2af843f3a7ca223eea07fb608e62a'
 PAGE_SIZE = 300
 
 
 class EstimatesOfExpenditure():
-    def __init__(self, financial_year_slug, sphere_slug):
+    def __init__(self, model_url):
         self.session = requests.Session()
-        self.sphere_slug = sphere_slug
-        dataset_id = 'estimates-of-%s-expenditure-south-africa-%s' % (
-            sphere_slug,
-            financial_year_slug,
-        )
-        self.cube_url = ('{}/api/3/cubes/{}:{}/').format(
-            settings.OPENSPENDING_HOST, ACCOUNT_ID, dataset_id)
-        model_url = self.cube_url + 'model/'
+
+        self.cube_url = cube_url(model_url)
         model_result = self.session.get(model_url)
         logger.info(
             "request to %s took %dms",
             model_url,
             model_result.elapsed.microseconds / 1000
         )
-        if model_result.status_code == 404:
-            logger.info("%s not found (404)" % model_result.url)
-            dataset_id = ('estimates_of_%s_expenditure_of_south_africa_%s' % (
-                sphere_slug,
-                financial_year_slug,
-            )).replace('-', '_')
-            self.cube_url = ('{}/api/3/cubes/{}:{}/').format(
-                settings.OPENSPENDING_HOST, ACCOUNT_ID, dataset_id
-            )
-            model_url = self.cube_url + 'model/'
-            model_result = self.session.get(model_url)
-            logger.info(
-                "request to %s took %dms",
-                model_url,
-                model_result.elapsed.microseconds / 1000
-            )
-
         model_result.raise_for_status()
         self.model = model_result.json()['model']
 
     # These make assumptions about the OS Types we give Estimes of Expenditure
     # columns, and the level of which hierarchy they end up in.
 
+    def get_dimension(self, hierarchy_name, level=0):
+        return self.model['hierarchies'][hierarchy_name]['levels'][level]
+
+    def get_ref(self, dimension_name, ref_type):
+        return self.model['dimensions'][dimension_name][ref_type + "_ref"]
+
     def get_programme_name_ref(self):
-        return self.get_programme_dimension() + '.programme'
+        return self.get_ref(self.get_programme_dimension(), 'label')
 
     def get_programme_number_ref(self):
-        return self.get_programme_dimension() + '.programme_number'
+        return self.get_ref(self.get_programme_dimension(), 'key')
 
     def get_programme_dimension(self):
-        return self.model['hierarchies']['activity']['levels'][0]
+        return self.get_dimension('activity')
 
     def get_department_name_ref(self):
-        return self.get_department_dimension() + '.department'
+        return self.get_ref(self.get_department_dimension(), 'label')
 
     def get_vote_number_ref(self):
-        return self.get_department_dimension() + '.vote_number'
+        return self.get_ref(self.get_department_dimension(), 'key')
 
     def get_department_dimension(self):
-        return self.model['hierarchies']['administrative_classification']['levels'][0]
+        return self.get_dimension('administrative_classification')
 
     def get_geo_ref(self):
-        return self.get_geo_dimension() + '.government'
+        return self.get_ref(self.get_geo_dimension(), 'label')
 
     def get_geo_dimension(self):
-        return self.model['hierarchies']['geo_source']['levels'][0]
+        return self.get_dimension('geo_source')
 
     def get_financial_year_ref(self):
-        return self.get_financial_year_dimension() + '.financial_year'
+        return self.get_ref(self.get_financial_year_dimension(), 'label')
 
     def get_financial_year_dimension(self):
-        return self.model['hierarchies']['date']['levels'][0]
+        return self.get_dimension('date')
 
     def get_function_ref(self):
-        return self.get_function_dimension() + '.government_function'
+        return self.get_ref(self.get_function_dimension(), 'label')
 
     def get_function_dimension(self):
-        return self.model['hierarchies']['functional_classification']['levels'][0]
+        return self.get_dimension('functional_classification')
 
     def get_phase_ref(self):
-        return self.get_phase_dimension() + '.budget_phase'
+        return self.get_ref(self.get_phase_dimension(), 'label')
 
     def get_phase_dimension(self):
-        return self.model['hierarchies']['phase']['levels'][0]
+        return self.get_dimension('phase')
+
+    def get_econ_class_1_ref(self):
+        return self.get_ref(self.get_econ_class_1_dimension(), 'key')
+
+    def get_econ_class_1_dimension(self):
+        return self.get_dimension('economic_classification')
+
+    def get_econ_class_2_ref(self):
+        return self.get_ref(self.get_econ_class_2_dimension(), 'key')
+
+    def get_econ_class_2_dimension(self):
+        return self.get_dimension('economic_classification', level=1)
 
     def aggregate(self, cuts=None, drilldowns=None):
         params = {
@@ -119,3 +114,7 @@ class EstimatesOfExpenditure():
         if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
             raise Exception("More cells than expected - perhaps we should start paging")
         return aggregate_result.json()
+
+
+def cube_url(model_url):
+    return re.sub('model/?$', '', model_url)

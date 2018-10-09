@@ -170,9 +170,9 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'url_path': dataset.get_url_path(),
         })
 
-    programme_budgets = department.get_programme_budgets()
-    if not programme_budgets:
-        programme_budgets = [
+    programmes = department.get_programme_budgets()
+    if not programmes['programme_budgets']:
+        programmes['programme_budgets'] = [
             {'name': p.name, 'total_budget': None}
             for p in department.programmes.order_by('programme_number')
         ]
@@ -184,6 +184,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         description_govt = department.government.name
 
     context = {
+        'economic_classification_by_programme': department.get_econ_by_programme_budgets(),
         'expenditure_over_time': department.get_expenditure_over_time(),
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'financial_years': financial_years_context,
@@ -200,7 +201,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'name': department.government.sphere.name,
             'slug': department.government.sphere.slug,
         },
-        'programmes': programme_budgets,
+        'programmes': programmes,
         'selected_financial_year': financial_year_id,
         'selected_tab': 'departments',
         'title': "%s budget %s  - vulekamali" % (
@@ -218,6 +219,20 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'name': primary_department.name,
             'slug': primary_department.slug
         },
+    }
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_category_list(request):
+    context = {
+        'categories': [category_fields(c) for c in Category.get_all()],
+        'selected_tab': 'datasets',
+        'slug': 'datasets',
+        'name': 'Datasets and Analysis',
+        'title': 'Datasets and Analysis - vulekamali',
+        'url_path': '/datasets',
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
