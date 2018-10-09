@@ -787,6 +787,13 @@ class Category():
         self.description = kwargs['description']
 
     @classmethod
+    def get_all(cls):
+        categories = [cls.contributed()]
+        for group in ckan.action.group_list(all_fields=True):
+            categories.append(cls.from_group(group))
+        return sorted(categories, key=lambda c: c.name)
+
+    @classmethod
     def get_by_slug(cls, category_slug):
         if category_slug == 'contributed':
             return cls.contributed()
@@ -822,9 +829,8 @@ class Category():
         return cls(
             name='Contributed data and analysis',
             slug='contributed',
-            description=("Contibuted data and documentation for South African "
-                         "government budgets. Hosted by National Treasury in "
-                         "partnership with IMALI YETHU.")
+            description=("Data and analysis contributed by other organisations "
+                         "on South African government budgets. ")
         )
 
 
