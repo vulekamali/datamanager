@@ -568,11 +568,12 @@ class Department(models.Model):
                         'name': econ1_name,
                         'items': sorted(econ_class_2s, key=total_budget_fun, reverse=True),
                     })
-            programmes.append({
-                'type': 'programme',
-                'name': programme_name,
-                'items': econ_class_1s,
-            })
+            if econ_class_1s:
+                programmes.append({
+                    'type': 'programme',
+                    'name': programme_name,
+                    'items': econ_class_1s,
+                })
 
         self._econ_by_programme_budgets = {
             'programmes': programmes,
