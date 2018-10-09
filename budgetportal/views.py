@@ -226,6 +226,20 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
+def dataset_category_list(request):
+    context = {
+        'categories': [category_fields(c) for c in Category.get_all()],
+        'selected_tab': 'datasets',
+        'slug': 'datasets',
+        'name': 'Datasets and Analysis',
+        'title': 'Datasets and Analysis - vulekamali',
+        'url_path': '/datasets',
+    }
+
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
 def dataset_category(request, category_slug):
     category = Category.get_by_slug(category_slug)
     context = {
