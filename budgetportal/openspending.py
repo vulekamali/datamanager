@@ -46,6 +46,12 @@ class EstimatesOfExpenditure():
     def get_programme_dimension(self):
         return self.get_dimension('activity')
 
+    def get_subprogramme_name_ref(self):
+        return self.get_ref(self.get_subprogramme_dimension(), 'label')
+
+    def get_subprogramme_dimension(self):
+        return self.get_dimension('activity', 1)
+
     def get_department_name_ref(self):
         return self.get_ref(self.get_department_dimension(), 'label')
 
