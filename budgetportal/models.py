@@ -216,7 +216,8 @@ class Department(models.Model):
     _programme_budgets = None
     _econ_by_programme_budgets = None
     _prog_by_econ_budgets = None
-    _estimates_of_expenditure_dataset = None
+    _estimates_of_econ_classes_expenditure_dataset = None
+    _estimates_of_subprogramme_expenditure_dataset = None
 
     def __init__(self, *args, **kwargs):
         super(Department, self).__init__(*args, **kwargs)
@@ -474,22 +475,48 @@ class Department(models.Model):
                     datasets[package['name']] = dataset
         return datasets.values()
 
-    def get_estimates_of_expenditure_dataset(self):
-        if self._estimates_of_expenditure_dataset is not None:
-            return self._estimates_of_expenditure_dataset
+    def get_estimates_of_econ_classes_expenditure_dataset(self):
+        if self._estimates_of_econ_classes_expenditure_dataset is not None:
+            return self._estimates_of_econ_classes_expenditure_dataset
         query = {
             'q': '',
             'fq': ''.join([
                 '+organization:"national-treasury"',
                 '+groups:"estimates-of-%s-expenditure"' % self.government.sphere.slug,
                 '+vocab_financial_years:"%s"' % self.get_financial_year().slug,
+                '+vocab_dimensions:"Economic classification 1"',
+                '+vocab_dimensions:"Economic classification 2"',
             ]),
             'rows': 1000,
         }
         response = ckan.action.package_search(**query)
-        package = response['results'][0]
-        self._estimates_of_expenditure_dataset = Dataset.from_package(package)
-        return self._estimates_of_expenditure_dataset
+        if response['results']:
+            package = response['results'][0]
+            self._estimates_of_econ_classes_expenditure_dataset = Dataset.from_package(package)
+            return self._estimates_of_econ_classes_expenditure_dataset
+        else:
+            return None
+
+    def get_estimates_of_subprogramme_expenditure_dataset(self):
+        if self._estimates_of_subprogramme_expenditure_dataset is not None:
+            return self._estimates_of_econ_classes_expenditure_dataset
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"estimates-of-%s-expenditure"' % self.government.sphere.slug,
+                '+vocab_financial_years:"%s"' % self.get_financial_year().slug,
+                '+vocab_dimensions:"Sub-programme"',
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        if response['results']:
+            package = response['results'][0]
+            self._estimates_of_subprogramme_expenditure_dataset = Dataset.from_package(package)
+            return self._estimates_of_subprogramme_expenditure_dataset
+        else:
+            return None
 
     def get_programme_budgets(self):
         """
@@ -497,7 +524,7 @@ class Department(models.Model):
         """
         if self._programme_budgets is not None:
             return self._programme_budgets
-        dataset = self.get_estimates_of_expenditure_dataset()
+        dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
@@ -529,7 +556,7 @@ class Department(models.Model):
         """
         if self._econ_by_programme_budgets is not None:
             return self._econ_by_programme_budgets
-        dataset = self.get_estimates_of_expenditure_dataset()
+        dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
@@ -588,7 +615,7 @@ class Department(models.Model):
         """
         if self._prog_by_econ_budgets is not None:
             return self._prog_by_econ_budgets
-        dataset = self.get_estimates_of_expenditure_dataset()
+        dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
@@ -633,6 +660,51 @@ class Department(models.Model):
         }
         return self._prog_by_econ_budgets
 
+    def get_subprog_budgets(self):
+        """
+        get the sub-programme budget totals for each programme
+        """
+        dataset = self.get_estimates_of_subprogramme_expenditure_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        financial_year_start = self.get_financial_year().get_starting_year()
+        cuts = [
+            openspending_api.get_financial_year_ref() + ':' + financial_year_start,
+            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+        ]
+        if self.government.sphere.slug == 'provincial':
+            cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
+        drilldowns = [
+            openspending_api.get_programme_number_ref(),
+            openspending_api.get_programme_name_ref(),
+            openspending_api.get_subprogramme_name_ref(),
+        ]
+        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        prog_func = lambda cell: cell[openspending_api.get_programme_name_ref()]
+        total_budget_fun = lambda x: x['total_budget']
+        programmes = []
+        programme_sorted = sorted(result['cells'], key=prog_func)
+        for prog_name, prog_group in groupby(programme_sorted, prog_func):
+            subprogrammes = []
+            for cell in prog_group:
+                if cell['value.sum']:
+                    subprogrammes.append({
+                        'type': 'subprogramme',
+                        'name': cell[openspending_api.get_subprogramme_name_ref()],
+                        'total_budget': cell['value.sum'],
+                    })
+            if subprogrammes:
+                programmes.append({
+                    'type': 'programme',
+                    'name': prog_name,
+                    'items': sorted(subprogrammes, key=total_budget_fun, reverse=True),
+                })
+        return {
+            'programmes': programmes,
+            'dataset_detail_page': dataset.get_url_path(),
+        }
+
     def get_expenditure_over_time(self):
         base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
@@ -644,7 +716,7 @@ class Department(models.Model):
             'real': [],
         }
 
-        dataset = self.get_estimates_of_expenditure_dataset()
+        dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
         openspending_api = dataset.get_openspending_api()
         cuts = [
             openspending_api.get_department_name_ref() + ':"' + self.name + '"',

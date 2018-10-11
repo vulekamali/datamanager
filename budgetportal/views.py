@@ -186,6 +186,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     context = {
         'economic_classification_by_programme': department.get_econ_by_programme_budgets(),
         'programme_by_economic_classification': department.get_prog_by_econ_budgets(),
+        'subprogramme_by_programme': department.get_subprog_budgets(),
         'expenditure_over_time': department.get_expenditure_over_time(),
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'financial_years': financial_years_context,
