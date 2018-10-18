@@ -52,6 +52,8 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'elasticapm.contrib.django',
 )
 
 MIDDLEWARE = (
@@ -62,6 +64,8 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'elasticapm.contrib.django.middleware.TracingMiddleware',
+    'elasticapm.contrib.django.middleware.Catch404Middleware',
 )
 
 SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
@@ -235,6 +239,15 @@ STATICFILES_STORAGE = 'budgetportal.pipeline.GzipManifestPipelineStorage'
 
 
 # Logging
+
+LOGSTASH_URL = os.environ.get('LOGSTASH_URL', '')
+APM_SERVER_URL = os.environ.get('APM_SERVER_URL', '')
+ELK_APP_NAME = 'vulekamali Data Manager'
+ELASTIC_APM = {
+    'SERVICE_NAME': ELK_APP_NAME,
+    'SERVER_URL': APM_SERVER_URL
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -248,7 +261,21 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
-        }
+        },
+        'logstash': {
+            'level': 'DEBUG',
+            'class': 'logstash.TCPLogstashHandler',
+            'host': LOGSTASH_URL,
+            'port': 5959,
+            'version': 1,
+            'message_type': 'logstash',
+            'fqdn': False,
+            'tags': [ELK_APP_NAME]
+        },
+        'elasticapm': {
+            'level': 'INFO',
+            'class': 'elasticapm.contrib.django.handlers.LoggingHandler',
+        },
     },
     'root': {
         'handlers': ['console'],
