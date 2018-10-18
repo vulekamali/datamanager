@@ -842,12 +842,12 @@ class Dataset():
                 'name': package['license_title'],
                 'url': package['license_url'] if 'license_url' in package else None,
             },
-            intro=package['notes'] if package['notes'] else None,
-            intro_short=package.get('notes_short', None),
-            methodology=package['methodology'] if 'methodology' in package else None,
-            key_points=package.get('key_points', None),
-            use_for=package.get('use_for', None),
-            usage=package.get('usage', None),
+            intro=none_if_empty_or_missing(package, 'notes'),
+            intro_short=none_if_empty_or_missing(package, 'notes_short'),
+            methodology=none_if_empty_or_missing(package, 'methodology'),
+            key_points=none_if_empty_or_missing(package, 'key_points'),
+            use_for=none_if_empty_or_missing(package, 'use_for'),
+            usage=none_if_empty_or_missing(package, 'usage'),
             resources=resources,
             organization_slug=package['organization']['name'],
             category=category,
@@ -1049,3 +1049,10 @@ def get_vocab_map():
 def package_is_contributed(package):
     return len(package['groups']) == 0 \
         and package['organization']['name'] != 'national-treasury'
+
+
+def none_if_empty_or_missing(dict, key):
+    if dict.get(key, None):
+        return dict.get(key)
+    else:
+        return None
