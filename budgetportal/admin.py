@@ -9,6 +9,7 @@ from budgetportal.models import (
     Programme,
     Sphere,
 )
+from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
@@ -130,6 +131,9 @@ class UserAdmin(admin.ModelAdmin):
 
 class SiteAdmin(admin.ModelAdmin):
     pass
+
+
+admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
 
 
 for financial_year in FinancialYear.objects.all():

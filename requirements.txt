@@ -20,7 +20,7 @@ gevent==1.2.1
 greenlet==0.4.12
 gunicorn==19.5.0
 idna==2.6
-newrelic==2.46.0.37
+openpyxl==2.5.9
 pathlib==1.0.1
 psycopg2==2.6
 pyaml==17.10.0
