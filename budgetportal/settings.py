@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'pipeline',
     'django_extensions',
+    'django_q',
     'captcha',
 
     'allauth',
@@ -289,4 +290,16 @@ LOGGING = {
             'level': 'DEBUG' if DEBUG else 'INFO',
         }
     }
+}
+
+Q_CLUSTER = {
+    'name': 'Something',
+    'workers': 1,
+    'timeout': 30*60,
+    'retry': 5,
+    'queue_limit': 1,
+    'bulk': 1,
+    'orm': 'default',
+    'poll': 30,
+    'save_limit': 0,
 }
