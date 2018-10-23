@@ -1,20 +1,21 @@
 from autoslug import AutoSlugField
+from budgetportal.openspending import EstimatesOfExpenditure
+from ckanapi import NotFound
 from collections import OrderedDict
+from decimal import Decimal
 from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
 from django.utils.text import slugify as django_slugify
 from itertools import groupby
-from slugify import slugify as extended_slugify
+from os.path import splitext, basename
 from partial_index import PartialIndex
 from pprint import pformat
-from budgetportal.openspending import EstimatesOfExpenditure
+from slugify import slugify as extended_slugify
 import logging
 import re
 import requests
 import urlparse
-from os.path import splitext, basename
-from decimal import Decimal
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -209,7 +210,7 @@ class Government(models.Model):
 class Department(models.Model):
     organisational_unit = 'department'
     government = models.ForeignKey(Government, on_delete=models.CASCADE, related_name="departments")
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, help_text="The department name must precisely match the text used in the Appropriation Bill. All datasets must be normalised to match this name. Beware that changing this name might cause a mismatch with already-published datasets which might need to be update to match this.")
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, editable=True)
     vote_number = models.IntegerField()
     is_vote_primary = models.BooleanField(default=True)
@@ -396,6 +397,36 @@ class Department(models.Model):
             len(response['results'])
         )
         return response['results']
+
+    def get_dataset(self, group_name, name):
+        """
+        Get a dataset correctly annotated to match this department
+        """
+        query = {
+            'q': '',
+            'fq': ('+organization:"national-treasury"'
+                   '+vocab_financial_years:"%s"'
+                   '+vocab_spheres:"%s"'
+                   '+extras_s_geographic_region_slug:"%s"'
+                   '+extras_s_department_name_slug:"%s"'
+                   '+groups:"%s"') % (
+                       self.government.sphere.financial_year.slug,
+                       self.government.sphere.slug,
+                       self.government.slug,
+                       self.get_primary_department().slug,
+                       group_name,
+                   ),
+            'rows': 1,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nreturned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        if response['results']:
+            assert(len(response['results']) == 1)
+            return Dataset.from_package(response['results'][0])
 
     def get_treasury_resources(self):
         resources = {}
@@ -857,8 +888,12 @@ class Dataset():
     @classmethod
     def fetch(cls, dataset_slug):
         logger.info("package_show id=%s", dataset_slug)
-        package = ckan.action.package_show(id=dataset_slug)
-        return cls.from_package(package)
+        try:
+            package = ckan.action.package_show(id=dataset_slug)
+            return cls.from_package(package)
+        except NotFound:
+            logger.info("Package with name %s not found.", dataset_slug)
+            return None
 
     def get_url_path(self):
         return "/datasets/%s/%s" % (self.category.slug, self.slug)

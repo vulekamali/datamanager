@@ -11,6 +11,7 @@ from budgetportal.models import (
     Sphere,
     Government,
     Department,
+    Dataset,
 )
 import logging
 
@@ -126,12 +127,45 @@ class Preview:
                             'status': 'error',
                         }
 
+                    if department:
+                        dataset = department.get_dataset(
+                            name=slugify(ws_row[dataset_name_idx].value),
+                            group_name=ws_row[group_id_idx].value
+                        )
+                        if dataset:
+                            row['dataset'] = {
+                                'object': dataset,
+                                'label': dataset.title,
+                            }
+                        else:
+                            dataset = Dataset.fetch(
+                                slugify(ws_row[dataset_name_idx].value)
+                            )
+                            if dataset:
+                                row['dataset'] = {
+                                    'object': dataset,
+                                    'label': dataset.title,
+                                    'new_label': ws_row[dataset_title_idx].value,
+                                    'status': 'info',
+                                    'message': ("Dataset by this name exists but it "
+                                                "is not configured correctly. It "
+                                                "will be updated to be associated "
+                                                "with this department."),
+                                }
+                            else:
+                                row['dataset'] = {
+                                    'label': ws_row[dataset_title_idx].value,
+                                }
+                    else:
+                        row['dataset'] = {
+                            'label': ws_row[dataset_title_idx].value,
+                            'status': 'error',
+                            'message': ("Department not found. We can't "
+                                        "upload the dataset until we can "
+                                        "associate it with an existing department."),
+                        }
 
                     row.update({
-                        'dataset': {
-                            'name': slugify(ws_row[dataset_name_idx].value),
-                            'label': ws_row[dataset_title_idx].value,
-                        },
                         'group': {
                             'name': slugify(ws_row[group_id_idx].value),
                         },
