@@ -5,24 +5,61 @@
 <h1>Bulk Upload</h1>
 
 <form action="/admin/bulk_upload" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit"/>
-    {% if file %}<p>File: {{ file }}</p>{% endif %}
-    {% if not valid %}<p>Something went wrong. Please try again.</p>{% endif %}
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  {% if file %}<p>File: {{ file }}</p>{% endif %}
+  {% if not valid %}<p>Something went wrong. Please try again.</p>{% endif %}
+
+
+  {% if preview %}
+  <table>
+    <tr>
+      <th>government</th>
+      <th>department</th>
+      <th>dataset_name</th>
+      <th>dataset_title</th>
+      <th>resource_title</th>
+      <th>resource_format</th>
+      <th>resource_url</th>
+    </tr>
+
+    {% for row in preview.rows %}
+    <tr>
+      <td>
+        {{ row.government.label }}
+      </td>
+
+      <td>
+        {{ row.department.label }}
+      </td>
+
+      <td>
+        {{ row.dataset.name }}
+      </td>
+
+      <td>
+        {{ row.dataset.label }}
+      </td>
+
+      <td>
+        {{ row.resource.name }}
+      </td>
+
+      <td>
+        {{ row.resource.format }}
+      </td>
+
+      <td>
+        {{ row.resource.url }}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  <input type="submit" value="Submit"/>
 
 </form>
-
-<table>
-{% for row in rows %}
-<tr>
-  {% for cell in row %}
-  <td>
-    {{ cell.value }}
-  </td>
-  {% endfor %}
-</tr>
-{% endfor %}
-</table>
 
 {% endblock content %}
