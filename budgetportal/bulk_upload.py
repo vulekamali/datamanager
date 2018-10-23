@@ -62,6 +62,9 @@ class Preview:
             ws = wb['Resources']
 
             for row_idx, ws_row in enumerate(ws.rows):
+                government = None
+                department = None
+                dataset = None
 
                 if not ws_row[0].value:
                     continue
@@ -92,12 +95,12 @@ class Preview:
                         government = government[0]
                         row['government'] = {
                             'object': government,
-                            'label': government.name,
+                            'name': government.name,
                             'status': 'success',
                         }
                     else:
                         row['government'] = {
-                            'label': ws_row[government_idx].value,
+                            'name': ws_row[government_idx].value,
                             'message': "Government not found for selected sphere",
                             'status': 'error',
                         }
@@ -111,18 +114,18 @@ class Preview:
                             department = department[0]
                             row['department'] = {
                                 'object': department,
-                                'label': department.name,
+                                'name': department.name,
                                 'status': 'success',
                             }
                         else:
                             row['department'] = {
-                                'label': ws_row[department_name_idx].value,
+                                'name': ws_row[department_name_idx].value,
                                 'message': "Department not found for specified government",
                                 'status': 'error',
                             }
                     else:
                         row['department'] = {
-                            'label': ws_row[department_name_idx].value,
+                            'name': ws_row[department_name_idx].value,
                             'message': "Can't look up department without government",
                             'status': 'error',
                         }
@@ -135,7 +138,10 @@ class Preview:
                         if dataset:
                             row['dataset'] = {
                                 'object': dataset,
-                                'label': dataset.title,
+                                'name': dataset.slug,
+                                'title': dataset.name,
+                                'status': 'success',
+                                'message': "This dataset already exists",
                             }
                         else:
                             dataset = Dataset.fetch(
@@ -144,8 +150,9 @@ class Preview:
                             if dataset:
                                 row['dataset'] = {
                                     'object': dataset,
-                                    'label': dataset.title,
-                                    'new_label': ws_row[dataset_title_idx].value,
+                                    'name': dataset.slug,
+                                    'title': dataset.name,
+                                    'new_title': ws_row[dataset_title_idx].value,
                                     'status': 'info',
                                     'message': ("Dataset by this name exists but it "
                                                 "is not configured correctly. It "
@@ -154,11 +161,15 @@ class Preview:
                                 }
                             else:
                                 row['dataset'] = {
-                                    'label': ws_row[dataset_title_idx].value,
+                                    'name': slugify(ws_row[dataset_name_idx].value),
+                                    'title': ws_row[dataset_title_idx].value,
+                                    'status': 'success',
+                                    'message': "This dataset will be created.",
                                 }
                     else:
                         row['dataset'] = {
-                            'label': ws_row[dataset_title_idx].value,
+                            'name': slugify(ws_row[dataset_name_idx].value),
+                            'title': ws_row[dataset_title_idx].value,
                             'status': 'error',
                             'message': ("Department not found. We can't "
                                         "upload the dataset until we can "

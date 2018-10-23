@@ -36,23 +36,25 @@
       <td class="{{ row.government.status }}"
           title="{{ row.government.message }}"
           >
-        {{ row.government.label }}
+        {{ row.government.name }}
       </td>
 
       <td class="{{ row.department.status }}"
           title="{{ row.department.message }}"
           >
-        {{ row.department.label }}
+        {{ row.department.name }}
       </td>
 
       <td class="{{ row.dataset.status }}"
           title="{{ row.dataset.message }}"
           >
-        {{ row.dataset.label }}
+        {{ row.dataset.name }}
       </td>
 
-      <td>
-        {{ row.dataset.label }}
+      <td class="{{ row.dataset.status }}"
+          title="{{ row.dataset.message }}"
+          >
+        {{ row.dataset.title }}
       </td>
 
       <td class="{{ row.resource.status }}"
