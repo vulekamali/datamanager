@@ -1,5 +1,11 @@
 {% extends "admin/base_site.html" %}
 
+{% load staticfiles pipeline %}
+
+{% block extrastyle %}
+    {% stylesheet "admin" %}
+{% endblock %}
+
 {% block content %}
 
 <h1>Bulk Upload</h1>
@@ -14,7 +20,7 @@
 
   {% if preview %}
 
-  <table>
+  <table class="table">
     <tr>
       <th>government</th>
       <th>department</th>
@@ -27,15 +33,21 @@
 
     {% for row in preview.rows %}
     <tr>
-      <td>
+      <td class="{{ row.government.status }}"
+          title="{{ row.government.message }}"
+          >
         {{ row.government.label }}
       </td>
 
-      <td>
+      <td class="{{ row.department.status }}"
+          title="{{ row.department.message }}"
+          >
         {{ row.department.label }}
       </td>
 
-      <td>
+      <td class="{{ row.dataset.status }}"
+          title="{{ row.dataset.message }}"
+          >
         {{ row.dataset.name }}
       </td>
 
@@ -43,11 +55,15 @@
         {{ row.dataset.label }}
       </td>
 
-      <td>
+      <td class="{{ row.resource.status }}"
+          title="{{ row.resource.message }}"
+          >
         {{ row.resource.name }}
       </td>
 
-      <td>
+      <td class="{{ row.resource.status }}"
+          title="{{ row.resource.message }}"
+          >
         {{ row.resource.format }}
       </td>
 

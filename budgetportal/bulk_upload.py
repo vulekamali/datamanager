@@ -81,19 +81,53 @@ class Preview:
                     resource_url_idx = heading_index['resource_url']
 
                 else:
-                    government = Government.objects.get(sphere=sphere,
-                                                        name=ws_row[government_idx].value)
-                    department = Department.objects.get(government=government,
-                                                        name=ws_row[department_name_idx].value)
-                    self.rows.append({
-                        'government': {
+                    row = {}
+
+                    government = Government.objects.filter(
+                        sphere=sphere,
+                        name=ws_row[government_idx].value
+                    )
+                    if government:
+                        government = government[0]
+                        row['government'] = {
                             'object': government,
                             'label': government.name,
-                        },
-                        'department': {
-                            'object': department,
-                            'label': department.name,
-                        },
+                            'status': 'success',
+                        }
+                    else:
+                        row['government'] = {
+                            'label': ws_row[government_idx].value,
+                            'message': "Government not found for selected sphere",
+                            'status': 'error',
+                        }
+
+                    if government:
+                        department = Department.objects.filter(
+                            government=government,
+                            name=ws_row[department_name_idx].value
+                        )
+                        if department:
+                            department = department[0]
+                            row['department'] = {
+                                'object': department,
+                                'label': department.name,
+                                'status': 'success',
+                            }
+                        else:
+                            row['department'] = {
+                                'label': ws_row[department_name_idx].value,
+                                'message': "Department not found for specified government",
+                                'status': 'error',
+                            }
+                    else:
+                        row['department'] = {
+                            'label': ws_row[department_name_idx].value,
+                            'message': "Can't look up department without government",
+                            'status': 'error',
+                        }
+
+
+                    row.update({
                         'dataset': {
                             'name': slugify(ws_row[dataset_name_idx].value),
                             'label': ws_row[dataset_title_idx].value,
@@ -108,3 +142,4 @@ class Preview:
                             'valid': True,
                         },
                     })
+                    self.rows.append(row)

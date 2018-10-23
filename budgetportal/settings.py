@@ -218,6 +218,12 @@ PIPELINE = {
             ),
             'output_filename': 'app.css',
         },
+        'admin': {
+            'source_filenames': (
+                'stylesheets/admin.scss',
+            ),
+            'output_filename': 'admin.css',
+        },
     },
     'JAVASCRIPT': {
         'js': {
