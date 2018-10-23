@@ -133,6 +133,7 @@ class Sphere(models.Model):
             ('financial_year', 'slug'),
             ('financial_year', 'name'),
         )
+        ordering = ['-financial_year__slug', 'name']
 
     def get_url_path(self):
         return "%s/%s" % (self.financial_year.get_url_path(), self.slug)

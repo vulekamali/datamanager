@@ -6,7 +6,7 @@
 
 <form action="/admin/bulk_upload" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <input type="submit" value="Submit"/>
     {% if file %}<p>File: {{ file }}</p>{% endif %}
     {% if not valid %}<p>Something went wrong. Please try again.</p>{% endif %}
