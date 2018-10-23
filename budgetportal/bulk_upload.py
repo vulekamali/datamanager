@@ -87,48 +87,18 @@ class Preview:
                 else:
                     row = {}
 
-                    government = Government.objects.filter(
-                        sphere=sphere,
-                        name=ws_row[government_idx].value
+                    government, government_preview = self.get_government_preview(
+                        ws_row,
+                        government_idx,
+                        sphere
                     )
-                    if government:
-                        government = government[0]
-                        row['government'] = {
-                            'object': government,
-                            'name': government.name,
-                            'status': 'success',
-                        }
-                    else:
-                        row['government'] = {
-                            'name': ws_row[government_idx].value,
-                            'message': "Government not found for selected sphere",
-                            'status': 'error',
-                        }
-
-                    if government:
-                        department = Department.objects.filter(
-                            government=government,
-                            name=ws_row[department_name_idx].value
-                        )
-                        if department:
-                            department = department[0]
-                            row['department'] = {
-                                'object': department,
-                                'name': department.name,
-                                'status': 'success',
-                            }
-                        else:
-                            row['department'] = {
-                                'name': ws_row[department_name_idx].value,
-                                'message': "Department not found for specified government",
-                                'status': 'error',
-                            }
-                    else:
-                        row['department'] = {
-                            'name': ws_row[department_name_idx].value,
-                            'message': "Can't look up department without government",
-                            'status': 'error',
-                        }
+                    row['government'] = government_preview
+                    department, department_preview = self.get_department_preview(
+                        ws_row,
+                        department_name_idx,
+                        government
+                    )
+                    row['department'] = department_preview
 
                     if department:
                         dataset = department.get_dataset(
@@ -188,3 +158,58 @@ class Preview:
                         },
                     })
                     self.rows.append(row)
+
+    @classmethod
+    def get_government_preview(cls, ws_row, government_idx, sphere):
+        government = None
+        government_preview = None
+
+        government = Government.objects.filter(
+            sphere=sphere,
+            name=ws_row[government_idx].value
+        )
+        if government:
+            government = government[0]
+            government_preview = {
+                'object': government,
+                'name': government.name,
+                'status': 'success',
+            }
+        else:
+            government_preview = {
+                'name': ws_row[government_idx].value,
+                'message': "Government not found for selected sphere",
+                'status': 'error',
+            }
+        return government, government_preview
+
+    @classmethod
+    def get_department_preview(cls, ws_row, department_name_idx, government):
+        department = None
+        department_preview = None
+
+        if government:
+            department = Department.objects.filter(
+                government=government,
+                name=ws_row[department_name_idx].value
+            )
+            if department:
+                department = department[0]
+                department_preview = {
+                    'object': department,
+                    'name': department.name,
+                    'status': 'success',
+                }
+            else:
+                department_preview = {
+                    'name': ws_row[department_name_idx].value,
+                    'message': "Department not found for specified government",
+                    'status': 'error',
+                }
+        else:
+            department_preview = {
+                'name': ws_row[department_name_idx].value,
+                'message': "Can't look up department without government",
+                'status': 'error',
+            }
+        return department, department_preview
