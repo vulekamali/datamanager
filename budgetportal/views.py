@@ -182,21 +182,27 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
 
     # ======= budget docs =========================
     budget_dataset = department.get_dataset(
-        group_name='estimates-of-national-expenditure-votes')
-    department_budget = {
-        'name': budget_dataset.name,
-        'document': budget_dataset.get_resource(format='PDF'),
-        'tables': (budget_dataset.get_resource(format='XLS') \
-                     or budget_dataset.get_resource(format='XLSX')),
-    }
+        group_name='budget-vote-documents')
+    if budget_dataset:
+        department_budget = {
+            'name': budget_dataset.name,
+            'document': budget_dataset.get_resource(format='PDF'),
+            'tables': (budget_dataset.get_resource(format='XLS') \
+                         or budget_dataset.get_resource(format='XLSX')),
+        }
+    else:
+        department_budget = None
     adjusted_budget_dataset = department.get_dataset(
-        group_name='adjusted-estimates-of-national-expenditure-votes')
-    department_adjusted_budget = {
-        'name': adjusted_budget_dataset.name,
-        'document': adjusted_budget_dataset.get_resource(format='PDF'),
-        'tables': (adjusted_budget_dataset.get_resource(format='XLS') \
-                     or adjusted_budget_dataset.get_resource(format='XLSX')),
-    }
+        group_name='adjusted-budget-vote-documents')
+    if adjusted_budget_dataset:
+        department_adjusted_budget = {
+            'name': adjusted_budget_dataset.name,
+            'document': adjusted_budget_dataset.get_resource(format='PDF'),
+            'tables': (adjusted_budget_dataset.get_resource(format='XLS') \
+                         or adjusted_budget_dataset.get_resource(format='XLSX')),
+        }
+    else:
+        department_adjusted_budget = None
 
     primary_department = department.get_primary_department()
 

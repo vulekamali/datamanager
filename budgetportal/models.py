@@ -10,13 +10,14 @@ from django.utils.text import slugify as django_slugify
 from itertools import groupby
 from partial_index import PartialIndex
 from pprint import pformat
+from tempfile import mkdtemp
 import logging
+import os
 import re
 import requests
-from urllib2 import urlopen
-import os
-from tempfile import NamedTemporaryFile
 import shutil
+import urllib
+import urlparse
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -364,7 +365,7 @@ class Department(models.Model):
             'rows': 1,
         }
         if name:
-            query['fq'].append('+name"%s" % name')
+            query['fq'] += '+name:"%s"' % name
         response = ckan.action.package_search(**query)
         logger.info(
             "query %s\nreturned %d results",
@@ -854,17 +855,18 @@ class Dataset():
             if ' ' in url:
                 url = url.replace(' ', '%20')
             logger.info("Downloading %s to upload to package %s", url, self.slug)
-            url_file = urlopen(url)
-            with NamedTemporaryFile(delete=False) as resource_file:
-                logger.info("Downloading %s to %s", url, resource_file.name)
-                shutil.copyfileobj(url_file, resource_file)
+            tempdir = mkdtemp(prefix="budgetportal")
+            basename = urllib.unquote(os.path.basename(urlparse.urlparse(url).path))
+            filename = os.path.join(tempdir, basename)
+            logger.info("Downloading %s to %s", url, filename)
+            urllib.urlretrieve(url, filename)[0]
 
             logger.info("Uploading file %s as resource '%s' to package %s",
-                        resource_file.name, name, self.slug)
+                        filename, name, self.slug)
             resource_fields = {
                 'package_id': self.slug,
                 'name': name,
-                'upload': open(resource_file.name, 'rb'),
+                'upload': open(filename, 'rb'),
                 'format': format,
             }
             result = ckan.action.resource_create(**resource_fields)
@@ -874,8 +876,8 @@ class Dataset():
             logger.exception(e)
             raise e
         finally:
-            logger.info("Deleting temporary file %s", resource_file.name)
-            os.remove(resource_file.name)
+            logger.info("Deleting temporary file %s", filenae)
+            shutil.rmtree(tempdir)
 
     @staticmethod
     def get_contributed_datasets():
