@@ -87,7 +87,9 @@
         <input type="hidden" name="resource_format[]" value="{{ row.resource.format }}">
       </td>
 
-      <td>
+      <td class="{{ row.resource.status }}"
+          title="{{ row.resource.message }}"
+          >
         {{ row.resource.url }}
         <input type="hidden" name="resource_url[]" value="{{ row.resource.url }}">
       </td>

@@ -87,17 +87,16 @@ class Preview:
                     for i, cell in enumerate(ws_row):
                         if cell.value:
                             heading_index[cell.value] = i
-
-                    resource_name_idx = heading_index['resource_name']
-                    resource_format_idx = heading_index['resource_format']
-                    resource_url_idx = heading_index['resource_url']
-
                 else:
                     government_name = ws_row[heading_index['government']].value
                     department_name = ws_row[heading_index[u'department_name']].value
                     group_name = max_length_slugify(ws_row[heading_index['group_id']].value)
                     dataset_name = max_length_slugify(ws_row[heading_index['dataset_name']].value)
                     dataset_title = ws_row[heading_index['dataset_title']].value
+                    resource_name = ws_row[heading_index['resource_name']].value
+                    resource_format = ws_row[heading_index['resource_format']].value
+                    resource_url = ws_row[heading_index['resource_url']].value
+
                     row = {}
 
                     government, government_preview = self.get_government_preview(
@@ -119,14 +118,14 @@ class Preview:
                     row['dataset'] = dataset_preview
                     group, group_preview = self.get_group_preview(group_name)
                     row['group'] = group_preview
-                    row.update({
-                        'resource': {
-                            'name': ws_row[resource_name_idx].value,
-                            'format': ws_row[resource_format_idx].value,
-                            'url': ws_row[resource_url_idx].value,
-                            'valid': True,
-                        },
-                    })
+                    resource, resource_preview = self.get_resource_preview(
+                        dataset,
+                        resource_name,
+                        resource_format,
+                        resource_url
+                    )
+                    row['resource'] = resource_preview
+
                     self.rows.append(row)
 
     @classmethod
@@ -219,7 +218,7 @@ class Preview:
                     dataset_preview = {
                         'name': dataset_name,
                         'title': dataset_title,
-                        'status': 'success',
+                        'status': 'info',
                         'message': "This dataset will be created.",
                         'action': 'create',
                     }
@@ -253,6 +252,42 @@ class Preview:
                             "correct name is used in your metadata."),
             }
         return category, group_preview
+
+    @classmethod
+    def get_resource_preview(cls, dataset, name, format, url):
+        resource = None
+        resource_preview = None
+        if dataset:
+            for existing_resource in dataset.resources:
+                if (existing_resource['name'] == name
+                    and existing_resource['format'] == format):
+                    resource = existing_resource
+            if resource:
+                resource_preview = {
+                    'name': name,
+                    'format': format,
+                    'url': url,
+                    'status': 'success',
+                    'message': "This resource already exists.",
+                }
+            else:
+                resource_preview = {
+                    'name': name,
+                    'format': format,
+                    'url': url,
+                    'status': 'info',
+                    'message': "This resource will be created.",
+                    'action': 'create',
+                }
+        else:
+            resource_preview = {
+                'name': name,
+                'format': format,
+                'url': url,
+                'status': 'error',
+                'message': "Can't create resource without a matching dataset.",
+            }
+        return resource, resource_preview
 
 
 def queue_actions(post_data):
