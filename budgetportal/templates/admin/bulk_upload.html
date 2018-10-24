@@ -6,9 +6,13 @@
     {% stylesheet "admin" %}
 {% endblock %}
 
+{% block title %}Bulk Upload{% endblock title %}
+
 {% block content %}
 
 <h1>Bulk Upload</h1>
+
+<a href="/admin/django_q/ormq">Task queue length: {{ queue_size }} items.</a>
 
 <form action="/admin/bulk_upload" method="post" enctype="multipart/form-data">
   {% csrf_token %}
@@ -16,7 +20,6 @@
 
   {% if file %}<p>File: {{ file }}</p>{% endif %}
   {% if not valid %}<p>Something went wrong. Please try again.</p>{% endif %}
-
 
   {% if preview %}
 
@@ -59,13 +62,15 @@
           title="{{ row.dataset.message }}"
           >
         {{ row.dataset.name }}
-        <input type="hidden" name="dataset_slug[]" value="{{ row.dataset.object.slug }}">
+        <input type="hidden" name="dataset_name[]" value="{{ row.dataset.name }}">
+        <input type="hidden" name="dataset_action[]" value="{{ row.dataset.action }}">
       </td>
 
       <td class="{{ row.dataset.status }}"
           title="{{ row.dataset.message }}"
           >
         {{ row.dataset.title }}
+        <input type="hidden" name="dataset_title[]" value="{{ row.dataset.title }}">
       </td>
 
       <td class="{{ row.resource.status }}"
@@ -84,6 +89,7 @@
 
       <td>
         {{ row.resource.url }}
+        <input type="hidden" name="resource_url[]" value="{{ row.resource.url }}">
       </td>
     </tr>
     {% endfor %}

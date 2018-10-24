@@ -306,6 +306,6 @@ Q_CLUSTER = {
     'queue_limit': 1,
     'bulk': 1,
     'orm': 'default',
-    'poll': 30,
+    'poll': 10,
     'save_limit': 0,
 }

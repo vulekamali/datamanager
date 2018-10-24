@@ -15,6 +15,10 @@ from budgetportal.models import (
 )
 import logging
 from slugify import slugify
+from django_q.tasks import async
+import tasks
+from django_q.brokers import get_broker
+from django.contrib import messages
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +26,7 @@ logger = logging.getLogger(__name__)
 class FileForm(forms.Form):
     sphere_queryset = Sphere.objects.all()
     sphere = forms.ModelChoiceField(queryset=sphere_queryset, empty_label=None)
-    file = forms.FileField()
+    file = forms.FileField(required=False)
 
 
 def bulk_upload_view(request):
@@ -36,8 +40,15 @@ def bulk_upload_view(request):
         if form.is_valid():
             valid = True
             sphere = form.cleaned_data['sphere']
-            metadata_file = request.FILES['file']
-            preview = Preview(sphere, metadata_file)
+            if form.cleaned_data.get('file'):
+                metadata_file = request.FILES['file']
+                preview = Preview(sphere, metadata_file)
+            else:
+                action_count = queue_actions(request.POST)
+                if action_count:
+                    messages.add_message(request, messages.INFO, "Queued %d actions" % action_count)
+                else:
+                    messages.add_message(request, messages.WARNING, "No metadata file uploaded and no actions queued.")
             form = FileForm(initial = {'sphere': sphere.pk })
         else:
             valid = False
@@ -50,6 +61,7 @@ def bulk_upload_view(request):
         'file': file,
         'form': form,
         'preview': preview,
+        'queue_size': get_broker().queue_size(),
     })
 
 
@@ -190,9 +202,7 @@ class Preview:
                     'message': "This dataset already exists",
                 }
             else:
-                dataset = Dataset.fetch(
-                    dataset_name
-                )
+                dataset = Dataset.fetch(dataset_name)
                 if dataset:
                     dataset_preview = {
                         'object': dataset,
@@ -211,6 +221,7 @@ class Preview:
                         'title': dataset_title,
                         'status': 'success',
                         'message': "This dataset will be created.",
+                        'action': 'create',
                     }
         else:
             dataset_preview = {
@@ -242,6 +253,24 @@ class Preview:
                             "correct name is used in your metadata."),
             }
         return category, group_preview
+
+
+def queue_actions(post_data):
+    action_count = 0
+    for preview_idx, action in enumerate(post_data.getlist('dataset_action[]')):
+        if action == 'create':
+            department_id = post_data.getlist('department_id[]')[preview_idx]
+            dataset_name = post_data.getlist('dataset_name[]')[preview_idx]
+            dataset_title = post_data.getlist('dataset_title[]')[preview_idx]
+            group_name = post_data.getlist('group_name[]')[preview_idx]
+            async(tasks.create_dataset, **{
+                'department_id': department_id,
+                'name': dataset_name,
+                'title': dataset_title,
+                'group_name': group_name
+            })
+            action_count += 1
+    return action_count
 
 
 def max_length_slugify(value):
