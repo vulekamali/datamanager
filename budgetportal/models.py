@@ -343,7 +343,7 @@ class Department(models.Model):
                 return dept
         return self
 
-    def get_dataset(self, group_name, name):
+    def get_dataset(self, group_name, name=None):
         """
         Get a dataset correctly annotated to match this department
         """
@@ -363,6 +363,8 @@ class Department(models.Model):
                    ),
             'rows': 1,
         }
+        if name:
+            query['fq'].append('+name"%s" % name')
         response = ckan.action.package_search(**query)
         logger.info(
             "query %s\nreturned %d results",
@@ -472,6 +474,8 @@ class Department(models.Model):
         if self._programme_budgets is not None:
             return self._programme_budgets
         dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
+        if not dataset:
+            return None
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
@@ -504,6 +508,8 @@ class Department(models.Model):
         if self._econ_by_programme_budgets is not None:
             return self._econ_by_programme_budgets
         dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
+        if not dataset:
+            return None
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
@@ -563,6 +569,8 @@ class Department(models.Model):
         if self._prog_by_econ_budgets is not None:
             return self._prog_by_econ_budgets
         dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
+        if not dataset:
+            return None
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
@@ -664,6 +672,8 @@ class Department(models.Model):
         }
 
         dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
+        if not dataset:
+            return None
         openspending_api = dataset.get_openspending_api()
         cuts = [
             openspending_api.get_department_name_ref() + ':"' + self.name + '"',
@@ -828,10 +838,14 @@ class Dataset():
             'twitter': org['twitter_id'] if 'twitter_id' in org else None,
         }
 
-    def get_resource(self, name, format):
+    def get_resource(self, format, name=None):
         for resource in self.resources:
-            if (resource['name'] == name
+            if (name
+                and resource['name'] == name
                 and resource['format'] == format):
+                return resource
+            # if name wasn't provided, just match first item with this format
+            if (resource['format'] == format):
                 return resource
 
     def create_resource(self, name, format, url):

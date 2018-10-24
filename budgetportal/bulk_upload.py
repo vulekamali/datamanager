@@ -120,6 +120,7 @@ class Preview:
                     row['group'] = group_preview
                     resource, resource_preview = self.get_resource_preview(
                         dataset,
+                        dataset_preview,
                         resource_name,
                         resource_format,
                         resource_url
@@ -188,10 +189,8 @@ class Preview:
         dataset = None
         dataset_preview = None
         if department:
-            dataset = department.get_dataset(
-                name=dataset_name,
-                group_name=group_name
-            )
+            # Dataset for this department by group name
+            dataset = department.get_dataset(group_name=group_name)
             if dataset:
                 dataset_preview = {
                     'object': dataset,
@@ -201,6 +200,7 @@ class Preview:
                     'message': "This dataset already exists",
                 }
             else:
+                # Dataset by dataset name
                 dataset = Dataset.fetch(dataset_name)
                 if dataset:
                     dataset_preview = {
@@ -254,11 +254,11 @@ class Preview:
         return category, group_preview
 
     @classmethod
-    def get_resource_preview(cls, dataset, name, format, url):
+    def get_resource_preview(cls, dataset, dataset_preview, name, format, url):
         resource = None
         resource_preview = None
         if dataset:
-            resource = dataset.get_resource(name, format)
+            resource = dataset.get_resource(format, name)
             if resource:
                 resource_preview = {
                     'name': name,
@@ -277,13 +277,23 @@ class Preview:
                     'action': 'create',
                 }
         else:
-            resource_preview = {
-                'name': name,
-                'format': format,
-                'url': url,
-                'status': 'error',
-                'message': "Can't create resource without a matching dataset.",
-            }
+            if dataset_preview.get('action', None) == 'create':
+                resource_preview = {
+                    'name': name,
+                    'format': format,
+                    'url': url,
+                    'status': 'info',
+                    'message': "This resource will be created after the dataset is created.",
+                    'action': 'create',
+                }
+            else:
+                resource_preview = {
+                    'name': name,
+                    'format': format,
+                    'url': url,
+                    'status': 'error',
+                    'message': "Can't create resource without a matching dataset.",
+                }
         return resource, resource_preview
 
 

@@ -16,17 +16,12 @@ logger = logging.getLogger(__name__)
 
 def create_dataset(department_id, name, title, group_name):
     department = Department.objects.get(pk=department_id)
-    query = {
-        'q': '',
-        'fq': '+name:"%s"' % name,
-        'rows': 1,
-    }
-    response = ckan.action.package_search(**query)
-    if response['results']:
+    dataset = department.get_dataset(group_name, name)
+    if dataset:
         logger.info("Not recreating existing dataset %s", name)
         return {
             'status': "Already exists",
-            'package': response['results'][0]
+            'package': dataset.package,
         }
     else:
         dataset = department.create_dataset(name, title, group_name)
@@ -39,7 +34,7 @@ def create_dataset(department_id, name, title, group_name):
 def create_resource(department_id, group_name, dataset_name, name, format, url):
     department = Department.objects.get(pk=department_id)
     dataset = department.get_dataset(group_name, dataset_name)
-    resource = dataset.get_resource(name, format)
+    resource = dataset.get_resource(format, name)
     if resource:
         logger.info("Not recreating existing resource %s %s on dataset %s",
                     name, format, dataset_name)
