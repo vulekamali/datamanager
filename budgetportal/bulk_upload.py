@@ -4,7 +4,6 @@ Admin View for bulk uploading
 
 from django import forms
 from django.shortcuts import render
-from django.utils.text import slugify
 from io import BytesIO
 from openpyxl import load_workbook
 from budgetportal.models import (
@@ -12,8 +11,10 @@ from budgetportal.models import (
     Government,
     Department,
     Dataset,
+    Category,
 )
 import logging
+from slugify import slugify
 
 logger = logging.getLogger(__name__)
 
@@ -79,12 +80,12 @@ class Preview:
                     department_name_idx = heading_index[u'department_name']
                     dataset_name_idx = heading_index['dataset_name']
                     dataset_title_idx = heading_index['dataset_title']
-                    group_id_idx = heading_index['group_id']
                     resource_name_idx = heading_index['resource_name']
                     resource_format_idx = heading_index['resource_format']
                     resource_url_idx = heading_index['resource_url']
 
                 else:
+                    group_name = max_length_slugify(ws_row[heading_index['group_id']].value)
                     row = {}
 
                     government, government_preview = self.get_government_preview(
@@ -99,57 +100,17 @@ class Preview:
                         government
                     )
                     row['department'] = department_preview
-
-                    if department:
-                        dataset = department.get_dataset(
-                            name=slugify(ws_row[dataset_name_idx].value),
-                            group_name=ws_row[group_id_idx].value
-                        )
-                        if dataset:
-                            row['dataset'] = {
-                                'object': dataset,
-                                'name': dataset.slug,
-                                'title': dataset.name,
-                                'status': 'success',
-                                'message': "This dataset already exists",
-                            }
-                        else:
-                            dataset = Dataset.fetch(
-                                slugify(ws_row[dataset_name_idx].value)
-                            )
-                            if dataset:
-                                row['dataset'] = {
-                                    'object': dataset,
-                                    'name': dataset.slug,
-                                    'title': dataset.name,
-                                    'new_title': ws_row[dataset_title_idx].value,
-                                    'status': 'info',
-                                    'message': ("Dataset by this name exists but it "
-                                                "is not configured correctly. It "
-                                                "will be updated to be associated "
-                                                "with this department."),
-                                }
-                            else:
-                                row['dataset'] = {
-                                    'name': slugify(ws_row[dataset_name_idx].value),
-                                    'title': ws_row[dataset_title_idx].value,
-                                    'status': 'success',
-                                    'message': "This dataset will be created.",
-                                }
-                    else:
-                        row['dataset'] = {
-                            'name': slugify(ws_row[dataset_name_idx].value),
-                            'title': ws_row[dataset_title_idx].value,
-                            'status': 'error',
-                            'message': ("Department not found. We can't "
-                                        "upload the dataset until we can "
-                                        "associate it with an existing department."),
-                        }
-
+                    dataset, dataset_preview = self.get_dataset_preview(
+                        ws_row,
+                        dataset_name_idx,
+                        dataset_title_idx,
+                        group_name,
+                        department
+                    )
+                    row['dataset'] = dataset_preview
+                    group, group_preview = self.get_group_preview(group_name)
+                    row['group'] = group_preview
                     row.update({
-                        'group': {
-                            'name': slugify(ws_row[group_id_idx].value),
-                        },
                         'resource': {
                             'name': ws_row[resource_name_idx].value,
                             'format': ws_row[resource_format_idx].value,
@@ -213,3 +174,79 @@ class Preview:
                 'status': 'error',
             }
         return department, department_preview
+
+    @classmethod
+    def get_dataset_preview(cls, ws_row, dataset_name_idx, dataset_title_idx,
+                            group_name, department):
+        dataset = None
+        dataset_preview = None
+        if department:
+            dataset = department.get_dataset(
+                name=max_length_slugify(ws_row[dataset_name_idx].value),
+                group_name=group_name
+            )
+            if dataset:
+                dataset_preview = {
+                    'object': dataset,
+                    'name': dataset.slug,
+                    'title': dataset.name,
+                    'status': 'success',
+                    'message': "This dataset already exists",
+                }
+            else:
+                dataset = Dataset.fetch(
+                    max_length_slugify(ws_row[dataset_name_idx].value)
+                )
+                if dataset:
+                    dataset_preview = {
+                        'object': dataset,
+                        'name': dataset.slug,
+                        'title': dataset.name,
+                        'new_title': ws_row[dataset_title_idx].value,
+                        'status': 'info',
+                        'message': ("Dataset by this name exists but it "
+                                    "is not configured correctly. It "
+                                    "will be updated to be associated "
+                                    "with this department."),
+                    }
+                else:
+                    dataset_preview = {
+                        'name': max_length_slugify(ws_row[dataset_name_idx].value),
+                        'title': ws_row[dataset_title_idx].value,
+                        'status': 'success',
+                        'message': "This dataset will be created.",
+                    }
+        else:
+            dataset_preview = {
+                'name': max_length_slugify(ws_row[dataset_name_idx].value),
+                'title': ws_row[dataset_title_idx].value,
+                'status': 'error',
+                'message': ("Department not found. We can't "
+                            "upload the dataset until we can "
+                            "associate it with an existing department."),
+            }
+        return dataset, dataset_preview
+
+    @classmethod
+    def get_group_preview(cls, group_name):
+        category = None
+        group_preview = None
+        category = Category.get_by_slug(group_name)
+        if category:
+            group_preview = {
+                'name': category.slug,
+                'object': category,
+                'status': 'success',
+            }
+        else:
+            group_preview = {
+                'name': group_name,
+                'status': 'error',
+                'message': ("Group not found. Ensure that group exists and "
+                            "correct name is used in your metadata."),
+            }
+        return category, group_preview
+
+
+def max_length_slugify(value):
+    return slugify(value, max_length=85, word_boundary=True)

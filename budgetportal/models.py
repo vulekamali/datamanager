@@ -8,14 +8,15 @@ from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
 from django.utils.text import slugify as django_slugify
 from itertools import groupby
-from os.path import splitext, basename
 from partial_index import PartialIndex
 from pprint import pformat
-from slugify import slugify as extended_slugify
 import logging
 import re
 import requests
-import urlparse
+from urllib2 import urlopen
+import os
+from tempfile import NamedTemporaryFile
+import shutil
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -274,7 +275,7 @@ class Department(models.Model):
         else:
             logger.warn("Not updating datasets for %s", self.get_url_path())
 
-    def _create_treasury_dataset(self):
+    def _create_treasury_dataset(self, name, title, group_id):
         vocab_map = get_vocab_map()
         tags = [
             { 'vocabulary_id': vocab_map['spheres'],
@@ -288,8 +289,9 @@ class Department(models.Model):
                 'name': self.government.name,
             })
         dataset_fields = {
-            'title': package_title(self),
-            'name': package_id(self),
+            'title': title,
+            'name': name,
+            'groups': [{'name': 'estimates-of-national-expenditure-votes'}],
             'extras': [
                 {'key': 'department_name', 'value': self.name},
                 {'key': 'Department Name', 'value': self.name},
@@ -304,39 +306,6 @@ class Department(models.Model):
             'tags': tags,
         }
         ckan.action.package_create(**dataset_fields)
-
-    def upload_resource(self, local_path, overwrite=False):
-        if not self.treasury_datasets:
-            self._create_treasury_dataset()
-        self.treasury_datasets = self.get_treasury_datasets()
-        assert(len(self.treasury_datasets) == 1)
-        dataset = self.treasury_datasets[0]
-        resource = None
-        for existing_resource in dataset['resources']:
-            existing_path = urlparse.urlparse(existing_resource['url']).path
-            existing_ext = splitext(basename(existing_path))[1]
-            ext = splitext(local_path)[1]
-            if existing_ext == ext:
-                resource = existing_resource
-        resource_fields = {
-            'package_id': dataset['id'],
-            'name': resource_name(self),
-            'upload': open(local_path, 'rb')
-        }
-
-        if resource and not overwrite:
-            logger.info("Not overwriting existing resource %s to package %s",
-                        local_path, dataset['id'])
-            return
-
-        if resource:
-            logger.info("Re-uploading resource %s to package %s", local_path, dataset['id'])
-            resource_fields['id'] = resource['id']
-            result = ckan.action.resource_patch(**resource_fields)
-        else:
-            logger.info("Uploading resource %s to package %s", local_path, dataset['id'])
-            result = ckan.action.resource_create(**resource_fields)
-        logger.info("Uploading resource result: %r", result)
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -911,6 +880,28 @@ class Dataset():
             'twitter': org['twitter_id'] if 'twitter_id' in org else None,
         }
 
+    def upload_resource(self, name, url):
+        try:
+            logger.info("Downloading %s to upload to package %s", url, self.slug)
+            with urlopen(url) as url_file, NamedTemporaryFile(delete=False) as resource_file:
+                logger.info("Downloading %s to %s", url, resource_file.name)
+                shutil.copyfileobj(url_file, resource_file)
+
+            logger.info("Uploading file %s as resource '%s' to package %s",
+                        resource_file.name, name, self.slug)
+            resource_fields = {
+                'package_id': self.slug,
+                'name': name,
+                'upload': open(resource_file.name, 'rb'),
+            }
+            result = ckan.action.resource_create(**resource_fields)
+            logger.info("Upload result: resource '%s' to package %s %r", name, self.slug, result)
+            self.resources.append(result)
+        except Exception as e:
+            logger.exception(e)
+        finally:
+            os.remove(resource_file.path)
+
     @staticmethod
     def get_contributed_datasets():
         query = {
@@ -959,8 +950,12 @@ class Category():
         if category_slug == 'contributed':
             return cls.contributed()
         else:
-            group = ckan.action.group_show(id=category_slug)
-            return cls.from_group(group)
+            try:
+                group = ckan.action.group_show(id=category_slug)
+                return cls.from_group(group)
+            except NotFound:
+                logger.info("Group with name %s not found.", category_slug)
+                return None
 
     @classmethod
     def from_group(cls, group):
@@ -1006,33 +1001,6 @@ def extras_set(extras, key, value):
         if extra['key'] == key:
             extra['value'] = value
             break
-
-
-def package_id(department):
-    financial_year = department.get_financial_year().slug
-    sphere = department.government.sphere
-    geo_region = department.government.name
-    if sphere.slug == 'provincial':
-        short_dept = extended_slugify(department.name, max_length=85, word_boundary=True)
-        return extended_slugify('prov dept %s %s %s' % (
-            prov_abbrev[geo_region], short_dept, financial_year))
-    elif sphere.slug == 'national':
-        short_dept = extended_slugify(department.name, max_length=96, word_boundary=True)
-        return extended_slugify('nat dept %s %s' % (short_dept, financial_year))
-    else:
-        raise Exception('unknown sphere %r' % sphere)
-
-
-def package_title(department):
-    financial_year = department.get_financial_year().slug
-    sphere = department.government.sphere
-    geo_region = department.government.name
-    if sphere.slug == 'provincial':
-        return "%s Department: %s %s" % (geo_region, department.name, financial_year)
-    elif sphere.slug == 'national':
-        return "National Department: %s %s" % (department.name, financial_year)
-    else:
-        raise Exception('unknown sphere %r' % sphere)
 
 
 def resource_name(department):

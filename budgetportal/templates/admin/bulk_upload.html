@@ -24,6 +24,7 @@
     <tr>
       <th>government</th>
       <th>department</th>
+      <th>group</th>
       <th>dataset_name</th>
       <th>dataset_title</th>
       <th>resource_title</th>
@@ -37,18 +38,28 @@
           title="{{ row.government.message }}"
           >
         {{ row.government.name }}
+        <input type="hidden" name="government_id[]" value="{{ row.government.object.id }}">
       </td>
 
       <td class="{{ row.department.status }}"
           title="{{ row.department.message }}"
           >
         {{ row.department.name }}
+        <input type="hidden" name="department_id[]" value="{{ row.department.object.id }}">
+      </td>
+
+      <td class="{{ row.group.status }}"
+          title="{{ row.group.message }}"
+          >
+        {{ row.group.name }}
+        <input type="hidden" name="group_name[]" value="{{ row.group.name }}">
       </td>
 
       <td class="{{ row.dataset.status }}"
           title="{{ row.dataset.message }}"
           >
         {{ row.dataset.name }}
+        <input type="hidden" name="dataset_slug[]" value="{{ row.dataset.object.slug }}">
       </td>
 
       <td class="{{ row.dataset.status }}"
@@ -61,12 +72,14 @@
           title="{{ row.resource.message }}"
           >
         {{ row.resource.name }}
+        <input type="hidden" name="resource_name[]" value="{{ row.resource.name }}">
       </td>
 
       <td class="{{ row.resource.status }}"
           title="{{ row.resource.message }}"
           >
         {{ row.resource.format }}
+        <input type="hidden" name="resource_format[]" value="{{ row.resource.format }}">
       </td>
 
       <td>
