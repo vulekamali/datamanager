@@ -373,36 +373,6 @@ class Department(models.Model):
             assert(len(response['results']) == 1)
             return Dataset.from_package(response['results'][0])
 
-    def get_treasury_resources(self):
-        resources = {}
-        datasets = self.get_treasury_datasets()
-        if datasets:
-            package = datasets[0]
-            for resource in package['resources']:
-                if resource['name'].startswith('Vote'):
-                    if self.government.sphere.slug == 'provincial':
-                        doc_short = "EPRE"
-                        doc_long = "Estimates of Provincial Revenue and Expenditure"
-                    elif self.government.sphere.slug == 'national':
-                        doc_short = "ENE"
-                        doc_long = "Estimates of National Expenditure"
-                    else:
-                        raise Exception("unexpected sphere")
-                    name = "%s for %s" % (doc_short, resource['name'])
-                    description = ("The %s (%s) sets out the detailed spending "
-                                   "plans of each government department for the "
-                                   "coming year.") % (doc_long, doc_short)
-                    if name not in resources:
-                        resources[name] = {
-                            'description': description,
-                            'formats': [],
-                        }
-                    resources[name]['formats'].append({
-                        'url': resource['url'],
-                        'format': resource['format'],
-                    })
-        return resources
-
     def _get_functions_query(self):
         function_names = [f.name for f in self.get_govt_functions()]
         ckan_tag_names = [re.sub('[^\w -]', '', n) for n in function_names]
@@ -858,10 +828,20 @@ class Dataset():
             'twitter': org['twitter_id'] if 'twitter_id' in org else None,
         }
 
-    def upload_resource(self, name, url):
+    def get_resource(self, name, format):
+        for resource in self.resources:
+            if (resource['name'] == name
+                and resource['format'] == format):
+                return resource
+
+    def create_resource(self, name, format, url):
         try:
+            # urlopen doesn't encode spaces for you https://bugs.python.org/issue13359
+            if ' ' in url:
+                url = url.replace(' ', '%20')
             logger.info("Downloading %s to upload to package %s", url, self.slug)
-            with urlopen(url) as url_file, NamedTemporaryFile(delete=False) as resource_file:
+            url_file = urlopen(url)
+            with NamedTemporaryFile(delete=False) as resource_file:
                 logger.info("Downloading %s to %s", url, resource_file.name)
                 shutil.copyfileobj(url_file, resource_file)
 
@@ -871,14 +851,17 @@ class Dataset():
                 'package_id': self.slug,
                 'name': name,
                 'upload': open(resource_file.name, 'rb'),
+                'format': format,
             }
             result = ckan.action.resource_create(**resource_fields)
             logger.info("Upload result: resource '%s' to package %s %r", name, self.slug, result)
             self.resources.append(result)
         except Exception as e:
             logger.exception(e)
+            raise e
         finally:
-            os.remove(resource_file.path)
+            logger.info("Deleting temporary file %s", resource_file.name)
+            os.remove(resource_file.name)
 
     @staticmethod
     def get_contributed_datasets():

@@ -34,3 +34,22 @@ def create_dataset(department_id, name, title, group_name):
             'status': "Created",
             'package': dataset.package,
         }
+
+
+def create_resource(department_id, group_name, dataset_name, name, format, url):
+    department = Department.objects.get(pk=department_id)
+    dataset = department.get_dataset(group_name, dataset_name)
+    resource = dataset.get_resource(name, format)
+    if resource:
+        logger.info("Not recreating existing resource %s %s on dataset %s",
+                    name, format, dataset_name)
+        return {
+            'status': "Already exists",
+            'resource': resource,
+        }
+    else:
+        resource = dataset.create_resource(name, format, url)
+        return {
+            'status': "Created",
+            'package': resource,
+        }

@@ -301,11 +301,12 @@ LOGGING = {
 Q_CLUSTER = {
     'name': 'Something',
     'workers': 1,
-    'timeout': 30*60,
+    'timeout': 30*60,     # Timeout a task after this many seconds
     'retry': 5,
     'queue_limit': 1,
     'bulk': 1,
-    'orm': 'default',
-    'poll': 10,
+    'orm': 'default',     # Use Django ORM as storage backend
+    'poll': 10,           # Check for queued tasks this frequently (seconds)
     'save_limit': 0,
+    'ack_failures': True, # Dequeue failed tasks
 }

@@ -258,10 +258,7 @@ class Preview:
         resource = None
         resource_preview = None
         if dataset:
-            for existing_resource in dataset.resources:
-                if (existing_resource['name'] == name
-                    and existing_resource['format'] == format):
-                    resource = existing_resource
+            resource = dataset.get_resource(name, format)
             if resource:
                 resource_preview = {
                     'name': name,
@@ -303,6 +300,23 @@ def queue_actions(post_data):
                 'name': dataset_name,
                 'title': dataset_title,
                 'group_name': group_name
+            })
+            action_count += 1
+    for preview_idx, action in enumerate(post_data.getlist('resource_action[]')):
+        if action == 'create':
+            department_id = post_data.getlist('department_id[]')[preview_idx]
+            group_name = post_data.getlist('group_name[]')[preview_idx]
+            dataset_name = post_data.getlist('dataset_name[]')[preview_idx]
+            resource_name = post_data.getlist('resource_name[]')[preview_idx]
+            resource_format = post_data.getlist('resource_format[]')[preview_idx]
+            resource_url = post_data.getlist('resource_url[]')[preview_idx]
+            async(tasks.create_resource, **{
+                'department_id': department_id,
+                'dataset_name': dataset_name,
+                'group_name': group_name,
+                'name': resource_name,
+                'format': resource_format,
+                'url': resource_url,
             })
             action_count += 1
     return action_count

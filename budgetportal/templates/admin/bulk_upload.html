@@ -78,6 +78,7 @@
           >
         {{ row.resource.name }}
         <input type="hidden" name="resource_name[]" value="{{ row.resource.name }}">
+        <input type="hidden" name="resource_action[]" value="{{ row.resource.action }}">
       </td>
 
       <td class="{{ row.resource.status }}"
