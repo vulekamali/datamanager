@@ -76,34 +76,31 @@ class Preview:
                         if cell.value:
                             heading_index[cell.value] = i
 
-                    government_idx = heading_index['government']
-                    department_name_idx = heading_index[u'department_name']
-                    dataset_name_idx = heading_index['dataset_name']
-                    dataset_title_idx = heading_index['dataset_title']
                     resource_name_idx = heading_index['resource_name']
                     resource_format_idx = heading_index['resource_format']
                     resource_url_idx = heading_index['resource_url']
 
                 else:
+                    government_name = ws_row[heading_index['government']].value
+                    department_name = ws_row[heading_index[u'department_name']].value
                     group_name = max_length_slugify(ws_row[heading_index['group_id']].value)
+                    dataset_name = max_length_slugify(ws_row[heading_index['dataset_name']].value)
+                    dataset_title = ws_row[heading_index['dataset_title']].value
                     row = {}
 
                     government, government_preview = self.get_government_preview(
-                        ws_row,
-                        government_idx,
+                        government_name,
                         sphere
                     )
                     row['government'] = government_preview
                     department, department_preview = self.get_department_preview(
-                        ws_row,
-                        department_name_idx,
+                        department_name,
                         government
                     )
                     row['department'] = department_preview
                     dataset, dataset_preview = self.get_dataset_preview(
-                        ws_row,
-                        dataset_name_idx,
-                        dataset_title_idx,
+                        dataset_name,
+                        dataset_title,
                         group_name,
                         department
                     )
@@ -121,13 +118,13 @@ class Preview:
                     self.rows.append(row)
 
     @classmethod
-    def get_government_preview(cls, ws_row, government_idx, sphere):
+    def get_government_preview(cls, government_name, sphere):
         government = None
         government_preview = None
 
         government = Government.objects.filter(
             sphere=sphere,
-            name=ws_row[government_idx].value
+            name=government_name
         )
         if government:
             government = government[0]
@@ -138,21 +135,21 @@ class Preview:
             }
         else:
             government_preview = {
-                'name': ws_row[government_idx].value,
+                'name': government_name,
                 'message': "Government not found for selected sphere",
                 'status': 'error',
             }
         return government, government_preview
 
     @classmethod
-    def get_department_preview(cls, ws_row, department_name_idx, government):
+    def get_department_preview(cls, department_name, government):
         department = None
         department_preview = None
 
         if government:
             department = Department.objects.filter(
                 government=government,
-                name=ws_row[department_name_idx].value
+                name=department_name
             )
             if department:
                 department = department[0]
@@ -163,26 +160,25 @@ class Preview:
                 }
             else:
                 department_preview = {
-                    'name': ws_row[department_name_idx].value,
+                    'name': department_name,
                     'message': "Department not found for specified government",
                     'status': 'error',
                 }
         else:
             department_preview = {
-                'name': ws_row[department_name_idx].value,
+                'name': department_name,
                 'message': "Can't look up department without government",
                 'status': 'error',
             }
         return department, department_preview
 
     @classmethod
-    def get_dataset_preview(cls, ws_row, dataset_name_idx, dataset_title_idx,
-                            group_name, department):
+    def get_dataset_preview(cls, dataset_name, dataset_title, group_name, department):
         dataset = None
         dataset_preview = None
         if department:
             dataset = department.get_dataset(
-                name=max_length_slugify(ws_row[dataset_name_idx].value),
+                name=dataset_name,
                 group_name=group_name
             )
             if dataset:
@@ -195,14 +191,14 @@ class Preview:
                 }
             else:
                 dataset = Dataset.fetch(
-                    max_length_slugify(ws_row[dataset_name_idx].value)
+                    dataset_name
                 )
                 if dataset:
                     dataset_preview = {
                         'object': dataset,
                         'name': dataset.slug,
                         'title': dataset.name,
-                        'new_title': ws_row[dataset_title_idx].value,
+                        'new_title':dataset_title,
                         'status': 'info',
                         'message': ("Dataset by this name exists but it "
                                     "is not configured correctly. It "
@@ -211,15 +207,15 @@ class Preview:
                     }
                 else:
                     dataset_preview = {
-                        'name': max_length_slugify(ws_row[dataset_name_idx].value),
-                        'title': ws_row[dataset_title_idx].value,
+                        'name': dataset_name,
+                        'title': dataset_title,
                         'status': 'success',
                         'message': "This dataset will be created.",
                     }
         else:
             dataset_preview = {
-                'name': max_length_slugify(ws_row[dataset_name_idx].value),
-                'title': ws_row[dataset_title_idx].value,
+                'name': dataset_name,
+                'title': dataset_title,
                 'status': 'error',
                 'message': ("Department not found. We can't "
                             "upload the dataset until we can "
