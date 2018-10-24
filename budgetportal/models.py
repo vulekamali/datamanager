@@ -225,7 +225,6 @@ class Department(models.Model):
     def __init__(self, *args, **kwargs):
         super(Department, self).__init__(*args, **kwargs)
         if self.pk:
-            self.treasury_datasets = self.get_treasury_datasets()
             self.old_name = self.name
             self.old_slug = self.slug
 
@@ -275,7 +274,7 @@ class Department(models.Model):
         else:
             logger.warn("Not updating datasets for %s", self.get_url_path())
 
-    def _create_treasury_dataset(self, name, title, group_id):
+    def create_dataset(self, name, title, group_name):
         vocab_map = get_vocab_map()
         tags = [
             { 'vocabulary_id': vocab_map['spheres'],
@@ -291,7 +290,7 @@ class Department(models.Model):
         dataset_fields = {
             'title': title,
             'name': name,
-            'groups': [{'name': 'estimates-of-national-expenditure-votes'}],
+            'groups': [{'name': group_name}],
             'extras': [
                 {'key': 'department_name', 'value': self.name},
                 {'key': 'Department Name', 'value': self.name},
@@ -305,7 +304,7 @@ class Department(models.Model):
             'license_id': 'other-pd',
             'tags': tags,
         }
-        ckan.action.package_create(**dataset_fields)
+        return Dataset.from_package(ckan.action.package_create(**dataset_fields))
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -343,29 +342,6 @@ class Department(models.Model):
             else:
                 return dept
         return self
-
-    def get_treasury_datasets(self):
-        query = {
-            'q': '',
-            'fq': ('+organization:"national-treasury"'
-                   '+vocab_financial_years:"%s"'
-                   '+vocab_spheres:"%s"'
-                   '+extras_s_geographic_region_slug:"%s"'
-                   '+extras_s_department_name_slug:"%s"') % (
-                       self.government.sphere.financial_year.slug,
-                       self.government.sphere.slug,
-                       self.government.slug,
-                       self.get_primary_department().slug,
-                   ),
-            'rows': 1,
-        }
-        response = ckan.action.package_search(**query)
-        logger.info(
-            "query %s\nreturned %d results",
-            pformat(query),
-            len(response['results'])
-        )
-        return response['results']
 
     def get_dataset(self, group_name, name):
         """
@@ -813,6 +789,7 @@ class Dataset():
         self.organization_slug = kwargs['organization_slug']
         self.category = kwargs['category']
         self._openspending_api = None
+        self.package = kwargs['package']
 
     @classmethod
     def from_package(cls, package):
@@ -852,6 +829,7 @@ class Dataset():
             resources=resources,
             organization_slug=package['organization']['name'],
             category=category,
+            package=package
         )
 
     @classmethod
