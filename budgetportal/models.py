@@ -910,6 +910,10 @@ class Dataset():
 
 
 class Category():
+    excluded_groups = {
+        'adjusted-budget-vote-documents'
+    }
+
     def __init__(self, **kwargs):
         self.slug = kwargs['slug']
         self.name = kwargs['name']
@@ -919,7 +923,8 @@ class Category():
     def get_all(cls):
         categories = [cls.contributed()]
         for group in ckan.action.group_list(all_fields=True):
-            categories.append(cls.from_group(group))
+            if group['name'] not in cls.excluded_groups:
+                categories.append(cls.from_group(group))
         return sorted(categories, key=lambda c: c.name)
 
     @classmethod
