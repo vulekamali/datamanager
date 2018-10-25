@@ -8,6 +8,8 @@ from budgetportal.models import (
     Department,
     Dataset,
     Category,
+    PackageDeletedException,
+    PackageWithoutGroupException
 )
 from django import forms
 from django.contrib import messages
@@ -188,49 +190,69 @@ class Preview:
     def get_dataset_preview(cls, dataset_name, dataset_title, group_name, department):
         dataset = None
         dataset_preview = None
-        if department:
-            # Dataset for this department by group name
-            dataset = department.get_dataset(group_name=group_name)
-            if dataset:
-                dataset_preview = {
-                    'object': dataset,
-                    'name': dataset.slug,
-                    'title': dataset.name,
-                    'status': 'success',
-                    'message': "This dataset already exists",
-                }
-            else:
-                # Dataset by dataset name
-                dataset = Dataset.fetch(dataset_name)
+        try:
+            if department:
+                # Dataset for this department by group name
+                dataset = department.get_dataset(group_name=group_name)
                 if dataset:
                     dataset_preview = {
                         'object': dataset,
                         'name': dataset.slug,
                         'title': dataset.name,
-                        'new_title':dataset_title,
-                        'status': 'error',
-                        'message': ("Dataset by this name exists but it "
-                                    "is not configured correctly to be "
-                                    "identified as part of this dataset."),
+                        'status': 'success',
+                        'message': "This dataset already exists",
                     }
                 else:
-                    dataset_preview = {
-                        'name': dataset_name,
-                        'title': dataset_title,
-                        'status': 'info',
-                        'message': "This dataset will be created.",
-                        'action': 'create',
-                    }
-        else:
-            dataset_preview = {
+                    try:
+                        # Dataset by dataset name
+                        dataset = Dataset.fetch(dataset_name)
+                    except PackageDeletedException:
+                        return None, {
+                            'name': dataset_name,
+                            'title': dataset_title,
+                            'status': 'error',
+                            'message': ("A dataset with this name exists but is deleted. "
+                                        "First purge it or change its state to active or "
+                                        "change its name"),
+                        }
+                    if dataset:
+                        dataset_preview = {
+                            'object': dataset,
+                            'name': dataset.slug,
+                            'title': dataset.name,
+                            'new_title':dataset_title,
+                            'status': 'error',
+                            'message': ("Dataset by this name exists but it "
+                                        "is not configured correctly to be "
+                                        "identified as part of this dataset."),
+                        }
+                    else:
+                        dataset_preview = {
+                            'name': dataset_name,
+                            'title': dataset_title,
+                            'status': 'info',
+                            'message': "This dataset will be created.",
+                            'action': 'create',
+                        }
+            else:
+                dataset_preview = {
+                    'name': dataset_name,
+                    'title': dataset_title,
+                    'status': 'error',
+                    'message': ("Department not found. We can't "
+                                "upload the dataset until we can "
+                                "associate it with an existing department."),
+                }
+            return dataset, dataset_preview
+        except PackageWithoutGroupException:
+            return None, {
                 'name': dataset_name,
                 'title': dataset_title,
                 'status': 'error',
-                'message': ("Department not found. We can't "
-                            "upload the dataset until we can "
-                            "associate it with an existing department."),
+                'message': ("Dataset exists but must have the correct group "
+                            "assigned."),
             }
-        return dataset, dataset_preview
+
 
     @classmethod
     def get_group_preview(cls, group_name):

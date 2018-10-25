@@ -754,6 +754,12 @@ class Programme(models.Model):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
+class PackageDeletedException(Exception):
+    pass
+
+class PackageWithoutGroupException(Exception):
+    pass
+
 class Dataset():
     def __init__(self, **kwargs):
         self.author = kwargs['author']
@@ -776,6 +782,9 @@ class Dataset():
 
     @classmethod
     def from_package(cls, package):
+        if package['state'] == 'deleted':
+            raise PackageDeletedException
+
         resources = []
         for resource in package['resources']:
             resources.append({
@@ -788,6 +797,8 @@ class Dataset():
         if package_is_contributed(package):
             category = Category.contributed()
         else:
+            if not package['groups']:
+                raise PackageWithoutGroupException
             category = Category.from_group(package['groups'][0])
 
         return cls(
@@ -812,7 +823,7 @@ class Dataset():
             resources=resources,
             organization_slug=package['organization']['name'],
             category=category,
-            package=package
+            package=package,
         )
 
     @classmethod
