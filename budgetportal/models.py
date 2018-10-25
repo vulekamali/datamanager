@@ -911,7 +911,8 @@ class Dataset():
 
 class Category():
     excluded_groups = {
-        'adjusted-budget-vote-documents'
+        'budget-vote-documents',
+        'adjusted-budget-vote-documents',
     }
 
     def __init__(self, **kwargs):
