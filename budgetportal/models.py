@@ -305,6 +305,7 @@ class Department(models.Model):
             'license_id': 'other-pd',
             'tags': tags,
         }
+        logger.info("Creating package with %r", dataset_fields)
         return Dataset.from_package(ckan.action.package_create(**dataset_fields))
 
     def get_url_path(self):
