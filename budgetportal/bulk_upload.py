@@ -2,10 +2,6 @@
 Admin View for bulk uploading
 """
 
-from django import forms
-from django.shortcuts import render
-from io import BytesIO
-from openpyxl import load_workbook
 from budgetportal.models import (
     Sphere,
     Government,
@@ -13,12 +9,16 @@ from budgetportal.models import (
     Dataset,
     Category,
 )
-import logging
-from slugify import slugify
-from django_q.tasks import async
-import tasks
-from django_q.brokers import get_broker
+from django import forms
 from django.contrib import messages
+from django.shortcuts import render
+from django_q.brokers import get_broker
+from django_q.tasks import async
+from io import BytesIO
+from openpyxl import load_workbook
+from slugify import slugify
+import logging
+import tasks
 
 logger = logging.getLogger(__name__)
 
@@ -208,11 +208,10 @@ class Preview:
                         'name': dataset.slug,
                         'title': dataset.name,
                         'new_title':dataset_title,
-                        'status': 'info',
+                        'status': 'error',
                         'message': ("Dataset by this name exists but it "
-                                    "is not configured correctly. It "
-                                    "will be updated to be associated "
-                                    "with this department."),
+                                    "is not configured correctly to be "
+                                    "identified as part of this dataset."),
                     }
                 else:
                     dataset_preview = {
@@ -299,34 +298,25 @@ class Preview:
 
 def queue_actions(post_data):
     action_count = 0
+    # Using kwargs to django-q so it shows field names in Admin
     for preview_idx, action in enumerate(post_data.getlist('dataset_action[]')):
         if action == 'create':
-            department_id = post_data.getlist('department_id[]')[preview_idx]
-            dataset_name = post_data.getlist('dataset_name[]')[preview_idx]
-            dataset_title = post_data.getlist('dataset_title[]')[preview_idx]
-            group_name = post_data.getlist('group_name[]')[preview_idx]
             async(tasks.create_dataset, **{
-                'department_id': department_id,
-                'name': dataset_name,
-                'title': dataset_title,
-                'group_name': group_name
+                'department_id': post_data.getlist('department_id[]')[preview_idx],
+                'name': post_data.getlist('dataset_name[]')[preview_idx],
+                'title': post_data.getlist('dataset_title[]')[preview_idx],
+                'group_name': post_data.getlist('group_name[]')[preview_idx],
             })
             action_count += 1
     for preview_idx, action in enumerate(post_data.getlist('resource_action[]')):
         if action == 'create':
-            department_id = post_data.getlist('department_id[]')[preview_idx]
-            group_name = post_data.getlist('group_name[]')[preview_idx]
-            dataset_name = post_data.getlist('dataset_name[]')[preview_idx]
-            resource_name = post_data.getlist('resource_name[]')[preview_idx]
-            resource_format = post_data.getlist('resource_format[]')[preview_idx]
-            resource_url = post_data.getlist('resource_url[]')[preview_idx]
             async(tasks.create_resource, **{
-                'department_id': department_id,
-                'dataset_name': dataset_name,
-                'group_name': group_name,
-                'name': resource_name,
-                'format': resource_format,
-                'url': resource_url,
+                'department_id': post_data.getlist('department_id[]')[preview_idx],
+                'dataset_name': post_data.getlist('dataset_name[]')[preview_idx],
+                'group_name': post_data.getlist('group_name[]')[preview_idx],
+                'name': post_data.getlist('resource_name[]')[preview_idx],
+                'format': post_data.getlist('resource_format[]')[preview_idx],
+                'url': post_data.getlist('resource_url[]')[preview_idx],
             })
             action_count += 1
     return action_count

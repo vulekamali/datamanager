@@ -346,7 +346,9 @@ class Department(models.Model):
 
     def get_dataset(self, group_name, name=None):
         """
-        Get a dataset correctly annotated to match this department
+        Get a dataset correctly annotated to match this department.
+        If name isn't provided, still assume there's just one dataset
+        in the specified group categorised to match this department.
         """
         query = {
             'q': '',
@@ -840,6 +842,9 @@ class Dataset():
         }
 
     def get_resource(self, format, name=None):
+        """
+        Returns the first matching resource, or None if none match.
+        """
         for resource in self.resources:
             if (name
                 and resource['name'] == name
@@ -876,7 +881,7 @@ class Dataset():
             logger.exception(e)
             raise e
         finally:
-            logger.info("Deleting temporary file %s", filenae)
+            logger.info("Deleting temporary directory %s", tempdir)
             shutil.rmtree(tempdir)
 
     @staticmethod
