@@ -170,18 +170,47 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'url_path': dataset.get_url_path(),
         })
 
+    #======== programmes =========================
     programmes = department.get_programme_budgets()
-    if not programmes['programme_budgets']:
+    if not programmes:
+        programmes = {}
+    if (not programmes) or (not programmes['programme_budgets']):
         programmes['programme_budgets'] = [
             {'name': p.name, 'total_budget': None}
             for p in department.programmes.order_by('programme_number')
         ]
+
+    # ======= budget docs =========================
+    budget_dataset = department.get_dataset(
+        group_name='budget-vote-documents')
+    if budget_dataset:
+        department_budget = {
+            'name': budget_dataset.name,
+            'document': budget_dataset.get_resource(format='PDF'),
+            'tables': (budget_dataset.get_resource(format='XLS') \
+                         or budget_dataset.get_resource(format='XLSX')),
+        }
+    else:
+        department_budget = None
+    adjusted_budget_dataset = department.get_dataset(
+        group_name='adjusted-budget-vote-documents')
+    if adjusted_budget_dataset:
+        department_adjusted_budget = {
+            'name': adjusted_budget_dataset.name,
+            'document': adjusted_budget_dataset.get_resource(format='PDF'),
+            'tables': (adjusted_budget_dataset.get_resource(format='XLS') \
+                         or adjusted_budget_dataset.get_resource(format='XLSX')),
+        }
+    else:
+        department_adjusted_budget = None
+
     primary_department = department.get_primary_department()
 
     if department.government.sphere.slug == 'national':
         description_govt = "National"
     elif department.government.sphere.slug == 'provincial':
         description_govt = department.government.name
+
 
     context = {
         'economic_classification_by_programme': department.get_econ_by_programme_budgets(),
@@ -214,7 +243,8 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             selected_year.slug,
             COMMON_DESCRIPTION_ENDING,
         ),
-        'treasury_datasets': department.get_treasury_resources(),
+        'department_budget': department_budget,
+        'department_adjusted_budget': department_adjusted_budget,
         'vote_number': department.vote_number,
         'vote_primary': {
             'url_path': primary_department.get_url_path(),

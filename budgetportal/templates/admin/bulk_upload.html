@@ -1,0 +1,106 @@
+{% extends "admin/base_site.html" %}
+
+{% load staticfiles pipeline %}
+
+{% block extrastyle %}
+    {% stylesheet "admin" %}
+{% endblock %}
+
+{% block title %}Bulk Upload{% endblock title %}
+
+{% block content %}
+
+<h1>Bulk Upload</h1>
+
+<a href="/admin/django_q/ormq">Task queue length: {{ queue_size }} items.</a>
+
+<form action="/admin/bulk_upload" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  {% if file %}<p>File: {{ file }}</p>{% endif %}
+  {% if not valid %}<p>Something went wrong. Please try again.</p>{% endif %}
+
+  {% if preview %}
+
+  <table class="table">
+    <tr>
+      <th>government</th>
+      <th>department</th>
+      <th>group</th>
+      <th>dataset_name</th>
+      <th>dataset_title</th>
+      <th>resource_title</th>
+      <th>resource_format</th>
+      <th>resource_url</th>
+    </tr>
+
+    {% for row in preview.rows %}
+    <tr>
+      <td class="{{ row.government.status }}"
+          title="{{ row.government.message }}"
+          >
+        {{ row.government.name }}
+        <input type="hidden" name="government_id[]" value="{{ row.government.object.id }}">
+      </td>
+
+      <td class="{{ row.department.status }}"
+          title="{{ row.department.message }}"
+          >
+        {{ row.department.name }}
+        <input type="hidden" name="department_id[]" value="{{ row.department.object.id }}">
+      </td>
+
+      <td class="{{ row.group.status }}"
+          title="{{ row.group.message }}"
+          >
+        {{ row.group.name }}
+        <input type="hidden" name="group_name[]" value="{{ row.group.name }}">
+      </td>
+
+      <td class="{{ row.dataset.status }}"
+          title="{{ row.dataset.message }}"
+          >
+        {{ row.dataset.name }}
+        <input type="hidden" name="dataset_name[]" value="{{ row.dataset.name }}">
+        <input type="hidden" name="dataset_action[]" value="{{ row.dataset.action }}">
+      </td>
+
+      <td class="{{ row.dataset.status }}"
+          title="{{ row.dataset.message }}"
+          >
+        {{ row.dataset.title }}
+        <input type="hidden" name="dataset_title[]" value="{{ row.dataset.title }}">
+      </td>
+
+      <td class="{{ row.resource.status }}"
+          title="{{ row.resource.message }}"
+          >
+        {{ row.resource.name }}
+        <input type="hidden" name="resource_name[]" value="{{ row.resource.name }}">
+        <input type="hidden" name="resource_action[]" value="{{ row.resource.action }}">
+      </td>
+
+      <td class="{{ row.resource.status }}"
+          title="{{ row.resource.message }}"
+          >
+        {{ row.resource.format }}
+        <input type="hidden" name="resource_format[]" value="{{ row.resource.format }}">
+      </td>
+
+      <td class="{{ row.resource.status }}"
+          title="{{ row.resource.message }}"
+          >
+        {{ row.resource.url }}
+        <input type="hidden" name="resource_url[]" value="{{ row.resource.url }}">
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  <input type="submit" value="Submit"/>
+
+</form>
+
+{% endblock content %}

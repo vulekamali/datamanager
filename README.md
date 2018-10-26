@@ -102,6 +102,7 @@ dokku config:set budgetportal DJANGO_DEBUG=false \
 git push dokku master
 dokku run python manage.py migrate
 dokku run python manage.py createsuperuser
+dokku ps:scale budgetportal worker=1
 ```
 
 Also use `dokku domains` to configure the hostnames that your app will serve.
