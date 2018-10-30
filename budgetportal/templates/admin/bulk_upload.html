@@ -12,7 +12,9 @@
 
 <h1>Bulk Upload</h1>
 
-<a href="/admin/django_q/ormq">Task queue length: {{ queue_size }} items.</a>
+<p><a href="/admin/bulk_upload/template">Download metadata xlsx template</a></p>
+
+<p><a href="/admin/django_q/ormq">Task queue length: {{ queue_size }} items.</a></p>
 
 <form action="/admin/bulk_upload" method="post" enctype="multipart/form-data">
   {% csrf_token %}
