@@ -7,6 +7,7 @@ from django.views.decorators.cache import cache_page
 from . import views
 from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView
+from . import bulk_upload
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
@@ -64,6 +65,7 @@ urlpatterns = [
 
     # Admin
     url(r'^admin/', admin.site.urls),
+    url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
 ]
 

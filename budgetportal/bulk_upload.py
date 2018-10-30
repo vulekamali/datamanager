@@ -13,22 +13,93 @@ from budgetportal.models import (
 )
 from django import forms
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render
 from django_q.brokers import get_broker
 from django_q.tasks import async
 from io import BytesIO
-from openpyxl import load_workbook
+from openpyxl import load_workbook, Workbook
+from openpyxl.comments import Comment
+from openpyxl.styles import Font
+from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.write_only import WriteOnlyCell
+from openpyxl.writer.excel import save_virtual_workbook
 from slugify import slugify
 import logging
 import tasks
 
 logger = logging.getLogger(__name__)
 
+HEADINGS = [
+    {
+        'label': 'government',
+        'comment': None,
+    },
+    {
+        'label': 'group_id',
+        'comment': None,
+    },
+    {
+        'label': 'department_name',
+        'comment': None,
+    },
+    {
+        'label': 'dataset_name',
+        'comment': "This will be \"sluggified\" and must then be unique to this dataset in the entire system. For example, Gauteng Provincial Legislature EPRE for 2017-19 is prov-dept-gt-gauteng-provincial-legislature-2017-18",
+    },
+    {
+        'label': 'dataset_title',
+        'comment': None,
+    },
+    {
+        'label': 'resource_name',
+        'comment': None,
+    },
+    {
+        'label': 'resource_format',
+        'comment': "You can usually make this the capitalised extension of the file. We use the combination of the format and resource title to ensure we do not duplicate resources. So we assume a file has only one resource with the same title and format combination.",
+    },
+    {
+        'label': 'resource_url',
+        'comment': None,
+    }
+]
+
 
 class FileForm(forms.Form):
     sphere_queryset = Sphere.objects.all()
     sphere = forms.ModelChoiceField(queryset=sphere_queryset, empty_label=None)
     file = forms.FileField(required=False)
+
+
+def template_view(request):
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Resources"
+
+    for idx, heading in enumerate(HEADINGS):
+        column_letter = get_column_letter(idx+1)
+        ref = "%s1" % column_letter
+        # Value
+        ws[ref] = heading['label']
+
+        # Comment
+        if heading['comment']:
+            ws[ref].comment = Comment(heading['comment'], "vulekamali")
+
+        # Column width
+        column = ws.column_dimensions[column_letter]
+        column.width = 20
+
+        # Style
+        ws[ref].font = Font(bold=True)
+
+    response = HttpResponse(
+        content=save_virtual_workbook(wb),
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = 'attachment; filename=vulekamali-bulk-upload.xlsx'
+    return response
 
 
 def bulk_upload_view(request):
