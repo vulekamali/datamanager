@@ -306,7 +306,10 @@ class Department(models.Model):
             'tags': tags,
         }
         logger.info("Creating package with %r", dataset_fields)
-        return Dataset.from_package(ckan.action.package_create(**dataset_fields))
+        package = ckan.action.package_create(**dataset_fields)
+        logger.info("Updating package with %r", package)
+        package = ckan.action.package_update(**package)
+        return Dataset.from_package(package)
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
