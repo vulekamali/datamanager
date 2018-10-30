@@ -360,14 +360,23 @@ class Preview:
                     'message': "This resource already exists.",
                 }
             else:
-                resource_preview = {
-                    'name': name,
-                    'format': format,
-                    'url': url,
-                    'status': 'info',
-                    'message': "This resource will be created.",
-                    'action': 'create',
-                }
+                if url:
+                    resource_preview = {
+                        'name': name,
+                        'format': format,
+                        'url': url,
+                        'status': 'info',
+                        'message': "This resource will be created.",
+                        'action': 'create',
+                    }
+                else:
+                    resource_preview = {
+                        'name': name,
+                        'format': format,
+                        'url': url,
+                        'status': 'error',
+                        'message': "Can't create resource without url",
+                    }
         else:
             if dataset_preview.get('action', None) == 'create':
                 resource_preview = {
