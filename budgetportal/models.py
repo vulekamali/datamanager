@@ -242,11 +242,6 @@ class Department(models.Model):
 
         ordering = ['vote_number', 'name']
 
-    def save(self, *args, **kwargs):
-        if self.pk and self.old_name != self.name:
-            self._update_datasets()
-        super(Department, self).save(*args, **kwargs)
-
     def clean(self):
         # This is only for user feedback in admin.
         # The constraint must be enforced elsewhere.
@@ -256,24 +251,6 @@ class Department(models.Model):
            and existing_vote_primary.first() != self:
             raise ValidationError('There is already a primary department for '
                                   'vote %d' % self.vote_number)
-
-    def _update_datasets(self):
-        if len(self.name) > 5 and self.is_vote_primary:  # If it's a really short name we can break stuff
-            for dataset in self.treasury_datasets:
-                new_slug = django_slugify(self.name)
-                dataset['title'] = dataset['title'].replace(self.old_name, self.name)
-                dataset['name'] = dataset['name'].replace(self.slug, new_slug)
-                extras_set(dataset['extras'], 'Department Name', self.name)
-                extras_set(dataset['extras'], 'department_name', self.name)
-                extras_set(dataset['extras'], 'department_name_slug', new_slug)
-                logger.info("Updating package %s with new name", dataset['id'])
-                ckan.action.package_update(**dataset)
-                for resource in dataset['resources']:
-                    resource['name'] = resource['name'].replace(self.old_name, self.name)
-                    logger.info("Updating resource %s with new name", resource['id'])
-                    ckan.action.resource_update(**resource)
-        else:
-            logger.warn("Not updating datasets for %s", self.get_url_path())
 
     def create_dataset(self, name, title, group_name):
         vocab_map = get_vocab_map()
@@ -307,8 +284,7 @@ class Department(models.Model):
         }
         logger.info("Creating package with %r", dataset_fields)
         package = ckan.action.package_create(**dataset_fields)
-        logger.info("Updating package with %r", package)
-        package = ckan.action.package_update(**package)
+        logger.info("package_create response: %r", package)
         return Dataset.from_package(package)
 
     def get_url_path(self):
