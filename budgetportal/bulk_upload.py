@@ -379,14 +379,23 @@ class Preview:
                     }
         else:
             if dataset_preview.get('action', None) == 'create':
-                resource_preview = {
-                    'name': name,
-                    'format': format,
-                    'url': url,
-                    'status': 'info',
-                    'message': "This resource will be created after the dataset is created.",
-                    'action': 'create',
-                }
+                if url:
+                    resource_preview = {
+                        'name': name,
+                        'format': format,
+                        'url': url,
+                        'status': 'info',
+                        'message': "This resource will be created after the dataset is created.",
+                        'action': 'create',
+                    }
+                else:
+                    resource_preview = {
+                        'name': name,
+                        'format': format,
+                        'url': url,
+                        'status': 'error',
+                        'message': "Can't create resource without url",
+                    }
             else:
                 resource_preview = {
                     'name': name,
