@@ -881,8 +881,9 @@ class Dataset():
             logger.info("Downloading %s to %s", url, filename)
             urllib.urlretrieve(url, filename)[0]
 
+            package_before = ckan.action.package_show(id=self.slug)
             logger.info("Uploading file %s as resource '%s' to package %s",
-                        filename, name, self.slug)
+                        filename, name, package_before)
             resource_fields = {
                 'package_id': self.slug,
                 'name': name,
@@ -891,6 +892,8 @@ class Dataset():
             }
             result = ckan.action.resource_create(**resource_fields)
             logger.info("Upload result: resource '%s' to package %s %r", name, self.slug, result)
+            package_after = ckan.action.package_show(id=self.slug)
+            logger.info("Package after creating resource: %r", package_after)
             self.resources.append(result)
         except Exception as e:
             logger.exception(e)
