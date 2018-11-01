@@ -2,12 +2,16 @@
 Abstracts away some of the mechanics of querying OpenSpending and some of the
 conventions of how we name fields in our Fiscal Data Packages.
 """
+import urllib
+
 from django.conf import settings
 from pprint import pformat
 import logging
 import random
 import requests
 import re
+
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
@@ -124,8 +128,6 @@ class EstimatesOfExpenditure():
         params = {
             'pagesize': PAGE_SIZE,
         }
-        if csv:
-            params['format'] = 'csv'
         if settings.BUST_OPENSPENDING_CACHE:
             params['cache_bust'] = random.randint(1, 1000000)
 
@@ -137,7 +139,12 @@ class EstimatesOfExpenditure():
         req = requests.Request('GET', url, params=params)
         prepped_req = self.session.prepare_request(req)
         prepped_req.params = params  # <- so that we can access params for logging in aggregate()
-        return prepped_req
+        if csv:
+            csv_url = reverse('csv')
+            csv_url += '?api_url=' + urllib.quote(prepped_req.url)
+            return csv_url
+        else:
+            return prepped_req
 
 
 def cube_url(model_url):

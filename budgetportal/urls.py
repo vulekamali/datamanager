@@ -66,7 +66,7 @@ urlpatterns = [
     url(r'^(?P<client_id>\w+)/sso$', sso),
 
     # CSV
-    url(r'^csv/$', json_to_csv),
+    url(r'^csv/$', json_to_csv, name='csv'),
 
     # Admin
     url(r'^admin/', admin.site.urls),

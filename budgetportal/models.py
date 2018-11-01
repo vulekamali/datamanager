@@ -619,7 +619,7 @@ class Department(models.Model):
             'dataset_detail_page': dataset.get_url_path(),
             'department_data_csv': openspending_api.aggregate_url(cuts=cuts,
                                                                   drilldowns=openspending_api.get_all_drilldowns(),
-                                                                  csv=True).url
+                                                                  csv=True)
         }
         return self._prog_by_econ_budgets
 
