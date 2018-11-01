@@ -1,10 +1,18 @@
+import urllib
+import urlparse
+
+import requests
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
+
+from budgetportal.csv_gen import generate_csv_response
 from models import FinancialYear, Dataset, Category
 import yaml
-
+import logging
 from . import revenue
+
+logger = logging.getLogger(__name__)
 
 COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
@@ -318,6 +326,33 @@ def dataset(request, category_slug, dataset_slug):
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def json_to_csv(request):
+    """
+    Check if API call is from OpenSpending *
+    Get result from API call
+    Feed dict result to CSV generator
+    Return streaming http response
+    :param request: HttpRequest
+    :return: StreamingHttpResponse
+    """
+    api_url = urllib.unquote(str(request.GET.get('api_url')))
+
+    parsed_url = urlparse.urlparse(api_url)
+    domain = '{uri.netloc}'.format(uri=parsed_url)
+    if domain != 'openspending.org':
+        return HttpResponse("Invalid domain received: %s (Only openspending.org is allowed)" % domain,
+                            status=403)
+
+    result = requests.get(api_url)
+    logger.info(
+        "request %s took %dms",
+        api_url,
+        result.elapsed.microseconds / 1000
+    )
+    result.raise_for_status()
+    return generate_csv_response(result.json())
 
 
 def dataset_fields(dataset):
