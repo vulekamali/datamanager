@@ -583,6 +583,7 @@ class Department(models.Model):
         ]
         if self.government.sphere.slug == 'provincial':
             cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
+
         drilldowns = [
             openspending_api.get_programme_number_ref(),
             openspending_api.get_programme_name_ref(),
@@ -616,6 +617,9 @@ class Department(models.Model):
         self._prog_by_econ_budgets = {
             'econ_classes': econ_classes,
             'dataset_detail_page': dataset.get_url_path(),
+            'department_data_csv': openspending_api.aggregate_url(cuts=cuts,
+                                                                  drilldowns=openspending_api.get_all_drilldowns(),
+                                                                  csv=True).url
         }
         return self._prog_by_econ_budgets
 

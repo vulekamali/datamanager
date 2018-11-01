@@ -11,7 +11,7 @@ import re
 
 logger = logging.getLogger(__name__)
 
-PAGE_SIZE = 300
+PAGE_SIZE = 10000
 
 
 class EstimatesOfExpenditure():
@@ -28,14 +28,23 @@ class EstimatesOfExpenditure():
         model_result.raise_for_status()
         self.model = model_result.json()['model']
 
-    # These make assumptions about the OS Types we give Estimes of Expenditure
-    # columns, and the level of which hierarchy they end up in.
-
     def get_dimension(self, hierarchy_name, level=0):
         return self.model['hierarchies'][hierarchy_name]['levels'][level]
 
     def get_ref(self, dimension_name, ref_type):
         return self.model['dimensions'][dimension_name][ref_type + "_ref"]
+
+    def get_all_drilldowns(self):
+        drilldowns = []
+        for key, value in self.model['dimensions'].iteritems():
+            # Find both keys and labels
+            drilldowns.append(self.get_ref(key, 'key'))
+            drilldowns.append(self.get_ref(key, 'label'))
+        # Enforce uniqueness
+        return list(set(drilldowns))
+
+    # These make assumptions about the OS Types we give Estimes of Expenditure
+    # columns, and the level of which hierarchy they end up in.
 
     def get_programme_name_ref(self):
         return self.get_ref(self.get_programme_dimension(), 'label')
@@ -98,9 +107,25 @@ class EstimatesOfExpenditure():
         return self.get_dimension('economic_classification', level=1)
 
     def aggregate(self, cuts=None, drilldowns=None):
+        prepped_req = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
+        aggregate_result = self.session.send(prepped_req)
+        logger.info(
+            "request %s with query %r took %dms",
+            aggregate_result.url,
+            pformat(prepped_req.params),
+            aggregate_result.elapsed.microseconds / 1000
+        )
+        aggregate_result.raise_for_status()
+        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
+            raise Exception("More cells than expected - perhaps we should start paging")
+        return aggregate_result.json()
+
+    def aggregate_url(self, cuts=None, drilldowns=None, csv=False):
         params = {
             'pagesize': PAGE_SIZE,
         }
+        if csv:
+            params['format'] = 'csv'
         if settings.BUST_OPENSPENDING_CACHE:
             params['cache_bust'] = random.randint(1, 1000000)
 
@@ -108,18 +133,11 @@ class EstimatesOfExpenditure():
             params['cut'] = "|".join(cuts)
         if drilldowns is not None:
             params['drilldown'] = "|".join(drilldowns)
-        aggregate_url = self.cube_url + 'aggregate/'
-        aggregate_result = self.session.get(aggregate_url, params=params)
-        logger.info(
-            "request %s with query %r took %dms",
-            aggregate_result.url,
-            pformat(params),
-            aggregate_result.elapsed.microseconds / 1000
-        )
-        aggregate_result.raise_for_status()
-        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
-            raise Exception("More cells than expected - perhaps we should start paging")
-        return aggregate_result.json()
+        url = self.cube_url + 'aggregate/'
+        req = requests.Request('GET', url, params=params)
+        prepped_req = self.session.prepare_request(req)
+        prepped_req.params = params  # <- so that we can access params for logging in aggregate()
+        return prepped_req
 
 
 def cube_url(model_url):
