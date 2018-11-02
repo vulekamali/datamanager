@@ -11,7 +11,7 @@ import re
 
 logger = logging.getLogger(__name__)
 
-PAGE_SIZE = 300
+PAGE_SIZE = 10000
 
 
 class EstimatesOfExpenditure():
