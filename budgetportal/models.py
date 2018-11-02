@@ -483,10 +483,8 @@ class Department(models.Model):
             return None
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
-        cuts = [
-            openspending_api.get_financial_year_ref() + ':' + financial_year_start,
-            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
-        ]
+        cuts = []
+
         if self.government.sphere.slug == 'provincial':
             cuts.append(openspending_api.get_geo_ref() +
                         ':"%s"' % self.government.name)
@@ -495,19 +493,25 @@ class Department(models.Model):
                 self.government.slug)
         else:
             cache_name = 'programme-budgets-national'
+            cuts.append(openspending_api.get_financial_year_ref() + ':' +
+                        financial_year_start, )
         drilldowns = [
             openspending_api.get_programme_number_ref(),
             openspending_api.get_programme_name_ref(),
-            openspending_api.get_department_name_ref()
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_financial_year_ref()
         ]
         result_cache = cache.get(cache_name)
         if result_cache:
-            result = openspending_api.filter_dept(result_cache, self.name,
-                                                  self.government.sphere.slug)
+            budget_results = result_cache
         else:
-            result = openspending_api.aggregate(
+            budget_results = openspending_api.aggregate(
                 cuts=cuts, drilldowns=drilldowns)
-            cache.set(cache_name, result)
+            cache.set(cache_name, budget_results)
+
+        result = openspending_api.filter_dept(budget_results, self.name,
+                                              self.government.sphere.slug,
+                                              int(financial_year_start))
         programmes = []
         for cell in result['cells']:
             programmes.append({
