@@ -121,13 +121,15 @@ class EstimatesOfExpenditure():
             raise Exception("More cells than expected - perhaps we should start paging")
         return aggregate_result.json()
 
-    def filter_dept(self, result, dept_name, sphere):
+    def filter_dept(self, result, dept_name, sphere, financial_year):
         sphere_filter = {
             'national': 'vote_number.department',
             'provincial': 'department.department'
         }
-        filtered_results = filter(
-            lambda x: x[sphere_filter[sphere]] == dept_name, result['cells'])
+        filtered_results = []
+        for budget in result['cells']:
+            if budget[sphere_filter[sphere]] == dept_name and budget['financial_year.financial_year'] == financial_year:
+                filtered_results.append(budget)
         return {'cells': filtered_results}
 
 
