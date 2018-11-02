@@ -121,6 +121,15 @@ class EstimatesOfExpenditure():
             raise Exception("More cells than expected - perhaps we should start paging")
         return aggregate_result.json()
 
+    def filter_dept(self, result, dept_name, sphere):
+        sphere_filter = {
+            'national': 'vote_number.department',
+            'provincial': 'department.department'
+        }
+        filtered_results = filter(
+            lambda x: x[sphere_filter[sphere]] == dept_name, result['cells'])
+        return {'cells': filtered_results}
+
 
 def cube_url(model_url):
     return re.sub('model/?$', '', model_url)
