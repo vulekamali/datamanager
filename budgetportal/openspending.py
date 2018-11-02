@@ -16,6 +16,7 @@ from django.urls import reverse
 logger = logging.getLogger(__name__)
 
 PAGE_SIZE = 10000
+URL_LENGTH_LIMIT = 2000
 
 
 class EstimatesOfExpenditure():
@@ -41,7 +42,6 @@ class EstimatesOfExpenditure():
     def get_all_drilldowns(self):
         drilldowns = []
         for key, value in self.model['dimensions'].iteritems():
-            # Find both keys and labels
             drilldowns.append(self.get_ref(key, 'key'))
             drilldowns.append(self.get_ref(key, 'label'))
         # Enforce uniqueness
@@ -142,6 +142,8 @@ class EstimatesOfExpenditure():
         if csv:
             csv_url = reverse('csv')
             csv_url += '?api_url=' + urllib.quote(prepped_req.url)
+            if len(csv_url) > URL_LENGTH_LIMIT:
+                raise Exception("Generated URL exceeds %s. Some browsers may no longer be able to interpret the URL.")
             return csv_url
         else:
             return prepped_req

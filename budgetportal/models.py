@@ -502,6 +502,10 @@ class Department(models.Model):
         self._programme_budgets = {
             'programme_budgets': programmes,
             'dataset_detail_page': dataset.get_url_path(),
+            'department_data_csv': openspending_api.aggregate_url(cuts=cuts,
+                                                                  drilldowns=openspending_api.get_all_drilldowns(),
+                                                                  csv=True)
+
         }
         return self._programme_budgets
 
@@ -563,6 +567,9 @@ class Department(models.Model):
         self._econ_by_programme_budgets = {
             'programmes': programmes,
             'dataset_detail_page': dataset.get_url_path(),
+            'department_data_csv': openspending_api.aggregate_url(cuts=cuts,
+                                                                  drilldowns=openspending_api.get_all_drilldowns(),
+                                                                  csv=True)
         }
         return self._econ_by_programme_budgets
 
@@ -666,6 +673,9 @@ class Department(models.Model):
         return {
             'programmes': programmes,
             'dataset_detail_page': dataset.get_url_path(),
+            'department_data_csv': openspending_api.aggregate_url(cuts=cuts,
+                                                                  drilldowns=openspending_api.get_all_drilldowns(),
+                                                                  csv=True)
         }
 
     def get_expenditure_over_time(self):
