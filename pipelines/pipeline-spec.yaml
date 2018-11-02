@@ -1,0 +1,17 @@
+adjusted-budget-comparison:
+  title: Original and adjusted budget spending per department
+  description: Data per department, provided for original and adjusted numbers
+  pipeline:
+    -
+      run: load
+      parameters:
+        from: './loadme.csv'
+        name: 'origin-data'
+        format: 'csv'
+    -
+      run: dump_to_path
+      parameters:
+        out-path: './result-data.csv'
+        format: 'csv'
+
+
