@@ -33,7 +33,6 @@ REVENUE_RESOURCE_IDS = {
     '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
 }
 
-
 CPI_RESOURCE_IDS = {
     '2018-19': '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d',
 }
@@ -82,7 +81,7 @@ class FinancialYear(models.Model):
 
     @staticmethod
     def slug_from_year_start(year):
-        return year + '-' + str(int(year[2:])+1)
+        return year + '-' + str(int(year[2:]) + 1)
 
     def get_sphere(self, name):
         return getattr(self, name)
@@ -212,7 +211,11 @@ class Government(models.Model):
 class Department(models.Model):
     organisational_unit = 'department'
     government = models.ForeignKey(Government, on_delete=models.CASCADE, related_name="departments")
-    name = models.CharField(max_length=200, help_text="The department name must precisely match the text used in the Appropriation Bill. All datasets must be normalised to match this name. Beware that changing this name might cause a mismatch with already-published datasets which might need to be update to match this.")
+    name = models.CharField(max_length=200,
+                            help_text="The department name must precisely match the text used in the Appropriation "
+                                      "Bill. All datasets must be normalised to match this name. Beware that changing "
+                                      "this name might cause a mismatch with already-published datasets which might "
+                                      "need to be update to match this.")
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, editable=True)
     vote_number = models.IntegerField()
     is_vote_primary = models.BooleanField(default=True)
@@ -253,7 +256,7 @@ class Department(models.Model):
         existing_vote_primary = Department.objects.filter(
             government=self.government, vote_number=self.vote_number)
         if self.is_vote_primary and existing_vote_primary \
-           and existing_vote_primary.first() != self:
+                and existing_vote_primary.first() != self:
             raise ValidationError('There is already a primary department for '
                                   'vote %d' % self.vote_number)
 
@@ -278,10 +281,10 @@ class Department(models.Model):
     def create_dataset(self, name, title, group_name):
         vocab_map = get_vocab_map()
         tags = [
-            { 'vocabulary_id': vocab_map['spheres'],
-              'name': self.government.sphere.slug },
-            { 'vocabulary_id': vocab_map['financial_years'],
-              'name': self.get_financial_year().slug },
+            {'vocabulary_id': vocab_map['spheres'],
+             'name': self.government.sphere.slug},
+            {'vocabulary_id': vocab_map['financial_years'],
+             'name': self.get_financial_year().slug},
         ]
         if self.government.sphere.slug == 'provincial':
             tags.append({
@@ -332,11 +335,11 @@ class Department(models.Model):
         """
         if not self.is_vote_primary:
             try:
-                dept = Department\
-                       .objects \
-                       .get(vote_number=self.vote_number,
-                            is_vote_primary=True,
-                            government=self.government)
+                dept = Department \
+                    .objects \
+                    .get(vote_number=self.vote_number,
+                         is_vote_primary=True,
+                         government=self.government)
             except MultipleObjectsReturned:
                 logger.exception("Department %s has multiple primary "
                                  "departments" % self.slug)
@@ -359,12 +362,12 @@ class Department(models.Model):
                    '+extras_s_geographic_region_slug:"%s"'
                    '+extras_s_department_name_slug:"%s"'
                    '+groups:"%s"') % (
-                       self.government.sphere.financial_year.slug,
-                       self.government.sphere.slug,
-                       self.government.slug,
-                       self.get_primary_department().slug,
-                       group_name,
-                   ),
+                      self.government.sphere.financial_year.slug,
+                      self.government.sphere.slug,
+                      self.government.slug,
+                      self.get_primary_department().slug,
+                      group_name,
+                  ),
             'rows': 1,
         }
         if name:
@@ -376,7 +379,7 @@ class Department(models.Model):
             len(response['results'])
         )
         if response['results']:
-            assert(len(response['results']) == 1)
+            assert (len(response['results']) == 1)
             return Dataset.from_package(response['results'][0])
 
     def _get_functions_query(self):
@@ -682,7 +685,7 @@ class Department(models.Model):
         base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
-        financial_year_starts = [str(y) for y in xrange(financial_year_start_int-4, financial_year_start_int+3)]
+        financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 4, financial_year_start_int + 3)]
         expenditure = {
             'base_financial_year': FinancialYear.slug_from_year_start(str(base_year)),
             'nominal': [],
@@ -710,7 +713,7 @@ class Department(models.Model):
                 cell = [
                     c for c in result['cells']
                     if c[openspending_api.get_financial_year_ref()] == int(financial_year_start)
-                    and c[openspending_api.get_phase_ref()] == phase
+                       and c[openspending_api.get_phase_ref()] == phase
                 ][0]
                 nominal = cell['value.sum']
                 expenditure['nominal'].append({
@@ -720,7 +723,7 @@ class Department(models.Model):
                 })
                 expenditure['real'].append({
                     'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
-                    'amount': int((Decimal(nominal)/cpi[financial_year_start]['index']) * 100),
+                    'amount': int((Decimal(nominal) / cpi[financial_year_start]['index']) * 100),
                     'phase': phase,
                 })
 
@@ -732,6 +735,27 @@ class Department(models.Model):
             logger.warning("Missing expenditure data for %r budget year %s",
                            cuts, self.get_financial_year().slug)
             return None
+
+    def get_adjusted_budget_summary(self):
+        model_url = 'https://openspending.org/api/3/cubes/09bb177d38a4056f69a92746b8d3d9bd:aene-2018-19-v2/model/'
+        openspending_api = EstimatesOfExpenditure(model_url)
+
+        cuts = [
+            openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+        ]
+        drilldowns = None
+
+        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+
+        self._adjusted_budget_summary = {
+            'by_type': None,
+            'total_change': None,
+            'econ_classes': None,
+            'programmes': None,
+            'virements': None,
+        }
+        return self._adjusted_budget_summary
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
@@ -772,8 +796,10 @@ class Programme(models.Model):
 class PackageDeletedException(Exception):
     pass
 
+
 class PackageWithoutGroupException(Exception):
     pass
+
 
 class Dataset():
     def __init__(self, **kwargs):
@@ -794,6 +820,7 @@ class Dataset():
         self.category = kwargs['category']
         self._openspending_api = None
         self.package = kwargs['package']
+        self._adjusted_budget_summary = {}
 
     @classmethod
     def from_package(cls, package):
@@ -873,8 +900,8 @@ class Dataset():
         """
         for resource in self.resources:
             if (name
-                and resource['name'] == name
-                and resource['format'] == format):
+                    and resource['name'] == name
+                    and resource['format'] == format):
                 return resource
             # if name wasn't provided, just match first item with this format
             if (resource['format'] == format):
@@ -937,7 +964,6 @@ class Dataset():
         )[0]
         self._openspending_api = EstimatesOfExpenditure(api_resource['url'])
         return self._openspending_api
-
 
 
 class Category():
@@ -1004,7 +1030,8 @@ class Category():
         )
 
 
-# https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
+# https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
+# -or-has-a-sp
 def none_selected_query(vocab_name):
     """Match items where none of the options in a custom vocab tag is selected"""
     return '+(*:* NOT %s:["" TO *])' % vocab_name
@@ -1023,7 +1050,7 @@ def resource_name(department):
 
 def get_base_year():
     cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
-    return int(cpi_year_slug[:4])-1
+    return int(cpi_year_slug[:4]) - 1
 
 
 def get_cpi():
@@ -1047,10 +1074,10 @@ def get_cpi():
         if financial_year_start == str(base_year):
             base_year_index = idx
             cell['index'] = 100
-    for idx in range(base_year_index-1, -1, -1):
-        cpi[idx]['index'] = cpi[idx+1]['index'] / (1 + Decimal(cpi[idx+1]['CPI']))
-    for idx in xrange(base_year_index+1, len(cpi)):
-        cpi[idx]['index'] = cpi[idx-1]['index'] * (1 + Decimal(cpi[idx]['CPI']))
+    for idx in range(base_year_index - 1, -1, -1):
+        cpi[idx]['index'] = cpi[idx + 1]['index'] / (1 + Decimal(cpi[idx + 1]['CPI']))
+    for idx in xrange(base_year_index + 1, len(cpi)):
+        cpi[idx]['index'] = cpi[idx - 1]['index'] * (1 + Decimal(cpi[idx]['CPI']))
     cpi_dict = {}
     for cell in cpi:
         cpi_dict[cell['financial_year_start']] = cell
@@ -1066,7 +1093,7 @@ def get_vocab_map():
 
 def package_is_contributed(package):
     return len(package['groups']) == 0 \
-        and package['organization']['name'] != 'national-treasury'
+           and package['organization']['name'] != 'national-treasury'
 
 
 def none_if_empty_or_missing(dict, key):
