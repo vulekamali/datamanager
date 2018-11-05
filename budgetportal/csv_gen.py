@@ -19,7 +19,7 @@ def generate_csv_response(data):
     """
     response = StreamingHttpResponse(streaming_content=iter_items(data, Echo()),
                                      content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=\"openspend-dataset.csv\"'
+    response['Content-Disposition'] = 'attachment; filename=\"vulekamali-download.csv\"'
 
     return response
 
