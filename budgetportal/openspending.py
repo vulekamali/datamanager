@@ -114,9 +114,8 @@ class EstimatesOfExpenditure():
         prepped_req = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
         aggregate_result = self.session.send(prepped_req)
         logger.info(
-            "request %s with query %r took %dms",
+            "request %s took %dms",
             aggregate_result.url,
-            pformat(prepped_req.params),
             aggregate_result.elapsed.microseconds / 1000
         )
         aggregate_result.raise_for_status()
@@ -138,12 +137,13 @@ class EstimatesOfExpenditure():
         url = self.cube_url + 'aggregate/'
         req = requests.Request('GET', url, params=params)
         prepped_req = self.session.prepare_request(req)
-        prepped_req.params = params  # <- so that we can access params for logging in aggregate()
         if csv:
             csv_url = reverse('csv')
             csv_url += '?api_url=' + urllib.quote(prepped_req.url)
             if len(csv_url) > URL_LENGTH_LIMIT:
-                raise Exception("Generated URL exceeds %s. Some browsers may no longer be able to interpret the URL.")
+                raise Exception("Generated URL exceeds max length of %s. "
+                                "Some browsers may no longer be able to interpret the URL." %
+                                URL_LENGTH_LIMIT)
             return csv_url
         else:
             return prepped_req

@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.views import View
 
 from budgetportal.csv_gen import generate_csv_response
+from budgetportal.openspending import PAGE_SIZE
 from models import FinancialYear, Dataset, Category
 import yaml
 import logging
@@ -330,7 +331,7 @@ def dataset(request, category_slug, dataset_slug):
 
 def json_to_csv(request):
     """
-    Check if API call is from OpenSpending *
+    Ensure that API call is to OpenSpending *
     Get result from API call
     Feed dict result to CSV generator
     Return streaming http response
@@ -352,6 +353,8 @@ def json_to_csv(request):
         result.elapsed.microseconds / 1000
     )
     result.raise_for_status()
+    if result.json()['total_cell_count'] > PAGE_SIZE:
+        raise Exception("More cells than expected - perhaps we should start paging")
     return generate_csv_response(result.json())
 
 

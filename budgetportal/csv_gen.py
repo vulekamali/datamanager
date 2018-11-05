@@ -17,19 +17,19 @@ def generate_csv_response(data):
     :param data: dict
     :return: StreamingHttpResponse object
     """
-    response = StreamingHttpResponse(streaming_content=iter_items(data, Echo()),
+    response = StreamingHttpResponse(streaming_content=iter_items(data['cells'], Echo()),
                                      content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=\"vulekamali-download.csv\"'
 
     return response
 
 
-def iter_items(data, pseudo_buffer):
-    headers_list = data['cells'][0].keys()
+def iter_items(cells, pseudo_buffer):
+    headers_list = cells[0].keys()
     headers_dict = {}
     for header in headers_list:
         headers_dict[header] = header
     writer = csv.DictWriter(pseudo_buffer, fieldnames=headers_list)
     yield writer.writerow(headers_dict)
-    for dict_object in data['cells']:
+    for dict_object in cells:
         yield writer.writerow(dict_object)
