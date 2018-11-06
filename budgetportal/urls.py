@@ -1,6 +1,6 @@
 from adminplus.sites import AdminSitePlus
 
-from budgetportal.views import json_to_csv
+from budgetportal.views import openspending_csv
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
@@ -66,7 +66,7 @@ urlpatterns = [
     url(r'^(?P<client_id>\w+)/sso$', sso),
 
     # CSV
-    url(r'^csv/$', json_to_csv, name='csv'),
+    url(r'^csv/$', openspending_csv, name='openspending_csv'),
 
     # Admin
     url(r'^admin/', admin.site.urls),

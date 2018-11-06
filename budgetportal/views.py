@@ -329,7 +329,7 @@ def dataset(request, category_slug, dataset_slug):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def json_to_csv(request):
+def openspending_csv(request):
     """
     Ensure that API call is to OpenSpending *
     Get result from API call
