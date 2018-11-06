@@ -14,7 +14,9 @@ logger = logging.getLogger(__name__)
 
 PAGE_SIZE = 10000
 
-class EstimatesOfExpenditure():
+
+class BabbageFiscalDataset():
+
     def __init__(self, model_url):
         self.session = requests.Session()
 
@@ -42,8 +44,42 @@ class EstimatesOfExpenditure():
         # Enforce uniqueness
         return list(set(drilldowns))
 
-    # These make assumptions about the OS Types we give Estimes of Expenditure
-    # columns, and the level of which hierarchy they end up in.
+    def aggregate_url(self, cuts=None, drilldowns=None):
+        params = {
+            'pagesize': PAGE_SIZE,
+        }
+        if settings.BUST_OPENSPENDING_CACHE:
+            params['cache_bust'] = random.randint(1, 1000000)
+
+        if cuts is not None:
+            params['cut'] = "|".join(cuts)
+        if drilldowns is not None:
+            params['drilldown'] = "|".join(drilldowns)
+        url = self.cube_url + 'aggregate/'
+        return url + '?' + urllib.urlencode(params)
+
+    def aggregate(self, cuts=None, drilldowns=None):
+        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
+        aggregate_result = self.session.get(url)
+        logger.info(
+            "request %s took %dms",
+            aggregate_result.url,
+            aggregate_result.elapsed.microseconds / 1000
+        )
+        aggregate_result.raise_for_status()
+        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
+            raise Exception("More cells than expected - perhaps we should start paging")
+        return aggregate_result.json()
+
+
+class EstimatesOfExpenditure(BabbageFiscalDataset):
+    """
+    This tries to provide a more semantic interface to Fiscal Data in
+    the OpenSpending API than OpenSpending types.
+
+    It makes assumptions about the OS Types we give Estimes of Expenditure
+    columns, and the level of which hierarchy they end up in.
+    """
 
     def get_programme_name_ref(self):
         return self.get_ref(self.get_programme_dimension(), 'label')
@@ -105,32 +141,15 @@ class EstimatesOfExpenditure():
     def get_econ_class_2_dimension(self):
         return self.get_dimension('economic_classification', level=1)
 
-    def aggregate_url(self, cuts=None, drilldowns=None):
-        params = {
-            'pagesize': PAGE_SIZE,
-        }
-        if settings.BUST_OPENSPENDING_CACHE:
-            params['cache_bust'] = random.randint(1, 1000000)
 
-        if cuts is not None:
-            params['cut'] = "|".join(cuts)
-        if drilldowns is not None:
-            params['drilldown'] = "|".join(drilldowns)
-        url = self.cube_url + 'aggregate/'
-        return url + '?' + urllib.urlencode(params)
+class AdjustedEstimatesOfExpenditure(EstimatesOfExpenditure):
 
-    def aggregate(self, cuts=None, drilldowns=None):
-        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
-        aggregate_result = self.session.get(url)
-        logger.info(
-            "request %s took %dms",
-            aggregate_result.url,
-            aggregate_result.elapsed.microseconds / 1000
-        )
-        aggregate_result.raise_for_status()
-        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
-            raise Exception("More cells than expected - perhaps we should start paging")
-        return aggregate_result.json()
+    def get_adjustment_kind_dimension(self):
+        return self.get_dimension('value_kind')
+
+    def get_adjustment_kind_ref(self):
+        return self.get_ref(self.get_adjustment_kind_dimension(), 'label')
+
 
 def cube_url(model_url):
     return re.sub('model/?$', '', model_url)

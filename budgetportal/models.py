@@ -1,5 +1,8 @@
 from autoslug import AutoSlugField
-from budgetportal.openspending import EstimatesOfExpenditure
+from budgetportal.openspending import (
+    EstimatesOfExpenditure,
+    AdjustedEstimatesOfExpenditure,
+)
 from ckanapi import NotFound
 from collections import OrderedDict
 from decimal import Decimal
@@ -749,7 +752,7 @@ class Department(models.Model):
 
     def get_adjusted_budget_summary(self):
         model_url = 'https://openspending.org/api/3/cubes/09bb177d38a4056f69a92746b8d3d9bd:aene-2018-19-v2/model/'
-        openspending_api = EstimatesOfExpenditure(model_url)
+        openspending_api = AdjustedEstimatesOfExpenditure(model_url)
 
         cuts = [
             openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
