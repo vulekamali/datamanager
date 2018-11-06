@@ -71,6 +71,8 @@ MIDDLEWARE = (
 
 SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
 
+DATAMANAGER_URL = os.environ.get("DATAMANAGER_URL", "http://localhost:8000/")
+
 ROOT_URLCONF = 'budgetportal.urls'
 
 WSGI_APPLICATION = 'budgetportal.wsgi.application'

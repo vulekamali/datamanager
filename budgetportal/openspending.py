@@ -5,19 +5,14 @@ conventions of how we name fields in our Fiscal Data Packages.
 import urllib
 
 from django.conf import settings
-from pprint import pformat
 import logging
 import random
 import requests
 import re
 
-from django.urls import reverse
-
 logger = logging.getLogger(__name__)
 
 PAGE_SIZE = 10000
-URL_LENGTH_LIMIT = 2000
-
 
 class EstimatesOfExpenditure():
     def __init__(self, model_url):
@@ -110,21 +105,7 @@ class EstimatesOfExpenditure():
     def get_econ_class_2_dimension(self):
         return self.get_dimension('economic_classification', level=1)
 
-    def aggregate(self, cuts=None, drilldowns=None):
-        prepped_req = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
-        aggregate_result = self.session.send(prepped_req)
-        logger.info(
-            "request %s with query %r took %dms",
-            aggregate_result.url,
-            pformat(prepped_req.params),
-            aggregate_result.elapsed.microseconds / 1000
-        )
-        aggregate_result.raise_for_status()
-        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
-            raise Exception("More cells than expected - perhaps we should start paging")
-        return aggregate_result.json()
-
-    def aggregate_url(self, cuts=None, drilldowns=None, csv=False):
+    def aggregate_url(self, cuts=None, drilldowns=None):
         params = {
             'pagesize': PAGE_SIZE,
         }
@@ -136,18 +117,20 @@ class EstimatesOfExpenditure():
         if drilldowns is not None:
             params['drilldown'] = "|".join(drilldowns)
         url = self.cube_url + 'aggregate/'
-        req = requests.Request('GET', url, params=params)
-        prepped_req = self.session.prepare_request(req)
-        prepped_req.params = params  # <- so that we can access params for logging in aggregate()
-        if csv:
-            csv_url = reverse('csv')
-            csv_url += '?api_url=' + urllib.quote(prepped_req.url)
-            if len(csv_url) > URL_LENGTH_LIMIT:
-                raise Exception("Generated URL exceeds %s. Some browsers may no longer be able to interpret the URL.")
-            return csv_url
-        else:
-            return prepped_req
+        return url + '?' + urllib.urlencode(params)
 
+    def aggregate(self, cuts=None, drilldowns=None):
+        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
+        aggregate_result = self.session.get(url)
+        logger.info(
+            "request %s took %dms",
+            aggregate_result.url,
+            aggregate_result.elapsed.microseconds / 1000
+        )
+        aggregate_result.raise_for_status()
+        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
+            raise Exception("More cells than expected - perhaps we should start paging")
+        return aggregate_result.json()
 
 def cube_url(model_url):
     return re.sub('model/?$', '', model_url)
