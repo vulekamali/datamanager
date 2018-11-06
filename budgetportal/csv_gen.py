@@ -29,7 +29,7 @@ def iter_items(cells, pseudo_buffer):
     headers_dict = {}
     for header in headers_list:
         headers_dict[header] = header
-    writer = csv.DictWriter(pseudo_buffer, fieldnames=headers_list)
+    writer = csv.DictWriter(pseudo_buffer, fieldnames=sorted(headers_list))
     yield writer.writerow(headers_dict)
     for dict_object in cells:
         yield writer.writerow(dict_object)
