@@ -758,18 +758,20 @@ class Department(models.Model):
             openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
             openspending_api.get_department_name_ref() + ':"' + self.name + '"',
         ]
-        drilldowns = None
+        drilldowns = [
+            openspending_api.get_adjustment_kind_ref(),
+            openspending_api.get_phase_ref(),
+        ]
 
         result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
 
-        self._adjusted_budget_summary = {
+        return {
             'by_type': None,
             'total_change': None,
             'econ_classes': None,
             'programmes': None,
             'virements': None,
         }
-        return self._adjusted_budget_summary
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
