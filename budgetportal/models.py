@@ -6,11 +6,13 @@ from decimal import Decimal
 from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify as django_slugify
 from itertools import groupby
 from partial_index import PartialIndex
 from pprint import pformat
 from tempfile import mkdtemp
+from urlparse import urljoin
 import logging
 import os
 import re
@@ -21,6 +23,8 @@ import urlparse
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
+
+URL_LENGTH_LIMIT = 2000
 
 CKAN_DATASTORE_URL = ('https://data.vulekamali.gov.za'
                       '/api/3/action' \
@@ -499,9 +503,14 @@ class Department(models.Model):
                 'name': cell[openspending_api.get_programme_name_ref()],
                 'total_budget': cell['value.sum']
             })
+        csv_aggregate_url = openspending_api.aggregate_url(
+            cuts=cuts,
+            drilldowns=openspending_api.get_all_drilldowns()
+        )
         self._programme_budgets = {
             'programme_budgets': programmes,
             'dataset_detail_page': dataset.get_url_path(),
+            'department_data_csv': csv_url(csv_aggregate_url),
         }
         return self._programme_budgets
 
@@ -560,9 +569,14 @@ class Department(models.Model):
                     'items': econ_class_1s,
                 })
 
+        csv_aggregate_url = openspending_api.aggregate_url(
+            cuts=cuts,
+            drilldowns=openspending_api.get_all_drilldowns()
+        )
         self._econ_by_programme_budgets = {
             'programmes': programmes,
             'dataset_detail_page': dataset.get_url_path(),
+            'department_data_csv': csv_url(csv_aggregate_url),
         }
         return self._econ_by_programme_budgets
 
@@ -583,6 +597,7 @@ class Department(models.Model):
         ]
         if self.government.sphere.slug == 'provincial':
             cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
+
         drilldowns = [
             openspending_api.get_programme_number_ref(),
             openspending_api.get_programme_name_ref(),
@@ -613,9 +628,14 @@ class Department(models.Model):
                     'name': econ_class_name,
                     'items': sorted(programmes, key=total_budget_fun, reverse=True),
                 })
+        csv_aggregate_url = openspending_api.aggregate_url(
+            cuts=cuts,
+            drilldowns=openspending_api.get_all_drilldowns()
+        )
         self._prog_by_econ_budgets = {
             'econ_classes': econ_classes,
             'dataset_detail_page': dataset.get_url_path(),
+            'department_data_csv': csv_url(csv_aggregate_url),
         }
         return self._prog_by_econ_budgets
 
@@ -659,9 +679,14 @@ class Department(models.Model):
                     'name': prog_name,
                     'items': sorted(subprogrammes, key=total_budget_fun, reverse=True),
                 })
+        csv_aggregate_url = openspending_api.aggregate_url(
+            cuts=cuts,
+            drilldowns=openspending_api.get_all_drilldowns()
+        )
         return {
             'programmes': programmes,
             'dataset_detail_page': dataset.get_url_path(),
+            'department_data_csv': csv_url(csv_aggregate_url),
         }
 
     def get_expenditure_over_time(self):
@@ -1060,3 +1085,13 @@ def none_if_empty_or_missing(dict, key):
         return dict.get(key)
     else:
         return None
+
+
+def csv_url(aggregate_url):
+    querystring = '?api_url=' + urllib.quote(aggregate_url)
+    csv_url = urljoin(settings.DATAMANAGER_URL, reverse('openspending_csv') + querystring)
+    if len(csv_url) > URL_LENGTH_LIMIT:
+        raise Exception("Generated URL exceeds max length of %s. "
+                        "Some browsers may no longer be able to interpret the URL." %
+                        URL_LENGTH_LIMIT)
+    return csv_url
