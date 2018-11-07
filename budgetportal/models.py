@@ -498,7 +498,6 @@ class Department(models.Model):
             openspending_api.get_programme_number_ref(),
             openspending_api.get_programme_name_ref(),
             openspending_api.get_department_name_ref(),
-            openspending_api.get_financial_year_ref()
         ]
 
         budget_results = openspending_api.aggregate(
