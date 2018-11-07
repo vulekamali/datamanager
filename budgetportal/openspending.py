@@ -135,10 +135,10 @@ class EstimatesOfExpenditure():
             cache.set(url, aggregate_result)
         return aggregate_result
 
-    def filter_dept(self, result, dept_name, financial_year):
+    def filter_dept(self, result, dept_name):
         filtered_results = []
         for budget in result['cells']:
-            if budget[self.get_department_name_ref()] == dept_name and budget[self.get_financial_year_ref()] == financial_year:
+            if budget[self.get_department_name_ref()] == dept_name:
                 filtered_results.append(budget)
         return {'cells': filtered_results}
 
