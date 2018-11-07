@@ -8,7 +8,6 @@ from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify as django_slugify
-from django.core.cache import cache
 from itertools import groupby
 from partial_index import PartialIndex
 from pprint import pformat
@@ -492,11 +491,7 @@ class Department(models.Model):
         if self.government.sphere.slug == 'provincial':
             cuts.append(openspending_api.get_geo_ref() +
                         ':"%s"' % self.government.name)
-
-            cache_name = 'programme-budgets-provincial-{}'.format(
-                self.government.slug)
         else:
-            cache_name = 'programme-budgets-national'
             cuts.append(openspending_api.get_financial_year_ref() + ':' +
                         financial_year_start, )
         drilldowns = [
@@ -505,14 +500,9 @@ class Department(models.Model):
             openspending_api.get_department_name_ref(),
             openspending_api.get_financial_year_ref()
         ]
-        result_cache = cache.get(cache_name)
-        if result_cache:
-            budget_results = result_cache
-        else:
-            budget_results = openspending_api.aggregate(
-                cuts=cuts, drilldowns=drilldowns)
-            cache.set(cache_name, budget_results)
 
+        budget_results = openspending_api.aggregate(
+                cuts=cuts, drilldowns=drilldowns)
         result = openspending_api.filter_dept(budget_results, self.name,
                                               int(financial_year_start))
         programmes = []
