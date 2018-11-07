@@ -764,10 +764,41 @@ class Department(models.Model):
         ]
 
         result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        descriptions_totals = {'Adjusted appropriation': ('Total',),
+                               'Voted (Main appropriation)': ('Total',)}
+
+        descriptions_by_type = {'Adjusted appropriation': ('Adjustments - Unforeseeable/unavoidable',
+                                                           'Adjustments - Announced in the budget speech',
+                                                           'Adjustments - Roll-overs')}
+
+        def filter_unique_combinations(cell):
+            whitelist = descriptions_by_type
+            whitelist_keys = whitelist.keys()
+            phase = cell['budget_phase.budget_phase']
+            descript = cell['fy_descript.fy_descript']
+            if phase in whitelist_keys:
+                if descript in whitelist[phase]:
+                    return True
+            return False
+
+        # Get by type
+        cells_by_type = filter(filter_unique_combinations, result['cells'])
+        by_type = [{'name': x['fy_descript.fy_descript'], 'amount': x['value.sum']} for x in cells_by_type]
+        # Get total change
+        # cell_totals = filter(filter_unique_combinations, result['cells'])
+        for dct in result['cells']:
+            if dct['budget_phase.budget_phase'] == 'Adjusted appropriation' and dct['fy_descript.fy_descript'] == 'Total':
+                total_adjusted = dct['value.sum']
+            if dct['budget_phase.budget_phase'] == 'Voted (Main appropriation)' and dct['fy_descript.fy_descript'] == 'Total':
+                total_voted = dct['value.sum']
+        if total_adjusted and total_voted:
+            total_change = round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
+        else:
+            raise Exception("Could not calculate total change for department budget")
 
         return {
-            'by_type': None,
-            'total_change': None,
+            'by_type': by_type,
+            'total_change': total_change,
             'econ_classes': None,
             'programmes': None,
             'virements': None,
