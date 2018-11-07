@@ -2,8 +2,9 @@
 Abstracts away some of the mechanics of querying OpenSpending and some of the
 conventions of how we name fields in our Fiscal Data Packages.
 """
+import urllib
+
 from django.conf import settings
-from pprint import pformat
 import logging
 import random
 import requests
@@ -20,22 +21,27 @@ class EstimatesOfExpenditure():
 
         self.cube_url = cube_url(model_url)
         model_result = self.session.get(model_url)
-        logger.info(
-            "request to %s took %dms",
-            model_url,
-            model_result.elapsed.microseconds / 1000
-        )
+        logger.info("request to %s took %dms", model_url,
+                    model_result.elapsed.microseconds / 1000)
         model_result.raise_for_status()
         self.model = model_result.json()['model']
-
-    # These make assumptions about the OS Types we give Estimes of Expenditure
-    # columns, and the level of which hierarchy they end up in.
 
     def get_dimension(self, hierarchy_name, level=0):
         return self.model['hierarchies'][hierarchy_name]['levels'][level]
 
     def get_ref(self, dimension_name, ref_type):
         return self.model['dimensions'][dimension_name][ref_type + "_ref"]
+
+    def get_all_drilldowns(self):
+        drilldowns = []
+        for key, value in self.model['dimensions'].iteritems():
+            drilldowns.append(self.get_ref(key, 'key'))
+            drilldowns.append(self.get_ref(key, 'label'))
+        # Enforce uniqueness
+        return list(set(drilldowns))
+
+    # These make assumptions about the OS Types we give Estimes of Expenditure
+    # columns, and the level of which hierarchy they end up in.
 
     def get_programme_name_ref(self):
         return self.get_ref(self.get_programme_dimension(), 'label')
@@ -97,7 +103,7 @@ class EstimatesOfExpenditure():
     def get_econ_class_2_dimension(self):
         return self.get_dimension('economic_classification', level=1)
 
-    def aggregate(self, cuts=None, drilldowns=None):
+    def aggregate_url(self, cuts=None, drilldowns=None):
         params = {
             'pagesize': PAGE_SIZE,
         }
@@ -108,17 +114,18 @@ class EstimatesOfExpenditure():
             params['cut'] = "|".join(cuts)
         if drilldowns is not None:
             params['drilldown'] = "|".join(drilldowns)
-        aggregate_url = self.cube_url + 'aggregate/'
-        aggregate_result = self.session.get(aggregate_url, params=params)
-        logger.info(
-            "request %s with query %r took %dms",
-            aggregate_result.url,
-            pformat(params),
-            aggregate_result.elapsed.microseconds / 1000
-        )
+        url = self.cube_url + 'aggregate/'
+        return url + '?' + urllib.urlencode(params)
+
+    def aggregate(self, cuts=None, drilldowns=None):
+        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
+        aggregate_result = self.session.get(url)
+        logger.info("request %s took %dms", aggregate_result.url,
+                    aggregate_result.elapsed.microseconds / 1000)
         aggregate_result.raise_for_status()
         if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
-            raise Exception("More cells than expected - perhaps we should start paging")
+            raise Exception(
+                "More cells than expected - perhaps we should start paging")
         return aggregate_result.json()
 
     def filter_dept(self, result, dept_name, sphere, financial_year):
