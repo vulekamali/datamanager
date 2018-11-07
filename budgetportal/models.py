@@ -749,44 +749,45 @@ class Department(models.Model):
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
-        cuts = [
-            openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
-        ]
-        drilldowns = [
-            openspending_api.get_adjustment_kind_ref(),
-            openspending_api.get_phase_ref(),
-        ]
 
-        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
-
-        descriptions_by_type = {'Adjusted appropriation': ('Adjustments - Unforeseeable/unavoidable',
-                                                           'Adjustments - Announced in the budget speech',
-                                                           'Adjustments - Roll-overs')}
-
-        def filter_unique_combinations(cell):
-            whitelist = descriptions_by_type
-            whitelist_keys = whitelist.keys()
-            phase = cell['budget_phase.budget_phase']
-            descript = cell['fy_descript.fy_descript']
-            if phase in whitelist_keys:
-                if descript in whitelist[phase]:
-                    return True
-            return False
+        result_for_type_and_total = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+            ],
+            drilldowns=[
+                openspending_api.get_adjustment_kind_ref(),
+                openspending_api.get_phase_ref(),
+            ])
 
         # Get by type
-        cells_by_type = filter(filter_unique_combinations, result['cells'])
+        cells_by_type = filter(filter_by_type, result_for_type_and_total['cells'])
         by_type = [{'name': string.replace(x['fy_descript.fy_descript'], 'Adjustments - ', ""),
                     'amount': x['value.sum'], 'type': 'kind'} for x in cells_by_type]
 
         # Get programmes
+        cuts = [
+            openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+            openspending_api.get_adjustment_kind_ref() + ':"' + 'Adjustments - Total adjustments' + '"',
 
+        ]
+        result_for_programmes = openspending_api.aggregate(
+            cuts=cuts,
+            drilldowns=[
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_phase_ref(),
+            ])
+        programmes = [{'name': x['progno.programme'], 'amount': x['value.sum']}
+                      for x in result_for_programmes['cells']]
 
-        # Get total change
-        for dct in result['cells']:
-            if dct['budget_phase.budget_phase'] == 'Adjusted appropriation' and dct['fy_descript.fy_descript'] == 'Total':
+        # Get total change (very ugly, refactor)
+        for dct in result_for_type_and_total['cells']:
+            if dct['budget_phase.budget_phase'] == 'Adjusted appropriation' and \
+                    dct['fy_descript.fy_descript'] == 'Total':
                 total_adjusted = dct['value.sum']
-            if dct['budget_phase.budget_phase'] == 'Voted (Main appropriation)' and dct['fy_descript.fy_descript'] == 'Total':
+            if dct['budget_phase.budget_phase'] == 'Voted (Main appropriation)' and \
+                    dct['fy_descript.fy_descript'] == 'Total':
                 total_voted = dct['value.sum']
         if total_adjusted and total_voted:
             total_change = round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
@@ -797,7 +798,7 @@ class Department(models.Model):
             'by_type': by_type,
             'total_change': total_change,
             'econ_classes': None,
-            'programmes': None,
+            'programmes': programmes,
             'virements': None,
         }
 
@@ -1162,3 +1163,19 @@ def csv_url(aggregate_url):
                         "Some browsers may no longer be able to interpret the URL." %
                         URL_LENGTH_LIMIT)
     return csv_url
+
+
+def filter_by_type(cell):
+    """
+        Intended to be fed to filter() in get_adjusted_budget_summary
+    """
+    whitelist = {'Adjusted appropriation': ('Adjustments - Unforeseeable/unavoidable',
+                                            'Adjustments - Announced in the budget speech',
+                                            'Adjustments - Roll-overs')}
+    whitelist_keys = whitelist.keys()
+    phase = cell['budget_phase.budget_phase']
+    descript = cell['fy_descript.fy_descript']
+    if phase in whitelist_keys:
+        if descript in whitelist[phase]:
+            return True
+    return False
