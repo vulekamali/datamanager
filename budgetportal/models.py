@@ -184,35 +184,6 @@ class Government(models.Model):
     def get_vote_primary_departments(self):
         return Department.objects.filter(government=self, is_vote_primary=True).all()
 
-    def get_function_budgets(self):
-        """
-        get the budget totals for all the government functions
-        """
-
-        if self._function_budgets is not None:
-            return self._function_budgets
-        budget = self.get_estimates_of_expenditure_dataset().get_openspending_api()
-        financial_year_start = self.sphere.financial_year.get_starting_year()
-        vote_numbers = [str(d.vote_number)
-                        for d in self.get_vote_primary_departments()]
-        votes = '"%s"' % '";"'.join(vote_numbers)
-        cuts = [
-            budget.get_financial_year_ref() + ':' + financial_year_start,
-            budget.get_vote_number_ref() + ':' + votes
-        ]
-        if self.sphere.slug == 'provincial':
-            cuts.append(budget.get_geo_ref() + ':"%s"' % self.name)
-        drilldowns = [budget.get_function_ref()]
-        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
-        functions = []
-        for cell in result['cells']:
-            functions.append({
-                'name': cell[budget.get_function_ref()],
-                'total_budget': cell['value.sum']
-            })
-        self._function_budgets = functions
-        return self._function_budgets
-
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
@@ -232,6 +203,7 @@ class Department(models.Model):
     _programme_budgets = None
     _econ_by_programme_budgets = None
     _prog_by_econ_budgets = None
+    _adjusted_estimates_of_expenditure_dataset = None
     _estimates_of_econ_classes_expenditure_dataset = None
     _estimates_of_subprogramme_expenditure_dataset = None
 
@@ -459,6 +431,26 @@ class Department(models.Model):
             package = response['results'][0]
             self._estimates_of_econ_classes_expenditure_dataset = Dataset.from_package(package)
             return self._estimates_of_econ_classes_expenditure_dataset
+        else:
+            return None
+
+    def get_adjusted_estimates_expenditure_dataset(self):
+        if self._adjusted_estimates_of_expenditure_dataset is not None:
+            return self._adjusted_estimates_of_expenditure_dataset
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"adjusted-estimates-of-%s-expenditure"' % self.government.sphere.slug,
+                '+vocab_financial_years:"%s"' % self.get_financial_year().slug,
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        if response['results']:
+            package = response['results'][0]
+            self._adjusted_estimates_of_expenditure_dataset = Dataset.from_package(package)
+            return self._adjusted_estimates_of_expenditure_dataset
         else:
             return None
 
@@ -753,9 +745,10 @@ class Department(models.Model):
             return None
 
     def get_adjusted_budget_summary(self):
-        model_url = 'https://openspending.org/api/3/cubes/09bb177d38a4056f69a92746b8d3d9bd:aene-2018-19-v2/model/'
-        openspending_api = AdjustedEstimatesOfExpenditure(model_url)
-
+        dataset = self.get_adjusted_estimates_expenditure_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
         cuts = [
             openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
             openspending_api.get_department_name_ref() + ':"' + self.name + '"',
@@ -1011,7 +1004,14 @@ class Dataset():
             lambda r: r['format'] == 'OpenSpending API',
             self.resources
         )[0]
-        self._openspending_api = EstimatesOfExpenditure(api_resource['url'])
+        api_class_mapping = {
+            'estimates-of-national-expenditure': EstimatesOfExpenditure,
+            'estimates-of-provincial-expenditure': EstimatesOfExpenditure,
+            'adjusted-estimates-of-national-expenditure': AdjustedEstimatesOfExpenditure,
+            'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
+        }
+        api_class = api_class_mapping[self.category.slug]
+        self._openspending_api = api_class(api_resource['url'])
         return self._openspending_api
 
 
