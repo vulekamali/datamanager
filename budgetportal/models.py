@@ -766,8 +766,6 @@ class Department(models.Model):
         ]
 
         result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
-        descriptions_totals = {'Adjusted appropriation': ('Total',),
-                               'Voted (Main appropriation)': ('Total',)}
 
         descriptions_by_type = {'Adjusted appropriation': ('Adjustments - Unforeseeable/unavoidable',
                                                            'Adjustments - Announced in the budget speech',
@@ -785,9 +783,13 @@ class Department(models.Model):
 
         # Get by type
         cells_by_type = filter(filter_unique_combinations, result['cells'])
-        by_type = [{'name': string.replace(x['fy_descript.fy_descript'], 'Adjustments - ', ""), 'amount': x['value.sum']} for x in cells_by_type]
+        by_type = [{'name': string.replace(x['fy_descript.fy_descript'], 'Adjustments - ', ""),
+                    'amount': x['value.sum'], 'type': 'kind'} for x in cells_by_type]
+
+        # Get programmes
+
+
         # Get total change
-        # cell_totals = filter(filter_unique_combinations, result['cells'])
         for dct in result['cells']:
             if dct['budget_phase.budget_phase'] == 'Adjusted appropriation' and dct['fy_descript.fy_descript'] == 'Total':
                 total_adjusted = dct['value.sum']
