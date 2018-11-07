@@ -514,7 +514,6 @@ class Department(models.Model):
             cache.set(cache_name, budget_results)
 
         result = openspending_api.filter_dept(budget_results, self.name,
-                                              self.government.sphere.slug,
                                               int(financial_year_start))
         programmes = []
         for cell in result['cells']:
