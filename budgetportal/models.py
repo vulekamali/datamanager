@@ -793,7 +793,6 @@ class Department(models.Model):
         programmes = [{'name': cell[programme_name_ref], 'amount': cell['value.sum']}
                       for cell in result_for_programmes['cells']]
 
-
         # Get econ classes
         result_for_econ_classes = openspending_api.aggregate(
             cuts=[
@@ -807,20 +806,34 @@ class Department(models.Model):
                 openspending_api.get_econ_class_2_ref(),
                 openspending_api.get_econ_class_3_ref()
             ])
-
+        econ_classes = dict()
+        econ_class_2_ref, econ_class_3_ref = openspending_api.get_econ_class_2_ref(), \
+                                             openspending_api.get_econ_class_3_ref()
+        for cell in result_for_econ_classes['cells']:
+            new_econ_2_object = {'type': 'economic_classification_3',
+                                 'name': cell[econ_class_3_ref],
+                                 'amount': cell['value.sum']}
+            if cell[econ_class_2_ref] not in econ_classes.keys():
+                econ_classes[cell[econ_class_2_ref]] = dict()
+                econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
+                econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
+                econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
+            else:
+                econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         return {
             'by_type': by_type,
             'total_change': {
                 'amount': total_adjusted - total_voted,
                 'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
             },
-            'econ_classes': None,
+            'econ_classes': econ_classes.values(),
             'programmes': programmes,
             'virements': None,
         }
 
-    def __str__(self):
-        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
+
+def __str__(self):
+    return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
 class GovtFunction(models.Model):
