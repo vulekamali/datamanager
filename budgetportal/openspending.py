@@ -5,6 +5,7 @@ conventions of how we name fields in our Fiscal Data Packages.
 import urllib
 
 from django.conf import settings
+from django.core.cache import cache
 import logging
 import random
 import requests
@@ -119,14 +120,20 @@ class EstimatesOfExpenditure():
 
     def aggregate(self, cuts=None, drilldowns=None):
         url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
-        aggregate_result = self.session.get(url)
-        logger.info("request %s took %dms", aggregate_result.url,
-                    aggregate_result.elapsed.microseconds / 1000)
-        aggregate_result.raise_for_status()
-        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
-            raise Exception(
-                "More cells than expected - perhaps we should start paging")
-        return aggregate_result.json()
+        result_cache = cache.get(url)
+        if result_cache:
+            aggregate_result = result_cache
+        else:
+            aggregate_result = self.session.get(url)
+            logger.info("request %s took %dms", aggregate_result.url,
+                        aggregate_result.elapsed.microseconds / 1000)
+            aggregate_result.raise_for_status()
+            aggregate_result = aggregate_result.json()
+            if aggregate_result['total_cell_count'] > PAGE_SIZE:
+                raise Exception(
+                    "More cells than expected - perhaps we should start paging")
+            cache.set(url, aggregate_result)
+        return aggregate_result
 
     def filter_dept(self, result, dept_name, financial_year):
         filtered_results = []
