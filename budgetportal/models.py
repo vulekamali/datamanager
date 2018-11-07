@@ -795,7 +795,18 @@ class Department(models.Model):
 
 
         # Get econ classes
+        result_for_econ_classes = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+                openspending_api.get_adjustment_kind_ref() + ':' +
+                '"Adjustments - Total adjustments"' + ';' + '"Special appropriation"',
 
+            ],
+            drilldowns=[
+                openspending_api.get_econ_class_2_ref(),
+                openspending_api.get_econ_class_3_ref()
+            ])
 
         return {
             'by_type': by_type,
