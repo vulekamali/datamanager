@@ -1,3 +1,5 @@
+import string
+
 from autoslug import AutoSlugField
 from budgetportal.openspending import (
     EstimatesOfExpenditure,
@@ -783,7 +785,7 @@ class Department(models.Model):
 
         # Get by type
         cells_by_type = filter(filter_unique_combinations, result['cells'])
-        by_type = [{'name': x['fy_descript.fy_descript'], 'amount': x['value.sum']} for x in cells_by_type]
+        by_type = [{'name': string.replace(x['fy_descript.fy_descript'], 'Adjustments - ', ""), 'amount': x['value.sum']} for x in cells_by_type]
         # Get total change
         # cell_totals = filter(filter_unique_combinations, result['cells'])
         for dct in result['cells']:
