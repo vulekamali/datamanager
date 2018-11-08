@@ -827,6 +827,22 @@ class Department(models.Model):
                 econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
             else:
                 econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
+
+        # Get virements
+        result_for_virements = dataset.get_resource('CSV', name='Value of Virements')
+        if result_for_virements:
+            pass
+        else:
+            result_for_virements = openspending_api.aggregate(
+                cuts=[
+                    openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                    openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+                    openspending_api.get_adjustment_kind_ref() + ':' +
+                    '"Adjustments - Virements and shifts due to savings"',
+
+                ],
+                drilldowns=openspending_api.get_all_drilldowns())
+
         return {
             'by_type': by_type if by_type else None,
             'total_change': {
@@ -835,7 +851,7 @@ class Department(models.Model):
             },
             'econ_classes': econ_classes.values() if econ_classes else None,
             'programmes': programmes if programmes else None,
-            'virements': 0,
+            # 'virements': 0,
         }
 
 
@@ -884,6 +900,10 @@ class PackageWithoutGroupException(Exception):
 
 
 class Dataset():
+    """
+    Reprsents a CKAN dataset (AKA package)
+    """
+
     def __init__(self, **kwargs):
         self.author = kwargs['author']
         self.created_date = kwargs['created_date']
@@ -986,7 +1006,7 @@ class Dataset():
                     and resource['format'] == format):
                 return resource
             # if name wasn't provided, just match first item with this format
-            if (resource['format'] == format):
+            if not name and (resource['format'] == format):
                 return resource
 
     def create_resource(self, name, format, url):
