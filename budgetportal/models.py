@@ -760,6 +760,8 @@ class Department(models.Model):
                 openspending_api.get_adjustment_kind_ref(),
                 openspending_api.get_phase_ref(),
             ])
+        if not result_for_type_and_total['cells']:
+            return None
         phase_ref, descript_ref = openspending_api.get_phase_ref(), openspending_api.get_adjustment_kind_ref()
         for cell in result_for_type_and_total['cells']:
             if cell[phase_ref] == 'Adjusted appropriation' and \
@@ -768,7 +770,10 @@ class Department(models.Model):
             if cell[phase_ref] == 'Voted (Main appropriation)' and \
                     cell[descript_ref] == 'Total':
                 total_voted = cell['value.sum']
-        if not (total_adjusted and total_voted):
+        try:
+            total_adjusted
+            total_voted
+        except UnboundLocalError:
             raise Exception("Could not calculate total change for department budget")
 
         # Get by type
@@ -821,14 +826,14 @@ class Department(models.Model):
             else:
                 econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         return {
-            'by_type': by_type,
+            'by_type': by_type if by_type else None,
             'total_change': {
                 'amount': total_adjusted - total_voted,
                 'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
             },
-            'econ_classes': econ_classes.values(),
-            'programmes': programmes,
-            'virements': None,
+            'econ_classes': econ_classes.values() if econ_classes else None,
+            'programmes': programmes if programmes else None,
+            'virements': 0,
         }
 
 
