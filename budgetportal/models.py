@@ -749,6 +749,8 @@ class Department(models.Model):
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
+        if not openspending_api:
+            return None
 
         # Get total change (very ugly, refactor)
         result_for_type_and_total = openspending_api.aggregate(
@@ -1038,10 +1040,13 @@ class Dataset():
     def get_openspending_api(self):
         if self._openspending_api is not None:
             return self._openspending_api
-        api_resource = filter(
-            lambda r: r['format'] == 'OpenSpending API',
-            self.resources
-        )[0]
+        try:
+            api_resource = filter(
+                lambda r: r['format'] == 'OpenSpending API',
+                self.resources
+            )[0]
+        except IndexError:
+            return None
         api_class_mapping = {
             'estimates-of-national-expenditure': EstimatesOfExpenditure,
             'estimates-of-provincial-expenditure': EstimatesOfExpenditure,
