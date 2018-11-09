@@ -779,35 +779,6 @@ class Department(models.Model):
         except UnboundLocalError:
             raise Exception("Could not calculate total change for department budget")
 
-
-        # Get econ classes
-        result_for_econ_classes = openspending_api.aggregate(
-            cuts=[
-                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
-                openspending_api.get_adjustment_kind_ref() + ':' +
-                '"Adjustments - Total adjustments"' + ';' + '"Special appropriation"',
-
-            ],
-            drilldowns=[
-                openspending_api.get_econ_class_2_ref(),
-                openspending_api.get_econ_class_3_ref()
-            ])
-        econ_classes = dict()
-        econ_class_2_ref, econ_class_3_ref = openspending_api.get_econ_class_2_ref(), \
-                                             openspending_api.get_econ_class_3_ref()
-        for cell in result_for_econ_classes['cells']:
-            new_econ_2_object = {'type': 'economic_classification_3',
-                                 'name': cell[econ_class_3_ref],
-                                 'amount': cell['value.sum']}
-            if cell[econ_class_2_ref] not in econ_classes.keys():
-                econ_classes[cell[econ_class_2_ref]] = dict()
-                econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
-                econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
-                econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
-            else:
-                econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
-
         # Get virements
         virements_resource = dataset.get_resource('CSV', name='Value of Virements')
         if virements_resource:
@@ -861,7 +832,7 @@ class Department(models.Model):
                 # whereas the virements % calculates only perc of total value
                 'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
             },
-            'econ_classes': econ_classes.values() if econ_classes else None,
+            'econ_classes': self._get_adjustments_by_econ_class(openspending_api),
             'programmes': self._get_adjustments_by_programme(openspending_api),
             'virements': virements if virements else None,
         }
@@ -921,9 +892,43 @@ class Department(models.Model):
                 openspending_api.get_phase_ref(),
             ])
         programme_name_ref = openspending_api.get_programme_name_ref()
-        programmes = [{'name': cell[programme_name_ref], 'amount': cell['value.sum']}
-                      for cell in result_for_programmes['cells']]
+        programmes = [{
+            'name': cell[programme_name_ref],
+            'amount': cell['value.sum']
+        }
+                      for cell in result_for_programmes['cells']
+                      if cell['value.sum']
+        ]
         return programmes if programmes else None
+
+    def _get_adjustments_by_econ_class(self, openspending_api):
+        result_for_econ_classes = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+                openspending_api.get_adjustment_kind_ref() + ':' +
+                '"Adjustments - Total adjustments"' + ';' + '"Special appropriation"',
+
+            ],
+            drilldowns=[
+                openspending_api.get_econ_class_2_ref(),
+                openspending_api.get_econ_class_3_ref()
+            ])
+        econ_classes = dict()
+        econ_class_2_ref, econ_class_3_ref = openspending_api.get_econ_class_2_ref(), \
+                                             openspending_api.get_econ_class_3_ref()
+        for cell in result_for_econ_classes['cells']:
+            new_econ_2_object = {'type': 'economic_classification_3',
+                                 'name': cell[econ_class_3_ref],
+                                 'amount': cell['value.sum']}
+            if cell[econ_class_2_ref] not in econ_classes.keys():
+                econ_classes[cell[econ_class_2_ref]] = dict()
+                econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
+                econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
+                econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
+            else:
+                econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
+        return econ_classes.values() if econ_classes else None
 
 def __str__(self):
     return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
