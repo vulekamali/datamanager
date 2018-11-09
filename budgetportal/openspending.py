@@ -122,8 +122,10 @@ class EstimatesOfExpenditure():
         url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
         result_cache = cache.get(url)
         if result_cache:
+            logger.info('cache hit for %s', url)
             aggregate_result = result_cache
         else:
+            logger.info('missed cache for %s', url)
             aggregate_result = self.session.get(url)
             logger.info("request %s took %dms", aggregate_result.url,
                         aggregate_result.elapsed.microseconds / 1000)
