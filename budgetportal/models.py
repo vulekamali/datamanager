@@ -487,7 +487,8 @@ class Department(models.Model):
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
-            openspending_api.get_financial_year_ref() + ':' + financial_year_start
+            openspending_api.get_financial_year_ref() + ':' +
+            financial_year_start
         ]
 
         if self.government.sphere.slug == 'provincial':
@@ -532,18 +533,23 @@ class Department(models.Model):
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
-            openspending_api.get_financial_year_ref() + ':' + financial_year_start,
-            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+            openspending_api.get_financial_year_ref() + ':' +
+            financial_year_start,
         ]
         if self.government.sphere.slug == 'provincial':
-            cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
+            cuts.append(openspending_api.get_geo_ref() +
+                        ':"%s"' % self.government.name)
         drilldowns = [
             openspending_api.get_programme_number_ref(),
             openspending_api.get_programme_name_ref(),
             openspending_api.get_econ_class_1_ref(),
             openspending_api.get_econ_class_2_ref(),
+            openspending_api.get_department_name_ref(),
         ]
-        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        budget_results = openspending_api.aggregate(
+            cuts=cuts, drilldowns=drilldowns)
+        result = openspending_api.filter_dept(budget_results, self.name)
+
         prog_func = lambda cell: cell[openspending_api.get_programme_name_ref()]
         econ1_func = lambda cell: cell[openspending_api.get_econ_class_1_ref()]
         total_budget_fun = lambda x: x['total_budget']
@@ -655,17 +661,22 @@ class Department(models.Model):
         openspending_api = dataset.get_openspending_api()
         financial_year_start = self.get_financial_year().get_starting_year()
         cuts = [
-            openspending_api.get_financial_year_ref() + ':' + financial_year_start,
-            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+            openspending_api.get_financial_year_ref() + ':' +
+            financial_year_start,
         ]
         if self.government.sphere.slug == 'provincial':
-            cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
+            cuts.append(openspending_api.get_geo_ref() +
+                        ':"%s"' % self.government.name)
         drilldowns = [
             openspending_api.get_programme_number_ref(),
             openspending_api.get_programme_name_ref(),
             openspending_api.get_subprogramme_name_ref(),
+            openspending_api.get_department_name_ref()
         ]
-        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        budget_results = openspending_api.aggregate(
+            cuts=cuts, drilldowns=drilldowns)
+        result = openspending_api.filter_dept(budget_results, self.name)
+
         prog_func = lambda cell: cell[openspending_api.get_programme_name_ref()]
         total_budget_fun = lambda x: x['total_budget']
         programmes = []
