@@ -4,6 +4,7 @@ conventions of how we name fields in our Fiscal Data Packages.
 """
 import urllib
 
+from collections import OrderedDict
 from django.conf import settings
 from django.core.cache import cache
 from hashlib import sha1
@@ -40,7 +41,9 @@ class EstimatesOfExpenditure():
             drilldowns.append(self.get_ref(key, 'key'))
             drilldowns.append(self.get_ref(key, 'label'))
         # Enforce uniqueness
-        return list(set(drilldowns))
+        # Enforce ordering to produce URLs more consistently to improve caching
+        # and reduce diffs when written to file.
+        return sorted(list(set(drilldowns)))
 
     # These make assumptions about the OS Types we give Estimes of Expenditure
     # columns, and the level of which hierarchy they end up in.
@@ -109,6 +112,7 @@ class EstimatesOfExpenditure():
         params = {
             'pagesize': PAGE_SIZE,
         }
+
         if settings.BUST_OPENSPENDING_CACHE:
             params['cache_bust'] = random.randint(1, 1000000)
 
@@ -117,7 +121,8 @@ class EstimatesOfExpenditure():
         if drilldowns is not None:
             params['drilldown'] = "|".join(drilldowns)
         url = self.cube_url + 'aggregate/'
-        return url + '?' + urllib.urlencode(params)
+        sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
+        return url + '?' + urllib.urlencode(sorted_params)
 
     def aggregate(self, cuts=None, drilldowns=None):
         url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)

@@ -511,7 +511,7 @@ class Department(models.Model):
                 'total_budget': cell['value.sum']
             })
         csv_aggregate_url = openspending_api.aggregate_url(
-            cuts=cuts,
+            cuts=cuts + [openspending_api.get_department_name_ref() + ':"' + self.name + '"'],
             drilldowns=openspending_api.get_all_drilldowns()
         )
         self._programme_budgets = {
@@ -582,7 +582,7 @@ class Department(models.Model):
                 })
 
         csv_aggregate_url = openspending_api.aggregate_url(
-            cuts=cuts,
+            cuts=cuts + [openspending_api.get_department_name_ref() + ':"' + self.name + '"'],
             drilldowns=openspending_api.get_all_drilldowns()
         )
         self._econ_by_programme_budgets = {
@@ -645,7 +645,7 @@ class Department(models.Model):
                     'items': sorted(programmes, key=total_budget_fun, reverse=True),
                 })
         csv_aggregate_url = openspending_api.aggregate_url(
-            cuts=cuts,
+            cuts=cuts + [openspending_api.get_department_name_ref() + ':"' + self.name + '"'],
             drilldowns=openspending_api.get_all_drilldowns()
         )
         self._prog_by_econ_budgets = {
@@ -701,7 +701,7 @@ class Department(models.Model):
                     'items': sorted(subprogrammes, key=total_budget_fun, reverse=True),
                 })
         csv_aggregate_url = openspending_api.aggregate_url(
-            cuts=cuts,
+            cuts=cuts + [openspending_api.get_department_name_ref() + ':"' + self.name + '"'],
             drilldowns=openspending_api.get_all_drilldowns()
         )
         return {
