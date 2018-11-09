@@ -1,3 +1,4 @@
+import json
 import string
 
 from autoslug import AutoSlugField
@@ -829,9 +830,28 @@ class Department(models.Model):
                 econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
 
         # Get virements
-        result_for_virements = dataset.get_resource('CSV', name='Value of Virements')
-        if result_for_virements:
-            pass
+        virements_resource = dataset.get_resource('CSV', name='Value of Virements')
+        if virements_resource:
+            resource_id = virements_resource['id']
+            sql = '''
+            SELECT "Value of Virements" FROM "{}" 
+            WHERE "department_name"='{}'
+            '''.format(resource_id, self.name)
+            params = {
+                'sql': sql
+            }
+            result = requests.get(CKAN_DATASTORE_URL, params=params)
+            result.raise_for_status()
+            records = result.json()['result']['records']
+            if records:
+                value = records[0]['Value of Virements']
+            else:
+                raise Exception('Value of Virements query returned no records')
+            virements = {
+                'label': 'Value of virements',  # <- should the second V be capitalised?
+                'amount': int(value),
+                'percentage': round(100 * float(value)/float(total_voted), 2),
+            }
         else:
             result_for_virements = openspending_api.aggregate(
                 cuts=[
@@ -842,16 +862,29 @@ class Department(models.Model):
 
                 ],
                 drilldowns=openspending_api.get_all_drilldowns())
+            cells = result_for_virements['cells']
+            total_positive_virement_change = 0
+            for c in cells:
+                value = c['value.sum']
+                if value > 0:
+                    total_positive_virement_change += value
+            virements = {
+                'label': 'Value of virements and shifts due to savings',
+                'amount': int(total_positive_virement_change),
+                'percentage': round(100 * float(total_positive_virement_change)/float(total_voted), 2)
+            }
 
         return {
             'by_type': by_type if by_type else None,
             'total_change': {
                 'amount': total_adjusted - total_voted,
+                # this calculates percentage of change from original voted,
+                # whereas the virements % calculates only perc of total value
                 'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
             },
             'econ_classes': econ_classes.values() if econ_classes else None,
             'programmes': programmes if programmes else None,
-            # 'virements': 0,
+            'virements': virements if virements else None,
         }
 
 
@@ -936,6 +969,8 @@ class Dataset():
                 'description': resource['description'],
                 'format': resource['format'],
                 'url': resource['url'],
+                'id': resource['id'],
+
             })
 
         if package_is_contributed(package):
