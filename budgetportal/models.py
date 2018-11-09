@@ -779,27 +779,6 @@ class Department(models.Model):
         except UnboundLocalError:
             raise Exception("Could not calculate total change for department budget")
 
-        # Get by type
-        cells_by_type = filter(filter_by_type, result_for_type_and_total['cells'])
-        by_type = [{'name': string.replace(x['fy_descript.fy_descript'], 'Adjustments - ', ""),
-                    'amount': x['value.sum'], 'type': 'kind'} for x in cells_by_type]
-
-        # Get programmes
-        result_for_programmes = openspending_api.aggregate(
-            cuts=[
-                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
-                openspending_api.get_adjustment_kind_ref() + ':' +
-                '"Adjustments - Total adjustments"' + ';' + '"Special appropriation"',
-
-            ],
-            drilldowns=[
-                openspending_api.get_programme_name_ref(),
-                openspending_api.get_phase_ref(),
-            ])
-        programme_name_ref = openspending_api.get_programme_name_ref()
-        programmes = [{'name': cell[programme_name_ref], 'amount': cell['value.sum']}
-                      for cell in result_for_programmes['cells']]
 
         # Get econ classes
         result_for_econ_classes = openspending_api.aggregate(
@@ -834,7 +813,7 @@ class Department(models.Model):
         if virements_resource:
             resource_id = virements_resource['id']
             sql = '''
-            SELECT "Value of Virements" FROM "{}" 
+            SELECT "Value of Virements" FROM "{}"
             WHERE "department_name"='{}'
             '''.format(resource_id, self.name)
             params = {
@@ -875,7 +854,7 @@ class Department(models.Model):
             }
 
         return {
-            'by_type': by_type if by_type else None,
+            'by_type': self._get_adjustments_by_type(openspending_api, result_for_type_and_total),
             'total_change': {
                 'amount': total_adjusted - total_voted,
                 # this calculates percentage of change from original voted,
@@ -883,10 +862,68 @@ class Department(models.Model):
                 'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
             },
             'econ_classes': econ_classes.values() if econ_classes else None,
-            'programmes': programmes if programmes else None,
+            'programmes': self._get_adjustments_by_programme(openspending_api),
             'virements': virements if virements else None,
         }
 
+    def _get_adjustments_by_type(self, openspending_api, result_for_type_and_total):
+        budget_phase_ref = openspending_api.get_phase_ref()
+        adjustment_kind_ref = openspending_api.get_adjustment_kind_ref()
+        def filter_by_type(cell):
+            types = [
+                "Adjustments - Announced in the budget speech",
+                "Adjustments - Declared unspent funds",
+                "Adjustments - Emergency funding",
+                "Adjustments - Roll-overs",
+                "Adjustments - Self-financing",
+                "Adjustments - Shifting of functions between votes",
+                "Adjustments - Shifting of functions within the vote",
+                "Adjustments - Significant and unforeseeable economic and financial events",
+                "Adjustments - Unforeseeable/unavoidable",
+                "Adjustments - Virements and shifts due to savings",
+                "Special appropriation",
+            ]
+
+            whitelist = {'Adjusted appropriation': types}
+            whitelist_keys = whitelist.keys()
+            phase = cell[budget_phase_ref]
+            descript = cell[adjustment_kind_ref]
+            if phase in whitelist_keys:
+                if descript in whitelist[phase]:
+                    return True
+            return False
+
+        cells_by_type = filter(filter_by_type, result_for_type_and_total['cells'])
+        by_type = []
+        for cell in cells_by_type:
+            name = cell[adjustment_kind_ref]
+            name = string.replace(name, 'Adjustments - ', "")
+            if cell['value.sum']:
+                by_type.append({
+                    'name': name,
+                    'amount': cell['value.sum'],
+                    'type': 'kind',
+                })
+
+        return by_type if by_type else None
+
+    def _get_adjustments_by_programme(self, openspending_api):
+        result_for_programmes = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+                openspending_api.get_adjustment_kind_ref() + ':' +
+                '"Adjustments - Total adjustments"' + ';' + '"Special appropriation"',
+
+            ],
+            drilldowns=[
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_phase_ref(),
+            ])
+        programme_name_ref = openspending_api.get_programme_name_ref()
+        programmes = [{'name': cell[programme_name_ref], 'amount': cell['value.sum']}
+                      for cell in result_for_programmes['cells']]
+        return programmes if programmes else None
 
 def __str__(self):
     return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
@@ -1258,19 +1295,3 @@ def csv_url(aggregate_url):
                         "Some browsers may no longer be able to interpret the URL." %
                         URL_LENGTH_LIMIT)
     return csv_url
-
-
-def filter_by_type(cell):
-    """
-        Intended to be fed to filter() in get_adjusted_budget_summary
-    """
-    whitelist = {'Adjusted appropriation': ('Adjustments - Unforeseeable/unavoidable',
-                                            'Adjustments - Announced in the budget speech',
-                                            'Adjustments - Roll-overs')}
-    whitelist_keys = whitelist.keys()
-    phase = cell['budget_phase.budget_phase']
-    descript = cell['fy_descript.fy_descript']
-    if phase in whitelist_keys:
-        if descript in whitelist[phase]:
-            return True
-    return False
