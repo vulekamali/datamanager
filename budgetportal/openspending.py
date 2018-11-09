@@ -6,6 +6,7 @@ import urllib
 
 from django.conf import settings
 from django.core.cache import cache
+from hashlib import sha1
 import logging
 import random
 import requests
@@ -120,12 +121,12 @@ class EstimatesOfExpenditure():
 
     def aggregate(self, cuts=None, drilldowns=None):
         url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
-        result_cache = cache.get(url)
-        if result_cache:
-            logger.info('cache hit for %s', url)
-            aggregate_result = result_cache
+        cached_result = cache.get(cache_key(url))
+        if cached_result:
+            logger.info('cache HIT for %s', url)
+            aggregate_result = cached_result
         else:
-            logger.info('missed cache for %s', url)
+            logger.info('cache MISS for %s', url)
             aggregate_result = self.session.get(url)
             logger.info("request %s took %dms", aggregate_result.url,
                         aggregate_result.elapsed.microseconds / 1000)
@@ -135,7 +136,7 @@ class EstimatesOfExpenditure():
                 raise Exception(
                     "More cells than expected - perhaps we should start paging"
                 )
-            cache.set(url, aggregate_result)
+            cache.set(cache_key(url), aggregate_result)
         return aggregate_result
 
     def filter_dept(self, result, dept_name):
@@ -148,3 +149,7 @@ class EstimatesOfExpenditure():
 
 def cube_url(model_url):
     return re.sub('model/?$', '', model_url)
+
+
+def cache_key(url):
+    return sha1(url).hexdigest()
