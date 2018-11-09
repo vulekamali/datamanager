@@ -721,16 +721,19 @@ class Department(models.Model):
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
-        cuts = [
-            openspending_api.get_department_name_ref() + ':"' + self.name + '"',
-        ]
+        cuts = []
         if self.government.sphere.slug == 'provincial':
-            cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
+            cuts.append(openspending_api.get_geo_ref() +
+                        ':"%s"' % self.government.name)
         drilldowns = [
             openspending_api.get_financial_year_ref(),
             openspending_api.get_phase_ref(),
+            openspending_api.get_department_name_ref()
         ]
-        result = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        budget_results = openspending_api.aggregate(
+            cuts=cuts, drilldowns=drilldowns)
+        result = openspending_api.filter_dept(budget_results, self.name)
+
         if result['cells']:
             cpi = get_cpi()
             for idx, financial_year_start in enumerate(financial_year_starts):
