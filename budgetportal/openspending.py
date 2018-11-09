@@ -111,7 +111,7 @@ class EstimatesOfExpenditure():
         if settings.BUST_OPENSPENDING_CACHE:
             params['cache_bust'] = random.randint(1, 1000000)
 
-        if cuts is not None:
+        if cuts is not None and cuts:
             params['cut'] = "|".join(cuts)
         if drilldowns is not None:
             params['drilldown'] = "|".join(drilldowns)
@@ -131,7 +131,8 @@ class EstimatesOfExpenditure():
             aggregate_result = aggregate_result.json()
             if aggregate_result['total_cell_count'] > PAGE_SIZE:
                 raise Exception(
-                    "More cells than expected - perhaps we should start paging")
+                    "More cells than expected - perhaps we should start paging"
+                )
             cache.set(url, aggregate_result)
         return aggregate_result
 
