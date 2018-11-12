@@ -753,7 +753,7 @@ class Department(models.Model):
         if not openspending_api:
             return None
 
-        # Get total change (very ugly, refactor)
+        # Get total change
         result_for_type_and_total = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
@@ -763,83 +763,24 @@ class Department(models.Model):
                 openspending_api.get_adjustment_kind_ref(),
                 openspending_api.get_phase_ref(),
             ])
-        if not result_for_type_and_total['cells']:
-            return None
-        phase_ref, descript_ref = openspending_api.get_phase_ref(), openspending_api.get_adjustment_kind_ref()
-        for cell in result_for_type_and_total['cells']:
-            if cell[phase_ref] == 'Adjusted appropriation' and \
-                    cell[descript_ref] == 'Total':
-                total_adjusted = cell['value.sum']
-            if cell[phase_ref] == 'Voted (Main appropriation)' and \
-                    cell[descript_ref] == 'Total':
-                total_voted = cell['value.sum']
-        try:
-            total_adjusted
-            total_voted
-        except UnboundLocalError:
-            raise Exception("Could not calculate total change for department budget")
 
-        # Get virements
-        virements_resource = dataset.get_resource('CSV', name='Value of Virements')
-        if virements_resource:
-            resource_id = virements_resource['id']
-            sql = '''
-            SELECT "Value of Virements" FROM "{}"
-            WHERE "department_name"='{}'
-            '''.format(resource_id, self.name)
-            params = {
-                'sql': sql
-            }
-            result = requests.get(CKAN_DATASTORE_URL, params=params)
-            result.raise_for_status()
-            records = result.json()['result']['records']
-            if records:
-                value = records[0]['Value of Virements']
-            else:
-                raise Exception('Value of Virements query returned no records')
-            virements = {
-                'label': 'Value of virements',  # <- should the second V be capitalised?
-                'amount': int(value),
-                'percentage': round(100 * float(value)/float(total_voted), 2),
-            }
-        else:
-            result_for_virements = openspending_api.aggregate(
-                cuts=[
-                    openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                    openspending_api.get_department_name_ref() + ':"' + self.name + '"',
-                    openspending_api.get_adjustment_kind_ref() + ':' +
-                    '"Adjustments - Virements and shifts due to savings"',
-
-                ],
-                drilldowns=openspending_api.get_all_drilldowns())
-            cells = result_for_virements['cells']
-            total_positive_virement_change = 0
-            for c in cells:
-                value = c['value.sum']
-                if value > 0:
-                    total_positive_virement_change += value
-            virements = {
-                'label': 'Value of virements and shifts due to savings',
-                'amount': int(total_positive_virement_change),
-                'percentage': round(100 * float(total_positive_virement_change)/float(total_voted), 2)
-            }
+        total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, result_for_type_and_total)
 
         return {
             'by_type': self._get_adjustments_by_type(openspending_api, result_for_type_and_total),
             'total_change': {
                 'amount': total_adjusted - total_voted,
-                # this calculates percentage of change from original voted,
-                # whereas the virements % calculates only perc of total value
                 'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
             },
             'econ_classes': self._get_adjustments_by_econ_class(openspending_api),
             'programmes': self._get_adjustments_by_programme(openspending_api),
-            'virements': virements if virements else None,
+            'virements': self._get_budget_virements(openspending_api, dataset, total_voted),
         }
 
     def _get_adjustments_by_type(self, openspending_api, result_for_type_and_total):
         budget_phase_ref = openspending_api.get_phase_ref()
         adjustment_kind_ref = openspending_api.get_adjustment_kind_ref()
+
         def filter_by_type(cell):
             types = [
                 "Adjustments - Announced in the budget speech",
@@ -929,6 +870,70 @@ class Department(models.Model):
             else:
                 econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         return econ_classes.values() if econ_classes else None
+
+    def _get_total_budget_adjustment(self, openspending_api, result_for_type_and_total):
+        if not result_for_type_and_total['cells']:
+            return None
+        phase_ref, descript_ref = openspending_api.get_phase_ref(), openspending_api.get_adjustment_kind_ref()
+        for cell in result_for_type_and_total['cells']:
+            if cell[phase_ref] == 'Adjusted appropriation' and \
+                    cell[descript_ref] == 'Total':
+                total_adjusted = cell['value.sum']
+            if cell[phase_ref] == 'Voted (Main appropriation)' and \
+                    cell[descript_ref] == 'Total':
+                total_voted = cell['value.sum']
+        try:
+            total_adjusted
+            total_voted
+        except UnboundLocalError:
+            raise Exception("Could not calculate total change for department budget")
+        return total_voted, total_adjusted
+
+    def _get_budget_virements(self, openspending_api, dataset, total_voted):
+        virements_resource = dataset.get_resource('CSV', name='Value of Virements')
+        if virements_resource:
+            sql = '''
+                    SELECT "Value of Virements" FROM "{}"
+                    WHERE "department_name"='{}'
+                    '''.format(virements_resource['id'], self.name)
+            params = {
+                'sql': sql
+            }
+            result = requests.get(CKAN_DATASTORE_URL, params=params)
+            result.raise_for_status()
+            records = result.json()['result']['records']
+            if records:
+                value = records[0]['Value of Virements']
+            else:
+                raise Exception('Value of Virements query returned no records')
+            virements = {
+                'label': 'Value of virements',
+                'amount': int(value),
+                'percentage': round(100 * float(value) / float(total_voted), 2),
+            }
+        else:
+            result_for_virements = openspending_api.aggregate(
+                cuts=[
+                    openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                    openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+                    openspending_api.get_adjustment_kind_ref() + ':' +
+                    '"Adjustments - Virements and shifts due to savings"',
+
+                ],
+                drilldowns=openspending_api.get_all_drilldowns())
+            cells = result_for_virements['cells']
+            total_positive_virement_change = 0
+            for c in cells:
+                value = c['value.sum']
+                if value > 0:
+                    total_positive_virement_change += value
+            virements = {
+                'label': 'Value of virements and shifts due to savings',
+                'amount': int(total_positive_virement_change),
+                'percentage': round(100 * float(total_positive_virement_change) / float(total_voted), 2)
+            }
+        return virements if virements else None
+
 
 def __str__(self):
     return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
