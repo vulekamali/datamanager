@@ -753,7 +753,6 @@ class Department(models.Model):
         if not openspending_api:
             return None
 
-        # Get total change
         result_for_type_and_total = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
@@ -762,12 +761,19 @@ class Department(models.Model):
             drilldowns=[
                 openspending_api.get_adjustment_kind_ref(),
                 openspending_api.get_phase_ref(),
+                openspending_api.get_programme_name_ref(),
             ])
 
-        total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, result_for_type_and_total)
+        cells_for_type_and_total = filter(openspending_api.filter_by_programme,
+                                          result_for_type_and_total['cells'])
+        cells_for_type_and_total = openspending_api.aggregate_by_ref(
+            [openspending_api.get_adjustment_kind_ref(),
+             openspending_api.get_phase_ref()],
+            cells_for_type_and_total)
+        total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
 
         return {
-            'by_type': self._get_adjustments_by_type(openspending_api, result_for_type_and_total),
+            'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
             'total_change': {
                 'amount': total_adjusted - total_voted,
                 'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
@@ -777,7 +783,7 @@ class Department(models.Model):
             'virements': self._get_budget_virements(openspending_api, dataset, total_voted),
         }
 
-    def _get_adjustments_by_type(self, openspending_api, result_for_type_and_total):
+    def _get_adjustments_by_type(self, openspending_api, cells):
         budget_phase_ref = openspending_api.get_phase_ref()
         adjustment_kind_ref = openspending_api.get_adjustment_kind_ref()
 
@@ -805,7 +811,7 @@ class Department(models.Model):
                     return True
             return False
 
-        cells_by_type = filter(filter_by_type, result_for_type_and_total['cells'])
+        cells_by_type = filter(filter_by_type, cells)
         by_type = []
         for cell in cells_by_type:
             name = cell[adjustment_kind_ref]
@@ -833,12 +839,15 @@ class Department(models.Model):
                 openspending_api.get_phase_ref(),
             ])
         programme_name_ref = openspending_api.get_programme_name_ref()
-        programmes = [{
-            'name': cell[programme_name_ref],
-            'amount': cell['value.sum']
-        }
-                      for cell in result_for_programmes['cells']
-                      if cell['value.sum']
+        cells_for_programmes = filter(openspending_api.filter_by_programme,
+                                      result_for_programmes['cells'])
+        programmes = [
+            {
+                'name': cell[programme_name_ref],
+                'amount': cell['value.sum']
+            }
+            for cell in cells_for_programmes
+            if cell['value.sum']
         ]
         return programmes if programmes else None
 
@@ -853,12 +862,23 @@ class Department(models.Model):
             ],
             drilldowns=[
                 openspending_api.get_econ_class_2_ref(),
-                openspending_api.get_econ_class_3_ref()
+                openspending_api.get_econ_class_3_ref(),
+                openspending_api.get_programme_name_ref()
             ])
+
         econ_classes = dict()
-        econ_class_2_ref, econ_class_3_ref = openspending_api.get_econ_class_2_ref(), \
-                                             openspending_api.get_econ_class_3_ref()
-        for cell in result_for_econ_classes['cells']:
+        econ_class_2_ref = openspending_api.get_econ_class_2_ref()
+        econ_class_3_ref = openspending_api.get_econ_class_3_ref()
+
+        cells_for_econ_classes = filter(openspending_api.filter_by_programme,
+                                        result_for_econ_classes['cells'])
+        cells_for_econ_classes = openspending_api.aggregate_by_ref(
+            [openspending_api.get_econ_class_2_ref(),
+             openspending_api.get_econ_class_3_ref()],
+            cells_for_econ_classes
+        )
+
+        for cell in cells_for_econ_classes:
             new_econ_2_object = {'type': 'economic_classification_3',
                                  'name': cell[econ_class_3_ref],
                                  'amount': cell['value.sum']}
@@ -871,11 +891,12 @@ class Department(models.Model):
                 econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         return econ_classes.values() if econ_classes else None
 
-    def _get_total_budget_adjustment(self, openspending_api, result_for_type_and_total):
-        if not result_for_type_and_total['cells']:
+    @staticmethod
+    def _get_total_budget_adjustment(openspending_api, cells):
+        if not cells:
             return None
         phase_ref, descript_ref = openspending_api.get_phase_ref(), openspending_api.get_adjustment_kind_ref()
-        for cell in result_for_type_and_total['cells']:
+        for cell in cells:
             if cell[phase_ref] == 'Adjusted appropriation' and \
                     cell[descript_ref] == 'Total':
                 total_adjusted = cell['value.sum']
@@ -921,9 +942,11 @@ class Department(models.Model):
 
                 ],
                 drilldowns=openspending_api.get_all_drilldowns())
-            cells = result_for_virements['cells']
+            cells_for_virements = result_for_virements['cells']
+            cells_for_virements = filter(openspending_api.filter_by_programme,
+                                         cells_for_virements)
             total_positive_virement_change = 0
-            for c in cells:
+            for c in cells_for_virements:
                 value = c['value.sum']
                 if value > 0:
                     total_positive_virement_change += value

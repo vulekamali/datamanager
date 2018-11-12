@@ -71,6 +71,44 @@ class BabbageFiscalDataset():
             raise Exception("More cells than expected - perhaps we should start paging")
         return aggregate_result.json()
 
+    @staticmethod
+    def aggregate_by_ref(col_refs, cells):
+        # TODO: currently expects col_refs to be array of length 2
+        aggregated_cells = list()
+        unique_reference_combos = list()
+        for cell in cells:
+            combo = (cell[col_refs[0]], cell[col_refs[1]])
+            if combo not in unique_reference_combos:
+                unique_reference_combos.append(combo)
+
+        for unique_ref_combo in unique_reference_combos:
+            value_sum = 0
+            count_sum = 0
+            ex_cell = None
+            for cell in cells:
+                if cell[col_refs[0]] == unique_ref_combo[0] and cell[col_refs[1]] == unique_ref_combo[1]:
+                    if not ex_cell:
+                        ex_cell = {
+                            col_refs[0]: cell[col_refs[0]],
+                            col_refs[1]: cell[col_refs[1]],
+                        }
+                    value_sum += cell['value.sum']
+                    count_sum += cell['_count']
+            ex_cell['value.sum'] = value_sum
+            ex_cell['_count'] = count_sum
+            aggregated_cells.append(ex_cell)
+        return aggregated_cells
+
+    # TODO: temporary
+    def filter_by_programme(self, cell):
+        prog_ref = EstimatesOfExpenditure.get_programme_name_ref(self)
+        programme_exclude = 'Direct charge against the National Revenue Fund'
+        cell_programme = cell[prog_ref]
+        if cell_programme != programme_exclude:
+            return True
+        else:
+            return False
+
 
 class EstimatesOfExpenditure(BabbageFiscalDataset):
     """
