@@ -764,12 +764,15 @@ class Department(models.Model):
                 openspending_api.get_programme_name_ref(),
             ])
 
-        cells_for_type_and_total = filter(openspending_api.filter_by_programme,
-                                          result_for_type_and_total['cells'])
-        cells_for_type_and_total = openspending_api.aggregate_by_ref(
-            [openspending_api.get_adjustment_kind_ref(),
-             openspending_api.get_phase_ref()],
-            cells_for_type_and_total)
+        # maximum semanticism reached
+        cells_for_type_and_total = openspending_api.filter_and_aggregate(result_for_type_and_total['cells'],
+                                                                         openspending_api.get_programme_name_ref(),
+                                                                         'Direct charge against the National '
+                                                                         'Revenue Fund',
+                                                                         [openspending_api.get_adjustment_kind_ref(),
+                                                                          openspending_api.get_phase_ref()]
+                                                                         )
+
         total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
 
         return {
@@ -839,8 +842,10 @@ class Department(models.Model):
                 openspending_api.get_phase_ref(),
             ])
         programme_name_ref = openspending_api.get_programme_name_ref()
-        cells_for_programmes = filter(openspending_api.filter_by_programme,
-                                      result_for_programmes['cells'])
+        cells_for_programmes = openspending_api.filter_by_ref_exclusion(result_for_programmes['cells'],
+                                                                        programme_name_ref,
+                                                                        'Direct charge against the National Revenue '
+                                                                        'Fund')
         programmes = [
             {
                 'name': cell[programme_name_ref],
@@ -870,13 +875,12 @@ class Department(models.Model):
         econ_class_2_ref = openspending_api.get_econ_class_2_ref()
         econ_class_3_ref = openspending_api.get_econ_class_3_ref()
 
-        cells_for_econ_classes = filter(openspending_api.filter_by_programme,
-                                        result_for_econ_classes['cells'])
-        cells_for_econ_classes = openspending_api.aggregate_by_ref(
-            [openspending_api.get_econ_class_2_ref(),
-             openspending_api.get_econ_class_3_ref()],
-            cells_for_econ_classes
-        )
+        cells_for_econ_classes = openspending_api.filter_and_aggregate(result_for_econ_classes['cells'],
+                                                                       openspending_api.get_programme_name_ref(),
+                                                                       'Direct charge against the National '
+                                                                       'Revenue Fund',
+                                                                       [openspending_api.get_econ_class_2_ref(),
+                                                                        openspending_api.get_econ_class_3_ref()])
 
         for cell in cells_for_econ_classes:
             new_econ_2_object = {'type': 'economic_classification_3',
@@ -942,9 +946,10 @@ class Department(models.Model):
 
                 ],
                 drilldowns=openspending_api.get_all_drilldowns())
-            cells_for_virements = result_for_virements['cells']
-            cells_for_virements = filter(openspending_api.filter_by_programme,
-                                         cells_for_virements)
+            cells_for_virements = openspending_api.filter_by_ref_exclusion(result_for_virements['cells'],
+                                                                           openspending_api.get_programme_name_ref(),
+                                                                           'Direct charge against the National '
+                                                                           'Revenue Fund')
             total_positive_virement_change = 0
             for c in cells_for_virements:
                 value = c['value.sum']

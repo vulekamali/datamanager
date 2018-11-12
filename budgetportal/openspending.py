@@ -72,12 +72,15 @@ class BabbageFiscalDataset():
         return aggregate_result.json()
 
     @staticmethod
-    def aggregate_by_ref(col_refs, cells):
+    def aggregate_by_ref(aggregate_refs, cells):
         # TODO: currently expects col_refs to be array of length 2
+        """ Simulates a basic version of aggregation via Open Spending API
+        Accepts a list of cells and a list of column references. """
+
         aggregated_cells = list()
         unique_reference_combos = list()
         for cell in cells:
-            combo = (cell[col_refs[0]], cell[col_refs[1]])
+            combo = (cell[aggregate_refs[0]], cell[aggregate_refs[1]])
             if combo not in unique_reference_combos:
                 unique_reference_combos.append(combo)
 
@@ -86,11 +89,11 @@ class BabbageFiscalDataset():
             count_sum = 0
             ex_cell = None
             for cell in cells:
-                if cell[col_refs[0]] == unique_ref_combo[0] and cell[col_refs[1]] == unique_ref_combo[1]:
+                if cell[aggregate_refs[0]] == unique_ref_combo[0] and cell[aggregate_refs[1]] == unique_ref_combo[1]:
                     if not ex_cell:
                         ex_cell = {
-                            col_refs[0]: cell[col_refs[0]],
-                            col_refs[1]: cell[col_refs[1]],
+                            aggregate_refs[0]: cell[aggregate_refs[0]],
+                            aggregate_refs[1]: cell[aggregate_refs[1]],
                         }
                     value_sum += cell['value.sum']
                     count_sum += cell['_count']
@@ -99,15 +102,15 @@ class BabbageFiscalDataset():
             aggregated_cells.append(ex_cell)
         return aggregated_cells
 
-    # TODO: temporary
-    def filter_by_programme(self, cell):
-        prog_ref = EstimatesOfExpenditure.get_programme_name_ref(self)
-        programme_exclude = 'Direct charge against the National Revenue Fund'
-        cell_programme = cell[prog_ref]
-        if cell_programme != programme_exclude:
-            return True
-        else:
-            return False
+    @staticmethod
+    def filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value):
+        filtered_cells = filter(lambda cell: cell[filter_ref] != filter_exclusion_value, cells)
+        return filtered_cells
+
+    def filter_and_aggregate(self, cells, filter_ref, filter_exclusion_value, aggregate_refs):
+        filtered_cells = self.filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value)
+        aggregated_cells = self.aggregate_by_ref(aggregate_refs, filtered_cells)
+        return aggregated_cells
 
 
 class EstimatesOfExpenditure(BabbageFiscalDataset):
