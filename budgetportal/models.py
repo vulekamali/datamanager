@@ -775,6 +775,7 @@ class Department(models.Model):
 
         total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
 
+
         return {
             'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
             'total_change': {
@@ -784,6 +785,7 @@ class Department(models.Model):
             'econ_classes': self._get_adjustments_by_econ_class(openspending_api),
             'programmes': self._get_adjustments_by_programme(openspending_api),
             'virements': self._get_budget_virements(openspending_api, dataset, total_voted),
+            'special_appropriation': self._get_budget_special_appropriations(openspending_api, total_voted),
         }
 
     def _get_adjustments_by_type(self, openspending_api, cells):
@@ -802,7 +804,6 @@ class Department(models.Model):
                 "Adjustments - Significant and unforeseeable economic and financial events",
                 "Adjustments - Unforeseeable/unavoidable",
                 "Adjustments - Virements and shifts due to savings",
-                "Special appropriation",
             ]
 
             whitelist = {'Adjusted appropriation': types}
@@ -833,8 +834,7 @@ class Department(models.Model):
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
                 openspending_api.get_department_name_ref() + ':"' + self.name + '"',
-                openspending_api.get_adjustment_kind_ref() + ':' +
-                '"Adjustments - Total adjustments"' + ';' + '"Special appropriation"',
+                openspending_api.get_adjustment_kind_ref() + ':' + '"Adjustments - Total adjustments"',
 
             ],
             drilldowns=[
@@ -861,8 +861,7 @@ class Department(models.Model):
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
                 openspending_api.get_department_name_ref() + ':"' + self.name + '"',
-                openspending_api.get_adjustment_kind_ref() + ':' +
-                '"Adjustments - Total adjustments"' + ';' + '"Special appropriation"',
+                openspending_api.get_adjustment_kind_ref() + ':' + '"Adjustments - Total adjustments"',
 
             ],
             drilldowns=[
@@ -961,6 +960,26 @@ class Department(models.Model):
                 'percentage': round(100 * float(total_positive_virement_change) / float(total_voted), 2)
             }
         return virements if virements else None
+
+    def _get_budget_special_appropriations(self, openspending_api, total_voted):
+        result_for_special_appropriations = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+                openspending_api.get_adjustment_kind_ref() + ':' + '"Special appropriation"',
+
+            ])
+        total_special_appropriations = 0
+        for cell in result_for_special_appropriations['cells']:
+            total_special_appropriations += cell['value.sum']
+
+        if total_special_appropriations:
+            return {
+                'amount': total_special_appropriations,
+                'percentage': round((float(total_special_appropriations) / float(total_voted)) * 100, 2)
+            }
+        else:
+            return None
 
 
 def __str__(self):
