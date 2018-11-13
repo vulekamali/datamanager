@@ -92,11 +92,19 @@ DATABASES = {
 
 # Caches
 if DEBUG:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    if os.environ.get('DEBUG_CACHE', 'false').lower() == 'true':
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+                'LOCATION': 'unique-snowflake',
+            }
         }
-    }
+    else:
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+            }
+        }
 else:
     CACHES = {
         'default': {

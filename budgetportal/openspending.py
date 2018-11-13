@@ -4,7 +4,10 @@ conventions of how we name fields in our Fiscal Data Packages.
 """
 import urllib
 
+from collections import OrderedDict
 from django.conf import settings
+from django.core.cache import cache
+from hashlib import sha1
 import logging
 import random
 import requests
@@ -16,17 +19,13 @@ PAGE_SIZE = 10000
 
 
 class BabbageFiscalDataset():
-
     def __init__(self, model_url):
         self.session = requests.Session()
 
         self.cube_url = cube_url(model_url)
         model_result = self.session.get(model_url)
-        logger.info(
-            "request to %s took %dms",
-            model_url,
-            model_result.elapsed.microseconds / 1000
-        )
+        logger.info("request to %s took %dms", model_url,
+                    model_result.elapsed.microseconds / 1000)
         model_result.raise_for_status()
         self.model = model_result.json()['model']
 
@@ -42,7 +41,9 @@ class BabbageFiscalDataset():
             drilldowns.append(self.get_ref(key, 'key'))
             drilldowns.append(self.get_ref(key, 'label'))
         # Enforce uniqueness
-        return list(set(drilldowns))
+        # Enforce ordering to produce URLs more consistently to improve caching
+        # and reduce diffs when written to file.
+        return sorted(list(set(drilldowns)))
 
     def aggregate_url(self, cuts=None, drilldowns=None):
         params = {
@@ -182,6 +183,13 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
     def get_econ_class_2_dimension(self):
         return self.get_dimension('economic_classification', level=1)
 
+    def aggregate_url(self, cuts=None, drilldowns=None):
+        params = {
+            'pagesize': PAGE_SIZE,
+        }
+
+        if settings.BUST_OPENSPENDING_CACHE:
+            params['cache_bust'] = random.randint(1, 1000000)
     def get_econ_class_3_ref(self):
         return self.get_ref(self.get_econ_class_3_dimension(), 'key')
 
@@ -191,8 +199,43 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
 
 class AdjustedEstimatesOfExpenditure(EstimatesOfExpenditure):
 
+        if cuts is not None and cuts:
+            params['cut'] = "|".join(cuts)
+        if drilldowns is not None:
+            params['drilldown'] = "|".join(drilldowns)
+        url = self.cube_url + 'aggregate/'
+        sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
+        return url + '?' + urllib.urlencode(sorted_params)
+
     def get_adjustment_kind_dimension(self):
         return self.get_dimension('value_kind')
+
+    def aggregate(self, cuts=None, drilldowns=None):
+        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
+        cached_result = cache.get(cache_key(url))
+        if cached_result:
+            logger.info('cache HIT for %s', url)
+            aggregate_result = cached_result
+        else:
+            logger.info('cache MISS for %s', url)
+            aggregate_result = self.session.get(url)
+            logger.info("request %s took %dms", aggregate_result.url,
+                        aggregate_result.elapsed.microseconds / 1000)
+            aggregate_result.raise_for_status()
+            aggregate_result = aggregate_result.json()
+            if aggregate_result['total_cell_count'] > PAGE_SIZE:
+                raise Exception(
+                    "More cells than expected - perhaps we should start paging"
+                )
+            cache.set(cache_key(url), aggregate_result)
+        return aggregate_result
+
+    def filter_dept(self, result, dept_name):
+        filtered_results = []
+        for budget in result['cells']:
+            if budget[self.get_department_name_ref()] == dept_name:
+                filtered_results.append(budget)
+        return {'cells': filtered_results}
 
     def get_adjustment_kind_ref(self):
         return self.get_ref(self.get_adjustment_kind_dimension(), 'label')
@@ -200,3 +243,7 @@ class AdjustedEstimatesOfExpenditure(EstimatesOfExpenditure):
 
 def cube_url(model_url):
     return re.sub('model/?$', '', model_url)
+
+
+def cache_key(url):
+    return sha1(url).hexdigest()
