@@ -1,5 +1,7 @@
-Budget Portal
+vulekamali Data Manager
 =============
+
+This app provides Single Sign-on (SSO) and support for maintaining correct and consistent data for the vulekamali Budget Data Portal by the National Treasury of South Africa.
 
 Setting up Development environment
 -----------------------
@@ -74,7 +76,14 @@ EMAIL_USE_TLS= \
 python manage.py runserver
 ```
 
-Logout from ckan might not send you to the right URL. You can manually go to logout from this app at http://localhost:8000/accounts/logout/.
+Logout from ckan might not send you to the right URL to logout from DataManager. You can manually go to logout from this app at http://localhost:8000/accounts/logout/.
+
+### Additional environment variables somtimes needing customisation for development
+
+| Environment variable | Description |
+| -------------------- | ------------|
+| `DEBUG_CACHE`          | Enable the django app cache. Normally disabled by `DEBUG=True`, this enables it for development - see more in `settings.py`. |
+
 
 Production deployment
 ---------------------
