@@ -971,7 +971,8 @@ class Department(models.Model):
             ])
         total_special_appropriations = 0
         for cell in result_for_special_appropriations['cells']:
-            total_special_appropriations += cell['value.sum']
+            if cell['value.sum']:
+                total_special_appropriations += cell['value.sum']
 
         if total_special_appropriations:
             return {
