@@ -45,32 +45,57 @@ class BabbageFiscalDataset():
         # and reduce diffs when written to file.
         return sorted(list(set(drilldowns)))
 
+    @staticmethod
+    def filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value):
+        filtered_cells = filter(lambda cell: cell[filter_ref] != filter_exclusion_value, cells)
+        return filtered_cells
+
+    def filter_and_aggregate(self, cells, filter_ref, filter_exclusion_value, aggregate_refs):
+        filtered_cells = self.filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value)
+        aggregated_cells = self.aggregate_by_ref(aggregate_refs, filtered_cells)
+        return aggregated_cells
+
     def aggregate_url(self, cuts=None, drilldowns=None):
         params = {
             'pagesize': PAGE_SIZE,
         }
+
         if settings.BUST_OPENSPENDING_CACHE:
             params['cache_bust'] = random.randint(1, 1000000)
-
-        if cuts is not None:
+        if cuts is not None and cuts:
             params['cut'] = "|".join(cuts)
         if drilldowns is not None:
             params['drilldown'] = "|".join(drilldowns)
         url = self.cube_url + 'aggregate/'
-        return url + '?' + urllib.urlencode(params)
+        sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
+        return url + '?' + urllib.urlencode(sorted_params)
 
     def aggregate(self, cuts=None, drilldowns=None):
         url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
-        aggregate_result = self.session.get(url)
-        logger.info(
-            "request %s took %dms",
-            aggregate_result.url,
-            aggregate_result.elapsed.microseconds / 1000
-        )
-        aggregate_result.raise_for_status()
-        if aggregate_result.json()['total_cell_count'] > PAGE_SIZE:
-            raise Exception("More cells than expected - perhaps we should start paging")
-        return aggregate_result.json()
+        cached_result = cache.get(cache_key(url))
+        if cached_result:
+            logger.info('cache HIT for %s', url)
+            aggregate_result = cached_result
+        else:
+            logger.info('cache MISS for %s', url)
+            aggregate_result = self.session.get(url)
+            logger.info("request %s took %dms", aggregate_result.url,
+                        aggregate_result.elapsed.microseconds / 1000)
+            aggregate_result.raise_for_status()
+            aggregate_result = aggregate_result.json()
+            if aggregate_result['total_cell_count'] > PAGE_SIZE:
+                raise Exception(
+                    "More cells than expected - perhaps we should start paging"
+                )
+            cache.set(cache_key(url), aggregate_result)
+        return aggregate_result
+
+    def filter_dept(self, result, dept_name):
+        filtered_results = []
+        for budget in result['cells']:
+            if budget[self.get_department_name_ref()] == dept_name:
+                filtered_results.append(budget)
+        return {'cells': filtered_results}
 
     @staticmethod
     def aggregate_by_ref(aggregate_refs, cells):
@@ -183,13 +208,6 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
     def get_econ_class_2_dimension(self):
         return self.get_dimension('economic_classification', level=1)
 
-    def aggregate_url(self, cuts=None, drilldowns=None):
-        params = {
-            'pagesize': PAGE_SIZE,
-        }
-
-        if settings.BUST_OPENSPENDING_CACHE:
-            params['cache_bust'] = random.randint(1, 1000000)
     def get_econ_class_3_ref(self):
         return self.get_ref(self.get_econ_class_3_dimension(), 'key')
 
@@ -199,43 +217,8 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
 
 class AdjustedEstimatesOfExpenditure(EstimatesOfExpenditure):
 
-        if cuts is not None and cuts:
-            params['cut'] = "|".join(cuts)
-        if drilldowns is not None:
-            params['drilldown'] = "|".join(drilldowns)
-        url = self.cube_url + 'aggregate/'
-        sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
-        return url + '?' + urllib.urlencode(sorted_params)
-
     def get_adjustment_kind_dimension(self):
         return self.get_dimension('value_kind')
-
-    def aggregate(self, cuts=None, drilldowns=None):
-        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
-        cached_result = cache.get(cache_key(url))
-        if cached_result:
-            logger.info('cache HIT for %s', url)
-            aggregate_result = cached_result
-        else:
-            logger.info('cache MISS for %s', url)
-            aggregate_result = self.session.get(url)
-            logger.info("request %s took %dms", aggregate_result.url,
-                        aggregate_result.elapsed.microseconds / 1000)
-            aggregate_result.raise_for_status()
-            aggregate_result = aggregate_result.json()
-            if aggregate_result['total_cell_count'] > PAGE_SIZE:
-                raise Exception(
-                    "More cells than expected - perhaps we should start paging"
-                )
-            cache.set(cache_key(url), aggregate_result)
-        return aggregate_result
-
-    def filter_dept(self, result, dept_name):
-        filtered_results = []
-        for budget in result['cells']:
-            if budget[self.get_department_name_ref()] == dept_name:
-                filtered_results.append(budget)
-        return {'cells': filtered_results}
 
     def get_adjustment_kind_ref(self):
         return self.get_ref(self.get_adjustment_kind_dimension(), 'label')

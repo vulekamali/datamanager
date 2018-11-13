@@ -780,13 +780,16 @@ class Department(models.Model):
         result_for_type_and_total = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
             ],
             drilldowns=[
                 openspending_api.get_adjustment_kind_ref(),
                 openspending_api.get_phase_ref(),
                 openspending_api.get_programme_name_ref(),
+                openspending_api.get_department_name_ref()
             ])
+
+        result_for_type_and_total = openspending_api.filter_dept(result_for_type_and_total,
+                                                                 self.name)
 
         # maximum semanticism reached
         cells_for_type_and_total = openspending_api.filter_and_aggregate(result_for_type_and_total['cells'],
@@ -799,7 +802,6 @@ class Department(models.Model):
 
         total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
 
-
         return {
             'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
             'total_change': {
@@ -810,7 +812,7 @@ class Department(models.Model):
             'programmes': self._get_adjustments_by_programme(openspending_api),
             'virements': self._get_budget_virements(openspending_api, dataset, total_voted),
             'special_appropriation': self._get_budget_special_appropriations(openspending_api, total_voted),
-            'direct_charges': self._get_budget_direct_charges(openspending_api)
+            'direct_charges': self._get_budget_direct_charges(openspending_api),
         }
 
     def _get_adjustments_by_type(self, openspending_api, cells):
@@ -865,7 +867,12 @@ class Department(models.Model):
             drilldowns=[
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_phase_ref(),
+                openspending_api.get_department_name_ref()
+
             ])
+        result_for_programmes = openspending_api.filter_dept(result_for_programmes,
+                                                             self.name)
+
         programme_name_ref = openspending_api.get_programme_name_ref()
         cells_for_programmes = openspending_api.filter_by_ref_exclusion(result_for_programmes['cells'],
                                                                         programme_name_ref,
@@ -885,15 +892,19 @@ class Department(models.Model):
         result_for_econ_classes = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
                 openspending_api.get_adjustment_kind_ref() + ':' + '"Adjustments - Total adjustments"',
 
             ],
             drilldowns=[
                 openspending_api.get_econ_class_2_ref(),
                 openspending_api.get_econ_class_3_ref(),
-                openspending_api.get_programme_name_ref()
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_department_name_ref()
+
             ])
+
+        result_for_econ_classes = openspending_api.filter_dept(result_for_econ_classes,
+                                                               self.name)
 
         econ_classes = dict()
         econ_class_2_ref = openspending_api.get_econ_class_2_ref()
@@ -964,12 +975,13 @@ class Department(models.Model):
             result_for_virements = openspending_api.aggregate(
                 cuts=[
                     openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                    openspending_api.get_department_name_ref() + ':"' + self.name + '"',
                     openspending_api.get_adjustment_kind_ref() + ':' +
                     '"Adjustments - Virements and shifts due to savings"',
 
                 ],
                 drilldowns=openspending_api.get_all_drilldowns())
+
+            result_for_virements = openspending_api.filter_dept(result_for_virements, self.name)
             cells_for_virements = openspending_api.filter_by_ref_exclusion(result_for_virements['cells'],
                                                                            openspending_api.get_programme_name_ref(),
                                                                            'Direct charge against the National '
@@ -990,10 +1002,14 @@ class Department(models.Model):
         result_for_special_appropriations = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
                 openspending_api.get_adjustment_kind_ref() + ':' + '"Special appropriation"',
 
+            ],
+            drilldowns=[
+                openspending_api.get_department_name_ref()
             ])
+        result_for_special_appropriations = openspending_api.filter_dept(result_for_special_appropriations, self.name)
+
         total_special_appropriations = 0
         for cell in result_for_special_appropriations['cells']:
             if cell['value.sum']:
@@ -1011,13 +1027,15 @@ class Department(models.Model):
         result_for_direct_charges = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
                 openspending_api.get_programme_name_ref() + ':' + '"Direct charge against the National Revenue Fund"',
             ],
             drilldowns=[
                 openspending_api.get_phase_ref(),
                 openspending_api.get_subprogramme_name_ref(),
+                openspending_api.get_department_name_ref()
             ])
+        result_for_direct_charges = openspending_api.filter_dept(result_for_direct_charges, self.name)
+
         unique_subprogrammes = []
         subprog_ref = openspending_api.get_subprogramme_name_ref()
         phase_ref = openspending_api.get_phase_ref()
@@ -1046,7 +1064,6 @@ class Department(models.Model):
                 }
 
         return subprog_dict.values() if subprog_dict else None
-
 
 
 def __str__(self):
