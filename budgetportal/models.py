@@ -786,6 +786,7 @@ class Department(models.Model):
             'programmes': self._get_adjustments_by_programme(openspending_api),
             'virements': self._get_budget_virements(openspending_api, dataset, total_voted),
             'special_appropriation': self._get_budget_special_appropriations(openspending_api, total_voted),
+            'direct_charges': self._get_budget_direct_charges(openspending_api)
         }
 
     def _get_adjustments_by_type(self, openspending_api, cells):
@@ -981,6 +982,47 @@ class Department(models.Model):
             }
         else:
             return None
+
+    def _get_budget_direct_charges(self, openspending_api):
+        result_for_direct_charges = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+                openspending_api.get_programme_name_ref() + ':' + '"Direct charge against the National Revenue Fund"',
+            ],
+            drilldowns=[
+                openspending_api.get_phase_ref(),
+                openspending_api.get_subprogramme_name_ref(),
+            ])
+        unique_subprogrammes = []
+        subprog_ref = openspending_api.get_subprogramme_name_ref()
+        phase_ref = openspending_api.get_phase_ref()
+        subprog_dict = {}
+
+        for cell in result_for_direct_charges['cells']:
+            if cell[subprog_ref] not in unique_subprogrammes:
+                unique_subprogrammes.append(cell[subprog_ref])
+
+        for subprog in unique_subprogrammes:
+            voted_appropriation = None
+            adjusted_appropriation = None
+            for cell in result_for_direct_charges['cells']:
+                if cell[subprog_ref] == subprog:
+                    if cell[phase_ref] == 'Voted (Main appropriation)':
+                        voted_appropriation = cell['value.sum']
+                    elif cell[phase_ref] == 'Adjusted appropriation':
+                        adjusted_appropriation = cell['value.sum']
+            if not (voted_appropriation and adjusted_appropriation):
+                raise Exception("Could not calculate change for direct charge subprogramme \'%s\'" % subprog)
+            if voted_appropriation != adjusted_appropriation:
+                subprog_dict[subprog] = {
+                    'amount': adjusted_appropriation - voted_appropriation,
+                    'label': subprog,
+                    'percentage': round((float(adjusted_appropriation) / float(voted_appropriation)) * 100 - 100, 2)
+                }
+
+        return subprog_dict.values() if subprog_dict else None
+
 
 
 def __str__(self):
