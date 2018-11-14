@@ -799,8 +799,17 @@ class Department(models.Model):
                                                                          [openspending_api.get_adjustment_kind_ref(),
                                                                           openspending_api.get_phase_ref()]
                                                                          )
-
+        if not cells_for_type_and_total:
+            return None
         total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
+
+        dept_aggregate_url = openspending_api.aggregate_url(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':' + self.name,
+            ],
+            drilldowns=openspending_api.get_all_drilldowns()
+        )
 
         return {
             'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
@@ -813,6 +822,7 @@ class Department(models.Model):
             'virements': self._get_budget_virements(openspending_api, dataset, total_voted),
             'special_appropriation': self._get_budget_special_appropriations(openspending_api, total_voted),
             'direct_charges': self._get_budget_direct_charges(openspending_api),
+            'department_data_csv': csv_url(dept_aggregate_url),
         }
 
     def _get_adjustments_by_type(self, openspending_api, cells):
