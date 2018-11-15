@@ -791,7 +791,6 @@ class Department(models.Model):
 
         result_for_type_and_total = openspending_api.filter_dept(result_for_type_and_total,
                                                                  self.name)
-        # maximum semanticism reached
         cells_for_type_and_total = openspending_api.filter_and_aggregate(
             result_for_type_and_total['cells'],
             openspending_api.get_programme_name_ref(),
@@ -950,10 +949,11 @@ class Department(models.Model):
     def _get_total_budget_adjustment(openspending_api, cells):
         if not cells:
             return None
-        phase_ref, descript_ref = openspending_api.get_phase_ref(), openspending_api.get_adjustment_kind_ref()
+        phase_ref = openspending_api.get_phase_ref()
+        descript_ref = openspending_api.get_adjustment_kind_ref()
         for cell in cells:
             if cell[phase_ref] == 'Adjusted appropriation' and \
-                    cell[descript_ref] == 'Total':
+                    cell[descript_ref] == 'Adjustments - Total adjustments':
                 total_adjusted = cell['value.sum']
             if cell[phase_ref] == 'Voted (Main appropriation)' and \
                     cell[descript_ref] == 'Total':
