@@ -814,7 +814,7 @@ class Department(models.Model):
         return {
             'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
             'total_change': {
-                'amount': total_adjusted - total_voted,
+                'amount': total_adjusted,
                 'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
             },
             'econ_classes': self._get_adjustments_by_econ_class(openspending_api),
@@ -932,12 +932,14 @@ class Department(models.Model):
                                  'name': cell[econ_class_3_ref],
                                  'amount': cell['value.sum']}
             if cell[econ_class_2_ref] not in econ_classes.keys():
-                econ_classes[cell[econ_class_2_ref]] = dict()
-                econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
-                econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
-                econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
+                if cell['value.sum'] > 0:
+                    econ_classes[cell[econ_class_2_ref]] = dict()
+                    econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
+                    econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
+                    econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
             else:
-                econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
+                if cell['value.sum'] > 0:
+                    econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         return econ_classes.values() if econ_classes else None
 
     @staticmethod
