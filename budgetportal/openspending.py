@@ -55,7 +55,7 @@ class BabbageFiscalDataset():
         aggregated_cells = self.aggregate_by_ref(aggregate_refs, filtered_cells)
         return aggregated_cells
 
-    def aggregate_url(self, cuts=None, drilldowns=None):
+    def aggregate_url(self, cuts=None, drilldowns=None, order=None):
         params = {
             'pagesize': PAGE_SIZE,
         }
@@ -66,12 +66,14 @@ class BabbageFiscalDataset():
             params['cut'] = "|".join(cuts)
         if drilldowns is not None:
             params['drilldown'] = "|".join(drilldowns)
+        if order is not None:
+            params['order'] = "|".join(order)
         url = self.cube_url + 'aggregate/'
         sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
         return url + '?' + urllib.urlencode(sorted_params)
 
-    def aggregate(self, cuts=None, drilldowns=None):
-        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
+    def aggregate(self, cuts=None, drilldowns=None, order=None):
+        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns, order=order)
         cached_result = cache.get(cache_key(url))
         if cached_result:
             logger.info('cache HIT for %s', url)
@@ -99,7 +101,6 @@ class BabbageFiscalDataset():
 
     @staticmethod
     def aggregate_by_ref(aggregate_refs, cells):
-        # TODO: currently expects col_refs to be array of length 2
         """ Simulates a basic version of aggregation via Open Spending API
         Accepts a list of cells and a list of column references. """
 
@@ -126,16 +127,6 @@ class BabbageFiscalDataset():
             ex_cell['value.sum'] = value_sum
             ex_cell['_count'] = count_sum
             aggregated_cells.append(ex_cell)
-        return aggregated_cells
-
-    @staticmethod
-    def filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value):
-        filtered_cells = filter(lambda cell: cell[filter_ref] != filter_exclusion_value, cells)
-        return filtered_cells
-
-    def filter_and_aggregate(self, cells, filter_ref, filter_exclusion_value, aggregate_refs):
-        filtered_cells = self.filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value)
-        aggregated_cells = self.aggregate_by_ref(aggregate_refs, filtered_cells)
         return aggregated_cells
 
 

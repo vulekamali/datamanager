@@ -786,19 +786,18 @@ class Department(models.Model):
                 openspending_api.get_phase_ref(),
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_department_name_ref()
-            ])
+            ],
+            order=[openspending_api.get_adjustment_kind_ref()])
 
         result_for_type_and_total = openspending_api.filter_dept(result_for_type_and_total,
                                                                  self.name)
-
         # maximum semanticism reached
-        cells_for_type_and_total = openspending_api.filter_and_aggregate(result_for_type_and_total['cells'],
-                                                                         openspending_api.get_programme_name_ref(),
-                                                                         'Direct charge against the National '
-                                                                         'Revenue Fund',
-                                                                         [openspending_api.get_adjustment_kind_ref(),
-                                                                          openspending_api.get_phase_ref()]
-                                                                         )
+        cells_for_type_and_total = openspending_api.filter_and_aggregate(
+            result_for_type_and_total['cells'],
+            openspending_api.get_programme_name_ref(),
+            'Direct charge against the National Revenue Fund',
+            [openspending_api.get_adjustment_kind_ref(), openspending_api.get_phase_ref()]
+        )
         if not cells_for_type_and_total:
             return None
         total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
@@ -879,7 +878,8 @@ class Department(models.Model):
                 openspending_api.get_phase_ref(),
                 openspending_api.get_department_name_ref()
 
-            ])
+            ],
+            order=[openspending_api.get_programme_name_ref()])
         result_for_programmes = openspending_api.filter_dept(result_for_programmes,
                                                              self.name)
 
@@ -911,6 +911,10 @@ class Department(models.Model):
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_department_name_ref()
 
+            ],
+            order=[
+                openspending_api.get_econ_class_2_ref(),
+                openspending_api.get_econ_class_3_ref(),
             ])
 
         result_for_econ_classes = openspending_api.filter_dept(result_for_econ_classes,
@@ -1045,7 +1049,8 @@ class Department(models.Model):
                 openspending_api.get_phase_ref(),
                 openspending_api.get_subprogramme_name_ref(),
                 openspending_api.get_department_name_ref()
-            ])
+            ],
+            order=[openspending_api.get_subprogramme_name_ref()])
         result_for_direct_charges = openspending_api.filter_dept(result_for_direct_charges, self.name)
 
         unique_subprogrammes = []
