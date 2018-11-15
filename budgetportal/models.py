@@ -813,7 +813,7 @@ class Department(models.Model):
             'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
             'total_change': {
                 'amount': total_adjusted,
-                'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
+                'percentage': round((float(total_adjusted) / float(total_voted)) * 100, 2)
             },
             'econ_classes': self._get_adjustments_by_econ_class(openspending_api),
             'programmes': self._get_adjustments_by_programme(openspending_api),
