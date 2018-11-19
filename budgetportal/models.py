@@ -943,7 +943,13 @@ class Department(models.Model):
             else:
                 if cell['value.sum'] != 0:
                     econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
-        return econ_classes.values() if econ_classes else None
+        # sort by name
+        name_func = lambda x: x['name']
+        for econ_2_name in list(econ_classes.keys()): # Copy keys because we're updating dict
+            econ_classes[econ_2_name]['items'] = sorted(
+                econ_classes[econ_2_name]['items'], key=name_func)
+        econ_classes_list = sorted(econ_classes.values(), key=name_func)
+        return econ_classes_list if econ_classes_list else None
 
     @staticmethod
     def _get_total_budget_adjustment(openspending_api, cells):
