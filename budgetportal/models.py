@@ -821,6 +821,7 @@ class Department(models.Model):
             'special_appropriation': self._get_budget_special_appropriations(openspending_api, total_voted),
             'direct_charges': self._get_budget_direct_charges(openspending_api),
             'department_data_csv': csv_url(dept_aggregate_url),
+            'dataset_detail_page': dataset.get_url_path(),
         }
 
     def _get_adjustments_by_type(self, openspending_api, cells):
