@@ -1044,36 +1044,37 @@ class Department(models.Model):
             drilldowns=[
                 openspending_api.get_phase_ref(),
                 openspending_api.get_subprogramme_name_ref(),
-                openspending_api.get_department_name_ref()
+                openspending_api.get_department_name_ref(),
+                openspending_api.get_adjustment_kind_ref(),
             ])
+
         result_for_direct_charges = openspending_api.filter_dept(result_for_direct_charges, self.name)
 
-        unique_subprogrammes = []
         subprog_ref = openspending_api.get_subprogramme_name_ref()
         phase_ref = openspending_api.get_phase_ref()
+        kind_ref = openspending_api.get_adjustment_kind_ref()
         subprog_dict = {}
 
         for cell in result_for_direct_charges['cells']:
-            if cell[subprog_ref] not in unique_subprogrammes:
-                unique_subprogrammes.append(cell[subprog_ref])
+            if cell[kind_ref] == 'Adjustments - Total adjustments':
+                subprog_dict[cell[subprog_ref]] = {
+                    'amount': cell['value.sum'],
+                    'label': cell[subprog_ref]
+                }
 
-        for subprog in unique_subprogrammes:
-            voted_appropriation = None
-            adjusted_appropriation = None
+        for subprog in subprog_dict.keys():
             for cell in result_for_direct_charges['cells']:
                 if cell[subprog_ref] == subprog:
                     if cell[phase_ref] == 'Voted (Main appropriation)':
-                        voted_appropriation = cell['value.sum']
-                    elif cell[phase_ref] == 'Adjusted appropriation':
-                        adjusted_appropriation = cell['value.sum']
-            if not (voted_appropriation and adjusted_appropriation):
-                raise Exception("Could not calculate change for direct charge subprogramme \'%s\'" % subprog)
-            if voted_appropriation != adjusted_appropriation:
-                subprog_dict[subprog] = {
-                    'amount': adjusted_appropriation - voted_appropriation,
-                    'label': subprog,
-                    'percentage': round((float(adjusted_appropriation) / float(voted_appropriation)) * 100 - 100, 2)
-                }
+                        subprog_dict[subprog]['percentage'] = \
+                            round((float(subprog_dict[subprog]['amount']) / float(cell['value.sum'])) * 100, 2)
+
+            # if voted_appropriation != total_adjustments:
+            #     subprog_dict[subprog] = {
+            #         'amount': total_adjustments - voted_appropriation,
+            #         'label': subprog,
+            #         'percentage': round((float(total_adjustments) / float(voted_appropriation)) * 100 - 100, 2)
+            #     }
 
         return subprog_dict.values() if subprog_dict else None
 
