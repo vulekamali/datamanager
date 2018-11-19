@@ -786,19 +786,17 @@ class Department(models.Model):
                 openspending_api.get_phase_ref(),
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_department_name_ref()
-            ])
+            ],
+            order=[openspending_api.get_adjustment_kind_ref()])
 
         result_for_type_and_total = openspending_api.filter_dept(result_for_type_and_total,
                                                                  self.name)
-
-        # maximum semanticism reached
-        cells_for_type_and_total = openspending_api.filter_and_aggregate(result_for_type_and_total['cells'],
-                                                                         openspending_api.get_programme_name_ref(),
-                                                                         'Direct charge against the National '
-                                                                         'Revenue Fund',
-                                                                         [openspending_api.get_adjustment_kind_ref(),
-                                                                          openspending_api.get_phase_ref()]
-                                                                         )
+        cells_for_type_and_total = openspending_api.filter_and_aggregate(
+            result_for_type_and_total['cells'],
+            openspending_api.get_programme_name_ref(),
+            'Direct charge against the National Revenue Fund',
+            [openspending_api.get_adjustment_kind_ref(), openspending_api.get_phase_ref()]
+        )
         if not cells_for_type_and_total:
             return None
         total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
@@ -815,7 +813,7 @@ class Department(models.Model):
             'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
             'total_change': {
                 'amount': total_adjusted,
-                'percentage': round((float(total_adjusted) / float(total_voted)) * 100 - 100.0, 2)
+                'percentage': round((float(total_adjusted) / float(total_voted)) * 100, 2)
             },
             'econ_classes': self._get_adjustments_by_econ_class(openspending_api),
             'programmes': self._get_adjustments_by_programme(openspending_api),
@@ -879,7 +877,8 @@ class Department(models.Model):
                 openspending_api.get_phase_ref(),
                 openspending_api.get_department_name_ref()
 
-            ])
+            ],
+            order=[openspending_api.get_programme_name_ref()])
         result_for_programmes = openspending_api.filter_dept(result_for_programmes,
                                                              self.name)
 
@@ -911,6 +910,10 @@ class Department(models.Model):
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_department_name_ref()
 
+            ],
+            order=[
+                openspending_api.get_econ_class_2_ref(),
+                openspending_api.get_econ_class_3_ref(),
             ])
 
         result_for_econ_classes = openspending_api.filter_dept(result_for_econ_classes,
@@ -946,10 +949,11 @@ class Department(models.Model):
     def _get_total_budget_adjustment(openspending_api, cells):
         if not cells:
             return None
-        phase_ref, descript_ref = openspending_api.get_phase_ref(), openspending_api.get_adjustment_kind_ref()
+        phase_ref = openspending_api.get_phase_ref()
+        descript_ref = openspending_api.get_adjustment_kind_ref()
         for cell in cells:
             if cell[phase_ref] == 'Adjusted appropriation' and \
-                    cell[descript_ref] == 'Total':
+                    cell[descript_ref] == 'Adjustments - Total adjustments':
                 total_adjusted = cell['value.sum']
             if cell[phase_ref] == 'Voted (Main appropriation)' and \
                     cell[descript_ref] == 'Total':
@@ -1046,8 +1050,8 @@ class Department(models.Model):
                 openspending_api.get_subprogramme_name_ref(),
                 openspending_api.get_department_name_ref(),
                 openspending_api.get_adjustment_kind_ref(),
-            ])
-
+            ],
+            order=[openspending_api.get_subprogramme_name_ref()])
         result_for_direct_charges = openspending_api.filter_dept(result_for_direct_charges, self.name)
 
         subprog_ref = openspending_api.get_subprogramme_name_ref()
@@ -1068,13 +1072,6 @@ class Department(models.Model):
                     if cell[phase_ref] == 'Voted (Main appropriation)':
                         subprog_dict[subprog]['percentage'] = \
                             round((float(subprog_dict[subprog]['amount']) / float(cell['value.sum'])) * 100, 2)
-
-            # if voted_appropriation != total_adjustments:
-            #     subprog_dict[subprog] = {
-            #         'amount': total_adjustments - voted_appropriation,
-            #         'label': subprog,
-            #         'percentage': round((float(total_adjustments) / float(voted_appropriation)) * 100 - 100, 2)
-            #     }
 
         return subprog_dict.values() if subprog_dict else None
 
