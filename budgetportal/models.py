@@ -813,7 +813,7 @@ class Department(models.Model):
             'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
             'total_change': {
                 'amount': total_adjusted,
-                'percentage': round((float(total_adjusted) / float(total_voted)) * 100, 2)
+                'percentage': (float(total_adjusted) / float(total_voted)) * 100
             },
             'econ_classes': self._get_adjustments_by_econ_class(openspending_api),
             'programmes': self._get_adjustments_by_programme(openspending_api),
@@ -935,13 +935,13 @@ class Department(models.Model):
                                  'name': cell[econ_class_3_ref],
                                  'amount': cell['value.sum']}
             if cell[econ_class_2_ref] not in econ_classes.keys():
-                if cell['value.sum'] > 0:
+                if cell['value.sum'] != 0:
                     econ_classes[cell[econ_class_2_ref]] = dict()
                     econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
                     econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
                     econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
             else:
-                if cell['value.sum'] > 0:
+                if cell['value.sum'] != 0:
                     econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         return econ_classes.values() if econ_classes else None
 
@@ -988,7 +988,7 @@ class Department(models.Model):
             virements = {
                 'label': 'Value of virements',
                 'amount': int(value),
-                'percentage': round(100 * float(value) / float(total_voted), 2),
+                'percentage': 100 * (float(value) / float(total_voted))
             }
         else:
             result_for_virements = openspending_api.aggregate(
@@ -1013,7 +1013,7 @@ class Department(models.Model):
             virements = {
                 'label': 'Value of virements and shifts due to savings',
                 'amount': int(total_positive_virement_change),
-                'percentage': round(100 * float(total_positive_virement_change) / float(total_voted), 2)
+                'percentage': 100 * float(total_positive_virement_change) / float(total_voted)
             }
         return virements if virements else None
 
@@ -1037,7 +1037,7 @@ class Department(models.Model):
         if total_special_appropriations:
             return {
                 'amount': total_special_appropriations,
-                'percentage': round((float(total_special_appropriations) / float(total_voted)) * 100, 2)
+                'percentage': (float(total_special_appropriations) / float(total_voted)) * 100
             }
         else:
             return None
@@ -1074,7 +1074,7 @@ class Department(models.Model):
                 if cell[subprog_ref] == subprog:
                     if cell[phase_ref] == 'Voted (Main appropriation)':
                         subprog_dict[subprog]['percentage'] = \
-                            round((float(subprog_dict[subprog]['amount']) / float(cell['value.sum'])) * 100, 2)
+                            (float(subprog_dict[subprog]['amount']) / float(cell['value.sum'])) * 100
 
         return subprog_dict.values() if subprog_dict else None
 
