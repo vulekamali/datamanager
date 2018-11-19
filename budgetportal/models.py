@@ -951,6 +951,8 @@ class Department(models.Model):
             return None
         phase_ref = openspending_api.get_phase_ref()
         descript_ref = openspending_api.get_adjustment_kind_ref()
+        total_adjusted, total_voted = None, None
+
         for cell in cells:
             if cell[phase_ref] == 'Adjusted appropriation' and \
                     cell[descript_ref] == 'Adjustments - Total adjustments':
@@ -958,11 +960,12 @@ class Department(models.Model):
             if cell[phase_ref] == 'Voted (Main appropriation)' and \
                     cell[descript_ref] == 'Total':
                 total_voted = cell['value.sum']
-        try:
-            total_adjusted
-            total_voted
-        except UnboundLocalError:
+
+        if total_voted and not total_adjusted:
+            total_adjusted = 0
+        elif not (total_voted or total_adjusted):
             raise Exception("Could not calculate total change for department budget")
+
         return total_voted, total_adjusted
 
     def _get_budget_virements(self, openspending_api, dataset, total_voted):
