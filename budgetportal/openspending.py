@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 PAGE_SIZE = 10000
 
 
-class EstimatesOfExpenditure():
+class BabbageFiscalDataset():
     def __init__(self, model_url):
         self.session = requests.Session()
 
@@ -45,8 +45,99 @@ class EstimatesOfExpenditure():
         # and reduce diffs when written to file.
         return sorted(list(set(drilldowns)))
 
-    # These make assumptions about the OS Types we give Estimes of Expenditure
-    # columns, and the level of which hierarchy they end up in.
+    @staticmethod
+    def filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value):
+        filtered_cells = filter(lambda cell: cell[filter_ref] != filter_exclusion_value, cells)
+        return filtered_cells
+
+    def filter_and_aggregate(self, cells, filter_ref, filter_exclusion_value, aggregate_refs):
+        filtered_cells = self.filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value)
+        aggregated_cells = self.aggregate_by_ref(aggregate_refs, filtered_cells)
+        return aggregated_cells
+
+    def aggregate_url(self, cuts=None, drilldowns=None, order=None):
+        params = {
+            'pagesize': PAGE_SIZE,
+        }
+
+        if settings.BUST_OPENSPENDING_CACHE:
+            params['cache_bust'] = random.randint(1, 1000000)
+        if cuts is not None and cuts:
+            params['cut'] = "|".join(cuts)
+        if drilldowns is not None:
+            params['drilldown'] = "|".join(drilldowns)
+        if order is not None:
+            params['order'] = "|".join(order)
+        url = self.cube_url + 'aggregate/'
+        sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
+        return url + '?' + urllib.urlencode(sorted_params)
+
+    def aggregate(self, cuts=None, drilldowns=None, order=None):
+        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns, order=order)
+        cached_result = cache.get(cache_key(url))
+        if cached_result:
+            logger.info('cache HIT for %s', url)
+            aggregate_result = cached_result
+        else:
+            logger.info('cache MISS for %s', url)
+            aggregate_result = self.session.get(url)
+            logger.info("request %s took %dms", aggregate_result.url,
+                        aggregate_result.elapsed.microseconds / 1000)
+            aggregate_result.raise_for_status()
+            aggregate_result = aggregate_result.json()
+            if aggregate_result['total_cell_count'] > PAGE_SIZE:
+                raise Exception(
+                    "More cells than expected - perhaps we should start paging"
+                )
+            cache.set(cache_key(url), aggregate_result)
+        return aggregate_result
+
+    def filter_dept(self, result, dept_name):
+        filtered_results = []
+        for budget in result['cells']:
+            if budget[self.get_department_name_ref()] == dept_name:
+                filtered_results.append(budget)
+        return {'cells': filtered_results}
+
+    @staticmethod
+    def aggregate_by_ref(aggregate_refs, cells):
+        """ Simulates a basic version of aggregation via Open Spending API
+        Accepts a list of cells and a list of column references. """
+
+        aggregated_cells = list()
+        unique_reference_combos = list()
+        for cell in cells:
+            combo = (cell[aggregate_refs[0]], cell[aggregate_refs[1]])
+            if combo not in unique_reference_combos:
+                unique_reference_combos.append(combo)
+
+        for unique_ref_combo in unique_reference_combos:
+            value_sum = 0
+            count_sum = 0
+            ex_cell = None
+            for cell in cells:
+                if cell[aggregate_refs[0]] == unique_ref_combo[0] and cell[aggregate_refs[1]] == unique_ref_combo[1]:
+                    if not ex_cell:
+                        ex_cell = {
+                            aggregate_refs[0]: cell[aggregate_refs[0]],
+                            aggregate_refs[1]: cell[aggregate_refs[1]],
+                        }
+                    value_sum += cell['value.sum']
+                    count_sum += cell['_count']
+            ex_cell['value.sum'] = value_sum
+            ex_cell['_count'] = count_sum
+            aggregated_cells.append(ex_cell)
+        return aggregated_cells
+
+
+class EstimatesOfExpenditure(BabbageFiscalDataset):
+    """
+    This tries to provide a more semantic interface to Fiscal Data in
+    the OpenSpending API than OpenSpending types.
+
+    It makes assumptions about the OS Types we give Estimes of Expenditure
+    columns, and the level of which hierarchy they end up in.
+    """
 
     def get_programme_name_ref(self):
         return self.get_ref(self.get_programme_dimension(), 'label')
@@ -108,48 +199,20 @@ class EstimatesOfExpenditure():
     def get_econ_class_2_dimension(self):
         return self.get_dimension('economic_classification', level=1)
 
-    def aggregate_url(self, cuts=None, drilldowns=None):
-        params = {
-            'pagesize': PAGE_SIZE,
-        }
+    def get_econ_class_3_ref(self):
+        return self.get_ref(self.get_econ_class_3_dimension(), 'key')
 
-        if settings.BUST_OPENSPENDING_CACHE:
-            params['cache_bust'] = random.randint(1, 1000000)
+    def get_econ_class_3_dimension(self):
+        return self.get_dimension('economic_classification', level=2)
 
-        if cuts is not None and cuts:
-            params['cut'] = "|".join(cuts)
-        if drilldowns is not None:
-            params['drilldown'] = "|".join(drilldowns)
-        url = self.cube_url + 'aggregate/'
-        sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
-        return url + '?' + urllib.urlencode(sorted_params)
 
-    def aggregate(self, cuts=None, drilldowns=None):
-        url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns)
-        cached_result = cache.get(cache_key(url))
-        if cached_result:
-            logger.info('cache HIT for %s', url)
-            aggregate_result = cached_result
-        else:
-            logger.info('cache MISS for %s', url)
-            aggregate_result = self.session.get(url)
-            logger.info("request %s took %dms", aggregate_result.url,
-                        aggregate_result.elapsed.microseconds / 1000)
-            aggregate_result.raise_for_status()
-            aggregate_result = aggregate_result.json()
-            if aggregate_result['total_cell_count'] > PAGE_SIZE:
-                raise Exception(
-                    "More cells than expected - perhaps we should start paging"
-                )
-            cache.set(cache_key(url), aggregate_result)
-        return aggregate_result
+class AdjustedEstimatesOfExpenditure(EstimatesOfExpenditure):
 
-    def filter_dept(self, result, dept_name):
-        filtered_results = []
-        for budget in result['cells']:
-            if budget[self.get_department_name_ref()] == dept_name:
-                filtered_results.append(budget)
-        return {'cells': filtered_results}
+    def get_adjustment_kind_dimension(self):
+        return self.get_dimension('value_kind')
+
+    def get_adjustment_kind_ref(self):
+        return self.get_ref(self.get_adjustment_kind_dimension(), 'label')
 
 
 def cube_url(model_url):

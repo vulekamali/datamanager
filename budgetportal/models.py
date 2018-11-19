@@ -1,5 +1,11 @@
+import json
+import string
+
 from autoslug import AutoSlugField
-from budgetportal.openspending import EstimatesOfExpenditure
+from budgetportal.openspending import (
+    EstimatesOfExpenditure,
+    AdjustedEstimatesOfExpenditure,
+)
 from ckanapi import NotFound
 from collections import OrderedDict
 from decimal import Decimal
@@ -36,7 +42,6 @@ REVENUE_RESOURCE_IDS = {
     '2016-17': '69b54066-00e0-4d7b-8b33-1ccbace5ba8e',
     '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
 }
-
 
 CPI_RESOURCE_IDS = {
     '2018-19': '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d',
@@ -86,7 +91,7 @@ class FinancialYear(models.Model):
 
     @staticmethod
     def slug_from_year_start(year):
-        return year + '-' + str(int(year[2:])+1)
+        return year + '-' + str(int(year[2:]) + 1)
 
     def get_sphere(self, name):
         return getattr(self, name)
@@ -180,35 +185,6 @@ class Government(models.Model):
     def get_vote_primary_departments(self):
         return Department.objects.filter(government=self, is_vote_primary=True).all()
 
-    def get_function_budgets(self):
-        """
-        get the budget totals for all the government functions
-        """
-
-        if self._function_budgets is not None:
-            return self._function_budgets
-        budget = self.get_estimates_of_expenditure_dataset().get_openspending_api()
-        financial_year_start = self.sphere.financial_year.get_starting_year()
-        vote_numbers = [str(d.vote_number)
-                        for d in self.get_vote_primary_departments()]
-        votes = '"%s"' % '";"'.join(vote_numbers)
-        cuts = [
-            budget.get_financial_year_ref() + ':' + financial_year_start,
-            budget.get_vote_number_ref() + ':' + votes
-        ]
-        if self.sphere.slug == 'provincial':
-            cuts.append(budget.get_geo_ref() + ':"%s"' % self.name)
-        drilldowns = [budget.get_function_ref()]
-        result = budget.aggregate(cuts=cuts, drilldowns=drilldowns)
-        functions = []
-        for cell in result['cells']:
-            functions.append({
-                'name': cell[budget.get_function_ref()],
-                'total_budget': cell['value.sum']
-            })
-        self._function_budgets = functions
-        return self._function_budgets
-
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
@@ -216,7 +192,11 @@ class Government(models.Model):
 class Department(models.Model):
     organisational_unit = 'department'
     government = models.ForeignKey(Government, on_delete=models.CASCADE, related_name="departments")
-    name = models.CharField(max_length=200, help_text="The department name must precisely match the text used in the Appropriation Bill. All datasets must be normalised to match this name. Beware that changing this name might cause a mismatch with already-published datasets which might need to be update to match this.")
+    name = models.CharField(max_length=200,
+                            help_text="The department name must precisely match the text used in the Appropriation "
+                                      "Bill. All datasets must be normalised to match this name. Beware that changing "
+                                      "this name might cause a mismatch with already-published datasets which might "
+                                      "need to be update to match this.")
     slug = AutoSlugField(populate_from='name', max_length=200, always_update=True, editable=True)
     vote_number = models.IntegerField()
     is_vote_primary = models.BooleanField(default=True)
@@ -224,6 +204,7 @@ class Department(models.Model):
     _programme_budgets = None
     _econ_by_programme_budgets = None
     _prog_by_econ_budgets = None
+    _adjusted_estimates_of_expenditure_dataset = None
     _estimates_of_econ_classes_expenditure_dataset = None
     _estimates_of_subprogramme_expenditure_dataset = None
 
@@ -257,7 +238,7 @@ class Department(models.Model):
         existing_vote_primary = Department.objects.filter(
             government=self.government, vote_number=self.vote_number)
         if self.is_vote_primary and existing_vote_primary \
-           and existing_vote_primary.first() != self:
+                and existing_vote_primary.first() != self:
             raise ValidationError('There is already a primary department for '
                                   'vote %d' % self.vote_number)
 
@@ -282,10 +263,10 @@ class Department(models.Model):
     def create_dataset(self, name, title, group_name):
         vocab_map = get_vocab_map()
         tags = [
-            { 'vocabulary_id': vocab_map['spheres'],
-              'name': self.government.sphere.slug },
-            { 'vocabulary_id': vocab_map['financial_years'],
-              'name': self.get_financial_year().slug },
+            {'vocabulary_id': vocab_map['spheres'],
+             'name': self.government.sphere.slug},
+            {'vocabulary_id': vocab_map['financial_years'],
+             'name': self.get_financial_year().slug},
         ]
         if self.government.sphere.slug == 'provincial':
             tags.append({
@@ -336,11 +317,11 @@ class Department(models.Model):
         """
         if not self.is_vote_primary:
             try:
-                dept = Department\
-                       .objects \
-                       .get(vote_number=self.vote_number,
-                            is_vote_primary=True,
-                            government=self.government)
+                dept = Department \
+                    .objects \
+                    .get(vote_number=self.vote_number,
+                         is_vote_primary=True,
+                         government=self.government)
             except MultipleObjectsReturned:
                 logger.exception("Department %s has multiple primary "
                                  "departments" % self.slug)
@@ -363,12 +344,12 @@ class Department(models.Model):
                    '+extras_s_geographic_region_slug:"%s"'
                    '+extras_s_department_name_slug:"%s"'
                    '+groups:"%s"') % (
-                       self.government.sphere.financial_year.slug,
-                       self.government.sphere.slug,
-                       self.government.slug,
-                       self.get_primary_department().slug,
-                       group_name,
-                   ),
+                      self.government.sphere.financial_year.slug,
+                      self.government.sphere.slug,
+                      self.government.slug,
+                      self.get_primary_department().slug,
+                      group_name,
+                  ),
             'rows': 1,
         }
         if name:
@@ -380,7 +361,7 @@ class Department(models.Model):
             len(response['results'])
         )
         if response['results']:
-            assert(len(response['results']) == 1)
+            assert (len(response['results']) == 1)
             return Dataset.from_package(response['results'][0])
 
     def _get_functions_query(self):
@@ -451,6 +432,26 @@ class Department(models.Model):
             package = response['results'][0]
             self._estimates_of_econ_classes_expenditure_dataset = Dataset.from_package(package)
             return self._estimates_of_econ_classes_expenditure_dataset
+        else:
+            return None
+
+    def get_adjusted_estimates_expenditure_dataset(self):
+        if self._adjusted_estimates_of_expenditure_dataset is not None:
+            return self._adjusted_estimates_of_expenditure_dataset
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"adjusted-estimates-of-%s-expenditure"' % self.government.sphere.slug,
+                '+vocab_financial_years:"%s"' % self.get_financial_year().slug,
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        if response['results']:
+            package = response['results'][0]
+            self._adjusted_estimates_of_expenditure_dataset = Dataset.from_package(package)
+            return self._adjusted_estimates_of_expenditure_dataset
         else:
             return None
 
@@ -714,7 +715,7 @@ class Department(models.Model):
         base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
-        financial_year_starts = [str(y) for y in xrange(financial_year_start_int-4, financial_year_start_int+3)]
+        financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 4, financial_year_start_int + 3)]
         expenditure = {
             'base_financial_year': FinancialYear.slug_from_year_start(str(base_year)),
             'nominal': [],
@@ -745,7 +746,7 @@ class Department(models.Model):
                 cell = [
                     c for c in result['cells']
                     if c[openspending_api.get_financial_year_ref()] == int(financial_year_start)
-                    and c[openspending_api.get_phase_ref()] == phase
+                       and c[openspending_api.get_phase_ref()] == phase
                 ][0]
                 nominal = cell['value.sum']
                 expenditure['nominal'].append({
@@ -755,7 +756,7 @@ class Department(models.Model):
                 })
                 expenditure['real'].append({
                     'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
-                    'amount': int((Decimal(nominal)/cpi[financial_year_start]['index']) * 100),
+                    'amount': int((Decimal(nominal) / cpi[financial_year_start]['index']) * 100),
                     'phase': phase,
                 })
 
@@ -768,8 +769,324 @@ class Department(models.Model):
                            cuts, self.get_financial_year().slug)
             return None
 
-    def __str__(self):
-        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
+    def get_adjusted_budget_summary(self):
+        dataset = self.get_adjusted_estimates_expenditure_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        if not openspending_api:
+            return None
+
+        result_for_type_and_total = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+            ],
+            drilldowns=[
+                openspending_api.get_adjustment_kind_ref(),
+                openspending_api.get_phase_ref(),
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_department_name_ref()
+            ],
+            order=[openspending_api.get_adjustment_kind_ref()])
+
+        result_for_type_and_total = openspending_api.filter_dept(result_for_type_and_total,
+                                                                 self.name)
+        cells_for_type_and_total = openspending_api.filter_and_aggregate(
+            result_for_type_and_total['cells'],
+            openspending_api.get_programme_name_ref(),
+            'Direct charge against the National Revenue Fund',
+            [openspending_api.get_adjustment_kind_ref(), openspending_api.get_phase_ref()]
+        )
+        if not cells_for_type_and_total:
+            return None
+        total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
+
+        dept_aggregate_url = openspending_api.aggregate_url(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':' + self.name,
+            ],
+            drilldowns=openspending_api.get_all_drilldowns()
+        )
+
+        return {
+            'by_type': self._get_adjustments_by_type(openspending_api, cells_for_type_and_total),
+            'total_change': {
+                'amount': total_adjusted,
+                'percentage': (float(total_adjusted) / float(total_voted)) * 100
+            },
+            'econ_classes': self._get_adjustments_by_econ_class(openspending_api),
+            'programmes': self._get_adjustments_by_programme(openspending_api),
+            'virements': self._get_budget_virements(openspending_api, dataset, total_voted),
+            'special_appropriation': self._get_budget_special_appropriations(openspending_api, total_voted),
+            'direct_charges': self._get_budget_direct_charges(openspending_api),
+            'department_data_csv': csv_url(dept_aggregate_url),
+        }
+
+    def _get_adjustments_by_type(self, openspending_api, cells):
+        budget_phase_ref = openspending_api.get_phase_ref()
+        adjustment_kind_ref = openspending_api.get_adjustment_kind_ref()
+
+        def filter_by_type(cell):
+            types = [
+                "Adjustments - Announced in the budget speech",
+                "Adjustments - Declared unspent funds",
+                "Adjustments - Emergency funding",
+                "Adjustments - Roll-overs",
+                "Adjustments - Self-financing",
+                "Adjustments - Shifting of functions between votes",
+                "Adjustments - Shifting of functions within the vote",
+                "Adjustments - Significant and unforeseeable economic and financial events",
+                "Adjustments - Unforeseeable/unavoidable",
+                "Adjustments - Virements and shifts due to savings",
+            ]
+
+            whitelist = {'Adjusted appropriation': types}
+            whitelist_keys = whitelist.keys()
+            phase = cell[budget_phase_ref]
+            descript = cell[adjustment_kind_ref]
+            if phase in whitelist_keys:
+                if descript in whitelist[phase]:
+                    return True
+            return False
+
+        cells_by_type = filter(filter_by_type, cells)
+        by_type = []
+        for cell in cells_by_type:
+            name = cell[adjustment_kind_ref]
+            name = string.replace(name, 'Adjustments - ', "")
+            if cell['value.sum']:
+                by_type.append({
+                    'name': name,
+                    'amount': cell['value.sum'],
+                    'type': 'kind',
+                })
+
+        return by_type if by_type else None
+
+    def _get_adjustments_by_programme(self, openspending_api):
+        result_for_programmes = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_department_name_ref() + ':"' + self.name + '"',
+                openspending_api.get_adjustment_kind_ref() + ':' + '"Adjustments - Total adjustments"',
+
+            ],
+            drilldowns=[
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_phase_ref(),
+                openspending_api.get_department_name_ref()
+
+            ],
+            order=[openspending_api.get_programme_name_ref()])
+        result_for_programmes = openspending_api.filter_dept(result_for_programmes,
+                                                             self.name)
+
+        programme_name_ref = openspending_api.get_programme_name_ref()
+        cells_for_programmes = openspending_api.filter_by_ref_exclusion(result_for_programmes['cells'],
+                                                                        programme_name_ref,
+                                                                        'Direct charge against the National Revenue '
+                                                                        'Fund')
+        programmes = [
+            {
+                'name': cell[programme_name_ref],
+                'amount': cell['value.sum']
+            }
+            for cell in cells_for_programmes
+            if cell['value.sum']
+        ]
+        return programmes if programmes else None
+
+    def _get_adjustments_by_econ_class(self, openspending_api):
+        result_for_econ_classes = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_adjustment_kind_ref() + ':' + '"Adjustments - Total adjustments"',
+
+            ],
+            drilldowns=[
+                openspending_api.get_econ_class_2_ref(),
+                openspending_api.get_econ_class_3_ref(),
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_department_name_ref()
+
+            ],
+            order=[
+                openspending_api.get_econ_class_2_ref(),
+                openspending_api.get_econ_class_3_ref(),
+            ])
+
+        result_for_econ_classes = openspending_api.filter_dept(result_for_econ_classes,
+                                                               self.name)
+
+        econ_classes = dict()
+        econ_class_2_ref = openspending_api.get_econ_class_2_ref()
+        econ_class_3_ref = openspending_api.get_econ_class_3_ref()
+
+        cells_for_econ_classes = openspending_api.filter_and_aggregate(result_for_econ_classes['cells'],
+                                                                       openspending_api.get_programme_name_ref(),
+                                                                       'Direct charge against the National '
+                                                                       'Revenue Fund',
+                                                                       [openspending_api.get_econ_class_2_ref(),
+                                                                        openspending_api.get_econ_class_3_ref()])
+
+        for cell in cells_for_econ_classes:
+            new_econ_2_object = {'type': 'economic_classification_3',
+                                 'name': cell[econ_class_3_ref],
+                                 'amount': cell['value.sum']}
+            if cell[econ_class_2_ref] not in econ_classes.keys():
+                if cell['value.sum'] != 0:
+                    econ_classes[cell[econ_class_2_ref]] = dict()
+                    econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
+                    econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
+                    econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
+            else:
+                if cell['value.sum'] != 0:
+                    econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
+        # sort by name
+        name_func = lambda x: x['name']
+        for econ_2_name in list(econ_classes.keys()): # Copy keys because we're updating dict
+            econ_classes[econ_2_name]['items'] = sorted(
+                econ_classes[econ_2_name]['items'], key=name_func)
+        econ_classes_list = sorted(econ_classes.values(), key=name_func)
+        return econ_classes_list if econ_classes_list else None
+
+    @staticmethod
+    def _get_total_budget_adjustment(openspending_api, cells):
+        if not cells:
+            return None
+        phase_ref = openspending_api.get_phase_ref()
+        descript_ref = openspending_api.get_adjustment_kind_ref()
+        total_adjusted, total_voted = None, None
+
+        for cell in cells:
+            if cell[phase_ref] == 'Adjusted appropriation' and \
+                    cell[descript_ref] == 'Adjustments - Total adjustments':
+                total_adjusted = cell['value.sum']
+            if cell[phase_ref] == 'Voted (Main appropriation)' and \
+                    cell[descript_ref] == 'Total':
+                total_voted = cell['value.sum']
+
+        if total_voted and not total_adjusted:
+            total_adjusted = 0
+        elif not (total_voted or total_adjusted):
+            raise Exception("Could not calculate total change for department budget")
+
+        return total_voted, total_adjusted
+
+    def _get_budget_virements(self, openspending_api, dataset, total_voted):
+        virements_resource = dataset.get_resource('CSV', name='Value of Virements')
+        if virements_resource:
+            sql = '''
+                    SELECT "Value of Virements" FROM "{}"
+                    WHERE "department_name"='{}'
+                    '''.format(virements_resource['id'], self.name)
+            params = {
+                'sql': sql
+            }
+            result = requests.get(CKAN_DATASTORE_URL, params=params)
+            result.raise_for_status()
+            records = result.json()['result']['records']
+            if records:
+                value = records[0]['Value of Virements']
+            else:
+                raise Exception('Value of Virements query returned no records')
+            virements = {
+                'label': 'Value of virements',
+                'amount': int(value),
+                'percentage': 100 * (float(value) / float(total_voted))
+            }
+        else:
+            result_for_virements = openspending_api.aggregate(
+                cuts=[
+                    openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                    openspending_api.get_adjustment_kind_ref() + ':' +
+                    '"Adjustments - Virements and shifts due to savings"',
+
+                ],
+                drilldowns=openspending_api.get_all_drilldowns())
+
+            result_for_virements = openspending_api.filter_dept(result_for_virements, self.name)
+            cells_for_virements = openspending_api.filter_by_ref_exclusion(result_for_virements['cells'],
+                                                                           openspending_api.get_programme_name_ref(),
+                                                                           'Direct charge against the National '
+                                                                           'Revenue Fund')
+            total_positive_virement_change = 0
+            for c in cells_for_virements:
+                value = c['value.sum']
+                if value > 0:
+                    total_positive_virement_change += value
+            virements = {
+                'label': 'Value of virements and shifts due to savings',
+                'amount': int(total_positive_virement_change),
+                'percentage': 100 * float(total_positive_virement_change) / float(total_voted)
+            }
+        return virements if virements else None
+
+    def _get_budget_special_appropriations(self, openspending_api, total_voted):
+        result_for_special_appropriations = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_adjustment_kind_ref() + ':' + '"Special appropriation"',
+
+            ],
+            drilldowns=[
+                openspending_api.get_department_name_ref()
+            ])
+        result_for_special_appropriations = openspending_api.filter_dept(result_for_special_appropriations, self.name)
+
+        total_special_appropriations = 0
+        for cell in result_for_special_appropriations['cells']:
+            if cell['value.sum']:
+                total_special_appropriations += cell['value.sum']
+
+        if total_special_appropriations:
+            return {
+                'amount': total_special_appropriations,
+                'percentage': (float(total_special_appropriations) / float(total_voted)) * 100
+            }
+        else:
+            return None
+
+    def _get_budget_direct_charges(self, openspending_api):
+        result_for_direct_charges = openspending_api.aggregate(
+            cuts=[
+                openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
+                openspending_api.get_programme_name_ref() + ':' + '"Direct charge against the National Revenue Fund"',
+            ],
+            drilldowns=[
+                openspending_api.get_phase_ref(),
+                openspending_api.get_subprogramme_name_ref(),
+                openspending_api.get_department_name_ref(),
+                openspending_api.get_adjustment_kind_ref(),
+            ],
+            order=[openspending_api.get_subprogramme_name_ref()])
+        result_for_direct_charges = openspending_api.filter_dept(result_for_direct_charges, self.name)
+
+        subprog_ref = openspending_api.get_subprogramme_name_ref()
+        phase_ref = openspending_api.get_phase_ref()
+        kind_ref = openspending_api.get_adjustment_kind_ref()
+        subprog_dict = {}
+
+        for cell in result_for_direct_charges['cells']:
+            if cell[kind_ref] == 'Adjustments - Total adjustments':
+                subprog_dict[cell[subprog_ref]] = {
+                    'amount': cell['value.sum'],
+                    'label': cell[subprog_ref]
+                }
+
+        for subprog in subprog_dict.keys():
+            for cell in result_for_direct_charges['cells']:
+                if cell[subprog_ref] == subprog:
+                    if cell[phase_ref] == 'Voted (Main appropriation)':
+                        subprog_dict[subprog]['percentage'] = \
+                            (float(subprog_dict[subprog]['amount']) / float(cell['value.sum'])) * 100
+
+        return subprog_dict.values() if subprog_dict else None
+
+
+def __str__(self):
+    return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
 class GovtFunction(models.Model):
@@ -807,10 +1124,16 @@ class Programme(models.Model):
 class PackageDeletedException(Exception):
     pass
 
+
 class PackageWithoutGroupException(Exception):
     pass
 
+
 class Dataset():
+    """
+    Reprsents a CKAN dataset (AKA package)
+    """
+
     def __init__(self, **kwargs):
         self.author = kwargs['author']
         self.created_date = kwargs['created_date']
@@ -829,6 +1152,7 @@ class Dataset():
         self.category = kwargs['category']
         self._openspending_api = None
         self.package = kwargs['package']
+        self._adjusted_budget_summary = {}
 
     @classmethod
     def from_package(cls, package):
@@ -842,6 +1166,8 @@ class Dataset():
                 'description': resource['description'],
                 'format': resource['format'],
                 'url': resource['url'],
+                'id': resource['id'],
+
             })
 
         if package_is_contributed(package):
@@ -908,11 +1234,11 @@ class Dataset():
         """
         for resource in self.resources:
             if (name
-                and resource['name'] == name
-                and resource['format'] == format):
+                    and resource['name'] == name
+                    and resource['format'] == format):
                 return resource
             # if name wasn't provided, just match first item with this format
-            if (resource['format'] == format):
+            if not name and (resource['format'] == format):
                 return resource
 
     def create_resource(self, name, format, url):
@@ -966,13 +1292,22 @@ class Dataset():
     def get_openspending_api(self):
         if self._openspending_api is not None:
             return self._openspending_api
-        api_resource = filter(
-            lambda r: r['format'] == 'OpenSpending API',
-            self.resources
-        )[0]
-        self._openspending_api = EstimatesOfExpenditure(api_resource['url'])
+        try:
+            api_resource = filter(
+                lambda r: r['format'] == 'OpenSpending API',
+                self.resources
+            )[0]
+        except IndexError:
+            return None
+        api_class_mapping = {
+            'estimates-of-national-expenditure': EstimatesOfExpenditure,
+            'estimates-of-provincial-expenditure': EstimatesOfExpenditure,
+            'adjusted-estimates-of-national-expenditure': AdjustedEstimatesOfExpenditure,
+            'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
+        }
+        api_class = api_class_mapping[self.category.slug]
+        self._openspending_api = api_class(api_resource['url'])
         return self._openspending_api
-
 
 
 class Category():
@@ -1039,7 +1374,8 @@ class Category():
         )
 
 
-# https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty-or-has-a-sp
+# https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
+# -or-has-a-sp
 def none_selected_query(vocab_name):
     """Match items where none of the options in a custom vocab tag is selected"""
     return '+(*:* NOT %s:["" TO *])' % vocab_name
@@ -1058,7 +1394,7 @@ def resource_name(department):
 
 def get_base_year():
     cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
-    return int(cpi_year_slug[:4])-1
+    return int(cpi_year_slug[:4]) - 1
 
 
 def get_cpi():
@@ -1082,10 +1418,10 @@ def get_cpi():
         if financial_year_start == str(base_year):
             base_year_index = idx
             cell['index'] = 100
-    for idx in range(base_year_index-1, -1, -1):
-        cpi[idx]['index'] = cpi[idx+1]['index'] / (1 + Decimal(cpi[idx+1]['CPI']))
-    for idx in xrange(base_year_index+1, len(cpi)):
-        cpi[idx]['index'] = cpi[idx-1]['index'] * (1 + Decimal(cpi[idx]['CPI']))
+    for idx in range(base_year_index - 1, -1, -1):
+        cpi[idx]['index'] = cpi[idx + 1]['index'] / (1 + Decimal(cpi[idx + 1]['CPI']))
+    for idx in xrange(base_year_index + 1, len(cpi)):
+        cpi[idx]['index'] = cpi[idx - 1]['index'] * (1 + Decimal(cpi[idx]['CPI']))
     cpi_dict = {}
     for cell in cpi:
         cpi_dict[cell['financial_year_start']] = cell
@@ -1101,7 +1437,7 @@ def get_vocab_map():
 
 def package_is_contributed(package):
     return len(package['groups']) == 0 \
-        and package['organization']['name'] != 'national-treasury'
+           and package['organization']['name'] != 'national-treasury'
 
 
 def none_if_empty_or_missing(dict, key):

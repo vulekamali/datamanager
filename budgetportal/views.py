@@ -189,26 +189,40 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             for p in department.programmes.order_by('programme_number')
         ]
 
-    # ======= budget docs =========================
+    # ======= main budget docs =========================
     budget_dataset = department.get_dataset(
         group_name='budget-vote-documents')
     if budget_dataset:
+        document_resource = budget_dataset.get_resource(format='PDF')
+        if document_resource:
+            document_resource = resource_fields(document_resource)
+        tables_resource = (budget_dataset.get_resource(format='XLS') \
+                           or budget_dataset.get_resource(format='XLSX'))
+        if tables_resource:
+            tables_resource = resource_fields(tables_resource)
         department_budget = {
             'name': budget_dataset.name,
-            'document': budget_dataset.get_resource(format='PDF'),
-            'tables': (budget_dataset.get_resource(format='XLS') \
-                         or budget_dataset.get_resource(format='XLSX')),
+            'document': document_resource,
+            'tables': tables_resource,
         }
     else:
         department_budget = None
+
+    # ======= adjusted budget docs =========================
     adjusted_budget_dataset = department.get_dataset(
         group_name='adjusted-budget-vote-documents')
     if adjusted_budget_dataset:
+        document_resource = adjusted_budget_dataset.get_resource(format='PDF')
+        if document_resource:
+            document_resource = resource_fields(document_resource)
+        tables_resource = (adjusted_budget_dataset.get_resource(format='XLS') \
+                           or adjusted_budget_dataset.get_resource(format='XLSX'))
+        if tables_resource:
+            tables_resource = resource_fields(tables_resource)
         department_adjusted_budget = {
             'name': adjusted_budget_dataset.name,
-            'document': adjusted_budget_dataset.get_resource(format='PDF'),
-            'tables': (adjusted_budget_dataset.get_resource(format='XLS') \
-                         or adjusted_budget_dataset.get_resource(format='XLSX')),
+            'document': document_resource,
+            'tables': tables_resource,
         }
     else:
         department_adjusted_budget = None
@@ -226,6 +240,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'programme_by_economic_classification': department.get_prog_by_econ_budgets(),
         'subprogramme_by_programme': department.get_subprog_budgets(),
         'expenditure_over_time': department.get_expenditure_over_time(),
+        'adjusted_budget_summary': department.get_adjusted_budget_summary(),
         'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'financial_years': financial_years_context,
         'government': {
@@ -362,7 +377,7 @@ def dataset_fields(dataset):
     return {
         'slug': dataset.slug,
         'name': dataset.name,
-        'resources': dataset.resources,
+        'resources': [resource_fields(r) for r in dataset.resources],
         'organization': dataset.get_organization(),
         'author': dataset.author,
         'created': dataset.created_date,
@@ -376,6 +391,15 @@ def dataset_fields(dataset):
         'methodology': dataset.methodology,
         'url_path': dataset.get_url_path(),
         'category': category_fields(dataset.category),
+    }
+
+
+def resource_fields(resource):
+    return {
+        'name': resource['name'],
+        'url': resource['url'],
+        'description': resource['description'],
+        'format': resource['format'],
     }
 
 
