@@ -167,9 +167,6 @@ Loading departments and their datasets
 
 The departments and their metadata are loaded using Django Manage Commands. The input format they expect is defined in the source header.
 
-
-```
-
 License
 -------
 
