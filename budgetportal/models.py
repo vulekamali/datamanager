@@ -945,13 +945,14 @@ class Department(models.Model):
             new_econ_2_object = {'type': 'economic_classification_3',
                                  'name': cell[econ_class_3_ref],
                                  'amount': cell['value.sum']}
-            if cell[econ_class_2_ref] not in econ_classes.keys() and cell['value.sum'] != 0:
-                econ_classes[cell[econ_class_2_ref]] = {
-                    'type': 'economic_classification_2',
-                    'name': cell[econ_class_2_ref],
-                    'items': []
-                }
-            econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
+            if cell['value.sum'] != 0:
+                if cell[econ_class_2_ref] not in econ_classes.keys():
+                    econ_classes[cell[econ_class_2_ref]] = {
+                        'type': 'economic_classification_2',
+                        'name': cell[econ_class_2_ref],
+                        'items': []
+                    }
+                econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         # sort by name
         name_func = lambda x: x['name']
         for econ_2_name in list(econ_classes.keys()): # Copy keys because we're updating dict
@@ -1057,7 +1058,7 @@ class Department(models.Model):
         result_for_direct_charges = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_programme_name_ref() + ':' + "'" + DIRECT_CHARGE_NRF + "'",
+                openspending_api.get_programme_name_ref() + ':' + DIRECT_CHARGE_NRF,
             ],
             drilldowns=[
                 openspending_api.get_phase_ref(),
