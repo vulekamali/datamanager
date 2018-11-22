@@ -36,6 +36,8 @@ CKAN_DATASTORE_URL = ('https://data.vulekamali.gov.za'
                       '/api/3/action' \
                       '/datastore_search_sql')
 
+DIRECT_CHARGE_NRF = 'Direct charge against the National Revenue Fund'
+
 REVENUE_RESOURCE_IDS = {
     '2018-19': '7ad5e908-5814-4581-a9df-a6f37c56d5bd',
     '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
@@ -794,7 +796,7 @@ class Department(models.Model):
         cells_for_type_and_total = openspending_api.filter_and_aggregate(
             result_for_type_and_total['cells'],
             openspending_api.get_programme_name_ref(),
-            'Direct charge against the National Revenue Fund',
+            DIRECT_CHARGE_NRF,
             [openspending_api.get_adjustment_kind_ref(), openspending_api.get_phase_ref()]
         )
         if not cells_for_type_and_total:
@@ -885,8 +887,7 @@ class Department(models.Model):
         programme_name_ref = openspending_api.get_programme_name_ref()
         cells_for_programmes = openspending_api.filter_by_ref_exclusion(result_for_programmes['cells'],
                                                                         programme_name_ref,
-                                                                        'Direct charge against the National Revenue '
-                                                                        'Fund')
+                                                                        DIRECT_CHARGE_NRF)
         programmes = [
             {
                 'name': cell[programme_name_ref],
@@ -925,8 +926,7 @@ class Department(models.Model):
 
         cells_for_econ_classes = openspending_api.filter_and_aggregate(result_for_econ_classes['cells'],
                                                                        openspending_api.get_programme_name_ref(),
-                                                                       'Direct charge against the National '
-                                                                       'Revenue Fund',
+                                                                       DIRECT_CHARGE_NRF,
                                                                        [openspending_api.get_econ_class_2_ref(),
                                                                         openspending_api.get_econ_class_3_ref()])
 
@@ -1009,8 +1009,7 @@ class Department(models.Model):
             result_for_virements = openspending_api.filter_dept(result_for_virements, self.name)
             cells_for_virements = openspending_api.filter_by_ref_exclusion(result_for_virements['cells'],
                                                                            openspending_api.get_programme_name_ref(),
-                                                                           'Direct charge against the National '
-                                                                           'Revenue Fund')
+                                                                           DIRECT_CHARGE_NRF)
             total_positive_virement_change = 0
             for c in cells_for_virements:
                 value = c['value.sum']
@@ -1052,7 +1051,7 @@ class Department(models.Model):
         result_for_direct_charges = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_programme_name_ref() + ':' + '"Direct charge against the National Revenue Fund"',
+                openspending_api.get_programme_name_ref() + ':' + "'" + DIRECT_CHARGE_NRF + "'",
             ],
             drilldowns=[
                 openspending_api.get_phase_ref(),

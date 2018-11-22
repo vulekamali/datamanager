@@ -135,7 +135,7 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
     This tries to provide a more semantic interface to Fiscal Data in
     the OpenSpending API than OpenSpending types.
 
-    It makes assumptions about the OS Types we give Estimes of Expenditure
+    It makes assumptions about the OS Types we give Estimates of Expenditure
     columns, and the level of which hierarchy they end up in.
     """
 
