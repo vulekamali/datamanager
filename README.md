@@ -114,6 +114,7 @@ To enable this, we use [django-allauth](django-allauth) add social media account
 
 For Google, set up an OAuth Client ID in [Google API Console](https://console.developers.google.com/apis/credentials?project=vulekamali)
 
+
 Loading departments and their datasets
 --------------------------------------
 
