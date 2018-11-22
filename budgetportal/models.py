@@ -793,12 +793,19 @@ class Department(models.Model):
 
         result_for_type_and_total = openspending_api.filter_dept(result_for_type_and_total,
                                                                  self.name)
-        cells_for_type_and_total = openspending_api.filter_and_aggregate(
+
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
             result_for_type_and_total['cells'],
             openspending_api.get_programme_name_ref(),
             DIRECT_CHARGE_NRF,
-            [openspending_api.get_adjustment_kind_ref(), openspending_api.get_phase_ref()]
         )
+
+        cells_for_type_and_total = openspending_api.aggregate_by_ref(
+            [openspending_api.get_adjustment_kind_ref(),
+             openspending_api.get_phase_ref()],
+            filtered_cells
+        )
+
         if not cells_for_type_and_total:
             return None
         total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
@@ -924,11 +931,17 @@ class Department(models.Model):
         econ_class_2_ref = openspending_api.get_econ_class_2_ref()
         econ_class_3_ref = openspending_api.get_econ_class_3_ref()
 
-        cells_for_econ_classes = openspending_api.filter_and_aggregate(result_for_econ_classes['cells'],
-                                                                       openspending_api.get_programme_name_ref(),
-                                                                       DIRECT_CHARGE_NRF,
-                                                                       [openspending_api.get_econ_class_2_ref(),
-                                                                        openspending_api.get_econ_class_3_ref()])
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
+            result_for_econ_classes['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF
+        )
+
+        cells_for_econ_classes = openspending_api.aggregate_by_ref(
+            [openspending_api.get_econ_class_2_ref(),
+             openspending_api.get_econ_class_3_ref()],
+            filtered_cells
+        )
 
         for cell in cells_for_econ_classes:
             new_econ_2_object = {'type': 'economic_classification_3',
