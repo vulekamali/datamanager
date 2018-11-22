@@ -910,14 +910,12 @@ class Department(models.Model):
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
                 openspending_api.get_adjustment_kind_ref() + ':' + '"Adjustments - Total adjustments"',
-
             ],
             drilldowns=[
                 openspending_api.get_econ_class_2_ref(),
                 openspending_api.get_econ_class_3_ref(),
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_department_name_ref()
-
             ],
             order=[
                 openspending_api.get_econ_class_2_ref(),
@@ -947,15 +945,13 @@ class Department(models.Model):
             new_econ_2_object = {'type': 'economic_classification_3',
                                  'name': cell[econ_class_3_ref],
                                  'amount': cell['value.sum']}
-            if cell[econ_class_2_ref] not in econ_classes.keys():
-                if cell['value.sum'] != 0:
-                    econ_classes[cell[econ_class_2_ref]] = dict()
-                    econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
-                    econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
-                    econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
-            else:
-                if cell['value.sum'] != 0:
-                    econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
+            if cell[econ_class_2_ref] not in econ_classes.keys() and cell['value.sum'] != 0:
+                econ_classes[cell[econ_class_2_ref]] = {
+                    'type': 'economic_classification_2',
+                    'name': cell[econ_class_2_ref],
+                    'items': []
+                }
+            econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         # sort by name
         name_func = lambda x: x['name']
         for econ_2_name in list(econ_classes.keys()): # Copy keys because we're updating dict
@@ -1000,10 +996,8 @@ class Department(models.Model):
             result = requests.get(CKAN_DATASTORE_URL, params=params)
             result.raise_for_status()
             records = result.json()['result']['records']
-            if records:
-                value = records[0]['Value of Virements']
-            else:
-                raise Exception('Value of Virements query returned no records')
+            value = records[0]['Value of Virements']
+
             virements = {
                 'label': 'Value of virements',
                 'amount': int(value),
@@ -1025,9 +1019,8 @@ class Department(models.Model):
                                                                            DIRECT_CHARGE_NRF)
             total_positive_virement_change = 0
             for c in cells_for_virements:
-                value = c['value.sum']
-                if value > 0:
-                    total_positive_virement_change += value
+                if c['value.sum'] > 0:
+                    total_positive_virement_change += c['value.sum']
             virements = {
                 'label': 'Value of virements and shifts due to savings',
                 'amount': int(total_positive_virement_change),
@@ -1078,7 +1071,7 @@ class Department(models.Model):
         subprog_ref = openspending_api.get_subprogramme_name_ref()
         phase_ref = openspending_api.get_phase_ref()
         kind_ref = openspending_api.get_adjustment_kind_ref()
-        subprog_dict = {}
+        subprog_dict = OrderedDict()
 
         for cell in result_for_direct_charges['cells']:
             if cell[kind_ref] == 'Adjustments - Total adjustments':
@@ -1164,7 +1157,6 @@ class Dataset():
         self.category = kwargs['category']
         self._openspending_api = None
         self.package = kwargs['package']
-        self._adjusted_budget_summary = {}
 
     @classmethod
     def from_package(cls, package):
