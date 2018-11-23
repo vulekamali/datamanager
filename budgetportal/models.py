@@ -36,6 +36,8 @@ CKAN_DATASTORE_URL = ('https://data.vulekamali.gov.za'
                       '/api/3/action' \
                       '/datastore_search_sql')
 
+DIRECT_CHARGE_NRF = 'Direct charge against the National Revenue Fund'
+
 REVENUE_RESOURCE_IDS = {
     '2018-19': '7ad5e908-5814-4581-a9df-a6f37c56d5bd',
     '2017-18': 'b59a852f-7ae1-4a60-a827-643b151e458f',
@@ -791,12 +793,19 @@ class Department(models.Model):
 
         result_for_type_and_total = openspending_api.filter_dept(result_for_type_and_total,
                                                                  self.name)
-        cells_for_type_and_total = openspending_api.filter_and_aggregate(
+
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
             result_for_type_and_total['cells'],
             openspending_api.get_programme_name_ref(),
-            'Direct charge against the National Revenue Fund',
-            [openspending_api.get_adjustment_kind_ref(), openspending_api.get_phase_ref()]
+            DIRECT_CHARGE_NRF,
         )
+
+        cells_for_type_and_total = openspending_api.aggregate_by_ref(
+            [openspending_api.get_adjustment_kind_ref(),
+             openspending_api.get_phase_ref()],
+            filtered_cells
+        )
+
         if not cells_for_type_and_total:
             return None
         total_voted, total_adjusted = self._get_total_budget_adjustment(openspending_api, cells_for_type_and_total)
@@ -886,8 +895,7 @@ class Department(models.Model):
         programme_name_ref = openspending_api.get_programme_name_ref()
         cells_for_programmes = openspending_api.filter_by_ref_exclusion(result_for_programmes['cells'],
                                                                         programme_name_ref,
-                                                                        'Direct charge against the National Revenue '
-                                                                        'Fund')
+                                                                        DIRECT_CHARGE_NRF)
         programmes = [
             {
                 'name': cell[programme_name_ref],
@@ -903,14 +911,12 @@ class Department(models.Model):
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
                 openspending_api.get_adjustment_kind_ref() + ':' + '"Adjustments - Total adjustments"',
-
             ],
             drilldowns=[
                 openspending_api.get_econ_class_2_ref(),
                 openspending_api.get_econ_class_3_ref(),
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_department_name_ref()
-
             ],
             order=[
                 openspending_api.get_econ_class_2_ref(),
@@ -924,26 +930,30 @@ class Department(models.Model):
         econ_class_2_ref = openspending_api.get_econ_class_2_ref()
         econ_class_3_ref = openspending_api.get_econ_class_3_ref()
 
-        cells_for_econ_classes = openspending_api.filter_and_aggregate(result_for_econ_classes['cells'],
-                                                                       openspending_api.get_programme_name_ref(),
-                                                                       'Direct charge against the National '
-                                                                       'Revenue Fund',
-                                                                       [openspending_api.get_econ_class_2_ref(),
-                                                                        openspending_api.get_econ_class_3_ref()])
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
+            result_for_econ_classes['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF
+        )
+
+        cells_for_econ_classes = openspending_api.aggregate_by_ref(
+            [openspending_api.get_econ_class_2_ref(),
+             openspending_api.get_econ_class_3_ref()],
+            filtered_cells
+        )
 
         for cell in cells_for_econ_classes:
             new_econ_2_object = {'type': 'economic_classification_3',
                                  'name': cell[econ_class_3_ref],
                                  'amount': cell['value.sum']}
-            if cell[econ_class_2_ref] not in econ_classes.keys():
-                if cell['value.sum'] != 0:
-                    econ_classes[cell[econ_class_2_ref]] = dict()
-                    econ_classes[cell[econ_class_2_ref]]['type'] = 'economic_classification_2'
-                    econ_classes[cell[econ_class_2_ref]]['name'] = cell[econ_class_2_ref]
-                    econ_classes[cell[econ_class_2_ref]]['items'] = [new_econ_2_object]
-            else:
-                if cell['value.sum'] != 0:
-                    econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
+            if cell['value.sum'] != 0:
+                if cell[econ_class_2_ref] not in econ_classes.keys():
+                    econ_classes[cell[econ_class_2_ref]] = {
+                        'type': 'economic_classification_2',
+                        'name': cell[econ_class_2_ref],
+                        'items': []
+                    }
+                econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         # sort by name
         name_func = lambda x: x['name']
         for econ_2_name in list(econ_classes.keys()): # Copy keys because we're updating dict
@@ -988,10 +998,8 @@ class Department(models.Model):
             result = requests.get(CKAN_DATASTORE_URL, params=params)
             result.raise_for_status()
             records = result.json()['result']['records']
-            if records:
-                value = records[0]['Value of Virements']
-            else:
-                raise Exception('Value of Virements query returned no records')
+            value = records[0]['Value of Virements']
+
             virements = {
                 'label': 'Value of virements',
                 'amount': int(value),
@@ -1010,13 +1018,11 @@ class Department(models.Model):
             result_for_virements = openspending_api.filter_dept(result_for_virements, self.name)
             cells_for_virements = openspending_api.filter_by_ref_exclusion(result_for_virements['cells'],
                                                                            openspending_api.get_programme_name_ref(),
-                                                                           'Direct charge against the National '
-                                                                           'Revenue Fund')
+                                                                           DIRECT_CHARGE_NRF)
             total_positive_virement_change = 0
             for c in cells_for_virements:
-                value = c['value.sum']
-                if value > 0:
-                    total_positive_virement_change += value
+                if c['value.sum'] > 0:
+                    total_positive_virement_change += c['value.sum']
             virements = {
                 'label': 'Value of virements and shifts due to savings',
                 'amount': int(total_positive_virement_change),
@@ -1053,7 +1059,7 @@ class Department(models.Model):
         result_for_direct_charges = openspending_api.aggregate(
             cuts=[
                 openspending_api.get_financial_year_ref() + ':' + self.get_financial_year().get_starting_year(),
-                openspending_api.get_programme_name_ref() + ':' + '"Direct charge against the National Revenue Fund"',
+                openspending_api.get_programme_name_ref() + ':' + DIRECT_CHARGE_NRF,
             ],
             drilldowns=[
                 openspending_api.get_phase_ref(),
@@ -1067,7 +1073,7 @@ class Department(models.Model):
         subprog_ref = openspending_api.get_subprogramme_name_ref()
         phase_ref = openspending_api.get_phase_ref()
         kind_ref = openspending_api.get_adjustment_kind_ref()
-        subprog_dict = {}
+        subprog_dict = OrderedDict()
 
         for cell in result_for_direct_charges['cells']:
             if cell[kind_ref] == 'Adjustments - Total adjustments':
@@ -1153,7 +1159,6 @@ class Dataset():
         self.category = kwargs['category']
         self._openspending_api = None
         self.package = kwargs['package']
-        self._adjusted_budget_summary = {}
 
     @classmethod
     def from_package(cls, package):

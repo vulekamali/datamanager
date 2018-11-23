@@ -50,11 +50,6 @@ class BabbageFiscalDataset():
         filtered_cells = filter(lambda cell: cell[filter_ref] != filter_exclusion_value, cells)
         return filtered_cells
 
-    def filter_and_aggregate(self, cells, filter_ref, filter_exclusion_value, aggregate_refs):
-        filtered_cells = self.filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value)
-        aggregated_cells = self.aggregate_by_ref(aggregate_refs, filtered_cells)
-        return aggregated_cells
-
     def aggregate_url(self, cuts=None, drilldowns=None, order=None):
         params = {
             'pagesize': PAGE_SIZE,
@@ -135,7 +130,7 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
     This tries to provide a more semantic interface to Fiscal Data in
     the OpenSpending API than OpenSpending types.
 
-    It makes assumptions about the OS Types we give Estimes of Expenditure
+    It makes assumptions about the OS Types we give Estimates of Expenditure
     columns, and the level of which hierarchy they end up in.
     """
 
