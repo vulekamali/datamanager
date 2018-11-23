@@ -229,9 +229,6 @@ class Department(models.Model):
 
         ordering = ['vote_number', 'name']
 
-    def save(self, *args, **kwargs):
-        super(Department, self).save(*args, **kwargs)
-
     def clean(self):
         # This is only for user feedback in admin.
         # The constraint must be enforced elsewhere.
