@@ -115,10 +115,47 @@ To enable this, we use [django-allauth](django-allauth) add social media account
 For Google, set up an OAuth Client ID in [Google API Console](https://console.developers.google.com/apis/credentials?project=vulekamali)
 
 
-Loading departments and their datasets
---------------------------------------
+Loading departments in bulk
+---------------------------
 
-The departments and their metadata are loaded using Django Manage Commands. The input format they expect is defined in the source header.
+The departments and their metadata are loaded using the Django Manage Command `load_departments`.
+
+The command can be called to update the production database using
+
+```bash
+DATABASE_URL=postgresql://...produser...:...prodpasswd...@proddbhost/budgetportal python manage.py load_departments 2018-19 national departments.csv
+```
+
+where
+
+- `2018-19` is the financial year slug
+- `national` is the sphere slug
+- `departments.csv` is a CSV file as follows:
+
+Required columns:
+
+ - `government` - government name
+ - `department_name`
+ - `vote_number`
+
+Optional columns:
+
+ - `is_vote_primary` - TRUE or FALSE
+ - `purpose`
+ - `mandate`
+ - `vision`
+ - `mission`
+ - `core_functions_and_responsibilities`
+ 
+ The latter 5 will be combined with headings into the department introduction text, where present. Markdown syntax will be used for formatting. e.g. 2 line breaks will result in new paragraphs, indentation will be considered `code blocks` and formatted specially.
+ 
+ e.g.
+ 
+ | government | department_name | vote_number | is_vote_primary | purpose | mandate | vision | mission | core_functions_and_responsibilities |
+ |------------|-----------------|-------------|-----------------|---------|---------|--------|---------|-----------------------------|
+| South Africa | The Presidency | 1 | TRUE | Facilitate a common programme towards the ... | To serve the president in the execution of his ... |
+| South Africa | Centre for Public Service Innovation | 10 | FALSE | Fcilitate the unearthing, development and practical ... | The responsibility for public sector innovation is vested in the Minister of Public Service... |
+
 
 License
 -------
