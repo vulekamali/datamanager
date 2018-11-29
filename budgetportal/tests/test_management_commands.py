@@ -42,3 +42,25 @@ class BasicPagesTestCase(TestCase):
         self.assertFalse(cpsi.is_vote_primary)
         self.assertIn("Facilitate the unearthing", cpsi.intro)
         self.assertIn("The responsibility for", cpsi.intro)
+
+    def test_load_departments_provincial(self):
+        filename = 'budgetportal/tests/test_management_commands_provincial_departments.csv'
+        call_command('load_departments', '2030-31', 'provincial', filename)
+
+        central_premier = Department.objects.get(
+            government=self.fake_central_province,
+            name='Office of the premier'
+        )
+        self.assertEqual(central_premier.vote_number, 1)
+        self.assertTrue(central_premier.is_vote_primary)
+        self.assertIn("To serve the president", central_premier.intro)
+        self.assertIn("Facilitate a common", central_premier.intro)
+
+        northeast_premier = Department.objects.get(
+            government=self.fake_northeast_province,
+            name='Office of the premier'
+        )
+        self.assertEqual(northeast_premier.vote_number, 1)
+        self.assertTrue(northeast_premier.is_vote_primary)
+        self.assertIn("Facilitate the unearthing", northeast_premier.intro)
+        self.assertIn("The responsibility for", northeast_premier.intro)
