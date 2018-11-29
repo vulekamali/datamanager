@@ -1,10 +1,12 @@
-from django.test import TestCase, Client
 from budgetportal.models import (
     FinancialYear,
     Sphere,
     Government,
     Department,
 )
+from django.conf import settings
+from django.test import TestCase, Client
+from mock import Mock
 import yaml
 
 
@@ -56,6 +58,7 @@ class BasicPagesTestCase(TestCase):
                 vote_number=1,
                 intro=""
             )
+            settings.CKAN.action.package_search = Mock(return_value={'results': []})
 
     def test_overview_page(self):
         """Test that it exists and that the correct years are linked"""
