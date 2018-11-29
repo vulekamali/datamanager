@@ -58,8 +58,8 @@ class BasicPagesTestCase(TestCase):
             )
 
 
-
     def test_overview_page(self):
+        """Test that it exists and that the correct years are linked"""
         c = Client()
         response = c.get('/2019-20.yaml')
         content = yaml.load(response.content)

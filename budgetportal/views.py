@@ -36,7 +36,9 @@ def year_home(request, financial_year_id):
         'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         'url_path': year.get_url_path(),
     }
-    for year in FinancialYear.objects.order_by('slug'):
+    years = list(FinancialYear.objects.order_by('-slug')[:4])
+    years.reverse()
+    for year in years:
         is_selected = year.slug == financial_year_id
         context['financial_years'].append({
             'id': year.slug,
