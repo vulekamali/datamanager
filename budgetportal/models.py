@@ -1,6 +1,3 @@
-import json
-import string
-
 from autoslug import AutoSlugField
 from budgetportal.openspending import (
     EstimatesOfExpenditure,
@@ -13,7 +10,6 @@ from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify as django_slugify
 from itertools import groupby
 from partial_index import PartialIndex
 from pprint import pformat
@@ -24,6 +20,7 @@ import os
 import re
 import requests
 import shutil
+import string
 import urllib
 import urlparse
 
