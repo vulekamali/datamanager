@@ -125,6 +125,12 @@ class FinancialYear(models.Model):
         revenue_data = revenue_result.json()['result']['records']
         return revenue_data
 
+    @classmethod
+    def get_available_years(cls):
+        years = list(cls.objects.order_by('-slug')[:4])
+        years.reverse()
+        return years
+
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 

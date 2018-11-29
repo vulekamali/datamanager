@@ -57,11 +57,35 @@ class BasicPagesTestCase(TestCase):
                 intro=""
             )
 
-
     def test_overview_page(self):
         """Test that it exists and that the correct years are linked"""
         c = Client()
         response = c.get('/2019-20.yaml')
+        content = yaml.load(response.content)
+        self.assertEqual(content['financial_years'][-1]['id'], '2019-20')
+        self.assertEqual(content['financial_years'][0]['id'], '2016-17')
+
+
+    def test_department_list_page(self):
+        """Test that it exists and that the correct years are linked"""
+        c = Client()
+        response = c.get('/2019-20/departments.yaml')
+        content = yaml.load(response.content)
+        self.assertEqual(content['financial_years'][-1]['id'], '2019-20')
+        self.assertEqual(content['financial_years'][0]['id'], '2016-17')
+
+    def test_department_detail_page(self):
+        """Test that it exists and that the correct years are linked"""
+        c = Client()
+        response = c.get('/2019-20/national/departments/the-presidency.yaml')
+        content = yaml.load(response.content)
+        self.assertEqual(content['financial_years'][-1]['id'], '2019-20')
+        self.assertEqual(content['financial_years'][0]['id'], '2016-17')
+
+    def test_search_page(self):
+        """Test that it exists and that the correct years are linked"""
+        c = Client()
+        response = c.get('/2019-20/search-result.yaml')
         content = yaml.load(response.content)
         self.assertEqual(content['financial_years'][-1]['id'], '2019-20')
         self.assertEqual(content['financial_years'][0]['id'], '2016-17')
