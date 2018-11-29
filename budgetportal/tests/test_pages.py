@@ -20,12 +20,10 @@ class BasicPagesTestCase(TestCase):
         for year in FinancialYear.objects.all():
             # spheres
             national = Sphere.objects.create(financial_year=year, name='National')
-            provincial = Sphere.objects.create(financial_year=year, name='Provincial')
+            Sphere.objects.create(financial_year=year, name='Provincial')
 
             # governments
             south_africa = Government.objects.create(sphere=national, name='South Africa')
-            fake_central = Government.objects.create(sphere=provincial, name='Fake Central')
-            fake_south = Government.objects.create(sphere=provincial, name='Fake South')
 
             # departments
             Department.objects.create(
@@ -34,31 +32,7 @@ class BasicPagesTestCase(TestCase):
                 vote_number=1,
                 intro=""
             )
-            Department.objects.create(
-                government=south_africa,
-                name='Parliament',
-                vote_number=2,
-                intro=""
-            )
-            Department.objects.create(
-                government=fake_central,
-                name="Premier's Office",
-                vote_number=1,
-                intro=""
-            )
-            Department.objects.create(
-                government=fake_central,
-                name="Education",
-                vote_number=2,
-                intro=""
-            )
-            Department.objects.create(
-                government=fake_south,
-                name="Premier's Office",
-                vote_number=1,
-                intro=""
-            )
-            settings.CKAN.action.package_search = Mock(return_value={'results': []})
+        settings.CKAN.action.package_search = Mock(return_value={'results': []})
 
     def test_overview_page(self):
         """Test that it exists and that the correct years are linked"""
