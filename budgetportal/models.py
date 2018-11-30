@@ -1,6 +1,3 @@
-import json
-import string
-
 from autoslug import AutoSlugField
 from budgetportal.openspending import (
     EstimatesOfExpenditure,
@@ -13,7 +10,6 @@ from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify as django_slugify
 from itertools import groupby
 from partial_index import PartialIndex
 from pprint import pformat
@@ -24,6 +20,7 @@ import os
 import re
 import requests
 import shutil
+import string
 import urllib
 import urlparse
 
@@ -127,6 +124,12 @@ class FinancialYear(models.Model):
         revenue_result.raise_for_status()
         revenue_data = revenue_result.json()['result']['records']
         return revenue_data
+
+    @classmethod
+    def get_available_years(cls):
+        years = list(cls.objects.order_by('-slug')[:4])
+        years.reverse()
+        return years
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())

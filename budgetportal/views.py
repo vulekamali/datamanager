@@ -36,7 +36,7 @@ def year_home(request, financial_year_id):
         'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         'url_path': year.get_url_path(),
     }
-    for year in FinancialYear.objects.order_by('slug'):
+    for year in FinancialYear.get_available_years():
         is_selected = year.slug == financial_year_id
         context['financial_years'].append({
             'id': year.slug,
@@ -71,7 +71,7 @@ class FinancialYearPage(View):
             'url_path': '/%s/%s' % (financial_year_id, self.slug),
         }
 
-        for year in FinancialYear.objects.order_by('slug'):
+        for year in FinancialYear.get_available_years():
             is_selected = year.slug == financial_year_id
             context['financial_years'].append({
                 'id': year.slug,
@@ -103,7 +103,7 @@ def department_list(request, financial_year_id):
     }
 
     selected_year = None
-    for year in FinancialYear.objects.order_by('slug'):
+    for year in FinancialYear.get_available_years():
         is_selected = year.slug == financial_year_id
         if is_selected:
             selected_year = year
@@ -142,7 +142,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     department = None
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
-    years = list(FinancialYear.objects.order_by('slug'))
+    years = FinancialYear.get_available_years()
     for year in years:
         if year.slug == financial_year_id:
             selected_year = year
