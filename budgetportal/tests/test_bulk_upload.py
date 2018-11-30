@@ -8,7 +8,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.contrib.auth.models import User
 import sys
 from datetime import datetime
-from selenium.webdriver import Chrome
+from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from allauth.account.models import EmailAddress
 from selenium.webdriver.support.ui import Select
@@ -45,9 +45,7 @@ class BulkUploadTestCase(StaticLiveServerTestCase):
             verified=True,
         )
 
-        options = Options()
-        options.add_argument('-headless')
-        self.selenium = Chrome()
+        self.selenium = webdriver.PhantomJS()
 
         self.path = os.path.dirname(__file__)
         super(BulkUploadTestCase, self).setUp()
