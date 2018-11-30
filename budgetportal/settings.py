@@ -19,6 +19,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'true') == 'true'
 
+# THINK VERY CAREFULY before using the TEST variable.
+# Tests should aim to be as production-like as possible.
+import sys
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    TEST = True
+else:
+    TEST = False
+
 # SECURITY WARNING: keep the secret key used in production secret!
 if DEBUG:
     SECRET_KEY = '-r&cjf5&l80y&(q_fiidd$-u7&o$=gv)s84=2^a2$o^&9aco0o'
@@ -87,8 +95,7 @@ import dj_database_url
 db_config = dj_database_url.config(default='postgres://budgetportal@localhost/budgetportal')
 db_config['ATOMIC_REQUESTS'] = True
 
-import sys
-if 'test' in sys.argv or 'test_coverage' in sys.argv:
+if TEST:
     DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3'}}
 else:
     DATABASES = {'default': db_config}
@@ -255,7 +262,8 @@ PIPELINE = {
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'budgetportal.pipeline.GzipManifestPipelineStorage'
+if not TEST:
+    STATICFILES_STORAGE = 'budgetportal.pipeline.GzipManifestPipelineStorage'
 
 
 # Logging
