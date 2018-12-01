@@ -74,6 +74,25 @@ Logout from ckan might not send you to the right URL to logout from DataManager.
 | -------------------- | ------------|
 | `DEBUG_CACHE`          | Enable the django app cache. Normally disabled by `DEBUG=True`, this enables it for development - see more in `settings.py`. |
 
+Running tests
+--------------
+
+To be able to run tests, install test dependencies:
+
+```bash
+pip install -r requirements-test.txt
+```
+
+Install PhantomJS according to the right way for your operating system.
+
+### Run the tests
+
+```bash
+python manage.py test
+```
+
+If any tests fail, the exit code will be non-zero and details will be printed to the console. Remember to scroll up a bit in the output to see stack traces corresponding server errors for HTTP-based tests.
+
 
 Production deployment
 ---------------------
