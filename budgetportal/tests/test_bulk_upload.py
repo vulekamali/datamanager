@@ -4,15 +4,17 @@ from budgetportal.models import (
     Government,
     Department,
 )
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from django.contrib.auth.models import User
-import sys
-from datetime import datetime
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 from allauth.account.models import EmailAddress
+from ckanapi import NotFound
+from datetime import datetime
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from mock import Mock
+from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import os
+import sys
 
 USERNAME = 'testuser'
 EMAIL = 'testuser@domain.com'
@@ -48,6 +50,13 @@ class BulkUploadTestCase(StaticLiveServerTestCase):
         self.selenium = webdriver.PhantomJS()
 
         self.path = os.path.dirname(__file__)
+
+        # Mock CKAN API
+        settings.CKAN.action = Mock()
+        settings.CKAN.action.package_search.return_value = {'results': []}
+        settings.CKAN.action.package_show.side_effect = NotFound()
+        settings.CKAN.action.group_show.side_effect = NotFound()
+
         super(BulkUploadTestCase, self).setUp()
 
 
@@ -85,4 +94,5 @@ class BulkUploadTestCase(StaticLiveServerTestCase):
         submit_input = selenium.find_element_by_css_selector('input[type="submit"]')
         submit_input.click()
 
-        selenium.find_elements_by_css_selector('#bulk-upload-preview tr')
+        preview_rows = selenium.find_elements_by_css_selector('#bulk-upload-preview tr')
+        self.assertEqual(len(preview_rows), 5)
