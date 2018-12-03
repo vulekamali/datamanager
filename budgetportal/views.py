@@ -8,10 +8,11 @@ from django.views import View
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-from models import FinancialYear, Dataset, Category
+from models import FinancialYear, Sphere, Dataset, Category
 import yaml
 import logging
 from . import revenue
+from csv import DictWriter
 
 logger = logging.getLogger(__name__)
 
@@ -88,6 +89,32 @@ class FinancialYearPage(View):
             encoding='utf-8'
         )
         return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def programme_list_csv(request, financial_year_id, sphere_slug):
+    sphere = get_object_or_404(Sphere, financial_year__slug=financial_year_id, slug=sphere_slug)
+    filename = "programmes-%s-%s.csv" % (financial_year_id, sphere_slug)
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+    fieldnames = [
+        'government_name',
+        'department_name',
+        'programme_name',
+        'programme_number',
+    ]
+    writer = DictWriter(response, fieldnames=fieldnames)
+    writer.writeheader()
+    for government in sphere.governments.all():
+        for department in government.departments.all():
+            for programme in department.programmes.all():
+                row = {
+                    'government_name': government.name,
+                    'department_name': department.name,
+                    'programme_name': programme.name,
+                    'programme_number': programme.programme_number,
+                }
+                writer.writerow(row)
+    return response
 
 
 def department_list(request, financial_year_id):

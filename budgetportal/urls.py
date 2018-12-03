@@ -38,6 +38,11 @@ urlpatterns = [
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list)),
 
+    # Programme list as CSV
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
+        '/(?P<sphere_slug>[\w-]+)'
+        '/programmes.csv$', cache_page(CACHE_SECS)(views.programme_list_csv)),
+
     # Department
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/national'
