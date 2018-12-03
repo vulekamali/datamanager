@@ -113,8 +113,7 @@ class ExportImportProgrammesTestCase(TestCase):
 
             # Create them again
             out = StringIO()
-            result = call_command('load_programmes', '2030-31', 'national', csv_file.name,
-                         stdout=out, stderr=err)
+            result = call_command('load_programmes', '2030-31', 'national', csv_file.name, stdout=out)
             result = yaml.load(out.getvalue())
             self.assertEqual(result['number_added'], 2)
 
