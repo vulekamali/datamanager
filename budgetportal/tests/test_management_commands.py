@@ -3,10 +3,13 @@ from budgetportal.models import (
     Sphere,
     Government,
     Department,
+    Programme,
 )
 from django.core.management import call_command
 from django.test import TestCase
-
+from tempfile import NamedTemporaryFile
+from StringIO import StringIO
+import yaml
 
 class BasicPagesTestCase(TestCase):
     def setUp(self):
@@ -64,3 +67,59 @@ class BasicPagesTestCase(TestCase):
         self.assertTrue(northeast_premier.is_vote_primary)
         self.assertIn("Facilitate the unearthing", northeast_premier.intro)
         self.assertIn("The responsibility for", northeast_premier.intro)
+
+
+class ExportImportProgrammesTestCase(TestCase):
+    def setUp(self):
+        self.year = FinancialYear.objects.create(slug="2030-31")
+
+        # spheres
+        national = Sphere.objects.create(financial_year=self.year, name='National')
+
+        # governments
+        south_africa = Government.objects.create(sphere=national, name='South Africa')
+
+        self.department = Department.objects.create(
+            government=south_africa,
+            name="Some Department",
+            vote_number=1,
+            is_vote_primary=True,
+            intro=""
+        )
+        Programme.objects.create(
+            department=self.department,
+            name="A programme",
+            programme_number=1
+        )
+        Programme.objects.create(
+            department=self.department,
+            name="Another programme",
+            programme_number=2
+        )
+
+    def test_load_programmes_from_export(self):
+        """Test that exported programmes can be loaded correctly"""
+
+        with NamedTemporaryFile() as csv_file:
+
+            # Download the CSV
+            response = self.client.get('/2030-31/national/programmes.csv')
+            self.assertEqual(response.status_code, 200)
+            csv_file.write(response.content)
+            csv_file.flush()
+
+            # Delete all programmes
+            Programme.objects.all().delete()
+
+            # Create them again
+            out = StringIO()
+            result = call_command('load_programmes', '2030-31', 'national', csv_file.name,
+                         stdout=out, stderr=err)
+            result = yaml.load(out.getvalue())
+            self.assertEqual(result['number_added'], 2)
+
+            # Check that it was successful
+            programme_1 = Programme.objects.get(department=self.department, programme_number=1)
+            programme_2 = Programme.objects.get(department=self.department, programme_number=2)
+            self.assertEqual("A programme", programme_1.name)
+            self.assertEqual("Another programme", programme_2.name)
