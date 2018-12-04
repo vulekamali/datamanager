@@ -213,12 +213,6 @@ class Department(models.Model):
     _estimates_of_econ_classes_expenditure_dataset = None
     _estimates_of_subprogramme_expenditure_dataset = None
 
-    def __init__(self, *args, **kwargs):
-        super(Department, self).__init__(*args, **kwargs)
-        if self.pk:
-            self.old_name = self.name
-            self.old_slug = self.slug
-
     class Meta:
         unique_together = (
             ('government', 'slug'),
