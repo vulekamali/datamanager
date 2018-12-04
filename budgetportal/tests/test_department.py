@@ -29,3 +29,24 @@ class AdjustedBudgetMissingTestCase(TestCase):
 
     def test_missing_dataset(self):
         self.assertEqual(self.department.get_adjusted_budget_summary(), None)
+
+
+class AdjustedBudgeOpenSpendingtMissingTestCase(TestCase):
+    """Unit tests of adjusted budget data summary for a department"""
+    def setUp(self):
+        year = FinancialYear(slug="2030-31")
+        sphere = Sphere(financial_year=year, name="A sphere")
+        government = Government(sphere=sphere, name="A government")
+        self.department = Department(
+            government=government,
+            name="Fake",
+            vote_number=1,
+            is_vote_primary=True,
+            intro="",
+        )
+        mock_dataset = Mock()
+        mock_dataset.get_openspending_api = Mock(return_value=None)
+        self.department.get_adjusted_estimates_expenditure_dataset = Mock(return_value=mock_dataset)
+
+    def test_missing_openspending_dataset(self):
+        self.assertEqual(self.department.get_adjusted_budget_summary(), None)
