@@ -90,7 +90,14 @@ class AdjustedBudgetTestCase(TestCase):
         self.department._get_budget_direct_charges = Mock(return_value=Mock())
         models.csv_url = Mock(return_value=Mock())
 
-
     def test_no_adjustment(self):
-        self.department._get_total_budget_adjustment = Mock(return_value=(123, 123))
-        self.assertEqual(self.department.get_adjusted_budget_summary(), None)
+        self.department._get_total_budget_adjustment = Mock(return_value=(123, 0))
+        result = self.department.get_adjusted_budget_summary()
+        self.assertEqual(result['total_change']['amount'], 0)
+        self.assertEqual(result['total_change']['percentage'], 0)
+
+    def test_adjustment(self):
+        self.department._get_total_budget_adjustment = Mock(return_value=(100, 11))
+        result = self.department.get_adjusted_budget_summary()
+        self.assertEqual(result['total_change']['amount'], 11)
+        self.assertEqual(result['total_change']['percentage'], 11)
