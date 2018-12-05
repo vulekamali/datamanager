@@ -111,7 +111,7 @@ def programme_list_csv(request, financial_year_id, sphere_slug):
                     'government_name': government.name.encode("utf-8"),
                     'department_name': department.name.encode("utf-8"),
                     'programme_name': programme.name.encode("utf-8"),
-                    'programme_number': programme.programme_number.encode("utf-8"),
+                    'programme_number': programme.programme_number,
                 }
                 writer.writerow(row)
     return response
