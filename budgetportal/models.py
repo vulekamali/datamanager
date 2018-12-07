@@ -807,11 +807,9 @@ class Department(models.Model):
             'dataset_detail_page': dataset.get_url_path(),
         }
 
-    def _get_adjustments_by_type(self, openspending_api, cells):
-        budget_phase_ref = openspending_api.get_phase_ref()
-        adjustment_kind_ref = openspending_api.get_adjustment_kind_ref()
-
-        def filter_by_type(cell):
+    @staticmethod
+    def _get_adjustment_types_filter(budget_phase_ref, adjustment_kind_ref):
+        def adjustment_types_filter(cell):
             types = [
                 "Adjustments - Announced in the budget speech",
                 "Adjustments - Declared unspent funds",
@@ -833,8 +831,13 @@ class Department(models.Model):
                 if descript in whitelist[phase]:
                     return True
             return False
+        return adjustment_types_filter
 
-        cells_by_type = filter(filter_by_type, cells)
+    def _get_adjustments_by_type(self, openspending_api, cells):
+        budget_phase_ref = openspending_api.get_phase_ref()
+        adjustment_kind_ref = openspending_api.get_adjustment_kind_ref()
+        filter_function = self._get_adjustment_types_filter(budget_phase_ref, adjustment_kind_ref)
+        cells_by_type = filter(filter_function, cells)
         by_type = []
         for cell in cells_by_type:
             name = cell[adjustment_kind_ref]

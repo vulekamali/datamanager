@@ -9,7 +9,7 @@ from budgetportal.models import (
     Department,
 )
 from budgetportal import models
-from django.test import TestCase
+from django.test import SimpleTestCase, TestCase
 from mock import Mock
 
 
@@ -53,7 +53,7 @@ class AdjustedBudgetOpenSpendingtMissingTestCase(TestCase):
         self.assertEqual(self.department.get_adjusted_budget_summary(), None)
 
 
-class AdjustedBudgetTestCase(TestCase):
+class AdjustedBudgetTestCase(SimpleTestCase):
     """Unit tests of adjusted budget data summary for a department"""
     def setUp(self):
         year = FinancialYear(slug="2030-31")
@@ -101,3 +101,30 @@ class AdjustedBudgetTestCase(TestCase):
         result = self.department.get_adjusted_budget_summary()
         self.assertEqual(result['total_change']['amount'], 11)
         self.assertEqual(result['total_change']['percentage'], 11)
+
+
+class AdjustmentTypesFilterTestCase(SimpleTestCase):
+    def setUp(self):
+        self.filter = models.Department._get_adjustment_types_filter(
+            "budget_phase", "adjustment_kind")
+
+    def test_include(self):
+        cell = {
+            "budget_phase": "Adjusted appropriation",
+            "adjustment_kind": "Adjustments - Announced in the budget speech",
+        }
+        self.assertTrue(self.filter(cell))
+
+    def test_exclude_phase(self):
+        cell = {
+            "budget_phase": "Main appropriation",
+            "adjustment_kind": "Adjustments - Announced in the budget speech",
+        }
+        self.assertFalse(self.filter(cell))
+
+    def test_exclude_kind(self):
+        cell = {
+            "budget_phase": "Adjusted appropriation",
+            "adjustment_kind": "Special appropriation",
+        }
+        self.assertFalse(self.filter(cell))
