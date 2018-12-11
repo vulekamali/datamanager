@@ -2,7 +2,7 @@ from autoslug import AutoSlugField
 from budgetportal.openspending import (
     EstimatesOfExpenditure,
     AdjustedEstimatesOfExpenditure,
-)
+    ExpenditureTimeSeries)
 from ckanapi import NotFound
 from collections import OrderedDict
 from decimal import Decimal
@@ -1090,7 +1090,7 @@ class Department(models.Model):
         base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
-        financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 3, financial_year_start_int)]
+        financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)]
 
         expenditure = {
             'base_financial_year': FinancialYear.slug_from_year_start(str(base_year)),
@@ -1098,18 +1098,19 @@ class Department(models.Model):
             'real'               : [],
         }
 
-        dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
+        dataset = self.get_expenditure_time_series_dataset()
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
-        cuts = []
-        if self.government.sphere.slug == 'provincial':
-            cuts.append(openspending_api.get_geo_ref() +
-                        ':"%s"' % self.government.name)
+
+        cuts = [
+            openspending_api.get_phase_ref() + ':' + '"Main appropriation"' + ';' +
+            '"Adjusted appropriation"' + ';' + '"Final Appropriation"' + ';' + '"Audit Outcome"',
+            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+        ]
         drilldowns = [
             openspending_api.get_financial_year_ref(),
-            openspending_api.get_phase_ref(),
-            openspending_api.get_department_name_ref()
+            openspending_api.get_phase_ref()
         ]
         budget_results = openspending_api.aggregate(
             cuts=cuts, drilldowns=drilldowns)
@@ -1354,7 +1355,7 @@ class Dataset():
             return self._openspending_api
         try:
             api_resource = filter(
-                lambda r: r['format'] == 'OpenSpending API',
+                lambda r: r['format'].lower() == 'openspending api',
                 self.resources
             )[0]
         except IndexError:
@@ -1364,6 +1365,7 @@ class Dataset():
             'estimates-of-provincial-expenditure': EstimatesOfExpenditure,
             'adjusted-estimates-of-national-expenditure': AdjustedEstimatesOfExpenditure,
             'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
+            'expenditure-time-series': ExpenditureTimeSeries,
         }
         api_class = api_class_mapping[self.category.slug]
         self._openspending_api = api_class(api_resource['url'])

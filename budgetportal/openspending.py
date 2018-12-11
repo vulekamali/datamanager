@@ -210,6 +210,10 @@ class AdjustedEstimatesOfExpenditure(EstimatesOfExpenditure):
         return self.get_ref(self.get_adjustment_kind_dimension(), 'label')
 
 
+class ExpenditureTimeSeries(AdjustedEstimatesOfExpenditure):
+    pass
+
+
 def cube_url(model_url):
     return re.sub('model/?$', '', model_url)
 
