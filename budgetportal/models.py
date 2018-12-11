@@ -1117,7 +1117,8 @@ class Department(models.Model):
         ]
         drilldowns = [
             openspending_api.get_financial_year_ref(),
-            openspending_api.get_phase_ref()
+            openspending_api.get_phase_ref(),
+            openspending_api.get_department_name_ref()
         ]
         budget_results = openspending_api.aggregate(
             cuts=cuts, drilldowns=drilldowns)
@@ -1127,22 +1128,24 @@ class Department(models.Model):
             cpi = get_cpi()
             for financial_year_start in financial_year_starts:
                 for phase in EXPENDITURE_TIME_SERIES_PHASES:
-                    cell = [
+                    cells = [
                         c for c in result['cells']
                         if c[openspending_api.get_financial_year_ref()] == int(financial_year_start)
                            and c[openspending_api.get_phase_ref()] == phase
-                    ][0]
-                    nominal = cell['value.sum']
-                    expenditure['nominal'].append({
-                        'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
-                        'amount'        : nominal,
-                        'phase'         : phase,
-                    })
-                    expenditure['real'].append({
-                        'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
-                        'amount'        : int((Decimal(nominal) / cpi[financial_year_start]['index']) * 100),
-                        'phase'         : phase,
-                    })
+                    ]
+                    if cells:
+                        cell = cells[0]
+                        nominal = cell['value.sum']
+                        expenditure['nominal'].append({
+                            'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
+                            'amount'        : nominal,
+                            'phase'         : phase,
+                        })
+                        expenditure['real'].append({
+                            'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
+                            'amount'        : int((Decimal(nominal) / cpi[financial_year_start]['index']) * 100),
+                            'phase'         : phase,
+                        })
 
             return {
                 'expenditure'        : expenditure,
