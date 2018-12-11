@@ -124,6 +124,39 @@ class BabbageFiscalDataset():
             aggregated_cells.append(ex_cell)
         return aggregated_cells
 
+    @staticmethod
+    def aggregate_by_three_ref(aggregate_refs, cells):
+        """ Simulates a basic version of aggregation via Open Spending API
+        Accepts a list of cells and a list of column references. """
+
+        aggregated_cells = list()
+        unique_reference_combos = list()
+        for cell in cells:
+            combo = (cell[aggregate_refs[0]], cell[aggregate_refs[1]], cell[aggregate_refs[2]])
+            if combo not in unique_reference_combos:
+                unique_reference_combos.append(combo)
+
+        for unique_ref_combo in unique_reference_combos:
+            value_sum = 0
+            count_sum = 0
+            ex_cell = None
+            for cell in cells:
+                if cell[aggregate_refs[0]] == unique_ref_combo[0] \
+                        and cell[aggregate_refs[1]] == unique_ref_combo[1] \
+                        and cell[aggregate_refs[2]] == unique_ref_combo[2]:
+                    if not ex_cell:
+                        ex_cell = {
+                            aggregate_refs[0]: cell[aggregate_refs[0]],
+                            aggregate_refs[1]: cell[aggregate_refs[1]],
+                            aggregate_refs[2]: cell[aggregate_refs[2]],
+                        }
+                    value_sum += cell['value.sum']
+                    count_sum += cell['_count']
+            ex_cell['value.sum'] = value_sum
+            ex_cell['_count'] = count_sum
+            aggregated_cells.append(ex_cell)
+        return aggregated_cells
+
 
 class EstimatesOfExpenditure(BabbageFiscalDataset):
     """

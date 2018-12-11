@@ -1101,8 +1101,8 @@ class Department(models.Model):
 
         expenditure = {
             'base_financial_year': FinancialYear.slug_from_year_start(str(base_year)),
-            'nominal'            : [],
-            'real'               : [],
+            'nominal': [],
+            'real': [],
         }
 
         dataset = self.get_expenditure_time_series_dataset()
@@ -1116,18 +1116,32 @@ class Department(models.Model):
         drilldowns = [
             openspending_api.get_financial_year_ref(),
             openspending_api.get_phase_ref(),
-            openspending_api.get_department_name_ref()
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_programme_name_ref(),
         ]
         budget_results = openspending_api.aggregate(
             cuts=cuts, drilldowns=drilldowns)
         result = openspending_api.filter_dept(budget_results, self.name)
 
-        if result['cells']:
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
+            result['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF,
+        )
+
+        result_cells = openspending_api.aggregate_by_three_ref(
+            [openspending_api.get_department_name_ref(),
+             openspending_api.get_financial_year_ref(),
+             openspending_api.get_phase_ref()],
+            filtered_cells
+        )
+
+        if result_cells:
             cpi = get_cpi()
             for financial_year_start in financial_year_starts:
                 for phase in EXPENDITURE_TIME_SERIES_PHASES:
                     cells = [
-                        c for c in result['cells']
+                        c for c in result_cells
                         if c[openspending_api.get_financial_year_ref()] == int(financial_year_start)
                            and c[openspending_api.get_phase_ref()] == phase
                     ]
@@ -1136,17 +1150,17 @@ class Department(models.Model):
                         nominal = cell['value.sum']
                         expenditure['nominal'].append({
                             'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
-                            'amount'        : nominal,
-                            'phase'         : phase,
+                            'amount': nominal,
+                            'phase': phase,
                         })
                         expenditure['real'].append({
                             'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
-                            'amount'        : int((Decimal(nominal) / cpi[financial_year_start]['index']) * 100),
-                            'phase'         : phase,
+                            'amount': int((Decimal(nominal) / cpi[financial_year_start]['index']) * 100),
+                            'phase': phase,
                         })
 
             return {
-                'expenditure'        : expenditure,
+                'expenditure': expenditure,
                 'dataset_detail_page': dataset.get_url_path(),
             }
         else:
@@ -1187,7 +1201,6 @@ class Department(models.Model):
         if result['cells']:
             prog_names = [cell[openspending_api.get_programme_name_ref()] for cell in result['cells']]
             prog_names = set(prog_names)
-            cpi = get_cpi()
             for financial_year_start in financial_year_starts:
                 for phase in EXPENDITURE_TIME_SERIES_PHASES:
                     for prog_name in prog_names:
@@ -1204,17 +1217,17 @@ class Department(models.Model):
                                 programmes[prog_name]
                             except KeyError:
                                 programmes[prog_name] = {
-                                    'name' : prog_name,
+                                    'name': prog_name,
                                     'items': [],
                                 }
                             programmes[prog_name]['items'].append({
                                 'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
-                                'amount'        : nominal,
-                                'phase'         : phase,
+                                'amount': nominal,
+                                'phase': phase,
                             })
             expenditure_programmes['programmes'] = programmes.values()
             return {
-                'programmes'        : expenditure_programmes,
+                'programmes': expenditure_programmes,
                 'dataset_detail_page': dataset.get_url_path(),
             }
         else:
