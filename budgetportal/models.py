@@ -1170,6 +1170,7 @@ class Department(models.Model):
                             'phase': phase,
                         })
 
+            found = False
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
                     for fiscal_type in expenditure:
@@ -1249,6 +1250,24 @@ class Department(models.Model):
                                 'amount': nominal,
                                 'phase': phase,
                             })
+
+            found = False
+            for fiscal_year in financial_year_starts:
+                for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
+                    for program in programmes:
+                            for item in programmes[program]['items']:
+                                found = False
+                                if item['financial_year'] == FISCAL_YEAR_MAPPING[str(fiscal_year)] \
+                                        and item['phase'] == fiscal_phase:
+                                    found = True
+                                    break
+                            if not found:
+                                programmes[program]['items'].append({
+                                    'financial_year': FISCAL_YEAR_MAPPING[fiscal_year],
+                                    'phase': fiscal_phase,
+                                    'amount': None,
+                                })
+
             return {
                 'programmes': programmes.values(),
                 'dataset_detail_page': dataset.get_url_path(),
