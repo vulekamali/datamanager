@@ -1,3 +1,5 @@
+import itertools
+
 from autoslug import AutoSlugField
 from budgetportal.openspending import (
     EstimatesOfExpenditure,
@@ -44,6 +46,16 @@ REVENUE_RESOURCE_IDS = {
 
 CPI_RESOURCE_IDS = {
     '2018-19': '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d',
+}
+
+FISCAL_YEAR_MAPPING = {
+    '2014': '2014-15',
+    '2015': '2015-16',
+    '2016': '2016-17',
+    '2017': '2017-18',
+    '2018': '2018-19',
+    '2019': '2019-20',
+    '2020': '2020-21'
 }
 
 prov_abbrev = {
@@ -1100,7 +1112,6 @@ class Department(models.Model):
         financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)]
 
         expenditure = {
-            'base_financial_year': FinancialYear.slug_from_year_start(str(base_year)),
             'nominal': [],
             'real': [],
         }
@@ -1159,8 +1170,23 @@ class Department(models.Model):
                             'phase': phase,
                         })
 
-            # for item in expenditure['nominal']:
-            #     phases = [cell['phase'] for cell in ]
+            for fiscal_year in financial_year_starts:
+                for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
+                    for fiscal_type in expenditure:
+                        for item in expenditure[fiscal_type]:
+                            found = False
+                            if item['financial_year'] == FISCAL_YEAR_MAPPING[str(fiscal_year)] \
+                                    and item['phase'] == fiscal_phase:
+                                found = True
+                                break
+                        if not found:
+                            expenditure[fiscal_type].append({
+                                'financial_year': FISCAL_YEAR_MAPPING[fiscal_year],
+                                'phase': fiscal_phase,
+                                'amount': None,
+                            })
+
+            expenditure['base_financial_year'] = FinancialYear.slug_from_year_start(str(base_year))
 
             return {
                 'expenditure': expenditure,
