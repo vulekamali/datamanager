@@ -1159,6 +1159,9 @@ class Department(models.Model):
                             'phase': phase,
                         })
 
+            # for item in expenditure['nominal']:
+            #     phases = [cell['phase'] for cell in ]
+
             return {
                 'expenditure': expenditure,
                 'dataset_detail_page': dataset.get_url_path(),
@@ -1169,14 +1172,9 @@ class Department(models.Model):
             return None
 
     def get_expenditure_time_series_by_programme(self):
-        base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)]
-
-        expenditure_programmes = {
-            'base_financial_year': FinancialYear.slug_from_year_start(str(base_year)),
-        }
 
         programmes = {}
 
@@ -1225,9 +1223,8 @@ class Department(models.Model):
                                 'amount': nominal,
                                 'phase': phase,
                             })
-            expenditure_programmes['programmes'] = programmes.values()
             return {
-                'programmes': expenditure_programmes,
+                'programmes': programmes.values(),
                 'dataset_detail_page': dataset.get_url_path(),
             }
         else:
