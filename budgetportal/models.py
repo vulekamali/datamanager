@@ -48,25 +48,6 @@ CPI_RESOURCE_IDS = {
     '2018-19': '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d',
 }
 
-FISCAL_YEAR_MAPPING = {
-    '2008': '2008-2009',
-    '2009': '2009-2010',
-    '2010': '2010-11',
-    '2011': '2011-12',
-    '2012': '2012-13',
-    '2013': '2013-14',
-    '2014': '2014-15',
-    '2015': '2015-16',
-    '2016': '2016-17',
-    '2017': '2017-18',
-    '2018': '2018-19',
-    '2019': '2019-20',
-    '2020': '2020-21',
-    '2021': '2021-22',
-    '2022': '2022-23',
-    '2023': '2023-24',
-}
-
 prov_abbrev = {
     'Eastern Cape': 'EC',
     'Free State': 'FS',
@@ -1185,13 +1166,13 @@ class Department(models.Model):
                     for fiscal_type in expenditure:
                         for item in expenditure[fiscal_type]:
                             found = False
-                            if item['financial_year'] == FISCAL_YEAR_MAPPING[str(fiscal_year)] \
+                            if item['financial_year'] == FinancialYear.slug_from_year_start(fiscal_year) \
                                     and item['phase'] == fiscal_phase:
                                 found = True
                                 break
                         if not found:
                             expenditure[fiscal_type].append({
-                                'financial_year': FISCAL_YEAR_MAPPING[fiscal_year],
+                                'financial_year': FinancialYear.slug_from_year_start(fiscal_year),
                                 'phase': fiscal_phase,
                                 'amount': None,
                             })
@@ -1266,13 +1247,13 @@ class Department(models.Model):
                     for program in programmes:
                             for item in programmes[program]['items']:
                                 found = False
-                                if item['financial_year'] == FISCAL_YEAR_MAPPING[str(fiscal_year)] \
+                                if item['financial_year'] == FinancialYear.slug_from_year_start(fiscal_year) \
                                         and item['phase'] == fiscal_phase:
                                     found = True
                                     break
                             if not found:
                                 programmes[program]['items'].append({
-                                    'financial_year': FISCAL_YEAR_MAPPING[fiscal_year],
+                                    'financial_year': FinancialYear.slug_from_year_start(fiscal_year),
                                     'phase': fiscal_phase,
                                     'amount': None,
                                 })
