@@ -1136,7 +1136,7 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF,
         )
 
-        result_cells = openspending_api.aggregate_by_three_ref(
+        result_cells = openspending_api.aggregate_by_ref(
             [openspending_api.get_department_name_ref(),
              openspending_api.get_financial_year_ref(),
              openspending_api.get_phase_ref()],
