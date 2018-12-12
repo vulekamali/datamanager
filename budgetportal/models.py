@@ -1,8 +1,10 @@
+import itertools
+
 from autoslug import AutoSlugField
 from budgetportal.openspending import (
     EstimatesOfExpenditure,
     AdjustedEstimatesOfExpenditure,
-)
+    ExpenditureTimeSeries)
 from ckanapi import NotFound
 from collections import OrderedDict
 from decimal import Decimal
@@ -68,6 +70,13 @@ TRENDS_AND_ESTIMATES_PHASES = [
     'Medium Term Estimates',
     'Medium Term Estimates',
 ]
+
+EXPENDITURE_TIME_SERIES_PHASES = (
+    'Main appropriation',
+    'Adjusted appropriation',
+    'Final Appropriation',
+    'Audit Outcome'
+)
 
 
 class FinancialYear(models.Model):
@@ -212,6 +221,7 @@ class Department(models.Model):
     _adjusted_estimates_of_expenditure_dataset = None
     _estimates_of_econ_classes_expenditure_dataset = None
     _estimates_of_subprogramme_expenditure_dataset = None
+    _expenditure_time_series_dataset = None
 
     class Meta:
         unique_together = (
@@ -408,6 +418,26 @@ class Department(models.Model):
             package = response['results'][0]
             self._estimates_of_econ_classes_expenditure_dataset = Dataset.from_package(package)
             return self._estimates_of_econ_classes_expenditure_dataset
+        else:
+            return None
+
+    def get_expenditure_time_series_dataset(self):
+        if self._expenditure_time_series_dataset is not None:
+            return self._expenditure_time_series_dataset
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"expenditure-time-series"',
+                # '+vocab_financial_years:"%s"' % self.get_financial_year().slug,
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        if response['results']:
+            package = response['results'][0]
+            self._expenditure_time_series_dataset = Dataset.from_package(package)
+            return self._expenditure_time_series_dataset
         else:
             return None
 
@@ -1065,6 +1095,178 @@ class Department(models.Model):
 
         return subprog_dict.values() if subprog_dict else None
 
+    def get_expenditure_time_series_summary(self):
+        base_year = get_base_year()
+        financial_year_start = self.get_financial_year().get_starting_year()
+        financial_year_start_int = int(financial_year_start)
+        financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)]
+
+        expenditure = {
+            'nominal': [],
+            'real': [],
+        }
+
+        dataset = self.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+
+        cuts = [
+            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+        ]
+        drilldowns = [
+            openspending_api.get_financial_year_ref(),
+            openspending_api.get_phase_ref(),
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_programme_name_ref(),
+        ]
+        budget_results = openspending_api.aggregate(
+            cuts=cuts, drilldowns=drilldowns)
+        result = openspending_api.filter_dept(budget_results, self.name)
+
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
+            result['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF,
+        )
+
+        result_cells = openspending_api.aggregate_by_three_ref(
+            [openspending_api.get_department_name_ref(),
+             openspending_api.get_financial_year_ref(),
+             openspending_api.get_phase_ref()],
+            filtered_cells
+        )
+
+        if result_cells:
+            cpi = get_cpi()
+            for financial_year_start in financial_year_starts:
+                for phase in EXPENDITURE_TIME_SERIES_PHASES:
+                    cells = [
+                        c for c in result_cells
+                        if c[openspending_api.get_financial_year_ref()] == int(financial_year_start)
+                           and c[openspending_api.get_phase_ref()] == phase
+                    ]
+                    if cells:
+                        cell = cells[0]
+                        nominal = cell['value.sum']
+                        expenditure['nominal'].append({
+                            'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
+                            'amount': nominal,
+                            'phase': phase,
+                        })
+                        expenditure['real'].append({
+                            'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
+                            'amount': int((Decimal(nominal) / cpi[financial_year_start]['index']) * 100),
+                            'phase': phase,
+                        })
+
+            found = False
+            for fiscal_year in financial_year_starts:
+                for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
+                    for fiscal_type in expenditure:
+                        for item in expenditure[fiscal_type]:
+                            found = False
+                            if item['financial_year'] == FinancialYear.slug_from_year_start(fiscal_year) \
+                                    and item['phase'] == fiscal_phase:
+                                found = True
+                                break
+                        if not found:
+                            expenditure[fiscal_type].append({
+                                'financial_year': FinancialYear.slug_from_year_start(fiscal_year),
+                                'phase': fiscal_phase,
+                                'amount': None,
+                            })
+
+            expenditure['base_financial_year'] = FinancialYear.slug_from_year_start(str(base_year))
+
+            return {
+                'expenditure': expenditure,
+                'dataset_detail_page': dataset.get_url_path(),
+            }
+        else:
+            logger.warning("Missing expenditure time series data for %r budget year %s",
+                           cuts, self.get_financial_year().slug)
+            return None
+
+    def get_expenditure_time_series_by_programme(self):
+        financial_year_start = self.get_financial_year().get_starting_year()
+        financial_year_start_int = int(financial_year_start)
+        financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)]
+
+        programmes = {}
+
+        dataset = self.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+
+        cuts = [
+            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+        ]
+        drilldowns = [
+            openspending_api.get_financial_year_ref(),
+            openspending_api.get_phase_ref(),
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_programme_name_ref(),
+        ]
+        budget_results = openspending_api.aggregate(
+            cuts=cuts, drilldowns=drilldowns)
+        result = openspending_api.filter_dept(budget_results, self.name)
+
+        if result['cells']:
+            prog_names = [cell[openspending_api.get_programme_name_ref()] for cell in result['cells']]
+            prog_names = set(prog_names)
+            for financial_year_start in financial_year_starts:
+                for phase in EXPENDITURE_TIME_SERIES_PHASES:
+                    for prog_name in prog_names:
+                        cells = [
+                            c for c in result['cells']
+                            if c[openspending_api.get_financial_year_ref()] == int(financial_year_start)
+                               and c[openspending_api.get_phase_ref()] == phase
+                               and c[openspending_api.get_programme_name_ref()] == prog_name
+                        ]
+                        if cells:
+                            cell = cells[0]
+                            nominal = cell['value.sum']
+                            try:
+                                programmes[prog_name]
+                            except KeyError:
+                                programmes[prog_name] = {
+                                    'name': prog_name,
+                                    'items': [],
+                                }
+                            programmes[prog_name]['items'].append({
+                                'financial_year': FinancialYear.slug_from_year_start(financial_year_start),
+                                'amount': nominal,
+                                'phase': phase,
+                            })
+
+            found = False
+            for fiscal_year in financial_year_starts:
+                for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
+                    for program in programmes:
+                            for item in programmes[program]['items']:
+                                found = False
+                                if item['financial_year'] == FinancialYear.slug_from_year_start(fiscal_year) \
+                                        and item['phase'] == fiscal_phase:
+                                    found = True
+                                    break
+                            if not found:
+                                programmes[program]['items'].append({
+                                    'financial_year': FinancialYear.slug_from_year_start(fiscal_year),
+                                    'phase': fiscal_phase,
+                                    'amount': None,
+                                })
+
+            return {
+                'programmes': programmes.values(),
+                'dataset_detail_page': dataset.get_url_path(),
+            }
+        else:
+            logger.warning("Missing expenditure time series data for %r budget year %s",
+                           cuts, self.get_financial_year().slug)
+            return None
+
 
 def __str__(self):
     return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
@@ -1274,7 +1476,7 @@ class Dataset():
             return self._openspending_api
         try:
             api_resource = filter(
-                lambda r: r['format'] == 'OpenSpending API',
+                lambda r: r['format'].lower() == 'openspending api',
                 self.resources
             )[0]
         except IndexError:
@@ -1284,6 +1486,7 @@ class Dataset():
             'estimates-of-provincial-expenditure': EstimatesOfExpenditure,
             'adjusted-estimates-of-national-expenditure': AdjustedEstimatesOfExpenditure,
             'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
+            'expenditure-time-series': ExpenditureTimeSeries,
         }
         api_class = api_class_mapping[self.category.slug]
         self._openspending_api = api_class(api_resource['url'])
