@@ -129,11 +129,8 @@ def department_list(request, financial_year_id):
          selected_year.slug, COMMON_DESCRIPTION_ENDING),
     }
 
-    selected_year = None
     for year in FinancialYear.get_available_years():
         is_selected = year.slug == financial_year_id
-        if is_selected:
-            selected_year = year
         context['financial_years'].append({
             'id': year.slug,
             'is_selected': is_selected,
