@@ -428,8 +428,7 @@ class Department(models.Model):
             'q': '',
             'fq': ''.join([
                 '+organization:"national-treasury"',
-                '+groups:"expenditure-time-series"',
-                # '+vocab_financial_years:"%s"' % self.get_financial_year().slug,
+                '+groups:"budgeted-and-actual-%s-expenditure"' % self.government.sphere.slug,
             ]),
             'rows': 1000,
         }
@@ -1486,7 +1485,7 @@ class Dataset():
             'estimates-of-provincial-expenditure': EstimatesOfExpenditure,
             'adjusted-estimates-of-national-expenditure': AdjustedEstimatesOfExpenditure,
             'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
-            'expenditure-time-series': ExpenditureTimeSeries,
+            'budgeted-and-actual-national-expenditure': ExpenditureTimeSeries,
         }
         api_class = api_class_mapping[self.category.slug]
         self._openspending_api = api_class(api_resource['url'])
