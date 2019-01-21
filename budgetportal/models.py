@@ -1159,7 +1159,7 @@ class Department(models.Model):
                             'phase': phase,
                         })
 
-            missing_years = []
+            missing_years = {}
             found = False
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
@@ -1177,12 +1177,13 @@ class Department(models.Model):
                                 'amount': None,
                             })
                             if fiscal_year not in missing_years:
-                                missing_years.append(fiscal_year)
+                                missing_years[fiscal_year] = 1
+                            else:
+                                missing_years[fiscal_year] += 1
 
             expenditure['base_financial_year'] = FinancialYear.slug_from_year_start(str(base_year))
 
             # Generate notices if applicable
-            # For each year, check if the total for this department is > 0
             no_data_for_years = []
             no_dept_for_years = []
             notices = []
@@ -1202,7 +1203,7 @@ class Department(models.Model):
                         # no data for this fiscal year, so data hasn't been published yet
                         no_data_for_years.append(year)
                 else:
-                    # no data for this fiscal year
+                    # no data for this fiscal year, so data hasn't been published yet
                     no_data_for_years.append(year)
 
             if no_data_for_years:
@@ -1220,7 +1221,7 @@ class Department(models.Model):
                 notices.append(notice_string)
 
             if no_dept_for_years:
-                notices.append('This department did not exist for some years displayed')
+                notices.append('This department did not exist for some years displayed.')
 
             return {
                 'notices': notices,
@@ -1286,6 +1287,7 @@ class Department(models.Model):
                             })
 
             found = False
+            missing_years = []
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
                     for program in programmes:
@@ -1301,8 +1303,29 @@ class Department(models.Model):
                                     'phase': fiscal_phase,
                                     'amount': None,
                                 })
+                                if fiscal_year not in missing_years:
+                                    missing_years.append(fiscal_year)
+
+            no_prog_for_years = []
+            notices = []
+            for year in missing_years:
+                single_year_cuts = [
+                    openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+                    openspending_api.get_financial_year_ref() + ':' + year,
+                ]
+                single_year_budget_results = openspending_api.aggregate(
+                    cuts=single_year_cuts)
+
+                if single_year_budget_results['cells']:
+                    if single_year_budget_results['cells'][0]['value.sum'] > 0:
+                        # prog did not exist, since there is data for other programmes
+                        no_prog_for_years.append(year)
+
+            if no_prog_for_years:
+                notices.append('One or more programmes did not exist for some years displayed.')
 
             return {
+                'notices': notices,
                 'programmes': programmes.values(),
                 'dataset_detail_page': dataset.get_url_path(),
             }
