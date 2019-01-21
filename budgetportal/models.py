@@ -1159,6 +1159,7 @@ class Department(models.Model):
                             'phase': phase,
                         })
 
+            missing_years = []
             found = False
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
@@ -1175,10 +1176,54 @@ class Department(models.Model):
                                 'phase': fiscal_phase,
                                 'amount': None,
                             })
+                            if fiscal_year not in missing_years:
+                                missing_years.append(fiscal_year)
 
             expenditure['base_financial_year'] = FinancialYear.slug_from_year_start(str(base_year))
 
+            # Generate notices if applicable
+            # For each year, check if the total for this department is > 0
+            no_data_for_years = []
+            no_dept_for_years = []
+            notices = []
+            for year in missing_years:
+                single_year_cuts = [
+                    openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+                    openspending_api.get_financial_year_ref() + ':' + year,
+                ]
+                single_year_budget_results = openspending_api.aggregate(
+                    cuts=single_year_cuts)
+
+                if single_year_budget_results['cells']:
+                    if single_year_budget_results['cells'][0]['value.sum'] > 0:
+                        # dept did not exist, since there is data for other departments
+                        no_dept_for_years.append(year)
+                    else:
+                        # no data for this fiscal year, so data hasn't been published yet
+                        no_data_for_years.append(year)
+                else:
+                    # no data for this fiscal year
+                    no_data_for_years.append(year)
+
+            if no_data_for_years:
+                notice_string = 'Please note that the data for'
+                index = 1
+                for year in no_data_for_years:
+                    if len(no_data_for_years) == 1:
+                        notice_string += ' {}'.format(year)
+                    elif index == len(no_data_for_years):
+                        notice_string += ' and {}'.format(year)
+                    else:
+                        notice_string += ' {},'.format(year)
+                    index += 1
+                notice_string += ' has not been published on vulekamali.'
+                notices.append(notice_string)
+
+            if no_dept_for_years:
+                notices.append('This department did not exist for some years displayed')
+
             return {
+                'notices': notices,
                 'expenditure': expenditure,
                 'dataset_detail_page': dataset.get_url_path(),
             }
