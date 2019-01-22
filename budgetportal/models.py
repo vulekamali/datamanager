@@ -1187,7 +1187,10 @@ class Department(models.Model):
             no_data_for_years = []
             no_dept_for_years = []
             notices = []
-            for year in missing_years:
+            for year, count in missing_years.items():
+                if count != 8:
+                    # All phases for a given year must be missing before starting any checks
+                    continue
                 single_year_cuts = [
                     openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
                     openspending_api.get_financial_year_ref() + ':' + year,
@@ -1211,6 +1214,11 @@ class Department(models.Model):
                 index = 1
                 for year in no_data_for_years:
                     if len(no_data_for_years) == 1:
+                        notice_string += ' {}'.format(year)
+                    elif len(no_data_for_years) == 2:
+                        notice_string += ' {} and {}'.format(year, no_data_for_years[index])
+                        break
+                    elif index == len(no_data_for_years)-1:
                         notice_string += ' {}'.format(year)
                     elif index == len(no_data_for_years):
                         notice_string += ' and {}'.format(year)
@@ -1287,7 +1295,7 @@ class Department(models.Model):
                             })
 
             found = False
-            missing_years = []
+            missing_years = {}
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
                     for program in programmes:
@@ -1304,22 +1312,31 @@ class Department(models.Model):
                                     'amount': None,
                                 })
                                 if fiscal_year not in missing_years:
-                                    missing_years.append(fiscal_year)
+                                    missing_years[fiscal_year] = {program: 1}
+                                else:
+                                    if program not in missing_years[fiscal_year].keys():
+                                        missing_years[fiscal_year][program] = 1
+                                    else:
+                                        missing_years[fiscal_year][program] += 1
 
-            no_prog_for_years = []
+            no_prog_for_years = False
             notices = []
-            for year in missing_years:
-                single_year_cuts = [
-                    openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
-                    openspending_api.get_financial_year_ref() + ':' + year,
-                ]
-                single_year_budget_results = openspending_api.aggregate(
-                    cuts=single_year_cuts)
+            for year, progs in missing_years.items():
+                if no_prog_for_years: break
+                for p, count in progs.items():
+                    if no_prog_for_years: break
+                    if count == 4:
+                        single_year_cuts = [
+                            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+                            openspending_api.get_financial_year_ref() + ':' + year,
+                        ]
+                        single_year_budget_results = openspending_api.aggregate(
+                            cuts=single_year_cuts)
 
-                if single_year_budget_results['cells']:
-                    if single_year_budget_results['cells'][0]['value.sum'] > 0:
-                        # prog did not exist, since there is data for other programmes
-                        no_prog_for_years.append(year)
+                        if single_year_budget_results['cells']:
+                            if single_year_budget_results['cells'][0]['value.sum'] > 0:
+                                # prog did not exist, since there is data for other programmes
+                                no_prog_for_years = True
 
             if no_prog_for_years:
                 notices.append('One or more programmes did not exist for some years displayed.')
