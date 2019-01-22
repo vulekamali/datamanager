@@ -32,7 +32,7 @@ class AdjustedBudgetMissingTestCase(TestCase):
         self.assertEqual(self.department.get_adjusted_budget_summary(), None)
 
 
-class AdjustedBudgetOpenSpendingtMissingTestCase(TestCase):
+class AdjustedBudgetOpenSpendingMissingTestCase(TestCase):
     """Unit tests of adjusted budget data summary for a department"""
     def setUp(self):
         year = FinancialYear(slug="2030-31")
