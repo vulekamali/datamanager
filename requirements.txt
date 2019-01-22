@@ -32,6 +32,6 @@ PyYAML==3.12
 requests==2.20.0
 simplejson==3.12.0
 six==1.9.0
-urllib3==1.22
+urllib3==1.23
 Werkzeug==0.10.1
 whitenoise==1.0.6
