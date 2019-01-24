@@ -1,0 +1,2656 @@
+{
+  "test_cells_data_complete": [
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28726061000,
+      "_count": 557,
+      "financial_year.financial_year": 2015
+    },
+    {
+      "budget_phase.budget_phase": "Audit Outcome",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28690816280,
+      "_count": 558,
+      "financial_year.financial_year": 2015
+    },
+    {
+      "budget_phase.budget_phase": "Final Appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 29005061000,
+      "_count": 566,
+      "financial_year.financial_year": 2015
+    },
+    {
+      "budget_phase.budget_phase": "Main appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 26957304000.0,
+      "_count": 685,
+      "financial_year.financial_year": 2015
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28471417000,
+      "_count": 565,
+      "financial_year.financial_year": 2016
+    },
+    {
+      "budget_phase.budget_phase": "Audit Outcome",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28199783365,
+      "_count": 155,
+      "financial_year.financial_year": 2016
+    },
+    {
+      "budget_phase.budget_phase": "Final Appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28471416900,
+      "_count": 157,
+      "financial_year.financial_year": 2016
+    },
+    {
+      "budget_phase.budget_phase": "Main appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28471417000.0,
+      "_count": 684,
+      "financial_year.financial_year": 2016
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 40584306000,
+      "_count": 568,
+      "financial_year.financial_year": 2017
+    },
+    {
+      "budget_phase.budget_phase": "Audit Outcome",
+      "vote_number.department": "National Treasury",
+      "value.sum": 39792071170,
+      "_count": 503,
+      "financial_year.financial_year": 2017
+    },
+    {
+      "budget_phase.budget_phase": "Final Appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 40484306000,
+      "_count": 559,
+      "financial_year.financial_year": 2017
+    },
+    {
+      "budget_phase.budget_phase": "Main appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 30799220000.0,
+      "_count": 820,
+      "financial_year.financial_year": 2017
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 29710233000,
+      "_count": 536,
+      "financial_year.financial_year": 2018
+    },
+    {
+      "budget_phase.budget_phase": "Main appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 29358390000.0,
+      "_count": 882,
+      "financial_year.financial_year": 2018
+    }
+  ],
+  "test_cells_data_missing_2018": [
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28726061000,
+      "_count": 557,
+      "financial_year.financial_year": 2015
+    },
+    {
+      "budget_phase.budget_phase": "Audit Outcome",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28690816280,
+      "_count": 558,
+      "financial_year.financial_year": 2015
+    },
+    {
+      "budget_phase.budget_phase": "Final Appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 29005061000,
+      "_count": 566,
+      "financial_year.financial_year": 2015
+    },
+    {
+      "budget_phase.budget_phase": "Main appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 26957304000.0,
+      "_count": 685,
+      "financial_year.financial_year": 2015
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28471417000,
+      "_count": 565,
+      "financial_year.financial_year": 2016
+    },
+    {
+      "budget_phase.budget_phase": "Audit Outcome",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28199783365,
+      "_count": 155,
+      "financial_year.financial_year": 2016
+    },
+    {
+      "budget_phase.budget_phase": "Final Appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28471416900,
+      "_count": 157,
+      "financial_year.financial_year": 2016
+    },
+    {
+      "budget_phase.budget_phase": "Main appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 28471417000.0,
+      "_count": 684,
+      "financial_year.financial_year": 2016
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 40584306000,
+      "_count": 568,
+      "financial_year.financial_year": 2017
+    },
+    {
+      "budget_phase.budget_phase": "Audit Outcome",
+      "vote_number.department": "National Treasury",
+      "value.sum": 39792071170,
+      "_count": 503,
+      "financial_year.financial_year": 2017
+    },
+    {
+      "budget_phase.budget_phase": "Final Appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 40484306000,
+      "_count": 559,
+      "financial_year.financial_year": 2017
+    },
+    {
+      "budget_phase.budget_phase": "Main appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 30799220000.0,
+      "_count": 820,
+      "financial_year.financial_year": 2017
+    }
+  ],
+  "test_cells_only_2018": [
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 29710233000,
+      "_count": 536,
+      "financial_year.financial_year": 2018
+    },
+    {
+      "budget_phase.budget_phase": "Main appropriation",
+      "vote_number.department": "National Treasury",
+      "value.sum": 29358390000.0,
+      "_count": 882,
+      "financial_year.financial_year": 2018
+    }
+  ],
+  "program_test_cells_complete": [
+    {
+      "_count": 164,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 363629000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 69,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 3264890000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 3962941000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 525742590000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 77,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 135387000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 107,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 807090000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4562062000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 40,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 3254926000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 80,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 266104000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 9334439000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 10,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 2774593000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 169,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 375582000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 63,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 3264294000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 5,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 3967698000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 526636137000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 78,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 131290000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 108,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 774494280,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4562062000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 41,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 3546134000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 82,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 262577000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 9334439000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 9,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 2472246000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 167,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 386645000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 68,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 3265171000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 3967741000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 525742590000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 80,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 132730000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 109,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 783753000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4562062000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 41,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 3547662000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 85,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 268889000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 9334439000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 9,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 2755969000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 193,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 366665000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 87,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 3116930000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 7,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 3962941000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 519893814000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 92,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 133892000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 122,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 751362000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4542805000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 49,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 1247442000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 94,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 256965000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 9434439000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 35,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 3143863000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 165,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 467416000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 78,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 113129000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4462642000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 570833034000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 72,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 150161000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 107,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 1216758000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4812487000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 45,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4977977000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 78,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 294483000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 9363676000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 10,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 2612688000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 31,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 436312954,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 21,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 110146309,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 3,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4400158875,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 570197128000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 22,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 151181509,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 26,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 1209857964,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4812487000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 24,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4955752630,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 23,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 281778217,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 9363676000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 3,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 2478431907,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 30,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 464415800,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 23,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 113129000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 3,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4462642000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 570833034000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 23,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 156561100,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 25,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 1251758000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4812487000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 24,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4961628000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 23,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 294483000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 9363676000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 2590637000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 196,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 412661000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 90,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 107211000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 6,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4173242000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 569787416000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 87,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 146070000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 127,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 849854000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4812487000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 50,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5039068000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 93,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 286955000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 10009151000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 32,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 2634718000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 170,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 439071000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 72,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 10100312000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4835002000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 616714049000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 75,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 163991000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 109,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 1079146000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 5005639000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 41,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 5831388000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 81,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 303046000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 10218198000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 10,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 2608513000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 153,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 437869000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 56,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 10089761000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 5,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4618088000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 616347785000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 69,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 151860000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 100,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 885832697,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 5105639000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 39,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 5469838473,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 69,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 288635000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 10218198000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 9,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 2526350000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 163,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 445620000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 71,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 10100312000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4648202000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 616714049000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 76,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 163991000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 111,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 1000846000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 5105639000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 41,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 5940689000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 81,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 302296000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 10218198000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 9,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 2558513000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 203,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 414310000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 208,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 102355000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 5,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4835002000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 615856815000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 95,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 139649000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 128,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 1087876000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5005639000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 54,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5836761000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 92,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 286103000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 10218198000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 32,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 2873327000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 161,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 473819000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 61,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 101585000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 5163796000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 664004032000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 72,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 152770000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 103,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 1194148000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4763533000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 38,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 5542776000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 80,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 298047000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 9007217000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 11,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 3012542000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 198,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 484733000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 210,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 110418000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 5,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5163796000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 663014110000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 90,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 141009000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 126,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 1196622000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4763533000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 50,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5402120000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 170,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 290101000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 9007217000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 30,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 2798841000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    }
+  ],
+  "program_test_cells_missing_2018_revenue_admin": [
+    {
+      "_count": 164,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 363629000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 69,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 3264890000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 3962941000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 525742590000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 77,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 135387000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 107,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 807090000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4562062000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 40,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 3254926000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 80,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 266104000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 9334439000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 10,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 2774593000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 169,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 375582000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 63,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 3264294000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 5,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 3967698000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 526636137000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 78,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 131290000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 108,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 774494280,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4562062000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 41,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 3546134000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 82,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 262577000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 9334439000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 9,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 2472246000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 167,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 386645000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 68,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 3265171000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 3967741000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 525742590000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 80,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 132730000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 109,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 783753000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4562062000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 41,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 3547662000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 85,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 268889000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 9334439000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 9,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 2755969000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 193,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 366665000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 87,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 3116930000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 7,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 3962941000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 519893814000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 92,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 133892000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 122,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 751362000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4542805000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 49,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 1247442000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 94,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 256965000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 9434439000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 35,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 3143863000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2015
+    },
+    {
+      "_count": 165,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 467416000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 78,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 113129000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4462642000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 570833034000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 72,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 150161000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 107,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 1216758000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4812487000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 45,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4977977000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 78,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 294483000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 9363676000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 10,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 2612688000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 31,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 436312954,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 21,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 110146309,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 3,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4400158875,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 570197128000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 22,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 151181509,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 26,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 1209857964,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4812487000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 24,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4955752630,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 23,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 281778217,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 9363676000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 3,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 2478431907,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 30,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 464415800,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 23,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 113129000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 3,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4462642000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 570833034000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 23,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 156561100,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 25,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 1251758000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4812487000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 24,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4961628000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 23,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 294483000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 9363676000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 2590637000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 196,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 412661000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 90,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 107211000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 6,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4173242000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 569787416000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 87,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 146070000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 127,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 849854000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4812487000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 50,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5039068000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 93,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 286955000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 10009151000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 32,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 2634718000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2016
+    },
+    {
+      "_count": 170,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 439071000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 72,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 10100312000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4835002000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 616714049000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 75,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 163991000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 109,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 1079146000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 5005639000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 41,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 5831388000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 81,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 303046000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 10218198000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 10,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 2608513000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 153,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 437869000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 56,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 10089761000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 5,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 4618088000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 616347785000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 69,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 151860000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 100,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 885832697,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 5105639000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 39,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 5469838473,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 69,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 288635000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 10218198000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 9,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Audit Outcome",
+      "value.sum": 2526350000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 163,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 445620000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 71,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 10100312000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 4648202000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 616714049000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 76,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 163991000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 111,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 1000846000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 5105639000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 41,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 5940689000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 81,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 302296000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 10218198000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 9,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Final Appropriation",
+      "value.sum": 2558513000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 203,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 414310000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 208,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 102355000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 5,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4835002000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 615856815000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 95,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 139649000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 128,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 1087876000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5005639000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 54,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5836761000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 92,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 286103000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 1,
+      "programme_number.programme": "Revenue Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 10218198000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 32,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 2873327000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2017
+    },
+    {
+      "_count": 161,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 473819000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 61,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 101585000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 5163796000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 664004032000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 72,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 152770000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 103,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 1194148000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 4763533000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 38,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 5542776000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 80,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 298047000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 11,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "value.sum": 3012542000,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 198,
+      "programme_number.programme": "Administration",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 484733000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 210,
+      "programme_number.programme": "Asset and Liability Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 110418000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 5,
+      "programme_number.programme": "Civil and Military Pensions, Contributions to Funds and Other Benefits",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5163796000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 4,
+      "programme_number.programme": "Direct charge against the National Revenue Fund",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 663014110000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 90,
+      "programme_number.programme": "Economic Policy, Tax, Financial Regulation and Research",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 141009000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 126,
+      "programme_number.programme": "Financial Accounting and Supply Chain Management Systems",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 1196622000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 2,
+      "programme_number.programme": "Financial Intelligence and State Security",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 4763533000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 50,
+      "programme_number.programme": "International Financial Relations",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 5402120000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 170,
+      "programme_number.programme": "Public Finance and Budget Management",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 290101000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    },
+    {
+      "_count": 30,
+      "programme_number.programme": "Technical Support and Development Finance",
+      "budget_phase.budget_phase": "Main appropriation",
+      "value.sum": 2798841000.0,
+      "vote_number.department": "National Treasury",
+      "financial_year.financial_year": 2018
+    }
+  ]
+}

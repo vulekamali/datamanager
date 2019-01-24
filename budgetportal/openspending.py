@@ -80,7 +80,7 @@ class BabbageFiscalDataset():
                         aggregate_result.elapsed.microseconds / 1000)
             aggregate_result.raise_for_status()
             aggregate_result = aggregate_result.json()
-            if aggregate_result['total_cell_count'] > PAGE_SIZE:
+            if len(aggregate_result['cells']) > PAGE_SIZE:
                 raise Exception(
                     "More cells than expected - perhaps we should start paging"
                 )
