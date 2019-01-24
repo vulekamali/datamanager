@@ -1159,7 +1159,7 @@ class Department(models.Model):
                             'phase': phase,
                         })
 
-            missing_years = {}
+            missing_phases_count = {}
             found = False
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
@@ -1176,10 +1176,10 @@ class Department(models.Model):
                                 'phase': fiscal_phase,
                                 'amount': None,
                             })
-                            if fiscal_year not in missing_years:
-                                missing_years[fiscal_year] = 1
+                            if fiscal_year not in missing_phases_count:
+                                missing_phases_count[fiscal_year] = 1
                             else:
-                                missing_years[fiscal_year] += 1
+                                missing_phases_count[fiscal_year] += 1
 
             expenditure['base_financial_year'] = FinancialYear.slug_from_year_start(str(base_year))
 
@@ -1187,7 +1187,8 @@ class Department(models.Model):
             no_data_for_years = []
             no_dept_for_years = []
             notices = []
-            for year, count in missing_years.items():
+            for year, count in missing_phases_count.items():
+                # 8 because 4 phases real and nominal
                 if count != 8:
                     # All phases for a given year must be missing before starting any checks
                     continue
@@ -1244,7 +1245,8 @@ class Department(models.Model):
     def get_expenditure_time_series_by_programme(self):
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
-        financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)]
+        year_ints = xrange(financial_year_start_int - 3, financial_year_start_int + 1)
+        financial_year_starts = [str(y) for y in year_ints]
 
         programmes = {}
 
@@ -1295,7 +1297,7 @@ class Department(models.Model):
                             })
 
             found = False
-            missing_years = {}
+            missing_phases_count = {}
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
                     for program in programmes:
@@ -1311,17 +1313,17 @@ class Department(models.Model):
                                     'phase': fiscal_phase,
                                     'amount': None,
                                 })
-                                if fiscal_year not in missing_years:
-                                    missing_years[fiscal_year] = {program: 1}
+                                if fiscal_year not in missing_phases_count:
+                                    missing_phases_count[fiscal_year] = {program: 1}
                                 else:
-                                    if program not in missing_years[fiscal_year].keys():
-                                        missing_years[fiscal_year][program] = 1
+                                    if program not in missing_phases_count[fiscal_year].keys():
+                                        missing_phases_count[fiscal_year][program] = 1
                                     else:
-                                        missing_years[fiscal_year][program] += 1
+                                        missing_phases_count[fiscal_year][program] += 1
 
             no_prog_for_years = False
             notices = []
-            for year, progs in missing_years.items():
+            for year, progs in missing_phases_count.items():
                 if no_prog_for_years: break
                 for p, count in progs.items():
                     if no_prog_for_years: break
