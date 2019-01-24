@@ -1343,7 +1343,7 @@ class Department(models.Model):
 
             return {
                 'notices': notices,
-                'programmes': programmes.values(),
+                'programmes': sorted(programmes.values()),
                 'dataset_detail_page': dataset.get_url_path(),
             }
         else:
