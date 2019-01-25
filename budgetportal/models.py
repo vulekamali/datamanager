@@ -1212,20 +1212,14 @@ class Department(models.Model):
 
             if no_data_for_years:
                 notice_string = 'Please note that the data for'
-                index = 1
-                for year in no_data_for_years:
-                    if len(no_data_for_years) == 1:
-                        notice_string += ' {}'.format(year)
-                    elif len(no_data_for_years) == 2:
-                        notice_string += ' {} and {}'.format(year, no_data_for_years[index])
-                        break
-                    elif index == len(no_data_for_years)-1:
-                        notice_string += ' {}'.format(year)
-                    elif index == len(no_data_for_years):
-                        notice_string += ' and {}'.format(year)
-                    else:
-                        notice_string += ' {},'.format(year)
-                    index += 1
+                no_data_for_years.sort()
+                if len(no_data_for_years) == 1:
+                    notice_string += ' {}'.format(no_data_for_years[0])
+                elif len(no_data_for_years) == 2:
+                    notice_string += ' {}'.format(' and '.join(no_data_for_years))
+                else:
+                    notice_string += ' {}'.format(', '.join(no_data_for_years[:-1]))
+                    notice_string += ' and {}'.format(no_data_for_years[-1])
                 notice_string += ' has not been published on vulekamali.'
                 notices.append(notice_string)
 
