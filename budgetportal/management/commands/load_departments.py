@@ -34,11 +34,14 @@ class Command(BaseCommand):
         parser.add_argument('financial_year', type=str)
         parser.add_argument('sphere', type=str)
         parser.add_argument('filename', type=str)
+        parser.add_argument('update', type=bool, nargs='?', default=False)
 
     def handle(self, *args, **options):
         financial_year = options['financial_year']
         sphere = options['sphere']
         filename = options['filename']
+        update = options.get('update', False)
+
         with open(filename) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
@@ -58,11 +61,27 @@ class Command(BaseCommand):
                     is_vote_primary = True
                 else:
                     is_vote_primary = is_vote_primary.upper() == 'TRUE'
-                Department.objects.create(
-                    government=government,
-                    name=row['department_name'],
-                    vote_number=row['vote_number'],
-                    is_vote_primary=is_vote_primary,
-                    intro=intro,
-                    website_url=website_url
-                )
+
+                def create_dept():
+                    Department.objects.create(
+                        government=government,
+                        name=row['department_name'],
+                        vote_number=row['vote_number'],
+                        is_vote_primary=is_vote_primary,
+                        intro=intro,
+                        website_url=website_url
+                    )
+
+                try:
+                    if update:
+                        department = Department.objects.get(government=government, name=row['department_name'])
+                        department.government = government
+                        department.vote_number = row['vote_number']
+                        department.is_vote_primary = is_vote_primary
+                        department.intro = intro
+                        department.website_url = website_url
+                        department.save()
+                    else:
+                        create_dept()
+                except Department.DoesNotExist:
+                    create_dept()
