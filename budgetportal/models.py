@@ -285,8 +285,8 @@ class Department(models.Model):
         return Dataset.from_package(ckan.action.package_create(**dataset_fields))
 
     def get_website_url(self):
-        latest_instance = self._get_latest_sphere_instance()
-        return latest_instance.website_url
+        """ Always return the latest available URL, even for old departments. """
+        return self._get_latest_department_instance().website_url
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
