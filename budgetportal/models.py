@@ -297,7 +297,7 @@ class Department(models.Model):
     def get_financial_year(self):
         return self.government.sphere.financial_year
 
-    def _get_latest_sphere_instance(self):
+    def _get_latest_department_instance(self):
         sphere_name = self.government.sphere.name
         latest_sphere = Sphere.objects.get(financial_year=FinancialYear.get_latest_year(), name=sphere_name)
         latest_government = latest_sphere.governments.get(name=self.government.name)
