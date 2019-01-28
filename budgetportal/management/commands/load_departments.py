@@ -48,6 +48,7 @@ class Command(BaseCommand):
                     slug=slugify(row['government']),
                 )
                 intro = ""
+                website_url = None
                 if row.get('purpose', False):
                     intro += "## Vote purpose\n\n%s\n\n" % row['purpose']
                 if row.get('vision', False):
@@ -58,6 +59,8 @@ class Command(BaseCommand):
                     intro += "## Mandate\n\n%s\n\n" % row['mandate']
                 if row.get('core functions and responsibilities', False):
                     intro += "## Core functions and responsibilities\n\n%s\n\n" % row['core_functions_and_responsibilities']
+                if row.get('website_url', False):
+                    website_url = row['website_url']
                 is_vote_primary = row.get('is_vote_primary', None)
                 if is_vote_primary is None:
                     is_vote_primary = True
@@ -68,5 +71,6 @@ class Command(BaseCommand):
                     name=row['department_name'],
                     vote_number=row['vote_number'],
                     is_vote_primary=is_vote_primary,
-                    intro=intro
+                    intro=intro,
+                    website_url=website_url
                 )

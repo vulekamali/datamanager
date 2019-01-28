@@ -215,6 +215,7 @@ class Department(models.Model):
     vote_number = models.IntegerField()
     is_vote_primary = models.BooleanField(default=True)
     intro = models.TextField()
+    website_url = models.URLField(default=None, null=True, blank=True)
     _programme_budgets = None
     _econ_by_programme_budgets = None
     _prog_by_econ_budgets = None
