@@ -302,6 +302,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'name': primary_department.name,
             'slug': primary_department.slug
         },
+        'website_url': department.get_website_url(),
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')

@@ -140,6 +140,10 @@ class FinancialYear(models.Model):
         years.reverse()
         return years
 
+    @classmethod
+    def get_latest_year(cls):
+        return cls.objects.order_by('-slug')[0]
+
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
@@ -281,7 +285,8 @@ class Department(models.Model):
         return Dataset.from_package(ckan.action.package_create(**dataset_fields))
 
     def get_website_url(self):
-        return self.website_url
+        latest_instance = self._get_latest_sphere_instance()
+        return latest_instance.website_url
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -291,6 +296,12 @@ class Department(models.Model):
 
     def get_financial_year(self):
         return self.government.sphere.financial_year
+
+    def _get_latest_sphere_instance(self):
+        sphere_name = self.government.sphere.name
+        latest_sphere = Sphere.objects.get(financial_year=FinancialYear.get_latest_year(), name=sphere_name)
+        latest_government = latest_sphere.governments.get(name=self.government.name)
+        return latest_government.departments.get(slug=self.slug)
 
     def _get_financial_year_query(self):
         return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
