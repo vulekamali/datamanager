@@ -280,6 +280,9 @@ class Department(models.Model):
         logger.info("Creating package with %r", dataset_fields)
         return Dataset.from_package(ckan.action.package_create(**dataset_fields))
 
+    def get_website_url(self):
+        return self.website_url
+
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 

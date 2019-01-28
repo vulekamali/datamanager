@@ -150,6 +150,7 @@ def department_list(request, financial_year_id):
                     'slug': str(department.slug),
                     'vote_number': department.vote_number,
                     'url_path': department.get_url_path(),
+                    'website_url': department.get_website_url(),
                 })
             departments = sorted(departments, key=lambda d: d['vote_number'])
             context[sphere_name].append({
