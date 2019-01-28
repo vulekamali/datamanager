@@ -49,16 +49,8 @@ class Command(BaseCommand):
                 )
                 intro = ""
                 website_url = None
-                if row.get('purpose', False):
-                    intro += "## Vote purpose\n\n%s\n\n" % row['purpose']
-                if row.get('vision', False):
-                    intro += "## Vision\n\n%s\n\n" % row['vision']
-                if row.get('mission', False):
-                    intro += "## Mission\n\n%s\n\n" % row['mission']
-                if row.get('mandate', False):
-                    intro += "## Mandate\n\n%s\n\n" % row['mandate']
-                if row.get('core functions and responsibilities', False):
-                    intro += "## Core functions and responsibilities\n\n%s\n\n" % row['core_functions_and_responsibilities']
+                if row.get('intro', False):
+                    intro += row['intro']
                 if row.get('website_url', False):
                     website_url = row['website_url']
                 is_vote_primary = row.get('is_vote_primary', None)
