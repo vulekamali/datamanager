@@ -214,7 +214,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
 
 
 class DepartmentWebsiteUrlTestCase(TestCase):
-    """ Unit tests of budgeted and actual expenditure summary for a department """
+    """ Integration test to verify that website urls are retrieved and output correctly """
 
     def setUp(self):
         year_old = FinancialYear.objects.create(slug="2017-18")
