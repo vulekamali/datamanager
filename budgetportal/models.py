@@ -298,10 +298,27 @@ class Department(models.Model):
         return self.government.sphere.financial_year
 
     def _get_latest_department_instance(self):
+        """ Try to find the department in the most recent year with the same slug.
+        Continue traversing backwards in time until found, or until the original year has been reached. """
+        years = FinancialYear.objects.all().order_by('-slug')
+        original_dept_year = self.government.sphere.financial_year
         sphere_name = self.government.sphere.name
-        latest_sphere = Sphere.objects.get(financial_year=FinancialYear.get_latest_year(), name=sphere_name)
-        latest_government = latest_sphere.governments.get(name=self.government.name)
-        return latest_government.departments.get(slug=self.slug)
+        latest_existing_department = None
+        found_or_out_of_years, index = False, 0
+        while not found_or_out_of_years:
+            year = years[index]
+            index += 1
+            if year == original_dept_year:
+                found_or_out_of_years = True
+
+            latest_sphere = Sphere.objects.get(financial_year=year, name=sphere_name)
+            latest_government = latest_sphere.governments.get(name=self.government.name)
+            try:
+                latest_existing_department = latest_government.departments.get(slug=self.slug)
+                found_or_out_of_years = True
+            except Department.DoesNotExist:
+                continue
+        return latest_existing_department
 
     def _get_financial_year_query(self):
         return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
