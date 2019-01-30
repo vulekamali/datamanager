@@ -20,8 +20,8 @@ class BasicPagesTestCase(TestCase):
         provincial = Sphere.objects.create(financial_year=year, name='Provincial')
 
         # governments
-        self.south_africa = Government.objects.create(sphere=national, name='South Africa')
-        self.free_state = Government.objects.create(
+        self.fake_national_government = Government.objects.create(sphere=national, name='South Africa')
+        self.fake_provincial_government = Government.objects.create(
             sphere=provincial,
             name='Free State'
         )
@@ -30,14 +30,14 @@ class BasicPagesTestCase(TestCase):
         filename = 'budgetportal/tests/test_data/test_management_commands_national_departments.csv'
         call_command('load_departments', '2030-31', 'national', filename)
 
-        presidency = Department.objects.get(government=self.south_africa, name='The Presidency')
+        presidency = Department.objects.get(government=self.fake_national_government, name='The Presidency')
         self.assertEqual(presidency.vote_number, 1)
         self.assertTrue(presidency.is_vote_primary)
         self.assertIn("To serve the president", presidency.intro)
         self.assertIn("Facilitate a common", presidency.intro)
         self.assertTrue(presidency.website_url, 'www.thepresidency.gov.za')
 
-        parliament = Department.objects.get(government=self.south_africa, vote_number=2)
+        parliament = Department.objects.get(government=self.fake_national_government, vote_number=2)
         self.assertEqual(parliament.name, 'Parliament')
         self.assertTrue(parliament.is_vote_primary)
         self.assertIn("Provide the support services", parliament.intro)
@@ -49,7 +49,7 @@ class BasicPagesTestCase(TestCase):
         call_command('load_departments', '2030-31', 'provincial', filename)
 
         premier = Department.objects.get(
-            government=self.free_state,
+            government=self.fake_provincial_government,
             name='Premier'
         )
         self.assertEqual(premier.vote_number, 1)
@@ -59,7 +59,7 @@ class BasicPagesTestCase(TestCase):
         self.assertTrue(premier.website_url, 'www.testpremier.gov.za')
 
         legislature = Department.objects.get(
-            government=self.free_state,
+            government=self.fake_provincial_government,
             name='Free State Legislature'
         )
         self.assertEqual(legislature.vote_number, 2)
@@ -133,10 +133,10 @@ class ExportImportDepartmentsTestCase(TestCase):
         Sphere.objects.create(financial_year=self.year, name='Provincial')
 
         # governments
-        self.south_africa = Government.objects.create(sphere=national, name='South Africa')
+        self.fake_national_government = Government.objects.create(sphere=national, name='South Africa')
 
         self.department_one = Department.objects.create(
-            government=self.south_africa,
+            government=self.fake_national_government,
             name="Some Department 1",
             vote_number=1,
             is_vote_primary=True,
@@ -144,7 +144,7 @@ class ExportImportDepartmentsTestCase(TestCase):
             website_url="test.com"
         )
         self.department_one = Department.objects.create(
-            government=self.south_africa,
+            government=self.fake_national_government,
             name="Some Department 2",
             vote_number=2,
             is_vote_primary=False,
@@ -175,7 +175,7 @@ class ExportImportDepartmentsTestCase(TestCase):
             # self.assertEqual(result['number_added'], 2)
 
             # Check that it was successful
-            dept_1 = Department.objects.get(government=self.south_africa, vote_number=1)
-            dept_2 = Department.objects.get(government=self.south_africa, vote_number=2)
+            dept_1 = Department.objects.get(government=self.fake_national_government, vote_number=1)
+            dept_2 = Department.objects.get(government=self.fake_national_government, vote_number=2)
             self.assertEqual("Some Department 1", dept_1.name)
             self.assertEqual("Some Department 2", dept_2.name)
