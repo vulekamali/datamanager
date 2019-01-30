@@ -21,13 +21,9 @@ class BasicPagesTestCase(TestCase):
 
         # governments
         self.south_africa = Government.objects.create(sphere=national, name='South Africa')
-        self.fake_central_province = Government.objects.create(
+        self.free_state = Government.objects.create(
             sphere=provincial,
-            name='Fake Central'
-        )
-        self.fake_northeast_province = Government.objects.create(
-            sphere=provincial,
-            name='Fake North-East'
+            name='Free State'
         )
 
     def test_load_departments_national(self):
@@ -39,34 +35,38 @@ class BasicPagesTestCase(TestCase):
         self.assertTrue(presidency.is_vote_primary)
         self.assertIn("To serve the president", presidency.intro)
         self.assertIn("Facilitate a common", presidency.intro)
+        self.assertTrue(presidency.website_url, 'www.thepresidency.gov.za')
 
-        cpsi = Department.objects.get(government=self.south_africa, vote_number=10)
-        self.assertEqual(cpsi.name, 'Centre for Public Service Innovation')
-        self.assertFalse(cpsi.is_vote_primary)
-        self.assertIn("Facilitate the unearthing", cpsi.intro)
-        self.assertIn("The responsibility for", cpsi.intro)
+        parliament = Department.objects.get(government=self.south_africa, vote_number=2)
+        self.assertEqual(parliament.name, 'Parliament')
+        self.assertTrue(parliament.is_vote_primary)
+        self.assertIn("Provide the support services", parliament.intro)
+        self.assertIn("These are aligned", parliament.intro)
+        self.assertTrue(parliament.website_url, 'www.parliament.gov.za')
 
     def test_load_departments_provincial(self):
         filename = 'budgetportal/tests/test_data/test_management_commands_provincial_departments.csv'
         call_command('load_departments', '2030-31', 'provincial', filename)
 
-        central_premier = Department.objects.get(
-            government=self.fake_central_province,
-            name='Office of the premier'
+        premier = Department.objects.get(
+            government=self.free_state,
+            name='Premier'
         )
-        self.assertEqual(central_premier.vote_number, 1)
-        self.assertTrue(central_premier.is_vote_primary)
-        self.assertIn("To serve the president", central_premier.intro)
-        self.assertIn("Facilitate a common", central_premier.intro)
+        self.assertEqual(premier.vote_number, 1)
+        self.assertTrue(premier.is_vote_primary)
+        self.assertIn("Implementing all national legislation within functional areas", premier.intro)
+        self.assertIn("Leading Free State", premier.intro)
+        self.assertTrue(premier.website_url, 'www.testpremier.gov.za')
 
-        northeast_premier = Department.objects.get(
-            government=self.fake_northeast_province,
-            name='Office of the premier'
+        legislature = Department.objects.get(
+            government=self.free_state,
+            name='Free State Legislature'
         )
-        self.assertEqual(northeast_premier.vote_number, 1)
-        self.assertTrue(northeast_premier.is_vote_primary)
-        self.assertIn("Facilitate the unearthing", northeast_premier.intro)
-        self.assertIn("The responsibility for", northeast_premier.intro)
+        self.assertEqual(legislature.vote_number, 2)
+        self.assertTrue(legislature.is_vote_primary)
+        self.assertIn("The legislative authority of a", legislature.intro)
+        self.assertIn("The vision of the Free State Legislature", legislature.intro)
+        self.assertTrue(premier.website_url, 'www.testlegislature.co.za')
 
 
 class ExportImportProgrammesTestCase(TestCase):
