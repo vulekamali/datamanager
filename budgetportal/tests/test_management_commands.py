@@ -31,7 +31,7 @@ class BasicPagesTestCase(TestCase):
         )
 
     def test_load_departments_national(self):
-        filename = 'budgetportal/tests/test_management_commands_national_departments.csv'
+        filename = 'budgetportal/tests/test_data/test_management_commands_national_departments.csv'
         call_command('load_departments', '2030-31', 'national', filename)
 
         presidency = Department.objects.get(government=self.south_africa, name='The Presidency')
@@ -47,7 +47,7 @@ class BasicPagesTestCase(TestCase):
         self.assertIn("The responsibility for", cpsi.intro)
 
     def test_load_departments_provincial(self):
-        filename = 'budgetportal/tests/test_management_commands_provincial_departments.csv'
+        filename = 'budgetportal/tests/test_data/test_management_commands_provincial_departments.csv'
         call_command('load_departments', '2030-31', 'provincial', filename)
 
         central_premier = Department.objects.get(
