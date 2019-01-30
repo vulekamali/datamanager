@@ -45,11 +45,15 @@ class Command(BaseCommand):
         with open(filename) as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                government = Government.objects.get(
-                    sphere__financial_year__slug=financial_year,
-                    sphere__slug=sphere,
-                    slug=slugify(row['government']),
-                )
+                try:
+                    government = Government.objects.get(
+                        sphere__financial_year__slug=financial_year,
+                        sphere__slug=sphere,
+                        slug=slugify(row['government']),
+                    )
+                except Government.DoesNotExist:
+                    print('Missing government: {} {} {}'.format(financial_year, sphere, row['government']))
+                    raise
                 intro = ""
                 website_url = None
                 if row.get('intro', False):
