@@ -122,3 +122,60 @@ class ExportImportProgrammesTestCase(TestCase):
             programme_2 = Programme.objects.get(department=self.department, programme_number=2)
             self.assertEqual("A programme", programme_1.name)
             self.assertEqual("Another programme", programme_2.name)
+
+
+class ExportImportDepartmentsTestCase(TestCase):
+    def setUp(self):
+        self.year = FinancialYear.objects.create(slug="2030-31")
+
+        # spheres
+        national = Sphere.objects.create(financial_year=self.year, name='National')
+        Sphere.objects.create(financial_year=self.year, name='Provincial')
+
+        # governments
+        self.south_africa = Government.objects.create(sphere=national, name='South Africa')
+
+        self.department_one = Department.objects.create(
+            government=self.south_africa,
+            name="Some Department 1",
+            vote_number=1,
+            is_vote_primary=True,
+            intro="",
+            website_url="test.com"
+        )
+        self.department_one = Department.objects.create(
+            government=self.south_africa,
+            name="Some Department 2",
+            vote_number=2,
+            is_vote_primary=False,
+            intro="",
+            website_url=None
+        )
+
+    def test_load_departments_from_export(self):
+        """Test that exported departments can be loaded correctly
+        Note: departments export currently do national and provincial, so this only works
+        because we are not creating any provincial departments prior to exporting. """
+
+        with NamedTemporaryFile() as csv_file:
+
+            # Download the CSV
+            response = self.client.get('/2030-31/departments.csv')
+            self.assertEqual(response.status_code, 200)
+            csv_file.write(response.content)
+            csv_file.flush()
+
+            # Delete all departments
+            Department.objects.all().delete()
+
+            # Create them again
+            out = StringIO()
+            result = call_command('load_departments', '2030-31', 'national', csv_file.name, stdout=out)
+            result = yaml.load(out.getvalue())
+            # self.assertEqual(result['number_added'], 2)
+
+            # Check that it was successful
+            dept_1 = Department.objects.get(government=self.south_africa, vote_number=1)
+            dept_2 = Department.objects.get(government=self.south_africa, vote_number=2)
+            self.assertEqual("Some Department 1", dept_1.name)
+            self.assertEqual("Some Department 2", dept_2.name)
