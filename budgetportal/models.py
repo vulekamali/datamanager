@@ -289,8 +289,7 @@ class Department(models.Model):
 
     def get_website_url(self):
         """ Always return the latest available URL, even for old departments. """
-        latest_dept = self._get_latest_department_instance()
-        return latest_dept.website_url if latest_dept else None
+        return self._get_latest_department_instance().website_url
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
