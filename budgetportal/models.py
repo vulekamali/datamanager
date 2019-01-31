@@ -140,6 +140,10 @@ class FinancialYear(models.Model):
         years.reverse()
         return years
 
+    @classmethod
+    def get_latest_year(cls):
+        return cls.objects.order_by('-slug')[0]
+
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
@@ -215,6 +219,7 @@ class Department(models.Model):
     vote_number = models.IntegerField()
     is_vote_primary = models.BooleanField(default=True)
     intro = models.TextField()
+    website_url = models.URLField(default=None, null=True, blank=True)
     _programme_budgets = None
     _econ_by_programme_budgets = None
     _prog_by_econ_budgets = None
@@ -279,6 +284,10 @@ class Department(models.Model):
         logger.info("Creating package with %r", dataset_fields)
         return Dataset.from_package(ckan.action.package_create(**dataset_fields))
 
+    def get_website_url(self):
+        """ Always return the latest available URL, even for old departments. """
+        return self._get_latest_department_instance().website_url
+
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 
@@ -287,6 +296,14 @@ class Department(models.Model):
 
     def get_financial_year(self):
         return self.government.sphere.financial_year
+
+    def _get_latest_department_instance(self):
+        """ Try to find the department in the most recent year with the same slug.
+        Continue traversing backwards in time until found, or until the original year has been reached. """
+        newer_departments = Department.objects.filter(government__slug=self.government.slug,
+                                                      government__sphere__slug=self.government.sphere.slug,
+                                                      slug=self.slug).order_by('-government__sphere__financial_year')
+        return newer_departments.first() if newer_departments else None
 
     def _get_financial_year_query(self):
         return '+vocab_financial_years:"%s"' % self.get_financial_year().slug

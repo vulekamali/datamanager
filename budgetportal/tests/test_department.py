@@ -211,3 +211,41 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result['notices'], ['This department did not exist for some years displayed.'])
+
+
+class DepartmentWebsiteUrlTestCase(TestCase):
+    """ Integration test to verify that website urls are retrieved and output correctly """
+
+    def setUp(self):
+        year_old = FinancialYear.objects.create(slug="2017-18")
+        year_new = FinancialYear.objects.create(slug="2018-19")
+        sphere_old = Sphere.objects.create(financial_year=year_old, name="A sphere")
+        sphere_new = Sphere.objects.create(financial_year=year_new, name="A sphere")
+        government_old = Government.objects.create(sphere=sphere_old, name="A government")
+        government_new = Government.objects.create(sphere=sphere_new, name="A government")
+        self.department = Department.objects.create(
+            government=government_old,
+            name="Fake",
+            vote_number=1,
+            is_vote_primary=True,
+            intro="",
+            website_url='https://governmentwebsite.co.za',
+        )
+        self.new_department = Department.objects.create(
+            government=government_new,
+            name="Fake",
+            vote_number=1,
+            is_vote_primary=True,
+            intro="",
+            website_url=None,
+        )
+
+    def test_website_url_always_returns_latest_department_year(self):
+        """ Make sure that any given department for any given year always returns the website url of the
+        latest department instance in that sphere """
+        self.assertEqual(self.department.get_website_url(), None)
+        new_url = 'https://newwebsite.com'
+        self.new_department.website_url = new_url
+        self.new_department.save()
+        self.assertEqual(self.department.get_website_url(), new_url)
+

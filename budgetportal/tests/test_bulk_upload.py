@@ -89,7 +89,7 @@ class BulkUploadTestCase(StaticLiveServerTestCase):
         sphere_select.select_by_visible_text(str(self.national))
 
         file_input = selenium.find_element_by_id('id_file')
-        file_input.send_keys(self.path + "/test_bulk_upload_metadata.xlsx")
+        file_input.send_keys(self.path + "/test_data/test_bulk_upload_metadata.xlsx")
 
         submit_input = selenium.find_element_by_css_selector('input[type="submit"]')
         submit_input.click()

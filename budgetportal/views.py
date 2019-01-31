@@ -117,6 +117,39 @@ def programme_list_csv(request, financial_year_id, sphere_slug):
     return response
 
 
+def department_list_csv(request, financial_year_id):
+    selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
+
+    filename = "departments-%s.csv" % (financial_year_id)
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+
+    fieldnames = [
+        'government',
+        'department_name',
+        'vote_number',
+        'is_vote_primary',
+        'intro',
+        'website_url',
+    ]
+    writer = DictWriter(response, fieldnames=fieldnames)
+    writer.writeheader()
+
+    for sphere_name in ('national', 'provincial'):
+        for government in selected_year.spheres.filter(slug=sphere_name).first().governments.all():
+            for department in government.departments.all():
+                writer.writerow({
+                    'government': government.name.encode("utf-8"),
+                    'department_name': department.name.encode("utf-8"),
+                    'vote_number': department.vote_number,
+                    'is_vote_primary': department.is_vote_primary,
+                    'intro': department.intro.encode("utf-8"),
+                    'website_url': department.get_website_url(),
+                })
+
+    return response
+
+
 def department_list(request, financial_year_id):
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
     context = {
@@ -150,6 +183,7 @@ def department_list(request, financial_year_id):
                     'slug': str(department.slug),
                     'vote_number': department.vote_number,
                     'url_path': department.get_url_path(),
+                    'website_url': department.get_website_url(),
                 })
             departments = sorted(departments, key=lambda d: d['vote_number'])
             context[sphere_name].append({
@@ -301,6 +335,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'name': primary_department.name,
             'slug': primary_department.slug
         },
+        'website_url': department.get_website_url(),
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
