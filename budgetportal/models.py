@@ -83,6 +83,9 @@ class FinancialYear(models.Model):
     organisational_unit = 'financial_year'
     slug = models.SlugField(max_length=7, unique=True)
 
+    class Meta:
+        ordering = ['-slug']
+
     @property
     def national(self):
         return self.spheres.filter(slug='national')[0]
@@ -303,11 +306,8 @@ class Department(models.Model):
         Continue traversing backwards in time until found, or until the original year has been reached. """
         newer_departments = Department.objects.filter(government__slug=self.government.slug,
                                                       government__sphere__slug=self.government.sphere.slug,
-                                                      slug=self.slug).order_by('-government__sphere__financial_year')
-        for dept in newer_departments:
-            if dept.website_url:
-                return dept
-        return None
+                                                      slug=self.slug).order_by('-government__sphere__financial_year__slug')
+        return newer_departments.first() if newer_departments else None
 
     def _get_financial_year_query(self):
         return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
