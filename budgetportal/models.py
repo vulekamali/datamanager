@@ -286,7 +286,8 @@ class Department(models.Model):
 
     def get_website_url(self):
         """ Always return the latest available URL, even for old departments. """
-        return self._get_latest_department_instance().website_url
+        latest_dept = self._get_latest_department_instance()
+        return latest_dept.website_url if latest_dept else None
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -303,7 +304,10 @@ class Department(models.Model):
         newer_departments = Department.objects.filter(government__slug=self.government.slug,
                                                       government__sphere__slug=self.government.sphere.slug,
                                                       slug=self.slug).order_by('-government__sphere__financial_year')
-        return newer_departments.first() if newer_departments else None
+        for dept in newer_departments:
+            if dept.website_url:
+                return dept
+        return None
 
     def _get_financial_year_query(self):
         return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
