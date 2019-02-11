@@ -405,6 +405,42 @@ def dataset(request, category_slug, dataset_slug):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
+def infrastructure_projects_overview(request):
+    """ Overview page to showcase all featured infrastructure projects """
+    dataset_slug = 'a1a846b5-6079-4824-88e3-55a1b5efdd03'
+    # dataset = Dataset.fetch('a1a846b5-6079-4824-88e3-55a1b5efdd03')
+    datastore_url = ('http://ckan:5000'
+                      '/api/3/action' \
+                      '/datastore_search_sql')
+    sql = '''
+            SELECT * FROM "{}"
+             WHERE "Project name"='Limpopo region'
+            '''.format(dataset_slug)
+
+    params = {
+        'sql': sql
+    }
+    revenue_result = requests.get(datastore_url, params=params)
+    revenue_result.raise_for_status()
+    revenue_data = revenue_result.json()['result']['records']
+
+    projects = []
+    project = revenue_data[0]
+    project = {
+        'name': project['Project name'],
+        'coordinates': project['GPS code'],
+        'stage': project['Current project stage'],
+        'department': project['Department'],
+        'description': project['Project description'],
+        'province': None,
+        'total_budget': project['Total project cost'],
+        'projected_budget': None,
+        'detail': None,
+    }
+
+    return HttpResponse(projects, content_type='application/json')
+
+
 def openspending_csv(request):
     """
     Ensure that API call is to OpenSpending *
