@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
+MAPIT_POINT_API_URL = 'https://mapit.code4sa.org/point/4326/{},{}'
 
 
 def year_home(request, financial_year_id):
@@ -409,14 +410,12 @@ def dataset(request, category_slug, dataset_slug):
 def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
     dataset_slug = 'b9255e68-837e-4198-8404-e4c14714c65a'
-    # dataset = Dataset.fetch('a1a846b5-6079-4824-88e3-55a1b5efdd03')
     datastore_url = ('http://ckan:5000'
                       '/api/3/action' \
                       '/datastore_search_sql')
     sql = '''
-            SELECT * FROM "{}"
-             WHERE "Featured"='Yes'
-            '''.format(dataset_slug)
+        SELECT * FROM "{}" WHERE "Featured"='TRUE'
+    '''.format(dataset_slug)
 
     params = {
         'sql': sql
@@ -473,8 +472,7 @@ def infrastructure_projects_overview(request):
         provinces = []
         params = {'type': 'PR'}
         for c in coords:
-            province_result = requests.get('https://mapit.code4sa.org/point/4326/{},{}'.
-                                           format(c['longitude'], c['latitude']), params=params)
+            province_result = requests.get(MAPIT_POINT_API_URL.format(c['longitude'], c['latitude']), params=params)
             province_result.raise_for_status()
             list_of_objects_returned = province_result.json().values()
             if len(list_of_objects_returned) > 0:
@@ -506,9 +504,9 @@ def infrastructure_project_detail(request, project_slug):
     datastore_url = ('http://ckan:5000'
                      '/api/3/action' \
                      '/datastore_search_sql')
-    sql = '''SELECT * FROM "{}"
-                WHERE "Featured"='Yes' AND "Project name"='{}'
-                '''.format(dataset_slug, 'Community Education and Training : GP')
+    sql = '''
+        SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}' 
+    '''.format(dataset_slug, project_slug)
 
     params = {'sql': sql}
     revenue_result = requests.get(datastore_url, params=params)
@@ -552,7 +550,7 @@ def infrastructure_project_detail(request, project_slug):
     provinces = []
     params = {'type': 'PR'}
     for c in coords:
-        province_result = requests.get('https://mapit.code4sa.org/point/4326/{},{}'.
+        province_result = requests.get(MAPIT_POINT_API_URL.
                                        format(c['longitude'], c['latitude']), params=params)
         province_result.raise_for_status()
         list_of_objects_returned = province_result.json().values()
