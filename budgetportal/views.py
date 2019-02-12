@@ -407,14 +407,14 @@ def dataset(request, category_slug, dataset_slug):
 
 def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
-    dataset_slug = 'a1a846b5-6079-4824-88e3-55a1b5efdd03'
+    dataset_slug = 'b9255e68-837e-4198-8404-e4c14714c65a'
     # dataset = Dataset.fetch('a1a846b5-6079-4824-88e3-55a1b5efdd03')
     datastore_url = ('http://ckan:5000'
                       '/api/3/action' \
                       '/datastore_search_sql')
     sql = '''
             SELECT * FROM "{}"
-             WHERE "Project name"='Limpopo region'
+             WHERE "Featured"='Yes'
             '''.format(dataset_slug)
 
     params = {
@@ -423,22 +423,73 @@ def infrastructure_projects_overview(request):
     revenue_result = requests.get(datastore_url, params=params)
     revenue_result.raise_for_status()
     revenue_data = revenue_result.json()['result']['records']
-
     projects = []
-    project = revenue_data[0]
-    project = {
-        'name': project['Project name'],
-        'coordinates': project['GPS code'],
-        'stage': project['Current project stage'],
-        'department': project['Department'],
-        'description': project['Project description'],
-        'province': None,
-        'total_budget': project['Total project cost'],
-        'projected_budget': None,
-        'detail': None,
-    }
 
-    return HttpResponse(projects, content_type='application/json')
+    # Assume project names are unique within the subset of featured projects
+    unique_project_names = []
+    for obj in revenue_data:
+        if obj['Project name'] not in unique_project_names:
+            unique_project_names.append(obj['Project name'])
+
+    for project_name in unique_project_names:
+        project_list = filter(
+            lambda x: x['Project name'] == project_name and int(x['Financial Year']) > 2018,
+            revenue_data)
+
+        projected_expenditure = 0
+        for project in project_list:
+            projected_expenditure += float(project['Amount'])
+        example_project = project_list[0]
+
+        coords = []
+        try:
+            gps_codes = example_project['GPS code']
+            if ' and ' in gps_codes:
+                gps_codes_grouped = gps_codes.split('and')
+                for code_group in gps_codes_grouped:
+                    lat_long = code_group.split(',')
+                    coords.append({
+                        'latitude': float(lat_long[0]),
+                        'longitude': float(lat_long[1])
+                    })
+            else:
+                lat_long = gps_codes.split(',')
+                coords.append({
+                    'latitude': float(lat_long[0]),
+                    'longitude': float(lat_long[1])
+                })
+        except Exception as e:
+            logger.warning("Caught Exception '{}' for co-ordinates for infrastructure project '{}'".format(
+                e, example_project['Project name']
+            ))
+
+        provinces = []
+        params = {
+            'type': 'PR'
+        }
+        for c in coords:
+            province_result = requests.get('https://mapit.code4sa.org/point/4326/{},{}'.format(c['longitude'], c['latitude']), params=params)
+            province_result.raise_for_status()
+            list_of_objects_returned = province_result.json().values()
+            if len(list_of_objects_returned) > 0:
+                provinces.append(list_of_objects_returned[0]['name'])
+            else:
+                logger.warning("Couldn't find GPS co-ordinates on MapIt: {}".format(c))
+
+        projects.append({
+            'name': project_name,
+            'coordinates': coords,
+            'projected_budget': projected_expenditure,
+            'stage': example_project['Current project stage'],
+            'department': example_project['Department'],
+            'description': example_project['Project description'],
+            'provinces': provinces,
+            'total_budget': example_project['Total project cost'],
+            'detail': None,
+        })
+
+    response_yaml = yaml.safe_dump(projects, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def openspending_csv(request):
