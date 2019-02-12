@@ -289,7 +289,7 @@ class Department(models.Model):
 
     def get_website_url(self):
         """ Always return the latest available URL, even for old departments. """
-        return self._get_latest_department_instance().website_url
+        return self.get_latest_department_instance().website_url
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -300,7 +300,7 @@ class Department(models.Model):
     def get_financial_year(self):
         return self.government.sphere.financial_year
 
-    def _get_latest_department_instance(self):
+    def get_latest_department_instance(self):
         """ Try to find the department in the most recent year with the same slug.
         Continue traversing backwards in time until found, or until the original year has been reached. """
         newer_departments = Department.objects.filter(government__slug=self.government.slug,

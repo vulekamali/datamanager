@@ -494,6 +494,7 @@ def infrastructure_projects_overview(request):
             'total_budget': float(project_details['Total project cost']),
             'detail': None,
         })
+    projects = sorted(projects, key=lambda p: p['name'])
 
     response_yaml = yaml.safe_dump(projects, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
@@ -590,7 +591,7 @@ def infrastructure_project_detail(request, project_slug):
         'total_budget': float(project_details['Total project cost']),
         'nature_of_investment': project_details['Nature of investment'],
         'infrastructure_type': project_details['Infrastructure type'],
-        'expenditure': expenditure
+        'expenditure': sorted(expenditure, key=lambda e: e['year'])
     }
 
     response_yaml = yaml.safe_dump(project, default_flow_style=False, encoding='utf-8')
