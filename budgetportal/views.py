@@ -436,55 +436,63 @@ def infrastructure_projects_overview(request):
             lambda x: x['Project name'] == project_name and int(x['Financial Year']) > 2018,
             revenue_data)
 
+        # Get projected expenditure
         projected_expenditure = 0
         for project in project_list:
             projected_expenditure += float(project['Amount'])
-        example_project = project_list[0]
+        project_details = project_list[0]
 
+        # Get co-ordinates
         coords = []
         try:
-            gps_codes = example_project['GPS code']
-            if ' and ' in gps_codes:
+            gps_codes = project_details['GPS code']
+            if 'and' in gps_codes:
                 gps_codes_grouped = gps_codes.split('and')
                 for code_group in gps_codes_grouped:
-                    lat_long = code_group.split(',')
+                    lat_long = [x.strip() for x in code_group.split(',')]
                     coords.append({
-                        'latitude': float(lat_long[0]),
-                        'longitude': float(lat_long[1])
+                        'latitude': lat_long[0].strip(),
+                        'longitude': lat_long[1].strip()
                     })
-            else:
-                lat_long = gps_codes.split(',')
+            elif ',' in gps_codes:
+                lat_long = [x.strip() for x in gps_codes.split(',')]
                 coords.append({
-                    'latitude': float(lat_long[0]),
-                    'longitude': float(lat_long[1])
+                    'latitude': lat_long[0].strip(),
+                    'longitude': lat_long[1].strip()
                 })
+            else:
+                logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
+                               format(project_details['Project name'], gps_codes))
         except Exception as e:
             logger.warning("Caught Exception '{}' for co-ordinates for infrastructure project '{}'".format(
-                e, example_project['Project name']
+                e, project_details['Project name']
             ))
 
+        # Get provinces
         provinces = []
-        params = {
-            'type': 'PR'
-        }
+        params = {'type': 'PR'}
         for c in coords:
-            province_result = requests.get('https://mapit.code4sa.org/point/4326/{},{}'.format(c['longitude'], c['latitude']), params=params)
+            province_result = requests.get('https://mapit.code4sa.org/point/4326/{},{}'.
+                                           format(c['longitude'], c['latitude']), params=params)
             province_result.raise_for_status()
             list_of_objects_returned = province_result.json().values()
             if len(list_of_objects_returned) > 0:
-                provinces.append(list_of_objects_returned[0]['name'])
+                province_name = list_of_objects_returned[0]['name']
+                if province_name not in provinces:
+                    provinces.append(province_name)
             else:
-                logger.warning("Couldn't find GPS co-ordinates on MapIt: {}".format(c))
+                logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
+                               format(project_details['Project name'], c))
 
         projects.append({
             'name': project_name,
             'coordinates': coords,
             'projected_budget': projected_expenditure,
-            'stage': example_project['Current project stage'],
-            'department': example_project['Department'],
-            'description': example_project['Project description'],
+            'stage': project_details['Current project stage'],
+            'department': project_details['Department'],
+            'description': project_details['Project description'],
             'provinces': provinces,
-            'total_budget': example_project['Total project cost'],
+            'total_budget': float(project_details['Total project cost']),
             'detail': None,
         })
 
