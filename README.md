@@ -162,7 +162,7 @@ Optional columns:
  - `is_vote_primary` - TRUE or FALSE
  - `intro`
 
- The latter 5 will be combined with headings into the department introduction text, where present. Markdown syntax will be used for formatting. e.g. 2 line breaks will result in new paragraphs, indentation will be considered `code blocks` and formatted specially.
+ [Markdown syntax](https://daringfireball.net/projects/markdown/syntax#header) must be used for formatting `intro`. e.g. 2 line breaks will result in new paragraphs. Use headings like `## Vote purpose`
 
  e.g.
 
