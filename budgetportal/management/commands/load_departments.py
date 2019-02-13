@@ -15,6 +15,7 @@ Optional columns:
 
  - is_vote_primary
  - intro
+ - website_url
 
 """
 from django.core.management.base import BaseCommand
