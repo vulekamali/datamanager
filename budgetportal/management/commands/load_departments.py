@@ -14,11 +14,7 @@ Required columns:
 Optional columns:
 
  - is_vote_primary
- - purpose
- - mandate
- - vision
- - mission
- - core_functions_and_responsibilities
+ - intro
 
 """
 from django.core.management.base import BaseCommand

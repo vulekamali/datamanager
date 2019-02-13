@@ -160,20 +160,16 @@ Required columns:
 Optional columns:
 
  - `is_vote_primary` - TRUE or FALSE
- - `purpose`
- - `mandate`
- - `vision`
- - `mission`
- - `core_functions_and_responsibilities`
- 
+ - `intro`
+
  The latter 5 will be combined with headings into the department introduction text, where present. Markdown syntax will be used for formatting. e.g. 2 line breaks will result in new paragraphs, indentation will be considered `code blocks` and formatted specially.
- 
+
  e.g.
- 
- | government | department_name | vote_number | is_vote_primary | purpose | mandate | vision | mission | core_functions_and_responsibilities |
- |------------|-----------------|-------------|-----------------|---------|---------|--------|---------|-----------------------------|
-| South Africa | The Presidency | 1 | TRUE | Facilitate a common programme towards the ... | To serve the president in the execution of his ... |
-| South Africa | Centre for Public Service Innovation | 10 | FALSE | Fcilitate the unearthing, development and practical ... | The responsibility for public sector innovation is vested in the Minister of Public Service... |
+
+ | government | department_name | vote_number | is_vote_primary | intro |
+ |------------|-----------------|-------------|-----------------|-------|
+| South Africa | The Presidency | 1 | TRUE | ## Vote purpose <br/><br/>Facilitate a common programme towards the ... <br/></br> ## Mandate <br/><br/>To serve the president in the execution of his ... |
+| South Africa | Centre for Public Service Innovation | 10 | FALSE | ## Vote purpose <br/><br/>Facilitate the unearthing, development and practical ...  <br/></br> ## Mandate <br/><br/> The responsibility for public sector innovation is vested in the Minister of Public Service... |
 
 
 License
