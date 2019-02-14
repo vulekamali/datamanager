@@ -1,6 +1,8 @@
 import itertools
 
 from autoslug import AutoSlugField
+from slugify import slugify
+
 from budgetportal.openspending import (
     EstimatesOfExpenditure,
     AdjustedEstimatesOfExpenditure,
@@ -34,6 +36,8 @@ URL_LENGTH_LIMIT = 2000
 CKAN_DATASTORE_URL = ('https://data.vulekamali.gov.za'
                       '/api/3/action' \
                       '/datastore_search_sql')
+
+MAPIT_POINT_API_URL = 'https://mapit.code4sa.org/point/4326/{},{}'
 
 DIRECT_CHARGE_NRF = 'Direct charge against the National Revenue Fund'
 
@@ -1410,6 +1414,87 @@ class PackageDeletedException(Exception):
 
 class PackageWithoutGroupException(Exception):
     pass
+
+
+class InfrastructureProject():
+    """ Represents an infrastructure project stored in CKAN """
+
+    def __init__(self, **kwargs):
+        self.records = kwargs['records']
+        self.name = self.records[0]['Project name']
+        self.stage = self.records[0]['Current project stage']
+        self.department_name = self.records[0]['Department']
+        self.description = self.records[0]['Project description']
+        self.total_budget = float(self.records[0]['Total project cost'])
+        self.nature_of_investment = self.records[0]['Nature of investment']
+        self.infrastructure_type = self.records[0]['Infrastructure type']
+        self.gps_codes = self.records[0]['GPS code']
+        self.coordinates = []
+        self.provinces = []
+        self.expenditure = []
+
+    def get_url_path(self):
+        return "/infrastructure-projects/{}".format(slugify(self.name))
+
+    def get_projected_expenditure(self):
+        # Include only projected amounts
+        projected_project_list = filter(lambda x: int(x['Financial Year']) > 2018, self.records)
+
+        projected_expenditure = 0
+        for project in projected_project_list:
+            projected_expenditure += float(project['Amount'])
+        return projected_expenditure
+
+    def get_cleaned_coordinates(self):
+        try:
+            if 'and' in self.gps_codes:
+                gps_codes_grouped = self.gps_codes.split('and')
+                for code_group in gps_codes_grouped:
+                    lat_long = [x.strip() for x in code_group.split(',')]
+                    self.coordinates.append({
+                        'latitude': lat_long[0],
+                        'longitude': lat_long[1]
+                    })
+            elif ',' in self.gps_codes:
+                lat_long = [x.strip() for x in self.gps_codes.split(',')]
+                self.coordinates.append({
+                    'latitude': lat_long[0],
+                    'longitude': lat_long[1]
+                })
+            else:
+                logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
+                               format(self.project_details['Project name'], self.gps_codes))
+        except Exception as e:
+            logger.warning("Caught Exception '{}' for co-ordinates for infrastructure project '{}'".format(
+                e, self.name
+            ))
+        return self.coordinates
+
+    def get_provinces(self):
+        params = {'type': 'PR'}
+        if not self.coordinates:
+            self.get_cleaned_coordinates()
+        for c in self.coordinates:
+            province_result = requests.get(MAPIT_POINT_API_URL.format(c['longitude'], c['latitude']), params=params)
+            province_result.raise_for_status()
+            list_of_objects_returned = province_result.json().values()
+            if len(list_of_objects_returned) > 0:
+                province_name = list_of_objects_returned[0]['name']
+                if province_name not in self.provinces:
+                    self.provinces.append(province_name)
+            else:
+                logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
+                               format(self.name, c))
+        return self.provinces
+
+    def get_expenditure(self):
+        for record in self.records:
+            self.expenditure.append({
+                'year': record['Financial Year'],
+                'amount': float(record['Amount']),
+                'budget_phase': record['Budget Phase']
+            })
+        return self.expenditure
 
 
 class Dataset():
