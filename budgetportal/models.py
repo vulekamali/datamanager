@@ -1495,7 +1495,7 @@ class InfrastructureProject():
         return projects
 
     def get_url_path(self):
-        return "/infrastructure-projects/{}".format(slugify(self.name))
+        return "/infrastructure-projects/{}".format(slugify(self.department_name + '-' + self.name))
 
     def get_projected_expenditure(self):
         # Include only projected amounts
