@@ -409,28 +409,9 @@ def dataset(request, category_slug, dataset_slug):
 
 def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
-    dataset_slug = 'b9255e68-837e-4198-8404-e4c14714c65a'
-    datastore_url = ('http://ckan:5000/api/3/action/datastore_search_sql')
-    sql = '''
-        SELECT * FROM "{}" WHERE "Featured"='TRUE'
-    '''.format(dataset_slug)
-
-    params = {'sql': sql}
-    projects_result = requests.get(datastore_url, params=params)
-    projects_result.raise_for_status()
-    revenue_data = projects_result.json()['result']['records']
-
-    # Assume project names are unique within the subset of featured projects
-    unique_project_names = []
-    for obj in revenue_data:
-        if obj['Project name'] not in unique_project_names:
-            unique_project_names.append(obj['Project name'])
-
+    infrastructure_projects = InfrastructureProject.get_featured_projects_from_resource()
     projects = []
-    for project_name in unique_project_names:
-        project_list = filter(lambda x: x['Project name'] == project_name, revenue_data)
-        project = InfrastructureProject(records=project_list)
-
+    for project in infrastructure_projects:
         projects.append({
             'name': project.name,
             'coordinates': project.get_cleaned_coordinates(),
@@ -448,19 +429,7 @@ def infrastructure_projects_overview(request):
 
 
 def infrastructure_project_detail(request, project_slug):
-    dataset_slug = 'b9255e68-837e-4198-8404-e4c14714c65a'
-    datastore_url = ('http://ckan:5000/api/3/action/datastore_search_sql')
-    sql = '''
-        SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}' 
-    '''.format(dataset_slug, project_slug)
-
-    params = {'sql': sql}
-    revenue_result = requests.get(datastore_url, params=params)
-    revenue_result.raise_for_status()
-    revenue_data = revenue_result.json()['result']['records']
-
-    project = InfrastructureProject(records=revenue_data)
-
+    project = InfrastructureProject.get_project_from_resource(project_slug)
     departments = Department.objects.filter(slug=slugify(project.department_name),
                                             government__sphere__slug='national')
     department_url = None

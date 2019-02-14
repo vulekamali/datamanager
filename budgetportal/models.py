@@ -33,7 +33,7 @@ ckan = settings.CKAN
 
 URL_LENGTH_LIMIT = 2000
 
-CKAN_DATASTORE_URL = ('https://data.vulekamali.gov.za'
+CKAN_DATASTORE_URL = (settings.CKAN_URL+
                       '/api/3/action' \
                       '/datastore_search_sql')
 
@@ -1432,6 +1432,67 @@ class InfrastructureProject():
         self.coordinates = []
         self.provinces = []
         self.expenditure = []
+        self.dataset = None
+
+    @classmethod
+    def get_dataset(cls):
+        """ Return the first dataset in the Infrastructure Projects group. """
+        query = {
+            'q': '',
+            'fq': ('+organization:"national-treasury"'
+                   '+vocab_spheres:"national"'
+                   '+groups:"infrastructure-projects"'),
+            'rows': 1,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nreturned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        if response['results']:
+            return Dataset.from_package(response['results'][0])
+        else:
+            raise Exception('Could not find Infrastructure Projects dataset')
+
+    @classmethod
+    def get_project_from_resource(cls, project_slug):
+        """ Uses first CSV resource in dataset """
+        resource = cls.get_dataset().get_resource(format='CSV')
+        sql = '''
+                SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}' 
+            '''.format(resource['id'], project_slug)
+        params = {'sql': sql}
+        revenue_result = requests.get(CKAN_DATASTORE_URL, params=params)
+        revenue_result.raise_for_status()
+        revenue_data = revenue_result.json()['result']['records']
+        project = InfrastructureProject(records=revenue_data)
+        return project
+
+    @classmethod
+    def get_featured_projects_from_resource(cls):
+        """ Uses first CSV resource in dataset """
+        resource = cls.get_dataset().get_resource(format='CSV')
+        sql = '''
+                SELECT * FROM "{}" WHERE "Featured"='TRUE'
+            '''.format(resource['id'])
+
+        params = {'sql': sql}
+        projects_result = requests.get(CKAN_DATASTORE_URL, params=params)
+        projects_result.raise_for_status()
+        revenue_data = projects_result.json()['result']['records']
+
+        # Assume project names are unique within the subset of featured projects
+        unique_project_names = []
+        for obj in revenue_data:
+            if obj['Project name'] not in unique_project_names:
+                unique_project_names.append(obj['Project name'])
+
+        projects = []
+        for project_name in unique_project_names:
+            project_list = filter(lambda x: x['Project name'] == project_name, revenue_data)
+            projects.append(InfrastructureProject(records=project_list))
+        return projects
 
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(slugify(self.name))
