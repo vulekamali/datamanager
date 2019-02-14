@@ -19,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
-MAPIT_POINT_API_URL = 'https://mapit.code4sa.org/point/4326/{},{}'
 
 
 def year_home(request, financial_year_id):
