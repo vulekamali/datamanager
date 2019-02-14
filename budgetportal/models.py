@@ -1463,7 +1463,7 @@ class InfrastructureProject():
                 })
             else:
                 logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
-                               format(self.project_details['Project name'], self.gps_codes))
+                               format(self.name, self.gps_codes))
         except Exception as e:
             logger.warning("Caught Exception '{}' for co-ordinates for infrastructure project '{}'".format(
                 e, self.name
