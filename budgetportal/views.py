@@ -425,7 +425,7 @@ def infrastructure_projects_overview(request):
         })
     projects = sorted(projects, key=lambda p: p['name'])
     response = {
-        'datasets_url': '/datasets',
+        'dataset_url': InfrastructureProject.get_dataset().get_url_path(),
         'projects': projects,
         'description': 'Infrastructure projects in South Africa for 2019-20',
         'slug': 'infrastructure-projects',
@@ -445,7 +445,7 @@ def infrastructure_project_detail(request, project_slug):
         department_url = departments[0].get_latest_department_instance().get_url_path()
 
     project = {
-        'datasets_url': '/datasets',
+        'dataset_url': InfrastructureProject.get_dataset().get_url_path(),
         'description': project.description,
         'selected_tab': 'infrastructure-projects',
         'slug': project.get_url_path(),

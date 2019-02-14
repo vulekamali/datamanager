@@ -1432,7 +1432,6 @@ class InfrastructureProject():
         self.coordinates = []
         self.provinces = []
         self.expenditure = []
-        self.dataset = None
 
     @classmethod
     def get_dataset(cls):
