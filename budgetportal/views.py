@@ -424,7 +424,15 @@ def infrastructure_projects_overview(request):
             'detail': project.get_url_path(),
         })
     projects = sorted(projects, key=lambda p: p['name'])
-    response_yaml = yaml.safe_dump(projects, default_flow_style=False, encoding='utf-8')
+    response = {
+        'datasets_url': '/datasets',
+        'projects': projects,
+        'description': 'Infrastructure projects in South Africa for 2019-20',
+        'slug': 'infrastructure-projects',
+        'selected_tab': 'infrastructure-projects',
+        'title': 'Infrastructure Projects - vulekamali'
+    }
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
@@ -437,6 +445,11 @@ def infrastructure_project_detail(request, project_slug):
         department_url = departments[0].get_latest_department_instance().get_url_path()
 
     project = {
+        'datasets_url': '/datasets',
+        'description': project.description,
+        'selected_tab': 'infrastructure-projects',
+        'slug': project.get_url_path(),
+        'title': '{} - vulekamali'.format(project.name),
         'name': project.name,
         'coordinates': project.get_cleaned_coordinates(),
         'projected_budget': project.get_projected_expenditure(),
@@ -445,7 +458,6 @@ def infrastructure_project_detail(request, project_slug):
             'name': project.department_name,
             'url': department_url
         },
-        'description': project.description,
         'provinces': project.get_provinces(),
         'total_budget': project.total_budget,
         'nature_of_investment': project.nature_of_investment,
