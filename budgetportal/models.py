@@ -1511,13 +1511,13 @@ class InfrastructureProject():
             if 'and' in self.gps_codes:
                 gps_codes_grouped = self.gps_codes.split('and')
                 for code_group in gps_codes_grouped:
-                    lat_long = [x.strip() for x in code_group.split(',')]
+                    lat_long = [float(x) for x in code_group.split(',')]
                     self.coordinates.append({
                         'latitude': lat_long[0],
                         'longitude': lat_long[1]
                     })
             elif ',' in self.gps_codes:
-                lat_long = [x.strip() for x in self.gps_codes.split(',')]
+                lat_long = [float(x) for x in self.gps_codes.split(',')]
                 self.coordinates.append({
                     'latitude': lat_long[0],
                     'longitude': lat_long[1]
