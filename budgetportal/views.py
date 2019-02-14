@@ -9,7 +9,7 @@ from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-from models import FinancialYear, Sphere, Dataset, Category, Department
+from models import FinancialYear, Sphere, Dataset, Category, Department, InfrastructureProject
 import yaml
 import logging
 from . import revenue
@@ -410,101 +410,46 @@ def dataset(request, category_slug, dataset_slug):
 def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
     dataset_slug = 'b9255e68-837e-4198-8404-e4c14714c65a'
-    datastore_url = ('http://ckan:5000'
-                      '/api/3/action' \
-                      '/datastore_search_sql')
+    datastore_url = ('http://ckan:5000/api/3/action/datastore_search_sql')
     sql = '''
         SELECT * FROM "{}" WHERE "Featured"='TRUE'
     '''.format(dataset_slug)
 
-    params = {
-        'sql': sql
-    }
+    params = {'sql': sql}
     projects_result = requests.get(datastore_url, params=params)
     projects_result.raise_for_status()
     revenue_data = projects_result.json()['result']['records']
 
     # Assume project names are unique within the subset of featured projects
-    projects = []
     unique_project_names = []
     for obj in revenue_data:
         if obj['Project name'] not in unique_project_names:
             unique_project_names.append(obj['Project name'])
 
+    projects = []
     for project_name in unique_project_names:
-        project_list = filter(
-            lambda x: x['Project name'] == project_name and int(x['Financial Year']) > 2018,
-            revenue_data)
-
-        # Get projected expenditure
-        projected_expenditure = 0
-        for project in project_list:
-            projected_expenditure += float(project['Amount'])
-        project_details = project_list[0]
-
-        # Get co-ordinates
-        coords = []
-        try:
-            gps_codes = project_details['GPS code']
-            if 'and' in gps_codes:
-                gps_codes_grouped = gps_codes.split('and')
-                for code_group in gps_codes_grouped:
-                    lat_long = [x.strip() for x in code_group.split(',')]
-                    coords.append({
-                        'latitude': lat_long[0],
-                        'longitude': lat_long[1]
-                    })
-            elif ',' in gps_codes:
-                lat_long = [x.strip() for x in gps_codes.split(',')]
-                coords.append({
-                    'latitude': lat_long[0],
-                    'longitude': lat_long[1]
-                })
-            else:
-                logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
-                               format(project_details['Project name'], gps_codes))
-        except Exception as e:
-            logger.warning("Caught Exception '{}' for co-ordinates for infrastructure project '{}'".format(
-                e, project_details['Project name']
-            ))
-
-        # Get provinces
-        provinces = []
-        params = {'type': 'PR'}
-        for c in coords:
-            province_result = requests.get(MAPIT_POINT_API_URL.format(c['longitude'], c['latitude']), params=params)
-            province_result.raise_for_status()
-            list_of_objects_returned = province_result.json().values()
-            if len(list_of_objects_returned) > 0:
-                province_name = list_of_objects_returned[0]['name']
-                if province_name not in provinces:
-                    provinces.append(province_name)
-            else:
-                logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
-                               format(project_details['Project name'], c))
+        project_list = filter(lambda x: x['Project name'] == project_name, revenue_data)
+        project = InfrastructureProject(records=project_list)
 
         projects.append({
-            'name': project_name,
-            'coordinates': coords,
-            'projected_budget': projected_expenditure,
-            'stage': project_details['Current project stage'],
-            'department': project_details['Department'],
-            'description': project_details['Project description'],
-            'provinces': provinces,
-            'total_budget': float(project_details['Total project cost']),
-            'detail': None,
+            'name': project.name,
+            'coordinates': project.get_cleaned_coordinates(),
+            'projected_budget': project.get_projected_expenditure(),
+            'stage': project.stage,
+            'department': project.department_name,
+            'description': project.description,
+            'provinces': project.get_provinces(),
+            'total_budget': project.total_budget,
+            'detail': project.get_url_path(),
         })
     projects = sorted(projects, key=lambda p: p['name'])
-
     response_yaml = yaml.safe_dump(projects, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def infrastructure_project_detail(request, project_slug):
     dataset_slug = 'b9255e68-837e-4198-8404-e4c14714c65a'
-    datastore_url = ('http://ckan:5000'
-                     '/api/3/action' \
-                     '/datastore_search_sql')
+    datastore_url = ('http://ckan:5000/api/3/action/datastore_search_sql')
     sql = '''
         SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}' 
     '''.format(dataset_slug, project_slug)
@@ -514,84 +459,29 @@ def infrastructure_project_detail(request, project_slug):
     revenue_result.raise_for_status()
     revenue_data = revenue_result.json()['result']['records']
 
-    project_list = filter(lambda x: int(x['Financial Year']) > 2018, revenue_data)
+    project = InfrastructureProject(records=revenue_data)
 
-    projected_expenditure = 0
-    for project in project_list:
-        projected_expenditure += float(project['Amount'])
-    project_details = project_list[0]
-
-    # Get co-ordinates
-    coords = []
-    try:
-        gps_codes = project_details['GPS code']
-        if 'and' in gps_codes:
-            gps_codes_grouped = gps_codes.split('and')
-            for code_group in gps_codes_grouped:
-                lat_long = [x.strip() for x in code_group.split(',')]
-                coords.append({
-                    'latitude': lat_long[0],
-                    'longitude': lat_long[1]
-                })
-        elif ',' in gps_codes:
-            lat_long = [x.strip() for x in gps_codes.split(',')]
-            coords.append({
-                'latitude': lat_long[0],
-                'longitude': lat_long[1]
-            })
-        else:
-            logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
-                           format(project_details['Project name'], gps_codes))
-    except Exception as e:
-        logger.warning("Caught Exception '{}' for co-ordinates for infrastructure project '{}'".format(
-            e, project_details['Project name']
-        ))
-
-    # Get provinces
-    provinces = []
-    params = {'type': 'PR'}
-    for c in coords:
-        province_result = requests.get(MAPIT_POINT_API_URL.
-                                       format(c['longitude'], c['latitude']), params=params)
-        province_result.raise_for_status()
-        list_of_objects_returned = province_result.json().values()
-        if len(list_of_objects_returned) > 0:
-            province_name = list_of_objects_returned[0]['name']
-            if province_name not in provinces:
-                provinces.append(province_name)
-        else:
-            logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
-                           format(project_details['Project name'], c))
-
-    expenditure = []
-    for record in revenue_data:
-        expenditure.append({
-            'year': record['Financial Year'],
-            'amount': float(record['Amount']),
-            'budget_phase': record['Budget Phase']
-        })
-    departments = Department.objects.filter(slug=slugify(project_details['Department']),
+    departments = Department.objects.filter(slug=slugify(project.department_name),
                                             government__sphere__slug='national')
+    department_url = None
     if departments:
         department_url = departments[0].get_latest_department_instance().get_url_path()
-    else:
-        department_url = None
 
     project = {
-        'name': project_details['Project name'],
-        'coordinates': coords,
-        'projected_budget': projected_expenditure,
-        'stage': project_details['Current project stage'],
+        'name': project.name,
+        'coordinates': project.get_cleaned_coordinates(),
+        'projected_budget': project.get_projected_expenditure(),
+        'stage': project.stage,
         'department': {
-            'name': project_details['Department'],
+            'name': project.department_name,
             'url': department_url
         },
-        'description': project_details['Project description'],
-        'provinces': provinces,
-        'total_budget': float(project_details['Total project cost']),
-        'nature_of_investment': project_details['Nature of investment'],
-        'infrastructure_type': project_details['Infrastructure type'],
-        'expenditure': sorted(expenditure, key=lambda e: e['year'])
+        'description': project.description,
+        'provinces': project.get_provinces(),
+        'total_budget': project.total_budget,
+        'nature_of_investment': project.nature_of_investment,
+        'infrastructure_type': project.infrastructure_type,
+        'expenditure': sorted(project.get_expenditure(), key=lambda e: e['year'])
     }
 
     response_yaml = yaml.safe_dump(project, default_flow_style=False, encoding='utf-8')
