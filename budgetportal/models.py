@@ -1429,13 +1429,9 @@ class InfrastructureProject:
         self.nature_of_investment = self.records[0]['Nature of investment']
         self.infrastructure_type = self.records[0]['Infrastructure type']
         self.raw_coordinate_string = self.records[0]['GPS code']
-        self.provinces = []
-        self.complete_expenditure = []
-        self._build_complete_expenditure()
-        self.cleaned_coordinates = []
-        self._clean_coordinates()
-        self.projected_expenditure = 0
-        self._calculate_projected_expenditure()
+        self.complete_expenditure = self._build_complete_expenditure(self.records)
+        self.cleaned_coordinates = self._clean_coordinates(self.raw_coordinate_string)
+        self.projected_expenditure = self._calculate_projected_expenditure(self.records)
 
     @classmethod
     def get_dataset(cls):
@@ -1500,17 +1496,22 @@ class InfrastructureProject:
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(slugify(self.department_name + '-' + self.name))
 
-    def _calculate_projected_expenditure(self):
-        """ Calculate sum of predicted amounts """
-        projected_records_for_project = filter(lambda x: x['Budget Phase'] == 'MTEF', self.records)
-        self.projected_expenditure = 0
+    @staticmethod
+    def _calculate_projected_expenditure(records):
+        """ Calculate sum of predicted amounts from a list of records """
+        if not isinstance(records, list):
+            raise TypeError('Invalid type for projected expenditure calculation')
+        projected_records_for_project = filter(lambda x: x['Budget Phase'] == 'MTEF', records)
+        projected_expenditure = 0
         for project in projected_records_for_project:
-            self.projected_expenditure += float(project['Amount'])
-        return self.projected_expenditure
+            projected_expenditure += float(project['Amount'])
+        return projected_expenditure
 
     @staticmethod
     def _parse_coordinate(coordinate):
         """ Expects a single set of coordinates (lat, long) split by a comma """
+        if not isinstance(coordinate, str):
+            raise TypeError('Invalid type for coordinate parsing')
         lat_long = [float(x) for x in coordinate.split(',')]
         cleaned_coordinate = {
             'latitude': lat_long[0],
@@ -1518,26 +1519,26 @@ class InfrastructureProject:
         }
         return cleaned_coordinate
 
-    def _clean_coordinates(self):
+    @classmethod
+    def _clean_coordinates(cls, raw_coordinate_string):
+        cleaned_coordinates = []
         try:
-            if 'and' in self.raw_coordinate_string:
-                list_of_coordinates = self.raw_coordinate_string.split('and')
+            if 'and' in raw_coordinate_string:
+                list_of_coordinates = raw_coordinate_string.split('and')
                 for coordinate in list_of_coordinates:
-                    self.cleaned_coordinates.append(
-                        self._parse_coordinate(coordinate)
+                    cleaned_coordinates.append(
+                        cls._parse_coordinate(coordinate)
                     )
-            elif ',' in self.raw_coordinate_string:
-                self.cleaned_coordinates.append(
-                    self._parse_coordinate(self.raw_coordinate_string)
+            elif ',' in raw_coordinate_string:
+                cleaned_coordinates.append(
+                    cls._parse_coordinate(raw_coordinate_string)
                 )
             else:
-                logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
-                               format(self.name, self.raw_coordinate_string))
+                logger.warning("Invalid co-ordinates: {}".
+                               format(raw_coordinate_string))
         except Exception as e:
-            logger.warning("Caught Exception '{}' for co-ordinates for infrastructure project '{}'".format(
-                e, self.name
-            ))
-        return self.cleaned_coordinates
+            logger.warning("Caught Exception '{}' for co-ordinates {}".format(e, raw_coordinate_string))
+        return cleaned_coordinates
 
     @staticmethod
     def _get_province_from_coord(coordinate):
@@ -1574,12 +1575,14 @@ class InfrastructureProject:
             'budget_phase': record['Budget Phase']
         }
 
-    def _build_complete_expenditure(self):
-        for record in self.records:
-            self.complete_expenditure.append(
-                self._build_expenditure_item(record)
+    @classmethod
+    def _build_complete_expenditure(cls, records):
+        complete_expenditure = []
+        for record in records:
+            complete_expenditure.append(
+                cls._build_expenditure_item(record)
             )
-        return self.complete_expenditure
+        return complete_expenditure
 
 
 class Dataset():

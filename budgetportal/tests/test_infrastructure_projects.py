@@ -7,70 +7,94 @@ class ProjectedExpenditureTestCase(TestCase):
     """ Unit tests for get_projected_expenditure function """
 
     def setUp(self):
-        self.fake_records = [
-            {'Financial Year': 2016, 'Amount': 100},
-            {'Financial Year': 2017, 'Amount': 100},
-            {'Financial Year': 2018, 'Amount': 100},
-            {'Financial Year': 2019, 'Amount': 100},
-            {'Financial Year': 2020, 'Amount': 100},
-            {'Financial Year': 2021, 'Amount': 100}
+        self.fake_valid_records = [
+            {'Budget Phase': 'test phase one', 'Amount': 100},
+            {'Budget Phase': 'test phase one', 'Amount': 100},
+            {'Budget Phase': 'test phase two', 'Amount': 100},
+            {'Budget Phase': 'MTEF', 'Amount': 200},
+            {'Budget Phase': 'MTEF', 'Amount': 200},
+            {'Budget Phase': 'MTEF', 'Amount': 200},
         ]
-        self.project = InfrastructureProject()
 
     def test_success(self):
-        self.project.records = self.fake_records
-        projected_expenditure = self.project.get_projected_expenditure()
-        self.assertEqual(projected_expenditure, 300)
+        projected_expenditure = InfrastructureProject._calculate_projected_expenditure(
+            self.fake_valid_records
+        )
+        self.assertEqual(projected_expenditure, 600)
 
     def test_empty_records_returns_zero(self):
-        self.project.records = []
-        projected_expenditure = self.project.get_projected_expenditure()
+        projected_expenditure = InfrastructureProject._calculate_projected_expenditure([])
         self.assertEqual(projected_expenditure, 0)
 
+    def test_string_raises_type_error(self):
+        self.assertRaises(
+            TypeError,
+            InfrastructureProject._calculate_projected_expenditure,
+            'test string raises exception'
+        )
 
-class CleanedCoordinatesTestCase(TestCase):
-    """ Unit tests for get_cleaned_coordinates function """
 
-    def setUp(self):
-        self.project = InfrastructureProject()
+class CoordinatesTestCase(TestCase):
+    """ Unit tests for parsing coordinates """
 
-    def test_standard_format(self):
-        self.project.gps_codes = '-26.378582,27.654933'
-        coords = self.project.get_cleaned_coordinates()
-        self.assertEqual(coords, [
+    def test_success_simple_format(self):
+        raw_coord_string = '-26.378582,27.654933'
+        cleaned_coord_object = InfrastructureProject._parse_coordinate(
+            raw_coord_string
+        )
+        self.assertEqual(
+            cleaned_coord_object,
             {
                 'latitude': -26.378582,
                 'longitude': 27.654933
             }
-        ])
+        )
 
-    def test_multiple_coordinates(self):
-        self.project.gps_codes = '-26.378582,27.654933 and -22.111222,23.333444'
-        coords = self.project.get_cleaned_coordinates()
-        self.assertEqual(coords, [
+    def test_failure_int_raises_type_error(self):
+        invalid_coordinate = 25
+        self.assertRaises(
+            TypeError,
+            InfrastructureProject._parse_coordinate,
+            invalid_coordinate
+        )
+
+    def test_failure_list_raises_type_error(self):
+        invalid_coordinate = [25, 23]
+        self.assertRaises(
+            TypeError,
+            InfrastructureProject._parse_coordinate,
+            invalid_coordinate
+        )
+
+    def test_success_multiple_coordinates(self):
+        raw_coordinate_string = '-26.378582,27.654933 and -22.111222,23.333444'
+        coords = InfrastructureProject._clean_coordinates(raw_coordinate_string)
+        self.assertIn(
             {
                 'latitude': -26.378582,
                 'longitude': 27.654933
             },
+            coords
+        )
+        self.assertIn(
             {
                 'latitude': -22.111222,
                 'longitude': 23.333444
-            }
-        ])
+            },
+            coords
+        )
 
-    def test_invalid_value(self):
-        self.project.name = 'fake project'  # needed for exception logging due to invalid value
-        self.project.gps_codes = '  fake invalid value  with    funky spacing?'
-        coords = self.project.get_cleaned_coordinates()
+    def test_empty_response_for_invalid_value(self):
+        raw_coordinate_string = 'test string with, no coords and'
+        coords = InfrastructureProject._clean_coordinates(raw_coordinate_string)
         self.assertEqual(coords, [])
 
 
 class ExpenditureTestCase(TestCase):
-    """ Unit tests for the get_provinces function """
+    """ Unit tests for expenditure functions """
 
     def setUp(self):
-        self.project = InfrastructureProject()
-        self.project.records = [
+        self.fake_valid_records = [
             {
                 'Financial Year': 2030,
                 'Budget Phase': 'fake budget phase',
@@ -82,19 +106,40 @@ class ExpenditureTestCase(TestCase):
                 'Amount': 1000
             },
         ]
-
-    def test_success(self):
-        expenditure = self.project.get_expenditure()
-        self.assertEqual(expenditure, [
-            {
+        self.expected_output_2030 = {
                 'year': 2030,
                 'amount': 123.0,
                 'budget_phase': 'fake budget phase'
-            },
-            {
+            }
+        self.expected_output_2031 = {
                 'year': 2031,
-                'amount': 1000.0,
+                'amount': 1000,
                 'budget_phase': 'fake budget phase 2'
             }
-        ])
 
+    def test_success_build_expenditure_item(self):
+        expenditure_item = InfrastructureProject._build_expenditure_item(self.fake_valid_records[0])
+        self.assertEqual(
+            expenditure_item,
+            self.expected_output_2030
+        )
+
+    def test_failure_missing_fields(self):
+        self.assertRaises(
+            KeyError,
+            InfrastructureProject._build_expenditure_item,
+            {
+                'Not enough keys': 'to parse successfully'
+            }
+        )
+
+    def test_success_build_complete_expenditure(self):
+        complete_expenditure = InfrastructureProject._build_complete_expenditure(self.fake_valid_records)
+        self.assertIn(
+            self.expected_output_2030,
+            complete_expenditure
+        )
+        self.assertIn(
+            self.expected_output_2031,
+            complete_expenditure
+        )
