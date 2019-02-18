@@ -1428,11 +1428,13 @@ class InfrastructureProject:
         self.total_budget = float(self.records[0]['Total project cost'])
         self.nature_of_investment = self.records[0]['Nature of investment']
         self.infrastructure_type = self.records[0]['Infrastructure type']
-        self.gps_codes = self.records[0]['GPS code']
-        self.coordinates = []
+        self.raw_coordinate_string = self.records[0]['GPS code']
+        self.cleaned_coordinates = []
         self.provinces = []
-        self.expenditure = []
+        self.complete_expenditure = []
         self._clean_coordinates()
+        self.projected_expenditure = 0
+        self._calculate_projected_expenditure()
 
     @classmethod
     def get_dataset(cls):
@@ -1497,64 +1499,71 @@ class InfrastructureProject:
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(slugify(self.department_name + '-' + self.name))
 
-    def get_projected_expenditure(self):
-        # Include only projected amounts
-        projected_project_list = filter(lambda x: int(x['Financial Year']) > 2018, self.records)
-
-        projected_expenditure = 0
-        for project in projected_project_list:
-            projected_expenditure += float(project['Amount'])
-        return projected_expenditure
+    def _calculate_projected_expenditure(self):
+        """ Calculate sum of predicted amounts """
+        projected_records_for_project = filter(lambda x: x['Budget Phase'] == 'MTEF', self.records)
+        self.projected_expenditure = 0
+        for project in projected_records_for_project:
+            self.projected_expenditure += float(project['Amount'])
+        return self.projected_expenditure
 
     def _parse_coordinate(self, coordinate):
+        """ Expects a single set of coordinates (lat, long) split by a comma """
         lat_long = [float(x) for x in coordinate.split(',')]
         cleaned_coordinate = {
             'latitude': lat_long[0],
             'longitude': lat_long[1]
         }
-        self.coordinates.append(cleaned_coordinate)
+        self.cleaned_coordinates.append(cleaned_coordinate)
         return cleaned_coordinate
 
     def _clean_coordinates(self):
         try:
-            if 'and' in self.gps_codes:
-                list_of_coordinates = self.gps_codes.split('and')
+            if 'and' in self.raw_coordinate_string:
+                list_of_coordinates = self.raw_coordinate_string.split('and')
                 for coordinate in list_of_coordinates:
                     self._parse_coordinate(coordinate)
-            elif ',' in self.gps_codes:
-                self._parse_coordinate(self.gps_codes)
+            elif ',' in self.raw_coordinate_string:
+                self._parse_coordinate(self.raw_coordinate_string)
             else:
                 logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
-                               format(self.name, self.gps_codes))
+                               format(self.name, self.raw_coordinate_string))
         except Exception as e:
             logger.warning("Caught Exception '{}' for co-ordinates for infrastructure project '{}'".format(
                 e, self.name
             ))
-        return self.coordinates
+        return self.cleaned_coordinates
+
+    def _get_province_from_coord(self, coordinate):
+        """ Expects a cleaned coordinate """
+        params = {'type': 'PR'}
+        province_result = requests.get(
+            MAPIT_POINT_API_URL.format(coordinate['longitude'], coordinate['latitude']),
+            params=params)
+        province_result.raise_for_status()
+        list_of_objects_returned = province_result.json().values()
+        if len(list_of_objects_returned) > 0:
+            province_name = list_of_objects_returned[0]['name']
+            return province_name
+        else:
+            logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
+                           format(self.name, coordinate))
 
     def get_provinces(self):
-        params = {'type': 'PR'}
-        for c in self.coordinates:
-            province_result = requests.get(MAPIT_POINT_API_URL.format(c['longitude'], c['latitude']), params=params)
-            province_result.raise_for_status()
-            list_of_objects_returned = province_result.json().values()
-            if len(list_of_objects_returned) > 0:
-                province_name = list_of_objects_returned[0]['name']
-                if province_name not in self.provinces:
-                    self.provinces.append(province_name)
-            else:
-                logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
-                               format(self.name, c))
-        return self.provinces
+        """ Returns a list of provinces based on values in self.coordinates """
+        provinces = set()
+        for c in self.cleaned_coordinates:
+            provinces.add(self._get_province_from_coord(c))
+        return list(provinces)
 
-    def get_expenditure(self):
+    def _build_expenditure_list(self):
         for record in self.records:
-            self.expenditure.append({
+            self.complete_expenditure.append({
                 'year': record['Financial Year'],
                 'amount': float(record['Amount']),
                 'budget_phase': record['Budget Phase']
             })
-        return self.expenditure
+        return self.complete_expenditure
 
 
 class Dataset():

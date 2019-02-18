@@ -419,8 +419,8 @@ def infrastructure_projects_overview(request):
 
         projects.append({
             'name': project.name,
-            'coordinates': project.coordinates,
-            'projected_budget': project.get_projected_expenditure(),
+            'coordinates': project.cleaned_coordinates,
+            'projected_budget': project.projected_expenditure,
             'stage': project.stage,
             'description': project.description,
             'provinces': project.get_provinces(),
@@ -435,7 +435,7 @@ def infrastructure_projects_overview(request):
             },
             'nature_of_investment': project.nature_of_investment,
             'infrastructure_type': project.infrastructure_type,
-            'expenditure': sorted(project.get_expenditure(), key=lambda e: e['year'])
+            'expenditure': sorted(project._build_expenditure_list(), key=lambda e: e['year'])
         })
     projects = sorted(projects, key=lambda p: p['name'])
     response = {
@@ -465,8 +465,8 @@ def infrastructure_project_detail(request, project_slug):
         'slug': project.get_url_path(),
         'title': '{} - vulekamali'.format(project.name),
         'name': project.name,
-        'coordinates': project._clean_coordinates(),
-        'projected_budget': project.get_projected_expenditure(),
+        'coordinates': project.cleaned_coordinates,
+        'projected_budget': project.projected_expenditure,
         'stage': project.stage,
         'department': {
             'name': project.department_name,
@@ -476,7 +476,7 @@ def infrastructure_project_detail(request, project_slug):
         'total_budget': project.total_budget,
         'nature_of_investment': project.nature_of_investment,
         'infrastructure_type': project.infrastructure_type,
-        'expenditure': sorted(project.get_expenditure(), key=lambda e: e['year'])
+        'expenditure': sorted(project._build_expenditure_list(), key=lambda e: e['year'])
     }
 
     response_yaml = yaml.safe_dump(project, default_flow_style=False, encoding='utf-8')
