@@ -435,7 +435,7 @@ def infrastructure_projects_overview(request):
             },
             'nature_of_investment': project.nature_of_investment,
             'infrastructure_type': project.infrastructure_type,
-            'expenditure': sorted(project._build_expenditure_list(), key=lambda e: e['year'])
+            'expenditure': sorted(project.complete_expenditure, key=lambda e: e['year'])
         })
     projects = sorted(projects, key=lambda p: p['name'])
     response = {
@@ -476,7 +476,7 @@ def infrastructure_project_detail(request, project_slug):
         'total_budget': project.total_budget,
         'nature_of_investment': project.nature_of_investment,
         'infrastructure_type': project.infrastructure_type,
-        'expenditure': sorted(project._build_expenditure_list(), key=lambda e: e['year'])
+        'expenditure': sorted(project.complete_expenditure, key=lambda e: e['year'])
     }
 
     response_yaml = yaml.safe_dump(project, default_flow_style=False, encoding='utf-8')

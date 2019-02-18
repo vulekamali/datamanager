@@ -1429,9 +1429,10 @@ class InfrastructureProject:
         self.nature_of_investment = self.records[0]['Nature of investment']
         self.infrastructure_type = self.records[0]['Infrastructure type']
         self.raw_coordinate_string = self.records[0]['GPS code']
-        self.cleaned_coordinates = []
         self.provinces = []
         self.complete_expenditure = []
+        self._build_complete_expenditure()
+        self.cleaned_coordinates = []
         self._clean_coordinates()
         self.projected_expenditure = 0
         self._calculate_projected_expenditure()
@@ -1507,14 +1508,14 @@ class InfrastructureProject:
             self.projected_expenditure += float(project['Amount'])
         return self.projected_expenditure
 
-    def _parse_coordinate(self, coordinate):
+    @staticmethod
+    def _parse_coordinate(coordinate):
         """ Expects a single set of coordinates (lat, long) split by a comma """
         lat_long = [float(x) for x in coordinate.split(',')]
         cleaned_coordinate = {
             'latitude': lat_long[0],
             'longitude': lat_long[1]
         }
-        self.cleaned_coordinates.append(cleaned_coordinate)
         return cleaned_coordinate
 
     def _clean_coordinates(self):
@@ -1522,9 +1523,13 @@ class InfrastructureProject:
             if 'and' in self.raw_coordinate_string:
                 list_of_coordinates = self.raw_coordinate_string.split('and')
                 for coordinate in list_of_coordinates:
-                    self._parse_coordinate(coordinate)
+                    self.cleaned_coordinates.append(
+                        self._parse_coordinate(coordinate)
+                    )
             elif ',' in self.raw_coordinate_string:
-                self._parse_coordinate(self.raw_coordinate_string)
+                self.cleaned_coordinates.append(
+                    self._parse_coordinate(self.raw_coordinate_string)
+                )
             else:
                 logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
                                format(self.name, self.raw_coordinate_string))
@@ -1534,7 +1539,8 @@ class InfrastructureProject:
             ))
         return self.cleaned_coordinates
 
-    def _get_province_from_coord(self, coordinate):
+    @staticmethod
+    def _get_province_from_coord(coordinate):
         """ Expects a cleaned coordinate """
         params = {'type': 'PR'}
         province_result = requests.get(
@@ -1546,29 +1552,39 @@ class InfrastructureProject:
             province_name = list_of_objects_returned[0]['name']
             return province_name
         else:
-            logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
-                           format(self.name, coordinate))
+            return None
 
     def get_provinces(self):
         """ Returns a list of provinces based on values in self.coordinates """
         provinces = set()
         for c in self.cleaned_coordinates:
-            provinces.add(self._get_province_from_coord(c))
+            province = self._get_province_from_coord(c)
+            if province:
+                provinces.add(province)
+            else:
+                logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
+                               format(self.name, c))
         return list(provinces)
 
-    def _build_expenditure_list(self):
+    @staticmethod
+    def _build_expenditure_item(record):
+        return {
+            'year': record['Financial Year'],
+            'amount': float(record['Amount']),
+            'budget_phase': record['Budget Phase']
+        }
+
+    def _build_complete_expenditure(self):
         for record in self.records:
-            self.complete_expenditure.append({
-                'year': record['Financial Year'],
-                'amount': float(record['Amount']),
-                'budget_phase': record['Budget Phase']
-            })
+            self.complete_expenditure.append(
+                self._build_expenditure_item(record)
+            )
         return self.complete_expenditure
 
 
 class Dataset():
     """
-    Reprsents a CKAN dataset (AKA package)
+    Represents a CKAN dataset (AKA package)
     """
 
     def __init__(self, **kwargs):
