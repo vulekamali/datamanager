@@ -1416,7 +1416,7 @@ class PackageWithoutGroupException(Exception):
     pass
 
 
-class InfrastructureProject():
+class InfrastructureProject:
     """ Represents an infrastructure project stored in CKAN """
 
     def __init__(self, **kwargs):
@@ -1432,6 +1432,7 @@ class InfrastructureProject():
         self.coordinates = []
         self.provinces = []
         self.expenditure = []
+        self._clean_coordinates()
 
     @classmethod
     def get_dataset(cls):
@@ -1505,22 +1506,23 @@ class InfrastructureProject():
             projected_expenditure += float(project['Amount'])
         return projected_expenditure
 
-    def get_cleaned_coordinates(self):
+    def _parse_coordinate(self, coordinate):
+        lat_long = [float(x) for x in coordinate.split(',')]
+        cleaned_coordinate = {
+            'latitude': lat_long[0],
+            'longitude': lat_long[1]
+        }
+        self.coordinates.append(cleaned_coordinate)
+        return cleaned_coordinate
+
+    def _clean_coordinates(self):
         try:
             if 'and' in self.gps_codes:
-                gps_codes_grouped = self.gps_codes.split('and')
-                for code_group in gps_codes_grouped:
-                    lat_long = [float(x) for x in code_group.split(',')]
-                    self.coordinates.append({
-                        'latitude': lat_long[0],
-                        'longitude': lat_long[1]
-                    })
+                list_of_coordinates = self.gps_codes.split('and')
+                for coordinate in list_of_coordinates:
+                    self._parse_coordinate(coordinate)
             elif ',' in self.gps_codes:
-                lat_long = [float(x) for x in self.gps_codes.split(',')]
-                self.coordinates.append({
-                    'latitude': lat_long[0],
-                    'longitude': lat_long[1]
-                })
+                self._parse_coordinate(self.gps_codes)
             else:
                 logger.warning("Invalid co-ordinates for infrastructure project '{}': {}".
                                format(self.name, self.gps_codes))
@@ -1532,8 +1534,6 @@ class InfrastructureProject():
 
     def get_provinces(self):
         params = {'type': 'PR'}
-        if not self.coordinates:
-            self.get_cleaned_coordinates()
         for c in self.coordinates:
             province_result = requests.get(MAPIT_POINT_API_URL.format(c['longitude'], c['latitude']), params=params)
             province_result.raise_for_status()

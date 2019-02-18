@@ -419,7 +419,7 @@ def infrastructure_projects_overview(request):
 
         projects.append({
             'name': project.name,
-            'coordinates': project.get_cleaned_coordinates(),
+            'coordinates': project.coordinates,
             'projected_budget': project.get_projected_expenditure(),
             'stage': project.stage,
             'description': project.description,
@@ -465,7 +465,7 @@ def infrastructure_project_detail(request, project_slug):
         'slug': project.get_url_path(),
         'title': '{} - vulekamali'.format(project.name),
         'name': project.name,
-        'coordinates': project.get_cleaned_coordinates(),
+        'coordinates': project._clean_coordinates(),
         'projected_budget': project.get_projected_expenditure(),
         'stage': project.stage,
         'department': {
