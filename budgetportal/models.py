@@ -1421,15 +1421,14 @@ class InfrastructureProject():
 
     def __init__(self, **kwargs):
         self.records = kwargs.get('records')
-        if self.records:
-            self.name = self.records[0]['Project name']
-            self.stage = self.records[0]['Current project stage']
-            self.department_name = self.records[0]['Department']
-            self.description = self.records[0]['Project description']
-            self.total_budget = float(self.records[0]['Total project cost'])
-            self.nature_of_investment = self.records[0]['Nature of investment']
-            self.infrastructure_type = self.records[0]['Infrastructure type']
-            self.gps_codes = self.records[0]['GPS code']
+        self.name = self.records[0]['Project name']
+        self.stage = self.records[0]['Current project stage']
+        self.department_name = self.records[0]['Department']
+        self.description = self.records[0]['Project description']
+        self.total_budget = float(self.records[0]['Total project cost'])
+        self.nature_of_investment = self.records[0]['Nature of investment']
+        self.infrastructure_type = self.records[0]['Infrastructure type']
+        self.gps_codes = self.records[0]['GPS code']
         self.coordinates = []
         self.provinces = []
         self.expenditure = []

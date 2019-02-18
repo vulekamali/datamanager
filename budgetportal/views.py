@@ -411,16 +411,31 @@ def infrastructure_projects_overview(request):
     infrastructure_projects = InfrastructureProject.get_featured_projects_from_resource()
     projects = []
     for project in infrastructure_projects:
+        departments = Department.objects.filter(slug=slugify(project.department_name),
+                                                government__sphere__slug='national')
+        department_url = None
+        if departments:
+            department_url = departments[0].get_latest_department_instance().get_url_path()
+
         projects.append({
             'name': project.name,
             'coordinates': project.get_cleaned_coordinates(),
             'projected_budget': project.get_projected_expenditure(),
             'stage': project.stage,
-            'department': project.department_name,
             'description': project.description,
             'provinces': project.get_provinces(),
             'total_budget': project.total_budget,
             'detail': project.get_url_path(),
+            'dataset_url': InfrastructureProject.get_dataset().get_url_path(),
+            'slug': project.get_url_path(),
+            'page_title': '{} - vulekamali'.format(project.name),
+            'department': {
+                'name': project.department_name,
+                'url': department_url
+            },
+            'nature_of_investment': project.nature_of_investment,
+            'infrastructure_type': project.infrastructure_type,
+            'expenditure': sorted(project.get_expenditure(), key=lambda e: e['year'])
         })
     projects = sorted(projects, key=lambda p: p['name'])
     response = {
@@ -429,7 +444,7 @@ def infrastructure_projects_overview(request):
         'description': 'Infrastructure projects in South Africa for 2019-20',
         'slug': 'infrastructure-projects',
         'selected_tab': 'infrastructure-projects',
-        'title': 'Infrastructure Projects - vulekamali'
+        'title': 'Infrastructure Projects - vulekamali',
     }
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
