@@ -1,6 +1,9 @@
 import itertools
 
 from autoslug import AutoSlugField
+from django.http import Http404
+from slugify import slugify
+
 from budgetportal.openspending import (
     EstimatesOfExpenditure,
     AdjustedEstimatesOfExpenditure,
@@ -31,9 +34,11 @@ ckan = settings.CKAN
 
 URL_LENGTH_LIMIT = 2000
 
-CKAN_DATASTORE_URL = ('https://data.vulekamali.gov.za'
+CKAN_DATASTORE_URL = (settings.CKAN_URL+
                       '/api/3/action' \
                       '/datastore_search_sql')
+
+MAPIT_POINT_API_URL = 'https://mapit.code4sa.org/point/4326/{},{}'
 
 DIRECT_CHARGE_NRF = 'Direct charge against the National Revenue Fund'
 
@@ -289,7 +294,7 @@ class Department(models.Model):
 
     def get_website_url(self):
         """ Always return the latest available URL, even for old departments. """
-        return self._get_latest_department_instance().website_url
+        return self.get_latest_department_instance().website_url
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -300,7 +305,7 @@ class Department(models.Model):
     def get_financial_year(self):
         return self.government.sphere.financial_year
 
-    def _get_latest_department_instance(self):
+    def get_latest_department_instance(self):
         """ Try to find the department in the most recent year with the same slug.
         Continue traversing backwards in time until found, or until the original year has been reached. """
         newer_departments = Department.objects.filter(government__slug=self.government.slug,
@@ -1412,9 +1417,180 @@ class PackageWithoutGroupException(Exception):
     pass
 
 
+class InfrastructureProject:
+    """ Represents an infrastructure project stored in CKAN """
+
+    def __init__(self, **kwargs):
+        self.records = kwargs.get('records')
+        self.name = self.records[0]['Project name']
+        self.stage = self.records[0]['Current project stage']
+        self.department_name = self.records[0]['Department']
+        self.description = self.records[0]['Project description']
+        self.total_budget = float(self.records[0]['Total project cost'])
+        self.nature_of_investment = self.records[0]['Nature of investment']
+        self.infrastructure_type = self.records[0]['Infrastructure type']
+        self.raw_coordinate_string = self.records[0]['GPS code']
+        self.complete_expenditure = self._build_complete_expenditure(self.records)
+        self.cleaned_coordinates = self._clean_coordinates(self.raw_coordinate_string)
+        self.projected_expenditure = self._calculate_projected_expenditure(self.records)
+
+    @classmethod
+    def get_dataset(cls):
+        """ Return the first dataset in the Infrastructure Projects group. """
+        query = {
+            'q': '',
+            'fq': ('+organization:"national-treasury"'
+                   '+vocab_spheres:"national"'
+                   '+groups:"infrastructure-projects"'),
+            'rows': 1,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nreturned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        if response['results']:
+            return Dataset.from_package(response['results'][0])
+        else:
+            raise Http404()
+
+    @classmethod
+    def get_project_from_resource(cls, project_slug):
+        """ Uses first CSV resource in dataset """
+        resource = cls.get_dataset().get_resource(format='CSV')
+        sql = '''
+                SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}' 
+            '''.format(resource['id'], project_slug)
+        params = {'sql': sql}
+        revenue_result = requests.get(CKAN_DATASTORE_URL, params=params)
+        revenue_result.raise_for_status()
+        revenue_data = revenue_result.json()['result']['records']
+        project = InfrastructureProject(records=revenue_data)
+        return project
+
+    @classmethod
+    def get_featured_projects_from_resource(cls):
+        """ Uses first CSV resource in dataset """
+        resource = cls.get_dataset().get_resource(format='CSV')
+        sql = '''
+                SELECT * FROM "{}" WHERE "Featured"='TRUE'
+            '''.format(resource['id'])
+
+        params = {'sql': sql}
+        projects_result = requests.get(CKAN_DATASTORE_URL, params=params)
+        projects_result.raise_for_status()
+        project_records = projects_result.json()['result']['records']
+
+        # Assume project names are unique within the subset of featured projects
+        unique_project_names = []
+        for obj in project_records:
+            if obj['Project name'] not in unique_project_names:
+                unique_project_names.append(obj['Project name'])
+
+        projects = []
+        for project_name in unique_project_names:
+            project_list = filter(lambda x: x['Project name'] == project_name, revenue_data)
+            projects.append(InfrastructureProject(records=project_list))
+        return projects
+
+    def get_url_path(self):
+        return "/infrastructure-projects/{}".format(slugify(self.department_name + '-' + self.name))
+
+    @staticmethod
+    def _calculate_projected_expenditure(records):
+        """ Calculate sum of predicted amounts from a list of records """
+        if not isinstance(records, list):
+            raise TypeError('Invalid type for projected expenditure calculation')
+        projected_records_for_project = filter(lambda x: x['Budget Phase'] == 'MTEF', records)
+        projected_expenditure = 0
+        for project in projected_records_for_project:
+            projected_expenditure += float(project['Amount'])
+        return projected_expenditure
+
+    @staticmethod
+    def _parse_coordinate(coordinate):
+        """ Expects a single set of coordinates (lat, long) split by a comma """
+        if not isinstance(coordinate, (str, unicode)):
+            raise TypeError('Invalid type for coordinate parsing')
+        lat_long = [float(x) for x in coordinate.split(',')]
+        cleaned_coordinate = {
+            'latitude': lat_long[0],
+            'longitude': lat_long[1]
+        }
+        return cleaned_coordinate
+
+    @classmethod
+    def _clean_coordinates(cls, raw_coordinate_string):
+        cleaned_coordinates = []
+        try:
+            if 'and' in raw_coordinate_string:
+                list_of_coordinates = raw_coordinate_string.split('and')
+                for coordinate in list_of_coordinates:
+                    cleaned_coordinates.append(
+                        cls._parse_coordinate(coordinate)
+                    )
+            elif ',' in raw_coordinate_string:
+                cleaned_coordinates.append(
+                    cls._parse_coordinate(raw_coordinate_string)
+                )
+            else:
+                logger.warning("Invalid co-ordinates: {}".
+                               format(raw_coordinate_string))
+        except Exception as e:
+            logger.warning("Caught Exception '{}' for co-ordinates {}".format(e, raw_coordinate_string))
+        return cleaned_coordinates
+
+    @staticmethod
+    def _get_province_from_coord(coordinate):
+        """ Expects a cleaned coordinate """
+        params = {'type': 'PR'}
+        province_result = requests.get(
+            MAPIT_POINT_API_URL.format(coordinate['longitude'], coordinate['latitude']),
+            params=params
+        )
+        province_result.raise_for_status()
+        r = province_result.json()
+        list_of_objects_returned = r.values()
+        if len(list_of_objects_returned) > 0:
+            province_name = list_of_objects_returned[0]['name']
+            return province_name
+        else:
+            return None
+
+    def get_provinces(self):
+        """ Returns a list of provinces based on values in self.coordinates """
+        provinces = set()
+        for c in self.cleaned_coordinates:
+            province = self._get_province_from_coord(c)
+            if province:
+                provinces.add(province)
+            else:
+                logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
+                               format(self.name, c))
+        return list(provinces)
+
+    @staticmethod
+    def _build_expenditure_item(record):
+        return {
+            'year': record['Financial Year'],
+            'amount': float(record['Amount']),
+            'budget_phase': record['Budget Phase']
+        }
+
+    @classmethod
+    def _build_complete_expenditure(cls, records):
+        complete_expenditure = []
+        for record in records:
+            complete_expenditure.append(
+                cls._build_expenditure_item(record)
+            )
+        return complete_expenditure
+
+
 class Dataset():
     """
-    Reprsents a CKAN dataset (AKA package)
+    Represents a CKAN dataset (AKA package)
     """
 
     def __init__(self, **kwargs):
