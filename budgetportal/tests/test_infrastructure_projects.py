@@ -249,13 +249,15 @@ empty_ckan_response = MockResponse(
 class OverviewIntegrationTest(LiveServerTestCase):
 
     def setUp(self):
-        self.expected_expenditure = [{'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2015'},
-                                {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2016'},
-                                {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2017'},
-                                {'amount': 100.0, 'budget_phase': 'Adjusted Appropriation', 'year': '2018'},
-                                {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2019'},
-                                {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2020'},
-                                {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2021'}]
+        self.expected_expenditure = [
+            {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2015'},
+            {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2016'},
+            {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2017'},
+            {'amount': 100.0, 'budget_phase': 'Adjusted Appropriation', 'year': '2018'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2019'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2020'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2021'}
+        ]
 
     @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=None)
     def test_missing_dataset_returns_404(self, mock_dataset):
@@ -285,6 +287,8 @@ class OverviewIntegrationTest(LiveServerTestCase):
         response = c.get('/infrastructure-projects.yaml')
         content = yaml.load(response.content)
         self.assertEqual(len(content['projects']), 2)
+
+        # First project (single coords, province)
         first_test_project = filter(lambda x: x['name'] == 'Eastern Cape: Bambisana hospital (refurbishment)', content['projects'])[0]
         self.assertEqual(first_test_project['dataset_url'], 'fake path')
         self.assertEqual(first_test_project['description'], 'Revitalisation of hospital')
@@ -304,4 +308,15 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(first_test_project['slug'], '/infrastructure-projects/health-eastern-cape-bambisana-hospital-refurbishment')
         self.assertEqual(first_test_project['stage'], 'Design')
         self.assertEqual(first_test_project['total_budget'], 100.0)
+
+        # Second project (multiple coords, provinces)
+        second_test_project = filter(lambda x: x['name'] == 'Kirkwood water treatment works', content['projects'])[0]
+        self.assertIn({'latitude': -33.399790, 'longitude': 25.443304}, second_test_project['coordinates'])
+        self.assertIn({'latitude': -30.399790, 'longitude': 15.443304}, second_test_project['coordinates'])
+        self.assertEqual(len(second_test_project['coordinates']), 2)
+        self.assertIn('Fake Province 4', second_test_project['provinces'])
+        self.assertIn('Fake Province 5', second_test_project['provinces'])
+        self.assertEqual(len(second_test_project['provinces']), 2)
+
+
 
