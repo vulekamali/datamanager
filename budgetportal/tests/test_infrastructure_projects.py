@@ -1,7 +1,10 @@
 import mock
-from django.test import TestCase
+import yaml
+from django.test import TestCase, LiveServerTestCase, Client
 import requests
-from budgetportal.models import InfrastructureProject, MAPIT_POINT_API_URL
+
+from budgetportal import settings
+from budgetportal.models import InfrastructureProject, MAPIT_POINT_API_URL, CKAN_DATASTORE_URL
 
 
 class ProjectedExpenditureTestCase(TestCase):
@@ -108,15 +111,15 @@ class ExpenditureTestCase(TestCase):
             },
         ]
         self.expected_output_2030 = {
-                'year': 2030,
-                'amount': 123.0,
-                'budget_phase': 'fake budget phase'
-            }
+            'year': 2030,
+            'amount': 123.0,
+            'budget_phase': 'fake budget phase'
+        }
         self.expected_output_2031 = {
-                'year': 2031,
-                'amount': 1000,
-                'budget_phase': 'fake budget phase 2'
-            }
+            'year': 2031,
+            'amount': 1000,
+            'budget_phase': 'fake budget phase 2'
+        }
 
     def test_success_build_expenditure_item(self):
         expenditure_item = InfrastructureProject._build_expenditure_item(self.fake_valid_records[0])
@@ -169,6 +172,15 @@ def mocked_requests_get(*args, **kwargs):
             {},
             200
         )
+    elif args[0] == CKAN_DATASTORE_URL:
+        return MockResponse(
+            {
+                'result': {
+                    'records': []
+                }
+            },
+            200
+        )
 
     return MockResponse(None, 404)
 
@@ -196,4 +208,26 @@ class ProvinceTestCase(TestCase):
         self.assertEqual(province, None)
 
 
+class MockDataset(mock.Mock):
+    def get_resource(self, format):
+        return {'id': 'fake id'}
 
+    def get_url_path(self):
+        return 'fake path'
+
+
+class OverviewIntegrationTest(LiveServerTestCase):
+
+    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', side_effect=MockDataset)
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    def test_success_empty_projects(self, mock_dataset, mock_get):
+        """ Test that it exists and that the correct years are linked. """
+        c = Client()
+        response = c.get('/infrastructure-projects.yaml')
+        content = yaml.load(response.content)
+        self.assertEqual(content.projects, [])
+        self.assertEqual(content.dataset_url, 'fake path')
+        self.assertEqual(content.description, 'Infrastructure projects in South Africa for 2019-20')
+        self.assertEqual(content.selected_tab, 'infrastructure-projects')
+        self.assertEqual(content.slug, 'infrastructure-projects')
+        self.assertEqual(content.title, 'Infrastructure Projects - vulekamali')
