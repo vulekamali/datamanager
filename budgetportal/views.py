@@ -409,6 +409,8 @@ def dataset(request, category_slug, dataset_slug):
 def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
     infrastructure_projects = InfrastructureProject.get_featured_projects_from_resource()
+    if infrastructure_projects is None:
+        return HttpResponse(status=404)
     projects = []
     for project in infrastructure_projects:
         departments = Department.objects.filter(slug=slugify(project.department_name),
@@ -452,6 +454,8 @@ def infrastructure_projects_overview(request):
 
 def infrastructure_project_detail(request, project_slug):
     project = InfrastructureProject.get_project_from_resource(project_slug)
+    if project is None:
+        return HttpResponse(status=404)
     departments = Department.objects.filter(slug=slugify(project.department_name),
                                             government__sphere__slug='national')
     department_url = None

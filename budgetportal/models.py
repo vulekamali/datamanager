@@ -1453,12 +1453,15 @@ class InfrastructureProject:
         if response['results']:
             return Dataset.from_package(response['results'][0])
         else:
-            raise Http404()
+            return None
 
     @classmethod
     def get_project_from_resource(cls, project_slug):
         """ Uses first CSV resource in dataset """
-        resource = cls.get_dataset().get_resource(format='CSV')
+        dataset = cls.get_dataset()
+        if not dataset:
+            return None
+        resource = dataset.get_resource(format='CSV')
         sql = '''
                 SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}' 
             '''.format(resource['id'], project_slug)
@@ -1472,7 +1475,10 @@ class InfrastructureProject:
     @classmethod
     def get_featured_projects_from_resource(cls):
         """ Uses first CSV resource in dataset """
-        resource = cls.get_dataset().get_resource(format='CSV')
+        dataset = cls.get_dataset()
+        if not dataset:
+            return None
+        resource = dataset.get_resource(format='CSV')
         sql = '''
                 SELECT * FROM "{}" WHERE "Featured"='TRUE'
             '''.format(resource['id'])
