@@ -1,9 +1,7 @@
 import mock
 import yaml
 from django.test import TestCase, LiveServerTestCase, Client
-import requests
 
-from budgetportal import settings
 from budgetportal.models import InfrastructureProject, MAPIT_POINT_API_URL, CKAN_DATASTORE_URL
 import json
 
