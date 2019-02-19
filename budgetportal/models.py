@@ -1,6 +1,7 @@
 import itertools
 
 from autoslug import AutoSlugField
+from django.http import Http404
 from slugify import slugify
 
 from budgetportal.openspending import (
@@ -1452,7 +1453,7 @@ class InfrastructureProject:
         if response['results']:
             return Dataset.from_package(response['results'][0])
         else:
-            raise Exception('Could not find Infrastructure Projects dataset')
+            raise Http404()
 
     @classmethod
     def get_project_from_resource(cls, project_slug):
