@@ -1484,7 +1484,7 @@ class InfrastructureProject:
 
         # Assume project names are unique within the subset of featured projects
         unique_project_names = []
-        for obj in revenue_data:
+        for obj in project_records:
             if obj['Project name'] not in unique_project_names:
                 unique_project_names.append(obj['Project name'])
 
