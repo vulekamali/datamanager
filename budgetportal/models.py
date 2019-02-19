@@ -1486,11 +1486,11 @@ class InfrastructureProject:
         params = {'sql': sql}
         projects_result = requests.get(CKAN_DATASTORE_URL, params=params)
         projects_result.raise_for_status()
-        revenue_data = projects_result.json()['result']['records']
+        project_records = projects_result.json()['result']['records']
 
         # Assume project names are unique within the subset of featured projects
         unique_project_names = []
-        for obj in revenue_data:
+        for obj in project_records:
             if obj['Project name'] not in unique_project_names:
                 unique_project_names.append(obj['Project name'])
 
