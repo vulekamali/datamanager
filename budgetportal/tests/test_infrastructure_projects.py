@@ -5,6 +5,10 @@ import requests
 
 from budgetportal import settings
 from budgetportal.models import InfrastructureProject, MAPIT_POINT_API_URL, CKAN_DATASTORE_URL
+import json
+
+with open('budgetportal/tests/test_data/test_infrastructure_projects.json', 'r') as mock_data:
+    MOCK_DATA = json.load(mock_data)
 
 
 class ProjectedExpenditureTestCase(TestCase):
@@ -149,18 +153,20 @@ class ExpenditureTestCase(TestCase):
         )
 
 
+class MockResponse:
+    def __init__(self, json_data, status_code):
+        self.json_data = json_data
+        self.status_code = status_code
+
+    def json(self):
+        return self.json_data
+
+    def raise_for_status(self):
+        return None
+
+
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
-    class MockResponse:
-        def __init__(self, json_data, status_code):
-            self.json_data = json_data
-            self.status_code = status_code
-
-        def json(self):
-            return self.json_data
-
-        def raise_for_status(self):
-            return None
 
     if args[0] == MAPIT_POINT_API_URL.format(25.312526, -27.515232):
         return MockResponse(
@@ -172,20 +178,31 @@ def mocked_requests_get(*args, **kwargs):
             {},
             200
         )
-
+    elif args[0] == CKAN_DATASTORE_URL:
+        return MockResponse(
+            {
+                'result': {
+                    'records': MOCK_DATA['records']
+                }
+            },
+            200
+        )
+    elif args[0] == MAPIT_POINT_API_URL.format(29.45397, -31.45019):
+        return MockResponse(
+            {4288: {'name': 'Fake Province 3'}},
+            200
+        )
+    elif args[0] == MAPIT_POINT_API_URL.format(25.443304, -33.399790):
+        return MockResponse(
+            {4288: {'name': 'Fake Province 4'}},
+            200
+        )
+    elif args[0] == MAPIT_POINT_API_URL.format(15.443304, -30.399790):
+        return MockResponse(
+            {4288: {'name': 'Fake Province 5'}},
+            200
+        )
     return MockResponse(None, 404)
-
-
-class MockResponse:
-    def __init__(self, json_data, status_code):
-        self.json_data = json_data
-        self.status_code = status_code
-
-    def json(self):
-        return self.json_data
-
-    def raise_for_status(self):
-        return None
 
 
 class ProvinceTestCase(TestCase):
@@ -228,17 +245,17 @@ empty_ckan_response = MockResponse(
             200
         )
 
-populated_ckan_response = MockResponse(
-            {
-                'result': {
-                    'records': []
-                }
-            },
-            200
-        )
-
 
 class OverviewIntegrationTest(LiveServerTestCase):
+
+    def setUp(self):
+        self.expected_expenditure = [{'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2015'},
+                                {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2016'},
+                                {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2017'},
+                                {'amount': 100.0, 'budget_phase': 'Adjusted Appropriation', 'year': '2018'},
+                                {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2019'},
+                                {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2020'},
+                                {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2021'}]
 
     @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=None)
     def test_missing_dataset_returns_404(self, mock_dataset):
@@ -261,15 +278,30 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(content['title'], 'Infrastructure Projects - vulekamali')
 
     @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
-    @mock.patch('requests.get', return_value=populated_ckan_response)
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
         response = c.get('/infrastructure-projects.yaml')
         content = yaml.load(response.content)
-        self.assertEqual(content.projects, [])
-        self.assertEqual(content.dataset_url, 'fake path')
-        self.assertEqual(content.description, 'Infrastructure projects in South Africa for 2019-20')
-        self.assertEqual(content.selected_tab, 'infrastructure-projects')
-        self.assertEqual(content.slug, 'infrastructure-projects')
-        self.assertEqual(content.title, 'Infrastructure Projects - vulekamali')
+        self.assertEqual(len(content['projects']), 2)
+        first_test_project = filter(lambda x: x['name'] == 'Eastern Cape: Bambisana hospital (refurbishment)', content['projects'])[0]
+        self.assertEqual(first_test_project['dataset_url'], 'fake path')
+        self.assertEqual(first_test_project['description'], 'Revitalisation of hospital')
+        self.assertEqual(first_test_project['detail'], '/infrastructure-projects/health-eastern-cape-bambisana-hospital-refurbishment')
+        self.assertEqual(first_test_project['infrastructure_type'], 'District Hospital')
+        self.assertIn({'latitude': -31.45019, 'longitude': 29.45397}, first_test_project['coordinates'])
+        self.assertEqual(len(first_test_project['coordinates']), 1)
+        self.assertEqual(len(first_test_project['expenditure']), 7)
+        for item in self.expected_expenditure:
+            self.assertIn(item, first_test_project['expenditure'])
+        self.assertEqual(first_test_project['name'], 'Eastern Cape: Bambisana hospital (refurbishment)')
+        self.assertEqual(first_test_project['nature_of_investment'], 'Rehabilitation and refurbishment')
+        self.assertEqual(first_test_project['page_title'], 'Eastern Cape: Bambisana hospital (refurbishment) - vulekamali')
+        self.assertEqual(first_test_project['projected_budget'], 300.0)
+        self.assertIn('Fake Province 3', first_test_project['provinces'])
+        self.assertEqual(len(first_test_project['provinces']), 1)
+        self.assertEqual(first_test_project['slug'], '/infrastructure-projects/health-eastern-cape-bambisana-hospital-refurbishment')
+        self.assertEqual(first_test_project['stage'], 'Design')
+        self.assertEqual(first_test_project['total_budget'], 100.0)
+
