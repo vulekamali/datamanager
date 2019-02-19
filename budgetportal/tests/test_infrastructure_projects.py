@@ -172,17 +172,20 @@ def mocked_requests_get(*args, **kwargs):
             {},
             200
         )
-    elif args[0] == CKAN_DATASTORE_URL:
-        return MockResponse(
-            {
-                'result': {
-                    'records': []
-                }
-            },
-            200
-        )
 
     return MockResponse(None, 404)
+
+
+class MockResponse:
+    def __init__(self, json_data, status_code):
+        self.json_data = json_data
+        self.status_code = status_code
+
+    def json(self):
+        return self.json_data
+
+    def raise_for_status(self):
+        return None
 
 
 class ProvinceTestCase(TestCase):
@@ -216,11 +219,50 @@ class MockDataset(mock.Mock):
         return 'fake path'
 
 
+empty_ckan_response = MockResponse(
+            {
+                'result': {
+                    'records': []
+                }
+            },
+            200
+        )
+
+populated_ckan_response = MockResponse(
+            {
+                'result': {
+                    'records': []
+                }
+            },
+            200
+        )
+
+
 class OverviewIntegrationTest(LiveServerTestCase):
 
-    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', side_effect=MockDataset)
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=None)
+    def test_missing_dataset_returns_404(self, mock_dataset):
+        c = Client()
+        response = c.get('/infrastructure-projects.yaml')
+        self.assertEqual(response.status_code, 404)
+
+    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
+    @mock.patch('requests.get', return_value=empty_ckan_response)
     def test_success_empty_projects(self, mock_dataset, mock_get):
+        """ Test that it exists and that the correct years are linked. """
+        c = Client()
+        response = c.get('/infrastructure-projects.yaml')
+        content = yaml.load(response.content)
+        self.assertEqual(content['projects'], [])
+        self.assertEqual(content['dataset_url'], 'fake path')
+        self.assertEqual(content['description'], 'Infrastructure projects in South Africa for 2019-20')
+        self.assertEqual(content['selected_tab'], 'infrastructure-projects')
+        self.assertEqual(content['slug'], 'infrastructure-projects')
+        self.assertEqual(content['title'], 'Infrastructure Projects - vulekamali')
+
+    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
+    @mock.patch('requests.get', return_value=populated_ckan_response)
+    def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
         response = c.get('/infrastructure-projects.yaml')
