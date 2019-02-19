@@ -1566,16 +1566,34 @@ class InfrastructureProject:
         else:
             return None
 
+    @staticmethod
+    def _get_province_from_project_name(project_name):
+        """ Searches name of project for province name or abbreviation """
+        project_name_slug = slugify(project_name)
+        new_dict = {}
+        for prov_name in prov_abbrev.keys():
+            new_dict[prov_name] = slugify(prov_name)
+        for name, slug in new_dict.items():
+            if slug in project_name_slug:
+                return name
+        return None
+
     def get_provinces(self):
         """ Returns a list of provinces based on values in self.coordinates """
         provinces = set()
-        for c in self.cleaned_coordinates:
-            province = self._get_province_from_coord(c)
+        if self.cleaned_coordinates:
+            for c in self.cleaned_coordinates:
+                province = self._get_province_from_coord(c)
+                if province:
+                    provinces.add(province)
+                else:
+                    logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
+                                   format(self.name, c))
+        else:
+            province = self._get_province_from_project_name(self.name)
             if province:
+                logger.info("Found province {} in project name".format(province))
                 provinces.add(province)
-            else:
-                logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
-                               format(self.name, c))
         return list(provinces)
 
     @staticmethod

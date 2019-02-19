@@ -234,6 +234,10 @@ class ProvinceTestCase(TestCase):
         province = InfrastructureProject._get_province_from_coord(self.test_coordinates_two)
         self.assertEqual(province, None)
 
+    def test_success_province_from_name(self):
+        province = InfrastructureProject._get_province_from_project_name('Eastern Cape: A New Test')
+        self.assertEqual(province, 'Eastern Cape')
+
 
 class MockDataset(mock.Mock):
     def get_resource(self, format):
