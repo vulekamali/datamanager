@@ -1466,10 +1466,10 @@ class InfrastructureProject:
                 SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}' 
             '''.format(resource['id'], project_slug)
         params = {'sql': sql}
-        revenue_result = requests.get(CKAN_DATASTORE_URL, params=params)
-        revenue_result.raise_for_status()
-        revenue_data = revenue_result.json()['result']['records']
-        project = InfrastructureProject(records=revenue_data)
+        project_result = requests.get(CKAN_DATASTORE_URL, params=params)
+        project_result.raise_for_status()
+        project_records = revenue_result.json()['result']['records']
+        project = InfrastructureProject(records=project_records)
         return project
 
     @classmethod
@@ -1496,7 +1496,7 @@ class InfrastructureProject:
 
         projects = []
         for project_name in unique_project_names:
-            project_list = filter(lambda x: x['Project name'] == project_name, revenue_data)
+            project_list = filter(lambda x: x['Project name'] == project_name, project_records)
             projects.append(InfrastructureProject(records=project_list))
         return projects
 
