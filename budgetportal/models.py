@@ -1469,8 +1469,10 @@ class InfrastructureProject:
         project_result = requests.get(CKAN_DATASTORE_URL, params=params)
         project_result.raise_for_status()
         project_records = project_result.json()['result']['records']
-        project = InfrastructureProject(records=project_records)
-        return project
+        if project_records:
+            return InfrastructureProject(records=project_records)
+        else:
+            return None
 
     @classmethod
     def get_featured_projects_from_resource(cls):

@@ -176,11 +176,20 @@ def mocked_requests_get(*args, **kwargs):
             {},
             200
         )
+    elif args[0] == CKAN_DATASTORE_URL and 'health-standard-fake-project' in kwargs['params']['sql']:
+        return MockResponse(
+            {
+                'result': {
+                    'records': MOCK_DATA['detail_records']
+                }
+            },
+            200
+        )
     elif args[0] == CKAN_DATASTORE_URL:
         return MockResponse(
             {
                 'result': {
-                    'records': MOCK_DATA['records']
+                    'records': MOCK_DATA['overview_records']
                 }
             },
             200
@@ -316,4 +325,56 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(len(second_test_project['provinces']), 2)
 
 
+class DetailIntegrationTest(LiveServerTestCase):
 
+    def setUp(self):
+        self.expected_expenditure = [
+            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2045'},
+            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2046'},
+            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2047'},
+            {'amount': 100.0, 'budget_phase': 'fake current phase', 'year': '2048'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2049'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2050'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2051'}
+        ]
+        self.project_slug = 'standard-fake-project'
+        self.department_slug = 'health'
+
+    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=None)
+    def test_missing_dataset_returns_404(self, mock_dataset):
+        c = Client()
+        response = c.get('/infrastructure-projects/{}-{}.yaml'.format(self.department_slug, self.project_slug))
+        self.assertEqual(response.status_code, 404)
+
+    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
+    @mock.patch('requests.get', return_value=empty_ckan_response)
+    def test_empty_project_records_returns_404(self, mock_dataset, mock_get):
+        """ Test that it exists and that the correct years are linked. """
+        c = Client()
+        response = c.get('/infrastructure-projects/{}-{}.yaml'.format(self.department_slug, self.project_slug))
+        self.assertEqual(response.status_code, 404)
+
+    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    def test_success_with_projects(self, mock_dataset, mock_get):
+        """ Test that it exists and that the correct years are linked. """
+        c = Client()
+        response = c.get('/infrastructure-projects/{}-{}.yaml'.format(self.department_slug, self.project_slug))
+        content = yaml.load(response.content)
+
+        self.assertEqual(content['dataset_url'], 'fake path')
+        self.assertEqual(content['description'], 'Typical project description')
+        self.assertEqual(content['infrastructure_type'], 'fake type')
+        self.assertIn({'latitude': -31.45019, 'longitude': 29.45397}, content['coordinates'])
+        self.assertEqual(len(content['coordinates']), 1)
+        self.assertEqual(len(content['expenditure']), 7)
+        for item in self.expected_expenditure:
+            self.assertIn(item, content['expenditure'])
+        self.assertEqual(content['nature_of_investment'], 'standard fake investment')
+        self.assertEqual(content['title'], 'Standard fake project - vulekamali')
+        self.assertEqual(content['projected_budget'], 300.0)
+        self.assertIn('Fake Province 3', content['provinces'])
+        self.assertEqual(len(content['provinces']), 1)
+        self.assertEqual(content['slug'], '/infrastructure-projects/health-standard-fake-project')
+        self.assertEqual(content['stage'], 'Design')
+        self.assertEqual(content['total_budget'], 100.0)
