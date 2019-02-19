@@ -248,13 +248,13 @@ class OverviewIntegrationTest(LiveServerTestCase):
 
     def setUp(self):
         self.expected_expenditure = [
-            {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2015'},
-            {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2016'},
-            {'amount': 100.0, 'budget_phase': 'Audited Outcome', 'year': '2017'},
-            {'amount': 100.0, 'budget_phase': 'Adjusted Appropriation', 'year': '2018'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2019'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2020'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2021'}
+            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2045'},
+            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2046'},
+            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2047'},
+            {'amount': 100.0, 'budget_phase': 'fake current phase', 'year': '2048'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2049'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2050'},
+            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2051'}
         ]
 
     @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=None)
@@ -287,28 +287,27 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(len(content['projects']), 2)
 
         # First project (single coords, province)
-        first_test_project = filter(lambda x: x['name'] == 'Eastern Cape: Bambisana hospital (refurbishment)', content['projects'])[0]
+        first_test_project = filter(lambda x: x['name'] == 'Standard fake project', content['projects'])[0]
         self.assertEqual(first_test_project['dataset_url'], 'fake path')
-        self.assertEqual(first_test_project['description'], 'Revitalisation of hospital')
-        self.assertEqual(first_test_project['detail'], '/infrastructure-projects/health-eastern-cape-bambisana-hospital-refurbishment')
-        self.assertEqual(first_test_project['infrastructure_type'], 'District Hospital')
+        self.assertEqual(first_test_project['description'], 'Typical project description')
+        self.assertEqual(first_test_project['detail'], '/infrastructure-projects/health-standard-fake-project')
+        self.assertEqual(first_test_project['infrastructure_type'], 'fake type')
         self.assertIn({'latitude': -31.45019, 'longitude': 29.45397}, first_test_project['coordinates'])
         self.assertEqual(len(first_test_project['coordinates']), 1)
         self.assertEqual(len(first_test_project['expenditure']), 7)
         for item in self.expected_expenditure:
             self.assertIn(item, first_test_project['expenditure'])
-        self.assertEqual(first_test_project['name'], 'Eastern Cape: Bambisana hospital (refurbishment)')
-        self.assertEqual(first_test_project['nature_of_investment'], 'Rehabilitation and refurbishment')
-        self.assertEqual(first_test_project['page_title'], 'Eastern Cape: Bambisana hospital (refurbishment) - vulekamali')
+        self.assertEqual(first_test_project['nature_of_investment'], 'standard fake investment')
+        self.assertEqual(first_test_project['page_title'], 'Standard fake project - vulekamali')
         self.assertEqual(first_test_project['projected_budget'], 300.0)
         self.assertIn('Fake Province 3', first_test_project['provinces'])
         self.assertEqual(len(first_test_project['provinces']), 1)
-        self.assertEqual(first_test_project['slug'], '/infrastructure-projects/health-eastern-cape-bambisana-hospital-refurbishment')
+        self.assertEqual(first_test_project['slug'], '/infrastructure-projects/health-standard-fake-project')
         self.assertEqual(first_test_project['stage'], 'Design')
         self.assertEqual(first_test_project['total_budget'], 100.0)
 
         # Second project (multiple coords, provinces)
-        second_test_project = filter(lambda x: x['name'] == 'Kirkwood water treatment works', content['projects'])[0]
+        second_test_project = filter(lambda x: x['name'] == 'another fake project', content['projects'])[0]
         self.assertIn({'latitude': -33.399790, 'longitude': 25.443304}, second_test_project['coordinates'])
         self.assertIn({'latitude': -30.399790, 'longitude': 15.443304}, second_test_project['coordinates'])
         self.assertEqual(len(second_test_project['coordinates']), 2)
