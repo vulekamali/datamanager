@@ -1,6 +1,7 @@
+import mock
 from django.test import TestCase
-
-from budgetportal.models import InfrastructureProject
+import requests
+from budgetportal.models import InfrastructureProject, MAPIT_POINT_API_URL
 
 
 class ProjectedExpenditureTestCase(TestCase):
@@ -143,3 +144,56 @@ class ExpenditureTestCase(TestCase):
             self.expected_output_2031,
             complete_expenditure
         )
+
+
+# This method will be used by the mock to replace requests.get
+def mocked_requests_get(*args, **kwargs):
+    class MockResponse:
+        def __init__(self, json_data, status_code):
+            self.json_data = json_data
+            self.status_code = status_code
+
+        def json(self):
+            return self.json_data
+
+        def raise_for_status(self):
+            return None
+
+    if args[0] == MAPIT_POINT_API_URL.format(25.312526, -27.515232):
+        return MockResponse(
+            {4288: {'name': 'Fake Province 1'}},
+            200
+        )
+    elif args[0] == MAPIT_POINT_API_URL.format(24.312526, -26.515232):
+        return MockResponse(
+            {},
+            200
+        )
+
+    return MockResponse(None, 404)
+
+
+class ProvinceTestCase(TestCase):
+
+    def setUp(self):
+        self.test_coordinates_one = {
+            'longitude': 25.312526,
+            'latitude': -27.515232
+        }
+        self.test_coordinates_two = {
+            'longitude': 24.312526,
+            'latitude': -26.515232
+        }
+
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    def test_success_one_result(self, mock_get):
+        province = InfrastructureProject._get_province_from_coord(self.test_coordinates_one)
+        self.assertEqual(province, 'Fake Province 1')
+
+    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    def test_success_no_results(self, mock_get):
+        province = InfrastructureProject._get_province_from_coord(self.test_coordinates_two)
+        self.assertEqual(province, None)
+
+
+

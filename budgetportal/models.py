@@ -1511,7 +1511,7 @@ class InfrastructureProject:
     @staticmethod
     def _parse_coordinate(coordinate):
         """ Expects a single set of coordinates (lat, long) split by a comma """
-        if not isinstance(coordinate, str):
+        if not isinstance(coordinate, (str, unicode)):
             raise TypeError('Invalid type for coordinate parsing')
         lat_long = [float(x) for x in coordinate.split(',')]
         cleaned_coordinate = {
@@ -1547,9 +1547,11 @@ class InfrastructureProject:
         params = {'type': 'PR'}
         province_result = requests.get(
             MAPIT_POINT_API_URL.format(coordinate['longitude'], coordinate['latitude']),
-            params=params)
+            params=params
+        )
         province_result.raise_for_status()
-        list_of_objects_returned = province_result.json().values()
+        r = province_result.json()
+        list_of_objects_returned = r.values()
         if len(list_of_objects_returned) > 0:
             province_name = list_of_objects_returned[0]['name']
             return province_name
