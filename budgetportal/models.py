@@ -1454,26 +1454,34 @@ class InfrastructureProject:
         if response['results']:
             return Dataset.from_package(response['results'][0])
         else:
-            raise Http404()
+            return None
 
     @classmethod
     def get_project_from_resource(cls, project_slug):
         """ Uses first CSV resource in dataset """
-        resource = cls.get_dataset().get_resource(format='CSV')
+        dataset = cls.get_dataset()
+        if not dataset:
+            return None
+        resource = dataset.get_resource(format='CSV')
         sql = '''
                 SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}'
             '''.format(resource['id'], project_slug)
         params = {'sql': sql}
-        revenue_result = requests.get(CKAN_DATASTORE_URL, params=params)
-        revenue_result.raise_for_status()
-        revenue_data = revenue_result.json()['result']['records']
-        project = InfrastructureProject(records=revenue_data)
-        return project
+        project_result = requests.get(CKAN_DATASTORE_URL, params=params)
+        project_result.raise_for_status()
+        project_records = project_result.json()['result']['records']
+        if project_records:
+            return InfrastructureProject(records=project_records)
+        else:
+            return None
 
     @classmethod
     def get_featured_projects_from_resource(cls):
         """ Uses first CSV resource in dataset """
-        resource = cls.get_dataset().get_resource(format='CSV')
+        dataset = cls.get_dataset()
+        if not dataset:
+            return None
+        resource = dataset.get_resource(format='CSV')
         sql = '''
                 SELECT * FROM "{}" WHERE "Featured"='TRUE'
             '''.format(resource['id'])
@@ -1559,16 +1567,34 @@ class InfrastructureProject:
         else:
             return None
 
+    @staticmethod
+    def _get_province_from_project_name(project_name):
+        """ Searches name of project for province name or abbreviation """
+        project_name_slug = slugify(project_name)
+        new_dict = {}
+        for prov_name in prov_abbrev.keys():
+            new_dict[prov_name] = slugify(prov_name)
+        for name, slug in new_dict.items():
+            if slug in project_name_slug:
+                return name
+        return None
+
     def get_provinces(self):
         """ Returns a list of provinces based on values in self.coordinates """
         provinces = set()
-        for c in self.cleaned_coordinates:
-            province = self._get_province_from_coord(c)
+        if self.cleaned_coordinates:
+            for c in self.cleaned_coordinates:
+                province = self._get_province_from_coord(c)
+                if province:
+                    provinces.add(province)
+                else:
+                    logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
+                                   format(self.name, c))
+        else:
+            province = self._get_province_from_project_name(self.name)
             if province:
+                logger.info("Found province {} in project name".format(province))
                 provinces.add(province)
-            else:
-                logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
-                               format(self.name, c))
         return list(provinces)
 
     @staticmethod
