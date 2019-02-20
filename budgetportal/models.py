@@ -296,7 +296,7 @@ class Department(models.Model):
 
     def get_website_url(self):
         """ Always return the latest available URL, even for old departments. """
-        return self.get_latest_department_instance().website_url
+        return self.get_latest_department_instance(require_website_url=True).website_url
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
@@ -307,12 +307,19 @@ class Department(models.Model):
     def get_financial_year(self):
         return self.government.sphere.financial_year
 
-    def get_latest_department_instance(self):
+    def get_latest_department_instance(self, require_website_url=False):
         """ Try to find the department in the most recent year with the same slug.
         Continue traversing backwards in time until found, or until the original year has been reached. """
-        newer_departments = Department.objects.filter(government__slug=self.government.slug,
-                                                      government__sphere__slug=self.government.sphere.slug,
-                                                      slug=self.slug).order_by('-government__sphere__financial_year__slug')
+        if require_website_url:
+            newer_departments = Department.objects.filter(government__slug=self.government.slug,
+                                                          government__sphere__slug=self.government.sphere.slug,
+                                                          slug=self.slug,
+                                                          website_url__isnull=False).order_by('-government__sphere__financial_year__slug')
+
+        else:
+            newer_departments = Department.objects.filter(government__slug=self.government.slug,
+                                                          government__sphere__slug=self.government.sphere.slug,
+                                                          slug=self.slug).order_by('-government__sphere__financial_year__slug')
         return newer_departments.first() if newer_departments else None
 
     def _get_financial_year_query(self):
