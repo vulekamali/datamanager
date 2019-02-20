@@ -151,7 +151,7 @@ class FinancialYear(models.Model):
 
     @classmethod
     def get_latest_year(cls):
-        return cls.objects.order_by('-slug')[0]
+        return cls.objects.filter(published=True).order_by('-slug')[0]
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
