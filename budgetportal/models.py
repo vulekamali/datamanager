@@ -87,6 +87,7 @@ EXPENDITURE_TIME_SERIES_PHASES = (
 class FinancialYear(models.Model):
     organisational_unit = 'financial_year'
     slug = models.SlugField(max_length=7, unique=True)
+    published = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-slug']
@@ -144,7 +145,7 @@ class FinancialYear(models.Model):
 
     @classmethod
     def get_available_years(cls):
-        years = list(cls.objects.order_by('-slug')[:4])
+        years = list(cls.objects.filter(published=True).order_by('-slug')[:4])
         years.reverse()
         return years
 
