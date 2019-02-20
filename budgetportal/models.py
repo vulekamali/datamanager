@@ -51,6 +51,7 @@ REVENUE_RESOURCE_IDS = {
 
 CPI_RESOURCE_IDS = {
     '2018-19': '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d',
+    '2019-20': '7d0b4608-6e6c-4c7f-b0d7-9a2e54bbecdc'
 }
 
 prov_abbrev = {
