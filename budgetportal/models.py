@@ -1423,6 +1423,7 @@ class InfrastructureProject:
     def __init__(self, **kwargs):
         self.records = kwargs.get('records')
         self.name = self.records[0]['Project name']
+        self.slug = self.records[0]['Project slug']
         self.stage = self.records[0]['Current project stage']
         self.department_name = self.records[0]['Department']
         self.description = self.records[0]['Project description']
@@ -1460,7 +1461,7 @@ class InfrastructureProject:
         """ Uses first CSV resource in dataset """
         resource = cls.get_dataset().get_resource(format='CSV')
         sql = '''
-                SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}' 
+                SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}'
             '''.format(resource['id'], project_slug)
         params = {'sql': sql}
         revenue_result = requests.get(CKAN_DATASTORE_URL, params=params)
@@ -1490,12 +1491,12 @@ class InfrastructureProject:
 
         projects = []
         for project_name in unique_project_names:
-            project_list = filter(lambda x: x['Project name'] == project_name, revenue_data)
+            project_list = filter(lambda x: x['Project name'] == project_name, project_records)
             projects.append(InfrastructureProject(records=project_list))
         return projects
 
     def get_url_path(self):
-        return "/infrastructure-projects/{}".format(slugify(self.department_name + '-' + self.name))
+        return "/infrastructure-projects/{}".format(self.slug)
 
     @staticmethod
     def _calculate_projected_expenditure(records):
