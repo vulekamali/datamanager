@@ -13,9 +13,14 @@ from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.db.utils import ProgrammingError
+from django.contrib import messages
+import logging
 
 
+logger = logging.getLogger(__name__)
 admin.site.login = login_required(admin.site.login)
+
 
 class FinancialYearAdmin(admin.ModelAdmin):
     pass
@@ -136,15 +141,19 @@ class SiteAdmin(admin.ModelAdmin):
 admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
 
 
-for financial_year in FinancialYear.objects.all():
-    for sphere in financial_year.spheres.all():
-        view = EntityDatasetsView.as_view(
-            financial_year_slug=financial_year.slug,
-            sphere_slug=sphere.slug,
-        )
-        path = "%s/%s/entity_datasets" % (financial_year.slug, sphere.slug)
-        label = "Entity Datasets - %s %s" % (financial_year.slug, sphere.name)
-        admin.site.register_view(path, label, view=view)
+try:
+    for financial_year in FinancialYear.objects.all():
+        for sphere in financial_year.spheres.all():
+            view = EntityDatasetsView.as_view(
+                financial_year_slug=financial_year.slug,
+                sphere_slug=sphere.slug,
+            )
+            path = "%s/%s/entity_datasets" % (financial_year.slug, sphere.slug)
+            label = "Entity Datasets - %s %s" % (financial_year.slug, sphere.name)
+            admin.site.register_view(path, label, view=view)
+except ProgrammingError, e:
+    logging.error(e, exc_info=True)
+
 
 admin.site.register(FinancialYear, FinancialYearAdmin)
 admin.site.register(Sphere, SphereAdmin)

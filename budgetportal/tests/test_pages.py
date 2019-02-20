@@ -12,11 +12,11 @@ import yaml
 
 class BasicPagesTestCase(TestCase):
     def setUp(self):
-        FinancialYear.objects.create(slug="2015-16")
-        FinancialYear.objects.create(slug="2016-17")
-        FinancialYear.objects.create(slug="2017-18")
-        FinancialYear.objects.create(slug="2018-19")
-        FinancialYear.objects.create(slug="2019-20")
+        FinancialYear.objects.create(slug="2015-16", published=True)
+        FinancialYear.objects.create(slug="2016-17", published=True)
+        FinancialYear.objects.create(slug="2017-18", published=True)
+        FinancialYear.objects.create(slug="2018-19", published=True)
+        FinancialYear.objects.create(slug="2019-20", published=True)
         for year in FinancialYear.objects.all():
             # spheres
             national = Sphere.objects.create(financial_year=year, name='National')
