@@ -145,7 +145,7 @@ def department_list_csv(request, financial_year_id):
                     'vote_number': department.vote_number,
                     'is_vote_primary': department.is_vote_primary,
                     'intro': department.intro.encode("utf-8"),
-                    'website_url': department.get_website_url(),
+                    'website_url': department.get_latest_website_url(),
                 })
 
     return response
@@ -184,7 +184,7 @@ def department_list(request, financial_year_id):
                     'slug': str(department.slug),
                     'vote_number': department.vote_number,
                     'url_path': department.get_url_path(),
-                    'website_url': department.get_website_url(),
+                    'website_url': department.get_latest_website_url(),
                 })
             departments = sorted(departments, key=lambda d: d['vote_number'])
             context[sphere_name].append({
@@ -336,7 +336,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'name': primary_department.name,
             'slug': primary_department.slug
         },
-        'website_url': department.get_website_url(),
+        'website_url': department.get_latest_website_url(),
     }
 
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
