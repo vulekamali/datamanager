@@ -294,9 +294,14 @@ class Department(models.Model):
         logger.info("Creating package with %r", dataset_fields)
         return Dataset.from_package(ckan.action.package_create(**dataset_fields))
 
-    def get_website_url(self):
-        """ Always return the latest available URL, even for old departments. """
-        return self.get_latest_department_instance().website_url
+    def get_latest_website_url(self):
+        """ Always return the latest available non-null URL, even for old departments. """
+        newer_departments = Department.objects.filter(government__slug=self.government.slug,
+                                                      government__sphere__slug=self.government.sphere.slug,
+                                                      slug=self.slug,
+                                                      website_url__isnull=False).order_by(
+            '-government__sphere__financial_year__slug')
+        return newer_departments.first().website_url if newer_departments else None
 
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)

@@ -242,10 +242,10 @@ class DepartmentWebsiteUrlTestCase(TestCase):
 
     def test_website_url_always_returns_latest_department_year(self):
         """ Make sure that any given department for any given year always returns the website url of the
-        latest department instance in that sphere """
-        self.assertEqual(self.department.get_website_url(), None)
+        latest department instance in that sphere, where it is not null """
+        self.assertEqual(self.department.get_latest_website_url(), 'https://governmentwebsite.co.za')
         new_url = 'https://newwebsite.com'
         self.new_department.website_url = new_url
         self.new_department.save()
-        self.assertEqual(self.department.get_website_url(), new_url)
+        self.assertEqual(self.department.get_latest_website_url(), new_url)
 
