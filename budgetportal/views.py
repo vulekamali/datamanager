@@ -474,6 +474,8 @@ def infrastructure_project_detail(request, project_slug):
         dept = departments[0]
         infra_project_fin_year = InfrastructureProject.get_dataset().package['financial_year'][0]
         department_url = dept.get_latest_department_instance().get_url_path()
+        print(dept.get_financial_year().slug)
+        print(infra_project_fin_year)
         if dept.get_financial_year().slug == infra_project_fin_year:
             budget_dataset = dept.get_dataset(group_name='budget-vote-documents')
             if budget_dataset:
