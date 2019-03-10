@@ -413,20 +413,13 @@ def infrastructure_projects_overview(request):
         return HttpResponse(status=404)
     projects = []
     for project in infrastructure_projects:
-        departments = Department.objects.filter(slug=slugify(project.department_name),
-                                                government__sphere__slug='national').order_by('government__sphere__financial_year')
+        departments = Department.objects.filter(
+            slug=slugify(project.department_name),
+            government__sphere__slug='national'
+        )
         department_url = None
-        pdf_document_url = None
         if departments:
-            dept = departments[0]
-            infra_project_fin_year = InfrastructureProject.get_dataset().package['financial_year'][0]
-            department_url = dept.get_latest_department_instance().get_url_path()
-            if dept.get_financial_year().slug == infra_project_fin_year:
-                budget_dataset = dept.get_dataset(group_name='budget-vote-documents')
-                if budget_dataset:
-                    document_resource = budget_dataset.get_resource(format='PDF')
-                    if document_resource:
-                        pdf_document_url = document_resource['url']
+            department_url = departments[0].get_latest_department_instance().get_url_path()
 
         projects.append({
             'name': project.name,
@@ -443,7 +436,7 @@ def infrastructure_projects_overview(request):
             'department': {
                 'name': project.department_name,
                 'url': department_url,
-                'budget_document': pdf_document_url
+                'budget_document': project.get_budget_document_url()
             },
             'nature_of_investment': project.nature_of_investment,
             'infrastructure_type': project.infrastructure_type,
@@ -466,21 +459,13 @@ def infrastructure_project_detail(request, project_slug):
     project = InfrastructureProject.get_project_from_resource(project_slug)
     if project is None:
         return HttpResponse(status=404)
-    departments = Department.objects.filter(slug=slugify(project.department_name),
-                                            government__sphere__slug='national').order_by('government__sphere__financial_year')
+    departments = Department.objects.filter(
+        slug=slugify(project.department_name),
+        government__sphere__slug='national'
+    )
     department_url = None
-    pdf_document_url = None
     if departments:
-        dept = departments[0]
-        infra_project_fin_year = InfrastructureProject.get_dataset().package['financial_year'][0]
-        department_url = dept.get_latest_department_instance().get_url_path()
-        if dept.get_financial_year().slug == infra_project_fin_year:
-            budget_dataset = dept.get_dataset(group_name='budget-vote-documents')
-            if budget_dataset:
-                document_resource = budget_dataset.get_resource(format='PDF')
-                if document_resource:
-                    pdf_document_url = document_resource['url']
-
+        department_url = departments[0].get_latest_department_instance().get_url_path()
 
     project = {
         'dataset_url': InfrastructureProject.get_dataset().get_url_path(),
@@ -495,7 +480,7 @@ def infrastructure_project_detail(request, project_slug):
         'department': {
             'name': project.department_name,
             'url': department_url,
-            'budget_document': pdf_document_url
+            'budget_document': project.get_budget_document_url()
         },
         'provinces': project.get_provinces(),
         'total_budget': project.total_budget,

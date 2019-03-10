@@ -1513,6 +1513,26 @@ class InfrastructureProject:
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(self.slug)
 
+    def get_budget_document_url(self, document_format='PDF'):
+        """
+        Returns budget-vote-document URL, for given format,
+        if the latest department instance matches the project year
+        """
+        departments = Department.objects.filter(
+            slug=slugify(self.department_name),
+            government__sphere__slug='national'
+        )
+        if departments:
+            latest_dept = departments[0].get_latest_department_instance()
+            project_year = InfrastructureProject.get_dataset().package['financial_year'][0]
+            if latest_dept.get_financial_year().slug == project_year:
+                budget_dataset = latest_dept.get_dataset(group_name='budget-vote-documents')
+                if budget_dataset:
+                    document_resource = budget_dataset.get_resource(format=document_format)
+                    if document_resource:
+                        return document_resource['url']
+        return None
+
     @staticmethod
     def _calculate_projected_expenditure(records):
         """ Calculate sum of predicted amounts from a list of records """
