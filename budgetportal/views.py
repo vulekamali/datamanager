@@ -467,7 +467,7 @@ def infrastructure_project_detail(request, project_slug):
     if project is None:
         return HttpResponse(status=404)
     departments = Department.objects.filter(slug=slugify(project.department_name),
-                                            government__sphere__slug='national')
+                                            government__sphere__slug='national').order_by('government__sphere__financial_year')
     department_url = None
     pdf_document_url = None
     if departments:
