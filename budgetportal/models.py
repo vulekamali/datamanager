@@ -1126,9 +1126,9 @@ class Department(models.Model):
 
         return subprog_dict.values() if subprog_dict else None
 
-    def get_expenditure_time_series_by_department(self):
+    def get_treemap_expenditure_by_department(self):
         """ Used by the treemap on the homepage. """
-        expenditure = []
+        national_expenditure = []
         dataset = self.get_expenditure_time_series_dataset()
         if not dataset:
             return None
@@ -1163,9 +1163,14 @@ class Department(models.Model):
                 'budget_phase': cell[openspending_api.get_phase_ref()],
                 'financial_year': cell[openspending_api.get_financial_year_ref()]
             }
-            expenditure.append(ex)
+            national_expenditure.append(ex)
 
-        return {'expenditure': expenditure}
+        return {
+            'expenditure': {
+                'national': national_expenditure,
+                'provincial': [],
+            }
+        } if national_expenditure else None
 
     def get_expenditure_time_series_summary(self):
         base_year = get_base_year()

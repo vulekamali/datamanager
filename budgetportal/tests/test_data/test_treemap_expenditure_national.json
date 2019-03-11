@@ -1,0 +1,53 @@
+{
+  "complete": [
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "Arts and Culture",
+      "_count": 239,
+      "financial_year.financial_year": 2018,
+      "value.sum": 3826047000
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "Basic Education",
+      "_count": 372,
+      "financial_year.financial_year": 2018,
+      "value.sum": 21286426000
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "Civilian Secretariat",
+      "_count": 130,
+      "financial_year.financial_year": 2018,
+      "value.sum": 1290888000
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "Communications",
+      "_count": 439,
+      "financial_year.financial_year": 2018,
+      "value.sum": 70815477000
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "Cooperative Governance and Traditional Affairs",
+      "_count": 474,
+      "financial_year.financial_year": 2018,
+      "value.sum": 20588554000
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "Correctional Services",
+      "_count": 1486,
+      "financial_year.financial_year": 2018,
+      "value.sum": 45088161000
+    },
+    {
+      "budget_phase.budget_phase": "Adjusted appropriation",
+      "vote_number.department": "Defence and Military Veterans",
+      "_count": 126,
+      "financial_year.financial_year": 2018,
+      "value.sum": 885778000
+    }
+  ]
+}
