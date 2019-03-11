@@ -21,6 +21,19 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
+def homepage(request):
+    """ The vulekamali home page """
+
+    # Build expenditure data (for keymap)
+    dept = Department.objects.filter(government__sphere__slug='national')[0]
+    context = dept.get_expenditure_time_series_by_department()
+
+    response_yaml = yaml.safe_dump(context,
+                                   default_flow_style=False,
+                                   encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
 def year_home(request, financial_year_id):
     """
     View of a financial year homepage, e.g. /2017-18

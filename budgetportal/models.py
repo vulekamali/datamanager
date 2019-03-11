@@ -1126,6 +1126,47 @@ class Department(models.Model):
 
         return subprog_dict.values() if subprog_dict else None
 
+    def get_expenditure_time_series_by_department(self):
+        """ Used by the treemap on the homepage. """
+        expenditure = []
+        dataset = self.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+
+        cuts = [openspending_api.get_adjustment_kind_ref() + ':' + '"Total"']
+        drilldowns = [
+            openspending_api.get_financial_year_ref(),
+            openspending_api.get_phase_ref(),
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_programme_name_ref(),
+        ]
+        results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
+            results['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF,
+        )
+
+        result_cells = openspending_api.aggregate_by_three_ref(
+            [openspending_api.get_department_name_ref(),
+             openspending_api.get_financial_year_ref(),
+             openspending_api.get_phase_ref()],
+            filtered_cells
+        )
+
+        for cell in result_cells:
+            ex = {
+                'name': cell[openspending_api.get_department_name_ref()],
+                'amount': cell['value.sum'],
+                'budget_phase': cell[openspending_api.get_phase_ref()],
+                'financial_year': cell[openspending_api.get_financial_year_ref()]
+            }
+            expenditure.append(ex)
+
+        return {'expenditure': expenditure}
+
     def get_expenditure_time_series_summary(self):
         base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
