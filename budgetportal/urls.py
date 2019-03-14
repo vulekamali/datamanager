@@ -23,7 +23,7 @@ def permission_denied(request):
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html')),
-    url(r'^treemap$', views.homepage),
+    url(r'^treemap.yaml$', views.homepage),
 
     # Home Page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
