@@ -24,7 +24,6 @@ COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YE
 def homepage(request):
     """ The vulekamali home page """
 
-    # Build expenditure data (for keymap)
     dept = Department.objects.filter(government__sphere__slug='national')[0]
     context = dept.get_treemap_expenditure_by_department()
 
