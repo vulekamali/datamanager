@@ -1133,43 +1133,70 @@ class Department(models.Model):
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
+        phase_ref = openspending_api.get_phase_ref()
+        year_ref = openspending_api.get_financial_year_ref()
 
         cuts = [openspending_api.get_adjustment_kind_ref() + ':' + '"Total"']
         drilldowns = [
-            openspending_api.get_financial_year_ref(),
-            openspending_api.get_phase_ref(),
+            year_ref,
+            phase_ref,
             openspending_api.get_department_name_ref(),
-            openspending_api.get_programme_name_ref(),
+            openspending_api.get_programme_name_ref()
         ]
-        results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        total_budget_drilldowns = [
+            year_ref,
+            phase_ref,
+            openspending_api.get_programme_name_ref()
+        ]
+        total_budget_results = openspending_api.aggregate(cuts=cuts, drilldowns=total_budget_drilldowns)
+        total_budget_filtered = openspending_api.filter_by_ref_exclusion(
+            total_budget_results['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF
+        )
+        total_budget_aggregated = openspending_api.aggregate_by_ref(
+            [year_ref, phase_ref],
+            total_budget_filtered
+        )
+
+        total_budgets = {}
+        for cell in total_budget_aggregated:
+            if cell[phase_ref] not in total_budgets.keys():
+                total_budgets[cell[phase_ref]] = {cell[year_ref]: cell['value.sum']}
+            else:
+                total_budgets[cell[phase_ref]][cell[year_ref]] = cell['value.sum']
+
+        expenditure_results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
 
         filtered_cells = openspending_api.filter_by_ref_exclusion(
-            results['cells'],
+            expenditure_results['cells'],
             openspending_api.get_programme_name_ref(),
             DIRECT_CHARGE_NRF,
         )
 
         result_cells = openspending_api.aggregate_by_three_ref(
             [openspending_api.get_department_name_ref(),
-             openspending_api.get_financial_year_ref(),
-             openspending_api.get_phase_ref()],
+             year_ref, phase_ref],
             filtered_cells
         )
 
         for cell in result_cells:
+            # Add total budget to object from dict
+            # Calculate percentage of total budget
             ex = {
                 'name': cell[openspending_api.get_department_name_ref()],
                 'amount': cell['value.sum'],
-                'budget_phase': cell[openspending_api.get_phase_ref()],
-                'financial_year': cell[openspending_api.get_financial_year_ref()]
+                'budget_phase': cell[phase_ref],
+                'financial_year': cell[year_ref]
             }
             national_expenditure.append(ex)
 
         return {
             'expenditure': {
                 'national': national_expenditure,
-                'provincial': [],
-            }
+            },
+            'slug': 'departments-treemap',
+            'total_budgets': total_budgets
         } if national_expenditure else None
 
     def get_expenditure_time_series_summary(self):

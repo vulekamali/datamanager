@@ -27,7 +27,7 @@ def homepage(request):
     dept = Department.objects.filter(government__sphere__slug='national')[0]
     context = dept.get_treemap_expenditure_by_department()
 
-    response_yaml = yaml.safe_dump(context['expenditure']['national'],
+    response_yaml = yaml.safe_dump(context,
                                    default_flow_style=False,
                                    encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
