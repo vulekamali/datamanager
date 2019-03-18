@@ -1181,13 +1181,14 @@ class Department(models.Model):
         )
 
         for cell in result_cells:
-            # Add total budget to object from dict
             # Calculate percentage of total budget
+            perc = (float(cell['value.sum']) / total_budgets[cell[phase_ref]][cell[year_ref]]) * 100
             ex = {
                 'name': cell[openspending_api.get_department_name_ref()],
-                'amount': cell['value.sum'],
+                'amount': float(cell['value.sum']),
                 'budget_phase': cell[phase_ref],
-                'financial_year': cell[year_ref]
+                'financial_year': cell[year_ref],
+                'percentage_of_total': perc
             }
             national_expenditure.append(ex)
 
