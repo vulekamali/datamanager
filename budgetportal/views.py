@@ -25,7 +25,7 @@ def homepage(request):
     """ The vulekamali home page """
 
     dept = Department.objects.filter(government__sphere__slug='national')[0]
-    context = dept.get_treemap_expenditure_by_department()
+    context = dept.get_expenditure_by_year_phase_department()
 
     response_yaml = yaml.safe_dump(context,
                                    default_flow_style=False,

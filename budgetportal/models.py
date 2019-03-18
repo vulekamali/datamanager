@@ -835,7 +835,7 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF,
         )
 
-        cells_for_type_and_total = openspending_api.aggregate_by_ref(
+        cells_for_type_and_total = openspending_api.aggregate_by_refs(
             [openspending_api.get_adjustment_kind_ref(),
              openspending_api.get_phase_ref()],
             filtered_cells
@@ -971,7 +971,7 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF
         )
 
-        cells_for_econ_classes = openspending_api.aggregate_by_ref(
+        cells_for_econ_classes = openspending_api.aggregate_by_refs(
             [openspending_api.get_econ_class_2_ref(),
              openspending_api.get_econ_class_3_ref()],
             filtered_cells
@@ -1127,6 +1127,7 @@ class Department(models.Model):
         return subprog_dict.values() if subprog_dict else None
 
     def get_all_budget_totals_by_year_and_phase(self):
+        """ Returns the total for each year:phase combination from the expenditure time series dataset. """
         dataset = self.get_expenditure_time_series_dataset()
         if not dataset:
             return None
@@ -1146,7 +1147,7 @@ class Department(models.Model):
             openspending_api.get_programme_name_ref(),
             DIRECT_CHARGE_NRF
         )
-        total_budget_aggregated = openspending_api.aggregate_by_ref(
+        total_budget_aggregated = openspending_api.aggregate_by_refs(
             [year_ref, phase_ref],
             total_budget_filtered
         )
@@ -1160,8 +1161,9 @@ class Department(models.Model):
 
         return total_budgets
 
-    def get_treemap_expenditure_by_department(self):
-        """ Used by the treemap on the homepage. """
+    def get_expenditure_by_year_phase_department(self):
+        """ Returns a data object for each department, year and phase. Adds additional data required for the Treemap.
+         From the Expenditure Time Series dataset. """
         national_expenditure = []
         dataset = self.get_expenditure_time_series_dataset()
         if not dataset:
@@ -1180,13 +1182,15 @@ class Department(models.Model):
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
+        # Disaggregate and filter out any direct charge NRF programmes
         filtered_cells = openspending_api.filter_by_ref_exclusion(
             expenditure_results['cells'],
             openspending_api.get_programme_name_ref(),
             DIRECT_CHARGE_NRF,
         )
 
-        result_cells = openspending_api.aggregate_by_three_ref(
+        # Re-aggragate by year:phase
+        result_cells = openspending_api.aggregate_by_refs(
             [openspending_api.get_department_name_ref(),
              year_ref, phase_ref],
             filtered_cells
@@ -1259,7 +1263,7 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF,
         )
 
-        result_cells = openspending_api.aggregate_by_three_ref(
+        result_cells = openspending_api.aggregate_by_refs(
             [openspending_api.get_department_name_ref(),
              openspending_api.get_financial_year_ref(),
              openspending_api.get_phase_ref()],

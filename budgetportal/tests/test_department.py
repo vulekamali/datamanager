@@ -88,7 +88,7 @@ class AdjustedBudgetTestCase(TestCase):
         mock_openspending_api.aggregate = Mock
         mock_openspending_api.filter_dept = Mock(return_value={'cells': []})
         mock_openspending_api.filter_by_ref_exclusion = Mock
-        mock_openspending_api.aggregate_by_ref = Mock
+        mock_openspending_api.aggregate_by_refs = Mock
         mock_openspending_api.aggregate_url = Mock
         mock_dataset.get_openspending_api = Mock(return_value=mock_openspending_api)
         self.department.get_adjusted_estimates_expenditure_dataset = Mock(return_value=mock_dataset)
@@ -186,14 +186,14 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
         self.mock_openspending_api.filter_dept = Mock(return_value={'cells': []})
         self.mock_openspending_api.filter_by_ref_exclusion = Mock
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=self.mock_data['test_cells_data_complete'])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['test_cells_data_complete'])
         self.mock_openspending_api.aggregate_url = Mock
         mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
         self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
         self.department.get_financial_year = Mock(return_value=year)
 
     def test_no_cells_null_response(self):
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=[])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result, None)
 
@@ -204,7 +204,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
     def test_missing_data_not_published(self):
         """ Here we feed an incomplete set of cells and expect it to tell us that 2018 data has not been published """
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 0, '_count': 0}]})
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result['notices'], ['Please note that the data for 2018 has not been published on vulekamali.'])
 
@@ -212,7 +212,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         """ Here we feed an incomplete set of cells and expect it to tell us that the department did not exist
         (removed 2018 data) """
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result['notices'], ['This department did not exist for some years displayed.'])
 
@@ -278,20 +278,20 @@ class TreemapExpenditureByDepartmentTestCase(TestCase):
         self.mock_openspending_api.get_financial_year_ref = Mock(return_value="financial_year.financial_year")
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
         self.mock_openspending_api.filter_by_ref_exclusion = Mock
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=self.mock_data['complete'])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['complete'])
         self.mock_openspending_api.aggregate_url = Mock
         mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
         self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
 
     @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
     def test_no_cells_null_response(self, total_budgets_mock):
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=[])
-        result = self.department.get_treemap_expenditure_by_department()
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
+        result = self.department.get_expenditure_by_year_phase_department()
         self.assertEqual(result, None)
 
     @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
     def test_complete_data(self, total_budgets_mock):
-        result = self.department.get_treemap_expenditure_by_department()
+        result = self.department.get_expenditure_by_year_phase_department()
         national_expenditure = result['expenditure']['national']
         self.assertEqual(len(national_expenditure), 7)
         expenditure_keys = national_expenditure[0].keys()
@@ -299,5 +299,5 @@ class TreemapExpenditureByDepartmentTestCase(TestCase):
         self.assertIn('amount', expenditure_keys)
         self.assertIn('budget_phase', expenditure_keys)
         self.assertIn('financial_year', expenditure_keys)
-        self.assertIn('perc_of_total', expenditure_keys)
+        self.assertIn('percentage_of_total', expenditure_keys)
         self.assertIn('detail', expenditure_keys)
