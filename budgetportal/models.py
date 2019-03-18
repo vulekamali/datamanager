@@ -1196,7 +1196,6 @@ class Department(models.Model):
             'expenditure': {
                 'national': national_expenditure,
             },
-            'slug': 'departments-treemap',
             'total_budgets': total_budgets
         } if national_expenditure else None
 
