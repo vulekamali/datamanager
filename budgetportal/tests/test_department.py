@@ -1,6 +1,7 @@
 """
 Tests of models.Department
 """
+import mock
 
 from budgetportal.models import (
     FinancialYear,
@@ -282,16 +283,21 @@ class TreemapExpenditureByDepartmentTestCase(TestCase):
         mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
         self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
 
-    def test_no_cells_null_response(self):
+    @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
+    def test_no_cells_null_response(self, total_budgets_mock):
         self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=[])
         result = self.department.get_treemap_expenditure_by_department()
         self.assertEqual(result, None)
 
-    def test_complete_data(self):
+    @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
+    def test_complete_data(self, total_budgets_mock):
         result = self.department.get_treemap_expenditure_by_department()
         national_expenditure = result['expenditure']['national']
         self.assertEqual(len(national_expenditure), 7)
-        self.assertIn('name', national_expenditure[0].keys())
-        self.assertIn('amount', national_expenditure[0].keys())
-        self.assertIn('budget_phase', national_expenditure[0].keys())
-        self.assertIn('financial_year', national_expenditure[0].keys())
+        expenditure_keys = national_expenditure[0].keys()
+        self.assertIn('name', expenditure_keys)
+        self.assertIn('amount', expenditure_keys)
+        self.assertIn('budget_phase', expenditure_keys)
+        self.assertIn('financial_year', expenditure_keys)
+        self.assertIn('perc_of_total', expenditure_keys)
+        self.assertIn('detail', expenditure_keys)

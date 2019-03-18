@@ -1126,9 +1126,7 @@ class Department(models.Model):
 
         return subprog_dict.values() if subprog_dict else None
 
-    def get_treemap_expenditure_by_department(self):
-        """ Used by the treemap on the homepage. """
-        national_expenditure = []
+    def get_all_budget_totals_by_year_and_phase(self):
         dataset = self.get_expenditure_time_series_dataset()
         if not dataset:
             return None
@@ -1136,19 +1134,13 @@ class Department(models.Model):
         phase_ref = openspending_api.get_phase_ref()
         year_ref = openspending_api.get_financial_year_ref()
 
-        cuts = [openspending_api.get_adjustment_kind_ref() + ':' + '"Total"']
-        drilldowns = [
-            year_ref,
-            phase_ref,
-            openspending_api.get_department_name_ref(),
-            openspending_api.get_programme_name_ref()
-        ]
+        total_budget_cuts = [openspending_api.get_adjustment_kind_ref() + ':' + '"Total"']
         total_budget_drilldowns = [
             year_ref,
             phase_ref,
             openspending_api.get_programme_name_ref()
         ]
-        total_budget_results = openspending_api.aggregate(cuts=cuts, drilldowns=total_budget_drilldowns)
+        total_budget_results = openspending_api.aggregate(cuts=total_budget_cuts, drilldowns=total_budget_drilldowns)
         total_budget_filtered = openspending_api.filter_by_ref_exclusion(
             total_budget_results['cells'],
             openspending_api.get_programme_name_ref(),
@@ -1162,11 +1154,31 @@ class Department(models.Model):
         total_budgets = {}
         for cell in total_budget_aggregated:
             if cell[phase_ref] not in total_budgets.keys():
-                total_budgets[cell[phase_ref]] = {cell[year_ref]: cell['value.sum']}
+                total_budgets[cell[phase_ref]] = {cell[year_ref]: float(cell['value.sum'])}
             else:
-                total_budgets[cell[phase_ref]][cell[year_ref]] = cell['value.sum']
+                total_budgets[cell[phase_ref]][cell[year_ref]] = float(cell['value.sum'])
 
-        expenditure_results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        return total_budgets
+
+    def get_treemap_expenditure_by_department(self):
+        """ Used by the treemap on the homepage. """
+        national_expenditure = []
+        dataset = self.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        phase_ref = openspending_api.get_phase_ref()
+        year_ref = openspending_api.get_financial_year_ref()
+
+        expenditure_cuts = [openspending_api.get_adjustment_kind_ref() + ':' + '"Total"']
+        expenditure_drilldowns = [
+            year_ref,
+            phase_ref,
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_programme_name_ref()
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
         filtered_cells = openspending_api.filter_by_ref_exclusion(
             expenditure_results['cells'],
@@ -1180,6 +1192,7 @@ class Department(models.Model):
             filtered_cells
         )
 
+        total_budgets = self.get_all_budget_totals_by_year_and_phase()
         national_depts = Department.objects.filter(government__sphere__slug='national')
         for cell in result_cells:
             perc = (float(cell['value.sum']) / total_budgets[cell[phase_ref]][cell[year_ref]]) * 100
