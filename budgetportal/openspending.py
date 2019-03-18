@@ -96,7 +96,7 @@ class BabbageFiscalDataset():
     @staticmethod
     def aggregate_by_refs(aggregate_refs, cells):
         """ Simulates a basic version of aggregation via Open Spending API
-        Accepts a list of cells and a list of column references. """
+        Accepts a list of cells and a list of any number of column references. """
 
         aggregated_cells = list()
         unique_reference_combos = list()
