@@ -259,9 +259,9 @@ class TreemapExpenditureByDepartmentTestCase(TestCase):
 
     def setUp(self):
         self.mock_data = treemap_mock_data
-        year = FinancialYear(slug="2018-19")
-        sphere = Sphere(financial_year=year, name="A sphere")
-        government = Government(sphere=sphere, name="A government")
+        year = FinancialYear.objects.create(slug="2018-19")
+        sphere = Sphere.objects.create(financial_year=year, name="national")
+        government = Government.objects.create(sphere=sphere, name="A government")
         self.department = Department(
             government=government,
             name="Fake",
@@ -282,6 +282,16 @@ class TreemapExpenditureByDepartmentTestCase(TestCase):
         self.mock_openspending_api.aggregate_url = Mock
         mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
         self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
+
+        vote_number = 1
+        for mock_object in self.mock_data['complete']:
+            dep = Department.objects.create(
+                government=government,
+                is_vote_primary=True,
+                name=mock_object['vote_number.department'],
+                vote_number=vote_number
+            )
+            vote_number += 1
 
     @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
     def test_no_cells_null_response(self, total_budgets_mock):
