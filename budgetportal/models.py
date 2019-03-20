@@ -1210,6 +1210,7 @@ class Department(models.Model):
                 logger.warning('No department found for: national {} {}'.format(
                     cell[year_ref], cell[openspending_api.get_department_name_ref()]
                 ))
+                continue
 
             ex = {
                 'name': cell[openspending_api.get_department_name_ref()],
