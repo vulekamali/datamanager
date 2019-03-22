@@ -1189,15 +1189,36 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF,
         )
 
-        # Re-aggragate by year:phase
+        # Re-aggregate by year:phase
         result_cells = openspending_api.aggregate_by_refs(
             [openspending_api.get_department_name_ref(),
              year_ref, phase_ref],
             filtered_cells
         )
 
-        total_budgets = self.get_all_budget_totals_by_year_and_phase()
+        # total_budgets = self.get_all_budget_totals_by_year_and_phase()
+        total_budgets = {}
         national_depts = Department.objects.filter(government__sphere__slug='national')
+
+        for cell in result_cells:
+            try:
+                national_depts.get(
+                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(str(cell[year_ref])),
+                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                )
+            except Department.DoesNotExist:
+                logger.warning('No department found for: national {} {}'.format(
+                    cell[year_ref], cell[openspending_api.get_department_name_ref()]
+                ))
+                continue
+
+            if cell[phase_ref] not in total_budgets.keys():
+                total_budgets[cell[phase_ref]] = {cell[year_ref]: float(cell['value.sum'])}
+            elif cell[year_ref] not in total_budgets[cell[phase_ref]].keys():
+                total_budgets[cell[phase_ref]][cell[year_ref]] = float(cell['value.sum'])
+            else:
+                total_budgets[cell[phase_ref]][cell[year_ref]] += float(cell['value.sum'])
+
         for cell in result_cells:
             perc = (float(cell['value.sum']) / total_budgets[cell[phase_ref]][cell[year_ref]]) * 100
             try:
