@@ -1207,9 +1207,6 @@ class Department(models.Model):
                     slug=slugify(cell[openspending_api.get_department_name_ref()]),
                 )
             except Department.DoesNotExist:
-                logger.warning('No department found for: national {} {}'.format(
-                    cell[year_ref], cell[openspending_api.get_department_name_ref()]
-                ))
                 continue
 
             if cell[phase_ref] not in total_budgets.keys():
