@@ -1,6 +1,7 @@
 """
 Tests of models.Department
 """
+import mock
 
 from budgetportal.models import (
     FinancialYear,
@@ -13,8 +14,11 @@ from django.test import TestCase
 from mock import Mock
 import json
 
-with open('budgetportal/tests/test_data/budget_and_actual.json', 'r') as mock_data:
-    mock_data = json.load(mock_data)
+with open('budgetportal/tests/test_data/budget_and_actual.json', 'r') as department_mock_data:
+    department_mock_data = json.load(department_mock_data)
+
+with open('budgetportal/tests/test_data/test_treemap_expenditure_national.json', 'r') as treemap_mock_data:
+    treemap_mock_data = json.load(treemap_mock_data)
 
 
 class AdjustedBudgetMissingTestCase(TestCase):
@@ -84,7 +88,7 @@ class AdjustedBudgetTestCase(TestCase):
         mock_openspending_api.aggregate = Mock
         mock_openspending_api.filter_dept = Mock(return_value={'cells': []})
         mock_openspending_api.filter_by_ref_exclusion = Mock
-        mock_openspending_api.aggregate_by_ref = Mock
+        mock_openspending_api.aggregate_by_refs = Mock
         mock_openspending_api.aggregate_url = Mock
         mock_dataset.get_openspending_api = Mock(return_value=mock_openspending_api)
         self.department.get_adjusted_estimates_expenditure_dataset = Mock(return_value=mock_dataset)
@@ -114,7 +118,7 @@ class BudgetedAndActualExpenditureProgrammeTestCase(TestCase):
     """Unit tests of budgeted and actual expenditure summary for a department"""
 
     def setUp(self):
-        self.mock_data = mock_data
+        self.mock_data = department_mock_data
         year = FinancialYear(slug="2018-19")
         sphere = Sphere(financial_year=year, name="A sphere")
         government = Government(sphere=sphere, name="A government")
@@ -161,7 +165,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
     """Unit tests of budgeted and actual expenditure summary for a department"""
 
     def setUp(self):
-        self.mock_data = mock_data
+        self.mock_data = department_mock_data
         year = FinancialYear(slug="2018-19")
         sphere = Sphere(financial_year=year, name="A sphere")
         government = Government(sphere=sphere, name="A government")
@@ -182,14 +186,14 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
         self.mock_openspending_api.filter_dept = Mock(return_value={'cells': []})
         self.mock_openspending_api.filter_by_ref_exclusion = Mock
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=self.mock_data['test_cells_data_complete'])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['test_cells_data_complete'])
         self.mock_openspending_api.aggregate_url = Mock
         mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
         self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
         self.department.get_financial_year = Mock(return_value=year)
 
     def test_no_cells_null_response(self):
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=[])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result, None)
 
@@ -200,7 +204,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
     def test_missing_data_not_published(self):
         """ Here we feed an incomplete set of cells and expect it to tell us that 2018 data has not been published """
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 0, '_count': 0}]})
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result['notices'], ['Please note that the data for 2018 has not been published on vulekamali.'])
 
@@ -208,7 +212,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         """ Here we feed an incomplete set of cells and expect it to tell us that the department did not exist
         (removed 2018 data) """
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
-        self.mock_openspending_api.aggregate_by_three_ref = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['test_cells_data_missing_2018'])
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result['notices'], ['This department did not exist for some years displayed.'])
 
@@ -249,3 +253,61 @@ class DepartmentWebsiteUrlTestCase(TestCase):
         self.new_department.save()
         self.assertEqual(self.department.get_latest_website_url(), new_url)
 
+
+class TreemapExpenditureByDepartmentTestCase(TestCase):
+    """ Unit tests for the treemap expenditure by department function. """
+
+    def setUp(self):
+        self.mock_data = treemap_mock_data
+        year = FinancialYear.objects.create(slug="2018-19")
+        sphere = Sphere.objects.create(financial_year=year, name="national")
+        government = Government.objects.create(sphere=sphere, name="A government")
+        self.department = Department(
+            government=government,
+            name="Fake",
+            vote_number=1,
+            is_vote_primary=True,
+            intro="",
+        )
+        mock_dataset = Mock()
+        self.mock_openspending_api = Mock()
+        self.mock_openspending_api.get_adjustment_kind_ref = Mock(return_value='adjustment_kind_ref')
+        self.mock_openspending_api.get_phase_ref = Mock(return_value='budget_phase.budget_phase')
+        self.mock_openspending_api.get_programme_name_ref = Mock(return_value='programme_number.programme')
+        self.mock_openspending_api.get_department_name_ref = Mock(return_value='vote_number.department')
+        self.mock_openspending_api.get_financial_year_ref = Mock(return_value="financial_year.financial_year")
+        self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
+        self.mock_openspending_api.filter_by_ref_exclusion = Mock
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['complete'])
+        self.mock_openspending_api.aggregate_url = Mock
+        mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
+        self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
+
+        vote_number = 1
+        for mock_object in self.mock_data['complete']:
+            dep = Department.objects.create(
+                government=government,
+                is_vote_primary=True,
+                name=mock_object['vote_number.department'],
+                vote_number=vote_number
+            )
+            vote_number += 1
+
+    @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
+    def test_no_cells_null_response(self, total_budgets_mock):
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
+        result = self.department.get_expenditure_by_year_phase_department()
+        self.assertEqual(result, None)
+
+    @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
+    def test_complete_data(self, total_budgets_mock):
+        result = self.department.get_expenditure_by_year_phase_department()
+        national_expenditure = result['expenditure']['national']
+        self.assertEqual(len(national_expenditure), 7)
+        expenditure_keys = national_expenditure[0].keys()
+        self.assertIn('name', expenditure_keys)
+        self.assertIn('amount', expenditure_keys)
+        self.assertIn('budget_phase', expenditure_keys)
+        self.assertIn('financial_year', expenditure_keys)
+        self.assertIn('percentage_of_total', expenditure_keys)
+        self.assertIn('detail', expenditure_keys)

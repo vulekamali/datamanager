@@ -835,7 +835,7 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF,
         )
 
-        cells_for_type_and_total = openspending_api.aggregate_by_ref(
+        cells_for_type_and_total = openspending_api.aggregate_by_refs(
             [openspending_api.get_adjustment_kind_ref(),
              openspending_api.get_phase_ref()],
             filtered_cells
@@ -971,7 +971,7 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF
         )
 
-        cells_for_econ_classes = openspending_api.aggregate_by_ref(
+        cells_for_econ_classes = openspending_api.aggregate_by_refs(
             [openspending_api.get_econ_class_2_ref(),
              openspending_api.get_econ_class_3_ref()],
             filtered_cells
@@ -1126,6 +1126,127 @@ class Department(models.Model):
 
         return subprog_dict.values() if subprog_dict else None
 
+    def get_all_budget_totals_by_year_and_phase(self):
+        """ Returns the total for each year:phase combination from the expenditure time series dataset. """
+        dataset = self.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        phase_ref = openspending_api.get_phase_ref()
+        year_ref = openspending_api.get_financial_year_ref()
+
+        total_budget_cuts = [openspending_api.get_adjustment_kind_ref() + ':' + '"Total"']
+        total_budget_drilldowns = [
+            year_ref,
+            phase_ref,
+            openspending_api.get_programme_name_ref()
+        ]
+        total_budget_results = openspending_api.aggregate(cuts=total_budget_cuts, drilldowns=total_budget_drilldowns)
+        total_budget_filtered = openspending_api.filter_by_ref_exclusion(
+            total_budget_results['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF
+        )
+        total_budget_aggregated = openspending_api.aggregate_by_refs(
+            [year_ref, phase_ref],
+            total_budget_filtered
+        )
+
+        total_budgets = {}
+        for cell in total_budget_aggregated:
+            if cell[phase_ref] not in total_budgets.keys():
+                total_budgets[cell[phase_ref]] = {cell[year_ref]: float(cell['value.sum'])}
+            else:
+                total_budgets[cell[phase_ref]][cell[year_ref]] = float(cell['value.sum'])
+
+        return total_budgets
+
+    def get_expenditure_by_year_phase_department(self):
+        """ Returns a data object for each department, year and phase. Adds additional data required for the Treemap.
+         From the Expenditure Time Series dataset. """
+        national_expenditure = []
+        dataset = self.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        phase_ref = openspending_api.get_phase_ref()
+        year_ref = openspending_api.get_financial_year_ref()
+
+        expenditure_cuts = [openspending_api.get_adjustment_kind_ref() + ':' + '"Total"']
+        expenditure_drilldowns = [
+            year_ref,
+            phase_ref,
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_programme_name_ref()
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+
+        # Disaggregate and filter out any direct charge NRF programmes
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
+            expenditure_results['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF,
+        )
+
+        # Re-aggregate by year:phase
+        result_cells = openspending_api.aggregate_by_refs(
+            [openspending_api.get_department_name_ref(),
+             year_ref, phase_ref],
+            filtered_cells
+        )
+
+        # total_budgets = self.get_all_budget_totals_by_year_and_phase()
+        total_budgets = {}
+        national_depts = Department.objects.filter(government__sphere__slug='national')
+
+        for cell in result_cells:
+            try:
+                national_depts.get(
+                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(str(cell[year_ref])),
+                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                )
+            except Department.DoesNotExist:
+                continue
+
+            if cell[phase_ref] not in total_budgets.keys():
+                total_budgets[cell[phase_ref]] = {cell[year_ref]: float(cell['value.sum'])}
+            elif cell[year_ref] not in total_budgets[cell[phase_ref]].keys():
+                total_budgets[cell[phase_ref]][cell[year_ref]] = float(cell['value.sum'])
+            else:
+                total_budgets[cell[phase_ref]][cell[year_ref]] += float(cell['value.sum'])
+
+        for cell in result_cells:
+            perc = (float(cell['value.sum']) / total_budgets[cell[phase_ref]][cell[year_ref]]) * 100
+            try:
+                dept = national_depts.get(
+                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(str(cell[year_ref])),
+                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                )
+            except Department.DoesNotExist:
+                dept = None
+                logger.warning('No department found for: national {} {}'.format(
+                    cell[year_ref], cell[openspending_api.get_department_name_ref()]
+                ))
+                continue
+
+            ex = {
+                'name': cell[openspending_api.get_department_name_ref()],
+                'amount': float(cell['value.sum']),
+                'budget_phase': cell[phase_ref],
+                'financial_year': cell[year_ref],
+                'percentage_of_total': perc,
+                'detail': dept.get_url_path() if dept else None
+            }
+            national_expenditure.append(ex)
+
+        return {
+            'expenditure': {
+                'national': national_expenditure,
+            },
+            'total_budgets': total_budgets
+        } if national_expenditure else None
+
     def get_expenditure_time_series_summary(self):
         base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
@@ -1161,7 +1282,7 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF,
         )
 
-        result_cells = openspending_api.aggregate_by_three_ref(
+        result_cells = openspending_api.aggregate_by_refs(
             [openspending_api.get_department_name_ref(),
              openspending_api.get_financial_year_ref(),
              openspending_api.get_phase_ref()],
@@ -1512,6 +1633,26 @@ class InfrastructureProject:
 
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(self.slug)
+
+    def get_budget_document_url(self, document_format='PDF'):
+        """
+        Returns budget-vote-document URL, for given format,
+        if the latest department instance matches the project year
+        """
+        departments = Department.objects.filter(
+            slug=slugify(self.department_name),
+            government__sphere__slug='national'
+        )
+        if departments:
+            latest_dept = departments[0].get_latest_department_instance()
+            project_year = InfrastructureProject.get_dataset().package['financial_year'][0]
+            if latest_dept.get_financial_year().slug == project_year:
+                budget_dataset = latest_dept.get_dataset(group_name='budget-vote-documents')
+                if budget_dataset:
+                    document_resource = budget_dataset.get_resource(format=document_format)
+                    if document_resource:
+                        return document_resource['url']
+        return None
 
     @staticmethod
     def _calculate_projected_expenditure(records):
