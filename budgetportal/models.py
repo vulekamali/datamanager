@@ -84,6 +84,12 @@ EXPENDITURE_TIME_SERIES_PHASES = (
     'Audit Outcome'
 )
 
+EXPENDITURE_TIME_SERIES_PHASE_MAPPING = {
+    'original': 'Main appropriation',
+    'adjusted': 'Adjusted appropriation',
+    'actual': 'Audit Outcome'
+}
+
 
 class FinancialYear(models.Model):
     organisational_unit = 'financial_year'
@@ -110,6 +116,10 @@ class FinancialYear(models.Model):
     @staticmethod
     def slug_from_year_start(year):
         return year + '-' + str(int(year[2:]) + 1)
+
+    @staticmethod
+    def start_from_year_slug(slug):
+        return slug[:4]
 
     def get_sphere(self, name):
         return getattr(self, name)
@@ -1161,9 +1171,16 @@ class Department(models.Model):
 
         return total_budgets
 
-    def get_expenditure_by_year_phase_department(self):
+    def get_national_expenditure_treemap(self, financial_year_id, budget_phase):
         """ Returns a data object for each department, year and phase. Adds additional data required for the Treemap.
          From the Expenditure Time Series dataset. """
+        # Take budget sphere, year and phase as positional arguments from URL
+        # Output expenditure specific to sphere:year:phase scope, simple list of objects
+        try:
+            selected_phase = EXPENDITURE_TIME_SERIES_PHASE_MAPPING[budget_phase]
+        except KeyError:
+            raise Exception('An invalid phase was provided: {}'.format(budget_phase))
+
         national_expenditure = []
         dataset = self.get_expenditure_time_series_dataset()
         if not dataset:
@@ -1172,7 +1189,12 @@ class Department(models.Model):
         phase_ref = openspending_api.get_phase_ref()
         year_ref = openspending_api.get_financial_year_ref()
 
-        expenditure_cuts = [openspending_api.get_adjustment_kind_ref() + ':' + '"Total"']
+        # Add cuts: year and phase
+        expenditure_cuts = [
+            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+            year_ref + ':' + '{}'.format(FinancialYear.start_from_year_slug(financial_year_id)),
+            phase_ref + ':' + '"{}"'.format(selected_phase)
+        ]
         expenditure_drilldowns = [
             year_ref,
             phase_ref,
@@ -1196,9 +1218,8 @@ class Department(models.Model):
             filtered_cells
         )
 
-        # total_budgets = self.get_all_budget_totals_by_year_and_phase()
         total_budgets = {}
-        national_depts = Department.objects.filter(government__sphere__slug='national')
+        national_depts = Department.objects.filter(government__sphere__slug='national', is_vote_primary=True)
 
         for cell in result_cells:
             try:
@@ -1224,8 +1245,7 @@ class Department(models.Model):
                     slug=slugify(cell[openspending_api.get_department_name_ref()]),
                 )
             except Department.DoesNotExist:
-                dept = None
-                logger.warning('No department found for: national {} {}'.format(
+                logger.warning('Excluding: national {} {}'.format(
                     cell[year_ref], cell[openspending_api.get_department_name_ref()]
                 ))
                 continue

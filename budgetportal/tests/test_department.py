@@ -296,12 +296,12 @@ class TreemapExpenditureByDepartmentTestCase(TestCase):
     @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
     def test_no_cells_null_response(self, total_budgets_mock):
         self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
-        result = self.department.get_expenditure_by_year_phase_department()
+        result = self.department.get_national_expenditure_treemap()
         self.assertEqual(result, None)
 
     @mock.patch('budgetportal.models.Department.get_all_budget_totals_by_year_and_phase', return_value=mock.MagicMock())
     def test_complete_data(self, total_budgets_mock):
-        result = self.department.get_expenditure_by_year_phase_department()
+        result = self.department.get_national_expenditure_treemap()
         national_expenditure = result['expenditure']['national']
         self.assertEqual(len(national_expenditure), 7)
         expenditure_keys = national_expenditure[0].keys()

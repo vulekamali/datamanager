@@ -21,16 +21,15 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
-def homepage(request):
+def homepage(request, financial_year_id, phase_slug, sphere_slug):
     """ The vulekamali home page """
-
-    dept = Department.objects.filter(government__sphere__slug='national')[0]
-    context = dept.get_expenditure_by_year_phase_department()
-
-    response_yaml = yaml.safe_dump(context,
-                                   default_flow_style=False,
-                                   encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
+    if sphere_slug == 'national':
+        dept = Department.objects.filter(government__sphere__slug='national')[0]
+        context = dept.get_national_expenditure_treemap(financial_year_id, phase_slug)
+        response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+        return HttpResponse(response_yaml, content_type='text/x-yaml')
+    else:
+        return HttpResponse("Unknown government sphere. Options are: national", status=400)
 
 
 def year_home(request, financial_year_id):
