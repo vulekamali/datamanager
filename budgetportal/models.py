@@ -1181,7 +1181,7 @@ class Department(models.Model):
         except KeyError:
             raise Exception('An invalid phase was provided: {}'.format(budget_phase))
 
-        national_expenditure = []
+        expenditure = []
         dataset = self.get_expenditure_time_series_dataset()
         if not dataset:
             return None
@@ -1218,27 +1218,11 @@ class Department(models.Model):
             filtered_cells
         )
 
-        total_budgets = {}
+        total_budget = 0
+        filtered_result_cells = []
         national_depts = Department.objects.filter(government__sphere__slug='national', is_vote_primary=True)
 
         for cell in result_cells:
-            try:
-                national_depts.get(
-                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(str(cell[year_ref])),
-                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
-                )
-            except Department.DoesNotExist:
-                continue
-
-            if cell[phase_ref] not in total_budgets.keys():
-                total_budgets[cell[phase_ref]] = {cell[year_ref]: float(cell['value.sum'])}
-            elif cell[year_ref] not in total_budgets[cell[phase_ref]].keys():
-                total_budgets[cell[phase_ref]][cell[year_ref]] = float(cell['value.sum'])
-            else:
-                total_budgets[cell[phase_ref]][cell[year_ref]] += float(cell['value.sum'])
-
-        for cell in result_cells:
-            perc = (float(cell['value.sum']) / total_budgets[cell[phase_ref]][cell[year_ref]]) * 100
             try:
                 dept = national_depts.get(
                     government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(str(cell[year_ref])),
@@ -1250,22 +1234,24 @@ class Department(models.Model):
                 ))
                 continue
 
-            ex = {
+            total_budget += float(cell['value.sum'])
+            cell['url'] = dept.get_url_path() if dept else None
+            filtered_result_cells.append(cell)
+
+        for cell in filtered_result_cells:
+            percentage_of_total = float(cell['value.sum']) / total_budget * 100
+            expenditure.append({
                 'name': cell[openspending_api.get_department_name_ref()],
+                'slug': slugify(cell[openspending_api.get_department_name_ref()]),
                 'amount': float(cell['value.sum']),
-                'budget_phase': cell[phase_ref],
-                'financial_year': cell[year_ref],
-                'percentage_of_total': perc,
-                'detail': dept.get_url_path() if dept else None
-            }
-            national_expenditure.append(ex)
+                'percentage_of_total': percentage_of_total,
+                'province': None,  # to keep a consistent schema
+                'url': cell['url']
+            })
 
         return {
-            'expenditure': {
-                'national': national_expenditure,
-            },
-            'total_budgets': total_budgets
-        } if national_expenditure else None
+            'data': {'items': expenditure, 'total': total_budget},
+        } if expenditure else None
 
     def get_expenditure_time_series_summary(self):
         base_year = get_base_year()
