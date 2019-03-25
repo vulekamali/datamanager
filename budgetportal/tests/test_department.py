@@ -285,7 +285,7 @@ class TreemapExpenditureByDepartmentTestCase(TestCase):
 
         vote_number = 1
         for mock_object in self.mock_data['complete']:
-            dep = Department.objects.create(
+            Department.objects.create(
                 government=government,
                 is_vote_primary=True,
                 name=mock_object['vote_number.department'],
