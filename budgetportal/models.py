@@ -1253,6 +1253,88 @@ class Department(models.Model):
             'data': {'items': expenditure, 'total': total_budget},
         } if expenditure else None
 
+    def get_provincial_expenditure_treemap(self, financial_year_id, budget_phase):
+        """ tbd """
+        # Take budget sphere, year and phase as positional arguments from URL
+        # Output expenditure specific to sphere:year:phase scope, simple list of objects
+        try:
+            selected_phase = EXPENDITURE_TIME_SERIES_PHASE_MAPPING[budget_phase]
+        except KeyError:
+            raise Exception('An invalid phase was provided: {}'.format(budget_phase))
+
+        expenditure = []
+        dataset = self.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        phase_ref = openspending_api.get_phase_ref()
+        year_ref = openspending_api.get_financial_year_ref()
+
+        # Add cuts: year and phase
+        expenditure_cuts = [
+            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+            year_ref + ':' + '{}'.format(FinancialYear.start_from_year_slug(financial_year_id)),
+            phase_ref + ':' + '"{}"'.format(selected_phase)
+        ]
+        expenditure_drilldowns = [
+            year_ref,
+            phase_ref,
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_programme_name_ref()
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+
+        # Disaggregate and filter out any direct charge NRF programmes
+        filtered_cells = openspending_api.filter_by_ref_exclusion(
+            expenditure_results['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF,
+        )
+
+        # Re-aggregate by year:phase
+        result_cells = openspending_api.aggregate_by_refs(
+            [openspending_api.get_department_name_ref(),
+             year_ref, phase_ref],
+            filtered_cells
+        )
+
+        total_budget = 0
+        filtered_result_cells = []
+        national_depts = Department.objects.filter(government__sphere__slug='provincial', is_vote_primary=True)
+
+        for cell in result_cells:
+            try:
+                dept = national_depts.get(
+                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
+                        str(cell[year_ref])),
+                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                )
+            except Department.DoesNotExist:
+                logger.warning('Excluding: provincial {} {}'.format(
+                    cell[year_ref], cell[openspending_api.get_department_name_ref()]
+                ))
+                continue
+
+            total_budget += float(cell['value.sum'])
+            cell['url'] = dept.get_url_path() if dept else None
+            filtered_result_cells.append(cell)
+
+        for cell in filtered_result_cells:
+            percentage_of_total = float(cell['value.sum']) / total_budget * 100
+            expenditure.append({
+                'name': cell[openspending_api.get_department_name_ref()],
+                'slug': slugify(cell[openspending_api.get_department_name_ref()]),
+                'amount': float(cell['value.sum']),
+                'percentage_of_total': percentage_of_total,
+                'province': None,  # to keep a consistent schema
+                'url': cell['url']
+            })
+
+        return {
+            'data': {'items': expenditure, 'total': total_budget},
+        } if expenditure else None
+
     def get_expenditure_time_series_summary(self):
         base_year = get_base_year()
         financial_year_start = self.get_financial_year().get_starting_year()
@@ -1944,6 +2026,7 @@ class Dataset():
             'adjusted-estimates-of-national-expenditure': AdjustedEstimatesOfExpenditure,
             'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
             'budgeted-and-actual-national-expenditure': ExpenditureTimeSeries,
+            'budgeted-and-actual-provincial-expenditure': ExpenditureTimeSeries,
         }
         api_class = api_class_mapping[self.category.slug]
         self._openspending_api = api_class(api_resource['url'])

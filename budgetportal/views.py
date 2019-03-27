@@ -28,6 +28,11 @@ def homepage(request, financial_year_id, phase_slug, sphere_slug):
         context = dept.get_national_expenditure_treemap(financial_year_id, phase_slug)
         response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
         return HttpResponse(response_yaml, content_type='text/x-yaml')
+    elif sphere_slug == 'provincial':
+        dept = Department.objects.filter(government__sphere__slug='provincial')[0]
+        context = dept.get_provincial_expenditure_treemap(financial_year_id, phase_slug)
+        response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+        return HttpResponse(response_yaml, content_type='text/x-yaml')
     else:
         return HttpResponse("Unknown government sphere. Options are: national", status=400)
 

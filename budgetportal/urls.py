@@ -24,10 +24,8 @@ def permission_denied(request):
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/national'
-        '/(?P<phase_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.homepage),
-        kwargs={'sphere_slug': 'national'}),
-    # url(r'^treemap.yaml$', views.homepage),
+        '/(?P<sphere_slug>[\w-]+)'
+        '/(?P<phase_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.homepage)),
 
     # Home Page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
