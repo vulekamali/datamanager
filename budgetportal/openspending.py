@@ -160,7 +160,7 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
         return self.get_ref(self.get_department_dimension(), 'label')
 
     def get_government_ref(self):
-        return self.get_ref(self.get_department_dimension(), 'key')
+        return self.get_ref(self.get_government_dimension(), 'key')
 
     def get_vote_number_ref(self):
         return self.get_ref(self.get_department_dimension(), 'key')

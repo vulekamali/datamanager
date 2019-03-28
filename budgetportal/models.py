@@ -1280,6 +1280,7 @@ class Department(models.Model):
             year_ref,
             phase_ref,
             openspending_api.get_department_name_ref(),
+            openspending_api.get_government_ref(),
             openspending_api.get_programme_name_ref()
         ]
 
@@ -1295,20 +1296,21 @@ class Department(models.Model):
         # Re-aggregate by year:phase
         result_cells = openspending_api.aggregate_by_refs(
             [openspending_api.get_department_name_ref(),
-             year_ref, phase_ref],
+             year_ref, phase_ref, openspending_api.get_government_ref()],
             filtered_cells
         )
 
         total_budget = 0
         filtered_result_cells = []
-        national_depts = Department.objects.filter(government__sphere__slug='provincial', is_vote_primary=True)
+        provincial_depts = Department.objects.filter(government__sphere__slug='provincial', is_vote_primary=True)
 
         for cell in result_cells:
             try:
-                dept = national_depts.get(
+                dept = provincial_depts.get(
                     government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
                         str(cell[year_ref])),
                     slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                    government__slug=slugify(cell[openspending_api.get_government_ref()])
                 )
             except Department.DoesNotExist:
                 logger.warning('Excluding: provincial {} {}'.format(
@@ -1327,7 +1329,7 @@ class Department(models.Model):
                 'slug': slugify(cell[openspending_api.get_department_name_ref()]),
                 'amount': float(cell['value.sum']),
                 'percentage_of_total': percentage_of_total,
-                'province': None,  # to keep a consistent schema
+                'province': cell[openspending_api.get_government_ref()],
                 'url': cell['url']
             })
 
