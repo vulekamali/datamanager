@@ -1267,54 +1267,37 @@ class Department(models.Model):
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
-        phase_ref = openspending_api.get_phase_ref()
-        year_ref = openspending_api.get_financial_year_ref()
 
         # Add cuts: year and phase
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
-            year_ref + ':' + '{}'.format(FinancialYear.start_from_year_slug(financial_year_id)),
-            phase_ref + ':' + '"{}"'.format(selected_phase)
+            openspending_api.get_financial_year_ref() + ':' + '{}'.format(FinancialYear.start_from_year_slug(financial_year_id)),
+            openspending_api.get_phase_ref() + ':' + '"{}"'.format(selected_phase)
         ]
         expenditure_drilldowns = [
-            year_ref,
-            phase_ref,
             openspending_api.get_department_name_ref(),
             openspending_api.get_government_ref(),
-            openspending_api.get_programme_name_ref()
         ]
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
-        # Disaggregate and filter out any direct charge NRF programmes
-        filtered_cells = openspending_api.filter_by_ref_exclusion(
-            expenditure_results['cells'],
-            openspending_api.get_programme_name_ref(),
-            DIRECT_CHARGE_NRF,
-        )
-
-        # Re-aggregate by year:phase
-        result_cells = openspending_api.aggregate_by_refs(
-            [openspending_api.get_department_name_ref(),
-             year_ref, phase_ref, openspending_api.get_government_ref()],
-            filtered_cells
-        )
-
         total_budget = 0
         filtered_result_cells = []
-        provincial_depts = Department.objects.filter(government__sphere__slug='provincial', is_vote_primary=True)
+        provincial_depts = Department.objects.filter(
+            government__sphere__financial_year__slug=financial_year_id,
+            government__sphere__slug='provincial',
+            is_vote_primary=True
+        )
 
-        for cell in result_cells:
+        for cell in expenditure_results['cells']:
             try:
                 dept = provincial_depts.get(
-                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
-                        str(cell[year_ref])),
                     slug=slugify(cell[openspending_api.get_department_name_ref()]),
                     government__slug=slugify(cell[openspending_api.get_government_ref()])
                 )
             except Department.DoesNotExist:
-                logger.warning('Excluding: provincial {} {}'.format(
-                    cell[year_ref], cell[openspending_api.get_department_name_ref()]
+                logger.warning('Excluding: provincial {} {} {}'.format(
+                    financial_year_id, cell[openspending_api.get_government_ref()], cell[openspending_api.get_department_name_ref()]
                 ))
                 continue
 
@@ -1328,7 +1311,7 @@ class Department(models.Model):
                 'name': cell[openspending_api.get_department_name_ref()],
                 'slug': slugify(cell[openspending_api.get_department_name_ref()]),
                 'amount': float(cell['value.sum']),
-                'percentage_of_total': percentage_of_total,
+                'percentage_of_total': 0,
                 'province': cell[openspending_api.get_government_ref()],
                 'url': cell['url']
             })
