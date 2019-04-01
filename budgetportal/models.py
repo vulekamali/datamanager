@@ -1254,7 +1254,7 @@ class Department(models.Model):
         } if expenditure else None
 
     def get_provincial_expenditure_treemap(self, financial_year_id, budget_phase):
-        """ tbd """
+        """ Returns a list of department objects nested in provinces. """
         # Take budget sphere, year and phase as positional arguments from URL
         # Output expenditure specific to sphere:year:phase scope, simple list of objects
         try:
@@ -1318,6 +1318,73 @@ class Department(models.Model):
 
         return {
             'data': {'items': expenditure, 'total': total_budget},
+        } if expenditure else None
+
+    def get_preview_page(self, financial_year_id, phase_slug, government_slug, sphere_slug):
+        try:
+            selected_phase = EXPENDITURE_TIME_SERIES_PHASE_MAPPING[phase_slug]
+        except KeyError:
+            raise Exception('An invalid phase was provided: {}'.format(phase_slug))
+
+        expenditure = []
+        dataset = self.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+
+        # Add cuts: year and phase
+        expenditure_cuts = [
+            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+            openspending_api.get_financial_year_ref() + ':' + '{}'.format(
+                FinancialYear.start_from_year_slug(financial_year_id)),
+            openspending_api.get_phase_ref() + ':' + '"{}"'.format(selected_phase)
+        ]
+        expenditure_drilldowns = [
+            openspending_api.get_department_name_ref(),
+            openspending_api.get_government_ref(),
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+
+        total_budget = 0
+        filtered_result_cells = []
+        sphere_depts = Department.objects.filter(
+            government__sphere__financial_year__slug=financial_year_id,
+            government__sphere__slug=sphere_slug,
+            government__slug=government_slug,
+        )
+
+        for cell in expenditure_results['cells']:
+            try:
+                dept = sphere_depts.get(
+                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                    government__slug=slugify(cell[openspending_api.get_government_ref()])
+                )
+            except Department.DoesNotExist:
+                logger.warning('Excluding: provincial {} {} {}'.format(
+                    financial_year_id, cell[openspending_api.get_government_ref()],
+                    cell[openspending_api.get_department_name_ref()]
+                ))
+                continue
+
+            total_budget += float(cell['value.sum'])
+            cell['url'] = dept.get_url_path() if dept else None
+            filtered_result_cells.append(cell)
+
+        for cell in filtered_result_cells:
+            percentage_of_total = float(cell['value.sum']) / total_budget * 100
+            expenditure.append({
+                'title': cell[openspending_api.get_department_name_ref()],
+                'slug': slugify(cell[openspending_api.get_department_name_ref()]),
+                'total': float(cell['value.sum']),
+                'percentage_of_budget': percentage_of_total,
+                'percentage_changed': 0,
+                'description': None,
+                'programmes': [],
+            })
+
+        return {
+            'data': {'items': expenditure},
         } if expenditure else None
 
     def get_expenditure_time_series_summary(self):

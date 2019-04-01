@@ -37,6 +37,13 @@ def homepage(request, financial_year_id, phase_slug, sphere_slug):
         return HttpResponse("Unknown government sphere. Options are: national", status=400)
 
 
+def department_preview(request, financial_year_id, sphere_slug, government_slug, phase_slug):
+    dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
+    context = dept.get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
 def year_home(request, financial_year_id):
     """
     View of a financial year homepage, e.g. /2017-18
