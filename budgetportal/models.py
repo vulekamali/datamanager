@@ -1336,15 +1336,29 @@ class Department(models.Model):
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
             openspending_api.get_financial_year_ref() + ':' + '{}'.format(
-                FinancialYear.start_from_year_slug(financial_year_id)),
+                FinancialYear.start_from_year_slug(financial_year_id)
+            ),
             openspending_api.get_phase_ref() + ':' + '"{}"'.format(selected_phase)
         ]
         expenditure_drilldowns = [
             openspending_api.get_department_name_ref(),
             openspending_api.get_government_ref(),
+            openspending_api.get_programme_name_ref(),
         ]
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+        expenditure_results_filter_government_programme_breakdown = filter(
+            lambda cell: slugify(cell[openspending_api.get_government_ref()]) == government_slug,
+            expenditure_results['cells']
+        )
+
+        expenditure_results_filter_government_departments = openspending_api.aggregate_by_refs(
+            [
+                openspending_api.get_department_name_ref(),
+                openspending_api.get_government_ref(),
+            ],
+            expenditure_results_filter_government_programme_breakdown
+        )
 
         total_budget = 0
         filtered_result_cells = []
@@ -1354,7 +1368,7 @@ class Department(models.Model):
             government__slug=government_slug,
         )
 
-        for cell in expenditure_results['cells']:
+        for cell in expenditure_results_filter_government_departments:
             try:
                 dept = sphere_depts.get(
                     slug=slugify(cell[openspending_api.get_department_name_ref()]),
@@ -1369,18 +1383,34 @@ class Department(models.Model):
 
             total_budget += float(cell['value.sum'])
             cell['url'] = dept.get_url_path() if dept else None
+            cell['description'] = dept.intro if dept else None
             filtered_result_cells.append(cell)
 
         for cell in filtered_result_cells:
             percentage_of_total = float(cell['value.sum']) / total_budget * 100
+
+            department_programmes = filter(
+                lambda x: x[openspending_api.get_department_name_ref()] == cell[openspending_api.get_department_name_ref()],
+                expenditure_results_filter_government_programme_breakdown
+            )
+            programmes = []
+
+            for programme in department_programmes:
+                percentage = float(programme['value.sum']) / cell['value.sum'] * 100
+                programmes.append({
+                    'title': programme[openspending_api.get_programme_name_ref()].title(),
+                    'slug': slugify(programme[openspending_api.get_programme_name_ref()]),
+                    'percentage': percentage,
+                    'amount': float(programme['value.sum'])
+                })
+
             expenditure.append({
                 'title': cell[openspending_api.get_department_name_ref()],
                 'slug': slugify(cell[openspending_api.get_department_name_ref()]),
                 'total': float(cell['value.sum']),
                 'percentage_of_budget': percentage_of_total,
-                'percentage_changed': 0,
-                'description': None,
-                'programmes': [],
+                'description': cell['description'],
+                'programmes': programmes,
             })
 
         return {
