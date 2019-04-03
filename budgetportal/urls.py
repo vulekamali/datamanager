@@ -23,6 +23,7 @@ def permission_denied(request):
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html')),
+
     # National and provincial treemap data
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/(?P<sphere_slug>[\w-]+)'

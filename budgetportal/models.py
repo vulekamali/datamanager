@@ -1331,8 +1331,10 @@ class Department(models.Model):
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
+        programme_ref = openspending_api.get_programme_name_ref()
+        government_ref = openspending_api.get_government_ref()
+        department_ref = openspending_api.get_department_name_ref()
 
-        # Add cuts: year and phase
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
             openspending_api.get_financial_year_ref() + ':' + '{}'.format(
@@ -1341,28 +1343,28 @@ class Department(models.Model):
             openspending_api.get_phase_ref() + ':' + '"{}"'.format(selected_phase)
         ]
         expenditure_drilldowns = [
-            openspending_api.get_department_name_ref(),
-            openspending_api.get_government_ref(),
-            openspending_api.get_programme_name_ref(),
+            department_ref,
+            government_ref,
+            programme_ref,
         ]
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
         expenditure_results_no_drf = openspending_api.filter_by_ref_exclusion(
             expenditure_results['cells'],
-            openspending_api.get_programme_name_ref(),
+            programme_ref,
             DIRECT_CHARGE_NRF,
         )
 
         expenditure_results_filter_government_programme_breakdown = filter(
-            lambda x: slugify(x[openspending_api.get_government_ref()]) == government_slug,
+            lambda x: slugify(x[government_ref]) == government_slug,
             expenditure_results_no_drf
         )
 
         expenditure_results_filter_government_departments = openspending_api.aggregate_by_refs(
             [
-                openspending_api.get_department_name_ref(),
-                openspending_api.get_government_ref(),
+                department_ref,
+                government_ref,
             ],
             expenditure_results_filter_government_programme_breakdown
         )
@@ -1379,13 +1381,13 @@ class Department(models.Model):
         for cell in expenditure_results_filter_government_departments:
             try:
                 dept = sphere_depts.get(
-                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
-                    government__slug=slugify(cell[openspending_api.get_government_ref()])
+                    slug=slugify(cell[department_ref]),
+                    government__slug=slugify(cell[government_ref])
                 )
             except Department.DoesNotExist:
                 logger.warning('Excluding: {} {} {} {}'.format(
-                    sphere_slug, financial_year_id, cell[openspending_api.get_government_ref()],
-                    cell[openspending_api.get_department_name_ref()]
+                    sphere_slug, financial_year_id, cell[government_ref],
+                    cell[department_ref]
                 ))
                 continue
 
@@ -1398,7 +1400,7 @@ class Department(models.Model):
             percentage_of_total = float(cell['value.sum']) / total_budget * 100
 
             department_programmes = filter(
-                lambda x: x[openspending_api.get_department_name_ref()] == cell[openspending_api.get_department_name_ref()],
+                lambda x: x[department_ref] == cell[department_ref],
                 expenditure_results_filter_government_programme_breakdown
             )
             programmes = []
@@ -1406,15 +1408,15 @@ class Department(models.Model):
             for programme in department_programmes:
                 percentage = float(programme['value.sum']) / cell['value.sum'] * 100
                 programmes.append({
-                    'title': programme[openspending_api.get_programme_name_ref()].title(),
-                    'slug': slugify(programme[openspending_api.get_programme_name_ref()]),
+                    'title': programme[programme_ref].title(),
+                    'slug': slugify(programme[programme_ref]),
                     'percentage': percentage,
                     'amount': float(programme['value.sum'])
                 })
 
             expenditure.append({
-                'title': cell[openspending_api.get_department_name_ref()],
-                'slug': slugify(cell[openspending_api.get_department_name_ref()]),
+                'title': cell[department_ref],
+                'slug': slugify(cell[department_ref]),
                 'total': float(cell['value.sum']),
                 'percentage_of_budget': percentage_of_total,
                 'description': cell['description'],
