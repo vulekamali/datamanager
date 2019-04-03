@@ -22,19 +22,16 @@ COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YE
 
 
 def homepage(request, financial_year_id, phase_slug, sphere_slug):
-    """ The vulekamali home page """
+    """ The data for the vulekamali home page treemaps """
+    dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
     if sphere_slug == 'national':
-        dept = Department.objects.filter(government__sphere__slug='national')[0]
         context = dept.get_national_expenditure_treemap(financial_year_id, phase_slug)
-        response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-        return HttpResponse(response_yaml, content_type='text/x-yaml')
     elif sphere_slug == 'provincial':
-        dept = Department.objects.filter(government__sphere__slug='provincial')[0]
         context = dept.get_provincial_expenditure_treemap(financial_year_id, phase_slug)
-        response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-        return HttpResponse(response_yaml, content_type='text/x-yaml')
     else:
-        return HttpResponse("Unknown government sphere. Options are: national", status=400)
+        return HttpResponse("Unknown government sphere.", status=400)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def department_preview(request, financial_year_id, sphere_slug, government_slug, phase_slug):
