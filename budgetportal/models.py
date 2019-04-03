@@ -1347,9 +1347,16 @@ class Department(models.Model):
         ]
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+
+        expenditure_results_no_drf = openspending_api.filter_by_ref_exclusion(
+            expenditure_results['cells'],
+            openspending_api.get_programme_name_ref(),
+            DIRECT_CHARGE_NRF,
+        )
+
         expenditure_results_filter_government_programme_breakdown = filter(
-            lambda cell: slugify(cell[openspending_api.get_government_ref()]) == government_slug,
-            expenditure_results['cells']
+            lambda x: slugify(x[openspending_api.get_government_ref()]) == government_slug,
+            expenditure_results_no_drf
         )
 
         expenditure_results_filter_government_departments = openspending_api.aggregate_by_refs(
@@ -1366,6 +1373,7 @@ class Department(models.Model):
             government__sphere__financial_year__slug=financial_year_id,
             government__sphere__slug=sphere_slug,
             government__slug=government_slug,
+            is_vote_primary=True,
         )
 
         for cell in expenditure_results_filter_government_departments:
@@ -1375,8 +1383,8 @@ class Department(models.Model):
                     government__slug=slugify(cell[openspending_api.get_government_ref()])
                 )
             except Department.DoesNotExist:
-                logger.warning('Excluding: provincial {} {} {}'.format(
-                    financial_year_id, cell[openspending_api.get_government_ref()],
+                logger.warning('Excluding: {} {} {} {}'.format(
+                    sphere_slug, financial_year_id, cell[openspending_api.get_government_ref()],
                     cell[openspending_api.get_department_name_ref()]
                 ))
                 continue
