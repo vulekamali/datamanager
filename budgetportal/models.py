@@ -313,8 +313,16 @@ class Department(models.Model):
             '-government__sphere__financial_year__slug')
         return newer_departments.first().website_url if newer_departments else None
 
+    # https://vulekamali.gov.za/2018-19/national/departments/military-veterans
     def get_url_path(self):
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
+
+    # https://vulekamali.gov.za/2018-19/previews/national/south-africa/original
+    # https://vulekamali.gov.za/2018-19/previews/national/south-africa/adjusted
+    # https://vulekamali.gov.za/2018-19/previews/provincial/western-cape/original
+    def get_preview_url_path(self, budget_phase):
+        return "%s/previews/%s/%s/%s" % \
+               (self.government.sphere.financial_year.slug, self.government.sphere.slug, self.slug, budget_phase)
 
     def get_govt_functions(self):
         return GovtFunction.objects.filter(programme__department=self).distinct()
@@ -1235,7 +1243,7 @@ class Department(models.Model):
                 continue
 
             total_budget += float(cell['value.sum'])
-            cell['url'] = dept.get_url_path() if dept else None
+            cell['url'] = dept.get_preview_url_path(budget_phase) if dept else None
             filtered_result_cells.append(cell)
 
         for cell in filtered_result_cells:
