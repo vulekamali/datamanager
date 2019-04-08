@@ -177,6 +177,7 @@ class Sphere(models.Model):
         on_delete=models.CASCADE,
         related_name="spheres",
     )
+    _consolidated_expenditure_budget_dataset = None
 
     class Meta:
         unique_together = (
@@ -190,6 +191,69 @@ class Sphere(models.Model):
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
+
+    def get_consolidated_expenditure_budget_dataset(self):
+        if self._consolidated_expenditure_budget_dataset is not None:
+            return self._consolidated_expenditure_budget_dataset
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"consolidated-expenditure-budget"',
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        if response['results']:
+            package = response['results'][0]
+            self._consolidated_expenditure_budget_dataset = Dataset.from_package(package)
+            return self._consolidated_expenditure_budget_dataset
+        else:
+            return None
+
+    def get_consolidated_expenditure_treemap(self, financial_year_id):
+        """ Returns a data object for each function group for a specific year. Used by the consolidated treemap. """
+
+        expenditure = []
+        dataset = self.get_consolidated_expenditure_budget_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        year_ref = openspending_api.get_financial_year_ref()
+
+        # Add cuts: year and phase
+        expenditure_cuts = [
+            year_ref + ':' + '{}'.format(FinancialYear.start_from_year_slug(financial_year_id)),
+        ]
+        expenditure_drilldowns = [
+            openspending_api.get_function_ref(),
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+
+        total_budget = 0
+        filtered_result_cells = []
+
+        for cell in expenditure_results['cells']:
+            total_budget += float(cell['value.sum'])
+            cell['url'] = None
+
+        for cell in filtered_result_cells:
+            percentage_of_total = float(cell['value.sum']) / total_budget * 100
+            expenditure.append({
+                'name': cell[openspending_api.get_function_ref()],
+                'id': slugify(cell[openspending_api.get_function_ref()]),
+                'amount': float(cell['value.sum']),
+                'percentage': percentage_of_total,
+                'url': cell['url']
+            })
+
+        return {
+            'data': {
+                'items': expenditure,
+                'total': total_budget
+            },
+        } if expenditure else None
 
 
 class Government(models.Model):
