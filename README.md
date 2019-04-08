@@ -165,12 +165,18 @@ Optional columns:
 
  [Markdown syntax](https://daringfireball.net/projects/markdown/syntax#header) must be used for formatting `intro`. e.g. 2 line breaks will result in new paragraphs. Use headings like `## Vote purpose`
 
- e.g.
+ e.g. for national
 
  | government | department_name | vote_number | is_vote_primary | intro | website_url |
  |------------|-----------------|-------------|-----------------|-------|-------------|
 | South Africa | The Presidency | 1 | TRUE | ## Vote purpose <br/><br/>Facilitate a common programme towards the ... <br/></br> ## Mandate <br/><br/>To serve the president in the execution of his ... | http://www.thepresidency.gov.za/ |
 | South Africa | Centre for Public Service Innovation | 10 | FALSE | ## Vote purpose <br/><br/>Facilitate the unearthing, development and practical ...  <br/></br> ## Mandate <br/><br/> The responsibility for public sector innovation is vested in the Minister of Public Service... | www.cpsi.co.za |
+
+e.g. for provincial
+
+ | government | department_name | vote_number | is_vote_primary | intro | website_url |
+ |------------|-----------------|-------------|-----------------|-------|-------------|
+| Eastern Cape | Health | 3 | TRUE | ## Vision<br/><br/>A quality health service to the people of the ... <br/></br> ## Mission<br/><br/>To provide and ensure accessible comprehensive integrated ... <br/><br/> ## Core functions and responsibilities<br/><br/>The strategic objectives are in line with the implementation | |
 
 
 License
