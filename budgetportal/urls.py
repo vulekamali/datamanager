@@ -36,6 +36,10 @@ urlpatterns = [
         '/(?P<government_slug>[\w-]+)'
         '/(?P<phase_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department_preview)),
 
+    # Consolidated
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
+        '/consolidated.yaml', cache_page(CACHE_SECS)(views.consolidated_treemap)),
+
     # Home Page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
         cache_page(CACHE_SECS)(views.year_home)),
@@ -71,10 +75,10 @@ urlpatterns = [
         '/departments'
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
 
-
     url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_category_list)),
     url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview)),
-    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
+    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$',
+        cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
     url(r'^datasets'
         '/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category)),
     url(r'^datasets'
@@ -97,9 +101,9 @@ urlpatterns = [
 
 ]
 
-
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns = [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
+                      url(r'^__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

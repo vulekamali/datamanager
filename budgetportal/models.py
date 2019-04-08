@@ -95,6 +95,7 @@ class FinancialYear(models.Model):
     organisational_unit = 'financial_year'
     slug = models.SlugField(max_length=7, unique=True)
     published = models.BooleanField(default=False)
+    _consolidated_expenditure_budget_dataset = None
 
     class Meta:
         ordering = ['-slug']
@@ -167,31 +168,6 @@ class FinancialYear(models.Model):
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
-
-class Sphere(models.Model):
-    organisational_unit = 'sphere'
-    name = models.CharField(max_length=200)
-    slug = AutoSlugField(populate_from='name', max_length=200, always_update=True)
-    financial_year = models.ForeignKey(
-        FinancialYear,
-        on_delete=models.CASCADE,
-        related_name="spheres",
-    )
-    _consolidated_expenditure_budget_dataset = None
-
-    class Meta:
-        unique_together = (
-            ('financial_year', 'slug'),
-            ('financial_year', 'name'),
-        )
-        ordering = ['-financial_year__slug', 'name']
-
-    def get_url_path(self):
-        return "%s/%s" % (self.financial_year.get_url_path(), self.slug)
-
-    def __str__(self):
-        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
-
     def get_consolidated_expenditure_budget_dataset(self):
         if self._consolidated_expenditure_budget_dataset is not None:
             return self._consolidated_expenditure_budget_dataset
@@ -211,7 +187,7 @@ class Sphere(models.Model):
         else:
             return None
 
-    def get_consolidated_expenditure_treemap(self, financial_year_id):
+    def get_consolidated_expenditure_treemap(self):
         """ Returns a data object for each function group for a specific year. Used by the consolidated treemap. """
 
         expenditure = []
@@ -223,7 +199,7 @@ class Sphere(models.Model):
 
         # Add cuts: year and phase
         expenditure_cuts = [
-            year_ref + ':' + '{}'.format(FinancialYear.start_from_year_slug(financial_year_id)),
+            year_ref + ':' + '{}'.format(self.get_starting_year()),
         ]
         expenditure_drilldowns = [
             openspending_api.get_function_ref(),
@@ -232,13 +208,14 @@ class Sphere(models.Model):
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
         total_budget = 0
-        filtered_result_cells = []
+        modified_result_cells = []
 
         for cell in expenditure_results['cells']:
             total_budget += float(cell['value.sum'])
             cell['url'] = None
+            modified_result_cells.append(cell)
 
-        for cell in filtered_result_cells:
+        for cell in modified_result_cells:
             percentage_of_total = float(cell['value.sum']) / total_budget * 100
             expenditure.append({
                 'name': cell[openspending_api.get_function_ref()],
@@ -254,6 +231,31 @@ class Sphere(models.Model):
                 'total': total_budget
             },
         } if expenditure else None
+
+
+
+class Sphere(models.Model):
+    organisational_unit = 'sphere'
+    name = models.CharField(max_length=200)
+    slug = AutoSlugField(populate_from='name', max_length=200, always_update=True)
+    financial_year = models.ForeignKey(
+        FinancialYear,
+        on_delete=models.CASCADE,
+        related_name="spheres",
+    )
+
+    class Meta:
+        unique_together = (
+            ('financial_year', 'slug'),
+            ('financial_year', 'name'),
+        )
+        ordering = ['-financial_year__slug', 'name']
+
+    def get_url_path(self):
+        return "%s/%s" % (self.financial_year.get_url_path(), self.slug)
+
+    def __str__(self):
+        return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
 class Government(models.Model):
@@ -2189,6 +2191,7 @@ class Dataset():
             'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
             'budgeted-and-actual-national-expenditure': ExpenditureTimeSeries,
             'budgeted-and-actual-provincial-expenditure': ExpenditureTimeSeries,
+            'consolidated-expenditure-budget': ExpenditureTimeSeries,
         }
         api_class = api_class_mapping[self.category.slug]
         self._openspending_api = api_class(api_resource['url'])
