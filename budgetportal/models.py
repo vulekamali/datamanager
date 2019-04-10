@@ -255,23 +255,38 @@ class FinancialYear(models.Model):
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
         unique_functions = []
-        total_budget = 0
         for c in expenditure_results['cells']:
-            total_budget += c['value.sum']
-            if c[function_ref] not in unique_functions:
+            if c[function_ref] not in unique_functions and c[function_ref] != '':
                 unique_functions.append(c[function_ref])
 
         function_objects = []
         for function in unique_functions:
+            # Iterate over each function, build an object for it
+            total_budget = 0
             function_cells = filter(lambda x: x[function_ref] == function, expenditure_results['cells'])
+            focus_area_national_departments = []
+            for cell in function_cells:
+                total_budget += cell['value.sum']
+
             for cell in function_cells:
                 percentage_of_total = float(cell['value.sum']) / total_budget * 100
-                function_object = {
-                    'title': cell[function_ref],
-                    'slug': slugify(cell[function_ref]),
-                    'percentage_total': percentage_of_total
-                }
-                function_objects.append(function_object)
+                focus_area_national_departments.append({
+                    'title': cell[dept_ref],
+                    'slug': slugify(cell[dept_ref]),
+                    'amount': cell['value.sum'],
+                    'percentage_total': percentage_of_total,
+                })
+
+            function_object = {
+                'title': function,
+                'slug': slugify(function),
+                'percentage_total': None,
+                'national': focus_area_national_departments,
+                'description': None,
+                'percentage_changed': None,
+                'total': None,
+            }
+            function_objects.append(function_object)
 
         return {
             'data': {
