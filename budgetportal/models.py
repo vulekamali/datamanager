@@ -255,21 +255,24 @@ class FinancialYear(models.Model):
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
         unique_functions = []
+        total_budget_all_focus_areas = 0
         for c in expenditure_results['cells']:
-            if c[function_ref] not in unique_functions and c[function_ref] != '':
-                unique_functions.append(c[function_ref])
+            if c[function_ref] != '':
+                total_budget_all_focus_areas += c['value.sum']
+                if c[function_ref] not in unique_functions:
+                    unique_functions.append(c[function_ref])
 
         function_objects = []
         for function in unique_functions:
             # Iterate over each function, build an object for it
-            total_budget = 0
+            total_function_budget = 0
             function_cells = filter(lambda x: x[function_ref] == function, expenditure_results['cells'])
             focus_area_national_departments = []
             for cell in function_cells:
-                total_budget += cell['value.sum']
+                total_function_budget += cell['value.sum']
 
             for cell in function_cells:
-                percentage_of_total = float(cell['value.sum']) / total_budget * 100
+                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
                 focus_area_national_departments.append({
                     'title': cell[dept_ref],
                     'slug': slugify(cell[dept_ref]),
@@ -277,14 +280,15 @@ class FinancialYear(models.Model):
                     'percentage_total': percentage_of_total,
                 })
 
+            percentage_of_consolidated_budget = float(total_function_budget) / total_budget_all_focus_areas * 100
             function_object = {
                 'title': function,
                 'slug': slugify(function),
-                'percentage_total': None,
+                'percentage_total': percentage_of_consolidated_budget,
                 'national': focus_area_national_departments,
                 'description': None,
-                'percentage_changed': None,
-                'total': None,
+                'percentage_changed': 0,
+                'total': total_function_budget,
             }
             function_objects.append(function_object)
 
