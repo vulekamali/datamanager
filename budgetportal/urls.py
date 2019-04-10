@@ -24,6 +24,10 @@ def permission_denied(request):
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html')),
 
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
+        '/focus'
+        '/preview.yaml', cache_page(CACHE_SECS)(views.focus_preview)),
+
     # National and provincial treemap data
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/(?P<sphere_slug>[\w-]+)'

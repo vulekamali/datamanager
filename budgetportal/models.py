@@ -232,6 +232,54 @@ class FinancialYear(models.Model):
             },
         } if expenditure else None
 
+    def get_focus_area_preview(self):
+        """ TBD. """
+        dept = Department.objects.filter(government__sphere__slug='national')[0]  # ew
+        dataset = dept.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        year_ref = openspending_api.get_financial_year_ref()
+        dept_ref = openspending_api.get_department_name_ref()
+        function_ref = openspending_api.get_function_ref()
+
+        # Add cuts: year and phase
+        expenditure_cuts = [
+            year_ref + ':' + '{}'.format(self.get_starting_year()),
+        ]
+        expenditure_drilldowns = [
+            function_ref,
+            dept_ref
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+
+        unique_functions = []
+        total_budget = 0
+        for c in expenditure_results['cells']:
+            total_budget += c['value.sum']
+            if c[function_ref] not in unique_functions:
+                unique_functions.append(c[function_ref])
+
+        function_objects = []
+        for function in unique_functions:
+            function_cells = filter(lambda x: x[function_ref] == function, expenditure_results['cells'])
+            for cell in function_cells:
+                percentage_of_total = float(cell['value.sum']) / total_budget * 100
+                function_object = {
+                    'title': cell[function_ref],
+                    'slug': slugify(cell[function_ref]),
+                    'percentage_total': percentage_of_total
+                }
+                function_objects.append(function_object)
+
+        return {
+            'data': {
+                'items': function_objects,
+            },
+        } if function_objects else None
+
+
 
 
 class Sphere(models.Model):
