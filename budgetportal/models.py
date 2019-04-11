@@ -242,10 +242,12 @@ class FinancialYear(models.Model):
         year_ref = openspending_api.get_financial_year_ref()
         dept_ref = openspending_api.get_department_name_ref()
         function_ref = openspending_api.get_function_ref()
+        phase_ref = openspending_api.get_phase_ref()
 
         # Add cuts: year and phase
         expenditure_cuts = [
             year_ref + ':' + '{}'.format(self.get_starting_year()),
+            phase_ref + ':' + '{}'.format("Main appropriation"),
         ]
         expenditure_drilldowns = [
             function_ref,
