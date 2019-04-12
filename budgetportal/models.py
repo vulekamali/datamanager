@@ -1459,11 +1459,12 @@ class Department(models.Model):
 
             for function in department_functions:
                 slug = slugify(function[function_ref])
-                functions.append({
-                    'title': function[function_ref].title(),
-                    'slug': slug,
-                    'url': financial_year.get_focus_area_url(slug)
-                })
+                if function[function_ref] != '':
+                    functions.append({
+                        'title': function[function_ref].title(),
+                        'slug': slug,
+                        'url': financial_year.get_focus_area_url(slug)
+                    })
 
             expenditure.append({
                 'title': cell[department_ref],
