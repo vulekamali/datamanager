@@ -99,6 +99,9 @@ class FinancialYear(models.Model):
     class Meta:
         ordering = ['-slug']
 
+    def get_focus_area_url(self, focus_slug):
+        return '{}/focus/{}'.format(self.slug, focus_slug)
+
     @property
     def national(self):
         return self.spheres.filter(slug='national')[0]
@@ -1340,6 +1343,8 @@ class Department(models.Model):
         programme_ref = openspending_api.get_programme_name_ref()
         government_ref = openspending_api.get_government_ref()
         department_ref = openspending_api.get_department_name_ref()
+        function_ref = openspending_api.get_function_ref()
+        financial_year = FinancialYear.objects.get(slug=financial_year_id)
 
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
@@ -1352,6 +1357,7 @@ class Department(models.Model):
             department_ref,
             government_ref,
             programme_ref,
+            function_ref
         ]
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
@@ -1362,17 +1368,35 @@ class Department(models.Model):
             DIRECT_CHARGE_NRF,
         )
 
-        expenditure_results_filter_government_programme_breakdown = filter(
+        expenditure_results_filter_government_complete_breakdown = filter(
             lambda x: slugify(x[government_ref]) == government_slug,
             expenditure_results_no_drf
         )
 
-        expenditure_results_filter_government_departments = openspending_api.aggregate_by_refs(
+        expenditure_results_filter_government_function_breakdown = openspending_api.aggregate_by_refs(
+            [
+                department_ref,
+                government_ref,
+                function_ref,
+            ],
+            expenditure_results_filter_government_complete_breakdown
+        )
+
+        expenditure_results_filter_government_programme_breakdown = openspending_api.aggregate_by_refs(
+            [
+                department_ref,
+                government_ref,
+                programme_ref,
+            ],
+            expenditure_results_filter_government_complete_breakdown
+        )
+
+        expenditure_results_filter_government_department_breakdown = openspending_api.aggregate_by_refs(
             [
                 department_ref,
                 government_ref,
             ],
-            expenditure_results_filter_government_programme_breakdown
+            expenditure_results_filter_government_complete_breakdown
         )
 
         total_budget = 0
@@ -1384,7 +1408,7 @@ class Department(models.Model):
             is_vote_primary=True,
         )
 
-        for cell in expenditure_results_filter_government_departments:
+        for cell in expenditure_results_filter_government_department_breakdown:
             try:
                 dept = sphere_depts.get(
                     slug=slugify(cell[department_ref]),
@@ -1411,6 +1435,12 @@ class Department(models.Model):
             )
             programmes = []
 
+            department_functions = filter(
+                lambda x: x[department_ref] == cell[department_ref],
+                expenditure_results_filter_government_function_breakdown
+            )
+            functions = []
+
             for programme in department_programmes:
                 percentage = float(programme['value.sum']) / cell['value.sum'] * 100
                 programmes.append({
@@ -1420,6 +1450,14 @@ class Department(models.Model):
                     'amount': float(programme['value.sum'])
                 })
 
+            for function in department_functions:
+                slug = slugify(function[function_ref])
+                functions.append({
+                    'title': function[function_ref].title(),
+                    'slug': slug,
+                    'url': financial_year.get_focus_area_url(slug)
+                })
+
             expenditure.append({
                 'title': cell[department_ref],
                 'slug': slugify(cell[department_ref]),
@@ -1427,6 +1465,7 @@ class Department(models.Model):
                 'percentage_of_budget': percentage_of_total,
                 'description': cell['description'],
                 'programmes': programmes,
+                'focus_areas': functions
             })
 
         return {
