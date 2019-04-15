@@ -159,17 +159,11 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
     def get_department_name_ref(self):
         return self.get_ref(self.get_department_dimension(), 'label')
 
-    def get_government_ref(self):
-        return self.get_ref(self.get_government_dimension(), 'key')
-
     def get_vote_number_ref(self):
         return self.get_ref(self.get_department_dimension(), 'key')
 
     def get_department_dimension(self):
         return self.get_dimension('administrative_classification')
-
-    def get_government_dimension(self):
-        return self.get_dimension('administrative_classification', level=1)
 
     def get_geo_ref(self):
         return self.get_ref(self.get_geo_dimension(), 'label')
