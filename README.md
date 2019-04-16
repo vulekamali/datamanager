@@ -22,15 +22,22 @@ loading a dump from elsewhere:
 If you're setting up a new database:
 
 ```
-python manage.py migrate
-python manage.py createsuperuser
+docker-compose run --rm app python manage.py migrate
+docker-compose run --rm app python manage.py loaddata fixtures/development
 ```
 
 Then run the server
 
 ```
-python manage.py runserver_plus
+docker-compose up
 ```
+
+Now you can login with initial the *development superuser*:
+
+Username: `admin@localhost`
+Password: `password`
+
+A fixture is needed to set this up instead of `createsuperuser` because Django Allauth is configured to require verified email addresses.
 
 ### Development
 
