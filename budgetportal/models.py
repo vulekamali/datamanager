@@ -1,7 +1,4 @@
-import itertools
-
 from autoslug import AutoSlugField
-from django.http import Http404
 from slugify import slugify
 
 from budgetportal.openspending import (
@@ -1285,7 +1282,7 @@ class Department(models.Model):
         ]
         expenditure_drilldowns = [
             openspending_api.get_department_name_ref(),
-            openspending_api.get_government_ref(),
+            openspending_api.get_geo_ref(),
         ]
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
@@ -1302,11 +1299,11 @@ class Department(models.Model):
             try:
                 dept = provincial_depts.get(
                     slug=slugify(cell[openspending_api.get_department_name_ref()]),
-                    government__slug=slugify(cell[openspending_api.get_government_ref()])
+                    government__slug=slugify(cell[openspending_api.get_geo_ref()])
                 )
             except Department.DoesNotExist:
                 logger.warning('Excluding: provincial {} {} {}'.format(
-                    financial_year_id, cell[openspending_api.get_government_ref()], cell[openspending_api.get_department_name_ref()]
+                    financial_year_id, cell[openspending_api.get_geo_ref()], cell[openspending_api.get_department_name_ref()]
                 ))
                 continue
 
@@ -1321,7 +1318,7 @@ class Department(models.Model):
                 'slug': slugify(cell[openspending_api.get_department_name_ref()]),
                 'amount': float(cell['value.sum']),
                 'percentage_of_total': 0,
-                'province': cell[openspending_api.get_government_ref()],
+                'province': cell[openspending_api.get_geo_ref()],
                 'url': cell['url']
             })
 
