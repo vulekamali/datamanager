@@ -45,7 +45,7 @@ Load an initial set of financial years, spheres and governments. You might need 
 
 ```
 docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
-docker-compose run app python manage.py load_departments 2019-20 national /code/departments-2019-20.csv
+docker-compose run --rm app python manage.py load_departments 2019-20 national /code/departments-2019-20.csv
 ```
 
 ### Development best practises
