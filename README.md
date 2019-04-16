@@ -23,7 +23,7 @@ If you're setting up a new database:
 
 ```
 docker-compose run --rm app python manage.py migrate
-docker-compose run --rm app python manage.py loaddata fixtures/development
+docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
 ```
 
 Then run the server
@@ -39,7 +39,15 @@ Password: `password`
 
 A fixture is needed to set this up instead of `createsuperuser` because Django Allauth is configured to require verified email addresses.
 
-### Development
+### Load data
+
+Load an initial set of financial years, spheres and governments. You might need to add more recent ones manually in the admin interface.
+
+```
+docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
+```
+
+### Development best practises
 
 * Put javascript into ``budgetportal/static/javascript/app.js``
 * Put SCSS stylesheets into ``budgetportal/static/stylesheets/app.scss``
