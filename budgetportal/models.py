@@ -1,7 +1,4 @@
-import itertools
-
 from autoslug import AutoSlugField
-from django.http import Http404
 from slugify import slugify
 
 from budgetportal.openspending import (
