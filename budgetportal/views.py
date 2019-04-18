@@ -21,15 +21,31 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
-def homepage(request):
-    """ The vulekamali home page """
+def homepage(request, financial_year_id, phase_slug, sphere_slug):
+    """ The data for the vulekamali home page treemaps """
+    dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
+    if sphere_slug == 'national':
+        context = dept.get_national_expenditure_treemap(financial_year_id, phase_slug)
+    elif sphere_slug == 'provincial':
+        context = dept.get_provincial_expenditure_treemap(financial_year_id, phase_slug)
+    else:
+        return HttpResponse("Unknown government sphere.", status=400)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
-    dept = Department.objects.filter(government__sphere__slug='national')[0]
-    context = dept.get_expenditure_by_year_phase_department()
 
-    response_yaml = yaml.safe_dump(context,
-                                   default_flow_style=False,
-                                   encoding='utf-8')
+def consolidated_treemap(request, financial_year_id):
+    """ The data for the vulekamali home page treemaps """
+    year = FinancialYear.objects.get(slug=financial_year_id)
+    context = year.get_consolidated_expenditure_treemap()
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def department_preview(request, financial_year_id, sphere_slug, government_slug, phase_slug):
+    dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
+    context = dept.get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
