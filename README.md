@@ -6,21 +6,8 @@ This app provides Single Sign-on (SSO) and support for maintaining correct and c
 Setting up Development environment
 -----------------------
 
-Requires a recent Python 2.7 and Postgres 9 point release.
-
-Install system dependencies for psycopg2. e.g. on Ubuntu:
-
 ```
-sudo apt-get update
-sudo apt-get install libpq-dev python-dev
-```
-
-Install python dependencies
-
-```
-virtualenv --no-site-packages env
-source env/bin/activate
-pip install -r requirements.txt
+docker-compose up db
 ```
 
 Add the dokku remote to you local clone
@@ -35,17 +22,33 @@ loading a dump from elsewhere:
 If you're setting up a new database:
 
 ```
-python manage.py migrate
-python manage.py createsuperuser
+docker-compose run --rm app python manage.py migrate
+docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
 ```
 
 Then run the server
 
 ```
-python manage.py runserver_plus
+docker-compose up
 ```
 
-### Development
+Now you can login with initial the *development superuser*:
+
+Username: `admin@localhost`
+Password: `password`
+
+A fixture is needed to set this up instead of `createsuperuser` because Django Allauth is configured to require verified email addresses.
+
+### Load data
+
+Load an initial set of financial years, spheres and governments. You might need to add more recent ones manually in the admin interface.
+
+```
+docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
+docker-compose run --rm app python manage.py load_departments 2019-20 national /code/departments-2019-20.csv
+```
+
+### Development best practises
 
 * Put javascript into ``budgetportal/static/javascript/app.js``
 * Put SCSS stylesheets into ``budgetportal/static/stylesheets/app.scss``
@@ -165,12 +168,18 @@ Optional columns:
 
  [Markdown syntax](https://daringfireball.net/projects/markdown/syntax#header) must be used for formatting `intro`. e.g. 2 line breaks will result in new paragraphs. Use headings like `## Vote purpose`
 
- e.g.
+ e.g. for national
 
  | government | department_name | vote_number | is_vote_primary | intro | website_url |
  |------------|-----------------|-------------|-----------------|-------|-------------|
 | South Africa | The Presidency | 1 | TRUE | ## Vote purpose <br/><br/>Facilitate a common programme towards the ... <br/></br> ## Mandate <br/><br/>To serve the president in the execution of his ... | http://www.thepresidency.gov.za/ |
 | South Africa | Centre for Public Service Innovation | 10 | FALSE | ## Vote purpose <br/><br/>Facilitate the unearthing, development and practical ...  <br/></br> ## Mandate <br/><br/> The responsibility for public sector innovation is vested in the Minister of Public Service... | www.cpsi.co.za |
+
+e.g. for provincial
+
+ | government | department_name | vote_number | is_vote_primary | intro | website_url |
+ |------------|-----------------|-------------|-----------------|-------|-------------|
+| Eastern Cape | Health | 3 | TRUE | ## Vision<br/><br/>A quality health service to the people of the ... <br/></br> ## Mission<br/><br/>To provide and ensure accessible comprehensive integrated ... <br/><br/> ## Core functions and responsibilities<br/><br/>The strategic objectives are in line with the implementation | |
 
 
 License
