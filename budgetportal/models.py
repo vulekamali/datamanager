@@ -1514,6 +1514,7 @@ class Department(models.Model):
 
         cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+            openspending_api.get_geo_ref() + ':' + '"%s"' % self.government.name,
         ]
         drilldowns = [
             openspending_api.get_financial_year_ref(),
