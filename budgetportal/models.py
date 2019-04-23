@@ -229,9 +229,8 @@ class FinancialYear(models.Model):
             },
         } if expenditure else None
 
-    def get_focus_area_preview(self):
-        """ TBD. """
-        dept = Department.objects.filter(government__sphere__slug='national')[0]  # ew
+    def get_focus_area_data(self, sphere):
+        dept = Department.objects.filter(government__sphere__slug=sphere)[0]  # ew
         dataset = dept.get_expenditure_time_series_dataset()
         if not dataset:
             return None
@@ -240,37 +239,60 @@ class FinancialYear(models.Model):
         dept_ref = openspending_api.get_department_name_ref()
         function_ref = openspending_api.get_function_ref()
         phase_ref = openspending_api.get_phase_ref()
+        government_ref = openspending_api.get_geo_ref()
 
         # Add cuts: year and phase
         expenditure_cuts = [
             year_ref + ':' + '{}'.format(self.get_starting_year()),
             phase_ref + ':' + '{}'.format("Main appropriation"),
         ]
+
         expenditure_drilldowns = [
             function_ref,
             dept_ref
         ]
 
+        if sphere == 'provincial':
+            expenditure_drilldowns.append(government_ref)
+
+
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+        return expenditure_results, openspending_api
+
+    def get_focus_area_preview(self):
+        """ Returns data for the focus area preview pages. """
+        national_expenditure_results, national_os_api = self.get_focus_area_data('national')
+        provincial_expenditure_results, provincial_os_api = self.get_focus_area_data('provincial')
+
+        dept_ref = national_os_api.get_department_name_ref()
+        function_ref = national_os_api.get_function_ref()
 
         unique_functions = []
         total_budget_all_focus_areas = 0
-        for c in expenditure_results['cells']:
-            if c[function_ref] != '':
-                total_budget_all_focus_areas += c['value.sum']
-                if c[function_ref] not in unique_functions:
-                    unique_functions.append(c[function_ref])
+        for c in national_expenditure_results['cells']:
+            if c[function_ref] == '':
+                raise Exception('Empty function area for cell: {}'.format(c))
+
+            total_budget_all_focus_areas += c['value.sum']
+            if c[function_ref] not in unique_functions:
+                unique_functions.append(c[function_ref])
 
         function_objects = []
         for function in unique_functions:
             # Iterate over each function, build an object for it
+
             total_function_budget = 0
-            function_cells = filter(lambda x: x[function_ref] == function, expenditure_results['cells'])
+            national_function_cells = filter(lambda x: x[function_ref] == function, national_expenditure_results['cells'])
+            provincial_function_cells = filter(lambda x: x[function_ref] == function, provincial_expenditure_results['cells'])
             focus_area_national_departments = []
-            for cell in function_cells:
+            focus_area_provincial_departments = []
+
+            for cell in provincial_function_cells:
+                total_function_budget += cell['value.sum']
+            for cell in national_function_cells:
                 total_function_budget += cell['value.sum']
 
-            for cell in function_cells:
+            for cell in national_function_cells:
                 percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
                 focus_area_national_departments.append({
                     'title': cell[dept_ref],
@@ -279,17 +301,23 @@ class FinancialYear(models.Model):
                     'percentage_total': percentage_of_total,
                 })
 
-            percentage_of_consolidated_budget = float(total_function_budget) / total_budget_all_focus_areas * 100
-            function_object = {
+            for cell in provincial_function_cells:
+                # Here we need to group by province and add the departments for that province as children
+                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
+                focus_area_provincial_departments.append({
+                    'title': cell[dept_ref],
+                    'slug': slugify(cell[dept_ref]),
+                    'amount': cell['value.sum'],
+                    'percentage_total': percentage_of_total,
+                })
+
+            function_page = {
                 'title': function,
                 'slug': slugify(function),
-                'percentage_total': percentage_of_consolidated_budget,
                 'national': focus_area_national_departments,
-                'description': None,
-                'percentage_changed': 0,
-                'total': total_function_budget,
+                'provincial': focus_area_provincial_departments,
             }
-            function_objects.append(function_object)
+            function_objects.append(function_page)
 
         return {
             'data': {
