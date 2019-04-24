@@ -305,10 +305,9 @@ class FinancialYear(models.Model):
                 })
 
             provinces = {}
-            total_provinces_budget = 0
             for cell in provincial_function_cells:
                 # Here we need to group by province and add the departments for each province as children
-                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100  # change this budget value
+                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
 
                 dept_object = {
                     'title': cell[dept_ref],
@@ -316,7 +315,6 @@ class FinancialYear(models.Model):
                     'amount': cell['value.sum'],
                     'percentage_total': percentage_of_total,
                 }
-                total_provinces_budget += cell['value.sum']
                 if cell[geo_ref] not in provinces.keys():
                     provinces[cell[geo_ref]] = [dept_object]
                 else:
@@ -326,7 +324,7 @@ class FinancialYear(models.Model):
                 amount = 0
                 for dept in provinces[province]:
                     amount += dept['amount']
-                percentage = float(amount) / total_provinces_budget * 100
+                percentage = float(amount) / total_function_budget * 100
 
                 focus_area_provincial_departments.append({
                     'slug': slugify(province),
