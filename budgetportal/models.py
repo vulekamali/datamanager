@@ -31,7 +31,7 @@ ckan = settings.CKAN
 
 URL_LENGTH_LIMIT = 2000
 
-CKAN_DATASTORE_URL = (settings.CKAN_URL+
+CKAN_DATASTORE_URL = (settings.CKAN_URL +
                       '/api/3/action' \
                       '/datastore_search_sql')
 
@@ -255,7 +255,6 @@ class FinancialYear(models.Model):
         if sphere == 'provincial':
             expenditure_drilldowns.append(government_ref)
 
-
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
         return expenditure_results, openspending_api
 
@@ -266,6 +265,7 @@ class FinancialYear(models.Model):
 
         dept_ref = national_os_api.get_department_name_ref()
         function_ref = national_os_api.get_function_ref()
+        geo_ref = national_os_api.get_geo_ref()
 
         unique_functions = []
         total_budget_all_focus_areas = 0
@@ -282,8 +282,10 @@ class FinancialYear(models.Model):
             # Iterate over each function, build an object for it
 
             total_function_budget = 0
-            national_function_cells = filter(lambda x: x[function_ref] == function, national_expenditure_results['cells'])
-            provincial_function_cells = filter(lambda x: x[function_ref] == function, provincial_expenditure_results['cells'])
+            national_function_cells = filter(lambda x: x[function_ref] == function,
+                                             national_expenditure_results['cells'])
+            provincial_function_cells = filter(lambda x: x[function_ref] == function,
+                                               provincial_expenditure_results['cells'])
             focus_area_national_departments = []
             focus_area_provincial_departments = []
 
@@ -301,14 +303,36 @@ class FinancialYear(models.Model):
                     'percentage_total': percentage_of_total,
                 })
 
+            provinces = {}
+            total_provinces_budget = 0
             for cell in provincial_function_cells:
-                # Here we need to group by province and add the departments for that province as children
-                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
-                focus_area_provincial_departments.append({
+                # Here we need to group by province and add the departments for each province as children
+                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100  # change this budget value
+
+                dept_object = {
                     'title': cell[dept_ref],
                     'slug': slugify(cell[dept_ref]),
                     'amount': cell['value.sum'],
                     'percentage_total': percentage_of_total,
+                }
+                total_provinces_budget += cell['value.sum']
+                if cell[geo_ref] not in provinces.keys():
+                    provinces[cell[geo_ref]] = [dept_object]
+                else:
+                    provinces[cell[geo_ref]].append(dept_object)
+
+            for province in provinces.keys():
+                amount = 0
+                for dept in provinces[province]:
+                    amount += dept['amount']
+                percentage = float(amount) / total_provinces_budget * 100
+
+                focus_area_provincial_departments.append({
+                    'slug': slugify(province),
+                    'title': province,
+                    'children': provinces[province],
+                    'amount': amount,
+                    'percentage': percentage
                 })
 
             function_page = {
@@ -324,8 +348,6 @@ class FinancialYear(models.Model):
                 'items': function_objects,
             },
         } if function_objects else None
-
-
 
 
 class Sphere(models.Model):
@@ -480,7 +502,9 @@ class Department(models.Model):
     def get_preview_url_path(self):
         """ e.g. 2018-19/previews/national/south-africa/agriculture-and-fisheries """
         return "%s/previews/%s/%s/%s" % \
-               (self.government.sphere.financial_year.slug, self.government.sphere.slug, self.government.slug, self.slug)
+               (
+                   self.government.sphere.financial_year.slug, self.government.sphere.slug, self.government.slug,
+                   self.slug)
 
     def get_govt_functions(self):
         return GovtFunction.objects.filter(programme__department=self).distinct()
@@ -493,7 +517,8 @@ class Department(models.Model):
         Continue traversing backwards in time until found, or until the original year has been reached. """
         newer_departments = Department.objects.filter(government__slug=self.government.slug,
                                                       government__sphere__slug=self.government.sphere.slug,
-                                                      slug=self.slug).order_by('-government__sphere__financial_year__slug')
+                                                      slug=self.slug).order_by(
+            '-government__sphere__financial_year__slug')
         return newer_departments.first() if newer_departments else None
 
     def _get_financial_year_query(self):
@@ -1167,7 +1192,7 @@ class Department(models.Model):
                 econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         # sort by name
         name_func = lambda x: x['name']
-        for econ_2_name in list(econ_classes.keys()): # Copy keys because we're updating dict
+        for econ_2_name in list(econ_classes.keys()):  # Copy keys because we're updating dict
             econ_classes[econ_2_name]['items'] = sorted(
                 econ_classes[econ_2_name]['items'], key=name_func)
         econ_classes_list = sorted(econ_classes.values(), key=name_func)
@@ -1437,7 +1462,8 @@ class Department(models.Model):
         # Add cuts: year and phase
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
-            openspending_api.get_financial_year_ref() + ':' + '{}'.format(FinancialYear.start_from_year_slug(financial_year_id)),
+            openspending_api.get_financial_year_ref() + ':' + '{}'.format(
+                FinancialYear.start_from_year_slug(financial_year_id)),
             openspending_api.get_phase_ref() + ':' + '"{}"'.format(selected_phase)
         ]
         expenditure_drilldowns = [
@@ -1463,7 +1489,8 @@ class Department(models.Model):
                 )
             except Department.DoesNotExist:
                 logger.warning('Excluding: provincial {} {} {}'.format(
-                    financial_year_id, cell[openspending_api.get_geo_ref()], cell[openspending_api.get_department_name_ref()]
+                    financial_year_id, cell[openspending_api.get_geo_ref()],
+                    cell[openspending_api.get_department_name_ref()]
                 ))
                 continue
 
@@ -1796,25 +1823,25 @@ class Department(models.Model):
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
                     for program in programmes:
-                            for item in programmes[program]['items']:
-                                found = False
-                                if item['financial_year'] == FinancialYear.slug_from_year_start(fiscal_year) \
-                                        and item['phase'] == fiscal_phase:
-                                    found = True
-                                    break
-                            if not found:
-                                programmes[program]['items'].append({
-                                    'financial_year': FinancialYear.slug_from_year_start(fiscal_year),
-                                    'phase': fiscal_phase,
-                                    'amount': None,
-                                })
-                                if fiscal_year not in missing_phases_count:
-                                    missing_phases_count[fiscal_year] = {program: 1}
+                        for item in programmes[program]['items']:
+                            found = False
+                            if item['financial_year'] == FinancialYear.slug_from_year_start(fiscal_year) \
+                                    and item['phase'] == fiscal_phase:
+                                found = True
+                                break
+                        if not found:
+                            programmes[program]['items'].append({
+                                'financial_year': FinancialYear.slug_from_year_start(fiscal_year),
+                                'phase': fiscal_phase,
+                                'amount': None,
+                            })
+                            if fiscal_year not in missing_phases_count:
+                                missing_phases_count[fiscal_year] = {program: 1}
+                            else:
+                                if program not in missing_phases_count[fiscal_year].keys():
+                                    missing_phases_count[fiscal_year][program] = 1
                                 else:
-                                    if program not in missing_phases_count[fiscal_year].keys():
-                                        missing_phases_count[fiscal_year][program] = 1
-                                    else:
-                                        missing_phases_count[fiscal_year][program] += 1
+                                    missing_phases_count[fiscal_year][program] += 1
 
             no_prog_for_years = False
             notices = []

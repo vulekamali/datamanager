@@ -1,0 +1,127 @@
+{
+  "provincial": [
+
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP1 Provincial Test Dept 1",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1",
+      "geo_source.government": "Test Province 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP1 Provincial Test Dept 2",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1",
+      "geo_source.government": "Test Province 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP1 Provincial Test Dept 3",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1",
+      "geo_source.government": "Test Province 1"
+    },
+
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP2 Provincial Test Dept 1",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1",
+      "geo_source.government": "Test Province 2"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP2 Provincial Test Dept 2",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1",
+      "geo_source.government": "Test Province 2"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP2 Provincial Test Dept 3",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1",
+      "geo_source.government": "Test Province 2"
+    },
+
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "Prov Different FG Dept 1",
+      "_count": 319,
+      "function_group.function_group": "Test FG 2",
+      "geo_source.government": "Test Province 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "Prov Different FG Dept 2",
+      "_count": 319,
+      "function_group.function_group": "Test FG 2",
+      "geo_source.government": "Test Province 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "Prov Different FG Dept 3",
+      "_count": 319,
+      "function_group.function_group": "Test FG 2",
+      "geo_source.government": "Test Province 1"
+    }
+  ],
+  "national": [
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP1 National Test Dept 1",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP1 National Test Dept 2",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP1 National Test Dept 3",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP2 National Test Dept 1",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP2 National Test Dept 2",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "TP2 National Test Dept 3",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "Different FG 1",
+      "_count": 319,
+      "function_group.function_group": "Test FG 2"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "Different FG 2",
+      "_count": 319,
+      "function_group.function_group": "Test FG 2"
+    },
+    {
+      "value.sum": 7915439000.0,
+      "vote_number.department": "Different FG 3",
+      "_count": 319,
+      "function_group.function_group": "Test FG 2"
+    }
+  ]
+}
+
