@@ -233,7 +233,7 @@ class FinancialYear(models.Model):
         dept = Department.objects.filter(government__sphere__slug=sphere)[0]  # ew
         dataset = dept.get_expenditure_time_series_dataset()
         if not dataset:
-            return None
+            return None, None
         openspending_api = dataset.get_openspending_api()
         year_ref = openspending_api.get_financial_year_ref()
         dept_ref = openspending_api.get_department_name_ref()
@@ -262,7 +262,8 @@ class FinancialYear(models.Model):
         """ Returns data for the focus area preview pages. """
         national_expenditure_results, national_os_api = self.get_focus_area_data('national')
         provincial_expenditure_results, provincial_os_api = self.get_focus_area_data('provincial')
-
+        if not national_expenditure_results or not provincial_expenditure_results:
+            return None
         dept_ref = national_os_api.get_department_name_ref()
         function_ref = national_os_api.get_function_ref()
         geo_ref = national_os_api.get_geo_ref()
