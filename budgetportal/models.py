@@ -1,7 +1,4 @@
-import itertools
-
 from autoslug import AutoSlugField
-from django.http import Http404
 from slugify import slugify
 
 from budgetportal.openspending import (
@@ -95,6 +92,7 @@ class FinancialYear(models.Model):
     organisational_unit = 'financial_year'
     slug = models.SlugField(max_length=7, unique=True)
     published = models.BooleanField(default=False)
+    _consolidated_expenditure_budget_dataset = None
 
     class Meta:
         ordering = ['-slug']
@@ -169,6 +167,71 @@ class FinancialYear(models.Model):
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
+
+    def get_consolidated_expenditure_budget_dataset(self):
+        if self._consolidated_expenditure_budget_dataset is not None:
+            return self._consolidated_expenditure_budget_dataset
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"consolidated-expenditure-budget"',
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        if response['results']:
+            package = response['results'][0]
+            self._consolidated_expenditure_budget_dataset = Dataset.from_package(package)
+            return self._consolidated_expenditure_budget_dataset
+        else:
+            return None
+
+    def get_consolidated_expenditure_treemap(self):
+        """ Returns a data object for each function group for a specific year. Used by the consolidated treemap. """
+
+        expenditure = []
+        dataset = self.get_consolidated_expenditure_budget_dataset()
+        if not dataset:
+            return None
+        openspending_api = dataset.get_openspending_api()
+        year_ref = openspending_api.get_financial_year_ref()
+
+        # Add cuts: year and phase
+        expenditure_cuts = [
+            year_ref + ':' + '{}'.format(self.get_starting_year()),
+        ]
+        expenditure_drilldowns = [
+            openspending_api.get_function_ref(),
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+
+        total_budget = 0
+        modified_result_cells = []
+
+        for cell in expenditure_results['cells']:
+            total_budget += float(cell['value.sum'])
+            cell['url'] = None
+            modified_result_cells.append(cell)
+
+        for cell in modified_result_cells:
+            percentage_of_total = float(cell['value.sum']) / total_budget * 100
+            expenditure.append({
+                'name': cell[openspending_api.get_function_ref()],
+                'id': slugify(cell[openspending_api.get_function_ref()]),
+                'amount': float(cell['value.sum']),
+                'percentage': percentage_of_total,
+                'url': cell['url']
+            })
+
+        return {
+            'data': {
+                'items': expenditure,
+                'total': total_budget
+            },
+        } if expenditure else None
+
 
 
 class Sphere(models.Model):
@@ -1341,7 +1404,7 @@ class Department(models.Model):
             return None
         openspending_api = dataset.get_openspending_api()
         programme_ref = openspending_api.get_programme_name_ref()
-        government_ref = openspending_api.get_geo_ref()
+        geo_ref = openspending_api.get_geo_ref()
         department_ref = openspending_api.get_department_name_ref()
         financial_year = FinancialYear.objects.get(slug=financial_year_id)
 
@@ -1354,7 +1417,7 @@ class Department(models.Model):
         ]
         expenditure_drilldowns = [
             department_ref,
-            government_ref,
+            geo_ref,
             programme_ref,
         ]
 
@@ -1372,7 +1435,7 @@ class Department(models.Model):
         )
 
         expenditure_results_filter_government_complete_breakdown = filter(
-            lambda x: slugify(x[government_ref]) == government_slug,
+            lambda x: slugify(x[geo_ref]) == government_slug,
             expenditure_results_no_drf
         )
 
@@ -1381,7 +1444,7 @@ class Department(models.Model):
             expenditure_results_filter_government_function_breakdown = openspending_api.aggregate_by_refs(
                 [
                     department_ref,
-                    government_ref,
+                    geo_ref,
                     function_ref,
                 ],
                 expenditure_results_filter_government_complete_breakdown
@@ -1392,7 +1455,7 @@ class Department(models.Model):
         expenditure_results_filter_government_programme_breakdown = openspending_api.aggregate_by_refs(
             [
                 department_ref,
-                government_ref,
+                geo_ref,
                 programme_ref,
             ],
             expenditure_results_filter_government_complete_breakdown
@@ -1401,7 +1464,7 @@ class Department(models.Model):
         expenditure_results_filter_government_department_breakdown = openspending_api.aggregate_by_refs(
             [
                 department_ref,
-                government_ref,
+                geo_ref,
             ],
             expenditure_results_filter_government_complete_breakdown
         )
@@ -1419,11 +1482,11 @@ class Department(models.Model):
             try:
                 dept = sphere_depts.get(
                     slug=slugify(cell[department_ref]),
-                    government__slug=slugify(cell[government_ref])
+                    government__slug=slugify(cell[geo_ref])
                 )
             except Department.DoesNotExist:
                 logger.warning('Excluding: {} {} {} {}'.format(
-                    sphere_slug, financial_year_id, cell[government_ref],
+                    sphere_slug, financial_year_id, cell[geo_ref],
                     cell[department_ref]
                 ))
                 continue
@@ -1498,6 +1561,7 @@ class Department(models.Model):
 
         cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+            openspending_api.get_geo_ref() + ':' + '"%s"' % self.government.name,
         ]
         drilldowns = [
             openspending_api.get_financial_year_ref(),
@@ -1637,6 +1701,7 @@ class Department(models.Model):
 
         cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+            openspending_api.get_geo_ref() + ':' + '"%s"' % self.government.name,
         ]
         drilldowns = [
             openspending_api.get_financial_year_ref(),
@@ -2172,6 +2237,7 @@ class Dataset():
             'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
             'budgeted-and-actual-national-expenditure': ExpenditureTimeSeries,
             'budgeted-and-actual-provincial-expenditure': ExpenditureTimeSeries,
+            'consolidated-expenditure-budget': ExpenditureTimeSeries,
         }
         api_class = api_class_mapping[self.category.slug]
         self._openspending_api = api_class(api_resource['url'])

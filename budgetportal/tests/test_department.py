@@ -138,6 +138,7 @@ class BudgetedAndActualExpenditureProgrammeTestCase(TestCase):
         self.mock_openspending_api = Mock()
         self.mock_openspending_api.get_adjustment_kind_ref = Mock(return_value='adjustment_kind_ref')
         self.mock_openspending_api.get_phase_ref = Mock(return_value='budget_phase.budget_phase')
+        self.mock_openspending_api.get_geo_ref = Mock(return_value='government.government')
         self.mock_openspending_api.get_programme_name_ref = Mock(return_value='programme_number.programme')
         self.mock_openspending_api.get_department_name_ref = Mock(return_value='department_name_ref')
         self.mock_openspending_api.get_financial_year_ref = Mock(return_value="financial_year.financial_year")
@@ -185,6 +186,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         self.mock_openspending_api = Mock()
         self.mock_openspending_api.get_adjustment_kind_ref = Mock(return_value='adjustment_kind_ref')
         self.mock_openspending_api.get_phase_ref = Mock(return_value='budget_phase.budget_phase')
+        self.mock_openspending_api.get_geo_ref = Mock(return_value='government.government')
         self.mock_openspending_api.get_programme_name_ref = Mock
         self.mock_openspending_api.get_department_name_ref = Mock(return_value='department_name_ref')
         self.mock_openspending_api.get_financial_year_ref = Mock(return_value="financial_year.financial_year")
