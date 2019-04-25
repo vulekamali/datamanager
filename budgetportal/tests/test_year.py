@@ -90,3 +90,4 @@ class FocusAreaPagesTestCase(TestCase):
         self.assertIn('national', expenditure_keys)
         self.assertIn('slug', expenditure_keys)
         self.assertIn('title', expenditure_keys)
+        self.assertIn('footnotes', expenditure_keys)

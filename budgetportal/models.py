@@ -282,6 +282,7 @@ class FinancialYear(models.Model):
         for function in unique_functions:
             # Iterate over each function, build an object for it
 
+            footnotes = {'national': [], 'provincial': []}
             total_function_budget = 0
             national_function_cells = filter(lambda x: x[function_ref] == function,
                                              national_expenditure_results['cells'])
@@ -295,6 +296,7 @@ class FinancialYear(models.Model):
             for cell in national_function_cells:
                 total_function_budget += cell['value.sum']
 
+            footnotes['national'].append('Source: Estimates of National Expenditure {}'.format(self.slug))
             for cell in national_function_cells:
                 percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
                 focus_area_national_departments.append({
@@ -304,6 +306,7 @@ class FinancialYear(models.Model):
                     'percentage_total': percentage_of_total,
                 })
 
+            footnotes['provincial'].append('Source: Estimates of Provincial Expenditure {}'.format(self.slug))
             provinces = {}
             for cell in provincial_function_cells:
                 # Here we need to group by province and add the departments for each province as children
@@ -339,6 +342,7 @@ class FinancialYear(models.Model):
                 'slug': slugify(function),
                 'national': focus_area_national_departments,
                 'provincial': focus_area_provincial_departments,
+                'footnotes': footnotes
             }
             function_objects.append(function_page)
 
