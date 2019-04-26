@@ -230,7 +230,7 @@ class FinancialYear(models.Model):
         } if expenditure else None
 
     def get_focus_area_data(self, sphere):
-        dept = Department.objects.filter(government__sphere__slug=sphere)[0]  # ew
+        dept = Department.objects.filter(government__sphere__slug=sphere)[0]
         dataset = dept.get_expenditure_time_series_dataset()
         if not dataset:
             return None, None
@@ -241,7 +241,6 @@ class FinancialYear(models.Model):
         phase_ref = openspending_api.get_phase_ref()
         government_ref = openspending_api.get_geo_ref()
 
-        # Add cuts: year and phase
         expenditure_cuts = [
             year_ref + ':' + '{}'.format(self.get_starting_year()),
             phase_ref + ':' + '{}'.format("Main appropriation"),
@@ -258,10 +257,42 @@ class FinancialYear(models.Model):
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
         return expenditure_results, openspending_api
 
+    def get_subprogramme_from_actual_and_budgeted_dataset(self, sphere, department, subprogramme):
+        dept = Department.objects.filter(government__sphere__slug=sphere)[0]
+        dataset = dept.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None, None
+        openspending_api = dataset.get_openspending_api()
+        year_ref = openspending_api.get_financial_year_ref()
+        dept_ref = openspending_api.get_department_name_ref()
+        function_ref = openspending_api.get_function_ref()
+        phase_ref = openspending_api.get_phase_ref()
+        subprogramme_ref = openspending_api.get_subprogramme_name_ref()
+
+        expenditure_cuts = [
+            year_ref + ':' + '{}'.format(self.get_starting_year()),
+            phase_ref + ':' + '{}'.format("Main appropriation"),
+            dept_ref + ':' + '{}'.format(department),
+            subprogramme_ref + ':' + '{}'.format(subprogramme),
+        ]
+
+        expenditure_drilldowns = [
+            function_ref
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+        return expenditure_results
+
     def get_focus_area_preview(self):
         """ Returns data for the focus area preview pages. """
+        subprogramme_dept_exclude = 'National Treasury'
+        subprogramme_exclude = 'Provincial Equitable Share'
+
         national_expenditure_results, national_os_api = self.get_focus_area_data('national')
         provincial_expenditure_results, provincial_os_api = self.get_focus_area_data('provincial')
+        subprogramme_to_exclude_results = self.get_subprogramme_from_actual_and_budgeted_dataset(
+            'national', subprogramme_dept_exclude, subprogramme_exclude
+        )
         if not national_expenditure_results or not provincial_expenditure_results:
             return None
         dept_ref = national_os_api.get_department_name_ref()
@@ -282,31 +313,41 @@ class FinancialYear(models.Model):
         for function in unique_functions:
             # Iterate over each function, build an object for it
 
-            footnotes = {'national': [], 'provincial': []}
             total_function_budget = 0
             national_function_cells = filter(lambda x: x[function_ref] == function,
                                              national_expenditure_results['cells'])
             provincial_function_cells = filter(lambda x: x[function_ref] == function,
                                                provincial_expenditure_results['cells'])
-            focus_area_national_departments = []
-            focus_area_provincial_departments = []
+            national = {'data': [], 'footnotes': [], 'notices': []}
+            provincial = {'data': [], 'footnotes': [], 'notices': []}
 
             for cell in provincial_function_cells:
                 total_function_budget += cell['value.sum']
             for cell in national_function_cells:
                 total_function_budget += cell['value.sum']
 
-            footnotes['national'].append('Source: Estimates of National Expenditure {}'.format(self.slug))
+            national['footnotes'].append('**Source:** Estimates of National Expenditure {}'.format(self.slug))
             for cell in national_function_cells:
                 percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
-                focus_area_national_departments.append({
+                exclude_for_function = filter(lambda x: x[function_ref] == function,
+                                              subprogramme_to_exclude_results['results'])
+                if exclude_for_function and cell[dept_ref] == subprogramme_dept_exclude:
+                    exclude_amount = exclude_for_function[0]['value.sum']
+                    amount = cell['value.sum'] - exclude_amount
+                    logger.info('Excluded subprogramme {} with value {} from department {}'.format(
+                        subprogramme_exclude, exclude_amount, subprogramme_dept_exclude
+                    ))
+                    national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
+                else:
+                    amount = cell['value.sum']
+                national['data'].append({
                     'title': cell[dept_ref],
                     'slug': slugify(cell[dept_ref]),
-                    'amount': cell['value.sum'],
+                    'amount': amount,
                     'percentage_total': percentage_of_total,
                 })
 
-            footnotes['provincial'].append('Source: Estimates of Provincial Expenditure {}'.format(self.slug))
+            provincial['footnotes'].append('**Source:** Estimates of Provincial Expenditure {}'.format(self.slug))
             provinces = {}
             for cell in provincial_function_cells:
                 # Here we need to group by province and add the departments for each province as children
@@ -329,7 +370,7 @@ class FinancialYear(models.Model):
                     amount += dept['amount']
                 percentage = float(amount) / total_function_budget * 100
 
-                focus_area_provincial_departments.append({
+                provincial['data'].append({
                     'slug': slugify(province),
                     'title': province,
                     'children': provinces[province],
@@ -340,9 +381,8 @@ class FinancialYear(models.Model):
             function_page = {
                 'title': function,
                 'slug': slugify(function),
-                'national': focus_area_national_departments,
-                'provincial': focus_area_provincial_departments,
-                'footnotes': footnotes
+                'national': national,
+                'provincial': provincial,
             }
             function_objects.append(function_page)
 
