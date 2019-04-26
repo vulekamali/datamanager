@@ -327,56 +327,63 @@ class FinancialYear(models.Model):
                 total_function_budget += cell['value.sum']
 
             national['footnotes'].append('**Source:** Estimates of National Expenditure {}'.format(self.slug))
-            for cell in national_function_cells:
-                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
-                exclude_for_function = filter(lambda x: x[function_ref] == function,
-                                              subprogramme_to_exclude_results['cells'])
-                if exclude_for_function and cell[dept_ref] == subprogramme_dept_exclude:
-                    exclude_amount = exclude_for_function[0]['value.sum']
-                    amount = cell['value.sum'] - exclude_amount
-                    logger.info('Excluded subprogramme {} with value {} from department {}'.format(
-                        subprogramme_exclude, exclude_amount, subprogramme_dept_exclude
-                    ))
-                    national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
-                else:
-                    amount = cell['value.sum']
-                national['data'].append({
-                    'title': cell[dept_ref],
-                    'slug': slugify(cell[dept_ref]),
-                    'amount': amount,
-                    'percentage_total': percentage_of_total,
-                })
+            if national_function_cells:
+                for cell in national_function_cells:
+                    percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
+                    exclude_for_function = filter(lambda x: x[function_ref] == function,
+                                                  subprogramme_to_exclude_results['cells'])
+                    if exclude_for_function and cell[dept_ref] == subprogramme_dept_exclude:
+                        exclude_amount = exclude_for_function[0]['value.sum']
+                        amount = cell['value.sum'] - exclude_amount
+                        logger.info('Excluded subprogramme {} with value {} from department {}'.format(
+                            subprogramme_exclude, exclude_amount, subprogramme_dept_exclude
+                        ))
+                        national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
+                    else:
+                        amount = cell['value.sum']
+                    national['data'].append({
+                        'title': cell[dept_ref],
+                        'slug': slugify(cell[dept_ref]),
+                        'amount': amount,
+                        'percentage_total': percentage_of_total,
+                    })
+            else:
+                national['notices'].append('No national departments contribute to this focus area')
+
 
             provincial['footnotes'].append('**Source:** Estimates of Provincial Expenditure {}'.format(self.slug))
             provinces = {}
-            for cell in provincial_function_cells:
-                # Here we need to group by province and add the departments for each province as children
-                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
+            if provincial_function_cells:
+                for cell in provincial_function_cells:
+                    # Here we need to group by province and add the departments for each province as children
+                    percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
 
-                dept_object = {
-                    'title': cell[dept_ref],
-                    'slug': slugify(cell[dept_ref]),
-                    'amount': cell['value.sum'],
-                    'percentage_total': percentage_of_total,
-                }
-                if cell[geo_ref] not in provinces.keys():
-                    provinces[cell[geo_ref]] = [dept_object]
-                else:
-                    provinces[cell[geo_ref]].append(dept_object)
+                    dept_object = {
+                        'title': cell[dept_ref],
+                        'slug': slugify(cell[dept_ref]),
+                        'amount': cell['value.sum'],
+                        'percentage_total': percentage_of_total,
+                    }
+                    if cell[geo_ref] not in provinces.keys():
+                        provinces[cell[geo_ref]] = [dept_object]
+                    else:
+                        provinces[cell[geo_ref]].append(dept_object)
 
-            for province in provinces.keys():
-                amount = 0
-                for dept in provinces[province]:
-                    amount += dept['amount']
-                percentage = float(amount) / total_function_budget * 100
+                for province in provinces.keys():
+                    amount = 0
+                    for dept in provinces[province]:
+                        amount += dept['amount']
+                    percentage = float(amount) / total_function_budget * 100
 
-                provincial['data'].append({
-                    'slug': slugify(province),
-                    'title': province,
-                    'children': provinces[province],
-                    'amount': amount,
-                    'percentage': percentage
-                })
+                    provincial['data'].append({
+                        'slug': slugify(province),
+                        'title': province,
+                        'children': provinces[province],
+                        'amount': amount,
+                        'percentage': percentage
+                    })
+            else:
+                provincial['notices'].append('No provincial departments contribute to this focus area')
 
             function_page = {
                 'title': function,
