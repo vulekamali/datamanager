@@ -330,7 +330,7 @@ class FinancialYear(models.Model):
             for cell in national_function_cells:
                 percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
                 exclude_for_function = filter(lambda x: x[function_ref] == function,
-                                              subprogramme_to_exclude_results['results'])
+                                              subprogramme_to_exclude_results['cells'])
                 if exclude_for_function and cell[dept_ref] == subprogramme_dept_exclude:
                     exclude_amount = exclude_for_function[0]['value.sum']
                     amount = cell['value.sum'] - exclude_amount

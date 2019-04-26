@@ -70,7 +70,7 @@
   "national": [
     {
       "value.sum": 7915439000.0,
-      "vote_number.department": "TP1 National Test Dept 1",
+      "vote_number.department": "National Treasury",
       "_count": 319,
       "function_group.function_group": "Test FG 1"
     },
@@ -119,6 +119,20 @@
     {
       "value.sum": 7915439000.0,
       "vote_number.department": "Different FG 3",
+      "_count": 319,
+      "function_group.function_group": "Test FG 2"
+    }
+  ],
+  "national_subprogramme": [
+    {
+      "value.sum": 6915439000.0,
+      "subprogramme.subprogramme": "Provincial Equitable Share",
+      "_count": 319,
+      "function_group.function_group": "Test FG 1"
+    },
+    {
+      "value.sum": 3915439000.0,
+      "subprogramme.subprogramme": "Provincial Equitable Share",
       "_count": 319,
       "function_group.function_group": "Test FG 2"
     }

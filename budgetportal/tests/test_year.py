@@ -53,7 +53,7 @@ class ConsolidatedTreemapTestCase(TestCase):
 
 
 class FocusAreaPagesTestCase(TestCase):
-    """ Unit tests for the consolidated treemap function(s) """
+    """ Unit tests for the focus area page functions """
 
     def setUp(self):
         self.year = FinancialYear.objects.create(slug="2019-20")
@@ -66,12 +66,16 @@ class FocusAreaPagesTestCase(TestCase):
         self.mock_openspending_api.get_year_ref = Mock(return_value='function_group.function_group')
         self.mock_openspending_api.get_financial_year_ref = Mock(return_value="financial_year.financial_year")
         self.mock_openspending_api.get_department_name_ref = Mock(return_value="vote_number.department")
+        self.mock_openspending_api.get_subprogramme_name_ref = Mock(return_value="subprogramme.subprogramme")
         mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
 
         def get_sphere_dataset(sphere):
             return {'cells': FOCUS_AREA_MOCK_DATA[sphere]}, self.mock_openspending_api
 
         self.year.get_focus_area_data = Mock(side_effect=get_sphere_dataset)
+        self.year.get_subprogramme_from_actual_and_budgeted_dataset = Mock(
+            return_value={'cells': FOCUS_AREA_MOCK_DATA['national_subprogramme']}
+        )
         self.year.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
 
     def test_no_cells_null_response(self):
@@ -90,4 +94,3 @@ class FocusAreaPagesTestCase(TestCase):
         self.assertIn('national', expenditure_keys)
         self.assertIn('slug', expenditure_keys)
         self.assertIn('title', expenditure_keys)
-        self.assertIn('footnotes', expenditure_keys)
