@@ -50,6 +50,8 @@ docker-compose run --rm app python manage.py load_departments 2019-20 national /
 
 ### Development best practises
 
+* Always maintain or improve test coverage
+* Follow the principles of the [test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid)
 * Put javascript into ``budgetportal/static/javascript/app.js``
 * Put SCSS stylesheets into ``budgetportal/static/stylesheets/app.scss``
 * Install new asset packs with Bower: ``bower install -Sp package-to-install``
@@ -80,19 +82,13 @@ Logout from ckan might not send you to the right URL to logout from DataManager.
 Running tests
 --------------
 
-To be able to run tests, install test dependencies:
-
-```bash
-pip install -r requirements-test.txt
-```
-
 Install PhantomJS according to the right way for your operating system.
 
-### Run the tests
-
-```bash
-python manage.py test
 ```
+tox
+```
+
+This should should exist with non-zero status and indicate that all tests passed.
 
 If any tests fail, the exit code will be non-zero and details will be printed to the console. Remember to scroll up a bit in the output to see stack traces corresponding server errors for HTTP-based tests.
 
