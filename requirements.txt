@@ -1,6 +1,7 @@
 certifi==2017.11.5
 chardet==3.0.4
 ckanapi==4.1
+codecov
 dj-database-url==0.3.0
 Django==1.11.20
 django-adminplus==0.5
