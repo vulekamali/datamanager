@@ -24,6 +24,7 @@ If you're setting up a new database:
 ```
 docker-compose run --rm app python manage.py migrate
 docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
+docker-compose run --rm app python manage.py loaddata fixtures/years-spheres-governments.json
 ```
 
 Then run the server
@@ -32,7 +33,7 @@ Then run the server
 docker-compose up
 ```
 
-Now you can login with initial the *development superuser*:
+Now you can login with initial the *development superuser* at `/admin/login/`:
 
 Username: `admin@localhost`
 Password: `password`
@@ -45,6 +46,7 @@ Load an initial set of financial years, spheres and governments. You might need 
 
 ```
 docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
+docker-compose run --rm app python manage.py loaddata fixtures/years-spheres-governments.json
 docker-compose run --rm app python manage.py load_departments 2019-20 national /code/departments-2019-20.csv
 ```
 
@@ -82,7 +84,19 @@ Logout from ckan might not send you to the right URL to logout from DataManager.
 Running tests
 --------------
 
-Install PhantomJS according to the right way for your operating system.
+To run tests in your docker image:
+
+```bash
+docker-compose run --rm app tox
+```
+
+To be able to run tests on your local environment, install test dependencies:
+
+```bash
+pip install -r requirements-test.txt
+```
+
+Install [PhantomJS](http://phantomjs.org/download.html) according to the right way for your operating system.
 
 ```
 tox
