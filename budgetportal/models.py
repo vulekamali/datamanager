@@ -294,8 +294,6 @@ class FinancialYear(models.Model):
         subprogramme_to_exclude_results = self.get_subprogramme_from_actual_and_budgeted_dataset(
             'national', subprogramme_dept_exclude, subprogramme_exclude
         )
-        if not national_expenditure_results or not provincial_expenditure_results:
-            return None
         nat_dept_ref = national_os_api.get_department_name_ref()
         nat_function_ref = national_os_api.get_function_ref()
         prov_dept_ref = provincial_os_api.get_department_name_ref()
@@ -329,6 +327,10 @@ class FinancialYear(models.Model):
             for cell in national_function_cells:
                 total_function_budget += cell['value.sum']
 
+            if not national_function_cells:
+                notice = ("No national departments allocated budget "
+                          "to this focus area.").format(self.slug)
+                national['notices'].append(notice)
             national['footnotes'].append('**Source:** Estimates of National Expenditure {}'.format(self.slug))
             for cell in national_function_cells:
                 percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
@@ -368,6 +370,12 @@ class FinancialYear(models.Model):
             else:
                 footnote = '**Source:** Estimates of Provincial Expenditure {}'.format(self.slug)
                 provincial['footnotes'].append(footnote)
+
+                if not provincial_function_cells:
+                    notice = ("No provincial departments allocated budget "
+                              "to this focus area.").format(self.slug)
+                    provincial['notices'].append(notice)
+
                 province_depts = {}
                 for cell in provincial_function_cells:
                     # Here we need to group by province and add the departments for each province as children
