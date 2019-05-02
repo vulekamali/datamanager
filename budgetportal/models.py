@@ -314,18 +314,17 @@ class FinancialYear(models.Model):
         for function in unique_functions:
             # Iterate over each function, build an object for it
 
-            total_function_budget = 0
             national_function_cells = filter(lambda x: x[nat_function_ref] == function,
                                              national_expenditure_results['cells'])
             provincial_function_cells = filter(lambda x: x[prov_function_ref] == function,
                                                provincial_expenditure_results['cells'])
             national = {'data': [], 'footnotes': [], 'notices': []}
             provincial = {'data': [], 'footnotes': [], 'notices': []}
-
-            for cell in provincial_function_cells:
-                total_function_budget += cell['value.sum']
-            for cell in national_function_cells:
-                total_function_budget += cell['value.sum']
+            national['total'] = sum(c['value.sum'] for c in national_function_cells)
+            if no_provincial_in_year:
+                provincial['total'] = None
+            else:
+                provincial['total'] = sum(c['value.sum'] for c in provincial_function_cells)
 
             if not national_function_cells:
                 notice = ("No national departments allocated budget "
@@ -333,7 +332,6 @@ class FinancialYear(models.Model):
                 national['notices'].append(notice)
             national['footnotes'].append('**Source:** Estimates of National Expenditure {}'.format(self.slug))
             for cell in national_function_cells:
-                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
                 exclude_for_function = filter(lambda x: x[nat_function_ref] == function,
                                               subprogramme_to_exclude_results['cells'])
                 if exclude_for_function and cell[nat_dept_ref] == subprogramme_dept_exclude:
@@ -359,7 +357,6 @@ class FinancialYear(models.Model):
                     'title': cell[nat_dept_ref],
                     'slug': department_slug,
                     'amount': amount,
-                    'percentage_total': percentage_of_total,
                     'url': preview_url,
                 })
 
@@ -379,7 +376,6 @@ class FinancialYear(models.Model):
                 province_depts = {}
                 for cell in provincial_function_cells:
                     # Here we need to group by province and add the departments for each province as children
-                    percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
                     department_slug = slugify(cell[prov_dept_ref])
                     if departments:
                         preview_url = departments[0].get_preview_url_path()
@@ -395,7 +391,6 @@ class FinancialYear(models.Model):
                         'title': cell[prov_dept_ref],
                         'slug': department_slug,
                         'amount': cell['value.sum'],
-                        'percentage_total': percentage_of_total,
                         'url': preview_url,
                     }
                     if cell[prov_geo_ref] not in province_depts.keys():
@@ -407,14 +402,12 @@ class FinancialYear(models.Model):
                     amount = 0
                     for dept in province_depts[province]:
                         amount += dept['amount']
-                    percentage = float(amount) / total_function_budget * 100
 
                     provincial['data'].append({
                         'slug': slugify(province),
                         'title': province,
                         'children': province_depts[province],
                         'amount': amount,
-                        'percentage': percentage
                     })
 
             function_page = {
