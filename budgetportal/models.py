@@ -373,7 +373,6 @@ class FinancialYear(models.Model):
                               "to this focus area.").format(self.slug)
                     provincial['notices'].append(notice)
 
-                province_depts = {}
                 for cell in provincial_function_cells:
                     # Here we need to group by province and add the departments for each province as children
                     department_slug = slugify(cell[prov_dept_ref])
@@ -1561,12 +1560,10 @@ class Department(models.Model):
             filtered_result_cells.append(cell)
 
         for cell in filtered_result_cells:
-            percentage_of_total = float(cell['value.sum']) / total_budget * 100
             expenditure.append({
                 'name': cell[openspending_api.get_department_name_ref()],
                 'slug': slugify(cell[openspending_api.get_department_name_ref()]),
                 'amount': float(cell['value.sum']),
-                'percentage_of_total': 0,
                 'province': cell[openspending_api.get_geo_ref()],
                 'url': cell['url']
             })
@@ -1605,15 +1602,9 @@ class Department(models.Model):
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
-        expenditure_results_no_drf = openspending_api.filter_by_ref_exclusion(
-            expenditure_results['cells'],
-            programme_ref,
-            DIRECT_CHARGE_NRF,
-        )
-
         expenditure_results_filter_government_programme_breakdown = filter(
             lambda x: slugify(x[geo_ref]) == government_slug,
-            expenditure_results_no_drf
+            expenditure_results['cells']
         )
 
         expenditure_results_filter_government_departments = openspending_api.aggregate_by_refs(
