@@ -209,17 +209,17 @@ class FinancialYear(models.Model):
 
         for cell in expenditure_results['cells']:
             total_budget += float(cell['value.sum'])
-            cell['url'] = None
             modified_result_cells.append(cell)
 
         for cell in modified_result_cells:
             percentage_of_total = float(cell['value.sum']) / total_budget * 100
+            focus_area_name = cell[openspending_api.get_function_ref()]
             expenditure.append({
-                'name': cell[openspending_api.get_function_ref()],
+                'name': focus_area_name,
                 'id': slugify(cell[openspending_api.get_function_ref()]),
                 'amount': float(cell['value.sum']),
                 'percentage': percentage_of_total,
-                'url': cell['url']
+                'url': self.get_focus_area_url_path(focus_area_name)
             })
 
         return {
@@ -416,6 +416,8 @@ class FinancialYear(models.Model):
             },
         } if function_objects else None
 
+    def get_focus_area_url_path(self, name):
+        return "{}/focus/{}".format(self.slug, slugify(name))
 
 class Sphere(models.Model):
     organisational_unit = 'sphere'
