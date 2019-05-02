@@ -78,11 +78,6 @@ class FocusAreaPagesTestCase(TestCase):
         )
         self.year.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
 
-    def test_no_cells_null_response(self):
-        self.year.get_focus_area_data = Mock(return_value=(None, None))
-        result = self.year.get_focus_area_preview()
-        self.assertEqual(result, None)
-
     def test_provincial_data(self):
         result = self.year.get_focus_area_preview()
         data = result['data']
