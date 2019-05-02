@@ -342,40 +342,62 @@ class FinancialYear(models.Model):
                     national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
                 else:
                     amount = cell['value.sum']
+                department_slug = slugify(cell[nat_dept_ref])
+                departments = Department.objects.filter(
+                    slug=department_slug,
+                    government__sphere__slug='national',
+                    government__sphere__financial_year=self,
+                )
+                if departments:
+                    preview_url = departments[0].get_preview_url_path()
+                else:
+                    preview_url = None
                 national['data'].append({
                     'title': cell[nat_dept_ref],
-                    'slug': slugify(cell[nat_dept_ref]),
+                    'slug': department_slug,
                     'amount': amount,
                     'percentage_total': percentage_of_total,
+                    'url': preview_url,
                 })
 
             provincial['footnotes'].append('**Source:** Estimates of Provincial Expenditure {}'.format(self.slug))
-            provinces = {}
+            province_depts = {}
             for cell in provincial_function_cells:
                 # Here we need to group by province and add the departments for each province as children
                 percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
-
+                department_slug = slugify(cell[prov_dept_ref])
+                if departments:
+                    preview_url = departments[0].get_preview_url_path()
+                else:
+                    preview_url = None
+                departments = Department.objects.filter(
+                    slug=department_slug,
+                    government__name=cell[prov_geo_ref],
+                    government__sphere__slug='provincial',
+                    government__sphere__financial_year=self,
+                )
                 dept_object = {
                     'title': cell[prov_dept_ref],
-                    'slug': slugify(cell[prov_dept_ref]),
+                    'slug': department_slug,
                     'amount': cell['value.sum'],
                     'percentage_total': percentage_of_total,
+                    'url': preview_url,
                 }
-                if cell[prov_geo_ref] not in provinces.keys():
-                    provinces[cell[prov_geo_ref]] = [dept_object]
+                if cell[prov_geo_ref] not in province_depts.keys():
+                    province_depts[cell[prov_geo_ref]] = [dept_object]
                 else:
-                    provinces[cell[prov_geo_ref]].append(dept_object)
+                    province_depts[cell[prov_geo_ref]].append(dept_object)
 
-            for province in provinces.keys():
+            for province in province_depts.keys():
                 amount = 0
-                for dept in provinces[province]:
+                for dept in province_depts[province]:
                     amount += dept['amount']
                 percentage = float(amount) / total_function_budget * 100
 
                 provincial['data'].append({
                     'slug': slugify(province),
                     'title': province,
-                    'children': provinces[province],
+                    'children': province_depts[province],
                     'amount': amount,
                     'percentage': percentage
                 })
