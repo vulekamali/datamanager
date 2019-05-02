@@ -4,3 +4,5 @@ env
 staticfiles/
 docs/_build
 *.sqlite3
+.tox
+.coverage

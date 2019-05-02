@@ -3,7 +3,9 @@ python:
   - "2.7"
 cache: pip
 install:
-  - pip install -r requirements.txt
-  - pip install -r requirements-test.txt
+  - pip install -U pip
+  - pip install tox codecov
 script:
-  - python manage.py test
+  - tox
+after_success:
+  - codecov
