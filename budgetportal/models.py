@@ -290,6 +290,7 @@ class FinancialYear(models.Model):
 
         national_expenditure_results, national_os_api = self.get_focus_area_data('national')
         provincial_expenditure_results, provincial_os_api = self.get_focus_area_data('provincial')
+        no_provincial_in_year = not provincial_expenditure_results['cells']
         subprogramme_to_exclude_results = self.get_subprogramme_from_actual_and_budgeted_dataset(
             'national', subprogramme_dept_exclude, subprogramme_exclude
         )
@@ -360,47 +361,53 @@ class FinancialYear(models.Model):
                     'url': preview_url,
                 })
 
-            provincial['footnotes'].append('**Source:** Estimates of Provincial Expenditure {}'.format(self.slug))
-            province_depts = {}
-            for cell in provincial_function_cells:
-                # Here we need to group by province and add the departments for each province as children
-                percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
-                department_slug = slugify(cell[prov_dept_ref])
-                if departments:
-                    preview_url = departments[0].get_preview_url_path()
-                else:
-                    preview_url = None
-                departments = Department.objects.filter(
-                    slug=department_slug,
-                    government__name=cell[prov_geo_ref],
-                    government__sphere__slug='provincial',
-                    government__sphere__financial_year=self,
-                )
-                dept_object = {
-                    'title': cell[prov_dept_ref],
-                    'slug': department_slug,
-                    'amount': cell['value.sum'],
-                    'percentage_total': percentage_of_total,
-                    'url': preview_url,
-                }
-                if cell[prov_geo_ref] not in province_depts.keys():
-                    province_depts[cell[prov_geo_ref]] = [dept_object]
-                else:
-                    province_depts[cell[prov_geo_ref]].append(dept_object)
+            if no_provincial_in_year:
+                notice = ("Provincial budget allocations to focus areas "
+                          "for {} not published yet on vulekamali.").format(self.slug)
+                provincial['notices'].append(notice)
+            else:
+                footnote = '**Source:** Estimates of Provincial Expenditure {}'.format(self.slug)
+                provincial['footnotes'].append(footnote)
+                province_depts = {}
+                for cell in provincial_function_cells:
+                    # Here we need to group by province and add the departments for each province as children
+                    percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
+                    department_slug = slugify(cell[prov_dept_ref])
+                    if departments:
+                        preview_url = departments[0].get_preview_url_path()
+                    else:
+                        preview_url = None
+                    departments = Department.objects.filter(
+                        slug=department_slug,
+                        government__name=cell[prov_geo_ref],
+                        government__sphere__slug='provincial',
+                        government__sphere__financial_year=self,
+                    )
+                    dept_object = {
+                        'title': cell[prov_dept_ref],
+                        'slug': department_slug,
+                        'amount': cell['value.sum'],
+                        'percentage_total': percentage_of_total,
+                        'url': preview_url,
+                    }
+                    if cell[prov_geo_ref] not in province_depts.keys():
+                        province_depts[cell[prov_geo_ref]] = [dept_object]
+                    else:
+                        province_depts[cell[prov_geo_ref]].append(dept_object)
 
-            for province in province_depts.keys():
-                amount = 0
-                for dept in province_depts[province]:
-                    amount += dept['amount']
-                percentage = float(amount) / total_function_budget * 100
+                for province in province_depts.keys():
+                    amount = 0
+                    for dept in province_depts[province]:
+                        amount += dept['amount']
+                    percentage = float(amount) / total_function_budget * 100
 
-                provincial['data'].append({
-                    'slug': slugify(province),
-                    'title': province,
-                    'children': province_depts[province],
-                    'amount': amount,
-                    'percentage': percentage
-                })
+                    provincial['data'].append({
+                        'slug': slugify(province),
+                        'title': province,
+                        'children': province_depts[province],
+                        'amount': amount,
+                        'percentage': percentage
+                    })
 
             function_page = {
                 'title': function,
