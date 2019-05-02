@@ -387,27 +387,12 @@ class FinancialYear(models.Model):
                         government__sphere__slug='provincial',
                         government__sphere__financial_year=self,
                     )
-                    dept_object = {
-                        'title': cell[prov_dept_ref],
+                    provincial['data'].append({
+                        'name': cell[prov_dept_ref],
                         'slug': department_slug,
                         'amount': cell['value.sum'],
                         'url': preview_url,
-                    }
-                    if cell[prov_geo_ref] not in province_depts.keys():
-                        province_depts[cell[prov_geo_ref]] = [dept_object]
-                    else:
-                        province_depts[cell[prov_geo_ref]].append(dept_object)
-
-                for province in province_depts.keys():
-                    amount = 0
-                    for dept in province_depts[province]:
-                        amount += dept['amount']
-
-                    provincial['data'].append({
-                        'slug': slugify(province),
-                        'title': province,
-                        'children': province_depts[province],
-                        'amount': amount,
+                        'province': cell[prov_geo_ref],
                     })
 
             function_page = {
