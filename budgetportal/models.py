@@ -409,6 +409,8 @@ class FinancialYear(models.Model):
         } if function_objects else None
 
     def get_focus_area_url_path(self, name):
+        if name == "Contingency reserve":
+            return None
         return "{}/focus/{}".format(self.slug, slugify(name))
 
 class Sphere(models.Model):
