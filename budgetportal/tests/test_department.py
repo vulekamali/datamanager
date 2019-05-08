@@ -383,4 +383,5 @@ class NationalDepartmentPreviewTestCase(TestCase):
         self.assertIn('percentage_of_budget', expenditure_keys)
         self.assertIn('programmes', expenditure_keys)
         self.assertIn('slug', expenditure_keys)
+        self.assertIn('focus_areas', expenditure_keys)
 
