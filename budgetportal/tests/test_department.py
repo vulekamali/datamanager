@@ -385,3 +385,5 @@ class NationalDepartmentPreviewTestCase(TestCase):
         self.assertIn('slug', expenditure_keys)
         self.assertIn('focus_areas', expenditure_keys)
 
+        self.assertEqual(data['items'][0]['focus_areas'][0]['slug'], 'economic-development')
+
