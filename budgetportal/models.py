@@ -295,6 +295,9 @@ class FinancialYear(models.Model):
         )
         if not national_expenditure_results or not provincial_expenditure_results:
             return None
+        provincial_data_exists = True
+        if not provincial_expenditure_results['cells']:
+            provincial_data_exists = False
         dept_ref = national_os_api.get_department_name_ref()
         function_ref = national_os_api.get_function_ref()
         geo_ref = national_os_api.get_geo_ref()
@@ -350,41 +353,45 @@ class FinancialYear(models.Model):
             else:
                 national['notices'].append('No national departments contribute to this focus area')
 
-
-            provincial['footnotes'].append('**Source:** Estimates of Provincial Expenditure {}'.format(self.slug))
+            provincial_dataset_name = 'Estimates of Provincial Expenditure {}'.format(self.slug)
+            provincial['footnotes'].append('**Source:** {}'.format(provincial_dataset_name))
             provinces = {}
-            if provincial_function_cells:
-                for cell in provincial_function_cells:
-                    # Here we need to group by province and add the departments for each province as children
-                    percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
+            if provincial_data_exists:
+                if provincial_function_cells:
+                    for cell in provincial_function_cells:
+                        # Here we need to group by province and add the departments for each province as children
+                        percentage_of_total = float(cell['value.sum']) / total_function_budget * 100
 
-                    dept_object = {
-                        'title': cell[dept_ref],
-                        'slug': slugify(cell[dept_ref]),
-                        'amount': cell['value.sum'],
-                        'percentage_total': percentage_of_total,
-                    }
-                    if cell[geo_ref] not in provinces.keys():
-                        provinces[cell[geo_ref]] = [dept_object]
-                    else:
-                        provinces[cell[geo_ref]].append(dept_object)
+                        dept_object = {
+                            'title': cell[dept_ref],
+                            'slug': slugify(cell[dept_ref]),
+                            'amount': cell['value.sum'],
+                            'percentage_total': percentage_of_total,
+                        }
+                        if cell[geo_ref] not in provinces.keys():
+                            provinces[cell[geo_ref]] = [dept_object]
+                        else:
+                            provinces[cell[geo_ref]].append(dept_object)
 
-                for province in provinces.keys():
-                    amount = 0
-                    for dept in provinces[province]:
-                        amount += dept['amount']
-                    percentage = float(amount) / total_function_budget * 100
+                    for province in provinces.keys():
+                        amount = 0
+                        for dept in provinces[province]:
+                            amount += dept['amount']
+                        percentage = float(amount) / total_function_budget * 100
 
-                    provincial['data'].append({
-                        'slug': slugify(province),
-                        'title': province,
-                        'children': provinces[province],
-                        'amount': amount,
-                        'percentage': percentage
-                    })
+                        provincial['data'].append({
+                            'slug': slugify(province),
+                            'title': province,
+                            'children': provinces[province],
+                            'amount': amount,
+                            'percentage': percentage
+                        })
+                else:
+                    provincial['notices'].append('No provincial departments contribute to this focus area')
             else:
-                provincial['notices'].append('No provincial departments contribute to this focus area')
-
+                provincial['notices'].append(
+                    'This data will be available upon the release of: {}'.format(provincial_dataset_name)
+                )
             function_page = {
                 'title': function,
                 'slug': slugify(function),
