@@ -31,7 +31,7 @@ ckan = settings.CKAN
 
 URL_LENGTH_LIMIT = 2000
 
-CKAN_DATASTORE_URL = (settings.CKAN_URL+
+CKAN_DATASTORE_URL = (settings.CKAN_URL +
                       '/api/3/action' \
                       '/datastore_search_sql')
 
@@ -212,17 +212,17 @@ class FinancialYear(models.Model):
 
         for cell in expenditure_results['cells']:
             total_budget += float(cell['value.sum'])
-            cell['url'] = None
             modified_result_cells.append(cell)
 
         for cell in modified_result_cells:
             percentage_of_total = float(cell['value.sum']) / total_budget * 100
+            focus_area_name = cell[openspending_api.get_function_ref()]
             expenditure.append({
-                'name': cell[openspending_api.get_function_ref()],
+                'name': focus_area_name,
                 'id': slugify(cell[openspending_api.get_function_ref()]),
                 'amount': float(cell['value.sum']),
                 'percentage': percentage_of_total,
-                'url': cell['url']
+                'url': self.get_focus_area_url_path(focus_area_name)
             })
 
         return {
@@ -232,7 +232,189 @@ class FinancialYear(models.Model):
             },
         } if expenditure else None
 
+    def get_focus_area_data(self, sphere):
+        dept = Department.objects.filter(government__sphere__slug=sphere)[0]
+        dataset = dept.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None, None
+        openspending_api = dataset.get_openspending_api()
+        year_ref = openspending_api.get_financial_year_ref()
+        dept_ref = openspending_api.get_department_name_ref()
+        function_ref = openspending_api.get_function_ref()
+        phase_ref = openspending_api.get_phase_ref()
+        government_ref = openspending_api.get_geo_ref()
 
+        expenditure_cuts = [
+            year_ref + ':' + '{}'.format(self.get_starting_year()),
+            phase_ref + ':' + '{}'.format("Main appropriation"),
+        ]
+
+        expenditure_drilldowns = [
+            function_ref,
+            dept_ref
+        ]
+
+        if sphere == 'provincial':
+            expenditure_drilldowns.append(government_ref)
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+        return expenditure_results, openspending_api
+
+    def get_subprogramme_from_actual_and_budgeted_dataset(self, sphere, department, subprogramme):
+        dept = Department.objects.filter(government__sphere__slug=sphere)[0]
+        dataset = dept.get_expenditure_time_series_dataset()
+        if not dataset:
+            return None, None
+        openspending_api = dataset.get_openspending_api()
+        year_ref = openspending_api.get_financial_year_ref()
+        dept_ref = openspending_api.get_department_name_ref()
+        function_ref = openspending_api.get_function_ref()
+        phase_ref = openspending_api.get_phase_ref()
+        subprogramme_ref = openspending_api.get_subprogramme_name_ref()
+
+        expenditure_cuts = [
+            year_ref + ':' + '{}'.format(self.get_starting_year()),
+            phase_ref + ':' + '{}'.format("Main appropriation"),
+            dept_ref + ':' + '{}'.format(department),
+            subprogramme_ref + ':' + '{}'.format(subprogramme),
+        ]
+
+        expenditure_drilldowns = [
+            function_ref
+        ]
+
+        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
+        return expenditure_results
+
+    def get_focus_area_preview(self):
+        """ Returns data for the focus area preview pages. """
+        subprogramme_dept_exclude = 'National Treasury'
+        subprogramme_exclude = 'Provincial Equitable Share'
+
+        national_expenditure_results, national_os_api = self.get_focus_area_data('national')
+        provincial_expenditure_results, provincial_os_api = self.get_focus_area_data('provincial')
+        no_provincial_in_year = not provincial_expenditure_results['cells']
+        subprogramme_to_exclude_results = self.get_subprogramme_from_actual_and_budgeted_dataset(
+            'national', subprogramme_dept_exclude, subprogramme_exclude
+        )
+        nat_dept_ref = national_os_api.get_department_name_ref()
+        nat_function_ref = national_os_api.get_function_ref()
+        prov_dept_ref = provincial_os_api.get_department_name_ref()
+        prov_function_ref = provincial_os_api.get_function_ref()
+        prov_geo_ref = provincial_os_api.get_geo_ref()
+
+        unique_functions = []
+        total_budget_all_focus_areas = 0
+        for c in national_expenditure_results['cells']:
+            if c[nat_function_ref] == '':
+                raise Exception('Empty function area for cell: {}'.format(c))
+
+            total_budget_all_focus_areas += c['value.sum']
+            if c[nat_function_ref] not in unique_functions:
+                unique_functions.append(c[nat_function_ref])
+
+        function_objects = []
+        for function in unique_functions:
+            # Iterate over each function, build an object for it
+
+            national_function_cells = filter(lambda x: x[nat_function_ref] == function,
+                                             national_expenditure_results['cells'])
+            provincial_function_cells = filter(lambda x: x[prov_function_ref] == function,
+                                               provincial_expenditure_results['cells'])
+            national = {'data': [], 'footnotes': [], 'notices': []}
+            provincial = {'data': [], 'footnotes': [], 'notices': []}
+            national['total'] = sum(c['value.sum'] for c in national_function_cells)
+            if no_provincial_in_year:
+                provincial['total'] = None
+            else:
+                provincial['total'] = sum(c['value.sum'] for c in provincial_function_cells)
+
+            if not national_function_cells:
+                notice = ("No national departments allocated budget "
+                          "to this focus area.").format(self.slug)
+                national['notices'].append(notice)
+            national['footnotes'].append('**Source:** Estimates of National Expenditure {}'.format(self.slug))
+            for cell in national_function_cells:
+                exclude_for_function = filter(lambda x: x[nat_function_ref] == function,
+                                              subprogramme_to_exclude_results['cells'])
+                if exclude_for_function and cell[nat_dept_ref] == subprogramme_dept_exclude:
+                    exclude_amount = exclude_for_function[0]['value.sum']
+                    amount = cell['value.sum'] - exclude_amount
+                    logger.info('Excluded subprogramme {} with value {} from department {}'.format(
+                        subprogramme_exclude, exclude_amount, subprogramme_dept_exclude
+                    ))
+                    national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
+                else:
+                    amount = cell['value.sum']
+                department_slug = slugify(cell[nat_dept_ref])
+                departments = Department.objects.filter(
+                    slug=department_slug,
+                    government__sphere__slug='national',
+                    government__sphere__financial_year=self,
+                )
+                if departments:
+                    preview_url = departments[0].get_preview_url_path()
+                else:
+                    preview_url = None
+                national['data'].append({
+                    'title': cell[nat_dept_ref],
+                    'slug': department_slug,
+                    'amount': amount,
+                    'url': preview_url,
+                })
+
+            if no_provincial_in_year:
+                notice = ("Provincial budget allocations to focus areas "
+                          "for {} not published yet on vulekamali.").format(self.slug)
+                provincial['notices'].append(notice)
+            else:
+                footnote = '**Source:** Estimates of Provincial Expenditure {}'.format(self.slug)
+                provincial['footnotes'].append(footnote)
+
+                if not provincial_function_cells:
+                    notice = ("No provincial departments allocated budget "
+                              "to this focus area.").format(self.slug)
+                    provincial['notices'].append(notice)
+
+                for cell in provincial_function_cells:
+                    # Here we need to group by province and add the departments for each province as children
+                    department_slug = slugify(cell[prov_dept_ref])
+                    if departments:
+                        preview_url = departments[0].get_preview_url_path()
+                    else:
+                        preview_url = None
+                    departments = Department.objects.filter(
+                        slug=department_slug,
+                        government__name=cell[prov_geo_ref],
+                        government__sphere__slug='provincial',
+                        government__sphere__financial_year=self,
+                    )
+                    provincial['data'].append({
+                        'name': cell[prov_dept_ref],
+                        'slug': department_slug,
+                        'amount': cell['value.sum'],
+                        'url': preview_url,
+                        'province': cell[prov_geo_ref],
+                    })
+
+            function_page = {
+                'title': function,
+                'slug': slugify(function),
+                'national': national,
+                'provincial': provincial,
+            }
+            function_objects.append(function_page)
+
+        return {
+            'data': {
+                'items': function_objects,
+            },
+        } if function_objects else None
+
+    def get_focus_area_url_path(self, name):
+        if name == "Contingency reserve":
+            return None
+        return "{}/focus/{}".format(self.slug, slugify(name))
 
 class Sphere(models.Model):
     organisational_unit = 'sphere'
@@ -386,7 +568,9 @@ class Department(models.Model):
     def get_preview_url_path(self):
         """ e.g. 2018-19/previews/national/south-africa/agriculture-and-fisheries """
         return "%s/previews/%s/%s/%s" % \
-               (self.government.sphere.financial_year.slug, self.government.sphere.slug, self.government.slug, self.slug)
+               (
+                   self.government.sphere.financial_year.slug, self.government.sphere.slug, self.government.slug,
+                   self.slug)
 
     def get_govt_functions(self):
         return GovtFunction.objects.filter(programme__department=self).distinct()
@@ -399,7 +583,8 @@ class Department(models.Model):
         Continue traversing backwards in time until found, or until the original year has been reached. """
         newer_departments = Department.objects.filter(government__slug=self.government.slug,
                                                       government__sphere__slug=self.government.sphere.slug,
-                                                      slug=self.slug).order_by('-government__sphere__financial_year__slug')
+                                                      slug=self.slug).order_by(
+            '-government__sphere__financial_year__slug')
         return newer_departments.first() if newer_departments else None
 
     def _get_financial_year_query(self):
@@ -1073,7 +1258,7 @@ class Department(models.Model):
                 econ_classes[cell[econ_class_2_ref]]['items'].append(new_econ_2_object)
         # sort by name
         name_func = lambda x: x['name']
-        for econ_2_name in list(econ_classes.keys()): # Copy keys because we're updating dict
+        for econ_2_name in list(econ_classes.keys()):  # Copy keys because we're updating dict
             econ_classes[econ_2_name]['items'] = sorted(
                 econ_classes[econ_2_name]['items'], key=name_func)
         econ_classes_list = sorted(econ_classes.values(), key=name_func)
@@ -1343,7 +1528,8 @@ class Department(models.Model):
         # Add cuts: year and phase
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
-            openspending_api.get_financial_year_ref() + ':' + '{}'.format(FinancialYear.start_from_year_slug(financial_year_id)),
+            openspending_api.get_financial_year_ref() + ':' + '{}'.format(
+                FinancialYear.start_from_year_slug(financial_year_id)),
             openspending_api.get_phase_ref() + ':' + '"{}"'.format(selected_phase)
         ]
         expenditure_drilldowns = [
@@ -1369,7 +1555,8 @@ class Department(models.Model):
                 )
             except Department.DoesNotExist:
                 logger.warning('Excluding: provincial {} {} {}'.format(
-                    financial_year_id, cell[openspending_api.get_geo_ref()], cell[openspending_api.get_department_name_ref()]
+                    financial_year_id, cell[openspending_api.get_geo_ref()],
+                    cell[openspending_api.get_department_name_ref()]
                 ))
                 continue
 
@@ -1378,12 +1565,10 @@ class Department(models.Model):
             filtered_result_cells.append(cell)
 
         for cell in filtered_result_cells:
-            percentage_of_total = float(cell['value.sum']) / total_budget * 100
             expenditure.append({
                 'name': cell[openspending_api.get_department_name_ref()],
                 'slug': slugify(cell[openspending_api.get_department_name_ref()]),
                 'amount': float(cell['value.sum']),
-                'percentage_of_total': 0,
                 'province': cell[openspending_api.get_geo_ref()],
                 'url': cell['url']
             })
@@ -1746,25 +1931,25 @@ class Department(models.Model):
             for fiscal_year in financial_year_starts:
                 for fiscal_phase in EXPENDITURE_TIME_SERIES_PHASES:
                     for program in programmes:
-                            for item in programmes[program]['items']:
-                                found = False
-                                if item['financial_year'] == FinancialYear.slug_from_year_start(fiscal_year) \
-                                        and item['phase'] == fiscal_phase:
-                                    found = True
-                                    break
-                            if not found:
-                                programmes[program]['items'].append({
-                                    'financial_year': FinancialYear.slug_from_year_start(fiscal_year),
-                                    'phase': fiscal_phase,
-                                    'amount': None,
-                                })
-                                if fiscal_year not in missing_phases_count:
-                                    missing_phases_count[fiscal_year] = {program: 1}
+                        for item in programmes[program]['items']:
+                            found = False
+                            if item['financial_year'] == FinancialYear.slug_from_year_start(fiscal_year) \
+                                    and item['phase'] == fiscal_phase:
+                                found = True
+                                break
+                        if not found:
+                            programmes[program]['items'].append({
+                                'financial_year': FinancialYear.slug_from_year_start(fiscal_year),
+                                'phase': fiscal_phase,
+                                'amount': None,
+                            })
+                            if fiscal_year not in missing_phases_count:
+                                missing_phases_count[fiscal_year] = {program: 1}
+                            else:
+                                if program not in missing_phases_count[fiscal_year].keys():
+                                    missing_phases_count[fiscal_year][program] = 1
                                 else:
-                                    if program not in missing_phases_count[fiscal_year].keys():
-                                        missing_phases_count[fiscal_year][program] = 1
-                                    else:
-                                        missing_phases_count[fiscal_year][program] += 1
+                                    missing_phases_count[fiscal_year][program] += 1
 
             no_prog_for_years = False
             notices = []
