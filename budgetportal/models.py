@@ -194,7 +194,6 @@ class FinancialYear(models.Model):
         openspending_api = dataset.get_openspending_api()
         year_ref = openspending_api.get_financial_year_ref()
 
-        # Add cuts: year and phase
         expenditure_cuts = [
             year_ref + ':' + '{}'.format(self.get_starting_year()),
         ]
