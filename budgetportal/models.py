@@ -1592,6 +1592,7 @@ class Department(models.Model):
         geo_ref = openspending_api.get_geo_ref()
         department_ref = openspending_api.get_department_name_ref()
         financial_year = FinancialYear.objects.get(slug=financial_year_id)
+        function_ref = openspending_api.get_function_ref()
 
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
@@ -1604,12 +1605,8 @@ class Department(models.Model):
             department_ref,
             geo_ref,
             programme_ref,
+            function_ref
         ]
-
-        # Remove conditional when Actual vs Budgeted Provincial has function_ref available
-        if sphere_slug == 'national':
-            function_ref = openspending_api.get_function_ref()
-            expenditure_drilldowns.append(function_ref)
 
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
@@ -1624,18 +1621,14 @@ class Department(models.Model):
             expenditure_results_no_drf
         )
 
-        # Remove conditional when Actual vs Budgeted Provincial has function_ref available
-        if sphere_slug == 'national':
-            expenditure_results_filter_government_function_breakdown = openspending_api.aggregate_by_refs(
-                [
-                    department_ref,
-                    geo_ref,
-                    function_ref,
-                ],
-                expenditure_results_filter_government_complete_breakdown
-            )
-        else:
-            expenditure_results_filter_government_function_breakdown = []
+        expenditure_results_filter_government_function_breakdown = openspending_api.aggregate_by_refs(
+            [
+                department_ref,
+                geo_ref,
+                function_ref,
+            ],
+            expenditure_results_filter_government_complete_breakdown
+        )
 
         expenditure_results_filter_government_programme_breakdown = openspending_api.aggregate_by_refs(
             [
