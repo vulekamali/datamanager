@@ -14,6 +14,8 @@ from django.test import TestCase
 from mock import Mock
 import json
 
+from budgetportal.openspending import BabbageFiscalDataset
+
 with open('budgetportal/tests/test_data/budget_and_actual.json', 'r') as DEPARTMENT_MOCK_DATA:
     DEPARTMENT_MOCK_DATA = json.load(DEPARTMENT_MOCK_DATA)
 
@@ -341,10 +343,12 @@ class NationalDepartmentPreviewTestCase(TestCase):
         self.mock_openspending_api.get_phase_ref = Mock(return_value='budget_phase.budget_phase')
         self.mock_openspending_api.get_programme_name_ref = Mock(return_value='programme_number.programme')
         self.mock_openspending_api.get_department_name_ref = Mock(return_value='vote_number.department')
-        self.mock_openspending_api.get_geo_ref = Mock(return_value='government.government')
+        self.mock_openspending_api.get_geo_ref = Mock(return_value='geo_source.government')
+        self.mock_openspending_api.get_function_ref = Mock(return_value='function_group_1.function_group_1')
         self.mock_openspending_api.get_financial_year_ref = Mock(return_value="financial_year.financial_year")
-        self.mock_openspending_api.aggregate = Mock(return_value={'cells': self.mock_data['programmes']})
-        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['departments'])
+        self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
+        self.mock_openspending_api.filter_by_ref_exclusion = Mock(return_value=self.mock_data['programmes'])
+        self.mock_openspending_api.aggregate_by_refs = BabbageFiscalDataset.aggregate_by_refs
         self.mock_openspending_api.aggregate_url = Mock
         mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
         self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
@@ -379,3 +383,7 @@ class NationalDepartmentPreviewTestCase(TestCase):
         self.assertIn('percentage_of_budget', expenditure_keys)
         self.assertIn('programmes', expenditure_keys)
         self.assertIn('slug', expenditure_keys)
+        self.assertIn('focus_areas', expenditure_keys)
+
+        self.assertEqual(data['items'][0]['focus_areas'][0]['slug'], 'economic-development')
+
