@@ -155,9 +155,7 @@ class ExportImportDepartmentsTestCase(TestCase):
                 self.departments[sphere_slug].append(department)
 
     def test_load_all_departments_from_export(self):
-        """Test that exported departments can be loaded correctly
-        Note: departments export currently do national and provincial, so this only works
-        because we are not creating any provincial departments prior to exporting. """
+        """Test that exported departments can be loaded correctly"""
 
         for sphere_slug in self.sphere_slugs:
             with NamedTemporaryFile() as csv_file:
@@ -169,15 +167,12 @@ class ExportImportDepartmentsTestCase(TestCase):
                 csv_file.flush()
 
                 # Delete all departments
-                # TODO: only delete object for sphere
                 Department.objects.filter(government__sphere__slug=sphere_slug).delete()
-                # Department.objects.all().delete()
 
                 # Create them again
                 out = StringIO()
                 result = call_command('load_departments', '2030-31', sphere_slug, csv_file.name, stdout=out)
                 result = yaml.load(out.getvalue())
-                # self.assertEqual(result['number_added'], 2)
 
                 # Check that it was successful
                 dept_1 = Department.objects.get(government=self.governments[sphere_slug], vote_number=1)
