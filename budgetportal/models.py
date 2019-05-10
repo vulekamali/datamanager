@@ -1594,7 +1594,6 @@ class Department(models.Model):
         financial_year = FinancialYear.objects.get(slug=financial_year_id)
         function_ref = openspending_api.get_function_ref()
 
-
         # Expenditure data
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
@@ -1717,7 +1716,7 @@ class Department(models.Model):
             for function in department_functions:
                 slug = slugify(function[function_ref])
                 if function[function_ref] == '':
-                    raise Exception("Empty function object: {}".format(function))
+                    logger.error("Empty function object: {}".format(function))
                 functions.append({
                     'title': function[function_ref].title(),
                     'slug': slug,
