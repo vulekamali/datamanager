@@ -1594,6 +1594,7 @@ class Department(models.Model):
         financial_year = FinancialYear.objects.get(slug=financial_year_id)
         function_ref = openspending_api.get_function_ref()
 
+        # Expenditure data
         expenditure_cuts = [
             openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
             openspending_api.get_financial_year_ref() + ':' + '{}'.format(
@@ -1607,29 +1608,42 @@ class Department(models.Model):
             programme_ref,
             function_ref
         ]
-
         expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
 
+        # We do a separate call to always build focus area data from the main appropriation phase
+        focus_cuts = [
+            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
+            openspending_api.get_financial_year_ref() + ':' + '{}'.format(
+                FinancialYear.start_from_year_slug(financial_year_id)
+            ),
+            openspending_api.get_phase_ref() + ':' + '"{}"'.format(EXPENDITURE_TIME_SERIES_PHASE_MAPPING["original"]),
+        ]
+        focus_drilldowns = [
+            department_ref,
+            geo_ref,
+            function_ref
+        ]
+
+        focus_results = openspending_api.aggregate(cuts=focus_cuts, drilldowns=focus_drilldowns)
+
+        # Remove Direct Charge against the National Revenue Fund programmes
         expenditure_results_no_drf = openspending_api.filter_by_ref_exclusion(
             expenditure_results['cells'],
             programme_ref,
             DIRECT_CHARGE_NRF,
         )
 
+        # Filter departments that belong to the selected government
         expenditure_results_filter_government_complete_breakdown = filter(
             lambda x: slugify(x[geo_ref]) == government_slug,
             expenditure_results_no_drf
         )
-
-        expenditure_results_filter_government_function_breakdown = openspending_api.aggregate_by_refs(
-            [
-                department_ref,
-                geo_ref,
-                function_ref,
-            ],
-            expenditure_results_filter_government_complete_breakdown
+        focus_results_filter_government = filter(
+            lambda x: slugify(x[geo_ref]) == government_slug,
+            focus_results['cells']
         )
 
+        # Used to determine programmes for departments
         expenditure_results_filter_government_programme_breakdown = openspending_api.aggregate_by_refs(
             [
                 department_ref,
@@ -1639,6 +1653,7 @@ class Department(models.Model):
             expenditure_results_filter_government_complete_breakdown
         )
 
+        # Used to iterate over unique departments and build department objects
         expenditure_results_filter_government_department_breakdown = openspending_api.aggregate_by_refs(
             [
                 department_ref,
@@ -1685,7 +1700,7 @@ class Department(models.Model):
 
             department_functions = filter(
                 lambda x: x[department_ref] == cell[department_ref],
-                expenditure_results_filter_government_function_breakdown
+                focus_results_filter_government
             )
             functions = []
 
@@ -1701,7 +1716,7 @@ class Department(models.Model):
             for function in department_functions:
                 slug = slugify(function[function_ref])
                 if function[function_ref] == '':
-                    raise Exception("Empty function object: {}".format(function))
+                    logger.error("Empty function object: {}".format(function))
                 functions.append({
                     'title': function[function_ref].title(),
                     'slug': slug,
