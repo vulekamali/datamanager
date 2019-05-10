@@ -173,6 +173,7 @@ class FinancialYear(models.Model):
             'fq': ''.join([
                 '+organization:"national-treasury"',
                 '+groups:"consolidated-expenditure-budget"',
+                '+vocab_financial_years:"%s"'.format(self.slug)
             ]),
             'rows': 1000,
         }
