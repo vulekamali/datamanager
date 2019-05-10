@@ -61,6 +61,12 @@ urlpatterns = [
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments.csv$', cache_page(CACHE_SECS)(views.department_list_csv)),
 
+    # Department list for sphere as CSV
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
+        '/(?P<sphere_slug>[\w-]+)'
+        '/departments.csv$',
+        cache_page(CACHE_SECS)(views.department_list_for_sphere_csv)),
+
     # Programme list as CSV
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/(?P<sphere_slug>[\w-]+)'

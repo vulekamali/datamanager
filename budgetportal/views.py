@@ -154,7 +154,12 @@ def programme_list_csv(request, financial_year_id, sphere_slug):
     return response
 
 
-def department_list_csv(request, financial_year_id):
+def department_list_for_sphere_csv(request, financial_year_id, sphere_slug):
+    sphere = get_object_or_404(Sphere, financial_year__slug=financial_year_id, slug=sphere_slug)
+    return department_list_csv(request, financial_year_id, [sphere_slug])
+
+
+def department_list_csv(request, financial_year_id, spheres=['national', 'provincial']):
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
     filename = "departments-%s.csv" % (financial_year_id)
@@ -172,7 +177,7 @@ def department_list_csv(request, financial_year_id):
     writer = DictWriter(response, fieldnames=fieldnames)
     writer.writeheader()
 
-    for sphere_name in ('national', 'provincial'):
+    for sphere_name in spheres:
         for government in selected_year.spheres.filter(slug=sphere_name).first().governments.all():
             for department in government.departments.all():
                 writer.writerow({
