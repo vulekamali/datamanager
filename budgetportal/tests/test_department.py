@@ -346,7 +346,7 @@ class NationalDepartmentPreviewTestCase(TestCase):
         self.mock_openspending_api.get_geo_ref = Mock(return_value='geo_source.government')
         self.mock_openspending_api.get_function_ref = Mock(return_value='function_group_1.function_group_1')
         self.mock_openspending_api.get_financial_year_ref = Mock(return_value="financial_year.financial_year")
-        self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
+        self.mock_openspending_api.aggregate = Mock(return_value={'cells': self.mock_data['programmes']})
         self.mock_openspending_api.filter_by_ref_exclusion = Mock(return_value=self.mock_data['programmes'])
         self.mock_openspending_api.aggregate_by_refs = BabbageFiscalDataset.aggregate_by_refs
         self.mock_openspending_api.aggregate_url = Mock
