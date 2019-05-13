@@ -63,6 +63,8 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.google',
 
     'elasticapm.contrib.django',
+
+    'import_export',
 )
 
 MIDDLEWARE = (
