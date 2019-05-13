@@ -43,9 +43,19 @@ A fixture is needed to set this up instead of `createsuperuser` because Django A
 
 Load an initial set of financial years, spheres and governments. You might need to add more recent ones manually in the admin interface.
 
+You can download data from the production datamanager to use in your test environment as follows:
+
+```
+curl https://datamanager.vulekamali.gov.za/2018-19/national/departments.csv > departments-national-2018-19.csv
+curl https://datamanager.vulekamali.gov.za/2018-19/provincial/departments.csv > departments-provincial-2018-19.csv
+```
+
+You can load this data into your environment with:
+
 ```
 docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
-docker-compose run --rm app python manage.py load_departments 2019-20 national /code/departments-2019-20.csv
+docker-compose run --rm app python manage.py load_departments 2019-20 national departments-national-2018-19.csv
+docker-compose run --rm app python manage.py load_departments 2019-20 provincial departments-provincial-2018-19.csv
 ```
 
 ### Development best practises
