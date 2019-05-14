@@ -79,7 +79,7 @@ MIDDLEWARE = (
 
 SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
 
-DATAMANAGER_URL = os.environ.get("DATAMANAGER_URL", "https://data.vulekamali.gov.za/")
+DATAMANAGER_URL = os.environ.get("DATAMANAGER_URL", "https://datamanager.vulekamali.gov.za/")
 
 ROOT_URLCONF = 'budgetportal.urls'
 
