@@ -1626,17 +1626,10 @@ class Department(models.Model):
 
         focus_results = openspending_api.aggregate(cuts=focus_cuts, drilldowns=focus_drilldowns)
 
-        # Remove Direct Charge against the National Revenue Fund programmes
-        expenditure_results_no_drf = openspending_api.filter_by_ref_exclusion(
-            expenditure_results['cells'],
-            programme_ref,
-            DIRECT_CHARGE_NRF,
-        )
-
         # Filter departments that belong to the selected government
         expenditure_results_filter_government_complete_breakdown = filter(
             lambda x: slugify(x[geo_ref]) == government_slug,
-            expenditure_results_no_drf
+            expenditure_results['cells']
         )
         focus_results_filter_government = filter(
             lambda x: slugify(x[geo_ref]) == government_slug,
