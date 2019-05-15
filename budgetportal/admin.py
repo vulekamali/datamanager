@@ -202,21 +202,21 @@ class SiteAdmin(admin.ModelAdmin):
     pass
 
 
-# admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
+admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
 
 
-# try:
-#     for financial_year in FinancialYear.objects.all():
-#         for sphere in financial_year.spheres.all():
-#             view = EntityDatasetsView.as_view(
-#                 financial_year_slug=financial_year.slug,
-#                 sphere_slug=sphere.slug,
-#             )
-#             path = "%s/%s/entity_datasets" % (financial_year.slug, sphere.slug)
-#             label = "Entity Datasets - %s %s" % (financial_year.slug, sphere.name)
-#             admin.site.register_view(path, label, view=view)
-# except ProgrammingError, e:
-#     logging.error(e, exc_info=True)
+try:
+    for financial_year in FinancialYear.objects.all():
+        for sphere in financial_year.spheres.all():
+            view = EntityDatasetsView.as_view(
+                financial_year_slug=financial_year.slug,
+                sphere_slug=sphere.slug,
+            )
+            path = "%s/%s/entity_datasets" % (financial_year.slug, sphere.slug)
+            label = "Entity Datasets - %s %s" % (financial_year.slug, sphere.name)
+            admin.site.register_view(path, label, view=view)
+except ProgrammingError, e:
+    logging.error(e, exc_info=True)
 
 
 admin.site.register(FinancialYear, FinancialYearAdmin)
