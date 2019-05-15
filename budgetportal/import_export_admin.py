@@ -1,14 +1,12 @@
-from import_export.instance_loaders import ModelInstanceLoader
-from import_export import resources
-from budgetportal.models import (
-    Department,
-    Government,
-    Sphere,
-)
-
-from import_export.fields import Field
-from django.utils.text import slugify
+from budgetportal.models import Department, Government, Sphere
+from django import forms
 from django.core.exceptions import ValidationError
+from django.utils.text import slugify
+from import_export import resources
+from import_export.admin import ImportForm
+from import_export.fields import Field
+from import_export.formats import base_formats
+from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import Widget
 
 
@@ -124,3 +122,24 @@ class DepartmentResource(resources.ModelResource):
         if 'sphere' in kwargs:
             self.sphere = kwargs['sphere']
             self.fields['government'].widget.set_sphere(self.sphere)
+
+
+class DepartmentImportForm(ImportForm):
+    """
+    Form class to use to upload a CSV file to import departments.
+    """
+    sphere = forms.ModelChoiceField(
+        queryset=Sphere.objects.all(),
+        required=True
+    )
+
+
+class CustomCSV(base_formats.CSV):
+    """
+    Class that will be used in the django-import-export module
+    to import data from a csv file. We override the create_dataset method
+    because the package's create_dataset method doesn't seem to work.
+    """
+
+    def create_dataset(self, in_stream, **kwargs):
+        return super(CustomCSV, self).create_dataset(in_stream, **kwargs)

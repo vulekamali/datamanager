@@ -1,10 +1,6 @@
 from django.contrib import admin
 from django.views.generic import TemplateView
-from import_export.formats import base_formats
-from import_export.admin import ImportExportModelAdmin, ImportForm, ImportMixin, ConfirmImportForm
 from django.core.exceptions import ValidationError
-from import_export.fields import Field
-from django import forms
 from django.utils.text import slugify
 
 from budgetportal.models import (
@@ -21,13 +17,13 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.utils import ProgrammingError
 from django.contrib import messages
+from import_export.admin import ImportMixin
 import logging
 
 from .import_export_admin import (
-    CustomIsVotePrimaryWidget,
-    CustomGovernmentWidget,
-    DepartmentInstanceLoader,
-    DepartmentResource
+    DepartmentResource,
+    DepartmentImportForm,
+    CustomCSV
 )
 
 
@@ -49,28 +45,6 @@ class GovernmentAdmin(admin.ModelAdmin):
 
 class GovtFunctionAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
-
-
-class DepartmentImportForm(ImportForm):
-    """
-    Form class to use to upload a CSV file to import departments.
-    """
-    sphere = forms.ModelChoiceField(
-        queryset=Sphere.objects.all(),
-        required=True
-    )
-
-
-class CustomCSV(base_formats.CSV):
-    """
-    Class that will be used in the django-import-export module
-    to import data from a csv file. We override the create_dataset method
-    because the package's create_dataset method doesn't seem to work.
-    """
-
-    def create_dataset(self, in_stream, **kwargs):
-        return super(CustomCSV, self).create_dataset(in_stream, **kwargs)
-
 
 class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
     # Resource class to be used by the django-import-export package
