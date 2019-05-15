@@ -134,12 +134,14 @@ class DepartmentImportForm(ImportForm):
     )
 
 
-class CustomCSV(base_formats.CSV):
+class CustomCSV(base_formats.TextFormat):
     """
     Class that will be used in the django-import-export module
     to import data from a csv file. We override the create_dataset method
     because the package's create_dataset method doesn't seem to work.
     """
+    TABLIB_MODULE = 'tablib.formats._csv'
+    CONTENT_TYPE = 'text/csv'
 
     def create_dataset(self, in_stream, **kwargs):
         return super(CustomCSV, self).create_dataset(in_stream, **kwargs)
