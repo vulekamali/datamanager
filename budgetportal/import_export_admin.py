@@ -50,7 +50,7 @@ class CustomGovernmentWidget(Widget):
             )
         except Government.DoesNotExist:
             raise ValidationError(
-                "Government '%s' with sphere '%s' does not exist." %
+                "Government '%s' does not exist in sphere '%s'." %
                 (value, self.sphere))
 
         return government
@@ -108,6 +108,7 @@ class DepartmentResource(resources.ModelResource):
     is_vote_primary = Field(attribute='is_vote_primary',
                             column_name='is_vote_primary', widget=CustomIsVotePrimaryWidget())
     name = Field(attribute='name', column_name='department_name')
+    vote_number = Field(attribute='vote_number', column_name='vote_number')
     government = Field(attribute='government',
                        column_name='government', widget=CustomGovernmentWidget())
 
