@@ -1,4 +1,4 @@
-from import_export.instance_loaders import BaseInstanceLoader
+from import_export.instance_loaders import ModelInstanceLoader
 from import_export import resources
 from budgetportal.models import (
     Department,
@@ -10,6 +10,7 @@ from import_export.fields import Field
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from import_export.widgets import Widget
+
 
 class CustomIsVotePrimaryWidget(Widget):
     """
@@ -27,6 +28,7 @@ class CustomIsVotePrimaryWidget(Widget):
             return True
         else:
             return False
+
 
 class CustomGovernmentWidget(Widget):
     """
@@ -49,67 +51,72 @@ class CustomGovernmentWidget(Widget):
                 slug=slugify(value),
             )
         except Government.DoesNotExist:
-            raise ValidationError("Government '%s' with sphere '%s' does not exist." % (value, self.sphere))
+            raise ValidationError(
+                "Government '%s' with sphere '%s' does not exist." %
+                (value, self.sphere))
 
         return government
 
 
-class DepartmentInstanceLoader(BaseInstanceLoader):
-
-    def get_queryset(self):
-        return self.resource._meta.model.objects.all()
+class DepartmentInstanceLoader(ModelInstanceLoader):
+    """
+    Class to find a Department model instance from a row.
+    """
 
     def get_instance(self, row):
-        unique_together = (
-            ('government', 'slug'),
-            ('government', 'name'),
-        )
-        for fields in unique_together:
-            params = {}
-            for key in fields:
-                if key == 'slug':
-                    field = self.resource.fields['name']
-                    params['slug'] = slugify(field.clean(row))
-                else:
-                    field = self.resource.fields[key]
-                    params[field.attribute] = field.clean(row)
-            if params:
-                try:
-                    instance = self.get_queryset().get(**params)
-                    if instance:
-                        return instance
-                except self.resource._meta.model.DoesNotExist:
-                    pass
+        """
+        Gets a Department instance by either a unique government-slug or
+        government-name combination, or if is_vote_primary is True, from a
+        unique government-vote_number combination.
+        """
+        name = self.resource.fields['name'].clean(row)
+        slug = slugify(name)
+        government = self.resource.fields['government'].clean(row)
+
+        instance = None
 
         try:
-            params = {}
-            # If is_vote_primary, then (government, vote_number) must be unique
-            is_vote_primary_field = self.resource.fields['is_vote_primary']
-            is_vote_primary = is_vote_primary_field.clean(row)
-            if is_vote_primary:
-                import_id_fields = ['government', 'vote_number']
-                for key in import_id_fields:
-                    field = self.resource.fields[key]
-                    params[field.attribute] = field.clean(row)
-                if params:
-                    instance = self.get_queryset().get(**params)
-                    if instance:
-                        return instance
+            instance = Department.objects.all().get(name=name, government=government)
+        except Department.DoesNotExist:
+            pass
 
-            return None
-        except self.resource._meta.model.DoesNotExist:
-            return None
+        if not instance:
+            try:
+                instance = Department.objects.all().get(slug=slug, government=government)
+            except Department.DoesNotExist:
+                pass
+
+        # If is_vote_primary, then (government, vote_number) must be unique
+        is_vote_primary = self.resource.fields['is_vote_primary'].clean(row)
+        vote_number = self.resource.fields['vote_number'].clean(row)
+        if is_vote_primary:
+            try:
+                instance = Department.objects.all().get(
+                    vote_number=vote_number, government=government)
+            except Department.DoesNotExist:
+                pass
+
+        if instance:
+            return instance
+
+        return None
 
 
 class DepartmentResource(resources.ModelResource):
-    is_vote_primary = Field(attribute='is_vote_primary', column_name='is_vote_primary', widget=CustomIsVotePrimaryWidget())
+    """
+    Class to help django-import-export know how to map the rows in department
+    import files to django models.
+    """
+    is_vote_primary = Field(attribute='is_vote_primary',
+                            column_name='is_vote_primary', widget=CustomIsVotePrimaryWidget())
     name = Field(attribute='name', column_name='department_name')
-    government = Field(attribute='government', column_name='government', widget=CustomGovernmentWidget())
+    government = Field(attribute='government',
+                       column_name='government', widget=CustomGovernmentWidget())
 
     class Meta:
         model = Department
         fields = ('government', 'name', 'vote_number',
-        'is_vote_primary', 'intro', 'website_url')
+                  'is_vote_primary', 'intro', 'website_url')
         instance_loader_class = DepartmentInstanceLoader
         import_id_fields = ['government', 'name']
 

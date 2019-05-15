@@ -51,57 +51,48 @@ class GovtFunctionAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
 
 
-class CustomImportForm(ImportForm):
+class DepartmentImportForm(ImportForm):
+    """
+    Form class to use to upload a CSV file to import departments.
+    """
     sphere = forms.ModelChoiceField(
         queryset=Sphere.objects.all(),
         required=True
     )
 
-class CustomConfirmImportForm(ConfirmImportForm):
-    sphere = forms.ModelChoiceField(
-        queryset=Sphere.objects.all(),
-        required=True
-    )
 
-class CustomCSV(base_formats.TextFormat):
-    TABLIB_MODULE = 'tablib.formats._csv'
-    CONTENT_TYPE = 'text/csv'
+class CustomCSV(base_formats.CSV):
+    """
+    Class that will be used in the django-import-export module
+    to import data from a csv file. We override the create_dataset method
+    because the package's create_dataset method doesn't seem to work.
+    """
 
     def create_dataset(self, in_stream, **kwargs):
-        # The package does the below which doesn't work
-        # if sys.version_info[0] < 3:
-            # python 2.7 csv does not do unicode
-            # return super(CSV, self).create_dataset(in_stream.encode('utf-8'), **kwargs)
-        # return super(CSV, self).create_dataset(in_stream, **kwargs)
         return super(CustomCSV, self).create_dataset(in_stream, **kwargs)
 
 
 class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
+    # Resource class to be used by the django-import-export package
     resource_class = DepartmentResource
+    # File formats that can be used to import departments
     formats = ( CustomCSV, )
 
     def get_import_form(self):
-        return CustomImportForm
-
-    def get_confirm_import_form(self):
-        return CustomConfirmImportForm
+        """
+        Get the import form to use by the django-import-export package
+        to import departments.
+        """
+        return DepartmentImportForm
 
     def get_resource_kwargs(self, request, *args, **kwargs):
-        if hasattr(self, 'sphere'):
-            return {'sphere': self.sphere}
+        """
+        Get the kwargs to send on to the department resource when
+        we import departments.
+        """
         if u'sphere' in request.POST:
-            print('sphere ', request.POST[u'sphere'])
-            self.sphere = request.POST[u'sphere']
             return {'sphere': request.POST[u'sphere']}
         return {}
-
-    def get_form_kwargs(self, form, *args, **kwargs):
-        # pass on `sphere` to the kwargs for the custom confirm form
-        if isinstance(form, CustomImportForm):
-            if form.is_valid():
-                sphere = form.cleaned_data['sphere']
-                kwargs.update({'sphere': sphere.id})
-        return kwargs
 
     list_display = (
         'vote_number',

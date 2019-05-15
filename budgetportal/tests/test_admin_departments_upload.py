@@ -27,22 +27,16 @@ class AdminDepartmentUploadTest(StaticLiveServerTestCase):
     def setUp(self):
         year = FinancialYear.objects.create(slug="2030-31")
         # spheres
-        national = Sphere.objects.create(financial_year=year, name='National')
-        provincial = Sphere.objects.create(
+        self.national_sphere = Sphere.objects.create(financial_year=year, name='National')
+        self.provincial_sphere = Sphere.objects.create(
             financial_year=year, name='Provincial')
         # governments
         self.fake_national_government = Government.objects.create(
-            sphere=national, name='South Africa')
+            sphere=self.national_sphere, name='South Africa')
         self.fake_provincial_government = Government.objects.create(
-            sphere=provincial,
+            sphere=self.provincial_sphere,
             name='Free State'
         )
-        # Department.objects.create(
-        #     government=south_africa,
-        #     name='The Presidency',
-        #     vote_number=1,
-        #     intro=""
-        # )
 
         user = User.objects.create_user(
             username=USERNAME,
@@ -72,7 +66,7 @@ class AdminDepartmentUploadTest(StaticLiveServerTestCase):
             self.selenium.get_screenshot_as_file('%s.png' % now)
             super(AdminDepartmentUploadTest, self).tearDown()
 
-    def test_upload_csv(self):
+    def test_upload_csv_for_national_sphere(self):
         filename = 'budgetportal/tests/test_data/test_management_commands_national_departments.csv'
 
         selenium = self.selenium
@@ -98,7 +92,7 @@ class AdminDepartmentUploadTest(StaticLiveServerTestCase):
         sphere_select = Select(selenium.find_element_by_id('id_sphere'))
 
         file_import.send_keys(filename)
-        sphere_select.select_by_index(1)
+        sphere_select.select_by_value(str(self.national_sphere.id))
 
         selenium.find_element_by_css_selector(
             'input[type="submit"]').click()
