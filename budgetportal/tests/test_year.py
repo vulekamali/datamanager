@@ -91,12 +91,12 @@ class FocusAreaPagesTestCase(TestCase):
 
     def test_get_focus_area_preview(self):
         result = self.year.get_focus_area_preview()
-        data = result['data']
-        self.assertEqual(len(data), 1)
-        data_keys = data.keys()
-        self.assertIn('items', data_keys)
-        expenditure_keys = data['items'][0].keys()
-        self.assertIn('provincial', expenditure_keys)
-        self.assertIn('national', expenditure_keys)
-        self.assertIn('slug', expenditure_keys)
-        self.assertIn('title', expenditure_keys)
+        focus_areas = result['data']['items']
+        fg1 = [f for f in focus_areas if f['slug'] == "test-fg-1"][0]
+        fg2 = [f for f in focus_areas if f['slug'] == "test-fg-2"][0]
+
+        self.assertEqual('Test FG 1', fg1['title'])
+        self.assertEqual('Test FG 1', fg1['title'])
+
+        fg1_national = fg1['national']
+        fg1_provincial = fg1['provincial']
