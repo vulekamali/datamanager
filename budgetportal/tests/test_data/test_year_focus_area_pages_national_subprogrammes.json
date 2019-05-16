@@ -1,0 +1,14 @@
+[
+    {
+        "value.sum": 6915439000.0,
+        "subprogramme.subprogramme": "Provincial Equitable Share",
+        "_count": 319,
+        "function_group.function_group": "Test FG 1"
+    },
+    {
+        "value.sum": 3915439000.0,
+        "subprogramme.subprogramme": "Provincial Equitable Share",
+        "_count": 319,
+        "function_group.function_group": "Test FG 2"
+    }
+]
