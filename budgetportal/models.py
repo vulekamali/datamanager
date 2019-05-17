@@ -38,6 +38,8 @@ CKAN_DATASTORE_URL = (settings.CKAN_URL +
 MAPIT_POINT_API_URL = 'https://mapit.code4sa.org/point/4326/{},{}'
 
 DIRECT_CHARGE_NRF = 'Direct charge against the National Revenue Fund'
+PROV_EQ_SHARE_DEPT = 'National Treasury'
+PROV_EQ_SHARE_SUBPROG = 'Provincial Equitable Share'
 
 REVENUE_RESOURCE_IDS = {
     '2018-19': '7ad5e908-5814-4581-a9df-a6f37c56d5bd',
@@ -288,20 +290,13 @@ class FinancialYear(models.Model):
 
     def get_focus_area_preview(self):
         """ Returns data for the focus area preview pages. """
-        subprogramme_dept_exclude = 'National Treasury'
-        subprogramme_exclude = 'Provincial Equitable Share'
 
         national_expenditure_results, national_os_api = self.get_focus_area_data('national')
         provincial_expenditure_results, provincial_os_api = self.get_focus_area_data('provincial')
-        no_provincial_in_year = not provincial_expenditure_results['cells']
         subprogramme_to_exclude_results = self.get_subprogramme_from_actual_and_budgeted_dataset(
-            'national', subprogramme_dept_exclude, subprogramme_exclude
+            'national', PROV_EQ_SHARE_DEPT, PROV_EQ_SHARE_SUBPROG
         )
-        nat_dept_ref = national_os_api.get_department_name_ref()
         nat_function_ref = national_os_api.get_function_ref()
-        prov_dept_ref = provincial_os_api.get_department_name_ref()
-        prov_function_ref = provincial_os_api.get_function_ref()
-        prov_geo_ref = provincial_os_api.get_geo_ref()
 
         unique_functions = []
         total_budget_all_focus_areas = 0
@@ -315,101 +310,121 @@ class FinancialYear(models.Model):
 
         function_objects = []
         for function in unique_functions:
-            # Iterate over each function, build an object for it
-
-            national_function_cells = filter(lambda x: x[nat_function_ref] == function,
-                                             national_expenditure_results['cells'])
-            provincial_function_cells = filter(lambda x: x[prov_function_ref] == function,
-                                               provincial_expenditure_results['cells'])
-            national = {'data': [], 'footnotes': [], 'notices': []}
-            provincial = {'data': [], 'footnotes': [], 'notices': []}
-            national['total'] = sum(c['value.sum'] for c in national_function_cells)
-            if no_provincial_in_year:
-                provincial['total'] = None
-            else:
-                provincial['total'] = sum(c['value.sum'] for c in provincial_function_cells)
-
-            if not national_function_cells:
-                notice = ("No national departments allocated budget "
-                          "to this focus area.").format(self.slug)
-                national['notices'].append(notice)
-            national['footnotes'].append('**Source:** Estimates of National Expenditure {}'.format(self.slug))
-            for cell in national_function_cells:
-                exclude_for_function = filter(lambda x: x[nat_function_ref] == function,
-                                              subprogramme_to_exclude_results['cells'])
-                if exclude_for_function and cell[nat_dept_ref] == subprogramme_dept_exclude:
-                    exclude_amount = exclude_for_function[0]['value.sum']
-                    amount = cell['value.sum'] - exclude_amount
-                    logger.info('Excluded subprogramme {} with value {} from department {}'.format(
-                        subprogramme_exclude, exclude_amount, subprogramme_dept_exclude
-                    ))
-                    national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
-                else:
-                    amount = cell['value.sum']
-                department_slug = slugify(cell[nat_dept_ref])
-                departments = Department.objects.filter(
-                    slug=department_slug,
-                    government__sphere__slug='national',
-                    government__sphere__financial_year=self,
-                )
-                if departments:
-                    preview_url = departments[0].get_preview_url_path()
-                else:
-                    preview_url = None
-                national['data'].append({
-                    'title': cell[nat_dept_ref],
-                    'slug': department_slug,
-                    'amount': amount,
-                    'url': preview_url,
-                })
-
-            if no_provincial_in_year:
-                notice = ("Provincial budget allocations to focus areas "
-                          "for {} not published yet on vulekamali.").format(self.slug)
-                provincial['notices'].append(notice)
-            else:
-                footnote = '**Source:** Estimates of Provincial Expenditure {}'.format(self.slug)
-                provincial['footnotes'].append(footnote)
-
-                if not provincial_function_cells:
-                    notice = ("No provincial departments allocated budget "
-                              "to this focus area.").format(self.slug)
-                    provincial['notices'].append(notice)
-
-                for cell in provincial_function_cells:
-                    # Here we need to group by province and add the departments for each province as children
-                    department_slug = slugify(cell[prov_dept_ref])
-                    if departments:
-                        preview_url = departments[0].get_preview_url_path()
-                    else:
-                        preview_url = None
-                    departments = Department.objects.filter(
-                        slug=department_slug,
-                        government__name=cell[prov_geo_ref],
-                        government__sphere__slug='provincial',
-                        government__sphere__financial_year=self,
-                    )
-                    provincial['data'].append({
-                        'name': cell[prov_dept_ref],
-                        'slug': department_slug,
-                        'amount': cell['value.sum'],
-                        'url': preview_url,
-                        'province': cell[prov_geo_ref],
-                    })
-
-            function_page = {
+            function_objects.append({
                 'title': function,
                 'slug': slugify(function),
-                'national': national,
-                'provincial': provincial,
-            }
-            function_objects.append(function_page)
+                'national': self.national_summary_for_function(
+                    function,
+                    national_os_api,
+                    national_expenditure_results,
+                    subprogramme_to_exclude_results,
+                ),
+                'provincial': self.provincial_summary_for_function(
+                    function,
+                    provincial_os_api,
+                    provincial_expenditure_results,
+                ),
+            })
 
         return {
             'data': {
                 'items': function_objects,
             },
         } if function_objects else None
+
+    def national_summary_for_function(
+            self,
+            function,
+            openspending_api,
+            expenditure_results,
+            subprogramme_to_exclude_results):
+        dept_ref = openspending_api.get_department_name_ref()
+        function_ref = openspending_api.get_function_ref()
+
+        function_cells = filter(lambda x: x[function_ref] == function,
+                                         expenditure_results['cells'])
+        national = {'data': [], 'footnotes': [], 'notices': []}
+        national['total'] = sum(c['value.sum'] for c in function_cells)
+
+        if not function_cells:
+            notice = ("No national departments allocated budget "
+                      "to this focus area.").format(self.slug)
+            national['notices'].append(notice)
+        national['footnotes'].append('**Source:** Estimates of National Expenditure {}'.format(self.slug))
+        for cell in function_cells:
+            exclude_for_function = filter(lambda x: x[function_ref] == function,
+                                          subprogramme_to_exclude_results['cells'])
+            if exclude_for_function and cell[dept_ref] == PROV_EQ_SHARE_DEPT:
+                exclude_amount = exclude_for_function[0]['value.sum']
+                amount = cell['value.sum'] - exclude_amount
+                national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
+            else:
+                amount = cell['value.sum']
+            department_slug = slugify(cell[dept_ref])
+            departments = Department.objects.filter(
+                slug=department_slug,
+                government__sphere__slug='national',
+                government__sphere__financial_year=self,
+            )
+            if departments:
+                preview_url = departments[0].get_preview_url_path()
+            else:
+                preview_url = None
+            national['data'].append({
+                'title': cell[dept_ref],
+                'slug': department_slug,
+                'amount': amount,
+                'url': preview_url,
+            })
+        return national
+
+    def provincial_summary_for_function(self, function, openspending_api, expenditure_results):
+        dept_ref = openspending_api.get_department_name_ref()
+        function_ref = openspending_api.get_function_ref()
+        geo_ref = openspending_api.get_geo_ref()
+        no_provincial_in_year = not expenditure_results['cells']
+
+        function_cells = filter(lambda x: x[function_ref] == function,
+                                           expenditure_results['cells'])
+        provincial = {'data': [], 'footnotes': [], 'notices': []}
+        if no_provincial_in_year:
+            provincial['total'] = None
+        else:
+            provincial['total'] = sum(c['value.sum'] for c in function_cells)
+
+        if no_provincial_in_year:
+            notice = ("Provincial budget allocations to focus areas "
+                      "for {} not published yet on vulekamali.").format(self.slug)
+            provincial['notices'].append(notice)
+        else:
+            footnote = '**Source:** Estimates of Provincial Expenditure {}'.format(self.slug)
+            provincial['footnotes'].append(footnote)
+
+            if not function_cells:
+                notice = ("No provincial departments allocated budget "
+                          "to this focus area.").format(self.slug)
+                provincial['notices'].append(notice)
+
+            for cell in function_cells:
+                department_slug = slugify(cell[dept_ref])
+                departments = Department.objects.filter(
+                    slug=department_slug,
+                    government__name=cell[geo_ref],
+                    government__sphere__slug='provincial',
+                    government__sphere__financial_year=self,
+                )
+                if departments:
+                    preview_url = departments[0].get_preview_url_path()
+                else:
+                    preview_url = None
+                provincial['data'].append({
+                    'name': cell[dept_ref],
+                    'slug': department_slug,
+                    'amount': cell['value.sum'],
+                    'url': preview_url,
+                    'province': cell[geo_ref],
+                })
+        return provincial
 
     def get_focus_area_url_path(self, name):
         if name == "Contingency reserve":
