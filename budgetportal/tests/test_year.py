@@ -2,7 +2,7 @@
 Tests of models.FinancialYear
 """
 
-from budgetportal.models import FinancialYear
+from budgetportal.models import FinancialYear, Sphere, Government, Department
 from django.test import TestCase
 from mock import Mock
 import json
@@ -64,6 +64,29 @@ class FocusAreaPagesTestCase(TestCase):
 
     def setUp(self):
         self.year = FinancialYear.objects.create(slug="2019-20")
+        self.year.save()
+        national = Sphere(financial_year=self.year, name="national")
+        national.save()
+        provincial = Sphere(financial_year=self.year, name="provincial")
+        provincial.save()
+        southafrica = Government(sphere=national, name="South Africa")
+        southafrica.save()
+        province = Government(sphere=provincial, name="Test Province 1")
+        province.save()
+        Department(
+            government=southafrica,
+            name="TP1 National Test Dept 2",
+            vote_number=1,
+            is_vote_primary=True,
+            intro="",
+        ).save()
+        Department(
+            government=province,
+            name="TP1 Provincial Test Dept 2",
+            vote_number=1,
+            is_vote_primary=True,
+            intro="",
+        ).save()
 
         mock_dataset = Mock()
         self.mock_openspending_api = Mock()
@@ -98,5 +121,15 @@ class FocusAreaPagesTestCase(TestCase):
         self.assertEqual('Test FG 1', fg1['title'])
         self.assertEqual('Test FG 1', fg1['title'])
 
-        fg1_national = fg1['national']
-        fg1_provincial = fg1['provincial']
+        self.assertEqual(6, len(fg1['national']['data']))
+        self.assertEqual(6, len(fg1['provincial']['data']))
+
+        nat_dept_data = [dept for dept in fg1['national']['data']
+                         if dept['title'] == 'TP1 National Test Dept 2'][0]
+        self.assertTrue(nat_dept_data['slug'] in nat_dept_data['url'])
+        self.assertTrue('2019-20' in nat_dept_data['url'])
+
+        prov_dept_data = [dept for dept in fg1['provincial']['data']
+                         if dept['name'] == 'TP1 Provincial Test Dept 2'][0]
+        self.assertTrue(prov_dept_data['slug'] in prov_dept_data['url'])
+        self.assertTrue('2019-20' in prov_dept_data['url'])

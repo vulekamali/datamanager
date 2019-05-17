@@ -357,9 +357,6 @@ class FinancialYear(models.Model):
             if exclude_for_function and cell[dept_ref] == PROV_EQ_SHARE_DEPT:
                 exclude_amount = exclude_for_function[0]['value.sum']
                 amount = cell['value.sum'] - exclude_amount
-                logger.info('Excluded subprogramme {} with value {} from department {}'.format(
-                    PROV_EQ_SHARE_SUBPROG, exclude_amount, PROV_EQ_SHARE_DEPT
-                ))
                 national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
             else:
                 amount = cell['value.sum']
