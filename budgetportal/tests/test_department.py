@@ -8,6 +8,7 @@ from budgetportal.models import (
     Sphere,
     Government,
     Department,
+    Dataset,
 )
 from budgetportal import models
 from django.test import TestCase

@@ -1,8 +1,10 @@
+import budgetportal.models
 from budgetportal.models import (
     FinancialYear,
     Sphere,
     Government,
     Department,
+    Dataset,
 )
 from django.conf import settings
 from django.test import TestCase, Client
@@ -33,6 +35,7 @@ class BasicPagesTestCase(TestCase):
                 intro=""
             )
         settings.CKAN.action.package_search = Mock(return_value={'results': []})
+        Dataset.get_latest_cpi_resource =  Mock(return_value=('2018-19', '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d'))
 
     def test_overview_page(self):
         """Test that it exists and that the correct years are linked"""
