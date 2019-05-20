@@ -246,21 +246,24 @@ class FinancialYear(models.Model):
         phase_ref = openspending_api.get_phase_ref()
         government_ref = openspending_api.get_geo_ref()
 
-        expenditure_cuts = [
+        cuts = [
             year_ref + ':' + '{}'.format(self.get_starting_year()),
             phase_ref + ':' + '{}'.format("Main appropriation"),
         ]
 
-        expenditure_drilldowns = [
+        drilldowns = [
             function_ref,
             dept_ref
         ]
 
         if sphere == 'provincial':
-            expenditure_drilldowns.append(government_ref)
+            drilldowns.append(government_ref)
 
-        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
-        return expenditure_results, openspending_api
+        results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+        cells = results['cells']
+        cells = filter(lambda c: c[function_ref] != '', cells)
+
+        return cells, openspending_api
 
     def get_subprogramme_from_actual_and_budgeted_dataset(self, sphere, department, subprogramme):
         dept = Department.objects.filter(government__sphere__slug=sphere)[0]
@@ -297,16 +300,11 @@ class FinancialYear(models.Model):
             'national', PROV_EQ_SHARE_DEPT, PROV_EQ_SHARE_SUBPROG
         )
         nat_function_ref = national_os_api.get_function_ref()
+        prov_function_ref = provincial_os_api.get_function_ref()
 
-        unique_functions = []
-        total_budget_all_focus_areas = 0
-        for c in national_expenditure_results['cells']:
-            if c[nat_function_ref] == '':
-                raise Exception('Empty function area for cell: {}'.format(c))
-
-            total_budget_all_focus_areas += c['value.sum']
-            if c[nat_function_ref] not in unique_functions:
-                unique_functions.append(c[nat_function_ref])
+        function_names = [cell[nat_function_ref] for cell in national_expenditure_results['cells']]
+        function_names += [cell[prov_function_ref] for cell in provincial_expenditure_results['cells']]
+        unique_functions = list(set(function_names))
 
         function_objects = []
         for function in unique_functions:
