@@ -83,7 +83,7 @@ python manage.py runserver
 
 Logout from ckan might not send you to the right URL to logout from DataManager. You can manually go to logout from this app at http://localhost:8000/accounts/logout/.
 
-### Additional environment variables somtimes needing customisation for development
+### Additional environment variables sometimes needing customisation for development
 
 | Environment variable | Description |
 | -------------------- | ------------|
