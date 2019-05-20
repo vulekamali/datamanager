@@ -1,14 +1,12 @@
-import budgetportal.models
 from budgetportal.models import (
     FinancialYear,
     Sphere,
     Government,
     Department,
-    Dataset,
 )
 from django.conf import settings
 from django.test import TestCase, Client
-from mock import Mock, patch
+from mock import patch
 import yaml
 
 # Hacky make sure we don't call out to openspending.
@@ -39,12 +37,11 @@ class BasicPagesTestCase(TestCase):
                 vote_number=1,
                 intro=""
             )
-        # settings.CKAN.action.package_search = Mock(return_value={'results': []})
         ckan_patch = patch('budgetportal.models.ckan')
         CKANMockClass = ckan_patch.start()
         CKANMockClass.action.package_search.return_value = {'results': []}
         self.addCleanup(ckan_patch.stop)
-        # Dataset.get_latest_cpi_resource =  Mock(return_value=('2018-19', '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d'))
+
         dataset_patch = patch('budgetportal.models.Dataset.get_latest_cpi_resource', return_value=('2018-19', '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d'))
         dataset_patch.start()
         self.addCleanup(dataset_patch.stop)
