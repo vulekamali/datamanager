@@ -1,15 +1,8 @@
-import budgetportal.models
-from budgetportal.models import (
-    FinancialYear,
-    Sphere,
-    Government,
-    Department,
-    Dataset,
-)
 from django.conf import settings
-from django.test import TestCase, Client
+from django.test import TestCase
 from mock import patch
-import yaml
+
+from budgetportal.models import Dataset
 
 
 class TestDataset(TestCase):
