@@ -28,9 +28,9 @@ def get_focus_area_preview(financial_year):
     prov_function_ref = provincial_os_api.get_function_ref()
 
     function_names = [cell[nat_function_ref]
-                      for cell in national_expenditure_results['cells']]
+                      for cell in national_expenditure_results]
     function_names += [cell[prov_function_ref]
-                       for cell in provincial_expenditure_results['cells']]
+                       for cell in provincial_expenditure_results]
     unique_functions = list(set(function_names))
 
     function_objects = []
@@ -131,7 +131,7 @@ def national_summary_for_function(
     function_ref = openspending_api.get_function_ref()
 
     function_cells = filter(lambda x: x[function_ref] == function,
-                            expenditure_results['cells'])
+                            expenditure_results)
     national = {'data': [], 'footnotes': [], 'notices': []}
     national['total'] = sum(c['value.sum'] for c in function_cells)
 
@@ -169,10 +169,10 @@ def provincial_summary_for_function(financial_year, function, openspending_api, 
     dept_ref = openspending_api.get_department_name_ref()
     function_ref = openspending_api.get_function_ref()
     geo_ref = openspending_api.get_geo_ref()
-    no_provincial_in_year = not expenditure_results['cells']
+    no_provincial_in_year = not expenditure_results
 
     function_cells = filter(lambda x: x[function_ref] == function,
-                            expenditure_results['cells'])
+                            expenditure_results)
     provincial = {'data': [], 'footnotes': [], 'notices': []}
     if no_provincial_in_year:
         provincial['total'] = None
