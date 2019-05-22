@@ -288,3 +288,37 @@ def none_if_empty_or_missing(dict, key):
         return dict.get(key)
     else:
         return None
+
+
+def get_expenditure_time_series_dataset(sphere_slug):
+    query = {
+        'q': '',
+        'fq': ''.join([
+            '+organization:"national-treasury"',
+            '+groups:"budgeted-and-actual-%s-expenditure"' % sphere_slug,
+        ]),
+        'rows': 1000,
+    }
+    response = ckan.action.package_search(**query)
+    if response['results']:
+        package = response['results'][0]
+        return Dataset.from_package(package)
+    else:
+        return None
+
+
+def get_consolidated_expenditure_budget_dataset():
+    query = {
+        'q': '',
+        'fq': ''.join([
+            '+organization:"national-treasury"',
+            '+groups:"consolidated-expenditure-budget"',
+        ]),
+        'rows': 1000,
+    }
+    response = ckan.action.package_search(**query)
+    if response['results']:
+        package = response['results'][0]
+        return Dataset.from_package(package)
+    else:
+        return None
