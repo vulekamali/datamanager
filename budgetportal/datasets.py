@@ -132,12 +132,15 @@ class Dataset():
 
     def create_resource(self, name, format, url):
         try:
-            # urlopen doesn't encode spaces for you https://bugs.python.org/issue13359
+            # urlopen doesn't encode spaces for you
+            # https://bugs.python.org/issue13359
             if ' ' in url:
                 url = url.replace(' ', '%20')
-            logger.info("Downloading %s to upload to package %s", url, self.slug)
+            logger.info("Downloading %s to upload to package %s",
+                        url, self.slug)
             tempdir = mkdtemp(prefix="budgetportal")
-            basename = urllib.unquote(os.path.basename(urlparse.urlparse(url).path))
+            basename = urllib.unquote(
+                os.path.basename(urlparse.urlparse(url).path))
             filename = os.path.join(tempdir, basename)
             logger.info("Downloading %s to %s", url, filename)
             urllib.urlretrieve(url, filename)[0]
@@ -151,7 +154,8 @@ class Dataset():
                 'format': format,
             }
             result = ckan.action.resource_create(**resource_fields)
-            logger.info("Upload result: resource '%s' to package %s %r", name, self.slug, result)
+            logger.info("Upload result: resource '%s' to package %s %r",
+                        name, self.slug, result)
             self.resources.append(result)
         except Exception as e:
             logger.exception(e)
@@ -276,7 +280,7 @@ class PackageWithoutGroupException(Exception):
 
 def package_is_contributed(package):
     return len(package['groups']) == 0 \
-           and package['organization']['name'] != 'national-treasury'
+        and package['organization']['name'] != 'national-treasury'
 
 
 def none_if_empty_or_missing(dict, key):
