@@ -9,12 +9,18 @@ from budgetportal.models import (
     Government,
     Department,
 )
-from budgetportal import models
+from budgetportal import models, datasets
 from django.test import TestCase
 from mock import Mock
 import json
-
+import requests
 from budgetportal.openspending import BabbageFiscalDataset
+
+# Hacky make sure we don't call out to openspending.
+requests.get = Mock
+requests.Session = Mock
+
+print(requests.get("something"))
 
 with open('budgetportal/tests/test_data/budget_and_actual.json', 'r') as f:
     DEPARTMENT_MOCK_DATA = json.load(f)
@@ -293,7 +299,6 @@ class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
             is_vote_primary=True,
             intro="",
         )
-        mock_dataset = Mock()
         self.mock_openspending_api = Mock()
         self.mock_openspending_api.get_adjustment_kind_ref = Mock(return_value='adjustment_kind_ref')
         self.mock_openspending_api.get_phase_ref = Mock(return_value='budget_phase.budget_phase')
@@ -302,10 +307,9 @@ class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
         self.mock_openspending_api.get_financial_year_ref = Mock(return_value="financial_year.financial_year")
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
         self.mock_openspending_api.filter_by_ref_exclusion = Mock
-        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['complete'])
         self.mock_openspending_api.aggregate_url = Mock
-        mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
-        self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
+        self.mock_dataset = Mock()
+        self.mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
 
         vote_number = 1
         for mock_object in self.mock_data['complete']:
@@ -321,8 +325,11 @@ class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
         'budgetportal.models.Department.get_all_budget_totals_by_year_and_phase',
         return_value=mock.MagicMock()
     )
-    def test_no_cells_null_response(self, total_budgets_mock):
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    def test_no_cells_null_response(self, mock_get_dataset, total_budgets_mock):
         self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
+        mock_get_dataset.return_value = self.mock_dataset
+
         result = self.department.get_national_expenditure_treemap(
             financial_year_id='2018-19',
             budget_phase='original'
@@ -333,7 +340,11 @@ class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
         'budgetportal.models.Department.get_all_budget_totals_by_year_and_phase',
         return_value=mock.MagicMock()
     )
-    def test_complete_data(self, total_budgets_mock):
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    def test_complete_data(self, mock_get_dataset, total_budgets_mock):
+        self.mock_openspending_api.aggregate_by_refs = Mock(return_value=self.mock_data['complete'])
+        mock_get_dataset.return_value = self.mock_dataset
+
         result = self.department.get_national_expenditure_treemap(
             financial_year_id='2019-20',
             budget_phase='original'
@@ -343,6 +354,7 @@ class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
         data_keys = data.keys()
         self.assertIn('items', data_keys)
         self.assertIn('total', data_keys)
+        self.assertEqual(len(data['items']), 3)
         expenditure_keys = data['items'][0].keys()
         self.assertIn('name', expenditure_keys)
         self.assertIn('amount', expenditure_keys)
