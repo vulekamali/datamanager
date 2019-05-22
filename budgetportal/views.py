@@ -9,7 +9,8 @@ from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-from models import FinancialYear, Sphere, Dataset, Category, Department, InfrastructureProject
+from models import FinancialYear, Sphere, Department, InfrastructureProject
+from datasets import Dataset, Category
 import yaml
 import logging
 from . import revenue
