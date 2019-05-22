@@ -1313,7 +1313,7 @@ class Department(models.Model):
             'real': [],
         }
 
-        dataset = self.get_expenditure_time_series_dataset()
+        dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
@@ -1453,7 +1453,7 @@ class Department(models.Model):
 
         programmes = {}
 
-        dataset = self.get_expenditure_time_series_dataset()
+        dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
