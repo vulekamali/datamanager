@@ -24,9 +24,6 @@ def get_focus_area_preview(financial_year):
         financial_year, 'national')
     provincial_expenditure_results, provincial_os_api = get_focus_area_data(
         financial_year, 'provincial')
-    subprogramme_to_exclude_results = get_subprogramme_from_actual_and_budgeted_dataset(
-        'national', PROV_EQ_SHARE_DEPT, PROV_EQ_SHARE_SUBPROG
-    )
     nat_function_ref = national_os_api.get_function_ref()
     prov_function_ref = provincial_os_api.get_function_ref()
 
@@ -42,12 +39,13 @@ def get_focus_area_preview(financial_year):
             'title': function,
             'slug': slugify(function),
             'national': national_summary_for_function(
+                financial_year,
                 function,
                 national_os_api,
                 national_expenditure_results,
-                subprogramme_to_exclude_results,
             ),
             'provincial': provincial_summary_for_function(
+                financial_year,
                 function,
                 provincial_os_api,
                 provincial_expenditure_results,
@@ -92,8 +90,8 @@ def get_focus_area_data(financial_year, sphere_slug):
     return cells, openspending_api
 
 
-def get_subprogramme_from_actual_and_budgeted_dataset(financial_year, sphere_slug, department, subprogramme):
-    dataset = get_expenditure_time_series_dataset(sphere_slug)
+def get_prov_eq_share(financial_year):
+    dataset = get_expenditure_time_series_dataset('national')
     if not dataset:
         return None, None
     openspending_api = dataset.get_openspending_api()
@@ -103,28 +101,32 @@ def get_subprogramme_from_actual_and_budgeted_dataset(financial_year, sphere_slu
     phase_ref = openspending_api.get_phase_ref()
     subprogramme_ref = openspending_api.get_subprogramme_name_ref()
 
-    expenditure_cuts = [
+    cuts = [
         year_ref + ':' + '{}'.format(financial_year.get_starting_year()),
         phase_ref + ':' + '{}'.format("Main appropriation"),
-        dept_ref + ':' + '{}'.format(department),
-        subprogramme_ref + ':' + '{}'.format(subprogramme),
+        dept_ref + ':' + '{}'.format(PROV_EQ_SHARE_DEPT),
+        subprogramme_ref + ':' + '{}'.format(PROV_EQ_SHARE_SUBPROG),
     ]
 
-    expenditure_drilldowns = [
+    drilldowns = [
         function_ref
     ]
 
-    expenditure_results = openspending_api.aggregate(
-        cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
-    return expenditure_results
+    results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
+    count = len(results['cells'])
+    if count != 1:
+        raise Exception("Expected Provincial Equitable Share once but found it %d times" % count)
+    cell = results['cells'][0]
+    return (cell[function_ref], cell['value.sum'])
 
 
 def national_summary_for_function(
         financial_year,
         function,
         openspending_api,
-        expenditure_results,
-        subprogramme_to_exclude_results):
+        expenditure_results):
+    eq_share_function, eq_share_amount = get_prov_eq_share(financial_year)
+
     dept_ref = openspending_api.get_department_name_ref()
     function_ref = openspending_api.get_function_ref()
 
@@ -139,13 +141,9 @@ def national_summary_for_function(
     national['footnotes'].append(
         '**Source:** Estimates of National Expenditure {}'.format(financial_year.slug))
     for cell in function_cells:
-        exclude_for_function = filter(lambda x: x[function_ref] == function,
-                                      subprogramme_to_exclude_results['cells'])
-        if exclude_for_function and cell[dept_ref] == PROV_EQ_SHARE_DEPT:
-            exclude_amount = exclude_for_function[0]['value.sum']
-            amount = cell['value.sum'] - exclude_amount
-            national['footnotes'].append(
-                '**Note:** Provincial Equitable Share is excluded')
+        if cell[function_ref] == eq_share_function and cell[dept_ref] == PROV_EQ_SHARE_DEPT:
+            amount = cell['value.sum'] - eq_share_amount
+            national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
         else:
             amount = cell['value.sum']
         department_slug = slugify(cell[dept_ref])
@@ -259,7 +257,7 @@ def get_consolidated_expenditure_treemap(financial_year):
             'id': slugify(cell[openspending_api.get_function_ref()]),
             'amount': float(cell['value.sum']),
             'percentage': percentage_of_total,
-            'url': get_focus_area_url_path(focus_area_name)
+            'url': get_focus_area_url_path(financial_year.slug, focus_area_name)
         })
 
     return {
@@ -405,13 +403,12 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
             })
 
         for function in department_functions:
-            slug = slugify(function[function_ref])
-            if function[function_ref] == '':
-                logger.error("Empty function object: {}".format(function))
+            name = function[function_ref]
+            slug = slugify(name)
             functions.append({
-                'title': function[function_ref].title(),
+                'title': name,
                 'slug': slug,
-                'url': financial_year.get_focus_area_url(slug)
+                'url': get_focus_area_url_path(financial_year.slug, name)
             })
 
         expenditure.append({
