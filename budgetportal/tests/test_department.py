@@ -13,13 +13,12 @@ from budgetportal import models
 from django.test import TestCase
 from mock import Mock
 import json
+import mock_data
 
 # Hacky make sure we don't call out to openspending.
 import requests
 requests.get = Mock
 requests.Session = Mock
-
-print(requests.get("something"))
 
 with open('budgetportal/tests/test_data/budget_and_actual.json', 'r') as f:
     DEPARTMENT_MOCK_DATA = json.load(f)
@@ -188,7 +187,6 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
             is_vote_primary=True,
             intro="",
         )
-        mock_dataset = Mock()
         self.mock_openspending_api = Mock()
         self.mock_openspending_api.get_adjustment_kind_ref = Mock(return_value='adjustment_kind_ref')
         self.mock_openspending_api.get_phase_ref = Mock(return_value='budget_phase.budget_phase')
@@ -199,28 +197,34 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
         self.mock_openspending_api.filter_dept = Mock(return_value={'cells': []})
         self.mock_openspending_api.filter_by_ref_exclusion = Mock
-        self.mock_openspending_api.aggregate_by_refs = Mock(
-            return_value=self.mock_data['test_cells_data_complete'])
         self.mock_openspending_api.aggregate_url = Mock
-        mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
-        self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
-        self.department.get_financial_year = Mock(return_value=year)
+        self.mock_dataset = Mock()
+        self.mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
 
-    def test_no_cells_null_response(self):
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    def test_no_cells_null_response(self, mock_get_dataset):
         self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
+        mock_get_dataset.return_value = self.mock_dataset
+
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result, None)
 
     def test_complete_data_no_notices(self):
+        self.mock_openspending_api.aggregate_by_refs = Mock(
+            return_value=self.mock_data['test_cells_data_complete'])
+
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result['notices'], [])
 
-    def test_missing_data_not_published(self):
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    @mock.patch('budgetportal.models.get_cpi', return_value=mock_data.CPI_2019_20)
+    def test_missing_data_not_published(self, mock_get_cpi, mock_get_dataset):
         """
         Here we feed an incomplete set of cells and expect it to tell us that
         2018 data has not been published
         """
 
+        mock_get_dataset.return_value = self.mock_dataset
         self.mock_openspending_api.aggregate = Mock(return_value={
             'cells': [{'value.sum': 0, '_count': 0}]
         })
