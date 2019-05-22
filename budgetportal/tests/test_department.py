@@ -121,7 +121,7 @@ class AdjustedBudgetTestCase(TestCase):
 
 
 class BudgetedAndActualExpenditureProgrammeTestCase(TestCase):
-    """Unit tests of budgeted and actual expenditure summary for a department"""
+    """tests of budgeted and actual expenditure summary for a department"""
 
     def setUp(self):
         self.mock_data = DEPARTMENT_MOCK_DATA
@@ -135,7 +135,6 @@ class BudgetedAndActualExpenditureProgrammeTestCase(TestCase):
             is_vote_primary=True,
             intro="",
         )
-        mock_dataset = Mock()
         self.mock_openspending_api = Mock()
         self.mock_openspending_api.get_adjustment_kind_ref = Mock(return_value='adjustment_kind_ref')
         self.mock_openspending_api.get_phase_ref = Mock(return_value='budget_phase.budget_phase')
@@ -146,34 +145,46 @@ class BudgetedAndActualExpenditureProgrammeTestCase(TestCase):
         self.mock_openspending_api.aggregate = Mock(return_value={'cells': [{'value.sum': 1, '_count': 0}]})
         self.mock_openspending_api.filter_dept = Mock(return_value={'cells': self.mock_data['program_test_cells_complete']})
         self.mock_openspending_api.aggregate_url = Mock
-        mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
-        self.department.get_expenditure_time_series_dataset = Mock(return_value=mock_dataset)
-        self.department.get_financial_year = Mock(return_value=year)
+        self.mock_dataset = Mock()
+        self.mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
 
-    def test_no_cells_null_response(self):
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    def test_no_cells_null_response(self, mock_get_dataset):
         self.mock_openspending_api.filter_dept = Mock(return_value={'cells': []})
+        mock_get_dataset.return_value = self.mock_dataset
+
         result = self.department.get_expenditure_time_series_by_programme()
         self.assertEqual(result, None)
 
-    def test_complete_data_no_notices(self):
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    @mock.patch('budgetportal.models.get_cpi', return_value=mock_data.CPI_2019_20)
+    def test_complete_data_no_notices(self, mock_get_cpi, mock_get_dataset):
+        mock_get_dataset.return_value = self.mock_dataset
+
         result = self.department.get_expenditure_time_series_by_programme()
         self.assertEqual(result['notices'], [])
 
-    def test_missing_data_prog_did_not_exist(self):
-        """ Here we feed an incomplete set of cells and expect it to tell us that the department did not exist
-        (removed 2018 data) """
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    @mock.patch('budgetportal.models.get_cpi', return_value=mock_data.CPI_2019_20)
+    def test_missing_data_prog_did_not_exist(self, mock_get_cpi, mock_get_dataset):
+        """
+        Here we feed an incomplete set of cells and expect it to tell us that
+        the department did not exist (removed 2018 data)
+        """
+        mock_get_dataset.return_value = self.mock_dataset
         self.mock_openspending_api.aggregate = Mock(return_value={
             'cells': [{'value.sum': 1, '_count': 0}]
         })
         self.mock_openspending_api.filter_dept = Mock(return_value={
             'cells': self.mock_data['program_test_cells_missing_2018_revenue_admin']
         })
+
         result = self.department.get_expenditure_time_series_by_programme()
         self.assertEqual(result['notices'], ['One or more programmes did not exist for some years displayed.'])
 
 
 class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
-    """Unit tests of budgeted and actual expenditure summary for a department"""
+    """tests of budgeted and actual expenditure summary for a department"""
 
     def setUp(self):
         self.mock_data = DEPARTMENT_MOCK_DATA
@@ -209,7 +220,10 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result, None)
 
-    def test_complete_data_no_notices(self):
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    @mock.patch('budgetportal.models.get_cpi', return_value=mock_data.CPI_2019_20)
+    def test_complete_data_no_notices(self, mock_get_cpi, mock_get_dataset):
+        mock_get_dataset.return_value = self.mock_dataset
         self.mock_openspending_api.aggregate_by_refs = Mock(
             return_value=self.mock_data['test_cells_data_complete'])
 
@@ -231,18 +245,26 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         self.mock_openspending_api.aggregate_by_refs = Mock(
             return_value=self.mock_data['test_cells_data_missing_2018']
         )
+
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result['notices'], ['Please note that the data for 2018 has not been published on vulekamali.'])
 
-    def test_missing_data_dept_did_not_exist(self):
-        """ Here we feed an incomplete set of cells and expect it to tell us that the department did not exist
-        (removed 2018 data) """
+    @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
+    @mock.patch('budgetportal.models.get_cpi', return_value=mock_data.CPI_2019_20)
+    def test_missing_data_dept_did_not_exist(self, mock_get_cpi, mock_get_dataset):
+        """
+        Here we feed an incomplete set of cells and expect it to tell us
+        that the department did not exist (removed 2018 data)
+        """
+
+        mock_get_dataset.return_value = self.mock_dataset
         self.mock_openspending_api.aggregate = Mock(return_value={
             'cells': [{'value.sum': 1, '_count': 0}]
         })
         self.mock_openspending_api.aggregate_by_refs = Mock(
             return_value=self.mock_data['test_cells_data_missing_2018']
         )
+
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result['notices'], ['This department did not exist for some years displayed.'])
 
