@@ -1,11 +1,9 @@
 from autoslug import AutoSlugField
 from slugify import slugify
-
-from budgetportal.openspending import (
-    EstimatesOfExpenditure,
-    AdjustedEstimatesOfExpenditure,
-    ExpenditureTimeSeries)
-from ckanapi import NotFound
+from budgetportal.datasets import (
+    Dataset,
+    get_expenditure_time_series_dataset,
+)
 from collections import OrderedDict
 from decimal import Decimal
 from django.conf import settings
@@ -15,16 +13,12 @@ from django.urls import reverse
 from itertools import groupby
 from partial_index import PartialIndex
 from pprint import pformat
-from tempfile import mkdtemp
 from urlparse import urljoin
 import logging
-import os
 import re
 import requests
-import shutil
 import string
 import urllib
-import urlparse
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -38,8 +32,6 @@ CKAN_DATASTORE_URL = (settings.CKAN_URL +
 MAPIT_POINT_API_URL = 'https://mapit.code4sa.org/point/4326/{},{}'
 
 DIRECT_CHARGE_NRF = 'Direct charge against the National Revenue Fund'
-PROV_EQ_SHARE_DEPT = 'National Treasury'
-PROV_EQ_SHARE_SUBPROG = 'Provincial Equitable Share'
 
 REVENUE_RESOURCE_IDS = {
     '2018-19': '7ad5e908-5814-4581-a9df-a6f37c56d5bd',
@@ -98,9 +90,6 @@ class FinancialYear(models.Model):
 
     class Meta:
         ordering = ['-slug']
-
-    def get_focus_area_url(self, focus_slug):
-        return '{}/focus/{}'.format(self.slug, focus_slug)
 
     @property
     def national(self):
@@ -170,266 +159,6 @@ class FinancialYear(models.Model):
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
-    def get_consolidated_expenditure_budget_dataset(self):
-        if self._consolidated_expenditure_budget_dataset is not None:
-            return self._consolidated_expenditure_budget_dataset
-        query = {
-            'q': '',
-            'fq': ''.join([
-                '+organization:"national-treasury"',
-                '+groups:"consolidated-expenditure-budget"',
-            ]),
-            'rows': 1000,
-        }
-        response = ckan.action.package_search(**query)
-        if response['results']:
-            package = response['results'][0]
-            self._consolidated_expenditure_budget_dataset = Dataset.from_package(package)
-            return self._consolidated_expenditure_budget_dataset
-        else:
-            return None
-
-    def get_consolidated_expenditure_treemap(self):
-        """ Returns a data object for each function group for a specific year. Used by the consolidated treemap. """
-
-        expenditure = []
-        dataset = self.get_consolidated_expenditure_budget_dataset()
-        if not dataset:
-            return None
-        openspending_api = dataset.get_openspending_api()
-        year_ref = openspending_api.get_financial_year_ref()
-
-        # Add cuts: year and phase
-        expenditure_cuts = [
-            year_ref + ':' + '{}'.format(self.get_starting_year()),
-        ]
-        expenditure_drilldowns = [
-            openspending_api.get_function_ref(),
-        ]
-
-        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
-
-        total_budget = 0
-        modified_result_cells = []
-
-        for cell in expenditure_results['cells']:
-            total_budget += float(cell['value.sum'])
-            modified_result_cells.append(cell)
-
-        for cell in modified_result_cells:
-            percentage_of_total = float(cell['value.sum']) / total_budget * 100
-            focus_area_name = cell[openspending_api.get_function_ref()]
-            expenditure.append({
-                'name': focus_area_name,
-                'id': slugify(cell[openspending_api.get_function_ref()]),
-                'amount': float(cell['value.sum']),
-                'percentage': percentage_of_total,
-                'url': self.get_focus_area_url_path(focus_area_name)
-            })
-
-        return {
-            'data': {
-                'items': expenditure,
-                'total': total_budget
-            },
-        } if expenditure else None
-
-    def get_focus_area_data(self, sphere):
-        dept = Department.objects.filter(government__sphere__slug=sphere)[0]
-        dataset = dept.get_expenditure_time_series_dataset()
-        if not dataset:
-            return None, None
-        openspending_api = dataset.get_openspending_api()
-        year_ref = openspending_api.get_financial_year_ref()
-        dept_ref = openspending_api.get_department_name_ref()
-        function_ref = openspending_api.get_function_ref()
-        phase_ref = openspending_api.get_phase_ref()
-        government_ref = openspending_api.get_geo_ref()
-
-        expenditure_cuts = [
-            year_ref + ':' + '{}'.format(self.get_starting_year()),
-            phase_ref + ':' + '{}'.format("Main appropriation"),
-        ]
-
-        expenditure_drilldowns = [
-            function_ref,
-            dept_ref
-        ]
-
-        if sphere == 'provincial':
-            expenditure_drilldowns.append(government_ref)
-
-        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
-        return expenditure_results, openspending_api
-
-    def get_subprogramme_from_actual_and_budgeted_dataset(self, sphere, department, subprogramme):
-        dept = Department.objects.filter(government__sphere__slug=sphere)[0]
-        dataset = dept.get_expenditure_time_series_dataset()
-        if not dataset:
-            return None, None
-        openspending_api = dataset.get_openspending_api()
-        year_ref = openspending_api.get_financial_year_ref()
-        dept_ref = openspending_api.get_department_name_ref()
-        function_ref = openspending_api.get_function_ref()
-        phase_ref = openspending_api.get_phase_ref()
-        subprogramme_ref = openspending_api.get_subprogramme_name_ref()
-
-        expenditure_cuts = [
-            year_ref + ':' + '{}'.format(self.get_starting_year()),
-            phase_ref + ':' + '{}'.format("Main appropriation"),
-            dept_ref + ':' + '{}'.format(department),
-            subprogramme_ref + ':' + '{}'.format(subprogramme),
-        ]
-
-        expenditure_drilldowns = [
-            function_ref
-        ]
-
-        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
-        return expenditure_results
-
-    def get_focus_area_preview(self):
-        """ Returns data for the focus area preview pages. """
-
-        national_expenditure_results, national_os_api = self.get_focus_area_data('national')
-        provincial_expenditure_results, provincial_os_api = self.get_focus_area_data('provincial')
-        subprogramme_to_exclude_results = self.get_subprogramme_from_actual_and_budgeted_dataset(
-            'national', PROV_EQ_SHARE_DEPT, PROV_EQ_SHARE_SUBPROG
-        )
-        nat_function_ref = national_os_api.get_function_ref()
-
-        unique_functions = []
-        total_budget_all_focus_areas = 0
-        for c in national_expenditure_results['cells']:
-            if c[nat_function_ref] == '':
-                raise Exception('Empty function area for cell: {}'.format(c))
-
-            total_budget_all_focus_areas += c['value.sum']
-            if c[nat_function_ref] not in unique_functions:
-                unique_functions.append(c[nat_function_ref])
-
-        function_objects = []
-        for function in unique_functions:
-            function_objects.append({
-                'title': function,
-                'slug': slugify(function),
-                'national': self.national_summary_for_function(
-                    function,
-                    national_os_api,
-                    national_expenditure_results,
-                    subprogramme_to_exclude_results,
-                ),
-                'provincial': self.provincial_summary_for_function(
-                    function,
-                    provincial_os_api,
-                    provincial_expenditure_results,
-                ),
-            })
-
-        return {
-            'data': {
-                'items': function_objects,
-            },
-        } if function_objects else None
-
-    def national_summary_for_function(
-            self,
-            function,
-            openspending_api,
-            expenditure_results,
-            subprogramme_to_exclude_results):
-        dept_ref = openspending_api.get_department_name_ref()
-        function_ref = openspending_api.get_function_ref()
-
-        function_cells = filter(lambda x: x[function_ref] == function,
-                                         expenditure_results['cells'])
-        national = {'data': [], 'footnotes': [], 'notices': []}
-        national['total'] = sum(c['value.sum'] for c in function_cells)
-
-        if not function_cells:
-            notice = ("No national departments allocated budget "
-                      "to this focus area.").format(self.slug)
-            national['notices'].append(notice)
-        national['footnotes'].append('**Source:** Estimates of National Expenditure {}'.format(self.slug))
-        for cell in function_cells:
-            exclude_for_function = filter(lambda x: x[function_ref] == function,
-                                          subprogramme_to_exclude_results['cells'])
-            if exclude_for_function and cell[dept_ref] == PROV_EQ_SHARE_DEPT:
-                exclude_amount = exclude_for_function[0]['value.sum']
-                amount = cell['value.sum'] - exclude_amount
-                national['footnotes'].append('**Note:** Provincial Equitable Share is excluded')
-            else:
-                amount = cell['value.sum']
-            department_slug = slugify(cell[dept_ref])
-            departments = Department.objects.filter(
-                slug=department_slug,
-                government__sphere__slug='national',
-                government__sphere__financial_year=self,
-            )
-            if departments:
-                preview_url = departments[0].get_preview_url_path()
-            else:
-                preview_url = None
-            national['data'].append({
-                'title': cell[dept_ref],
-                'slug': department_slug,
-                'amount': amount,
-                'url': preview_url,
-            })
-        return national
-
-    def provincial_summary_for_function(self, function, openspending_api, expenditure_results):
-        dept_ref = openspending_api.get_department_name_ref()
-        function_ref = openspending_api.get_function_ref()
-        geo_ref = openspending_api.get_geo_ref()
-        no_provincial_in_year = not expenditure_results['cells']
-
-        function_cells = filter(lambda x: x[function_ref] == function,
-                                           expenditure_results['cells'])
-        provincial = {'data': [], 'footnotes': [], 'notices': []}
-        if no_provincial_in_year:
-            provincial['total'] = None
-        else:
-            provincial['total'] = sum(c['value.sum'] for c in function_cells)
-
-        if no_provincial_in_year:
-            notice = ("Provincial budget allocations to focus areas "
-                      "for {} not published yet on vulekamali.").format(self.slug)
-            provincial['notices'].append(notice)
-        else:
-            footnote = '**Source:** Estimates of Provincial Expenditure {}'.format(self.slug)
-            provincial['footnotes'].append(footnote)
-
-            if not function_cells:
-                notice = ("No provincial departments allocated budget "
-                          "to this focus area.").format(self.slug)
-                provincial['notices'].append(notice)
-
-            for cell in function_cells:
-                department_slug = slugify(cell[dept_ref])
-                departments = Department.objects.filter(
-                    slug=department_slug,
-                    government__name=cell[geo_ref],
-                    government__sphere__slug='provincial',
-                    government__sphere__financial_year=self,
-                )
-                if departments:
-                    preview_url = departments[0].get_preview_url_path()
-                else:
-                    preview_url = None
-                provincial['data'].append({
-                    'name': cell[dept_ref],
-                    'slug': department_slug,
-                    'amount': cell['value.sum'],
-                    'url': preview_url,
-                    'province': cell[geo_ref],
-                })
-        return provincial
-
-    def get_focus_area_url_path(self, name):
-        if name == "Contingency reserve":
-            return None
-        return "{}/focus/{}".format(self.slug, slugify(name))
 
 class Sphere(models.Model):
     organisational_unit = 'sphere'
@@ -735,25 +464,6 @@ class Department(models.Model):
         else:
             return None
 
-    def get_expenditure_time_series_dataset(self):
-        if self._expenditure_time_series_dataset is not None:
-            return self._expenditure_time_series_dataset
-        query = {
-            'q': '',
-            'fq': ''.join([
-                '+organization:"national-treasury"',
-                '+groups:"budgeted-and-actual-%s-expenditure"' % self.government.sphere.slug,
-            ]),
-            'rows': 1000,
-        }
-        response = ckan.action.package_search(**query)
-        if response['results']:
-            package = response['results'][0]
-            self._expenditure_time_series_dataset = Dataset.from_package(package)
-            return self._expenditure_time_series_dataset
-        else:
-            return None
-
     def get_adjusted_estimates_expenditure_dataset(self):
         if self._adjusted_estimates_of_expenditure_dataset is not None:
             return self._adjusted_estimates_of_expenditure_dataset
@@ -945,7 +655,6 @@ class Department(models.Model):
             cell[openspending_api.get_econ_class_1_ref()],
             cell[openspending_api.get_econ_class_2_ref()],
         ])
-        prog_func = lambda cell: cell[openspending_api.get_programme_name_ref()]
         total_budget_fun = lambda x: x['total_budget']
         econ_classes = []
         econ_sorted = sorted(result['cells'], key=econ1_2_func)
@@ -1410,7 +1119,7 @@ class Department(models.Model):
 
     def get_all_budget_totals_by_year_and_phase(self):
         """ Returns the total for each year:phase combination from the expenditure time series dataset. """
-        dataset = self.get_expenditure_time_series_dataset()
+        dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
@@ -1454,7 +1163,7 @@ class Department(models.Model):
             raise Exception('An invalid phase was provided: {}'.format(budget_phase))
 
         expenditure = []
-        dataset = self.get_expenditure_time_series_dataset()
+        dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
@@ -1535,7 +1244,7 @@ class Department(models.Model):
             raise Exception('An invalid phase was provided: {}'.format(budget_phase))
 
         expenditure = []
-        dataset = self.get_expenditure_time_series_dataset()
+        dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
@@ -1592,158 +1301,6 @@ class Department(models.Model):
             'data': {'items': expenditure, 'total': total_budget},
         } if expenditure else None
 
-    def get_preview_page(self, financial_year_id, phase_slug, government_slug, sphere_slug):
-        try:
-            selected_phase = EXPENDITURE_TIME_SERIES_PHASE_MAPPING[phase_slug]
-        except KeyError:
-            raise Exception('An invalid phase was provided: {}'.format(phase_slug))
-
-        expenditure = []
-        dataset = self.get_expenditure_time_series_dataset()
-        if not dataset:
-            return None
-        openspending_api = dataset.get_openspending_api()
-        programme_ref = openspending_api.get_programme_name_ref()
-        geo_ref = openspending_api.get_geo_ref()
-        department_ref = openspending_api.get_department_name_ref()
-        financial_year = FinancialYear.objects.get(slug=financial_year_id)
-        function_ref = openspending_api.get_function_ref()
-
-        # Expenditure data
-        expenditure_cuts = [
-            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
-            openspending_api.get_financial_year_ref() + ':' + '{}'.format(
-                FinancialYear.start_from_year_slug(financial_year_id)
-            ),
-            openspending_api.get_phase_ref() + ':' + '"{}"'.format(selected_phase)
-        ]
-        expenditure_drilldowns = [
-            department_ref,
-            geo_ref,
-            programme_ref,
-            function_ref
-        ]
-        expenditure_results = openspending_api.aggregate(cuts=expenditure_cuts, drilldowns=expenditure_drilldowns)
-
-        # We do a separate call to always build focus area data from the main appropriation phase
-        focus_cuts = [
-            openspending_api.get_adjustment_kind_ref() + ':' + '"Total"',
-            openspending_api.get_financial_year_ref() + ':' + '{}'.format(
-                FinancialYear.start_from_year_slug(financial_year_id)
-            ),
-            openspending_api.get_phase_ref() + ':' + '"{}"'.format(EXPENDITURE_TIME_SERIES_PHASE_MAPPING["original"]),
-        ]
-        focus_drilldowns = [
-            department_ref,
-            geo_ref,
-            function_ref
-        ]
-
-        focus_results = openspending_api.aggregate(cuts=focus_cuts, drilldowns=focus_drilldowns)
-
-        # Filter departments that belong to the selected government
-        expenditure_results_filter_government_complete_breakdown = filter(
-            lambda x: slugify(x[geo_ref]) == government_slug,
-            expenditure_results['cells']
-        )
-        focus_results_filter_government = filter(
-            lambda x: slugify(x[geo_ref]) == government_slug,
-            focus_results['cells']
-        )
-
-        # Used to determine programmes for departments
-        expenditure_results_filter_government_programme_breakdown = openspending_api.aggregate_by_refs(
-            [
-                department_ref,
-                geo_ref,
-                programme_ref,
-            ],
-            expenditure_results_filter_government_complete_breakdown
-        )
-
-        # Used to iterate over unique departments and build department objects
-        expenditure_results_filter_government_department_breakdown = openspending_api.aggregate_by_refs(
-            [
-                department_ref,
-                geo_ref,
-            ],
-            expenditure_results_filter_government_complete_breakdown
-        )
-
-        total_budget = 0
-        filtered_result_cells = []
-        sphere_depts = Department.objects.filter(
-            government__sphere__financial_year__slug=financial_year_id,
-            government__sphere__slug=sphere_slug,
-            government__slug=government_slug,
-            is_vote_primary=True,
-        )
-
-        for cell in expenditure_results_filter_government_department_breakdown:
-            try:
-                dept = sphere_depts.get(
-                    slug=slugify(cell[department_ref]),
-                    government__slug=slugify(cell[geo_ref])
-                )
-            except Department.DoesNotExist:
-                logger.warning('Excluding: {} {} {} {}'.format(
-                    sphere_slug, financial_year_id, cell[geo_ref],
-                    cell[department_ref]
-                ))
-                continue
-
-            total_budget += float(cell['value.sum'])
-            cell['url'] = dept.get_url_path() if dept else None
-            cell['description'] = dept.intro if dept else None
-            filtered_result_cells.append(cell)
-
-        for cell in filtered_result_cells:
-            percentage_of_total = float(cell['value.sum']) / total_budget * 100
-
-            department_programmes = filter(
-                lambda x: x[department_ref] == cell[department_ref],
-                expenditure_results_filter_government_programme_breakdown
-            )
-            programmes = []
-
-            department_functions = filter(
-                lambda x: x[department_ref] == cell[department_ref],
-                focus_results_filter_government
-            )
-            functions = []
-
-            for programme in department_programmes:
-                percentage = float(programme['value.sum']) / cell['value.sum'] * 100
-                programmes.append({
-                    'title': programme[programme_ref].title(),
-                    'slug': slugify(programme[programme_ref]),
-                    'percentage': percentage,
-                    'amount': float(programme['value.sum'])
-                })
-
-            for function in department_functions:
-                slug = slugify(function[function_ref])
-                if function[function_ref] == '':
-                    logger.error("Empty function object: {}".format(function))
-                functions.append({
-                    'title': function[function_ref].title(),
-                    'slug': slug,
-                    'url': financial_year.get_focus_area_url(slug)
-                })
-
-            expenditure.append({
-                'title': cell[department_ref],
-                'slug': slugify(cell[department_ref]),
-                'total': float(cell['value.sum']),
-                'percentage_of_budget': percentage_of_total,
-                'description': cell['description'],
-                'programmes': programmes,
-                'focus_areas': functions
-            })
-
-        return {
-            'data': {'items': expenditure},
-        } if expenditure else None
 
     def get_expenditure_time_series_summary(self):
         base_year = get_base_year()
@@ -1756,7 +1313,7 @@ class Department(models.Model):
             'real': [],
         }
 
-        dataset = self.get_expenditure_time_series_dataset()
+        dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
@@ -1896,7 +1453,7 @@ class Department(models.Model):
 
         programmes = {}
 
-        dataset = self.get_expenditure_time_series_dataset()
+        dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
             return None
         openspending_api = dataset.get_openspending_api()
@@ -2035,14 +1592,6 @@ class Programme(models.Model):
 
     def __str__(self):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
-
-
-class PackageDeletedException(Exception):
-    pass
-
-
-class PackageWithoutGroupException(Exception):
-    pass
 
 
 class InfrastructureProject:
@@ -2263,253 +1812,6 @@ class InfrastructureProject:
         return complete_expenditure
 
 
-class Dataset():
-    """
-    Represents a CKAN dataset (AKA package)
-    """
-
-    def __init__(self, **kwargs):
-        self.author = kwargs['author']
-        self.created_date = kwargs['created_date']
-        self.last_updated_date = kwargs['last_updated_date']
-        self.license = kwargs['license']
-        self.name = kwargs['name']
-        self.resources = kwargs['resources']
-        self.slug = kwargs['slug']
-        self.intro = kwargs['intro']
-        self.intro_short = kwargs['intro_short']
-        self.methodology = kwargs['methodology']
-        self.key_points = kwargs['key_points']
-        self.use_for = kwargs['use_for']
-        self.usage = kwargs['usage']
-        self.organization_slug = kwargs['organization_slug']
-        self.category = kwargs['category']
-        self._openspending_api = None
-        self.package = kwargs['package']
-
-    @classmethod
-    def from_package(cls, package):
-        if package['state'] == 'deleted':
-            raise PackageDeletedException
-
-        resources = []
-        for resource in package['resources']:
-            resources.append({
-                'name': resource['name'],
-                'description': resource['description'],
-                'format': resource['format'],
-                'url': resource['url'],
-                'id': resource['id'],
-
-            })
-
-        if package_is_contributed(package):
-            category = Category.contributed()
-        else:
-            if not package['groups']:
-                raise PackageWithoutGroupException
-            category = Category.from_group(package['groups'][0])
-
-        return cls(
-            slug=package['name'],
-            name=package['title'],
-            created_date=package['metadata_created'],
-            last_updated_date=package['metadata_modified'],
-            author={
-                'name': package['author'],
-                'email': package['author_email'],
-            },
-            license={
-                'name': package['license_title'],
-                'url': package['license_url'] if 'license_url' in package else None,
-            },
-            intro=none_if_empty_or_missing(package, 'notes'),
-            intro_short=none_if_empty_or_missing(package, 'notes_short'),
-            methodology=none_if_empty_or_missing(package, 'methodology'),
-            key_points=none_if_empty_or_missing(package, 'key_points'),
-            use_for=none_if_empty_or_missing(package, 'use_for'),
-            usage=none_if_empty_or_missing(package, 'usage'),
-            resources=resources,
-            organization_slug=package['organization']['name'],
-            category=category,
-            package=package,
-        )
-
-    @classmethod
-    def fetch(cls, dataset_slug):
-        logger.info("package_show id=%s", dataset_slug)
-        try:
-            package = ckan.action.package_show(id=dataset_slug)
-            return cls.from_package(package)
-        except NotFound:
-            logger.info("Package with name %s not found.", dataset_slug)
-            return None
-
-    def get_url_path(self):
-        return "/datasets/%s/%s" % (self.category.slug, self.slug)
-
-    def get_organization(self):
-        org = ckan.action.organization_show(id=self.organization_slug)
-        return {
-            'name': org['title'],
-            'logo_url': org['image_display_url'],
-            'slug': org['name'],
-            'url': org['url'] if 'url' in org else None,
-            'telephone': org['telephone'] if 'telephone' in org else None,
-            'email': org['email'] if 'email' in org else None,
-            'facebook': org['facebook_id'] if 'facebook_id' in org else None,
-            'twitter': org['twitter_id'] if 'twitter_id' in org else None,
-        }
-
-    def get_resource(self, format, name=None):
-        """
-        Returns the first matching resource, or None if none match.
-        """
-        for resource in self.resources:
-            if (name
-                    and resource['name'] == name
-                    and resource['format'] == format):
-                return resource
-            # if name wasn't provided, just match first item with this format
-            if not name and (resource['format'] == format):
-                return resource
-
-    def create_resource(self, name, format, url):
-        try:
-            # urlopen doesn't encode spaces for you https://bugs.python.org/issue13359
-            if ' ' in url:
-                url = url.replace(' ', '%20')
-            logger.info("Downloading %s to upload to package %s", url, self.slug)
-            tempdir = mkdtemp(prefix="budgetportal")
-            basename = urllib.unquote(os.path.basename(urlparse.urlparse(url).path))
-            filename = os.path.join(tempdir, basename)
-            logger.info("Downloading %s to %s", url, filename)
-            urllib.urlretrieve(url, filename)[0]
-
-            logger.info("Uploading file %s as resource '%s' to package %s",
-                        filename, name, self.slug)
-            resource_fields = {
-                'package_id': self.slug,
-                'name': name,
-                'upload': open(filename, 'rb'),
-                'format': format,
-            }
-            result = ckan.action.resource_create(**resource_fields)
-            logger.info("Upload result: resource '%s' to package %s %r", name, self.slug, result)
-            self.resources.append(result)
-        except Exception as e:
-            logger.exception(e)
-            raise e
-        finally:
-            logger.info("Deleting temporary directory %s", tempdir)
-            shutil.rmtree(tempdir)
-
-    @staticmethod
-    def get_contributed_datasets():
-        query = {
-            'q': '',
-            'fq': '-organization:"national-treasury" AND (*:* NOT groups:["" TO *])',
-            'rows': 1000,
-        }
-        response = ckan.action.package_search(**query)
-        if response['count'] > 1000:
-            raise Exception("Time to add paging")
-        logger.info(
-            "query %s\nto ckan returned %d results",
-            pformat(query),
-            len(response['results'])
-        )
-        for package in response['results']:
-            yield Dataset.from_package(package)
-
-    def get_openspending_api(self):
-        if self._openspending_api is not None:
-            return self._openspending_api
-        try:
-            api_resource = filter(
-                lambda r: r['format'].lower() == 'openspending api',
-                self.resources
-            )[0]
-        except IndexError:
-            return None
-        api_class_mapping = {
-            'estimates-of-national-expenditure': EstimatesOfExpenditure,
-            'estimates-of-provincial-expenditure': EstimatesOfExpenditure,
-            'adjusted-estimates-of-national-expenditure': AdjustedEstimatesOfExpenditure,
-            'adjusted-estimates-of-provincial-expenditure': AdjustedEstimatesOfExpenditure,
-            'budgeted-and-actual-national-expenditure': ExpenditureTimeSeries,
-            'budgeted-and-actual-provincial-expenditure': ExpenditureTimeSeries,
-            'consolidated-expenditure-budget': ExpenditureTimeSeries,
-        }
-        api_class = api_class_mapping[self.category.slug]
-        self._openspending_api = api_class(api_resource['url'])
-        return self._openspending_api
-
-
-class Category():
-    excluded_groups = {
-        'budget-vote-documents',
-        'adjusted-budget-vote-documents',
-    }
-
-    def __init__(self, **kwargs):
-        self.slug = kwargs['slug']
-        self.name = kwargs['name']
-        self.description = kwargs['description']
-
-    @classmethod
-    def get_all(cls):
-        categories = [cls.contributed()]
-        for group in ckan.action.group_list(all_fields=True):
-            if group['name'] not in cls.excluded_groups:
-                categories.append(cls.from_group(group))
-        return sorted(categories, key=lambda c: c.name)
-
-    @classmethod
-    def get_by_slug(cls, category_slug):
-        if category_slug == 'contributed':
-            return cls.contributed()
-        else:
-            try:
-                group = ckan.action.group_show(id=category_slug)
-                return cls.from_group(group)
-            except NotFound:
-                logger.info("Group with name %s not found.", category_slug)
-                return None
-
-    @classmethod
-    def from_group(cls, group):
-        return cls(
-            slug=group['name'],
-            description=group['description'],
-            name=group['title'],
-        )
-
-    def get_datasets(self):
-        datasets = []
-        if self.slug == 'contributed':
-            datasets = Dataset.get_contributed_datasets()
-        else:
-            packages = ckan.action.group_package_show(id=self.slug, limit=1000)
-            if len(packages) == 1000:
-                raise Exception("Too many packages to list like this")
-            for package in packages:
-                datasets.append(Dataset.from_package(package))
-        return sorted(datasets, key=lambda d: d.name)
-
-    def get_url_path(self):
-        return "/datasets/%s" % self.slug
-
-    @classmethod
-    def contributed(cls):
-        return cls(
-            name='Contributed data and analysis',
-            slug='contributed',
-            description=("Data and analysis contributed by other organisations "
-                         "on South African government budgets. ")
-        )
-
-
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
 # -or-has-a-sp
 def none_selected_query(vocab_name):
@@ -2569,18 +1871,6 @@ def get_vocab_map():
     for vocab in ckan.action.vocabulary_list():
         vocab_map[vocab['name']] = vocab['id']
     return vocab_map
-
-
-def package_is_contributed(package):
-    return len(package['groups']) == 0 \
-           and package['organization']['name'] != 'national-treasury'
-
-
-def none_if_empty_or_missing(dict, key):
-    if dict.get(key, None):
-        return dict.get(key)
-    else:
-        return None
 
 
 def csv_url(aggregate_url):

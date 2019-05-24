@@ -4,6 +4,12 @@ from django.test import TestCase, LiveServerTestCase, Client
 
 from budgetportal.models import InfrastructureProject, MAPIT_POINT_API_URL, CKAN_DATASTORE_URL
 import json
+from mock import Mock
+
+# Hacky make sure we don't call out to openspending.
+import requests
+requests.get = Mock
+requests.Session = Mock
 
 with open('budgetportal/tests/test_data/test_infrastructure_projects.json', 'r') as mock_data:
     MOCK_DATA = json.load(mock_data)

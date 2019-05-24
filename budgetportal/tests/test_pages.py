@@ -9,6 +9,11 @@ from django.test import TestCase, Client
 from mock import Mock
 import yaml
 
+# Hacky make sure we don't call out to openspending.
+import requests
+requests.get = Mock
+requests.Session = Mock
+
 
 class BasicPagesTestCase(TestCase):
     def setUp(self):

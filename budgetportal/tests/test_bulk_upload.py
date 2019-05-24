@@ -20,6 +20,11 @@ USERNAME = 'testuser'
 EMAIL = 'testuser@domain.com'
 PASSWORD = '12345'
 
+# Hacky make sure we don't call out to openspending.
+import requests
+requests.get = Mock
+requests.Session = Mock
+
 
 class BulkUploadTestCase(StaticLiveServerTestCase):
     def setUp(self):
