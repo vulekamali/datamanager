@@ -11,6 +11,11 @@ from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
 from models import FinancialYear, Sphere, Department, InfrastructureProject
 from datasets import Dataset, Category
+from summaries import (
+    get_preview_page,
+    get_focus_area_preview,
+    get_consolidated_expenditure_treemap,
+)
 import yaml
 import logging
 from . import revenue
@@ -37,23 +42,22 @@ def homepage(request, financial_year_id, phase_slug, sphere_slug):
 
 def consolidated_treemap(request, financial_year_id):
     """ The data for the vulekamali home page treemaps """
-    year = FinancialYear.objects.get(slug=financial_year_id)
-    context = year.get_consolidated_expenditure_treemap()
+    financial_year = FinancialYear.objects.get(slug=financial_year_id)
+    context = get_consolidated_expenditure_treemap(financial_year)
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def focus_preview(request, financial_year_id):
     """ The data for the focus area preview pages for a specific year """
-    year = FinancialYear.objects.get(slug=financial_year_id)
-    context = year.get_focus_area_preview()
+    financial_year = FinancialYear.objects.get(slug=financial_year_id)
+    context = get_focus_area_preview(financial_year)
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def department_preview(request, financial_year_id, sphere_slug, government_slug, phase_slug):
-    dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
-    context = dept.get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
+    context = get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 

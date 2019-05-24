@@ -3,6 +3,30 @@ vulekamali Data Manager
 
 This app provides Single Sign-on (SSO) and support for maintaining correct and consistent data for the vulekamali Budget Data Portal by the National Treasury of South Africa.
 
+Code Structure vision
+---------------------
+
+We're moving towards the following code structure:
+
+    +-------+
+    | views |
+    +-------+
+      |   |
+      |   V
+      | +-----------+
+      | | summaries |
+      | +-----------+
+      |    |      |
+      |    |      +----+
+      V    V           V
+    +--------+    +----------+
+    | models |    | datasets |
+    +--------+    +----------+
+
+A lot of summary code has been implemented as part of models but should now
+start moving to summaries, and just call out to models and datasets as needed.
+
+
 Setting up Development environment
 -----------------------
 
