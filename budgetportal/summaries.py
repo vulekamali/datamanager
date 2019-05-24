@@ -51,6 +51,7 @@ def get_focus_area_preview(financial_year):
                 provincial_expenditure_results,
             ),
         })
+    function_objects.sort(key=lambda f: f['slug'])
 
     return {
         'data': {
@@ -162,6 +163,7 @@ def national_summary_for_function(
             'amount': amount,
             'url': preview_url,
         })
+    national['data'].sort(key=lambda x: x['slug'])
     return national
 
 
@@ -212,6 +214,7 @@ def provincial_summary_for_function(financial_year, function, openspending_api, 
                 'url': preview_url,
                 'province': cell[geo_ref],
             })
+    provincial['data'].sort(key=lambda x: (x['province'], x['slug']))
     return provincial
 
 
