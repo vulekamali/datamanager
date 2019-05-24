@@ -24,13 +24,13 @@ requests.Session = Mock
 with open('budgetportal/tests/test_data/consolidated_treemap.json', 'r') as f:
     CONSOLIDATED_MOCK_DATA = json.load(f)
 
-with open('budgetportal/tests/test_data/test_year_focus_area_pages_provincial.json', 'r') as f:
+with open('budgetportal/tests/test_data/test_summaries_focus_area_pages_provincial.json', 'r') as f:
     FOCUS_AREA_PROVINCIAL_MOCK_DATA = json.load(f)
 
-with open('budgetportal/tests/test_data/test_year_focus_area_pages_national.json', 'r') as f:
+with open('budgetportal/tests/test_data/test_summaries_focus_area_pages_national.json', 'r') as f:
     FOCUS_AREA_NATIONAL_MOCK_DATA = json.load(f)
 
-with open('budgetportal/tests/test_data/test_year_focus_area_pages_national_subprogrammes.json', 'r') as f:
+with open('budgetportal/tests/test_data/test_summaries_focus_area_pages_national_subprogrammes.json', 'r') as f:
     FOCUS_AREA_NATIONAL_SUBPROGRAMMES_MOCK_DATA = json.load(f)
 
 with open('budgetportal/tests/test_data/test_national_department_preview.json', 'r') as f:
@@ -127,7 +127,7 @@ class FocusAreaPagesTestCase(TestCase):
                 cells = FOCUS_AREA_PROVINCIAL_MOCK_DATA
             elif sphere == "national":
                 cells = FOCUS_AREA_NATIONAL_MOCK_DATA
-            return {'cells': cells}, self.mock_openspending_api
+            return cells, self.mock_openspending_api
 
         self.mock_get_focus_area_data = mock_get_focus_area_data
 
