@@ -16,12 +16,17 @@ We're moving towards the following code structure:
       | +-----------+
       | | summaries |
       | +-----------+
-      |    |      |
-      |    |      +----+
-      V    V           V
-    +--------+    +----------+
-    | models |    | datasets |
-    +--------+    +----------+
+      |    |   |   |
+      |    |   |   |
+      V    V   |   V
+    +--------+ |  +----------+          +------+
+    | models | |  | datasets |---HTTP-->| CKAN |
+    +--------+ |  +----------+          +------+
+               |
+               V
+          +--------------+          +--------------+
+          | openspending |---HTTP-->| OpenSpending |
+          +--------------+          +--------------+
 
 A lot of summary code has been implemented as part of models but should now
 start moving to summaries, and just call out to models and datasets as needed.
