@@ -1,11 +1,9 @@
-from django.conf import settings
 from django.test import TestCase
 from mock import patch
+from budgetportal.datasets import get_latest_cpi_resource
 
-from budgetportal.models import Dataset
 
-
-class TestDataset(TestCase):
+class TestGetLatestCPIResource(TestCase):
     def setUp(self):
         self.cpi_cpi_query = {
             'q': '',
@@ -33,7 +31,7 @@ class TestDataset(TestCase):
         with patch('budgetportal.models.ckan') as ckan_mock:
             ckan_mock.action.package_search.return_value = {
                 'results': results}
-            cpi_year, cpi_resource_id = Dataset.get_latest_cpi_resource()
+            cpi_year, cpi_resource_id = get_latest_cpi_resource()
             ckan_mock.action.package_search.assert_called_with(
                 **self.cpi_cpi_query)
             self.assertEqual('2020-21', cpi_year)
@@ -51,7 +49,7 @@ class TestDataset(TestCase):
         with patch('budgetportal.models.ckan') as ckan_mock:
             ckan_mock.action.package_search.return_value = {'results': results}
             with self.assertRaises(AssertionError):
-                cpi_year, cpi_resource_id = Dataset.get_latest_cpi_resource()
+                cpi_year, cpi_resource_id = get_latest_cpi_resource()
 
             ckan_mock.action.package_search.assert_called_with(
                 **self.cpi_cpi_query)
