@@ -10,7 +10,7 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from mock import Mock
+from mock import patch
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import os
@@ -56,11 +56,13 @@ class BulkUploadTestCase(StaticLiveServerTestCase):
 
         self.path = os.path.dirname(__file__)
 
-        # Mock CKAN API
-        settings.CKAN.action = Mock()
-        settings.CKAN.action.package_search.return_value = {'results': []}
-        settings.CKAN.action.package_show.side_effect = NotFound()
-        settings.CKAN.action.group_show.side_effect = NotFound()
+        # Patch CKAN API
+        self.ckan_patch = patch('budgetportal.models.ckan')
+        self.CKANMockClass = self.ckan_patch.start()
+        self.CKANMockClass.action.package_search.return_value = {'results': []}
+        self.CKANMockClass.action.package_show.side_effect = NotFound()
+        self.CKANMockClass.action.group_show.side_effect = NotFound()
+        self.addCleanup(self.ckan_patch.stop)
 
         super(BulkUploadTestCase, self).setUp()
 

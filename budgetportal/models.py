@@ -40,11 +40,6 @@ REVENUE_RESOURCE_IDS = {
     '2015-16': 'c484cd2b-da4e-4e71-aca8-f23989d0f3e0',
 }
 
-CPI_RESOURCE_IDS = {
-    '2018-19': '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d',
-    '2019-20': '0c173948-9674-4ca9-aec6-f144bde5cc1e'
-}
-
 prov_abbrev = {
     'Eastern Cape': 'EC',
     'Free State': 'FS',
@@ -740,7 +735,8 @@ class Department(models.Model):
         }
 
     def get_expenditure_over_time(self):
-        base_year = get_base_year()
+        cpi_year_slug, cpi_resource_id = Dataset.get_latest_cpi_resource()
+        base_year = get_base_year(cpi_year_slug)
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 4, financial_year_start_int + 3)]
@@ -1303,7 +1299,8 @@ class Department(models.Model):
 
 
     def get_expenditure_time_series_summary(self):
-        base_year = get_base_year()
+        cpi_year_slug, cpi_resource_id = Dataset.get_latest_cpi_resource()
+        base_year = get_base_year(cpi_year_slug)
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [str(y) for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)]
@@ -1812,6 +1809,48 @@ class InfrastructureProject:
         return complete_expenditure
 
 
+    @staticmethod
+    def get_latest_cpi_resource():
+        """
+        Find the latest CPI dataset that was uploaded and return its financial
+        year and the id of the CSV resource.
+
+        :returns: latest financial year, resource id
+        """
+        # Get all the datasets in CPI data group /group/cpi-inflation
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"cpi-inflation"',
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        assert response['results']
+
+        results = response['results']
+
+        def get_financial_year_and_resources(dataset):
+            assert 'financial_year' in dataset and len(dataset['financial_year']) == 1
+
+            return {
+                'financial_year': dataset['financial_year'][0],
+                'resources': dataset['resources'],
+            }
+
+        # Get the dataset with the latest financial_year
+        latest_dataset = max(map(get_financial_year_and_resources, results),
+            key=lambda x: x['financial_year'])
+
+        # Get the only resource with the CSV format
+        resources = filter(lambda x: x.get('format', None) == 'CSV',
+            latest_dataset['resources'])
+
+        assert len(resources) == 1 and 'id' in resources[0]
+
+        return latest_dataset['financial_year'], resources[0]['id']
+
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
 # -or-has-a-sp
 def none_selected_query(vocab_name):
@@ -1830,19 +1869,17 @@ def resource_name(department):
     return "Vote %d - %s" % (department.vote_number, department.name)
 
 
-def get_base_year():
-    cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
+def get_base_year(cpi_year_slug):
     return int(cpi_year_slug[:4]) - 1
 
-
 def get_cpi():
-    cpi_year_slug = max(CPI_RESOURCE_IDS.keys())
-    base_year = get_base_year()
+    cpi_year_slug, cpi_resource_id = Dataset.get_latest_cpi_resource()
+    base_year = get_base_year(cpi_year_slug)
 
     sql = '''
     SELECT "Year", "CPI" FROM "{}"
     ORDER BY "Year"
-    '''.format(CPI_RESOURCE_IDS[cpi_year_slug])
+    '''.format(cpi_resource_id)
     params = {
         'sql': sql
     }
