@@ -11,12 +11,15 @@ from budgetportal.models import (
 )
 from budgetportal import models
 from django.test import TestCase
-from mock import Mock
+from mock import Mock, patch
 import json
 import mock_data
 
 # Hacky make sure we don't call out to openspending.
 import requests
+
+requests.get = Mock
+requests.Session = Mock
 
 
 with open('budgetportal/tests/test_data/budget_and_actual.json', 'r') as f:
@@ -210,6 +213,10 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         self.mock_openspending_api.aggregate_url = Mock
         self.mock_dataset = Mock()
         self.mock_dataset.get_openspending_api = Mock(return_value=self.mock_openspending_api)
+
+        dataset_patch = patch('budgetportal.datasets.Dataset.get_latest_cpi_resource', return_value=('2018-19', '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d'))
+        dataset_patch.start()
+        self.addCleanup(dataset_patch.stop)
 
     @mock.patch('budgetportal.models.get_expenditure_time_series_dataset')
     def test_no_cells_null_response(self, mock_get_dataset):

@@ -23,8 +23,8 @@ PASSWORD = '12345'
 # Hacky make sure we don't call out to openspending.
 import requests
 
-# requests.get = Mock
-# requests.Session = Mock
+requests.get = Mock
+requests.Session = Mock
 
 
 

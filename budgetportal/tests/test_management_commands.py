@@ -15,6 +15,8 @@ from mock import Mock
 # Hacky make sure we don't call out to openspending.
 import requests
 
+requests.get = Mock
+requests.Session = Mock
 
 
 class BasicPagesTestCase(TestCase):

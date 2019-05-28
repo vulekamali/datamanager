@@ -12,6 +12,9 @@ import yaml
 # Hacky make sure we don't call out to openspending.
 import requests
 
+requests.get = Mock
+requests.Session = Mock
+
 
 
 class BasicPagesTestCase(TestCase):
@@ -37,6 +40,11 @@ class BasicPagesTestCase(TestCase):
                 intro=""
             )
         ckan_patch = patch('budgetportal.models.ckan')
+        CKANMockClass = ckan_patch.start()
+        CKANMockClass.action.package_search.return_value = {'results': []}
+        self.addCleanup(ckan_patch.stop)
+
+        ckan_patch = patch('budgetportal.datasets.ckan')
         CKANMockClass = ckan_patch.start()
         CKANMockClass.action.package_search.return_value = {'results': []}
         self.addCleanup(ckan_patch.stop)
