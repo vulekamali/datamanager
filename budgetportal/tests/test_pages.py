@@ -6,13 +6,12 @@ from budgetportal.models import (
 )
 from django.conf import settings
 from django.test import TestCase, Client
-from mock import patch
+from mock import patch, Mock
 import yaml
 
 # Hacky make sure we don't call out to openspending.
 import requests
-requests.get = Mock
-requests.Session = Mock
+
 
 
 class BasicPagesTestCase(TestCase):
@@ -42,7 +41,7 @@ class BasicPagesTestCase(TestCase):
         CKANMockClass.action.package_search.return_value = {'results': []}
         self.addCleanup(ckan_patch.stop)
 
-        dataset_patch = patch('budgetportal.models.Dataset.get_latest_cpi_resource', return_value=('2018-19', '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d'))
+        dataset_patch = patch('budgetportal.datasets.Dataset.get_latest_cpi_resource', return_value=('2018-19', '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d'))
         dataset_patch.start()
         self.addCleanup(dataset_patch.stop)
 

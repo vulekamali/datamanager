@@ -17,8 +17,7 @@ import mock_data
 
 # Hacky make sure we don't call out to openspending.
 import requests
-requests.get = Mock
-requests.Session = Mock
+
 
 with open('budgetportal/tests/test_data/budget_and_actual.json', 'r') as f:
     DEPARTMENT_MOCK_DATA = json.load(f)

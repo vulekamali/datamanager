@@ -2,7 +2,7 @@ from django.conf import settings
 from django.test import TestCase
 from mock import patch
 
-from budgetportal.models import Dataset
+from budgetportal.datasets import Dataset
 
 
 class TestDataset(TestCase):
@@ -30,7 +30,7 @@ class TestDataset(TestCase):
                     {'format': u'CSV', 'id': u'5b315ff0-55e9-4ba8-b88c-2d70093bfe9d'}
                 ]}
         ]
-        with patch('budgetportal.models.ckan') as ckan_mock:
+        with patch('budgetportal.datasets.ckan') as ckan_mock:
             ckan_mock.action.package_search.return_value = {
                 'results': results}
             cpi_year, cpi_resource_id = Dataset.get_latest_cpi_resource()
@@ -48,7 +48,7 @@ class TestDataset(TestCase):
                                'id': u'0c173948-9674-4ca9-aec6-f144bde5cc1e'}]},
         ]
 
-        with patch('budgetportal.models.ckan') as ckan_mock:
+        with patch('budgetportal.datasets.ckan') as ckan_mock:
             ckan_mock.action.package_search.return_value = {'results': results}
             with self.assertRaises(AssertionError):
                 cpi_year, cpi_resource_id = Dataset.get_latest_cpi_resource()
