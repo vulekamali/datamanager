@@ -210,7 +210,7 @@ class Dataset():
     def get_latest_cpi_resource():
         """
         Find the latest CPI dataset that was uploaded and return its financial
-        year and the id of the CSV resource.
+        year and the id of its CSV resource.
 
         :returns: latest financial year, resource id
         """
