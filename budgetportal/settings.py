@@ -44,11 +44,11 @@ INSTALLED_APPS = (
     'budgetportal',
     'allauth_facebook',
 
+    'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'adminplus',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
