@@ -6,24 +6,22 @@ from budgetportal.models import (
 )
 from allauth.account.models import EmailAddress
 from ckanapi import NotFound
-from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from mock import Mock
-from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.ui import Select
 import os
-import sys
+
+from budgetportal.tests.helpers import BaseSeleniumTestCase
 
 USERNAME = 'testuser'
 EMAIL = 'testuser@domain.com'
 PASSWORD = '12345'
 
 
-class AdminDepartmentUploadTest(StaticLiveServerTestCase):
+class AdminDepartmentUploadTest(BaseSeleniumTestCase):
     def setUp(self):
         year = FinancialYear.objects.create(slug="2030-31")
         # spheres
@@ -51,20 +49,9 @@ class AdminDepartmentUploadTest(StaticLiveServerTestCase):
             verified=True,
         )
 
-        self.selenium = webdriver.PhantomJS()
-
         self.path = os.path.dirname(__file__)
 
         super(AdminDepartmentUploadTest, self).setUp()
-
-    def tearDown(self):
-        self.selenium.quit()
-
-        # https://stackoverflow.com/questions/14991244/how-do-i-capture-a-screenshot-if-my-nosetests-fail
-        if sys.exc_info()[0]:  # Returns the info of exception being handled
-            now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S-%f')
-            self.selenium.get_screenshot_as_file('%s.png' % now)
-            super(AdminDepartmentUploadTest, self).tearDown()
 
     def test_upload_csv_for_national_sphere(self):
         filename = 'budgetportal/tests/test_data/test_management_commands_national_departments.csv'
