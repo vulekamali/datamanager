@@ -18,12 +18,12 @@ from django.contrib.sites.models import Site
 from django.db.utils import ProgrammingError
 from django.contrib import messages
 from import_export.admin import ImportMixin
+from import_export.formats.base_formats import CSV
 import logging
 
 from .import_export_admin import (
     DepartmentResource,
     DepartmentImportForm,
-    CustomCSV
 )
 
 
@@ -50,7 +50,7 @@ class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
     # Resource class to be used by the django-import-export package
     resource_class = DepartmentResource
     # File formats that can be used to import departments
-    formats = ( CustomCSV, )
+    formats = [CSV]
 
     def get_import_form(self):
         """
