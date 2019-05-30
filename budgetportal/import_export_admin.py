@@ -74,13 +74,13 @@ class DepartmentInstanceLoader(ModelInstanceLoader):
         instance = None
 
         try:
-            instance = Department.objects.all().get(name=name, government=government)
+            instance = Department.objects.get(name=name, government=government)
         except Department.DoesNotExist:
             pass
 
         if not instance:
             try:
-                instance = Department.objects.all().get(slug=slug, government=government)
+                instance = Department.objects.get(slug=slug, government=government)
             except Department.DoesNotExist:
                 pass
 
@@ -89,7 +89,7 @@ class DepartmentInstanceLoader(ModelInstanceLoader):
         vote_number = self.resource.fields['vote_number'].clean(row)
         if is_vote_primary:
             try:
-                instance = Department.objects.all().get(
+                instance = Department.objects.get(
                     vote_number=vote_number, government=government)
             except Department.DoesNotExist:
                 pass
