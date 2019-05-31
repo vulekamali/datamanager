@@ -1,6 +1,7 @@
 from budgetportal.models import Department, Government, Sphere
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db.models import Q
 from django.utils.text import slugify
 from import_export import resources
 from import_export.admin import ImportForm
@@ -73,26 +74,20 @@ class DepartmentInstanceLoader(ModelInstanceLoader):
 
         instance = None
 
-        try:
-            instance = Department.objects.get(name=name, government=government)
-        except Department.DoesNotExist:
-            pass
-
-        if not instance:
-            try:
-                instance = Department.objects.get(slug=slug, government=government)
-            except Department.DoesNotExist:
-                pass
+        q = Q(name=name, government=government)
+        q |= Q(slug=slug, government=government)
 
         # If is_vote_primary, then (government, vote_number) must be unique
         is_vote_primary = self.resource.fields['is_vote_primary'].clean(row)
         vote_number = self.resource.fields['vote_number'].clean(row)
+
         if is_vote_primary:
-            try:
-                instance = Department.objects.get(
-                    vote_number=vote_number, government=government)
-            except Department.DoesNotExist:
-                pass
+            q |= Q(vote_number=vote_number, government=government)
+
+        try:
+            instance = Department.objects.get(q)
+        except Department.DoesNotExist:
+            pass
 
         if instance:
             return instance
