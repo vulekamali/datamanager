@@ -206,6 +206,49 @@ class Dataset():
         return self._openspending_api
 
 
+    @staticmethod
+    def get_latest_cpi_resource():
+        """
+        Find the latest CPI dataset that was uploaded and return its financial
+        year and the id of its CSV resource.
+
+        :returns: latest financial year, resource id
+        """
+        # Get all the datasets in CPI data group /group/cpi-inflation
+        query = {
+            'q': '',
+            'fq': ''.join([
+                '+organization:"national-treasury"',
+                '+groups:"cpi-inflation"',
+            ]),
+            'rows': 1000,
+        }
+        response = ckan.action.package_search(**query)
+        assert response['results']
+
+        results = response['results']
+
+        def get_financial_year_and_resources(dataset):
+            assert 'financial_year' in dataset and len(dataset['financial_year']) == 1
+
+            return {
+                'financial_year': dataset['financial_year'][0],
+                'resources': dataset['resources'],
+            }
+
+        # Get the dataset with the latest financial_year
+        latest_dataset = max(map(get_financial_year_and_resources, results),
+            key=lambda x: x['financial_year'])
+
+        # Get the only resource with the CSV format
+        resources = filter(lambda x: x.get('format', None) == 'CSV',
+            latest_dataset['resources'])
+
+        assert len(resources) == 1 and 'id' in resources[0]
+
+        return latest_dataset['financial_year'], resources[0]['id']
+
+
 class Category():
     excluded_groups = {
         'budget-vote-documents',

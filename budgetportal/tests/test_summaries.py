@@ -17,6 +17,7 @@ from budgetportal.openspending import BabbageFiscalDataset
 
 # Hacky make sure we don't call out to openspending.
 import requests
+
 requests.get = Mock
 requests.Session = Mock
 
