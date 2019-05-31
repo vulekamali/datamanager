@@ -85,12 +85,9 @@ class DepartmentInstanceLoader(ModelInstanceLoader):
             q |= Q(vote_number=vote_number, government=government)
 
         try:
-            instance = Department.objects.get(q)
+            return Department.objects.get(q)
         except Department.DoesNotExist:
             pass
-
-        if instance:
-            return instance
 
         return None
 
