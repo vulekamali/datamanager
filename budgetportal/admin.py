@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.core.exceptions import ValidationError
+from django.utils.text import slugify
 
 from budgetportal.models import (
     Department,
@@ -15,7 +17,14 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db.utils import ProgrammingError
 from django.contrib import messages
+from import_export.admin import ImportMixin
+from import_export.formats.base_formats import CSV
 import logging
+
+from .import_export_admin import (
+    DepartmentResource,
+    DepartmentImportForm,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -37,8 +46,28 @@ class GovernmentAdmin(admin.ModelAdmin):
 class GovtFunctionAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
 
+class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
+    # Resource class to be used by the django-import-export package
+    resource_class = DepartmentResource
+    # File formats that can be used to import departments
+    formats = [CSV]
 
-class DepartmentAdmin(admin.ModelAdmin):
+    def get_import_form(self):
+        """
+        Get the import form to use by the django-import-export package
+        to import departments.
+        """
+        return DepartmentImportForm
+
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        """
+        Get the kwargs to send on to the department resource when
+        we import departments.
+        """
+        if u'sphere' in request.POST:
+            return {'sphere': request.POST[u'sphere']}
+        return {}
+
     list_display = (
         'vote_number',
         'name',

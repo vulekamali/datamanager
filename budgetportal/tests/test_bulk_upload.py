@@ -6,7 +6,6 @@ from budgetportal.models import (
 )
 from allauth.account.models import EmailAddress
 from ckanapi import NotFound
-from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -14,7 +13,8 @@ from mock import patch, Mock
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import os
-import sys
+
+from budgetportal.tests.helpers import BaseSeleniumTestCase
 
 USERNAME = 'testuser'
 EMAIL = 'testuser@domain.com'
@@ -28,7 +28,7 @@ requests.Session = Mock
 
 
 
-class BulkUploadTestCase(StaticLiveServerTestCase):
+class BulkUploadTestCase(BaseSeleniumTestCase):
     def setUp(self):
         year = FinancialYear.objects.create(slug="2030-31")
         Sphere.objects.create(financial_year=year, name='Provincial')
@@ -54,8 +54,6 @@ class BulkUploadTestCase(StaticLiveServerTestCase):
             verified=True,
         )
 
-        self.selenium = webdriver.PhantomJS()
-
         self.path = os.path.dirname(__file__)
 
         # Patch CKAN API
@@ -74,16 +72,6 @@ class BulkUploadTestCase(StaticLiveServerTestCase):
         self.addCleanup(self.ckan_patch2.stop)
 
         super(BulkUploadTestCase, self).setUp()
-
-
-    def tearDown(self):
-        self.selenium.quit()
-
-        # https://stackoverflow.com/questions/14991244/how-do-i-capture-a-screenshot-if-my-nosetests-fail
-        if sys.exc_info()[0]:  # Returns the info of exception being handled
-            now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S-%f')
-            self.selenium.get_screenshot_as_file('%s.png' % now)
-            super(BulkUploadTestCase, self).tearDown()
 
     def test_bulk_upload(self):
         selenium = self.selenium
