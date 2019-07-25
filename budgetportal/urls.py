@@ -1,6 +1,6 @@
 from adminplus.sites import AdminSitePlus
 
-from budgetportal.views import openspending_csv
+from budgetportal.views import openspending_csv, about
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
@@ -108,6 +108,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
+    #about us
+    url(r'^about/$', about, name="about")
 ]
 
 if settings.DEBUG:

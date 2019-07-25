@@ -1,0 +1,34 @@
+.Message {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 1.5rem;
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  fill: #155724;
+
+  &--secondary {
+    color: #383d41;
+    background-color: #e2e3e5;
+    border-color: #d6d8db;
+    fill: #383d41;
+  }
+}
+
+.Message-heading {
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 1rem;
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.Message-content {
+  display: flex;
+}
+
+.Message-text {
+  line-height: 1.45;
+  font-size: 14px;
+  flex-grow: 1;
+}

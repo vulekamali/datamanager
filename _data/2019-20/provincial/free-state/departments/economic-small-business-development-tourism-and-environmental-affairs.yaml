@@ -1,0 +1,299 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual: null
+budget_actual_programmes: null
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Free State EPRE 2019-20 - Vote 03 - Economic, Small Business Development,
+      Tourism and Environmental Affairs
+    url: https://data.vulekamali.gov.za/dataset/195a68a7-47bd-47d2-9ff7-5b60af976de5/resource/a99e662e-71e4-422f-90d3-d34d4524efb4/download/fs-vote-03-eco-dev.-small-bus.-dev.-tourism-env.-affairs.pdf
+  name: Free State EPRE 2019-20 - Vote 03 - Economic, Small Business Development,
+    Tourism and Environmental Affairs
+  tables: null
+description: 'Free State department: Economic, Small Business Development, Tourism
+  and Environmental Affairs budget data for the 2019-20 financial year from National
+  Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Free%2BState%2522%257Cvotenumber.department%253A%2522Economic%252C%2BSmall%2BBusiness%2BDevelopment%252C%2BTourism%2Band%2BEnvironmental%2BAffairs%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 2069000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 156905000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 54000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 167291000
+        type: economic_classification_2
+      - name: Current payments
+        total_budget: 87552000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Economic And Small Business Development
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 14977000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 191689000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 300000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Environmental Affairs
+    type: programme
+  - items:
+    - items:
+      - name: Current payments
+        total_budget: 10088000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Tourism
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 463414000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 463076000
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 488926000
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 580734000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 630925000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 661348000
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 684981000
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+    real:
+    - amount: 541146437
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 508726682
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 512942984
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 580734000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 599977474
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 596242021
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 585750940
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: false
+    url_path: /2016-17/provincial/free-state
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2017-18/provincial/free-state
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2018-19/provincial/free-state
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/free-state/departments/economic-small-business-development-tourism-and-environmental-affairs
+  id: 2019-20
+  is_selected: true
+government:
+  name: Free State
+  slug: free-state
+government_functions: []
+intro: '# Vision'
+is_vote_primary: true
+name: Economic, Small Business Development, Tourism and Environmental Affairs
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Free%2BState%2522%257Cvotenumber.department%253A%2522Economic%252C%2BSmall%2BBusiness%2BDevelopment%252C%2BTourism%2Band%2BEnvironmental%2BAffairs%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Environmental Affairs
+      total_budget: 14977000
+      type: programme
+    - name: Administration
+      total_budget: 2069000
+      type: programme
+    name: Capital - Payments for capital assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Environmental Affairs
+      total_budget: 191689000
+      type: programme
+    - name: Administration
+      total_budget: 156905000
+      type: programme
+    - name: Economic And Small Business Development
+      total_budget: 87552000
+      type: programme
+    - name: Tourism
+      total_budget: 10088000
+      type: programme
+    name: Current - Current payments
+    type: economic_classification_1_and_2
+  - items:
+    - name: Economic And Small Business Development
+      total_budget: 167291000
+      type: programme
+    - name: Environmental Affairs
+      total_budget: 300000
+      type: programme
+    - name: Administration
+      total_budget: 54000
+      type: programme
+    name: Current - Transfers and subsidies
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Free%2BState%2522%257Cvotenumber.department%253A%2522Economic%252C%2BSmall%2BBusiness%2BDevelopment%252C%2BTourism%2Band%2BEnvironmental%2BAffairs%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 159028000
+  - name: Environmental Affairs
+    total_budget: 206966000
+  - name: Economic And Small Business Development
+    total_budget: 254843000
+  - name: Tourism
+    total_budget: 10088000
+selected_financial_year: 2019-20
+selected_tab: departments
+slug: economic-small-business-development-tourism-and-environmental-affairs
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Free%2BState%2522%257Cvotenumber.department%253A%2522Economic%252C%2BSmall%2BBusiness%2BDevelopment%252C%2BTourism%2Band%2BEnvironmental%2BAffairs%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Financial Management
+      total_budget: 60438000
+      type: subprogramme
+    - name: Management Services
+      total_budget: 44427000
+      type: subprogramme
+    - name: Corporate Services
+      total_budget: 41885000
+      type: subprogramme
+    - name: Office Of The Mec
+      total_budget: 12278000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Economic Planning
+      total_budget: 130371000
+      type: subprogramme
+    - name: Integrated Economic Development Services
+      total_budget: 69334000
+      type: subprogramme
+    - name: Small Business Development
+      total_budget: 55138000
+      type: subprogramme
+    name: Economic And Small Business Development
+    type: programme
+  - items:
+    - name: Biodiversity Management
+      total_budget: 139290000
+      type: subprogramme
+    - name: Environmental Quality Managemnt
+      total_budget: 35711000
+      type: subprogramme
+    - name: Compliance And Enforcement
+      total_budget: 18771000
+      type: subprogramme
+    - name: Environmental Empowerment Services
+      total_budget: 10551000
+      type: subprogramme
+    - name: Environmental Policy, Planning And Coordination
+      total_budget: 2643000
+      type: subprogramme
+    name: Environmental Affairs
+    type: programme
+  - items:
+    - name: Tourism Planning
+      total_budget: 4097000
+      type: subprogramme
+    - name: Tourism Growth And Development
+      total_budget: 4029000
+      type: subprogramme
+    - name: Tourism Sector Transformation
+      total_budget: 1962000
+      type: subprogramme
+    name: Tourism
+    type: programme
+title: Economic, Small Business Development, Tourism and Environmental Affairs budget
+  2019-20  - vulekamali
+vote_number: 3
+vote_primary:
+  name: Economic, Small Business Development, Tourism and Environmental Affairs
+  slug: economic-small-business-development-tourism-and-environmental-affairs
+  url_path: /2019-20/provincial/free-state/departments/economic-small-business-development-tourism-and-environmental-affairs
+website_url: null

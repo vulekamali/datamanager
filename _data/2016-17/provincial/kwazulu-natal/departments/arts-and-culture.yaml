@@ -1,0 +1,774 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 783914000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 786472000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    real:
+    - amount: 915406674
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 864003515
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2013 and 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 113504000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 134546000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: 1. Administration
+  - items:
+    - amount: 198740000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Cultural Affairs
+  - items:
+    - amount: 205351000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: 2. Cultural Affairs
+  - items:
+    - amount: 446575000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: 3. Library and Archive Services
+  - items:
+    - amount: 471670000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Library and Archive Services
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "KwaZulu-Natal AEPRE 2016-17 \u2013 Vote 15 - Arts and Culture"
+    url: https://data.vulekamali.gov.za/dataset/77be75cb-b9ab-402a-9abe-b92f8e5a9bbd/resource/f53d7d49-1a37-4bcd-a92a-871509f1b52b/download/kzn-vote-15-arts-and-culture.pdf
+  name: "KwaZulu-Natal AEPRE 2016-17 \u2013 Vote 15 - Arts and Culture"
+  tables:
+    description: ''
+    format: XLSX
+    name: "KwaZulu-Natal AEPRE 2016-17 \u2013 Vote 15 - Arts and Culture"
+    url: https://data.vulekamali.gov.za/dataset/77be75cb-b9ab-402a-9abe-b92f8e5a9bbd/resource/4f93ea91-d8f2-4084-b336-c8bac005bfbd/download/kzn-arts-and-culture.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 15 : Arts and Culture'
+    url: https://data.vulekamali.gov.za/dataset/36fdb6da-7584-4685-bc0b-051aed3382bd/resource/517d5acf-7683-44e3-b732-4455ab59078a/download/kzn-vote-15-arts-and-culture.pdf
+  name: 'KwaZulu-Natal Department: Arts and Culture 2016-17'
+  tables: null
+description: 'KwaZulu-Natal department: Arts and Culture budget data for the 2016-17
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Arts%2Band%2BCulture%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 69665000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 58971000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 680000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: ''
+        total_budget: 3830000
+        type: economic_classification_2
+      name: Payments for financial assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 800000
+        type: economic_classification_2
+      - name: Public corporations and private enterprises
+        total_budget: 250000
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 220000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 130000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 1. Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 69504000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 59949000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 13000000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 1509000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 33104000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 12709000
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 8176000
+        type: economic_classification_2
+      - name: Public corporations and private enterprises
+        total_budget: 7400000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 2. Cultural Affairs
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 77536000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 74872000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 69000000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 3958000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 217880000
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 3329000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 3. Library and Archive Services
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 479744000
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 698686000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 710027000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 808770000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 786472000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 857179000
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 870986000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    real:
+    - amount: 658507291
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 906311793
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 871966217
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 944431986
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 864003515
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 899285278
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 870986000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/kwazulu-natal/departments/arts-and-culture
+  id: 2016-17
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/kwazulu-natal/departments/arts-and-culture
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/kwazulu-natal/departments/arts-and-culture
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/kwazulu-natal/departments/arts-and-culture
+  id: 2019-20
+  is_selected: false
+government:
+  name: KwaZulu-Natal
+  slug: kwazulu-natal
+government_functions: []
+intro: "## Vision\n\nThe vision of the department is: Prosperity and social cohesion\
+  \ through arts and culture.\r\n\r\n\n\n## Mission statement\n\nThe department\u2019\
+  s mission is to Provide world class services in arts and culture for the people\
+  \ of KwaZulu-Natal by:\r\n\r\n* Developing and promoting arts and culture in the\
+  \ province and mainstreaming its role in socio-economic development.\r\n\r\n* Supporting\
+  \ interventions to develop arts and culture capacity in the province.\r\n\r\n* Implementing\
+  \ social cohesion and moral regeneration programmes that contribute to the transformation\
+  \ of society and nation building.\r\n\r\n* Developing and promoting previously marginalised\
+  \ languages and enhancing the linguistic diversity of the province.\r\n\r\n* Collecting,\
+  \ preserving and providing archival, museum, library and other forms of information\
+  \ resources.\r\n\r\n\r\n\n\n## Core functions\n\nThe core functions of the department\
+  \ encompass the development and promotion of arts, culture,\r\nmuseum, archive and\
+  \ library services"
+is_vote_primary: true
+name: Arts and Culture
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Arts%2Band%2BCulture%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: 3. Library and Archive Services
+      total_budget: 74872000
+      type: programme
+    - name: 1. Administration
+      total_budget: 69665000
+      type: programme
+    - name: 2. Cultural Affairs
+      total_budget: 69504000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Library and Archive Services
+      total_budget: 77536000
+      type: programme
+    - name: 2. Cultural Affairs
+      total_budget: 59949000
+      type: programme
+    - name: 1. Administration
+      total_budget: 58971000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Library and Archive Services
+      total_budget: 69000000
+      type: programme
+    - name: 2. Cultural Affairs
+      total_budget: 13000000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Library and Archive Services
+      total_budget: 3958000
+      type: programme
+    - name: 2. Cultural Affairs
+      total_budget: 1509000
+      type: programme
+    - name: 1. Administration
+      total_budget: 680000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: 1. Administration
+      total_budget: 3830000
+      type: programme
+    name: 'Payments for financial assets - '
+    type: economic_classification_1_and_2
+  - items:
+    - name: 2. Cultural Affairs
+      total_budget: 8176000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: 1. Administration
+      total_budget: 800000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: 2. Cultural Affairs
+      total_budget: 33104000
+      type: programme
+    - name: 3. Library and Archive Services
+      total_budget: 3329000
+      type: programme
+    - name: 1. Administration
+      total_budget: 220000
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Library and Archive Services
+      total_budget: 217880000
+      type: programme
+    - name: 2. Cultural Affairs
+      total_budget: 12709000
+      type: programme
+    - name: 1. Administration
+      total_budget: 130000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+  - items:
+    - name: 2. Cultural Affairs
+      total_budget: 7400000
+      type: programme
+    - name: 1. Administration
+      total_budget: 250000
+      type: programme
+    name: Transfers and subsidies - Public corporations and private enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Arts%2Band%2BCulture%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: 1. Administration
+    total_budget: 134546000
+  - name: 2. Cultural Affairs
+    total_budget: 205351000
+  - name: 3. Library and Archive Services
+    total_budget: 446575000
+selected_financial_year: 2016-17
+selected_tab: departments
+slug: arts-and-culture
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2016-17-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Arts%2Band%2BCulture%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Arts and Culture budget 2016-17  - vulekamali
+vote_number: 15
+vote_primary:
+  name: Arts and Culture
+  slug: arts-and-culture
+  url_path: /2016-17/provincial/kwazulu-natal/departments/arts-and-culture
+website_url: null

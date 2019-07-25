@@ -1,0 +1,62 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+author:
+  email: ''
+  name: ''
+category:
+  description: Contibuted data and documentation for South African government budgets.
+    Hosted by National Treasury in partnership with IMALI YETHU.
+  name: Contributed data and analysis
+  slug: contributed
+  url_path: /datasets/contributed
+created: '2018-10-04T14:20:07.906242'
+description: Data and/or documentation related to South African government budgets
+  contributed by World Bank and hosted by National Treasury in partnership with IMALI
+  YETHU
+importance: null
+intro: The World Bank Open Data site provides an entry-point into the World Bank's
+  Data Bank. It includes demographic, developmental, time-series and geospatial data
+  from the Data Bank's data catalogue.
+intro_short: Demographic, time-series, survey and geospatial data
+key_points: "- Time series\r\n- Compare multiple countries, regions\r\n- Browse by\
+  \ indicator e.g. under categories such as\r\n  - Agriculture and rural development\r\
+  \n  - Aid effectiveness\r\n  - Economy and growth\r\n  - Education\r\n  - Energy\
+  \ and mining\r\n  - Gender\r\n- Search topics"
+last_updated: '2018-10-04T14:22:09.907107'
+license:
+  name: License not specified
+  url: null
+methodology: ''
+name: World Bank Open Data
+organization:
+  email: null
+  facebook: null
+  logo_url: ''
+  name: World Bank
+  slug: world-bank
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: ''
+  name: World Bank Open Data
+  url: https://data.worldbank.org/
+- description: ''
+  format: PNG
+  name: 'Screenshot: Search for an indicator'
+  url: https://data.vulekamali.gov.za/dataset/aa7bae20-e24d-4f67-b68d-119c9aae7580/resource/17b1f9fc-23f1-48ff-834e-6c4a7f65ff30/download/9z6ii19.png
+- description: ''
+  format: PNG
+  name: 'Screenshot: View the indicator with selected series'
+  url: https://data.vulekamali.gov.za/dataset/aa7bae20-e24d-4f67-b68d-119c9aae7580/resource/dbfa854d-9178-4b59-99b3-26e2cc2b0368/download/8i8qdlw.png
+selected_tab: datasets
+slug: world-bank-open-data
+title: World Bank Open Data - vulekamali
+url_path: /datasets/contributed/world-bank-open-data
+usage: "1. Visit https://data.worldbank.org/\r\n2. Search or browse for a relevant\
+  \ topic\r\n3. Select an indicator of interest, e.g. \"Incidence of HIV (% of uninfected\
+  \ population ages 15-49)\"\r\n4. Select countries or regions to compare\r\n5. Select\
+  \ time range\r\n6. Download data as CSV or Excel"

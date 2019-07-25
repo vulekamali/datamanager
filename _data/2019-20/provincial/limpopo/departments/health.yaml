@@ -1,0 +1,1424 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 16371023000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 18042779000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 19511420000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    real:
+    - amount: 17984901458
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 18929074959
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 19511420000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2019 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 113758000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Health Care Support Services
+  - items:
+    - amount: 140445000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 141521000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: HEALTH CARE SUPPORT SERVICES
+  - items:
+    - amount: 281425000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 308533000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 306248000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: ADMINISTRATION
+  - items:
+    - amount: 571492000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Health Sciences And Training
+  - items:
+    - amount: 652172000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: HEALTH FACILITIES MANAGEMENT
+  - items:
+    - amount: 660478000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: HEALTH SCIENCES AND TRAINING
+  - items:
+    - amount: 671825000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Health Sciences and Training
+  - items:
+    - amount: 686647000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Emergency  Madical Services
+  - items:
+    - amount: 728878000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 735863000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: EMERGENCY  MADICAL SERVICES
+  - items:
+    - amount: 735668000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 729277000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Health Facilities Management
+  - items:
+    - amount: 1593372000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1838220000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Central Hospital Services
+  - items:
+    - amount: 1768187000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: CENTRAL HOSPITAL SERVICES
+  - items:
+    - amount: 2138443000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2537298000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Provincial Hospital Services
+  - items:
+    - amount: 2364444000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: PROVINCIAL HOSPITAL SERVICES
+  - items:
+    - amount: 10250218000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: District Health Services
+  - items:
+    - amount: 11421927000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 12548883000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: DISTRICT HEALTH SERVICES
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget: null
+description: 'Limpopo department: Health budget data for the 2019-20 financial year
+  from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Limpopo%2522%257Cvotenumber.department%253A%2522Health%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 397000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 323673000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 330000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 16299000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 1953111000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 724000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Central Hospital Services
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 64515000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 13389156000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 159120000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: District Health Services
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 29906000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 738231000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 651000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Emergency  Madical Services
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 2055000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 143715000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 251000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Health Care Support Services
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 279794000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 376406000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Health Facilities Management
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 1189000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 420141000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 214330000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Health Sciences And Training
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 2981000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 2659391000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 702000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Provincial Hospital Services
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 15432089000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 17217613000
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 18387177000
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 19701774000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 20777068000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 21997146000
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 23853727000
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+    real:
+    - amount: 18020646743
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 18914949491
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 19290390451
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 19701774000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 19757931275
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 19831651108
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 20398146861
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/limpopo/departments/health
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/limpopo/departments/health
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/limpopo/departments/health
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/limpopo/departments/health
+  id: 2019-20
+  is_selected: true
+government:
+  name: Limpopo
+  slug: limpopo
+government_functions: []
+intro: ''
+is_vote_primary: true
+name: Health
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Limpopo%2522%257Cvotenumber.department%253A%2522Health%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Health Facilities Management
+      total_budget: 279794000
+      type: programme
+    - name: District Health Services
+      total_budget: 64515000
+      type: programme
+    - name: Emergency  Madical Services
+      total_budget: 29906000
+      type: programme
+    - name: Central Hospital Services
+      total_budget: 16299000
+      type: programme
+    - name: Provincial Hospital Services
+      total_budget: 2981000
+      type: programme
+    - name: Health Care Support Services
+      total_budget: 2055000
+      type: programme
+    - name: Health Sciences And Training
+      total_budget: 1189000
+      type: programme
+    - name: Administration
+      total_budget: 397000
+      type: programme
+    name: Capital - Payments for capital assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: District Health Services
+      total_budget: 13389156000
+      type: programme
+    - name: Provincial Hospital Services
+      total_budget: 2659391000
+      type: programme
+    - name: Central Hospital Services
+      total_budget: 1953111000
+      type: programme
+    - name: Emergency  Madical Services
+      total_budget: 738231000
+      type: programme
+    - name: Health Sciences And Training
+      total_budget: 420141000
+      type: programme
+    - name: Health Facilities Management
+      total_budget: 376406000
+      type: programme
+    - name: Administration
+      total_budget: 323673000
+      type: programme
+    - name: Health Care Support Services
+      total_budget: 143715000
+      type: programme
+    name: Current - Current payments
+    type: economic_classification_1_and_2
+  - items:
+    - name: Health Sciences And Training
+      total_budget: 214330000
+      type: programme
+    - name: District Health Services
+      total_budget: 159120000
+      type: programme
+    - name: Central Hospital Services
+      total_budget: 724000
+      type: programme
+    - name: Provincial Hospital Services
+      total_budget: 702000
+      type: programme
+    - name: Emergency  Madical Services
+      total_budget: 651000
+      type: programme
+    - name: Administration
+      total_budget: 330000
+      type: programme
+    - name: Health Care Support Services
+      total_budget: 251000
+      type: programme
+    name: Current - Transfers and subsidies
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Limpopo%2522%257Cvotenumber.department%253A%2522Health%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 324400000
+  - name: District Health Services
+    total_budget: 13612791000
+  - name: Emergency  Madical Services
+    total_budget: 768788000
+  - name: Provincial Hospital Services
+    total_budget: 2663074000
+  - name: Central Hospital Services
+    total_budget: 1970134000
+  - name: Health Sciences And Training
+    total_budget: 635660000
+  - name: Health Care Support Services
+    total_budget: 146021000
+  - name: Health Facilities Management
+    total_budget: 656200000
+selected_financial_year: 2019-20
+selected_tab: departments
+slug: health
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Limpopo%2522%257Cvotenumber.department%253A%2522Health%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Management
+      total_budget: 322315000
+      type: subprogramme
+    - name: Off Of The Mec
+      total_budget: 2085000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Central Hospital
+      total_budget: 1970134000
+      type: subprogramme
+    name: Central Hospital Services
+    type: programme
+  - items:
+    - name: District Hospitals
+      total_budget: 7019559000
+      type: subprogramme
+    - name: Community Health Clinics
+      total_budget: 3107774000
+      type: subprogramme
+    - name: Hiv/Aids
+      total_budget: 1947302000
+      type: subprogramme
+    - name: District Management
+      total_budget: 612292000
+      type: subprogramme
+    - name: Community Health Centres
+      total_budget: 602762000
+      type: subprogramme
+    - name: Community Based Services
+      total_budget: 248377000
+      type: subprogramme
+    - name: Other Community Services
+      total_budget: 68308000
+      type: subprogramme
+    - name: Nutrition
+      total_budget: 6417000
+      type: subprogramme
+    name: District Health Services
+    type: programme
+  - items:
+    - name: Emergency Transport
+      total_budget: 768788000
+      type: subprogramme
+    name: Emergency  Madical Services
+    type: programme
+  - items:
+    - name: Medical Trading Account
+      total_budget: 96697000
+      type: subprogramme
+    - name: Forensic Parthology Services
+      total_budget: 41374000
+      type: subprogramme
+    - name: Orthotic & Prosthetic Services
+      total_budget: 7950000
+      type: subprogramme
+    name: Health Care Support Services
+    type: programme
+  - items:
+    - name: Community Health Facilities
+      total_budget: 489358000
+      type: subprogramme
+    - name: District Hospital Services
+      total_budget: 107289000
+      type: subprogramme
+    - name: Provincial Hospital Services
+      total_budget: 36585000
+      type: subprogramme
+    - name: Tertiary Hospital
+      total_budget: 21845000
+      type: subprogramme
+    - name: Other Facilities
+      total_budget: 1123000
+      type: subprogramme
+    name: Health Facilities Management
+    type: programme
+  - items:
+    - name: Nursing Tranning Colleges
+      total_budget: 240728000
+      type: subprogramme
+    - name: Bursaries
+      total_budget: 229788000
+      type: subprogramme
+    - name: Other Trainning
+      total_budget: 160772000
+      type: subprogramme
+    - name: 'Ems: Trainning Colleges'
+      total_budget: 4372000
+      type: subprogramme
+    name: Health Sciences And Training
+    type: programme
+  - items:
+    - name: General (Regional) Hospital
+      total_budget: 2086013000
+      type: subprogramme
+    - name: Psychatric/Mental Hospital
+      total_budget: 577061000
+      type: subprogramme
+    name: Provincial Hospital Services
+    type: programme
+title: Health budget 2019-20  - vulekamali
+vote_number: 16
+vote_primary:
+  name: Health
+  slug: health
+  url_path: /2019-20/provincial/limpopo/departments/health
+website_url: null

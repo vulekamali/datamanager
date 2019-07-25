@@ -1,0 +1,24 @@
+.NewIntro {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.67;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  padding: 15px 25px 26px;
+}
+
+.NewIntro-button {
+  color: #3f3f3f;
+  display: inline-block;
+  position: relative;
+  left: -6px;
+  top: -3px;
+  margin-top: 3px;
+  padding: 3px 6px 6px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: darken(white, 15%);
+  }
+}

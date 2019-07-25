@@ -1,0 +1,1102 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 47169745000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 47236465000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 47236465000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 47197094000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 48618790000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 48999560000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 48999560000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 48977232000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 47949743000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 48496235000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 50512992000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    real:
+    - amount: 51819804765
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 51893102116
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 51893102116
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 51849849867
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 51007038348
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 51406512502
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 51406512502
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 51383087707
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 47949743000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 48496235000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 48035277376
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 900248000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 900248000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 881289000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 881289000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 917277000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 917277000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 888000000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 888000000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 950364000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 950364000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 1020469000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Defence Intelligence
+  - items:
+    - amount: 3899635000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 3672635000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 3445535000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 3431011000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 3688564000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 3535399000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 3229122000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 3208059000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 3375584000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 3375584000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 3620718000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Force Employment
+  - items:
+    - amount: 4355880000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 4386815000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 4323232000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 4298385000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 4790003000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 4590003000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 4613939000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 4613939000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 4424685000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 4699355000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 4517878000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Maritime Defence
+  - items:
+    - amount: 4416816000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 4440671000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 4448745000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 4448745000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 4586699000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 4586699000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 4853116000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 4852916000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 4714062000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 4714062000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 5375266000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Military Health Support
+  - items:
+    - amount: 5151108000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 5347951000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 5740559000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 5740559000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 5380834000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 5469484000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 5506480000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 5505415000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 5548928000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 5653274000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 6187144000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 5911093000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 5924287000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 6056698000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 6056698000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 6077210000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 6362443000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 6463949000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 6463949000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 6285942000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 6181596000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 6349471000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: General Support
+  - items:
+    - amount: 6883527000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 6936583000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 6782585000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 6782585000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 6628007000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 6818498000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 6753411000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 6753411000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 6415901000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 6650779000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 6977747000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Air Defence
+  - items:
+    - amount: 15651438000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 15627275000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 15557822000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 15557822000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 16550196000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 16719757000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 16691543000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 16691543000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 16234277000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 16271221000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 16464299000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Landward Defence
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "ENE 2019-20 \u2013 Vote 19 - Defence and Military Veterans"
+    url: https://data.vulekamali.gov.za/dataset/f55ab2a5-ae95-4657-a626-220a6ce71a9b/resource/cc97c8dc-653b-4a60-9980-d16a4cfaa4c5/download/vote-19-defence-and-military-veterans.pdf
+  name: "ENE 2019-20 \u2013 Vote 19 - Defence and Military Veterans"
+  tables:
+    description: ''
+    format: XLSX
+    name: "ENE 2019-20 \u2013 Vote 19 - Defence and Military Veterans"
+    url: https://data.vulekamali.gov.za/dataset/f55ab2a5-ae95-4657-a626-220a6ce71a9b/resource/9a25117e-48e0-4252-80ff-5059dc8fad4b/download/ene19-vote19_chaptertables.xlsx
+description: 'National department: Defence and Military Veterans budget data for the
+  2019-20 financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Defence%2Band%2BMilitary%2BVeterans%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 22302000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 5441510000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 723332000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 26087000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 5657170000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 1294490000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Air Defence
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 4133000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 520865000
+        type: economic_classification_2
+      - name: Current payments
+        total_budget: 495471000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Defence Intelligence
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 36073000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 3323835000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 260810000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Force Employment
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 583301000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 4140557000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 1625613000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: General Support
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 32568000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 14486069000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 1945662000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Landward Defence
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 10708000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 3333110000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 1174060000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Maritime Defence
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 47606000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 5250141000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 77519000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Military Health Support
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 45071534000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 47197094000
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 48977232000
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 48496235000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 50512992000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 53825105000
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 52277513000
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+    real:
+    - amount: 52631772172
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 51849849867
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 51383087707
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 48496235000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 48035277376
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 48526327153
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 44704309215
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/defence-and-military-veterans
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/defence-and-military-veterans
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/defence-and-military-veterans
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/defence-and-military-veterans
+  id: 2019-20
+  is_selected: true
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose \n\nDefend and protect the Republic of South Africa, its territorial\
+  \ integrity and its people, in accordance with the Constitution and the principles\
+  \ of international law regulating the use of force. Provide for military veterans\u2019\
+  \ benefits.\n\n## Vote mandate\n\nThe Department of Defence derives its mandate\
+  \ from section 200 of the Constitution, the Defence Act (2002) as amended by the\
+  \ Defence Amendment Act (2010), the 1996 White Paper on Defence and the 2015 South\
+  \ African Defence Review. The department is required to provide, manage, prepare\
+  \ and employ defence capabilities that are commensurate with the needs of South\
+  \ Africa."
+is_vote_primary: true
+name: Defence and Military Veterans
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Defence%2Band%2BMilitary%2BVeterans%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: General Support
+      total_budget: 583301000
+      type: programme
+    - name: Military Health Support
+      total_budget: 47606000
+      type: programme
+    - name: Force Employment
+      total_budget: 36073000
+      type: programme
+    - name: Landward Defence
+      total_budget: 32568000
+      type: programme
+    - name: Air Defence
+      total_budget: 26087000
+      type: programme
+    - name: Administration
+      total_budget: 22302000
+      type: programme
+    - name: Maritime Defence
+      total_budget: 10708000
+      type: programme
+    - name: Defence Intelligence
+      total_budget: 4133000
+      type: programme
+    name: Capital - Payments for capital assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Landward Defence
+      total_budget: 14486069000
+      type: programme
+    - name: Air Defence
+      total_budget: 5657170000
+      type: programme
+    - name: Administration
+      total_budget: 5441510000
+      type: programme
+    - name: Military Health Support
+      total_budget: 5250141000
+      type: programme
+    - name: General Support
+      total_budget: 4140557000
+      type: programme
+    - name: Maritime Defence
+      total_budget: 3333110000
+      type: programme
+    - name: Force Employment
+      total_budget: 3323835000
+      type: programme
+    - name: Defence Intelligence
+      total_budget: 495471000
+      type: programme
+    name: Current - Current payments
+    type: economic_classification_1_and_2
+  - items:
+    - name: Landward Defence
+      total_budget: 1945662000
+      type: programme
+    - name: General Support
+      total_budget: 1625613000
+      type: programme
+    - name: Air Defence
+      total_budget: 1294490000
+      type: programme
+    - name: Maritime Defence
+      total_budget: 1174060000
+      type: programme
+    - name: Administration
+      total_budget: 723332000
+      type: programme
+    - name: Defence Intelligence
+      total_budget: 520865000
+      type: programme
+    - name: Force Employment
+      total_budget: 260810000
+      type: programme
+    - name: Military Health Support
+      total_budget: 77519000
+      type: programme
+    name: Current - Transfers and subsidies
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Defence%2Band%2BMilitary%2BVeterans%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 6187144000
+  - name: Force Employment
+    total_budget: 3620718000
+  - name: Landward Defence
+    total_budget: 16464299000
+  - name: Air Defence
+    total_budget: 6977747000
+  - name: Maritime Defence
+    total_budget: 4517878000
+  - name: Military Health Support
+    total_budget: 5375266000
+  - name: Defence Intelligence
+    total_budget: 1020469000
+  - name: General Support
+    total_budget: 6349471000
+selected_financial_year: 2019-20
+selected_tab: departments
+slug: defence-and-military-veterans
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Defence%2Band%2BMilitary%2BVeterans%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Office Accommodation
+      total_budget: 2534671000
+      type: subprogramme
+    - name: Human Resources Support Services
+      total_budget: 958728000
+      type: subprogramme
+    - name: Military Veterans Management
+      total_budget: 662553000
+      type: subprogramme
+    - name: Financial Services
+      total_budget: 435561000
+      type: subprogramme
+    - name: Legal Services
+      total_budget: 364139000
+      type: subprogramme
+    - name: Defence Foreign Relations
+      total_budget: 303270000
+      type: subprogramme
+    - name: South African National Defence Force Command and Control
+      total_budget: 185764000
+      type: subprogramme
+    - name: Inspection and Audit Services
+      total_budget: 154563000
+      type: subprogramme
+    - name: Ministry
+      total_budget: 137685000
+      type: subprogramme
+    - name: Communication Services
+      total_budget: 129878000
+      type: subprogramme
+    - name: Policy and Planning
+      total_budget: 123646000
+      type: subprogramme
+    - name: Acquisition Services
+      total_budget: 89780000
+      type: subprogramme
+    - name: Departmental Direction
+      total_budget: 51852000
+      type: subprogramme
+    - name: Defence Reserve Direction
+      total_budget: 34995000
+      type: subprogramme
+    - name: Religious Services
+      total_budget: 20059000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Base Support Capability
+      total_budget: 1763885000
+      type: subprogramme
+    - name: Transport and Maritime Capability
+      total_budget: 1156031000
+      type: subprogramme
+    - name: Command and Control Capability
+      total_budget: 876590000
+      type: subprogramme
+    - name: Air Combat Capability
+      total_budget: 726699000
+      type: subprogramme
+    - name: Helicopter Capability
+      total_budget: 700486000
+      type: subprogramme
+    - name: Technical Support Services
+      total_budget: 580250000
+      type: subprogramme
+    - name: Training Capability
+      total_budget: 509015000
+      type: subprogramme
+    - name: Operational Support and Intelligence Capability
+      total_budget: 370087000
+      type: subprogramme
+    - name: Operational Direction
+      total_budget: 189045000
+      type: subprogramme
+    - name: Command Post
+      total_budget: 73673000
+      type: subprogramme
+    - name: Strategic Direction
+      total_budget: 31986000
+      type: subprogramme
+    name: Air Defence
+    type: programme
+  - items:
+    - name: Operations
+      total_budget: 542532000
+      type: subprogramme
+    - name: Defence Intelligence Support Services
+      total_budget: 477937000
+      type: subprogramme
+    name: Defence Intelligence
+    type: programme
+  - items:
+    - name: Support to the People
+      total_budget: 1093622000
+      type: subprogramme
+    - name: Regional Security
+      total_budget: 1021195000
+      type: subprogramme
+    - name: Special Operations
+      total_budget: 936437000
+      type: subprogramme
+    - name: Operational Direction
+      total_budget: 378205000
+      type: subprogramme
+    - name: Strategic Direction
+      total_budget: 191259000
+      type: subprogramme
+    name: Force Employment
+    type: programme
+  - items:
+    - name: Joint Logistic Services
+      total_budget: 2905512000
+      type: subprogramme
+    - name: Departmental Support
+      total_budget: 1203751000
+      type: subprogramme
+    - name: Command and Management Information Systems
+      total_budget: 1047971000
+      type: subprogramme
+    - name: Military Police
+      total_budget: 704537000
+      type: subprogramme
+    - name: Technology Development
+      total_budget: 487700000
+      type: subprogramme
+    name: General Support
+    type: programme
+  - items:
+    - name: Infantry Capability
+      total_budget: 6294523000
+      type: subprogramme
+    - name: Support Capability
+      total_budget: 4816730000
+      type: subprogramme
+    - name: Signal Capability
+      total_budget: 1408095000
+      type: subprogramme
+    - name: Engineering Capability
+      total_budget: 813978000
+      type: subprogramme
+    - name: Artillery Capability
+      total_budget: 718494000
+      type: subprogramme
+    - name: General Training Capability
+      total_budget: 544553000
+      type: subprogramme
+    - name: Armour Capability
+      total_budget: 497013000
+      type: subprogramme
+    - name: Air Defence Artillery Capability
+      total_budget: 494297000
+      type: subprogramme
+    - name: Strategic Direction
+      total_budget: 395089000
+      type: subprogramme
+    - name: Operational Intelligence
+      total_budget: 246412000
+      type: subprogramme
+    - name: Command and Control Capability
+      total_budget: 235115000
+      type: subprogramme
+    name: Landward Defence
+    type: programme
+  - items:
+    - name: Maritime Combat Capability
+      total_budget: 1449546000
+      type: subprogramme
+    - name: Maritime Logistic Support Capability
+      total_budget: 1184276000
+      type: subprogramme
+    - name: Base Support Capability
+      total_budget: 719054000
+      type: subprogramme
+    - name: Maritime Direction
+      total_budget: 594935000
+      type: subprogramme
+    - name: Maritime Human Resources and Training Capability
+      total_budget: 570067000
+      type: subprogramme
+    name: Maritime Defence
+    type: programme
+  - items:
+    - name: Specialist/Tertiary Health Service
+      total_budget: 2049235000
+      type: subprogramme
+    - name: Area Military Health Service
+      total_budget: 1956339000
+      type: subprogramme
+    - name: Military Health Training Capability
+      total_budget: 378635000
+      type: subprogramme
+    - name: Military Health Product Support Capability
+      total_budget: 302508000
+      type: subprogramme
+    - name: Mobile Military Health Support
+      total_budget: 260527000
+      type: subprogramme
+    - name: Military Health Maintenance Capability
+      total_budget: 221370000
+      type: subprogramme
+    - name: Strategic Direction
+      total_budget: 206652000
+      type: subprogramme
+    name: Military Health Support
+    type: programme
+title: Defence and Military Veterans budget 2019-20  - vulekamali
+vote_number: 19
+vote_primary:
+  name: Defence and Military Veterans
+  slug: defence-and-military-veterans
+  url_path: /2019-20/national/departments/defence-and-military-veterans
+website_url: www.dod.mil.za

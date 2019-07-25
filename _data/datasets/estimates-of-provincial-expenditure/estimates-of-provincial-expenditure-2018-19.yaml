@@ -1,0 +1,85 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Expenditure data used to prepare the EPRE publications provide detailed\
+    \ data on provincial government\u2019s expenditure allocations contained in the\
+    \ annual appropriation bill (for the upcoming year) as well as for the two outer\
+    \ years, that is for the three years of the medium term expenditure framework.\
+    \ Information is presented by vote (generally a provincial government department)\
+    \ and by main economic classification. The\_EPRE publications also provide detailed\
+    \ data on how provincial government institutions have spent their budgets in previous\
+    \ years."
+  name: Estimates of Provincial Expenditure
+  slug: estimates-of-provincial-expenditure
+  url_path: /datasets/estimates-of-provincial-expenditure
+created: '2018-04-18T13:28:44.817100'
+description: "This dataset includes expenditure data as published in the Estimates\
+  \ of Provincial Revenue and Expenditure. Departmental expenditure data in previous\
+  \ financial years have been aligned with the budget and programme structures of\
+  \ departments as they are structured in the current Medium Term Expenditure Framework.\
+  \ This means that the structure of historical expenditure data for a department,\
+  \ may not necessarily reflect the same structure of that department when expenditure\
+  \ was incurred during a particular financial year. This may be due to functions\
+  \ shifts which may have occurred within a particular department or a general change\
+  \ in a department\u2019s budget programme structures (BPS) as departments are afforded\
+  \ an opportunity before the start of the Budget to change their BPS.This is to ensure\
+  \ a more economical, efficient and effective delivery of public services and performance\
+  \ by the department as a whole.\r\n"
+intro: "This dataset includes expenditure data as published in the Estimates of Provincial\
+  \ Revenue and Expenditure. Departmental expenditure data in previous financial years\
+  \ have been aligned with the budget and programme structures of departments as they\
+  \ are structured in the current Medium Term Expenditure Framework. This means that\
+  \ the structure of historical expenditure data for a department, may not necessarily\
+  \ reflect the same structure of that department when expenditure was incurred during\
+  \ a particular financial year. This may be due to functions shifts which may have\
+  \ occurred within a particular department or a general change in a department\u2019\
+  s budget programme structures (BPS) as departments are afforded an opportunity before\
+  \ the start of the Budget to change their BPS.This is to ensure a more economical,\
+  \ efficient and effective delivery of public services and performance by the department\
+  \ as a whole.\r\n"
+intro_short: null
+key_points: null
+last_updated: '2018-10-11T08:05:08.210764'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: Estimates of Provincial Expenditure 2018-19
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: CSV
+  name: Estimates of Provincial Expenditure 2018-19
+  url: https://data.vulekamali.gov.za/dataset/12e1481d-2173-44f2-a468-b4bd022a84d5/resource/dde660d3-6267-4b5c-b562-97ced746bec8/download/estimates-of-provincial-expenditure-south-africa-2018-19.csv
+- description: ''
+  format: OpenSpending API
+  name: Estimates of Provincial Expenditure 2018-19
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:estimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/model/
+- description: ''
+  format: XLSX
+  name: Estimates of Provincial Expenditure 2018-19
+  url: https://data.vulekamali.gov.za/dataset/12e1481d-2173-44f2-a468-b4bd022a84d5/resource/4522054b-58ee-4f2f-883c-9fa024a4654d/download/estimates-of-provincial-expenditure-south-africa-2018-19-generated-2018-04-18t1213.xlsx
+- description: Explore the total for the different levels of economic classification
+    for all 9 provinces.
+  format: ''
+  name: Explore online - economic classification
+  url: https://openspending.org/viewer/b9d2af843f3a7ca223eea07fb608e62a:estimates_of_provincial_expenditure_of_south_africa_2018_19?measure=%22value.sum%22&groups%5B%5D=%22economic_classification_2.economic_classification_2%22&filters%5Bbudget_phase.budget_phase%5D%5B%5D=%22Main%20appropriation%22&filters%5Bfinancial_year.financial_year%5D%5B%5D=2018&filters%5Beconomic_classification_1.economic_classification_1%5D%5B%5D=%22Payments%22&order=%22value.sum%7Cdesc%22&visualizations%5B%5D=%22Treemap%22&lang=en
+- description: ''
+  format: ''
+  name: Explore online - department expenditure by province
+  url: https://openspending.org/viewer/b9d2af843f3a7ca223eea07fb608e62a:estimates_of_provincial_expenditure_of_south_africa_2018_19?measure=%22value.sum%22&rows%5B%5D=%22department.department%22&columns%5B%5D=%22government.government%22&filters%5Bbudget_phase.budget_phase%5D%5B%5D=%22Adjusted%20appropriation%22&filters%5Bfinancial_year.financial_year%5D%5B%5D=2017&order=%22value.sum%7Cdesc%22&visualizations%5B%5D=%22PivotTable%22&lang=en
+selected_tab: datasets
+slug: estimates-of-provincial-expenditure-2018-19
+title: Estimates of Provincial Expenditure 2018-19 - vulekamali
+url_path: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+usage: null
+use_for: null

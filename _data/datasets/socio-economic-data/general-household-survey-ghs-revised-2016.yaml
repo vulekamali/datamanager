@@ -1,0 +1,65 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Socio-economic data resources that can be used for contextual and
+    other analyses purposes. '
+  name: Socio-economic Data
+  slug: socio-economic-data
+  url_path: /datasets/socio-economic-data
+created: '2018-10-05T12:08:23.567621'
+description: 'The General Household Survey measures the performance of government
+  programmes and the quality of service delivery. It focuses on six broad areas: education,
+  health and social development, housing, household access to services and facilities,
+  food security, and agriculture.'
+intro: 'The General Household Survey measures the performance of government programmes
+  and the quality of service delivery. It focuses on six broad areas: education, health
+  and social development, housing, household access to services and facilities, food
+  security, and agriculture.'
+intro_short: 'South African household access to key public services data '
+key_points: "- Analysis down to the provincial level\r\n- Focus on development indicators\r\
+  \n- Series / indicators for individuals and households"
+last_updated: '2018-10-05T12:53:52.074131'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: General Household Survey (GHS) (Revised) 2016
+organization:
+  email: null
+  facebook: null
+  logo_url: ''
+  name: Statistics South Africa
+  slug: statistics-south-africa
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: application/xhtml+xml
+  name: General Household Survey (GHS) (Revised) 2016
+  url: http://superweb.statssa.gov.za/webapi/jsf/login.xhtml
+- description: ''
+  format: PNG
+  name: 'Screenshot: Provinces by Children 17 and younger'
+  url: https://data.vulekamali.gov.za/dataset/d5cc449f-9bcb-4d52-a8b2-57f17dcbf3c5/resource/1475aff2-e8df-4320-a610-cb72347b9d44/download/j5abve4.png
+- description: ''
+  format: PNG
+  name: 'Screenshot: Chart of Provinces by Children 17 and younger'
+  url: https://data.vulekamali.gov.za/dataset/d5cc449f-9bcb-4d52-a8b2-57f17dcbf3c5/resource/ae8cec73-0800-40c2-a88b-94f272846659/download/ori0jkh.png
+selected_tab: datasets
+slug: general-household-survey-ghs-revised-2016
+title: General Household Survey (GHS) (Revised) 2016 - vulekamali
+url_path: /datasets/socio-economic-data/general-household-survey-ghs-revised-2016
+usage: "1. [Visit StatsSA's SuperWEB2](http://superweb.statssa.gov.za/webapi/jsf/login.xhtml)\r\
+  \n2. Register for a free account and/or login\r\n3. Select the Household Surveys\
+  \ menu\r\n4. Select the General Household Surveys / (Revised 2017) / (Revised) sub-menu\r\
+  \n5. Select a specific year from the sub-sub-menus (e.g. 2017)\r\n6. Select one\
+  \ of the General Household Survey datasets\r\n7. Select data series from the dataset\
+  \ (e.g. Household Size; Refuse Removal) and add them to the empty table\r\n8. Download\
+  \ or save your table"
+use_for: The General Household Survey is conducted annually and provides supporting
+  information to the more detailed Census (conducted every decade) and the Community
+  Survey (conducted every decade, five years after the Census). The General Household
+  Survey can be used to identify trends and shorter-term changes in key demographic
+  and socio-economic variables.

@@ -27,6 +27,13 @@ if 'test' in sys.argv or 'test_coverage' in sys.argv:
 else:
     TEST = False
 
+import environ
+
+ROOT_DIR = (
+    environ.Path(__file__) - 2
+)
+PROJ_DIR = ROOT_DIR.path("budgetportal")
+
 # SECURITY WARNING: keep the secret key used in production secret!
 if DEBUG:
     SECRET_KEY = '-r&cjf5&l80y&(q_fiidd$-u7&o$=gv)s84=2^a2$o^&9aco0o'
@@ -195,7 +202,10 @@ USE_TZ = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            str(ROOT_DIR.path('_layouts')),
+            str(ROOT_DIR.path("_includes"))
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -210,6 +220,11 @@ TEMPLATES = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+STATICFILES_DIRS = [
+    str(PROJ_DIR.path("static")),
+    str(ROOT_DIR.path("assets"))
+]
+
 
 ASSETS_DEBUG = DEBUG
 ASSETS_URL_EXPIRE = False

@@ -1,0 +1,1292 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 742261000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 787855000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 795179000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 834342000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 866766856
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 865522853
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 834239719
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 834342000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 21110000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 21790000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 22589000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Rural Development
+  - items:
+    - amount: 22838000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 23448000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 24286000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 27923000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Agricultural Economics Services
+  - items:
+    - amount: 24130000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: RURAL DEVELOPMENT
+  - items:
+    - amount: 56967000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 58737000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 58968000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 65018000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Structured Agricultural Education and Training
+  - items:
+    - amount: 75212000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 97710000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 86083000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 91134000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Sustainable Resource Management
+  - items:
+    - amount: 76223000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 86035000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 91141000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Veterinary Services
+  - items:
+    - amount: 96853000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: VETERINARY SERVICES
+  - items:
+    - amount: 108825000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 109653000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 115915000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 126284000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Research and Technology Development Services
+  - items:
+    - amount: 124163000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 130633000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 130842000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 124492000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 256923000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 259849000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 265355000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 278508000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Farmer Support and Development
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 11 - Agriculture
+    url: https://data.vulekamali.gov.za/dataset/294889bb-047f-4f77-89e2-ccd128cbfbe8/resource/09c0f26e-d574-490e-b884-eff1b9febc1e/download/wc-vote-11-agriculture.pdf
+  name: 'Western Cape Department: Agriculture 2018-19'
+  tables: null
+description: 'Western Cape department: Agriculture budget data for the 2018-19 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Agriculture%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 71850000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 46244000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 2434000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 3303000.0
+        type: economic_classification_2
+      - name: Non-Profit Institutions
+        total_budget: 660000.0
+        type: economic_classification_2
+      - name: Provinces And Municipalities
+        total_budget: 1000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 16197000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 4972000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 533000.0
+        type: economic_classification_2
+      - name: Software And Other Intangible Assets
+        total_budget: 6000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Non-Profit Institutions
+        total_budget: 4425000.0
+        type: economic_classification_2
+      - name: Departmental Agencies And Accounts
+        total_budget: 1100000.0
+        type: economic_classification_2
+      - name: Public Corporations And Private Enterprises
+        total_budget: 500000.0
+        type: economic_classification_2
+      - name: Higher Education Institutions
+        total_budget: 190000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Agricultural Economics Services
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 64028000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 20305000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 5205000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Public Corporations And Private Enterprises
+        total_budget: 188470000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 500000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Farmer Support And Development
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 88351000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 34578000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 3317000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces And Municipalities
+        total_budget: 38000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Research And Technology Development Services
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 12144000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 3636000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 295000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Public Corporations And Private Enterprises
+        total_budget: 7055000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 1000000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Rural Development
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 37921000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 19761000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings And Other Fixed Structures
+        total_budget: 5453000.0
+        type: economic_classification_2
+      - name: Machinery And Equipment
+        total_budget: 1480000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Non-Profit Institutions
+        total_budget: 300000.0
+        type: economic_classification_2
+      - name: Departmental Agencies And Accounts
+        total_budget: 58000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 40000.0
+        type: economic_classification_2
+      - name: Provinces And Municipalities
+        total_budget: 5000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Structured Agricultural Education And Training
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 30759000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 17498000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 2749000.0
+        type: economic_classification_2
+      - name: Buildings And Other Fixed Structures
+        total_budget: 90000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Public Corporations And Private Enterprises
+        total_budget: 37011000.0
+        type: economic_classification_2
+      - name: Non-Profit Institutions
+        total_budget: 3026000.0
+        type: economic_classification_2
+      - name: Provinces And Municipalities
+        total_budget: 1000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Sustainable Resource Management
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 70123000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 22880000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 3168000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Non-Profit Institutions
+        total_budget: 650000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 30000.0
+        type: economic_classification_2
+      - name: Provinces And Municipalities
+        total_budget: 2000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Veterinary Services
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 855436000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 750633000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 807792000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 877648000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 834342000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 878985000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 929103000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 1050539335
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 876543164
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 887425270
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 920759755
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 834342000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 835869874
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 837638052
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/western-cape/departments/agriculture
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/western-cape/departments/agriculture
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/western-cape/departments/agriculture
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/western-cape/departments/agriculture
+  id: 2019-20
+  is_selected: false
+government:
+  name: Western Cape
+  slug: western-cape
+government_functions: []
+intro: ''
+is_vote_primary: true
+name: Agriculture
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Agriculture%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Research And Technology Development Services
+      total_budget: 88351000.0
+      type: programme
+    - name: Administration
+      total_budget: 71850000.0
+      type: programme
+    - name: Veterinary Services
+      total_budget: 70123000.0
+      type: programme
+    - name: Farmer Support And Development
+      total_budget: 64028000.0
+      type: programme
+    - name: Structured Agricultural Education And Training
+      total_budget: 37921000.0
+      type: programme
+    - name: Sustainable Resource Management
+      total_budget: 30759000.0
+      type: programme
+    - name: Agricultural Economics Services
+      total_budget: 16197000.0
+      type: programme
+    - name: Rural Development
+      total_budget: 12144000.0
+      type: programme
+    name: Current Payments - Compensation Of Employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 46244000.0
+      type: programme
+    - name: Research And Technology Development Services
+      total_budget: 34578000.0
+      type: programme
+    - name: Veterinary Services
+      total_budget: 22880000.0
+      type: programme
+    - name: Farmer Support And Development
+      total_budget: 20305000.0
+      type: programme
+    - name: Structured Agricultural Education And Training
+      total_budget: 19761000.0
+      type: programme
+    - name: Sustainable Resource Management
+      total_budget: 17498000.0
+      type: programme
+    - name: Agricultural Economics Services
+      total_budget: 4972000.0
+      type: programme
+    - name: Rural Development
+      total_budget: 3636000.0
+      type: programme
+    name: Current Payments - Goods And Services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Structured Agricultural Education And Training
+      total_budget: 5453000.0
+      type: programme
+    - name: Sustainable Resource Management
+      total_budget: 90000.0
+      type: programme
+    name: Payments For Capital Assets - Buildings And Other Fixed Structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Farmer Support And Development
+      total_budget: 5205000.0
+      type: programme
+    - name: Research And Technology Development Services
+      total_budget: 3317000.0
+      type: programme
+    - name: Veterinary Services
+      total_budget: 3168000.0
+      type: programme
+    - name: Sustainable Resource Management
+      total_budget: 2749000.0
+      type: programme
+    - name: Administration
+      total_budget: 2434000.0
+      type: programme
+    - name: Structured Agricultural Education And Training
+      total_budget: 1480000.0
+      type: programme
+    - name: Agricultural Economics Services
+      total_budget: 533000.0
+      type: programme
+    - name: Rural Development
+      total_budget: 295000.0
+      type: programme
+    name: Payments For Capital Assets - Machinery And Equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Agricultural Economics Services
+      total_budget: 6000.0
+      type: programme
+    name: Payments For Capital Assets - Software And Other Intangible Assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Agricultural Economics Services
+      total_budget: 1100000.0
+      type: programme
+    - name: Structured Agricultural Education And Training
+      total_budget: 58000.0
+      type: programme
+    name: Transfers And Subsidies - Departmental Agencies And Accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Agricultural Economics Services
+      total_budget: 190000.0
+      type: programme
+    name: Transfers And Subsidies - Higher Education Institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 3303000.0
+      type: programme
+    - name: Rural Development
+      total_budget: 1000000.0
+      type: programme
+    - name: Farmer Support And Development
+      total_budget: 500000.0
+      type: programme
+    - name: Structured Agricultural Education And Training
+      total_budget: 40000.0
+      type: programme
+    - name: Veterinary Services
+      total_budget: 30000.0
+      type: programme
+    name: Transfers And Subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Agricultural Economics Services
+      total_budget: 4425000.0
+      type: programme
+    - name: Sustainable Resource Management
+      total_budget: 3026000.0
+      type: programme
+    - name: Administration
+      total_budget: 660000.0
+      type: programme
+    - name: Veterinary Services
+      total_budget: 650000.0
+      type: programme
+    - name: Structured Agricultural Education And Training
+      total_budget: 300000.0
+      type: programme
+    name: Transfers And Subsidies - Non-Profit Institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Research And Technology Development Services
+      total_budget: 38000.0
+      type: programme
+    - name: Structured Agricultural Education And Training
+      total_budget: 5000.0
+      type: programme
+    - name: Veterinary Services
+      total_budget: 2000.0
+      type: programme
+    - name: Administration
+      total_budget: 1000.0
+      type: programme
+    - name: Sustainable Resource Management
+      total_budget: 1000.0
+      type: programme
+    name: Transfers And Subsidies - Provinces And Municipalities
+    type: economic_classification_1_and_2
+  - items:
+    - name: Farmer Support And Development
+      total_budget: 188470000.0
+      type: programme
+    - name: Sustainable Resource Management
+      total_budget: 37011000.0
+      type: programme
+    - name: Rural Development
+      total_budget: 7055000.0
+      type: programme
+    - name: Agricultural Economics Services
+      total_budget: 500000.0
+      type: programme
+    name: Transfers And Subsidies - Public Corporations And Private Enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Agriculture%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 124492000.0
+  - name: Direct Charges
+    total_budget: 0.0
+  - name: Sustainable Resource Management
+    total_budget: 91134000.0
+  - name: Farmer Support And Development
+    total_budget: 278508000.0
+  - name: Veterinary Services
+    total_budget: 96853000.0
+  - name: Research And Technology Development Services
+    total_budget: 126284000.0
+  - name: Agricultural Economics Services
+    total_budget: 27923000.0
+  - name: Structured Agricultural Education And Training
+    total_budget: 65018000.0
+  - name: Rural Development
+    total_budget: 24130000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: agriculture
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-drilldown-2018-19-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Agriculture%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme.programme%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 44851000.0
+      type: subprogramme
+    - name: Financial Management
+      total_budget: 44285000.0
+      type: subprogramme
+    - name: Senior Management
+      total_budget: 20172000.0
+      type: subprogramme
+    - name: Office of the MEC
+      total_budget: 8499000.0
+      type: subprogramme
+    - name: Communication Services
+      total_budget: 6685000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Production Economics and Marketing Support
+      total_budget: 18993000.0
+      type: subprogramme
+    - name: Macroeconomics  Support
+      total_budget: 7238000.0
+      type: subprogramme
+    - name: Agro-Processing Support
+      total_budget: 1692000.0
+      type: subprogramme
+    name: Agricultural Economics Services
+    type: programme
+  - items:
+    - name: Farmer-settlement and Development
+      total_budget: 207041000.0
+      type: subprogramme
+    - name: Extension and Advisory Services
+      total_budget: 36974000.0
+      type: subprogramme
+    - name: Casidra SOC Ltd
+      total_budget: 22951000.0
+      type: subprogramme
+    - name: Food Security
+      total_budget: 11542000.0
+      type: subprogramme
+    name: Farmer Support and Development
+    type: programme
+  - items:
+    - name: Research
+      total_budget: 84165000.0
+      type: subprogramme
+    - name: Research Infrastructure Support
+      total_budget: 40883000.0
+      type: subprogramme
+    - name: Technology Transfer
+      total_budget: 1236000.0
+      type: subprogramme
+    name: Research and Technology Development Services
+    type: programme
+  - items:
+    - name: Farm Worker Development
+      total_budget: 15361000.0
+      type: subprogramme
+    - name: Rural Development Coordination
+      total_budget: 7792000.0
+      type: subprogramme
+    - name: Social Facilitation
+      total_budget: 977000.0
+      type: subprogramme
+    name: Rural Development
+    type: programme
+  - items:
+    - name: HIGHER EDUCATION AND TRAINING
+      total_budget: 51014000.0
+      type: subprogramme
+    - name: Agricultural Skills Development
+      total_budget: 14004000.0
+      type: subprogramme
+    name: Structured Agricultural Education and Training
+    type: programme
+  - items:
+    - name: Engineering Services
+      total_budget: 31975000.0
+      type: subprogramme
+    - name: LandCare
+      total_budget: 31824000.0
+      type: subprogramme
+    - name: Disaster Risk Management
+      total_budget: 26078000.0
+      type: subprogramme
+    - name: Land Use Management
+      total_budget: 1257000.0
+      type: subprogramme
+    name: Sustainable Resource Management
+    type: programme
+  - items:
+    - name: Animal Health
+      total_budget: 52394000.0
+      type: subprogramme
+    - name: Veterinary Laboratory Services
+      total_budget: 22070000.0
+      type: subprogramme
+    - name: Veterinary Export Control
+      total_budget: 15465000.0
+      type: subprogramme
+    - name: Veterinary Public Health
+      total_budget: 6924000.0
+      type: subprogramme
+    name: Veterinary Services
+    type: programme
+title: Agriculture budget 2018-19  - vulekamali
+vote_number: 11
+vote_primary:
+  name: Agriculture
+  slug: agriculture
+  url_path: /2018-19/provincial/western-cape/departments/agriculture
+website_url: null

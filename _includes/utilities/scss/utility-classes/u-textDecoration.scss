@@ -1,0 +1,9 @@
+.u-textDecoration {
+  &None {
+    text-decoration: none !important;
+  }
+
+  &Underline {
+    text-decoration: underline !important;
+  }
+}

@@ -1,0 +1,668 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 2749756000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 2901371000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 3135731000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 3210996353
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 3187392231
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 3289764129
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 38094000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 39231000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 48896000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: EPWP
+  - items:
+    - amount: 301734000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 325954000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 357468000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 647601000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 760066000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 837140000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Infrastructure Operations
+  - items:
+    - amount: 1762327000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1776120000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1892227000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Roads Infrastructure
+contributed_datasets:
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2016/17'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2016-17
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2014/15'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2014-15
+- contributor: Public Service Accountability Monitor
+  name: A People's Guide to the Adjusted Budget 2018/19
+  url_path: /datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Department of Human Settlements, 2016/17 and 2017/18'
+  url_path: /datasets/contributed/budget-brief-department-of-human-settlements
+- contributor: Studies in Poverty and Inequality Institute
+  name: Monitoring the right of access to adequate housing in South Africa
+  url_path: /datasets/contributed/monitoring-the-right-of-access-to-adequate-housing-in-south-africa
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "LP AEPRE 2017-18 \u2013 Vote 9 - Public Works, Roads and Infrastructure"
+    url: https://data.vulekamali.gov.za/dataset/7fdb79f7-a159-4a06-be54-2af16231c60e/resource/9d6e2b71-5284-4ce0-ad38-de4883181b4d/download/lim-vote-09-public-works-roads-and-infrastructure.pdf
+  name: "Limpopo AEPRE 2017-18 \u2013 Vote 9 - Public Works, Roads and Infrastructure"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 09 : Public Works, Roads and Infrastructure'
+    url: https://data.vulekamali.gov.za/dataset/b09b28fb-c750-4711-a1c4-d0994356be80/resource/1cc4790c-b363-4841-a0a6-ba50376aee55/download/lim-vote-09-public-works-roads-infrastructure.pdf
+  name: 'Limpopo Department: Public Works, Roads and Infrastructure 2017-18'
+  tables: null
+description: 'Limpopo department: Public Works, Roads and Infrastructure budget data
+  for the 2017-18 financial year from National Treasury in partnership with IMALI
+  YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Limpopo%2522%257Cdepartment.department%253A%2522Public%2BWorks%252C%2BRoads%2Band%2BInfrastructure%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 235462000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 105672000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 12315000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 3599000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 420000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 25873000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 23023000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: EPWP
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 474674000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 140107000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 160627000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 7331000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 51415000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 2986000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Infrastructure Operations
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 460794000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 351902000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 105838000
+        type: economic_classification_2
+      - name: Buildings and other fixed structures
+        total_budget: 7000000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 962151000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 3044000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 1498000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Roads Infrastructure
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 858941000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 2787867000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 2685343000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 3101834000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 3135731000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 3195713000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 3258251000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 1114189146
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 3423709017
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 3135778804
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 3407617155
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 3289764129
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 3195713000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 3098430410
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/limpopo/departments/public-works-roads-and-infrastructure
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/limpopo/departments/public-works-roads-and-infrastructure
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/limpopo/departments/public-works-roads-and-infrastructure
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/limpopo/departments/public-works-roads-and-infrastructure
+  id: 2019-20
+  is_selected: false
+government:
+  name: Limpopo
+  slug: limpopo
+government_functions:
+- Economic affairs
+- General public services
+- Human settlements and municipal infrastructure
+intro: "## Vision\n\nA leader in the provision and management of provincial land,\
+  \ buildings and roads infrastructure.\r\n\r\n\n\n## Mission\n\nOptimal utilization\
+  \ of resources in the provision and management of sustainable social and economic\
+  \ infrastructure including implementation and coordination of Expanded Public Works\
+  \ Programme.\r\n\r\n\n\n## Core functions\n\n* Facilitate and co-ordinate the provision\
+  \ of provincial government building infrastructure;\r\n\r\n* Manage Provincial government\
+  \ land and buildings;\r\n\r\n* Coordinate and implement the Expanded Public Works\
+  \ Programme and\r\n\r\n* Comply with the requirements of Government Immovable Asset\
+  \ Management Act (GIAMA).\r\n\r\n* Plan, Design, upgrade and maintain roads infrastructure."
+is_vote_primary: true
+name: Public Works, Roads and Infrastructure
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Limpopo%2522%257Cdepartment.department%253A%2522Public%2BWorks%252C%2BRoads%2Band%2BInfrastructure%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Infrastructure Operations
+      total_budget: 474674000
+      type: programme
+    - name: Roads Infrastructure
+      total_budget: 351902000
+      type: programme
+    - name: Administration
+      total_budget: 235462000
+      type: programme
+    - name: EPWP
+      total_budget: 25873000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Roads Infrastructure
+      total_budget: 460794000
+      type: programme
+    - name: Infrastructure Operations
+      total_budget: 140107000
+      type: programme
+    - name: Administration
+      total_budget: 105672000
+      type: programme
+    - name: EPWP
+      total_budget: 23023000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Infrastructure Operations
+      total_budget: 160627000
+      type: programme
+    - name: Roads Infrastructure
+      total_budget: 7000000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Roads Infrastructure
+      total_budget: 105838000
+      type: programme
+    - name: Administration
+      total_budget: 12315000
+      type: programme
+    - name: Infrastructure Operations
+      total_budget: 7331000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Roads Infrastructure
+      total_budget: 962151000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 3599000
+      type: programme
+    - name: Roads Infrastructure
+      total_budget: 3044000
+      type: programme
+    - name: Infrastructure Operations
+      total_budget: 2986000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Infrastructure Operations
+      total_budget: 51415000
+      type: programme
+    - name: Roads Infrastructure
+      total_budget: 1498000
+      type: programme
+    - name: Administration
+      total_budget: 420000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Limpopo%2522%257Cdepartment.department%253A%2522Public%2BWorks%252C%2BRoads%2Band%2BInfrastructure%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 357468000
+  - name: Infrastructure Operations
+    total_budget: 837140000
+  - name: EPWP
+    total_budget: 48896000
+  - name: Roads Infrastructure
+    total_budget: 1892227000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: public-works-roads-and-infrastructure
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Limpopo%2522%257Cdepartment.department%253A%2522Public%2BWorks%252C%2BRoads%2Band%2BInfrastructure%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Public Works, Roads and Infrastructure budget 2017-18  - vulekamali
+vote_number: 9
+vote_primary:
+  name: Public Works, Roads and Infrastructure
+  slug: public-works-roads-and-infrastructure
+  url_path: /2017-18/provincial/limpopo/departments/public-works-roads-and-infrastructure
+website_url: null

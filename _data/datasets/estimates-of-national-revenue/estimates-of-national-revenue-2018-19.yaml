@@ -1,0 +1,43 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: ''
+  name: Estimates of National Revenue
+  slug: estimates-of-national-revenue
+  url_path: /datasets/estimates-of-national-revenue
+created: '2018-02-21T13:44:38.402815'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2018-02-22T10:52:46.613940'
+license:
+  name: Creative Commons Attribution
+  url: http://www.opendefinition.org/licenses/cc-by
+methodology: null
+name: Estimates of national revenue 2018-19
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: budget revenue Statistical tables 2017-18
+  url: https://data.vulekamali.gov.za/dataset/6135a024-b117-42b3-b3e3-d442272104a8/resource/98b7e5fa-43f0-4890-84d3-95fc380d0f32/download/budget-estimates-of-national-revenue-2017-18.pdf
+- description: ''
+  format: CSV
+  name: budget estimates of national revenue 2018-19.csv
+  url: https://data.vulekamali.gov.za/dataset/6135a024-b117-42b3-b3e3-d442272104a8/resource/7ad5e908-5814-4581-a9df-a6f37c56d5bd/download/budget-estimates-of-national-revenue-2018-19.csv
+selected_tab: datasets
+slug: estimates-of-national-revenue-2018-19
+title: Estimates of national revenue 2018-19 - vulekamali
+url_path: /datasets/estimates-of-national-revenue/estimates-of-national-revenue-2018-19
+usage: null
+use_for: null

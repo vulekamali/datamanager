@@ -1,0 +1,38 @@
+.ApiCta-title {
+  font-size: 18px;
+  font-weight: bold;
+  font-weight: 900;
+  line-height: 1.44;
+  padding-bottom: 15px;
+}
+
+.ApiCta-description {
+  font-size: 14px;
+  line-height: 1.86;
+}
+
+.ApiCta {
+  border-radius: 20px;
+  background-color: #7bb344;
+  border: solid 1px #d2d2d2;
+  padding: 10px;
+  text-decoration: none;
+  color: #3f3f3f;
+  display: block;
+
+  &:hover {
+    background-color: darken(#7bb344, 15%);
+  }
+}
+
+.ApiCta-wrap {
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 20px 25px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #d2d2d2;
+
+  .ApiCta:hover & {
+    background-color: darken(white, 15%);
+  }
+}

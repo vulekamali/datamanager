@@ -1,0 +1,565 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2017-18
+    nominal:
+    - amount: 145006000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 145006000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+  - This department did not exist for some years displayed.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 88267000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Institutional Support and Coordination
+  - items:
+    - amount: 19024000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Research, Policy and Legislation
+  - items:
+    - amount: 37715000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2017-18 - Vote 4 - Cooperative Governance and Traditional Affairs
+    url: https://data.vulekamali.gov.za/dataset/569fa746-544f-4c3c-a8a7-5310d6d55a1e/resource/d30f7bcd-79bf-4bbf-bddf-8a719b842283/download/vote-4-cooperative-governance-and-traditional-affairs.pdf
+  name: AENE 2017-18 - Vote 4 - Cooperative Governance and Traditional Affairs
+  tables:
+    description: ''
+    format: XLS
+    name: AENE 2017-18 - Vote 4 - Cooperative Governance and Traditional Affairs
+    url: https://data.vulekamali.gov.za/dataset/569fa746-544f-4c3c-a8a7-5310d6d55a1e/resource/400b5fd7-9fb2-4ee8-a61b-3cbf6e03e091/download/aene17chap-tab-vote04.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 04 - Cooperative Governance and Traditional Affairs
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-cooperative-governance-and-traditional-affairs-2017-18/resource/fc462b31-c68d-4eec-8858-4e22eab76fe5/download/vote-04-cooperative-governance-and-traditional-affairs.pdf
+  name: 'National Department: Cooperative Governance and Traditional Affairs 2017-18'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 04 - Cooperative Governance and Traditional Affairs
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-cooperative-governance-and-traditional-affairs-2017-18/resource/1dde2375-461a-4476-9990-95ba2ce72246/download/ene17-vote04_chaptertables.xlsx
+description: 'National department: Traditional Affairs budget data for the 2017-18
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cvote_number.department%253A%2522Traditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 24529000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 10481000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2705000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 28759000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 19061000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 40447000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Institutional Support and Coordination
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 15755000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 3269000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Research, Policy and Legislation
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2017-18
+    nominal:
+    - amount: 42087000.0
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 111751000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 125362000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 129798000.0
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 145006000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 154216000.0
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 164313000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 52123826
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 131029457
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 139766888
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 136142266
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 145006000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 146187923
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 147931923
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: false
+    url_path: /2015-16/national
+  id: 2015-16
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2016-17/national
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/traditional-affairs
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/traditional-affairs
+  id: 2018-19
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions:
+- General public services
+intro: "## Department purpose\r\n\r\nCoordinate traditional affairs across government\
+  \ through the development of appropriate policies, norms and standards, systems,\
+  \ and regulatory frameworks; and promote culture, heritage and social cohesion.\r\
+  \n\r\n## Mandate\r\n\r\nThe department\u2019s mandate extends beyond traditional\
+  \ and KhoiSan leadership and communities, and includes overseeing a full range of\
+  \ tasks inherent in dealing with all issues of traditional affairs.\r\nThe 2003\
+  \ White Paper on Traditional Leadership and Governance sets out a national framework,\
+  \ norms and standards that define the role and place of the institution of traditional\
+  \ leadership within the South African system of democratic governance. It seeks\
+  \ to support and transform the institution in accordance with  constitutional imperatives,\
+  \ and to restore the integrity and legitimacy of the institution in line with the\
+  \ African indigenous law and customs subject to the Constitution.\r\n\r\nThe mandate\
+  \ of the Department of Traditional Affairs is informed by the following constitutional\
+  \ and legislative frameworks:\r\n\r\n* the Traditional Leadership and Governance\
+  \ Framework Act (2003)\r\n* the National House of Traditional Leaders Act (2009)\r\
+  \n* the Commission for the Promotion and Protection of the Rights of Cultural, Religious\
+  \ and Linguistic Communities Act (2002)."
+is_vote_primary: false
+name: Traditional Affairs
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cvote_number.department%253A%2522Traditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Institutional Support and Coordination
+      total_budget: 28759000.0
+      type: programme
+    - name: Administration
+      total_budget: 24529000.0
+      type: programme
+    - name: Research, Policy and Legislation
+      total_budget: 15755000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Institutional Support and Coordination
+      total_budget: 19061000.0
+      type: programme
+    - name: Administration
+      total_budget: 10481000.0
+      type: programme
+    - name: Research, Policy and Legislation
+      total_budget: 3269000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 2705000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Institutional Support and Coordination
+      total_budget: 40447000.0
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cvote_number.department%253A%2522Traditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 37715000.0
+  - name: Research, Policy and Legislation
+    total_budget: 19024000.0
+  - name: Institutional Support and Coordination
+    total_budget: 88267000.0
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: traditional-affairs
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cvote_number.department%253A%2522Traditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 14868000.0
+      type: subprogramme
+    - name: Management of Traditional Affairs
+      total_budget: 11321000.0
+      type: subprogramme
+    - name: Ministry
+      total_budget: 6644000.0
+      type: subprogramme
+    - name: Internal Audit
+      total_budget: 4882000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Commission for the Promotion and Protection of the Rights of Cultural,
+        Religious and Linguistic Communities
+      total_budget: 40447000.0
+      type: subprogramme
+    - name: National House of Traditional Leaders
+      total_budget: 17621000.0
+      type: subprogramme
+    - name: Commission on Traditional Leaders Disputes and Claims
+      total_budget: 14116000.0
+      type: subprogramme
+    - name: Intergovernmental Relations and Partnerships
+      total_budget: 7675000.0
+      type: subprogramme
+    - name: Institutional Development and Capacity Building
+      total_budget: 6675000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 1733000.0
+      type: subprogramme
+    name: Institutional Support and Coordination
+    type: programme
+  - items:
+    - name: Research and Information Management
+      total_budget: 13575000.0
+      type: subprogramme
+    - name: Policy and Legislation
+      total_budget: 3766000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 1683000.0
+      type: subprogramme
+    name: Research, Policy and Legislation
+    type: programme
+title: Traditional Affairs budget 2017-18  - vulekamali
+vote_number: 4
+vote_primary:
+  name: Cooperative Governance and Traditional Affairs
+  slug: cooperative-governance-and-traditional-affairs
+  url_path: /2017-18/national/departments/cooperative-governance-and-traditional-affairs

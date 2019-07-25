@@ -1,0 +1,907 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1368043000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1545923000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    real:
+    - amount: 1597516683
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1698322262
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2013 and 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 225160000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Local Governance
+  - items:
+    - amount: 249953000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: 2. Local Governance
+  - items:
+    - amount: 255891000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Traditional Institutional Management
+  - items:
+    - amount: 284999000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: 4. Traditional Institutional Management
+  - items:
+    - amount: 352394000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 367321000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: 1. Administration
+  - items:
+    - amount: 534598000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Development and Planning
+  - items:
+    - amount: 643650000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: 3. Development and Planning
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "KwaZulu-Natal AEPRE 2016-17 \u2013 Vote 11 - Co-operative Governance and\
+      \ Traditional Affairs"
+    url: https://data.vulekamali.gov.za/dataset/d818f51b-c304-407c-a4a1-061759fe7347/resource/3d845663-c040-42e3-9aaf-7a7406880836/download/kzn-vote-11-co-op-gov.-and-trad-affairs.pdf
+  name: "KwaZulu-Natal AEPRE 2016-17 \u2013 Vote 11 - Co-operative Governance and\
+    \ Traditional Affairs"
+  tables:
+    description: ''
+    format: XLSX
+    name: "KwaZulu-Natal AEPRE 2016-17 \u2013 Vote 11 - Co-operative Governance and\
+      \ Traditional Affairs"
+    url: https://data.vulekamali.gov.za/dataset/d818f51b-c304-407c-a4a1-061759fe7347/resource/b3634c8a-58e2-4140-a676-97e0fcfdc712/download/kzn-coop-gov-and-traditional-affairs.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 11 : Co-operative Governance and Traditional Affairs'
+    url: https://data.vulekamali.gov.za/dataset/7411d792-f1f3-4575-9de0-099804cac0dc/resource/0cf6102e-c6de-4865-a929-9ceb3b8b514f/download/kzn-vote-11-co-op-gov.-and-trad-affairs.pdf
+  name: 'KwaZulu-Natal Department: Co-operative Governance and Traditional Affairs
+    2016-17'
+  tables: null
+description: 'KwaZulu-Natal department: Co-operative Governance and Traditional Affairs
+  budget data for the 2016-17 financial year from National Treasury in partnership
+  with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Co-operative%2BGovernance%2Band%2BTraditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 181992000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 160407000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 6006000
+        type: economic_classification_2
+      - name: Buildings and other fixed structures
+        total_budget: 4000000
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 2000000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 12711000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 205000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 1. Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 201802000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 46289000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 1383000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 479000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 2. Local Governance
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 423896000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 114595000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 64596000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 7061000
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 200000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 32816000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 486000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 3. Development and Planning
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 176057000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 97962000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 8000000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 2068000
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 112000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 800000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 4. Traditional Institutional Management
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1314550000
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 1242496000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1482587000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1581163000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1545923000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1461452000
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 1546475000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    real:
+    - amount: 1804380585
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 1611723689
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1820727631
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1846385143
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1698322262
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1533241329
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 1546475000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/kwazulu-natal/departments/co-operative-governance-and-traditional-affairs
+  id: 2016-17
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/kwazulu-natal/departments/co-operative-governance-and-traditional-affairs
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/kwazulu-natal/departments/co-operative-governance-and-traditional-affairs
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/kwazulu-natal/departments/co-operative-governance-and-traditional-affairs
+  id: 2019-20
+  is_selected: false
+government:
+  name: KwaZulu-Natal
+  slug: kwazulu-natal
+government_functions: []
+intro: "## Vision\n\nThe vision of the Department of Co-operative Governance and Traditional\
+  \ Affairs (COGTA) is: People centred sustainable co-operative governance.\r\n\r\n\
+  \n\n## Mission statement\n\nThe department\u2019s mission statement is: \u201CThe\
+  \ department will co-ordinate and foster co-operation among governance institutions\
+  \ and build capacity to accelerate delivery of high quality services to communities\u201D\
+  .\r\n\r\n\n\n## Core functions\n\nThe mandate of the department is as follows:\r\
+  \n\r\n* To co-ordinate all organs of state to ensure maximum impact.\r\n\r\n*Interventionist\
+  \ approach.\r\n\r\n* Improved internal and external co-operation and outcomes based\
+  \ IGR structures.\r\n\r\n* Ensure single window of co-ordination and regulation\
+  \ of national, provincial and local government.\r\nIn essence, the department\u2019\
+  s mandate at the centre of integrated development has the following functions:\r\
+  \n\r\n* Co-ordination, both vertically and horizontally, and doing away with the\
+  \ silo approach across the\r\nprovince.\r\n\r\n* The key area of focus is planning.\
+  \ The department is repositioned as a critical ally of the Planning\r\nCommission\
+  \ to align planning across the three spheres of government, by strengthening Integrated\r\
+  \nDevelopment Plans (IDPs).\r\n\r\n* Ensuring the alignment of priorities of both\
+  \ national and provincial departments implemented in a local\r\nspace in the municipal\
+  \ IDPs.\r\n\r\n* Ensure that IDP encapsulates the provincial priorities and budget\
+  \ in a co-ordinated manner.\r\n\r\n* Enhance the IGR framework support integration\
+  \ (IGR framework to be reviewed and strengthened).\r\n\r\n* Ensure seamless service\
+  \ delivery in a co-ordinated manner supported by emerging legislated processes.\r\
+  \n\r\n* Put development planning at the centre stage.\r\n\r\n* Put people at the\
+  \ centre of development.\r\n\r\nThe department will continue to support and ensure\
+  \ that there is alignment between the national,\r\nprovincial, as well as local\
+  \ government priorities. Working together with different stakeholders in the\r\n\
+  province and countrywide, the department is committed to contributing toward realisation\
+  \ and\r\nachievement of government\u2019s priorities as spelt out in the MTSF."
+is_vote_primary: true
+name: Co-operative Governance and Traditional Affairs
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Co-operative%2BGovernance%2Band%2BTraditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: 2. Local Governance
+      total_budget: 201802000
+      type: programme
+    - name: 1. Administration
+      total_budget: 181992000
+      type: programme
+    - name: 4. Traditional Institutional Management
+      total_budget: 176057000
+      type: programme
+    - name: 3. Development and Planning
+      total_budget: 114595000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Development and Planning
+      total_budget: 423896000
+      type: programme
+    - name: 1. Administration
+      total_budget: 160407000
+      type: programme
+    - name: 4. Traditional Institutional Management
+      total_budget: 97962000
+      type: programme
+    - name: 2. Local Governance
+      total_budget: 46289000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Development and Planning
+      total_budget: 64596000
+      type: programme
+    - name: 4. Traditional Institutional Management
+      total_budget: 8000000
+      type: programme
+    - name: 1. Administration
+      total_budget: 4000000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Development and Planning
+      total_budget: 7061000
+      type: programme
+    - name: 1. Administration
+      total_budget: 6006000
+      type: programme
+    - name: 4. Traditional Institutional Management
+      total_budget: 2068000
+      type: programme
+    - name: 2. Local Governance
+      total_budget: 1383000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: 1. Administration
+      total_budget: 2000000
+      type: programme
+    - name: 3. Development and Planning
+      total_budget: 200000
+      type: programme
+    - name: 4. Traditional Institutional Management
+      total_budget: 112000
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: 1. Administration
+      total_budget: 12711000
+      type: programme
+    - name: 4. Traditional Institutional Management
+      total_budget: 800000
+      type: programme
+    - name: 3. Development and Planning
+      total_budget: 486000
+      type: programme
+    - name: 2. Local Governance
+      total_budget: 479000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Development and Planning
+      total_budget: 32816000
+      type: programme
+    - name: 1. Administration
+      total_budget: 205000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Co-operative%2BGovernance%2Band%2BTraditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: 1. Administration
+    total_budget: 367321000
+  - name: 2. Local Governance
+    total_budget: 249953000
+  - name: 3. Development and Planning
+    total_budget: 643650000
+  - name: 4. Traditional Institutional Management
+    total_budget: 284999000
+selected_financial_year: 2016-17
+selected_tab: departments
+slug: co-operative-governance-and-traditional-affairs
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2016-17-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Co-operative%2BGovernance%2Band%2BTraditional%2BAffairs%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Co-operative Governance and Traditional Affairs budget 2016-17  - vulekamali
+vote_number: 11
+vote_primary:
+  name: Co-operative Governance and Traditional Affairs
+  slug: co-operative-governance-and-traditional-affairs
+  url_path: /2016-17/provincial/kwazulu-natal/departments/co-operative-governance-and-traditional-affairs
+website_url: null

@@ -1,0 +1,101 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:19:16.762528'
+description: 'The purpose of this study was to obtain relevant data and analyse the
+  costs and revenues associated with provincial government renting state-owned residential
+  properties to private tenants in the period 2013/14 to 2015/16.
+
+
+  The key objectives of the project were to:
+
+
+  - Identify and quantify all costs and revenues associated with the management of
+  state-owned residential rental properties by provincial governments.
+
+  - Assess the quality and comprehensiveness of available data on leases and rentals.
+
+  - Estimate the discrepancy between rentals charged and market-related rates that
+  could be obtained for similar properties.
+
+  - Identify weaknesses in rent-collection systems and processes and make recommendations
+  to address them.
+
+  - Make recommendations to improve the effectiveness and efficiency of property rental
+  processes.'
+intro: 'The purpose of this study was to obtain relevant data and analyse the costs
+  and revenues associated with provincial government renting state-owned residential
+  properties to private tenants in the period 2013/14 to 2015/16.
+
+
+  The key objectives of the project were to:
+
+
+  - Identify and quantify all costs and revenues associated with the management of
+  state-owned residential rental properties by provincial governments.
+
+  - Assess the quality and comprehensiveness of available data on leases and rentals.
+
+  - Estimate the discrepancy between rentals charged and market-related rates that
+  could be obtained for similar properties.
+
+  - Identify weaknesses in rent-collection systems and processes and make recommendations
+  to address them.
+
+  - Make recommendations to improve the effectiveness and efficiency of property rental
+  processes.'
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T09:00:05.751771'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - Public Residential Rental Stock
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Technical Report - Public Residential Rental Stock - Public Works
+  url: https://data.vulekamali.gov.za/dataset/per-public-residential-rental-stock/resource/1dd2bd28-775e-4b3f-9f7b-3d1bf8a02cbf/download/technical-report-public-residential-rental-stock-public-works.pdf
+- description: ''
+  format: XLSX
+  name: Cost Model - Public Residential Rental Stock - Public Works
+  url: https://data.vulekamali.gov.za/dataset/per-public-residential-rental-stock/resource/92ce1037-c793-4953-b9d3-55526d99d7a2/download/cost-model-public-residential-rental-stock-public-works.xlsx
+- description: ''
+  format: PDF
+  name: Technical Report - Public Residential Rental Stock - Human Settlements
+  url: https://data.vulekamali.gov.za/dataset/per-public-residential-rental-stock/resource/0369df7b-eaf0-43e7-901d-359c92664637/download/technical-report-public-residential-rental-stock-human-settlements.pdf
+- description: ''
+  format: XLSX
+  name: Cost Model - Public Residential Rental Stock - Human Settlements
+  url: https://data.vulekamali.gov.za/dataset/per-public-residential-rental-stock/resource/5bfce045-1865-475e-9cce-e430e9fdf177/download/cost-model-public-residential-rental-stock-human-settlements.xlsx
+- description: ''
+  format: PDF
+  name: Infographics - Public Residential Rental Stock
+  url: https://data.vulekamali.gov.za/dataset/per-public-residential-rental-stock/resource/a02c46c0-b356-4260-9c5e-fcb6ef240145/download/infographics-public-residential-rental-stock.pdf
+selected_tab: datasets
+slug: per-public-residential-rental-stock
+title: PER - Public Residential Rental Stock - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-public-residential-rental-stock
+usage: null
+use_for: null

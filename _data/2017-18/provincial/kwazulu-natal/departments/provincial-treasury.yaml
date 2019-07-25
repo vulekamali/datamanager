@@ -1,0 +1,794 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 712151000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 675280000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 607844000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 831606245
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 741850051
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 637702464
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 34159000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 20426000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 22484000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Growth and Development
+  - items:
+    - amount: 103567000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 103056000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 96056000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Fiscal Resource Management
+  - items:
+    - amount: 123089000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 134552000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 151596000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 131558000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 121683000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 123888000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Internal Audit
+  - items:
+    - amount: 319778000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 295563000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 213820000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Financial Management
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "KZN AEPRE 2017-18 \u2013 Vote 6 - Provincial Treasury"
+    url: https://data.vulekamali.gov.za/dataset/cc1900f0-095e-4946-9fba-cae19a99acfd/resource/2e3727bf-b22f-4ea8-929a-6583663edd52/download/kzn-vote-06-provincial-treasury.pdf
+  name: "KwaZulu-Natal AEPRE 2017-18 \u2013 Vote 6 - Provincial Treasury"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 06 : Provincial Treasury'
+    url: https://data.vulekamali.gov.za/dataset/c4cf466b-00c8-45cd-a122-52563eaa7e39/resource/f1ec5987-b32c-471f-b78c-969f79d3b999/download/kzn-vote-06-treasury.pdf
+  name: 'KwaZulu-Natal Department: Provincial Treasury 2017-18'
+  tables: null
+description: 'KwaZulu-Natal department: Provincial Treasury budget data for the 2017-18
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Provincial%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 83766000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 52988000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 5375000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 8805000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 638000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 24000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 138949000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 71759000
+        type: economic_classification_2
+      - name: Interest and rent on land
+        total_budget: 1734000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 493000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 885000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Financial Management
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 61163000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 34527000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 366000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: Fiscal Resource Management
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 22184000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 300000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Growth and Development
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 70976000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 52048000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 761000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 103000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Internal Audit
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 578426000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 630949000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 604650000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 651306000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 607844000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 636900000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 677272000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 750314598
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 774852523
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 706073173
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 715512660
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 637702464
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 636900000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 644051106
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/kwazulu-natal/departments/provincial-treasury
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/kwazulu-natal/departments/provincial-treasury
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/kwazulu-natal/departments/provincial-treasury
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/kwazulu-natal/departments/provincial-treasury
+  id: 2019-20
+  is_selected: false
+government:
+  name: KwaZulu-Natal
+  slug: kwazulu-natal
+government_functions:
+- General public services
+intro: "## Vision\n\nThe vision of the department is: Be the centre of excellence\
+  \ in financial and fiscal management in the country.\r\n\r\n\n\n## Mission\n\nThe\
+  \ department\u2019s mission is: To enhance the KwaZulu-Natal Provincial Government\u2019\
+  s service delivery by responding to the expectations of all stakeholders in the\
+  \ value chain as a key driver through:\r\n\r\n* Optimum and transparent allocation\
+  \ of financial resources while enhancing revenue generation and financial management\
+  \ practices in compliance with applicable legislation and corporate governance principles.\r\
+  \n\r\n* Competent and dedicated employees who are at the centre of ensuring best\
+  \ value to their stakeholders.\r\n\r\n\n\n## Core functions\n\nThe core functions\
+  \ of the department include the following:\r\n\r\nEstimates of Provincial Revenue\
+  \ and Expenditure\r\n\r\n* Mobilisation of funds for the provincial government.\r\
+  \n\r\n* Allocation of fiscal resources to provincial departments.\r\n\r\n* Preparation\
+  \ of annual and MTEF budgets.\r\n\r\n* Province-wide cash management.\r\n\r\n* Internal\
+  \ audit.\r\n\r\n* Provincial financial management in terms of the PFMA and MFMA\
+  \ through:\r\n\r\n* Budget monitoring and reporting.\r\n\r\n* Financial accounting.\r\
+  \n\r\n* Financial systems maintenance.\r\n\r\n* Provision of advice on procurement\
+  \ policies and procedures in provincial government.\r\n"
+is_vote_primary: true
+name: Provincial Treasury
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Provincial%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 83766000
+      type: programme
+    - name: Financial Management
+      total_budget: 71759000
+      type: programme
+    - name: Internal Audit
+      total_budget: 70976000
+      type: programme
+    - name: Fiscal Resource Management
+      total_budget: 61163000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Financial Management
+      total_budget: 138949000
+      type: programme
+    - name: Administration
+      total_budget: 52988000
+      type: programme
+    - name: Internal Audit
+      total_budget: 52048000
+      type: programme
+    - name: Fiscal Resource Management
+      total_budget: 34527000
+      type: programme
+    - name: Growth and Development
+      total_budget: 22184000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Financial Management
+      total_budget: 1734000
+      type: programme
+    name: Current payments - Interest and rent on land
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 5375000
+      type: programme
+    - name: Internal Audit
+      total_budget: 761000
+      type: programme
+    - name: Financial Management
+      total_budget: 493000
+      type: programme
+    - name: Fiscal Resource Management
+      total_budget: 366000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Financial Management
+      total_budget: 885000
+      type: programme
+    - name: Administration
+      total_budget: 638000
+      type: programme
+    - name: Internal Audit
+      total_budget: 103000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 8805000
+      type: programme
+    - name: Growth and Development
+      total_budget: 300000
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 24000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Provincial%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 151596000
+  - name: Fiscal Resource Management
+    total_budget: 96056000
+  - name: Financial Management
+    total_budget: 213820000
+  - name: Internal Audit
+    total_budget: 123888000
+  - name: Growth and Development
+    total_budget: 22484000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: provincial-treasury
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Provincial%2BTreasury%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 80702000
+      type: subprogramme
+    - name: Chief Financial Office
+      total_budget: 30560000
+      type: subprogramme
+    - name: Office of the MEC
+      total_budget: 30345000
+      type: subprogramme
+    - name: Head of Department
+      total_budget: 9989000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Support and Interlinked Financial Systems
+      total_budget: 109891000
+      type: subprogramme
+    - name: Supply Chain Management
+      total_budget: 44272000
+      type: subprogramme
+    - name: Financial Reporting
+      total_budget: 28331000
+      type: subprogramme
+    - name: Cash Management and Liabilities
+      total_budget: 17070000
+      type: subprogramme
+    - name: Public, Private Partnerships
+      total_budget: 8288000
+      type: subprogramme
+    - name: Norms and Standards
+      total_budget: 5968000
+      type: subprogramme
+    name: Financial Management
+    type: programme
+  - items:
+    - name: Municipal Finance
+      total_budget: 57181000
+      type: subprogramme
+    - name: Economic Analysis
+      total_budget: 21415000
+      type: subprogramme
+    - name: Public Finance
+      total_budget: 14190000
+      type: subprogramme
+    - name: Programme Support
+      total_budget: 3270000
+      type: subprogramme
+    name: Fiscal Resource Management
+    type: programme
+  - items:
+    - name: Air Shows/ Special Projects
+      total_budget: 19458000
+      type: subprogramme
+    - name: Budget Communication
+      total_budget: 3026000
+      type: subprogramme
+    name: Growth and Development
+    type: programme
+  - items:
+    - name: Assurance Services
+      total_budget: 65275000
+      type: subprogramme
+    - name: Forensics Services
+      total_budget: 39558000
+      type: subprogramme
+    - name: Risk Management
+      total_budget: 19055000
+      type: subprogramme
+    name: Internal Audit
+    type: programme
+title: Provincial Treasury budget 2017-18  - vulekamali
+vote_number: 6
+vote_primary:
+  name: Provincial Treasury
+  slug: provincial-treasury
+  url_path: /2017-18/provincial/kwazulu-natal/departments/provincial-treasury
+website_url: null

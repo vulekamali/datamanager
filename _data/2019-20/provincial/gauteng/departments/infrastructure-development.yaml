@@ -1,0 +1,506 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 2564853000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2542126000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 3036963934
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    real:
+    - amount: 2817699813
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2667000111
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 3036963934
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2019 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 338335000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 304697000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 317763000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Expanded Public Works Programme
+  - items:
+    - amount: 419596000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 325310000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 326559064
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 1806922000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1912119000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2392641870
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Public Works Infrastructure
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget: null
+description: 'Gauteng department: Infrastructure Development budget data for the 2019-20
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Gauteng%2522%257Cvotenumber.department%253A%2522Infrastructure%2BDevelopment%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 32000000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 304160000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 2471000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Current payments
+        total_budget: 330797000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 116000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Expanded Public Works Programme
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 187421000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 1552258000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 1056617000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Public Works Infrastructure
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 2416103000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 2563607000
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 2859021000
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 3036964000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 3465840000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 3483832000
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 3682518000
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+    real:
+    - amount: 2821376850
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 2816330981
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 2999461602
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 3036964000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 3295836955
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 3140868399
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 3149048489
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/gauteng/departments/infrastructure-development
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/gauteng/departments/infrastructure-development
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/gauteng/departments/infrastructure-development
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/gauteng/departments/infrastructure-development
+  id: 2019-20
+  is_selected: true
+government:
+  name: Gauteng
+  slug: gauteng
+government_functions: []
+intro: ''
+is_vote_primary: true
+name: Infrastructure Development
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Gauteng%2522%257Cvotenumber.department%253A%2522Infrastructure%2BDevelopment%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Public Works Infrastructure
+      total_budget: 187421000
+      type: programme
+    - name: Administration
+      total_budget: 32000000
+      type: programme
+    name: Capital - Payments for capital assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Public Works Infrastructure
+      total_budget: 1552258000
+      type: programme
+    - name: Expanded Public Works Programme
+      total_budget: 330797000
+      type: programme
+    - name: Administration
+      total_budget: 304160000
+      type: programme
+    name: Current - Current payments
+    type: economic_classification_1_and_2
+  - items:
+    - name: Public Works Infrastructure
+      total_budget: 1056617000
+      type: programme
+    - name: Administration
+      total_budget: 2471000
+      type: programme
+    - name: Expanded Public Works Programme
+      total_budget: 116000
+      type: programme
+    name: Current - Transfers and subsidies
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Gauteng%2522%257Cvotenumber.department%253A%2522Infrastructure%2BDevelopment%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 338631000
+  - name: Public Works Infrastructure
+    total_budget: 2796296000
+  - name: Expanded Public Works Programme
+    total_budget: 330913000
+selected_financial_year: 2019-20
+selected_tab: departments
+slug: infrastructure-development
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Gauteng%2522%257Cvotenumber.department%253A%2522Infrastructure%2BDevelopment%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Support
+      total_budget: 318975000
+      type: subprogramme
+    - name: Management Of The Department
+      total_budget: 12488000
+      type: subprogramme
+    - name: Office Of The Mec
+      total_budget: 7168000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Community Development
+      total_budget: 250222000
+      type: subprogramme
+    - name: Programme Support Cbp
+      total_budget: 80691000
+      type: subprogramme
+    name: Expanded Public Works Programme
+    type: programme
+  - items:
+    - name: Immovable Asset Management
+      total_budget: 1796270000
+      type: subprogramme
+    - name: Maitenance
+      total_budget: 668722000
+      type: subprogramme
+    - name: Construction
+      total_budget: 331304000
+      type: subprogramme
+    name: Public Works Infrastructure
+    type: programme
+title: Infrastructure Development budget 2019-20  - vulekamali
+vote_number: 15
+vote_primary:
+  name: Infrastructure Development
+  slug: infrastructure-development
+  url_path: /2019-20/provincial/gauteng/departments/infrastructure-development
+website_url: null

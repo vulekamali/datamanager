@@ -1,0 +1,29 @@
+.Logo {
+  width: 160px;
+  height: 46px;
+
+  @media screen and (min-width: 900px) {
+    width: 244px;
+    height: 75px;
+  }
+
+  &:hover {
+    fill: #3f3f3f;
+  }
+}
+
+.Logo-green {
+  fill: #ED9E31;
+
+  .Logo:hover & {
+    fill: #3f3f3f;
+  }
+}
+
+.Logo-orange {
+  fill: #76B643;
+
+  .Logo:hover & {
+    fill: #3f3f3f;
+  }
+}

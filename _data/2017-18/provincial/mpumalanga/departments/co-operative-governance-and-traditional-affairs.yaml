@@ -1,0 +1,721 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 443898000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 498106000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 510043000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 518356850
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 547209989
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 535097291
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 16478000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 19982000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 17645000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: The House of Traditional Leaders
+  - items:
+    - amount: 61860000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 65645000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 53674000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Development and Planning
+  - items:
+    - amount: 100811000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 129529000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 148469000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Traditional Institutional Management
+  - items:
+    - amount: 111771000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 115765000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 118642000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 152978000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 167185000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 171613000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Local Governance
+contributed_datasets:
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2016/17'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2016-17
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2014/15'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2014-15
+- contributor: Public Service Accountability Monitor
+  name: A People's Guide to the Adjusted Budget 2018/19
+  url_path: /datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Department of Human Settlements, 2016/17 and 2017/18'
+  url_path: /datasets/contributed/budget-brief-department-of-human-settlements
+- contributor: Studies in Poverty and Inequality Institute
+  name: Monitoring the right of access to adequate housing in South Africa
+  url_path: /datasets/contributed/monitoring-the-right-of-access-to-adequate-housing-in-south-africa
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "MPU AEPRE 2017-18 \u2013 Vote 4 - Co-operative Governance and Traditional\
+      \ Affairs"
+    url: https://data.vulekamali.gov.za/dataset/a5cbe123-b8ea-4278-8d6d-67a4164cf1d4/resource/72b7f9db-40cb-4124-a541-1c14a7cc189d/download/mpu-vote-04-cooperative-governance-and-traditional-affairs.pdf
+  name: "Mpumalanga AEPRE 2017-18 \u2013 Vote 4 - Co-operative Governance and Traditional\
+    \ Affairs"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 04 : Co-operative Governance and Traditional Affairs'
+    url: https://data.vulekamali.gov.za/dataset/d8305cbb-9bd4-4d84-bf23-b90250acf241/resource/3c1b3b98-7047-438b-864b-de72321015a5/download/mpu-vote-04-cooperative-governance-and-trad.-affairs.pdf
+  name: 'Mpumalanga Department: Co-operative Governance and Traditional Affairs 2017-18'
+  tables: null
+description: 'Mpumalanga department: Co-operative Governance and Traditional Affairs
+  budget data for the 2017-18 financial year from National Treasury in partnership
+  with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cdepartment.department%253A%2522Co-operative%2BGovernance%2Band%2BTraditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 74410000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 42043000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 924000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 1191000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 74000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 39674000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 7650000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Software and other intangible assets
+        total_budget: 150000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 6200000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Development and Planning
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 167591000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 4022000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Local Governance
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 12447000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 5198000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: The House of Traditional Leaders
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 84555000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 2808000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 40000000
+        type: economic_classification_2
+      - name: Buildings and other fixed structures
+        total_budget: 106000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 21000000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Traditional Institutional Management
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 396929000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 447005000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 476080000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 616606000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 510043000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 490865000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 513203000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 514882842
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 548955545
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 555937015
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 677391886
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 535097291
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 490865000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 488029860
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/mpumalanga/departments/co-operative-governance-and-traditional-affairs
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/mpumalanga/departments/co-operative-governance-and-traditional-affairs
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/mpumalanga/departments/co-operative-governance-and-traditional-affairs
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/mpumalanga/departments/co-operative-governance-and-traditional-affairs
+  id: 2019-20
+  is_selected: false
+government:
+  name: Mpumalanga
+  slug: mpumalanga
+government_functions:
+- Human settlements and municipal infrastructure
+intro: "## Vision\n\nResponsive, effective, efficient and sustainable cooperative\
+  \ governance\r\n\r\n\n\n## Mission\n\nTo coordinate, support, monitor and strengthen\
+  \ an integrated cooperative Governance\r\nsystem\r\n\r\n\n\n## Core functons\n\n\
+  * S154 of the Constitution states that National and Provincial governments, by legislative\r\
+  \nand other measures, must support and strengthen the capacity of Municipalities\
+  \ to\r\nmanage their own affairs, to exercise their powers and to perform their\
+  \ functions.\r\n\r\n* S105 (1) states that the MEC for Local Government in a province\
+  \ must establish\r\nmechanisms, processes and procedures in terms of S155(6) of\
+  \ the Constitution to-\r\n\r\n* Monitor Municipalities in the Province in managing\
+  \ their own affairs, exercising their\r\npowers and performing their functions;\r\
+  \n\r\n* Monitor the development of local government capacity in the Province; and\r\
+  \n\r\n* Assess the support needed by Municipalities to strengthen their capacity\
+  \ to manage their\r\nown affairs, exercise their powers and perform their functions"
+is_vote_primary: true
+name: Co-operative Governance and Traditional Affairs
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cdepartment.department%253A%2522Co-operative%2BGovernance%2Band%2BTraditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Local Governance
+      total_budget: 167591000
+      type: programme
+    - name: Traditional Institutional Management
+      total_budget: 84555000
+      type: programme
+    - name: Administration
+      total_budget: 74410000
+      type: programme
+    - name: Development and Planning
+      total_budget: 39674000
+      type: programme
+    - name: The House of Traditional Leaders
+      total_budget: 12447000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 42043000
+      type: programme
+    - name: Development and Planning
+      total_budget: 7650000
+      type: programme
+    - name: The House of Traditional Leaders
+      total_budget: 5198000
+      type: programme
+    - name: Local Governance
+      total_budget: 4022000
+      type: programme
+    - name: Traditional Institutional Management
+      total_budget: 2808000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Traditional Institutional Management
+      total_budget: 106000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Traditional Institutional Management
+      total_budget: 40000000
+      type: programme
+    - name: Administration
+      total_budget: 924000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Development and Planning
+      total_budget: 150000
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Development and Planning
+      total_budget: 6200000
+      type: programme
+    - name: Administration
+      total_budget: 1191000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Traditional Institutional Management
+      total_budget: 21000000
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 74000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cdepartment.department%253A%2522Co-operative%2BGovernance%2Band%2BTraditional%2BAffairs%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 118642000
+  - name: Local Governance
+    total_budget: 171613000
+  - name: Development and Planning
+    total_budget: 53674000
+  - name: Traditional Institutional Management
+    total_budget: 148469000
+  - name: The House of Traditional Leaders
+    total_budget: 17645000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: co-operative-governance-and-traditional-affairs
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cdepartment.department%253A%2522Co-operative%2BGovernance%2Band%2BTraditional%2BAffairs%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Co-operative Governance and Traditional Affairs budget 2017-18  - vulekamali
+vote_number: 4
+vote_primary:
+  name: Co-operative Governance and Traditional Affairs
+  slug: co-operative-governance-and-traditional-affairs
+  url_path: /2017-18/provincial/mpumalanga/departments/co-operative-governance-and-traditional-affairs
+website_url: null

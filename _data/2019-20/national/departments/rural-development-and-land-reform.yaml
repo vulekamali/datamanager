@@ -1,0 +1,827 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 10124345000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 10124345000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 10124345000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 10066999208
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 10184240000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 10184240000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 10184240000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 9730181000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 10425243000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 10425243000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 10946208000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    real:
+    - amount: 11122417161
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 11122417161
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 11122417161
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 11059418140
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 10684509429
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 10684509429
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 10684509429
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 10208146179
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 10425243000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 10425243000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 10409285149
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 817913000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 714371000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 676947000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 668582000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 672117000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 661278000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 652389000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 618203000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 690437000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 657664000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 712800000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: National Geomatics Management Services
+  - items:
+    - amount: 1462058000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1582541000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1621877000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 1607482000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 1721620000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1735790000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 1762212000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 1373037000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 1825416000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1877945000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 1889100000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 1914367000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1914367000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1832279000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 1814769034
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 1914896000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1907482000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 2009507000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 1995657000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 1814515000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1787249000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 1821141000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Rural Development
+  - items:
+    - amount: 2761799000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2744858000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 2657448000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 2645052378
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 2628223000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2640240000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 2662613000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 2649294000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 2723851000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 2743055000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 2914974000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Land Reform
+  - items:
+    - amount: 3168208000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 3168208000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 3335794000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 3331113796
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 3247384000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 3239450000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 3097519000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 3093990000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 3371024000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 3359330000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 3608193000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Restitution
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "ENE 2019-20 \u2013 Vote 39 - Rural Development and Land Reform"
+    url: https://data.vulekamali.gov.za/dataset/6e18ad8e-8c35-4228-aa9a-05ca10dffcd5/resource/13f147ca-8f7c-4b57-bb65-a35faaa2dfdc/download/vote-39-rural-development-and-land-reform.pdf
+  name: "ENE 2019-20 \u2013 Vote 39 - Rural Development and Land Reform"
+  tables:
+    description: ''
+    format: XLSX
+    name: "ENE 2019-20 \u2013 Vote 39 - Rural Development and Land Reform"
+    url: https://data.vulekamali.gov.za/dataset/6e18ad8e-8c35-4228-aa9a-05ca10dffcd5/resource/f730a880-8faa-476c-8c8c-b1dd25d26fbd/download/ene19-vote39_chaptertables.xlsx
+description: 'National department: Rural Development and Land Reform budget data for
+  the 2019-20 financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Rural%2BDevelopment%2Band%2BLand%2BReform%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 248461000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 1640443000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 196000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 603556000
+        type: economic_classification_2
+      - name: Payments for capital assets
+        total_budget: 3770000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 1641259000
+        type: economic_classification_2
+      - name: Current payments
+        total_budget: 666389000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Land Reform
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 4396000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 669758000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 38646000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: National Geomatics Management Services
+    type: programme
+  - items:
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 2919712000
+        type: economic_classification_2
+      - name: Payments for capital assets
+        total_budget: 2395000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 679385000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 6701000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Restitution
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 403820000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 1104722000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 312599000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Rural Development
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 9118047000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 10066999000
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 9730181000
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 10425243000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 10946208000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 10669914000
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 11355542000
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+    real:
+    - amount: 10647495875
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 11059417911
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 10208146179
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 10425243000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 10409285149
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 9619521178
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 9710516658
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/rural-development-and-land-reform
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/rural-development-and-land-reform
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/rural-development-and-land-reform
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/rural-development-and-land-reform
+  id: 2019-20
+  is_selected: true
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose \r\n\r\nCreate and maintain an equitable and sustainable land\
+  \ dispensation, and act as a catalyst in rural development, to ensure sustainable\
+  \ rural livelihoods, decent work and continued social and economic advancement for\
+  \ all South Africans.\r\n\r\n## Vote mandate\r\n\r\nThe Department of Rural Development\
+  \ and Land Reform executes its legislative mandate based on several acts:\r\n\r\n\
+  - the State Land Disposal Act (1961), which makes provision for the disposal of\
+  \ certain state land and prohibits the acquisition of state land by prescription\r\
+  \n- the Sectional Titles Act (1986), which makes provision for the division of buildings\
+  \ into sections and common property and for the acquisition of separate ownership\
+  \ in sections coupled with joint ownership in common property. It further regulates\
+  \ the transfer of ownership of sections and the registration of sectional mortgage\
+  \ bonds, and real rights in such sections. It also makes provision for the establishment\
+  \ of body corporates to control common property\r\n- the Physical Planning Act (1991),\
+  \ which promotes the orderly physical development of South Africa, with provisions\
+  \ for the division of the country into regions; and for the preparation of national\
+  \ development plans, regional development plans, regional structural plans and urban\
+  \ structure plans\r\n- the Upgrading of Land Tenure Rights Act (1991), which makes\
+  \ provision for the upgrading and conversion into ownership of certain rights graded\
+  \ in respect of land, and for the transfer of tribal land in full ownership to a\
+  \ tribe\r\n- the Distribution and Transfer of Certain State Land Act (1993), which\
+  \ makes provision for the distribution and transfer of certain land belonging to\
+  \ the state and designated by the Minister of Rural Development and Land Reform\
+  \ as land to be dealt with in accordance with the provisions of the act\r\n- the\
+  \ Land Titles Adjustment Act (1993), which regulates the allocation or devolution\
+  \ of certain land in respect of one or more persons who claim ownership, but do\
+  \ not have registered title deeds in respect thereof\r\n- the Provision of Land\
+  \ and Assistance Act (1993), which provides for the designation of certain land,\
+  \ the regulation of the subdivision of such land and the settlement of persons on\
+  \ it. It also provides for the acquisition, maintenance, planning, development,\
+  \ improvement, and disposal of property and the provision of financial assistance\
+  \ for land reform purposes\r\n- the Restitution of Land Rights Act (1994), which\
+  \ makes provision for the restitution of rights in land to persons or communities\
+  \ dispossessed of such rights after 19 June 1913 as a result of past racially discriminatory\
+  \ laws or practices. To administer this task, the act established a Commission on\
+  \ the Restitution of Land Rights and a land claims court. The Minister of the Department\
+  \ of Rural Development and Land Reform is authorised to purchase, acquire in any\
+  \ other manner or expropriate land or rights in land for the purpose of restitution\
+  \ awards\r\n- the Land Administration Act (1995), which provides for the delegation\
+  \ of powers and the assignment of the administration of laws regarding land matters\
+  \ to provinces\r\n- the Communal Property Associations Act (1996), which makes provision\
+  \ for communities, to form juristic persons, to be known as communal property associations,\
+  \ to acquire, hold and manage property on a basis agreed to by members of a community.\
+  \ This has to be done in terms of a written constitution\r\n- the Interim Protection\
+  \ of Informal Land Rights Act (1996), which makes provision for temporary protection\
+  \ of certain rights to and interests in land that are not otherwise adequately protected\
+  \ by law\r\n- the Land Reform (Labour Tenants) Act (1996), which makes provision\
+  \ for the security of tenure of labour tenants and those persons occupying or using\
+  \ land as a result of their association with labour tenants. It also makes provision\
+  \ for the acquisition of land and rights in land by labour tenants\r\n- the Extension\
+  \ of Security of Tenure Act (1997), which makes provision for the facilitation of\
+  \ long-term security of land tenure to regulate the conditions of residence on certain\
+  \ land, and to regulate the conditions on and circumstances under which the right\
+  \ of persons to reside on land may be terminated\r\n- the Land Survey Act (1997),\
+  \ which makes provision for the regulation of the survey of land in South Africa\r\
+  \n- the Transformation of Certain Rural Areas Act (1998), which provides for the\
+  \ transfer of certain land to municipalities and certain other legal entities, and\
+  \ for the removal of restrictions on the alienation of land\r\n- the Planning Profession\
+  \ Act (2002), which makes provision for the South African Council for Planners.\
+  \ \r\n\r\nThe act makes provision for different categories of planners and the registration\
+  \ of planners, and authorises the identification of areas of work for planners.\
+  \ The act seeks to protect the public from unethical practices, and ensure a high\
+  \ standard of professional conduct and integrity\r\n\r\n- the Spatial Data Infrastructure\
+  \ Act (2003), which makes provision for the establishment of South African spatial\
+  \ data infrastructure, the committee for spatial information and an electronic metadata\
+  \ catalogue; for the determination of standards and prescriptions with regard to\
+  \ the facilitation of the sharing of spatial information; and for the capture and\
+  \ publishing of metadata\r\n- the Geomatics Profession Act (2013), which makes provision\
+  \ for the establishment of the South African Geomatics Council; for different categories\
+  \ of registered persons and branches in the geomatics profession; and for the identification\
+  \ of areas of work to be performed by the different categories of registered persons\r\
+  \n- the Spatial Planning and Land Use Management Act (2013), which provides for\
+  \ a framework for spatial planning and land use management in South Africa\r\n-\
+  \ the Property Valuation Act (2014), which provides for the establishment of the\
+  \ Office of the Valuer General for the regulation of the valuation of property that\
+  \ has been identified for land reform, and property that has been identified for\
+  \ acquisition or disposal by a department."
+is_vote_primary: true
+name: Rural Development and Land Reform
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Rural%2BDevelopment%2Band%2BLand%2BReform%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Rural Development
+      total_budget: 403820000
+      type: programme
+    - name: Administration
+      total_budget: 248461000
+      type: programme
+    - name: National Geomatics Management Services
+      total_budget: 4396000
+      type: programme
+    - name: Land Reform
+      total_budget: 3770000
+      type: programme
+    - name: Restitution
+      total_budget: 2395000
+      type: programme
+    name: Capital - Payments for capital assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Restitution
+      total_budget: 2919712000
+      type: programme
+    - name: Land Reform
+      total_budget: 603556000
+      type: programme
+    name: Capital - Transfers and subsidies
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 1640443000
+      type: programme
+    - name: Rural Development
+      total_budget: 1104722000
+      type: programme
+    - name: Restitution
+      total_budget: 679385000
+      type: programme
+    - name: National Geomatics Management Services
+      total_budget: 669758000
+      type: programme
+    - name: Land Reform
+      total_budget: 666389000
+      type: programme
+    name: Current - Current payments
+    type: economic_classification_1_and_2
+  - items:
+    - name: Land Reform
+      total_budget: 1641259000
+      type: programme
+    - name: Rural Development
+      total_budget: 312599000
+      type: programme
+    - name: National Geomatics Management Services
+      total_budget: 38646000
+      type: programme
+    - name: Restitution
+      total_budget: 6701000
+      type: programme
+    - name: Administration
+      total_budget: 196000
+      type: programme
+    name: Current - Transfers and subsidies
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Rural%2BDevelopment%2Band%2BLand%2BReform%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 1889100000
+  - name: National Geomatics Management Services
+    total_budget: 712800000
+  - name: Rural Development
+    total_budget: 1821141000
+  - name: Restitution
+    total_budget: 3608193000
+  - name: Land Reform
+    total_budget: 2914974000
+selected_financial_year: 2019-20
+selected_tab: departments
+slug: rural-development-and-land-reform
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Rural%2BDevelopment%2Band%2BLand%2BReform%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Office Accommodation
+      total_budget: 513243000
+      type: subprogramme
+    - name: Provincial Coordination
+      total_budget: 435660000
+      type: subprogramme
+    - name: Corporate Services
+      total_budget: 423794000
+      type: subprogramme
+    - name: Management
+      total_budget: 215609000
+      type: subprogramme
+    - name: Financial Services
+      total_budget: 205717000
+      type: subprogramme
+    - name: Internal Audit
+      total_budget: 48630000
+      type: subprogramme
+    - name: Ministry
+      total_budget: 46447000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Agricultural Land Holding Account
+      total_budget: 1405947000
+      type: subprogramme
+    - name: Land Reform Grants
+      total_budget: 603556000
+      type: subprogramme
+    - name: Land Tenure and Administration
+      total_budget: 443627000
+      type: subprogramme
+    - name: Land Redistribution and Development
+      total_budget: 298228000
+      type: subprogramme
+    - name: Office of Valuer-General
+      total_budget: 142127000
+      type: subprogramme
+    - name: KwaZulu-Natal Ingonyama Trust Board
+      total_budget: 21489000
+      type: subprogramme
+    name: Land Reform
+    type: programme
+  - items:
+    - name: National Geomatics Management Services
+      total_budget: 512803000
+      type: subprogramme
+    - name: Spatial Planning and Land Use Management
+      total_budget: 191987000
+      type: subprogramme
+    - name: South African Geomatics Council
+      total_budget: 4107000
+      type: subprogramme
+    - name: South African Council for Planners
+      total_budget: 3902000
+      type: subprogramme
+    - name: Registration of Deeds Trading account
+      total_budget: 1000
+      type: subprogramme
+    name: National Geomatics Management Services
+    type: programme
+  - items:
+    - name: Restitution Grants
+      total_budget: 2919712000
+      type: subprogramme
+    - name: Restitution Regional Offices
+      total_budget: 503268000
+      type: subprogramme
+    - name: Restitution National Office
+      total_budget: 185213000
+      type: subprogramme
+    name: Restitution
+    type: programme
+  - items:
+    - name: Rural Infrastructure Development
+      total_budget: 874988000
+      type: subprogramme
+    - name: Rural Enterprise and Industrial Development
+      total_budget: 534523000
+      type: subprogramme
+    - name: National Rural Youth Services Corps
+      total_budget: 411630000
+      type: subprogramme
+    name: Rural Development
+    type: programme
+title: Rural Development and Land Reform budget 2019-20  - vulekamali
+vote_number: 39
+vote_primary:
+  name: Rural Development and Land Reform
+  slug: rural-development-and-land-reform
+  url_path: /2019-20/national/departments/rural-development-and-land-reform
+website_url: www.ruraldevelopment.gov.za

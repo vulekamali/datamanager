@@ -1,0 +1,685 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2017-18
+    nominal:
+    - amount: 245664000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 264399000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 245664000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 250635087
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices:
+  - This department did not exist for some years displayed.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 115019000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 125852000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 50801000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 54542000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Integrity and Anti-Corruption
+  - items:
+    - amount: 36766000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 39323000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Monitoring and Evaluation
+  - items:
+    - amount: 43078000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 44682000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Leadership and Management Practices
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 10 - Public Service and Administration
+    url: https://data.vulekamali.gov.za/dataset/b9d30817-1536-4787-bac0-f133d3bd50ca/resource/d3d994ad-ff46-4115-8d17-71b93c8f7079/download/vote-10-public-service-and-administration.pdf
+  name: AENE 2018-19 - Vote 10 - Public Service and Administration
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 10 - Public Service and Administration
+    url: https://data.vulekamali.gov.za/dataset/b9d30817-1536-4787-bac0-f133d3bd50ca/resource/71efa052-39af-495c-9fc6-690d74b2514f/download/aene18chap-tab-vote10.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 10 - Public Service and Administration
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-public-service-and-administration-2018-19/resource/014605ce-e18a-44a6-9891-fe0ad10edd54/download/vote-10-public-service-and-administration.pdf
+  name: 'National Department: Public Service and Administration 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 10 - Public Service and Administration
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-public-service-and-administration-2018-19/resource/b0e88470-55a8-43f2-8069-47cc630728f1/download/ene18-vote10_chaptertables.xlsx
+description: 'National department: Public Service Commission budget data for the 2018-19
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Public%2BService%2BCommission%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 68646000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 56156000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 904000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 113000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 33000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 52660000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 1859000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 20000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 3000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Integrity and Anti-Corruption
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 42846000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 1613000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 65000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 158000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Leadership and Management Practices
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 38593000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 730000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Monitoring and Evaluation
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2017-18
+    nominal:
+    - amount: 225800000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 229320000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 229039000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 242764000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 264399000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 278229000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 297627000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 264753349
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 255670321
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 240233967
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 242764000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 250635087
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 250491142
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 253887909
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: false
+    url_path: /2015-16/national
+  id: 2015-16
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2016-17/national
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/public-service-commission
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/public-service-commission
+  id: 2018-19
+  is_selected: true
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: '## Vote purpose
+
+
+  Promote constitutional values and principles of public administration in the public
+  service.
+
+
+  ## Mandate
+
+
+  The Public Service Commission is an independent institution established in terms
+  of chapter 10 of the Constitution. The commission derives its mandate from sections
+  195 and 196 of the Constitution and is tasked and empowered, either of its own accord
+  or if it receives any complaint, to investigate, monitor and evaluate the organisation
+  and administration of the public service. The mandate also requires the commission
+  to: evaluate the performance of government programmes and promote measures throughout
+  the public service, which ensures effective and efficient performance within the
+  public service; and promote the values and principles of public administration,
+  as set out in the Constitution.
+
+
+  '
+is_vote_primary: false
+name: Public Service Commission
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Public%2BService%2BCommission%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 68646000.0
+      type: programme
+    - name: Integrity and Anti-Corruption
+      total_budget: 52660000.0
+      type: programme
+    - name: Leadership and Management Practices
+      total_budget: 42846000.0
+      type: programme
+    - name: Monitoring and Evaluation
+      total_budget: 38593000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 56156000.0
+      type: programme
+    - name: Integrity and Anti-Corruption
+      total_budget: 1859000.0
+      type: programme
+    - name: Leadership and Management Practices
+      total_budget: 1613000.0
+      type: programme
+    - name: Monitoring and Evaluation
+      total_budget: 730000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 904000.0
+      type: programme
+    - name: Leadership and Management Practices
+      total_budget: 65000.0
+      type: programme
+    - name: Integrity and Anti-Corruption
+      total_budget: 20000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 33000.0
+      type: programme
+    name: Transfers and subsidies - Foreign governments and international organisations
+    type: economic_classification_1_and_2
+  - items:
+    - name: Leadership and Management Practices
+      total_budget: 158000.0
+      type: programme
+    - name: Administration
+      total_budget: 113000.0
+      type: programme
+    - name: Integrity and Anti-Corruption
+      total_budget: 3000.0
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Public%2BService%2BCommission%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 125852000.0
+  - name: Leadership and Management Practices
+    total_budget: 44682000.0
+  - name: Monitoring and Evaluation
+    total_budget: 39323000.0
+  - name: Integrity and Anti-Corruption
+    total_budget: 54542000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: public-service-commission
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Public%2BService%2BCommission%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 55798000.0
+      type: subprogramme
+    - name: Property Management
+      total_budget: 34484000.0
+      type: subprogramme
+    - name: Public Service Commission
+      total_budget: 20432000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 15138000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Professional Ethics
+      total_budget: 23036000.0
+      type: subprogramme
+    - name: 'Programme Management: Integrity and Anti-Corruption'
+      total_budget: 18088000.0
+      type: subprogramme
+    - name: Public Administration Investigations
+      total_budget: 13418000.0
+      type: subprogramme
+    name: Integrity and Anti-Corruption
+    type: programme
+  - items:
+    - name: 'Programme Management: Leadership and Management Practices'
+      total_budget: 19654000.0
+      type: subprogramme
+    - name: Labour Relations Improvement
+      total_budget: 13221000.0
+      type: subprogramme
+    - name: Leadership and Human Resource Reviews
+      total_budget: 11807000.0
+      type: subprogramme
+    name: Leadership and Management Practices
+    type: programme
+  - items:
+    - name: 'Programme Management: Monitoring and Evaluation'
+      total_budget: 22389000.0
+      type: subprogramme
+    - name: Governance Monitoring
+      total_budget: 9392000.0
+      type: subprogramme
+    - name: Service Delivery and Compliance Evaluations
+      total_budget: 7542000.0
+      type: subprogramme
+    name: Monitoring and Evaluation
+    type: programme
+title: Public Service Commission budget 2018-19  - vulekamali
+vote_number: 10
+vote_primary:
+  name: Public Service and Administration
+  slug: public-service-and-administration
+  url_path: /2018-19/national/departments/public-service-and-administration

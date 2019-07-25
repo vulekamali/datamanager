@@ -1,0 +1,615 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 292016000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 302056000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 316617000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    real:
+    - amount: 320803347
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 316893570
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 316617000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2019 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 53875000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 46054000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 45310000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Provincial Policing Functions
+  - items:
+    - amount: 68838000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 70081000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 74092000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Civilian Oversight
+  - items:
+    - amount: 80993000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 86206000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 92966000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 88310000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 99715000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 104249000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Security Risk Management
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget: null
+description: 'Western Cape department: Community Safety budget data for the 2019-20
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cvotenumber.department%253A%2522Community%2BSafety%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 1230000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 54450000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 42108000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 2643000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 63723000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 10196000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Civilian Oversight
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 452000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 30649000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 25458000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Provincial Policing Functions
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 9283000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 111159000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 7950000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Security Risk Management
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 269233000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 285919000
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 295381000
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 343424000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 359301000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 392914000
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 414750000
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+    real:
+    - amount: 314393779
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 314105296
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 309890682
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 343424000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 341676913
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 354233833
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 354667067
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/western-cape/departments/community-safety
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/western-cape/departments/community-safety
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/western-cape/departments/community-safety
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/western-cape/departments/community-safety
+  id: 2019-20
+  is_selected: true
+government:
+  name: Western Cape
+  slug: western-cape
+government_functions: []
+intro: ''
+is_vote_primary: true
+name: Community Safety
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cvotenumber.department%253A%2522Community%2BSafety%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Security Risk Management
+      total_budget: 9283000
+      type: programme
+    - name: Civilian Oversight
+      total_budget: 2643000
+      type: programme
+    - name: Administration
+      total_budget: 1230000
+      type: programme
+    - name: Provincial Policing Functions
+      total_budget: 452000
+      type: programme
+    name: Capital - Payments for capital assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Security Risk Management
+      total_budget: 111159000
+      type: programme
+    - name: Civilian Oversight
+      total_budget: 63723000
+      type: programme
+    - name: Administration
+      total_budget: 54450000
+      type: programme
+    - name: Provincial Policing Functions
+      total_budget: 30649000
+      type: programme
+    name: Current - Current payments
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 42108000
+      type: programme
+    - name: Provincial Policing Functions
+      total_budget: 25458000
+      type: programme
+    - name: Civilian Oversight
+      total_budget: 10196000
+      type: programme
+    - name: Security Risk Management
+      total_budget: 7950000
+      type: programme
+    name: Current - Transfers and subsidies
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cvotenumber.department%253A%2522Community%2BSafety%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 97788000
+  - name: Civilian Oversight
+    total_budget: 76562000
+  - name: Provincial Policing Functions
+    total_budget: 56559000
+  - name: Security Risk Management
+    total_budget: 128392000
+selected_financial_year: 2019-20
+selected_tab: departments
+slug: community-safety
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cvotenumber.department%253A%2522Community%2BSafety%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 62736000
+      type: subprogramme
+    - name: Financial Management
+      total_budget: 24589000
+      type: subprogramme
+    - name: Office Of The Mec
+      total_budget: 5709000
+      type: subprogramme
+    - name: Office Of The Hod
+      total_budget: 4754000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Safety Promotion
+      total_budget: 23260000
+      type: subprogramme
+    - name: Community Police Relations
+      total_budget: 22732000
+      type: subprogramme
+    - name: Monitoring And Evaluation
+      total_budget: 14974000
+      type: subprogramme
+    - name: Policy And Research
+      total_budget: 12860000
+      type: subprogramme
+    - name: Programme Support
+      total_budget: 2736000
+      type: subprogramme
+    name: Civilian Oversight
+    type: programme
+  - items:
+    - name: Safety Partnership
+      total_budget: 45436000
+      type: subprogramme
+    - name: Western Cape  Police Ombudsman
+      total_budget: 11123000
+      type: subprogramme
+    name: Provincial Policing Functions
+    type: programme
+  - items:
+    - name: Provincial Security Operations
+      total_budget: 75721000
+      type: subprogramme
+    - name: Programme Support
+      total_budget: 35518000
+      type: subprogramme
+    - name: Security Advisory Services
+      total_budget: 17153000
+      type: subprogramme
+    name: Security Risk Management
+    type: programme
+title: Community Safety budget 2019-20  - vulekamali
+vote_number: 4
+vote_primary:
+  name: Community Safety
+  slug: community-safety
+  url_path: /2019-20/provincial/western-cape/departments/community-safety
+website_url: null

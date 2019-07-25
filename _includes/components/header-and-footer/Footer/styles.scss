@@ -1,0 +1,108 @@
+.Footer {
+  background-color: white;
+  border-top: 10px solid #3f3f3f;
+  font-size: 14px;
+  line-height: 2.14;
+}
+
+.Footer-container {
+  margin: 0;
+  padding: 0;
+  @include clearfix;
+}
+
+.Footer-section {
+  display: block;
+  width: 100%;
+
+  @media screen and (min-width: 650px) {
+    float: left;
+    width: (100% / 3);
+    padding-right: 10px;
+
+    &.is-double {
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    float: left;
+    width: 20%;
+    padding-right: 10px;
+
+    &.is-double {
+      width: 40%;
+    }
+  }
+}
+
+.Footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  font-weight: 900;
+  margin-bottom: 0;
+  padding-bottom: 8px;
+}
+
+.Footer-wrap {
+  padding: 25px 45px 40px;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.Footer-link {
+  font-size: 14px;
+  text-decoration: none;
+  color: #4a4a4a;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 2px 10px;
+  position: relative;
+  left: -10px;
+
+  &:hover {
+    background-color: darken(#f0f0f0, 5%);
+  }
+}
+
+.Footer-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.Footer-newsletter {
+  margin: 5px 0 15px;
+
+  @media screen and (min-width: 650px) {
+    display: table;
+    width: 80%;
+  }
+}
+
+.Footer-button {
+  width: 100px;
+  padding-top: 10px;
+
+  @media screen and (min-width: 650px) {
+    display: table-cell;
+    padding-top: 0;
+    padding-left: 10px;
+    vertical-align: top;
+  }
+}
+
+.Footer-input {
+  display: table-cell;
+}
+
+.SocialIcon {
+  line-height: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.Footer-socialMedia {
+  position: relative;
+  left: -15px;
+}

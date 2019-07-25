@@ -1,0 +1,414 @@
+data:
+  items:
+  - description: ''
+    focus_areas:
+    - slug: economic-development
+      title: Economic development
+      url: 2018-19/focus/economic-development
+    percentage_of_budget: 1.8973602887262833
+    programmes:
+    - amount: 532805000.0
+      percentage: 22.9251394513508
+      slug: administration
+      title: Administration
+    - amount: 1759864000.0
+      percentage: 75.72212651047198
+      slug: agriculture
+      title: Agriculture
+    - amount: 31439000.0
+      percentage: 1.3527340381772275
+      slug: rural-development
+      title: Rural Development
+    slug: agriculture-and-rural-development
+    title: Agriculture And Rural Development
+    total: 2324108000.0
+  - description: ''
+    focus_areas:
+    - slug: learning-and-culture
+      title: Learning and culture
+      url: 2018-19/focus/learning-and-culture
+    percentage_of_budget: 0.7858257836897198
+    programmes:
+    - amount: 152667000.0
+      percentage: 15.860336536213952
+      slug: 1-administration
+      title: 1. Administration
+    - amount: 255489000.0
+      percentage: 26.54235375883961
+      slug: 2-cultural-affairs
+      title: 2. Cultural Affairs
+    - amount: 554415000.0
+      percentage: 57.59730970494644
+      slug: 3-library-and-archive-services
+      title: 3. Library And Archive Services
+    slug: arts-and-culture
+    title: Arts And Culture
+    total: 962571000.0
+  - description: ''
+    focus_areas:
+    - slug: peace-and-security
+      title: Peace and security
+      url: 2018-19/focus/peace-and-security
+    percentage_of_budget: 0.183644348536595
+    programmes:
+    - amount: 83619000.0
+      percentage: 37.17242574983663
+      slug: administration
+      title: Administration
+    - amount: 141330000.0
+      percentage: 62.827574250163366
+      slug: provincial-secretariat-for-police-service
+      title: Provincial Secretariat For Police Service
+    slug: community-safety-and-liaison
+    title: Community Safety And Liaison
+    total: 224949000.0
+  - description: ''
+    focus_areas:
+    - slug: community-development
+      title: Community development
+      url: 2018-19/focus/community-development
+    percentage_of_budget: 1.3707725752482696
+    programmes:
+    - amount: 454952000.0
+      percentage: 27.095281826617164
+      slug: 1-administration
+      title: 1. Administration
+    - amount: 300739000.0
+      percentage: 17.910917989711045
+      slug: 2-local-governance
+      title: 2. Local Governance
+    - amount: 350598000.0
+      percentage: 20.880338184793835
+      slug: 3-development-and-planning
+      title: 3. Development And Planning
+    - amount: 572793000.0
+      percentage: 34.11346199887796
+      slug: 4-traditional-institutional-management
+      title: 4. Traditional Institutional Management
+    slug: co-operative-governance-and-traditional-affairs
+    title: Co-Operative Governance And Traditional Affairs
+    total: 1679082000.0
+  - description: ''
+    focus_areas:
+    - slug: economic-development
+      title: Economic development
+      url: 2018-19/focus/economic-development
+    percentage_of_budget: 2.4567355421619173
+    programmes:
+    - amount: 271110000.0
+      percentage: 9.009083852170075
+      slug: administration
+      title: Administration
+    - amount: 120145000.0
+      percentage: 3.992462024340577
+      slug: business-regulation-and-governance
+      title: Business Regulation And Governance
+    - amount: 40024000.0
+      percentage: 1.3300120692680282
+      slug: economic-planning
+      title: Economic Planning
+    - amount: 1009677000.0
+      percentage: 33.55193374131358
+      slug: environmental-affairs
+      title: Environmental Affairs
+    - amount: 419310000.0
+      percentage: 13.933823724884492
+      slug: integrated-economic-development-services
+      title: Integrated Economic Development Services
+    - amount: 247786000.0
+      percentage: 8.234018853579043
+      slug: tourism
+      title: Tourism
+    - amount: 901244000.0
+      percentage: 29.9486657344442
+      slug: trade-and-sector-development
+      title: Trade And Sector Development
+    slug: economic-development-tourism-and-environmental-affairs
+    title: Economic Development, Tourism And Environmental Affairs
+    total: 3009296000.0
+  - description: ''
+    focus_areas:
+    - slug: learning-and-culture
+      title: Learning and culture
+      url: 2018-19/focus/learning-and-culture
+    percentage_of_budget: 41.55685741658775
+    programmes:
+    - amount: 1984826000.0
+      percentage: 3.8991796310530153
+      slug: administration
+      title: Administration
+    - amount: 1280418000.0
+      percentage: 2.5153740352220493
+      slug: early-childhood-development
+      title: Early Childhood Development
+    - amount: 1566379000.0
+      percentage: 3.0771428282928532
+      slug: examination-and-education-related-services
+      title: Examination And Education Related Services
+    - amount: 91028000.0
+      percentage: 0.1788239994112803
+      slug: independent-school-subsidies
+      title: Independent School Subsidies
+    - amount: 2186607000.0
+      percentage: 4.295577282602072
+      slug: infrastructure-development
+      title: Infrastructure Development
+    - amount: 42626473000.0
+      percentage: 83.7394689837957
+      slug: public-ordinary-school-education
+      title: Public Ordinary School Education
+    - amount: 1167951000.0
+      percentage: 2.29443323962302
+      slug: public-special-school-education
+      title: Public Special School Education
+    slug: education
+    title: Education
+    total: 50903682000.0
+  - description: ''
+    focus_areas:
+    - slug: health
+      title: Health
+      url: 2018-19/focus/health
+    percentage_of_budget: 34.57187703580197
+    programmes:
+    - amount: 811207000.0
+      percentage: 1.9155885434436242
+      slug: administration
+      title: Administration
+    - amount: 4955993000.0
+      percentage: 11.703108346188824
+      slug: central-hospital-services
+      title: Central Hospital Services
+    - amount: 20825714000.0
+      percentage: 49.177952295078185
+      slug: district-health-services
+      title: District Health Services
+    - amount: 1415686000.0
+      percentage: 3.3430084833014635
+      slug: emergency-medical-services
+      title: Emergency Medical  Services
+    - amount: 313640000.0
+      percentage: 0.7406311715328618
+      slug: health-care-support-services
+      title: Health Care Support Services
+    - amount: 1528656000.0
+      percentage: 3.6097764448116902
+      slug: health-facilities-management
+      title: Health Facilities Management
+    - amount: 1264350000.0
+      percentage: 2.9856428444317498
+      slug: health-sciences-and-training
+      title: Health Sciences And Training
+    - amount: 11232418000.0
+      percentage: 26.5242918712116
+      slug: provincial-hospital-services
+      title: Provincial Hospital Services
+    slug: health
+    title: Health
+    total: 42347664000.0
+  - description: ''
+    focus_areas:
+    - slug: community-development
+      title: Community development
+      url: 2018-19/focus/community-development
+    percentage_of_budget: 2.9775391880984805
+    programmes:
+    - amount: 225774000.0
+      percentage: 6.190274994468416
+      slug: administration
+      title: Administration
+    - amount: 192578000.0
+      percentage: 5.280106557374801
+      slug: housing-asset-management-property-management
+      title: Housing Asset Management, Property Management
+    - amount: 3210917000.0
+      percentage: 88.03697154859967
+      slug: housing-development
+      title: Housing Development
+    - amount: 17968000.0
+      percentage: 0.49264689955711677
+      slug: housing-needs-research-and-planning
+      title: Housing Needs, Research And  Planning
+    slug: human-settlements
+    title: Human Settlements
+    total: 3647237000.0
+  - description: ''
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2018-19/focus/general-public-services
+    percentage_of_budget: 0.6426045973711809
+    programmes:
+    - amount: 102326000.0
+      percentage: 12.999770052735421
+      slug: administration
+      title: Administration
+    - amount: 410377000.0
+      percentage: 52.13539701475093
+      slug: institutional-development
+      title: Institutional Development
+    - amount: 274434000.0
+      percentage: 34.86483293251366
+      slug: policy-and-governance
+      title: Policy And Governance
+    slug: office-of-the-premier
+    title: Office Of The Premier
+    total: 787137000.0
+  - description: ''
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2018-19/focus/general-public-services
+    percentage_of_budget: 0.4614306212242019
+    programmes:
+    - amount: 191996000.0
+      percentage: 33.96872688928441
+      slug: administration
+      title: Administration
+    - amount: 90251000.0
+      percentage: 15.967580420867142
+      slug: direct-charge-against-the-provincial-revenue-fund
+      title: Direct Charge Against The Provincial Revenue Fund
+    - amount: 282967000.0
+      percentage: 50.06369268984845
+      slug: parliamentary-business
+      title: Parliamentary Business
+    slug: provincial-legislature
+    title: Provincial Legislature
+    total: 565214000.0
+  - description: ''
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2018-19/focus/general-public-services
+    percentage_of_budget: 0.5313831422343273
+    programmes:
+    - amount: 192377000.0
+      percentage: 29.555538485174377
+      slug: administration
+      title: Administration
+    - amount: 209602000.0
+      percentage: 32.201874327853744
+      slug: financial-governance
+      title: Financial Governance
+    - amount: 144555000.0
+      percentage: 22.208480565371026
+      slug: internal-audit
+      title: Internal Audit
+    - amount: 63709000.0
+      percentage: 9.787832232293747
+      slug: municipal-finance-management
+      title: Municipal Finance Management
+    - amount: 40657000.0
+      percentage: 6.246274389307113
+      slug: sustainable-resource-management
+      title: Sustainable Resource Management
+    slug: provincial-treasury
+    title: Provincial Treasury
+    total: 650900000.0
+  - description: ''
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2018-19/focus/general-public-services
+    percentage_of_budget: 1.2963593421638342
+    programmes:
+    - amount: 406788000.0
+      percentage: 25.617469765707853
+      slug: administration
+      title: Administration
+    - amount: 683593000.0
+      percentage: 43.04926155528071
+      slug: property-management
+      title: Property Management
+    - amount: 497551000.0
+      percentage: 31.333268679011443
+      slug: provision-of-buildings-structures-and-equipment
+      title: Provision Of Buildings, Structures And Equipment
+    slug: public-works
+    title: Public Works
+    total: 1587932000.0
+  - description: ''
+    focus_areas:
+    - slug: social-development
+      title: Social development
+      url: 2018-19/focus/social-development
+    percentage_of_budget: 2.68416818014393
+    programmes:
+    - amount: 519846000.0
+      percentage: 15.81096888513639
+      slug: administration
+      title: Administration
+    - amount: 1391089000.0
+      percentage: 42.30957802013576
+      slug: children-and-families
+      title: Children And Families
+    - amount: 211501000.0
+      percentage: 6.432743024232622
+      slug: development-and-research
+      title: Development And Research
+    - amount: 393093000.0
+      percentage: 11.955812282800904
+      slug: restorative-services
+      title: Restorative Services
+    - amount: 772353000.0
+      percentage: 23.490897787694326
+      slug: social-welfare-services
+      title: Social Welfare Services
+    slug: social-development
+    title: Social Development
+    total: 3287882000.0
+  - description: ''
+    focus_areas:
+    - slug: learning-and-culture
+      title: Learning and culture
+      url: 2018-19/focus/learning-and-culture
+    percentage_of_budget: 0.3689663623939636
+    programmes:
+    - amount: 94791000.0
+      percentage: 20.973641064446966
+      slug: administration
+      title: Administration
+    - amount: 357162000.0
+      percentage: 79.02635893555303
+      slug: sport-and-recreation
+      title: Sport And Recreation
+    slug: sport-and-recreation
+    title: Sport And Recreation
+    total: 451953000.0
+  - description: ''
+    focus_areas:
+    - slug: community-development
+      title: Community development
+      url: 2018-19/focus/community-development
+    - slug: economic-development
+      title: Economic development
+      url: 2018-19/focus/economic-development
+    - slug: peace-and-security
+      title: Peace and security
+      url: 2018-19/focus/peace-and-security
+    percentage_of_budget: 8.214475575617584
+    programmes:
+    - amount: 363292000.0
+      percentage: 3.6105178200817387
+      slug: 1-administration
+      title: 1. Administration
+    - amount: 7460222000.0
+      percentage: 74.14218995399247
+      slug: 2-transport-infrastructure
+      title: 2. Transport Infrastructure
+    - amount: 1281846000.0
+      percentage: 12.739415747113883
+      slug: 3-transport-operations
+      title: 3. Transport Operations
+    - amount: 920064000.0
+      percentage: 9.143904813801804
+      slug: 4-transport-regulation
+      title: 4. Transport Regulation
+    - amount: 36623000.0
+      percentage: 0.3639716650101118
+      slug: 5-community-based-programme
+      title: 5. Community Based Programme
+    slug: transport
+    title: Transport
+    total: 10062047000.0

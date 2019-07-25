@@ -1,0 +1,58 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Adjustments to the expenditure plans.\r\n\r\nIn the middle of each\
+    \ year, the adjustments budget process provides an opportunity to make permissible\
+    \ revisions to the main Budget, as contained in ENE publications, in response\
+    \ to changes that have affected the planned government spending for that year.\
+    \ These adjustments for the current year are contained in an adjustments appropriation\
+    \ bill. The Adjusted Estimates of National Expenditure (AENE) publication contains\
+    \ detailed data on these mid-year adjustments as well as the revised current year\
+    \ revenue and expenditure estimates."
+  name: Adjusted Estimates of National Expenditure
+  slug: adjusted-estimates-of-national-expenditure
+  url_path: /datasets/adjusted-estimates-of-national-expenditure
+created: '2018-11-23T10:36:36.657260'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2018-12-11T09:13:38.987399'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: Adjusted Estimates of National Expenditure 2016-17
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: CSV
+  name: Adjusted Estimates of National Expenditure 2016-17
+  url: http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/adjusted-estimates-of-national-expenditure-2016-17/final/data/aene-2016-17.csv
+- description: ''
+  format: OpenSpending API
+  name: Adjusted Estimates of National Expenditure 2016-17
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:adjusted-estimates-of-national-expenditure-2016-17/model/
+- description: 'Source data provided by Treasury data owners for vulekamali.gov.za '
+  format: XLSX
+  name: NAT AENE 2016-17.xlsx
+  url: https://data.vulekamali.gov.za/dataset/d1b2f600-d041-413b-bd39-f49b81ca11e3/resource/f565a37d-77bb-4d92-9e76-ed2256352889/download/nat-aene-2016-17.xlsx
+- description: ''
+  format: CSV
+  name: Value of Virements
+  url: https://data.vulekamali.gov.za/dataset/d1b2f600-d041-413b-bd39-f49b81ca11e3/resource/9213ef33-f940-43d2-a4d7-55f4993c17e5/download/aene-2016-17-table-2-virements.csv
+selected_tab: datasets
+slug: adjusted-estimates-of-national-expenditure-2016-17
+title: Adjusted Estimates of National Expenditure 2016-17 - vulekamali
+url_path: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2016-17
+usage: null
+use_for: null

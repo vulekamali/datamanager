@@ -1,0 +1,84 @@
+---
+layout: page-shell
+---
+
+{% assign page_data = site.data.datasets.contributed[page.data_key] %}
+
+
+<div class="Page-content">
+  <main class="Page-contentInner">
+
+    <div class="Section is-invisible">
+      <a href="/">vulekamali</a>
+      <span> / </span>
+      <a href="/datasets/">Data and Analysis</a>
+      <span> / </span>
+      <a href="/datasets/contributed">Contributed Data and Analysis</a>
+      <span> / {{ page_data.name }}</span>
+    </div>
+
+    <h1 class="Page-mainHeading u-marginTop15">{{ page_data.name }}</h1>
+
+    {%
+      include components/contributed-data/CsoMeta/index.html
+      author=page_data.author
+      created=page_data.created
+      last_updated=page_data.last_updated
+      organization=page_data.organization
+      license=page_data.license
+      facebook=page_data.facebook
+      twitter=page_data.twitter
+    %}
+
+    <main class="Page-main">
+      <div class="Section u-marginBottom20">
+        {% if page_data.intro %}
+          <div class="Section-card is-invisible">
+            <h2 class="Section-title">Data contributed by: {{ page_data.organization.name }}</h2>
+            {{ page_data.intro |strip_html | markdownify }}
+          </div>
+        {% endif %}
+
+        {% if page_data.methodology and page_data.methodology != '' %}
+          <div class="Section-card is-invisible">
+            <h2 class="Section-title">Methodology Used in Gathering and Analysis</h2>
+            {{ page_data.methodology | strip_html | markdownify }}
+          </div>
+        {% endif %}
+      </div>
+
+      {%
+        include components/universal/Downloads/index.html
+        resources=page_data.resources
+        utils="u-marginBottom20"
+      %}
+
+      <div class="Section u-marginBottom20">
+        <h2 class="Section-title">Discuss this dataset with others</h2>
+        <div data-enhance-component="Comments" data-url="https://vulekamali.gov.za{{ page_data.url_path }}">
+          <div id="discourse-comments"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <aside class="Page-sidebar">
+      <div class="Section u-marginBottom20">
+        <h2 class="Section-title">Share this page:</h2>
+        <div data-component="Share"></div>
+      </div>
+
+      <div class="Section is-bevel">
+        <div class="Section-card">
+          <h2 class="Section-title">How can I contribute?</h2>
+          <p>Do you have data related to this dataset that you would like to contribute?</p>
+          <a href="https://data.vulekamali.gov.za/user/login?came_from=/dataset/new" class="Button" target="_blank">
+            Log in and submit your data
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+</div>

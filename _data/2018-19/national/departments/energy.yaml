@@ -1,0 +1,962 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type:
+  - amount: 118515000
+    name: Roll-overs
+    type: kind
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aaene-2018-19-v2/aggregate/%3Fcut%3Dfinyear.finyear%253A2018%257Cdepartment.department%253AEnergy%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%26pagesize%3D10000
+  direct_charges: null
+  econ_classes:
+  - items:
+    - amount: 170265000
+      name: Goods and services
+      type: economic_classification_3
+    name: Current payments
+    type: economic_classification_2
+  - items:
+    - amount: 750000
+      name: Machinery and equipment
+      type: economic_classification_3
+    name: Payments for capital assets
+    type: economic_classification_2
+  - items:
+    - amount: -52500000
+      name: Public corporations and private enterprises
+      type: economic_classification_3
+    name: Transfers and subsidies
+    type: economic_classification_2
+  programmes:
+  - amount: 750000
+    name: Administration
+  - amount: 114524000
+    name: Clean Energy
+  - amount: -51759000
+    name: Electrification and Energy Programme and Project Management
+  - amount: -3000000
+    name: Energy Policy and Planning
+  - amount: 59000000
+    name: Nuclear Energy
+  - amount: -1000000
+    name: Petroleum and Petroleum Products Regulation
+  special_appropriation: null
+  total_change:
+    amount: 118515000
+    percentage: 1.6822528604260287
+  virements:
+    amount: 59000000
+    label: Value of virements
+    percentage: 0.8374713645119664
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 7482094000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 7267619000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 7267619000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 7142117255
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 7545171000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 7550556000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 7550556000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 7512841593
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 8113450000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 8145422000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 8145422000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 7944647230
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 7045017000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 7163532000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 8737130331
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 8486679584
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 8486679584
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 8340126346
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 8288984562
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 8294900423
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 8294900423
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 8253468077
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 8511998247
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 8545540773
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 8545540773
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 8334903561
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 7045017000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 7163532000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 45096000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 44096000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 40586000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 38094559
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 46748000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 43518000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 40164000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 39877828
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 46668000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 46668000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 43119000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 41707264
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 53078000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 50078000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Energy Policy and Planning
+  - items:
+    - amount: 74378000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 73378000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 69008000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 68958173
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 77871000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 77528000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 79001000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 78991285
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 81828000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 81828000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 78748000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 74638966
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 87132000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 86132000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Petroleum and Petroleum Products Regulation
+  - items:
+    - amount: 242598000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 246598000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 277898000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 277766895
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 240137000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 244822000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 247018000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 282761955
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 239541000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 263561000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 278060000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 272382201
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 282638000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 283388000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 654398000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 653898000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 655116000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 655028908
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 863575000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 880141000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 879834000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 872451437
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 786875000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 790875000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 795425000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 794190869
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 816586000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 875586000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Nuclear Energy
+  - items:
+    - amount: 687327000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 435827000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 400961000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 281783365
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 616933000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 599392000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 589894000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 560100615
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 774510000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 742510000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 730490000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 609554933
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 370183000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 484707000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Clean Energy
+  - items:
+    - amount: 5778297000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 5813822000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 5824050000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 5820485355
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 5699907000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 5705155000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 5714645000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 5678658473
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 6184028000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 6219980000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 6219580000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 6152172997
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 5435400000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 5383641000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Electrification and Energy Programme and Project Management
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 26 - Energy
+    url: https://data.vulekamali.gov.za/dataset/05cd11c8-efe0-4dee-a99a-e5ab76483793/resource/68d33229-4a7e-4249-a96b-bd56019658ef/download/vote-26-energy.pdf
+  name: AENE 2018-19 - Vote 26 - Energy
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 26 - Energy
+    url: https://data.vulekamali.gov.za/dataset/05cd11c8-efe0-4dee-a99a-e5ab76483793/resource/a3b36268-ac91-4b14-8e81-c3b8d6f20e36/download/aene18chap-tab-vote26.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 26 - Energy
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-energy-2018-19/resource/fd5eadda-1a21-4b08-adc8-c4ba40e55af5/download/vote-26-energy.pdf
+  name: 'National Department: Energy 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 26 - Energy
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-energy-2018-19/resource/ef461a09-0802-4b63-9442-62938ab1d42d/download/ene18-vote26_chaptertables.xlsx
+description: 'National department: Energy budget data for the 2018-19 financial year
+  from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Energy%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 164202000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 112335000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 4539000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 1108000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 454000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 62265000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 19906000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 215024000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 70241000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 2747000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Clean Energy
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 49620000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 17623000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Public corporations and private enterprises
+        total_budget: 3463680000.0
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 1904477000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Electrification and Energy Programme and Project Management
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 41632000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 11446000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Energy Policy and Planning
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 27746000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 21794000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Public corporations and private enterprises
+        total_budget: 682714000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 62042000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 22290000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Nuclear Energy
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 63363000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 20891000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Foreign governments and international organisations
+        total_budget: 2878000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Petroleum and Petroleum Products Regulation
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 6220113000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 7142117000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 7512842000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 8145422000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 7045017000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 7573646000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 7997605000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 7638763602
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 8340126048
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 8253468524
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 8545540773
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 7045017000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 7202150812
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 7210285919
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/energy
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/energy
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/energy
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/energy
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose\n\nFormulate energy policies, regulatory frameworks and legislation,\
+  \ and oversee their implementation, to ensure energy security, the promotion of\
+  \ environmentally friendly energy carriers, and access to affordable and reliable\
+  \ energy for all South Africans. \n\n## Mandate\n\nThe Department of Energy is mandated\
+  \ to ensure the secure and sustainable provision of energy in support of socioeconomic\
+  \ development. It aims to achieve this by developing an integrated energy plan for\
+  \ the entire energy sector and regulating energy industries, and promoting investment\
+  \ in accordance with the integrated resource plan for electricity. A number of acts\
+  \ regulate the energy sector and reflect the legislative measures the department\
+  \ has instituted to govern the sector. Key among these are:\n\n * the National Energy\
+  \ Act (2008)\n * the Petroleum Products Act (1977)\n * the Electricity Regulation\
+  \ Act (2006).\n\nThe National Energy Act (2008) sets out the core aspects of the\
+  \ department\u2019s mandate and is the enabling legislation that empowers the Minister\
+  \ of Energy to:\n\n * ensure that diverse energy resources are available in sustainable\
+  \ quantities and at affordable prices in the South African economy to support economic\
+  \ growth and poverty alleviation, while taking into account environmental considerations\n\
+  \ * plan for the increased generation and consumption of renewable energy, a contingency\
+  \ energy supply, the holding of strategic energy feedstock and carriers, adequate\
+  \ investment in appropriate upkeep, and access to energy infrastructure\n * collect\
+  \ data and information regarding energy demand, supply and generation\n * promote\
+  \ electricity regulation, energy research and the efficient generation and consumption\
+  \ of energy.\n\nThe department is also mandated to regulate the petroleum industry\
+  \ at the manufacturing, wholesale and retail levels through the implementation of\
+  \ the Petroleum Products Act (1977). The Petroleum and Liquid Fuels Charter is annexed\
+  \ to the Petroleum Products Amendment Act (2003), and outlines the department\u2019\
+  s strategy to effect transformation in the industry.\n\nIn terms of its policy mandate,\
+  \ the department is working with a range of documents and legislation that support\
+  \ the long-term vision for South Africa to use as much renewable energy as possible;\
+  \ create the necessary conditions to stimulate an efficient electricity market;\
+  \ and position South Africa to become globally competitive in the use of innovative\
+  \ technology for the design, manufacture and deployment of state of the art nuclear\
+  \ energy systems, power reactors and nuclear fuel cycle systems\n\n\n"
+is_vote_primary: true
+name: Energy
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Energy%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 164202000.0
+      type: programme
+    - name: Petroleum and Petroleum Products Regulation
+      total_budget: 63363000.0
+      type: programme
+    - name: Electrification and Energy Programme and Project Management
+      total_budget: 49620000.0
+      type: programme
+    - name: Energy Policy and Planning
+      total_budget: 41632000.0
+      type: programme
+    - name: Nuclear Energy
+      total_budget: 21794000.0
+      type: programme
+    - name: Clean Energy
+      total_budget: 19906000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 112335000.0
+      type: programme
+    - name: Clean Energy
+      total_budget: 62265000.0
+      type: programme
+    - name: Nuclear Energy
+      total_budget: 27746000.0
+      type: programme
+    - name: Petroleum and Petroleum Products Regulation
+      total_budget: 20891000.0
+      type: programme
+    - name: Electrification and Energy Programme and Project Management
+      total_budget: 17623000.0
+      type: programme
+    - name: Energy Policy and Planning
+      total_budget: 11446000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 4539000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Clean Energy
+      total_budget: 70241000.0
+      type: programme
+    - name: Nuclear Energy
+      total_budget: 62042000.0
+      type: programme
+    - name: Administration
+      total_budget: 1108000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Nuclear Energy
+      total_budget: 22290000.0
+      type: programme
+    - name: Petroleum and Petroleum Products Regulation
+      total_budget: 2878000.0
+      type: programme
+    - name: Clean Energy
+      total_budget: 2747000.0
+      type: programme
+    name: Transfers and subsidies - Foreign governments and international organisations
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 454000.0
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Electrification and Energy Programme and Project Management
+      total_budget: 1904477000.0
+      type: programme
+    - name: Clean Energy
+      total_budget: 215024000.0
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+  - items:
+    - name: Electrification and Energy Programme and Project Management
+      total_budget: 3463680000.0
+      type: programme
+    - name: Nuclear Energy
+      total_budget: 682714000.0
+      type: programme
+    name: Transfers and subsidies - Public corporations and private enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Energy%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 282638000.0
+  - name: Energy Policy and Planning
+    total_budget: 53078000.0
+  - name: Petroleum and Petroleum Products Regulation
+    total_budget: 87132000.0
+  - name: Electrification and Energy Programme and Project Management
+    total_budget: 5435400000.0
+  - name: Nuclear Energy
+    total_budget: 816586000.0
+  - name: Clean Energy
+    total_budget: 370183000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: energy
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Energy%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 79232000.0
+      type: subprogramme
+    - name: Departmental Management
+      total_budget: 73165000.0
+      type: subprogramme
+    - name: Office Accommodation
+      total_budget: 49177000.0
+      type: subprogramme
+    - name: Finance Administration
+      total_budget: 39338000.0
+      type: subprogramme
+    - name: Ministry
+      total_budget: 33272000.0
+      type: subprogramme
+    - name: Audit Services
+      total_budget: 8454000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Energy Efficiency
+      total_budget: 285720000.0
+      type: subprogramme
+    - name: Renewable Energy
+      total_budget: 75796000.0
+      type: subprogramme
+    - name: Climate Change and Designated National Authority
+      total_budget: 8667000.0
+      type: subprogramme
+    name: Clean Energy
+    type: programme
+  - items:
+    - name: Integrated National Electrification Programme
+      total_budget: 5392463000.0
+      type: subprogramme
+    - name: Energy Regional Offices
+      total_budget: 18123000.0
+      type: subprogramme
+    - name: Programme and Project Management Office
+      total_budget: 11353000.0
+      type: subprogramme
+    - name: Electricity Infrastructure/Industry Transformation
+      total_budget: 8140000.0
+      type: subprogramme
+    - name: Community Upliftment Programmes and Projects
+      total_budget: 5321000.0
+      type: subprogramme
+    name: Electrification and Energy Programme and Project Management
+    type: programme
+  - items:
+    - name: Energy Planning
+      total_budget: 25574000.0
+      type: subprogramme
+    - name: Hydrocarbon Policy
+      total_budget: 15224000.0
+      type: subprogramme
+    - name: Electricity, Energy Efficiency and Environmental Policy
+      total_budget: 9657000.0
+      type: subprogramme
+    - name: Policy Analysis and Research
+      total_budget: 2623000.0
+      type: subprogramme
+    name: Energy Policy and Planning
+    type: programme
+  - items:
+    - name: Nuclear Safety and Technology
+      total_budget: 796159000.0
+      type: subprogramme
+    - name: Nuclear Policy
+      total_budget: 11353000.0
+      type: subprogramme
+    - name: Nuclear Non-proliferation and Radiation Security
+      total_budget: 9074000.0
+      type: subprogramme
+    name: Nuclear Energy
+    type: programme
+  - items:
+    - name: Regional Petroleum Regulation Offices
+      total_budget: 35001000.0
+      type: subprogramme
+    - name: Petroleum Licensing and Fuel Supply
+      total_budget: 27388000.0
+      type: subprogramme
+    - name: Petroleum Compliance, Monitoring and Enforcement
+      total_budget: 18574000.0
+      type: subprogramme
+    - name: Fuel Pricing
+      total_budget: 6169000.0
+      type: subprogramme
+    name: Petroleum and Petroleum Products Regulation
+    type: programme
+title: Energy budget 2018-19  - vulekamali
+vote_number: 26
+vote_primary:
+  name: Energy
+  slug: energy
+  url_path: /2018-19/national/departments/energy
+website_url: www.energy.gov.za

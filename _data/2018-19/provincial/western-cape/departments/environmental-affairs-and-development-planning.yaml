@@ -1,0 +1,394 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual: null
+budget_actual_programmes: null
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 9 - Environmental Affairs And Development Planning
+    url: https://data.vulekamali.gov.za/dataset/abe233cd-d68a-4f67-b63a-13cf8d4109e2/resource/de7c5d4b-c246-428e-acea-81d706e5a721/download/wc-vote-09-environmental-affairs-and-dev.-planning.pdf
+  name: 'Western Cape Department: Environmental Affairs And Development Planning 2018-19'
+  tables: null
+description: 'Western Cape department: Environmental Affairs And Development Planning
+  budget data for the 2018-19 financial year from National Treasury in partnership
+  with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Environmental%2BAffairs%2BAnd%2BDevelopment%2BPlanning%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 54962000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 10161000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 3572000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental Agencies And Accounts
+        total_budget: 8000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 9088000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 6810000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 95000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental Agencies And Accounts
+        total_budget: 302531000.0
+        type: economic_classification_2
+      - name: Non-Profit Institutions
+        total_budget: 1200000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Biodiversity Management
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 21118000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 3718000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 88000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    name: Compliance And Enforcement
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 52529000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 4202000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 141000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces And Municipalities
+        total_budget: 15000000.0
+        type: economic_classification_2
+      - name: Non-Profit Institutions
+        total_budget: 1970000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Development Planning
+    type: programme
+  - items:
+    - items:
+      - name: Goods And Services
+        total_budget: 996000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    name: Environmental Empowerment Services
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 14950000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 5499000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 170000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    name: Environmental Policy, Planning And Coordination
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 68912000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 26390000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 507000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental Agencies And Accounts
+        total_budget: 4000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Environmental Quality Management
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 457181000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 502648000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 537950000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 555720000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 604621000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 604611000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 625955000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 561452433
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 586961495
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 590981867
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 583018033
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 604621000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 574954203
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 564333262
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/western-cape/departments/environmental-affairs-and-development-planning
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/western-cape/departments/environmental-affairs-and-development-planning
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/western-cape/departments/environmental-affairs-and-development-planning
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/western-cape/departments/environmental-affairs-and-development-planning
+  id: 2019-20
+  is_selected: false
+government:
+  name: Western Cape
+  slug: western-cape
+government_functions: []
+intro: ''
+is_vote_primary: true
+name: Environmental Affairs And Development Planning
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Environmental%2BAffairs%2BAnd%2BDevelopment%2BPlanning%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Environmental Quality Management
+      total_budget: 68912000.0
+      type: programme
+    - name: Administration
+      total_budget: 54962000.0
+      type: programme
+    - name: Development Planning
+      total_budget: 52529000.0
+      type: programme
+    - name: Compliance And Enforcement
+      total_budget: 21118000.0
+      type: programme
+    - name: Environmental Policy, Planning And Coordination
+      total_budget: 14950000.0
+      type: programme
+    - name: Biodiversity Management
+      total_budget: 9088000.0
+      type: programme
+    name: Current Payments - Compensation Of Employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Environmental Quality Management
+      total_budget: 26390000.0
+      type: programme
+    - name: Administration
+      total_budget: 10161000.0
+      type: programme
+    - name: Biodiversity Management
+      total_budget: 6810000.0
+      type: programme
+    - name: Environmental Policy, Planning And Coordination
+      total_budget: 5499000.0
+      type: programme
+    - name: Development Planning
+      total_budget: 4202000.0
+      type: programme
+    - name: Compliance And Enforcement
+      total_budget: 3718000.0
+      type: programme
+    - name: Environmental Empowerment Services
+      total_budget: 996000.0
+      type: programme
+    name: Current Payments - Goods And Services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 3572000.0
+      type: programme
+    - name: Environmental Quality Management
+      total_budget: 507000.0
+      type: programme
+    - name: Environmental Policy, Planning And Coordination
+      total_budget: 170000.0
+      type: programme
+    - name: Development Planning
+      total_budget: 141000.0
+      type: programme
+    - name: Biodiversity Management
+      total_budget: 95000.0
+      type: programme
+    - name: Compliance And Enforcement
+      total_budget: 88000.0
+      type: programme
+    name: Payments For Capital Assets - Machinery And Equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Biodiversity Management
+      total_budget: 302531000.0
+      type: programme
+    - name: Administration
+      total_budget: 8000.0
+      type: programme
+    - name: Environmental Quality Management
+      total_budget: 4000.0
+      type: programme
+    name: Transfers And Subsidies - Departmental Agencies And Accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Development Planning
+      total_budget: 1970000.0
+      type: programme
+    - name: Biodiversity Management
+      total_budget: 1200000.0
+      type: programme
+    name: Transfers And Subsidies - Non-Profit Institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Development Planning
+      total_budget: 15000000.0
+      type: programme
+    name: Transfers And Subsidies - Provinces And Municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Environmental%2BAffairs%2BAnd%2BDevelopment%2BPlanning%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 68703000.0
+  - name: Environmental Policy, Planning And Coordination
+    total_budget: 20619000.0
+  - name: Compliance And Enforcement
+    total_budget: 24924000.0
+  - name: Environmental Quality Management
+    total_budget: 95813000.0
+  - name: Biodiversity Management
+    total_budget: 319724000.0
+  - name: Environmental Empowerment Services
+    total_budget: 996000.0
+  - name: Development Planning
+    total_budget: 73842000.0
+  - name: Direct Charges
+    total_budget: 0.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: environmental-affairs-and-development-planning
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-drilldown-2018-19-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Environmental%2BAffairs%2BAnd%2BDevelopment%2BPlanning%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme.programme%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Environmental Affairs And Development Planning budget 2018-19  - vulekamali
+vote_number: 9
+vote_primary:
+  name: Environmental Affairs And Development Planning
+  slug: environmental-affairs-and-development-planning
+  url_path: /2018-19/provincial/western-cape/departments/environmental-affairs-and-development-planning
+website_url: null

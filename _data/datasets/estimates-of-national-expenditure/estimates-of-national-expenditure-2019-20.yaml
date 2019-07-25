@@ -1,0 +1,76 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Budgeted expenditure for a given financial year.\r\n\r\nExpenditure\
+    \ data used to prepare the ENE publications provide detailed data on government\u2019\
+    s expenditure allocations contained in the annual appropriation bill (for the\
+    \ upcoming year) as well as for the two outer years, that is for the three years\
+    \ of the medium term expenditure framework. Information is presented by vote (generally\
+    \ a national government department) and by main economic classification. The ENE\
+    \ publications also provide detailed data on how government institutions have\
+    \ spent their budgets in previous years."
+  name: Estimates of National Expenditure
+  slug: estimates-of-national-expenditure
+  url_path: /datasets/estimates-of-national-expenditure
+created: '2019-02-20T16:43:07.956801'
+description: "This dataset includes expenditure data as published in the Estimates\
+  \ of National Expenditure. Departmental expenditure data in previous financial years\
+  \ have been aligned with the budget and programme structures of departments as they\
+  \ are structured in the current Medium Term Expenditure Framework. This means that\
+  \ the structure of historical expenditure data for a department, may not necessarily\
+  \ reflect the same structure of that department when expenditure was incurred during\
+  \ a particular financial year. This may be due to functions shifts which may have\
+  \ occurred within a particular department or a general change in a department\u2019\
+  s budget programme structures (BPS) as departments are afforded an opportunity before\
+  \ the start of the Budget to change their BPS.This is to ensure a more economical,\
+  \ efficient and effective delivery of public services and performance by the department\
+  \ as a whole. "
+intro: "This dataset includes expenditure data as published in the Estimates of National\
+  \ Expenditure. Departmental expenditure data in previous financial years have been\
+  \ aligned with the budget and programme structures of departments as they are structured\
+  \ in the current Medium Term Expenditure Framework. This means that the structure\
+  \ of historical expenditure data for a department, may not necessarily reflect the\
+  \ same structure of that department when expenditure was incurred during a particular\
+  \ financial year. This may be due to functions shifts which may have occurred within\
+  \ a particular department or a general change in a department\u2019s budget programme\
+  \ structures (BPS) as departments are afforded an opportunity before the start of\
+  \ the Budget to change their BPS.This is to ensure a more economical, efficient\
+  \ and effective delivery of public services and performance by the department as\
+  \ a whole. "
+intro_short: null
+key_points: null
+last_updated: '2019-02-27T05:26:10.568139'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: Estimates of National Expenditure 2019-20
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: CSV
+  name: Estimates of National Expenditure 2019-20
+  url: http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/estimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/final/data/ene-2019-20.csv
+- description: ''
+  format: OpenSpending API
+  name: Estimates of National Expenditure 2019-20
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:estimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/model/
+- description: ''
+  format: XLSX
+  name: Estimates of National Expenditure 2019-20
+  url: https://data.vulekamali.gov.za/dataset/b15b5fe0-ccdd-4fec-ad5d-9f7e58397bce/resource/d4b62429-1a17-475f-aec0-2c4afdc1e4a0/download/nat-ene-2019-20.xlsx
+selected_tab: datasets
+slug: estimates-of-national-expenditure-2019-20
+title: Estimates of National Expenditure 2019-20 - vulekamali
+url_path: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+usage: null
+use_for: null

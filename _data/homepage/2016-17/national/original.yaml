@@ -1,0 +1,243 @@
+data:
+  items:
+  - amount: 6332965000.0
+    name: Agriculture, Forestry and Fisheries
+    percentage_of_total: 0.8781779905585079
+    province: null
+    slug: agriculture-forestry-and-fisheries
+    url: 2016-17/previews/national/south-africa/agriculture-forestry-and-fisheries
+  - amount: 4070853000.0
+    name: Arts and Culture
+    percentage_of_total: 0.564496015278637
+    province: null
+    slug: arts-and-culture
+    url: 2016-17/previews/national/south-africa/arts-and-culture
+  - amount: 22269595000.0
+    name: Basic Education
+    percentage_of_total: 3.0880745729136025
+    province: null
+    slug: basic-education
+    url: 2016-17/previews/national/south-africa/basic-education
+  - amount: 1345406000.0
+    name: Communications
+    percentage_of_total: 0.18656441928312564
+    province: null
+    slug: communications
+    url: 2016-17/previews/national/south-africa/communications
+  - amount: 72994048000.0
+    name: Cooperative Governance and Traditional Affairs
+    percentage_of_total: 10.12192020568111
+    province: null
+    slug: cooperative-governance-and-traditional-affairs
+    url: 2016-17/previews/national/south-africa/cooperative-governance-and-traditional-affairs
+  - amount: 21577287000.0
+    name: Correctional Services
+    percentage_of_total: 2.9920737820853605
+    province: null
+    slug: correctional-services
+    url: 2016-17/previews/national/south-africa/correctional-services
+  - amount: 47169745000.0
+    name: Defence and Military Veterans
+    percentage_of_total: 6.540922281941748
+    province: null
+    slug: defence-and-military-veterans
+    url: 2016-17/previews/national/south-africa/defence-and-military-veterans
+  - amount: 674661000.0
+    name: Economic Development
+    percentage_of_total: 0.09355372109086242
+    province: null
+    slug: economic-development
+    url: 2016-17/previews/national/south-africa/economic-development
+  - amount: 7545171000.0
+    name: Energy
+    percentage_of_total: 1.0462718658954104
+    province: null
+    slug: energy
+    url: 2016-17/previews/national/south-africa/energy
+  - amount: 6430101000.0
+    name: Environmental Affairs
+    percentage_of_total: 0.8916476208645163
+    province: null
+    slug: environmental-affairs
+    url: 2016-17/previews/national/south-africa/environmental-affairs
+  - amount: 38563317000.0
+    name: Health
+    percentage_of_total: 5.347488298503268
+    province: null
+    slug: health
+    url: 2016-17/previews/national/south-africa/health
+  - amount: 49188279000.0
+    name: Higher Education and Training
+    percentage_of_total: 6.820827844659058
+    province: null
+    slug: higher-education-and-training
+    url: 2016-17/previews/national/south-africa/higher-education-and-training
+  - amount: 7167140000.0
+    name: Home Affairs
+    percentage_of_total: 0.9938511586992039
+    province: null
+    slug: home-affairs
+    url: 2016-17/previews/national/south-africa/home-affairs
+  - amount: 30690856000.0
+    name: Human Settlements
+    percentage_of_total: 4.255831865579633
+    province: null
+    slug: human-settlements
+    url: 2016-17/previews/national/south-africa/human-settlements
+  - amount: 246111000.0
+    name: Independent Police Investigative Directorate
+    percentage_of_total: 0.034127657966583576
+    province: null
+    slug: independent-police-investigative-directorate
+    url: 2016-17/previews/national/south-africa/independent-police-investigative-directorate
+  - amount: 5888651000.0
+    name: International Relations and Cooperation
+    percentage_of_total: 0.8165659690650979
+    province: null
+    slug: international-relations-and-cooperation
+    url: 2016-17/previews/national/south-africa/international-relations-and-cooperation
+  - amount: 16049736000.0
+    name: Justice and Constitutional Development
+    percentage_of_total: 2.2255807365861875
+    province: null
+    slug: justice-and-constitutional-development
+    url: 2016-17/previews/national/south-africa/justice-and-constitutional-development
+  - amount: 2847877000.0
+    name: Labour
+    percentage_of_total: 0.39490868830283943
+    province: null
+    slug: labour
+    url: 2016-17/previews/national/south-africa/labour
+  - amount: 1669077000.0
+    name: Mineral Resources
+    percentage_of_total: 0.23144714773371122
+    province: null
+    slug: mineral-resources
+    url: 2016-17/previews/national/south-africa/mineral-resources
+  - amount: 28471417000.0
+    name: National Treasury
+    percentage_of_total: 3.948067259082174
+    province: null
+    slug: national-treasury
+    url: 2016-17/previews/national/south-africa/national-treasury
+  - amount: 864990000.0
+    name: Office of the Chief Justice and Judicial Administration
+    percentage_of_total: 0.11994621477510198
+    province: null
+    slug: office-of-the-chief-justice-and-judicial-administration
+    url: 2016-17/previews/national/south-africa/office-of-the-chief-justice-and-judicial-administration
+  - amount: 1659631000.0
+    name: Parliament
+    percentage_of_total: 0.23013729219229967
+    province: null
+    slug: parliament
+    url: 2016-17/previews/national/south-africa/parliament
+  - amount: 827662000.0
+    name: Planning, Monitoring and Evaluation
+    percentage_of_total: 0.11477002510224447
+    province: null
+    slug: planning-monitoring-and-evaluation
+    url: 2016-17/previews/national/south-africa/planning-monitoring-and-evaluation
+  - amount: 80984851000.0
+    name: Police
+    percentage_of_total: 11.22998685716093
+    province: null
+    slug: police
+    url: 2016-17/previews/national/south-africa/police
+  - amount: 273976000.0
+    name: Public Enterprises
+    percentage_of_total: 0.03799163474632463
+    province: null
+    slug: public-enterprises
+    url: 2016-17/previews/national/south-africa/public-enterprises
+  - amount: 770380000.0
+    name: Public Service and Administration
+    percentage_of_total: 0.10682685919888445
+    province: null
+    slug: public-service-and-administration
+    url: 2016-17/previews/national/south-africa/public-service-and-administration
+  - amount: 6528765000.0
+    name: Public Works
+    percentage_of_total: 0.9053291354884666
+    province: null
+    slug: public-works
+    url: 2016-17/previews/national/south-africa/public-works
+  - amount: 10124345000.0
+    name: Rural Development and Land Reform
+    percentage_of_total: 1.4039201144836704
+    province: null
+    slug: rural-development-and-land-reform
+    url: 2016-17/previews/national/south-africa/rural-development-and-land-reform
+  - amount: 7428995996.0
+    name: Science and Technology
+    percentage_of_total: 1.030162139793048
+    province: null
+    slug: science-and-technology
+    url: 2016-17/previews/national/south-africa/science-and-technology
+  - amount: 1325439000.0
+    name: Small Business Development
+    percentage_of_total: 0.18379564037190765
+    province: null
+    slug: small-business-development
+    url: 2016-17/previews/national/south-africa/small-business-development
+  - amount: 148937729000.0
+    name: Social Development
+    percentage_of_total: 20.652859374963796
+    province: null
+    slug: social-development
+    url: 2016-17/previews/national/south-africa/social-development
+  - amount: 1028600000.0
+    name: Sport and Recreation South Africa
+    percentage_of_total: 0.14263364491805675
+    province: null
+    slug: sport-and-recreation-south-africa
+    url: 2016-17/previews/national/south-africa/sport-and-recreation-south-africa
+  - amount: 2489102000.0
+    name: Statistics South Africa
+    percentage_of_total: 0.3451581672494895
+    province: null
+    slug: statistics-south-africa
+    url: 2016-17/previews/national/south-africa/statistics-south-africa
+  - amount: 2417412000.0
+    name: Telecommunications and Postal Services
+    percentage_of_total: 0.33521707644239684
+    province: null
+    slug: telecommunications-and-postal-services
+    url: 2016-17/previews/national/south-africa/telecommunications-and-postal-services
+  - amount: 499675000.0
+    name: The Presidency
+    percentage_of_total: 0.06928880665412211
+    province: null
+    slug: the-presidency
+    url: 2016-17/previews/national/south-africa/the-presidency
+  - amount: 2009516000.0
+    name: Tourism
+    percentage_of_total: 0.27865505697176135
+    province: null
+    slug: tourism
+    url: 2016-17/previews/national/south-africa/tourism
+  - amount: 10327517000.0
+    name: Trade and Industry
+    percentage_of_total: 1.432093518047049
+    province: null
+    slug: trade-and-industry
+    url: 2016-17/previews/national/south-africa/trade-and-industry
+  - amount: 56015163000.0
+    name: Transport
+    percentage_of_total: 7.767496470317976
+    province: null
+    slug: transport
+    url: 2016-17/previews/national/south-africa/transport
+  - amount: 15245297000.0
+    name: Water and Sanitation
+    percentage_of_total: 2.114030992580513
+    province: null
+    slug: water-and-sanitation
+    url: 2016-17/previews/national/south-africa/water-and-sanitation
+  - amount: 196887000.0
+    name: Women
+    percentage_of_total: 0.027301876771321638
+    province: null
+    slug: women
+    url: 2016-17/previews/national/south-africa/women
+  total: 721148225996.0

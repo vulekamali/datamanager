@@ -1,0 +1,72 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Expenditure data used to prepare the EPRE publications provide detailed\
+    \ data on provincial government\u2019s expenditure allocations contained in the\
+    \ annual appropriation bill (for the upcoming year) as well as for the two outer\
+    \ years, that is for the three years of the medium term expenditure framework.\
+    \ Information is presented by vote (generally a provincial government department)\
+    \ and by main economic classification. The\_EPRE publications also provide detailed\
+    \ data on how provincial government institutions have spent their budgets in previous\
+    \ years."
+  name: Estimates of Provincial Expenditure
+  slug: estimates-of-provincial-expenditure
+  url_path: /datasets/estimates-of-provincial-expenditure
+created: '2019-07-10T13:02:09.900376'
+description: "This dataset includes expenditure data as published in the Estimates\
+  \ of Provincial Revenue and Expenditure. Departmental expenditure data in previous\
+  \ financial years have been aligned with the budget and programme structures of\
+  \ departments as they are structured in the current Medium Term Expenditure Framework.\
+  \ This means that the structure of historical expenditure data for a department,\
+  \ may not necessarily reflect the same structure of that department when expenditure\
+  \ was incurred during a particular financial year. This may be due to functions\
+  \ shifts which may have occurred within a particular department or a general change\
+  \ in a department\u2019s budget programme structures (BPS) as departments are afforded\
+  \ an opportunity before the start of the Budget to change their BPS.This is to ensure\
+  \ a more economical, efficient and effective delivery of public services and performance\
+  \ by the department as a whole."
+intro: "This dataset includes expenditure data as published in the Estimates of Provincial\
+  \ Revenue and Expenditure. Departmental expenditure data in previous financial years\
+  \ have been aligned with the budget and programme structures of departments as they\
+  \ are structured in the current Medium Term Expenditure Framework. This means that\
+  \ the structure of historical expenditure data for a department, may not necessarily\
+  \ reflect the same structure of that department when expenditure was incurred during\
+  \ a particular financial year. This may be due to functions shifts which may have\
+  \ occurred within a particular department or a general change in a department\u2019\
+  s budget programme structures (BPS) as departments are afforded an opportunity before\
+  \ the start of the Budget to change their BPS.This is to ensure a more economical,\
+  \ efficient and effective delivery of public services and performance by the department\
+  \ as a whole."
+intro_short: null
+key_points: null
+last_updated: '2019-07-12T06:29:19.915941'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: Estimates of Provincial Expenditure 2019-20
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: OpenSpending API
+  name: Estimates of Provincial Expenditure of South Africa 2019-20
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:estimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/model/
+- description: ''
+  format: CSV
+  name: Estimates of Provincial Expenditure of South Africa 2019-20
+  url: http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/estimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/final/data/prv-epre-2019-20-from-jeffery-2019-06-03t1412.csv
+selected_tab: datasets
+slug: estimates-of-provincial-expenditure-of-south-africa-2019-20
+title: Estimates of Provincial Expenditure 2019-20 - vulekamali
+url_path: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+usage: null
+use_for: null

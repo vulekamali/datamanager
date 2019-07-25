@@ -1,0 +1,1137 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 9341457000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 9571940000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 9847024000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 10908380366
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 10515555299
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 10330728732
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 40180000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 35239000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: 5. Community Based Programme
+  - items:
+    - amount: 44039000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Community Based Programme
+  - items:
+    - amount: 296231000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 310192000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 335052000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: 1. Administration
+  - items:
+    - amount: 760770000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Transport Regulation
+  - items:
+    - amount: 811743000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 861447000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: 4. Transport Regulation
+  - items:
+    - amount: 1353591000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1437403000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: 3. Transport Operations
+  - items:
+    - amount: 1409008000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Transport Operations
+  - items:
+    - amount: 6831409000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Transport Infrastructure
+  - items:
+    - amount: 7056234000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 7177883000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: 2. Transport Infrastructure
+contributed_datasets:
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2016/17'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2016-17
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2014/15'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2014-15
+- contributor: Public Service Accountability Monitor
+  name: A People's Guide to the Adjusted Budget 2018/19
+  url_path: /datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Department of Human Settlements, 2016/17 and 2017/18'
+  url_path: /datasets/contributed/budget-brief-department-of-human-settlements
+- contributor: Studies in Poverty and Inequality Institute
+  name: Monitoring the right of access to adequate housing in South Africa
+  url_path: /datasets/contributed/monitoring-the-right-of-access-to-adequate-housing-in-south-africa
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "KZN AEPRE 2017-18 \u2013 Vote 12 - Transport"
+    url: https://data.vulekamali.gov.za/dataset/b559b02d-6be9-4aeb-b479-e72963cc9840/resource/c8060b36-8dfc-44e9-b183-aa49221fc7e9/download/kzn-vote-12-transport.pdf
+  name: "KwaZulu-Natal AEPRE 2017-18 \u2013 Vote 12 - Transport"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 12 : Transport'
+    url: https://data.vulekamali.gov.za/dataset/db14c60e-51ab-41f5-8632-a6acd0fcaaba/resource/3991fc44-8bd3-43c3-b8f6-831ef54a2888/download/kzn-vote-12-transport.pdf
+  name: 'KwaZulu-Natal Department: Transport 2017-18'
+  tables: null
+description: 'KwaZulu-Natal department: Transport budget data for the 2017-18 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Transport%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 155744000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 141536000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 19325000
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 7000000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 6052000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 5303000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 92000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 1. Administration
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 2650723000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 950205000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 3424685000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 138579000
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 1157000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 8463000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 4070000
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 1000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 2. Transport Infrastructure
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 325498000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 40152000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 257000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Public corporations and private enterprises
+        total_budget: 1071439000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 40000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 12000
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 5000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 3. Transport Operations
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 615896000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 206337000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 35498000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 2904000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 812000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: 4. Transport Regulation
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 20911000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 14228000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 100000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: 5. Community Based Programme
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 8055187000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 9051949000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 9338492000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 9577620000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 9847024000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 10313722000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 10970256000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 10448915498
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 11116469837
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 10904918021
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 10521795242
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 10330728732
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 10313722000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 10432153570
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/kwazulu-natal/departments/transport
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/kwazulu-natal/departments/transport
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/kwazulu-natal/departments/transport
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/kwazulu-natal/departments/transport
+  id: 2019-20
+  is_selected: false
+government:
+  name: KwaZulu-Natal
+  slug: kwazulu-natal
+government_functions:
+- Defence, public order and safety
+- Economic affairs
+- Human settlements and municipal infrastructure
+intro: "## Vision\n\nThe department\u2019s vision is: Prosperity through mobility.\r\
+  \n\r\n\n\n## Mission\n\nThe department\u2019s mission is: We will strive to provide\
+  \ the public with mobility by an affordable transportation system that is safe,\
+  \ integrated, regulated and accessible to meet the developmental needs of our province.\r\
+  \n\r\n\n\n## Core functions\n\nTurning the vision of the department into reality\
+  \ can only be achieved by focusing the attention and energy of all employees and\
+  \ relevant stakeholders on the performance of its core functions, namely:\r\n\r\n\
+  Construct, maintain and repair the provincial road network\r\nThe department\u2019\
+  s mandate is to construct and maintain a balanced road network that meets the mobility\
+  \ needs of the citizens of KZN, and supports the national and provincial growth\
+  \ and development plans and strategies.\r\n\r\nPlan, regulate and provide an integrated\
+  \ transportation system\r\nThe department\u2019s mandate is to regulate public transport\
+  \ and ensure access to safe, efficient and affordable public transport. The department\
+  \ is further mandated to facilitate development in the freight transport industry\
+  \ and the minimisation of negative externalities resultant from the transport of\
+  \ freight.\r\n\r\nEstimates of Provincial Revenue and Expenditure\r\n\r\nManage\
+  \ road traffic\r\nThe department\u2019s mandate is to create a safe road environment,\
+  \ through the reduction of road accidents.\r\nThe main services rendered include\
+  \ road traffic enforcement, road safety education, the analysis and reengineering\
+  \ of hazardous locations and the registration and licensing of vehicles."
+is_vote_primary: true
+name: Transport
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Transport%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: 2. Transport Infrastructure
+      total_budget: 950205000
+      type: programme
+    - name: 4. Transport Regulation
+      total_budget: 615896000
+      type: programme
+    - name: 1. Administration
+      total_budget: 141536000
+      type: programme
+    - name: 3. Transport Operations
+      total_budget: 40152000
+      type: programme
+    - name: 5. Community Based Programme
+      total_budget: 14228000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: 2. Transport Infrastructure
+      total_budget: 2650723000
+      type: programme
+    - name: 3. Transport Operations
+      total_budget: 325498000
+      type: programme
+    - name: 4. Transport Regulation
+      total_budget: 206337000
+      type: programme
+    - name: 1. Administration
+      total_budget: 155744000
+      type: programme
+    - name: 5. Community Based Programme
+      total_budget: 20911000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: 2. Transport Infrastructure
+      total_budget: 3424685000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: 2. Transport Infrastructure
+      total_budget: 138579000
+      type: programme
+    - name: 4. Transport Regulation
+      total_budget: 35498000
+      type: programme
+    - name: 1. Administration
+      total_budget: 19325000
+      type: programme
+    - name: 3. Transport Operations
+      total_budget: 257000
+      type: programme
+    - name: 5. Community Based Programme
+      total_budget: 100000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: 1. Administration
+      total_budget: 7000000
+      type: programme
+    - name: 2. Transport Infrastructure
+      total_budget: 1157000
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: 1. Administration
+      total_budget: 6052000
+      type: programme
+    - name: 3. Transport Operations
+      total_budget: 5000
+      type: programme
+    - name: 2. Transport Infrastructure
+      total_budget: 1000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: 2. Transport Infrastructure
+      total_budget: 8463000
+      type: programme
+    - name: 1. Administration
+      total_budget: 5303000
+      type: programme
+    - name: 4. Transport Regulation
+      total_budget: 2904000
+      type: programme
+    - name: 3. Transport Operations
+      total_budget: 40000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: 2. Transport Infrastructure
+      total_budget: 4070000
+      type: programme
+    - name: 4. Transport Regulation
+      total_budget: 812000
+      type: programme
+    - name: 1. Administration
+      total_budget: 92000
+      type: programme
+    - name: 3. Transport Operations
+      total_budget: 12000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+  - items:
+    - name: 3. Transport Operations
+      total_budget: 1071439000
+      type: programme
+    name: Transfers and subsidies - Public corporations and private enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Transport%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: 1. Administration
+    total_budget: 335052000
+  - name: 2. Transport Infrastructure
+    total_budget: 7177883000
+  - name: 3. Transport Operations
+    total_budget: 1437403000
+  - name: 4. Transport Regulation
+    total_budget: 861447000
+  - name: 5. Community Based Programme
+    total_budget: 35239000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: transport
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522KwaZulu-Natal%2522%257Cdepartment.department%253A%2522Transport%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Support
+      total_budget: 283604000
+      type: subprogramme
+    - name: Departmental Strategy
+      total_budget: 25080000
+      type: subprogramme
+    - name: Office of the MEC
+      total_budget: 14652000
+      type: subprogramme
+    - name: Management
+      total_budget: 11716000
+      type: subprogramme
+    name: 1. Administration
+    type: programme
+  - items:
+    - name: Construction
+      total_budget: 3424685000
+      type: subprogramme
+    - name: Maintenance
+      total_budget: 3422053000
+      type: subprogramme
+    - name: Programme Support Infrastrucure
+      total_budget: 260771000
+      type: subprogramme
+    - name: Infrastructure Design
+      total_budget: 42691000
+      type: subprogramme
+    - name: Infrastructure Planning
+      total_budget: 27683000
+      type: subprogramme
+    name: 2. Transport Infrastructure
+    type: programme
+  - items:
+    - name: Public Transport Services
+      total_budget: 1331875000
+      type: subprogramme
+    - name: Transport Safety and Compliance
+      total_budget: 77376000
+      type: subprogramme
+    - name: Programme Support Operations
+      total_budget: 28152000
+      type: subprogramme
+    name: 3. Transport Operations
+    type: programme
+  - items:
+    - name: Law Enforcement
+      total_budget: 660869000
+      type: subprogramme
+    - name: Transport Administration and Licensing
+      total_budget: 133770000
+      type: subprogramme
+    - name: Operator Licenses and Permits
+      total_budget: 64398000
+      type: subprogramme
+    - name: Programme Support Regulation
+      total_budget: 2410000
+      type: subprogramme
+    name: 4. Transport Regulation
+    type: programme
+  - items:
+    - name: Innovation and Empowerment
+      total_budget: 13080000
+      type: subprogramme
+    - name: Community Development
+      total_budget: 8551000
+      type: subprogramme
+    - name: Programme Support Community Based
+      total_budget: 7616000
+      type: subprogramme
+    - name: EPWP Co-ordination and Monitoring
+      total_budget: 5992000
+      type: subprogramme
+    name: 5. Community Based Programme
+    type: programme
+title: Transport budget 2017-18  - vulekamali
+vote_number: 12
+vote_primary:
+  name: Transport
+  slug: transport
+  url_path: /2017-18/provincial/kwazulu-natal/departments/transport
+website_url: null

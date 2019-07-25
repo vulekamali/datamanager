@@ -1,0 +1,85 @@
+.PseudoSelect {
+  max-height: 36px;
+  line-height: 16px;
+}
+
+.PseudoSelect-list {
+  min-height: 36px;
+  border-radius: 3px;
+  border: solid 1px #9b9b9b;
+  padding-left: 0;
+  display: table;
+  margin: 0;
+  background-color: white;
+  list-style: none;
+  position: relative;
+  width: 100%;
+  z-index: z-index('PseudoSelect');
+
+  &.is-open {
+    z-index: z-index('PseudoSelect is-open');
+  }
+
+  &.is-loading {
+    display: inline-block;
+  }
+}
+
+.PseudoSelect-item {
+  padding-left: 0;
+  display: none;
+  line-height: 1.3;
+
+  .PseudoSelect-list.is-open & {
+    display: table-row;
+  }
+
+  &.is-active {
+    display: table-header-group !important;
+  }
+}
+
+.PseudoSelect-radio {
+  display: none;
+}
+
+.PseudoSelect-label {
+  cursor: pointer;
+  padding: 9px 13px;
+  font-size: 14px;
+  display: block;
+  user-select: none;
+  @include clearfix;
+
+  &:hover {
+    background-color: darken(white, 15%);
+  }
+
+  .PseudoSelect-item.is-active &::after {
+    content: '';
+    display: inline-block;
+    float: right;
+    width: 0;
+    height: 0;
+    position: relative;
+    border: 5px solid transparent;
+    border-top: 5px solid #4a4a4a;
+    margin-left: 10px;
+    top: 7px;
+    transform: rotate(360deg);
+    transition: transform 0.3s, top 0.3s;
+
+    .PseudoSelect-list.is-open & {
+      top: 2px;
+      transform: rotate(180deg);
+    }
+  }
+
+  .PseudoSelect-list.is-open .PseudoSelect-item.is-active & {
+    border-bottom: 1px solid #9b9b9b;
+  }
+}
+
+.PseudoSelect-text {
+  display: inline-block;
+}

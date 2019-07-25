@@ -1,0 +1,81 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:19:53.113153'
+description: "The main purpose of the National Student Financial Aid Scheme (NSFAS)\
+  \ is to enable young people from poor households to obtain a higher education. This\
+  \ is essential for expanding South Africa\u2019s skills base and a powerful mechanism\
+  \ for breaking the intergenerational cycle of household poverty and exclusion. Tertiary\
+  \ education is unaffordable for most households (see Figure 1). While the average\
+  \ full cost of study for a single year at university was about R28 000 in 2003,\
+  \ this figure was three times greater than the incomes of households in the poorest\
+  \ 20% of the population. It was also more than 30% greater than the annual incomes\
+  \ of households in the second poorest quintile, and just 20% less than the total\
+  \ income of households in the middle 20%. In 2003, in other words, none of the poorest\
+  \ 50% of households could realistically afford to send a child to university."
+intro: "The main purpose of the National Student Financial Aid Scheme (NSFAS) is to\
+  \ enable young people from poor households to obtain a higher education. This is\
+  \ essential for expanding South Africa\u2019s skills base and a powerful mechanism\
+  \ for breaking the intergenerational cycle of household poverty and exclusion. Tertiary\
+  \ education is unaffordable for most households (see Figure 1). While the average\
+  \ full cost of study for a single year at university was about R28 000 in 2003,\
+  \ this figure was three times greater than the incomes of households in the poorest\
+  \ 20% of the population. It was also more than 30% greater than the annual incomes\
+  \ of households in the second poorest quintile, and just 20% less than the total\
+  \ income of households in the middle 20%. In 2003, in other words, none of the poorest\
+  \ 50% of households could realistically afford to send a child to university."
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T09:00:11.868410'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - National Student Financial Aid Scheme (NSFAS)
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Summary
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-nsfas/resource/6f325612-dcbe-42e1-af60-02caf53dba65/download/11.1-summary.pdf
+- description: ''
+  format: PDF
+  name: Technical Report
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-nsfas/resource/bd4d528d-b023-48eb-baee-2dfc55246d9b/download/11.2-technical-report.pdf
+- description: ''
+  format: XLSX
+  name: Logframe
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-nsfas/resource/94902693-8f55-4bad-abbe-260ed0c33e39/download/nfsas-logframe.xlsx
+- description: ''
+  format: XLSX
+  name: Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-nsfas/resource/69031447-82c1-4601-979d-2d0a00b56b65/download/nfsas-cost-model-locked.xlsx
+- description: ''
+  format: XLSX
+  name: Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-nsfas/resource/f042d45d-cecc-44b7-890e-ff5710f35427/download/nfsas-cost-model.xlsx
+selected_tab: datasets
+slug: per-higheducation-nsfas
+title: PER - National Student Financial Aid Scheme (NSFAS) - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-higheducation-nsfas
+usage: null
+use_for: null

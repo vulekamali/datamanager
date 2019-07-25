@@ -1,0 +1,24 @@
+{
+  "colors": [
+    "#FFD54F",
+    "#E57373",
+    "#4DD0E1",
+    "#7986CB",
+    "#BA68C8",
+    "#4DB6AC",
+    "#A1887F",
+    "#64B5F6",
+    "#FF8A65"
+  ],
+  "provinces": [
+    "Eastern Cape",
+    "Free State",
+    "Gauteng",
+    "Limpopo",
+    "Mpumalanga",
+    "Northern Cape",
+    "Western Cape",
+    "North West",
+    "KwaZulu-Natal"
+  ]
+}

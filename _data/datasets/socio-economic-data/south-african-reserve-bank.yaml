@@ -1,0 +1,64 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Socio-economic data resources that can be used for contextual and
+    other analyses purposes. '
+  name: Socio-economic Data
+  slug: socio-economic-data
+  url_path: /datasets/socio-economic-data
+created: '2018-10-05T12:32:25.784453'
+description: The Reserve Bank enacts monetary policy and is a curator of macroeconomic
+  statistics that it publishes in its Quarterly Bulletin.
+intro: The Reserve Bank enacts monetary policy and is a curator of macroeconomic statistics
+  that it publishes in its Quarterly Bulletin.
+intro_short: 'South African macroeconomic information '
+key_points: "- Links to policy documents, research and monetary regulations\r\n- Key\
+  \ monthly and quarterly indicators \r\n- Online query tool for downloading historical\
+  \ macroeconomic time-series data (.xlsx and .csv formats)"
+last_updated: '2018-10-05T12:37:56.927455'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: South African Reserve Bank
+organization:
+  email: null
+  facebook: null
+  logo_url: ''
+  name: Reserve Bank
+  slug: reserve-bank
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: ''
+  name: Reserve Bank Homepage
+  url: https://www.resbank.co.za
+- description: ''
+  format: ''
+  name: Online Statistical Query
+  url: https://www.resbank.co.za/Research/Statistics/Pages/OnlineDownloadFacility.asp
+- description: ''
+  format: PNG
+  name: 'Screenshot: Statistics overview'
+  url: https://data.vulekamali.gov.za/dataset/a7ebe83c-d484-4176-b80d-7b6bba375fca/resource/5bf3dd12-c456-4973-ab84-84580a9e78f2/download/sarb-stats-overview.png
+- description: ''
+  format: PNG
+  name: 'Screenshot: Online statistical query'
+  url: https://data.vulekamali.gov.za/dataset/a7ebe83c-d484-4176-b80d-7b6bba375fca/resource/c6c9be7b-a44e-4a75-b675-268d3e447162/download/sarb-stats-query.png
+selected_tab: datasets
+slug: south-african-reserve-bank
+title: South African Reserve Bank - vulekamali
+url_path: /datasets/socio-economic-data/south-african-reserve-bank
+usage: "1. Visit the [homepage](https://www.resbank.co.za)\r\n2. Click on one of the\
+  \ tabs at the top of the homepage to link to research, regulations and other resources\r\
+  \n3. To go to the online statistical query page, click on Research > Statistics\
+  \ > Online statistical query\r\n4. Type in a time series code or search for a time\
+  \ series using search keywords"
+use_for: The Reserve Bank website provides information on monetary policy and contains
+  monetary and related data such as on interest and exchange rates. This information
+  complements the demographic and social information available from StatsSA. It can
+  be used to analyse the economic factors that impact public spending and service
+  delivery.

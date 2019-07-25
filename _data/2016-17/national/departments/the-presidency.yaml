@@ -1,0 +1,595 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type:
+  - amount: -12000000
+    name: Declared unspent funds
+    type: kind
+  - amount: 2100000
+    name: Unforeseeable/unavoidable
+    type: kind
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aadjusted-estimates-of-national-expenditure-2016-17/aggregate/%3Fcut%3Dfinyear.finyear%253A2016%257Cvoteno.department%253AThe%2BPresidency%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  direct_charges: null
+  econ_classes:
+  - items:
+    - amount: -14362000
+      name: Compensation of employees
+      type: economic_classification_3
+    - amount: 1975000
+      name: Goods and services
+      type: economic_classification_3
+    name: Current payments
+    type: economic_classification_2
+  - items:
+    - amount: 125000
+      name: Machinery and equipment
+      type: economic_classification_3
+    name: Payments for capital assets
+    type: economic_classification_2
+  - items:
+    - amount: 2362000
+      name: Households
+      type: economic_classification_3
+    name: Transfers and subsidies
+    type: economic_classification_2
+  programmes:
+  - amount: 866000
+    name: Administration
+  - amount: -10766000
+    name: Executive Support
+  special_appropriation: null
+  total_change:
+    amount: -9900000
+    percentage: -1.981287837094111
+  virements:
+    amount: 11253000
+    label: Value of virements
+    percentage: 2.252063841496973
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 510330000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 475929000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 475929000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 466737000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 499675000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 489775000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 489775000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 475333000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    real:
+    - amount: 595932064
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 555760686
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 555760686
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 545026833
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 548933663
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 538057707
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 538057707
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 522191995
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2013 and 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 5726000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 5726000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 5726000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 5620000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 6035000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 6035000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 6035000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 5713000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Direct charge against the National Revenue Fund
+  - items:
+    - amount: 26390000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 32268000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 29687000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 20525000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 46324000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 35558000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 34734000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 27624000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Executive Support
+  - items:
+    - amount: 483940000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 443661000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 446242000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 446212000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 453351000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 454217000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 455041000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 447709000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Administration
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2016-17 - Vote 1 - The Presidency
+    url: https://data.vulekamali.gov.za/dataset/1de015d6-6c38-405b-901f-97ecd0927f6b/resource/6cabad44-19c4-4506-990d-ea755d0af8d1/download/vote-01-the-presidency.pdf
+  name: AENE 2016-17 - Vote 1 - The Presidency
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2016-17 - Vote 1 - The Presidency
+    url: https://data.vulekamali.gov.za/dataset/1de015d6-6c38-405b-901f-97ecd0927f6b/resource/d645d64b-c799-4715-bb71-612361e78078/download/aene16chap-tab-vote01.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 01 - The Presidency
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-the-presidency-2016-17/resource/f8042b4e-4b5b-41cb-ae38-1bef5cba742e/download/vote-1-the-presidency.pdf
+  name: 'National Department: The Presidency 2016-17'
+  tables:
+    description: ''
+    format: XLS
+    name: Vote 01 - The Presidency
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-the-presidency-2016-17/resource/c8c05fb7-0938-4143-9010-33f7b0c5c937/download/ene16chap-tab-vote01.xls
+description: 'National department: The Presidency budget data for the 2016-17 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cvote_number.department%253A%2522The%2BPresidency%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 303743000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 136833000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 12741000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 34000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 6035000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Direct charge against the National Revenue Fund
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 25970000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 19218000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 1136000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: Executive Support
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 345285000.0
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 394137000.0
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 426173000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 481655000.0
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 505710000.0
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 506646000.0
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 526770000.0
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    real:
+    - amount: 473945875
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 511261154
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 523372292
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 562447158
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 555563602
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 531533424
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 526770000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/the-presidency
+  id: 2016-17
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/the-presidency
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/the-presidency
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/the-presidency
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: '## Vote purpose
+
+
+  _Facilitate a common programme towards the achievement of the electoral
+
+  mandate and the enhanced integrity of the state through considered planning,
+
+  coordination, oversight, mobilisation and support._
+
+
+
+
+  ## Mandate
+
+
+  The mandate of the Presidency is to support the president and the deputy
+
+  president in the execution of their responsibilities, as outlined in the
+
+  Constitution and the programme of government.
+
+
+  '
+is_vote_primary: true
+name: The Presidency
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cvote_number.department%253A%2522The%2BPresidency%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 303743000.0
+      type: programme
+    - name: Executive Support
+      total_budget: 19218000.0
+      type: programme
+    - name: Direct charge against the National Revenue Fund
+      total_budget: 6035000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 136833000.0
+      type: programme
+    - name: Executive Support
+      total_budget: 25970000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 12741000.0
+      type: programme
+    - name: Executive Support
+      total_budget: 1136000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 34000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cvote_number.department%253A%2522The%2BPresidency%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 453351000.0
+  - name: Executive Support
+    total_budget: 46324000.0
+  - name: Direct charge against the National Revenue Fund
+    total_budget: 6035000.0
+selected_financial_year: 2016-17
+selected_tab: departments
+slug: the-presidency
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cvote_number.department%253A%2522The%2BPresidency%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Management
+      total_budget: 335240000.0
+      type: subprogramme
+    - name: Support Service to President
+      total_budget: 66040000.0
+      type: subprogramme
+    - name: Support Service to Deputy President
+      total_budget: 52071000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Salary of the President
+      total_budget: 3274000.0
+      type: subprogramme
+    - name: Salary of the Deputy President
+      total_budget: 2761000.0
+      type: subprogramme
+    name: Direct charge against the National Revenue Fund
+    type: programme
+  - items:
+    - name: Cabinet Services
+      total_budget: 46324000.0
+      type: subprogramme
+    name: Executive Support
+    type: programme
+title: The Presidency budget 2016-17  - vulekamali
+vote_number: 1
+vote_primary:
+  name: The Presidency
+  slug: the-presidency
+  url_path: /2016-17/national/departments/the-presidency
+website_url: www.thepresidency.gov.za

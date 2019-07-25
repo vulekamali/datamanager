@@ -1,0 +1,92 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+author:
+  email: hopolang@spii.org.za
+  name: Hopolang Selebalo and Dennis Webster
+category:
+  description: 'Data and analysis contributed by other organisations on South African
+    government budgets. '
+  name: Contributed data and analysis
+  slug: contributed
+  url_path: /datasets/contributed
+created: '2018-01-19T10:50:05.973593'
+description: Data and/or documentation related to South African government budgets
+  contributed by Studies in Poverty and Inequality Institute and hosted by National
+  Treasury in partnership with IMALI YETHU
+intro: "Sufficient budget allocations are imperative in fulfilling government's obligation\
+  \ to ensure the progressive realisation of socio-economic rights.  It is equally\
+  \ as important for government to utilise these resources efficiently and for their\
+  \ intended purpose. This requires planning and institutional capacity in order to\
+  \ deliver on mandates and targets. Therefore, spending needs to be effective and\
+  \ through budgetary allocations, tangible outcomes or improvements must be achieved.\
+  \ Finally, resource allocation should be linked to equity, with the needs of the\
+  \ most vulnerable prioritised in order to reduce disparities. \r\n\r\nWe analyse\
+  \ the allocation and expenditure trends of the Department of Human Settlements over\
+  \ a five-year period, therefore 2012 and 2017, at all three levels of government\
+  \ in order to interrogate the reasonableness of government\u2019s budgeting for\
+  \ the right to adequate housing. \r\n\r\nData is drawn from National Treasury documents-\
+  \ Estimates of National Expenditure- and departmental documents, such as annual\
+  \ reports."
+intro_short: null
+key_points: null
+last_updated: '2018-01-24T06:32:17.144182'
+license:
+  name: License not specified
+  url: null
+methodology: "Inflation is the term used to describe general increases in the prices\
+  \ of goods and services in the economy over time. Inflation erodes the value of\
+  \ money because rising prices mean that R1 today buys you slightly more than R1\
+  \ tomorrow. Departmental Annual Reports and Treasury documents tend to only provide\
+  \ the nominal amounts allocated in the budget each year, unadjusted for the effect\
+  \ of inflation. This makes comparing spending patterns over time difficult as the\
+  \ value of the amounts allocated in previous years (i.e. what they can buy) has\
+  \ changed. Therefore, when conducting an analysis of government budgets over time,\
+  \ it is important to take the effects of inflation into account. Converting nominal\
+  \ amounts to real amounts equalizes the value of money for each year under review,\
+  \ and therefore allows us to compare much more accurately the amounts allocated\
+  \ in the budget for different years.\r\n\r\nIn South Africa, the most widely used\
+  \ measurement of general inflation is the Consumer Price Index (CPI), which is tracked\
+  \ by Statistics South Africa (StatsSA). Adjusting the nominal amounts provided in\
+  \ the Estimates of National Expenditure and DHS annual reports to real amounts requires\
+  \ us to make a calculation using \u2018inflators\u2019 which are based on the annual\
+  \ CPI inflation rate provided by StatsSA. The CPI inflation rate and inflators used\
+  \ in this budget analysis to convert nominal amounts to real amounts are shown below.\
+  \ 2017 was used as the base year, hence all amounts in this chapter have been adjusted\
+  \ to 2017 prices.\r\n\r\nThe nominal figures (which have been converted into real\
+  \ figures for the purposes of this paper) are drawn from National Treasury\u2019\
+  s 2015, 2016, and 2017 Estimates of National Expenditure (ENE). The \u2018adjusted\
+  \ appropriation\u2019 figures provided in the ENE are used as a proxy for national\
+  \ programme allocation figures in this report, while the \u2018audited outcome\u2019\
+  \ figures represent national programme expenditure figures.  It must be noted that\
+  \ there are currently no expenditure figures for the 2016/17 financial year. \r\n\
+  \r\nHowever, the DHS\u2019 annual reports (2012/13 \u2013 2015/16) are used as sources\
+  \ for allocation and expenditure trends with regard to the sub-programmes under\
+  \ Programme 4 (Housing Development Finance). Neither the ENE publications nor annual\
+  \ reports provided data for the 2016/17 financial year in this regard."
+name: Monitoring the right of access to adequate housing in South Africa
+organization:
+  email: advocacy@spii.org.za
+  facebook: studiesinpovertyandinequalityinstitute
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2018-01-19-083658.384768spii-logo.jpg
+  name: Studies in Poverty and Inequality Institute
+  slug: studies-in-poverty-and-inequality-institute
+  telephone: 011 833 0161
+  twitter: '@SPII1'
+  url: http://www.spii.org.za/
+resources:
+- description: ''
+  format: PDF
+  name: Monitoring the right of access to adequate housing in South Africa
+  url: https://data.vulekamali.gov.za/dataset/9ef7f4d3-7adb-4a7f-a6b7-5b0b8c8aa9eb/resource/0611cc74-629b-4bdf-9e7c-8f5b1cfbd068/download/right-to-housing_2017.pdf
+- description: ''
+  format: XLSX
+  name: Human Settlements Housing Budget Analysis 2017
+  url: https://data.vulekamali.gov.za/dataset/9ef7f4d3-7adb-4a7f-a6b7-5b0b8c8aa9eb/resource/d8b44ec6-2ab7-41e3-8fa3-5f3e504cea9b/download/hs_housing-budget-analysis_2017.xlsx
+selected_tab: datasets
+slug: monitoring-the-right-of-access-to-adequate-housing-in-south-africa
+title: Monitoring the right of access to adequate housing in South Africa - vulekamali
+url_path: /datasets/contributed/monitoring-the-right-of-access-to-adequate-housing-in-south-africa
+usage: null
+use_for: null

@@ -1,0 +1,34 @@
+.DeptControls {
+  @include clearfix;
+}
+
+.DeptControls-keywords {
+  width: 100%;
+  max-width: 600px;
+
+  @media screen and (min-width: 1000px) {
+    width: 400px;
+    float: left;
+  }
+}
+
+.DeptControls-in {
+  float: left;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.DeptControls-dropdown {
+  float: left;
+  width: 230px;
+}
+
+.DeptControls-itemWrap {
+  padding: 10px 0;
+  @include clearfix;
+
+  @media screen and (min-width: 1000px) {
+    float: left;
+    padding: 0;
+  }
+}

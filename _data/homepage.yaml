@@ -1,0 +1,31 @@
+features_list:
+  - title: Explore National and Provincial Department Budgets
+    excerpt: Data for each department’s three year budget cycle of planning, implementation and review, including budget expenditure and <a class="Preview-link" href="/datasets">documents</a>.
+    icon: country
+    color: green
+    url: /2018-19/departments
+  - title: Understand Budget Data 
+    excerpt: Learn about the national budget and how to work with the budget datasets with our <a class="Preview-link" href="/glossary">Glossary</a>, <a class="Preview-link" href="/videos">Videos</a> and <a class="Preview-link" href="/guides">Dataset Guides</a>.
+    icon: brain
+    color: orange
+    url: https://vulekamali.gov.za/videos
+  - title: Planning, Implementation & Review Data
+    excerpt: Budget and expenditure data for the budget cycle, including the <a class="Preview-link" href="/datasets/estimates-of-national-expenditure">Estimates of National Expenditure</a> and <a class="Preview-link" href="/datasets/estimates-of-provincial-expenditure">Estimates of Provincial Revenue and Expenditure</a>
+    icon: cycle
+    color: purple
+    url: /datasets
+  - title: Socio-economic data that puts the budget data in context
+    excerpt: Links to South African and international socio-economic datasets and data portals that provide supporting context for budget analysis.
+    icon: people
+    color: green
+    url: https://vulekamali.gov.za/datasets/socio-economic-data
+  - title: Source Data & APIs
+    excerpt: Import structured data into your favourite analysis software. Built on the CKAN Data Discovery API including access to OpenSpending Data APIs and CSV files 
+    icon: datastore
+    color: orange
+    url: https://data.vulekamali.gov.za/
+  - title: Data & analysis contributed by other organisations
+    excerpt: View contributed data or contribute your own budget data & analysis to support participatory budgeting in South Africa.
+    icon: analysis
+    color: purple
+    url: https://vulekamali.gov.za/datasets/contributed

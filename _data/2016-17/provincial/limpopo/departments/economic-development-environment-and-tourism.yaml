@@ -1,0 +1,676 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1160813000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1332930000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    real:
+    - amount: 1355526203
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1464332112
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2013 and 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 174036000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 136485000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Tourism
+  - items:
+    - amount: 241817000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 371279000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Environmental Affairs
+  - items:
+    - amount: 304280000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 348019000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 440680000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 477147000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Economic Development
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "Limpopo AEPRE 2016-17 \u2013 Vote 6 - Economic Development, Environment\
+      \ and Tourism"
+    url: https://data.vulekamali.gov.za/dataset/d8f38d40-bcbd-4bc6-a333-10486bd4201c/resource/8966f316-4200-409f-bde2-7026c2cbc285/download/lim-vote-06-eco-dev-environment-and-tourism.pdf
+  name: "Limpopo AEPRE 2016-17 \u2013 Vote 6 - Economic Development, Environment and\
+    \ Tourism"
+  tables:
+    description: ''
+    format: XLSX
+    name: "Limpopo AEPRE 2016-17 \u2013 Vote 6 - Economic Development, Environment\
+      \ and Tourism"
+    url: https://data.vulekamali.gov.za/dataset/d8f38d40-bcbd-4bc6-a333-10486bd4201c/resource/66188deb-bb18-4c37-8605-73c3641dd2bb/download/lim-eco-dev-env.-affairs-tourism.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 06 : Economic Development, Environment and Tourism'
+    url: https://data.vulekamali.gov.za/dataset/1cf5e0b0-ecd8-4e04-bc40-aa70691140b2/resource/528a8278-aa08-479b-bdd3-981853650cc2/download/lim-vote-06-economic-dev.-environ.-tourism.pdf
+  name: 'Limpopo Department: Economic Development, Environment and Tourism 2016-17'
+  tables: null
+description: 'Limpopo department: Economic Development, Environment and Tourism budget
+  data for the 2016-17 financial year from National Treasury in partnership with IMALI
+  YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Limpopo%2522%257Cdepartment.department%253A%2522Economic%2BDevelopment%252C%2BEnvironment%2Band%2BTourism%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 167549000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 138531000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 33607000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 6420000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 1875000
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 37000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 85622000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 50740000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 2233000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 338282000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 270000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Economic Development
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 241812000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 60519000
+        type: economic_classification_2
+      - name: Interest and rent on land
+        total_budget: 437000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 41000000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 23389000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 2843000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 1279000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Environmental Affairs
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 27362000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 11617000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 97506000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Tourism
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 874203000
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 1071242000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1112393000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1160184000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1332930000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1436013000
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 1507810000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    real:
+    - amount: 1199950493
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 1389578806
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1366101734
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1354791695
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1464332112
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1506552716
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 1507810000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/limpopo/departments/economic-development-environment-and-tourism
+  id: 2016-17
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/limpopo/departments/economic-development-environment-and-tourism
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/limpopo/departments/economic-development-environment-and-tourism
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2019-20/provincial/limpopo
+  id: 2019-20
+  is_selected: false
+government:
+  name: Limpopo
+  slug: limpopo
+government_functions: []
+intro: "## Vision\r\n\r\nA competitive economy within a sustainable environment.\r\
+  \n\r\n\r\n\r\n## Mission\r\n\r\nTo create and facilitate the development of a competitive\
+  \ economy, sustainable environment and\r\ntourism growth.\r\n\r\n\r\n\r\n## Main\
+  \ services\r\n\r\nThe mandate of the Department is to facilitate the provincial\
+  \ economy, promote and manage\r\nenvironmental and tourism activities. To carry\
+  \ out this mandate, the department pursues the\r\nfollowing:\r\n\r\n\u2022 Improve\
+  \ service delivery to communities and stakeholders through a skilled, accountable,\r\
+  \ncorrupt free, development oriented and empowered and intergraded Public Service.\r\
+  \n\r\n\u2022 Accelerate employment creation, economic growth and development.\r\n\
+  \r\n\u2022 Ensure sustainable development through targeted intervention on environmental\
+  \ management,\r\ndevelopment of natural resources, creation of green jobs and proactive\
+  \ responses to climate\r\nchange.\r\n\r\n\u2022 To position Limpopo as a preferred\
+  \ tourist and investment destination within Southern African\r\nDeveloping Countries(SADC)\
+  \ and the World.\r\n\r\n\u2022 Transform Limpopo into a world class knowledge society\
+  \ that uses ICT as an enabler of socioeconomic\r\ndevelopment and ICT as a production\
+  \ sector."
+is_vote_primary: true
+name: Economic Development, Environment and Tourism
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Limpopo%2522%257Cdepartment.department%253A%2522Economic%2BDevelopment%252C%2BEnvironment%2Band%2BTourism%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Environmental Affairs
+      total_budget: 241812000
+      type: programme
+    - name: Administration
+      total_budget: 167549000
+      type: programme
+    - name: Economic Development
+      total_budget: 85622000
+      type: programme
+    - name: Tourism
+      total_budget: 11617000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 138531000
+      type: programme
+    - name: Environmental Affairs
+      total_budget: 60519000
+      type: programme
+    - name: Economic Development
+      total_budget: 50740000
+      type: programme
+    - name: Tourism
+      total_budget: 27362000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Environmental Affairs
+      total_budget: 437000
+      type: programme
+    name: Current payments - Interest and rent on land
+    type: economic_classification_1_and_2
+  - items:
+    - name: Environmental Affairs
+      total_budget: 41000000
+      type: programme
+    - name: Economic Development
+      total_budget: 2233000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 33607000
+      type: programme
+    - name: Environmental Affairs
+      total_budget: 23389000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Economic Development
+      total_budget: 338282000
+      type: programme
+    - name: Tourism
+      total_budget: 97506000
+      type: programme
+    - name: Administration
+      total_budget: 37000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 6420000
+      type: programme
+    - name: Environmental Affairs
+      total_budget: 2843000
+      type: programme
+    - name: Economic Development
+      total_budget: 270000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 1875000
+      type: programme
+    - name: Environmental Affairs
+      total_budget: 1279000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Limpopo%2522%257Cdepartment.department%253A%2522Economic%2BDevelopment%252C%2BEnvironment%2Band%2BTourism%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 348019000
+  - name: Economic Development
+    total_budget: 477147000
+  - name: Environmental Affairs
+    total_budget: 371279000
+  - name: Tourism
+    total_budget: 136485000
+selected_financial_year: 2016-17
+selected_tab: departments
+slug: economic-development-environment-and-tourism
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2016-17-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Limpopo%2522%257Cdepartment.department%253A%2522Economic%2BDevelopment%252C%2BEnvironment%2Band%2BTourism%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Economic Development, Environment and Tourism budget 2016-17  - vulekamali
+vote_number: 6
+vote_primary:
+  name: Economic Development, Environment and Tourism
+  slug: economic-development-environment-and-tourism
+  url_path: /2016-17/provincial/limpopo/departments/economic-development-environment-and-tourism
+website_url: null

@@ -1,0 +1,47 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+coordinates:
+- latitude: -26.378582
+  longitude: 27.654933
+dataset_url: /datasets/infrastructure-projects/major-infrastructure-projects-by-national-departments
+department:
+  budget_document: https://data.vulekamali.gov.za/dataset/97ac7669-f7a4-40b6-a5bf-7843666fe0b5/resource/10d89fd3-0c5e-44b4-8b90-bb328c73586f/download/vote-36-water-and-sanitation.pdf
+  name: Water and Sanitation
+  url: /2019-20/national/departments/water-and-sanitation
+description: Construction of new wastewater treatment works
+expenditure:
+- amount: 7104000.0
+  budget_phase: Audited Outcome
+  year: '2015'
+- amount: 1314000.0
+  budget_phase: Audited Outcome
+  year: '2016'
+- amount: 1036000.0
+  budget_phase: Audited Outcome
+  year: '2017'
+- amount: 55500000.0
+  budget_phase: Adjusted Appropriation
+  year: '2018'
+- amount: 70000000.0
+  budget_phase: MTEF
+  year: '2019'
+- amount: 100000000.0
+  budget_phase: MTEF
+  year: '2020'
+- amount: 274214000.0
+  budget_phase: MTEF
+  year: '2021'
+infrastructure_type: Waste Water Services
+name: Westonaria/Randfontein regional bulk wastewater treatment works (Zuurbekom)
+nature_of_investment: New infrastructure assets
+projected_budget: 444214000.0
+provinces:
+- Gauteng
+selected_tab: infrastructure-projects
+slug: /infrastructure-projects/water-and-sanitation-westonaria-randfontein-regional-bulk-wastewater-treatment-works-zuurbekom
+stage: Design
+title: Westonaria/Randfontein regional bulk wastewater treatment works (Zuurbekom)
+  - vulekamali
+total_budget: 1570000000.0

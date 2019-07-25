@@ -1,0 +1,858 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 17916783000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 19322742000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 20973433000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    real:
+    - amount: 19683044652
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 20271912200
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 20973433000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2019 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 20092000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 21000000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 22176000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Independent Schools Subsidies
+  - items:
+    - amount: 247638000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 293303000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 385985000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Public Special Schools Education
+  - items:
+    - amount: 317672000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 228373000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 328596000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Early Childhood Development
+  - items:
+    - amount: 691640000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 634973000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 640142000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Examination and Education Related Services
+  - items:
+    - amount: 1030777000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1165781000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1257793000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Infrastructure Development
+  - items:
+    - amount: 1341418000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1282005000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1515355000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 14267546000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 15697307000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 16823386000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Public Ordinary Schools Education
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget: null
+description: 'Mpumalanga department: Education budget data for the 2019-20 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cvotenumber.department%253A%2522Education%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 15000000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 1671178000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 13381000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Current payments
+        total_budget: 528455000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 13889000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Early Childhood Development
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 158000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 481704000
+        type: economic_classification_2
+      - name: Current payments
+        total_budget: 259003000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Examination And Education Related Services
+    type: programme
+  - items:
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 23418000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Independent Schools Subsidies
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 737696000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 196823000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Infrastructure Development
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 2007000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 16439191000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 1119048000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Public Ordinary Schools Education
+    type: programme
+  - items:
+    - items:
+      - name: Current payments
+        total_budget: 319516000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 41858000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Public Special Schools Education
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 17098289000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 17809481000
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 19283726000
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 21073289000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 21862325000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 23295188000
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 24532480000
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+    real:
+    - amount: 19966332878
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 19565164670
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 20230979659
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 21073289000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 20789955294
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 21001908198
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 20978572024
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/mpumalanga/departments/education
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/mpumalanga/departments/education
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/mpumalanga/departments/education
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/mpumalanga/departments/education
+  id: 2019-20
+  is_selected: true
+government:
+  name: Mpumalanga
+  slug: mpumalanga
+government_functions: []
+intro: ''
+is_vote_primary: true
+name: Education
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cvotenumber.department%253A%2522Education%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Infrastructure Development
+      total_budget: 737696000
+      type: programme
+    - name: Administration
+      total_budget: 15000000
+      type: programme
+    - name: Public Ordinary Schools Education
+      total_budget: 2007000
+      type: programme
+    - name: Examination And Education Related Services
+      total_budget: 158000
+      type: programme
+    name: Capital - Payments for capital assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Public Ordinary Schools Education
+      total_budget: 16439191000
+      type: programme
+    - name: Administration
+      total_budget: 1671178000
+      type: programme
+    - name: Early Childhood Development
+      total_budget: 528455000
+      type: programme
+    - name: Public Special Schools Education
+      total_budget: 319516000
+      type: programme
+    - name: Examination And Education Related Services
+      total_budget: 259003000
+      type: programme
+    - name: Infrastructure Development
+      total_budget: 196823000
+      type: programme
+    name: Current - Current payments
+    type: economic_classification_1_and_2
+  - items:
+    - name: Public Ordinary Schools Education
+      total_budget: 1119048000
+      type: programme
+    - name: Examination And Education Related Services
+      total_budget: 481704000
+      type: programme
+    - name: Public Special Schools Education
+      total_budget: 41858000
+      type: programme
+    - name: Independent Schools Subsidies
+      total_budget: 23418000
+      type: programme
+    - name: Early Childhood Development
+      total_budget: 13889000
+      type: programme
+    - name: Administration
+      total_budget: 13381000
+      type: programme
+    name: Current - Transfers and subsidies
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cvotenumber.department%253A%2522Education%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 1699559000
+  - name: Public Ordinary Schools Education
+    total_budget: 17560246000
+  - name: Independent Schools Subsidies
+    total_budget: 23418000
+  - name: Public Special Schools Education
+    total_budget: 361374000
+  - name: Early Childhood Development
+    total_budget: 542344000
+  - name: Infrastructure Development
+    total_budget: 934519000
+  - name: Examination And Education Related Services
+    total_budget: 740865000
+selected_financial_year: 2019-20
+selected_tab: departments
+slug: education
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-of-south-africa-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2019-20-uploaded-2019-06-05-1615/aggregate/%3Fcut%3Dfinancialyear.financialyear%253A2019%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cvotenumber.department%253A%2522Education%2522%26drilldown%3Dbudgetphase.budgetphase%257Ceconomicclassification1.economicclassification1%257Ceconomicclassification2.economicclassification2%257Ceconomicclassification3.economicclassification3%257Ceconomicclassification4.economicclassification4%257Ceconomicclassification5.economicclassification5%257Cfinancialyear.financialyear%257Cfunctiongroup1.functiongroup1%257Cfunctiongroup2.functiongroup2%257Cgovernment.government%257Cprognumber.prognumber%257Cprognumber.programme%257Csubprognumber.subprognumber%257Csubprognumber.subprogramme%257Cvotenumber.department%257Cvotenumber.votenumber%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Education Management
+      total_budget: 837504000
+      type: subprogramme
+    - name: Corporate Services
+      total_budget: 760097000
+      type: subprogramme
+    - name: (Emis) Education Management Information System
+      total_budget: 78856000
+      type: subprogramme
+    - name: Human Resource Development
+      total_budget: 12087000
+      type: subprogramme
+    - name: Office Of The Mec
+      total_budget: 11015000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Grade R In Public Schools
+      total_budget: 524949000
+      type: subprogramme
+    - name: Grade R In Early Childhood Development Centres
+      total_budget: 11550000
+      type: subprogramme
+    - name: Human Resource Development
+      total_budget: 3078000
+      type: subprogramme
+    - name: Conditional Grants
+      total_budget: 2767000
+      type: subprogramme
+    name: Early Childhood Development
+    type: programme
+  - items:
+    - name: Special Projects
+      total_budget: 446160000
+      type: subprogramme
+    - name: External Examinations
+      total_budget: 220537000
+      type: subprogramme
+    - name: Payment To Seta
+      total_budget: 52249000
+      type: subprogramme
+    - name: Conditional Grants
+      total_budget: 21919000
+      type: subprogramme
+    name: Examination And Education Related Services
+    type: programme
+  - items:
+    - name: Primary Level
+      total_budget: 16752000
+      type: subprogramme
+    - name: Secondary Level
+      total_budget: 6666000
+      type: subprogramme
+    name: Independent Schools Subsidies
+    type: programme
+  - items:
+    - name: Public Ordinary Schools
+      total_budget: 902951000
+      type: subprogramme
+    - name: Special School
+      total_budget: 30000000
+      type: subprogramme
+    - name: Early Childhood Development
+      total_budget: 1568000
+      type: subprogramme
+    name: Infrastructure Development
+    type: programme
+  - items:
+    - name: Public Primary Level
+      total_budget: 10633869000
+      type: subprogramme
+    - name: Public Secondary  Level
+      total_budget: 6100193000
+      type: subprogramme
+    - name: Conditional Grants
+      total_budget: 728045000
+      type: subprogramme
+    - name: Human Resource Development
+      total_budget: 78075000
+      type: subprogramme
+    - name: School Sport, Culture & Media Services
+      total_budget: 20064000
+      type: subprogramme
+    name: Public Ordinary Schools Education
+    type: programme
+  - items:
+    - name: Schools
+      total_budget: 332437000
+      type: subprogramme
+    - name: Conditional Grants
+      total_budget: 26094000
+      type: subprogramme
+    - name: Human Resource Development
+      total_budget: 2843000
+      type: subprogramme
+    name: Public Special Schools Education
+    type: programme
+title: Education budget 2019-20  - vulekamali
+vote_number: 7
+vote_primary:
+  name: Education
+  slug: education
+  url_path: /2019-20/provincial/mpumalanga/departments/education
+website_url: null

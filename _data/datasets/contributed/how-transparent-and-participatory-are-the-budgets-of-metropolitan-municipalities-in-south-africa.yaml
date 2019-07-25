@@ -1,0 +1,68 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Data and analysis contributed by other organisations on South African
+    government budgets. '
+  name: Contributed data and analysis
+  slug: contributed
+  url_path: /datasets/contributed
+created: '2018-07-18T15:27:27.236890'
+description: Data and/or documentation related to South African government budgets
+  contributed by International Budget Partnership and hosted by National Treasury
+  in partnership with IMALI YETHU
+intro: "How transparent and participatory are the budgets of Metropolitan Municipalities\
+  \ in South Africa?\r\n\r\nEvidence from around the world shows that when there is\
+  \ public participation in public finance decision making and oversight, it can lead\
+  \ to better policy choices, deeper public trust in government, and stronger accountability\
+  \ over the actual use of public money to provide services on the ground. Such participation,\
+  \ however, is only meaningful when the public has access to information about the\
+  \ government\u2019s plans, activities and the fiscal constraints it faces.\r\n\r\
+  \nWhile the national government has undergone regular budget transparency and participation\
+  \ assessments through the Open Budget Survey since 2006, to date there has not been\
+  \ a similar assessment of public finance management systems and practices for local\
+  \ and provincial governments. This is about to change, as the International Budget\
+  \ Partnership South Africa is preparing to launch a Metro OBI. The Metro OBI will\
+  \ complete the public finance transparency and participation picture in South Africa\
+  \ by assessing transparency and participation in the metropolitan municipalities\
+  \ (metros). Four of the eight metro municipalities will be assessed in 2018.\r\n\
+  \r\nThis paper introduces the Metro Open Budget Index and explains how the Metro\
+  \ OBI questionnaire was developed and how it will be implemented. "
+intro_short: null
+key_points: null
+last_updated: '2018-07-18T15:29:17.786047'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: How transparent and participatory are the budgets of Metropolitan Municipalities
+  in South Africa?
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2018-07-18-150902.261001ibplogo.png
+  name: International Budget Partnership
+  slug: international-budget-partnership
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Introducing the South Africa Metro Open Budget Index
+  url: https://data.vulekamali.gov.za/dataset/531593ff-2120-41a1-8a4e-050fa9d72f7f/resource/394c3be6-8442-4ca9-85e2-d827f1ef0773/download/south-africa-metro-open-budget-index-ibp-2017.pdf
+- description: ''
+  format: PDF
+  name: The South Africa Metro Open Budget Index Questionnaire
+  url: https://data.vulekamali.gov.za/dataset/531593ff-2120-41a1-8a4e-050fa9d72f7f/resource/96a2268a-6f06-4df5-8dde-8d3f4a052457/download/south-africa-metro-open-budget-index-questionnaire-ibp-2017.pdf
+selected_tab: datasets
+slug: how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+title: How transparent and participatory are the budgets of Metropolitan Municipalities
+  in South Africa? - vulekamali
+url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+usage: null
+use_for: null

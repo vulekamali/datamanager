@@ -1,0 +1,43 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: Consolidated dataset consisting of national and provincial expenditure
+  name: Consolidated Expenditure
+  slug: consolidated-expenditure-budget
+  url_path: /datasets/consolidated-expenditure-budget
+created: '2019-04-08T12:58:10.467436'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2019-04-08T14:19:19.796371'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: Consolidated Expenditure 2019-20
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: CSV
+  name: Consolidated Expenditure Budget 2019-20
+  url: https://data.vulekamali.gov.za/dataset/d190dad6-45fc-499c-a808-459b3cfe909b/resource/be6eff6c-35c6-4a9b-a81e-d7f2c9c5de68/download/consolidated-2019-20.csv
+- description: ''
+  format: openspending api
+  name: Consolidated Expenditure Budget 2019-20
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:consolidated-budget-expenditure-2019-20/model/
+selected_tab: datasets
+slug: consolidated-expenditure-2019-20
+title: Consolidated Expenditure 2019-20 - vulekamali
+url_path: /datasets/consolidated-expenditure-budget/consolidated-expenditure-2019-20
+usage: null
+use_for: null

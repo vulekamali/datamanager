@@ -1,0 +1,29 @@
+---
+layout: page-shell
+---
+
+{% assign page_data = site.data.datasets.index %}
+
+
+<div class="Page-content">
+  <main class="Page-contentInner">
+    <div class="Section is-invisible">
+      <a href="/">vulekamali</a>
+      <span> / Data and Analysis</span>
+    </div>
+
+    <h1 class="Page-mainHeading u-marginTop15">Data and Analysis</h1>
+
+    <div class="Grid has-twoColumn">
+      {% for dataset in page_data.categories %}
+        {%
+          include components/Preview/index.html
+          title=dataset.name
+          excerpt=dataset.description
+          url=dataset.url_path
+        %}
+      {% endfor %}
+    </div>
+
+  </main>
+</div>

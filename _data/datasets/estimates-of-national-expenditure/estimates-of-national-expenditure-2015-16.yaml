@@ -1,0 +1,76 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Budgeted expenditure for a given financial year.\r\n\r\nExpenditure\
+    \ data used to prepare the ENE publications provide detailed data on government\u2019\
+    s expenditure allocations contained in the annual appropriation bill (for the\
+    \ upcoming year) as well as for the two outer years, that is for the three years\
+    \ of the medium term expenditure framework. Information is presented by vote (generally\
+    \ a national government department) and by main economic classification. The ENE\
+    \ publications also provide detailed data on how government institutions have\
+    \ spent their budgets in previous years."
+  name: Estimates of National Expenditure
+  slug: estimates-of-national-expenditure
+  url_path: /datasets/estimates-of-national-expenditure
+created: '2018-02-08T14:37:41.767638'
+description: "This dataset includes expenditure data as published in the\r\nEstimates\
+  \ of National Expenditure. Departmental\r\nexpenditure data in previous financial\
+  \ years have been aligned with the\r\nbudget and programme structures of departments\
+  \ as they are structured in\r\nthe current Medium Term Expenditure Framework. This\
+  \ means that the\r\nstructure of historical expenditure data for a department, may\
+  \ not\r\nnecessarily reflect the same structure of that department when\r\nexpenditure\
+  \ was incurred during a particular financial year. This may be\r\ndue to functions\
+  \ shifts which may have occurred within a particular\r\ndepartment or a general\
+  \ change in a department\u2019s budget programme\r\nstructures (BPS) as departments\
+  \ are afforded an opportunity before the\r\nstart of the Budget to change their\
+  \ BPS.This is to ensure a more\r\neconomical, efficient and effective delivery of\
+  \ public services and\r\nperformance by the department as a whole."
+intro: "This dataset includes expenditure data as published in the\r\nEstimates of\
+  \ National Expenditure. Departmental\r\nexpenditure data in previous financial years\
+  \ have been aligned with the\r\nbudget and programme structures of departments as\
+  \ they are structured in\r\nthe current Medium Term Expenditure Framework. This\
+  \ means that the\r\nstructure of historical expenditure data for a department, may\
+  \ not\r\nnecessarily reflect the same structure of that department when\r\nexpenditure\
+  \ was incurred during a particular financial year. This may be\r\ndue to functions\
+  \ shifts which may have occurred within a particular\r\ndepartment or a general\
+  \ change in a department\u2019s budget programme\r\nstructures (BPS) as departments\
+  \ are afforded an opportunity before the\r\nstart of the Budget to change their\
+  \ BPS.This is to ensure a more\r\neconomical, efficient and effective delivery of\
+  \ public services and\r\nperformance by the department as a whole."
+intro_short: null
+key_points: null
+last_updated: '2019-01-25T05:18:54.845328'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: Estimates of National Expenditure 2015-16
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: OpenSpending API
+  name: Estimates of National Expenditure 2015-16
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:estimates-of-national-expenditure-2015-16-uploaded-2019-01-25t0215/model/
+- description: ''
+  format: XLSX
+  name: Estimates of National Expenditure Pivot Data 2015
+  url: https://data.vulekamali.gov.za/dataset/ce3e6738-a5eb-422d-85ef-346bb6b09fc5/resource/78cf356c-1363-48d4-99fb-2552f13cc660/download/ene-2015-expend-data-set.zip
+- description: ''
+  format: CSV
+  name: Estimates of National Expenditure 2015-16
+  url: http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/estimates-of-national-expenditure-2015-16-uploaded-2019-01-25t0215/final/data/ene-2015-16.csv
+selected_tab: datasets
+slug: estimates-of-national-expenditure-2015-16
+title: Estimates of National Expenditure 2015-16 - vulekamali
+url_path: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2015-16
+usage: null
+use_for: null

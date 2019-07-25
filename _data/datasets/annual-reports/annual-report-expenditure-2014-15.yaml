@@ -1,0 +1,44 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: Annual Reports expenditure data for the end of a financial year, including
+    Audited Outcome and Final Appropriation.
+  name: Annual Report Expenditure Data
+  slug: annual-reports
+  url_path: /datasets/annual-reports
+created: '2019-02-01T14:10:32.230934'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2019-02-05T15:43:54.032776'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: Annual Report Expenditure 2014-15
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: CSV
+  name: National Annual Report Expenditure 2014-15
+  url: http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/nat-are-2014-15/final/data/are-2014-15.csv
+- description: ''
+  format: openspending api
+  name: National Annual Report Expenditure 2014-15
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:nat-are-2014-15/model/
+selected_tab: datasets
+slug: annual-report-expenditure-2014-15
+title: Annual Report Expenditure 2014-15 - vulekamali
+url_path: /datasets/annual-reports/annual-report-expenditure-2014-15
+usage: null
+use_for: null

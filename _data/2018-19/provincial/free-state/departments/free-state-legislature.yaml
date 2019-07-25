@@ -1,0 +1,567 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 158255000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 203803000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 208393000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 184800479
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 223894186
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 218629664
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices:
+  - This department did not exist for some years displayed.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 28328000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 60967000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 55662000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Facilities For Members And Political Parties
+  - items:
+    - amount: 32024000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 34011000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 38207000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Parliamentary Services
+  - items:
+    - amount: 97903000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 108825000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 114524000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 2 - Free State Legislature
+    url: https://data.vulekamali.gov.za/dataset/0447cf4a-0204-4f1d-ad1e-8637b0576411/resource/a2bfbb8d-8135-4394-a614-448f1651806c/download/fs-vote-02-legislature.pdf
+  name: 'Free State Department: Free State Legislature 2018-19'
+  tables: null
+description: 'Free State department: Free State Legislature budget data for the 2018-19
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Free%2BState%2522%257Cdepartment.department%253A%2522Free%2BState%2BLegislature%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 73983000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 46837000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 1942000.0
+        type: economic_classification_2
+      - name: Software And Other Intangible Assets
+        total_budget: 254000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 310000.0
+        type: economic_classification_2
+      - name: Non-Profit Institutions
+        total_budget: 190000.0
+        type: economic_classification_2
+      - name: Higher Education Institutions
+        total_budget: 15000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 25998000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    name: Direct Charges
+    type: programme
+  - items:
+    - items:
+      - name: Goods And Services
+        total_budget: 3609000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Departmental Agencies And Accounts
+        total_budget: 63006000.0
+        type: economic_classification_2
+      name: Transfers And Subsidies
+      type: economic_classification_1
+    name: Facilities For Members And Political Parties
+    type: programme
+  - items:
+    - items:
+      - name: Compensation Of Employees
+        total_budget: 32343000.0
+        type: economic_classification_2
+      - name: Goods And Services
+        total_budget: 4498000.0
+        type: economic_classification_2
+      name: Current Payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery And Equipment
+        total_budget: 133000.0
+        type: economic_classification_2
+      name: Payments For Capital Assets
+      type: economic_classification_1
+    name: Parliamentary Services
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 192181000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 211894000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 220842000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 243056000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 253118000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 261142000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 275521000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 236012629
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 247436813
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 242612914
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 254995377
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 253118000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 248332714
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 248397512
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/free-state/departments/free-state-legislature
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/free-state/departments/free-state-legislature
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/free-state/departments/free-state-legislature
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: false
+    url_path: /2019-20/provincial/free-state
+  id: 2019-20
+  is_selected: false
+government:
+  name: Free State
+  slug: free-state
+government_functions: []
+intro: "## Mandate\n\nSection 10 (1) of the Constitution provides that: \u201CThe\
+  \ legislative authority of a province is vested in its provincial legislature. \
+  \ Section 114(1) and (2) of the Constitution provide further for the powers of a\
+  \ Provincial Legislature to include; (a) the consideration, passing, amendment or\
+  \ rejection of bills; (b) to initiate or prepare legislation, except money bills;\
+  \ (c) to ensure that all provincial executive organs of state in the province are\
+  \ accountable to it and (d) to maintain oversight of the exercise of provincial\
+  \ executive authority in the province, including the implementation of legislation\
+  \ and any provincial organ of state.\nIn addition to its constitutional mandate\
+  \ and obligations, the general and specific powers of the Legislature are set out\
+  \ in Rules 127 to 130 of the Standing Rules and Orders.\nThe Legislature has developed\
+  \ a range of policies pertaining to elected representatives, political parties,\
+  \ staff and various institutional practices in order to guide and regulate the daily\
+  \ implementation of services and projects.  In respect of such policies, the review\
+  \ highlighted the need to ensure that existing shortcomings and weaknesses are identified\
+  \ and that key legislation and good governance principles, are incorporated into\
+  \ the existing policy framework. \nThe provincial strategic outcomes developed by\
+  \ the Executive are the key points of departure that define the priorities for the\
+  \ province.  Within this framework, the Legislature has to engage with and identify\
+  \ whether there are any gaps or whether enabling policy is required to support the\
+  \ achievement of provincial goals. The Legislature, also has to prioritise how it\
+  \ will meaningfully perform oversight to ensure delivery against the stated strategies.\
+  \  \n\n## Vision\n\nThe vision of the Free State Legislature is in line with its\
+  \ mandate as derived from the Constitution of the Republic of South Africa (Act\
+  \ 108 of 1996). The vision encapsulates the core principles of the Legislature as\
+  \ follows; \u201CAn Activist Legislature that Champions Democracy\u201D.\n\n## Mission\n\
+  \nTo promote good governance and a culture of human rights through oversight, law-making\
+  \ and public participation. \n\n"
+is_vote_primary: true
+name: Free State Legislature
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Free%2BState%2522%257Cdepartment.department%253A%2522Free%2BState%2BLegislature%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 73983000.0
+      type: programme
+    - name: Parliamentary Services
+      total_budget: 32343000.0
+      type: programme
+    - name: Direct Charges
+      total_budget: 25998000.0
+      type: programme
+    name: Current Payments - Compensation Of Employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 46837000.0
+      type: programme
+    - name: Parliamentary Services
+      total_budget: 4498000.0
+      type: programme
+    - name: Facilities For Members And Political Parties
+      total_budget: 3609000.0
+      type: programme
+    name: Current Payments - Goods And Services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 1942000.0
+      type: programme
+    - name: Parliamentary Services
+      total_budget: 133000.0
+      type: programme
+    name: Payments For Capital Assets - Machinery And Equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 254000.0
+      type: programme
+    name: Payments For Capital Assets - Software And Other Intangible Assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Facilities For Members And Political Parties
+      total_budget: 63006000.0
+      type: programme
+    name: Transfers And Subsidies - Departmental Agencies And Accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 15000.0
+      type: programme
+    name: Transfers And Subsidies - Higher Education Institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 310000.0
+      type: programme
+    name: Transfers And Subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 190000.0
+      type: programme
+    name: Transfers And Subsidies - Non-Profit Institutions
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2018-19-shifted-econ-classes/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Free%2BState%2522%257Cdepartment.department%253A%2522Free%2BState%2BLegislature%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 123531000.0
+  - name: Facilities For Members And Political Parties
+    total_budget: 66615000.0
+  - name: Parliamentary Services
+    total_budget: 36974000.0
+  - name: Direct Charges
+    total_budget: 25998000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: free-state-legislature
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-drilldown-2018-19-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cgovernment.government%253A%2522Free%2BState%2522%257Cdepartment.department%253A%2522Free%2BState%2BLegislature%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme.programme%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Free State Legislature budget 2018-19  - vulekamali
+vote_number: 2
+vote_primary:
+  name: Free State Legislature
+  slug: free-state-legislature
+  url_path: /2018-19/provincial/free-state/departments/free-state-legislature
+website_url: null

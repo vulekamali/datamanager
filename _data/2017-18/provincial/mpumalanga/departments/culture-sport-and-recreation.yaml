@@ -1,0 +1,692 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 454891000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 451907000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 511232000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 531193801
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 496456627
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 536344697
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 81116000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 81679000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 99986000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 88417000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 86838000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 132743000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Cultural Affairs
+  - items:
+    - amount: 89627000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 96150000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 94345000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Sports and Recreation
+  - items:
+    - amount: 195731000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 187240000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 184158000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Library and Archives Services
+contributed_datasets:
+- contributor: Public Service Accountability Monitor
+  name: Education Budget Brief 2019/20
+  url_path: /datasets/contributed/education-budget-brief-2019-20
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Education 2016/17'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-education-2016-17
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Education 2018/19'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-education-2018-19
+- contributor: Centre for Child Law
+  name: 'Mud to bricks: A review of school infrastructure spending and delivery'
+  url_path: /datasets/contributed/mud-to-bricks-a-review-of-school-infrastructure-spending-and-delivery
+- contributor: Centre for Child Law
+  name: 'Budgets and Bricks: Progress with school infrastructure following the Rivonia
+    Primary School case'
+  url_path: /datasets/contributed/budgets-and-bricks-progress-with-school-infrastructure-following-the-rivonia-primary-school-case
+- contributor: Public Service Accountability Monitor
+  name: A People's Guide to the Adjusted Budget 2018/19
+  url_path: /datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19
+- contributor: International Budget Partnership
+  name: The transparency of public funding of Basic Education in South Africa
+  url_path: /datasets/contributed/the-transparency-of-public-funding-of-basic-education-in-south-africa
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "MPU AEPRE 2017-18 \u2013 Vote 11 - Culture, Sport and Recreation"
+    url: https://data.vulekamali.gov.za/dataset/be6422e0-2668-4c63-94b9-2d80beac3ca3/resource/06176d82-c5a8-4706-b986-2e7f79d8355d/download/mpu-vote-11-culture-sport-and-recreation.pdf
+  name: "Mpumalanga AEPRE 2017-18 \u2013 Vote 11 - Culture, Sport and Recreation"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 11 : Culture, Sport and Recreation'
+    url: https://data.vulekamali.gov.za/dataset/227d600f-cefa-469e-bfff-29927d1add3b/resource/44fab80b-620c-45ee-b0e2-8f4096325338/download/mpu-vote-11-culture-sport-and-recreation.pdf
+  name: 'Mpumalanga Department: Culture, Sport and Recreation 2017-18'
+  tables: null
+description: 'Mpumalanga department: Culture, Sport and Recreation budget data for
+  the 2017-18 financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cdepartment.department%253A%2522Culture%252C%2BSport%2Band%2BRecreation%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 51689000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 43243000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 4391000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 553000
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 110000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 48495000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 32806000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 45442000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 6000000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Cultural Affairs
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 64103000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 52348000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 62527000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 5180000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: Library and Archives Services
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 44958000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 20565000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 24786000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 500000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 3536000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Sports and Recreation
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 373622000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 411103000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 423084000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 497500000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 511232000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 533909000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 560087000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 484649792
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 504865206
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 494051538
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 546544249
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 536344697
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 533909000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 532614152
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/mpumalanga/departments/culture-sport-and-recreation
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/mpumalanga/departments/culture-sport-and-recreation
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/mpumalanga/departments/culture-sport-and-recreation
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/mpumalanga/departments/culture-sport-and-recreation
+  id: 2019-20
+  is_selected: false
+government:
+  name: Mpumalanga
+  slug: mpumalanga
+government_functions:
+- Basic education
+intro: "## Vision\n\nA patriotic socially cohesive society\r\n\r\n\n\n## Mission\n\
+  \nTo promote social cohesion and nation building through culture, sport and information\
+  \ service\r\nto people of Mpumalanga\r\n\r\n\n\n## Core functions\n\nTo foster a\
+  \ new national identity, common citizenry and equal rights through conducting programmes\
+  \ such as multi-faith consultative forums, multilingualism awareness campaigns,\
+  \ workshops on national symbols to achieve improved knowledge and upheld\r\nvalues\
+  \ enshrined in RSA Constitutional values.\r\n\r\n* To promote a viable cultural\
+  \ industries and preserve the heritage through completion of\r\npre-construction\
+  \ of Cultural Hubs, Heritage sites and maintenance of Cultural Villages and\r\n\
+  museums.\r\n\r\n* To promote and develop arts and culture through craft exhibitions\
+  \ and capacity building\r\nprogramme, cultural tourism, museum displays and standardization\
+  \ of Geographic Names\r\nand features.\r\n\r\n* To promote the Province and the\
+  \ Country as a diverse socially cohesive nation through\r\nthe host of International\
+  \ events and tournaments.\r\n\r\n* To encourage active participation of community\
+  \ based structures through the support of arts culture, language, heritage structure\
+  \ museums structures that are in partnership with\r\ngovernment to promote culture.\r\
+  \n\r\nLibrary and Archive services\r\n\r\n* To increase access to information services\
+  \ through establishment and resourcing of new libraries facilities, monitor existing\
+  \ library facilities and repository record management.\r\n\r\n* To sustain access\
+  \ to information services through library and archival programmes such as provision\
+  \ of library materials (books etc.)\r\n\r\n* To increased and sustain job opportunities\
+  \ created through creative industry that account\r\nfor EPWP jobs created and cooperatives\r\
+  \n\r\n* To foster constitutional values though by promoting human rights, reconciliation,\
+  \ cultural diversity and nation building through the host of national commemorative\
+  \ / celebrative\r\ndays that contributes towards improved knowledge and upheld values\
+  \ enshrined in RSA Constitutional values.\r\n\r\nSport and Recreation\r\n* To develop\
+  \ Sport Infrastructure for excellence and sport development through the completion\
+  \ of pre-construction phase of High Altitude Training Center and Sport Combo Courts\r\
+  \n\r\n* Coordinate recreation events (indigenous games; golden games, big walk,\
+  \ recreation day, hub & club tournaments, cycling, fun runs, sport-specific events;\
+  \ sport for all projects, sport\r\nfor social change and development, modified sport,\
+  \ sport and recreation outreach, mass mobilization and rural sport events etc.)\
+  \ and school sport district tournaments that promote\r\nhealthy lifestyles\r\n\r\
+  \n* Provision of equipment and attire to schools, Hubs and clubs in an effort to\
+  \ enable participation in Sport and Recreation\r\n\r\n* To encourage active participation\
+  \ of community based structures through the support of sport institutions, sport\
+  \ academies and Sport Councils that are in partnership with government to promote\
+  \ Sport."
+is_vote_primary: true
+name: Culture, Sport and Recreation
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cdepartment.department%253A%2522Culture%252C%2BSport%2Band%2BRecreation%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Library and Archives Services
+      total_budget: 52348000
+      type: programme
+    - name: Administration
+      total_budget: 51689000
+      type: programme
+    - name: Cultural Affairs
+      total_budget: 48495000
+      type: programme
+    - name: Sports and Recreation
+      total_budget: 20565000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Library and Archives Services
+      total_budget: 64103000
+      type: programme
+    - name: Sports and Recreation
+      total_budget: 44958000
+      type: programme
+    - name: Administration
+      total_budget: 43243000
+      type: programme
+    - name: Cultural Affairs
+      total_budget: 32806000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Library and Archives Services
+      total_budget: 62527000
+      type: programme
+    - name: Cultural Affairs
+      total_budget: 45442000
+      type: programme
+    - name: Sports and Recreation
+      total_budget: 24786000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Library and Archives Services
+      total_budget: 5180000
+      type: programme
+    - name: Administration
+      total_budget: 4391000
+      type: programme
+    - name: Sports and Recreation
+      total_budget: 500000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 553000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Cultural Affairs
+      total_budget: 6000000
+      type: programme
+    - name: Sports and Recreation
+      total_budget: 3536000
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 110000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cdepartment.department%253A%2522Culture%252C%2BSport%2Band%2BRecreation%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 99986000
+  - name: Cultural Affairs
+    total_budget: 132743000
+  - name: Library and Archives Services
+    total_budget: 184158000
+  - name: Sports and Recreation
+    total_budget: 94345000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: culture-sport-and-recreation
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Mpumalanga%2522%257Cdepartment.department%253A%2522Culture%252C%2BSport%2Band%2BRecreation%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Culture, Sport and Recreation budget 2017-18  - vulekamali
+vote_number: 11
+vote_primary:
+  name: Culture, Sport and Recreation
+  slug: culture-sport-and-recreation
+  url_path: /2017-18/provincial/mpumalanga/departments/culture-sport-and-recreation
+website_url: null

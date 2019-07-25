@@ -1,0 +1,229 @@
+.Tooltip {
+  display: inline-block;
+  text-align: left;
+  z-index: z-index('Tooltip');
+
+  @media screen and (min-width: 800px) {
+    position: relative;
+  }
+
+  &.is-block {
+    width: 100%;
+    display: block;
+  }
+}
+
+.Tooltip-underline {
+  user-select: none;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    display: block;
+    position: relative;
+    bottom: 0.2em;
+    width: 100%;
+    border-bottom: 1px dashed #4a4a4a;
+  }
+
+  &:hover {
+    background-color: darken(white, 10%);
+  }
+}
+
+.Tooltip-div {
+  position: relative;
+  left: -5px;
+}
+
+.Tooltip-modalCover {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
+}
+
+.Tooltip-boxWrap {
+  display: none;
+  font-weight: normal;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  z-index: z-index('Tooltip-boxWrap');
+
+  &.is-down {
+    @media screen and (min-width: 800px) {
+      top: 100%;
+    }
+  }
+
+  &.is-open {
+    display: block;
+    display: flex;
+  }
+
+  &.is-important {
+    z-index: z-index('Tooltip-boxWrap is-important');
+  }
+
+  @media screen and (min-width: 800px) {
+    background: none;
+    position: absolute;
+    z-index: z-index('Tooltip-boxWrap');
+    left: calc(-115px + 50%);
+
+    &.is-open {
+      display: none;
+    }
+
+    .Tooltip:hover & {
+      display: block;
+    }
+  }
+}
+
+.Tooltip-box {
+  position: relative;
+  z-index: 30;
+
+  @media screen and (min-width: 800px) {
+    position: relative;
+  }
+}
+
+.Tooltip-content {
+  margin: 40px auto;
+  position: static;
+  max-width: 250px;
+  padding: 10px 10px 20px;
+
+  @media screen and (min-width: 800px) {
+    margin: 0;
+    width: 250px;
+    position: absolute;
+    bottom: calc(100% - 12px);
+
+    &.is-down {
+      bottom: auto;
+      top: calc(100% - 12px);
+    }
+  }
+}
+
+.Tooltip-contentWrap {
+  @media screen and (min-width: 800px) {
+    position: relative;
+  }
+}
+
+.Tooltip-shadowBox {
+  position: relative;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  background: #e6e6e6;
+  font-size: 13px;
+
+  @media screen and (min-width: 800px) {
+
+  }
+}
+
+.Tooltip-infoBox {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 14px;
+}
+
+.Tooltip-triangle {
+  display: none;
+
+  @media screen and (min-width: 800px) {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    height: 25px;
+    width: 40px;
+    left: 95px;
+    top: 100%;
+  }
+
+  &::after {
+    content: '';
+    position: relative;
+    top: -30px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: #e6e6e6;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.5);
+    transform: rotate(45deg);
+  }
+
+  &.is-down {
+    top: auto;
+    bottom: calc(100% - 0.1em);
+    transform: rotate(180deg);
+  }
+}
+
+.Tooltip-title {
+  padding-bottom: 5px;
+  display: inline-block;
+  line-height: 1.64;
+  color: #4a4a4a;
+  font-weight: bold;
+}
+
+.Tooltip-text {
+  line-height: 1.64;
+  display: block;
+  padding-bottom: 10px;
+  color: #3f3f3f;
+}
+
+.Tooltip-linkWrap {
+  line-height: 1.64;
+  color: #4a4a4a;
+  display: block;
+  cursor: pointer;
+  padding: 5px 10px;
+  position: relative;
+  left: -5px;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: darken(#e6e6e6, 15%);
+  }
+
+  @media screen and (min-width: 800px) {
+    &.is-close {
+      display: none;
+    }
+  }
+}
+
+.Tooltip-link {
+  text-decoration: underline;
+  margin-left: 3px;
+}
+
+.Tooltip-closeIcon {
+  padding-right: 3px;
+}
+
+.Tooltip-links {
+  margin: 10px 10px 0;
+}

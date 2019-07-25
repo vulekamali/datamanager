@@ -1,0 +1,14 @@
+.Loader {
+
+  @supports (animation-name: spin) {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 10px solid transparent;
+    border-top: 10px solid #cfcfcf;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+}

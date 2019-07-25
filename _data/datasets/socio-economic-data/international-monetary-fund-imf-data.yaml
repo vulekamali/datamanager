@@ -1,0 +1,67 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Socio-economic data resources that can be used for contextual and
+    other analyses purposes. '
+  name: Socio-economic Data
+  slug: socio-economic-data
+  url_path: /datasets/socio-economic-data
+created: '2018-10-05T09:09:48.767828'
+description: The International Monetary Fund's (IMF) data portal publishes global
+  financial data, as well as economic and trade indicators.
+intro: The International Monetary Fund's (IMF) data portal publishes global financial
+  data, as well as economic and trade indicators.
+intro_short: Global financial, trade, banking and economic indicator data
+key_points: "- Time series data available monthly, quarterly and annually\r\n- Downloadable\
+  \ datasets can be exported as .xls(x), .pdf, .pptx\r\n- Datasets can be visualised\
+  \ as interactive maps and charts\r\n- Full datasets with an approved login\r\n-\
+  \ Datasets include\r\n  - Balance of Payments (BoP)\r\n  - Surveys of direct and\
+  \ portfolio investment\r\n  - Trade statistics (direction of trade, exports)\r\n\
+  \  - Government finances (public debt, expenditure, revenue)\r\n  - Macroeconomic\
+  \ indicators (CPI, growth forecasts)"
+last_updated: '2018-10-05T12:56:19.987315'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: International Monetary Fund (IMF) Data
+organization:
+  email: null
+  facebook: null
+  logo_url: ''
+  name: International Monetary Fund
+  slug: international-monetary-fund
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: ''
+  name: International Monetary Fund (IMF) Data
+  url: http://data.imf.org
+- description: ''
+  format: PNG
+  name: 'Screenshot: Current Account Surplus - Top Ten Economies'
+  url: https://data.vulekamali.gov.za/dataset/bc6d246a-4f20-4fbc-b6b1-94eadbff9c61/resource/3e4782e5-6d20-41f5-be3b-8fdeda889109/download/smayzgx.png
+- description: ''
+  format: PNG
+  name: 'Screenshot: Current Account, Balance map'
+  url: https://data.vulekamali.gov.za/dataset/bc6d246a-4f20-4fbc-b6b1-94eadbff9c61/resource/0752e74f-14cc-4069-96f7-5449ffa61606/download/q5eorxk.png
+selected_tab: datasets
+slug: international-monetary-fund-imf-data
+title: International Monetary Fund (IMF) Data - vulekamali
+url_path: /datasets/socio-economic-data/international-monetary-fund-imf-data
+usage: "1. [Visit http://data.imf.org](http://data.imf.org)\r\n2. (Optional: Register\
+  \ / sign in for full functionality)\r\n3. Seach the homepage for popular datasets\
+  \ and data visualisations, or\r\n4. Click on the Data Topics tab at the top to start\
+  \ a broad search for a dataset, or\r\n5. Click on the Datasets tab at the top to\
+  \ search for a specific dataset\r\n6. Filter the dataset by choosing a specific\
+  \ country or indicator\r\n7. Download data as .xls(x), .pdf, .rtf, .pptx, or other\
+  \ file type"
+use_for: The financial and economic data can be used to provide context for the analysis
+  of government budgets and expenditure. Datasets include metadata indicating how
+  many countries are included, and the most popular datasets have ready-to-use data
+  templates for quick download. The website has tools for filtering and visualising
+  data. A login is required for full functionality (saving of queries, using the site's
+  API, bulk downloads, and the ability to use workbooks).

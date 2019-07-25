@@ -1,0 +1,662 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 2516025000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 2645675000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2709162000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 2938059631
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 2906489360
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2842241241
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 23273000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 24806000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 27506000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Housing Needs,Planning and Research
+  - items:
+    - amount: 49363000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 51109000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 50200000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Local Governance
+  - items:
+    - amount: 155220000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 206048000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 228720000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 174761000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 165041000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 164555000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Development and Planning
+  - items:
+    - amount: 2113408000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 2198671000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2238181000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Housing Development
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "NW AEPRE 2017-18 \u2013 Vote 9 - Local Government and Human Settlements"
+    url: https://data.vulekamali.gov.za/dataset/85877225-cd94-4626-9c63-2ce3d5f6cbd7/resource/bac3e6ae-d9d9-428c-9d5d-a434f4ddfb39/download/nw-vote-09-local-government-and-human-settlment.pdf
+  name: "North West AEPRE 2017-18 \u2013 Vote 9 - Local Government and Human Settlements"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 09 : Local Government and Human Settlements'
+    url: https://data.vulekamali.gov.za/dataset/8aa44606-732b-41b3-a756-233dd40cc11c/resource/ca1b14de-b279-4360-a85e-230eede98370/download/nw-vote-09-local-government-and-human-settlements.pdf
+  name: 'North West Department: Local Government and Human Settlements 2017-18'
+  tables: null
+description: 'North West department: Local Government and Human Settlements budget
+  data for the 2017-18 financial year from National Treasury in partnership with IMALI
+  YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Local%2BGovernment%2Band%2BHuman%2BSettlements%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 129473000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 90905000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 3334000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 5008000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 31652000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 4504000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 128399000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Development and Planning
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 45808000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 5694000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 2186679000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Housing Development
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 23956000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 3550000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Housing Needs,Planning and Research
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 31556000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 18644000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Local Governance
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1754482000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 2189675000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 2612189000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 2690451000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 2709162000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2827082000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 2933610000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 2275854571
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 2689084537
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 3050354050
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 2955679441
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 2842241241
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2827082000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 2789713388
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/north-west/departments/local-government-and-human-settlements
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/north-west/departments/local-government-and-human-settlements
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/north-west/departments/local-government-and-human-settlements
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2019-20/provincial/north-west
+  id: 2019-20
+  is_selected: false
+government:
+  name: North West
+  slug: north-west
+government_functions: []
+intro: "## Vision\n\nA transformed developmental local governance and integrated sustainable\
+  \ human settlements in safe and dignified community.\r\n\r\n\n\n## Mission\n\nTo\
+  \ plan and promote integrated and sustainable human settlements and ensure quality\
+  \ service delivery through cooperation and good governance with municipalities\r\
+  \n\r\n\n\n## Core functions\n\nThe core/main function of the department is to support\
+  \ municipalities in a proactive, responsive and accountable manner. It further promotes\
+  \ community participation in the local government processes. The provision of basic\
+  \ services in terms of the constitution is a long term objective of the Department.\r\
+  \n\r\nThe Department is also responsible for provision of habitable human settlements\
+  \ to all the citizens. These services include amongst others, the Upgrading of informal\
+  \ settlements, provision of tittle deeds and building descent human settlements."
+is_vote_primary: true
+name: Local Government and Human Settlements
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Local%2BGovernment%2Band%2BHuman%2BSettlements%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 129473000
+      type: programme
+    - name: Housing Development
+      total_budget: 45808000
+      type: programme
+    - name: Development and Planning
+      total_budget: 31652000
+      type: programme
+    - name: Local Governance
+      total_budget: 31556000
+      type: programme
+    - name: Housing Needs,Planning and Research
+      total_budget: 23956000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 90905000
+      type: programme
+    - name: Local Governance
+      total_budget: 18644000
+      type: programme
+    - name: Housing Development
+      total_budget: 5694000
+      type: programme
+    - name: Development and Planning
+      total_budget: 4504000
+      type: programme
+    - name: Housing Needs,Planning and Research
+      total_budget: 3550000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 3334000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Housing Development
+      total_budget: 2186679000
+      type: programme
+    - name: Administration
+      total_budget: 5008000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Development and Planning
+      total_budget: 128399000
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Local%2BGovernment%2Band%2BHuman%2BSettlements%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 228720000
+  - name: Local Governance
+    total_budget: 50200000
+  - name: Development and Planning
+    total_budget: 164555000
+  - name: Housing Needs,Planning and Research
+    total_budget: 27506000
+  - name: Housing Development
+    total_budget: 2238181000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: local-government-and-human-settlements
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Local%2BGovernment%2Band%2BHuman%2BSettlements%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Local Government and Human Settlements budget 2017-18  - vulekamali
+vote_number: 9
+vote_primary:
+  name: Local Government and Human Settlements
+  slug: local-government-and-human-settlements
+  url_path: /2017-18/provincial/north-west/departments/local-government-and-human-settlements
+website_url: null

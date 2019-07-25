@@ -1,0 +1,17 @@
+.u-display {
+  &Table {
+    display: table !important;
+  }
+
+  &TableCell {
+    display: table-cell !important;
+  }
+
+  &InlineBlock {
+    display: inline-block !important;
+  }
+
+  &Block {
+    display: block !important;
+  }
+}

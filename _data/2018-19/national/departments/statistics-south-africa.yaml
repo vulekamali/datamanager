@@ -1,0 +1,1142 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type: null
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aaene-2018-19-v2/aggregate/%3Fcut%3Dfinyear.finyear%253A2018%257Cdepartment.department%253AStatistics%2BSouth%2BAfrica%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%26pagesize%3D10000
+  direct_charges: null
+  econ_classes:
+  - items:
+    - amount: -22822000
+      name: Goods and services
+      type: economic_classification_3
+    - amount: 3000
+      name: Interest and rent on land
+      type: economic_classification_3
+    name: Current payments
+    type: economic_classification_2
+  - items:
+    - amount: 10162000
+      name: Machinery and equipment
+      type: economic_classification_3
+    - amount: 10789000
+      name: Software and other intangible assets
+      type: economic_classification_3
+    name: Payments for capital assets
+    type: economic_classification_2
+  - items:
+    - amount: 1868000
+      name: Households
+      type: economic_classification_3
+    name: Transfers and subsidies
+    type: economic_classification_2
+  programmes:
+  - amount: -16693000
+    name: Administration
+  - amount: 11995000
+    name: Economic Statistics
+  - amount: 7634000
+    name: Methodology, Standards and Research
+  - amount: -18364000
+    name: Population and Social Statistics
+  - amount: 8011000
+    name: Statistical Collection and Outreach
+  - amount: 12297000
+    name: Statistical Support and Informatics
+  - amount: -4880000
+    name: Survey Operations
+  special_appropriation: null
+  total_change:
+    amount: 0
+    percentage: 0.0
+  virements:
+    amount: 78584000
+    label: Value of virements
+    percentage: 3.4592611080957467
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 2245208000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 2323256000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 2323256000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 2273540000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 2489102000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2538108000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 2538108000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 2461205000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 2146313000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2177562000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 2177562000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 2195519000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 2271699000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 2271699000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 2621816154
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 2712955820
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 2712955820
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 2654900525
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 2734481173
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2788318254
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 2788318254
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 2703834048
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 2251744017
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2284528027
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 2284528027
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 2303367110
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 2271699000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 2271699000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 66286000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 64587000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 58711000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 58149000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 69603000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 73422000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 70202000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 70202000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 66847000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 66847000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 72922000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 72424000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 67393000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 75027000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Methodology, Standards and Research
+  - items:
+    - amount: 133675000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 144882000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 154385000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 161188000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 126982000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 129488000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 119146000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 114498000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 128238000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 128238000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 118360000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 116943000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 202269000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 183905000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Population and Social Statistics
+  - items:
+    - amount: 214445000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 215868000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 218651000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 218651000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 224738000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 228773000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 233312000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 233312000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 228837000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 228837000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 228837000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 240669000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 236921000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 248916000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Economic Statistics
+  - items:
+    - amount: 235976000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 241152000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 239466000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 239466000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 533346000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 533346000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 529830000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 494034000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 191391000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 191391000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 185702000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 185702000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 194695000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 189815000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Survey Operations
+  - items:
+    - amount: 250004000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 246106000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 226418000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 220177000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 255373000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 257044000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 247883000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 247883000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 258413000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 258413000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 249118000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 237045000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 267124000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 279421000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Statistical Support and Informatics
+  - items:
+    - amount: 553560000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 556828000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 575785000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 575785000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 569893000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 571382000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 630088000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 630088000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 585060000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 585060000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 615904000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 641914000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 608020000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 616031000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Statistical Collection and Outreach
+  - items:
+    - amount: 791262000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 853833000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 849840000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 800124000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 709167000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 744653000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 707647000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 671188000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 687527000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 718776000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 706719000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 700822000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 695277000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 678584000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 12 - Statistics South Africa
+    url: https://data.vulekamali.gov.za/dataset/0772a68a-e558-47d2-8992-58c86a396d41/resource/88f9493b-20ba-468a-b174-235fb6493d9e/download/vote-12-statistics-south-africa.pdf
+  name: AENE 2018-19 - Vote 12 - Statistics South Africa
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 12 - Statistics South Africa
+    url: https://data.vulekamali.gov.za/dataset/0772a68a-e558-47d2-8992-58c86a396d41/resource/622922b1-d52f-4afb-852c-76346c61e7b5/download/aene18chap-tab-vote12.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 12 - Statistics South Africa
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-statistics-south-africa-2018-19/resource/9de43f80-258a-4b9c-a107-b04bb0622387/download/vote201220statistics20south20africa.pdf
+  name: 'National Department: Statistics South Africa 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 12 - Statistics South Africa
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-statistics-south-africa-2018-19/resource/ec4cb049-825a-45c3-9440-23dc4f15d1d7/download/ene18-vote12_chaptertables.xlsx
+description: 'National department: Statistics South Africa budget data for the 2018-19
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Statistics%2BSouth%2BAfrica%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 222697000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 218841000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 242221000.0
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 1772000.0
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 46000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Higher education institutions
+        total_budget: 7500000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 2070000.0
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 130000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 208443000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 28381000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 96000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 1000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Economic Statistics
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 62860000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 4495000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 20000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 18000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Methodology, Standards and Research
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 176199000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 23456000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2098000.0
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 316000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 200000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Population and Social Statistics
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 490560000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 107178000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 10111000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 162000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 9000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Statistical Collection and Outreach
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 133650000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 117057000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 14157000.0
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 2260000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: Statistical Support and Informatics
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 152124000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 40984000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 119000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 1468000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Survey Operations
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 2156435000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 2273540000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 2461205000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 2177562000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 2271699000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 2439368000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 3304131000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 2648263333
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 2654900525
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 2703834048
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 2284528027
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 2271699000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 2319714470
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 2978857948
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/statistics-south-africa
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/statistics-south-africa
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/statistics-south-africa
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/statistics-south-africa
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose\n\nLead and partner in the production of statistics in line\
+  \ with internationally recognised principles and standards, to inform users about\
+  \ socioeconomic dynamics for evidence-based decisions.\n\n## Mandate\n\nStatistics\
+  \ South Africa is a national government department accountable to the Minister in\
+  \ the Presidency: Planning, Monitoring and Evaluation. The department\u2019s activities\
+  \ are regulated by the Statistics Act (1999), which mandates the department to advance\
+  \ the production, dissemination, use and coordination of official and other statistics\
+  \ to assist organs of state, businesses, other organisations and the public in planning,\
+  \ monitoring and decision-making. The act also requires that the department coordinates\
+  \ statistical production among organs of state in line with the purpose of official\
+  \ statistics and statistical principles.\n\n"
+is_vote_primary: true
+name: Statistics South Africa
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Statistics%2BSouth%2BAfrica%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Statistical Collection and Outreach
+      total_budget: 490560000.0
+      type: programme
+    - name: Administration
+      total_budget: 218841000.0
+      type: programme
+    - name: Economic Statistics
+      total_budget: 208443000.0
+      type: programme
+    - name: Population and Social Statistics
+      total_budget: 176199000.0
+      type: programme
+    - name: Survey Operations
+      total_budget: 152124000.0
+      type: programme
+    - name: Statistical Support and Informatics
+      total_budget: 133650000.0
+      type: programme
+    - name: Methodology, Standards and Research
+      total_budget: 62860000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 222697000.0
+      type: programme
+    - name: Statistical Support and Informatics
+      total_budget: 117057000.0
+      type: programme
+    - name: Statistical Collection and Outreach
+      total_budget: 107178000.0
+      type: programme
+    - name: Survey Operations
+      total_budget: 40984000.0
+      type: programme
+    - name: Economic Statistics
+      total_budget: 28381000.0
+      type: programme
+    - name: Population and Social Statistics
+      total_budget: 23456000.0
+      type: programme
+    - name: Methodology, Standards and Research
+      total_budget: 4495000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 242221000.0
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Statistical Support and Informatics
+      total_budget: 14157000.0
+      type: programme
+    - name: Statistical Collection and Outreach
+      total_budget: 10111000.0
+      type: programme
+    - name: Population and Social Statistics
+      total_budget: 2098000.0
+      type: programme
+    - name: Administration
+      total_budget: 1772000.0
+      type: programme
+    - name: Survey Operations
+      total_budget: 119000.0
+      type: programme
+    - name: Economic Statistics
+      total_budget: 96000.0
+      type: programme
+    - name: Methodology, Standards and Research
+      total_budget: 20000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Statistical Support and Informatics
+      total_budget: 2260000.0
+      type: programme
+    - name: Population and Social Statistics
+      total_budget: 316000.0
+      type: programme
+    - name: Administration
+      total_budget: 46000.0
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Statistical Collection and Outreach
+      total_budget: 9000.0
+      type: programme
+    - name: Economic Statistics
+      total_budget: 1000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 7500000.0
+      type: programme
+    name: Transfers and subsidies - Higher education institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 2070000.0
+      type: programme
+    - name: Survey Operations
+      total_budget: 1468000.0
+      type: programme
+    - name: Statistical Collection and Outreach
+      total_budget: 162000.0
+      type: programme
+    - name: Methodology, Standards and Research
+      total_budget: 18000.0
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Population and Social Statistics
+      total_budget: 200000.0
+      type: programme
+    - name: Administration
+      total_budget: 130000.0
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Statistics%2BSouth%2BAfrica%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 695277000.0
+  - name: Economic Statistics
+    total_budget: 236921000.0
+  - name: Population and Social Statistics
+    total_budget: 202269000.0
+  - name: Methodology, Standards and Research
+    total_budget: 67393000.0
+  - name: Statistical Support and Informatics
+    total_budget: 267124000.0
+  - name: Statistical Collection and Outreach
+    total_budget: 608020000.0
+  - name: Survey Operations
+    total_budget: 194695000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: statistics-south-africa
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Statistics%2BSouth%2BAfrica%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Office Accommodation
+      total_budget: 383378000.0
+      type: subprogramme
+    - name: Corporate Services
+      total_budget: 162239000.0
+      type: subprogramme
+    - name: Financial Administration
+      total_budget: 78701000.0
+      type: subprogramme
+    - name: Departmental Management
+      total_budget: 33256000.0
+      type: subprogramme
+    - name: National Statistics System
+      total_budget: 25584000.0
+      type: subprogramme
+    - name: Internal Audit
+      total_budget: 12119000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Price Statistics
+      total_budget: 73911000.0
+      type: subprogramme
+    - name: Structural Industry Statistics
+      total_budget: 43676000.0
+      type: subprogramme
+    - name: Short Term Indicators
+      total_budget: 33259000.0
+      type: subprogramme
+    - name: Private Sector Finance Statistics
+      total_budget: 32180000.0
+      type: subprogramme
+    - name: National Accounts
+      total_budget: 21089000.0
+      type: subprogramme
+    - name: Government Finance Statistics
+      total_budget: 17978000.0
+      type: subprogramme
+    - name: Economic Analysis
+      total_budget: 8213000.0
+      type: subprogramme
+    - name: Programme Management for Economic Statistics
+      total_budget: 6615000.0
+      type: subprogramme
+    name: Economic Statistics
+    type: programme
+  - items:
+    - name: Business Register
+      total_budget: 34190000.0
+      type: subprogramme
+    - name: Methodology and Evaluation
+      total_budget: 16667000.0
+      type: subprogramme
+    - name: Policy Research and Analysis
+      total_budget: 6697000.0
+      type: subprogramme
+    - name: Survey Standards
+      total_budget: 5668000.0
+      type: subprogramme
+    - name: Programme Management for Methodology, Standards and Research
+      total_budget: 4171000.0
+      type: subprogramme
+    name: Methodology, Standards and Research
+    type: programme
+  - items:
+    - name: Poverty and Inequality Statistics
+      total_budget: 96817000.0
+      type: subprogramme
+    - name: Labour Statistics
+      total_budget: 44045000.0
+      type: subprogramme
+    - name: Demographic Analysis
+      total_budget: 17323000.0
+      type: subprogramme
+    - name: Social Statistics
+      total_budget: 16319000.0
+      type: subprogramme
+    - name: Health and Vital Statistics
+      total_budget: 13556000.0
+      type: subprogramme
+    - name: Population Statistics
+      total_budget: 8372000.0
+      type: subprogramme
+    - name: Programme Management for Population and Social Statistics
+      total_budget: 5837000.0
+      type: subprogramme
+    name: Population and Social Statistics
+    type: programme
+  - items:
+    - name: Provincial and District Offices
+      total_budget: 550661000.0
+      type: subprogramme
+    - name: Stakeholder Relations and Marketing
+      total_budget: 21223000.0
+      type: subprogramme
+    - name: Corporate Communications
+      total_budget: 15613000.0
+      type: subprogramme
+    - name: International Statistical Development and Cooperation
+      total_budget: 11379000.0
+      type: subprogramme
+    - name: Programme Management for Statistical Collection and Outreach
+      total_budget: 9144000.0
+      type: subprogramme
+    name: Statistical Collection and Outreach
+    type: programme
+  - items:
+    - name: Data Management and Technology
+      total_budget: 137280000.0
+      type: subprogramme
+    - name: Business Modernisation
+      total_budget: 53134000.0
+      type: subprogramme
+    - name: Publication Services
+      total_budget: 27137000.0
+      type: subprogramme
+    - name: Geography Services
+      total_budget: 22892000.0
+      type: subprogramme
+    - name: Geography Frames
+      total_budget: 22052000.0
+      type: subprogramme
+    - name: Programme Management for Statistical Support and Informatics
+      total_budget: 4629000.0
+      type: subprogramme
+    name: Statistical Support and Informatics
+    type: programme
+  - items:
+    - name: Corporate Data Processing
+      total_budget: 72926000.0
+      type: subprogramme
+    - name: Census and Community Survey Operations
+      total_budget: 64554000.0
+      type: subprogramme
+    - name: Household Survey Operations
+      total_budget: 25492000.0
+      type: subprogramme
+    - name: Survey Coordination, Monitoring and Evaluation
+      total_budget: 19530000.0
+      type: subprogramme
+    - name: Programme Management for Survey Operations
+      total_budget: 12193000.0
+      type: subprogramme
+    name: Survey Operations
+    type: programme
+title: Statistics South Africa budget 2018-19  - vulekamali
+vote_number: 12
+vote_primary:
+  name: Statistics South Africa
+  slug: statistics-south-africa
+  url_path: /2018-19/national/departments/statistics-south-africa
+website_url: www.statssa.gov.za

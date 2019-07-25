@@ -1,0 +1,14 @@
+---
+layout: page-shell
+---
+
+<div class="Page-content">
+  <main class="Page-contentInner Page-contentInner--floatingLinks">
+    <h1 class="Page-mainHeading">Videos</h1>
+    {% for video in site.data.videos.data %}
+      <div class="u-marginBottom25">
+        {% include components/universal/VideoCard/index.html fullpage="true" video=video %}
+      </div>
+    {% endfor %}
+  </main>
+</div>

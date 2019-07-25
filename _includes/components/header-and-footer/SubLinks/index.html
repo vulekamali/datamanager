@@ -1,0 +1,39 @@
+{% load define_action %}
+{% comment %} Determine whether children should show in sidebar {% endcomment %}
+{% if active == 'true' %}
+  {% assign ' is-currentPage' as parentActiveClass %}
+{% else %}
+  {% assign '' as parentActiveClass %}
+{% endif %} 
+
+
+<div class="SubLinks{{ parentActiveClass }}">
+  <ul class="SubLinks-subItems">
+
+    {% for item in items %}
+
+      {% comment %} Determine whether children should show in sidebar {% endcomment %}
+      {% if selected_sidebar and selected_sidebar == item.id %}
+        {% assign ' is-active' as activeClass %}
+      {% else %}
+        {% assign '' as activeClass %}
+      {% endif %}
+
+      {% comment %} Determine whether link active state should be determined by JavaScript {% endcomment %}
+      {% if item.connected %}
+        {% assign ' data-connected-id="'|add:item.connected|add:'"' as dataAttribute %}
+        {% assign ' js-link' as jsClass %}
+      {% else %}
+        {% assign '' as dataAttribute %}
+        {% assign '' as jsClass %}
+      {% endif %}
+
+      <li class="SubLinks-subItem">
+        <a class="SubLinks-subLink{{ activeClass }}{{ jsClass }}"{{ dataAttribute }} href="/{{ item.url }}">
+          {{ item.title }}
+        </a>
+      </li>
+    {% endfor %}
+
+  </ul>
+<div>

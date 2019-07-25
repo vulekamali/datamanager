@@ -1,0 +1,107 @@
+.Page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.Page-contentWrap {
+  background-color: $colour-shading-background;
+  flex-grow: 1;
+}
+
+.Page-content {
+  padding-top: 30px;
+
+  @media ($tablet-breakpoint) {
+    padding-top: 0;
+  }
+}
+
+.Page-contentInner {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 5px 100px;
+  @include clearfix;
+
+  &.is-full {
+    max-width: 1800px;
+  }
+
+  @media screen and (min-width: 750px) {
+    padding: 0 3rem 100px;
+  }
+
+  @media ($mobile-breakpoint) {
+    padding: 0 15px 100px;
+  }
+
+  @media ($tablet-breakpoint) {
+    padding: 0 25px 100px;
+  }
+
+  &--floatingLinks {
+    @media (min-width: 900px) {
+      padding-left: 240px;
+    }
+
+    @media ($widescreen-breakpoint) {
+      padding-left: 0;
+    }
+  }
+
+  &--department {
+    padding: 0 1.5rem 100px;
+
+    @media screen and (min-width: 750px) {
+      padding: 0 3rem 100px;
+    }
+  }
+}
+
+.Page-title,
+.Page-mainHeading {
+  color: #3f3f3f;
+  font-weight: bold;
+  font-size: $font-size-large;
+  line-height: 1.29;
+  margin: 25px 20px 10px;
+  display: block;
+
+  @media ($mobile-breakpoint) {
+    margin: 35px 30px 20px;
+  }
+
+  @media ($tablet-breakpoint) {
+    margin: 45px 40px 30px;
+  }
+}
+
+.Page-subHeading {
+  margin: 0 0 10px;
+  font-size: $font-size-medium;
+  font-weight: bold;
+  font-weight: 900;
+  display: block;
+}
+
+.Page-subHeading-link {
+  margin: 0 0 10px;
+  display: block;
+}
+
+.Page-main {
+  @media ($standard-breakpoint) {
+    float: left;
+    width: (100% / 3 * 2);
+    padding-right: 20px;
+  }
+}
+
+.Page-sidebar {
+  @media ($standard-breakpoint) {
+    float: right;
+    width: (100% / 3);
+    padding-left: 20px;
+  }
+}

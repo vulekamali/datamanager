@@ -1,0 +1,81 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+author:
+  email: ''
+  name: Thandiwe Matthews and Daniel McLaren
+category:
+  description: 'Data and analysis contributed by other organisations on South African
+    government budgets. '
+  name: Contributed data and analysis
+  slug: contributed
+  url_path: /datasets/contributed
+created: '2018-07-02T09:40:11.881894'
+description: Data and/or documentation related to South African government budgets
+  contributed by Studies in Poverty and Inequality Institute and hosted by National
+  Treasury in partnership with IMALI YETHU
+intro: "Tools and methods used for formulating and analysing government budgeting\
+  \ for the progressive realisation of socio-economic rights\r\n\r\nA Guide for State\
+  \ and non-State Human Rights Advocates and Researchers\r\n\r\nBudget analysis is\
+  \ a key component of SER monitoring. It allows human rights advocates to\r\nanalyse\
+  \ budgetary decisions made by governments, beginning with enforceable obligations\r\
+  \nunder international and national law. Thus, an SER budget analyst must understand\r\
+  \n\r\n1. the key components of a particular SER and how these components find expression\
+  \ in budgets;\r\n2. the methods and logistics of obtaining and understanding budgets;\
+  \ and\r\n3. how to connect a budget to the SER under review.\r\n\r\nArmed with these\
+  \ skills and numbers, budget analysts can assess governments\u2019 budgetary policies\
+  \ from a human rights basis, bringing to light successes and gaps, and providing\
+  \ viable alternatives to current spending where necessary.\r\n\r\nThis Guide will\
+  \ provide an overview of each of these aspects of SER monitoring, and how they\r\
+  \ntranslate in the South African context, with reference to practical examples used\
+  \ by civil society\r\nto monitor the advancement of SER through budget analysis.\
+  \ It is envisioned that the Guide will\r\nprovide a useful resource for human rights\
+  \ advocates to understand the process of monitoring\r\nthe progressive realisation\
+  \ of SER using tools of budget analysis. It is also hoped that the Guide\r\nwill\
+  \ inform renewed and coordinated activism amongst civil society groups and organisations\r\
+  \ninterested in SER monitoring, through the production of evidence-based research\
+  \ required\r\nto assist the government to reprioritise the budget in a manner that\
+  \ advances, rather than\r\nhinders, the full realisation and enjoyment of SER. "
+intro_short: null
+key_points: null
+last_updated: '2018-07-02T09:43:33.276422'
+license:
+  name: License not specified
+  url: null
+methodology: "The development of this Guide was informed by a variety of actors and\
+  \ perspectives, including\r\npolicy-makers involved in SER budget decision-making\
+  \ processes, and researchers and\r\norganisations that monitor the advancement of\
+  \ SER in South Africa. A Roundtable discussion,\r\nhosted by SPII and the SAHRC,\
+  \ brought together these various actors to discuss:\r\n\r\n_how the government budget\
+  \ is formulated and implemented in a manner that either advances,\r\nor inhibits,\
+  \ the progressive realisation of socio-economic rights, within \u2013 and to the\
+  \ maximum of \u2013\r\navailable resources._\r\n\r\nPresentations were made by representatives\
+  \ of the National Treasury, Open Democracy Advice\r\nCentre, Socio-Economic Rights\
+  \ Institute, Black Sash, Social Justice Coalition, Equal Education\r\nand the Public\
+  \ Service Accountability Monitor.\r\nThe Roundtable unpacked the conceptual challenges\
+  \ and opportunities of engaging in SER\r\nbudget work; how the South African Constitution\
+  \ informs budget prioritisation, formulation\r\nand implementation; the availability\
+  \ of data that is transparent and accessible; and the practical\r\nimplications\
+  \ of monitoring the advancement of SER through budget analysis."
+name: Budget Analysis for Advancing Socioeconomic Rights
+organization:
+  email: advocacy@spii.org.za
+  facebook: studiesinpovertyandinequalityinstitute
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2018-01-19-083658.384768spii-logo.jpg
+  name: Studies in Poverty and Inequality Institute
+  slug: studies-in-poverty-and-inequality-institute
+  telephone: 011 833 0161
+  twitter: '@SPII1'
+  url: http://www.spii.org.za/
+resources:
+- description: ''
+  format: PDF
+  name: 2016 SPII SAHRC Guide to Budget Analysis for Socio-Economic Rights.pdf
+  url: https://data.vulekamali.gov.za/dataset/2fe1a35a-2d18-4b6e-858d-13bf46426398/resource/1fe1e6b0-14ed-49e6-8571-69e54432e2c2/download/2016-spii-sahrc-guide-to-budget-analysis-for-socio-economic-rights.pdf
+selected_tab: datasets
+slug: budget-analysis-for-advancing-socioeconomic-rights
+title: Budget Analysis for Advancing Socioeconomic Rights - vulekamali
+url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+usage: null
+use_for: null

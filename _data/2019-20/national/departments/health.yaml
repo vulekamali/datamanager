@@ -1,0 +1,1097 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 38563317000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 38597416000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 38597416000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 38496186000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 42625723000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 42645557000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 42645557000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 42424691000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 47142866000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 47508374000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 51460690000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    real:
+    - amount: 42364942995
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 42402403522
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 42402403522
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 42291194127
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 44719580386
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 44740388670
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 44740388670
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 44508673308
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 47142866000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 47508374000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 48936489807
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 221751000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Primary Health Care
+  - items:
+    - amount: 257839000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 256539000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 238055000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 225731000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 264299000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 263899000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 263343000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 253771000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 301736000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 301736000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Primary Health Care Services
+  - items:
+    - amount: 463464000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 461964000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 448820000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 442877000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 512838000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 514838000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 500541000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 478160000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 550792000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 537146000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 661277000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 559762000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 588620000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 690593000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 679170000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 735087000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 934687000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 924954000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 841540000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 1671553000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1848199000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: National Health Insurance, Health Planning and Systems Enablement
+  - items:
+    - amount: 1690186000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1706686000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1716965000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 1714510000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 1726971000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1726571000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 1746609000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 1742508000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 1775546000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1796546000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Health Regulation and Compliance Management
+  - items:
+    - amount: 2111663000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: National Health Insurance
+  - items:
+    - amount: 5077589000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Health System Governance and Human Resources
+  - items:
+    - amount: 16018568000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 16009609000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 16006567000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 15965182000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 18278344000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 18297778000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 18295310000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 18279941000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 20719057000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 20714057000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: HIV and AIDS, Tuberculosis, and Maternal and Child Health
+  - items:
+    - amount: 19573498000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 19573998000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 19496416000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 19468716000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 21108184000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 20907784000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 20914800000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 20828771000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 22124182000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 22310690000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Hospitals, Tertiary Health Services and Human Resource Development
+  - items:
+    - amount: 20381141000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Hospital Systems
+  - items:
+    - amount: 23007269000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2019-20
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2019-20
+      phase: Audit Outcome
+    name: Communicable and Non-communicable Diseases
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "ENE 2019-20 \u2013 Vote 16 - Health"
+    url: https://data.vulekamali.gov.za/dataset/99721900-59e9-476f-99fc-2d0518a5289b/resource/a4d3cfec-1b10-4d59-b33d-5fa321776c6c/download/vote-16-health.pdf
+  name: "ENE 2019-20 \u2013 Vote 16 - Health"
+  tables:
+    description: ''
+    format: XLSX
+    name: "ENE 2019-20 \u2013 Vote 16 - Health"
+    url: https://data.vulekamali.gov.za/dataset/99721900-59e9-476f-99fc-2d0518a5289b/resource/a45a66b8-7978-4193-a827-c5f5deedb556/download/ene19-vote16_chaptertables.xlsx
+description: 'National department: Health budget data for the 2019-20 financial year
+  from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Health%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 8230000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 650364000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 2683000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 364000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 22443341000
+        type: economic_classification_2
+      - name: Current payments
+        total_budget: 563564000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Communicable and Non-communicable Diseases
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 25919000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 4742373000
+        type: economic_classification_2
+      - name: Current payments
+        total_budget: 309297000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Health System Governance and Human Resources
+    type: programme
+  - items:
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 6006973000
+        type: economic_classification_2
+      - name: Payments for capital assets
+        total_budget: 1063198000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Transfers and subsidies
+        total_budget: 13185528000
+        type: economic_classification_2
+      - name: Current payments
+        total_budget: 125442000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Hospital Systems
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 86324000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 1419643000
+        type: economic_classification_2
+      - name: Transfers and subsidies
+        total_budget: 605696000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: National Health Insurance
+    type: programme
+  - items:
+    - items:
+      - name: Payments for capital assets
+        total_budget: 239000
+        type: economic_classification_2
+      name: Capital
+      type: economic_classification_1
+    - items:
+      - name: Current payments
+        total_budget: 221512000
+        type: economic_classification_2
+      name: Current
+      type: economic_classification_1
+    name: Primary Health Care
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 35984861000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 38496186000
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 42424691000
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 47508374000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 51460690000
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 56686251000
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 61939920000
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+    real:
+    - amount: 42020912929
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 42291194127
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 44508673308
+      financial_year: 2017-18
+      phase: Audited Outcome
+    - amount: 47508374000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: 48936489807
+      financial_year: 2019-20
+      phase: Main appropriation
+    - amount: 51105809475
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    - amount: 52966967584
+      financial_year: 2021-22
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/health
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/health
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/health
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/health
+  id: 2019-20
+  is_selected: true
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose \n\nProvide leadership and coordination of health services\
+  \ to promote the health of all people in South Africa through an accessible, caring\
+  \ and high quality health system, based on the primary health care approach. \n\n\
+  ## Vote mandate\n\nThe Department of Health derives its mandate from the National\
+  \ Health Act (2003), which requires that the department provides a framework for\
+  \ a structured and uniform health system for South Africa. The act sets out the\
+  \ responsibilities of the three levels of government in the provision of health\
+  \ services. The department contributes directly to the realisation of outcome 2\
+  \ (a long and healthy life for all South Africans) of government\u2019s 2014-2019\
+  \ medium-term strategic framework."
+is_vote_primary: true
+name: Health
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Health%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Hospital Systems
+      total_budget: 1063198000
+      type: programme
+    - name: National Health Insurance
+      total_budget: 86324000
+      type: programme
+    - name: Health System Governance and Human Resources
+      total_budget: 25919000
+      type: programme
+    - name: Administration
+      total_budget: 8230000
+      type: programme
+    - name: Communicable and Non-communicable Diseases
+      total_budget: 364000
+      type: programme
+    - name: Primary Health Care
+      total_budget: 239000
+      type: programme
+    name: Capital - Payments for capital assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Hospital Systems
+      total_budget: 6006973000
+      type: programme
+    name: Capital - Transfers and subsidies
+    type: economic_classification_1_and_2
+  - items:
+    - name: National Health Insurance
+      total_budget: 1419643000
+      type: programme
+    - name: Administration
+      total_budget: 650364000
+      type: programme
+    - name: Communicable and Non-communicable Diseases
+      total_budget: 563564000
+      type: programme
+    - name: Health System Governance and Human Resources
+      total_budget: 309297000
+      type: programme
+    - name: Primary Health Care
+      total_budget: 221512000
+      type: programme
+    - name: Hospital Systems
+      total_budget: 125442000
+      type: programme
+    name: Current - Current payments
+    type: economic_classification_1_and_2
+  - items:
+    - name: Communicable and Non-communicable Diseases
+      total_budget: 22443341000
+      type: programme
+    - name: Hospital Systems
+      total_budget: 13185528000
+      type: programme
+    - name: Health System Governance and Human Resources
+      total_budget: 4742373000
+      type: programme
+    - name: National Health Insurance
+      total_budget: 605696000
+      type: programme
+    - name: Administration
+      total_budget: 2683000
+      type: programme
+    name: Current - Transfers and subsidies
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Health%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 661277000
+  - name: National Health Insurance
+    total_budget: 2111663000
+  - name: Communicable and Non-communicable Diseases
+    total_budget: 23007269000
+  - name: Primary Health Care
+    total_budget: 221751000
+  - name: Hospital Systems
+    total_budget: 20381141000
+  - name: Health System Governance and Human Resources
+    total_budget: 5077589000
+selected_financial_year: 2019-20
+selected_tab: departments
+slug: health
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2019-20
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-2019-20-uploaded-2019-02-20t1910/aggregate/%3Fcut%3Dfinyear.finyear%253A2019%257Cvoteno.department%253A%2522Health%2522%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfg1.fg1%257Cfg2.fg2%257Cfinyear.finyear%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 298630000
+      type: subprogramme
+    - name: Property Management
+      total_budget: 185995000
+      type: subprogramme
+    - name: Financial Management
+      total_budget: 128554000
+      type: subprogramme
+    - name: Ministry
+      total_budget: 34483000
+      type: subprogramme
+    - name: Management
+      total_budget: 13615000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: HIV, AIDS and STIs
+      total_budget: 22572408000
+      type: subprogramme
+    - name: Child, Youth and School Health
+      total_budget: 237608000
+      type: subprogramme
+    - name: Non-communicable Diseases
+      total_budget: 65702000
+      type: subprogramme
+    - name: Health Promotion and Nutrition
+      total_budget: 54196000
+      type: subprogramme
+    - name: Tuberculosis Management
+      total_budget: 27748000
+      type: subprogramme
+    - name: Communicable Diseases
+      total_budget: 24058000
+      type: subprogramme
+    - name: Women's Maternal and Reproductive Health
+      total_budget: 20299000
+      type: subprogramme
+    - name: Programme Management
+      total_budget: 5250000
+      type: subprogramme
+    name: Communicable and Non-communicable Diseases
+    type: programme
+  - items:
+    - name: Human Resources for Health
+      total_budget: 2971510000
+      type: subprogramme
+    - name: Public Entities Management and Laboratories
+      total_budget: 2037390000
+      type: subprogramme
+    - name: Health Information, Monitoring and  Evaluation
+      total_budget: 45318000
+      type: subprogramme
+    - name: Nursing Services
+      total_budget: 9438000
+      type: subprogramme
+    - name: Policy and Planning
+      total_budget: 7713000
+      type: subprogramme
+    - name: Programme Management
+      total_budget: 6220000
+      type: subprogramme
+    name: Health System Governance and Human Resources
+    type: programme
+  - items:
+    - name: Hospital Systems
+      total_budget: 13198893000
+      type: subprogramme
+    - name: Health Facilities Infrastructure Management
+      total_budget: 7178830000
+      type: subprogramme
+    - name: Programme Management
+      total_budget: 3418000
+      type: subprogramme
+    name: Hospital Systems
+    type: programme
+  - items:
+    - name: Health Financing and National Health Insurance
+      total_budget: 2059132000
+      type: subprogramme
+    - name: Affordable Medicine
+      total_budget: 47395000
+      type: subprogramme
+    - name: Programme Management
+      total_budget: 5136000
+      type: subprogramme
+    name: National Health Insurance
+    type: programme
+  - items:
+    - name: Environmental and Port Health Services
+      total_budget: 187501000
+      type: subprogramme
+    - name: District Health Services
+      total_budget: 21413000
+      type: subprogramme
+    - name: Emergency Medical Services and Trauma
+      total_budget: 8897000
+      type: subprogramme
+    - name: Programme Management
+      total_budget: 3940000
+      type: subprogramme
+    name: Primary Health Care
+    type: programme
+title: Health budget 2019-20  - vulekamali
+vote_number: 16
+vote_primary:
+  name: Health
+  slug: health
+  url_path: /2019-20/national/departments/health
+website_url: www.doh.gov.za

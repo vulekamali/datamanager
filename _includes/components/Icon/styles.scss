@@ -1,0 +1,30 @@
+.Icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-block;
+
+  @supports (display: flex) {
+    display: block;
+    position: static;
+  }
+
+  &--extraSmall {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  &--small {
+    width: 18px;
+    height: 18px;
+  }
+
+  &--large {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &--extraLarge {
+    width: 4rem;
+    height: 4rem;
+  }
+}

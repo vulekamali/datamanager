@@ -1,0 +1,480 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2017-18
+    nominal:
+    - amount: 34055000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 36030000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 34055000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 34154373
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices:
+  - This department did not exist for some years displayed.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 18675000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 19391000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 15380000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 16639000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Public Sector Innovation
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 10 - Public Service and Administration
+    url: https://data.vulekamali.gov.za/dataset/b9d30817-1536-4787-bac0-f133d3bd50ca/resource/d3d994ad-ff46-4115-8d17-71b93c8f7079/download/vote-10-public-service-and-administration.pdf
+  name: AENE 2018-19 - Vote 10 - Public Service and Administration
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 10 - Public Service and Administration
+    url: https://data.vulekamali.gov.za/dataset/b9d30817-1536-4787-bac0-f133d3bd50ca/resource/71efa052-39af-495c-9fc6-690d74b2514f/download/aene18chap-tab-vote10.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 10 - Public Service and Administration
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-public-service-and-administration-2018-19/resource/014605ce-e18a-44a6-9891-fe0ad10edd54/download/vote-10-public-service-and-administration.pdf
+  name: 'National Department: Public Service and Administration 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 10 - Public Service and Administration
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-public-service-and-administration-2018-19/resource/b0e88470-55a8-43f2-8069-47cc630728f1/download/ene18-vote10_chaptertables.xlsx
+description: 'National department: Centre for Public Service Innovation budget data
+  for the 2018-19 financial year from National Treasury in partnership with IMALI
+  YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Centre%2Bfor%2BPublic%2BService%2BInnovation%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 9917000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 9220000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 154000.0
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 99000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 1000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 9508000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 7131000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Public Sector Innovation
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2017-18
+    nominal:
+    - amount: 22553000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 28055000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 31407000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 34055000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 36030000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 38437000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 40969000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 26443677
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 31278697
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 32942111
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 34055000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 34154373
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 34605048
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 34948219
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: false
+    url_path: /2015-16/national
+  id: 2015-16
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2016-17/national
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/centre-for-public-service-innovation
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/centre-for-public-service-innovation
+  id: 2018-19
+  is_selected: true
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: '## Vote purpose
+
+
+  Facilitate the unearthing, development and practical implementation of innovative
+  solutions within and throughout the public service.
+
+
+  ## Mandate
+
+
+  The responsibility for public sector innovation is vested in the Minister of Public
+  Service and Administration in terms of section 3(1)(i) of the Public Service Act
+  (1994). The Centre for Public Service Innovation is tasked by the minister to fulfil
+  this mandate, which includes establishing norms and standards relating to transformation,
+  reform and innovation to improve the effectiveness and efficiency of the public
+  service and its service delivery to the public.
+
+
+  '
+is_vote_primary: false
+name: Centre for Public Service Innovation
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Centre%2Bfor%2BPublic%2BService%2BInnovation%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 9917000.0
+      type: programme
+    - name: Public Sector Innovation
+      total_budget: 9508000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 9220000.0
+      type: programme
+    - name: Public Sector Innovation
+      total_budget: 7131000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 154000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 99000.0
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 1000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Centre%2Bfor%2BPublic%2BService%2BInnovation%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 19391000.0
+  - name: Public Sector Innovation
+    total_budget: 16639000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: centre-for-public-service-innovation
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Centre%2Bfor%2BPublic%2BService%2BInnovation%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Resource Management
+      total_budget: 9166000.0
+      type: subprogramme
+    - name: Office of the Chief Financial Officer
+      total_budget: 6165000.0
+      type: subprogramme
+    - name: Strategic Management
+      total_budget: 4060000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Enabling Environment
+      total_budget: 8825000.0
+      type: subprogramme
+    - name: Solution Support and Incubation
+      total_budget: 3915000.0
+      type: subprogramme
+    - name: Research and Development
+      total_budget: 3899000.0
+      type: subprogramme
+    name: Public Sector Innovation
+    type: programme
+title: Centre for Public Service Innovation budget 2018-19  - vulekamali
+vote_number: 10
+vote_primary:
+  name: Public Service and Administration
+  slug: public-service-and-administration
+  url_path: /2018-19/national/departments/public-service-and-administration

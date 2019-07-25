@@ -1,0 +1,907 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 584362000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 607394000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    real:
+    - amount: 682382091
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 667271754
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2013 and 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 30097000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 36303000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Municipal Financial Governance
+  - items:
+    - amount: 73756000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 80539000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Gauteng Audit Services
+  - items:
+    - amount: 86592000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Provincial Supply Chain and Movable Asset Management
+  - items:
+    - amount: 91537000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Supply Chain Management
+  - items:
+    - amount: 98608000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 128028000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Financial Governance
+  - items:
+    - amount: 111528000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 121342000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 183781000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 149645000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Sustainable Fiscal  Resource Management
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "Gauteng AEPRE 2016-17 \u2013 Vote 14 - Gauteng Provincial Treasury"
+    url: https://data.vulekamali.gov.za/dataset/7d0fb312-f3f3-4b67-aa7f-6ae7bb5d7a3b/resource/dfab8507-7b75-4146-8175-0f4d251a697d/download/gt-vote-14-gauteng-provincial-treasury.pdf
+  name: "Gauteng AEPRE 2016-17 \u2013 Vote 14 - Gauteng Provincial Treasury"
+  tables:
+    description: ''
+    format: XLSX
+    name: "Gauteng AEPRE 2016-17 \u2013 Vote 14 - Gauteng Provincial Treasury"
+    url: https://data.vulekamali.gov.za/dataset/7d0fb312-f3f3-4b67-aa7f-6ae7bb5d7a3b/resource/4827ac49-6757-436a-bfc9-143edb233624/download/gt-gauteng-provincial-treasury.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 14 : Gauteng Provincial Treasury'
+    url: https://data.vulekamali.gov.za/dataset/1a0800b4-0324-4c9a-902d-6b51c24019c4/resource/bdf9c0ea-6702-45f2-8e01-e539b3c23368/download/gt-vote-14-gauteng-provincial-treasury.pdf
+  name: 'Gauteng Department: Gauteng Provincial Treasury 2016-17'
+  tables: null
+description: 'Gauteng department: Gauteng Provincial Treasury budget data for the
+  2016-17 financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Gauteng%2522%257Cdepartment.department%253A%2522Gauteng%2BProvincial%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 78863000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 41237000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 1004000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 238000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 116097000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 11931000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Financial Governance
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 74630000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 5909000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Gauteng Audit Services
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 35129000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 1174000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Municipal Financial Governance
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 77013000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 14524000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Supply Chain Management
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 71629000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 23966000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 1400000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 52650000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Sustainable Fiscal  Resource Management
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 346475000
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 429905000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 482881000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 609271000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 607394000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 633537000
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 671944000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    real:
+    - amount: 475579295
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 557658191
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 593013954
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 711469293
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 667271754
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 664657554
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 671944000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/gauteng/departments/gauteng-provincial-treasury
+  id: 2016-17
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/gauteng/departments/gauteng-provincial-treasury
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/gauteng/departments/gauteng-provincial-treasury
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2019-20/provincial/gauteng
+  id: 2019-20
+  is_selected: false
+government:
+  name: Gauteng
+  slug: gauteng
+government_functions: []
+intro: "## Vision\n\nTo provide strategic leadership in financial and fiscal matters\
+  \ to ensure sustainable and inclusive social and economic\r\ndevelopment of the\
+  \ people of Gauteng so that all may enjoy value-for-money services of the highest\
+  \ quality.\r\n\r\n\r\n\r\n\n\n## Mission\n\nWe are an activist Treasury that enables\
+  \ and promotes quality service delivery for the citizens of Gauteng through:\r\n\
+  \r\n\u2022\u2022 Sustainable financing and funding that ensures developmentally\
+  \ focused allocation of resources and innovative revenue\r\ngeneration;\r\n\r\n\u2022\
+  \u2022 Efficient cash management that ensures sustainable liquidity levels in the\
+  \ province;\r\n\r\n\u2022\u2022 Effective financial management and reporting that\
+  \ ensures responsible stewardship and transparent resource utilization\r\nand expenditure;\
+  \ and\r\n\r\n\u2022\u2022 A well-structured governance framework that ensures accountability,\
+  \ transparency and fiscal discipline in line with\r\nstatutory obligations.\r\n\r\
+  \n\r\n\n\n## Core functions and responsibilities\n\nThe functions or powers of the\
+  \ Gauteng Provincial Treasury (GPT) are described in both the Public Finance Management\
+  \ Act\r\n(PFMA), 1999 and the Municipal Finance Management Act, 2003 (Act No 56\
+  \ of 2003). These can be summarized as follows:\r\n\r\n\u2022\u2022 To manage the\
+  \ budget allocation for the Gauteng Provincial Government (GPG);\r\n\r\n\u2022\u2022\
+  \ To ensure the instilling of fiscal discipline and corporate governance in the\
+  \ Province;\r\n\r\n\u2022\u2022 To ensure proper cash management;\r\n\r\n\u2022\u2022\
+  \ To ensure the effective and efficient utilization of resources (that is, value\
+  \ for money and compliance with all relevant\r\nlegislations);\r\n\r\n\u2022\u2022\
+  \ To develop, implement and monitor compliance with corporate governance norms and\
+  \ standards relating to provincial\r\nand local governments; and\r\n\r\n\u2022\u2022\
+  \ To ensure adequate financial accountability."
+is_vote_primary: true
+name: Gauteng Provincial Treasury
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Gauteng%2522%257Cdepartment.department%253A%2522Gauteng%2BProvincial%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Financial Governance
+      total_budget: 116097000
+      type: programme
+    - name: Administration
+      total_budget: 78863000
+      type: programme
+    - name: Supply Chain Management
+      total_budget: 77013000
+      type: programme
+    - name: Gauteng Audit Services
+      total_budget: 74630000
+      type: programme
+    - name: Sustainable Fiscal  Resource Management
+      total_budget: 71629000
+      type: programme
+    - name: Municipal Financial Governance
+      total_budget: 35129000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 41237000
+      type: programme
+    - name: Sustainable Fiscal  Resource Management
+      total_budget: 23966000
+      type: programme
+    - name: Supply Chain Management
+      total_budget: 14524000
+      type: programme
+    - name: Financial Governance
+      total_budget: 11931000
+      type: programme
+    - name: Gauteng Audit Services
+      total_budget: 5909000
+      type: programme
+    - name: Municipal Financial Governance
+      total_budget: 1174000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Sustainable Fiscal  Resource Management
+      total_budget: 1400000
+      type: programme
+    - name: Administration
+      total_budget: 1004000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Sustainable Fiscal  Resource Management
+      total_budget: 52650000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 238000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Gauteng%2522%257Cdepartment.department%253A%2522Gauteng%2BProvincial%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 121342000
+  - name: Sustainable Fiscal  Resource Management
+    total_budget: 149645000
+  - name: Financial Governance
+    total_budget: 128028000
+  - name: Supply Chain Management
+    total_budget: 91537000
+  - name: Municipal Financial Governance
+    total_budget: 36303000
+  - name: Gauteng Audit Services
+    total_budget: 80539000
+selected_financial_year: 2016-17
+selected_tab: departments
+slug: gauteng-provincial-treasury
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2016-17-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Gauteng%2522%257Cdepartment.department%253A%2522Gauteng%2BProvincial%2BTreasury%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Management
+      total_budget: 70936000
+      type: subprogramme
+    - name: Financial Management Services (CFO)
+      total_budget: 25347000
+      type: subprogramme
+    - name: Office of the HOD
+      total_budget: 16790000
+      type: subprogramme
+    - name: Office of the MEC
+      total_budget: 8269000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Provincial Accounting Services
+      total_budget: 53597000
+      type: subprogramme
+    - name: Financial Information Management Systems
+      total_budget: 23200000
+      type: subprogramme
+    - name: Provincial Forensic Audits
+      total_budget: 23171000
+      type: subprogramme
+    - name: Transversal Internal Audit and Risk Management
+      total_budget: 16797000
+      type: subprogramme
+    - name: Compliance
+      total_budget: 6949000
+      type: subprogramme
+    - name: Programme Support/Office of the DDG
+      total_budget: 4314000
+      type: subprogramme
+    name: Financial Governance
+    type: programme
+  - items:
+    - name: Risk and Compliance Audit Services( Cluster 4,5,6)
+      total_budget: 25487000
+      type: subprogramme
+    - name: Risk and Compliance Audit Services( Cluster1,2,3)
+      total_budget: 25377000
+      type: subprogramme
+    - name: Performance and Computer Audit Services
+      total_budget: 21693000
+      type: subprogramme
+    - name: Programme Support/Office of the DDG
+      total_budget: 7982000
+      type: subprogramme
+    name: Gauteng Audit Services
+    type: programme
+  - items:
+    - name: Local Government Financial Services
+      total_budget: 12305000
+      type: subprogramme
+    - name: Municipal Accounting and Asset Management
+      total_budget: 12249000
+      type: subprogramme
+    - name: Municipal Compliance and Financial Management Support
+      total_budget: 6375000
+      type: subprogramme
+    - name: Programme Support/Office of the DDG
+      total_budget: 5374000
+      type: subprogramme
+    name: Municipal Financial Governance
+    type: programme
+  - items:
+    - name: SCM Client Support
+      total_budget: 31025000
+      type: subprogramme
+    - name: Programme Support/Office of the DDG
+      total_budget: 20047000
+      type: subprogramme
+    - name: Transversal Contract Management
+      total_budget: 17761000
+      type: subprogramme
+    - name: SCM Policy, Norms and Standards
+      total_budget: 10000000
+      type: subprogramme
+    - name: Strategic Procurement
+      total_budget: 7868000
+      type: subprogramme
+    - name: Governance, Compliance, Monitoring and Evaluation
+      total_budget: 4836000
+      type: subprogramme
+    name: Supply Chain Management
+    type: programme
+  - items:
+    - name: Programme Support/Office of the DDG
+      total_budget: 59166000
+      type: subprogramme
+    - name: Infrastructure Management
+      total_budget: 27734000
+      type: subprogramme
+    - name: Budget Management
+      total_budget: 21483000
+      type: subprogramme
+    - name: Public Finance
+      total_budget: 17164000
+      type: subprogramme
+    - name: Economic and Fiscal Policy Oversight
+      total_budget: 12058000
+      type: subprogramme
+    - name: Financial Asset and Liabilities Management
+      total_budget: 12040000
+      type: subprogramme
+    name: Sustainable Fiscal  Resource Management
+    type: programme
+title: Gauteng Provincial Treasury budget 2016-17  - vulekamali
+vote_number: 14
+vote_primary:
+  name: Gauteng Provincial Treasury
+  slug: gauteng-provincial-treasury
+  url_path: /2016-17/provincial/gauteng/departments/gauteng-provincial-treasury
+website_url: null

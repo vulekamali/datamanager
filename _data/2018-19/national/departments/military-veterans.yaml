@@ -1,0 +1,647 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2017-18
+    nominal:
+    - amount: 622111000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 627087000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 622111000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 594442509
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices:
+  - This department did not exist for some years displayed.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 307381000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Socio Economic Support
+  - items:
+    - amount: 164912000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 162750000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Empowerment and Stakeholder Management
+  - items:
+    - amount: 336772000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Socioeconomic Support
+  - items:
+    - amount: 149818000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 127565000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 19 - Defence and Military Veterans
+    url: https://data.vulekamali.gov.za/dataset/9268df3c-06b9-43cc-93b3-9532d4513fa0/resource/50ffb2c9-48ce-488b-83fa-8e9b8e3bb1fb/download/vote-19-defence-and-military-veterans.pdf
+  name: AENE 2018-19 - Vote 19 - Defence and Military Veterans
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 19 - Defence and Military Veterans
+    url: https://data.vulekamali.gov.za/dataset/9268df3c-06b9-43cc-93b3-9532d4513fa0/resource/89ad7f89-b2bf-41c3-8904-dd159777707f/download/aene18chap-tab-vote19.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 19 - Defence and Military Veterans
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-defence-and-military-veterans-2018-19/resource/05c90106-fa82-47e2-832b-2a0f5d955c48/download/vote201920defence20and20military20veterans.pdf
+  name: 'National Department: Defence and Military Veterans 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 19 - Defence and Military Veterans
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-defence-and-military-veterans-2018-19/resource/c24c140f-af1a-4461-b8ac-e3654fc2f956/download/ene18-vote19_chaptertables.xlsx
+description: 'National department: Military Veterans budget data for the 2018-19 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Military%2BVeterans%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 80343000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 43693000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 3529000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 120734000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 37983000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 15000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 4018000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Empowerment and Stakeholder Management
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 62703000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 40581000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Software and other intangible assets
+        total_budget: 2500000.0
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 840000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 230148000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Socioeconomic Support
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2017-18
+    nominal:
+    - amount: 463063000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 347951000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 504621000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 622111000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 627087000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 664527000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 703606000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 542947211
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 387932775
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 529285863
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 622111000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 594442509
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 598277417
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 600204472
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: false
+    url_path: /2015-16/national
+  id: 2015-16
+  is_selected: false
+- closest_match:
+    is_exact_match: false
+    url_path: /2016-17/national
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/military-veterans
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/military-veterans
+  id: 2018-19
+  is_selected: true
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: '## Vote purpose
+
+
+  Formulate policies and standards aimed at providing a comprehensive delivery system
+  to military veterans and their dependants in recognition of their role in the democratisation
+  of South Africa.
+
+
+  ## Mandate
+
+
+  The Department of Military Veterans derives its mandate from the Military Veterans
+  Act (2011), which requires the department to provide national policy and standards
+  on socioeconomic support to military veterans and to their dependants, including
+  benefits and entitlement to help realise a dignified, unified, empowered and self-sufficient
+  community of military veterans.
+
+
+  '
+is_vote_primary: false
+name: Military Veterans
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Military%2BVeterans%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 43693000.0
+      type: programme
+    - name: Socioeconomic Support
+      total_budget: 40581000.0
+      type: programme
+    - name: Empowerment and Stakeholder Management
+      total_budget: 37983000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Empowerment and Stakeholder Management
+      total_budget: 120734000.0
+      type: programme
+    - name: Administration
+      total_budget: 80343000.0
+      type: programme
+    - name: Socioeconomic Support
+      total_budget: 62703000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 3529000.0
+      type: programme
+    - name: Socioeconomic Support
+      total_budget: 840000.0
+      type: programme
+    - name: Empowerment and Stakeholder Management
+      total_budget: 15000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Socioeconomic Support
+      total_budget: 2500000.0
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Socioeconomic Support
+      total_budget: 230148000.0
+      type: programme
+    - name: Empowerment and Stakeholder Management
+      total_budget: 4018000.0
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Military%2BVeterans%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 127565000.0
+  - name: Socioeconomic Support
+    total_budget: 336772000.0
+  - name: Empowerment and Stakeholder Management
+    total_budget: 162750000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: military-veterans
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager-staging.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Military%2BVeterans%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 54113000.0
+      type: subprogramme
+    - name: Office Accommodation
+      total_budget: 20002000.0
+      type: subprogramme
+    - name: Strategic Planning, Policy Development and Monitoring and Evaluation
+      total_budget: 19867000.0
+      type: subprogramme
+    - name: Financial Administration
+      total_budget: 16676000.0
+      type: subprogramme
+    - name: Internal Audit
+      total_budget: 10055000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 6852000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Empowerment and Skills Development
+      total_budget: 83659000.0
+      type: subprogramme
+    - name: Provincial Offices and Stakeholder Relations
+      total_budget: 59595000.0
+      type: subprogramme
+    - name: Heritage, Memorials, Burials and Honours
+      total_budget: 19496000.0
+      type: subprogramme
+    name: Empowerment and Stakeholder Management
+    type: programme
+  - items:
+    - name: Socio Economic Support Management
+      total_budget: 240337000.0
+      type: subprogramme
+    - name: Health Care and Wellbeing Support
+      total_budget: 80858000.0
+      type: subprogramme
+    - name: Database and Benefits Management
+      total_budget: 15577000.0
+      type: subprogramme
+    name: Socioeconomic Support
+    type: programme
+title: Military Veterans budget 2018-19  - vulekamali
+vote_number: 19
+vote_primary:
+  name: Defence and Military Veterans
+  slug: defence-and-military-veterans
+  url_path: /2018-19/national/departments/defence-and-military-veterans

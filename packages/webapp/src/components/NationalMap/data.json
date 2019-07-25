@@ -1,0 +1,31 @@
+{
+  "provincesList": [
+    "Eastern Cape",
+    "Free State",
+    "Gauteng",
+    "Limpopo",
+    "Mpumalanga",
+    "KwaZulu-Natal",
+    "Northern Cape",
+    "Western Cape",
+    "North West"
+  ],
+  "countryGpsBounds": {
+    "y": [-35, -22],
+    "x": [16.5, 33]
+  },
+  "vectorMapSizes": {
+    "small": {
+      "x": 104,
+      "y": 89.5
+    },
+    "medium": {
+      "x": 226,
+      "y": 194.5
+    },
+    "large": {
+      "x": 428,
+      "y": 375
+    }
+  }
+}

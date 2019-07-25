@@ -1,0 +1,48 @@
+data:
+  items:
+  - amount: 209791505000.0
+    id: community-development
+    name: Community development
+    percentage: 11.485653057462223
+    url: 2019-20/focus/community-development
+  - amount: 13000000000.0
+    id: contingency-reserve
+    name: Contingency reserve
+    percentage: 0.7117232404000767
+    url: null
+  - amount: 202207844000.0
+    id: debt-service-costs
+    name: Debt-service costs
+    percentage: 11.070463228153324
+    url: 2019-20/focus/debt-service-costs
+  - amount: 209998130000.0
+    id: economic-development
+    name: Economic development
+    percentage: 11.496965350888965
+    url: 2019-20/focus/economic-development
+  - amount: 93138509000.0
+    id: general-public-services
+    name: General public services
+    percentage: 5.099141648577824
+    url: 2019-20/focus/general-public-services
+  - amount: 222572150000.0
+    id: health
+    name: Health
+    percentage: 12.18536706313938
+    url: 2019-20/focus/health
+  - amount: 386404340000.0
+    id: learning-and-culture
+    name: Learning and culture
+    percentage: 21.15484222841946
+    url: 2019-20/focus/learning-and-culture
+  - amount: 211043812000.0
+    id: peace-and-security
+    name: Peace and security
+    percentage: 11.55421428792497
+    url: 2019-20/focus/peace-and-security
+  - amount: 278396401000.0
+    id: social-development
+    name: Social development
+    percentage: 15.241629895033782
+    url: 2019-20/focus/social-development
+  total: 1826552691000.0

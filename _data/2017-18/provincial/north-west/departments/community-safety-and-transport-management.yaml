@@ -1,0 +1,786 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1831742000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1851672000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1983725000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 2138995926
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 2034212428
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2081169382
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 0
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Crime Prevention and Community Safety
+  - items:
+    - amount: 44182000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 45861000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Civillian Oversight
+  - items:
+    - amount: 48690000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Provincial Secretariat for Police Service
+  - items:
+    - amount: 208957000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 205942000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 316538000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 602374000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 582883000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 550163000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Transport Regulations
+  - items:
+    - amount: 976229000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1016986000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1068334000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Transport Operations
+contributed_datasets:
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2016/17'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2016-17
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2014/15'
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2014-15
+- contributor: Public Service Accountability Monitor
+  name: A People's Guide to the Adjusted Budget 2018/19
+  url_path: /datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19
+- contributor: Public Service Accountability Monitor
+  name: 'Budget Brief: Department of Human Settlements, 2016/17 and 2017/18'
+  url_path: /datasets/contributed/budget-brief-department-of-human-settlements
+- contributor: Studies in Poverty and Inequality Institute
+  name: Monitoring the right of access to adequate housing in South Africa
+  url_path: /datasets/contributed/monitoring-the-right-of-access-to-adequate-housing-in-south-africa
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "NW AEPRE 2017-18 \u2013 Vote 5 - Community Safety and Transport Management"
+    url: https://data.vulekamali.gov.za/dataset/449d0582-d980-4cca-beb6-58b9a8d1860d/resource/157cfa96-33b2-43e7-9040-02da83f0b663/download/nw-vote-05-community-safety-and-transport-management.pdf
+  name: "North West AEPRE 2017-18 \u2013 Vote 5 - Community Safety and Transport Management"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 05 : Community Safety and Transport Management'
+    url: https://data.vulekamali.gov.za/dataset/b8585a2b-f222-469c-83ef-d0742b3f3694/resource/7a8d7a69-4b7d-4ec1-af88-8339a569520e/download/nw-vote-05-community-safety-and-transport-management.pdf
+  name: 'North West Department: Community Safety and Transport Management 2017-18'
+  tables: null
+description: 'North West department: Community Safety and Transport Management budget
+  data for the 2017-18 financial year from National Treasury in partnership with IMALI
+  YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Community%2BSafety%2Band%2BTransport%2BManagement%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 187230000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 124898000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 3700000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 710000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 32190000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 9843000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 5683000
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 974000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Provincial Secretariat for Police Service
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 335038000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 77747000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 8121000
+        type: economic_classification_2
+      - name: Buildings and other fixed structures
+        total_budget: 5000000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Public corporations and private enterprises
+        total_budget: 642249000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 179000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Transport Operations
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 342565000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 169175000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 17873000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 17126000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 2905000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 519000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Transport Regulations
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1388534000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1538857000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1802470000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 1913894000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1983725000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2092903000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 2218305000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 1801159232
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1889831397
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 2104813880
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 2102568360
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 2081169382
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2092903000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 2109494840
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/north-west/departments/community-safety-and-transport-management
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/north-west/departments/community-safety-and-transport-management
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/north-west/departments/community-safety-and-transport-management
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/north-west/departments/community-safety-and-transport-management
+  id: 2019-20
+  is_selected: false
+government:
+  name: North West
+  slug: north-west
+government_functions:
+- Defence, public order and safety
+- Human settlements and municipal infrastructure
+intro: "## Vision\n\nSafe Communities and effective transport services.\r\n\r\n\n\n\
+  ## Mission\n\nWe are committed to promote community and road safety, exercise civilian\
+  \ oversight of police and coordinate transport services through an integrated approach.\r\
+  \n\r\nEach employee is committed to an IIMPACCT culture that explains our behaviour\
+  \ as follows:\r\n\r\n* Integrity\r\n\r\n* Innovative\r\n\r\n* Motivated\r\n\r\n\
+  * Passionate\r\n\r\n* Accountability\r\n\r\n* Client focused\r\n\r\n* Commitment\r\
+  \n\r\n* Team work\r\n\r\n\n\n## Core functions\n\nThe core functions of the department\
+  \ are summarized as follows:-\r\n\r\n* To exercise oversight function with regard\
+  \ to South African Police Service in the Province, coordinate crime prevention initiatives\
+  \ and promote community police relations;\r\n\r\n* To plan, regulate and facilitate\
+  \ the provision of integrated transport services through co-ordination and co-operation\
+  \ with national planning authorities, and the private sector \r\nin order to enhance\
+  \ implementation of safety initiatives and mobility of all communities particularly\
+  \ those currently without or with limited access;\r\n\r\n* To ensure the provision\
+  \ of a safe transport environment through the regulation of public transport operations,\
+  \ road traffic law enforcement and the registration and licensing of vehicles and\
+  \ drivers.\r\n\r\nDepartment of Community Safety and Transport ManagementVote 05To\
+  \ be appropriated by Vote in 2017/18R 1 983 725 000Direct ChargeNot ApplicableResponsible\
+  \ MECMEC for Community Safety and Transport ManagementAdministrating DepartmentDepartment\
+  \ of Community Safety and Transport ManagementAccounting OfficerDeputy Director\
+  \ General for Community Safety and Transport Management\r\n"
+is_vote_primary: true
+name: Community Safety and Transport Management
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Community%2BSafety%2Band%2BTransport%2BManagement%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Transport Regulations
+      total_budget: 342565000
+      type: programme
+    - name: Administration
+      total_budget: 124898000
+      type: programme
+    - name: Transport Operations
+      total_budget: 77747000
+      type: programme
+    - name: Provincial Secretariat for Police Service
+      total_budget: 32190000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Transport Operations
+      total_budget: 335038000
+      type: programme
+    - name: Administration
+      total_budget: 187230000
+      type: programme
+    - name: Transport Regulations
+      total_budget: 169175000
+      type: programme
+    - name: Provincial Secretariat for Police Service
+      total_budget: 9843000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Transport Regulations
+      total_budget: 17873000
+      type: programme
+    - name: Transport Operations
+      total_budget: 5000000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Transport Regulations
+      total_budget: 17126000
+      type: programme
+    - name: Transport Operations
+      total_budget: 8121000
+      type: programme
+    - name: Administration
+      total_budget: 3700000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Transport Regulations
+      total_budget: 2905000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Provincial Secretariat for Police Service
+      total_budget: 5683000
+      type: programme
+    - name: Administration
+      total_budget: 710000
+      type: programme
+    - name: Transport Regulations
+      total_budget: 519000
+      type: programme
+    - name: Transport Operations
+      total_budget: 179000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Provincial Secretariat for Police Service
+      total_budget: 974000
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Transport Operations
+      total_budget: 642249000
+      type: programme
+    name: Transfers and subsidies - Public corporations and private enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Community%2BSafety%2Band%2BTransport%2BManagement%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 316538000
+  - name: Provincial Secretariat for Police Service
+    total_budget: 48690000
+  - name: Transport Operations
+    total_budget: 1068334000
+  - name: Transport Regulations
+    total_budget: 550163000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: community-safety-and-transport-management
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Community%2BSafety%2Band%2BTransport%2BManagement%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Community Safety and Transport Management budget 2017-18  - vulekamali
+vote_number: 5
+vote_primary:
+  name: Community Safety and Transport Management
+  slug: community-safety-and-transport-management
+  url_path: /2017-18/provincial/north-west/departments/community-safety-and-transport-management
+website_url: null

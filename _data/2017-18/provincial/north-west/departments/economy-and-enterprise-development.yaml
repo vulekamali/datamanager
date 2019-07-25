@@ -1,0 +1,721 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 255096000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 302685000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 305268000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 297885458
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 332524112
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 320263350
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 4956000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Economic  Planning
+  - items:
+    - amount: 43943000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 23125000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Economic Planning and Sector Development
+  - items:
+    - amount: 45778000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Trade and Sector Development
+  - items:
+    - amount: 56203000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 54639000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 60372000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Integrated Economic Development Services
+  - items:
+    - amount: 70931000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 102240000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 117824000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Business Regulation and Governance
+  - items:
+    - amount: 77228000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 101863000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 103947000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Administration
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "NW AEPRE 2017-18 \u2013 Vote 6 - Economy and Enterprise Development"
+    url: https://data.vulekamali.gov.za/dataset/ad510b78-1f64-41ff-b0ff-f77bb15871af/resource/12d09c12-aacd-4597-95a2-fd020323b6e4/download/nw-vote-06-economy-and-enterprise-development.pdf
+  name: "North West AEPRE 2017-18 \u2013 Vote 6 - Economy and Enterprise Development"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 06 : Economy and Entreprise Development'
+    url: https://data.vulekamali.gov.za/dataset/41bd264c-39c6-4b86-a4a8-262530cac924/resource/f56324f6-cf98-405d-bc9d-1286ce146d31/download/nw-vote-06-economy-and-entreprise-development.pdf
+  name: 'North West Department: Economy and Enterprise Development 2017-18'
+  tables: null
+description: 'North West department: Economy and Enterprise Development budget data
+  for the 2017-18 financial year from National Treasury in partnership with IMALI
+  YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Economy%2Band%2BEnterprise%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 55044000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 45254000
+        type: economic_classification_2
+      - name: Interest and rent on land
+        total_budget: 10000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2102000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 1371000
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 166000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 22037000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 6197000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 89590000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Business Regulation and Governance
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 17053000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 6072000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Economic Planning and Sector Development
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 17804000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 3561000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Public corporations and private enterprises
+        total_budget: 23725000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 15282000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Integrated Economic Development Services
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 185863000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 225799000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 234759000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 275817000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 305268000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 333372000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 353783000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 241095182
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 277298046
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 274137157
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 303007427
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 320263350
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 333372000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 336429577
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/north-west/departments/economy-and-enterprise-development
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/north-west/departments/economy-and-enterprise-development
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/north-west/departments/economy-and-enterprise-development
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/north-west/departments/economy-and-enterprise-development
+  id: 2019-20
+  is_selected: false
+government:
+  name: North West
+  slug: north-west
+government_functions: []
+intro: "## Vision\r\n\r\n\u201CA growing economy wherein enterprises thrive\u201D\r\
+  \n\r\n\r\n\r\n## Mission\r\n\r\nTo lead, coordinate, support, implement and champion\
+  \ inclusive economic growth for the people of the North West Province through:\r\
+  \n\r\n* Economic Planning and Development;\r\n\r\n* Enterprise Development; and\r\
+  \n\r\n* Effective Regulatory Services\r\n\r\n\r\n\r\n## Core Functions\r\n\r\nThe\
+  \ department\u2019s core functions are summarised as follows:\r\n\r\n* Small Business\
+  \ Development;\r\n\r\n* Provincial macro-economic planning and development;\r\n\r\
+  \n* Research to determine economic potential and policy development;\r\n\r\n* Economic\
+  \ sector development and sectorial charter implementation;\r\n\r\n* Enhancement\
+  \ of productivity and competitiveness of various economic sectors;\r\n\r\n* Industrial\
+  \ development facilitation;\r\n\r\n* Economic infrastructure development facilitation;\r\
+  \n\r\n* Investment and trade promotion;\r\n\r\n* Regulatory functions (consumer\
+  \ protection and liquor policy administration, BBBEE policy compliance, gambling\
+  \ amongst others);\r\n\r\n* Economic development planning & coordination including\
+  \ LED, IDPs, and cluster management\r\n\r\n* Project management."
+is_vote_primary: true
+name: Economy and Enterprise Development
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Economy%2Band%2BEnterprise%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 55044000
+      type: programme
+    - name: Business Regulation and Governance
+      total_budget: 22037000
+      type: programme
+    - name: Integrated Economic Development Services
+      total_budget: 17804000
+      type: programme
+    - name: Economic Planning and Sector Development
+      total_budget: 6072000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 45254000
+      type: programme
+    - name: Economic Planning and Sector Development
+      total_budget: 17053000
+      type: programme
+    - name: Business Regulation and Governance
+      total_budget: 6197000
+      type: programme
+    - name: Integrated Economic Development Services
+      total_budget: 3561000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 10000
+      type: programme
+    name: Current payments - Interest and rent on land
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 2102000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Business Regulation and Governance
+      total_budget: 89590000
+      type: programme
+    - name: Administration
+      total_budget: 166000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Integrated Economic Development Services
+      total_budget: 15282000
+      type: programme
+    - name: Administration
+      total_budget: 1371000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Integrated Economic Development Services
+      total_budget: 23725000
+      type: programme
+    name: Transfers and subsidies - Public corporations and private enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Economy%2Band%2BEnterprise%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 103947000
+  - name: Integrated Economic Development Services
+    total_budget: 60372000
+  - name: Economic Planning and Sector Development
+    total_budget: 23125000
+  - name: Business Regulation and Governance
+    total_budget: 117824000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: economy-and-enterprise-development
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522North%2BWest%2522%257Cdepartment.department%253A%2522Economy%2Band%2BEnterprise%2BDevelopment%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes: []
+title: Economy and Enterprise Development budget 2017-18  - vulekamali
+vote_number: 6
+vote_primary:
+  name: Economy and Enterprise Development
+  slug: economy-and-enterprise-development
+  url_path: /2017-18/provincial/north-west/departments/economy-and-enterprise-development
+website_url: null

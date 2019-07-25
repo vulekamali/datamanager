@@ -1,0 +1,312 @@
+$mobile-break: 900px;
+
+.NavBar-mobileWrap {
+  padding: 20px;
+
+  &:active {
+    background-color: darken(white, 15%);
+  }
+
+  @media screen and (min-width: $mobile-break) {
+    padding: 0;
+    display: none;
+  }
+}
+
+.NavBar-container {
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  z-index: z-index(NavBar);
+  transform: translateX(-110%);
+  transition: transform 0.3s;
+
+  &.is-active {
+    transform: translateX(0);
+  }
+
+  @media screen and (min-width: $mobile-break) {
+    height: auto;
+    position: static;
+    transform: none;
+
+    &.is-active {
+      animation: none;
+    }
+  }
+}
+
+.NavBar-modalCover {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  display: none;
+  background: rgba(0, 0, 0, 0.2);
+
+  &.is-active {
+    display: block;
+
+    @media screen and (min-width: $mobile-break) {
+      display: none;
+    }
+  }
+}
+
+.NavBar-wrap {
+  height: 100%;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 0 3px 3px 0;
+  background-color: #fff;
+  box-shadow: 0 2px 21px 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: $mobile-break) {
+    max-width: 100%;
+    box-shadow: none;
+    background: none;
+    height: auto;
+  }
+}
+
+.NavBar-list {
+  overflow-y: scroll;
+  background-color: #f0f0f0;
+  list-style: none;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0;
+  padding-left: 0;
+  @include clearfix;
+
+  @media screen and (min-width: $mobile-break) {
+    overflow-y: visible;
+    background: none;
+    margin: 0 auto;
+  }
+}
+
+.NavBar-icon {
+  display: none;
+
+  @media screen and (min-width: $mobile-break) {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.NavBar-iconWrap {
+  display: none;
+  padding: 6px 7px;
+
+  .Navbar-link:not(.is-active):hover & {
+    border-radius: 18px;
+    background: darken(white, 15%);
+  }
+
+  @media screen and (min-width: $mobile-break) {
+    display: block;
+  }
+}
+
+.NavBar-item {
+  line-height: 1;
+  margin-left: 0;
+  display: block;
+
+  @media screen and (min-width: $mobile-break) {
+    list-style: none;
+    float: left;
+
+    &.is-right {
+      float: right;
+    }
+  }
+}
+
+.NavBar-link {
+  display: block;
+  border-bottom: solid 1px #b9b9b9;
+  color: #4a4a4a;
+  text-decoration: none;
+  padding: 12px 22px;
+  font-size: 16px;
+
+  @media screen and (min-width: $mobile-break) {
+    border-radius: 18px 18px 0 0;
+    padding: 6px 10px;
+    fill: #4a4a4a;
+    user-select: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom-width: 0;
+  }
+
+  &:not(.has-subLinks).is-active {
+    font-weight: bold;
+  }
+
+  &.is-active {
+    @media screen and (min-width: $mobile-break) {
+      border: 18px 18px 0 0;
+      background-color: #3f3f3f;
+      color: white;
+      fill: white;
+
+      &.is-darkBackground {
+        background-color: #f9f9f9;
+      }
+    }
+  }
+}
+
+.NavBar-subItems {
+  list-style: none;
+  padding-left: 0;
+
+  @media screen and (min-width: $mobile-break) {
+    width: 200px;
+    background-color: #f5f6f6;
+    padding: 20px;
+    list-style: none;
+    text-align: right;
+  }
+}
+
+.NavBar-subLink {
+  padding: 12px 22px;
+  font-size: (32px / 2);
+  border-bottom: solid 1px #b9b9b9;
+  background: white;
+  display: block;
+  cursor: pointer;
+  padding-left: 36px;
+  text-decoration: none;
+  color: #4a4a4a;
+
+
+  @media screen and (min-width: $mobile-break) {
+    display: inline-block;
+    font-weight: normal;
+    margin-bottom: 10px;
+    padding: 8px 15px;
+    border-radius: 2px;
+    background: none;
+    border-bottom-width: 0;
+  }
+
+  &:not(.is-active):hover {
+    background-color: darken(white, 10%);
+
+    @media screen and (min-width: $mobile-break) {
+      background-color: darken(#f5f6f6, 10%);
+    }
+  }
+
+  &.is-active {
+    font-weight: bold;
+
+    @media screen and (min-width: $mobile-break) {
+      cursor: default;
+    }
+  }
+}
+
+.NavBar-text {
+  @media screen and (min-width: $mobile-break) {
+    display: inline-block;
+    padding: 10px 20px;
+
+    .NavBar-link:not(.is-active):hover & {
+      border-radius: 18px;
+      background: darken(white, 15%);
+    }
+
+    &.is-mobileOnly {
+      display: none;
+    }
+  }
+}
+
+.NavBar-subItemsWrap {
+  @media screen and (min-width: $mobile-break) {
+    display: none;
+
+    &.is-currentPage {
+      display: block;
+      position: absolute;
+      left: 10;
+      top: 325px;
+
+      &.is-fixed {
+        position: fixed;
+        top: 50px;
+      }
+
+      @media screen and (min-width: 1050px) {
+        left: calc(50vw - (1024px / 2));
+      }
+
+      @media screen and (min-width: 1500px) {
+        left: calc(50vw - ((1024px / 2) + 230px));
+      }
+    }
+  }
+}
+
+.NavBar-expand {
+  border-bottom: solid 1px #b9b9b9;
+  text-align: right;
+  padding: (35px / 2) (33px / 2);
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(white, 20%);
+  }
+
+  @media screen and (min-width: $mobile-break) {
+    display: none;
+  }
+}
+
+.NavBar-expandText {
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  padding: 0 11px;
+}
+
+.NavBar-expandIcon {
+  vertical-align: middle;
+  display: inline-block;
+  width: 20px;
+  height: 25px;
+  border: 2px solid #4a4a4a;
+  border-radius: 3px;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-right: 5px solid black;
+    position: absolute;
+    top: 5px;
+    left: 0;
+  }
+}
+
+.NavBar-mobileTrigger {
+  width: 25px;
+  height: 25px;
+}

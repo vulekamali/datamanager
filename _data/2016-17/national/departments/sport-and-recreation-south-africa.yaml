@@ -1,0 +1,813 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type:
+  - amount: -2000000
+    name: Declared unspent funds
+    type: kind
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aadjusted-estimates-of-national-expenditure-2016-17/aggregate/%3Fcut%3Dfinyear.finyear%253A2016%257Cvoteno.department%253ASport%2Band%2BRecreation%2BSouth%2BAfrica%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  direct_charges: null
+  econ_classes:
+  - items:
+    - amount: -7000000
+      name: Compensation of employees
+      type: economic_classification_3
+    - amount: 5000000
+      name: Goods and services
+      type: economic_classification_3
+    name: Current payments
+    type: economic_classification_2
+  programmes:
+  - amount: 14600000
+    name: Active Nation
+  - amount: -4000000
+    name: Administration
+  - amount: 11394000
+    name: Sport Support
+  - amount: -23994000
+    name: Winning Nation
+  special_appropriation: null
+  total_change:
+    amount: -2000000
+    percentage: -0.19443904335990667
+  virements:
+    amount: 33994000
+    label: Value of virements
+    percentage: 3.3048804199883333
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 988548000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 980879000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 980879000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 979902000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 1028600000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1026600000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1026600000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 1023622000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    real:
+    - amount: 1154365704
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1145410317
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1145410317
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 1144269436
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 1130000833
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1127803671
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1127803671
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 1124532095
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2013 and 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 9678000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 6788000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 2996000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 2846000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 16282000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 16282000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 13992000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 12526000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Sport Infrastructure Support
+  - items:
+    - amount: 92152000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 75552000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 57152000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 56510000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 91149000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 67155000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 63155000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 62684000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Winning Nation
+  - items:
+    - amount: 124828000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 115477000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 114507000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 114448000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 134862000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 130862000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 117817000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 117328000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 133244000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 154017000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 154017000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 153928000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 137572000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 148966000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 147256000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 147124000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Sport Support
+  - items:
+    - amount: 628646000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 629045000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 652207000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 652170000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 648735000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 663335000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 684380000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 683960000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Active Nation
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2016-17 - Vote 40 - Sport and Recreation South Africa
+    url: https://data.vulekamali.gov.za/dataset/a1c63b6d-2881-4f6a-92e0-6745db937e03/resource/521c2563-93b5-4a41-841b-5801c5658244/download/vote-40-sport-and-recreation-south-africa.pdf
+  name: AENE 2016-17 - Vote 40 - Sport and Recreation South Africa
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2016-17 - Vote 40 - Sport and Recreation South Africa
+    url: https://data.vulekamali.gov.za/dataset/a1c63b6d-2881-4f6a-92e0-6745db937e03/resource/7fed267d-e4be-4e62-90a6-d277cb8a35db/download/aene16chap-tab-vote40.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 40 - Sport and Recreation South Africa
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-sport-and-recreation-south-africa-2016-17/resource/b7abb4a9-f56c-4194-8a5b-959b49e7c779/download/vote-40-sport-and-recreation-south-africa.pdf
+  name: 'National Department: Sport and Recreation South Africa 2016-17'
+  tables:
+    description: ''
+    format: XLS
+    name: Vote 40 - Sport and Recreation South Africa
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-sport-and-recreation-south-africa-2016-17/resource/6ec2d175-5427-4590-9eb7-1362528fe804/download/ene16chap-tab-vote40.xls
+description: 'National department: Sport and Recreation South Africa budget data for
+  the 2016-17 financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cvote_number.department%253A%2522Sport%2Band%2BRecreation%2BSouth%2BAfrica%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 42868000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 11651000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 555708000.0
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 38508000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Active Nation
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 77174000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 55438000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2167000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 83000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 8434000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 7848000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Sport Infrastructure Support
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 7543000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 5727000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 113269000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 11033000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Sport Support
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 55527000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 4380000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 21896000.0
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 9346000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Winning Nation
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1054084000.0
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 1073029000.0
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 966825000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 980879000.0
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1028600000.0
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1074986000.0
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 1135004000.0
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    real:
+    - amount: 1446859157
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 1391896842
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1187333352
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1145410317
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1130000833
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1127791377
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 1135004000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/sport-and-recreation-south-africa
+  id: 2016-17
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/sport-and-recreation-south-africa
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/sport-and-recreation-south-africa
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/sport-and-recreation-south-africa
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose\n\n_Transform the delivery of sport and recreation by ensuring\
+  \ equitable access,\ndevelopment and excellence at all levels of participation,\
+  \ thereby improving\nsocial cohesion, nation building and the quality of life of\
+  \ all South\nAfricans._\n\n\n\n## Mandate\n\nThe Department of Sport and Recreation\
+  \ South Africa is established in terms of\nthe Public Service Act\_(1994). Its legal\
+  \ mandate is derived from the National\nSport and Recreation Act\_(1998), which\
+  \ requires it to oversee the development\nand management of sport and recreation\
+  \ in South Africa. The act provides the\nframework for relationships between the\
+  \ department and its external clients.\nThis includes the department\u2019s partnership\
+  \ with the South African Sports\nConfederation and Olympic Committee, which is key\
+  \ to improving South Africa\u2019s\ninternational ranking in selected sports. The\
+  \ act also ensures that sport and\nphysical education contribute to social cohesion\
+  \ by legislating on sports\nparticipation and sports infrastructure.\n\n"
+is_vote_primary: true
+name: Sport and Recreation South Africa
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cvote_number.department%253A%2522Sport%2Band%2BRecreation%2BSouth%2BAfrica%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 77174000.0
+      type: programme
+    - name: Active Nation
+      total_budget: 11651000.0
+      type: programme
+    - name: Sport Infrastructure Support
+      total_budget: 7848000.0
+      type: programme
+    - name: Sport Support
+      total_budget: 7543000.0
+      type: programme
+    - name: Winning Nation
+      total_budget: 4380000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Winning Nation
+      total_budget: 55527000.0
+      type: programme
+    - name: Administration
+      total_budget: 55438000.0
+      type: programme
+    - name: Active Nation
+      total_budget: 42868000.0
+      type: programme
+    - name: Sport Infrastructure Support
+      total_budget: 8434000.0
+      type: programme
+    - name: Sport Support
+      total_budget: 5727000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 2167000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Winning Nation
+      total_budget: 21896000.0
+      type: programme
+    - name: Sport Support
+      total_budget: 11033000.0
+      type: programme
+    - name: Administration
+      total_budget: 83000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Sport Support
+      total_budget: 113269000.0
+      type: programme
+    - name: Active Nation
+      total_budget: 38508000.0
+      type: programme
+    - name: Winning Nation
+      total_budget: 9346000.0
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Active Nation
+      total_budget: 555708000.0
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cvote_number.department%253A%2522Sport%2Band%2BRecreation%2BSouth%2BAfrica%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 134862000.0
+  - name: Active Nation
+    total_budget: 648735000.0
+  - name: Winning Nation
+    total_budget: 91149000.0
+  - name: Sport Support
+    total_budget: 137572000.0
+  - name: Sport Infrastructure Support
+    total_budget: 16282000.0
+selected_financial_year: 2016-17
+selected_tab: departments
+slug: sport-and-recreation-south-africa
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cvote_number.department%253A%2522Sport%2Band%2BRecreation%2BSouth%2BAfrica%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Provincial sport support and coordination
+      total_budget: 555708000.0
+      type: subprogramme
+    - name: Community Sport
+      total_budget: 56265000.0
+      type: subprogramme
+    - name: School Sport
+      total_budget: 32109000.0
+      type: subprogramme
+    - name: 'Programme Management: Active Nation'
+      total_budget: 3561000.0
+      type: subprogramme
+    - name: Active Recreation
+      total_budget: 1092000.0
+      type: subprogramme
+    name: Active Nation
+    type: programme
+  - items:
+    - name: Corporate Services
+      total_budget: 49461000.0
+      type: subprogramme
+    - name: Ministry
+      total_budget: 23191000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 19818000.0
+      type: subprogramme
+    - name: Office of the Chief Financial Officer
+      total_budget: 19078000.0
+      type: subprogramme
+    - name: Office Accommodation
+      total_budget: 16336000.0
+      type: subprogramme
+    - name: Strategic Support
+      total_budget: 6978000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Sport and Recreation Facility Management
+      total_budget: 11387000.0
+      type: subprogramme
+    - name: Sport and Recreation Facility Planning
+      total_budget: 2711000.0
+      type: subprogramme
+    - name: 'Programme Management: Infrastructure Support'
+      total_budget: 2184000.0
+      type: subprogramme
+    name: Sport Infrastructure Support
+    type: programme
+  - items:
+    - name: Sport and Recreation Service Providers
+      total_budget: 130949000.0
+      type: subprogramme
+    - name: 'Programme Management: Sport Support'
+      total_budget: 4501000.0
+      type: subprogramme
+    - name: International Relations
+      total_budget: 2122000.0
+      type: subprogramme
+    name: Sport Support
+    type: programme
+  - items:
+    - name: Scientific Support
+      total_budget: 59252000.0
+      type: subprogramme
+    - name: Recognition Systems
+      total_budget: 18900000.0
+      type: subprogramme
+    - name: Major Events Support
+      total_budget: 10813000.0
+      type: subprogramme
+    - name: 'Programme Management: Winning Nation'
+      total_budget: 2184000.0
+      type: subprogramme
+    name: Winning Nation
+    type: programme
+title: Sport and Recreation South Africa budget 2016-17  - vulekamali
+vote_number: 40
+vote_primary:
+  name: Sport and Recreation South Africa
+  slug: sport-and-recreation-south-africa
+  url_path: /2016-17/national/departments/sport-and-recreation-south-africa
+website_url: www.srsa.gov.za

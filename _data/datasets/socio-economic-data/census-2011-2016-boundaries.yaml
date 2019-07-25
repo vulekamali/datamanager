@@ -1,0 +1,61 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Socio-economic data resources that can be used for contextual and
+    other analyses purposes. '
+  name: Socio-economic Data
+  slug: socio-economic-data
+  url_path: /datasets/socio-economic-data
+created: '2018-10-05T11:44:58.386858'
+description: The 2011 Census, aggregated using the 2016 municipal boundaries. The
+  census contains demographic information on individuals and households in South Africa
+  down to the level of communities and wards.
+intro: The 2011 Census, aggregated using the 2016 municipal boundaries. The census
+  contains demographic information on individuals and households in South Africa down
+  to the level of communities and wards.
+intro_short: South African 2011 Census data reflecting the 2016 municipal boundaries
+key_points: "- Demographic analysis at the national, provincial, district and municipal\
+  \ level\r\n- Geographical analysis using the 2016 political boundaries\r\n- Main\
+  \ cross-tabulations use geography, age, population group, income, employment status,\
+  \ and sex"
+last_updated: '2018-10-05T12:54:26.813566'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: Census 2011 (2016 Boundaries)
+organization:
+  email: null
+  facebook: null
+  logo_url: ''
+  name: Statistics South Africa
+  slug: statistics-south-africa
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: application/xhtml+xml
+  name: Census 2011 (2016 Boundaries)
+  url: http://superweb.statssa.gov.za/webapi/jsf/login.xhtml
+- description: ''
+  format: PNG
+  name: 'Screenshot: Census 2011 Education age by completed years'
+  url: https://data.vulekamali.gov.za/dataset/7793c6f2-38cc-4464-bd0b-02556db3fbf5/resource/d938427d-c56b-4963-ae57-aa4defb13e37/download/kqjzzkl.png
+- description: ''
+  format: PNG
+  name: 'Screenshot: Census 2011 chart: Education age by completed years'
+  url: https://data.vulekamali.gov.za/dataset/7793c6f2-38cc-4464-bd0b-02556db3fbf5/resource/16cc3db8-7d39-4493-a38b-547841538910/download/bfo8mfp.png
+selected_tab: datasets
+slug: census-2011-2016-boundaries
+title: Census 2011 (2016 Boundaries) - vulekamali
+url_path: /datasets/socio-economic-data/census-2011-2016-boundaries
+usage: "1. [Visit StatsSA's SuperWEB2](http://superweb.statssa.gov.za/webapi/jsf/login.xhtml)\r\
+  \n2. Register for a free account and/or login\r\n3. Expand the Community Profiles\
+  \ menu\r\n4. Select the Census 2011 (2016 Boundaries) dataset\r\n5. Select a specific\
+  \ subset of the dataset (e.g. Agricultural Households)\r\n6. Select data series\
+  \ from the subset and add them to the empty table\r\n7. Download or save your table"
+use_for: The 2011 Census provides data on demographics and service delivery at a national,
+  provincial, municipal, ward and community level. This information can be used to
+  provide context for the evaluation of budgeting, public spending and service delivery.

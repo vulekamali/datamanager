@@ -1,0 +1,113 @@
+$mobile-break: 750px;
+
+.Circles {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+}
+
+.Circles-item {
+  text-align: center;
+  padding: 20px 15px;
+  border: 10px solid grey;
+  border-radius: 15px;
+  color: #3f3f3f;
+  display: block;
+  background-color: #fff;
+  text-decoration: none;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    background-color: darken(white, 15%);
+  }
+
+  &.is-positive {
+    border-color: #7bb344;
+
+    &:hover {
+      border-color: darken(#7bb344, 15%);
+    }
+  }
+
+  &.is-negative {
+    border-color: $colour-brand-orange;
+
+    &:hover {
+      border-color: darken($colour-brand-orange, 15%);
+    }
+  }
+
+  &.is-prominent {
+    border-color: #ad3c64;
+
+    &:hover {
+      border-color: darken(#ad3c64, 15%);
+    }
+  }
+
+  @media screen and (min-width: $mobile-break) {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    text-align: center;
+    color: #3f3f3f;
+  }
+}
+
+.Circles-float {
+  display: none;
+
+  @media screen and (min-width: $mobile-break) {
+    display: block;
+    position: absolute;
+    width: 53px;
+    height: 84px;
+    left: -42px;
+    top: 47px;
+  }
+}
+
+.Circles-wrap {
+  margin: 20px;
+  border: 1px solid #d2d2d2;
+  padding: 10px;
+  background: #e6e6e6;
+  border-radius: 15px;
+
+  @media screen and (min-width: $mobile-break) {
+    margin: 0;
+    float: left;
+    border-radius: 50%;
+    position: relative;
+
+    &:nth-child(n+2) {
+      margin-left: 30px;
+    }
+  }
+}
+
+.Circles-floatStroke {
+  stroke: #d2d2d2;
+}
+
+.Circles-floatFill {
+  fill: #e6e6e6;
+}
+
+.Circles {
+  @include clearfix;
+}
+
+.Circles-number {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.Circles-text {
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+  line-height: 1.2;
+}

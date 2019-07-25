@@ -1,0 +1,42 @@
+<div class="VideoSection">
+  <div class="VideoSection-heading">
+    {%
+      include components/Icon/index.html
+      type="brain"
+      size="xl"
+    %}
+    <div class="Title u-marginTop15">Learn more about the budget</div>
+  </div>
+
+  <div class="VideoSection-list">
+    <div class="VideoSection-item">
+      {% include 
+        components/universal/VideoCard/index.html 
+        compact="true" 
+        full_height="true"
+        video=include.video_1
+      %}
+    </div>
+
+    <div class="VideoSection-item">
+      {% 
+        include components/universal/VideoCard/index.html
+        compact="true"
+        full_height="true"
+        video=include.video_2 %}
+    </div>
+
+    <div class="VideoSection-item">
+      {% 
+        include components/universal/VideoCard/index.html
+        compact="true" 
+        full_height="true"
+        video=include.video_3
+      %}
+    </div>
+  </div>
+
+  <div class="u-textAlignCenter u-marginTop15">
+    <a href="/videos" class="Button is-inline is-secondary">View all videos</a>
+  </div>
+</div>

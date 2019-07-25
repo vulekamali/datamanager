@@ -1,0 +1,65 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:12:46.219738'
+description: "South Africa\u2019s foreign missions play a pivotal role in maintaining\
+  \ diplomatic relationships with the rest of the world; facilitating international\
+  \ trade, investment and tourism; and strengthening political and social ties with\
+  \ host countries. They raise awareness of the country\u2019s foreign policy and\
+  \ articulate its position in global and regional multilateral forums."
+intro: "South Africa\u2019s foreign missions play a pivotal role in maintaining diplomatic\
+  \ relationships with the rest of the world; facilitating international trade, investment\
+  \ and tourism; and strengthening political and social ties with host countries.\
+  \ They raise awareness of the country\u2019s foreign policy and articulate its position\
+  \ in global and regional multilateral forums."
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T09:00:56.722811'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - Foreign Missions Cost Drivers
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Technical Report
+  url: https://data.vulekamali.gov.za/dataset/per-adminservices-fmcd/resource/7828aaa3-9b52-4b3a-81d6-ba5ce37400f4/download/technical-report.pdf
+- description: ''
+  format: PDF
+  name: Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-adminservices-fmcd/resource/44121a8c-9272-4edc-bc58-7ef177d376c7/download/expenditure-model.xlsm
+- description: ''
+  format: PDF
+  name: Cost Model Open - Foreign Mission Cost Drivers
+  url: https://data.vulekamali.gov.za/dataset/per-adminservices-fmcd/resource/4e1efd08-27b6-4f27-9a2c-3d006c50e5ee/download/foreign-missions-cost-drivers.pdf
+- description: ''
+  format: XLSM
+  name: Cost Model Open - Expenditure Model
+  url: https://data.vulekamali.gov.za/dataset/per-adminservices-fmcd/resource/2c3f3d66-3f2f-46d1-a897-9cfbbc8051ef/download/expenditure-model.xlsm
+selected_tab: datasets
+slug: per-adminservices-fmcd
+title: PER - Foreign Missions Cost Drivers - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-adminservices-fmcd
+usage: null
+use_for: null

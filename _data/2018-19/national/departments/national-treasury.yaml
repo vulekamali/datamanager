@@ -1,0 +1,1494 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type:
+  - amount: 400000000
+    name: Announced in the budget speech
+    type: kind
+  - amount: -17473000
+    name: Declared unspent funds
+    type: kind
+  - amount: -30684000
+    name: Shifting of functions between votes
+    type: kind
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aaene-2018-19-v2/aggregate/%3Fcut%3Dfinyear.finyear%253A2018%257Cdepartment.department%253ANational%2BTreasury%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%26pagesize%3D10000
+  direct_charges:
+  - amount: 975044000
+    label: Debt-service costs
+    percentage: 0.5413182330682326
+  - amount: 14878000
+    label: National Revenue Fund payments
+    percentage: 11.016171069778462
+  econ_classes:
+  - items:
+    - amount: 385965000
+      name: Goods and services
+      type: economic_classification_3
+    name: Current payments
+    type: economic_classification_2
+  - items:
+    - amount: -2714000
+      name: Machinery and equipment
+      type: economic_classification_3
+    - amount: -519000
+      name: Software and other intangible assets
+      type: economic_classification_3
+    name: Payments for capital assets
+    type: economic_classification_2
+  - items:
+    - amount: -24262000
+      name: Payments for financial assets
+      type: economic_classification_3
+    name: Payments for financial assets
+    type: economic_classification_2
+  - items:
+    - amount: -172612000
+      name: Departmental agencies and accounts
+      type: economic_classification_3
+    - amount: 162404000
+      name: Foreign governments and international organisations
+      type: economic_classification_3
+    - amount: 3581000
+      name: Households
+      type: economic_classification_3
+    name: Transfers and subsidies
+    type: economic_classification_2
+  programmes:
+  - amount: -10914000
+    name: Administration
+  - amount: -8833000
+    name: Asset and Liability Management
+  - amount: 11761000
+    name: Economic Policy, Tax, Financial Regulation and Research
+  - amount: -2474000
+    name: Financial Accounting and Supply Chain Management Systems
+  - amount: 140656000
+    name: International Financial Relations
+  - amount: 7946000
+    name: Public Finance and Budget Management
+  - amount: 213701000
+    name: Technical Support and Development Finance
+  special_appropriation: null
+  total_change:
+    amount: 351843000
+    percentage: 1.1984410589272778
+  virements:
+    amount: 219020000
+    label: Value of virements
+    percentage: 0.7460218356660566
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 26957304000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 28726061000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 29005061000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 28690816280
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 28471417000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 28471417000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 28471416900
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 28199783365
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 30799220000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 40584306000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 40484306000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 39792071170
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 29358390000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 29710233000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 31479085724
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 33544531632
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 33870330715
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 33503375010
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 31278169307
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 31278169307
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 31278169198
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 30979757647
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 32312136843
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 42577885062
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 42472972870
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 41746734135
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 29358390000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 29710233000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 133892000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 135387000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 132730000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 131290000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 146070000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 150161000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 156561100
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 151181509
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 139649000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 163991000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 163991000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 151860000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 141009000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 152770000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Economic Policy, Tax, Financial Regulation and Research
+  - items:
+    - amount: 256965000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 266104000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 268889000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 262577000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 286955000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 294483000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 294483000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 281778217
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 286103000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 303046000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 302296000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 288635000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 290101000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 298047000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Public Finance and Budget Management
+  - items:
+    - amount: 366665000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 363629000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 386645000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 375582000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 412661000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 467416000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 464415800
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 436312954
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 414310000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 439071000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 445620000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 437869000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 484733000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 473819000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 751362000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 807090000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 783753000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 774494280
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 849854000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1216758000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1251758000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 1209857964
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 1087876000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1079146000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 1000846000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 885832697
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 1196622000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1194148000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Financial Accounting and Supply Chain Management Systems
+  - items:
+    - amount: 1247442000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 3254926000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 3547662000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 3546134000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 5039068000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 4977977000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 4961628000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 4955752630
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 5836761000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 5831388000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 5940689000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 5469838473
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 5402120000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 5542776000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: International Financial Relations
+  - items:
+    - amount: 3116930000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 3264890000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 3265171000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 3264294000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 107211000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 113129000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 113129000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 110146309
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 102355000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 10100312000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 10100312000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 10089761000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 110418000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 101585000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Asset and Liability Management
+  - items:
+    - amount: 3143863000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 2774593000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 2755969000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 2472246000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 2634718000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 2612688000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 2590637000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 2478431907
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 2873327000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 2608513000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 2558513000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 2526350000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 2798841000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 3012542000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Technical Support and Development Finance
+  - items:
+    - amount: 3962941000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 3962941000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 3967741000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 3967698000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 4173242000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 4462642000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 4462642000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 4400158875
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 4835002000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 4835002000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 4648202000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 4618088000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 5163796000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 5163796000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Civil and Military Pensions, Contributions to Funds and Other Benefits
+  - items:
+    - amount: 4542805000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 4562062000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 4562062000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 4562062000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 4812487000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 4812487000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 4812487000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 4812487000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 5005639000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 5005639000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 5105639000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 5105639000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 4763533000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 4763533000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Financial Intelligence and State Security
+  - items:
+    - amount: 9434439000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 9334439000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 9334439000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 9334439000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 10009151000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 9363676000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 9363676000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 9363676000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 10218198000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 10218198000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 10218198000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 10218198000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 9007217000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 9007217000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Revenue Administration
+  - items:
+    - amount: 519893814000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 525742590000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 525742590000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 526636137000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 569787416000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 570833034000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 570833034000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 570197128000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 615856815000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 616714049000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 616714049000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 616347785000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 663014110000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 664004032000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Direct charge against the National Revenue Fund
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 7 - National Treasury
+    url: https://data.vulekamali.gov.za/dataset/014f5cd1-d340-4403-80d5-eb53425dcd75/resource/ad58bd1d-bd66-4f65-baf7-9459fd3dfa41/download/vote-7-national-treasury.pdf
+  name: AENE 2018-19 - Vote 7 - National Treasury
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 7 - National Treasury
+    url: https://data.vulekamali.gov.za/dataset/014f5cd1-d340-4403-80d5-eb53425dcd75/resource/6f2a2d09-07c6-4f18-b819-3d2325596c5e/download/aene18chap-tab-vote07.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 7 - National Treasury
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-national-treasury-2018-19/resource/59010939-0a3f-4b5f-bad7-7d6fe5ac8225/download/vote-07-national-treasury.pdf
+  name: 'National Department: National Treasury 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 7 - National Treasury
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-national-treasury-2018-19/resource/86faafc1-945e-4704-9c09-a6170e7dfbb5/download/ene18-vote07_chaptertables.xlsx
+description: 'National department: National Treasury budget data for the 2018-19 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522National%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 243629000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 201901000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 24643000.0
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 10658000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 2052000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 1850000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 78692000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 31218000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 508000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: Asset and Liability Management
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 68856000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 5092245000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 2695000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Civil and Military Pensions, Contributions to Funds and Other Benefits
+    type: programme
+  - items:
+    - items:
+      - name: Interest and rent on land
+        total_budget: 180123990000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Payments for financial assets
+        total_budget: 135056000.0
+        type: economic_classification_2
+      name: Payments for financial assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 482755064000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Direct charge against the National Revenue Fund
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 78682000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 28243000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 885000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 19883000.0
+        type: economic_classification_2
+      - name: Public corporations and private enterprises
+        total_budget: 13316000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Economic Policy, Tax, Financial Regulation and Research
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 877663000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 208210000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 5801000.0
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 618000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 102666000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 1664000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Financial Accounting and Supply Chain Management Systems
+    type: programme
+  - items:
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 4763533000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Financial Intelligence and State Security
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 36155000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 15350000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 540000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Payments for financial assets
+        total_budget: 4377269000.0
+        type: economic_classification_2
+      name: Payments for financial assets
+      type: economic_classification_1
+    - items:
+      - name: Foreign governments and international organisations
+        total_budget: 972806000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: International Financial Relations
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 204120000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 32013000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2186000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 51782000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Public Finance and Budget Management
+    type: programme
+  - items:
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 9007217000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Revenue Administration
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 407769000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 1541534000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 849538000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Technical Support and Development Finance
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 512618434000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 555326953000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 598396911000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 657198355000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 692372500000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 746443661000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 803199290000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 629533745684
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 648476745251
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 657387719608
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 689481200497
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 692372500000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 709829825601
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 724128852434
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/national-treasury
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/national-treasury
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/national-treasury
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/national-treasury
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose\n\nSupport economic growth and development, good governance,\
+  \ social progress and rising living standards through the accountable, economical,\
+  \ efficient, equitable and sustainable management of public finances, maintenance\
+  \ of macroeconomic and financial sector stability, and effective financial regulation\
+  \ of the economy.\n\n## Mandate\n\nNational Treasury\u2019s legislative mandate\
+  \ is based on section 216(1) of the Constitution, which calls for the establishment\
+  \ of a national treasury to ensure transparency, accountability and sound financial\
+  \ controls in the management of the country\u2019s public finances. This role is\
+  \ further elaborated in the Public Finance Management Act (1999). The department\
+  \ is mandated to:\n\n * promote national government\u2019s fiscal policy and the\
+  \ coordination of macroeconomic policy\n * ensure the stability and soundness of\
+  \ the financial system and financial services\n * coordinate intergovernmental financial\
+  \ and fiscal relations\n * manage the budget preparation process\n * enforce transparency\
+  \ and effective management in respect of revenue and expenditure, assets and liabilities,\
+  \ public entities, and constitutional institutions.\n\n"
+is_vote_primary: true
+name: National Treasury
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522National%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Financial Accounting and Supply Chain Management Systems
+      total_budget: 208210000.0
+      type: programme
+    - name: Public Finance and Budget Management
+      total_budget: 204120000.0
+      type: programme
+    - name: Administration
+      total_budget: 201901000.0
+      type: programme
+    - name: Asset and Liability Management
+      total_budget: 78692000.0
+      type: programme
+    - name: Economic Policy, Tax, Financial Regulation and Research
+      total_budget: 78682000.0
+      type: programme
+    - name: International Financial Relations
+      total_budget: 36155000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Financial Accounting and Supply Chain Management Systems
+      total_budget: 877663000.0
+      type: programme
+    - name: Technical Support and Development Finance
+      total_budget: 407769000.0
+      type: programme
+    - name: Administration
+      total_budget: 243629000.0
+      type: programme
+    - name: Civil and Military Pensions, Contributions to Funds and Other Benefits
+      total_budget: 68856000.0
+      type: programme
+    - name: Public Finance and Budget Management
+      total_budget: 32013000.0
+      type: programme
+    - name: Asset and Liability Management
+      total_budget: 31218000.0
+      type: programme
+    - name: Economic Policy, Tax, Financial Regulation and Research
+      total_budget: 28243000.0
+      type: programme
+    - name: International Financial Relations
+      total_budget: 15350000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Direct charge against the National Revenue Fund
+      total_budget: 180123990000.0
+      type: programme
+    name: Current payments - Interest and rent on land
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 24643000.0
+      type: programme
+    - name: Financial Accounting and Supply Chain Management Systems
+      total_budget: 5801000.0
+      type: programme
+    - name: Public Finance and Budget Management
+      total_budget: 2186000.0
+      type: programme
+    - name: Economic Policy, Tax, Financial Regulation and Research
+      total_budget: 885000.0
+      type: programme
+    - name: International Financial Relations
+      total_budget: 540000.0
+      type: programme
+    - name: Asset and Liability Management
+      total_budget: 508000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 10658000.0
+      type: programme
+    - name: Financial Accounting and Supply Chain Management Systems
+      total_budget: 618000.0
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: International Financial Relations
+      total_budget: 4377269000.0
+      type: programme
+    - name: Direct charge against the National Revenue Fund
+      total_budget: 135056000.0
+      type: programme
+    name: Payments for financial assets - Payments for financial assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Revenue Administration
+      total_budget: 9007217000.0
+      type: programme
+    - name: Financial Intelligence and State Security
+      total_budget: 4763533000.0
+      type: programme
+    - name: Technical Support and Development Finance
+      total_budget: 849538000.0
+      type: programme
+    - name: Financial Accounting and Supply Chain Management Systems
+      total_budget: 102666000.0
+      type: programme
+    - name: Public Finance and Budget Management
+      total_budget: 51782000.0
+      type: programme
+    - name: Economic Policy, Tax, Financial Regulation and Research
+      total_budget: 19883000.0
+      type: programme
+    - name: Administration
+      total_budget: 2052000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: International Financial Relations
+      total_budget: 972806000.0
+      type: programme
+    - name: Civil and Military Pensions, Contributions to Funds and Other Benefits
+      total_budget: 2695000.0
+      type: programme
+    name: Transfers and subsidies - Foreign governments and international organisations
+    type: economic_classification_1_and_2
+  - items:
+    - name: Civil and Military Pensions, Contributions to Funds and Other Benefits
+      total_budget: 5092245000.0
+      type: programme
+    - name: Administration
+      total_budget: 1850000.0
+      type: programme
+    - name: Financial Accounting and Supply Chain Management Systems
+      total_budget: 1664000.0
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Direct charge against the National Revenue Fund
+      total_budget: 482755064000.0
+      type: programme
+    - name: Technical Support and Development Finance
+      total_budget: 1541534000.0
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+  - items:
+    - name: Economic Policy, Tax, Financial Regulation and Research
+      total_budget: 13316000.0
+      type: programme
+    name: Transfers and subsidies - Public corporations and private enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522National%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 484733000.0
+  - name: Financial Intelligence and State Security
+    total_budget: 4763533000.0
+  - name: Direct charge against the National Revenue Fund
+    total_budget: 663014110000.0
+  - name: Economic Policy, Tax, Financial Regulation and Research
+    total_budget: 141009000.0
+  - name: Public Finance and Budget Management
+    total_budget: 290101000.0
+  - name: Asset and Liability Management
+    total_budget: 110418000.0
+  - name: Financial Accounting and Supply Chain Management Systems
+    total_budget: 1196622000.0
+  - name: International Financial Relations
+    total_budget: 5402120000.0
+  - name: Civil and Military Pensions, Contributions to Funds and Other Benefits
+    total_budget: 5163796000.0
+  - name: Technical Support and Development Finance
+    total_budget: 2798841000.0
+  - name: Revenue Administration
+    total_budget: 9007217000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: national-treasury
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522National%2BTreasury%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 147745000.0
+      type: subprogramme
+    - name: Office Accommodation
+      total_budget: 144212000.0
+      type: subprogramme
+    - name: Departmental Management
+      total_budget: 60028000.0
+      type: subprogramme
+    - name: Financial Administration
+      total_budget: 40165000.0
+      type: subprogramme
+    - name: Enterprise Wide Risk Management
+      total_budget: 30678000.0
+      type: subprogramme
+    - name: Internal Audit
+      total_budget: 25588000.0
+      type: subprogramme
+    - name: Legal Services
+      total_budget: 20760000.0
+      type: subprogramme
+    - name: Communications
+      total_budget: 11413000.0
+      type: subprogramme
+    - name: Ministry
+      total_budget: 4144000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: State Owned Entity Financial Management and Governance
+      total_budget: 34198000.0
+      type: subprogramme
+    - name: Financial Operations
+      total_budget: 24336000.0
+      type: subprogramme
+    - name: Programme Management for Asset and Liability Management
+      total_budget: 20943000.0
+      type: subprogramme
+    - name: Government Debt Management
+      total_budget: 19365000.0
+      type: subprogramme
+    - name: Strategy and Risk Management
+      total_budget: 11576000.0
+      type: subprogramme
+    name: Asset and Liability Management
+    type: programme
+  - items:
+    - name: Civil Pensions and Contributions to Funds
+      total_budget: 4144953000.0
+      type: subprogramme
+    - name: Military Pensions and Other Benefits
+      total_budget: 949987000.0
+      type: subprogramme
+    - name: Government Pensions Administration Agency
+      total_budget: 68856000.0
+      type: subprogramme
+    name: Civil and Military Pensions, Contributions to Funds and Other Benefits
+    type: programme
+  - items:
+    - name: Provincial Equitable Share
+      total_budget: 470286510000.0
+      type: subprogramme
+    - name: Debt-service costs
+      total_budget: 180123990000.0
+      type: subprogramme
+    - name: General Fuel Levy Sharing with Metropolitan Municipalities
+      total_budget: 12468554000.0
+      type: subprogramme
+    - name: National Revenue Fund payments
+      total_budget: 135056000.0
+      type: subprogramme
+    name: Direct charge against the National Revenue Fund
+    type: programme
+  - items:
+    - name: Programme Management for Economic Policy, Tax, Financial Regulation and
+        Research
+      total_budget: 39172000.0
+      type: subprogramme
+    - name: Tax Policy
+      total_budget: 30038000.0
+      type: subprogramme
+    - name: Economic Policy
+      total_budget: 26982000.0
+      type: subprogramme
+    - name: Financial Sector Policy
+      total_budget: 24934000.0
+      type: subprogramme
+    - name: Cooperative Banks Development Agency
+      total_budget: 19883000.0
+      type: subprogramme
+    name: Economic Policy, Tax, Financial Regulation and Research
+    type: programme
+  - items:
+    - name: Financial Systems
+      total_budget: 642137000.0
+      type: subprogramme
+    - name: Programme Management for Financial Accounting and Supply Chain Management
+        Systems
+      total_budget: 196494000.0
+      type: subprogramme
+    - name: Financial Management Policy and Compliance Improvement
+      total_budget: 137751000.0
+      type: subprogramme
+    - name: Financial Reporting for National Accounts
+      total_budget: 101874000.0
+      type: subprogramme
+    - name: Office of the Chief Procurement Officer
+      total_budget: 70339000.0
+      type: subprogramme
+    - name: Audit Statutory Bodies
+      total_budget: 47738000.0
+      type: subprogramme
+    - name: 'Service Charges: Commercial Banks'
+      total_budget: 289000.0
+      type: subprogramme
+    name: Financial Accounting and Supply Chain Management Systems
+    type: programme
+  - items:
+    - name: Secret Services
+      total_budget: 4484817000.0
+      type: subprogramme
+    - name: Financial Intelligence Centre
+      total_budget: 278716000.0
+      type: subprogramme
+    name: Financial Intelligence and State Security
+    type: programme
+  - items:
+    - name: International Development Funding Institutions
+      total_budget: 4513389000.0
+      type: subprogramme
+    - name: African Integration and Support
+      total_budget: 816818000.0
+      type: subprogramme
+    - name: International Economic Cooperation
+      total_budget: 39762000.0
+      type: subprogramme
+    - name: International Projects
+      total_budget: 19868000.0
+      type: subprogramme
+    - name: Programme Management for International Financial Relations
+      total_budget: 12283000.0
+      type: subprogramme
+    name: International Financial Relations
+    type: programme
+  - items:
+    - name: Intergovernmental Relations
+      total_budget: 95034000.0
+      type: subprogramme
+    - name: Budget Office and Coordination
+      total_budget: 59036000.0
+      type: subprogramme
+    - name: Public Finance
+      total_budget: 57636000.0
+      type: subprogramme
+    - name: Financial and Fiscal Commission
+      total_budget: 51782000.0
+      type: subprogramme
+    - name: Programme Management for Public Finance and Budget Management
+      total_budget: 26613000.0
+      type: subprogramme
+    name: Public Finance and Budget Management
+    type: programme
+  - items:
+    - name: South African Revenue Service
+      total_budget: 9007217000.0
+      type: subprogramme
+    name: Revenue Administration
+    type: programme
+  - items:
+    - name: Urban Development and Support
+      total_budget: 924829000.0
+      type: subprogramme
+    - name: Employment Creation Facilitation
+      total_budget: 875299000.0
+      type: subprogramme
+    - name: Local Government Financial Management Support
+      total_budget: 645481000.0
+      type: subprogramme
+    - name: Infrastructure Development Support
+      total_budget: 281374000.0
+      type: subprogramme
+    - name: Government Technical Advisory Centre
+      total_budget: 71858000.0
+      type: subprogramme
+    name: Technical Support and Development Finance
+    type: programme
+title: National Treasury budget 2018-19  - vulekamali
+vote_number: 7
+vote_primary:
+  name: National Treasury
+  slug: national-treasury
+  url_path: /2018-19/national/departments/national-treasury
+website_url: www.treasury.gov.za

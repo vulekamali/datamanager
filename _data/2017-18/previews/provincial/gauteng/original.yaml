@@ -1,0 +1,678 @@
+data:
+  items:
+  - description: "## Vision\n\nAn economically transformed and agricultural sector\
+      \ and sustainable environment manangement for healthy,food secure,developed\
+      \ rural and urban communities in Gauteng.\r\n\r\n\n\n## Mission\n\nTo radically\
+      \ modernze and transform agriculture,environment and ruarl development by:\r\
+      \n\r\n* Promoting environmental protection and manangement\r\n* Expanding access\
+      \ o agricltural opportunities;\r\n\r\n* Maximising food security;\r\n\r\n* Up-scale\
+      \ rural development;\r\n\r\n* Promoting the One Health System;\r\n\r\n* Supporting\
+      \ sustainable livelihood and communities\r\n\r\n\n\n## Core funtions\n\n* Ensure\
+      \ an environment that supports humman wellbeing\r\n* conserve the environment;\r\
+      \n\r\n* Ensure provision of sufficient food and watre;and\r\n\r\n* Ensure provision\
+      \ of veterinary services in the province."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 0.8427567516690349
+    programmes:
+    - amount: 189016000.0
+      percentage: 20.621427012873664
+      slug: administration
+      title: Administration
+    - amount: 487848000.0
+      percentage: 53.22365262928213
+      slug: agriculture-and-rural-development
+      title: Agriculture And Rural Development
+    - amount: 239736000.0
+      percentage: 26.154920357844208
+      slug: environmental-affairs
+      title: Environmental Affairs
+    slug: agriculture-and-rural-development
+    title: Agriculture and Rural Development
+    total: 916600000.0
+  - description: "## Vision\n\nTo realise Gauteng as a province where people feel\
+      \ and are safe\r\n\r\n\n\n## Mission\n\nTo be an innovative,effcetive and proactive\
+      \ department that ensures the safety of te community through:\r\n\r\n* Improving\
+      \ the quality of policing\r\n\r\n* Deepening meaningful community participation;\r\
+      \n\r\n* Enhancing social crime prevention;\r\n\r\n* Fostering intergrity\r\n\
+      \r\n* Initiating and sustaining sound supportive institutional arangements\r\
+      \n\r\n* Promoting pedestrian safety;\r\n\r\n* Intensifying trafiic law ennforcement;\
+      \ and\r\n\r\n* Creating a safer road enironment.\r\n\r\n\n\n## Core functions\n\
+      \nThe core functions and responsibilities of the department are:\r\n\r\n* To\
+      \ monitor police conduct;\r\n\r\n* To oversee the effectiveness and efficiency\
+      \ of the province's law enforcement agencies;\r\n\r\n* To promote good relations\
+      \ between the police and communities;\r\n\r\n* To assess the effectiveness of\
+      \ visible policing;\r\n\r\n* To record and investigate public complaints alleging\
+      \ police inefficiency\r\n\r\n* To mobilise all communities in the fight against\
+      \ crime;\r\n\r\n* Topromote social crime prevemtion thrugh partnerships and\
+      \ oter appropriate interventions;and\r\n\r\n* To provide  traffic services."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 0.6238082533653012
+    programmes:
+    - amount: 101050000.0
+      percentage: 14.893871035732026
+      slug: administration
+      title: Administration
+    - amount: 195080000.0
+      percentage: 28.753056523014386
+      slug: civilian-oversight
+      title: Civilian Oversight
+    - amount: 382337000.0
+      percentage: 56.353072441253595
+      slug: traffic-management
+      title: Traffic Management
+    slug: community-safety
+    title: Community Safety
+    total: 678467000.0
+  - description: "## Vision\n\nGlobally competitive Gauteng City Region,putting people\
+      \ first with service delivery and excellence and economic performance.\r\n\r\
+      \n\n\n## Mission\n\nTo facilitate and support cooperative governance across\
+      \ all spheres of government and associate institutions,and to promote the institution\
+      \ of traditional leadership Gauteng.\r\n\r\n\n\n## Core fubctions\n\nThe mandate\
+      \ of the Department highlights cooperative governance,and is essential for intergrated\
+      \ development.The department provides support to and monitors muncipalities\
+      \ and tribal authorities by:\r\n\r\n* Monitoring the muncipalities and traditional\
+      \ authoritiies' development and performance;\r\n\r\n* Supporting local authorities\
+      \ where there are capacity constraints;\r\n\r\n* Promoting capacity development\
+      \ in a systematic manner,toensure that municipalities are able to manage their\
+      \ own affairs\r\n* Advising,commenting on and approving INtergrated Development\
+      \ Plans (IDP's);\r\n\r\n* Providing key support services to municipalities in\
+      \ implementing te Municipal Finance Mnangement Act(No. 56 of 2003) (MFMA) and\
+      \ supporting Community Development Workders(CDW's);\r\n\r\n* Intervening whre\
+      \ local authorities fail to perform their designated functions and mandates;and\r\
+      \nStrengthening the functioning of Municipal Public Accounts Committees."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 0.4323343974937889
+    programmes:
+    - amount: 129090000.0
+      percentage: 27.453340592408594
+      slug: administration
+      title: Administration
+    - amount: 105955000.0
+      percentage: 22.53326130969597
+      slug: development-planning
+      title: Development Planning
+    - amount: 224108000.0
+      percentage: 47.66064957381288
+      slug: local-governance
+      title: Local Governance
+    - amount: 11063000.0
+      percentage: 2.3527485240825494
+      slug: traditional-institutional-management
+      title: Traditional Institutional Management
+    slug: cooperative-governance-and-traditional-affairs
+    title: Cooperative Governance and Traditional Affairs
+    total: 470216000.0
+  - description: "## Vision\r\n\r\nA radically transformed, modernised and re-industrialised\
+      \ economy in Gauteng, manifesting decent work, economic inclusion and equity.\r\
+      \n\r\n## Mission\r\n\r\nThe mission of the Department of Economic Development\
+      \ in pursuit of its vision is to:\r\n\r\n- Ensure radical transformation, modernisation\
+      \ and re-industrialisation of the Gauteng economy;\r\n- Provide and implement\
+      \ programmes and projects that will:\r\n  - revitalise Gauteng's township economies;\r\
+      \n  - build new smart, green, knowledge-based economy and industries;\r\n  -\
+      \ ensure decent employment and inclusion in key economic sectors;\r\n  - facilitate\
+      \ radical economic transformation, modernisation and re-industrialisation;\r\
+      \n  - include the marginalised sectors of women, youth and persons with disabilities\
+      \ in mainstream economic activities; and\r\n  - Establish appropriate partnerships\
+      \ for delivery and ensure that DED effectively delivers on its mandate."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 1.2998939051447393
+    programmes:
+    - amount: 287897000.0
+      percentage: 20.36346223489735
+      slug: administration
+      title: Administration
+    - amount: 66563000.0
+      percentage: 4.708118308775265
+      slug: business-regulation-and-governance
+      title: Business Regulation And Governance
+    - amount: 113508000.0
+      percentage: 8.028620900387045
+      slug: economic-planning
+      title: Economic Planning
+    - amount: 231613000.0
+      percentage: 16.382395713089338
+      slug: integrated-economic-development-services
+      title: Integrated Economic Development Services
+    - amount: 714211000.0
+      percentage: 50.517402842851
+      slug: trade-and-sector-development
+      title: Trade And Sector Development
+    slug: economic-development
+    title: Economic Development
+    total: 1413792000.0
+  - description: '## Vision
+
+
+      Every learner feels valued and inspired in our innovative education system.
+
+
+
+
+      ## Mission
+
+
+      We are committed to providing functional and modern schools that enable quality
+      teaching and learning to protect and promote the right of every learner to quality,
+      equitable and relevant education.
+
+
+
+
+      ## Core functions
+
+
+      The department will continue to work closely to ensure that people of all ages
+      and backgrounds have the education, skills and opportunities to pursue activities
+      that promote their wellbeing and build strong communities. We are primarily
+      responsible for the delivery and regulation of pre-tertiary and private schooling
+      with national and provincial imperatives with a special focus on curriculum
+      delivery, teaching and learning support material, infrastructure, ICT and teacher
+      placements.'
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 37.553399917123706
+    programmes:
+    - amount: 2887755000.0
+      percentage: 7.070228826754879
+      slug: administration
+      title: Administration
+    - amount: 765459000.0
+      percentage: 1.874109918431087
+      slug: early-childhood-development
+      title: Early Childhood Development
+    - amount: 1319719000.0
+      percentage: 3.2311312133529757
+      slug: examination-and-education-related-services
+      title: Examination And Education Related Services
+    - amount: 691636000.0
+      percentage: 1.6933655330252873
+      slug: independent-school-subsidies
+      title: Independent School Subsidies
+    - amount: 1742829000.0
+      percentage: 4.267051684060587
+      slug: infrastructure-development
+      title: Infrastructure Development
+    - amount: 31092723000.0
+      percentage: 76.12580238174792
+      slug: public-ordirnary-school-education
+      title: Public Ordirnary School Education
+    - amount: 2343748000.0
+      percentage: 5.738310442627265
+      slug: public-special-school-education
+      title: Public Special School Education
+    slug: education
+    title: Education
+    total: 40843869000.0
+  - description: "## Vision\n\n \r\nA connected Gauteng City that leverages technology\
+      \ to provide quality services to citizens.\r\n\r\n\n\n## Mission\n\nTo realize\
+      \ the intent of a connected  government through:\r\n\r\n*Provision of relevant\
+      \ technologies,standards and governance\r\n\r\n* Creation of an environment\
+      \ of collaboration between key stakeholders;and\r\n\r\n* Facilitation of the\
+      \ evolution of the Gauteng Ciyt REgion (GCR) service delivery\r\n\r\n\r\n\n\n\
+      ## Core functions\n\n* To roll out the Gauteng Broadband Network (GBN);\r\n\r\
+      \n* To develop and maintain all provincial government owned ICT infrastructure;\r\
+      \n\r\n* To develop and maintain applications,networks and services;\r\n\r\n\
+      * To improveand provide customer driven HR services;\r\n\r\n* To implement e-Recruitment\
+      \ solutions for job seekers;and\r\n\r\n* To deploy HR systems in the province"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 1.2475227240678595
+    programmes:
+    - amount: 239764000.0
+      percentage: 17.67086861158935
+      slug: administration
+      title: Administration
+    - amount: 113844000.0
+      percentage: 8.3904271125681
+      slug: human-resources-services
+      title: Human Resources Services
+    - amount: 1003224000.0
+      percentage: 73.93870427584255
+      slug: information-communication-technology-ict-shared-services
+      title: Information Communication Technology(Ict) Shared Services
+    slug: e-government
+    title: E-Government
+    total: 1356832000.0
+  - description: "## Vision\r\n\r\nA modern and transformative legislature that fosters\
+      \ public pride and confidence in democracy and enhances service delivery to\
+      \ the people og Gauteng.\r\n\r\n\r\n\r\n## Mission\r\n\r\nIn observing our constitutional\
+      \ obligations, Gauteng Provincal Legislature (GPL)\r\n* Is a modern and dynamic\
+      \ African legislature of the 21st Century\r\n\r\n* Ia a caring,responsive,activist\
+      \ and transformative legislature;\r\n\r\n* Reflects the values, aspirationsand\
+      \ cultured of the South African people\r\n\r\n* Is the most competent, accessible,\
+      \ transparent and accountable legislature;\r\n\r\n* Fosters ethical and good\
+      \ governance;\r\n\r\n* Attracts, develops, and retains skilled and prodessional\
+      \ staff; and\r\n\r\n* Recognises staff contributions,rewards their achievements\
+      \ and provides a stimulating environment\r\n\r\n\r\n\r\n## Core functions\r\n\
+      \r\nSection 114 of the Constitution of the Republic of South Africa defines\
+      \ the core functions and responsibilities of the GPL.The Act assigns to the\
+      \ GPL the power to exercise oversight over the Executive and organs of the state;\
+      \ and to facilitate law-making through considering,passing, amending or rejecting\
+      \ any bill before the GPL ,including initiating and preparing legislation with\
+      \ the exception of money billd. Section 118 ststes that the GPL must ensure\
+      \ public participations in legislative processes by ensuring that the public\
+      \ has access to and is involves with the processes"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 0.620526779607166
+    programmes:
+    - amount: 243595000.0
+      percentage: 36.09360229249457
+      slug: core-business
+      title: Core Business
+    - amount: 300180000.0
+      percentage: 44.47783220575553
+      slug: corporate-support-services
+      title: Corporate Support Services
+    - amount: 51701000.0
+      percentage: 7.6605650038968855
+      slug: leadership-and-governance
+      title: Leadership And Governance
+    - amount: 56049000.0
+      percentage: 8.304810504698487
+      slug: office-of-the-cfo
+      title: Office Of The Cfo
+    - amount: 23373000.0
+      percentage: 3.463189993154521
+      slug: office-of-the-secretary
+      title: Office Of The Secretary
+    slug: gauteng-provincial-legislature
+    title: Gauteng Provincial Legislature
+    total: 674898000.0
+  - description: "## Vision\n\nTo provide strategic leadership in financial and fiscal\
+      \ matters to ensure sustainable and nclusive social and economic development\
+      \ of the people ofGauteng so that all may enjoy value for money services of\
+      \ the highest quality.\r\n\r\n\n\n## Mission\n\nWe are an activist Treasurt\
+      \ that enables and promotes quality service delivery for the ciizens of Gauteng\
+      \ through:\r\n\r\n* Sustainable financing and funding that ebsures developmentally\
+      \ focused allocation of resources an dinnovative revenue generation;\r\n\r\n\
+      * Efficient cash management that ensure sustainable liquidity levels in the\
+      \ province;\r\n\r\n* Effective financial management and reporting that ensures\
+      \ responsible stewardship and transparent resource utilisation and expediture;and\r\
+      \n\r\n* A well-structured governance framework that ensures accountability,transparency\
+      \ and fiscal discipline in line with statutory obligations.\r\n\r\n\n\n## Corefunctions\n\
+      \nThe functions of the Gauteng Provincial TReasury (GPT) are described in the\
+      \ Public Finance Management Act (PFMA,1999) and the Municipal Finance Management\
+      \ Act (MFMA,2003).These canbe summarised as follows:\r\n\r\n* To manage the\
+      \ budget allocation for the Gauteng Provincial Government;\r\n\r\n* To ensure\
+      \ the instilling of fiscal discipline and corporate governance in the province;\r\
+      \n\r\n* to ensure the effective and efficient utilisation of resources-value\
+      \ for oney and compliance with all relevant legislation;\r\n\r\n* To develop,implement\
+      \ and monitor compliance withcorporate governance norms and standards realing\
+      \ to provincial and local government;and\r\n\r\n* To ensure adequate financial\
+      \ accountability.\r\n"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 0.6552199287569889
+    programmes:
+    - amount: 128921000.0
+      percentage: 18.090849261398954
+      slug: administration
+      title: Administration
+    - amount: 145586000.0
+      percentage: 20.429366670829644
+      slug: financial-governance
+      title: Financial Governance
+    - amount: 112379000.0
+      percentage: 15.769591836448315
+      slug: gauteng-audit-services
+      title: Gauteng Audit Services
+    - amount: 61380000.0
+      percentage: 8.613153230774412
+      slug: municipal-financial-governance
+      title: Municipal Financial Governance
+    - amount: 122614000.0
+      percentage: 17.205819000296085
+      slug: provincial-supply-chain-management
+      title: Provincial Supply Chain Management
+    - amount: 141751000.0
+      percentage: 19.891220000252584
+      slug: sustainable-fiscal-resource-management
+      title: Sustainable Fiscal  Resource Management
+    slug: gauteng-provincial-treasury
+    title: Gauteng Provincial Treasury
+    total: 712631000.0
+  - description: "## Vision\n\nDailt we provide high-quality,efficient and accessible\
+      \ healthcare to transform people's lives\r\n\r\n\r\n\n\n## Mission\n\nCreate\
+      \ an effective public health system in Gauteng by ensuring we have the right\
+      \ people,skills,systems and equipment to provide the care our patients need\
+      \ to live health,quality lives\r\n\r\n\n\n## Core functions\n\n* Provision of\
+      \ primary healtcare services through the district system by means of a network\
+      \ of provincial clinics and community health centres and district hospitals\
+      \ administered by doctors,nurses and other health prodessionals;\r\n\r\n\r\n\
+      * Provision of emergency Medical services and planned patient transport throughout\
+      \ the province;\r\n\r\n* Renderingsecondary healthcare services through regional\
+      \ hospitals providing out- and in-patient care at general specialist level\r\
+      \n\r\n* Provision of specialisedin-patient care for psychiatric and infectious\
+      \ diseases, and some tuberculosis (TB) and chronic psychiatric services on an\
+      \ outsourced basis;\r\n\r\n* Provision of in-patient and out-patient academic\
+      \ healthcareservices through the central,tertiary hospitals and dental ospitals,\
+      \ in addition to the teaching that takesplace at other service levels;training\
+      \ of future health care professionalsin health sciences faculties and nursing\
+      \ colleges;and\r\n\r\n* Delivering of forensic pathology services and clinical-medico\
+      \ legal services\r\n\r\nThese services are supported through human resource;developmentmanagement\
+      \ and support servicesuch as laundries,facilities management and cook-freeze;\
+      \ and through supplying medical and pharmaceutical materials"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 36.96788073441792
+    programmes:
+    - amount: 669961000.0
+      percentage: 1.6662775972151747
+      slug: administration
+      title: Administration
+    - amount: 14211198000.0
+      percentage: 35.3450437517842
+      slug: central-hospital-services
+      title: Central Hospital Services
+    - amount: 13752800000.0
+      percentage: 34.20495004781003
+      slug: district-health-services
+      title: District Health Services
+    - amount: 1275082000.0
+      percentage: 3.171289927641041
+      slug: emergency-medical-services
+      title: Emergency Medical Services
+    - amount: 281538000.0
+      percentage: 0.7002205533826086
+      slug: health-care-support-services
+      title: Health Care Support Services
+    - amount: 1658636000.0
+      percentage: 4.12523715370684
+      slug: health-facilities-management
+      title: Health Facilities Management
+    - amount: 990163000.0
+      percentage: 2.4626604003686317
+      slug: health-sciences-and-training
+      title: Health Sciences And Training
+    - amount: 7367668000.0
+      percentage: 18.324320568091473
+      slug: provincial-hospital-services
+      title: Provincial Hospital Services
+    slug: health
+    title: Health
+    total: 40207046000.0
+  - description: "## Vision\n\nIntegrated sustainable huma setllements withing a smart\
+      \ Gauteng City Region.\r\n\r\n\n\n## Misiion\n\nTo facilitate the delivery of\
+      \ sustainable integrated human settlements,newtowns and smart cities in partnership\
+      \ with relevant role-players form all sectors of society through:\r\n\r\n* Development\
+      \ of suitably located and affordable housing(shelter) and decent human settlememts;\r\
+      \n\r\n* Creating new post-apartheid towns and transforming current cities and\
+      \ towns in Gauteng,moving towards efficiency,inclusion and susuatainability;and\r\
+      \n\r\n* Building cohesive,sustainable and caring communitieswith improved access\
+      \ to work and social amenities,including sprots and recreation facilities,with\
+      \ community development and optimal access/inclusion.\r\n\r\n\n\n## Core functions\n\
+      \nThe mandate of the department is derived from the Constitution.Its primary\
+      \ roles are:\r\n\r\n* To promote and faciltate the provision of adequate housing\
+      \ in the province;\r\n\r\n* To develop provincial housing policies that will\
+      \ strengthen the ability to provide housing opportunities to qualifying beneficialries\
+      \ in order to buildsustainable comunities;\r\n\r\n* To develop and implement\
+      \ programmes and projects that give effect to the province's short,medium and\
+      \ long term housing plans;and\r\n\r\n* To manage the housing delivery process\
+      \ and transform informal settlements,especially in prioritytownships, into sustainable\
+      \ and vibrant communities;and provides services in rspect of sbsidies and rental\
+      \ housing.\r\n"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 5.687975500511405
+    programmes:
+    - amount: 417218000.0
+      percentage: 6.74415755172426
+      slug: administration
+      title: Administration
+    - amount: 173933000.0
+      percentage: 2.811555482850826
+      slug: housing-assets-management-property-management
+      title: Housing Assets Management Property Management
+    - amount: 5559389000.0
+      percentage: 89.86523905325942
+      slug: housing-development
+      title: Housing Development
+    - amount: 35822000.0
+      percentage: 0.5790479121655021
+      slug: housing-needs-research-and-planning
+      title: Housing Needs, Research And Planning
+    slug: human-settlements
+    title: Human Settlements
+    total: 6186362000.0
+  - description: "## Vision\n\nTo be a leading sustainable infrastructure provider\
+      \ and facilitator that positions Gauteng as a globally competitive city region\
+      \ with inclusive economic growth and decent work for all.\r\n\r\n\n\n## Mission\n\
+      \nTo contribute towards radcal transformation,modernization and re-industrialisation\
+      \ of Gauteng by accelerating integrated service delivery,maintenance and manangement\
+      \ of public infrastructure and deploying build environment professionals while\
+      \ encouraging the active participation of an empowered citizenry.\r\n\r\n\r\n\
+      \n\n## Core functions\n\n* Implementation of social infrastructure;\r\n\r\n\
+      * Skills development;\r\n\r\n* Community participation;\r\n\r\n* Capital project\
+      \ management;\r\n\r\n* Maintenance services;and\r\n\r\n* Provincial property\
+      \ management;"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 2.3373269147865994
+    programmes:
+    - amount: 325310000.0
+      percentage: 12.796769318279267
+      slug: administration
+      title: Administration
+    - amount: 304697000.0
+      percentage: 11.985912578684141
+      slug: expanded-public-works-programme
+      title: Expanded Public Works Programme
+    - amount: 1912119000.0
+      percentage: 75.21731810303659
+      slug: public-works-infrastructure
+      title: Public Works Infrastructure
+    slug: infrastructure-development
+    title: Infrastructure Development
+    total: 2542126000.0
+  - description: "## Vision\n\nLeadership for an integrated city-region, characterised\
+      \ by social cohesion and economic inclusion; the leading economy on\r\ninclusion;\
+      \ the leading economy on the continent, underpinned by sustainable socio-economic\
+      \ development.\r\n\r\n\n\n## Mission\n\nIn achieving its vision, the Office\
+      \ of the Premier (OoP) defines its mission (aim) as follows:\r\n* Providing\
+      \ strategic leadership and direction to government and society\r\n\r\n* Ensuring\
+      \ the transformation and modernisation of the public service\r\n\r\n* Improving\
+      \ governement performance and service delivery through enhanced planning, coordination,monitoring\
+      \ and evaluation of governmentnpeformance.\r\n\r\n* Driving effective comunication\
+      \ and stakeholder interfaces with communties and key sectors of society\r\n\r\
+      \n* providing strategic an operational support in fulfilling condtitutional\
+      \ and keysectors of society\r\n\r\n* Actively advancing gender equality, women's\
+      \ empowerment, youth development and the rights of people with disabilities,\
+      \ older persons and military veterans\r\n\r\n* Securing domestic and foreign\
+      \ partnerships that support the development agenda\r\n\r\n\n\n## Core functions\n\
+      \nAs re apex institution of the Gauteng Provincial Government (GPG), the OoP\
+      \ provides overall leadership to government and society. Particular emphasis\
+      \ is placed on research, strategic analysis amd policy development. The OoP\
+      \ intervenes in key sectors to unlock growth and employment potential and revitalise\
+      \ township economics with the aim of radically transforming the overall economy.\
+      \ It also targets the transformation of society by improving education, modernising\
+      \ upgrading the quality of health care and tackling urban poverty and social\
+      \ development challenges. It is also responsible for innovation in public transport\
+      \ as a means of effecting spatial transformation and for building new, sustainable,\
+      \ intergrated huma settlement and cities."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 0.5602226885876714
+    programmes:
+    - amount: 119391000.0
+      percentage: 19.594459306428583
+      slug: administration
+      title: Administration
+    - amount: 228793000.0
+      percentage: 37.54952323119594
+      slug: institutional-development
+      title: Institutional Development
+    - amount: 261126000.0
+      percentage: 42.856017462375476
+      slug: policy-governance
+      title: Policy & Governance
+    slug: office-of-the-premier
+    title: Office of the Premier
+    total: 609310000.0
+  - description: "## Vision\r\n\r\nA modern integrated,efficient and sustainable transport\
+      \ and roadsinfrastructure system in Gauteng.\r\n\r\n\r\n\r\n## Mission\r\n\r\
+      \nTo facilitate and provide an integrated transport system that:\r\n* Is reliable,accessible,safe\
+      \ and affordable;\r\n\r\n\r\n* Pormotes socio-economic development in Gauteng;\r\
+      \n*Is environmentally sustainable;and\r\n\r\n* Supports industrialised and radical\
+      \ socio-economic transformation\r\n\r\n\r\n\r\n## Core functions\r\n\r\n* To\
+      \ contribute to the achevement of departments outcomes;\r\n\r\n* To develop\
+      \ and mantain a sustainable road infrastructure that contributes to increased\
+      \ economic growth and enhances quality of life i Gauteng;\r\n\r\n* To develop\
+      \ a policy framework in support of a modern,integrated and intelligent transport\
+      \ system;\r\n\r\n* To contribute to the regulation of the transport-related\
+      \ carbon emissions;\r\n\r\n* Throught green transport,to contribute to environmental\
+      \ protection;\r\n\r\n*To provide public transport infrastructure that promotes\
+      \ integration and onter-modility of public transport;\r\n\r\n* To regulate public\
+      \ transport operations through issuing of operating licenses and permits;\r\n\
+      \r\n* To regulate public transport operations through the registration of associations;\r\
+      \n\r\n* To issue valid driver's licenses;and\r\n\r\n* To issue valid vehicle\
+      \ licenses"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 6.281868003899557
+    programmes:
+    - amount: 321364000.0
+      percentage: 4.703604588328485
+      slug: administration
+      title: Administration
+    - amount: 1833694000.0
+      percentage: 26.83863628779332
+      slug: gautrain
+      title: Gautrain
+    - amount: 1976158000.0
+      percentage: 28.92379306973414
+      slug: transport-infrastructure
+      title: Transport Infrastructure
+    - amount: 2386247000.0
+      percentage: 34.92601018808915
+      slug: transport-operations
+      title: Transport Operations
+    - amount: 314829000.0
+      percentage: 4.607955866054906
+      slug: transport-regulation
+      title: Transport Regulation
+    slug: roads-and-transport
+    title: Roads and Transport
+    total: 6832292000.0
+  - description: "## Vision\n\nA caring and self reliat society.\r\n\r\n\n\n## Mission\n\
+      \nTo transform our society by building conscious and capable citizens through\
+      \ the provision of intergrated social development services\r\n\r\n\n\n## Core\
+      \ functions\n\n* Rendering management and administration to the network of social\
+      \ development services withing Gauteng.\r\n\r\n* Provision, in particular with\
+      \ relevant stakeholder, of prevention,early intervention,rehabilitation and\
+      \ after-care services to people abusing substances;\r\n\r\n* Provision of community\
+      \ and home-based cae,residential and all other protection services for the frail,vulnerable\
+      \ older persons at risk,and people withdisabilities;\r\n\r\n* Provision of secure\
+      \ care facilities,home-based services,and assesssment and referral services\
+      \ for childrenfound to be in conflict with the law;\r\n\r\n* Provision of servicesfor\
+      \ children through the constuction and funding of Early Childhood Development(ECD)\
+      \ facilities throughout the province;\r\n\r\n* Provision of child care and protection\
+      \ services and implementation of the Children's Act;\r\n\r\n* Provision of shelters\
+      \ and counselling services for women and children who are victims of domestic\
+      \ violence and abuse;\r\n\r\n* Provision, through home and community-based care\
+      \ (HCBC) centres,of psycho-social support services to people who are infected\
+      \ and affected by HIV and AIDS,especially orphans and vulnerable children;\r\
+      \n\r\n* Provision of reunification and preservation services for familie;and\r\
+      \n\r\n* Provision of youth development and sustainable livelihood services to\
+      \ poor households through the implementation of the War on Poverty (WoP) programme."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 4.084446433168125
+    programmes:
+    - amount: 551236000.0
+      percentage: 12.40871344542166
+      slug: administration
+      title: Administration
+    - amount: 2078060000.0
+      percentage: 46.778604921291304
+      slug: children-and-families
+      title: Children And Families
+    - amount: 547069000.0
+      percentage: 12.314911319060043
+      slug: development-and-research
+      title: Development And Research
+    - amount: 506119000.0
+      percentage: 11.393097766262299
+      slug: restorative-services
+      title: Restorative Services
+    - amount: 759846000.0
+      percentage: 17.104672547964693
+      slug: social-welfare-services
+      title: Social Welfare Services
+    slug: social-development
+    title: Social Development
+    total: 4442330000.0
+  - description: "## Vision \n\nAn active ,creative and modernized Gauteng City Region\
+      \ (GCR) contributing to sustainable economic growth and social cohesion.\r\n\
+      \r\n\n\n## Mission\n\nIn pursuit of the above vision, the Department of Sport,Arts,Culture\
+      \ and Recreation (DSACR) will work in an integrated matter to create an enabling\
+      \ environment for radical economic and accelerated social transformation for\
+      \ \r\nsporting,artistic and cultural excellence through:\r\n\r\n* Facilitating\
+      \ talent identification and development in partnership with stakeolder;\r\n\r\
+      \n* Positioning the business of the sport and creative industries as catalysts\
+      \ for ssustainable economic growth;\r\n\r\n* Modernising the economy thrugh\
+      \ bidding for and hostinf major sporting and cultural events;\r\n\r\n* Providing\
+      \ universal access to sport,arts,cultural activities,library,archival service\
+      \ and facilites;\r\n\r\n* Identifying,promotion and preserving eritage.\r\n\r\
+      \n\n\n## Core functions\n\nThe core mandate of the DSACR is to ensure access,increased\
+      \ partocipation and transformation of the sport,arts,culture and recreation\
+      \ sectors through radical economic and accelerated social transformation that\
+      \ benefits all in theprovince,promoting nation building and social cohesion.\r\
+      \n\r\n\r\n"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 0.8048170674001378
+    programmes:
+    - amount: 117120000.0
+      percentage: 13.380004935247722
+      slug: administration
+      title: Administration
+    - amount: 190423000.0
+      percentage: 21.75427492985551
+      slug: cultural-affairs
+      title: Cultural Affairs
+    - amount: 280610000.0
+      percentage: 32.05740424248517
+      slug: library-and-archives-services
+      title: Library And Archives Services
+    - amount: 287183000.0
+      percentage: 32.8083158924116
+      slug: sport-and-recreation
+      title: Sport And Recreation
+    slug: sport-arts-culture-and-recreation
+    title: Sport, Arts, Culture and Recreation
+    total: 875336000.0

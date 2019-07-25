@@ -1,0 +1,275 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:13:41.726707'
+description: "The biofuels regulatory framework aims to encourage the production of\
+  \ biofuel on a commercial scale by establishing transparent criteria for selecting\
+  \ biofuel manufacturing projects. To achieve a 2% penetration of biofuels into the\
+  \ local transport fuel pool, an incentive scheme was announced in 2013 that will\
+  \ provide a guaranteed return on assets of 15% to an efficient biofuels producer.\
+  \ It is hoped that the commercial production of biofuels will stimulate significant\
+  \ economic development and employment in the agricultural sector. The fiscal production\
+  \ incentive for biofuels will be funded by a biofuels levy on all petrol and diesel\
+  \ sold for domestic consumption. The level of the incentive required to generate\
+  \ the 15% return on assets in an indicative efficient biofuels plant will be determined\
+  \ on a monthly basis via a biofuels incentive model. Should a biofuels manufacturer\u2019\
+  s return on assets exceed 20%, a \u2018claw-back\u2019 would come into effect, in\
+  \ terms of which it would pay the \u2018excessive\u2019 profits back to the subsidy\
+  \ scheme"
+intro: "The biofuels regulatory framework aims to encourage the production of biofuel\
+  \ on a commercial scale by establishing transparent criteria for selecting biofuel\
+  \ manufacturing projects. To achieve a 2% penetration of biofuels into the local\
+  \ transport fuel pool, an incentive scheme was announced in 2013 that will provide\
+  \ a guaranteed return on assets of 15% to an efficient biofuels producer. It is\
+  \ hoped that the commercial production of biofuels will stimulate significant economic\
+  \ development and employment in the agricultural sector. The fiscal production incentive\
+  \ for biofuels will be funded by a biofuels levy on all petrol and diesel sold for\
+  \ domestic consumption. The level of the incentive required to generate the 15%\
+  \ return on assets in an indicative efficient biofuels plant will be determined\
+  \ on a monthly basis via a biofuels incentive model. Should a biofuels manufacturer\u2019\
+  s return on assets exceed 20%, a \u2018claw-back\u2019 would come into effect, in\
+  \ terms of which it would pay the \u2018excessive\u2019 profits back to the subsidy\
+  \ scheme"
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T08:59:39.398918'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - Biofuels
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Technical report
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/87693994-368d-4be7-88dc-d331c7bbb81e/download/8.2-technical-report.pdf
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1B1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/1aa5cf77-5961-4680-a3d2-04bde8b2e1ec/download/master-model-6-1b1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1B2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/cab8e580-67a3-4971-86dd-bfacf813d1e5/download/master-model-6-1b2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1C1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/4cd3379c-040f-4c12-8389-bdf8cbf88a6a/download/master-model-6-1c1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1C2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/ca281a66-d50d-48d3-b6e0-d349ecfaee08/download/master-model-6-1c2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1CCoal R100 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/327bcb83-b409-4164-b2bb-019c5c0832cb/download/master-model-6-1ccoal-r100-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1CCoal R220 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/dd98b9e5-bd55-46dd-8f6b-cf0437115766/download/master-model-6-1ccoal-r220-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1D1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/fbd69035-881a-4cd5-8fa6-7229afff28eb/download/master-model-6-1d1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master 6- 100 (option 6) -result v2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/c265738f-5714-4b09-bd33-e248c4485db8/download/master-6-100-option-6-result-v2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master 6- 220 (option 6) -result v2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/29833bf2-d2dc-4ba1-a578-f6896f5740bd/download/master-6-220-option-6-result-v2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master 6 biomass (option 6) -result v2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/06822956-ed33-4c41-92e7-0c44d247df31/download/master-6-biomass-option-6-result-v2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1A1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/b81164d2-31ae-4b2a-abbe-11a0a255cf9b/download/master-model-6-1a1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1A2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/754a226e-8afa-4d08-a649-934da7654358/download/master-model-6-1a2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1ACoal R100 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/ec2325c5-a9fc-4733-8ee3-a9bed977cc13/download/master-model-6-1acoal-r100-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1ACoal R220 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/b5dd9a86-10a7-4608-9726-b341ddb9bc43/download/master-model-6-1acoal-r220-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1DCoal R220 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/0f452168-7231-4ee0-ab9a-51e466f9c56e/download/master-model-6-1dcoal-r220-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2A1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/25c4eabc-c40a-4e5c-b2af-5e415e96f2ee/download/master-model-6-2a1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2A2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/506adfc0-bb04-4b7e-b03c-8105553f7948/download/master-model-6-2a2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2ACoal R100 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/3e35bae8-2b7a-4883-a84c-a1495c2927b3/download/master-model-6-2acoal-r100-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2B1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/06ece253-7b7e-48f6-9525-e039c1796314/download/master-model-6-2b1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2BCoal R220 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/8a6b019b-5574-44ab-9d12-b7fd215ccbb4/download/master-model-6-2bcoal-r220-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2C1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/673f3042-bffc-4732-a849-18cfd320bf80/download/master-model-6-2c1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2C2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/480fda9b-4f06-4a0c-b164-b3ebdc5d22a9/download/master-model-6-2c2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2CCoal R100 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/bad0c069-f2fe-4570-86e9-6254972149b9/download/master-model-6-2ccoal-r100-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2CCoal R220 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/8a20e7fc-0590-43f1-bd37-93115e3fc975/download/master-model-6-2ccoal-r220-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2D1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/9272bbff-6df1-4eba-83a7-0f72b72831ff/download/master-model-6-2d1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 2DCoal R220 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/5855c387-d504-4776-b227-adc9da5af731/download/master-model-6-2dcoal-r220-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 3A1 - coal 220 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/96d931a0-b3dc-4e53-aec9-1aa6b2221bd6/download/master-model-6-3a1-coal-220-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 3A1 390c locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/cb9c8325-c2de-4587-bc56-7afbd6c6209a/download/master-model-6-3a1-390c-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 3A1 v2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/6aedf29c-5989-48fe-83f1-25106d7f72f7/download/master-model-6-3a1-v2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1D2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/8ee2917f-9113-488b-bc92-cae17018a6e5/download/master-model-6-1d2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1DCoal R100 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/b044f8f2-4bcb-465b-a532-8650c4ad2d23/download/master-model-6-1dcoal-r100-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 5DCoal R100 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/80ebb6ef-df02-44af-979d-bc9fa17683b8/download/master-model-6-5dcoal-r100-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 8A1 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/9b55d95a-e8d1-4cae-b823-53a5a1708194/download/master-model-6-8a1-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 8ACoal R100 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/b5e514b8-e9f2-4345-bd28-04ac10bfaab2/download/master-model-6-8acoal-r100-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 8ACoal R220 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/7f579d20-7685-4be8-abec-f32247263d2c/download/master-model-6-8acoal-r220-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/306a4c2a-f27a-4bfc-a202-b05daffaf9a1/download/master-model-6-locked.xlsm
+- description: ''
+  format: XLSX
+  name: PostProcessResults_v3 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/04fd71a0-66f2-40e4-85eb-c7a64a2c1f9b/download/postprocessresults_v3-locked.xlsx
+- description: ''
+  format: XLSX
+  name: PostProcessResults_v5.2 Biomass locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/3226c8e6-e43c-4d13-a556-6f10062cdbe2/download/postprocessresults_v5.2-biomass-locked.xlsx
+- description: ''
+  format: XLSX
+  name: PostProcessResults_v5.2 Coal locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/e57a535c-0929-4885-9079-68efd39555b1/download/postprocessresults_v5.2-coal-locked.xlsx
+- description: ''
+  format: XLSX
+  name: Results of Historical Data locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/d52fbeb1-1c8e-4d71-b558-2954ff4356dc/download/results-of-historical-data-locked.xlsx
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 5D2 locked - Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/9ef99803-dbeb-47aa-b6dd-395194ff8796/download/master-model-6-5d2-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1A1 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/53d41433-f5fe-4b73-a8fc-64575857f323/download/master-model-6-1a1.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1A2 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/cbc4d0ea-45ca-48f7-984f-cdc078dab3eb/download/master-model-6-1a2.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1ACoal R100 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/7a788758-964d-453f-8cd5-f7472fe42b7e/download/master-model-6-1acoal-r100.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1ACoal R220 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/e9b5245b-d19c-4abe-9f55-6b726fb92746/download/master-model-6-1acoal-r220.xlsm
+- description: ''
+  format: XLSM
+  name: Master Model 6 - 1B1 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/3b48c4be-bf65-4619-9af8-1e191b3a16c6/download/master-model-6-1b1.xlsm
+- description: ''
+  format: XLSX
+  name: BFP Historical - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/4c6edffb-5f6c-409e-8cde-85b8d6804dde/download/bfp-historical.xlsx
+- description: ''
+  format: XLSM
+  name: Biofuels High Level Project Finance Model v2 0 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/538e70a9-a62c-411d-8e52-a767e96b3730/download/biofuels-high-level-project-finance-model-v2-0.xlsm
+- description: ''
+  format: XLSM
+  name: Master 6- 100 (option 6) -result v2 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/1ae93d1a-6978-446b-b920-5e16d8a25906/download/master-6-100-option-6-result-v2.xlsm
+- description: ''
+  format: XLSM
+  name: Master 6- 220 (option 6) -result v2 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/d4a26580-a72a-4b00-95d6-21bdbb227bc5/download/master-6-220-option-6-result-v2.xlsm
+- description: ''
+  format: XLSM
+  name: Master 6 biomass (option 6) -result v2 - Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-ruralspace-biofuels/resource/7828b142-16a9-48b0-9edf-72e4d57094f4/download/master-6-biomass-option-6-result-v2.xlsm
+selected_tab: datasets
+slug: per-ruralspace-biofuels
+title: PER - Biofuels - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-ruralspace-biofuels
+usage: null
+use_for: null

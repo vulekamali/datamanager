@@ -1,0 +1,585 @@
+data:
+  items:
+  - description: "## Core functions and responsibilities of the department\r\n\r\n\
+      * Coordinate and facilitate rural development programmes that contribute to\
+      \ vibrant, equitable and sustainable rural communities;\r\n* Provision of comprehensive\
+      \ post settlement support to land reform beneficiaries;\r\n* Ensure food security\
+      \ for all by increasing agricultural production; providing technical support\
+      \ for development of farmers and communities;\r\n* Establishing markets in rural\
+      \ areas;\r\n* Establish agricultural cooperatives throughout the value-chain;\r\
+      \n* Development and implementation of the sector job creation plan;\r\n* Promoting\
+      \ sustainable use and management of natural resources;\r\n* To provide veterinary\
+      \ services which promote sustainable economic growth through export and import\
+      \ and ensure the health and welfare of people and animals in the Northern Cape;\r\
+      \n* To ensure the competitive capacity of its clients, through the timely provision\
+      \ of progressive technologies and information with regard to crop production,\
+      \ animal production and resource utilisation; and\r\n* To provide economic support\
+      \ to internal and external clients with regard to marketing, statistical information\
+      \ including financial feasibility and economic viability studies\r\n\r\n## Vision\r\
+      \n\r\nA transformed, vibrant agricultural sector for food security and sustainable\
+      \ rural development.\r\n\r\n## Mission\r\n\r\nThe Department as a lead agent\
+      \ in the sector, will champion land and agrarian transformation, promote and\
+      \ facilitate increased production and provide expertise for improved livelihoods,\
+      \ sustainable rural development and food security for all."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 3.9787306149981423
+    programmes:
+    - amount: 115867000.0
+      percentage: 19.016287436156667
+      slug: administration
+      title: Administration
+    - amount: 11448000.0
+      percentage: 1.8788650657143233
+      slug: agricultural-economics-services
+      title: Agricultural Economics Services
+    - amount: 331366000.0
+      percentage: 54.384346730039525
+      slug: farmer-support-and-development
+      title: Farmer Support And Development
+    - amount: 51749000.0
+      percentage: 8.493133148641729
+      slug: research-and-technology-development-services
+      title: Research And Technology Development Services
+    - amount: 14055000.0
+      percentage: 2.3067303021152004
+      slug: rural-development
+      title: Rural Development
+    - amount: 35169000.0
+      percentage: 5.77199558840907
+      slug: sustainable-resource-management
+      title: Sustainable Resource Management
+    - amount: 49650000.0
+      percentage: 8.148641728923494
+      slug: veterinary-services
+      title: Veterinary Services
+    slug: agriculture-land-reform-and-rural-development
+    title: Agriculture, Land Reform and Rural Development
+    total: 609304000.0
+  - description: "## Vision\n\nA radically transformed economy in the Northern Cape.\r\
+      \n\r\n\n\n## Mission\n\nAccelerating the economic growth and development of\
+      \ the Northern Cape Province through diversification, empowerment, employment,\
+      \ business creation and sustainable development.\r\n\r\n\n\n## Core functions\n\
+      \nThe department\u2019s core functions are summarised as follows:\r\n\r\n* To\
+      \ provide leadership, strategic management in accordance with government legislation,\
+      \ regulations and policies.\r\n\r\n* To ensure an effective and compliant department\
+      \ that will provide technical support and economic policy advice to the Northern\
+      \ Cape Province.\r\n\r\n* To promote, support and facilitate integrated economic\
+      \ development through shared partnerships in the province.\r\n\r\n* To accelerate\
+      \ economic growth by facilitating export from and investment into the province\
+      \ while simultaneously promoting economic diversification and industrial expansion.\r\
+      \n\r\n* To stimulate economic development through industry development and trade\
+      \ and investment promotion.\r\n\r\n* To regulate business practices and ensure\
+      \ compliance with relevant legislation whilst optimizing revenue collection\
+      \ and monitoring departmental agencies.\r\n\r\n* To support the development\
+      \ of measurable economic policies, strategies and plans informed by relative\
+      \ economic research so that they are in alignment with the NSDP, Northern Cape\
+      \ Provincial Growth and Development Strategy and IDP\u2019s with the aim of\
+      \ halving unemployment and achieving an average annual economic growth of 4-6\
+      \ per cent.\r\n\r\n* To ensure an equitable, socially responsible business environment\
+      \ that allows for predictability.\r\n\r\n* To manage the development and promotion\
+      \ of the Northern Cape as a competitive tourist destination"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 1.9362375547129007
+    programmes:
+    - amount: 61896000.0
+      percentage: 20.87442161637146
+      slug: administration
+      title: Administration
+    - amount: 36748000.0
+      percentage: 12.393260397415316
+      slug: business-regulation-and-governance
+      title: Business Regulation And Governance
+    - amount: 20059000.0
+      percentage: 6.764896329371771
+      slug: economic-planning
+      title: Economic Planning
+    - amount: 84174000.0
+      percentage: 28.387675538588137
+      slug: intergrated-economic-development-services
+      title: Intergrated Economic Development Services
+    - amount: 57073000.0
+      percentage: 19.247865207948305
+      slug: tourism
+      title: Tourism
+    - amount: 36566000.0
+      percentage: 12.331880910305008
+      slug: trade-and-sector-development
+      title: Trade And Sector Development
+    slug: economic-development-and-tourism
+    title: Economic Development and Tourism
+    total: 296516000.0
+  - description: "## Vision\n\nA transformed quality education system.\r\n\r\n\n\n\
+      ## Mission\n\nTo deliver quality public education to all learners of the Northern\
+      \ Cape which will enable them to play a meaningful role in a dynamic, developmental\
+      \ and economic society.\r\n\r\n\n\n## Core functions\n\n*Public Ordinary Schools\
+      \ is aimed at the provision of educators in schools, the development of educators\
+      \ to ensure that they are equipped to provide the best quality teaching and\
+      \ the provision of Learner Teacher Support Materials (LTSM). The function is\
+      \ also aimed at the provisioning of food to Public Ordinary School learners\
+      \ through the National school Nutrition Programme (NSNP).\r\n\r\n* Public Special\
+      \ Schools Education includes the provision of schooling to all learners with\
+      \ special educational needs in special schools and full-service schools.\r\n\
+      \r\n* Early Childhood Development is the provision of Grade R in state, private\
+      \ and community centres. The programme also seeks to provide ECD programmes\
+      \ for pre-Grade R learners.\r\n\r\n* Infrastructure Development includes the\
+      \ provision of new schools and other school facilities\r\n\r\n"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 38.251505318978744
+    programmes:
+    - amount: 653469000.0
+      percentage: 11.155446702517153
+      slug: administration
+      title: Administration
+    - amount: 99264000.0
+      percentage: 1.6945475018381326
+      slug: early-childhood-development
+      title: Early Childhood Development
+    - amount: 142162000.0
+      percentage: 2.426864341113723
+      slug: examination-and-education-related-services
+      title: Examination And Education Related Services
+    - amount: 9169000.0
+      percentage: 0.15652508506965102
+      slug: independent-school-subsidy
+      title: Independent School Subsidy
+    - amount: 623578000.0
+      percentage: 10.645173900922984
+      slug: infrastructure-development
+      title: Infrastructure Development
+    - amount: 4190024000.0
+      percentage: 71.52839601307443
+      slug: public-ordinary-school-education
+      title: Public Ordinary School Education
+    - amount: 140181000.0
+      percentage: 2.3930464554639275
+      slug: public-special-school-education
+      title: Public Special School Education
+    slug: education
+    title: Education
+    total: 5857847000.0
+  - description: "## Vision\n\nA prosperous society living sustainably with the natural\
+      \ environment.\r\n\r\n\n\n## Mission\n\nConserve and protect the natural environment\
+      \ for the benefit, enjoyment and welfare of present and future generations by\
+      \ integrating sustainable utilization with socio-economic development.\r\n\r\
+      \n\n\n## Core functions\n\n* Environmental assets conserved, valued, sustainably\
+      \ used, protected and continually enhanced; \r\n\r\n* Enhanced socio-economic\
+      \ benefits and employment creation for the present and future generations from\
+      \ a healthy environment;\r\n\r\n* A department that is fully capacitated to\
+      \ deliver its services efficiently and effectively; \r\n\r\n* Environmental\
+      \ education provide to stimulate critical thinking and influence decision making;\r\
+      \n\r\n* Ensure sustainable development and utilisation of natural resources\
+      \ while securing representative and resilient ecosystems through scientific\
+      \ research, spatial planning and cooperative governance;\r\n\r\n* To promote\
+      \ and enforce compliance with environmental legislation"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 0.9729052378766399
+    programmes:
+    - amount: 65019000.0
+      percentage: 43.63954869757234
+      slug: administration
+      title: Administration
+    - amount: 34229000.0
+      percentage: 22.97387090495399
+      slug: biodiversity-management
+      title: Biodiversity Management
+    - amount: 11176000.0
+      percentage: 7.501124228980275
+      slug: compliance-and-enforcement
+      title: Compliance And Enforcement
+    - amount: 13543000.0
+      percentage: 9.089810793940574
+      slug: environmental-empowerment-services
+      title: Environmental Empowerment Services
+    - amount: 10773000.0
+      percentage: 7.230638092233758
+      slug: environmental-policy-planning-and-coordination
+      title: Environmental Policy,Planning And Coordination
+    - amount: 14251000.0
+      percentage: 9.565007282319065
+      slug: environmental-quality-management
+      title: Environmental Quality Management
+    slug: environment-and-nature-conservation
+    title: Environment and Nature Conservation
+    total: 148991000.0
+  - description: "## Vision\n\nHealth service excellence for all.\r\n\r\n\n\n## Mission\n\
+      \nWorking together, we are committed to provide quality health care services\
+      \ and promote a healthy society. Our caring, multi- skilled professionals will\
+      \ integrate comprehensive services using evidence-based strategies and partnerships\
+      \ to maximise efficiencies for the benefit of all.\r\n\r\n\n\n## Core functions\n\
+      \nThe department\u2019s core function is the provision of health care, which\
+      \ focuses mainly on the District Health System, based on the Primary Health\
+      \ Care approach. Health care services are provided at a primary, secondary and\
+      \ tertiary level."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 28.95314296759246
+    programmes:
+    - amount: 192418000.0
+      percentage: 4.33970779177576
+      slug: administration
+      title: Administration
+    - amount: 934723000.0
+      percentage: 21.081316125580837
+      slug: central-hospital-services
+      title: Central Hospital Services
+    - amount: 1986793000.0
+      percentage: 44.80922295598924
+      slug: district-health-services
+      title: District Health Services
+    - amount: 297695000.0
+      percentage: 6.714077222882915
+      slug: emergency-medical-services
+      title: Emergency Medical Services
+    - amount: 104591000.0
+      percentage: 2.358897700057263
+      slug: health-care-support-services
+      title: Health Care Support Services
+    - amount: 446136000.0
+      percentage: 10.061947818767841
+      slug: health-facilities-management
+      title: Health Facilities Management
+    - amount: 130073000.0
+      percentage: 2.9336071032837285
+      slug: health-sciences-and-training
+      title: Health Sciences And Training
+    - amount: 341464000.0
+      percentage: 7.701223281662413
+      slug: provincial-hospital-services
+      title: Provincial Hospital Services
+    slug: health
+    title: Health
+    total: 4433893000.0
+  - description: "## Vision\n\nA prosperous province with a quality of life for all.\r\
+      \n\r\n\n\n## Mission Statement\n\nImproving government\u2019s performance through\
+      \ strategic leadership and integrated planning, monitoring and evaluation.\r\
+      \n\r\n\n\n## Core services\n\nThe core work of the Office of the Premier is\
+      \ to ensure the general improvement of efficiency and effectiveness of governance\
+      \ within the office and throughout the provincial government system."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 1.5418475737607933
+    programmes:
+    - amount: 105568000.0
+      percentage: 44.70965911256612
+      slug: administration
+      title: Administration
+    - amount: 87531000.0
+      percentage: 37.070714343191355
+      slug: institutional-development
+      title: Institutional Development
+    - amount: 43020000.0
+      percentage: 18.219626544242523
+      slug: policy-and-governance
+      title: Policy And Governance
+    slug: office-of-the-premier
+    title: Office of the Premier
+    total: 236119000.0
+  - description: "## Vision\n\nAn activist Legislature advancing the aspirations of\
+      \ the people of the Northern Cape.\r\n\r\n\n\n## Mission\n\nTo serve people\
+      \ of the Northern Cape by building a developmental institution for effective\
+      \ law making, public participation, accountability and oversight over the executive\
+      \ and municipalities\r\n\r\n\n\n## Core Services\n\n*The Northern Cape Provincial\
+      \ Legislature (NCPL) exists in terms of section 104 of the Constitution of the\
+      \ Republic of South Africa, Act 108 of 1996 which vests the legislative authority\
+      \ of the Northern Cape Province in the NCPL. In addition to the legislative\
+      \ authority, Provincial Legislature also has a constitutional mandate of oversight\
+      \ over the provincial executive as well as a responsibility to ensure public\
+      \ participation in its processes.\r\n\r\n*An effective Legislature is strongly\
+      \ correlated with the existence of a viable democracy and an open society. The\
+      \ Northern Cape Provincial Legislature on account of its members and legislative\
+      \ functions can empower ordinary citizens to participate in the development\
+      \ of policies that shape their lives. Due to its oversight role, the NCPL is\
+      \ fundamental in establishing the rule of law, protecting human rights, overseeing\
+      \ transparent governance processes and ensuring compliance with national and\
+      \ provincial legislation in the Northern Cape.\r\n\r\n*These functions, though\
+      \ universally recognised are not always naturally or effectively implemented\
+      \ without sufficient human and financial resources. With its budget the NCPL\
+      \ is able to develop programmes geared at its own development. These programmes\
+      \ are aimed at strengthening representatives, transparency, accountability and\
+      \ effective government"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 1.1088916503363255
+    programmes:
+    - amount: 77794000.0
+      percentage: 45.81075988128327
+      slug: administration
+      title: Administration
+    - amount: 45722000.0
+      percentage: 26.924435859989636
+      slug: facilities-for-members-and-political-parties
+      title: Facilities For Members And Political Parties
+    - amount: 46300000.0
+      percentage: 27.264804258727093
+      slug: parliamentary-business
+      title: Parliamentary Business
+    slug: provincial-legislature
+    title: Provincial Legislature
+    total: 169816000.0
+  - description: "## Vision\n\nTo be the heartbeat of sound financial management that\
+      \ supports economic growth and development.\r\n\r\n\n\n## Mission\n\nWe strive\
+      \ to promote sound fiscal policy that enables financial sustainability and support\
+      \ economic development.\r\n\r\n\n\n## Core Function and Responsibilities\n\n\
+      The core functions and responsibilities of a Provincial Treasury are outlined\
+      \ in the Public Finance Management Act and the Municipalities Finance Management\
+      \ Act, and amongst others, entail the following:\r\n\r\n* The preparation of\
+      \ the provincial annual and adjustment budgets;\r\n\r\n* Exercising control\
+      \ over the implementation of the provincial departmental budgets;\r\n\r\n* Monitoring\
+      \ local government budgets processes;\r\n\r\n* Supporting and building capacity\
+      \ in local governments, which includes the coordination of the implementation\
+      \ of the MFMA;\r\n\r\n* Ensuring compliance with the annual Division of Revenue\
+      \ Act;\r\n\r\n* Promoting and enforcing transparency and effective management\
+      \ of revenue, expenditure, assets and liabilities of the provincial departments\
+      \ and public entities;\r\n\r\n* Assisting provincial departments and public\
+      \ entities in their respective capacity building efforts for effective, efficient\
+      \ and transparent financial management by providing assistance with implementation\
+      \ and maintenance of financial systems, PERSAL, LOGIS and BAS;\r\n\r\n* Ensure\
+      \ compliance to Supply Chain Management (SCM) best practices;\r\n\r\n* Coordinating\
+      \ and monitoring activities of risk management in the province;\r\n\r\n* Investigating\
+      \ any systems of financial management and internal controls to be applied by\
+      \ the provincial departments or public entities to enhance effective and efficient\
+      \ financial management;\r\n\r\n* Issuing provincial treasury instructions; and\r\
+      \n\r\n* Preparing consolidated financial statements for the province."
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 1.9536333675720892
+    programmes:
+    - amount: 95463000.0
+      percentage: 31.908215789825523
+      slug: administration
+      title: Administration
+    - amount: 75816000.0
+      percentage: 25.341266127414936
+      slug: assets-and-liabilities-management
+      title: Assets And Liabilities Management
+    - amount: 29012000.0
+      percentage: 9.697172270873722
+      slug: financial-governance
+      title: Financial Governance
+    - amount: 35319000.0
+      percentage: 11.805267731800253
+      slug: provincial-internal-audit
+      title: Provincial Internal Audit
+    - amount: 63570000.0
+      percentage: 21.248078080085566
+      slug: sustainable-resource
+      title: Sustainable Resource
+    slug: provincial-treasury
+    title: Provincial Treasury
+    total: 299180000.0
+  - description: "## Vision\n\nTrendsetters in infrastructure delivery to change the\
+      \ economic landscape of the Province.\r\n\r\n\n\n## Mission\n\nTo provide and\
+      \ maintain all provincial land, buildings and road infrastructure in an integrated\
+      \ and sustainable manner.\r\n\r\nThe mission will be promoted through mission\
+      \ statements per programme which are as follow:\r\n\r\n* To promote and support\
+      \ good governance in the department;\r\n\r\n* Meet the accommodation and other\
+      \ specific needs of provincial departments;\r\n\r\n* Provide and maintain integrated\
+      \ road infrastructure that is safe and functional to support social and economic\
+      \ development; and\r\n\r\n\n\n## Core functions\n\nRoad Construction, Maintenance\
+      \ and Repairs \u2013 The construction of new roads, maintenance of existing\
+      \ roads and the repair of damaged roads and related structures;\r\n\r\n* Strategic\
+      \ planning and development - The development of integrated provincial transport\
+      \ and development plans, as well as departmental policies and procedures;\r\n\
+      \r\n* Public Works - Provide and maintain functional and accessible buildings,\
+      \ facilities management services and office accommodation according to the identified\
+      \ needs of provincial departments through planning, design and maintenance of\
+      \ safe and cost effective projects and buildings; and\r\n\r\n* Community based\
+      \ programme \u2013 The intervention in the infrastructure sector involves increasing\
+      \ the labour intensity of government-funded infrastructure projects.\r\n"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 10.994937322181032
+    programmes:
+    - amount: 143460000.0
+      percentage: 8.52017617629032
+      slug: administration
+      title: Administration
+    - amount: 86320000.0
+      percentage: 5.126597013365262
+      slug: community-based-programme
+      title: Community Based Programme
+    - amount: 143715000.0
+      percentage: 8.535320780535086
+      slug: public-works-infrastructure
+      title: Public Works Infrastructure
+    - amount: 1310273000.0
+      percentage: 77.81790602980934
+      slug: transport-infrastructure
+      title: Transport Infrastructure
+    slug: roads-and-public-works
+    title: Roads and Public Works
+    total: 1683768000.0
+  - description: "## Vision\n\nA caring and self-reliant society.\r\n\r\n\n\n## Mission\n\
+      \nTo transform our society by building conscious and capable citizens through\
+      \ the provision of integrated social development services.\r\n\r\n\n\n## Core\
+      \ functions\n\nDepartment of Social Development (DSD) has the responsibility\
+      \ of leading in partnership with stakeholder\u2019s outcome 13, by building\
+      \ an inclusive and responsive social protection system. As prescribed in the\
+      \ long-term vision of the National Development Plan (NDP) 2030, the social protection\
+      \ system has the ability to assist families to achieve the basic standard of\
+      \ living and making sure that no one slips below the minimum standard of living.\r\
+      \nIn this regard, the department has identified in accordance with the NDP 2030\
+      \ a targeted number of 13 334 zero income households to be migrated out of poverty\
+      \ over the next five years. The services provided by the department are statutory\
+      \ services, counseling services, therapeutic services, treatment services, after\
+      \ care services and institutionalized services such as support groups with children\
+      \ and parents.\r\n\r\nThe implementation and outcome of the service delivery\
+      \ goals are guided by the mandate of the department namely:\r\n\r\n* To build\
+      \ an inclusive and responsive social protection system.\r\n\r\n* To reform social\
+      \ welfare services as outlined in the Medium Term Strategic Framework 2014-2019,\r\
+      \n\r\n* To provide access to quality Early Childhood Development (ECD) services\
+      \ and strengthen community development interventions as the three sub-outcomes\
+      \ to be achieved through expanding service provision to the vulnerable groups,\
+      \ whilst creating support networks through service provision to respond to the\
+      \ needs of each vulnerable group e.g. people with disabilities, older persons,\
+      \ zero income families or children living and working on the street.\r\n\r\n\
+      The nature of the services rendered by the Department of Social Development\
+      \ in complementing partnership with stakeholders to various vulnerable groups,\
+      \ requires a service delivery methodology that advocate for teamwork amongst\
+      \ the range of social service professionals within a community to create therapeutic\
+      \ support networks at family level, social protection support networks at soup\
+      \ kitchen, Drop-in- Centre at community level and developmental support networks\
+      \ at Youth Service Centre level for the youth.\r\n"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 5.345483847164986
+    programmes:
+    - amount: 128936000.0
+      percentage: 15.750620870281173
+      slug: administration
+      title: Administration
+    - amount: 274758000.0
+      percentage: 33.56400919120117
+      slug: children-and-families
+      title: Children And Families
+    - amount: 146464000.0
+      percentage: 17.891814040647
+      slug: development-and-research
+      title: Development And Research
+    - amount: 157861000.0
+      percentage: 19.284053803464168
+      slug: restorative-services
+      title: Restorative Services
+    - amount: 110590000.0
+      percentage: 13.509502094406486
+      slug: social-welfare-services
+      title: Social Welfare Services
+    slug: social-development
+    title: Social Development
+    total: 818609000.0
+  - description: "## Vision\n\nA department committed to creating a prosperous and\
+      \ empowered province united in the advancement of its sport, heritage, arts\
+      \ and culture.\r\n\r\n\n\n## Mission\n\nTo serve all the people of the Northern\
+      \ Cape by promoting, protecting and developing sport and the diverse cultures\
+      \ of our province and at the same time are the catalysts in the development\
+      \ programmes, economic empowerment and other activities, thereby entrenching\
+      \ national building and social cohesion.\r\n\r\n\n\n## Core functions\n\nTo\
+      \ promote, develop and transform arts and culture, museums heritage, language,\
+      \ library, information and archives services in order to contribute to sustainable\
+      \ economic growth and opportunities, nation building, good governance, social\
+      \ cohesion and human capital development.\r\n\r\nTo improve the quality of life\
+      \ of all the people of the Northern Cape through the development, transformation\
+      \ and promotion of sustainable sport and recreation programmes that will lead\
+      \ to increased participation and global competitiveness in sport.\r\n\r\nMain\
+      \ Services\r\n\r\n* To promote respect for cultural diversity and the advancement\
+      \ of artistic disciplines into viable industries.\r\n\r\n* To accelerate the\
+      \ transformation of the country\u2019s heritage landscape by establishing and\
+      \ managing museum and heritage services.\r\n\r\n* To promote multilingualism,\
+      \ redress past linguistic imbalances and develop the previously marginalised\
+      \ languages.\r\n\r\n* To provide library and information services.\r\n\r\n*\
+      \ To render archival and records management services.\r\n\r\n* To establish\
+      \ and support transformed institutional structures and identify, develop and\
+      \ nurture athletes to increase participation and excellence in sport.\r\n\r\n\
+      * To provide sustainable mass participation opportunities across the age spectrum\
+      \ to promote physically active lifestyles.\r\n\r\n* To ensure active participation,\
+      \ development and training of all learners and educators and the identification\
+      \ of talent in quality and sustainable sport and recreation programmes.\r\n"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 2.4231897155745417
+    programmes:
+    - amount: 73673000.0
+      percentage: 19.853242357607897
+      slug: administration
+      title: Administration
+    - amount: 63132000.0
+      percentage: 17.012676238520243
+      slug: cultural-affairs
+      title: Cultural Affairs
+    - amount: 180953000.0
+      percentage: 48.76282714612167
+      slug: library-and-archives-services
+      title: Library And Archives Services
+    - amount: 53330000.0
+      percentage: 14.371254257750183
+      slug: sport-and-recreation
+      title: Sport And Recreation
+    slug: sport-arts-and-culture
+    title: Sport, Arts and Culture
+    total: 371088000.0
+  - description: "## Vision\n\nA leader in the creation and co-ordination of safe,\
+      \ secure and sustainable transport and policing sytems for a crime-free Northern\
+      \ Cape Province.\r\n\r\n\n\n## Mission\n\nTo enable safe and secure environment\
+      \ and mobility, for the community of the Northern Cape, through:\r\n\r\n* Good\
+      \ corporate governance, management, administration and support;\r\n\r\n* Establishing\
+      \ and supporting community safety partnerships;\r\n\r\n* Monitoring and oversight\
+      \ of the police;\r\n\r\n* Facilitating and coordinating social crime prevention\
+      \ and road safety programmes;\r\n\r\n* Educating, enforcing and administering\
+      \ road traffic legislation; Liaison with all relevant stakeholders, role-players\
+      \ and clients, pertaining policing, safety and security;\r\n\r\n* Regulated\
+      \ and integrated transport modes which are economically and environmentally\uFFFD\
+      \uFFFD\uFFFD. sustainable.\r\n\r\n\n\n## Core services\n\nTo promote subsidies\
+      \ transportation for the community as well as ensuring safety on our roads users\
+      \ through effective traffic law enforcement and effectively overseeing the functions\
+      \ of the South African police services (SAPS).\r\n\r\n"
+    focus_areas:
+    - slug: ''
+      title: ''
+      url: 2017-18/focus/
+    percentage_of_budget: 2.5394948292513466
+    programmes:
+    - amount: 78031000.0
+      percentage: 20.064592606306523
+      slug: administration
+      title: Administration
+    - amount: 28141000.0
+      percentage: 7.236069005063012
+      slug: civilian-oversight
+      title: Civilian Oversight
+    - amount: 196801000.0
+      percentage: 50.60465570752303
+      slug: transport-operations
+      title: Transport Operations
+    - amount: 85926000.0
+      percentage: 22.094682681107432
+      slug: transport-regulations
+      title: Transport Regulations
+    slug: transport-safety-and-liaison
+    title: Transport, Safety and Liaison
+    total: 388899000.0

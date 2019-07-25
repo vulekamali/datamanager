@@ -1,0 +1,55 @@
+.Related {
+  border-radius: 20px;
+  background-color: #e6e6e6;
+  border: solid 1px #d2d2d2;
+  padding: 10px;
+}
+
+.Related-wrap {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #d2d2d2;
+}
+
+.Related-title {
+  line-height: 1.44;
+  color: #3f3f3f;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 25px 20px 40px;
+  margin: 0;
+}
+
+.Related-list {
+  @include clearfix;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Related-item  {
+  float: left;
+  width: 50%;
+  display: block;
+}
+
+.Related-link {
+  font-size: 14px;
+  display: block;
+  height: 90px;
+  padding: 20px 30px;
+  text-align: center;
+  color: #3f3f3f;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+
+  @supports (display: flex) {
+    display: flex;
+  }
+
+  &:hover {
+    background: darken(white, 15%);
+  }
+}

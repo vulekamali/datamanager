@@ -1,0 +1,870 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 709856000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 773894000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    real:
+    - amount: 828926285
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 850185558
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2013 and 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 94968000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 104381000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Social Welfare Services
+  - items:
+    - amount: 110594000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 119490000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 117674000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 124196000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Development and Research
+  - items:
+    - amount: 149909000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 177038000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Restorative Services
+  - items:
+    - amount: 236711000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 248789000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Children and Families
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "Northern Cape AEPRE 2016-17 \u2013 Vote 10 - Social Development"
+    url: https://data.vulekamali.gov.za/dataset/54187bfe-69ef-4d7b-acca-c7ccc7a7d0fb/resource/d1572161-dbed-402e-adc1-fda07cc2a403/download/nc-vote-11-social-development.pdf
+  name: "Northern Cape AEPRE 2016-17 \u2013 Vote 10 - Social Development"
+  tables:
+    description: ''
+    format: XLSX
+    name: "Northern Cape AEPRE 2016-17 \u2013 Vote 11 - Social Development"
+    url: https://data.vulekamali.gov.za/dataset/54187bfe-69ef-4d7b-acca-c7ccc7a7d0fb/resource/e76c87db-7f5d-410c-88a9-b16147aed3f9/download/nc-social-development.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 11 : Social Development'
+    url: https://data.vulekamali.gov.za/dataset/5887b642-391e-4b24-840e-8ba9af6f357c/resource/ba4a0a78-8153-48c6-b6d9-513c5acf3e06/download/nc-vote-11-social-development.pdf
+  name: 'Northern Cape Department: Social Development 2016-17'
+  tables: null
+description: 'Northern Cape department: Social Development budget data for the 2016-17
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Northern%2BCape%2522%257Cdepartment.department%253A%2522Social%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 95140000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 21163000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2792000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 200000
+        type: economic_classification_2
+      - name: Higher education institutions
+        total_budget: 195000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 91138000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 33321000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2879000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 121256000
+        type: economic_classification_2
+      - name: Higher education institutions
+        total_budget: 195000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Children and Families
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 57039000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 22942000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2655000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 40397000
+        type: economic_classification_2
+      - name: Higher education institutions
+        total_budget: 1163000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Development and Research
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 65960000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 56686000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Buildings and other fixed structures
+        total_budget: 46724000
+        type: economic_classification_2
+      - name: Machinery and equipment
+        total_budget: 3269000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 4204000
+        type: economic_classification_2
+      - name: Higher education institutions
+        total_budget: 195000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Restorative Services
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 34756000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 18314000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2658000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 41588000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 6870000
+        type: economic_classification_2
+      - name: Higher education institutions
+        total_budget: 195000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Social Welfare Services
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 531722000
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 604415000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 654471000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 719956000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 773894000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 782746000
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 833262000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    real:
+    - amount: 729853450
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 784026647
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 803739297
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 840720446
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 850185558
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 821195986
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 833262000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/northern-cape/departments/social-development
+  id: 2016-17
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/northern-cape/departments/social-development
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/northern-cape/departments/social-development
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/northern-cape/departments/social-development
+  id: 2019-20
+  is_selected: false
+government:
+  name: Northern Cape
+  slug: northern-cape
+government_functions: []
+intro: "## Vision\n\nA caring and self-reliant society.\r\n\r\n\r\n\n\n## Mission\n\
+  \nTo transform our society by building conscious and capable citizens through the\
+  \ provision of integrated social development services.\r\n\r\n\r\n\n\n## Core functions\n\
+  \nDepartment of Social Development has the responsibility of leading in partnership\
+  \ with stakeholders, outcome 13 by building an inclusive and responsive social protection\
+  \ system. As prescribed in the long term vision of the National Development Plan\
+  \ (NDP) 2030, the social protection system has the ability to assist families to\
+  \ achieve the basic standard of living and make sure that no-one slip below the\
+  \ minimum standard of living.\r\n\r\n\r\nIn this regard, the department has identified\
+  \ in accordance with the NDP 2030 a targeted number of 13 334 zero income households\
+  \ to be migrated out of poverty over the next five years. The services provided\
+  \ by the department are statutory services, counseling services, therapeutic services\
+  \ and programmes, treatment services, after care services, institutionalized services\
+  \ such as support groups with children and parents.\r\n\r\n\r\nThe implementation\
+  \ and outcome of the service delivery goals are guided by the mandate of the Department\
+  \ namely:\r\n\r\n* To build an inclusive and responsive social protection system.\r\
+  \n\r\n* To reform social welfare services as outlined in the Medium Term Strategic\
+  \ Framework 2014-2019 ,\r\n\r\n* To provide access to quality Early Childhood Development\
+  \ (ECD) services and strengthen community development interventions as the three\
+  \ sub-outcomes to be achieved through expanding service provision to the vulnerable\
+  \ groups, whilst creating support networks through service provision to respond\
+  \ to the needs of each vulnerable group e.g. people with disabilities, older persons,\
+  \ zero income families or children living and working on the street.\r\n\r\n\r\n\
+  The nature of the services rendered by the Department of Social Development in complementing\
+  \ partnership with stakeholders to various vulnerable groups, requires a service\
+  \ delivery methodology that advocate for teamwork amongst the range of social service\
+  \ professionals within a community to create therapeutic support networks at family\
+  \ level, social protection support networks at soup kitchen, Drop-\r\n\r\nin- centre\
+  \ , community level and developmental support networks at Youth Service Centre level\
+  \ for the youth."
+is_vote_primary: true
+name: Social Development
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Northern%2BCape%2522%257Cdepartment.department%253A%2522Social%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 95140000
+      type: programme
+    - name: Children and Families
+      total_budget: 91138000
+      type: programme
+    - name: Development and Research
+      total_budget: 57039000
+      type: programme
+    - name: Restorative Services
+      total_budget: 56686000
+      type: programme
+    - name: Social Welfare Services
+      total_budget: 34756000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Restorative Services
+      total_budget: 65960000
+      type: programme
+    - name: Children and Families
+      total_budget: 33321000
+      type: programme
+    - name: Development and Research
+      total_budget: 22942000
+      type: programme
+    - name: Administration
+      total_budget: 21163000
+      type: programme
+    - name: Social Welfare Services
+      total_budget: 18314000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Restorative Services
+      total_budget: 46724000
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Restorative Services
+      total_budget: 3269000
+      type: programme
+    - name: Children and Families
+      total_budget: 2879000
+      type: programme
+    - name: Administration
+      total_budget: 2792000
+      type: programme
+    - name: Social Welfare Services
+      total_budget: 2658000
+      type: programme
+    - name: Development and Research
+      total_budget: 2655000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Development and Research
+      total_budget: 1163000
+      type: programme
+    - name: Administration
+      total_budget: 195000
+      type: programme
+    - name: Social Welfare Services
+      total_budget: 195000
+      type: programme
+    - name: Children and Families
+      total_budget: 195000
+      type: programme
+    - name: Restorative Services
+      total_budget: 195000
+      type: programme
+    name: Transfers and subsidies - Higher education institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Social Welfare Services
+      total_budget: 6870000
+      type: programme
+    - name: Administration
+      total_budget: 200000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Children and Families
+      total_budget: 121256000
+      type: programme
+    - name: Social Welfare Services
+      total_budget: 41588000
+      type: programme
+    - name: Development and Research
+      total_budget: 40397000
+      type: programme
+    - name: Restorative Services
+      total_budget: 4204000
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Northern%2BCape%2522%257Cdepartment.department%253A%2522Social%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 119490000
+  - name: Social Welfare Services
+    total_budget: 104381000
+  - name: Children and Families
+    total_budget: 248789000
+  - name: Restorative Services
+    total_budget: 177038000
+  - name: Development and Research
+    total_budget: 124196000
+selected_financial_year: 2016-17
+selected_tab: departments
+slug: social-development
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2016-17-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Northern%2BCape%2522%257Cdepartment.department%253A%2522Social%2BDevelopment%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Management Services
+      total_budget: 61173000
+      type: subprogramme
+    - name: District Management
+      total_budget: 49891000
+      type: subprogramme
+    - name: Office of the MEC
+      total_budget: 8426000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: ECD and Partial Care
+      total_budget: 79498000
+      type: subprogramme
+    - name: Child Care and Protection
+      total_budget: 52809000
+      type: subprogramme
+    - name: Child and Youth Care Centres
+      total_budget: 36551000
+      type: subprogramme
+    - name: Management and Support
+      total_budget: 33681000
+      type: subprogramme
+    - name: Care and Services to Families
+      total_budget: 29463000
+      type: subprogramme
+    - name: Community-Based Care Services for children
+      total_budget: 16787000
+      type: subprogramme
+    name: Children and Families
+    type: programme
+  - items:
+    - name: Poverty Alleviation and Sustainable Livelihoods
+      total_budget: 39086000
+      type: subprogramme
+    - name: Institutional capacity building and support for NPOs
+      total_budget: 27070000
+      type: subprogramme
+    - name: Youth development
+      total_budget: 25893000
+      type: subprogramme
+    - name: Management and Support
+      total_budget: 23360000
+      type: subprogramme
+    - name: Population Policy Promotion
+      total_budget: 8787000
+      type: subprogramme
+    name: Development and Research
+    type: programme
+  - items:
+    - name: Crime Prevention and support
+      total_budget: 77720000
+      type: subprogramme
+    - name: Substance Abuse, Prevention and Rehabilitation
+      total_budget: 67010000
+      type: subprogramme
+    - name: Management and Support
+      total_budget: 18274000
+      type: subprogramme
+    - name: Victim empowerment
+      total_budget: 14034000
+      type: subprogramme
+    name: Restorative Services
+    type: programme
+  - items:
+    - name: Services to Older Persons
+      total_budget: 29407000
+      type: subprogramme
+    - name: HIV and AIDS
+      total_budget: 28922000
+      type: subprogramme
+    - name: Management and Support
+      total_budget: 24136000
+      type: subprogramme
+    - name: Services to the Persons with Disabilities
+      total_budget: 15046000
+      type: subprogramme
+    - name: Social Relief
+      total_budget: 6870000
+      type: subprogramme
+    name: Social Welfare Services
+    type: programme
+title: Social Development budget 2016-17  - vulekamali
+vote_number: 11
+vote_primary:
+  name: Social Development
+  slug: social-development
+  url_path: /2016-17/provincial/northern-cape/departments/social-development
+website_url: null

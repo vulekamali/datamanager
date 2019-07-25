@@ -1,0 +1,618 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type: null
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aaene-2017-18-v3/aggregate/%3Fcut%3Dfinyear.finyear%253A2017%257Cvoteno.department%253APublic%2BEnterprises%26drilldown%3Dbudget_phase.budget_phase%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%257Cvoteno.department%257Cvoteno.voteno%26pagesize%3D10000
+  direct_charges: null
+  econ_classes:
+  - items:
+    - amount: -10000000
+      name: Compensation of employees
+      type: economic_classification_3
+    - amount: 9680000
+      name: Goods and services
+      type: economic_classification_3
+    name: Current payments
+    type: economic_classification_2
+  - items:
+    - amount: 320000
+      name: Households
+      type: economic_classification_3
+    name: Transfers and subsidies
+    type: economic_classification_2
+  programmes:
+  - amount: 3000000
+    name: Administration
+  - amount: -1000000
+    name: Legal and Governance
+  - amount: -2000000
+    name: Portfolio Management and Strategic Partnerships
+  special_appropriation: null
+  total_change:
+    amount: 0
+    percentage: 0.0
+  virements:
+    amount: 10320000
+    label: Value of virements
+    percentage: 3.8695743468218495
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 267481000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 23302594000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 23302594000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 23259675000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 273976000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 267976000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 267976000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 253779000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 266696000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 266696000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 266696000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 250413000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    real:
+    - amount: 312347901
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 27211339610
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 27211339610
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 27161221435
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 300984939
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 294393450
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 294393450
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 278796890
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 279796619
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 279796619
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 279796619
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 262713767
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 23829000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 23509000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 23509000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 19730000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 26007000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 25906000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 25906000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 23303000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 25243000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 24243000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 24243000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 21572000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Legal and Governance
+  - items:
+    - amount: 85065000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 23117211000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 23117211000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 23094185000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 89977000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 86278000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 86278000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 76688000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 85985000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 83985000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 83985000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 78212000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Portfolio Management and Strategic Partnerships
+  - items:
+    - amount: 158587000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 161874000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 161874000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 145760000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 157992000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 155792000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 155792000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 153788000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 155468000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 158468000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 158468000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 150629000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    name: Administration
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2017-18 - Vote 9 - Public Enterprises
+    url: https://data.vulekamali.gov.za/dataset/a5704500-c89b-43bb-ae5c-7d8cdfc0429c/resource/7d3d2240-7396-4e9c-8e81-988fe5b33f0f/download/vote-9-public-enterprises.pdf
+  name: AENE 2017-18 - Vote 9 - Public Enterprises
+  tables:
+    description: ''
+    format: XLS
+    name: AENE 2017-18 - Vote 9 - Public Enterprises
+    url: https://data.vulekamali.gov.za/dataset/a5704500-c89b-43bb-ae5c-7d8cdfc0429c/resource/449f5e2c-9b0b-4ea8-9e3a-60760c75d33c/download/aene17chap-tab-vote09.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 09 - Public Enterprises
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-public-enterprises-2017-18/resource/9df3d77a-3a79-4cab-907a-a53f6d5ac80a/download/vote-09-public-enterprises.pdf
+  name: 'National Department: Public Enterprises 2017-18'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 09 - Public Enterprises
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-public-enterprises-2017-18/resource/f7b6431e-c2de-4092-9588-873e80c0bfed/download/ene17-vote09_chaptertables.xlsx
+description: 'National department: Public Enterprises budget data for the 2017-18
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cvote_number.department%253A%2522Public%2BEnterprises%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 87553000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 65041000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2758000.0
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 106000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 10000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 19953000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 5290000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Legal and Governance
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 59400000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 26585000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    name: Portfolio Management and Strategic Partnerships
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 269396000.0
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 296052000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 23259675000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 267976000.0
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 266696000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 277153000.0
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 296515000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 349451358
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 363573980
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 27161221435
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 294393450
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 279796619
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 277153000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 281970631
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/public-enterprises
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/public-enterprises
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/public-enterprises
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/public-enterprises
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions:
+- General public services
+intro: "## Vote purpose\n\n_Drive investment, productivity and transformation in the\
+  \ department\u2019s\nportfolio of state-owned companies to unlock growth, drive\
+  \ industrialisation,\ncreate jobs and develop skills._\n\n\n\n## Mandate\n\nThe\
+  \ Department of Public Enterprises is the shareholder representative for\ngovernment\
+  \ at the state-owned companies in its portfolio. The department\u2019s\nmandate\
+  \ is to fulfil oversight responsibilities at these state-owned companies\nto ensure\
+  \ that they contribute to the realisation of government\u2019s strategic\nobjectives,\
+  \ as articulated in the National Development Plan (NDP), the medium-\nterm strategic\
+  \ framework (MTSF), the new growth path and the industrial policy\naction plan.\
+  \ State-owned companies are crucial to driving the state\u2019s\nstrategic objectives\
+  \ of creating jobs, and enhancing equity and\ntransformation. The department does\
+  \ not directly execute programmes but seeks\nto use state ownership in the economy\
+  \ to support the achievement these\nobjectives.\n\n"
+is_vote_primary: true
+name: Public Enterprises
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cvote_number.department%253A%2522Public%2BEnterprises%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 87553000.0
+      type: programme
+    - name: Portfolio Management and Strategic Partnerships
+      total_budget: 59400000.0
+      type: programme
+    - name: Legal and Governance
+      total_budget: 19953000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 65041000.0
+      type: programme
+    - name: Portfolio Management and Strategic Partnerships
+      total_budget: 26585000.0
+      type: programme
+    - name: Legal and Governance
+      total_budget: 5290000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 2758000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 106000.0
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 10000.0
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cvote_number.department%253A%2522Public%2BEnterprises%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 155468000.0
+  - name: Legal and Governance
+    total_budget: 25243000.0
+  - name: Portfolio Management and Strategic Partnerships
+    total_budget: 85985000.0
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: public-enterprises
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cvote_number.department%253A%2522Public%2BEnterprises%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 36769000.0
+      type: subprogramme
+    - name: Ministry
+      total_budget: 28605000.0
+      type: subprogramme
+    - name: Human Resources
+      total_budget: 20999000.0
+      type: subprogramme
+    - name: Chief Financial Officer
+      total_budget: 16398000.0
+      type: subprogramme
+    - name: Communications
+      total_budget: 15047000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 9827000.0
+      type: subprogramme
+    - name: Office Accommodation
+      total_budget: 9419000.0
+      type: subprogramme
+    - name: Strategic Planning, Monitoring and Evaluation
+      total_budget: 7096000.0
+      type: subprogramme
+    - name: Internal Audit
+      total_budget: 6701000.0
+      type: subprogramme
+    - name: Intergovernmental Relations
+      total_budget: 4607000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Legal
+      total_budget: 13385000.0
+      type: subprogramme
+    - name: Governance
+      total_budget: 8815000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 3043000.0
+      type: subprogramme
+    name: Legal and Governance
+    type: programme
+  - items:
+    - name: Manufacturing Enterprises
+      total_budget: 19886000.0
+      type: subprogramme
+    - name: Transport Enterprises
+      total_budget: 19624000.0
+      type: subprogramme
+    - name: Energy Enterprises
+      total_budget: 17569000.0
+      type: subprogramme
+    - name: Economic Impact and Policy Alignment
+      total_budget: 16782000.0
+      type: subprogramme
+    - name: Strategic Partnerships
+      total_budget: 12124000.0
+      type: subprogramme
+    name: Portfolio Management and Strategic Partnerships
+    type: programme
+title: Public Enterprises budget 2017-18  - vulekamali
+vote_number: 9
+vote_primary:
+  name: Public Enterprises
+  slug: public-enterprises
+  url_path: /2017-18/national/departments/public-enterprises
+website_url: www.dpe.gov.za

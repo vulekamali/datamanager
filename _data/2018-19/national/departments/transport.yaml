@@ -1,0 +1,1208 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type:
+  - amount: 33000000
+    name: Announced in the budget speech
+    type: kind
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aaene-2018-19-v2/aggregate/%3Fcut%3Dfinyear.finyear%253A2018%257Cdepartment.department%253ATransport%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%26pagesize%3D10000
+  direct_charges: null
+  econ_classes:
+  - items:
+    - amount: 3000000000
+      name: Departmental agencies and accounts
+      type: economic_classification_3
+    - amount: 33000000
+      name: Provinces and municipalities
+      type: economic_classification_3
+    - amount: -3000000000
+      name: Public corporations and private enterprises
+      type: economic_classification_3
+    name: Transfers and subsidies
+    type: economic_classification_2
+  programmes:
+  - amount: 33000000
+    name: Public Transport
+  - amount: -3000000000
+    name: Rail Transport
+  - amount: 3000000000
+    name: Road Transport
+  special_appropriation: null
+  total_change:
+    amount: 33000000
+    percentage: 0.055185520844457533
+  virements:
+    amount: 10040858000
+    label: Value of virements
+    percentage: 16.791211468340553
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 53357297000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 53615077000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 53615077000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 53320787000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 56015163000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 56285854000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 56285854000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 56403659000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 59795180000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 59795180000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 59795180000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 54670701000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 59798294000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 59831294000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 62307377855
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 62608397524
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 62608397524
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 62264743717
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 61537216504
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 61834592604
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 61834592604
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 61964010986
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 62732434091
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 62732434091
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 62732434091
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 57356230840
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 59798294000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 59831294000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices:
+  - One or more programmes did not exist for some years displayed.
+  programmes:
+  - items:
+    - amount: 1700000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1700000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 3821000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 10000000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 10000000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 10000000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 5559000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 10200000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 10200000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Direct charge against the National Revenue Fund
+  - items:
+    - amount: 80583000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 88083000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 88764000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 88762000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 78954000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 78954000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 77054000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 77054000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 81663000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 82641000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 83075000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 76660000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 89982000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 89982000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Integrated Transport Planning
+  - items:
+    - amount: 111089000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 121089000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 143674000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 142874000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 121733000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 120835000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 156386000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 153561000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 119692000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 129347000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 128417000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 109327000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 119925000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 119925000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Maritime Transport
+  - items:
+    - amount: 149526000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 149526000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 150383000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 145284000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 253223000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 253223000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 258267000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 210427000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 169869000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 170235000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 171165000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 166149000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 182253000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 182253000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Civil Aviation
+  - items:
+    - amount: 383457000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 383457000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 422169000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 420824000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 394763000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 392793000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 365182000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 365136000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 406857000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 407071000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 415254000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 407466000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 430077000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 430077000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 11536361000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 11518861000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 11334588000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 11328571000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 11655390000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 11655390000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 11557042000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 11550042000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 12568272000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 12567348000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 12525895000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 12277572000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 12990018000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 13023018000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Public Transport
+  - items:
+    - amount: 18311364000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 18311364000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 18310610000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 18305274000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 18985533000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 18985533000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 18993457000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 18992005000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 19320255000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 19308899000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 19333199000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 14515158000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 18887279000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 15887279000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Rail Transport
+  - items:
+    - amount: 22784917000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 23042697000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 23164889000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 22889198000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 24525567000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 24799126000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 24878466000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 25055434000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 27128572000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 27129639000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 27138175000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 27118369000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 27098760000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 30098760000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Road Transport
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 35 - Transport
+    url: https://data.vulekamali.gov.za/dataset/c453016c-1338-407c-b08f-22317f5334ff/resource/3ee796cc-398f-4d24-8631-9217fe62177c/download/vote-35-transport.pdf
+  name: AENE 2018-19 - Vote 35 - Transport
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 35 - Transport
+    url: https://data.vulekamali.gov.za/dataset/c453016c-1338-407c-b08f-22317f5334ff/resource/43af0860-a191-4095-9644-2f6c3920779d/download/aene18chap-tab-vote35.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 35 - Transport
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-transport-2018-19/resource/01df6d3b-b0d0-4957-b815-94b23866f710/download/vote-35-transport.pdf
+  name: 'National Department: Transport 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 35 - Transport
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-transport-2018-19/resource/65f8794b-e12b-4f3e-965c-83d75445e733/download/ene18-vote35_chaptertables.xlsx
+description: 'National department: Transport budget data for the 2018-19 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Transport%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 220672000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 194267000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2672000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 11238000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 1228000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 78889000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 46429000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 445000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 37249000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 16418000.0
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 2823000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Civil Aviation
+    type: programme
+  - items:
+    - items:
+      - name: Foreign governments and international organisations
+        total_budget: 10200000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Direct charge against the National Revenue Fund
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 53778000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 36004000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 200000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    name: Integrated Transport Planning
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 68743000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 23238000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 347000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 25619000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 1978000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Maritime Transport
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 256336000.0
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 55340000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 246000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 12243967000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 411605000.0
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 22524000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Public Transport
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 26767000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 18415000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 111000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Public corporations and private enterprises
+        total_budget: 18778968000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 63018000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Rail Transport
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 70487000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 48232000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 722000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 15836118000.0
+        type: economic_classification_2
+      - name: Provinces and municipalities
+        total_budget: 11143201000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Road Transport
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 49147098000.00001
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 53320787000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 56407480000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 59805180000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 59808494000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 65867550000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 69571447000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 60356309179
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 62264743717
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 61968208666
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 62742925311
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 59808494000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 62636678388
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 62722530641
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/transport
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/transport
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/transport
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/transport
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: '## Vote purpose
+
+
+  Lead the provision of an integrated, sustainable, reliable and safe transport system
+  through planning, developing, coordinating, promoting and implementing transport
+  policies, regulations and strategies.
+
+
+  ## Mandate
+
+
+  The Constitution identifies the legislative responsibilities of different spheres
+  of government with regards to airports and civil aviation, road infrastructure,
+  rail transport, maritime transport, road traffic management and public transport.
+  Transport is a function that is legislated and executed at the national, provincial
+  and local government levels. The implementation of transport functions at the national
+  level takes place through public entities that are overseen by the department, each
+  with a specific delivery mandate, as specified in legislation establishing these
+  entities.
+
+
+  The 1996 White Paper on Transport defines the infrastructure and operations of rail,
+  pipelines, roads, airports, harbours, and the intermodal operations of public transport
+  and freight. The Department of Transport is responsible for the legislation and
+  policies for all these sub-sectors. The department is therefore responsible for
+  conducting sector research, formulating legislation and policy to set the strategic
+  direction of sub-sectors, assigning responsibilities to public entities and other
+  spheres of government, regulating through setting norms and standards, and monitoring
+  implementation.
+
+
+  '
+is_vote_primary: true
+name: Transport
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Transport%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 220672000.0
+      type: programme
+    - name: Road Transport
+      total_budget: 70487000.0
+      type: programme
+    - name: Public Transport
+      total_budget: 55340000.0
+      type: programme
+    - name: Integrated Transport Planning
+      total_budget: 53778000.0
+      type: programme
+    - name: Civil Aviation
+      total_budget: 46429000.0
+      type: programme
+    - name: Rail Transport
+      total_budget: 26767000.0
+      type: programme
+    - name: Maritime Transport
+      total_budget: 23238000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Public Transport
+      total_budget: 256336000.0
+      type: programme
+    - name: Administration
+      total_budget: 194267000.0
+      type: programme
+    - name: Civil Aviation
+      total_budget: 78889000.0
+      type: programme
+    - name: Maritime Transport
+      total_budget: 68743000.0
+      type: programme
+    - name: Road Transport
+      total_budget: 48232000.0
+      type: programme
+    - name: Integrated Transport Planning
+      total_budget: 36004000.0
+      type: programme
+    - name: Rail Transport
+      total_budget: 18415000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 2672000.0
+      type: programme
+    - name: Road Transport
+      total_budget: 722000.0
+      type: programme
+    - name: Civil Aviation
+      total_budget: 445000.0
+      type: programme
+    - name: Maritime Transport
+      total_budget: 347000.0
+      type: programme
+    - name: Public Transport
+      total_budget: 246000.0
+      type: programme
+    - name: Integrated Transport Planning
+      total_budget: 200000.0
+      type: programme
+    - name: Rail Transport
+      total_budget: 111000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Road Transport
+      total_budget: 15836118000.0
+      type: programme
+    - name: Rail Transport
+      total_budget: 63018000.0
+      type: programme
+    - name: Civil Aviation
+      total_budget: 37249000.0
+      type: programme
+    - name: Maritime Transport
+      total_budget: 25619000.0
+      type: programme
+    - name: Administration
+      total_budget: 1228000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Civil Aviation
+      total_budget: 16418000.0
+      type: programme
+    - name: Direct charge against the National Revenue Fund
+      total_budget: 10200000.0
+      type: programme
+    - name: Maritime Transport
+      total_budget: 1978000.0
+      type: programme
+    name: Transfers and subsidies - Foreign governments and international organisations
+    type: economic_classification_1_and_2
+  - items:
+    - name: Public Transport
+      total_budget: 411605000.0
+      type: programme
+    - name: Administration
+      total_budget: 11238000.0
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Public Transport
+      total_budget: 22524000.0
+      type: programme
+    - name: Civil Aviation
+      total_budget: 2823000.0
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Public Transport
+      total_budget: 12243967000.0
+      type: programme
+    - name: Road Transport
+      total_budget: 11143201000.0
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+  - items:
+    - name: Rail Transport
+      total_budget: 18778968000.0
+      type: programme
+    name: Transfers and subsidies - Public corporations and private enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Transport%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 430077000.0
+  - name: Direct charge against the National Revenue Fund
+    total_budget: 10200000.0
+  - name: Integrated Transport Planning
+    total_budget: 89982000.0
+  - name: Rail Transport
+    total_budget: 18887279000.0
+  - name: Road Transport
+    total_budget: 27098760000.0
+  - name: Civil Aviation
+    total_budget: 182253000.0
+  - name: Maritime Transport
+    total_budget: 119925000.0
+  - name: Public Transport
+    total_budget: 12990018000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: transport
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Transport%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 227585000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 75752000.0
+      type: subprogramme
+    - name: Office Accommodation
+      total_budget: 55891000.0
+      type: subprogramme
+    - name: Communications
+      total_budget: 35642000.0
+      type: subprogramme
+    - name: Ministry
+      total_budget: 35207000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Aviation Safety, Security, Environment and Search and Rescue
+      total_budget: 75887000.0
+      type: subprogramme
+    - name: Aviation Oversight
+      total_budget: 59900000.0
+      type: subprogramme
+    - name: Aviation Policy and Regulations
+      total_budget: 28013000.0
+      type: subprogramme
+    - name: Aviation Economic Analysis and Industry Development
+      total_budget: 13109000.0
+      type: subprogramme
+    - name: Aviation Administration Support
+      total_budget: 5344000.0
+      type: subprogramme
+    name: Civil Aviation
+    type: programme
+  - items:
+    - name: International Oil Pollution Compensation Fund
+      total_budget: 10200000.0
+      type: subprogramme
+    name: Direct charge against the National Revenue Fund
+    type: programme
+  - items:
+    - name: Modelling and Economic Analysis
+      total_budget: 22919000.0
+      type: subprogramme
+    - name: Macro Sector Planning
+      total_budget: 18116000.0
+      type: subprogramme
+    - name: Freight Logistics
+      total_budget: 15669000.0
+      type: subprogramme
+    - name: Research and Innovation
+      total_budget: 15345000.0
+      type: subprogramme
+    - name: Regional Integration
+      total_budget: 10237000.0
+      type: subprogramme
+    - name: Integrated Transport Planning Administration Support
+      total_budget: 7696000.0
+      type: subprogramme
+    name: Integrated Transport Planning
+    type: programme
+  - items:
+    - name: Implementation, Monitoring and Evaluations
+      total_budget: 61709000.0
+      type: subprogramme
+    - name: Maritime Oversight
+      total_budget: 32152000.0
+      type: subprogramme
+    - name: Maritime Infrastructure and Industry Development
+      total_budget: 11493000.0
+      type: subprogramme
+    - name: Maritime Policy Development
+      total_budget: 10406000.0
+      type: subprogramme
+    - name: Maritime Administration Support
+      total_budget: 4165000.0
+      type: subprogramme
+    name: Maritime Transport
+    type: programme
+  - items:
+    - name: Public Transport Oversight
+      total_budget: 12678096000.0
+      type: subprogramme
+    - name: Public Transport Industry Development
+      total_budget: 187127000.0
+      type: subprogramme
+    - name: Public Transport Regulation
+      total_budget: 54474000.0
+      type: subprogramme
+    - name: Rural and Scholar Transport
+      total_budget: 40385000.0
+      type: subprogramme
+    - name: Public Transport Network Development
+      total_budget: 18871000.0
+      type: subprogramme
+    - name: Public Transport Administration Support
+      total_budget: 11065000.0
+      type: subprogramme
+    name: Public Transport
+    type: programme
+  - items:
+    - name: Rail Oversight
+      total_budget: 18841986000.0
+      type: subprogramme
+    - name: Rail Regulation
+      total_budget: 19835000.0
+      type: subprogramme
+    - name: Rail Infrastructure and Industry Development
+      total_budget: 11349000.0
+      type: subprogramme
+    - name: Rail Operations
+      total_budget: 8716000.0
+      type: subprogramme
+    - name: Rail Administration Support
+      total_budget: 5393000.0
+      type: subprogramme
+    name: Rail Transport
+    type: programme
+  - items:
+    - name: Road Oversight
+      total_budget: 26988198000.0
+      type: subprogramme
+    - name: Road Regulation
+      total_budget: 41914000.0
+      type: subprogramme
+    - name: Road Infrastructure and Industry Development
+      total_budget: 32175000.0
+      type: subprogramme
+    - name: Road Engineering Standards
+      total_budget: 28190000.0
+      type: subprogramme
+    - name: Road Administration Support
+      total_budget: 8283000.0
+      type: subprogramme
+    name: Road Transport
+    type: programme
+title: Transport budget 2018-19  - vulekamali
+vote_number: 35
+vote_primary:
+  name: Transport
+  slug: transport
+  url_path: /2018-19/national/departments/transport
+website_url: www.transport.gov.za

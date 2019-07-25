@@ -1,0 +1,28 @@
+.SmallMultiplesSection-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media screen and (min-width: 1000px) {
+    flex-flow: row wrap;
+  }
+}
+
+.SmallMultiplesSection-item {
+  min-width: 0;
+  width: 100%;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 1000px) {
+    max-width: (100% / 3);
+    padding-right: 1rem;
+
+    &:nth-of-type(3n) {
+      padding-right: 0;
+    }
+  }
+}
+
+.SmallMultiplesSection-share {
+  max-width: 250px;
+}

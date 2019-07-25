@@ -1,0 +1,53 @@
+.AdjustedSection-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media screen and (min-width: 1000px) {
+    flex-flow: row wrap;
+  }
+}
+
+.AdjustedSection-item {
+  min-width: 0;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 1000px) {
+    width: 50%;
+    padding-right: 1rem;
+
+    &--full {
+      width: 100%;
+    }
+
+    &:nth-of-type(2n) {
+      padding-left: 1rem;
+      padding-right: 0;
+    }
+  }
+}
+
+.AdjustedSection-share {
+  max-width: 250px;
+}
+
+.AdjustedSection-indicatorsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
+}
+
+.AdjustedSection-indicator {
+  padding: 0 0.5rem 2rem;
+  width: 100%;
+
+  @media screen and (min-width: 600px) {
+    width: (100% / 3);
+  }
+
+  &--small {
+    @media screen and (min-width: 1400px) {
+      width: (100% / 4);
+    }
+  }
+}

@@ -1,0 +1,601 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 117180000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 130821000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    real:
+    - amount: 136835614
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 143717518
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2013 and 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 23577000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 22927000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Parliamentary Services
+  - items:
+    - amount: 41219000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 44238000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Facilities for Members and Political Parties
+  - items:
+    - amount: 52384000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 63656000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2013-14
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    name: Administration
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "WC AEPRE 2016-17 \u2013 Vote 2 - Provincial Parliament"
+    url: https://data.vulekamali.gov.za/dataset/f5344589-f37b-495f-b855-02d2318822cf/resource/f58930b7-e7ff-45de-9d36-b2166ffdb8b3/download/wc-vote-02-provincial-parliament.pdf
+  name: "Western Cape AEPRE 2016-17 \u2013 Vote 2 - Provincial Parliament"
+  tables:
+    description: ''
+    format: XLSX
+    name: "WC AEPRE 2016-17 \u2013 Vote 2 - Provincial Parliament"
+    url: https://data.vulekamali.gov.za/dataset/f5344589-f37b-495f-b855-02d2318822cf/resource/9287f7b4-5229-486b-a8b5-11c3051b1e1d/download/wc-provincial-parliament.xls
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 02 : Provincial Parliament'
+    url: https://data.vulekamali.gov.za/dataset/ffa44954-e6d4-4d3b-a081-4aaf6fb3366a/resource/79fc3745-7776-4c60-81f6-e187170c0394/download/wc-vote-02-provincial-parliament.pdf
+  name: 'Western Cape Department: Provincial Parliament 2016-17'
+  tables: null
+description: 'Western Cape department: Provincial Parliament budget data for the 2016-17
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Provincial%2BParliament%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 39900000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 21378000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2302000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 46000
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 30000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 5742000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 36942000
+        type: economic_classification_2
+      - name: Households
+        total_budget: 1389000
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 165000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Facilities for Members and Political Parties
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 17402000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 5493000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Households
+        total_budget: 32000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Parliamentary Services
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 91047000
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 103122000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 107041000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 120408000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 130821000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 129238000
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 133803000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    real:
+    - amount: 124973138
+      financial_year: 2012-13
+      phase: Audited Outcome
+    - amount: 133766362
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 131454347
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 140605075
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 143717518
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 135586418
+      financial_year: 2017-18
+      phase: Medium Term Estimates
+    - amount: 133803000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/western-cape/departments/provincial-parliament
+  id: 2016-17
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/western-cape/departments/provincial-parliament
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/western-cape/departments/provincial-parliament
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/western-cape/departments/provincial-parliament
+  id: 2019-20
+  is_selected: false
+government:
+  name: Western Cape
+  slug: western-cape
+government_functions: []
+intro: "## Vision\n\nA dynamic, effective and efficient parliament supporting constitutional\
+  \ democracy.\r\n\r\n\n\n## Mission\n\nThe parliamentary administration will provide\
+  \ quality parliamentary and corporate support to enable\r\nMembers to fulfil their\
+  \ constitutional functions and to facilitate public involvement in parliamentary\
+  \ activities.\r\nBy:\r\n\r\n* providing quality support to the House and committees\r\
+  \n\r\n* promoting public access and involvement in the law-making and oversight\
+  \ processes\r\n\r\n* ensuring effective communication with all stakeholders\r\n\r\
+  \n* ensuring seamless and synergistic parliamentary processes and systems\r\n\r\n\
+  * investing in appropriately skilled staff\r\n\r\n* providing a secure environment\
+  \ that is conducive to empowering and enabling members and staff\r\n\r\n* implementing\
+  \ and adhering to good corporate governance systems and monitoring mechanisms\r\n\
+  \  managing resources effectively, efficiently and economically\r\n\r\n\n\n## Core\
+  \ functions and responsibilities\n\nTo provide for:\r\n\r\n* procedural and related\
+  \ support to the House and committees to conduct their legislative and oversight\r\
+  \n\r\n* functions effectively;\r\n\r\n* corporate support to Members and staff to\
+  \ perform their duties effectively;\r\n\r\n* the promotion of optimal public participation\
+  \ in parliamentary processes; and\r\n\r\n* the promotion of sound administration\
+  \ so as to ensure organisational efficiency"
+is_vote_primary: true
+name: Provincial Parliament
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Provincial%2BParliament%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 39900000
+      type: programme
+    - name: Parliamentary Services
+      total_budget: 17402000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 21378000
+      type: programme
+    - name: Facilities for Members and Political Parties
+      total_budget: 5742000
+      type: programme
+    - name: Parliamentary Services
+      total_budget: 5493000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 2302000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 30000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Facilities for Members and Political Parties
+      total_budget: 165000
+      type: programme
+    name: Transfers and subsidies - Foreign governments and international organisations
+    type: economic_classification_1_and_2
+  - items:
+    - name: Facilities for Members and Political Parties
+      total_budget: 1389000
+      type: programme
+    - name: Administration
+      total_budget: 46000
+      type: programme
+    - name: Parliamentary Services
+      total_budget: 32000
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Facilities for Members and Political Parties
+      total_budget: 36942000
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2016-17/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Provincial%2BParliament%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 63656000
+  - name: Facilities for Members and Political Parties
+    total_budget: 44238000
+  - name: Parliamentary Services
+    total_budget: 22927000
+selected_financial_year: 2016-17
+selected_tab: departments
+slug: provincial-parliament
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2016-17
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2016-17-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2016%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Provincial%2BParliament%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Office of the Secretary
+      total_budget: 18435000
+      type: subprogramme
+    - name: Information Technology
+      total_budget: 15205000
+      type: subprogramme
+    - name: Human Resources
+      total_budget: 7024000
+      type: subprogramme
+    - name: Office of the Speaker
+      total_budget: 6031000
+      type: subprogramme
+    - name: Supply Chain Management
+      total_budget: 4741000
+      type: subprogramme
+    - name: Finance
+      total_budget: 4364000
+      type: subprogramme
+    - name: Security and Facilities Management
+      total_budget: 4116000
+      type: subprogramme
+    - name: Internal Control
+      total_budget: 3740000
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Political Parties Support Service
+      total_budget: 36942000
+      type: subprogramme
+    - name: Facilities and Benefits to Members
+      total_budget: 7296000
+      type: subprogramme
+    name: Facilities for Members and Political Parties
+    type: programme
+  - items:
+    - name: Committee Support
+      total_budget: 13359000
+      type: subprogramme
+    - name: Hansard and Language Services
+      total_budget: 3495000
+      type: subprogramme
+    - name: Public Education and Outreach
+      total_budget: 3318000
+      type: subprogramme
+    - name: Plenary Support
+      total_budget: 2755000
+      type: subprogramme
+    name: Parliamentary Services
+    type: programme
+title: Provincial Parliament budget 2016-17  - vulekamali
+vote_number: 2
+vote_primary:
+  name: Provincial Parliament
+  slug: provincial-parliament
+  url_path: /2016-17/provincial/western-cape/departments/provincial-parliament
+website_url: null

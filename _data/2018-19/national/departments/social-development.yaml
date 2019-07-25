@@ -1,0 +1,995 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type:
+  - amount: -100000000
+    name: Declared unspent funds
+    type: kind
+  - amount: 18447000
+    name: Roll-overs
+    type: kind
+  - amount: 2199000
+    name: Unforeseeable/unavoidable
+    type: kind
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aaene-2018-19-v2/aggregate/%3Fcut%3Dfinyear.finyear%253A2018%257Cdepartment.department%253ASocial%2BDevelopment%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%26pagesize%3D10000
+  direct_charges: null
+  econ_classes:
+  - items:
+    - amount: -1500000
+      name: Goods and services
+      type: economic_classification_3
+    name: Current payments
+    type: economic_classification_2
+  - items:
+    - amount: -500000
+      name: Machinery and equipment
+      type: economic_classification_3
+    - amount: 500000
+      name: Software and other intangible assets
+      type: economic_classification_3
+    name: Payments for capital assets
+    type: economic_classification_2
+  - items:
+    - amount: 2199000
+      name: Departmental agencies and accounts
+      type: economic_classification_3
+    - amount: -126074000
+      name: Households
+      type: economic_classification_3
+    - amount: 27574000
+      name: Non-profit institutions
+      type: economic_classification_3
+    - amount: 18447000
+      name: Provinces and municipalities
+      type: economic_classification_3
+    name: Transfers and subsidies
+    type: economic_classification_2
+  programmes:
+  - amount: 8500000
+    name: Administration
+  - amount: -100000000
+    name: Social Assistance
+  - amount: -3801000
+    name: Social Security Policy and Administration
+  - amount: 15947000
+    name: Welfare Services Policy Development and Implementation Support
+  special_appropriation: null
+  total_change:
+    amount: -79354000
+    percentage: -0.04589547231859706
+  virements:
+    amount: 36074000
+    label: Value of virements
+    percentage: 0.020863891781398167
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 138168640000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 137893640000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 137893640000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 136405673000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 148937729000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 147933229000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 147933229000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 147342628000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 160707768000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 160357768000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 160357768000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 159396550000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 172901587000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 172822233000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 161344860858
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 161023732730
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 161023732730
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 159286176158
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 163620219675
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 162516694653
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 162516694653
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 161867871376
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 168602042240
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 168234849567
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 168234849567
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 167226414693
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 172901587000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 172822233000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 297015000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 297015000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 305053000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 305053000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 322512000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 338512000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 350131000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 349746000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 350788000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 368788000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 386438000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 384119000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 383246000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 391746000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 359820000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 359820000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 374602000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 374417000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 377704000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 377704000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 384571000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 383214000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 388856000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 384856000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 388706000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 386589000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 392303000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 392303000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Social Policy and Integrated Service Delivery
+  - items:
+    - amount: 662362000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 677362000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 678287000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 676403000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 723322000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 721322000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 718563000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 713088000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 1055255000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1050255000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 1056155000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 1011354000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 1284493000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1300440000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Welfare Services Policy Development and Implementation Support
+  - items:
+    - amount: 6756165000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 6741165000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 6717420000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 6716424000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 7015500000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 6997000000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 6981273000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 6980942000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 7332637000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 7323637000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 7296237000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 7277717000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 7880822000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 7877021000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Social Security Policy and Administration
+  - items:
+    - amount: 130093278000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 129818278000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 129818278000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 128333376000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 140498691000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 139498691000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 139498691000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 138915638000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 151580232000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 151230232000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 151230232000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 150336771000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 162960723000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 162860723000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Social Assistance
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 17 - Social Development
+    url: https://data.vulekamali.gov.za/dataset/d7a58767-88a4-47eb-8aad-8f915c58c5e1/resource/1b6aa4cf-08e4-4631-a1d0-5e4484f053ab/download/vote-17-social-development.pdf
+  name: AENE 2018-19 - Vote 17 - Social Development
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 17 - Social Development
+    url: https://data.vulekamali.gov.za/dataset/d7a58767-88a4-47eb-8aad-8f915c58c5e1/resource/4519af1b-59f2-4ceb-928c-f5b8be4e3b6e/download/aene18chap-tab-vote17.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 17 - Social Development
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-social-development-2018-19/resource/15f48a6b-c054-4159-be2a-04243bcc6fc3/download/vote201720social20development.pdf
+  name: 'National Department: Social Development 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 17 - Social Development
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-social-development-2018-19/resource/5e09c366-c6fe-4981-8a9d-68d52d586562/download/ene18-vote17_chaptertables.xlsx
+description: 'National department: Social Development budget data for the 2018-19
+  financial year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Social%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 197817000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 180618000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2220000.0
+        type: economic_classification_2
+      - name: Software and other intangible assets
+        total_budget: 557000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 1573000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 461000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Households
+        total_budget: 162960723000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Social Assistance
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 80299000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 46457000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 812000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 202578000.0
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 32369000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 27736000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 2052000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Social Policy and Integrated Service Delivery
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 68200000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 43444000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2430000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 7760679000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 4299000.0
+        type: economic_classification_2
+      - name: Higher education institutions
+        total_budget: 1500000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 270000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Social Security Policy and Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 144035000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 127380000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 5061000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Provinces and municipalities
+        total_budget: 758416000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 126982000.0
+        type: economic_classification_2
+      - name: Non-profit institutions
+        total_budget: 121822000.0
+        type: economic_classification_2
+      - name: Foreign governments and international organisations
+        total_budget: 797000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Welfare Services Policy Development and Implementation Support
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 127860470000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 136405673000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 147342628000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 160357768000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 172901587000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 186162566000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 200875233000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 157022212361
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 159286176158
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 161867871376
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 168234849567
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 172901587000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 177031099145
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 181100199870
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/social-development
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/social-development
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/social-development
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/social-development
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose\n\nEnsure protection against vulnerability by creating an\
+  \ enabling environment for the provision of a comprehensive, integrated and sustainable\
+  \ social development service. \n\n## Mandate\n\nThe Department of Social Development\
+  \ is not established in terms of a single act. Several pieces of legislation determine\
+  \ its mandate, many of which are under review. This includes the Social Assistance\
+  \ Act (2004), which provides a legislative framework for providing social assistance.\
+  \ The act sets out the different types of grants payable, as well as their qualifying\
+  \ criteria. It also makes provision for the establishment of the inspectorate for\
+  \ social assistance. Other pieces of legislation further define the department\u2019\
+  s mandate:\n\n * the Non-Profit Organisations Act (1997) establishes an administrative\
+  \ and regulatory framework within which non-profit organisations can conduct their\
+  \ affairs, and provides for their registration by the department\n * the Older Persons\
+  \ Act (2006) establishes a framework for empowering and protecting older persons,\
+  \ and promoting and maintaining their status, rights, wellbeing, safety and security.\
+  \ It provides for older persons to enjoy good quality services while staying with\
+  \ their families in their communities for as long as possible. It also makes provision\
+  \ for older persons to live in residential care facilities\n * the Children\u2019\
+  s Act (2005) sets out principles relating to the care and protection of children,\
+  \ and defines parental responsibilities and rights. It deals with early childhood\
+  \ development (ECD), drop-in centres and early intervention, children in alternative\
+  \ care such as foster care, child and youth care centres, and the adoption of children\n\
+  \ * the Prevention of and Treatment for Substance Abuse Act (2008) regulates substance\
+  \ abuse services and facilities\n * the 1998 White Paper on Population Policy for\
+  \ South Africa is aimed at promoting the sustainable development of all South Africans\
+  \ by integrating population issues with development planning in all spheres of government\
+  \ and all sectors of society\n * the 2015 White Paper on the Rights of Persons with\
+  \ Disabilities focuses on putting in place measures that will reduce the exclusion\
+  \ and inequality experienced by persons with disabilities. This includes contributing\
+  \ towards fighting poverty among persons with disabilities and their families, and\
+  \ providing policy guidelines on building capacity in the public sector to deliver\
+  \ equitable and accessible services\n * the 1997 White Paper for Social Welfare\
+  \ sets out the principles, guidelines, policies and programmes for developmental\
+  \ social welfare in South Africa. It provides the foundation for social welfare\
+  \ in the post-1994 era\n * the Social Service Professions Act (1978) provides for\
+  \ the regulation of social service professionals\n * the Victim Empowerment Support\
+  \ Services Bill is aimed at regulating victim support services and empowering victims.\n\
+  \n\n"
+is_vote_primary: true
+name: Social Development
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Social%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Administration
+      total_budget: 197817000.0
+      type: programme
+    - name: Welfare Services Policy Development and Implementation Support
+      total_budget: 144035000.0
+      type: programme
+    - name: Social Policy and Integrated Service Delivery
+      total_budget: 80299000.0
+      type: programme
+    - name: Social Security Policy and Administration
+      total_budget: 68200000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 180618000.0
+      type: programme
+    - name: Welfare Services Policy Development and Implementation Support
+      total_budget: 127380000.0
+      type: programme
+    - name: Social Policy and Integrated Service Delivery
+      total_budget: 46457000.0
+      type: programme
+    - name: Social Security Policy and Administration
+      total_budget: 43444000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Welfare Services Policy Development and Implementation Support
+      total_budget: 5061000.0
+      type: programme
+    - name: Social Security Policy and Administration
+      total_budget: 2430000.0
+      type: programme
+    - name: Administration
+      total_budget: 2220000.0
+      type: programme
+    - name: Social Policy and Integrated Service Delivery
+      total_budget: 812000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 557000.0
+      type: programme
+    name: Payments for capital assets - Software and other intangible assets
+    type: economic_classification_1_and_2
+  - items:
+    - name: Social Security Policy and Administration
+      total_budget: 7760679000.0
+      type: programme
+    - name: Social Policy and Integrated Service Delivery
+      total_budget: 202578000.0
+      type: programme
+    - name: Administration
+      total_budget: 1573000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Social Security Policy and Administration
+      total_budget: 4299000.0
+      type: programme
+    - name: Social Policy and Integrated Service Delivery
+      total_budget: 2052000.0
+      type: programme
+    - name: Welfare Services Policy Development and Implementation Support
+      total_budget: 797000.0
+      type: programme
+    name: Transfers and subsidies - Foreign governments and international organisations
+    type: economic_classification_1_and_2
+  - items:
+    - name: Social Security Policy and Administration
+      total_budget: 1500000.0
+      type: programme
+    name: Transfers and subsidies - Higher education institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Social Assistance
+      total_budget: 162960723000.0
+      type: programme
+    - name: Welfare Services Policy Development and Implementation Support
+      total_budget: 126982000.0
+      type: programme
+    - name: Social Policy and Integrated Service Delivery
+      total_budget: 27736000.0
+      type: programme
+    - name: Administration
+      total_budget: 461000.0
+      type: programme
+    - name: Social Security Policy and Administration
+      total_budget: 270000.0
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Welfare Services Policy Development and Implementation Support
+      total_budget: 121822000.0
+      type: programme
+    - name: Social Policy and Integrated Service Delivery
+      total_budget: 32369000.0
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+  - items:
+    - name: Welfare Services Policy Development and Implementation Support
+      total_budget: 758416000.0
+      type: programme
+    name: Transfers and subsidies - Provinces and municipalities
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Social%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 383246000.0
+  - name: Social Assistance
+    total_budget: 162960723000.0
+  - name: Social Security Policy and Administration
+    total_budget: 7880822000.0
+  - name: Welfare Services Policy Development and Implementation Support
+    total_budget: 1284493000.0
+  - name: Social Policy and Integrated Service Delivery
+    total_budget: 392303000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: social-development
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Social%2BDevelopment%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Management
+      total_budget: 151754000.0
+      type: subprogramme
+    - name: Department Management
+      total_budget: 70719000.0
+      type: subprogramme
+    - name: Finance
+      total_budget: 67485000.0
+      type: subprogramme
+    - name: Office Accommodation
+      total_budget: 40245000.0
+      type: subprogramme
+    - name: Ministry
+      total_budget: 37971000.0
+      type: subprogramme
+    - name: Internal Audit
+      total_budget: 15072000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Old Age
+      total_budget: 70531414000.0
+      type: subprogramme
+    - name: Child Support
+      total_budget: 60631022000.0
+      type: subprogramme
+    - name: Disability
+      total_budget: 22104787000.0
+      type: subprogramme
+    - name: Foster Care
+      total_budget: 5131589000.0
+      type: subprogramme
+    - name: Care Dependency
+      total_budget: 3138438000.0
+      type: subprogramme
+    - name: Grant-in-Aid
+      total_budget: 1011122000.0
+      type: subprogramme
+    - name: Social Relief of Distress
+      total_budget: 410000000.0
+      type: subprogramme
+    - name: War Veterans
+      total_budget: 2351000.0
+      type: subprogramme
+    name: Social Assistance
+    type: programme
+  - items:
+    - name: National Development Agency
+      total_budget: 202578000.0
+      type: subprogramme
+    - name: Community Development
+      total_budget: 91153000.0
+      type: subprogramme
+    - name: Registration and Monitoring of Non-Profit Organisations
+      total_budget: 37472000.0
+      type: subprogramme
+    - name: Population Policy Promotion
+      total_budget: 34531000.0
+      type: subprogramme
+    - name: Special Projects and Innovation
+      total_budget: 10995000.0
+      type: subprogramme
+    - name: Substance Abuse Advisory Services and Oversight
+      total_budget: 6205000.0
+      type: subprogramme
+    - name: Social Policy Research and Development
+      total_budget: 5910000.0
+      type: subprogramme
+    - name: Programme Management
+      total_budget: 3459000.0
+      type: subprogramme
+    name: Social Policy and Integrated Service Delivery
+    type: programme
+  - items:
+    - name: Social Grants Administration
+      total_budget: 7695431000.0
+      type: subprogramme
+    - name: Social Security Policy Development
+      total_budget: 77403000.0
+      type: subprogramme
+    - name: Social Grants Fraud Investigations
+      total_budget: 65248000.0
+      type: subprogramme
+    - name: Appeals Adjudication
+      total_budget: 37902000.0
+      type: subprogramme
+    - name: Programme Management
+      total_budget: 4838000.0
+      type: subprogramme
+    name: Social Security Policy and Administration
+    type: programme
+  - items:
+    - name: Children
+      total_budget: 573955000.0
+      type: subprogramme
+    - name: Social Worker Scholarships
+      total_budget: 323028000.0
+      type: subprogramme
+    - name: HIV and AIDS
+      total_budget: 121643000.0
+      type: subprogramme
+    - name: Substance Abuse
+      total_budget: 90674000.0
+      type: subprogramme
+    - name: Social Crime Prevention and Victim Empowerment
+      total_budget: 65182000.0
+      type: subprogramme
+    - name: Service Standards
+      total_budget: 31320000.0
+      type: subprogramme
+    - name: People with Disabilities
+      total_budget: 30059000.0
+      type: subprogramme
+    - name: Older Persons
+      total_budget: 20285000.0
+      type: subprogramme
+    - name: Youth
+      total_budget: 14406000.0
+      type: subprogramme
+    - name: Families
+      total_budget: 9765000.0
+      type: subprogramme
+    - name: Programme Management
+      total_budget: 4176000.0
+      type: subprogramme
+    name: Welfare Services Policy Development and Implementation Support
+    type: programme
+title: Social Development budget 2018-19  - vulekamali
+vote_number: 17
+vote_primary:
+  name: Social Development
+  slug: social-development
+  url_path: /2018-19/national/departments/social-development
+website_url: www.dsd.gov.za

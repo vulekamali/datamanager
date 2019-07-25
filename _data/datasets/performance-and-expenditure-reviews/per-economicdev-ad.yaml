@@ -1,0 +1,73 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:21:53.650880'
+description: There is wide agreement that South Africa produces too few artisans to
+  meet the needs of the economy and that improving the efficiency and effectiveness
+  of the artisan development system is important for accelerating growth and reducing
+  unemployment. Indeed, the National Development Plan (NDP) sets a target of producing
+  30 000 artisans a year by 2030, which would be more than double the number of artisans
+  who graduated in 2013. (This was already considerably higher than the low point
+  of 2005, when only 4 500 artisans graduated.)
+intro: There is wide agreement that South Africa produces too few artisans to meet
+  the needs of the economy and that improving the efficiency and effectiveness of
+  the artisan development system is important for accelerating growth and reducing
+  unemployment. Indeed, the National Development Plan (NDP) sets a target of producing
+  30 000 artisans a year by 2030, which would be more than double the number of artisans
+  who graduated in 2013. (This was already considerably higher than the low point
+  of 2005, when only 4 500 artisans graduated.)
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T09:00:15.193835'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - Artisan Development
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Summary
+  url: https://data.vulekamali.gov.za/dataset/per-economicdev-ad/resource/57f8391f-9a5d-4c7b-8454-a3f49eaadb25/download/20.1-summary.pdf
+- description: ''
+  format: PDF
+  name: Technical Report
+  url: https://data.vulekamali.gov.za/dataset/per-economicdev-ad/resource/661150c8-5a73-4fc2-9070-5fd5c942acb3/download/20.2-technical-report-.pdf
+- description: ''
+  format: XLSX
+  name: Logframe
+  url: https://data.vulekamali.gov.za/dataset/per-economicdev-ad/resource/8f44078e-b97a-4a20-8c44-1e98283e4228/download/artisan-logframe.xlsx
+- description: ''
+  format: XLSX
+  name: Cost Model Locked
+  url: https://data.vulekamali.gov.za/dataset/per-economicdev-ad/resource/e66b1045-b1b7-4bc0-93b1-a122f93f7d36/download/artisan-cost-model-locked.xlsx
+- description: ''
+  format: XLSX
+  name: Cost Model Open
+  url: https://data.vulekamali.gov.za/dataset/per-economicdev-ad/resource/578f4796-82ae-48bb-9eec-4b84d9477300/download/artisan-cost-model.xlsx
+selected_tab: datasets
+slug: per-economicdev-ad
+title: PER - Artisan Development - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-economicdev-ad
+usage: null
+use_for: null

@@ -1,0 +1,58 @@
+.ValueBlocks {
+  @include clearfix;
+}
+
+.ValueBlocks-itemWrap {
+  float: left;
+  padding: 5px;
+  width: 100%;
+
+  @media screen and (min-width: 750px) {
+    width: 50%;
+  }
+}
+
+.ValueBlocks-item {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #b9b9b9;
+  padding: 20px 30px;
+  font-size: 19px;
+  text-align: center;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+
+  &--link {
+    text-decoration: underline;
+
+    &:hover {
+      background-color: darken(#fff, 15%);
+    }
+  }
+
+  .ValueBlocks-itemWrap:nth-of-type(4n+1) & {
+    color: #ad3c64;
+  }
+
+  .ValueBlocks-itemWrap:nth-of-type(4n+2) & {
+    color: #5793f3;
+  }
+
+  .ValueBlocks-itemWrap:nth-of-type(4n+3) & {
+    color: #7bb344;
+  }
+
+  .ValueBlocks-itemWrap:nth-of-type(4n+4) & {
+    color: #ee9f31;
+  }
+}
+
+.ValueBlocks-title {
+  font-weight: bold;
+  font-weight: 900;
+}

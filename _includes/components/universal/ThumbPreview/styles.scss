@@ -1,0 +1,74 @@
+.ThumbPreview {
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  @media screen and (min-width: 750px) {
+    flex-direction: row;
+    height: 200px;
+  }
+}
+
+.ThumbPreview-image {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 60px;
+
+  @media screen and (min-width: 750px) {
+    min-height: 100px;
+  }
+}
+
+.ThumbPreview-thumb {
+  padding-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 750px) {
+    flex: 0 0 300px;
+    padding: 2rem;
+  }
+}
+
+.ThumbPreview-content {
+  width: 100%;
+
+  @supports (display: flex) {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  & a:hover {
+    background: darken(white, 15%);
+  }
+}
+
+.ThumbPreview-heading {
+  align-self: flex-start;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  font-size: 18px;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+  margin-bottom: 1rem;
+  display: inline-block;
+
+  &:hover {
+    background: darken(white, 15%);
+  }
+}
+
+.ThumbPreview-source {
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,46 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+coordinates: []
+dataset_url: /datasets/infrastructure-projects/major-infrastructure-projects-by-national-departments
+department:
+  budget_document: https://data.vulekamali.gov.za/dataset/b64c6843-744e-4c82-87bc-5e8d6ac658a7/resource/8a207f04-4ad4-4674-9f28-35652eb8725b/download/vote-14-basic-education.pdf
+  name: Basic Education
+  url: /2019-20/national/departments/basic-education
+description: Replace 510 schools that have inappropriate infrastructure, of which
+  395 are mud schools; provide water to 1 120 schools, sanitation to 741 schools and
+  electricity to 916 schools
+expenditure:
+- amount: 1368285000.0
+  budget_phase: Audited Outcome
+  year: '2015'
+- amount: 1049535000.0
+  budget_phase: Audited Outcome
+  year: '2016'
+- amount: 1617716000.0
+  budget_phase: Audited Outcome
+  year: '2017'
+- amount: 2121045000.0
+  budget_phase: Adjusted Appropriation
+  year: '2018'
+- amount: 1869482000.0
+  budget_phase: MTEF
+  year: '2019'
+- amount: 1628591000.0
+  budget_phase: MTEF
+  year: '2020'
+- amount: 2190735000.0
+  budget_phase: MTEF
+  year: '2021'
+infrastructure_type: Eradication of inappropriate school infrastructure and provision
+  of basic services to schools
+name: School infrastructure backlogs grant
+nature_of_investment: New infrastructure assets
+projected_budget: 5688808000.0
+provinces: []
+selected_tab: infrastructure-projects
+slug: /infrastructure-projects/basic-education-school-infrastructure-backlogs-grant
+stage: Various
+title: School infrastructure backlogs grant - vulekamali
+total_budget: 9045389000.0

@@ -1,0 +1,7 @@
+.u-maxWidth {
+  @for $i from 0 through 8 {
+    &#{$i * 100} {
+      max-width: #{$i * 100}px !important;
+    }
+  }
+}

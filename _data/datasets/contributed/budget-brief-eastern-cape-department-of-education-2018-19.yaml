@@ -1,0 +1,70 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+author:
+  email: s.fobosi@ru.ac.za
+  name: Siyabulela Fobosi
+category:
+  description: 'Data and analysis contributed by other organisations on South African
+    government budgets. '
+  name: Contributed data and analysis
+  slug: contributed
+  url_path: /datasets/contributed
+created: '2018-09-04T14:18:33.904095'
+description: Data and/or documentation related to South African government budgets
+  contributed by Public Service Accountability Monitor and hosted by National Treasury
+  in partnership with IMALI YETHU
+intro: "This brief analysis the budget allocations for the Eastern Cape Department\
+  \ of Education\r\n(ECDoE) in relation to the progressive realisation of the rights\
+  \ to quality basic education within\r\nProgramme 2: Public Ordinary Schools Education\
+  \ for the 2018/19 financial year. This brief is situated\r\nwithin the planning\
+  \ and resource allocation processes of the social accountability system (SAM), and\r\
+  \nusing a rights-based approach to evaluating resource allocation for Programme\
+  \ 2. This approach places\r\nan obligation on the state to fulfill the rights of\
+  \ citizens to quality basic education, as enshrined in Section 29 of the Constitution.\
+  \ The state has an obligation to progressively realise the rights of citizens to\
+  \ quality basic education, and to access and use available resources optimally and\
+  \ equitably in doing so. In addition, the purpose of this brief is to analyse the\
+  \ change in budget allocations from the Adjusted\r\nAppropriations of the 2017/18\
+  \ financial year, nominal and real budget allocations for the 2018/19\r\nfinancial\
+  \ year, as well as percent (%) changes in budget allocations for this financial\
+  \ year. In order\r\ndetermine the allocations in real terms, this brief makes use\
+  \ of the Consumer Price Index (CPI). This is\r\nmeant to show the effect of inflation\
+  \ on the purchasing power within the specific Programmes. While\r\ngovernment focuses\
+  \ on the nominal allocations, this brief accounts for the effects of inflation.\
+  \ This takes\r\ninto account that building new schools, for example, will be more\
+  \ expensive this financial year than the\r\nlast financial year. As such, government\
+  \ must ensure that budget allocations take inflation into account\r\neach year."
+intro_short: null
+key_points: null
+last_updated: '2018-10-25T13:39:09.172225'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: 'Budget Brief: Eastern Cape Department of Education 2018/19'
+organization:
+  email: psam-admin@ru.ac.za
+  facebook: publicserviceaccountabilitymonitor
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+  name: Public Service Accountability Monitor
+  slug: public-service-accountability-monitor
+  telephone: 046 603 8358
+  twitter: '@Right_to_SAM'
+  url: http://psam.org.za/
+resources:
+- description: ''
+  format: PDF
+  name: 'Budget Brief: Eastern Cape Department of Education 2018/19'
+  url: https://data.vulekamali.gov.za/dataset/0d3213a3-9b03-43b1-a7f6-d95a08cdcadb/resource/b82f9542-d809-401d-a989-5b5366ec934a/download/cuserss1200129documentssiyabudget-analysis-briefbudget-briefseducation-brief.pdf
+- description: ''
+  format: PDF
+  name: 'Budget Brief: Eastern Cape Department of Education 2018/19'
+  url: https://data.vulekamali.gov.za/dataset/0d3213a3-9b03-43b1-a7f6-d95a08cdcadb/resource/341196b7-bcbe-47b0-b586-9fc7472dfab3/download/cuserss1200129documentssiyabudget-analysis-briefbudget-briefseducation-brief.pdf
+selected_tab: datasets
+slug: budget-brief-eastern-cape-department-of-education-2018-19
+title: 'Budget Brief: Eastern Cape Department of Education 2018/19 - vulekamali'
+url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-education-2018-19
+usage: null
+use_for: null

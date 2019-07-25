@@ -1,0 +1,772 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary:
+  by_type: null
+  dataset_detail_page: /datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aaene-2018-19-v2/aggregate/%3Fcut%3Dfinyear.finyear%253A2018%257Cdepartment.department%253AMineral%2BResources%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Cecon1.econ1%257Cecon2.econ2%257Cecon3.econ3%257Cecon4.econ4%257Cecon5.econ5%257Cfinyear.finyear%257Cfy_descript.fy_descript%257Cprogno.progno%257Cprogno.programme%257Csprogno.sprogno%257Csprogno.subprogramme%26pagesize%3D10000
+  direct_charges: null
+  econ_classes:
+  - items:
+    - amount: -5800000
+      name: Goods and services
+      type: economic_classification_3
+    name: Current payments
+    type: economic_classification_2
+  - items:
+    - amount: 19677000
+      name: Departmental agencies and accounts
+      type: economic_classification_3
+    - amount: -13877000
+      name: Public corporations and private enterprises
+      type: economic_classification_3
+    name: Transfers and subsidies
+    type: economic_classification_2
+  programmes:
+  - amount: 8000000
+    name: Administration
+  - amount: -8000000
+    name: Mineral Policy and Promotion
+  special_appropriation: null
+  total_change:
+    amount: 0
+    percentage: 0.0
+  virements:
+    amount: 64177000
+    label: Value of virements
+    percentage: 3.3944213161428727
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1618542000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1638542000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1638542000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 1638481000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 1669077000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1669077000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1669077000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 1661101000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 1779449000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1779449000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 1779449000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 1776685000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 1890661000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1890661000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    real:
+    - amount: 1890034046
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1913388819
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 1913388819
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 1913317587
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 1833616956
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1833616956
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1833616956
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 1824854671
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 1866858952
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1866858952
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 1866858952
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 1863959179
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 1890661000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1890661000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+  notices: []
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-national-expenditure/budgeted-and-actual-national-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 175840000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 184431000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 171509000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 171506000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 184934000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 189873000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 190440000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 189557000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 189401000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 194146000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 203687000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 203657000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 205037000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 205037000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Mine Health and Safety
+  - items:
+    - amount: 260443000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 263715000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 246236000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 246236000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 270786000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 265127000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 260177000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 258758000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 364577000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 379260000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 370392000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 370104000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 393606000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 393606000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Mineral Regulation
+  - items:
+    - amount: 293223000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 308870000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 359067000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 359067000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 310868000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 345814000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 362796000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 361050000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 317722000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 339931000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 362906000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 362470000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 327000000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 335000000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Administration
+  - items:
+    - amount: 889036000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 881526000
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: 861730000
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: 861672000
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: 902489000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 868263000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 855664000
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: 851736000
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: 907749000.0
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 866112000
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 842464000
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: 840454000
+      financial_year: 2017-18
+      phase: Audit Outcome
+    - amount: 965018000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 957018000
+      financial_year: 2018-19
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2018-19
+      phase: Audit Outcome
+    name: Mineral Policy and Promotion
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: AENE 2018-19 - Vote 29 - Mineral Resources
+    url: https://data.vulekamali.gov.za/dataset/273af8e8-30e8-4637-90fb-92e57b0d7835/resource/59677588-84d1-49f7-86b7-fe3a06fac069/download/vote-29-mineral-resources.pdf
+  name: AENE 2018-19 - Vote 29 - Mineral Resources
+  tables:
+    description: ''
+    format: XLSX
+    name: AENE 2018-19 - Vote 29 - Mineral Resources
+    url: https://data.vulekamali.gov.za/dataset/273af8e8-30e8-4637-90fb-92e57b0d7835/resource/05fc90fa-81e0-4664-89d9-b581ff5bfcd6/download/aene18chap-tab-vote29.xlsx
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: Vote 29 - Mineral Resources
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-mineral-resources-2018-19/resource/85ad8ffa-192f-47c0-bd11-7c806fa6f488/download/vote-29-mineral-resources.pdf
+  name: 'National Department: Mineral Resources 2018-19'
+  tables:
+    description: ''
+    format: XLSX
+    name: Vote 29 - Mineral Resources
+    url: https://data.vulekamali.gov.za/dataset/nat-dept-mineral-resources-2018-19/resource/f00eacf3-cfe7-424c-a76f-cdd26568c062/download/ene18-vote29_chaptertables.xlsx
+description: 'National department: Mineral Resources budget data for the 2018-19 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Mineral%2BResources%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 186927000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 125077000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 9463000.0
+        type: economic_classification_2
+      - name: Buildings and other fixed structures
+        total_budget: 1954000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 1973000.0
+        type: economic_classification_2
+      - name: Households
+        total_budget: 1606000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Administration
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 166286000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 33219000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 729000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 4803000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Mine Health and Safety
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 71224000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 58104000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 163000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Public corporations and private enterprises
+        total_budget: 449221000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 386306000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Mineral Policy and Promotion
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 193191000.0
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 42830000.0
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 41000.0
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Public corporations and private enterprises
+        total_budget: 98439000.0
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 59105000.0
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Mineral Regulation
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1475157000.0
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1638481000.0
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 1661101000.0
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 1779449000.0
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 1890661000.0
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 2015977000.0
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 2139723000.0
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+    real:
+    - amount: 1811603036
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1913317587
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 1824854671
+      financial_year: 2016-17
+      phase: Audited Outcome
+    - amount: 1866858952
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: 1890661000
+      financial_year: 2018-19
+      phase: Main appropriation
+    - amount: 1917091238
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    - amount: 1929079345
+      financial_year: 2020-21
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/national/departments/mineral-resources
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/national/departments/mineral-resources
+  id: 2017-18
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/national/departments/mineral-resources
+  id: 2018-19
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/national/departments/mineral-resources
+  id: 2019-20
+  is_selected: false
+government:
+  name: South Africa
+  slug: south-africa
+government_functions: []
+intro: "## Vote purpose\n\nPromote and regulate the minerals and mining sector for\
+  \ transformation, growth and development. Ensure that all South Africans derive\
+  \ sustainable benefits from the country\u2019s mineral wealth. \n\n## Mandate\n\n\
+  The mandate of the Department of Mineral Resources is broadly informed by:\n\n *\
+  \ the Mineral and Petroleum Resources Development Act (2002), which provides the\
+  \ regulatory framework for equitable access to and the sustainable development of\
+  \ mineral resources and related matters\n * the Mine Health and Safety Act (1996),\
+  \ which governs mine health and safety\n * the 1998 White Paper on Minerals and\
+  \ Mining Policy for South Africa, which ensures the transparent and efficient regulation\
+  \ of the development of South Africa\u2019s mineral resources and mineral industry\
+  \ to meet national objectives and bring optimum benefit to the nation.\n\n"
+is_vote_primary: true
+name: Mineral Resources
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Mineral%2BResources%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Mineral Regulation
+      total_budget: 193191000.0
+      type: programme
+    - name: Administration
+      total_budget: 186927000.0
+      type: programme
+    - name: Mine Health and Safety
+      total_budget: 166286000.0
+      type: programme
+    - name: Mineral Policy and Promotion
+      total_budget: 71224000.0
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 125077000.0
+      type: programme
+    - name: Mineral Policy and Promotion
+      total_budget: 58104000.0
+      type: programme
+    - name: Mineral Regulation
+      total_budget: 42830000.0
+      type: programme
+    - name: Mine Health and Safety
+      total_budget: 33219000.0
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 1954000.0
+      type: programme
+    name: Payments for capital assets - Buildings and other fixed structures
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 9463000.0
+      type: programme
+    - name: Mine Health and Safety
+      total_budget: 729000.0
+      type: programme
+    - name: Mineral Policy and Promotion
+      total_budget: 163000.0
+      type: programme
+    - name: Mineral Regulation
+      total_budget: 41000.0
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: Mineral Policy and Promotion
+      total_budget: 386306000.0
+      type: programme
+    - name: Mineral Regulation
+      total_budget: 59105000.0
+      type: programme
+    - name: Mine Health and Safety
+      total_budget: 4803000.0
+      type: programme
+    - name: Administration
+      total_budget: 1973000.0
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Administration
+      total_budget: 1606000.0
+      type: programme
+    name: Transfers and subsidies - Households
+    type: economic_classification_1_and_2
+  - items:
+    - name: Mineral Policy and Promotion
+      total_budget: 449221000.0
+      type: programme
+    - name: Mineral Regulation
+      total_budget: 98439000.0
+      type: programme
+    name: Transfers and subsidies - Public corporations and private enterprises
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Mineral%2BResources%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Administration
+    total_budget: 327000000.0
+  - name: Mine Health and Safety
+    total_budget: 205037000.0
+  - name: Mineral Regulation
+    total_budget: 393606000.0
+  - name: Mineral Policy and Promotion
+    total_budget: 965018000.0
+selected_financial_year: 2018-19
+selected_tab: departments
+slug: mineral-resources
+sphere:
+  name: National
+  slug: national
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-national-expenditure-south-africa-2018-19/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2018%257Cvote_number.department%253A%2522Mineral%2BResources%2522%26drilldown%3Dbudget_phase.budget_phase%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment_function.government_function%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme_number.subprogramme%257Csubprogramme_number.subprogramme_number%257Cvote_number.department%257Cvote_number.vote_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: Corporate Services
+      total_budget: 125175000.0
+      type: subprogramme
+    - name: Financial Administration
+      total_budget: 96793000.0
+      type: subprogramme
+    - name: Office Accommodation
+      total_budget: 34790000.0
+      type: subprogramme
+    - name: Department Management
+      total_budget: 30050000.0
+      type: subprogramme
+    - name: Ministry
+      total_budget: 27276000.0
+      type: subprogramme
+    - name: Internal Audit
+      total_budget: 12916000.0
+      type: subprogramme
+    name: Administration
+    type: programme
+  - items:
+    - name: Mine Health and Safety Regions
+      total_budget: 140452000.0
+      type: subprogramme
+    - name: Governance Policy and Oversight
+      total_budget: 59782000.0
+      type: subprogramme
+    - name: Mine Health and Safety Council
+      total_budget: 4803000.0
+      type: subprogramme
+    name: Mine Health and Safety
+    type: programme
+  - items:
+    - name: Mintek
+      total_budget: 420368000.0
+      type: subprogramme
+    - name: Council for Geoscience
+      total_budget: 386306000.0
+      type: subprogramme
+    - name: Mineral Promotion and International Coordination
+      total_budget: 71806000.0
+      type: subprogramme
+    - name: Mine Environmental Management
+      total_budget: 33869000.0
+      type: subprogramme
+    - name: Management
+      total_budget: 22294000.0
+      type: subprogramme
+    - name: Mineral Policy
+      total_budget: 20007000.0
+      type: subprogramme
+    - name: Assistance to Mines
+      total_budget: 5877000.0
+      type: subprogramme
+    - name: Economic Advisory Services
+      total_budget: 4491000.0
+      type: subprogramme
+    name: Mineral Policy and Promotion
+    type: programme
+  - items:
+    - name: Mineral Regulation and Administration
+      total_budget: 206821000.0
+      type: subprogramme
+    - name: Petroleum Agency South Africa
+      total_budget: 98439000.0
+      type: subprogramme
+    - name: South African Diamond and Precious Metals Regulator
+      total_budget: 59105000.0
+      type: subprogramme
+    - name: Management Mineral Regulation
+      total_budget: 29241000.0
+      type: subprogramme
+    name: Mineral Regulation
+    type: programme
+title: Mineral Resources budget 2018-19  - vulekamali
+vote_number: 29
+vote_primary:
+  name: Mineral Resources
+  slug: mineral-resources
+  url_path: /2018-19/national/departments/mineral-resources
+website_url: www.dmr.gov.za

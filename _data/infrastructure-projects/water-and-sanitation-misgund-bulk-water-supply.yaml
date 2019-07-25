@@ -1,0 +1,47 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+coordinates:
+- latitude: -33.765182
+  longitude: 23.445781
+dataset_url: /datasets/infrastructure-projects/major-infrastructure-projects-by-national-departments
+department:
+  budget_document: https://data.vulekamali.gov.za/dataset/97ac7669-f7a4-40b6-a5bf-7843666fe0b5/resource/10d89fd3-0c5e-44b4-8b90-bb328c73586f/download/vote-36-water-and-sanitation.pdf
+  name: Water and Sanitation
+  url: /2019-20/national/departments/water-and-sanitation
+description: Construction of new bulk water scheme and Upgrading of existing bulk
+  water scheme
+expenditure:
+- amount: 422000.0
+  budget_phase: Audited Outcome
+  year: '2015'
+- amount: 1557000.0
+  budget_phase: Audited Outcome
+  year: '2016'
+- amount: 695000.0
+  budget_phase: Audited Outcome
+  year: '2017'
+- amount: 4000000.0
+  budget_phase: Adjusted Appropriation
+  year: '2018'
+- amount: 0.0
+  budget_phase: MTEF
+  year: '2019'
+- amount: 5000000.0
+  budget_phase: MTEF
+  year: '2020'
+- amount: 30000000.0
+  budget_phase: MTEF
+  year: '2021'
+infrastructure_type: Bulk Water Supply
+name: Misgund bulk water supply
+nature_of_investment: New infrastructure assets
+projected_budget: 35000000.0
+provinces:
+- Eastern Cape
+selected_tab: infrastructure-projects
+slug: /infrastructure-projects/water-and-sanitation-misgund-bulk-water-supply
+stage: Feasibility
+title: Misgund bulk water supply - vulekamali
+total_budget: 41674000.0

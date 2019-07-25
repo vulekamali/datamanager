@@ -1,0 +1,37 @@
+.ExpenditurePhaseSection-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media screen and (min-width: 1000px) {
+    flex-flow: row wrap;
+  }
+}
+
+.ExpenditurePhaseSection-item {
+  min-width: 0;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 1000px) {
+    width: 50%;
+    padding-right: 1rem;
+
+    &--right {
+      padding-left: 1rem;
+      padding-right: 0;
+    }
+  }
+}
+
+.ExpenditurePhaseSection-share {
+  max-width: 250px;
+}
+
+.ExpenditurePhaseSection-label {
+  display: flex;
+}
+
+.ExpenditurePhaseSection-labelItem {
+  margin-top: 1rem;
+  margin-right: 3rem;
+}

@@ -1,0 +1,813 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+adjusted_budget_summary: null
+budget_actual:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 1332027000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1341110000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1440749000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    real:
+    - amount: 1555459407
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 1473318508
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 1511521358
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+  notices:
+  - Please note that the data for 2014 has not been published on vulekamali.
+budget_actual_programmes:
+  dataset_detail_page: /datasets/budgeted-and-actual-provincial-expenditure/budgeted-and-actual-provincial-expenditure
+  notices: []
+  programmes:
+  - items:
+    - amount: 77019000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 96567000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 105376000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Executive Support (Administration)
+  - items:
+    - amount: 92097000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 63512000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 59188000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Provincial Strategic Management
+  - items:
+    - amount: 117608000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 118181000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 126890000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Corporate Assurance (Corporate Services Centre)
+  - items:
+    - amount: 194382000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 201782000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 215066000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: People Management (Corporate Services Centre)
+  - items:
+    - amount: 850921000
+      financial_year: 2015-16
+      phase: Main appropriation
+    - amount: 861068000
+      financial_year: 2016-17
+      phase: Main appropriation
+    - amount: 934229000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Main appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2014-15
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2015-16
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2015-16
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2016-17
+      phase: Audit Outcome
+    - amount: null
+      financial_year: 2017-18
+      phase: Adjusted appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Final Appropriation
+    - amount: null
+      financial_year: 2017-18
+      phase: Audit Outcome
+    name: Centre for E-Innovation (Corporate Services Centre)
+contributed_datasets:
+- contributor: International Budget Partnership
+  name: How Does Civil Society Use Budget Information?
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- contributor: International Budget Partnership
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- contributor: International Budget Partnership
+  name: A Guide to Conducting Social Audits in South Africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- contributor: Studies in Poverty and Inequality Institute
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+department_adjusted_budget:
+  document:
+    description: ''
+    format: PDF
+    name: "WC AEPRE 2017-18 \u2013 Vote 1 - Premier"
+    url: https://data.vulekamali.gov.za/dataset/647afa9d-8623-4d41-b1a7-817c365868ef/resource/1bcb9baf-0442-4331-b4ce-b36543191739/download/wc-vote-01-office-of-the-premier.pdf
+  name: "Western Cape AEPRE 2017-18 \u2013 Vote 1 - Premier"
+  tables: null
+department_budget:
+  document:
+    description: ''
+    format: PDF
+    name: 'Vote 01 : Premier'
+    url: https://data.vulekamali.gov.za/dataset/1c88c47c-9833-48f9-a5e4-e5cf71eea3bb/resource/0db3cc32-0422-4d15-be28-3f534ca76374/download/wc-vote-01-office-of-the-premier.pdf
+  name: 'Western Cape Department: Premier 2017-18'
+  tables: null
+description: 'Western Cape department: Premier budget data for the 2017-18 financial
+  year from National Treasury in partnership with IMALI YETHU.'
+economic_classification_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Premier%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programmes:
+  - items:
+    - items:
+      - name: Goods and services
+        total_budget: 672632000
+        type: economic_classification_2
+      - name: Compensation of employees
+        total_budget: 198453000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 47638000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 15500000
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 6000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Centre for E-Innovation (Corporate Services Centre)
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 107099000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 18973000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 815000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 3000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Corporate Assurance (Corporate Services Centre)
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 86457000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 17406000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 1507000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 6000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Executive Support (Administration)
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 164046000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 48902000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 2102000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Departmental agencies and accounts
+        total_budget: 16000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: People Management (Corporate Services Centre)
+    type: programme
+  - items:
+    - items:
+      - name: Compensation of employees
+        total_budget: 43393000
+        type: economic_classification_2
+      - name: Goods and services
+        total_budget: 14419000
+        type: economic_classification_2
+      name: Current payments
+      type: economic_classification_1
+    - items:
+      - name: Machinery and equipment
+        total_budget: 472000
+        type: economic_classification_2
+      name: Payments for capital assets
+      type: economic_classification_1
+    - items:
+      - name: Non-profit institutions
+        total_budget: 900000
+        type: economic_classification_2
+      - name: Departmental agencies and accounts
+        total_budget: 4000
+        type: economic_classification_2
+      name: Transfers and subsidies
+      type: economic_classification_1
+    name: Provincial Strategic Management
+    type: programme
+expenditure_over_time:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  expenditure:
+    base_financial_year: 2018-19
+    nominal:
+    - amount: 894537000
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1042874000
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1200773000
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 1364850000
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1440749000
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1545763000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 1488690000
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+    real:
+    - amount: 1160363070
+      financial_year: 2013-14
+      phase: Audited Outcome
+    - amount: 1280727207
+      financial_year: 2014-15
+      phase: Audited Outcome
+    - amount: 1402189039
+      financial_year: 2015-16
+      phase: Audited Outcome
+    - amount: 1499398831
+      financial_year: 2016-17
+      phase: Adjusted appropriation
+    - amount: 1511521358
+      financial_year: 2017-18
+      phase: Main appropriation
+    - amount: 1545763000
+      financial_year: 2018-19
+      phase: Medium Term Estimates
+    - amount: 1415668212
+      financial_year: 2019-20
+      phase: Medium Term Estimates
+financial_years:
+- closest_match:
+    is_exact_match: true
+    url_path: /2016-17/provincial/western-cape/departments/premier
+  id: 2016-17
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2017-18/provincial/western-cape/departments/premier
+  id: 2017-18
+  is_selected: true
+- closest_match:
+    is_exact_match: true
+    url_path: /2018-19/provincial/western-cape/departments/premier
+  id: 2018-19
+  is_selected: false
+- closest_match:
+    is_exact_match: true
+    url_path: /2019-20/provincial/western-cape/departments/premier
+  id: 2019-20
+  is_selected: false
+government:
+  name: Western Cape
+  slug: western-cape
+government_functions: []
+intro: "## Vision\r\n\r\nTo be a leading department enabling the Western Cape Government\
+  \ to improve the quality of life of all its people.\r\n\r\n\r\n\r\n## Mission\r\n\
+  \r\nTo embed good governance and to enable integrated service delivery in the Western\
+  \ Cape through partnerships, innovation and people excellence."
+is_vote_primary: true
+name: Premier
+programme_by_economic_classification:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Premier%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  econ_classes:
+  - items:
+    - name: Centre for E-Innovation (Corporate Services Centre)
+      total_budget: 198453000
+      type: programme
+    - name: People Management (Corporate Services Centre)
+      total_budget: 164046000
+      type: programme
+    - name: Corporate Assurance (Corporate Services Centre)
+      total_budget: 107099000
+      type: programme
+    - name: Executive Support (Administration)
+      total_budget: 86457000
+      type: programme
+    - name: Provincial Strategic Management
+      total_budget: 43393000
+      type: programme
+    name: Current payments - Compensation of employees
+    type: economic_classification_1_and_2
+  - items:
+    - name: Centre for E-Innovation (Corporate Services Centre)
+      total_budget: 672632000
+      type: programme
+    - name: People Management (Corporate Services Centre)
+      total_budget: 48902000
+      type: programme
+    - name: Corporate Assurance (Corporate Services Centre)
+      total_budget: 18973000
+      type: programme
+    - name: Executive Support (Administration)
+      total_budget: 17406000
+      type: programme
+    - name: Provincial Strategic Management
+      total_budget: 14419000
+      type: programme
+    name: Current payments - Goods and services
+    type: economic_classification_1_and_2
+  - items:
+    - name: Centre for E-Innovation (Corporate Services Centre)
+      total_budget: 47638000
+      type: programme
+    - name: People Management (Corporate Services Centre)
+      total_budget: 2102000
+      type: programme
+    - name: Executive Support (Administration)
+      total_budget: 1507000
+      type: programme
+    - name: Corporate Assurance (Corporate Services Centre)
+      total_budget: 815000
+      type: programme
+    - name: Provincial Strategic Management
+      total_budget: 472000
+      type: programme
+    name: Payments for capital assets - Machinery and equipment
+    type: economic_classification_1_and_2
+  - items:
+    - name: People Management (Corporate Services Centre)
+      total_budget: 16000
+      type: programme
+    - name: Executive Support (Administration)
+      total_budget: 6000
+      type: programme
+    - name: Centre for E-Innovation (Corporate Services Centre)
+      total_budget: 6000
+      type: programme
+    - name: Provincial Strategic Management
+      total_budget: 4000
+      type: programme
+    - name: Corporate Assurance (Corporate Services Centre)
+      total_budget: 3000
+      type: programme
+    name: Transfers and subsidies - Departmental agencies and accounts
+    type: economic_classification_1_and_2
+  - items:
+    - name: Centre for E-Innovation (Corporate Services Centre)
+      total_budget: 15500000
+      type: programme
+    - name: Provincial Strategic Management
+      total_budget: 900000
+      type: programme
+    name: Transfers and subsidies - Non-profit institutions
+    type: economic_classification_1_and_2
+programmes:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/estimates-of-provincial-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aestimates-of-provincial-expenditure-south-africa-2017-18/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Premier%2522%26drilldown%3Dbudget_phase.budget_phase%257Cdepartment.department%257Ceconomic_classification_1.economic_classification_1%257Ceconomic_classification_2.economic_classification_2%257Ceconomic_classification_3.economic_classification_3%257Ceconomic_classification_4.economic_classification_4%257Cfinancial_year.financial_year%257Cgovernment.government%257Cprogramme_number.programme%257Cprogramme_number.programme_number%26pagesize%3D10000
+  programme_budgets:
+  - name: Executive Support (Administration)
+    total_budget: 105376000
+  - name: Provincial Strategic Management
+    total_budget: 59188000
+  - name: People Management (Corporate Services Centre)
+    total_budget: 215066000
+  - name: Centre for E-Innovation (Corporate Services Centre)
+    total_budget: 934229000
+  - name: Corporate Assurance (Corporate Services Centre)
+    total_budget: 126890000
+selected_financial_year: 2017-18
+selected_tab: departments
+slug: premier
+sphere:
+  name: Provincial
+  slug: provincial
+subprogramme_by_programme:
+  dataset_detail_page: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2017-18
+  department_data_csv: https://datamanager.vulekamali.gov.za/csv/?api_url=https%3A//openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a%3Aepre-sub-programme-expenditure-2017-18-v2/aggregate/%3Fcut%3Dfinancial_year.financial_year%253A2017%257Cgovernment.government%253A%2522Western%2BCape%2522%257Cdepartment.department%253A%2522Premier%2522%26drilldown%3Ddepartment.department%257Cfinancial_year.financial_year%257Cgovernment.government%257Cphase.phase%257Cprogramme_number.programme%257Cprogramme_number.programme_number%257Csubprogramme.subprogramme%26pagesize%3D10000
+  programmes:
+  - items:
+    - name: GITO Management Services
+      total_budget: 466589000
+      type: subprogramme
+    - name: Connected Government and Unified Communications
+      total_budget: 328406000
+      type: subprogramme
+    - name: Strategic ICT Services
+      total_budget: 91013000
+      type: subprogramme
+    - name: Transversal Applications Development and Support
+      total_budget: 39887000
+      type: subprogramme
+    - name: Programme Support
+      total_budget: 8334000
+      type: subprogramme
+    name: Centre for E-Innovation (Corporate Services Centre)
+    type: programme
+  - items:
+    - name: Internal Audit
+      total_budget: 44158000
+      type: subprogramme
+    - name: Legal Services
+      total_budget: 41328000
+      type: subprogramme
+    - name: Provincial Forensic Services
+      total_budget: 16301000
+      type: subprogramme
+    - name: Corporate Communication
+      total_budget: 14446000
+      type: subprogramme
+    - name: Enterprise Risk Management
+      total_budget: 8048000
+      type: subprogramme
+    - name: Programme Support
+      total_budget: 2609000
+      type: subprogramme
+    name: Corporate Assurance (Corporate Services Centre)
+    type: programme
+  - items:
+    - name: Financial Management
+      total_budget: 39951000
+      type: subprogramme
+    - name: Office of the Director-General
+      total_budget: 26588000
+      type: subprogramme
+    - name: Office of the Premier
+      total_budget: 17481000
+      type: subprogramme
+    - name: Executive Council Support
+      total_budget: 9124000
+      type: subprogramme
+    - name: Departmental Strategy
+      total_budget: 5582000
+      type: subprogramme
+    - name: Strategic Communications
+      total_budget: 4517000
+      type: subprogramme
+    - name: Programme Support
+      total_budget: 2133000
+      type: subprogramme
+    name: Executive Support (Administration)
+    type: programme
+  - items:
+    - name: People Management Practices
+      total_budget: 98891000
+      type: subprogramme
+    - name: Organisation Development
+      total_budget: 80769000
+      type: subprogramme
+    - name: People Training and Empowerment
+      total_budget: 31678000
+      type: subprogramme
+    - name: Programme Support
+      total_budget: 3728000
+      type: subprogramme
+    name: People Management (Corporate Services Centre)
+    type: programme
+  - items:
+    - name: Strategic Management Information
+      total_budget: 20973000
+      type: subprogramme
+    - name: Strategic Programmes
+      total_budget: 18923000
+      type: subprogramme
+    - name: Policy and Strategy
+      total_budget: 16038000
+      type: subprogramme
+    - name: Programme Support
+      total_budget: 3254000
+      type: subprogramme
+    name: Provincial Strategic Management
+    type: programme
+title: Premier budget 2017-18  - vulekamali
+vote_number: 1
+vote_primary:
+  name: Premier
+  slug: premier
+  url_path: /2017-18/provincial/western-cape/departments/premier
+website_url: null

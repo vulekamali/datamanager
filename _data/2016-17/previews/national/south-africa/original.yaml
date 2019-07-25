@@ -1,0 +1,1932 @@
+data:
+  items:
+  - description: "## Vote purpose\r\n\r\nLead, support and promote agricultural, forestry\
+      \ and fisheries resources management through policies, strategies and programmes\
+      \ to enhance sustainable use, and achieve economic growth, job creation, food\
+      \ security, rural development and transformation.\r\n\r\n## Mandate\r\n\r\n\
+      The mandate of the Department of Agriculture, Forestry and Fisheries includes\
+      \ value chains, inputs, production and consumption in the agriculture, forestry\
+      \ and fishery sectors. The department\u2019s mandate is derived from a range\
+      \ of legislation, including the Sea Fisheries Act (1988), the National Forests\
+      \ Act (1988), the Agricultural Products Standards Act (1990), and the Conservation\
+      \ of Agricultural Resources Act (1993)."
+    focus_areas:
+    - slug: agriculture-rural-development-and-land-reform
+      title: Agriculture, rural development and land reform
+      url: 2016-17/focus/agriculture-rural-development-and-land-reform
+    percentage_of_budget: 0.48266927667062964
+    programmes:
+    - amount: 788053000.0
+      percentage: 12.44366580266905
+      slug: administration
+      title: Administration
+    - amount: 1953418000.0
+      percentage: 30.845235999251535
+      slug: agricultural-production-health-and-food-safety
+      title: Agricultural Production, Health And Food Safety
+    - amount: 458598000.0
+      percentage: 7.24144219966477
+      slug: fisheries
+      title: Fisheries
+    - amount: 1889738000.0
+      percentage: 29.83970383540727
+      slug: food-security-and-agrarian-reform
+      title: Food Security And Agrarian Reform
+    - amount: 945562000.0
+      percentage: 14.93079465937361
+      slug: forestry-and-natural-resources-management
+      title: Forestry And Natural Resources Management
+    - amount: 297596000.0
+      percentage: 4.6991575036337645
+      slug: trade-promotion-and-market-access
+      title: Trade Promotion And Market Access
+    slug: agriculture-forestry-and-fisheries
+    title: Agriculture, Forestry and Fisheries
+    total: 6332965000.0
+  - description: "## Vote purpose\n\n_Contribute to sustainable economic development\
+      \ and enhance job creation by\npreserving, protecting and developing South African\
+      \ arts, culture and heritage\nto sustain a socially cohesive and democratic\
+      \ nation._\n\n\n\n## Mandate\n\nThe Department of Arts and Culture derives its\
+      \ mandate from the following\nlegislation:\n\n  * the Heraldry Act\_(1962)\n\
+      \n  * the Culture Promotion Act\_(1983)\n\n  * the National Archives and Record\
+      \ Service of South Africa Act\_(1996)\n\n  * the Legal Deposit Act\_(1997)\n\
+      \n  * the South African Geographical Names Council Act\_(1998)\n\n  * the Cultural\
+      \ Institutions Act\_(1998)\n\n  * the National Council for Library and Information\
+      \ Act\_(2001)\n\n  * the National Heritage Resources Act\_(1999)\n\n  * the\
+      \ Use of Official Languages Act\_(2012).\n\nBroadly, this legislation mandates\
+      \ the department to:\n\n  * develop and promote arts and culture in South Africa,\
+      \ and mainstream its role in social development\n\n  * develop and promote the\
+      \ official languages of South Africa, and enhance the linguistic diversity of\
+      \ the country\n\n  * improve economic and other development opportunities for\
+      \ South African arts and culture nationally and globally through mutually beneficial\
+      \ partnerships in order to ensure the sustainability of the sector\n\n  * develop\
+      \ and monitor the implementation of policy, legislation and strategic direction\
+      \ for the identification, conservation and promotion of cultural heritage.\n\
+      \n"
+    focus_areas:
+    - slug: basic-education
+      title: Basic education
+      url: 2016-17/focus/basic-education
+    percentage_of_budget: 0.3102615714665189
+    programmes:
+    - amount: 281119000.0
+      percentage: 6.905653434304801
+      slug: administration
+      title: Administration
+    - amount: 1094707000.0
+      percentage: 26.891341937426873
+      slug: arts-and-culture-promotion-and-development
+      title: Arts And Culture Promotion And Development
+    - amount: 2330598000.0
+      percentage: 57.25085135719713
+      slug: heritage-promotion-and-preservation
+      title: Heritage Promotion And Preservation
+    - amount: 364429000.0
+      percentage: 8.952153271071198
+      slug: institutional-governance
+      title: Institutional Governance
+    slug: arts-and-culture
+    title: Arts and Culture
+    total: 4070853000.0
+  - description: "## Vote purpose\n\n_Develop, maintain and support a South African\
+      \ school education system for the\n21st century._\n\n\n\n## Mandate\n\nThe Department\
+      \ of Basic Education derives its mandate from the following\nlegislation:\n\n\
+      \  * the National Education Policy Act\_(1996), which inscribed into law the\
+      \ policies, the legislative and monitoring responsibilities of the Minister\
+      \ of Basic Education, as well as the formal relations between national and provincial\
+      \ authorities\n\n  * the South African Schools Act\_(1996), which promotes access,\
+      \ quality and democratic governance in the schooling system and makes schooling\
+      \ compulsory for children aged 7 to 15, to ensure that all learners have right\
+      \ of access to quality education without discrimination\n\n  * the Employment\
+      \ of Educators Act\_(1998), which regulates the professional, moral and ethical\
+      \ responsibilities of educators, as well as the competency requirements for\
+      \ teachers.\n\n"
+    focus_areas:
+    - slug: basic-education
+      title: Basic education
+      url: 2016-17/focus/basic-education
+    percentage_of_budget: 1.6972854437688936
+    programmes:
+    - amount: 377893000.0
+      percentage: 1.6969010886816756
+      slug: administration
+      title: Administration
+    - amount: 1936100000.0
+      percentage: 8.693916526097578
+      slug: curriculum-policy-support-and-monitoring
+      title: Curriculum Policy, Support And Monitoring
+    - amount: 6291684000.0
+      percentage: 28.252350345841492
+      slug: educational-enrichment-services
+      title: Educational Enrichment Services
+    - amount: 12500176000.0
+      percentage: 56.13113305383416
+      slug: planning-information-and-assessment
+      title: Planning, Information And Assessment
+    - amount: 1163742000.0
+      percentage: 5.2256989855450895
+      slug: teachers-education-human-resources-and-institutional-development
+      title: Teachers, Education Human Resources And Institutional Development
+    slug: basic-education
+    title: Basic Education
+    total: 22269595000.0
+  - description: "## Vote purpose\n\n_Create an enabling environment for the provision\
+      \ of inclusive communication\nservices to all South Africans in a manner that\
+      \ promotes socioeconomic\ndevelopment and investment through broadcasting, new\
+      \ media, print media and\nother new technologies, and brand the country locally\
+      \ and internationally._\n\n\n\n## Mandate\n\nThe Department of Communications\
+      \ is responsible for overarching communications\npolicy and strategy, information\
+      \ dissemination and publicity, and the branding\nof South Africa. Improved communication\
+      \ and marketing will promote an informed\ncitizenry and assist in promoting\
+      \ investments, economic growth and job\ncreation. The department\u2019s mandate\
+      \ is derived from section\_192 of the\nConstitution, which provides for the\
+      \ independence of broadcasting regulation\nin the public interest, the international\
+      \ Telecommunications Union and the\nWorld Intellectual Property Organisation.\n\
+      \nThe department is responsible for the administration and implementation of\
+      \ the\nfollowing legislation:\n\n  * the Films and Publications Act\_(1996)\n\
+      \n  * the Broadcasting Act\_(1999)\n\n  * the Media Development and Diversity\
+      \ Agency Act\_(2002)\n\n  * the Independent Communications Authority of South\
+      \ Africa Act\_(2000) \u2013 joint responsibility with the Minister of Telecommunications\
+      \ and Postal Services\n\n  * the Electronic Communications and Transactions\
+      \ Act\_(2002) \u2013 joint responsibility with the Minister of Telecommunications\
+      \ and Postal Services\n\n  * the Electronic Communications and Transactions\
+      \ Act\_(2005) \u2013 joint responsibility with the Minister of Telecommunications\
+      \ and Postal Services.\n\nThe department is also responsible for the oversight\
+      \ of the entities within\nits portfolio.\n\n"
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.10254061736458754
+    programmes:
+    - amount: 45102000.0
+      percentage: 3.3522966301621966
+      slug: administration
+      title: Administration
+    - amount: 8400000.0
+      percentage: 0.6243468514336936
+      slug: communications-policy-research-and-development
+      title: Communications Policy, Research And Development
+    - amount: 1281010000.0
+      percentage: 95.2136381136995
+      slug: entity-oversight
+      title: Entity Oversight
+    - amount: 10894000.0
+      percentage: 0.8097184047046022
+      slug: industry-and-capacity-development
+      title: Industry And Capacity Development
+    slug: communications
+    title: Communications
+    total: 1345406000.0
+  - description: "## Vote purpose\n\n_Improve cooperative governance across the three\
+      \ spheres of government in\npartnership with institutions of traditional leadership,\
+      \ thereby ensuring that\nprovinces and municipalities carry out their service\
+      \ delivery and development\nfunctions effectively._\n\n\n\n## Mandate\n\nThe\
+      \ Department of Cooperative Governance is mandated to: develop and monitor\n\
+      the implementation of national policy and legislation; transform and\nstrengthen\
+      \ key institutions and mechanisms of governance to fulfil their\ndevelopmental\
+      \ role; develop, promote and monitor mechanisms, systems and\nstructures to\
+      \ enable integrated service delivery and implementation within\ngovernment;\
+      \ and promote sustainable development by providing support to and\nexercising\
+      \ oversight over provincial and local government. This mandate is\nderived from\
+      \ the following legislation:\n\n  * the Intergovernmental Relations Framework\
+      \ Act\_(2005)\n\n  * the Municipal Property Rates Act\_(2004)\n\n  * the Municipal\
+      \ Systems Act\_(2000)\n\n  * the Municipal Structures Act\_(1998).\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    - slug: human-settlements-and-municipal-infrastructure
+      title: Human settlements and municipal infrastructure
+      url: 2016-17/focus/human-settlements-and-municipal-infrastructure
+    percentage_of_budget: 5.563268445257667
+    programmes:
+    - amount: 266464000.0
+      percentage: 0.36504894207264676
+      slug: administration
+      title: Administration
+    - amount: 3191185000.0
+      percentage: 4.371842756275142
+      slug: community-work-programme
+      title: Community Work Programme
+    - amount: 68122162000.0
+      percentage: 93.32563937267871
+      slug: institutional-development
+      title: Institutional Development
+    - amount: 483174000.0
+      percentage: 0.6619361622470917
+      slug: local-government-support-and-intervention-management
+      title: Local Government Support And Intervention Management
+    - amount: 598887000.0
+      percentage: 0.8204600462766498
+      slug: national-disaster-management-centre
+      title: National Disaster Management Centre
+    - amount: 332176000.0
+      percentage: 0.455072720449755
+      slug: regional-and-urban-development-and-legislative-support
+      title: Regional And Urban Development And Legislative Support
+    slug: cooperative-governance-and-traditional-affairs
+    title: Cooperative Governance and Traditional Affairs
+    total: 72994048000.0
+  - description: "## Vote purpose\n\n_Contribute to a just, peaceful and safer South\
+      \ Africa through the effective\nand humane incarceration of inmates and the\
+      \ rehabilitation and social\nreintegration of offenders._\n\n\n\n## Mandate\n\
+      \nThe mandate of the Department of Correctional Services is derived from the\n\
+      Correctional Services Act\_(1998), as amended; the Criminal Procedure Act\n\
+      (1977); the 2005 White Paper on Corrections; and the 2014\_White Paper on\n\
+      Remand Detention Management in South Africa. The legislation requires the\n\
+      department to contribute to maintaining and promoting a just, peaceful and\n\
+      safe society by correcting offending behaviour in a safe, secure and humane\n\
+      environment, thus facilitating optimal rehabilitation and reduced repeat\noffending.\n\
+      \n"
+    focus_areas:
+    - slug: defence-public-order-and-safety
+      title: Defence, public order and safety
+      url: 2016-17/focus/defence-public-order-and-safety
+    percentage_of_budget: 1.64452093273918
+    programmes:
+    - amount: 3876194000.0
+      percentage: 17.96423248205393
+      slug: administration
+      title: Administration
+    - amount: 1975116000.0
+      percentage: 9.153680905296389
+      slug: care
+      title: Care
+    - amount: 13700861000.0
+      percentage: 63.49668056044303
+      slug: incarceration
+      title: Incarceration
+    - amount: 1217339000.0
+      percentage: 5.641761172291957
+      slug: rehabilitation
+      title: Rehabilitation
+    - amount: 807777000.0
+      percentage: 3.743644879914699
+      slug: social-reintegration
+      title: Social Reintegration
+    slug: correctional-services
+    title: Correctional Services
+    total: 21577287000.0
+  - description: "## Vote purpose\n\n_Defend and protect the Republic of South Africa,\
+      \ its territorial integrity\nand its people, in accordance with the Constitution\
+      \ and the principles of\ninternational law regulating the use of force. Provide\
+      \ for military veterans\u2019\nbenefits._\n\n\n\n## Mandate\n\nThe Department\
+      \ of Defence derives its mandate from section\_200 of the\nConstitution, the\
+      \ Defence Act\_(2002), as amended by the Defence Amendment Act\n(2010), as well\
+      \ as the 1996 White Paper on Defence, the 1998 Defence Review\nand the 2015\
+      \ South African Defence Review. The department is required to\nprovide, manage,\
+      \ prepare and employ defence capabilities that are commensurate\nwith the needs\
+      \ of South Africa.\n\n"
+    focus_areas:
+    - slug: defence-public-order-and-safety
+      title: Defence, public order and safety
+      url: 2016-17/focus/defence-public-order-and-safety
+    percentage_of_budget: 3.595059612659797
+    programmes:
+    - amount: 5151108000.0
+      percentage: 10.920364314032225
+      slug: administration
+      title: Administration
+    - amount: 6883527000.0
+      percentage: 14.593097757895448
+      slug: air-defence
+      title: Air Defence
+    - amount: 900248000.0
+      percentage: 1.9085284433909913
+      slug: defence-intelligence
+      title: Defence Intelligence
+    - amount: 3899635000.0
+      percentage: 8.26723782373638
+      slug: force-employment
+      title: Force Employment
+    - amount: 5911093000.0
+      percentage: 12.5315347793379
+      slug: general-support
+      title: General Support
+    - amount: 15651438000.0
+      percentage: 33.18109521261987
+      slug: landward-defence
+      title: Landward Defence
+    - amount: 4355880000.0
+      percentage: 9.23447858367689
+      slug: maritime-defence
+      title: Maritime Defence
+    - amount: 4416816000.0
+      percentage: 9.363663085310298
+      slug: military-health-support
+      title: Military Health Support
+    slug: defence-and-military-veterans
+    title: Defence and Military Veterans
+    total: 47169745000.0
+  - description: "## Vote purpose\n\n_Promote economic development policy formulation\
+      \ and planning for the benefit\nof all South Africans._\n\n\n\n## Mandate\n\n\
+      The Economic Development Department was established in 2009 and has assumed\n\
+      responsibilities relating to the creation of decent employment through\ninclusive\
+      \ economic growth, including the implementation of certain aspects of\nthe national\
+      \ development plan, the new growth path and the national\ninfrastructure plan\
+      \ as captured in outcomes 4, 6 and 7 of government\u2019s\n2014-2019 medium\
+      \ term strategic framework.\n\nThe department is also responsible for five public\
+      \ entities, comprising three\nregulatory bodies and two development finance\
+      \ institutions. These are: the\nCompetition Commission, the Competition Tribunal,\
+      \ the International Trade\nAdministration Commission of South Africa, the Industrial\
+      \ Development\nCorporation of South Africa and the Small Enterprise Finance\
+      \ Agency.\n\nIn line with these responsibilities, the department\u2019s mandate\
+      \ includes the\nadministration of the following legislation:\n\n  * the Industrial\
+      \ Development Act\_(1940)\n\n  * the Competition Act\_(1998)\n\n  * the International\
+      \ Trade Administration Act\_(2002)\n\n  * the Infrastructure Development Act\_\
+      (2014).\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.051419538378608395
+    programmes:
+    - amount: 79208000.0
+      percentage: 11.74041481573709
+      slug: administration
+      title: Administration
+    - amount: 36008000.0
+      percentage: 5.337198978449917
+      slug: growth-path-and-social-dialogue
+      title: Growth Path And Social Dialogue
+    - amount: 559445000.0
+      percentage: 82.922386205813
+      slug: investment-competition-and-trade
+      title: Investment, Competition And Trade
+    slug: economic-development
+    title: Economic Development
+    total: 674661000.0
+  - description: "## Vote purpose\n\n_Formulate energy policies, regulatory frameworks\
+      \ and legislation, and oversee\ntheir implementation to ensure energy security,\
+      \ the promotion of\nenvironmentally friendly energy carriers, and access to\
+      \ affordable and\nreliable energy for all South Africans._\n\n\n\n## Mandate\n\
+      \nThe Department of Energy is mandated to ensure the secure and sustainable\n\
+      provision of energy for socioeconomic development. It is to achieve this by\n\
+      developing an integrated energy plan for the entire energy sector, regulating\n\
+      energy industries, and promoting investment in accordance with the integrated\n\
+      resource plan (which focuses on electricity). A number of acts regulate the\n\
+      energy sector and reflect the legislative measures the department has\ninstituted\
+      \ to govern the energy sector.\n\n  * Key among these are:\n\n  * the National\
+      \ Energy Act\_(2008)\n\n  * the Petroleum Products Act\_(1977)\n\n  * the Electricity\
+      \ Regulation Act\_(2006).\n\n  * The National Energy Act\_(2008) sets out the\
+      \ core aspects of the department\u2019s mandate and is the enabling legislation\
+      \ that empowers the Minister of Energy to:\n\n  * ensure that diverse energy\
+      \ resources are available in sustainable quantities and at affordable prices\
+      \ in the South African economy to support economic growth and poverty alleviation,\
+      \ while taking into account environmental considerations\n\n  * plan for the\
+      \ increased generation and consumption of renewable energy, a contingency energy\
+      \ supply, the holding of strategic energy feedstock and carriers, adequate investment\
+      \ in appropriate upkeep, and access to energy infrastructure\n\n  * collect\
+      \ data and information regarding energy demand, supply and generation\n\n  *\
+      \ promote electricity regulation, energy research and the efficient generation\
+      \ and consumption of energy.\n\nThe department is also mandated to regulate\
+      \ the petroleum industry at the\nmanufacturing, wholesale and retail levels,\
+      \ through the implementation of the\nPetroleum Products Act\_(1977). The Petroleum\
+      \ and Liquid Fuels Charter is\nannexed to the Petroleum Products Amendment Act\_\
+      (2003), and outlines the\ndepartment\u2019s strategy to effect the transformation\
+      \ of the industry.\n\nIn terms of its policy mandate, the department is working\
+      \ with a range of\ndocuments and legislation that support the long term vision\
+      \ for South Africa\nto use as much renewable energy as possible; create the\
+      \ necessary conditions\nto stimulate an efficient electricity market; and position\
+      \ South Africa to\nbecome globally competitive in the use of innovative technology\
+      \ for the\ndesign, manufacture and deployment of state of the art nuclear energy\
+      \ systems,\npower reactors and nuclear fuel cycle systems.\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    - slug: human-settlements-and-municipal-infrastructure
+      title: Human settlements and municipal infrastructure
+      url: 2016-17/focus/human-settlements-and-municipal-infrastructure
+    percentage_of_budget: 0.5750580066250502
+    programmes:
+    - amount: 240137000.0
+      percentage: 3.1826581531419236
+      slug: administration
+      title: Administration
+    - amount: 616933000.0
+      percentage: 8.176527742048524
+      slug: clean-energy
+      title: Clean Energy
+    - amount: 5699907000.0
+      percentage: 75.54377495221777
+      slug: electrification-and-energy-programme-and-project-management
+      title: Electrification And Energy Programme And Project Management
+    - amount: 46748000.0
+      percentage: 0.6195750898157245
+      slug: energy-policy-and-planning
+      title: Energy Policy And Planning
+    - amount: 863575000.0
+      percentage: 11.445399978343765
+      slug: nuclear-energy
+      title: Nuclear Energy
+    - amount: 77871000.0
+      percentage: 1.0320640844322813
+      slug: petroleum-and-petroleum-products-regulation
+      title: Petroleum And Petroleum Products Regulation
+    slug: energy
+    title: Energy
+    total: 7545171000.0
+  - description: "## Vote purpose\n\n_Lead South Africa's environmental sector to\
+      \ achieve sustainable development\ntowards a better quality of life for all._\n\
+      \n\n\n## Mandate\n\nThe Department of Environmental Affairs is mandated to give\
+      \ effect to the\nright of citizens to an environment that is not harmful to\
+      \ their health or\nwellbeing, and to have the environment protected for the\
+      \ benefit of present\nand future generations. To this end, the department provides\
+      \ leadership in\nenvironmental management, conservation and protection towards\
+      \ sustainability\nfor the benefit of South Africans and the global community.\n\
+      \nThis mandate is derived from the following legislation:\n\n  * the National\
+      \ Environmental Management Act\_(1998), which provides for issue specific legislation\
+      \ on: biodiversity and heritage resources; oceans and coasts; climate change\
+      \ and air quality management; and waste and chemicals management\n\n  * the\
+      \ National Environmental Management Amendment Act\_(2004), which streamlines\
+      \ the process of regulating and administering the environmental impact assessment\
+      \ process\n\n  * the National Environmental Management: Protected Areas Amendment\
+      \ Act\_(2009), which provides for the assignment of national parks, special\
+      \ parks and heritage sites to South Africa in terms of the World Heritage Convention\
+      \ Act\_(1999)\n\n  * the National Environmental Management: Biodiversity Act\_\
+      (2004), which significantly reforms South Africa\u2019s laws regulating biodiversity\n\
+      \n  * the National Environmental Management: Air Quality and Atmospheric Act\_\
+      (2004), which reforms the law regulating air quality in order to protect the\
+      \ environment by providing reasonable measures for preventing pollution and\
+      \ ecological degradation, securing ecologically sustainable development, and\
+      \ provides for national norms and standards regulating air quality monitoring\n\
+      \n  * the National Environmental Management: Waste Act\_(2008), which reforms\
+      \ the law regulating waste management in order to protect health and the environment\
+      \ by providing reasonable measures for the prevention of pollution\n\n  * the\
+      \ National Environmental Management: Integrated Coastal Management Act\_(2008),\
+      \ which promotes the conservation of the coastal environment and ensures sustainable\
+      \ development practices and the use of natural resources.\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.4900725329429568
+    programmes:
+    - amount: 808226000.0
+      percentage: 12.569413761930024
+      slug: administration
+      title: Administration
+    - amount: 718249000.0
+      percentage: 11.170104482029132
+      slug: biodiversity-and-conservation
+      title: Biodiversity And Conservation
+    - amount: 109273000.0
+      percentage: 1.6993978788202548
+      slug: chemicals-and-waste-management
+      title: Chemicals And Waste Management
+    - amount: 289582000.0
+      percentage: 4.50353734723607
+      slug: climate-change-and-air-quality
+      title: Climate Change And Air Quality
+    - amount: 3865083000.0
+      percentage: 60.109211348313195
+      slug: environmental-programmes
+      title: Environmental Programmes
+    - amount: 164647000.0
+      percentage: 2.5605663114778445
+      slug: legal-authorisations-and-compliance
+      title: Legal, Authorisations And Compliance
+    - amount: 475041000.0
+      percentage: 7.387768870193486
+      slug: oceans-and-coasts
+      title: Oceans And Coasts
+    slug: environmental-affairs
+    title: Environmental Affairs
+    total: 6430101000.0
+  - description: "## Vote purpose\n\n_Provide leadership and coordination of health\
+      \ services to promote the health\nof all people in South Africa through_ _an\
+      \ accessible, caring and high quality\nhealth system based on the primary health\
+      \ care approach._\n\n\n\n## Mandate\n\nThe Department of Health derives its\
+      \ mandate from the National Health Act\n(2003), which requires the department\
+      \ to provide a framework for a structured\nuniform health system within South\
+      \ Africa. The act sets out the functions of\nthe three levels of government\
+      \ as they relate to health services. The\ndepartment contributes directly to\
+      \ achieving the government outcome that calls\nfor a long and healthy life for\
+      \ all South Africans\_(outcome 2).\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    - slug: health
+      title: Health
+      url: 2016-17/focus/health
+    percentage_of_budget: 2.9391175101094347
+    programmes:
+    - amount: 463464000.0
+      percentage: 1.2018260773574017
+      slug: administration
+      title: Administration
+    - amount: 1690186000.0
+      percentage: 4.382885424508478
+      slug: health-regulation-and-compliance-management
+      title: Health Regulation And Compliance Management
+    - amount: 16018568000.0
+      percentage: 41.5383562570616
+      slug: hiv-and-aids-tuberculosis-and-maternal-and-child-health
+      title: Hiv And Aids, Tuberculosis, And Maternal And Child Health
+    - amount: 19573498000.0
+      percentage: 50.756780076776074
+      slug: hospitals-tertiary-health-services-and-human-resource-development
+      title: Hospitals, Tertiary Health Services And Human Resource Development
+    - amount: 559762000.0
+      percentage: 1.4515400736923123
+      slug: national-health-insurance-health-planning-and-systems-enablement
+      title: National Health Insurance, Health Planning And Systems Enablement
+    - amount: 257839000.0
+      percentage: 0.6686120906041355
+      slug: primary-health-care-services
+      title: Primary Health Care Services
+    slug: health
+    title: Health
+    total: 38563317000.0
+  - description: "## Vote purpose\n\n_Develop and support a quality higher and vocational\
+      \ education sector. Promote\naccess to higher and vocational education and skills\
+      \ development training\nopportunities._\n\n\n\n## Mandate\n\nThe Department\
+      \ of Higher Education and Training derives its mandate from the\nfollowing pieces\
+      \ of legislation:\n\n  * the Higher Education Act\_(1997), which provides for\
+      \ a unified and national system of higher education\n\n  * the National Student\
+      \ Financial Aid Scheme Act\_(1999), which provides for the granting of loans\
+      \ and bursaries to eligible students attending public higher education and training\
+      \ institutions, and the subsequent administration of such loans and bursaries\n\
+      \n  * the Continuing Education and Training Colleges Act\_(2006), which provides\
+      \ for the regulation of continuing education and training, the establishment\
+      \ of governance structures and the funding of public technical and vocational\
+      \ education and training colleges and community education and training colleges,\
+      \ the registration of private colleges, and the promotion of quality in continuing\
+      \ education and training\n\n  * the Skills Development Levies Act\_(1999), which\
+      \ provides for the imposition of skills development levies\n\n  * the Skills\
+      \ Development Act\_(2008), which enables the creation of the National Skills\
+      \ Agency, the establishment of the Quality Council for Trades and Occupations,\
+      \ and the regulation of apprenticeships, learnerships and other matters relating\
+      \ to skills development\n\n  * the National Qualifications Framework Act\_(2008),\
+      \ which provides for the national qualifications framework, the South African\
+      \ Qualifications Authority and the quality councils, for the issuing and quality\
+      \ assurance of qualifications required on the sub-frameworks of the national\
+      \ qualifications framework. \n\n"
+    focus_areas:
+    - slug: post-school-education-and-training
+      title: Post school education and training
+      url: 2016-17/focus/post-school-education-and-training
+    percentage_of_budget: 5.093311206522691
+    programmes:
+    - amount: 373667000.0
+      percentage: 0.5591484176198692
+      slug: administration
+      title: Administration
+    - amount: 2069739000.0
+      percentage: 3.0971193247895332
+      slug: community-education-and-training
+      title: Community Education And Training
+    - amount: 17639595000.0
+      percentage: 26.39556512002761
+      slug: direct-charge-against-the-national-revenue-fund
+      title: Direct Charge Against The National Revenue Fund
+    - amount: 71545000.0
+      percentage: 0.10705862047923297
+      slug: planning-policy-and-strategy
+      title: Planning, Policy And Strategy
+    - amount: 224534000.0
+      percentage: 0.33598854274490314
+      slug: skills-development
+      title: Skills Development
+    - amount: 6917191000.0
+      percentage: 10.350757230433516
+      slug: technical-and-vocational-education-and-training
+      title: Technical And Vocational Education And Training
+    - amount: 39531603000.0
+      percentage: 59.15436274390533
+      slug: university-education
+      title: University Education
+    slug: higher-education-and-training
+    title: Higher Education and Training
+    total: 66827874000.0
+  - description: "## Vote purpose\n\n_Efficiently determine and safeguard the identity\
+      \ and status of citizens.\nRegulate immigration to ensure security, promote\
+      \ development and fulfil South\nAfrica\u2019s international obligations._\n\n\
+      \n\n## Mandate\n\nThe mandate of the Department of Home Affairs is derived from\
+      \ the Constitution\nand various acts of Parliament and policy documents. The\
+      \ department\u2019s services\nare divided into two broad categories: civic services\
+      \ and immigration\nservices. Both must ensure the efficient determination and\
+      \ safeguarding of the\nidentity and status of citizens and foreigners, and provide\
+      \ for the management\nof immigration to ensure security, promote development\
+      \ and fulfil South\nAfrica\u2019s international obligations.\n\n"
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.5462462337305096
+    programmes:
+    - amount: 2222890000.0
+      percentage: 31.015021333474717
+      slug: administration
+      title: Administration
+    - amount: 3901559000.0
+      percentage: 54.43676278124887
+      slug: citizen-affairs
+      title: Citizen Affairs
+    - amount: 1042691000.0
+      percentage: 14.548215885276413
+      slug: immigration-affairs
+      title: Immigration Affairs
+    slug: home-affairs
+    title: Home Affairs
+    total: 7167140000.0
+  - description: "## Vote purpose\n\n_Facilitate the creation of sustainable human\
+      \ settlements and the improvement\nto household quality of life._\n\n\n\n##\
+      \ Mandate\n\nThe Department of Human Settlements derives its core mandate and\n\
+      responsibilities from section\_3 of the Housing Act\_(1997), which allows the\n\
+      department, in collaboration with provinces and municipalities, to establish\n\
+      and facilitate a sustainable national housing development process. The\ndepartment\
+      \ does this by: determining national policy and national norms and\nstandards\
+      \ for housing and human settlements development; setting broad\nnational housing\
+      \ delivery goals, and monitoring the financial and non-\nfinancial performance\
+      \ of provinces and municipalities against these goals;\nbuilding the capacity\
+      \ of provinces and municipalities; and promoting\nconsultation with all stakeholders\
+      \ in the housing delivery chain, including\ncivil society and the private sector.\n\
+      \n"
+    focus_areas:
+    - slug: human-settlements-and-municipal-infrastructure
+      title: Human settlements and municipal infrastructure
+      url: 2016-17/focus/human-settlements-and-municipal-infrastructure
+    percentage_of_budget: 2.3391149747270754
+    programmes:
+    - amount: 442274000.0
+      percentage: 1.441061142119985
+      slug: administration
+      title: Administration
+    - amount: 29940937000.0
+      percentage: 97.55653931581446
+      slug: housing-development-finance
+      title: Housing Development Finance
+    - amount: 224582000.0
+      percentage: 0.7317554127522543
+      slug: human-settlements-delivery-support
+      title: Human Settlements Delivery Support
+    - amount: 83063000.0
+      percentage: 0.2706441293133043
+      slug: human-settlements-policy-strategy-and-planning
+      title: Human Settlements Policy, Strategy And Planning
+    slug: human-settlements
+    title: Human Settlements
+    total: 30690856000.0
+  - description: "## Vote purpose\n\n_Ensure independent oversight of the South African\
+      \ Police Service and the\nMunicipal Police Services. Conduct independent and\
+      \ impartial investigations of\nidentified criminal offences allegedly committed\
+      \ by members of the South\nAfrican Police Service and the Municipal Police Services;\
+      \ and make appropriate\nrecommendations._\n\n\n\n## Mandate\n\nThe Independent\
+      \ Police Investigative Directorate exercises its functions in\naccordance with\
+      \ the Independent Police Investigative Directorate Act\_(2011).\nThe act gives\
+      \ effect to the provisions of section\_206(6) of the Constitution,\nwhich provides\
+      \ for the establishment of an independent police complaints body\nthat must\
+      \ investigate any alleged misconduct of, or offence committed by, a\nmember\
+      \ of the police service. The thrust of the directorate\u2019s work is to\ninvestigate\
+      \ serious and priority crimes allegedly committed by members of the\nSouth African\
+      \ Police Service and Municipal Police Services.\n\nThe Independent Police Investigative\
+      \ Directorate Act\_(2011), which came into\neffect on 1 April 2012, grants the\
+      \ directorate an extended mandate and changes\nthe focus of the directorate\u2019\
+      s work from a complaints driven organisation to\none that prioritises the investigative\
+      \ function. The act further places\nstringent obligations on the South African\
+      \ Police Service and Municipal Police\nServices to report matters that must\
+      \ be investigated by the directorate and\nensures the implementation of disciplinary\
+      \ recommendations made by the\ndirectorate.\n\n"
+    focus_areas:
+    - slug: defence-public-order-and-safety
+      title: Defence, public order and safety
+      url: 2016-17/focus/defence-public-order-and-safety
+    percentage_of_budget: 0.018757441159186154
+    programmes:
+    - amount: 74417000.0
+      percentage: 30.23716940729996
+      slug: administration
+      title: Administration
+    - amount: 8901000.0
+      percentage: 3.6166607750161512
+      slug: compliance-monitoring-and-stakeholder-management
+      title: Compliance Monitoring And Stakeholder Management
+    - amount: 157142000.0
+      percentage: 63.85005139957174
+      slug: investigation-and-information-management
+      title: Investigation And Information Management
+    - amount: 5651000.0
+      percentage: 2.296118418112153
+      slug: legal-services
+      title: Legal Services
+    slug: independent-police-investigative-directorate
+    title: Independent Police Investigative Directorate
+    total: 246111000.0
+  - description: "## Vote purpose\n\n_Formulate, coordinate, implement and manage\
+      \ South Africa\u2019s foreign policy and\ninternational relations programmes._\n\
+      \n\n\n## Mandate\n\nAccording to the Constitution, the president is ultimately\
+      \ responsible for the\nforeign policy and international relations of South Africa.\
+      \ It is the\npresident\u2019s prerogative to appoint heads of mission, to receive\
+      \ foreign heads\nof mission, to conduct state to state relations, and to negotiate\
+      \ and sign all\ninternational agreements. International agreements that are\
+      \ not of a\ntechnical, administrative or executive nature will only bind the\
+      \ country after\nbeing approved by Parliament, which also approves the country\u2019\
+      s ratification\nof or accession to multilateral agreements. All international\
+      \ agreements must\nbe tabled in Parliament for information purposes.\n\nThe\
+      \ Minister of International Relations and Cooperation is entrusted with the\n\
+      formulation, promotion, execution and daily conduct of South Africa\u2019s foreign\n\
+      policy.\n\nThe department\u2019s overall mandate is to work for the realisation\
+      \ of South\nAfrica\u2019s foreign policy objectives. This is done by:\n\n  *\
+      \ coordinating and aligning South Africa\u2019s international relations \n\n\
+      \  * monitoring developments in the international environment\n\n  * communicating\
+      \ government\u2019s policy positions\n\n  * developing and advising government\
+      \ on policy options, creating mechanisms and avenues for achieving objectives\n\
+      \n  * protecting South Africa\u2019s sovereignty and territorial integrity\n\
+      \n  * contributing to the creation of an enabling international environment\
+      \ for South African businesses\n\n  * sourcing developmental assistance\n\n\
+      \  * assisting South African citizens abroad.\n\n"
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.4488057203435957
+    programmes:
+    - amount: 1458674000.0
+      percentage: 24.77093650141603
+      slug: administration
+      title: Administration
+    - amount: 579280000.0
+      percentage: 9.837227575551683
+      slug: international-cooperation
+      title: International Cooperation
+    - amount: 3083079000.0
+      percentage: 52.356286694524776
+      slug: international-relations
+      title: International Relations
+    - amount: 515538000.0
+      percentage: 8.754772527697769
+      slug: international-transfers
+      title: International Transfers
+    - amount: 252080000.0
+      percentage: 4.280776700809744
+      slug: public-diplomacy-and-protocol-services
+      title: Public Diplomacy And Protocol Services
+    slug: international-relations-and-cooperation
+    title: International Relations and Cooperation
+    total: 5888651000.0
+  - description: "## Vote purpose\n\n_Uphold and protect the Constitution and the\
+      \ rule of law, and render\naccessible, fair, speedy and cost effective administration\
+      \ of justice in the\ninterests of a safer and more secure South Africa._\n\n\
+      \n\n## Mandate\n\nIn addition to its constitutional mandate, the Department\
+      \ of Justice and\nConstitutional Development derives its mandate from a number\
+      \ of acts, which\ncover all the categories of the department\u2019s functions.\
+      \ These include: the\nestablishment of magistrates\u2019 courts and appointment\
+      \ of magistrates and other\njudicial officers, their conditions of service;\
+      \ discipline and training; the\nestablishment and functioning of the Special\
+      \ Investigating Unit and the\nNational Prosecuting Authority, including the\
+      \ Asset Forfeiture Unit; the\nconduct of criminal proceedings; the prosecution\
+      \ of organised crime and\ncorruption, and the forfeiture of assets obtained\
+      \ through illicit means;\nprovision of witness protection to vulnerable and\
+      \ intimidated witnesses and\ntheir related persons in judicial proceedings;\
+      \ the establishment and\nfunctioning of bodies responsible for legal aid, law\
+      \ reform and rule making;\nthe appointment of masters of the high courts, and\
+      \ the administration of the\nGuardian\u2019s Fund and deceased and insolvent\
+      \ estates; the regulation and\nprovisioning of legal advisory services to government\
+      \ departments; the\npromotion, protection and enforcement of certain human rights;\
+      \ the protection\nof vulnerable groups; the management of third party funds;\
+      \ and support to\nchapter\_9 institutions.\n\n"
+    focus_areas:
+    - slug: defence-public-order-and-safety
+      title: Defence, public order and safety
+      url: 2016-17/focus/defence-public-order-and-safety
+    percentage_of_budget: 1.3787282864669979
+    programmes:
+    - amount: 2079934000.0
+      percentage: 11.497765216807746
+      slug: administration
+      title: Administration
+    - amount: 3162740000.0
+      percentage: 17.483459552950492
+      slug: auxiliary-and-associated-services
+      title: Auxiliary And Associated Services
+    - amount: 6121588000.0
+      percentage: 33.83981490664016
+      slug: court-services
+      title: Court Services
+    - amount: 2040162000.0
+      percentage: 11.277907702962173
+      slug: direct-charge-against-the-national-revenue-fund
+      title: Direct Charge Against The National Revenue Fund
+    - amount: 3557505000.0
+      percentage: 19.665699607593144
+      slug: national-prosecuting-authority
+      title: National Prosecuting Authority
+    - amount: 1127969000.0
+      percentage: 6.235353013046287
+      slug: state-legal-services
+      title: State Legal Services
+    slug: justice-and-constitutional-development
+    title: Justice and Constitutional Development
+    total: 18089898000.0
+  - description: "## Vote purpose\n\n_Play a significant role in reducing unemployment,\
+      \ poverty and inequality\nthrough pursuing the objectives of full and productive\
+      \ employment and decent\nwork for all, including: employment creation and enterprise\
+      \ development;\nstandards and rights at work including equality of opportunities;\
+      \ social\nprotection; and social dialogue._\n\n\n\n## Mandate\n\nThe Department\
+      \ of Labour derives its legislative mandate from the\nConstitution, and this\
+      \ is given effect through a number of acts that regulate\nlabour matters in\
+      \ South Africa. The most important of these are the Labour\nRelations Act\_\
+      (1995), the Basic Condition of Employment Act\_(1997), the\nEmployment Equity\
+      \ Act\_(1998), the Occupational Health and Safety Act\_(1993),\nand the Employment\
+      \ Services Act\_(2014).\n\nThe policy mandate of the department is to regulate\
+      \ the labour market through\npolicies and programmes developed in consultation\
+      \ with social partners, which\nare aimed at:\n\n  * improving economic efficiency\
+      \ and productivity\n\n  * facilitating decent employment creation\n\n  * promoting\
+      \ labour standards and fundamental rights at work \n\n  * providing adequate\
+      \ social safety nets to protect vulnerable workers\n\n  * promoting and enforcing\
+      \ sound labour relations\n\n  * eliminating inequality and discrimination in\
+      \ the workplace\n\n  * enhancing occupational health and safety awareness and\
+      \ compliance in the workplace\n\n  * giving value to social dialogue in the\
+      \ formulation of sound, and responsive legislation and policies to attain labour\
+      \ market flexibility for competitiveness of enterprises, balanced with the promotion\
+      \ of decent employment.\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.21705200196699692
+    programmes:
+    - amount: 852921000.0
+      percentage: 29.949362279340015
+      slug: administration
+      title: Administration
+    - amount: 519494000.0
+      percentage: 18.241447927701934
+      slug: inspection-and-enforcement-services
+      title: Inspection And Enforcement Services
+    - amount: 965193000.0
+      percentage: 33.89166737187034
+      slug: labour-policy-and-industrial-relations
+      title: Labour Policy And Industrial Relations
+    - amount: 510269000.0
+      percentage: 17.91752242108771
+      slug: public-employment-services
+      title: Public Employment Services
+    slug: labour
+    title: Labour
+    total: 2847877000.0
+  - description: "## Vote purpose\n\n_Promote and regulate the minerals and mining\
+      \ sector for transformation,\ngrowth and development. Ensure that all South\
+      \ Africans derive sustainable\nbenefits from the country's mineral wealth._\n\
+      \n\n\n## Mandate\n\nThe mandate of the Department of Mineral Resources is broadly\
+      \ informed by the\nfollowing:\n\n  * the Mineral and Petroleum Resources Development\
+      \ Act\_(2002), which provides the regulatory framework for equitable access\
+      \ to and the sustainable development of mineral resources and related matters\n\
+      \n  * the Mine Health and Safety Act\_(1996), which governs mine health and\
+      \ safety the 1998 White Paper on the Minerals and Mining Policy for South Africa,\
+      \ which provides the framework for the transparent and efficient regulation\
+      \ of the mineral resources and mineral industry.\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.12720932269443846
+    programmes:
+    - amount: 310868000.0
+      percentage: 18.62514431628978
+      slug: administration
+      title: Administration
+    - amount: 184934000.0
+      percentage: 11.080016080744027
+      slug: mine-health-and-safety
+      title: Mine Health And Safety
+    - amount: 902489000.0
+      percentage: 54.07114231398551
+      slug: mineral-policy-and-promotion
+      title: Mineral Policy And Promotion
+    - amount: 270786000.0
+      percentage: 16.223697288980677
+      slug: mineral-regulation
+      title: Mineral Regulation
+    slug: mineral-resources
+    title: Mineral Resources
+    total: 1669077000.0
+  - description: "## Vote purpose\n\n_Support economic growth and development, good\
+      \ governance, social progress and\nrising living standards through the accountable,\
+      \ economical, efficient,\nequitable and sustainable management of public finances,\
+      \ maintenance of\nmacroeconomic and financial sector stability, and effective\
+      \ financial\nregulation of the economy._\n\n\n\n## Mandate\n\nNational Treasury\u2019\
+      s legislative mandate is based on chapter 13, section\_216(1)\nof the Constitution,\
+      \ which calls for the establishment of a national treasury\nto ensure transparency,\
+      \ accountability and sound financial controls in the\nmanagement of the country\u2019\
+      s public finances. This role is further elaborated\nin the Public Finance Management\
+      \ Act\_(1999). The department is mandated to:\n\n  * promote national government\u2019\
+      s fiscal policy and the coordination of its macroeconomic policy\n\n  * ensure\
+      \ the stability and soundness of the financial system and financial services\n\
+      \n  * coordinate intergovernmental financial and fiscal relations\n\n  * manage\
+      \ the budget preparation process\n\n  * enforce transparency and effective management\
+      \ in respect of revenue and expenditure, assets and liabilities, public entities,\
+      \ and constitutional institutions.\n\n"
+    focus_areas:
+    - slug: debt-service-costs
+      title: Debt-service costs
+      url: 2016-17/focus/debt-service-costs
+    - slug: defence-public-order-and-safety
+      title: Defence, public order and safety
+      url: 2016-17/focus/defence-public-order-and-safety
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    - slug: human-settlements-and-municipal-infrastructure
+      title: Human settlements and municipal infrastructure
+      url: 2016-17/focus/human-settlements-and-municipal-infrastructure
+    percentage_of_budget: 45.59651887953353
+    programmes:
+    - amount: 412661000.0
+      percentage: 0.06897700079590802
+      slug: administration
+      title: Administration
+    - amount: 107211000.0
+      percentage: 0.017920504317902815
+      slug: asset-and-liability-management
+      title: Asset And Liability Management
+    - amount: 4173242000.0
+      percentage: 0.6975646275163313
+      slug: civil-and-military-pensions-contributions-to-funds-and-other-benefits
+      title: Civil And Military Pensions, Contributions To Funds And Other Benefits
+    - amount: 569787416000.0
+      percentage: 95.24095334167845
+      slug: direct-charge-against-the-national-revenue-fund
+      title: Direct Charge Against The National Revenue Fund
+    - amount: 146070000.0
+      percentage: 0.024415853463880238
+      slug: economic-policy-tax-financial-regulation-and-research
+      title: Economic Policy, Tax, Financial Regulation And Research
+    - amount: 849854000.0
+      percentage: 0.14205456787630916
+      slug: financial-accounting-and-supply-chain-management-systems
+      title: Financial Accounting And Supply Chain Management Systems
+    - amount: 4812487000.0
+      percentage: 0.8044155363101843
+      slug: financial-intelligence-and-state-security
+      title: Financial Intelligence And State Security
+    - amount: 5039068000.0
+      percentage: 0.842288942852934
+      slug: international-financial-relations
+      title: International Financial Relations
+    - amount: 286955000.0
+      percentage: 0.04796502519838265
+      slug: public-finance-and-budget-management
+      title: Public Finance And Budget Management
+    - amount: 10009151000.0
+      percentage: 1.6730469234877139
+      slug: revenue-administration
+      title: Revenue Administration
+    - amount: 2634718000.0
+      percentage: 0.4403976765020033
+      slug: technical-support-and-development-finance
+      title: Technical Support And Development Finance
+    slug: national-treasury
+    title: National Treasury
+    total: 598258833000.0
+  - description: "## Vote purpose\n\n_Strengthen judicial governance and independence\
+      \ by rendering effective\nsupport to the Chief Justice in executing administrative\
+      \ and judicial powers\nand duties as both head of the judiciary and the Constitutional\
+      \ Court._\n\n\n\n## Mandate\n\nThe mandate of the Office of the Chief Justice\
+      \ is to render support to the\nchief justice as the head of the judiciary, as\
+      \ provided for in section 165\_(6)\nof the Constitution, read together with\
+      \ the Superior Courts Act\_(2013). The\nOffice of the Chief Justice is also\
+      \ required to: provide and coordinate legal\nand administrative support to the\
+      \ chief justice; provide communication and\nrelationship management services\
+      \ and intergovernmental and internal\ncoordination; develop courts administration\
+      \ policy, and norms and standards;\nsupport the development of judicial policy,\
+      \ and norms and standards; support\nthe judicial function of the Constitutional\
+      \ Court; and support the Judicial\nService Commission and South African Judicial\
+      \ Education Institute in the\nexecution of their mandates.\n\n"
+    focus_areas:
+    - slug: defence-public-order-and-safety
+      title: Defence, public order and safety
+      url: 2016-17/focus/defence-public-order-and-safety
+    percentage_of_budget: 0.13604801926318516
+    programmes:
+    - amount: 161173000.0
+      percentage: 9.029061979880641
+      slug: administration
+      title: Administration
+    - amount: 920057000.0
+      percentage: 51.54245238360671
+      slug: direct-charge-against-the-national-revenue-fund
+      title: Direct Charge Against The National Revenue Fund
+    - amount: 37845000.0
+      percentage: 2.120112243543167
+      slug: judicial-education-and-research
+      title: Judicial Education And Research
+    - amount: 665972000.0
+      percentage: 37.308373392969486
+      slug: judicial-support-and-court-administration
+      title: Judicial Support And Court Administration
+    slug: office-of-the-chief-justice-and-judicial-administration
+    title: Office of the Chief Justice and Judicial Administration
+    total: 1785047000.0
+  - description: '## Vote purpose
+
+
+      _Provide the support services required by Parliament to fulfil its
+
+      constitutional functions, assist political parties represented in Parliament
+
+      to secure administrative support and service constituents, and provide members
+
+      of Parliament with the necessary facilities._
+
+
+      '
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.16686814339755549
+    programmes:
+    - amount: 115991000.0
+      percentage: 5.297773985820047
+      slug: administration
+      title: Administration
+    - amount: 626717000.0
+      percentage: 28.624677941143556
+      slug: associated-services
+      title: Associated Services
+    - amount: 525983000.0
+      percentage: 24.023752311675782
+      slug: core-business
+      title: Core Business
+    - amount: 529798000.0
+      percentage: 24.197998656270652
+      slug: direct-charge-against-the-national-revenue-fund
+      title: Direct Charge Against The National Revenue Fund
+    - amount: 72801000.0
+      percentage: 3.325113534168041
+      slug: strategic-leadership-and-governance
+      title: Strategic Leadership And Governance
+    - amount: 318139000.0
+      percentage: 14.530683570921916
+      slug: support-services
+      title: Support Services
+    slug: parliament
+    title: Parliament
+    total: 2189429000.0
+  - description: "## Vote purpose\r\n\r\nImprove government service delivery through\
+      \ planning, monitoring and evaluation.\r\n\r\n## Mandate\r\n\r\nThe Department\
+      \ of Planning Monitoring and Evaluation is mandated to:\r\n\r\n* facilitate\
+      \ the implementation of the national development plan through the development\
+      \ of medium term plans and delivery agreements for the cross-cutting priorities\
+      \ or outcomes of government, and monitor and evaluate the implementation of\
+      \ these plans\r\n* monitor the performance of individual national and provincial\
+      \ government departments and municipalities\r\n* monitor frontline service delivery\r\
+      \n* manage the presidential hotline\r\n* promote good planning, monitoring and\
+      \ evaluation practices in government."
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.06308056634890082
+    programmes:
+    - amount: 134315000.0
+      percentage: 16.228242930084985
+      slug: administration
+      title: Administration
+    - amount: 67839000.0
+      percentage: 8.196461840703089
+      slug: institutional-performance-monitoring-and-evaluation
+      title: Institutional Performance Monitoring And Evaluation
+    - amount: 103237000.0
+      percentage: 12.473328484332976
+      slug: national-planning
+      title: National Planning
+    - amount: 413417000.0
+      percentage: 49.9499795810367
+      slug: national-youth-development
+      title: National Youth Development
+    - amount: 108854000.0
+      percentage: 13.151987163842243
+      slug: outcomes-monitoring-and-evaluation
+      title: Outcomes Monitoring And Evaluation
+    slug: planning-monitoring-and-evaluation
+    title: Planning, Monitoring and Evaluation
+    total: 827662000.0
+  - description: "## Vote purpose\n\n_Prevent, combat and investigate crime, maintain\
+      \ public order, protect and\nsecure the inhabitants of South Africa and their\
+      \ property, and uphold and\nenforce the law._\n\n\n\n## Mandate\n\nThe South\
+      \ African Police Service derives its powers and functions from section\n205\
+      \ of the Constitution and from the South African Police Service Act\_(1995).\n\
+      This legislation regulates the police service in terms of its core function,\n\
+      which is to prevent, investigate and combat crime.\n\n"
+    focus_areas:
+    - slug: defence-public-order-and-safety
+      title: Defence, public order and safety
+      url: 2016-17/focus/defence-public-order-and-safety
+    percentage_of_budget: 6.172290460068659
+    programmes:
+    - amount: 17559811000.0
+      percentage: 21.682834237726755
+      slug: administration
+      title: Administration
+    - amount: 3350534000.0
+      percentage: 4.137235493586325
+      slug: crime-intelligence
+      title: Crime Intelligence
+    - amount: 16789609000.0
+      percentage: 20.731789702249376
+      slug: detective-services
+      title: Detective Services
+    - amount: 2609142000.0
+      percentage: 3.221765512663597
+      slug: protection-and-security-services
+      title: Protection And Security Services
+    - amount: 40675755000.0
+      percentage: 50.22637505377394
+      slug: visible-policing
+      title: Visible Policing
+    slug: police
+    title: Police
+    total: 80984851000.0
+  - description: "## Vote purpose\n\n_Drive investment, productivity and transformation\
+      \ in the department\u2019s\nportfolio of state owned companies to unlock growth,\
+      \ drive industrialisation,\ncreate jobs and develop skills._\n\n\n\n## Mandate\n\
+      \nThe mandate of the Department of Public Enterprises is to ensure that the\n\
+      state owned companies in its portfolio are directed to serve government\u2019\
+      s\nstrategic objectives, as articulated in the national development plan, the\
+      \ new\ngrowth path and the industrial policy action plan. In the current economic\n\
+      climate, state owned companies have emerged as key instruments for the state\n\
+      to drive its developmental objectives of creating jobs, and for enhancing\n\
+      equity and transformation.\n\nThe state owned companies in the department\u2019\
+      s portfolio form the cornerstone\nof the economy and their capacity must be\
+      \ strategically utilised to support\nthe delivery of the national development\
+      \ plan\u2019s outcomes, making the\nstrengthening of oversight tools for the\
+      \ state owned companies crucial to\nsocioeconomic transformation. The department\
+      \ does not directly execute\nprogrammes but seeks to leverage off state ownership\
+      \ in the economy to support\nthe delivery of key outcomes outlined in the national\
+      \ development plan and\ngovernment\u2019s 2014-2019 medium term strategic framework.\n\
+      \n"
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.02088118247062986
+    programmes:
+    - amount: 157992000.0
+      percentage: 57.666364937074775
+      slug: administration
+      title: Administration
+    - amount: 26007000.0
+      percentage: 9.492437293777558
+      slug: legal-and-governance
+      title: Legal And Governance
+    - amount: 89977000.0
+      percentage: 32.84119776914766
+      slug: portfolio-management-and-strategic-partnerships
+      title: Portfolio Management And Strategic Partnerships
+    slug: public-enterprises
+    title: Public Enterprises
+    total: 273976000.0
+  - description: "## Vote purpose\n\n_Lead the modernisation of the public service,\
+      \ through a generally applicable\nframework of norms and standards, to improve\
+      \ service delivery._\n\n\n\n## Mandate\n\nThe Department of Public Service and\
+      \ Administration draws its mandate from\nsection\_195\_(1) of the Constitution,\
+      \ which sets out basic values and\nprinciples that the public service should\
+      \ adhere to, and the Public Service\nAct\_(1994).\n\nThe department\u2019s mandate\
+      \ is to:\n\n  * transform and modernise the public service\n\n  * oversee changes\
+      \ to the structure of the public service\n\n  * improve the effectiveness and\
+      \ efficiency of the public service and its service delivery to the public\n\n\
+      \  * establish norms and standards for human resource management and development,\
+      \ conditions of service, labour relations, IT and service delivery\n\n  * issue\
+      \ directives and regulations for the public service\n\n  * formulate the national\
+      \ anti-corruption strategy.\n\n"
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.05871479747030336
+    programmes:
+    - amount: 215654000.0
+      percentage: 27.993198161946054
+      slug: administration
+      title: Administration
+    - amount: 282281000.0
+      percentage: 36.64178716996807
+      slug: governance-of-public-administration
+      title: Governance Of Public Administration
+    - amount: 20885000.0
+      percentage: 2.7109997663490746
+      slug: government-chief-information-officer
+      title: Government Chief Information Officer
+    - amount: 81377000.0
+      percentage: 10.56322853656637
+      slug: labour-relations-and-human-resource-management
+      title: Labour Relations And Human Resource Management
+    - amount: 32126000.0
+      percentage: 4.170149796204471
+      slug: policy-development-research-and-analysis
+      title: Policy Development, Research And Analysis
+    - amount: 138057000.0
+      percentage: 17.920636568965964
+      slug: service-delivery-support
+      title: Service Delivery Support
+    slug: public-service-and-administration
+    title: Public Service and Administration
+    total: 770380000.0
+  - description: "## Vote purpose\n\n_Provide policy formulation for, as well as coordination,\
+      \ regulation and\noversight of, the public works sector in relation to the accommodation,\n\
+      housing, land and infrastructure needs of national departments. Enhance\nintergovernmental\
+      \ relations by coordinating concurrent public works functions.\nLead and direct\
+      \ the implementation of the national expanded public works\nprogramme. Promote\
+      \ growth, job creation and transformation in the construction\nand property\
+      \ industries._\n\n\n\n## Mandate\n\nAs set out in the Government Immovable Asset\
+      \ Management Act\_(2007), the\nDepartment of Public Works is mandated to be\
+      \ the custodian and portfolio\nmanager of national government\u2019s immovable\
+      \ assets. Following the\noperationalisation of the Property Management Trading\
+      \ Entity in 2015/16, the\ndepartment\u2019s role will now be policy formulation,\
+      \ coordination, regulation and\noversight relating to the provision of accommodation\
+      \ and expert built\nenvironment services to client departments at the national\
+      \ government level;\nas well as, through the Property Management Trading Entity,\
+      \ the planning,\nacquiring, managing and disposing of immovable assets in the\
+      \ department\u2019s\ncustody. The department is further mandated to coordinate\
+      \ and provide\nstrategic leadership in job creation initiatives through the\
+      \ implementation of\nthe expanded public works programme. Public works is constitutionally\n\
+      designated as a concurrent function exercised by both the national and\nprovincial\
+      \ spheres of government.\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.4975922463020912
+    programmes:
+    - amount: 516634000.0
+      percentage: 7.913196446801194
+      slug: administration
+      title: Administration
+    - amount: 2319500000.0
+      percentage: 35.52739300618111
+      slug: expanded-public-works-programme
+      title: Expanded Public Works Programme
+    - amount: 31439000.0
+      percentage: 0.481545897271536
+      slug: intergovernmental-coordination
+      title: Intergovernmental Coordination
+    - amount: 96092000.0
+      percentage: 1.4718250695192736
+      slug: prestige-policy
+      title: Prestige Policy
+    - amount: 3565100000.0
+      percentage: 54.606039580226884
+      slug: property-and-construction-industry-policy-and-research
+      title: Property And Construction Industry Policy And Research
+    slug: public-works
+    title: Public Works
+    total: 6528765000.0
+  - description: "## Vote purpose\n\n_Create and maintain an equitable and sustainable\
+      \ land dispensation and act as\na catalyst in rural development to ensure sustainable\
+      \ rural livelihoods,\ndecent work and continued social and economic advancement\
+      \ for all South\nAfricans._\n\n\n\n## Mandate\n\nThe Department of Rural Development\
+      \ and Land Reform executes its legislative\nmandate based on the following acts:\n\
+      \n  * The Restitution of Land Rights Act\_(1994) provides for the restitution\
+      \ of rights in land to persons or communities dispossessed of such rights after\
+      \ 19 June 1913. The act established a Commission on Restitution of Land Rights\
+      \ and a Land Claims Court. The minister is authorised to purchase, acquire and\
+      \ expropriate land or rights in land for the purpose of restitution awards.\n\
+      \n  * The Provision of Land and Assistance Act\_(1993) provides for the designation\
+      \ of certain land, the regulation of the subdivision of such land and the settlement\
+      \ of persons on it. It also provides for the acquisition, maintenance, planning,\
+      \ development, improvement and disposal of property and the provision of financial\
+      \ assistance for land reform purposes.\n\n  * The Communal Property Associations\
+      \ Act\_(1996) enables communities to form juristic persons, to be known as communal\
+      \ property associations, in order to acquire, hold and manage property on a\
+      \ basis agreed to by members of a community in terms of a written constitution.\n\
+      \n  * The Transformation of Certain Rural Areas Act\_(1998) provides for the\
+      \ transfer of certain land to municipalities and certain other legal entities,\
+      \ as well as for the removal of restrictions on the alienation of land.\n\n\
+      \  * The Physical Planning Act\_(1991) promotes the orderly physical development\
+      \ of South Africa, and for that purpose, makes provisions for the division of\
+      \ the country into regions, and for the preparation of national development\
+      \ plans, regional development plans, regional structure plans and urban structure\
+      \ plans.\n\n  * The Deeds Registries Act\_(1997) provides for the administration\
+      \ of the land registration system and the registration of land rights.\n\n \
+      \ * The Land Survey Act\_(1997) provides for the regulation of the survey of\
+      \ land in South Africa.\n\n  * The Sectional Titles Act\_(1986) provides for:\
+      \ the division of building into sections and common property; the acquisition\
+      \ of separate ownership in sections coupled with joint ownership in common property;\
+      \ the control of certain incidents attached to separate ownership in sections\
+      \ and joint ownership in common property; the transfer of ownership of sections\
+      \ and the registration of sectional mortgage bonds over, and real rights in\
+      \ sections; the conferring and registration of rights in and the disposal of\
+      \ common property; the establishment of bodies corporate to control common property\
+      \ and for that purpose to apply rules; and the establishment of a sectional\
+      \ titles regulation board.\n\n  * The Spatial Planning and Land Use Management\
+      \ Act\_(2013) provides for national land use management and spatial planning\
+      \ systems; the development of government facilities such as hospitals, clinics\
+      \ and schools; and rural development plans, guidelines, and norms and standards.\n\
+      \n  * The department is also mandated to initiate, facilitate, coordinate, catalyse\
+      \ and implement an integrated rural development programme, which is linked to\
+      \ the need to create vibrant, equitable and sustainable rural communities (outcome\
+      \ 7 of government\u2019s 2014-2019 medium term strategic framework). \n\n"
+    focus_areas:
+    - slug: agriculture-rural-development-and-land-reform
+      title: Agriculture, rural development and land reform
+      url: 2016-17/focus/agriculture-rural-development-and-land-reform
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.7716307097724219
+    programmes:
+    - amount: 1462058000.0
+      percentage: 14.441013221102207
+      slug: administration
+      title: Administration
+    - amount: 2761799000.0
+      percentage: 27.27879186258469
+      slug: land-reform
+      title: Land Reform
+    - amount: 817913000.0
+      percentage: 8.078675706922276
+      slug: national-geomatics-management-services
+      title: National Geomatics Management Services
+    - amount: 3168208000.0
+      percentage: 31.292967594446853
+      slug: restitution
+      title: Restitution
+    - amount: 1914367000.0
+      percentage: 18.90855161494398
+      slug: rural-development
+      title: Rural Development
+    slug: rural-development-and-land-reform
+    title: Rural Development and Land Reform
+    total: 10124345000.0
+  - description: '## Vote purpose
+
+
+      _Realise the full potential of science and technology in social and economic
+
+      development by developing human resources, research and innovation_.
+
+
+
+
+      ## Mandate
+
+
+      The Department of Science and Technology executes its mandate through the
+
+      implementation of the 1996 White Paper on Science and Technology, the national
+
+      research and development strategy and the 10-year innovation plan. The plan
+
+      aims to make science and technology a driving force in enhancing productivity,
+
+      economic growth and socioeconomic development.
+
+
+      '
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.5662036856003979
+    programmes:
+    - amount: 303988000.0
+      percentage: 4.091912287524135
+      slug: administration
+      title: Administration
+    - amount: 124463000.0
+      percentage: 1.6753677087323067
+      slug: international-cooperation-and-resources
+      title: International Cooperation And Resources
+    - amount: 4200595996.0
+      percentage: 56.54325292760597
+      slug: research-development-and-support
+      title: Research, Development And Support
+    - amount: 1792876000.0
+      percentage: 24.13348992199403
+      slug: socio-economic-innovation-partnerships
+      title: Socio-Economic Innovation Partnerships
+    - amount: 1007073000.0
+      percentage: 13.555977154143562
+      slug: technology-innovation
+      title: Technology Innovation
+    slug: science-and-technology
+    title: Science and Technology
+    total: 7428995996.0
+  - description: "## Vote purpose\n\n_Promote the development of small businesses\
+      \ and cooperatives that contribute to inclusive economic growth and job creation._\n\
+      \n## Mandate\n\nThe Department of Small Business Development was established\
+      \ as a national department in accordance with the reorganisation of some national\
+      \ departments announced by the President in May 2014. The department is tasked\
+      \ with the responsibility to lead an integrated approach to the promotion and\
+      \ development of small businesses and cooperatives through a focus on the economic\
+      \ and legislative drivers that stimulate entrepreneurship to contribute to radical\
+      \ economic transformation. The realisation of this mandate will lead to increased\
+      \ employment, poverty reduction and reduced inequality.\n\nThe department\u2019\
+      s mandate is guided by a legislative framework that includes:\n\n- the National\
+      \ Small Business Act (1996)\n- the National Small Business Amendment Act (2004)\n\
+      - the Small Business Development Act (1981)\n- the Cooperatives Act (2005)\n\
+      - the Cooperatives Amendment Act (2013).\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.10101882505288481
+    programmes:
+    - amount: 118080000.0
+      percentage: 8.908746460606636
+      slug: administration
+      title: Administration
+    - amount: 26105000.0
+      percentage: 1.9695361310479018
+      slug: small-medium-and-micro-enterprises-and-cooperatives-policy-and-research
+      title: Small Medium And Micro Enterprises And Cooperatives Policy And Research
+    - amount: 1181254000.0
+      percentage: 89.12171740834546
+      slug: small-medium-and-micro-enterprises-and-cooperatives-programme-design-and-support
+      title: Small Medium And Micro Enterprises And Cooperatives Programme Design
+        And Support
+    slug: small-business-development
+    title: Small Business Development
+    total: 1325439000.0
+  - description: "## Vote purpose\n\n_Ensure protection against vulnerability by creating\
+      \ an enabling environment\nfor the provision of a comprehensive, integrated\
+      \ and sustainable social\ndevelopment service._\n\n\n\n## Mandate\n\nThe 1997\_\
+      White Paper for Social Welfare sets out the principles, guidelines,\npolicies\
+      \ and programmes for developmental social welfare in South Africa. It\nhas provided\
+      \ the foundation for social welfare in the post-\_1994 era. The\nDepartment\
+      \ of Social Development is not established in terms of a single act;\nseveral\
+      \ pieces of legislation determine its mandate:\n\n  * The Social Assistance\
+      \ Act\_(2004) provides a legislative framework for providing social assistance.\
+      \ It sets out the different types of grants payable as well as their qualifying\
+      \ criteria. It also makes provision for the establishment of the inspectorate\
+      \ for social assistance.\n\n  * The Non-Profit Organisations Act\_(1997) establishes\
+      \ an administrative and regulatory framework within which non-profit organisations\
+      \ can conduct their affairs, and provides for their registration by the department.\n\
+      \n  * The Older Persons Act\_(2006) establishes a framework for empowering and\
+      \ protecting older persons, and promoting and maintaining their status, rights,\
+      \ wellbeing, safety and security. It provides for older persons to enjoy good\
+      \ quality services while staying with their families in their communities for\
+      \ as long as possible. It also makes provision for older persons to live in\
+      \ residential care facilities if they are unable to stay with their families\
+      \ or within their communities. \n\n  * The Children\u2019s Act\_(2005) sets\
+      \ out principles relating to the care and protection of children, and defines\
+      \ parental responsibilities and rights. It deals with early childhood development,\
+      \ drop-in centres and early intervention, children in alternative care such\
+      \ as foster care, child and youth care centres and the adoption of children.\
+      \ \n\n  * The Prevention of and Treatment for Substance Abuse Act\_(2008) regulates\
+      \ substance abuse services and facilities. \n\n  * The 1998\_White Paper on\
+      \ Population Policy for South Africa is aimed at promoting the sustainable development\
+      \ of all South Africans by integrating population issues with development planning\
+      \ in all spheres of government and all sectors of society. \n\n"
+    focus_areas:
+    - slug: social-protection
+      title: Social protection
+      url: 2016-17/focus/social-protection
+    percentage_of_budget: 11.351344263768434
+    programmes:
+    - amount: 322512000.0
+      percentage: 0.21654150507424483
+      slug: administration
+      title: Administration
+    - amount: 140498691000.0
+      percentage: 94.33384807418408
+      slug: social-assistance
+      title: Social Assistance
+    - amount: 377704000.0
+      percentage: 0.2535986029436504
+      slug: social-policy-and-integrated-service-delivery
+      title: Social Policy And Integrated Service Delivery
+    - amount: 7015500000.0
+      percentage: 4.710357843579044
+      slug: social-security-policy-and-administration
+      title: Social Security Policy And Administration
+    - amount: 723322000.0
+      percentage: 0.4856539742189838
+      slug: welfare-services-policy-development-and-implementation-support
+      title: Welfare Services Policy Development And Implementation Support
+    slug: social-development
+    title: Social Development
+    total: 148937729000.0
+  - description: "## Vote purpose\n\n_Transform the delivery of sport and recreation\
+      \ by ensuring equitable access,\ndevelopment and excellence at all levels of\
+      \ participation, thereby improving\nsocial cohesion, nation building and the\
+      \ quality of life of all South\nAfricans._\n\n\n\n## Mandate\n\nThe Department\
+      \ of Sport and Recreation South Africa is established in terms of\nthe Public\
+      \ Service Act\_(1994). Its legal mandate is derived from the National\nSport\
+      \ and Recreation Act\_(1998), which requires it to oversee the development\n\
+      and management of sport and recreation in South Africa. The act provides the\n\
+      framework for relationships between the department and its external clients.\n\
+      This includes the department\u2019s partnership with the South African Sports\n\
+      Confederation and Olympic Committee, which is key to improving South Africa\u2019\
+      s\ninternational ranking in selected sports. The act also ensures that sport\
+      \ and\nphysical education contribute to social cohesion by legislating on sports\n\
+      participation and sports infrastructure.\n\n"
+    focus_areas:
+    - slug: basic-education
+      title: Basic education
+      url: 2016-17/focus/basic-education
+    percentage_of_budget: 0.07839513055628913
+    programmes:
+    - amount: 648735000.0
+      percentage: 63.06970639704452
+      slug: active-nation
+      title: Active Nation
+    - amount: 134862000.0
+      percentage: 13.111219132801866
+      slug: administration
+      title: Administration
+    - amount: 16282000.0
+      percentage: 1.5829282519930001
+      slug: sport-infrastructure-support
+      title: Sport Infrastructure Support
+    - amount: 137572000.0
+      percentage: 13.374684036554541
+      slug: sport-support
+      title: Sport Support
+    - amount: 91149000.0
+      percentage: 8.861462181606067
+      slug: winning-nation
+      title: Winning Nation
+    slug: sport-and-recreation-south-africa
+    title: Sport and Recreation South Africa
+    total: 1028600000.0
+  - description: "## Vote purpose\n\n_Lead and partner in the production of statistics\
+      \ in line with internationally\nrecognised principles and standards, to inform\
+      \ users about socioeconomic\ndynamics for evidence-based decisions._\n\n\n\n\
+      ## Mandate\n\nStatistics South Africa is a national government department accountable\
+      \ to the\nMinister in the Presidency: Planning, Monitoring and Evaluation. The\n\
+      department\u2019s activities are regulated by the Statistics Act\_(1999), which\n\
+      mandates the department to advance the production, dissemination, use and\n\
+      coordination of official and other statistics to assist organs of state,\nbusinesses,\
+      \ other organisations and the public in planning, monitoring, and\ndecision\
+      \ making. The act also requires that the department coordinates\nstatistical\
+      \ production among organs of state in line with the purpose of\nofficial statistics\
+      \ and statistical principles.\n\n"
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.18970783225541551
+    programmes:
+    - amount: 709167000.0
+      percentage: 28.49087743290552
+      slug: administration
+      title: Administration
+    - amount: 224738000.0
+      percentage: 9.02887868797663
+      slug: economic-statistics
+      title: Economic Statistics
+    - amount: 69603000.0
+      percentage: 2.7963096731270958
+      slug: methodology-standards-and-research
+      title: Methodology, Standards And Research
+    - amount: 126982000.0
+      percentage: 5.101518539617903
+      slug: population-and-social-statistics
+      title: Population And Social Statistics
+    - amount: 569893000.0
+      percentage: 22.89552617771389
+      slug: statistical-collection-and-outreach
+      title: Statistical Collection And Outreach
+    - amount: 255373000.0
+      percentage: 10.25964383942482
+      slug: statistical-support-and-informatics
+      title: Statistical Support And Informatics
+    - amount: 533346000.0
+      percentage: 21.42724564923414
+      slug: survey-operations
+      title: Survey Operations
+    slug: statistics-south-africa
+    title: Statistics South Africa
+    total: 2489102000.0
+  - description: "## Vote purpose\n\n_Develop information and communication technology\
+      \ (ICT) policies and\nlegislation that create favourable conditions for accelerated\
+      \ and shared\nsustainable economic growth that positively impacts on the wellbeing\
+      \ of all\nSouth Africans._\n\n\n\n## Mandate\n\nThe Department of Telecommunications\
+      \ and Postal Services is mandated to\ndevelop ICT policies that create conditions\
+      \ for accelerated and sustained\nshared growth of the South African economy,\
+      \ and to ensure the development of\nrobust, reliable, secure and affordable\
+      \ ICT infrastructure. This is to\ncontribute to the development of an inclusive\
+      \ information society in which\ninformation and ICT tools are key drivers of\
+      \ economic and societal\ndevelopment. The Electronic Communications Act\_(2005)\
+      \ mandates the Minister of\nTelecommunications and Postal Services to draft\
+      \ policies in order to fulfil\nSouth Africa\u2019s obligations under bilateral,\
+      \ multilateral, and international\ntreaties and conventions; set guidelines\
+      \ for the determination of certain\nlicence fees by the Independent Communications\
+      \ Authority of South Africa;\npromote universal service and electronic communications\
+      \ services in under-\nserviced areas; promote the participation of small business\
+      \ in the ICT sector;\nand enhance the capacity of state owned enterprises and\
+      \ exercise oversight\nover them. The department also contributes to building\
+      \ an ICT skills base in\nthe country to ensure equitable prosperity and global\
+      \ competitiveness.\n\nIn addition to the Electronic Communications Act\_(2005),\
+      \ the department\u2019s\nmandate is derived from the following legislation:\n\
+      \n  * the Electronic Communications and Transactions Act\_(2002)\n\n  * the\
+      \ Sentech Act\_(1996)\n\n  * the Postal Services Act\_(1998)\n\n  * the South\
+      \ Africa Post Office SOC Ltd Act\_(2011)\n\n  * the South African Postbank Limited\
+      \ Act\_(2010)\n\n  * the State Information Technology Agency Act\_(1998)\n\n\
+      \  * the Broadband Infraco Act\_(2007).\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.1842439523122108
+    programmes:
+    - amount: 193337000.0
+      percentage: 7.997685127731641
+      slug: administration
+      title: Administration
+    - amount: 891801000.0
+      percentage: 36.890732734014726
+      slug: ict-enterprise-development-and-oversight
+      title: Ict Enterprise Development And Oversight
+    - amount: 1191946000.0
+      percentage: 49.30669658295731
+      slug: ict-infrastructure-support
+      title: Ict Infrastructure Support
+    - amount: 44710000.0
+      percentage: 1.8494985546526617
+      slug: international-affairs-and-trade
+      title: International Affairs And Trade
+    - amount: 95618000.0
+      percentage: 3.9553870006436633
+      slug: policy-research-and-capacity-development
+      title: Policy, Research And Capacity Development
+    slug: telecommunications-and-postal-services
+    title: Telecommunications and Postal Services
+    total: 2417412000.0
+  - description: '## Vote purpose
+
+
+      _Facilitate a common programme towards the achievement of the electoral
+
+      mandate and the enhanced integrity of the state through considered planning,
+
+      coordination, oversight, mobilisation and support._
+
+
+
+
+      ## Mandate
+
+
+      The mandate of the Presidency is to support the president and the deputy
+
+      president in the execution of their responsibilities, as outlined in the
+
+      Constitution and the programme of government.
+
+
+      '
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.03854287524170813
+    programmes:
+    - amount: 453351000.0
+      percentage: 89.64643768167527
+      slug: administration
+      title: Administration
+    - amount: 6035000.0
+      percentage: 1.193371695240355
+      slug: direct-charge-against-the-national-revenue-fund
+      title: Direct Charge Against The National Revenue Fund
+    - amount: 46324000.0
+      percentage: 9.160190623084375
+      slug: executive-support
+      title: Executive Support
+    slug: the-presidency
+    title: The Presidency
+    total: 505710000.0
+  - description: "## Vote purpose\n\n_Promote and support the growth and development\
+      \ of an equitable, competitive\nand sustainable tourism sector, enhancing its\
+      \ contribution to national\npriorities._\n\n\n\n## Mandate\n\nThe mandate of\
+      \ the Department of Tourism, as outlined in the Tourism Act\_(\n2014), is to:\
+      \ promote the practice of responsible tourism for the benefit of\nSouth Africa\
+      \ and for the enjoyment of all its residents and foreign visitors;\nprovide\
+      \ for the effective domestic and international marketing of South Africa\nas\
+      \ a tourist destination; promote quality tourism products and services;\npromote\
+      \ growth in and development of the tourism sector; and enhance\ncooperation\
+      \ and coordination between all spheres of government in developing\nand managing\
+      \ tourism.\n\nIn recognition of tourism as a national priority with the potential\
+      \ to\ncontribute significantly to economic development, the 1996 White Paper\
+      \ on the\nDevelopment and Promotion of Tourism in South Africa provides for\
+      \ the\npromotion of domestic and international tourism. The national tourism\
+      \ sector\nstrategy provides a blueprint for the sector to meet the growth targets\n\
+      contained in the national development plan.\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.15315600736433205
+    programmes:
+    - amount: 237456000.0
+      percentage: 11.816576727928515
+      slug: administration
+      title: Administration
+    - amount: 444739000.0
+      percentage: 22.131647620621084
+      slug: domestic-tourism
+      title: Domestic Tourism
+    - amount: 54708000.0
+      percentage: 2.72244659908157
+      slug: international-tourism
+      title: International Tourism
+    - amount: 1272613000.0
+      percentage: 63.329329052368834
+      slug: policy-and-knowledge-services
+      title: Policy And Knowledge Services
+    slug: tourism
+    title: Tourism
+    total: 2009516000.0
+  - description: "## Vote purpose\n\nLead and facilitate access to sustainable economic\
+      \ activity and employment for\nall South Africans through an understanding of\
+      \ the economy, knowledge of\neconomic opportunities and potential, and anticipation\
+      \ of future economic\ntrends. Catalyse economic transformation and development,\
+      \ and provide a\npredictable, competitive, equitable and socially responsible\
+      \ environment for\ninvestment, enterprise and trade for economic citizens. Contribute\
+      \ to\nachieving government\u2019s vision of an adaptive and restructured economy,\n\
+      characterised by accelerated economic growth, employment creation and greater\n\
+      equity.\n\n\n\n## Mandate\n\nThe mandate of the Department of Trade and Industry\
+      \ is derived from a wide\nlegislative framework that includes:\n\n  * the Companies\
+      \ Act\_(2008) \n\n  * the Manufacturing Development Act\_(1993) \n\n  * the\
+      \ Broad Based Black Economic Empowerment Act\_(2003) \n\n  * the Consumer Protection\
+      \ Act\_(2008). \n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    percentage_of_budget: 0.7871155391185063
+    programmes:
+    - amount: 736625000.0
+      percentage: 7.132643790370909
+      slug: administration
+      title: Administration
+    - amount: 313525000.0
+      percentage: 3.03582167911222
+      slug: consumer-and-corporate-regulation
+      title: Consumer And Corporate Regulation
+    - amount: 6922407000.0
+      percentage: 67.0287640291466
+      slug: incentive-development-and-administration
+      title: Incentive Development And Administration
+    - amount: 1735679000.0
+      percentage: 16.806353356765232
+      slug: industrial-development
+      title: Industrial Development
+    - amount: 126383000.0
+      percentage: 1.22375010372774
+      slug: international-trade-and-economic-development
+      title: International Trade And Economic Development
+    - amount: 48077000.0
+      percentage: 0.4655233198841503
+      slug: investment-south-africa
+      title: Investment South Africa
+    - amount: 108282000.0
+      percentage: 1.0484804818040967
+      slug: special-economic-zones-and-economic-transformation
+      title: Special Economic Zones And Economic Transformation
+    - amount: 336539000.0
+      percentage: 3.2586632391890515
+      slug: trade-export-south-africa
+      title: Trade Export South Africa
+    slug: trade-and-industry
+    title: Trade and Industry
+    total: 10327517000.0
+  - description: "## Vote purpose\n\n_Lead the provision of an integrated, sustainable,\
+      \ reliable and safe transport\nsystem through planning, developing, coordinating,\
+      \ promoting and implementing\ntransport policies, regulations and strategies._\n\
+      \n\n\n## Mandate\n\nThe Constitution identifies the legislative responsibilities\
+      \ of different\nspheres of government with regard to airports, roads, traffic\
+      \ management and\npublic transport. Transport is a function that is legislated\
+      \ and executed at\nthe national, provincial and local spheres of government.\
+      \ The implementation\nof transport functions at the national sphere takes place\
+      \ through public\nentities that are overseen by the department, which are discussed\
+      \ at the end\nof the chapter.\n\n  \n\nThe 1996 White Paper on Transport defines\
+      \ the different sub-sectors in the\ntransport sector. Broadly, these are the\
+      \ infrastructure and operations of\nrail, pipelines, roads, airports, harbours\
+      \ and the intermodal operations of\npublic transport and freight. The Department\
+      \ of Transport is responsible for\nthe legislation and policies for all these\
+      \ sub-sectors.\n\nFor the intermodal functions of public transport and freight,\
+      \ the guiding\ndocuments are the National Land Transport Act\_(2009), the public\
+      \ transport\nstrategy and the national freight logistics strategy.\n\nThe department\
+      \ is therefore responsible for conducting sector research,\nformulating legislation\
+      \ and policy to set the strategic direction of sub-\nsectors, assigning responsibilities\
+      \ to public entities and other spheres of\ngovernment, regulating the sector\
+      \ through setting norms and standards, and\nmonitoring implementation.\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    - slug: human-settlements-and-municipal-infrastructure
+      title: Human settlements and municipal infrastructure
+      url: 2016-17/focus/human-settlements-and-municipal-infrastructure
+    percentage_of_budget: 4.26921642671283
+    programmes:
+    - amount: 394763000.0
+      percentage: 0.7047431067905667
+      slug: administration
+      title: Administration
+    - amount: 253223000.0
+      percentage: 0.4520615248410506
+      slug: civil-aviation
+      title: Civil Aviation
+    - amount: 78954000.0
+      percentage: 0.1409511206813769
+      slug: integrated-transport-planning
+      title: Integrated Transport Planning
+    - amount: 121733000.0
+      percentage: 0.2173215134623459
+      slug: maritime-transport
+      title: Maritime Transport
+    - amount: 11655390000.0
+      percentage: 20.80756240948545
+      slug: public-transport
+      title: Public Transport
+    - amount: 18985533000.0
+      percentage: 33.89356021333009
+      slug: rail-transport
+      title: Rail Transport
+    - amount: 24525567000.0
+      percentage: 43.78380011140912
+      slug: road-transport
+      title: Road Transport
+    slug: transport
+    title: Transport
+    total: 56015163000.0
+  - description: "## Vote purpose\n\n_Ensure the availability of water resources,\
+      \ facilitate equitable and\nsustainable socioeconomic development, and ensure\
+      \ universal access to water\nand sanitation services._\n\n\n\n## Mandate\n\n\
+      The mandate of the Department of Water and Sanitation is set out in the\nNational\
+      \ Water Act\_(1998) and the Water Services Act\_(1997). The department\u2019\
+      s\nlegislative mandate seeks to ensure that the country\u2019s water resources\
+      \ are\nprotected, managed, used, developed, conserved and controlled through\n\
+      regulating and supporting the delivery of effective water supply and\nsanitation.\
+      \ This is done in accordance with the requirements of water related\npolicies\
+      \ and legislation that are critical for delivering on people\u2019s right to\n\
+      have access to sufficient food and water, transforming the economy, and\neradicating\
+      \ poverty.\n\n"
+    focus_areas:
+    - slug: economic-affairs
+      title: Economic affairs
+      url: 2016-17/focus/economic-affairs
+    - slug: human-settlements-and-municipal-infrastructure
+      title: Human settlements and municipal infrastructure
+      url: 2016-17/focus/human-settlements-and-municipal-infrastructure
+    percentage_of_budget: 1.1619259660552237
+    programmes:
+    - amount: 1659488000.0
+      percentage: 10.885245462912268
+      slug: administration
+      title: Administration
+    - amount: 701945000.0
+      percentage: 4.604337980427669
+      slug: water-and-sanitation-services
+      title: Water And Sanitation Services
+    - amount: 11696415000.0
+      percentage: 76.72146367499433
+      slug: water-infrastructure-development
+      title: Water Infrastructure Development
+    - amount: 841817000.0
+      percentage: 5.521814366751924
+      slug: water-planning-and-information-management
+      title: Water Planning And Information Management
+    - amount: 345632000.0
+      percentage: 2.2671385149138126
+      slug: water-sector-regulation
+      title: Water Sector Regulation
+    slug: water-and-sanitation
+    title: Water and Sanitation
+    total: 15245297000.0
+  - description: "## Vote purpose\n\n_Lead, coordinate and oversee the transformation\
+      \ agenda on women\u2019s\nsocioeconomic empowerment, rights and equality._\n\
+      \n\n\n## Mandate\n\nThe Department of Women derives its mandate from the Constitution\
+      \ and the\npresidential proclamation made in 2014, in terms of which the department\
+      \ is\nmandated to champion gender equality, and the achievement of women\u2019\
+      s\nsocioeconomic empowerment and rights.\n\n"
+    focus_areas:
+    - slug: general-public-services
+      title: General public services
+      url: 2016-17/focus/general-public-services
+    percentage_of_budget: 0.015005815739681218
+    programmes:
+    - amount: 89357000.0
+      percentage: 45.38491622097955
+      slug: administration
+      title: Administration
+    - amount: 23128000.0
+      percentage: 11.746839557715848
+      slug: policy-stakeholder-coordination-and-knowledge-management
+      title: Policy, Stakeholder Coordination And Knowledge Management
+    - amount: 84402000.0
+      percentage: 42.86824422130461
+      slug: social-transformation-and-economic-empowerment
+      title: Social Transformation And Economic Empowerment
+    slug: women
+    title: Women
+    total: 196887000.0
