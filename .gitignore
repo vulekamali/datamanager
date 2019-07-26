@@ -7,4 +7,6 @@ docs/_build
 .tox
 .coverage
 /.vscode/
-/node_modules/
+node_modules/
+_layouts/
+/assets/generated/

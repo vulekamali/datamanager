@@ -203,7 +203,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            str(ROOT_DIR.path('_layouts')),
             str(ROOT_DIR.path("_includes"))
         ],
         'APP_DIRS': True,
