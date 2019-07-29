@@ -10,3 +10,4 @@ docs/_build
 node_modules/
 _layouts/
 /assets/generated/
+packages/webapp/build/
