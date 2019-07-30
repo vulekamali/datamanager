@@ -21,7 +21,7 @@
 
       {% comment %} Determine whether link active state should be determined by JavaScript {% endcomment %}
       {% if item.connected %}
-        {% assign ' data-connected-id="'|add:item.connected|add:'"' as dataAttribute %}
+        {% assign ' data-connected-id='|add:item.connected as dataAttribute %}
         {% assign ' js-link' as jsClass %}
       {% else %}
         {% assign '' as dataAttribute %}

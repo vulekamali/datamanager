@@ -10,8 +10,8 @@
   "version": "1.0.0",
   "scripts": {
     "build:webapp": "cd ./packages/webapp && node ./scripts/build.js",
-    "build:root": "webpack --display errors-only --progress -p --watch",
-    "build:dev": "webpack --display errors-only --progress",
+    "build:root": "webpack --display errors-only --progress -p",
+    "build:dev": "webpack --display errors-only --progress --watch",
     "build": "yarn build:webapp && yarn build:root",
     "copy:webapp": "node monorepo-custom-script"
   },

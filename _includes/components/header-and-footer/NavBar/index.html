@@ -45,13 +45,8 @@
           {% else %}
             {% assign item.url as finalUrl %}
           {% endif %} 
-
           <li class="NavBar-item{{ alignmentClass }}">
-            <a
-              class="NavBar-link{{ activeClass }}{{ subLinkClass }}"
-              href="/{{ finalUrl }}"
-            >
-
+            <a class="NavBar-link{{ activeClass }}{{ subLinkClass }}" href="/{{ finalUrl }}">
               {% if item.id == 'homepage' %}
                 <span class="NavBar-iconWrap">
                   {% include 'components/Icon/index.html' with type="home"%}

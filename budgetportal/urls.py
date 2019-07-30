@@ -109,7 +109,7 @@ urlpatterns = [
     url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
     #about us
-    url(r'^about/$', about, name="about")
+    url(r'^about/?$', about, name="about")
 ]
 
 if settings.DEBUG:
