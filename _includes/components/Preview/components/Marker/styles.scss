@@ -1,0 +1,46 @@
+.Marker {
+  position: relative;
+  background: #7bb344;
+  display: inline-flex;
+  width: 5rem;
+  height: 5rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  fill: white;
+  margin-bottom: 1rem;
+
+  &--purple {
+    background: #ad3c64;
+  }
+
+  &--orange {
+    background: #ee9f31;
+  }
+
+  &::before {
+    margin: 1;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 60%;
+    width: 0;
+    height: 0;
+    border-bottom: 0 solid transparent;
+    border-left: 2.5rem solid transparent;
+    border-right: 2.5rem solid transparent;
+    border-top: 3rem solid #7bb344;
+  }
+
+  &--purple::before {
+    border-top-color: #ad3c64;
+  }
+
+  &--orange::before {
+    border-top-color: #ee9f31;
+  }
+}
+
+.Marker-icon {
+  position: relative;
+}

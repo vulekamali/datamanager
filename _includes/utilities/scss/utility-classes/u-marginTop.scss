@@ -1,0 +1,19 @@
+.u-marginTop {
+  @for $i from 0 through 6 {
+    &#{$i * 5} {
+      margin-top: #{$i * 5}px !important;
+    }
+  }
+
+  @for $i from 0 through 3 {
+    &#{($i * 10) + 30} {
+      margin-top: #{($i * 10) + 30}px !important;
+    }
+  }
+
+  @for $i from 0 through 3 {
+    &#{($i * 100) + 100} {
+      margin-top: #{($i * 100) + 100}px !important;
+    }
+  }
+}

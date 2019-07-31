@@ -1,0 +1,18 @@
+.Features {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.Features-item {
+  width: 100%;
+
+  @media screen and (min-width: 500px) {
+    width: (100% / 2);
+  }
+
+  @media screen and (min-width: 700px) {
+    width: (100% / 3);
+  }
+}

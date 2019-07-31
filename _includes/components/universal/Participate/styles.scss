@@ -1,0 +1,25 @@
+.Participate-info {
+  margin-top: 15px;
+}
+
+.Participate-button {
+  background-color: #e6e6e6;
+  color: #3f3f3f;
+  border: 0;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px 11px 13px;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 10px 10px 0;
+
+  &:hover {
+    background-color: darken(#e6e6e6, 10%);
+  }
+
+  &.is-active {
+    background-color: #7bb344;
+    color: #fff;
+  }
+}

@@ -1,0 +1,7 @@
+.u-supportsFlex {
+  display: none !important;
+
+  @supports (display: flex) {
+    display: block !important;
+  }
+}

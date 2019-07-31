@@ -1,0 +1,82 @@
+$mobile-break: 900px;
+
+.SubLinks {
+  @media screen and (min-width: $mobile-break) {
+    display: none;
+
+    &.is-currentPage {
+      display: block;
+      position: absolute;
+      left: 10px;
+      top: 267px;
+
+      &.is-fixed {
+        position: fixed;
+        top: 50px;
+      }
+
+      @media screen and (min-width: 1050px) {
+        left: calc(50vw - (1024px / 2));
+      }
+
+      @media screen and (min-width: 1500px) {
+        left: calc(50vw - ((1024px / 2) + 230px));
+      }
+    }
+  }
+}
+
+.SubLinks-subItems {
+  list-style: none;
+  padding-left: 0;
+
+  @media screen and (min-width: $mobile-break) {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+    width: 200px;
+    list-style: none;
+    text-align: right;
+    padding: 18px 0 18px 20px;
+  }
+}
+
+.SubLinks-subLink {
+  padding: 12px 22px;
+  font-size: 16px;
+  border-bottom: solid 1px #b9b9b9;
+  background: white;
+  display: block;
+  cursor: pointer;
+  padding-left: 36px;
+  text-decoration: none;
+  color: #4a4a4a;
+  line-height: 1;
+
+  @media screen and (min-width: $mobile-break) {
+    font-weight: normal;
+    padding: 13px 18px 16px;
+    margin-left: 20px;
+    background: none;
+    border-bottom-width: 0;
+    border-radius: 10px 0 0 10px;
+  }
+
+  &:not(.is-active):hover {
+    background-color: darken(white, 10%);
+
+    @media screen and (min-width: $mobile-break) {
+      background-color: darken(#f5f6f6, 10%);
+    }
+  }
+
+  &.is-active {
+    font-weight: bold;
+    font-weight: 900;
+    background-color: #f0f0f0;
+
+    @media screen and (min-width: $mobile-break) {
+      cursor: default;
+    }
+  }
+}

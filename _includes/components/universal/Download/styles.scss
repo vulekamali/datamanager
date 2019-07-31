@@ -1,0 +1,21 @@
+.Download {
+  display: inline-block;
+  color: #3f3f3f;
+  padding: 3px 6px 6px;
+  border-radius: 5px;
+  font-size: 14px;
+
+  &:hover {
+    background-color: darken(#e6e6e6, 15%);
+  }
+}
+
+.Download-icon {
+  border: 2px solid #3f3f3f;
+  border-radius: 50%;
+  display: inline-block;
+  fill: #3f3f3f;
+  padding: 2px;
+  margin-right: 5px;
+  line-height: 0;
+}

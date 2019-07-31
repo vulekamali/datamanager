@@ -3,7 +3,7 @@ import urlparse
 
 import requests
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views import View
 from slugify import slugify
 
@@ -20,6 +20,8 @@ import yaml
 import logging
 from . import revenue
 from csv import DictWriter
+
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -605,3 +607,29 @@ def category_fields(category):
         'url_path': category.get_url_path(),
         'description': category.description,
     }
+
+
+def about(request):
+    videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
+    about_date_file_path = str(settings.ROOT_DIR.path('_data/about.yaml'))
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page' : {
+            'layout' : 'about',
+            'data_key' : 'about'
+        },
+        'site' : {
+            'data' : {
+                'videos' : read_object_from_yaml(videos_file_path),
+                'about' : read_object_from_yaml(about_date_file_path),
+                'navbar' : read_object_from_yaml(navbar_data_file_path)
+            },
+            'latest_year' : '2019-20'
+        },
+        'debug' : settings.DEBUG
+    }
+    return render(request, 'about.html', context=context)
+
+def read_object_from_yaml(path_file):
+    with open(path_file, 'r') as f:
+        return yaml.load(f)

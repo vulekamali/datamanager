@@ -1,0 +1,33 @@
+{% if resource.format == "" %}
+  {% assign icon = "link" %}
+{% else %}
+  {% assign icon = "download" %}
+{% endif %}
+
+{% if include.resources %}
+  <div class="Downloads {{ include.utils }}">
+    <div class="Downloads-inner">
+      <div class="Downloads-title">Documents included in this dataset</div>
+      <div class="Downloads-content">
+        <ul class="LinksList">
+          {% for resource in include.resources %}
+            {% capture text %}
+              {{ resource.name }}
+              &nbsp; 
+              {% if resource.format != "" %}
+                ({{ resource.format }})
+              {% endif %}
+            {% endcapture %}
+
+            {%
+              include components/LinksList/item.html
+              text=text
+              url=resource.url
+              type=icon
+            %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endif %}

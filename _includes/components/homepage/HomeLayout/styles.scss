@@ -1,0 +1,55 @@
+.HomeLayout {
+  padding-top: 30px;
+  @include clearfix;
+}
+
+.HomeLayout-title {
+  padding: 30px 20px;
+  font-size: 18px;
+  line-height: 1.44;
+  font-weight: bold;
+  display: block;
+}
+
+.HomeLayout-description {
+  padding-left: 20px;
+  padding-top: 10px;
+  line-height: 1.44;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+.HomeLayout-titleWrap {
+  text-align: center;
+
+  @media screen and (min-width: 750px) {
+    padding-top: 20px;
+    text-align: left;
+  }
+}
+
+.HomeLayout-main {
+  width: 100%;
+  padding-bottom: 30px;
+  text-align: center;
+
+  @media screen and (min-width: 1050px) {
+    text-align: left;
+    float: left;
+    max-width: 620px;
+    padding-bottom: 0;
+  }
+}
+
+.HomeLayout-sidebar {
+  width: 100%;
+
+  @media screen and (min-width: 1050px) {
+    float: right;
+    max-width: 300px;
+  }
+}
+
+.HomeLayout-newsletter {
+  padding-bottom: 23px;
+}

@@ -1,0 +1,54 @@
+<div class="EventSection">
+  <div class="EventSection-heading">
+    {%
+      include components/Icon/index.html
+      type="date"
+      size="xl"
+      color="purple"
+    %}
+    <div class="Title u-marginTop15">Upcoming events</div>
+  </div>
+
+  <div class="EventSection-list">
+    {% for event in include.events_list %}
+
+      {% if event.type == 'hackathon' %}
+        {% assign title = 'Hackathon' %}
+        {% assign description = 'Join developers, students, enterpreneurs and data experts at a vulekamali hackathon. Build websites, mobile apps and other tools using the data and APIs behind vulekamali.' %}
+
+      {% elsif event.type == 'cid' %}
+        {% assign title = 'Civic Information Drive' %}
+        {% assign description = 'Find out more about how to use vulekamali.gov.za to understand national and provincial budgets.' %}
+
+      {% elsif event.type == 'dataquest' %}
+        {% assign title = 'Data Quest' %}
+        {% assign description = 'Tell us what you need to make vulekamali and budget data more accessible and useful. Join us for a full day event discussing budget accessibility.' %}
+
+      {% elsif event.type == 'gift-dataquest' %}
+        {% assign title = 'Better Budget Data Quest' %}
+        {% assign description = 'Find new insights on budget topics and innovative ideas to analyse and improve budget allocations and execution.' %}
+
+      {% else %}
+        {% assign title = 'Event' %}
+        {% assign description = '' %}
+      {% endif %}
+
+      <div class="EventSection-item">
+        {%
+          include components/Preview/index.html
+          title=event.date
+          excerpt=description
+          url=event.rsvp_url
+          full_height="true"
+          location=event.province
+          type=title
+          top_align="true"
+        %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="u-textAlignCenter">
+    <a href="/events" class="Button is-inline is-secondary">View the full calendar of events</a>
+  </div>
+</div>

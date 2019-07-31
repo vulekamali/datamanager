@@ -1,0 +1,69 @@
+@function z-index($name) {
+  @if $name == 'DeptSearch-select' {
+    @return 10;
+  }
+
+  @if $name == 'SearchResult-item' {
+    @return 10;
+  }
+
+  @if $name == 'PseudoSelect' {
+    @return 10;
+  }
+
+  @if $name == 'PseudoSelect is-open' {
+    @return 20;
+  }
+
+  @if $name == 'Search-container--desktop' {
+    @return 30;
+  }
+
+  @if $name == 'YearSelect-bar' {
+    @return 30;
+  }
+
+  @if $name == 'Tooltip-boxWrap' {
+    @return 40;
+  }
+
+  @if $name == 'Intro-alert' {
+    @return 60;
+  }
+
+  @if $name == 'Tooltip-boxWrap is-important' {
+    @return 70;
+  }
+
+  @if $name == 'Page-header' {
+    @return 80;
+  }
+
+  @if $name == 'NavBar' {
+    @return 90;
+  }
+
+  @if $name == 'Search-container--mobile' {
+    @return 90;
+  }
+
+  @if $name == 'Tooltip-boxWrap--mobile' {
+    @return 100;
+  }
+
+  @if $name == 'Search--mobile' {
+    @return 109;
+  }
+
+  @if $name == 'Tooltip' {
+    @return 110;
+  }
+
+  @if $name == 'Tooltip-boxWrap' {
+    @return 130;
+  }
+
+  @if $name == 'Videos-modalWrap' {
+    @return 140;
+  }
+}

@@ -1,0 +1,18 @@
+.u-paddingRight {
+  @for $i from 0 through 6 {
+    &#{$i * 5} {
+      padding-right: #{$i * 5}px !important;
+    }
+  }
+
+  @for $i from 0 through 3 {
+    &#{($i * 10) + 30} {
+      padding-right: #{($i * 10) + 30}px !important;
+    }
+  }
+
+  @for $i from 0 through 3 {
+    &#{($i * 100) + 100} {
+      padding-right: #{($i * 100) + 100}px !important;
+    }
+  }}

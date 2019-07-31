@@ -1,0 +1,218 @@
+$mobile-break: 900px;
+$years: 4;
+
+.YearSelect {
+  background: #3f3f3f;
+  color: white;
+
+  @media screen and (min-width: $mobile-break) {
+    color: #3f3f3f;
+    background-color: #f0f0f0;
+    padding-top: 15px;
+  }
+}
+
+.YearSelect-fixed {
+  overflow: hidden;
+  background: #3f3f3f;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(-147px);
+  transition: transform 0.4s;
+  z-index: 99999999999;
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+
+  &.is-active {
+    transform: translateY(0);
+    overflow: visible;
+  }
+}
+
+.YearSelect-instance {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.YearSelect-title {
+  vertical-align: middle;
+  padding-right: 20px;
+  display: inline-block;
+  font-family: "Verdana", sans-serif;
+  text-transform: capitalize;
+  font-size: 11px;
+
+  @media screen and (min-width: 400px) {
+    font-size: 16px;
+    text-transform: none;
+    font-family: "Lato", sans-serif;
+  }
+}
+
+.YearSelect-titleExtra {
+  display: none;
+
+  @media screen and (min-width: 400px) {
+    display: inline;
+  }
+}
+
+.YearSelect-content {
+  line-height: 1.1;
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  position: relative;
+  max-width: 100px;
+  height: 48px;
+
+  @media screen and (min-width: $mobile-break) {
+    height: auto;
+    max-width: 140px * $years;
+  }
+}
+
+.YearSelect-bar {
+  padding-left: 0;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  z-index: z-index('YearSelect-bar');
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 18px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #d2d2d2;
+  @include clearfix;
+
+  &.is-loading {
+    height: 38px;
+  }
+
+  @media screen and (min-width: $mobile-break) {
+    position: static;
+    display: block;
+  }
+
+  @media screen and (min-width: 950px) {
+    width: auto;
+  }
+}
+
+.YearSelect-item {
+  cursor: pointer;
+  list-style: none;
+  float: left;
+  width: 100%;
+  display: none;
+  order: 2;
+  line-height: 1.1;
+
+  @media screen and (min-width: $mobile-break) {
+    display: block;
+    width: (100% / $years);
+
+    &::after {
+      display: none !important;
+    }
+  }
+
+  &.is-active {
+    order: 1;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #ad3c64;
+    border-radius: 18px;
+
+    .YearSelect-bar.is-open & {
+      border-bottom: 1px solid #4a4a4a;
+    }
+
+    &:first-child {
+      border-left-width: 0;
+    }
+
+    &:last-child {
+      border-right-width: 0;
+    }
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border: 5px solid transparent;
+      border-top: 5px solid white;
+      margin-left: 5px;
+      position: relative;
+      top: 15px;
+      transition: top 0.3s, transform 0.3s;
+      transform: rotate(0deg);
+    }
+
+    .YearSelect-bar.is-open &::after {
+      transform: rotate(180deg);
+      top: 9px;
+    }
+
+    @media screen and (min-width: $mobile-break) {
+      cursor: default;
+      background: none;
+      display: block;
+      border-bottom-width: 0 !important;
+      border-radius: 0 18px 18px 0;
+    }
+  }
+
+  .YearSelect-bar.is-open & {
+    display: block;
+  }
+}
+
+.YearSelect-link {
+  vertical-align: top;
+  width: auto;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 10px 0;
+  display: block;
+  color: #4a4a4a;
+  text-align: center;
+  overflow: hidden;
+
+  .YearSelect-item:first-child & {
+    border-radius: 15px 0 0 15px;
+  }
+
+  .YearSelect-item:last-child & {
+    border-radius: 15px;
+
+    @media screen and (min-width: $mobile-break) {
+      border-radius: 0 15px 15px 0;
+    }
+  }
+
+  .YearSelect-item.is-active & {
+    color: white;
+    display: inline-block;
+    background-color: #ad3c64;
+  }
+
+  .YearSelect-bar:not(.is-open) .YearSelect-item:not(.is-active) &:hover {
+    background-color: darken(white, 15%);
+  }
+
+  @media screen and (min-width: $mobile-break) {
+    width: 100%;
+  }
+}

@@ -1,0 +1,36 @@
+{% if include.datasets | size > 0 %}
+  {% assign padding = '' %}
+{% else %}
+  {% assign padding = ' u-paddingBottom0' %}
+{% endif %}
+
+
+<div class="Section is-bevel" id="contributed-data">
+  <div class="Section-card is-invisible {{ padding }}">
+    <div class="Section-title">Contributed data</div>
+  </div>
+
+  {% if include.datasets | size > 0 %}
+    {% for item in include.datasets %}
+
+      <div class="Section-card u-marginBottom10">
+        <div class="ContributedItem">
+          <div class="ContributedItem-info">
+            <div class="u-fontWeightBold">{{ item.name }}</div>
+            <div class="u-marginTop5">Data by {{ item.contributor }}</div>
+          </div>
+          <div class="ContributedItem-button">
+            <a class="Button is-inline" href="{{ item.url_path }}">View Dataset</a>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+  {% endif %}
+
+  <div class="Section-card is-invisible u-marginTop15">
+    <h3>How can I contribute?</h3>
+    <div>Do you have data related to this department that you would like to contribute?</div>
+    <a class="Button is-secondary u-marginTop15" href="https://data.vulekamali.gov.za/user/login?came_from=/dataset/new" target="_blank">Log in and submit your data</a>
+  </div>
+</div>

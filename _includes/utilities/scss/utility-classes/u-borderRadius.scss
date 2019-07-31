@@ -1,0 +1,7 @@
+.u-borderRadius {
+  @for $i from 0 through 5 {
+    &#{$i * 2} {
+      border-radius: #{$i * 2}px !important;
+    }
+  }
+}
