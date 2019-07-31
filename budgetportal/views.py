@@ -613,9 +613,6 @@ def about(request):
     videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
     about_date_file_path = str(settings.ROOT_DIR.path('_data/about.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    env = 'production'
-    if settings.DEBUG:
-        env = 'development'
     context = {
         'page' : {
             'layout' : 'about',
@@ -629,9 +626,7 @@ def about(request):
             },
             'latest_year' : '2019-20'
         },
-        'jekyll' : {
-            'environment' :  env
-        }
+        'debug' : settings.DEBUG
     }
     return render(request, 'about.html', context=context)
 

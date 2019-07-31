@@ -34,10 +34,10 @@
 {% endif %}
 
 
-{% if jekyll.environment == "production" %}
-  {% assign "data-production" as production %}
-{% else %}
+{% if debug %}
   {% assign "" as production %}
+{% else %}
+  {% assign "data-production" as production %}
 {% endif %}
 
 
