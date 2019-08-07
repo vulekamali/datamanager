@@ -108,7 +108,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
-    #about us
+    # about us
     url(r'^about/?$', about, name="about")
 ]
 
