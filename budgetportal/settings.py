@@ -203,7 +203,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            str(ROOT_DIR.path("_includes"))
+            str(ROOT_DIR.path("budgetportal/templates")),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

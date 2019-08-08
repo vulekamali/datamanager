@@ -1,0 +1,19 @@
+{
+    "name": "vulekamali",
+    "short_name": "vulekamali",
+    "icons": [
+        {
+            "src": "/assets/icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icons/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#7bb344",
+    "background_color": "#7bb344",
+    "display": "standalone"
+}

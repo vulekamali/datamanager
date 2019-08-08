@@ -1,0 +1,20 @@
+{% if include.source_url %}
+  {% assign tag = 'a' %}
+{% else %}
+  {% assign tag = 'span' %}
+{% endif %}
+
+<div class="ThumbPreview" data-component="ThumbPreview">
+  <div class="ThumbPreview-thumb">
+    <div class="ThumbPreview-image" data-thumb data-image="{{ include.logo }}"></div>
+  </div>
+  <div class="ThumbPreview-content">
+    <a class="ThumbPreview-heading" href="{{ include.url }}">{{ include.title }}</a>
+    <div class="ThumbPreview-source">
+      <span>Source: </span>
+      <{{ tag }} href="{{ include.source_url }}">{{ include.source }}</{{ tag }}>
+    </div>
+    <div class="ThumbPreview-info">First uploaded: {{ include.created | date_to_long_string }}</div>
+    <div class="ThumbPreview-info">Last updated: {{ include.updated | date_to_long_string }}</div>
+  </div>
+</div>
