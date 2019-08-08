@@ -12,8 +12,7 @@
     "build:webapp": "cd ./packages/webapp && node ./scripts/build",
     "build:root": "webpack --display errors-only --progress -p",
     "build:dev": "webpack --display errors-only --progress --watch",
-    "build": "yarn build:webapp && yarn build:root && yarn copy:webapp",
-    "copy:webapp": "node monorepo-custom-script"
+    "build": "yarn build:webapp && yarn build:root"
   },
   "devDependencies": {
     "app-root-dir": "^1.0.2",
