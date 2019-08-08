@@ -1,21 +1,23 @@
+{% load define_action %}
+
 <div class="Events">
-  {% for event in include.events %}
+  {% for event in events %}
 
   {% if event.type == 'hackathon' %}
-    {% assign title = 'Hackathon' %}
-    {% assign description = 'Join developers, students, enterpreneurs and data experts at a Vulekamali hackathon. Build websites, mobile apps and other tools using the data and APIs behind vulekamali.' %}
-  {% elsif event.type == 'cid' %}
-    {% assign title = 'Civic Information Drive' %}
-    {% assign description = 'Find out more about how to use vulekamali.gov.za to understand national and provincial budgets.' %}
-  {% elsif event.type == 'dataquest' %}
-    {% assign title = 'Data Quest' %}
-    {% assign description = 'Tell us what you need to make Vulekamali and budget data more accessible and useful. Join us for a full day event discussing budget accessibility.' %}
-  {% elsif event.type == 'gift-dataquest' %}
-    {% assign title = 'Better Budget Data Quest' %}
-    {% assign description = 'Find new insights on budget topics and innovative ideas to analyse and improve budget allocations and execution.' %}
+    {% assign 'Hackathon' as title %}
+    {% assign 'Join developers, students, enterpreneurs and data experts at a Vulekamali hackathon. Build websites, mobile apps and other tools using the data and APIs behind vulekamali.' as description %}
+  {% elif event.type == 'cid' %}
+    {% assign 'Civic Information Drive' as title %}
+    {% assign 'Find out more about how to use vulekamali.gov.za to understand national and provincial budgets.' as description %}
+  {% elif event.type == 'dataquest' %}
+    {% assign 'Data Quest' as title %}
+    {% assign 'Tell us what you need to make Vulekamali and budget data more accessible and useful. Join us for a full day event discussing budget accessibility.' as description%}
+  {% elif event.type == 'gift-dataquest' %}
+    {% assign 'Better Budget Data Quest' as title %}
+    {% assign 'Find new insights on budget topics and innovative ideas to analyse and improve budget allocations and execution.' as description %}
   {% else %}
-    {% assign title = 'Event' %}
-    {% assign description = '' %}
+    {% assign 'Event' as title %}
+    {% assign '' as description %}
   {% endif %}
 
     <div class="Events-blockWrap">
@@ -27,11 +29,7 @@
             {% if event.date %}
               <div class="Events-line">
                 <span class="Events-icon">
-                  {%
-                    include components/Icon/index.html
-                    type="date"
-                    size="xs"
-                  %}
+                  {% include 'components/Icon/index.html' with type="date" size="xs" %}
                 </span>
                 <span>{{ event.date }}</span>
               </div>
@@ -40,11 +38,7 @@
             {% if event.where %}
               <div class="Events-line">
                 <span class="Events-icon">
-                  {%
-                    include components/Icon/index.html
-                    type="pin"
-                    size="xs"
-                  %}
+                  {% include 'components/Icon/index.html' with type="pin" size="xs" %}
                 </span>
                 <span>{{ event.where }}</span>
               </div>
@@ -71,7 +65,7 @@
 
               {% else %}
 
-              {% if include.upcoming %}
+              {% if upcoming %}
                 <a class="Button is-small is-inline u-marginRight5" target="_blank" href="http://eepurl.com/diwJEP">Receive updates</a>
               {% endif %}
 
