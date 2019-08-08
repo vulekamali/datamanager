@@ -1,0 +1,29 @@
+{% extends 'page-shell.html' %}
+{% block page_content %}
+<div class="Page-content">
+  <main class="Page-contentInner Page-contentInner--floatingLinks">
+    <h1 class="Page-mainHeading">Resources</h1>
+    <div class="Section">
+      <h3 class="Section-title">Resources on Budget Analysis</h3>
+      <ul>
+        <li>
+          <a href="https://www.sahrc.org.za/home/21/files/2016%20SPII%20SAHRC%20Guide%20to%20Budget%20Analysis%20for%20Socio-Economic%20Rights.pdf">Budget analysis for advancing socio-economic rights</a> - Studies in Poverty and Inequality Institute (SPII) (PDF)
+        </li>
+      </ul>
+    </div>
+
+    <div class="Section u-marginTop20">
+      <h3 class="Section-title" id="process">The Budget Process and Public Participation</h3>
+      <ul>
+        <li><a href="https://data.vulekamali.gov.za/dataset/86e7c9ae-d299-4218-b719-b8b27a9c4e01/resource/2e8c7703-e66f-4ed4-b501-37087caa4750/download/presentation-to-mps-on-aene-and-budget-process.ppt" target="_blank">Budget Process and the Appropriation Bill</a> - A presentation to Members of Parliament by National Treasury (PPT)</li>
+        <li><a href="https://data.vulekamali.gov.za/dataset/86e7c9ae-d299-4218-b719-b8b27a9c4e01/resource/9765ffbb-5bf8-4e90-b458-6eca23e823ab/download/peoples_power-final.pdf" target="_blank">People's Power, People's Parliament</a> - by Keren Ben-Zeev (PDF)</li>
+        <li><a href="https://data.vulekamali.gov.za/dataset/86e7c9ae-d299-4218-b719-b8b27a9c4e01/resource/5234c761-7583-40bb-bcd6-f3861649abd1/download/public-participation-framework.pdf" target="_blank">Public Participation Framework for the South African Legislative Sector, June 2013</a> - South African Legislative Sector (PDF)</li>
+        <li><a href="http://forms.treasury.gov.za/Tips/_layouts/FormServer.aspx?XsnLocation=http://forms.treasury.gov.za/FormServerTemplates/BudgetLive.xsn&SaveLocation=http%3A%2F%2Fforms%2Etreasury%2Egov%2Eza%2FTips%2FTips&DefaultItemOpen=1" target="_blank">Submit a budget tip to the Minister of Finance</a></li>
+      </ul>
+    </div>
+
+    {% include "components/universal/Participate/index.html" with title="The Budget Process and Public Participation" description="National Treasury, departments and commitees are busy with different things depending on the time of year:" utils="u-marginTop20" %}
+
+  </main>
+</div>
+{% endblock %}

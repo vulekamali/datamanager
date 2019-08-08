@@ -1,15 +1,16 @@
-<div class="Section is-bevel {{ include.utils }}" id="participate">
+{% load define_action %}
+<div class="Section is-bevel {{ utils }}" id="participate">
   <div class="Section-card is-invisible u-paddingBottom15">
-    <div class="Section-title">{{ include.title }}</div>
-    <p>{{ include.description }}</p>
+    <div class="Section-title">{{ title }}</div>
+    <p>{{ description }}</p>
   </div>
   <div class="Section-card u-marginBottom20">
     <div class="js-initParticipate"></div>
   </div>
 
-  {% assign video4 = site.data.videos.data[3] %}
-  {% include components/universal/VideoCard/index.html video=video4 utils="u-marginTop15" %} 
+  {% assign site.data.videos.data.3 as video4 %}
+  {% include "components/universal/VideoCard/index.html" with video=video4 utils="u-marginTop15" %}
 
-  {% assign video5 = site.data.videos.data[4] %}
-  {% include components/universal/VideoCard/index.html video=video5 utils="u-marginTop15" %} 
+  {% assign site.data.videos.data.4 as video5 %}
+  {% include "components/universal/VideoCard/index.html" with video=video5 utils="u-marginTop15" %}
 </div>

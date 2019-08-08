@@ -707,6 +707,26 @@ def search_result(request, financial_year_id):
     return render(request, 'search-result.html', context=context)
 
 
+def resources(request):
+    videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page' : {
+            'layout' : 'resources',
+            'data_key' : 'resources'
+        },
+        'site' : {
+            'data' : {
+                'navbar' : read_object_from_yaml(navbar_data_file_path),
+                'videos': read_object_from_yaml(videos_file_path),
+            },
+            'latest_year' : '2019-20'
+        },
+        'debug' : settings.DEBUG
+    }
+    return render(request, 'resources.html', context=context)
+
+
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:
         return yaml.load(f)
