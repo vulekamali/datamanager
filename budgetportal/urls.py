@@ -102,7 +102,11 @@ urlpatterns = [
     url(r"^datasets.yaml$", cache_page(CACHE_SECS)(views.dataset_category_list)),
     url(
         r"^infrastructure-projects.yaml$",
-        cache_page(CACHE_SECS)(views.infrastructure_projects_overview),
+        cache_page(CACHE_SECS)(views.infrastructure_projects_overview_yaml),
+    ),
+    url(
+        r"^json/infrastructure-projects.json$",
+        cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json),
     ),
     url(
         r"^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$",
