@@ -3,14 +3,16 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const normalize = require('postcss-normalize');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
 
 
 module.exports = {
-  entry: './_includes/scripts.js',
+  entry: {
+    main: './_includes/scripts.js',
+    webapp: 'webapp/src/index.js'
+  },
   output: {
     path: resolve(__dirname, 'assets/generated/'),
-    filename: 'scripts.bundle.js',
+    filename: '[name].bundle.js',
   },
 
   devtool: 'source-map',
@@ -67,10 +69,6 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin('assets/generated/*'),
-    new ExtractTextPlugin('styles.bundle.css'),
-    new ManifestPlugin({
-      fileName: '../../_data/assets.json',
-      basePath: 'assets/generated/',
-    }),
+    new ExtractTextPlugin('styles.bundle.css')
   ],
 };
