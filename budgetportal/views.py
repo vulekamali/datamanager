@@ -688,6 +688,25 @@ def terms_and_conditions(request):
     }
     return render(request, 'terms-and-conditions.html', context=context)
 
+
+def search_result(request, financial_year_id):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page' : {
+            'layout' : 'search-result',
+            'data_key' : 'search-result'
+        },
+        'site' : {
+            'data' : {
+                'navbar' : read_object_from_yaml(navbar_data_file_path)
+            },
+            'latest_year' : '2019-20'
+        },
+        'debug' : settings.DEBUG
+    }
+    return render(request, 'search-result.html', context=context)
+
+
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:
         return yaml.load(f)
