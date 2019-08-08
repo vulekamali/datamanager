@@ -17,6 +17,7 @@ from summaries import (
     get_consolidated_expenditure_treemap,
 )
 import yaml
+import json
 import logging
 from . import revenue
 from csv import DictWriter
@@ -491,7 +492,7 @@ def infrastructure_projects_overview(request):
             'expenditure': sorted(project.complete_expenditure, key=lambda e: e['year'])
         })
     projects = sorted(projects, key=lambda p: p['name'])
-    response = {
+    return {
         'dataset_url': InfrastructureProject.get_dataset().get_url_path(),
         'projects': projects,
         'description': 'Infrastructure projects in South Africa for 2019-20',
@@ -499,8 +500,29 @@ def infrastructure_projects_overview(request):
         'selected_tab': 'infrastructure-projects',
         'title': 'Infrastructure Projects - vulekamali',
     }
+
+def infrastructure_projects_overview_yaml(request):
+    response = infrastructure_projects_overview(request)
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def infrastructure_projects_overview_json(request):
+    response_json = json.dumps(
+        infrastructure_projects_overview(request),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
+def infrastructure_project_list(request):
+    context = {
+        "page": {"layout": "about", "data_key": "about"},
+        "site": {"latest_year": "2019-20"},
+    }
+    return render(request, "infrastructure_project_list.html", context=context)
 
 
 def infrastructure_project_detail(request, project_slug):

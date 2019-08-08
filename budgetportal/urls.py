@@ -1,6 +1,6 @@
 from adminplus.sites import AdminSitePlus
 
-from budgetportal.views import openspending_csv, about
+from budgetportal.views import openspending_csv, about, infrastructure_project_list
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
@@ -85,7 +85,11 @@ urlpatterns = [
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
 
     url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_category_list)),
-    url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview)),
+    url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_yaml)),
+    url(
+        r'^json/infrastructure-projects.json$',
+        cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)
+    ),
     url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$',
         cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
     url(r'^datasets'
@@ -108,8 +112,13 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
-    #about us
-    url(r'^about/?$', about, name="about")
+    # Budget Portal
+    url(r'^about/?$', about, name="about"),
+    url(
+        r"^infrastructure-projects/?$",
+        infrastructure_project_list,
+        name="infrastructure-project-list",
+    ),
 ]
 
 if settings.DEBUG:
