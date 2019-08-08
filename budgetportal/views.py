@@ -2,7 +2,7 @@ import urllib
 import urlparse
 
 import requests
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import View
 from slugify import slugify
@@ -459,7 +459,7 @@ def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
     infrastructure_projects = InfrastructureProject.get_featured_projects_from_resource()
     if infrastructure_projects is None:
-        return HttpResponse(status=404)
+        raise Http404()
     projects = []
     for project in infrastructure_projects:
         departments = Department.objects.filter(
