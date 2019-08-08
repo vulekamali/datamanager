@@ -1,6 +1,6 @@
 from adminplus.sites import AdminSitePlus
 
-from budgetportal.views import openspending_csv, about, events, videos
+from budgetportal.views import openspending_csv, about, events, videos, terms_and_conditions
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
@@ -111,7 +111,8 @@ urlpatterns = [
     # about us
     url(r'^about/?$', about, name="about"),
     url(r'^events/?$', events, name="events"),
-    url(r'^videos/?$', videos, name="videos")
+    url(r'^videos/?$', videos, name="videos"),
+    url(r'^terms-and-conditions/?$', terms_and_conditions, name="terms-and-conditions")
 ]
 
 if settings.DEBUG:
