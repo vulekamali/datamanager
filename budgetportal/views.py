@@ -792,13 +792,13 @@ def dataset_landing_page(request):
     return render(request, 'datasets.html', context=context)
 
 
-def dataset(request, slug):
+def dataset_category(request, category_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    dataset_data_file_path = str(settings.ROOT_DIR.path('_data/datasets/{}/index.yaml'.format(slug)))
+    dataset_data_file_path = str(settings.ROOT_DIR.path('_data/datasets/{}/index.yaml'.format(category_slug)))
     context = {
         'page': {
             'layout': 'government_dataset_category',
-            'data_key': slug,
+            'data_key': category_slug,
         },
         'site': {
             'data': {
@@ -811,6 +811,26 @@ def dataset(request, slug):
     }
     return render(request, 'government_dataset_category.html', context=context)
 
+
+def dataset(request, category_slug, dataset_slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    dataset_data_file_path = str(settings.ROOT_DIR.path('_data/datasets/{}/{}.yaml'.format(category_slug, dataset_slug)))
+    context = {
+        'page': {
+            'layout': 'government_dataset',
+            'data_key': dataset_slug,
+            'category': category_slug,
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'dataset': read_object_from_yaml(dataset_data_file_path)
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'government_dataset.html', context=context)
 
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:

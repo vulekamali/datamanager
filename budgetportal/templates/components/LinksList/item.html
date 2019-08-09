@@ -1,34 +1,35 @@
-{% if include.url %}
-  {% if include.prefix %}
+{% load define_action %}
+{% if url %}
+  {% if prefix %}
     <li>
-      {% if include.type == 'download' or include.type  == 'link' %}
-        <a href="{{ include.url }}" target="_blank" rel="noopener noreferrer" class="LinksList-link LinksList-link--clickable">
+      {% if type == 'download' or type  == 'link' %}
+        <a href="{{ url }}" target="_blank" rel="noopener noreferrer" class="LinksList-link LinksList-link--clickable">
       {% else %}
-        <a href="{{ include.url }}" class="LinksList-link LinksList-link--clickable">
+        <a href="{{ url }}" class="LinksList-link LinksList-link--clickable">
       {% endif %}
         <span class="LinksList-icon">
-          {% include components/Icon/index.html type=include.type size="s" %}
+          {% include 'components/Icon/index.html' with type=type size="s" %}
         </span>
         <div>
-          <span>{{ include.prefix }}:&nbsp;</span>
+          <span>{{ prefix }}:&nbsp;</span>
           <span class="LinksList-title">
-            {{ include.text }}
+            {{ text }}
           </span>
         </div>
       </a>
     </li>
   {% else %}
     <li>
-      {% if include.type == 'download' or include.type  == 'link' %}
-        <a href="{{ include.url }}" target="_blank" rel="noopener noreferrer" class="LinksList-link LinksList-link--clickable">
+      {% if type == 'download' or type  == 'link' %}
+        <a href="{{ url }}" target="_blank" rel="noopener noreferrer" class="LinksList-link LinksList-link--clickable">
       {% else %}
-        <a href="{{ include.url }}" class="LinksList-link LinksList-link--clickable">
+        <a href="{{ url }}" class="LinksList-link LinksList-link--clickable">
       {% endif %}
         <span class="LinksList-icon">
-          {% include components/Icon/index.html type=include.type size="s" %}
+          {% include 'components/Icon/index.html' with type=type size="s" %}
         </span>
         <span class="LinksList-title">
-          {{ include.text }}
+          {{ text }}
         </span>
       </a>
     </li>

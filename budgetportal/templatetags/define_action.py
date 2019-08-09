@@ -7,6 +7,7 @@ def assign(val=None):
 
 @register.filter
 def hash(h, key):
-  if key in h:
-    return h[key]
+  if h:
+    if key in h:
+      return h[key]
   return None
