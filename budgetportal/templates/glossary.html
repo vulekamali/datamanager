@@ -1,0 +1,12 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% block page_content %}
+
+<div class="Page-content">
+  <main class="Page-contentInner Page-contentInner--floatingLinks">
+    <h1 class="Page-mainHeading">Glossary</h1>
+    {% include 'components/learning-centre/Glossary/index.html' with year=page.financial_year %}
+  </main>
+</div>
+
+{% endblock %}

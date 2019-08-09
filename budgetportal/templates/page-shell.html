@@ -21,10 +21,10 @@
     {% assign site.data.datasets.contributed|hash:page.data_key as page_data %}
 
   {% elif page.layout == 'government_dataset' %}
-    {% assign site.data.datasets|hash:page.category|hash:page.data_key as page_data %}
+    {% assign site.data.dataset as page_data %}
 
   {% elif page.layout == 'government_dataset_category' %}
-    {% assign site.data.datasets|hash:page.data_key|hash:"index" as page_data %}
+    {% assign site.data.dataset as page_data %}
 
   {% elif page.layout == 'contributed-data' %}
     {% assign site.data.datasets.contributed.index as page_data %}
