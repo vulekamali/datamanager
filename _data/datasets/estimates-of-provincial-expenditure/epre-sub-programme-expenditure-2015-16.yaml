@@ -1,0 +1,51 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Expenditure data used to prepare the EPRE publications provide detailed\
+    \ data on provincial government\u2019s expenditure allocations contained in the\
+    \ annual appropriation bill (for the upcoming year) as well as for the two outer\
+    \ years, that is for the three years of the medium term expenditure framework.\
+    \ Information is presented by vote (generally a provincial government department)\
+    \ and by main economic classification. The\_EPRE publications also provide detailed\
+    \ data on how provincial government institutions have spent their budgets in previous\
+    \ years."
+  name: Estimates of Provincial Expenditure
+  slug: estimates-of-provincial-expenditure
+  url_path: /datasets/estimates-of-provincial-expenditure
+created: '2018-10-19T06:49:33.902459'
+description: null
+intro: null
+intro_short: Expenditure data that can be used to show expenditure broken down by
+  sub-programme
+key_points: null
+last_updated: '2018-10-29T15:37:21.251424'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: EPRE Sub-programme Expenditure 2015-16
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: OpenSpending API
+  name: EPRE Sub-programme Expenditure 2015-16
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:epre-sub-programme-expenditure-2015-16-v2/model/
+- description: ''
+  format: CSV
+  name: EPRE Sub-programme Expenditure 2015-16
+  url: http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/epre-sub-programme-expenditure-2015-16-v2/final/data/epre-subprogrammes-2015-16.csv
+selected_tab: datasets
+slug: epre-sub-programme-expenditure-2015-16
+title: EPRE Sub-programme Expenditure 2015-16 - vulekamali
+url_path: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2015-16
+usage: null
+use_for: null

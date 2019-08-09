@@ -1,0 +1,61 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Socio-economic data resources that can be used for contextual and
+    other analyses purposes. '
+  name: Socio-economic Data
+  slug: socio-economic-data
+  url_path: /datasets/socio-economic-data
+created: '2018-10-04T14:20:07.906242'
+description: The World Bank Open Data site provides an entry-point into the World
+  Bank's Data Bank. It includes demographic, developmental, time-series and geospatial
+  data from the Data Bank's data catalogue.
+intro: The World Bank Open Data site provides an entry-point into the World Bank's
+  Data Bank. It includes demographic, developmental, time-series and geospatial data
+  from the Data Bank's data catalogue.
+intro_short: Demographic, time-series, survey and geospatial data
+key_points: "- Time series\r\n- Compare multiple countries, regions\r\n- Browse by\
+  \ indicator e.g. under categories such as\r\n  - Agriculture and rural development\r\
+  \n  - Aid effectiveness\r\n  - Economy and growth\r\n  - Education\r\n  - Energy\
+  \ and mining\r\n  - Gender\r\n- Search topics"
+last_updated: '2018-10-05T13:10:24.607671'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: World Bank Open Data
+organization:
+  email: null
+  facebook: null
+  logo_url: ''
+  name: World Bank
+  slug: world-bank
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: ''
+  name: World Bank Open Data
+  url: https://data.worldbank.org/
+- description: ''
+  format: PNG
+  name: 'Screenshot: Search for an indicator'
+  url: https://data.vulekamali.gov.za/dataset/aa7bae20-e24d-4f67-b68d-119c9aae7580/resource/17b1f9fc-23f1-48ff-834e-6c4a7f65ff30/download/9z6ii19.png
+- description: ''
+  format: PNG
+  name: 'Screenshot: View the indicator with selected series'
+  url: https://data.vulekamali.gov.za/dataset/aa7bae20-e24d-4f67-b68d-119c9aae7580/resource/dbfa854d-9178-4b59-99b3-26e2cc2b0368/download/8i8qdlw.png
+selected_tab: datasets
+slug: world-bank-open-data
+title: World Bank Open Data - vulekamali
+url_path: /datasets/socio-economic-data/world-bank-open-data
+usage: "1. [Visit https://data.worldbank.org/](https://data.worldbank.org/)\r\n2.\
+  \ Search or browse for a relevant topic\r\n3. Select an indicator of interest, e.g.\
+  \ \"Incidence of HIV (% of uninfected population ages 15-49)\"\r\n4. Select countries\
+  \ or regions to compare \r\n5. Select time range\r\n6. Download data as CSV or Excel"
+use_for: "The socio-economic and demographic data can provide context and supporting\
+  \ information for use during budget and expenditure analysis. Researchers can use\
+  \ the portal to find data and then explore and analyse it further using the World\
+  \ Bank\u2019s Data Bank tool."

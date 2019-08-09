@@ -1,0 +1,53 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "How money is allocated to provinces and municipalities for a given\
+    \ financial year.\r\n\r\nThe Division of Revenue Bill provides for the equitable\
+    \ division of revenue raised nationally among the national, provincial and local\
+    \ spheres of government.\r\n\r\nIt determines each province's share of the provincial\
+    \ share of that revenue.\r\n\r\nIt further determines the other allocations to\
+    \ provinces and municipalities from the national government's share of that revenue,\
+    \ including the conditions of those allocations.\r\n"
+  name: Division of Revenue Bills
+  slug: division-of-revenue-bills
+  url_path: /datasets/division-of-revenue-bills
+created: '2019-02-20T15:16:16.030758'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2019-07-10T15:03:00.083911'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: Division of Revenue Bill 2019-20
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Division of Revenue Bill
+  url: http://www.treasury.gov.za/legislation/bills/2019/[B5-2019]%20(Division%20of%20Revenue).pdf
+- description: ''
+  format: XLSX
+  name: Division of Revenue Bill Schedules 2019-20
+  url: https://data.vulekamali.gov.za/dataset/51d24918-d5b6-4abc-8845-3207fdf07df9/resource/ea64944c-e94a-4b4b-b1bf-a9cab16d6966/download/2019-division-of-revenue-bill-schedules-in-excel-format.xlsx
+- description: ''
+  format: XLSX
+  name: Division of Revenue Bill Annexures 2019-20
+  url: https://data.vulekamali.gov.za/dataset/51d24918-d5b6-4abc-8845-3207fdf07df9/resource/9a1dd44c-6ec7-4c59-85e2-13c42269ceaf/download/2019-division-of-revenue-bill-annexures-in-excel-format.xlsx
+selected_tab: datasets
+slug: division-of-revenue-bill-2019-20
+title: Division of Revenue Bill 2019-20 - vulekamali
+url_path: /datasets/division-of-revenue-bills/division-of-revenue-bill-2019-20
+usage: null
+use_for: null

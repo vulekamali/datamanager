@@ -1,0 +1,47 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: ''
+  name: Estimates of National Revenue
+  slug: estimates-of-national-revenue
+  url_path: /datasets/estimates-of-national-revenue
+created: '2018-02-07T13:30:08.227900'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2018-08-15T20:16:01.004285'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: Estimates of national revenue 2015-16
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: CSV
+  name: budget estimates of national revenue 2015-16-total.csv
+  url: https://data.vulekamali.gov.za/dataset/bf8256ce-1705-4dec-962a-5059dda70325/resource/c484cd2b-da4e-4e71-aca8-f23989d0f3e0/download/budget-estimates-of-national-revenue-2015-16-total.csv
+- description: ''
+  format: PDF
+  name: Revenue trends and tax proposals 2015-16
+  url: https://data.vulekamali.gov.za/dataset/bf8256ce-1705-4dec-962a-5059dda70325/resource/f02cd77a-283e-4076-b7e4-7ce45e3610be/download/chapter-4.pdf
+- description: ''
+  format: XLSX
+  name: Revenue trends and tax proposals 2015-16
+  url: https://data.vulekamali.gov.za/dataset/bf8256ce-1705-4dec-962a-5059dda70325/resource/481edd16-ac02-4076-89d0-fb1edc57da71/download/annexure-g.xls
+selected_tab: datasets
+slug: estimates-of-national-revenue-2015-16
+title: Estimates of national revenue 2015-16 - vulekamali
+url_path: /datasets/estimates-of-national-revenue/estimates-of-national-revenue-2015-16
+usage: null
+use_for: null

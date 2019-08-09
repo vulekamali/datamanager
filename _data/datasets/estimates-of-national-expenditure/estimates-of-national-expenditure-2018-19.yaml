@@ -1,0 +1,76 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Budgeted expenditure for a given financial year.\r\n\r\nExpenditure\
+    \ data used to prepare the ENE publications provide detailed data on government\u2019\
+    s expenditure allocations contained in the annual appropriation bill (for the\
+    \ upcoming year) as well as for the two outer years, that is for the three years\
+    \ of the medium term expenditure framework. Information is presented by vote (generally\
+    \ a national government department) and by main economic classification. The ENE\
+    \ publications also provide detailed data on how government institutions have\
+    \ spent their budgets in previous years."
+  name: Estimates of National Expenditure
+  slug: estimates-of-national-expenditure
+  url_path: /datasets/estimates-of-national-expenditure
+created: '2018-02-28T13:12:16.503055'
+description: "This dataset includes expenditure data as published in the\r\nEstimates\
+  \ of National Expenditure. Departmental\r\nexpenditure data in previous financial\
+  \ years have been aligned with the\r\nbudget and programme structures of departments\
+  \ as they are structured in\r\nthe current Medium Term Expenditure Framework. This\
+  \ means that the\r\nstructure of historical expenditure data for a department, may\
+  \ not\r\nnecessarily reflect the same structure of that department when\r\nexpenditure\
+  \ was incurred during a particular financial year. This may be\r\ndue to functions\
+  \ shifts which may have occurred within a particular\r\ndepartment or a general\
+  \ change in a department\u2019s budget programme\r\nstructures (BPS) as departments\
+  \ are afforded an opportunity before the\r\nstart of the Budget to change their\
+  \ BPS.This is to ensure a more\r\neconomical, efficient and effective delivery of\
+  \ public services and\r\nperformance by the department as a whole."
+intro: "This dataset includes expenditure data as published in the\r\nEstimates of\
+  \ National Expenditure. Departmental\r\nexpenditure data in previous financial years\
+  \ have been aligned with the\r\nbudget and programme structures of departments as\
+  \ they are structured in\r\nthe current Medium Term Expenditure Framework. This\
+  \ means that the\r\nstructure of historical expenditure data for a department, may\
+  \ not\r\nnecessarily reflect the same structure of that department when\r\nexpenditure\
+  \ was incurred during a particular financial year. This may be\r\ndue to functions\
+  \ shifts which may have occurred within a particular\r\ndepartment or a general\
+  \ change in a department\u2019s budget programme\r\nstructures (BPS) as departments\
+  \ are afforded an opportunity before the\r\nstart of the Budget to change their\
+  \ BPS.This is to ensure a more\r\neconomical, efficient and effective delivery of\
+  \ public services and\r\nperformance by the department as a whole."
+intro_short: null
+key_points: null
+last_updated: '2018-10-11T08:09:09.933905'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: Estimates of National Expenditure 2018-19
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: OpenSpending API
+  name: Estimates of National Expenditure 2018-19
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:estimates-of-national-expenditure-south-africa-2018-19/model/
+- description: ''
+  format: XLSX
+  name: Estimates of National Expenditure Pivot Data 2018
+  url: https://data.vulekamali.gov.za/dataset/f65e577e-1dc3-4b68-9868-a97b84a950e8/resource/ad5d7dc2-c600-4008-9827-929beef3ac77/download/budget-2018-ene-and-appropriation-pivot.xlsx
+- description: ''
+  format: CSV
+  name: Estimates of National Expenditure 2018-19
+  url: https://data.vulekamali.gov.za/dataset/f65e577e-1dc3-4b68-9868-a97b84a950e8/resource/ca4b1281-fb9b-4ab2-9e2a-b78a978a98a1/download/estimates-of-national-expenditure-south-africa-2018-19.csv
+selected_tab: datasets
+slug: estimates-of-national-expenditure-2018-19
+title: Estimates of National Expenditure 2018-19 - vulekamali
+url_path: /datasets/estimates-of-national-expenditure/estimates-of-national-expenditure-2018-19
+usage: null
+use_for: null

@@ -1,0 +1,879 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+datasets:
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-07-18T15:11:20.848908'
+  description: "A social audit is a community-led process that facilitates public\
+    \ participation in the monitoring of government service delivery and expenditure.\r\
+    \n\r\nThis guide is for community activists and organized civil society interested\
+    \ in conducting social audits in South Africa. It aims to help these groups think\
+    \ about, conduct, and reflect on social audits. The guide may also be of use to\
+    \ other stakeholders (such as government) that want to better understand a process\
+    \ they may be requested to participate in.\r\n\r\nThe guide can be used by civil\
+    \ society organizations wishing to conduct a social audit, or adapted to train\
+    \ community members or civil society organizations on the social audit methodology.\
+    \ It can also be given to government officials or independent observers when requesting\
+    \ their participation in a social audit process."
+  intro_short: null
+  last_updated: '2018-07-18T15:13:38.912197'
+  license:
+    name: License not specified
+    url: null
+  name: A Guide to Conducting Social Audits in South Africa
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-07-18-150902.261001ibplogo.png
+    name: International Budget Partnership
+    slug: international-budget-partnership
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: ''
+    format: PDF
+    name: Field Guide
+    url: https://data.vulekamali.gov.za/dataset/c99cf5b9-982e-41c7-a4e4-2b1b9a2976a1/resource/b1074fae-d4f5-4fbc-8b40-f37414ab4f35/download/social-audits-in-south-africa-guide-2015.pdf
+  - description: (condensed version, June 2018)
+    format: PDF
+    name: "A Pocket Guide to Conducting Social Audits in South Africa \u2013 English"
+    url: https://data.vulekamali.gov.za/dataset/c99cf5b9-982e-41c7-a4e4-2b1b9a2976a1/resource/61014a24-9d55-4051-a6da-8e9736692134/download/social-audits-in-south-africa-pocket-guide-2018.pdf
+  - description: (condensed version, June 2018)
+    format: PDF
+    name: "A Pocket Guide to Conducting Social Audits in South Africa \u2013 isiXhosa"
+    url: https://data.vulekamali.gov.za/dataset/c99cf5b9-982e-41c7-a4e4-2b1b9a2976a1/resource/1295401f-bbdb-4fe1-b88c-62f4939d6002/download/social-audits-in-south-africa-pocket-guide-isixhosa-2018.pdf
+  - description: (condensed version, June 2018)
+    format: PDF
+    name: "A Pocket Guide to Conducting Social Audits in South Africa \u2013 isiZulu "
+    url: https://data.vulekamali.gov.za/dataset/c99cf5b9-982e-41c7-a4e4-2b1b9a2976a1/resource/b28891ed-d1db-466a-883c-23a01182626f/download/social-audits-in-south-africa-pocket-guide-isizulu-2018.pdf
+  slug: a-guide-to-conducting-social-audits-in-south-africa
+  url_path: /datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa
+- author:
+    email: ''
+    name: 'Vulekamali '
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-11-30T05:06:49.588395'
+  description: Adjusted Estimates of National Expenditure 2018/19 and Medium Term
+    Budget and Policy Statement 2018/19
+  intro_short: "A summary of notable changes tabled in the 2018/19 Medium Term Budget\
+    \ Policy Statement (MTBPS) and Adjusted Estimates of National Expenditure (AENE).\
+    \ Section 12 of the Money Bills Amendment Procedures and Related Matters Act obliges\
+    \ the Minister of Finance  to table a Division of Revenue Amendment Bill alongside\
+    \ the revised fiscal framework with budget adjustments to the Division of Revenue\
+    \ Act and an Adjustment Appropriations Bill.\r\n\r\nSections 30 (2)(B) and 31(2)(b)\
+    \ of the Public Finance Management Act also outlines specific roles and responsibilities\
+    \ for provincial Members of the Executive Councils (MECs). This includes the requirement\
+    \ for provincial treasuries to table an adjustments budget within 30 days of the\
+    \ tabling of the national adjustments budget where a national adjustments budget\
+    \ allocates funds to a province. Accounting Officers are also obliged to motivate\
+    \ accordingly for adjusted budgets.  \r\nThis Guide is intended, in part, to support\
+    \ civic actors participation in the MTBPS and Adjustments Budget by distilling\
+    \ key budget information.\r\n"
+  last_updated: '2018-12-03T10:07:22.333285'
+  license:
+    name: Creative Commons Attribution Share-Alike
+    url: http://www.opendefinition.org/licenses/cc-by-sa
+  name: A People's Guide to the Adjusted Budget 2018/19
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: People's Guide to the Adjusted Budget 2018/19
+    format: PDF
+    name: Peoples_Guide_to Adjusted Budget_2018-FA-onscreen.pdf
+    url: https://data.vulekamali.gov.za/dataset/9c7af295-9362-44ea-9731-b95bb1ea89d3/resource/161140ee-1c5b-4d2c-bce2-05e4f81c5f21/download/peoples_guide_to-adjusted-budget_2018-fa-onscreen.pdf
+  slug: people-s-guide-to-the-adjusted-budget-2018-19
+  url_path: /datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19
+- author:
+    email: ''
+    name: Thandiwe Matthews and Daniel McLaren
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-07-02T09:40:11.881894'
+  description: "Tools and methods used for formulating and analysing government budgeting\
+    \ for the progressive realisation of socio-economic rights\r\n\r\nA Guide for\
+    \ State and non-State Human Rights Advocates and Researchers\r\n\r\nBudget analysis\
+    \ is a key component of SER monitoring. It allows human rights advocates to\r\n\
+    analyse budgetary decisions made by governments, beginning with enforceable obligations\r\
+    \nunder international and national law. Thus, an SER budget analyst must understand\r\
+    \n\r\n1. the key components of a particular SER and how these components find\
+    \ expression in budgets;\r\n2. the methods and logistics of obtaining and understanding\
+    \ budgets; and\r\n3. how to connect a budget to the SER under review.\r\n\r\n\
+    Armed with these skills and numbers, budget analysts can assess governments\u2019\
+    \ budgetary policies from a human rights basis, bringing to light successes and\
+    \ gaps, and providing viable alternatives to current spending where necessary.\r\
+    \n\r\nThis Guide will provide an overview of each of these aspects of SER monitoring,\
+    \ and how they\r\ntranslate in the South African context, with reference to practical\
+    \ examples used by civil society\r\nto monitor the advancement of SER through\
+    \ budget analysis. It is envisioned that the Guide will\r\nprovide a useful resource\
+    \ for human rights advocates to understand the process of monitoring\r\nthe progressive\
+    \ realisation of SER using tools of budget analysis. It is also hoped that the\
+    \ Guide\r\nwill inform renewed and coordinated activism amongst civil society\
+    \ groups and organisations\r\ninterested in SER monitoring, through the production\
+    \ of evidence-based research required\r\nto assist the government to reprioritise\
+    \ the budget in a manner that advances, rather than\r\nhinders, the full realisation\
+    \ and enjoyment of SER. "
+  intro_short: null
+  last_updated: '2018-07-02T09:43:33.276422'
+  license:
+    name: License not specified
+    url: null
+  name: Budget Analysis for Advancing Socioeconomic Rights
+  organization:
+    email: advocacy@spii.org.za
+    facebook: studiesinpovertyandinequalityinstitute
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-01-19-083658.384768spii-logo.jpg
+    name: Studies in Poverty and Inequality Institute
+    slug: studies-in-poverty-and-inequality-institute
+    telephone: 011 833 0161
+    twitter: '@SPII1'
+    url: http://www.spii.org.za/
+  resources:
+  - description: ''
+    format: PDF
+    name: 2016 SPII SAHRC Guide to Budget Analysis for Socio-Economic Rights.pdf
+    url: https://data.vulekamali.gov.za/dataset/2fe1a35a-2d18-4b6e-858d-13bf46426398/resource/1fe1e6b0-14ed-49e6-8571-69e54432e2c2/download/2016-spii-sahrc-guide-to-budget-analysis-for-socio-economic-rights.pdf
+  slug: budget-analysis-for-advancing-socioeconomic-rights
+  url_path: /datasets/contributed/budget-analysis-for-advancing-socioeconomic-rights
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-02-01T12:06:00.411802'
+  description: Housing backlog national figures. Mid-year performance by programme
+    for the Department of Human Settlements, in financial year 2016/17. Analysis of
+    the Department of Human Settlements budget allocation for the financial year 2017/18.
+  intro_short: null
+  last_updated: '2018-02-01T12:17:10.880499'
+  license:
+    name: License not specified
+    url: null
+  name: 'Budget Brief: Department of Human Settlements, 2016/17 and 2017/18'
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: 'Budget Brief: Department of Human Settlements'
+    format: PDF
+    name: Human-Settelements-Budget-Brief-20-September-2017.pdf
+    url: https://data.vulekamali.gov.za/dataset/f83b8735-b6de-4aa0-8fe8-b5486c8e72a7/resource/9322b727-e2a0-43d8-9012-c6b6408b201d/download/human-settelements-budget-brief-20-september-2017.pdf
+  slug: budget-brief-department-of-human-settlements
+  url_path: /datasets/contributed/budget-brief-department-of-human-settlements
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-02-01T12:21:53.615523'
+  description: Analysis of the Eastern Cape Department of Education's budget allocation
+    for the financial year 2016/17.
+  intro_short: null
+  last_updated: '2018-10-25T14:06:49.022698'
+  license:
+    name: License not specified
+    url: null
+  name: 'Budget Brief: Eastern Cape Department of Education 2016/17'
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: 'Budget Brief: Eastern Cape Department of Education'
+    format: PDF
+    name: Budget-Analysis-1-2-2016-17-1.pdf
+    url: https://data.vulekamali.gov.za/dataset/b794378a-a721-498f-9378-e321b71591e2/resource/6c368e4a-e5f2-4527-9cad-f9d06b4220ff/download/budget-analysis-1-2-2016-17-1.pdf
+  slug: budget-brief-eastern-cape-department-of-education-2016-17
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-education-2016-17
+- author:
+    email: s.fobosi@ru.ac.za
+    name: Siyabulela Fobosi
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-09-04T14:18:33.904095'
+  description: "This brief analysis the budget allocations for the Eastern Cape Department\
+    \ of Education\r\n(ECDoE) in relation to the progressive realisation of the rights\
+    \ to quality basic education within\r\nProgramme 2: Public Ordinary Schools Education\
+    \ for the 2018/19 financial year. This brief is situated\r\nwithin the planning\
+    \ and resource allocation processes of the social accountability system (SAM),\
+    \ and\r\nusing a rights-based approach to evaluating resource allocation for Programme\
+    \ 2. This approach places\r\nan obligation on the state to fulfill the rights\
+    \ of citizens to quality basic education, as enshrined in Section 29 of the Constitution.\
+    \ The state has an obligation to progressively realise the rights of citizens\
+    \ to quality basic education, and to access and use available resources optimally\
+    \ and equitably in doing so. In addition, the purpose of this brief is to analyse\
+    \ the change in budget allocations from the Adjusted\r\nAppropriations of the\
+    \ 2017/18 financial year, nominal and real budget allocations for the 2018/19\r\
+    \nfinancial year, as well as percent (%) changes in budget allocations for this\
+    \ financial year. In order\r\ndetermine the allocations in real terms, this brief\
+    \ makes use of the Consumer Price Index (CPI). This is\r\nmeant to show the effect\
+    \ of inflation on the purchasing power within the specific Programmes. While\r\
+    \ngovernment focuses on the nominal allocations, this brief accounts for the effects\
+    \ of inflation. This takes\r\ninto account that building new schools, for example,\
+    \ will be more expensive this financial year than the\r\nlast financial year.\
+    \ As such, government must ensure that budget allocations take inflation into\
+    \ account\r\neach year."
+  intro_short: null
+  last_updated: '2018-10-25T13:39:09.172225'
+  license:
+    name: License not specified
+    url: null
+  name: 'Budget Brief: Eastern Cape Department of Education 2018/19'
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: ''
+    format: PDF
+    name: 'Budget Brief: Eastern Cape Department of Education 2018/19'
+    url: https://data.vulekamali.gov.za/dataset/0d3213a3-9b03-43b1-a7f6-d95a08cdcadb/resource/b82f9542-d809-401d-a989-5b5366ec934a/download/cuserss1200129documentssiyabudget-analysis-briefbudget-briefseducation-brief.pdf
+  - description: ''
+    format: PDF
+    name: 'Budget Brief: Eastern Cape Department of Education 2018/19'
+    url: https://data.vulekamali.gov.za/dataset/0d3213a3-9b03-43b1-a7f6-d95a08cdcadb/resource/341196b7-bcbe-47b0-b586-9fc7472dfab3/download/cuserss1200129documentssiyabudget-analysis-briefbudget-briefseducation-brief.pdf
+  slug: budget-brief-eastern-cape-department-of-education-2018-19
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-education-2018-19
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-02-01T12:23:59.138958'
+  description: Analysis of the Eastern Cape Department of Health's budget allocation
+    for the financial year 2014/15.
+  intro_short: null
+  last_updated: '2018-10-25T14:06:46.625599'
+  license:
+    name: License not specified
+    url: null
+  name: 'Budget Brief: Eastern Cape Department of Health 2014/15'
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: 'Budget Brief: Eastern Cape Department of Health'
+    format: PDF
+    name: Budget-Analysis-1-1-2014-15.pdf
+    url: https://data.vulekamali.gov.za/dataset/4cca91cc-efb0-450c-b637-e204c799b30d/resource/b755069d-2ede-4e35-8e9b-88fd3c8ba644/download/budget-analysis-1-1-2014-15.pdf
+  slug: budget-brief-eastern-cape-department-of-health-2014-15
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-health-2014-15
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-02-01T12:19:16.357761'
+  description: Analysis of the Eastern Cape Department of Human Settlements budget
+    allocation for the financial year 2014/15.
+  intro_short: null
+  last_updated: '2018-10-25T14:06:51.577640'
+  license:
+    name: License not specified
+    url: null
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2014/15'
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: 'Budget Brief: Eastern Cape Department of Human Settlements'
+    format: PDF
+    name: Budget-Analysis-1-3-2014-15.pdf
+    url: https://data.vulekamali.gov.za/dataset/718a12f8-72e6-451d-84de-08062e4e1198/resource/d6019a5e-a980-465f-9a6e-460850a86565/download/budget-analysis-1-3-2014-15.pdf
+  slug: budget-brief-eastern-cape-department-of-human-settlements-2014-15
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2014-15
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-02-01T12:14:15.127993'
+  description: Analysis of the Eastern Cape Department of Human Settlements budget
+    allocation for the financial year 2016/17.
+  intro_short: null
+  last_updated: '2018-10-25T14:06:53.770606'
+  license:
+    name: License not specified
+    url: null
+  name: 'Budget Brief: Eastern Cape Department of Human Settlements 2016/17'
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: 'Budget Brief: Eastern Cape Department of Human Settlements'
+    format: PDF
+    name: Budget-Analysis-1-3-2016-17.pdf
+    url: https://data.vulekamali.gov.za/dataset/cf76f706-84ba-484f-80e3-23fbe788a655/resource/1a325081-2578-4acf-80d3-8f544fe8e59a/download/budget-analysis-1-3-2016-17.pdf
+  slug: budget-brief-eastern-cape-department-of-human-settlements-2016-17
+  url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2016-17
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-02-01T12:39:08.930180'
+  description: "The study, Budgets & Bricks: Progress with school infrastructure,\
+    \ explores whether the Gauteng Department of Education's (GDE) promises in the\
+    \ Rivonia Primary School, heard in the Constitutional Court in 2014, case have\
+    \ been met and whether the GDEs plan on infrastructure is sufficient. The GDE\
+    \ was responsible for analysing and providing for school infrastructure, but due\
+    \ to poor planning (primarily the failure to account for future growth of learners)\
+    \ there were 20 000 learners without a school place at the start of 2016. The\
+    \ report grapples with the question of whether GDE's spending for 2015 is sufficient\
+    \ \u2013 and the task is hampered by the fact that the available data is limited,\
+    \ and the data that is available is problematic."
+  intro_short: null
+  last_updated: '2018-02-01T12:41:09.356136'
+  license:
+    name: Creative Commons Non-Commercial (Any)
+    url: http://creativecommons.org/licenses/by-nc/2.0/
+  name: 'Budgets and Bricks: Progress with school infrastructure following the Rivonia
+    Primary School case'
+  organization:
+    email: centreforchildlaw@up.ac.za
+    facebook: ''
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-123436.500679logo.jpg
+    name: Centre for Child Law
+    slug: centre-for-child-law
+    telephone: 012 420 4502
+    twitter: ''
+    url: http://centreforchildlaw.co.za/
+  resources:
+  - description: 'Budgets and Bricks: Progress with school infrastructure following
+      the Rivonia Primary School case'
+    format: PDF
+    name: Budgets__Bricks_FINAL.pdf
+    url: https://data.vulekamali.gov.za/dataset/79eda387-9d15-4e67-bfc6-f77666f4051d/resource/021663b5-9241-43ab-8a0f-4dc320f73c35/download/budgets__bricks_final.pdf
+  slug: budgets-and-bricks-progress-with-school-infrastructure-following-the-rivonia-primary-school-case
+  url_path: /datasets/contributed/budgets-and-bricks-progress-with-school-infrastructure-following-the-rivonia-primary-school-case
+- author:
+    email: nhlanhla@cegaa.org
+    name: Nhlanhla Ndlovu
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-11-26T09:47:59.384144'
+  description: "This paper outlines some trends in South Africa\u2019s economic situation,\
+    \ its national and provincial health allocations generally, HIV and TB allocations\
+    \ and spending, and then take a closer look at spending trends at provincial and\
+    \ sub-programme levels in 2016/17. Our analyses are based on 2013/14 - 2018/19\
+    \ budget and expenditure documents, as well as 2016/17 provincial HIV CG Evaluation\
+    \ Report and CG quarterly reports.  \r\n\r\nSome achievements in the HIV and TB\
+    \ spending in SA are noted. The reported improvements in service delivery and\
+    \ health outcomes would not have been possible without the increasing political\
+    \ and financial commitment of the South African government, and continued support\
+    \ from funding and implementing partners.\r\n\r\n"
+  intro_short: null
+  last_updated: '2018-11-26T19:01:46.683726'
+  license:
+    name: License not specified
+    url: null
+  name: CEGAA Occasional Paper on Government Health HIV and TB spending 2013/14-2020/21
+  organization:
+    email: nhlanhla@cegaa.org
+    facebook: ''
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-11-26-185837.720693CEGAAFNL.png
+    name: CEGAA
+    slug: cegaa
+    telephone: nhlanhla@cegaa.org
+    twitter: ''
+    url: www.cegaa.org
+  resources:
+  - description: " This paper outlines some trends in South Africa\u2019s economic\
+      \ situation, its national and provincial health allocations generally, HIV and\
+      \ TB allocations and spending, and then take a closer look at spending trends\
+      \ at provincial and sub-programme levels in 2016/17. Our analyses are based\
+      \ on 2013/14 to 2018/19 budget and expenditure documents. 2016/17 provincial\
+      \ HIV CG Evaluation Reports and CG quarterly reports were also used.  "
+    format: PDF
+    name: 'KEEPING TRACK OF HIV AND TB SPENDING IN SOUTH AFRICA: 2013/14 TO 2020/21
+      EXPENDITURE AND BUDGET REVIEW'
+    url: https://data.vulekamali.gov.za/dataset/65c39bae-c93c-440d-9429-a96b3d0f0e06/resource/9e6b0d84-6ccd-45a8-b7cf-8aed5ec7b082/download/cegaa-hero-occasional-paper-2018-1-final19.10.18-.pdf
+  slug: cegaa-occasional-paper-on-government-health-hiv-and-tb-spending-2013-14-2020-21
+  url_path: /datasets/contributed/cegaa-occasional-paper-on-government-health-hiv-and-tb-spending-2013-14-2020-21
+- author:
+    email: s.fobosi@ru.ac.za
+    name: Siyabulela Fobosi
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2019-05-13T07:10:42.235489'
+  description: 'In performing the analysis, the budget brief made use of the budget
+    allocations contained in the ENE and EPRE. This also made use of the annual and
+    quarterly reports to account for expenditure. '
+  intro_short: 'The budget brief analyses the 2019/20 budget allocations to Programme
+    6 (Infrastructure Development) of the Eastern Cape Department of Education (ECDoE).
+    While this budget brief analyses the 2019/20 budget allocations, it also refers
+    to past budget allocations between 2014 and 2018. The analysis of budget allocations
+    will provide recommendations for the 6th administration. '
+  last_updated: '2019-05-14T11:32:53.564458'
+  license:
+    name: License not specified
+    url: null
+  name: Education Budget Brief 2019/20
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: 'The budget brief analyses the 2019/20 budget allocations to Programme
+      6 (Infrastructure Development) of the Eastern Cape Department of Education (ECDoE).
+      While the budget brief analyses the 2019/20 budget allocations, it also refers
+      to past budget allocations between 2014 and 2018. The analysis of budget allocations
+      provide recommendations for the 6th administration. '
+    format: PDF
+    name: Education Budget Brief 2019
+    url: https://data.vulekamali.gov.za/dataset/db3ab7ec-9f62-46a6-94f9-e43f3c8536a5/resource/701148f4-2034-455b-9545-630bada14fa7/download/cuserss1200129documentssiyabudget-analysis-brief2019budget-2019education-budget-brief_23-april-2.pdf
+  slug: education-budget-brief-2019-20
+  url_path: /datasets/contributed/education-budget-brief-2019-20
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-02-01T12:28:30.084350'
+  description: "This report seeks to evaluate the Emergency Medical Services of the\
+    \ Eastern Cape with particular emphasis on:\r\n\r\n1. Institutional arrangements\
+    \ for EMS provisioning in the Eastern Cape\r\n2. Giving a background to the provisioning\
+    \ of transport for health in South Africa\r\n3. Scrutinizing the planning and\
+    \ budget allocations provided to the Emergency Medical Services (EMS) programme\r\
+    \n4. Scrutinizing the provision and allocation of ambulances\r\n5. Scrutinizing\
+    \ the human resource provisioning for the EMS "
+  intro_short: null
+  last_updated: '2018-02-01T12:29:21.975981'
+  license:
+    name: License not specified
+    url: null
+  name: "Emergency Medical Services in the Eastern Cape 2005 \u2013 2015"
+  organization:
+    email: psam-admin@ru.ac.za
+    facebook: publicserviceaccountabilitymonitor
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+    name: Public Service Accountability Monitor
+    slug: public-service-accountability-monitor
+    telephone: 046 603 8358
+    twitter: '@Right_to_SAM'
+    url: http://psam.org.za/
+  resources:
+  - description: "Emergency Medical Services in the Eastern Cape 2005 \u2013 2015:\
+      \ Planning, Budgeting and Delivery"
+    format: PDF
+    name: 1484312201.pdf
+    url: https://data.vulekamali.gov.za/dataset/9544dbf3-10a9-463c-8edf-d0009c46ce33/resource/1388d667-ac5e-4ea7-a772-89e9649adcfd/download/1484312201.pdf
+  slug: emergency-medical-services-in-the-eastern-cape-2005-2015
+  url_path: /datasets/contributed/emergency-medical-services-in-the-eastern-cape-2005-2015
+- author:
+    email: claudia.lopes@za.boell.org
+    name: Claudia Lopes and Patience Mungwari Mpani
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-06-27T16:30:15.483552'
+  description: "The 4 provincial studies explore national and provincial government\
+    \ policy and budgets in relation to the provision of shelter services for abused\
+    \ women. They also profile the needs of women, and their children, who sought\
+    \ residence in shelters, and assessed the ability of shelters to meet those needs\
+    \ in the context of state funding. Essentially the studies sought to determine\
+    \ whether the state was fulfilling its obligations in ensuring the provision of\
+    \ sheltering services\r\nto women."
+  intro_short: null
+  last_updated: '2018-06-29T16:04:06.708308'
+  license:
+    name: License not specified
+    url: null
+  name: 'Housing women who have experienced abuse: policy, funding & practice'
+  organization:
+    email: info@za.boell.org
+    facebook: boellza
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-05-16-143716.201532hbf.jpg
+    name: Heinrich Boell Foundation
+    slug: heinrich-boell-foundation
+    telephone: 021 461 6266
+    twitter: '@boellza'
+    url: http://za.boell.org/
+  resources:
+  - description: ''
+    format: PDF
+    name: Profiling shelters in Mpumalanga
+    url: https://data.vulekamali.gov.za/dataset/c202c7cf-963b-4ce7-bcb5-82bb95d7650c/resource/3b325fce-c08e-4eed-b2f5-553d71233771/download/mp_housing_women_who_have_experienced_abuse_final-web.pdf
+  - description: ''
+    format: PDF
+    name: Profiling shelters in Gauteng
+    url: https://data.vulekamali.gov.za/dataset/c202c7cf-963b-4ce7-bcb5-82bb95d7650c/resource/68ac7fc4-a552-4983-ad66-22c18bda2e9c/download/gauteng_shelters_report.pdf
+  - description: ''
+    format: PDF
+    name: Profiling shelters in Western Cape
+    url: https://data.vulekamali.gov.za/dataset/c202c7cf-963b-4ce7-bcb5-82bb95d7650c/resource/68d02d0f-4499-4441-a5ab-6ca7e4231c37/download/onlinecopy_shelters_housing_women_who_have_experienced_abuse.pdf
+  - description: ''
+    format: PDF
+    name: Profiling shelters in KwaZulu-Natal
+    url: https://data.vulekamali.gov.za/dataset/c202c7cf-963b-4ce7-bcb5-82bb95d7650c/resource/7b5c2db6-56d9-4de4-9196-71bd49c1e74b/download/kzn_shelterresearchreport_email.pdf
+  slug: housing-women-who-have-experienced-abuse-policy-funding-practice
+  url_path: /datasets/contributed/housing-women-who-have-experienced-abuse-policy-funding-practice
+- author:
+    email: ''
+    name: Paolo de Renzio and Massimo Mastruzzi
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-07-18T15:30:51.133074'
+  description: "Mapping Fiscal Transparency Gaps and Needs in Developing Countries\r\
+    \n \r\nGovernments sometimes complain that the budget information they make publicly\
+    \ available is seldom accessed and utilized. On the other hand, civil society\
+    \ organizations (CSOs) often claim that the information governments make available\
+    \ is very difficult to understand and not detailed enough to allow for meaningful\
+    \ analysis and advocacy. Is there a mismatch between the budget information supplied\
+    \ by governments and demand among civil society?\r\n\r\nThis paper examines the\
+    \ \u201Cdemand side\u201D of fiscal transparency using findings from a global\
+    \ survey of 176 individuals working in civil society that use budget information\
+    \ for analysis and advocacy activities. Based on the responses, the authors identify\
+    \ a \u201Cfiscal transparency effectiveness gap\u201D between the fiscal information\
+    \ that governments often provide and the information that CSOs need.\r\n\r\nThese\
+    \ findings are used to develop a set of recommendations to help governments ensure\
+    \ their transparency practices deliver increased citizen engagement, improved\
+    \ oversight, and enhanced accountability."
+  intro_short: null
+  last_updated: '2018-08-16T14:49:47.911521'
+  license:
+    name: License not specified
+    url: null
+  name: How Does Civil Society Use Budget Information?
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-07-18-150902.261001ibplogo.png
+    name: International Budget Partnership
+    slug: international-budget-partnership
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: ''
+    format: PDF
+    name: How Does Civil Society Use Budget Information? Mapping Fiscal Transparency
+      Gaps and Needs in Developing Countries
+    url: https://data.vulekamali.gov.za/dataset/bbd5eb13-28c4-43ee-a96a-87c31e833fe8/resource/87992037-f828-410e-8b6f-24953f0b0f20/download/ibp-paper-how-civil-society-uses-budget-information-12-2016.pdf
+  slug: how-does-civil-society-use-budget-information
+  url_path: /datasets/contributed/how-does-civil-society-use-budget-information
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-07-18T15:27:27.236890'
+  description: "How transparent and participatory are the budgets of Metropolitan\
+    \ Municipalities in South Africa?\r\n\r\nEvidence from around the world shows\
+    \ that when there is public participation in public finance decision making and\
+    \ oversight, it can lead to better policy choices, deeper public trust in government,\
+    \ and stronger accountability over the actual use of public money to provide services\
+    \ on the ground. Such participation, however, is only meaningful when the public\
+    \ has access to information about the government\u2019s plans, activities and\
+    \ the fiscal constraints it faces.\r\n\r\nWhile the national government has undergone\
+    \ regular budget transparency and participation assessments through the Open Budget\
+    \ Survey since 2006, to date there has not been a similar assessment of public\
+    \ finance management systems and practices for local and provincial governments.\
+    \ This is about to change, as the International Budget Partnership South Africa\
+    \ is preparing to launch a Metro OBI. The Metro OBI will complete the public finance\
+    \ transparency and participation picture in South Africa by assessing transparency\
+    \ and participation in the metropolitan municipalities (metros). Four of the eight\
+    \ metro municipalities will be assessed in 2018.\r\n\r\nThis paper introduces\
+    \ the Metro Open Budget Index and explains how the Metro OBI questionnaire was\
+    \ developed and how it will be implemented. "
+  intro_short: null
+  last_updated: '2018-07-18T15:29:17.786047'
+  license:
+    name: License not specified
+    url: null
+  name: How transparent and participatory are the budgets of Metropolitan Municipalities
+    in South Africa?
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-07-18-150902.261001ibplogo.png
+    name: International Budget Partnership
+    slug: international-budget-partnership
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: ''
+    format: PDF
+    name: Introducing the South Africa Metro Open Budget Index
+    url: https://data.vulekamali.gov.za/dataset/531593ff-2120-41a1-8a4e-050fa9d72f7f/resource/394c3be6-8442-4ca9-85e2-d827f1ef0773/download/south-africa-metro-open-budget-index-ibp-2017.pdf
+  - description: ''
+    format: PDF
+    name: The South Africa Metro Open Budget Index Questionnaire
+    url: https://data.vulekamali.gov.za/dataset/531593ff-2120-41a1-8a4e-050fa9d72f7f/resource/96a2268a-6f06-4df5-8dde-8d3f4a052457/download/south-africa-metro-open-budget-index-questionnaire-ibp-2017.pdf
+  slug: how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+  url_path: /datasets/contributed/how-transparent-and-participatory-are-the-budgets-of-metropolitan-municipalities-in-south-africa
+- author:
+    email: hopolang@spii.org.za
+    name: Hopolang Selebalo and Dennis Webster
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-01-19T10:50:05.973593'
+  description: "Sufficient budget allocations are imperative in fulfilling government's\
+    \ obligation to ensure the progressive realisation of socio-economic rights. \
+    \ It is equally as important for government to utilise these resources efficiently\
+    \ and for their intended purpose. This requires planning and institutional capacity\
+    \ in order to deliver on mandates and targets. Therefore, spending needs to be\
+    \ effective and through budgetary allocations, tangible outcomes or improvements\
+    \ must be achieved. Finally, resource allocation should be linked to equity, with\
+    \ the needs of the most vulnerable prioritised in order to reduce disparities.\
+    \ \r\n\r\nWe analyse the allocation and expenditure trends of the Department of\
+    \ Human Settlements over a five-year period, therefore 2012 and 2017, at all three\
+    \ levels of government in order to interrogate the reasonableness of government\u2019\
+    s budgeting for the right to adequate housing. \r\n\r\nData is drawn from National\
+    \ Treasury documents- Estimates of National Expenditure- and departmental documents,\
+    \ such as annual reports."
+  intro_short: null
+  last_updated: '2018-01-24T06:32:17.144182'
+  license:
+    name: License not specified
+    url: null
+  name: Monitoring the right of access to adequate housing in South Africa
+  organization:
+    email: advocacy@spii.org.za
+    facebook: studiesinpovertyandinequalityinstitute
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-01-19-083658.384768spii-logo.jpg
+    name: Studies in Poverty and Inequality Institute
+    slug: studies-in-poverty-and-inequality-institute
+    telephone: 011 833 0161
+    twitter: '@SPII1'
+    url: http://www.spii.org.za/
+  resources:
+  - description: ''
+    format: PDF
+    name: Monitoring the right of access to adequate housing in South Africa
+    url: https://data.vulekamali.gov.za/dataset/9ef7f4d3-7adb-4a7f-a6b7-5b0b8c8aa9eb/resource/0611cc74-629b-4bdf-9e7c-8f5b1cfbd068/download/right-to-housing_2017.pdf
+  - description: ''
+    format: XLSX
+    name: Human Settlements Housing Budget Analysis 2017
+    url: https://data.vulekamali.gov.za/dataset/9ef7f4d3-7adb-4a7f-a6b7-5b0b8c8aa9eb/resource/d8b44ec6-2ab7-41e3-8fa3-5f3e504cea9b/download/hs_housing-budget-analysis_2017.xlsx
+  slug: monitoring-the-right-of-access-to-adequate-housing-in-south-africa
+  url_path: /datasets/contributed/monitoring-the-right-of-access-to-adequate-housing-in-south-africa
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-02-01T12:48:29.490957'
+  description: Dilapidated public school infrastructure can be found across the country,
+    but the problem is particularly acute in the Eastern Cape where the majority of
+    the so called 'mud schools' are located. On 04 February 2011, following court
+    action on the issue of mud schools, the Legal Resources Centre, acting on behalf
+    of 7 schools and the Centre for Child Law, concluded a landmark settlement with
+    the National Department of Basic Education in which the Department committed to
+    spend R8.2 billion from 1 April 2011 to 1 March 2014 to eradicate mud schools
+    and improve infrastructure of schools throughout South Africa. The Centre for
+    Child Law commissioned Cornerstone Economic Research, to track school infrastructure
+    spending and delivery. The aim of the research was to assess what progress has
+    been made in addressing the issues that brought about the litigation. This study,
+    amongst other things, makes the concerning finding that the Department has woefully
+    underspent the allocated school infrastructure funding for two years running.
+    The target for the number of schools to be built in 2011/2012 and 2012/2013 was
+    49. However, only 10 schools had been completed at the end of the first year.
+  intro_short: null
+  last_updated: '2018-02-01T12:51:55.567458'
+  license:
+    name: Creative Commons Non-Commercial (Any)
+    url: http://creativecommons.org/licenses/by-nc/2.0/
+  name: 'Mud to bricks: A review of school infrastructure spending and delivery'
+  organization:
+    email: centreforchildlaw@up.ac.za
+    facebook: ''
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-123436.500679logo.jpg
+    name: Centre for Child Law
+    slug: centre-for-child-law
+    telephone: 012 420 4502
+    twitter: ''
+    url: http://centreforchildlaw.co.za/
+  resources:
+  - description: 'Mud to bricks: A review of school infrastructure spending and delivery'
+    format: PDF
+    name: Mud to Bricks_Final.pdf
+    url: https://data.vulekamali.gov.za/dataset/02e3cbe6-b33d-411a-8e05-d069f3e2e27b/resource/f98312c8-8380-4296-b91d-e5d0511d8284/download/mud-to-bricks_final.pdf
+  slug: mud-to-bricks-a-review-of-school-infrastructure-spending-and-delivery
+  url_path: /datasets/contributed/mud-to-bricks-a-review-of-school-infrastructure-spending-and-delivery
+- author:
+    email: ''
+    name: ''
+  category:
+    description: 'Data and analysis contributed by other organisations on South African
+      government budgets. '
+    name: Contributed data and analysis
+    slug: contributed
+    url_path: /datasets/contributed
+  created: '2018-07-18T15:17:30.691540'
+  description: Like their counterparts around the world, CSOs in South Africa need
+    access to disaggregated budget data to be able to monitor budgeting for and expenditure
+    on the delivery of services, such as basic education. But they struggle to find
+    out whether the data they need is being produced or published, in which format,
+    and by whom. Through conversations with these CSOs, IBP South Africa collected
+    a range of education-related budget information requests and commissioned Cornerstone
+    Economic Research to assess the availability of disaggregated budget data that
+    responds to the requests. Download the report of what they found along with an
+    accompanying report with background information on how education is funded in
+    South Africa.
+  intro_short: null
+  last_updated: '2018-07-18T15:24:59.662325'
+  license:
+    name: License not specified
+    url: null
+  name: The transparency of public funding of Basic Education in South Africa
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2018-07-18-150902.261001ibplogo.png
+    name: International Budget Partnership
+    slug: international-budget-partnership
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: IBP South Africa commissioned Cornerstone Economic Research to assess
+      the availability of disaggregated budget data that responds CSO requests for
+      information needed to monitor funding for and the delivery of basic education.
+      This report provides responses to the specific information requests, indicating
+      where information can be found (where publicly available) or who in government
+      is likely to be able to provide the information. It also raises interesting
+      questions around who CSOs should engage with when advocating for more detailed
+      and relevant budget data.
+    format: PDF
+    name: Comments and recommendations on data requests on public funding of basic
+      education
+    url: https://data.vulekamali.gov.za/dataset/970fccc7-0f42-4256-89ae-0dea945e45e9/resource/b6f22546-69dc-4d33-9518-7c134ea10fb1/download/data-requests-on-public-funding-of-basic-education-south-africa-comments-recommendations-ibp-201.pdf
+  - description: This report outlines how basic education is funded through national
+      and provincial budget processes in South Africa.
+    format: PDF
+    name: Processes for Financing Public Basic Education in South Africa
+    url: https://data.vulekamali.gov.za/dataset/970fccc7-0f42-4256-89ae-0dea945e45e9/resource/14e5e268-744c-4bb3-afb7-33e77f626886/download/processes-for-financing-public-basic-education-in-south-africa-ibp-2017.pdf
+  slug: the-transparency-of-public-funding-of-basic-education-in-south-africa
+  url_path: /datasets/contributed/the-transparency-of-public-funding-of-basic-education-in-south-africa
+description: 'Data and analysis contributed by other organisations on South African
+  government budgets. '
+name: Contributed data and analysis
+selected_tab: datasets
+slug: contributed
+title: Contributed data and analysis - vulekamali
+url_path: /datasets/contributed

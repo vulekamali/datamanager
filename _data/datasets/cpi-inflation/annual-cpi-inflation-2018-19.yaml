@@ -1,0 +1,44 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: Consumer Price Index (CPI) Inflation data to calculate expenditure
+    in real terms from amounts in nominal terms
+  name: CPI Inflation
+  slug: cpi-inflation
+  url_path: /datasets/cpi-inflation
+created: '2018-03-28T15:51:19.752144'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2018-03-28T15:54:36.681242'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: Annual CPI Inflation 2018-19
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: XLSX
+  name: CPI numbers form BR2018.xlsx
+  url: https://data.vulekamali.gov.za/dataset/8f28ddb0-a0ce-4fea-9be2-34f890ed9f62/resource/d1f96183-83e5-4ff1-87f5-c58e279b6f63/download/cpi-numbers-form-br2018.xlsx
+- description: ''
+  format: CSV
+  name: CPI numbers form BR2018.csv
+  url: https://data.vulekamali.gov.za/dataset/8f28ddb0-a0ce-4fea-9be2-34f890ed9f62/resource/5b315ff0-55e9-4ba8-b88c-2d70093bfe9d/download/cpi-numbers-form-br2018.csv
+selected_tab: datasets
+slug: annual-cpi-inflation-2018-19
+title: Annual CPI Inflation 2018-19 - vulekamali
+url_path: /datasets/cpi-inflation/annual-cpi-inflation-2018-19
+usage: null
+use_for: null

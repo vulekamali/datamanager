@@ -1,0 +1,59 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Socio-economic data resources that can be used for contextual and
+    other analyses purposes. '
+  name: Socio-economic Data
+  slug: socio-economic-data
+  url_path: /datasets/socio-economic-data
+created: '2018-10-05T09:45:54.153842'
+description: The purpose of the Department of Planning, Monitoring and Evaluation
+  is to improve government service delivery through integrated planning, monitoring
+  and evaluation. It publishes planning, monitoring and evaluation data.
+intro: The purpose of the Department of Planning, Monitoring and Evaluation is to
+  improve government service delivery through integrated planning, monitoring and
+  evaluation. It publishes planning, monitoring and evaluation data.
+intro_short: South African national and provincial government's performance evaluation
+  plans and outcomes information
+key_points: "- Government performance information\r\n- Manuals for planning and performance\
+  \ evaluation\r\n- Outcomes delivery agreements\r\n- Reports and information products "
+last_updated: '2018-10-05T12:55:46.975332'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: Department of Planning, Monitoring and Evaluation (DPME) publications
+organization:
+  email: null
+  facebook: null
+  logo_url: ''
+  name: Department of Planning, Monitoring and Evaluation
+  slug: department-of-planning-monitoring-and-evaluation
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: ''
+  name: DPME publications
+  url: http://www.dpme.gov.za/
+- description: ''
+  format: PNG
+  name: 'Screenshot: Provincial in-year publications'
+  url: https://data.vulekamali.gov.za/dataset/7f335356-0557-4191-88e3-5216aaa6c483/resource/aa6c0f13-2a33-400f-8c31-e15f57bb946a/download/vmpfmsb.png
+- description: ''
+  format: PNG
+  name: 'Screenshot: Quarterly performance report: Free State'
+  url: https://data.vulekamali.gov.za/dataset/7f335356-0557-4191-88e3-5216aaa6c483/resource/d273a6e6-0e94-49d1-b72b-ffe86059c373/download/5opqfi1.png
+selected_tab: datasets
+slug: department-of-planning-monitoring-and-evaluation-dpme-publications
+title: Department of Planning, Monitoring and Evaluation (DPME) publications - vulekamali
+url_path: /datasets/socio-economic-data/department-of-planning-monitoring-and-evaluation-dpme-publications
+usage: "1. [Visit DPME's homepage](https://www.dpme.gov.za)\r\n2. Click on the Resource\
+  \ Centre tab at the top of the page\r\n3. Click on any of the tabs at the left side\
+  \ of the page  (e.g. Reports and Other Information Products)\r\n4. Download the\
+  \ report or dataset in .pdf or .xlsx"
+use_for: Planning and expenditure reports can be used to analyse spending and performance
+  in the public sector. The performance evaluation manuals provide guidance on evaluating
+  public spending and performance.

@@ -1,0 +1,143 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:18:16.476152'
+description: "The office accommodation for the provincial sphere of Government extends\
+  \ from provincial capitals to remote, outlying areas of the province, as is necessary\
+  \ for giving effect to the service delivery mandate. The leasing in of such office\
+  \ accommodation, in this context, is greatly impacted by the location, market supply\
+  \ and supplier (landlord) power.\n\nIn order to realise savings on expenditure on\
+  \ leased office accommodation, considerations needs to be given to: (a) appropriate\
+  \ lease management system that allows for accurate monitoring and professional management\
+  \ of leases; (b) Capacity in terms of professional property management resources\
+  \ to manage the lease portfolio, on an equal footing with professional developers/landlords;\
+  \ (c) Ensuring the benefits of the centralisation of the leasing mandate in Public\
+  \ Works is realised; (d) investing in Government\u2019s in-house benchmarking /\
+  \ data-mining capability; (e) Reviewing space efficiency."
+intro: "The office accommodation for the provincial sphere of Government extends from\
+  \ provincial capitals to remote, outlying areas of the province, as is necessary\
+  \ for giving effect to the service delivery mandate. The leasing in of such office\
+  \ accommodation, in this context, is greatly impacted by the location, market supply\
+  \ and supplier (landlord) power.\n\nIn order to realise savings on expenditure on\
+  \ leased office accommodation, considerations needs to be given to: (a) appropriate\
+  \ lease management system that allows for accurate monitoring and professional management\
+  \ of leases; (b) Capacity in terms of professional property management resources\
+  \ to manage the lease portfolio, on an equal footing with professional developers/landlords;\
+  \ (c) Ensuring the benefits of the centralisation of the leasing mandate in Public\
+  \ Works is realised; (d) investing in Government\u2019s in-house benchmarking /\
+  \ data-mining capability; (e) Reviewing space efficiency."
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T08:59:46.577696'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - Provincial Office Rental Accommodation
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Technical Report - Provincial Office Rental Accommodation - All
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/a7be2801-69d7-47c9-9a08-b1a2f886348e/download/technical-report-provincial-office-rental-accommodation-all.pdf
+- description: ''
+  format: XLSM
+  name: Cost Model - Provincial Office Rental Accommodation - All
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/4a7f3f50-8171-4339-8a9f-5ed6a689a805/download/cost-model-provincial-office-rental-accommodation-all.xlsm
+- description: ''
+  format: PDF
+  name: Infographics - Provincial Office Rental Accommodation - All
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/db72d53c-5e4e-4ed7-98d3-6782d66615c9/download/infographics-provincial-office-rental-accommodation-all.pdf
+- description: ''
+  format: PDF
+  name: Eastern Cape - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/b62b50c1-a942-4436-b25b-ef82c739182e/download/eastern-cape-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: XLSM
+  name: Eastern Cape - Cost Model - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/bc87246c-6a74-4a60-8d9f-fc3ee17e7be7/download/eastern-cape-cost-model-provincial-office-rental-accommodation.xlsm
+- description: ''
+  format: PDF
+  name: Free State - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/839572b7-a037-453d-81bc-550a89ab96b6/download/free-state-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: XLSM
+  name: Free State - Cost Model - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/7961a3e8-ea49-457f-b984-16b51df117f5/download/free-state-cost-model-provincial-office-rental-accommodation.xlsm
+- description: ''
+  format: PDF
+  name: Gauteng Province - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/2ced03c1-9657-475d-ba4d-f441a1118372/download/gauteng-province-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: XLSM
+  name: Gauteng - Cost Model - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/3c09cd2d-acfe-44e2-8786-5ef92c8df01c/download/gauteng-cost-model-provincial-office-rental-accommodation.xlsm
+- description: ''
+  format: PDF
+  name: KwaZulu-Natal - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/8caabe8c-7d37-4f88-8ed4-cf5d2f74e5a9/download/kwazulu-natal-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: PDF
+  name: Limpopo - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/14d54d4d-12f3-4060-9f12-971d92fe73a5/download/limpopo-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: XLSM
+  name: Limpopo - Cost Model - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/33e935a9-5a6a-4b60-83f3-469b4b8003dd/download/limpopo-cost-model-provincial-office-rental-accommodation.xlsm
+- description: ''
+  format: PDF
+  name: Mpumalanga - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/9902638a-1495-4e76-88ec-ddb3416457e4/download/mpumalanga-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: XLSM
+  name: Mpumalanga - Cost Model - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/4a8e6258-09af-4f4e-acc0-13943f93ad20/download/mpumalanga-cost-model-provincial-office-rental-accommodation.xlsm
+- description: ''
+  format: PDF
+  name: Northern Cape - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/6465766f-6318-439e-b734-8268788bfdd0/download/northern-cape-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: XLSM
+  name: Northern Cape - Cost Model - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/6b09a786-4738-42e0-9aab-4ec5ddb18539/download/northern-cape-cost-model-provincial-office-rental-accommodation.xlsm
+- description: ''
+  format: PDF
+  name: North West - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/a8ce6bb6-3790-4eb1-abe4-4fada05bf406/download/north-west-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: XLSM
+  name: North West - Cost Model - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/66769f31-4592-4e9d-a53c-c00221a7ed95/download/north-west-cost-model-provincial-office-rental-accommodation.xlsm
+- description: ''
+  format: PDF
+  name: Western Cape - Technical Report - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/aaab518a-9c66-4a47-ab83-b28909ccf61e/download/western-cape-technical-report-provincial-office-rental-accommodation.pdf
+- description: ''
+  format: XLSM
+  name: Western Cape - Cost Model - Provincial Office Rental Accommodation
+  url: https://data.vulekamali.gov.za/dataset/per-provincial-office-rental-accomodation/resource/a31e969f-d89f-4c5b-a4bd-9b0095fc21dc/download/western-cape-cost-model-provincial-office-rental-accommodation.xlsm
+selected_tab: datasets
+slug: per-provincial-office-rental-accomodation
+title: PER - Provincial Office Rental Accommodation - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-provincial-office-rental-accomodation
+usage: null
+use_for: null

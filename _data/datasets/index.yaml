@@ -1,0 +1,138 @@
+categories:
+- description: "Adjustments to the expenditure plans.\r\n\r\nIn the middle of each\
+    \ year, the adjustments budget process provides an opportunity to make permissible\
+    \ revisions to the main Budget, as contained in ENE publications, in response\
+    \ to changes that have affected the planned government spending for that year.\
+    \ These adjustments for the current year are contained in an adjustments appropriation\
+    \ bill. The Adjusted Estimates of National Expenditure (AENE) publication contains\
+    \ detailed data on these mid-year adjustments as well as the revised current year\
+    \ revenue and expenditure estimates."
+  name: Adjusted Estimates of National Expenditure
+  slug: adjusted-estimates-of-national-expenditure
+  url_path: /datasets/adjusted-estimates-of-national-expenditure
+- description: Annual Reports expenditure data for the end of a financial year, including
+    Audited Outcome and Final Appropriation.
+  name: Annual Report Expenditure Data
+  slug: annual-reports
+  url_path: /datasets/annual-reports
+- description: "Expenditure data sourced from the Main Budget, Adjusted Budget and\
+    \ Annual Report events. Use this data to compare budgeted and actual expenditure.\r\
+    \n\r\nNote that historical data in this dataset is not aligned with the current\
+    \ MTEF like the [ENE](https://vulekamali.gov.za/datasets/estimates-of-national-expenditure)\
+    \ and [EPRE](https://vulekamali.gov.za/datasets/estimates-of-provincial-expenditure)\
+    \ data is."
+  name: Budgeted and Actual National Expenditure
+  slug: budgeted-and-actual-national-expenditure
+  url_path: /datasets/budgeted-and-actual-national-expenditure
+- description: ''
+  name: Budgeted and Actual Provincial Expenditure
+  slug: budgeted-and-actual-provincial-expenditure
+  url_path: /datasets/budgeted-and-actual-provincial-expenditure
+- description: Consumer Price Index (CPI) Inflation data to calculate expenditure
+    in real terms from amounts in nominal terms
+  name: CPI Inflation
+  slug: cpi-inflation
+  url_path: /datasets/cpi-inflation
+- description: Consolidated dataset consisting of national and provincial expenditure
+  name: Consolidated Expenditure
+  slug: consolidated-expenditure-budget
+  url_path: /datasets/consolidated-expenditure-budget
+- description: 'Data and analysis contributed by other organisations on South African
+    government budgets. '
+  name: Contributed data and analysis
+  slug: contributed
+  url_path: /datasets/contributed
+- description: "How money is allocated to provinces and municipalities for a given\
+    \ financial year.\r\n\r\nThe Division of Revenue Bill provides for the equitable\
+    \ division of revenue raised nationally among the national, provincial and local\
+    \ spheres of government.\r\n\r\nIt determines each province's share of the provincial\
+    \ share of that revenue.\r\n\r\nIt further determines the other allocations to\
+    \ provinces and municipalities from the national government's share of that revenue,\
+    \ including the conditions of those allocations.\r\n"
+  name: Division of Revenue Bills
+  slug: division-of-revenue-bills
+  url_path: /datasets/division-of-revenue-bills
+- description: "Budgeted expenditure for a given financial year.\r\n\r\nExpenditure\
+    \ data used to prepare the ENE publications provide detailed data on government\u2019\
+    s expenditure allocations contained in the annual appropriation bill (for the\
+    \ upcoming year) as well as for the two outer years, that is for the three years\
+    \ of the medium term expenditure framework. Information is presented by vote (generally\
+    \ a national government department) and by main economic classification. The ENE\
+    \ publications also provide detailed data on how government institutions have\
+    \ spent their budgets in previous years."
+  name: Estimates of National Expenditure
+  slug: estimates-of-national-expenditure
+  url_path: /datasets/estimates-of-national-expenditure
+- description: ''
+  name: Estimates of National Revenue
+  slug: estimates-of-national-revenue
+  url_path: /datasets/estimates-of-national-revenue
+- description: "Expenditure data used to prepare the EPRE publications provide detailed\
+    \ data on provincial government\u2019s expenditure allocations contained in the\
+    \ annual appropriation bill (for the upcoming year) as well as for the two outer\
+    \ years, that is for the three years of the medium term expenditure framework.\
+    \ Information is presented by vote (generally a provincial government department)\
+    \ and by main economic classification. The\_EPRE publications also provide detailed\
+    \ data on how provincial government institutions have spent their budgets in previous\
+    \ years."
+  name: Estimates of Provincial Expenditure
+  slug: estimates-of-provincial-expenditure
+  url_path: /datasets/estimates-of-provincial-expenditure
+- description: "This annexure provides a brief description for each grant in schedules\
+    \ of the Division of Revenue Bill. The\r\nfollowing are key areas considered for\
+    \ each grant:\r\n\r\n- Strategic goal and purpose of the grant\r\n- Outcome statements\
+    \ and outputs of the grant\r\n- Priority outcome(s) of government that the grant\
+    \ primarily contributes to\r\n- Conditions of the grant (additional to what is\
+    \ required in the Bill)\r\n- Criteria for allocation between municipalities\r\n\
+    - Rationale for funding through a conditional grant\r\n- Past performance\r\n\
+    - The projected life of the grant\r\n- MTEF allocations\r\n- The payment schedule\r\
+    \n- Responsibilities of transferring national department and receiving municipalities\r\
+    \n- Process for approval of business plans for the next financial year\r\n\r\n\
+    These documents are published in\r\norder to provide more information on each\
+    \ grant to parliament, legislatures, municipal\r\ncouncils, officials in all three\
+    \ spheres of government and the public.\r\n\r\nThe financial statements and annual\
+    \ reports will report against the Division of\r\nRevenue Act, Division of Revenue\
+    \ Amendment Act and their schedules, and the grant\r\nframeworks as gazetted in\
+    \ terms of the Act. Such reports must cover both financial and\r\nnon-financial\
+    \ performance, focusing on the outputs achieved.\r\n"
+  name: Frameworks for Conditional Grants to Municipalities
+  slug: frameworks-for-conditional-grants-to-municipalities
+  url_path: /datasets/frameworks-for-conditional-grants-to-municipalities
+- description: "These documents provide a brief description of the framework for the\
+    \ grants set out in schedules of the Division of Revenue Bill. The following are\
+    \ key areas considered for each grant:\r\n\r\n- Strategic goal and purpose of\
+    \ the grant\r\n- Outcome statements and outputs of the grant\r\n- Priority outcome(s)\
+    \ of government that the grant primarily contributes to\r\n- Conditions of the\
+    \ grant (additional to what is required in the Bill)\r\n- Criteria for allocation\
+    \ between provinces\r\n- Rationale for funding through a conditional grant\r\n\
+    - Past performance\r\n- The projected life of the grant\r\n- MTEF allocations\r\
+    \n- The payment schedule\r\n- Responsibilities of transferring national department\
+    \ and receiving provincial departments\r\n- Process for approval of business plans\
+    \ for the next financial year"
+  name: Frameworks for Conditional Grants to Provinces
+  slug: frameworks-for-conditional-grants-to-provinces
+  url_path: /datasets/frameworks-for-conditional-grants-to-provinces
+- description: ''
+  name: Infrastructure Projects
+  slug: infrastructure-projects
+  url_path: /datasets/infrastructure-projects
+- description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+- description: 'Socio-economic data resources that can be used for contextual and
+    other analyses purposes. '
+  name: Socio-economic Data
+  slug: socio-economic-data
+  url_path: /datasets/socio-economic-data
+name: Datasets and Analysis
+selected_tab: datasets
+slug: datasets
+title: Datasets and Analysis - vulekamali
+url_path: /datasets

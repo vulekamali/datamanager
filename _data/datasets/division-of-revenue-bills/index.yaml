@@ -1,0 +1,227 @@
+datasets:
+- author:
+    email: ''
+    name: ''
+  category:
+    description: "How money is allocated to provinces and municipalities for a given\
+      \ financial year.\r\n\r\nThe Division of Revenue Bill provides for the equitable\
+      \ division of revenue raised nationally among the national, provincial and local\
+      \ spheres of government.\r\n\r\nIt determines each province's share of the provincial\
+      \ share of that revenue.\r\n\r\nIt further determines the other allocations\
+      \ to provinces and municipalities from the national government's share of that\
+      \ revenue, including the conditions of those allocations.\r\n"
+    name: Division of Revenue Bills
+    slug: division-of-revenue-bills
+    url_path: /datasets/division-of-revenue-bills
+  created: '2018-11-28T07:38:06.845444'
+  description: null
+  intro_short: null
+  last_updated: '2018-11-28T07:47:48.407003'
+  license:
+    name: License not specified
+    url: null
+  name: Division of Revenue Bill 2015-16
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+    name: National Treasury
+    slug: national-treasury
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: ''
+    format: PDF
+    name: Division of Revenue Bill 2015-16
+    url: http://www.treasury.gov.za/legislation/bills/2015/bills2015_bill05-2015.pdf
+  - description: ''
+    format: XLS
+    name: 2015-16 Annexure to Schedule 3, 4B, 5B, 6B, 7B.xlsx
+    url: https://data.vulekamali.gov.za/dataset/1b373ea1-e823-45cf-857e-35085f309ab9/resource/dbecbb88-0d7f-45b7-b69a-0823492c8836/download/2015-annexure-to-schedule-3-4b-5b-6b-7b.xlsx
+  slug: division-of-revenue-bill-2015-16
+  url_path: /datasets/division-of-revenue-bills/division-of-revenue-bill-2015-16
+- author:
+    email: ''
+    name: ''
+  category:
+    description: "How money is allocated to provinces and municipalities for a given\
+      \ financial year.\r\n\r\nThe Division of Revenue Bill provides for the equitable\
+      \ division of revenue raised nationally among the national, provincial and local\
+      \ spheres of government.\r\n\r\nIt determines each province's share of the provincial\
+      \ share of that revenue.\r\n\r\nIt further determines the other allocations\
+      \ to provinces and municipalities from the national government's share of that\
+      \ revenue, including the conditions of those allocations.\r\n"
+    name: Division of Revenue Bills
+    slug: division-of-revenue-bills
+    url_path: /datasets/division-of-revenue-bills
+  created: '2018-11-28T07:36:08.966387'
+  description: null
+  intro_short: null
+  last_updated: '2018-11-28T07:37:10.971014'
+  license:
+    name: License not specified
+    url: null
+  name: Division of Revenue Bill 2016-17
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+    name: National Treasury
+    slug: national-treasury
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: ''
+    format: PDF
+    name: Division of Revenue Bill 2016-17
+    url: http://www.treasury.gov.za/legislation/bills/2016/bills2016_bill02-2016.pdf
+  - description: ''
+    format: XLS
+    name: Division of Revenue Bill Schedules and Annexes 2016-17
+    url: http://www.treasury.gov.za/documents/national%20budget/2016/Schedules,%20Annexures%20and%20Appendices%20to%20the%202016%20Division%20of%20Revenue%20Bill.xls
+  slug: division-of-revenue-bill-2016-17
+  url_path: /datasets/division-of-revenue-bills/division-of-revenue-bill-2016-17
+- author:
+    email: ''
+    name: ''
+  category:
+    description: "How money is allocated to provinces and municipalities for a given\
+      \ financial year.\r\n\r\nThe Division of Revenue Bill provides for the equitable\
+      \ division of revenue raised nationally among the national, provincial and local\
+      \ spheres of government.\r\n\r\nIt determines each province's share of the provincial\
+      \ share of that revenue.\r\n\r\nIt further determines the other allocations\
+      \ to provinces and municipalities from the national government's share of that\
+      \ revenue, including the conditions of those allocations.\r\n"
+    name: Division of Revenue Bills
+    slug: division-of-revenue-bills
+    url_path: /datasets/division-of-revenue-bills
+  created: '2018-11-28T07:28:03.773840'
+  description: null
+  intro_short: null
+  last_updated: '2018-11-28T07:34:20.714128'
+  license:
+    name: License not specified
+    url: null
+  name: Division of Revenue Bill 2017-18
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+    name: National Treasury
+    slug: national-treasury
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: ''
+    format: PDF
+    name: Division of Revenue Bill 2017-18
+    url: http://www.treasury.gov.za/legislation/bills/2017/b%204-2017%20(division%20of%20revenue).pdf
+  - description: ''
+    format: XLS
+    name: Division of Revenue Bill Schedules and Annexes 2017-18
+    url: http://www.treasury.gov.za/documents/national%20budget/2017/2017%20Division%20of%20Revenue%20Bill%20Schedules%20and%20Annexures%20in%20Excel%20format.xlsx
+  slug: division-of-revenue-bill-2017-18
+  url_path: /datasets/division-of-revenue-bills/division-of-revenue-bill-2017-18
+- author:
+    email: ''
+    name: ''
+  category:
+    description: "How money is allocated to provinces and municipalities for a given\
+      \ financial year.\r\n\r\nThe Division of Revenue Bill provides for the equitable\
+      \ division of revenue raised nationally among the national, provincial and local\
+      \ spheres of government.\r\n\r\nIt determines each province's share of the provincial\
+      \ share of that revenue.\r\n\r\nIt further determines the other allocations\
+      \ to provinces and municipalities from the national government's share of that\
+      \ revenue, including the conditions of those allocations.\r\n"
+    name: Division of Revenue Bills
+    slug: division-of-revenue-bills
+    url_path: /datasets/division-of-revenue-bills
+  created: '2018-11-27T14:21:37.095587'
+  description: null
+  intro_short: null
+  last_updated: '2019-05-17T11:37:04.747725'
+  license:
+    name: License not specified
+    url: null
+  name: Division of Revenue Bill 2018-19
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+    name: National Treasury
+    slug: national-treasury
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: ''
+    format: PDF
+    name: Division of Revenue Bill 2018-19
+    url: http://www.treasury.gov.za/legislation/bills/2018/Division%20of%20Revenue%20Bill%20B2%202018.pdf
+  - description: ''
+    format: XLS
+    name: Division of Revenue Bill Schedules and Annexes 2018-19
+    url: http://www.treasury.gov.za/documents/national%20budget/2018/2018%20Division%20of%20Revenue%20Bill%20Schedules%20and%20Annexes%20in%20Excel%20format.xlsx
+  slug: division-of-revenue-bill-2018-19
+  url_path: /datasets/division-of-revenue-bills/division-of-revenue-bill-2018-19
+- author:
+    email: ''
+    name: ''
+  category:
+    description: "How money is allocated to provinces and municipalities for a given\
+      \ financial year.\r\n\r\nThe Division of Revenue Bill provides for the equitable\
+      \ division of revenue raised nationally among the national, provincial and local\
+      \ spheres of government.\r\n\r\nIt determines each province's share of the provincial\
+      \ share of that revenue.\r\n\r\nIt further determines the other allocations\
+      \ to provinces and municipalities from the national government's share of that\
+      \ revenue, including the conditions of those allocations.\r\n"
+    name: Division of Revenue Bills
+    slug: division-of-revenue-bills
+    url_path: /datasets/division-of-revenue-bills
+  created: '2019-02-20T15:16:16.030758'
+  description: null
+  intro_short: null
+  last_updated: '2019-07-10T15:03:00.083911'
+  license:
+    name: License not specified
+    url: null
+  name: Division of Revenue Bill 2019-20
+  organization:
+    email: null
+    facebook: null
+    logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+    name: National Treasury
+    slug: national-treasury
+    telephone: null
+    twitter: null
+    url: null
+  resources:
+  - description: ''
+    format: PDF
+    name: Division of Revenue Bill
+    url: http://www.treasury.gov.za/legislation/bills/2019/[B5-2019]%20(Division%20of%20Revenue).pdf
+  - description: ''
+    format: XLSX
+    name: Division of Revenue Bill Schedules 2019-20
+    url: https://data.vulekamali.gov.za/dataset/51d24918-d5b6-4abc-8845-3207fdf07df9/resource/ea64944c-e94a-4b4b-b1bf-a9cab16d6966/download/2019-division-of-revenue-bill-schedules-in-excel-format.xlsx
+  - description: ''
+    format: XLSX
+    name: Division of Revenue Bill Annexures 2019-20
+    url: https://data.vulekamali.gov.za/dataset/51d24918-d5b6-4abc-8845-3207fdf07df9/resource/9a1dd44c-6ec7-4c59-85e2-13c42269ceaf/download/2019-division-of-revenue-bill-annexures-in-excel-format.xlsx
+  slug: division-of-revenue-bill-2019-20
+  url_path: /datasets/division-of-revenue-bills/division-of-revenue-bill-2019-20
+description: "How money is allocated to provinces and municipalities for a given financial\
+  \ year.\r\n\r\nThe Division of Revenue Bill provides for the equitable division\
+  \ of revenue raised nationally among the national, provincial and local spheres\
+  \ of government.\r\n\r\nIt determines each province's share of the provincial share\
+  \ of that revenue.\r\n\r\nIt further determines the other allocations to provinces\
+  \ and municipalities from the national government's share of that revenue, including\
+  \ the conditions of those allocations.\r\n"
+name: Division of Revenue Bills
+selected_tab: datasets
+slug: division-of-revenue-bills
+title: Division of Revenue Bills - vulekamali
+url_path: /datasets/division-of-revenue-bills

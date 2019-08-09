@@ -1,0 +1,69 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:11:52.789191'
+description: "The promise of better housing has been a central plank of public policy\
+  \ since 1994. To this end, the government has provided public finance for a range\
+  \ of housing programmes, collectively dubbed \u2018RDP housing\u2019. These programmes\
+  \ aim to establish communities and neighbourhoods with access to healthcare, education\
+  \ and other social amenities. One of their basic components is the construction\
+  \ of permanent homes with security of tenure, which provide privacy, protection\
+  \ against the elements, and access to potable water, sanitation and energy."
+intro: "The promise of better housing has been a central plank of public policy since\
+  \ 1994. To this end, the government has provided public finance for a range of housing\
+  \ programmes, collectively dubbed \u2018RDP housing\u2019. These programmes aim\
+  \ to establish communities and neighbourhoods with access to healthcare, education\
+  \ and other social amenities. One of their basic components is the construction\
+  \ of permanent homes with security of tenure, which provide privacy, protection\
+  \ against the elements, and access to potable water, sanitation and energy."
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T09:00:52.042511'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - Housing Programmatic Comparison
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Read More
+  url: https://data.vulekamali.gov.za/dataset/per-urbanspace-hpc/resource/8655f357-f6a9-4ea1-8d55-7b7442d91fb0/download/housing-programmatic-comparison-read-more.pdf
+- description: ''
+  format: PDF
+  name: Summary
+  url: https://data.vulekamali.gov.za/dataset/per-urbanspace-hpc/resource/77229b18-da01-4ee5-a45b-d21e1ae2ccf6/download/1.-1-summary.pdf
+- description: ''
+  format: PDF
+  name: Technical Report
+  url: https://data.vulekamali.gov.za/dataset/per-urbanspace-hpc/resource/a5a94d47-6af7-4909-b7e2-ba9034d233fe/download/1.2-technical-report.pdf
+- description: ''
+  format: XLSM
+  name: Logframe
+  url: https://data.vulekamali.gov.za/dataset/per-urbanspace-hpc/resource/1be34bd0-c469-4928-a75a-6f0c32cb73b8/download/housing-programmatic-comparison-logframe.xlsm
+selected_tab: datasets
+slug: per-urbanspace-hpc
+title: PER - Housing Programmatic Comparison - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-urbanspace-hpc
+usage: null
+use_for: null

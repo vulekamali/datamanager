@@ -1,0 +1,49 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "How money is allocated to provinces and municipalities for a given\
+    \ financial year.\r\n\r\nThe Division of Revenue Bill provides for the equitable\
+    \ division of revenue raised nationally among the national, provincial and local\
+    \ spheres of government.\r\n\r\nIt determines each province's share of the provincial\
+    \ share of that revenue.\r\n\r\nIt further determines the other allocations to\
+    \ provinces and municipalities from the national government's share of that revenue,\
+    \ including the conditions of those allocations.\r\n"
+  name: Division of Revenue Bills
+  slug: division-of-revenue-bills
+  url_path: /datasets/division-of-revenue-bills
+created: '2018-11-28T07:38:06.845444'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2018-11-28T07:47:48.407003'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: Division of Revenue Bill 2015-16
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Division of Revenue Bill 2015-16
+  url: http://www.treasury.gov.za/legislation/bills/2015/bills2015_bill05-2015.pdf
+- description: ''
+  format: XLS
+  name: 2015-16 Annexure to Schedule 3, 4B, 5B, 6B, 7B.xlsx
+  url: https://data.vulekamali.gov.za/dataset/1b373ea1-e823-45cf-857e-35085f309ab9/resource/dbecbb88-0d7f-45b7-b69a-0823492c8836/download/2015-annexure-to-schedule-3-4b-5b-6b-7b.xlsx
+selected_tab: datasets
+slug: division-of-revenue-bill-2015-16
+title: Division of Revenue Bill 2015-16 - vulekamali
+url_path: /datasets/division-of-revenue-bills/division-of-revenue-bill-2015-16
+usage: null
+use_for: null

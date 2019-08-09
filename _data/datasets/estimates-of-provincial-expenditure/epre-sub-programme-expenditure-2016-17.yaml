@@ -1,0 +1,50 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Expenditure data used to prepare the EPRE publications provide detailed\
+    \ data on provincial government\u2019s expenditure allocations contained in the\
+    \ annual appropriation bill (for the upcoming year) as well as for the two outer\
+    \ years, that is for the three years of the medium term expenditure framework.\
+    \ Information is presented by vote (generally a provincial government department)\
+    \ and by main economic classification. The\_EPRE publications also provide detailed\
+    \ data on how provincial government institutions have spent their budgets in previous\
+    \ years."
+  name: Estimates of Provincial Expenditure
+  slug: estimates-of-provincial-expenditure
+  url_path: /datasets/estimates-of-provincial-expenditure
+created: '2018-10-19T06:46:15.963069'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2018-10-19T06:47:35.795219'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: EPRE Sub-programme Expenditure 2016-17
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: OpenSpending API
+  name: EPRE Sub-programme Expenditure 2016-17
+  url: https://openspending.org/api/3/cubes/b9d2af843f3a7ca223eea07fb608e62a:epre-sub-programme-expenditure-2016-17-v2/model/
+- description: ''
+  format: CSV
+  name: EPRE Sub-programme Expenditure 2016-17
+  url: http://datastore.openspending.org/b9d2af843f3a7ca223eea07fb608e62a/epre-sub-programme-expenditure-2016-17-v2/final/data/epre-subprogrammes-2016-17.csv
+selected_tab: datasets
+slug: epre-sub-programme-expenditure-2016-17
+title: EPRE Sub-programme Expenditure 2016-17 - vulekamali
+url_path: /datasets/estimates-of-provincial-expenditure/epre-sub-programme-expenditure-2016-17
+usage: null
+use_for: null

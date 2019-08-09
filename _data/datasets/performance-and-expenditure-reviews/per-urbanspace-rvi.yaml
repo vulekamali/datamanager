@@ -1,0 +1,69 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:12:01.396886'
+description: "The Informal Settlements Service Delivery Rapid Verification Study is\
+  \ not a typical performance and expenditure review (PER). It was commissioned by\
+  \ the Department of Performance Monitoring and Evaluation in the Presidency in December\
+  \ 2013 in order to help assess the extent to which government could rely on data\
+  \ prepared and presented by various departments about the delivery of services to\
+  \ communities and households living in informal settlements after it was reported\
+  \ that the target set for service delivery had been achieved. The target had been\
+  \ to provide 400 000 households with upgraded services (in situ or greenfield) and\
+  \ security of tenure between April 2010 and February 2014. The aim of the study\
+  \ was to assess the reliability of the data from various departments underpinning\
+  \ these claims. \u200B\u200B"
+intro: "The Informal Settlements Service Delivery Rapid Verification Study is not\
+  \ a typical performance and expenditure review (PER). It was commissioned by the\
+  \ Department of Performance Monitoring and Evaluation in the Presidency in December\
+  \ 2013 in order to help assess the extent to which government could rely on data\
+  \ prepared and presented by various departments about the delivery of services to\
+  \ communities and households living in informal settlements after it was reported\
+  \ that the target set for service delivery had been achieved. The target had been\
+  \ to provide 400 000 households with upgraded services (in situ or greenfield) and\
+  \ security of tenure between April 2010 and February 2014. The aim of the study\
+  \ was to assess the reliability of the data from various departments underpinning\
+  \ these claims. \u200B\u200B"
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T09:01:32.504752'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - Rapid Verification of Informal Settlements
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Summary
+  url: https://data.vulekamali.gov.za/dataset/per-urbanspace-rvi/resource/e525d795-c9a5-40be-8390-6a15281d8e88/download/2.1-summary.pdf
+- description: ''
+  format: PDF
+  name: Technical Report
+  url: https://data.vulekamali.gov.za/dataset/per-urbanspace-rvi/resource/e5fa033e-e309-44c7-a754-bca631d34980/download/2.2-technical-report.pdf
+selected_tab: datasets
+slug: per-urbanspace-rvi
+title: PER - Rapid Verification of Informal Settlements - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-urbanspace-rvi
+usage: null
+use_for: null

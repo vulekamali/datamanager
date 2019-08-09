@@ -1,0 +1,55 @@
+author:
+  email: null
+  name: null
+category:
+  description: "This annexure provides a brief description for each grant in schedules\
+    \ of the Division of Revenue Bill. The\r\nfollowing are key areas considered for\
+    \ each grant:\r\n\r\n- Strategic goal and purpose of the grant\r\n- Outcome statements\
+    \ and outputs of the grant\r\n- Priority outcome(s) of government that the grant\
+    \ primarily contributes to\r\n- Conditions of the grant (additional to what is\
+    \ required in the Bill)\r\n- Criteria for allocation between municipalities\r\n\
+    - Rationale for funding through a conditional grant\r\n- Past performance\r\n\
+    - The projected life of the grant\r\n- MTEF allocations\r\n- The payment schedule\r\
+    \n- Responsibilities of transferring national department and receiving municipalities\r\
+    \n- Process for approval of business plans for the next financial year\r\n\r\n\
+    These documents are published in\r\norder to provide more information on each\
+    \ grant to parliament, legislatures, municipal\r\ncouncils, officials in all three\
+    \ spheres of government and the public.\r\n\r\nThe financial statements and annual\
+    \ reports will report against the Division of\r\nRevenue Act, Division of Revenue\
+    \ Amendment Act and their schedules, and the grant\r\nframeworks as gazetted in\
+    \ terms of the Act. Such reports must cover both financial and\r\nnon-financial\
+    \ performance, focusing on the outputs achieved.\r\n"
+  name: Frameworks for Conditional Grants to Municipalities
+  slug: frameworks-for-conditional-grants-to-municipalities
+  url_path: /datasets/frameworks-for-conditional-grants-to-municipalities
+created: '2018-10-26T17:57:37.364448'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2018-10-26T18:00:49.086395'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: 2018-19 Public Transport Network Grant Framework
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Public Transport Network Grant
+  url: https://data.vulekamali.gov.za/dataset/f45921d4-198d-4490-aae5-d49391e42017/resource/7ab16d29-ec2c-438e-a3ee-0d020332dcd9/download/public-transport-network-grant.pdf
+selected_tab: datasets
+slug: 2018-19-public-transport-network-grant-framework
+title: 2018-19 Public Transport Network Grant Framework - vulekamali
+url_path: /datasets/frameworks-for-conditional-grants-to-municipalities/2018-19-public-transport-network-grant-framework
+usage: null
+use_for: null

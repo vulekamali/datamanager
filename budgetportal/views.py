@@ -208,7 +208,7 @@ def department_list(request, financial_year_id):
         'slug': 'departments',
         'title': 'Department Budgets for %s - vulekamali' % selected_year.slug,
         'description': "Department budgets for the %s financial year %s" % (
-         selected_year.slug, COMMON_DESCRIPTION_ENDING),
+            selected_year.slug, COMMON_DESCRIPTION_ENDING),
     }
 
     for year in FinancialYear.get_available_years():
@@ -254,17 +254,17 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         if year.slug == financial_year_id:
             selected_year = year
             sphere = selected_year \
-                     .spheres \
-                     .filter(slug=sphere_slug) \
-                     .first()
+                .spheres \
+                .filter(slug=sphere_slug) \
+                .first()
             government = sphere \
-                         .governments \
-                         .filter(slug=government_slug) \
-                         .first()
+                .governments \
+                .filter(slug=government_slug) \
+                .first()
             department = government \
-                         .departments \
-                         .filter(slug=department_slug) \
-                         .first()
+                .departments \
+                .filter(slug=department_slug) \
+                .first()
 
     financial_years_context = []
     for year in years:
@@ -286,7 +286,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
             'url_path': dataset.get_url_path(),
         })
 
-    #======== programmes =========================
+    # ======== programmes =========================
     programmes = department.get_programme_budgets()
     if not programmes:
         programmes = {}
@@ -340,7 +340,6 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         description_govt = "National"
     elif department.government.sphere.slug == 'provincial':
         description_govt = department.government.name
-
 
     context = {
         'economic_classification_by_programme': department.get_econ_by_programme_budgets(),
@@ -432,13 +431,13 @@ def dataset_category(request, category_slug):
 
 def dataset(request, category_slug, dataset_slug):
     dataset = Dataset.fetch(dataset_slug)
-    assert(dataset.category.slug == category_slug)
+    assert (dataset.category.slug == category_slug)
 
     if category_slug == 'contributed':
         description = ("Data and/or documentation related to South African"
                        " government budgets contributed by %s and hosted"
                        " by National Treasury in partnership with IMALI YETHU"
-        ) % dataset.get_organization()['name']
+                       ) % dataset.get_organization()['name']
     else:
         description = dataset.intro
 
@@ -614,19 +613,19 @@ def about(request):
     about_date_file_path = str(settings.ROOT_DIR.path('_data/about.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page' : {
-            'layout' : 'about',
-            'data_key' : 'about'
+        'page': {
+            'layout': 'about',
+            'data_key': 'about'
         },
-        'site' : {
-            'data' : {
-                'videos' : read_object_from_yaml(videos_file_path),
-                'about' : read_object_from_yaml(about_date_file_path),
-                'navbar' : read_object_from_yaml(navbar_data_file_path)
+        'site': {
+            'data': {
+                'videos': read_object_from_yaml(videos_file_path),
+                'about': read_object_from_yaml(about_date_file_path),
+                'navbar': read_object_from_yaml(navbar_data_file_path)
             },
-            'latest_year' : '2019-20'
+            'latest_year': '2019-20'
         },
-        'debug' : settings.DEBUG
+        'debug': settings.DEBUG
     }
     return render(request, 'about.html', context=context)
 
@@ -635,18 +634,18 @@ def events(request):
     events_file_path = str(settings.ROOT_DIR.path('_data/events.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page' : {
-            'layout' : 'events',
-            'data_key' : 'events'
+        'page': {
+            'layout': 'events',
+            'data_key': 'events'
         },
-        'site' : {
-            'data' : {
-                'events' : read_object_from_yaml(events_file_path),
+        'site': {
+            'data': {
+                'events': read_object_from_yaml(events_file_path),
                 'navbar': read_object_from_yaml(navbar_data_file_path),
             },
-            'latest_year' : '2019-20'
+            'latest_year': '2019-20'
         },
-        'debug' : settings.DEBUG
+        'debug': settings.DEBUG
     }
     return render(request, 'events.html', context=context)
 
@@ -655,18 +654,18 @@ def videos(request):
     videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page' : {
-            'layout' : 'videos',
-            'data_key' : 'videos'
+        'page': {
+            'layout': 'videos',
+            'data_key': 'videos'
         },
-        'site' : {
-            'data' : {
-                'videos' : read_object_from_yaml(videos_file_path),
-                'navbar' : read_object_from_yaml(navbar_data_file_path)
+        'site': {
+            'data': {
+                'videos': read_object_from_yaml(videos_file_path),
+                'navbar': read_object_from_yaml(navbar_data_file_path)
             },
-            'latest_year' : '2019-20'
+            'latest_year': '2019-20'
         },
-        'debug' : settings.DEBUG
+        'debug': settings.DEBUG
     }
     return render(request, 'videos.html', context=context)
 
@@ -674,17 +673,17 @@ def videos(request):
 def terms_and_conditions(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page' : {
-            'layout' : 'terms-and-conditions',
-            'data_key' : 'terms-and-conditions'
+        'page': {
+            'layout': 'terms-and-conditions',
+            'data_key': 'terms-and-conditions'
         },
-        'site' : {
-            'data' : {
-                'navbar' : read_object_from_yaml(navbar_data_file_path)
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path)
             },
-            'latest_year' : '2019-20'
+            'latest_year': '2019-20'
         },
-        'debug' : settings.DEBUG
+        'debug': settings.DEBUG
     }
     return render(request, 'terms-and-conditions.html', context=context)
 
@@ -692,17 +691,17 @@ def terms_and_conditions(request):
 def search_result(request, financial_year_id):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page' : {
-            'layout' : 'search-result',
-            'data_key' : 'search-result'
+        'page': {
+            'layout': 'search-result',
+            'data_key': 'search-result'
         },
-        'site' : {
-            'data' : {
-                'navbar' : read_object_from_yaml(navbar_data_file_path)
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path)
             },
-            'latest_year' : '2019-20'
+            'latest_year': '2019-20'
         },
-        'debug' : settings.DEBUG
+        'debug': settings.DEBUG
     }
     return render(request, 'search-result.html', context=context)
 
@@ -711,20 +710,106 @@ def resources(request):
     videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page' : {
-            'layout' : 'resources',
-            'data_key' : 'resources'
+        'page': {
+            'layout': 'resources',
+            'data_key': 'resources'
         },
-        'site' : {
-            'data' : {
-                'navbar' : read_object_from_yaml(navbar_data_file_path),
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
                 'videos': read_object_from_yaml(videos_file_path),
             },
-            'latest_year' : '2019-20'
+            'latest_year': '2019-20'
         },
-        'debug' : settings.DEBUG
+        'debug': settings.DEBUG
     }
     return render(request, 'resources.html', context=context)
+
+
+def guides(request, slug):
+    if slug not in [
+        'index',
+        'adjusted-estimates-of-national-expenditure',
+        'estimates-of-national-expenditure',
+        'estimates-of-provincial-expenditure',
+        'performance-and-expenditure-reviews',
+        'frameworks-for-conditional-grants'
+    ]: return HttpResponse(status=404)
+    aene_file_path = str(settings.ROOT_DIR.path('_data/guides/adjusted-estimates-of-national-expenditure.yaml'))
+    ene_file_path = str(settings.ROOT_DIR.path('_data/guides/estimates-of-national-expenditure.yaml'))
+    epre_file_path = str(settings.ROOT_DIR.path('_data/guides/estimates-of-provincial-expenditure.yaml'))
+    per_file_path = str(settings.ROOT_DIR.path('_data/guides/performance-and-expenditure-reviews.yaml'))
+    index_file_path = str(settings.ROOT_DIR.path('_data/guides/index.yaml'))
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
+    context = {
+        'page': {
+            'layout': 'guides',
+            'data_key': slug,
+            'content_template': 'guide-{}.html'.format(slug)
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'guides': {
+                    'index': read_object_from_yaml(index_file_path),
+                    'adjusted-estimates-of-national-expenditure': read_object_from_yaml(aene_file_path),
+                    'estimates-of-national-expenditure': read_object_from_yaml(ene_file_path),
+                    'estimates-of-provincial-expenditure': read_object_from_yaml(epre_file_path),
+                    'performance-and-expenditure-reviews': read_object_from_yaml(per_file_path),
+                }
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    if slug == 'index':
+        template = 'guides'
+    else:
+        template = 'guide_item'
+    return render(request, '{}.html'.format(template), context=context)
+
+
+def dataset_landing_page(request):
+    index_file_path = str(settings.ROOT_DIR.path('_data/datasets/index.yaml'))
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page': {
+            'layout': 'dataset_landing_page',
+            'data_key': 'datasets',
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'datasets': {
+                    'index': read_object_from_yaml(index_file_path),
+                }
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'datasets.html', context=context)
+
+
+def dataset(request, slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    dataset_data_file_path = str(settings.ROOT_DIR.path('_data/datasets/{}/index.yaml'.format(slug)))
+    context = {
+        'page': {
+            'layout': 'government_dataset_category',
+            'data_key': slug,
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'dataset': read_object_from_yaml(dataset_data_file_path)
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'government_dataset_category.html', context=context)
 
 
 def read_object_from_yaml(path_file):

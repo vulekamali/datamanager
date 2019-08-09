@@ -1,0 +1,65 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Data and analysis contributed by other organisations on South African
+    government budgets. '
+  name: Contributed data and analysis
+  slug: contributed
+  url_path: /datasets/contributed
+created: '2018-07-18T15:17:30.691540'
+description: Data and/or documentation related to South African government budgets
+  contributed by International Budget Partnership and hosted by National Treasury
+  in partnership with IMALI YETHU
+intro: Like their counterparts around the world, CSOs in South Africa need access
+  to disaggregated budget data to be able to monitor budgeting for and expenditure
+  on the delivery of services, such as basic education. But they struggle to find
+  out whether the data they need is being produced or published, in which format,
+  and by whom. Through conversations with these CSOs, IBP South Africa collected a
+  range of education-related budget information requests and commissioned Cornerstone
+  Economic Research to assess the availability of disaggregated budget data that responds
+  to the requests. Download the report of what they found along with an accompanying
+  report with background information on how education is funded in South Africa.
+intro_short: null
+key_points: null
+last_updated: '2018-07-18T15:24:59.662325'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: The transparency of public funding of Basic Education in South Africa
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2018-07-18-150902.261001ibplogo.png
+  name: International Budget Partnership
+  slug: international-budget-partnership
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: IBP South Africa commissioned Cornerstone Economic Research to assess
+    the availability of disaggregated budget data that responds CSO requests for information
+    needed to monitor funding for and the delivery of basic education. This report
+    provides responses to the specific information requests, indicating where information
+    can be found (where publicly available) or who in government is likely to be able
+    to provide the information. It also raises interesting questions around who CSOs
+    should engage with when advocating for more detailed and relevant budget data.
+  format: PDF
+  name: Comments and recommendations on data requests on public funding of basic education
+  url: https://data.vulekamali.gov.za/dataset/970fccc7-0f42-4256-89ae-0dea945e45e9/resource/b6f22546-69dc-4d33-9518-7c134ea10fb1/download/data-requests-on-public-funding-of-basic-education-south-africa-comments-recommendations-ibp-201.pdf
+- description: This report outlines how basic education is funded through national
+    and provincial budget processes in South Africa.
+  format: PDF
+  name: Processes for Financing Public Basic Education in South Africa
+  url: https://data.vulekamali.gov.za/dataset/970fccc7-0f42-4256-89ae-0dea945e45e9/resource/14e5e268-744c-4bb3-afb7-33e77f626886/download/processes-for-financing-public-basic-education-in-south-africa-ibp-2017.pdf
+selected_tab: datasets
+slug: the-transparency-of-public-funding-of-basic-education-in-south-africa
+title: The transparency of public funding of Basic Education in South Africa - vulekamali
+url_path: /datasets/contributed/the-transparency-of-public-funding-of-basic-education-in-south-africa
+usage: null
+use_for: null

@@ -1,0 +1,48 @@
+#########################################
+#  GENERATED FILE. Don't edit by hand.  #
+#########################################
+
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Data and analysis contributed by other organisations on South African
+    government budgets. '
+  name: Contributed data and analysis
+  slug: contributed
+  url_path: /datasets/contributed
+created: '2018-02-01T12:14:15.127993'
+description: Data and/or documentation related to South African government budgets
+  contributed by Public Service Accountability Monitor and hosted by National Treasury
+  in partnership with IMALI YETHU
+intro: Analysis of the Eastern Cape Department of Human Settlements budget allocation
+  for the financial year 2016/17.
+intro_short: null
+key_points: null
+last_updated: '2018-10-25T14:06:53.770606'
+license:
+  name: License not specified
+  url: null
+methodology: Desktop research. Document analysis on Human Settlements mid-term and
+  annual reports. No field work was undertaken.
+name: 'Budget Brief: Eastern Cape Department of Human Settlements 2016/17'
+organization:
+  email: psam-admin@ru.ac.za
+  facebook: publicserviceaccountabilitymonitor
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2018-02-01-115841.153638psam.jpg
+  name: Public Service Accountability Monitor
+  slug: public-service-accountability-monitor
+  telephone: 046 603 8358
+  twitter: '@Right_to_SAM'
+  url: http://psam.org.za/
+resources:
+- description: 'Budget Brief: Eastern Cape Department of Human Settlements'
+  format: PDF
+  name: Budget-Analysis-1-3-2016-17.pdf
+  url: https://data.vulekamali.gov.za/dataset/cf76f706-84ba-484f-80e3-23fbe788a655/resource/1a325081-2578-4acf-80d3-8f544fe8e59a/download/budget-analysis-1-3-2016-17.pdf
+selected_tab: datasets
+slug: budget-brief-eastern-cape-department-of-human-settlements-2016-17
+title: 'Budget Brief: Eastern Cape Department of Human Settlements 2016/17 - vulekamali'
+url_path: /datasets/contributed/budget-brief-eastern-cape-department-of-human-settlements-2016-17
+usage: null
+use_for: null

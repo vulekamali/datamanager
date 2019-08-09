@@ -1,0 +1,139 @@
+author:
+  email: null
+  name: null
+category:
+  description: Performance Expenditure Reviews (PERs) either assess baseline expenditure
+    on existing programme or cost the implementation of a new or substantially changed
+    policy. They include a policy and institutional analysis, a programme logic analysis,
+    a key performance indicator analysis, and a cost and savings model.  These analysis
+    involve the detailed scrutiny of programme performance and expenditure datasets
+    to quantify, assess, and improve the cost effectiveness of public policy and public
+    spending.
+  name: Performance and Expenditure Reviews
+  slug: performance-and-expenditure-reviews
+  url_path: /datasets/performance-and-expenditure-reviews
+created: '2018-07-17T12:20:06.102419'
+description: "Post-school education and training (PSET) is critical to South Africa\u2019\
+  s future socio-economic development. It dramatically improves the employment prospects\
+  \ of young people and raises their incomes from such employment. In addition, broadening\
+  \ the skills base would be socially and economically transformative, and promote\
+  \ economic and employment growth. A primary goal of the PSET system has been to\
+  \ increase access to higher education and skills training. Government has expanded\
+  \ the capacity of the universities and the technical and vocational education and\
+  \ training (TVET) colleges, while also increasing funding for workplace training.\
+  \ University enrolment has grown rapidly, but enrolment at TVET colleges has grown\
+  \ even faster. The main mechanism for increasing access to the PSET system for young\
+  \ people from poor households has been the National Student Financial Aid Scheme\
+  \ (NSFAS), which has grown significantly. \u200B"
+intro: "Post-school education and training (PSET) is critical to South Africa\u2019\
+  s future socio-economic development. It dramatically improves the employment prospects\
+  \ of young people and raises their incomes from such employment. In addition, broadening\
+  \ the skills base would be socially and economically transformative, and promote\
+  \ economic and employment growth. A primary goal of the PSET system has been to\
+  \ increase access to higher education and skills training. Government has expanded\
+  \ the capacity of the universities and the technical and vocational education and\
+  \ training (TVET) colleges, while also increasing funding for workplace training.\
+  \ University enrolment has grown rapidly, but enrolment at TVET colleges has grown\
+  \ even faster. The main mechanism for increasing access to the PSET system for young\
+  \ people from poor households has been the National Student Financial Aid Scheme\
+  \ (NSFAS), which has grown significantly. \u200B"
+intro_short: null
+key_points: null
+last_updated: '2018-09-28T08:59:49.590043'
+license:
+  name: null
+  url: null
+methodology: null
+name: PER - Post School Education and Training (PSET)
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: PDF
+  name: Summary
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/07e210ee-2314-48cd-8aa2-a4fe18a7497c/download/12-summary.pdf
+- description: ''
+  format: PDF
+  name: Technical Report - Vol 1.  International review
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/2538f595-bf0b-46ed-9d7b-d5ae6a4336c8/download/vol-1.-international-review.pdf
+- description: ''
+  format: PDF
+  name: Technical Report - Vol 2. Revenue and Expenditure Review
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/13edc89c-fda7-48af-aaf7-e1ea18942f32/download/vol-2.-revenue-and-expenditure-review.pdf
+- description: ''
+  format: PDF
+  name: Technical Report - Vol 3. Costing
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/1774fd39-5378-46a4-bd3a-95957123994a/download/vol-3.-costing.pdf
+- description: ''
+  format: PDF
+  name: Technical Report - Vol 4. Funding and financing options
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/004c115c-108e-43c6-b41d-69679516ebed/download/vol-4.-funding-and-financing-options.pdf
+- description: ''
+  format: PDF
+  name: Technical Report - Vol 5. Consolidated Report
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/4e68afea-04e6-4427-9b43-3ae9ac7716d5/download/vol-5.-consolidated-report.pdf
+- description: ''
+  format: XLSM
+  name: Cost Model Locked - PSET - AA Overall PSET dashboard locked
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/3e56b9d7-8107-40a7-8d83-a7115bf4ed8d/download/pset-aa-overall-pset-dashboard-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Open - PSET - AA Overall PSET dashboard
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/a8db483a-8c81-4b08-b76a-56a0e5a3a2a3/download/pset-aa-overall-pset-dashboard.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Locked - PSET - Community Colleges - cost model locked
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/df9b0b8f-91a0-4aaf-9552-ae4c35fe60a5/download/pset-community-colleges-cost-model-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Open - PSET - Community Colleges - cost model
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/136c707f-cebd-483e-9888-8fce99653359/download/pset-community-colleges-cost-model.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Locked - PSET - NSFAS - cost model locked
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/d0f316db-82b6-4c9c-9def-418483b0d77d/download/pset-nsfas-cost-model-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Open - PSET - NSFAS - cost model
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/80c16337-e95f-4c5a-b4a8-d9906245e284/download/pset-nsfas-cost-model.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Locked - PSET - NSFAS-University link file - cost model locked
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/f25a5dca-f7d1-4be9-9cbb-6341ebc7162d/download/pset-nsfas-university-link-file-cost-model-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Open - PSET - NSFAS-University link file - cost model
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/b9fcd074-6398-44e9-a475-3fc5a4aca6fc/download/pset-nsfas-university-link-file-cost-model.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Open - PSET - Skills Development Levy - cost model
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/576b24bc-a00d-48cd-a6ab-5679c7d69f2e/download/pset-skills-development-levy-cost-model.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Locked - PSET - TVET cost model locked
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/c112db94-2061-4532-92c4-b1911260f31b/download/pset-tvet-cost-model-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Open - PSET - TVET cost model
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/06f87393-43f6-48e1-a95e-474be4ddd6b4/download/pset-tvet-cost-model.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Open - PSET - University cost model locked
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/6825dde4-a419-4c78-b7f4-5ab3d05a1f5a/download/pset-university-cost-model-locked.xlsm
+- description: ''
+  format: XLSM
+  name: Cost Model Open - PSET - University cost model
+  url: https://data.vulekamali.gov.za/dataset/per-higheducation-pset/resource/2b592839-a30f-49e4-b26d-198b1edc915a/download/pset-university-cost-model.xlsm
+selected_tab: datasets
+slug: per-higheducation-pset
+title: PER - Post School Education and Training (PSET) - vulekamali
+url_path: /datasets/performance-and-expenditure-reviews/per-higheducation-pset
+usage: null
+use_for: null

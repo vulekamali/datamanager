@@ -1,0 +1,60 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: 'Socio-economic data resources that can be used for contextual and
+    other analyses purposes. '
+  name: Socio-economic Data
+  slug: socio-economic-data
+  url_path: /datasets/socio-economic-data
+created: '2018-10-05T12:11:17.669862'
+description: The national statistical agency of South Africa. It is responsible for
+  all official Censuses and other population surveys. It produces approximately 25
+  monthly data releases plus other quarterly and annual datasets.
+intro: The national statistical agency of South Africa. It is responsible for all
+  official Censuses and other population surveys. It produces approximately 25 monthly
+  data releases plus other quarterly and annual datasets.
+intro_short: 'South African statistical data '
+key_points: "- Regular statistical releases (monthly, quarterly, annually)\r\n- Research\
+  \ reports in .pdf format and databases available in .xlsx or .csv formats\r\n- Data\
+  \ tools, including visualisations and interactive platforms (e.g. SuperWEB2)"
+last_updated: '2018-10-05T12:53:26.189727'
+license:
+  name: License not specified
+  url: null
+methodology: null
+name: Statistics South Africa (StatsSA)
+organization:
+  email: null
+  facebook: null
+  logo_url: ''
+  name: Statistics South Africa
+  slug: statistics-south-africa
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: ''
+  name: Statistics South Africa (StatsSA)
+  url: http://www.statssa.gov.za/
+- description: ''
+  format: PNG
+  name: 'Screenshot: Search Statistical Publications'
+  url: https://data.vulekamali.gov.za/dataset/67a8a0ae-190b-46b1-b412-b5969dbd0f94/resource/dc7082aa-a0e1-4c36-92f1-d850fa6521df/download/mrzqpyd.png
+- description: ''
+  format: PNG
+  name: 'Screenshot: Quarterly employment statistics report'
+  url: https://data.vulekamali.gov.za/dataset/67a8a0ae-190b-46b1-b412-b5969dbd0f94/resource/f7bac374-df38-4008-9aa8-9582929308a0/download/kktkdg0.png
+selected_tab: datasets
+slug: statistics-south-africa-statssa
+title: Statistics South Africa (StatsSA) - vulekamali
+url_path: /datasets/socio-economic-data/statistics-south-africa-statssa
+usage: "1. (Visit StatsSA's homepage at)[http://www.statssa.gov.za/)\r\n2. Click on\
+  \ the tabs at the top (e.g. Find Statistics, Publications, etc) or enter a search\
+  \ in the searchbar at the top right to find specific publications or datasets\r\n\
+  3. Alternately, click through one of the links at the bottom of the homepage (e.g.\
+  \ Press Room, Tools, Links) to access more tools and reports"
+use_for: StatsSA publishes a broad range of statistical data, including demographics,
+  labour force information, and economic and welfare indicators. This information
+  provides context to the analysis of public spending and service delivery analysis.

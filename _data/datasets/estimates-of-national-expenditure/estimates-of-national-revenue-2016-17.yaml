@@ -1,0 +1,53 @@
+author:
+  email: ''
+  name: ''
+category:
+  description: "Expenditure data used to prepare the ENE publications provide detailed\
+    \ data on government\u2019s expenditure allocations contained in the annual appropriation\
+    \ bill (for the upcoming year) as well as for the two outer years, that is for\
+    \ the three years of the medium term expenditure framework. Information is presented\
+    \ by vote (generally a national government department) and by main economic classification.\
+    \ The ENE publications also provide detailed data on how government institutions\
+    \ have spent their budgets in previous years."
+  name: Estimates of National Expenditure
+  slug: estimates-of-national-expenditure
+  url_path: /datasets/estimates-of-national-expenditure
+created: '2018-02-07T13:29:14.884759'
+description: null
+intro: null
+intro_short: null
+key_points: null
+last_updated: '2018-08-15T20:09:27.908008'
+license:
+  name: Other (Public Domain)
+  url: null
+methodology: null
+name: Estimates of national revenue 2016-17
+organization:
+  email: null
+  facebook: null
+  logo_url: https://data.vulekamali.gov.za/uploads/group/2017-09-28-151852.487803treasury-logo.jpg
+  name: National Treasury
+  slug: national-treasury
+  telephone: null
+  twitter: null
+  url: null
+resources:
+- description: ''
+  format: CSV
+  name: budget estimates of national revenue 2016-17-total.csv
+  url: https://data.vulekamali.gov.za/dataset/280e1538-3ee3-4a7c-809a-98b96f07dd70/resource/69b54066-00e0-4d7b-8b33-1ccbace5ba8e/download/budget-estimates-of-national-revenue-2016-17-total.csv
+- description: ''
+  format: PDF
+  name: Revenue trends and tax proposals 2016-17
+  url: https://data.vulekamali.gov.za/dataset/280e1538-3ee3-4a7c-809a-98b96f07dd70/resource/c3aba7ce-f324-4977-95b1-4def63e63227/download/chapter-4.pdf
+- description: ''
+  format: XLSX
+  name: Revenue trends and tax proposals 2016-17
+  url: https://data.vulekamali.gov.za/dataset/280e1538-3ee3-4a7c-809a-98b96f07dd70/resource/d6d8d7bb-48ec-45d3-838c-24cb31772836/download/br-2016-tables-for-statistical-tables.xls
+selected_tab: datasets
+slug: estimates-of-national-revenue-2016-17
+title: Estimates of national revenue 2016-17 - vulekamali
+url_path: /datasets/estimates-of-national-expenditure/estimates-of-national-revenue-2016-17
+usage: null
+use_for: null
