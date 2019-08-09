@@ -72,6 +72,8 @@ INSTALLED_APPS = (
     'elasticapm.contrib.django',
 
     'import_export',
+    'markdownify',
+
 )
 
 MIDDLEWARE = (

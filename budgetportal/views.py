@@ -650,6 +650,24 @@ def events(request):
     return render(request, 'events.html', context=context)
 
 
+def glossary(request):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page': {
+            'layout': 'glossary',
+            'data_key': 'glossary'
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'events.html', context=context)
+
+
 def videos(request):
     videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))

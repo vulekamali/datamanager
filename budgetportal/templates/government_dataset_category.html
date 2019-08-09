@@ -1,5 +1,6 @@
 {% extends 'page-shell.html' %}
 {% load define_action %}
+{% load markdownify %}
 {% block page_content %}
 
 {% assign site.data.dataset as page_data %}
@@ -18,7 +19,7 @@
 
     <div class="Section is-invisible u-fontSize18">
       <div>
-      {{ page_data.description }}
+      {{ page_data.description|markdownify }}
       </div>
 
       {% assign site.data.dataset_category_guides.page_data.slug as guide_slug %}
