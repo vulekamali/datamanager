@@ -850,7 +850,8 @@ def dataset_category(request, category_slug):
 
 def dataset(request, category_slug, dataset_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    dataset_data_file_path = str(settings.ROOT_DIR.path('_data/datasets/{}/{}.yaml'.format(category_slug, dataset_slug)))
+    dataset_data_file_path = str(
+        settings.ROOT_DIR.path('_data/datasets/{}/{}.yaml'.format(category_slug, dataset_slug)))
     context = {
         'page': {
             'layout': 'government_dataset',
@@ -867,6 +868,47 @@ def dataset(request, category_slug, dataset_slug):
         'debug': settings.DEBUG
     }
     return render(request, 'government_dataset.html', context=context)
+
+
+def contributed_datasets_list(request):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    contributed_dataset_file_path = str(settings.ROOT_DIR.path('_data/datasets/contributed/index.yaml'))
+    context = {
+        'page': {
+            'layout': 'contributed-data',
+            'data_key': 'contributed',
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'datasets': {'contributed': {'index': read_object_from_yaml(contributed_dataset_file_path)}}
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'contributed-data.html', context=context)
+
+
+def contributed_dataset(request, dataset_slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    contributed_dataset_file_path = str(settings.ROOT_DIR.path('_data/datasets/contributed/{}.yaml'.format(dataset_slug)))
+    context = {
+        'page': {
+            'layout': 'contributed_dataset',
+            'data_key': dataset_slug,
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'dataset': read_object_from_yaml(contributed_dataset_file_path)
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'contributed_dataset.html', context=context)
+
 
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:

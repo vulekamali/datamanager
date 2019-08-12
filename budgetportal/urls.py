@@ -1,7 +1,8 @@
 from adminplus.sites import AdminSitePlus
 
 from budgetportal.views import openspending_csv, about, events, videos, terms_and_conditions, search_result, resources, \
-    guides, dataset_landing_page, dataset_category, dataset, glossary, faq
+    guides, dataset_landing_page, dataset_category, dataset, glossary, faq, contributed_datasets_list, \
+    contributed_dataset
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
@@ -109,7 +110,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
-    # about us
+    # Jekyll to django migrated pages
     url(r'^about/?$', about, name="about"),
     url(r'^events/?$', events, name="events"),
     url(r'^videos/?$', videos, name="videos"),
@@ -119,8 +120,10 @@ urlpatterns = [
     url(r'^faq/?$', faq, name="faq"),
     url(r'^guides/?$', guides, name="guides", kwargs={'slug': 'index'}),
     url(r'^guides/(?P<slug>[-\w]+)/?$', guides, name="guides"),
-    url(r'^datasets/?$', dataset_landing_page, name="dataset_landing_page"),
-    url(r'^datasets/(?P<category_slug>[-\w]+)/?$', dataset_category, name="dataset_category"),
+    url(r'^datasets/?$', dataset_landing_page, name="dataset-landing-page"),
+    url(r'^datasets/contributed/?$', contributed_datasets_list, name="contributed-datasets"),
+    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', contributed_dataset, name="contributed-dataset"),
+    url(r'^datasets/(?P<category_slug>[-\w]+)/?$', dataset_category, name="dataset-category"),
     url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', dataset, name="dataset"),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', search_result, name="search-result")
 ]
