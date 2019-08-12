@@ -660,6 +660,12 @@ def glossary(request):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
+                'glossary': {
+                    'selected_tab': 'learning-centre',
+                    'selected_sidebar': 'glossary',
+                    'title': 'Glossary - vulekamali',
+                    'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+                }
             },
             'latest_year': '2019-20'
         },
@@ -744,16 +750,18 @@ def search_result(request, financial_year_id):
 
 def resources(request):
     videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
+    resources_file_path = str(settings.ROOT_DIR.path('_data/resources.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
         'page': {
             'layout': 'resources',
-            'data_key': 'resources'
+            'data_key': 'resources',
         },
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
                 'videos': read_object_from_yaml(videos_file_path),
+                'resources': read_object_from_yaml(resources_file_path),
             },
             'latest_year': '2019-20'
         },

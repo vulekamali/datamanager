@@ -47,7 +47,7 @@
   <div data-create-component="Modals"></div>
   <div class="Page">
     <header class="Page-head">
-      {% with items=site.data.navbar.array  selected_tab=page_data.selected_tab latest_year=site.latest_year year=page.financial_year selected_sidebar=page_data.selected_sidebar%}
+      {% with items=site.data.navbar.array selected_tab=page_data.selected_tab latest_year=site.latest_year year=page.financial_year selected_sidebar=page_data.selected_sidebar%}
         {% include 'components/header-and-footer/HeaderBar/index.html' %}
       {% endwith %}
 
