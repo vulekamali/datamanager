@@ -913,3 +913,28 @@ def contributed_dataset(request, dataset_slug):
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:
         return yaml.load(f)
+
+
+def department_migrated(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    data = department(request, financial_year_id, sphere_slug, government_slug, department_slug)
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page': {
+            'layout': 'department',
+            'data_key': department_slug,
+            'geographic_region': government_slug,
+            'sphere': sphere_slug,
+            'financial_year': financial_year_id,
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'dataset': yaml.load(data.content)
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'department.html', context=context)
+
+

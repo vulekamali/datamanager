@@ -1,58 +1,57 @@
 {% load define_action %}
-{% assign "infrastructure-projects" as hardcoded_infrastructure%}
+{% assign "infrastructure-projects" as hardcoded_infrastructure %}
 {% if page.financial_year %}
 
-  {% if page.sphere %}
+    {% if page.sphere %}
 
-    {% if page.sphere == "national" %}
-      {% assign site.data|hash:page.financial_year|hash:page.sphere|hash:"departments"|hash:page.data_key as page_data %}
+        {% assign site.data.dataset as page_data %}
+        {% assign site.data.dataset as page_data %}
+
     {% else %}
-      {% assign site.data|hash:page.financial_year|hash:page.sphere|hash:page.geographic_region_slug|hash:"departments"|hash:page.data_key as page_data %}
+        {% assign site.data|hash:page.financial_year|hash:page.data_key as page_data %}
     {% endif %}
 
-  {% else %}
-    {% assign site.data|hash:page.financial_year|hash:page.data_key as page_data %}
-  {% endif %}
-
 {% elif page.layout == 'infrastructure_project_list' %}
-  {% assign site.data|hash:hardcoded_infrastructure|hash:"index" as page_data %}
+    {% assign site.data|hash:hardcoded_infrastructure|hash:"index" as page_data %}
 
 {% elif page.layout == 'infrastructure_project' %}
-  {% assign site.data|hash:hardcoded_infrastructure|hash:"index" as page_data %}
+    {% assign site.data|hash:hardcoded_infrastructure|hash:"index" as page_data %}
 
 {% elif page.layout == 'contributed_dataset' %}
-  {% assign site.data.datasets.contributed|hash:page.data_key as page_data %}
+    {% assign site.data.datasets.contributed|hash:page.data_key as page_data %}
 
 {% elif page.layout == 'government_dataset' %}
-  {% assign site.data.datasets|hash:page.category|hash:page.data_key as page_data %}
+    {% assign site.data.datasets|hash:page.category|hash:page.data_key as page_data %}
 
 {% elif page.layout == 'government_dataset_category' %}
     {% assign site.data.dataset as page_data %}
 
 {% else %}
-  {% assign site.data|hash:page.data_key as page_data %}
+    {% assign site.data|hash:page.data_key as page_data %}
 {% endif %}
 
 
 {% if debug %}
-  {% assign "" as production %}
+    {% assign "" as production %}
 {% else %}
-  {% assign "data-production" as production %}
+    {% assign "data-production" as production %}
 {% endif %}
 
 
 <!DOCTYPE html>
 <html>
-  {% include 'utilities/html/head.html' with title=page_data.title description=page_data.description %}
-  <body {{ production }} data-spy="scroll" data-offset="200">
-    {% if production %}
+{% include 'utilities/html/head.html' with title=page_data.title description=page_data.description %}
+<body {{ production }} data-spy="scroll" data-offset="200">
+{% if production %}
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLNL56L"
-                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLNL56L"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
     <!-- End Google Tag Manager (noscript) -->
-    {% endif %}
-    {% block content %}
-    {% endblock %}
-    {% include 'utilities/html/scripts.html' %}
-  </body>
+{% endif %}
+{% block content %}
+{% endblock %}
+{% include 'utilities/html/scripts.html' %}
+</body>
 </html>

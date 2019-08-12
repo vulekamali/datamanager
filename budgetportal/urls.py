@@ -80,6 +80,13 @@ urlpatterns = [
         '/departments'
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department),
         kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
+    # Department migrated
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
+        '/national'
+        '/departments'
+        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_migrated),
+        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
+
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'

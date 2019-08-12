@@ -1,82 +1,54 @@
-{% capture source_text %}
-  {{ include.source_type }} {{ include.year }}
-{% endcapture %}
+{% load define_action %}
 
-{% capture pdf_text %}
-  Learn more about these programmes in the {{ include.source_type }} as PDF
-{% endcapture %}
 
-{% capture excel_text %}
-  Learn more about these programmes in the {{ include.source_type }} as Excel
-{% endcapture %}
+{% assign ""|add:source_type|add:" "|add:year as source_text %}
 
-{% capture guide_text %}
-  Dataset Guide for {{ include.source_type }}
-{% endcapture %}
+{% assign "Learn more about these programmes in the "|add:source_type|add:" as PDF" as pdf_text %}
+
+{% assign "Learn more about these programmes in the "|add:source_type|add:" as Excel" as excel_text %}
+
+{% assign "Dataset Guide for "|add:source_type as guide_text %}
 
 
 <div class="ProgrammesSection" id="programmes">
-  <h3 class="Title Title--section">Programme budgets for {{ include.year }}</h3>
+    <h3 class="Title Title--section">Programme budgets for {{ year }}</h3>
 
-  <div class="ProgrammesSection-container">
-    <div class="ProgrammesSection-item">
-      <div class="ProgrammesSection-share u-marginTop10 u-marginBottom15">
-        <div data-component="Share" data-anchor="programmes" data-color="{{ include.color }}"></div>
-      </div>
+    <div class="ProgrammesSection-container">
+        <div class="ProgrammesSection-item">
+            <div class="ProgrammesSection-share u-marginTop10 u-marginBottom15">
+                <div data-component="Share" data-anchor="programmes" data-color="{{ color }}"></div>
+            </div>
 
-      <p class="js-tooltips">A department&#x27;s programmes are the activities that it spends money on during the financial year. Different programmes have different expenditure budgets, depending on their requirements and available finances. More detail on the programmes is available in the department's {{ include.source_type }} documents.</p>
+            <p class="js-tooltips">A department&#x27;s programmes are the activities that it spends money on during the
+                financial year. Different programmes have different expenditure budgets, depending on their requirements
+                and available finances. More detail on the programmes is available in the
+                department's {{ source_type }} documents.</p>
 
-      <ul class="LinksList">
-        {%
-          include components/LinksList/item.html
-          prefix="Source"
-          text=source_text
-          url=include.dataset
-          type="dataset"
-        %}
+            <ul class="LinksList">
+                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=dataset type="dataset" %}
 
-        {%
-          include components/LinksList/item.html
-          text="Download this data for analysis (CSV)"
-          url=include.csv
-          type="download"
-        %}
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=csv type="download" %}
 
-        {%
-          include components/LinksList/item.html
-          text=guide_text
-          url=include.guide
-          type="guide"
-        %}
+                {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 
-        {%
-          include components/LinksList/item.html
-          text=pdf_text
-          url=include.pdf
-          type="download"
-        %}
+                {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
 
-        {%
-          include components/LinksList/item.html
-          text=excel_text
-          url=include.excel
-          type="download"
-        %}
-      </ul>
-  </div>
+                {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+            </ul>
+        </div>
 
-  <div class="ProgrammesSection-item ProgrammesSection-item--right">
-    <div class="Card">
-      <div
-        data-component="ChartAdaptor"
-        data-type="programmes"
-        data-items="{{ include.items | jsonify | escape }}"
-        data-scale="2"
-        data-title="{{ include.title | truncate: 45 }}"
-        data-subtitle="{{ include.subtitle }}"
-        data-description="{{ include.description }}"
-      >
-      </div>
+        <div class="ProgrammesSection-item ProgrammesSection-item--right">
+            <div class="Card">
+                <div
+                        data-component="ChartAdaptor"
+                        data-type="programmes"
+                        data-items="{{ items | jsonify | escape }}"
+                        data-scale="2"
+                        data-title="{{ title | truncatechars:45 }}"
+                        data-subtitle="{{ subtitle }}"
+                        data-description="{{ description }}"
+                >
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
