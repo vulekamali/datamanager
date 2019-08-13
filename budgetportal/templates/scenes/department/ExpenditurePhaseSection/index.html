@@ -10,7 +10,7 @@
     <div class="ExpenditurePhaseSection-container">
         <div class="ExpenditurePhaseSection-item">
             <div class="ExpenditurePhaseSection-share u-marginTop10 u-marginBottom15">
-                <div data-component="Share" data-anchor="expenditure" data-color="{{ include.color }}"></div>
+                <div data-component="Share" data-anchor="expenditure" data-color="{{ color }}"></div>
             </div>
 
             <p class="js-tooltips">
@@ -21,8 +21,8 @@
 
             <p class="js-tooltips">Note: Direct charges against the National Revenue Fund are excluded.</p>
 
-            {% if include.website_url %}
-                <p>Read more in the Annual Report on <a href="http://{{ include.website_url }}">the department's
+            {% if website_url %}
+                <p>Read more in the Annual Report on <a href="http://{{ website_url }}">the department's
                     website.</a></p>
             {% endif %}
 
@@ -38,8 +38,8 @@
                 {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
             </ul>
 
-            {% if include.notices %}
-                {% for notice in include.notices %}
+            {% if notices %}
+                {% for notice in notices %}
                     <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
                         <div class="Message-content">
               <span class="Message-heading">
@@ -76,13 +76,13 @@
             <div class="Card">
                 <div
                         data-component="ChartAdaptor"
-                        data-items="{{ include.items | jsonify | escape }}"
+                        data-items="{{ items | jsonify | escape }}"
                         data-type="expenditurePhase"
                         data-scale="2"
                         data-color="purple"
-                        data-title="{{ include.title | truncatechars:45 }}"
-                        data-subtitle="{{ include.subtitle }}"
-                        data-description="{{ include.description }}"
+                        data-title="{{ title | truncatechars:45 }}"
+                        data-subtitle="{{ subtitle }}"
+                        data-description="{{ description }}"
                         data-barTypes="[&quot;Main Appropriation&quot;, &quot;Adjusted Appropriation&quot;, &quot;Final Appropriation&quot;, &quot;Audited Outcome&quot;]"
                         data-rotated
                 >
