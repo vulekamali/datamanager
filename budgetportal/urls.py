@@ -2,7 +2,7 @@ from adminplus.sites import AdminSitePlus
 
 from budgetportal.views import openspending_csv, about, events, videos, terms_and_conditions, search_result, resources, \
     guides, dataset_landing_page, dataset_category, dataset, glossary, faq, contributed_datasets_list, \
-    contributed_dataset, dataset_category_migrated, dataset_migrated
+    contributed_dataset, dataset_category_migrated, dataset_migrated, infrastructure_project_list
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
@@ -94,7 +94,11 @@ urlpatterns = [
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
 
     url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_category_list)),
-    url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview)),
+    url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_yaml)),
+    url(
+        r'^json/infrastructure-projects.json$',
+        cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)
+    ),
     url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$',
         cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
     url(r'^datasets'
@@ -117,6 +121,13 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
+    # Budget Portal
+    url(r'^about/?$', about, name="about"),
+    url(
+        r"^infrastructure-projects/?$",
+        infrastructure_project_list,
+        name="infrastructure-project-list",
+    ),
     # Jekyll to django migrated pages
     url(r'^about/?$', about, name="about"),
     url(r'^events/?$', events, name="events"),

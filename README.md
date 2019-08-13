@@ -35,6 +35,28 @@ start moving to summaries, and just call out to models and datasets as needed.
 Setting up Development environment
 -----------------------
 
+### Build frontend dependencies
+
+First time, and any time dependencies might have changed
+
+```
+yarn
+```
+
+### Run JS and CSS incremental build for the assets managed by yarn (except webapp package)
+
+```
+yarn build:dev
+```
+
+### Build changes in webapp package
+
+```
+yarn build:webapp
+```
+
+### Start development server
+
 ```
 docker-compose up db
 ```
