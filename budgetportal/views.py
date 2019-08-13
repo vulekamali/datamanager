@@ -10,6 +10,7 @@ from django.views import View
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
+from budgetportal.models import Video
 from budgetportal.openspending import PAGE_SIZE
 from models import FinancialYear, Sphere, Department, InfrastructureProject
 from datasets import Dataset, Category
@@ -699,6 +700,37 @@ def faq(request):
 def videos(request):
     videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+
+    videos_data = []
+    for video in Video.objects.all():
+        videos_data.append({
+            'id': video.title_id,
+            'title': video.title,
+            'description': video.description,
+            'languages': [
+                {
+                    'name': 'English',
+                    'id': 'zFalZt862hk'
+                },
+                {
+                    'name': 'Afrikaans',
+                    'id': 'jsT2YFRDETk'
+                },
+                {
+                    'name': 'isiZulu',
+                    'id': 'lMUqzosN6ck'
+                },
+                {
+                    'name': 'isiXhosa',
+                    'id': 'nHUDu2SJ9DQ'
+                },
+                {
+                    'name': 'Sesotho',
+                    'id': 'lUbcKHxnGkI'
+                },
+            ]
+        })
+
     context = {
         'page': {
             'layout': 'videos',
@@ -706,7 +738,13 @@ def videos(request):
         },
         'site': {
             'data': {
-                'videos': read_object_from_yaml(videos_file_path),
+                'videos': {
+                    'title': 'Videos - vulekamali',
+                    'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+                    'selected_tab': 'learning-centre',
+                    'selected_sidebar': 'videos',
+                    'data': videos_data
+                },
                 'navbar': read_object_from_yaml(navbar_data_file_path)
             },
             'latest_year': '2019-20'
@@ -790,7 +828,6 @@ def guides(request, slug):
     per_file_path = str(settings.ROOT_DIR.path('_data/guides/performance-and-expenditure-reviews.yaml'))
     index_file_path = str(settings.ROOT_DIR.path('_data/guides/index.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
     context = {
         'page': {
             'layout': 'guides',
@@ -864,8 +901,6 @@ def dataset_category_migrated(request, category_slug):
 
 def dataset_migrated(request, category_slug, dataset_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    dataset_data_file_path = str(
-        settings.ROOT_DIR.path('_data/datasets/{}/{}.yaml'.format(category_slug, dataset_slug)))
     context = {
         'page': {
             'layout': 'government_dataset',
@@ -886,7 +921,6 @@ def dataset_migrated(request, category_slug, dataset_slug):
 
 def contributed_datasets_list(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    contributed_dataset_file_path = str(settings.ROOT_DIR.path('_data/datasets/contributed/index.yaml'))
     context = {
         'page': {
             'layout': 'contributed-data',
@@ -909,7 +943,8 @@ def contributed_dataset(request, dataset_slug):
     context = {
         'page': {
             'layout': 'contributed_dataset',
-            'data_key': dataset_slug,
+            'data_key': 'contributed',
+            'category': 'contributed',
         },
         'site': {
             'data': {

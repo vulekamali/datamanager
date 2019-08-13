@@ -95,8 +95,8 @@
                 {% if created and last_updated %}
                   <dt class="CsoMeta-listItem is-title">Version History</dt>
                   <dd class="CsoMeta-listItem">
-                    <div class="CsoMeta-item">First uploaded on {{ created }}</div>
-                    <div class="CsoMeta-item">Last updated on {{ last_updated }}</div>
+                    <div class="CsoMeta-item">First uploaded on {{ created|date:"d F Y"}}</div>
+                    <div class="CsoMeta-item">Last updated on {{ last_updated|date:"d F Y" }}</div>
                   </dd>
                 {% endif %}
 

@@ -1,5 +1,6 @@
 {% extends 'page-shell.html' %}
 {% load define_action %}
+{% load markdownify %}
 {% block page_content %}
 {% assign site.data.dataset as page_data %}
 
@@ -24,14 +25,14 @@
         {% if page_data.intro %}
           <div class="Section-card is-invisible">
             <h2 class="Section-title">Data contributed by: {{ page_data.organization.name }}</h2>
-            {{ page_data.intro }}
+            {{ page_data.intro|linebreaks }}
           </div>
         {% endif %}
 
         {% if page_data.methodology and page_data.methodology != '' %}
           <div class="Section-card is-invisible">
             <h2 class="Section-title">Methodology Used in Gathering and Analysis</h2>
-            {{ page_data.methodology }}
+            {{ page_data.methodology|linebreaks }}
           </div>
         {% endif %}
       </div>

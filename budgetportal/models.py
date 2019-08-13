@@ -1809,6 +1809,13 @@ class InfrastructureProject:
         return complete_expenditure
 
 
+class Video(models.Model):
+    title_id = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    description = models.TextField(max_length=510)
+
+
+
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
 # -or-has-a-sp
 def none_selected_query(vocab_name):
