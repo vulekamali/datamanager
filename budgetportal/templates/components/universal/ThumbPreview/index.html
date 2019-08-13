@@ -15,7 +15,7 @@
       <span>Source: </span>
       <{{ tag }} href="{{ source_url }}">{{ source }}</{{ tag }}>
     </div>
-    <div class="ThumbPreview-info">First uploaded: {{ created }}</div>
-    <div class="ThumbPreview-info">Last updated: {{ updated }}</div>
+    <div class="ThumbPreview-info">First uploaded: {{ created|date:"d F Y" }}</div>
+    <div class="ThumbPreview-info">Last updated: {{ updated|date:"d F Y" }}</div>
   </div>
 </div>

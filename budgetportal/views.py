@@ -1,4 +1,6 @@
 import urllib
+from datetime import datetime
+
 import urlparse
 
 import requests
@@ -576,8 +578,8 @@ def dataset_fields(dataset):
         'resources': [resource_fields(r) for r in dataset.resources],
         'organization': dataset.get_organization(),
         'author': dataset.author,
-        'created': dataset.created_date,
-        'last_updated': dataset.last_updated_date,
+        'created': datetime.strptime(dataset.created_date[:19], "%Y-%m-%dT%H:%M:%S"),
+        'last_updated': datetime.strptime(dataset.last_updated_date[:19], "%Y-%m-%dT%H:%M:%S"),
         'license': dataset.license,
         'intro': dataset.intro,
         'intro_short': dataset.intro_short,
