@@ -698,17 +698,27 @@ def faq(request):
 
 
 def videos(request):
-    videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
 
     videos_data = []
-    for video in Video.objects.all():
-        videos_data.append({
-            'id': video.title_id,
-            'title': video.title,
-            'description': video.description,
-            'languages': video.languages.all()
-        })
+    unique_title_ids = set([video.title_id for video in Video.objects.all()])
+
+    for title_id in unique_title_ids:
+        videos_all_languages = Video.objects.filter(title_id=title_id)
+        languages = []
+        for video in videos_all_languages:
+            if video.language:
+                languages.append({
+                    'name_id': video.video_id,
+                    'name': video.language.name
+                })
+        if videos_all_languages.first():
+            videos_data.append({
+                'id': videos_all_languages.first().title_id,
+                'title': videos_all_languages.first().title,
+                'description': videos_all_languages.first().description,
+                'languages': languages
+            })
 
     context = {
         'page': {
