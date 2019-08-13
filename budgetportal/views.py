@@ -707,28 +707,7 @@ def videos(request):
             'id': video.title_id,
             'title': video.title,
             'description': video.description,
-            'languages': [
-                {
-                    'name': 'English',
-                    'id': 'zFalZt862hk'
-                },
-                {
-                    'name': 'Afrikaans',
-                    'id': 'jsT2YFRDETk'
-                },
-                {
-                    'name': 'isiZulu',
-                    'id': 'lMUqzosN6ck'
-                },
-                {
-                    'name': 'isiXhosa',
-                    'id': 'nHUDu2SJ9DQ'
-                },
-                {
-                    'name': 'Sesotho',
-                    'id': 'lUbcKHxnGkI'
-                },
-            ]
+            'languages': video.languages.all()
         })
 
     context = {

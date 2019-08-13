@@ -1809,11 +1809,22 @@ class InfrastructureProject:
         return complete_expenditure
 
 
+class Language(models.Model):
+    name = models.CharField(max_length=255)
+    name_id = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Video(models.Model):
     title_id = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=510)
+    languages = models.ManyToManyField(Language, null=True, blank=True)
 
+    def __str__(self):
+        return self.title_id
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
