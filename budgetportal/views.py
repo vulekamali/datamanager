@@ -676,6 +676,7 @@ def glossary(request):
 
 def faq(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    faq_file_path = str(settings.ROOT_DIR.path('_data/faq.yaml'))
     context = {
         'page': {
             'layout': 'faq',
@@ -684,6 +685,7 @@ def faq(request):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
+                'faq': read_object_from_yaml(faq_file_path),
             },
             'latest_year': '2019-20'
         },
@@ -739,7 +741,8 @@ def search_result(request, financial_year_id):
         },
         'site': {
             'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path)
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'search-result': yaml.load(FinancialYearPage.as_view(slug='search-result').content)
             },
             'latest_year': '2019-20'
         },
@@ -826,7 +829,7 @@ def dataset_landing_page(request):
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
                 'datasets': {
-                    'index': read_object_from_yaml(index_file_path),
+                    'index': yaml.load(dataset_category_list(request).content),
                 }
             },
             'latest_year': '2019-20'
@@ -836,9 +839,9 @@ def dataset_landing_page(request):
     return render(request, 'datasets.html', context=context)
 
 
-def dataset_category(request, category_slug):
+def dataset_category_migrated(request, category_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    dataset_data_file_path = str(settings.ROOT_DIR.path('_data/datasets/{}/index.yaml'.format(category_slug)))
+    category_guide_file_path = str(settings.ROOT_DIR.path('_data/guides/{}.yaml'.format(category_slug)))
     context = {
         'page': {
             'layout': 'government_dataset_category',
@@ -847,7 +850,8 @@ def dataset_category(request, category_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': read_object_from_yaml(dataset_data_file_path)
+                'dataset': yaml.load(dataset_category(request, category_slug).content),
+                'guide': {'slug': category_slug, 'url': 'guides/{}'.format(category_slug)}
             },
             'latest_year': '2019-20'
         },
@@ -856,7 +860,7 @@ def dataset_category(request, category_slug):
     return render(request, 'government_dataset_category.html', context=context)
 
 
-def dataset(request, category_slug, dataset_slug):
+def dataset_migrated(request, category_slug, dataset_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     dataset_data_file_path = str(
         settings.ROOT_DIR.path('_data/datasets/{}/{}.yaml'.format(category_slug, dataset_slug)))
@@ -869,7 +873,7 @@ def dataset(request, category_slug, dataset_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': read_object_from_yaml(dataset_data_file_path)
+                'dataset': yaml.load(dataset(request, category_slug, dataset_slug).content)
             },
             'latest_year': '2019-20'
         },
@@ -889,7 +893,7 @@ def contributed_datasets_list(request):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'datasets': {'contributed': {'index': read_object_from_yaml(contributed_dataset_file_path)}}
+                'dataset': yaml.load(dataset_category(request, 'contributed').content),
             },
             'latest_year': '2019-20'
         },
@@ -900,7 +904,6 @@ def contributed_datasets_list(request):
 
 def contributed_dataset(request, dataset_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    contributed_dataset_file_path = str(settings.ROOT_DIR.path('_data/datasets/contributed/{}.yaml'.format(dataset_slug)))
     context = {
         'page': {
             'layout': 'contributed_dataset',
@@ -909,7 +912,7 @@ def contributed_dataset(request, dataset_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': read_object_from_yaml(contributed_dataset_file_path)
+                'dataset': yaml.load(dataset(request, 'contributed', dataset_slug).content),
             },
             'latest_year': '2019-20'
         },
@@ -944,5 +947,3 @@ def department_migrated(request, financial_year_id, sphere_slug, government_slug
         'debug': settings.DEBUG
     }
     return render(request, 'department.html', context=context)
-
-

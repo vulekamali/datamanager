@@ -19,14 +19,13 @@
 
     <div class="Section is-invisible u-fontSize18">
       <div>
-      {{ page_data.description|markdownify }}
+      {{ page_data.description|markdownify|linebreaks }}
       </div>
 
-      {% assign site.data.dataset_category_guides.page_data.slug as guide_slug %}
+      {% assign site.data.guide.slug as guide_slug %}
       {% if guide_slug %}
-        {% assign "guides/{{ guide_slug }}" as guide_path %}
 
-        <a href="/{{ guide_path }}" class="Button is-inline u-marginTop25 u-marginBottom10">
+        <a href="/{{ site.data.guide.url }}" class="Button is-inline u-marginTop25 u-marginBottom10">
           Learn more about {{ page_data.name }}
         </a>
       {% endif %}
