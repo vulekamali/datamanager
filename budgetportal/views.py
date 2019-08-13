@@ -26,6 +26,7 @@ from . import revenue
 from csv import DictWriter
 
 from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
 
 logger = logging.getLogger(__name__)
 
@@ -249,7 +250,7 @@ def department_list(request, financial_year_id):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def department(request, financial_year_id, sphere_slug, government_slug, department_slug):
+def department_data(financial_year_id, sphere_slug, government_slug, department_slug):
     department = None
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
@@ -345,7 +346,7 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
     elif department.government.sphere.slug == 'provincial':
         description_govt = department.government.name
 
-    context = {
+    page_data = {
         'economic_classification_by_programme': department.get_econ_by_programme_budgets(),
         'programme_by_economic_classification': department.get_prog_by_econ_budgets(),
         'subprogramme_by_programme': department.get_subprog_budgets(),
@@ -390,12 +391,11 @@ def department(request, financial_year_id, sphere_slug, government_slug, departm
         'website_url': department.get_latest_website_url(),
     }
 
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
+    return page_data
 
 
-def dataset_category_list(request):
-    context = {
+def dataset_category_list_data():
+    page_data = {
         'categories': [category_fields(c) for c in Category.get_all()],
         'selected_tab': 'datasets',
         'slug': 'datasets',
@@ -404,13 +404,12 @@ def dataset_category_list(request):
         'url_path': '/datasets',
     }
 
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
+    return page_data
 
 
-def dataset_category(request, category_slug):
+def dataset_category_data(category_slug):
     category = Category.get_by_slug(category_slug)
-    context = {
+    page_data = {
         'datasets': [],
         'selected_tab': 'datasets',
         'slug': category.slug,
@@ -427,13 +426,12 @@ def dataset_category(request, category_slug):
         del field_subset['key_points']
         del field_subset['use_for']
         del field_subset['usage']
-        context['datasets'].append(field_subset)
+        page_data['datasets'].append(field_subset)
 
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
+    return page_data
 
 
-def dataset(request, category_slug, dataset_slug):
+def dataset_data(category_slug, dataset_slug):
     dataset = Dataset.fetch(dataset_slug)
     assert (dataset.category.slug == category_slug)
 
@@ -445,16 +443,14 @@ def dataset(request, category_slug, dataset_slug):
     else:
         description = dataset.intro
 
-    context = {
+    page_data = {
         'selected_tab': 'datasets',
         'title': "%s - vulekamali" % dataset.name,
         'description': description,
     }
 
-    context.update(dataset_fields(dataset))
-
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
+    page_data.update(dataset_fields(dataset))
+    return page_data
 
 
 def infrastructure_projects_overview(request):
@@ -502,6 +498,7 @@ def infrastructure_projects_overview(request):
         'selected_tab': 'infrastructure-projects',
         'title': 'Infrastructure Projects - vulekamali',
     }
+
 
 def infrastructure_projects_overview_yaml(request):
     response = infrastructure_projects_overview(request)
@@ -860,8 +857,23 @@ def guides(request, slug):
     return render(request, '{}.html'.format(template), context=context)
 
 
+def dataset_landing_page_yaml(request):
+    response = dataset_category_list_data()
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_landing_page_json(request):
+    response_json = json.dumps(
+        dataset_category_list_data(),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
 def dataset_landing_page(request):
-    index_file_path = str(settings.ROOT_DIR.path('_data/datasets/index.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
         'page': {
@@ -872,7 +884,7 @@ def dataset_landing_page(request):
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
                 'datasets': {
-                    'index': yaml.load(dataset_category_list(request).content),
+                    'index': dataset_category_list_data
                 }
             },
             'latest_year': '2019-20'
@@ -882,9 +894,25 @@ def dataset_landing_page(request):
     return render(request, 'datasets.html', context=context)
 
 
+def dataset_category_yaml(request, category_slug):
+    response = dataset_category_data(category_slug)
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_category_json(request, category_slug):
+    response_json = json.dumps(
+        dataset_category_data(category_slug),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+        cls=DjangoJSONEncoder
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
 def dataset_category_migrated(request, category_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    category_guide_file_path = str(settings.ROOT_DIR.path('_data/guides/{}.yaml'.format(category_slug)))
     context = {
         'page': {
             'layout': 'government_dataset_category',
@@ -893,7 +921,7 @@ def dataset_category_migrated(request, category_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': yaml.load(dataset_category(request, category_slug).content),
+                'dataset': dataset_category_data(category_slug),
                 'guide': {'slug': category_slug, 'url': 'guides/{}'.format(category_slug)}
             },
             'latest_year': '2019-20'
@@ -901,6 +929,23 @@ def dataset_category_migrated(request, category_slug):
         'debug': settings.DEBUG
     }
     return render(request, 'government_dataset_category.html', context=context)
+
+
+def dataset_yaml(request, category_slug, dataset_slug):
+    response = dataset_data(category_slug, dataset_slug)
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_json(request, category_slug, dataset_slug):
+    response_json = json.dumps(
+        dataset_data(category_slug, dataset_slug),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+        cls=DjangoJSONEncoder
+    )
+    return HttpResponse(response_json, content_type="application/json")
 
 
 def dataset_migrated(request, category_slug, dataset_slug):
@@ -914,13 +959,30 @@ def dataset_migrated(request, category_slug, dataset_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': yaml.load(dataset(request, category_slug, dataset_slug).content)
+                'dataset': dataset_data(category_slug, dataset_slug)
             },
             'latest_year': '2019-20'
         },
         'debug': settings.DEBUG
     }
     return render(request, 'government_dataset.html', context=context)
+
+
+def contributed_datasets_list_yaml(request):
+    response = dataset_category_data('contributed')
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def contributed_datasets_list_json(request):
+    response_json = json.dumps(
+        dataset_category_data('contributed'),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+        cls=DjangoJSONEncoder
+    )
+    return HttpResponse(response_json, content_type="application/json")
 
 
 def contributed_datasets_list(request):
@@ -933,13 +995,30 @@ def contributed_datasets_list(request):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': yaml.load(dataset_category(request, 'contributed').content),
+                'dataset': dataset_category_data('contributed'),
             },
             'latest_year': '2019-20'
         },
         'debug': settings.DEBUG
     }
     return render(request, 'contributed-data.html', context=context)
+
+
+def contributed_dataset_yaml(request, dataset_slug):
+    response = dataset_data('contributed', dataset_slug)
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def contributed_dataset_json(request, dataset_slug):
+    response_json = json.dumps(
+        dataset_data('contributed', dataset_slug),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+        cls=DjangoJSONEncoder
+    )
+    return HttpResponse(response_json, content_type="application/json")
 
 
 def contributed_dataset(request, dataset_slug):
@@ -953,7 +1032,7 @@ def contributed_dataset(request, dataset_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': yaml.load(dataset(request, 'contributed', dataset_slug).content),
+                'dataset': dataset_data('contributed', dataset_slug),
             },
             'latest_year': '2019-20'
         },
@@ -968,7 +1047,7 @@ def read_object_from_yaml(path_file):
 
 
 def department_migrated(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    data = department(request, financial_year_id, sphere_slug, government_slug, department_slug)
+    page_data = department_data(financial_year_id, sphere_slug, government_slug, department_slug)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
         'page': {
@@ -981,10 +1060,27 @@ def department_migrated(request, financial_year_id, sphere_slug, government_slug
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': yaml.load(data.content)
+                'dataset': page_data
             },
             'latest_year': '2019-20'
         },
         'debug': settings.DEBUG
     }
     return render(request, 'department.html', context=context)
+
+
+def department_yaml(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    page_data = department_data(financial_year_id, sphere_slug, government_slug, department_slug)
+    response_yaml = yaml.safe_dump(page_data, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def department_json(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    response_json = json.dumps(
+        department_data(financial_year_id, sphere_slug, government_slug, department_slug),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+        cls=DjangoJSONEncoder
+    )
+    return HttpResponse(response_json, content_type="application/json")

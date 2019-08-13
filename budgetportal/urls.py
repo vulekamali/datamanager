@@ -1,8 +1,10 @@
 from adminplus.sites import AdminSitePlus
 
 from budgetportal.views import openspending_csv, about, events, videos, terms_and_conditions, search_result, resources, \
-    guides, dataset_landing_page, dataset_category, dataset, glossary, faq, contributed_datasets_list, \
-    contributed_dataset, dataset_category_migrated, dataset_migrated, infrastructure_project_list
+    guides, dataset_landing_page, dataset_category_data, dataset_data, glossary, faq, contributed_datasets_list, \
+    contributed_dataset, dataset_category_migrated, dataset_migrated, infrastructure_project_list, \
+    dataset_landing_page_json, dataset_landing_page_yaml, dataset_category_yaml, dataset_category_json, dataset_json, \
+    contributed_datasets_list_json, contributed_dataset_json
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
@@ -74,39 +76,6 @@ urlpatterns = [
         '/(?P<sphere_slug>[\w-]+)'
         '/programmes.csv$', cache_page(CACHE_SECS)(views.programme_list_csv)),
 
-    # Department
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/national'
-        '/departments'
-        '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department),
-        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
-    # Department migrated
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/national'
-        '/departments'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_migrated),
-        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
-
-    url(r'^(?P<financial_year_id>[\w-]+)'
-        '/(?P<sphere_slug>[\w-]+)'
-        '/(?P<government_slug>[\w-]+)'
-        '/departments'
-        '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department)),
-
-    url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_category_list)),
-    url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_yaml)),
-    url(
-        r'^json/infrastructure-projects.json$',
-        cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)
-    ),
-    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$',
-        cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
-    url(r'^datasets'
-        '/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category)),
-    url(r'^datasets'
-        '/(?P<category_slug>[\w-]+)'
-        '/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset)),
-
     # Authentication
     url(r'^accounts/email.*', permission_denied),
     url(r'^accounts/', include('allauth.urls')),
@@ -123,13 +92,6 @@ urlpatterns = [
 
     # Budget Portal
     url(r'^about/?$', about, name="about"),
-    url(
-        r"^infrastructure-projects/?$",
-        infrastructure_project_list,
-        name="infrastructure-project-list",
-    ),
-    # Jekyll to django migrated pages
-    url(r'^about/?$', about, name="about"),
     url(r'^events/?$', events, name="events"),
     url(r'^videos/?$', videos, name="videos"),
     url(r'^terms-and-conditions/?$', terms_and_conditions, name="terms-and-conditions"),
@@ -138,12 +100,42 @@ urlpatterns = [
     url(r'^faq/?$', faq, name="faq"),
     url(r'^guides/?$', guides, name="guides", kwargs={'slug': 'index'}),
     url(r'^guides/(?P<slug>[-\w]+)/?$', guides, name="guides"),
+
     url(r'^datasets/?$', dataset_landing_page, name="dataset-landing-page"),
+    url(r'^datasets.json$', dataset_landing_page_json, name="dataset-landing-page-json"),
+    url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_landing_page_yaml)),
+
     url(r'^datasets/contributed/?$', contributed_datasets_list, name="contributed-datasets"),
+    url(r'^datasets/contributed.json$', contributed_datasets_list_json, name="contributed-datasets-json"),
+
     url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', contributed_dataset, name="contributed-dataset"),
+    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+).json$', contributed_dataset_json, name="contributed-dataset"),
+
     url(r'^datasets/(?P<category_slug>[-\w]+)/?$', dataset_category_migrated, name="dataset-category"),
+    url(r'^datasets/(?P<category_slug>[-\w]+).json?$', dataset_category_json, name="dataset-category-json"),
+    url(r'^datasets/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category_yaml)),
+
     url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', dataset_migrated, name="dataset"),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', search_result, name="search-result")
+    url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+).json?$', dataset_json, name="dataset-json"),
+    url(r'^datasets/(?P<category_slug>[\w-]+)/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_yaml)),
+
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', search_result, name="search-result"),
+
+    url(r"^infrastructure-projects/?$", infrastructure_project_list, name="infrastructure-project-list"),
+    url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_yaml)),
+    url(r'^json/infrastructure-projects.json$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)),
+    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
+
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
+        cache_page(CACHE_SECS)(views.department_migrated),
+        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+).yaml$',
+        cache_page(CACHE_SECS)(views.department_yaml),
+        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+).json',
+        cache_page(CACHE_SECS)(views.department_json),
+        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
+
 ]
 
 if settings.DEBUG:
