@@ -8,9 +8,7 @@
     <div class="js-initParticipate"></div>
   </div>
 
-  {% assign site.data.videos.data.3 as video4 %}
-  {% include "components/universal/VideoCard/index.html" with video=video4 utils="u-marginTop15" %}
-
-  {% assign site.data.videos.data.4 as video5 %}
-  {% include "components/universal/VideoCard/index.html" with video=video5 utils="u-marginTop15" %}
+    {% for video in site.data.videos.data %}
+      {% include "components/universal/VideoCard/index.html" with video=video utils="u-marginTop15" %}
+    {% endfor %}
 </div>

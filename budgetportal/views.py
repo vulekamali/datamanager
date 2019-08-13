@@ -10,7 +10,7 @@ from django.views import View
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
-from budgetportal.models import Video
+from budgetportal.models import Video, Event
 from budgetportal.openspending import PAGE_SIZE
 from models import FinancialYear, Sphere, Department, InfrastructureProject
 from datasets import Dataset, Category
@@ -612,7 +612,7 @@ def category_fields(category):
 
 
 def about(request):
-    videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
+    videos_data = Video.group_by_video_id({'onlineBudgetPortal'})
     about_date_file_path = str(settings.ROOT_DIR.path('_data/about.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
@@ -622,7 +622,7 @@ def about(request):
         },
         'site': {
             'data': {
-                'videos': read_object_from_yaml(videos_file_path),
+                'videos': {'data': videos_data},
                 'about': read_object_from_yaml(about_date_file_path),
                 'navbar': read_object_from_yaml(navbar_data_file_path)
             },
@@ -634,8 +634,11 @@ def about(request):
 
 
 def events(request):
-    events_file_path = str(settings.ROOT_DIR.path('_data/events.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+
+    upcoming_events = Event.objects.filter(status='upcoming')
+    past_events = Event.objects.filter(status='past')
+
     context = {
         'page': {
             'layout': 'events',
@@ -643,7 +646,10 @@ def events(request):
         },
         'site': {
             'data': {
-                'events': read_object_from_yaml(events_file_path),
+                'events': {
+                    'upcoming': upcoming_events,
+                    'past': past_events
+                },
                 'navbar': read_object_from_yaml(navbar_data_file_path),
             },
             'latest_year': '2019-20'
@@ -700,25 +706,8 @@ def faq(request):
 def videos(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
 
-    videos_data = []
-    unique_title_ids = set([video.title_id for video in Video.objects.all()])
-
-    for title_id in unique_title_ids:
-        videos_all_languages = Video.objects.filter(title_id=title_id)
-        languages = []
-        for video in videos_all_languages:
-            if video.language:
-                languages.append({
-                    'name_id': video.video_id,
-                    'name': video.language.name
-                })
-        if videos_all_languages.first():
-            videos_data.append({
-                'id': videos_all_languages.first().title_id,
-                'title': videos_all_languages.first().title,
-                'description': videos_all_languages.first().description,
-                'languages': languages
-            })
+    titles = set([video.title_id for video in Video.objects.all()])
+    videos_data = Video.group_by_video_id(titles)
 
     context = {
         'page': {
@@ -781,9 +770,13 @@ def search_result(request, financial_year_id):
 
 
 def resources(request):
-    videos_file_path = str(settings.ROOT_DIR.path('_data/videos.yaml'))
     resources_file_path = str(settings.ROOT_DIR.path('_data/resources.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+
+    titles = {'theBudgetProcess', 'participate'}
+
+    videos_data = Video.group_by_video_id(titles)
+
     context = {
         'page': {
             'layout': 'resources',
@@ -792,7 +785,7 @@ def resources(request):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'videos': read_object_from_yaml(videos_file_path),
+                'videos': {'data': videos_data},
                 'resources': read_object_from_yaml(resources_file_path),
             },
             'latest_year': '2019-20'

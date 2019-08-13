@@ -1297,7 +1297,6 @@ class Department(models.Model):
             'data': {'items': expenditure, 'total': total_budget},
         } if expenditure else None
 
-
     def get_expenditure_time_series_summary(self):
         cpi_year_slug, cpi_resource_id = Dataset.get_latest_cpi_resource()
         base_year = get_base_year(cpi_year_slug)
@@ -1816,12 +1815,55 @@ class Language(models.Model):
         return self.name
 
 
+prov_keys = prov_abbrev.keys()
+prov_choices = tuple([(prov_key, prov_key) for prov_key in prov_keys])
+
+
+class Event(models.Model):
+    date = models.CharField(max_length=255)
+    type = models.CharField(max_length=255, choices=(
+        ('hackathon', 'hackathon'), ('dataquest', 'dataquest'), ('cid', 'cid'),
+        ('gift-dataquest', 'gift-dataquest'),
+    ))
+    province = models.CharField(max_length=255, choices=prov_choices)
+    where = models.CharField(max_length=255)
+    url = models.URLField(blank=True, null=True)
+    notes_url = models.URLField(blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
+    rsvp_url = models.URLField(blank=True, null=True)
+    presentation_url = models.URLField(blank=True, null=True)
+    status = models.CharField(max_length=255, default='upcoming', choices=(('upcoming', 'upcoming'), ('past', 'past')))
+
+    def __str__(self):
+        return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
+
 class Video(models.Model):
     title_id = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=510)
     language = models.ForeignKey(Language, null=True, blank=True)
     video_id = models.CharField(max_length=255, null=True, blank=True)
+
+    @staticmethod
+    def group_by_video_id(unique_ids):
+        videos_data = []
+        for title_id in unique_ids:
+            videos_all_languages = Video.objects.filter(title_id=title_id)
+            languages = []
+            for video in videos_all_languages:
+                if video.language:
+                    languages.append({
+                        'name_id': video.video_id,
+                        'name': video.language.name
+                    })
+            if videos_all_languages.first():
+                videos_data.append({
+                    'id': videos_all_languages.first().title_id,
+                    'title': videos_all_languages.first().title,
+                    'description': videos_all_languages.first().description,
+                    'languages': languages
+                })
+        return sorted(videos_data, key=lambda x: x['description'], reverse=True)
 
     def __str__(self):
         return "{} - {}".format(self.title, self.language)
@@ -1847,6 +1889,7 @@ def resource_name(department):
 
 def get_base_year(cpi_year_slug):
     return int(cpi_year_slug[:4]) - 1
+
 
 def get_cpi():
     cpi_year_slug, cpi_resource_id = Dataset.get_latest_cpi_resource()
