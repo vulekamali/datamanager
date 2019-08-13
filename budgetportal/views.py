@@ -699,7 +699,7 @@ def glossary(request):
         },
         'debug': settings.DEBUG
     }
-    return render(request, 'events.html', context=context)
+    return render(request, 'glossary.html', context=context)
 
 
 def faq(request):
