@@ -1205,7 +1205,41 @@ def focus_area_preview(request, financial_year_id, focus_slug):
     return render(request, 'focus_page.html', context=context)
 
 
-def department_preview(request, financial_year_id, sphere_slug, government_slug, phase_slug):
-    context = get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+def department_preview_data(financial_year_id, sphere_slug, government_slug, phase_slug):
+    page_data = get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
+    return page_data
+
+
+def department_preview_yaml(financial_year_id, sphere_slug, government_slug, phase_slug):
+    response = department_preview_data(financial_year_id)
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def department_preview_json(request, financial_year_id, sphere_slug, government_slug, phase_slug):
+    response_json = json.dumps(
+        department_preview_data(financial_year_id, sphere_slug, government_slug, phase_slug),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
+def department_preview(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+
+    context = {
+        'page': {
+            'layout': 'department_preview',
+            'data_key': '',
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'department_preview.html', context=context)
