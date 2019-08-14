@@ -1163,12 +1163,46 @@ def consolidated_treemap_json(request, financial_year_id):
     return HttpResponse(response_json, content_type="application/json")
 
 
-def focus_preview(request, financial_year_id):
+def focus_preview_data(financial_year_id):
     """ The data for the focus area preview pages for a specific year """
     financial_year = FinancialYear.objects.get(slug=financial_year_id)
-    context = get_focus_area_preview(financial_year)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    page_data = get_focus_area_preview(financial_year)
+    return page_data
+
+
+def focus_preview_yaml(request, financial_year_id):
+    response = focus_preview_data(financial_year_id)
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def focus_preview_json(request, financial_year_id):
+    response_json = json.dumps(
+        focus_preview_data(financial_year_id),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
+def focus_area_preview(request, financial_year_id, focus_slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+
+    context = {
+        'page': {
+            'layout': 'focus_page',
+            'data_key': '',
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'focus_page.html', context=context)
 
 
 def department_preview(request, financial_year_id, sphere_slug, government_slug, phase_slug):

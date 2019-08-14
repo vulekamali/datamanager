@@ -29,7 +29,11 @@ urlpatterns = [
     url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/focus.yaml', cache_page(CACHE_SECS)(views.focus_preview)),
+        '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview)),
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
+        '/focus.yaml', cache_page(CACHE_SECS)(views.focus_preview_yaml)),
+    url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
+        '/focus.json', cache_page(CACHE_SECS)(views.focus_preview_json)),
 
     # National and provincial treemap data
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
