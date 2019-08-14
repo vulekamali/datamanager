@@ -3,15 +3,9 @@
 
 {% block content %}
     {% assign "infrastructure-projects" as hardcoded_infrastructure %}
+
     {% if page.financial_year %}
-
-        {% if page.sphere %}
-
-            {% assign site.data.dataset as page_data %}
-        
-        {% else %}
-            {% assign site.data|hash:page.financial_year|hash:page.data_key as page_data %}
-        {% endif %}
+        {% assign site.data.dataset as page_data %}
 
     {% elif page.layout == 'contributed_dataset' %}
         {% assign site.data.datasets.contributed|hash:page.data_key as page_data %}
