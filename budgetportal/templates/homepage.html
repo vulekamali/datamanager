@@ -1,16 +1,17 @@
 {% extends 'page-shell.html' %}
-
+{% load define_action %}
+{% load staticfiles %}
+{% block page_content %}
 {% assign site.data.dataset as page_data %}
 
-{% assign site.data.videos.data.1 as video_1 %}
-{% assign site.data.videos.data.2 as video_2 %}
-{% assign site.data.videos.data.3 as video_3 %}
+{% assign site.data.videos.data.0 as video_1 %}
+{% assign site.data.videos.data.1 as video_2 %}
+{% assign site.data.videos.data.2 as video_3 %}
 
 <div class="Page-content u-paddingTop0">
     <div data-webapp="homepage-hero">
         {% include 'connections/homepage-hero/index.html' %}
     </div>
-
     <div id="national-treemap" class="national-treemap" data-webapp="consolidated-treemap"></div>
     <div id="national-treemap" class="national-treemap" data-webapp="national-treemap"></div>
     <div id="provincial-treemap" class="national-treemap" data-webapp="provincial-treemap"></div>
@@ -28,3 +29,4 @@
 
     {% endwith %}
 </div>
+{% endblock %}

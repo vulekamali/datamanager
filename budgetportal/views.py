@@ -34,28 +34,6 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
-def consolidated_treemap(request, financial_year_id):
-    """ The data for the vulekamali home page treemaps """
-    financial_year = FinancialYear.objects.get(slug=financial_year_id)
-    context = get_consolidated_expenditure_treemap(financial_year)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def focus_preview(request, financial_year_id):
-    """ The data for the focus area preview pages for a specific year """
-    financial_year = FinancialYear.objects.get(slug=financial_year_id)
-    context = get_focus_area_preview(financial_year)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def department_preview(request, financial_year_id, sphere_slug, government_slug, phase_slug):
-    context = get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def year_home(request, financial_year_id):
     """
     View of a financial year homepage, e.g. /2017-18
@@ -1109,7 +1087,7 @@ def department_list_json(request, financial_year_id):
     return HttpResponse(response_json, content_type="application/json")
 
 
-def homepage_data(financial_year_id, phase_slug, sphere_slug):
+def treemaps_data(financial_year_id, phase_slug, sphere_slug):
     """ The data for the vulekamali home page treemaps """
     dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
     if sphere_slug == 'national':
@@ -1121,15 +1099,15 @@ def homepage_data(financial_year_id, phase_slug, sphere_slug):
     return page_data
 
 
-def homepage_yaml(request, financial_year_id, phase_slug, sphere_slug):
-    response = homepage_data(financial_year_id, phase_slug, sphere_slug)
+def treemaps_yaml(request, financial_year_id, phase_slug, sphere_slug):
+    response = treemaps_data(financial_year_id, phase_slug, sphere_slug)
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def homepage_json(request, financial_year_id, phase_slug, sphere_slug):
+def treemaps_json(request, financial_year_id, phase_slug, sphere_slug):
     response_json = json.dumps(
-        homepage_data(financial_year_id, phase_slug, sphere_slug),
+        treemaps_data(financial_year_id, phase_slug, sphere_slug),
         sort_keys=True,
         indent=4,
         separators=(",", ": "),
@@ -1137,11 +1115,13 @@ def homepage_json(request, financial_year_id, phase_slug, sphere_slug):
     return HttpResponse(response_json, content_type="application/json")
 
 
-def homepage(request, financial_year_id, phase_slug, sphere_slug):
-    titles = {'theBudgetProcess', 'participate'}
+def homepage(request):
+    titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
     videos_data = Video.group_by_video_id(titles)
 
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
+
     context = {
         'page': {
             'layout': 'homepage',
@@ -1150,12 +1130,48 @@ def homepage(request, financial_year_id, phase_slug, sphere_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': homepage_data(financial_year_id, phase_slug, sphere_slug),
-                'videos': {'data': videos_data}
+                'videos': {'data': videos_data},
+                'dataset': read_object_from_yaml(homepage_data_file_path)
             },
             'latest_year': '2019-20'
         },
         'debug': settings.DEBUG
     }
-    return render(request, 'government_dataset_category.html', context=context)
+    return render(request, 'homepage.html', context=context)
 
+
+def consolidated_treemap(financial_year_id):
+    """ The data for the vulekamali home page treemaps """
+    financial_year = FinancialYear.objects.get(slug=financial_year_id)
+    page_data = get_consolidated_expenditure_treemap(financial_year)
+    return page_data
+
+
+def consolidated_treemap_yaml(request, financial_year_id):
+    response = consolidated_treemap(financial_year_id)
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def consolidated_treemap_json(request, financial_year_id):
+    response_json = json.dumps(
+        consolidated_treemap(financial_year_id),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
+def focus_preview(request, financial_year_id):
+    """ The data for the focus area preview pages for a specific year """
+    financial_year = FinancialYear.objects.get(slug=financial_year_id)
+    context = get_focus_area_preview(financial_year)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def department_preview(request, financial_year_id, sphere_slug, government_slug, phase_slug):
+    context = get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')

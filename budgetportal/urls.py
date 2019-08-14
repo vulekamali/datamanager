@@ -26,7 +26,7 @@ def permission_denied(request):
 
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/focus.yaml', cache_page(CACHE_SECS)(views.focus_preview)),
@@ -34,7 +34,10 @@ urlpatterns = [
     # National and provincial treemap data
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/(?P<sphere_slug>[\w-]+)'
-        '/(?P<phase_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.homepage)),
+        '/(?P<phase_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.treemaps_yaml)),
+    url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
+        '/(?P<sphere_slug>[\w-]+)'
+        '/(?P<phase_slug>[\w-]+).json', cache_page(CACHE_SECS)(views.treemaps_json)),
 
     # Preview pages
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
@@ -45,7 +48,9 @@ urlpatterns = [
 
     # Consolidated
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/consolidated.yaml', cache_page(CACHE_SECS)(views.consolidated_treemap)),
+        '/consolidated.yaml', cache_page(CACHE_SECS)(views.consolidated_treemap_yaml)),
+    url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
+        '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json)),
 
     # Home Page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
