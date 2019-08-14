@@ -128,7 +128,7 @@ urlpatterns = [
 
     # Department List
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/departments', cache_page(CACHE_SECS)(views.department_list_data)),
+        '/departments', cache_page(CACHE_SECS)(views.department_list)),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list_yaml)),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
