@@ -34,19 +34,6 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
-def homepage(request, financial_year_id, phase_slug, sphere_slug):
-    """ The data for the vulekamali home page treemaps """
-    dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
-    if sphere_slug == 'national':
-        context = dept.get_national_expenditure_treemap(financial_year_id, phase_slug)
-    elif sphere_slug == 'provincial':
-        context = dept.get_provincial_expenditure_treemap(financial_year_id, phase_slug)
-    else:
-        return HttpResponse("Unknown government sphere.", status=400)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def consolidated_treemap(request, financial_year_id):
     """ The data for the vulekamali home page treemaps """
     financial_year = FinancialYear.objects.get(slug=financial_year_id)
@@ -792,7 +779,6 @@ def resources(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
 
     titles = {'theBudgetProcess', 'participate'}
-
     videos_data = Video.group_by_video_id(titles)
 
     context = {
@@ -883,7 +869,7 @@ def dataset_landing_page(request):
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
                 'datasets': {
-                    'index': dataset_category_list_data
+                    'index': dataset_category_list_data()
                 }
             },
             'latest_year': '2019-20'
@@ -1121,3 +1107,55 @@ def department_list_json(request, financial_year_id):
         cls=DjangoJSONEncoder
     )
     return HttpResponse(response_json, content_type="application/json")
+
+
+def homepage_data(financial_year_id, phase_slug, sphere_slug):
+    """ The data for the vulekamali home page treemaps """
+    dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
+    if sphere_slug == 'national':
+        page_data = dept.get_national_expenditure_treemap(financial_year_id, phase_slug)
+    elif sphere_slug == 'provincial':
+        page_data = dept.get_provincial_expenditure_treemap(financial_year_id, phase_slug)
+    else:
+        return HttpResponse("Unknown government sphere.", status=400)
+    return page_data
+
+
+def homepage_yaml(request, financial_year_id, phase_slug, sphere_slug):
+    response = homepage_data(financial_year_id, phase_slug, sphere_slug)
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def homepage_json(request, financial_year_id, phase_slug, sphere_slug):
+    response_json = json.dumps(
+        homepage_data(financial_year_id, phase_slug, sphere_slug),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
+def homepage(request, financial_year_id, phase_slug, sphere_slug):
+    titles = {'theBudgetProcess', 'participate'}
+    videos_data = Video.group_by_video_id(titles)
+
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page': {
+            'layout': 'homepage',
+            'data_key': 'index',
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'dataset': homepage_data(financial_year_id, phase_slug, sphere_slug),
+                'videos': {'data': videos_data}
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'government_dataset_category.html', context=context)
+
