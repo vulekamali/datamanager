@@ -204,9 +204,9 @@ def department_list_csv(request, financial_year_id, spheres=['national', 'provin
     return response
 
 
-def department_list(request, financial_year_id):
+def department_list_data(financial_year_id):
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
-    context = {
+    page_data = {
         'financial_years': [],
         'selected_financial_year': selected_year.slug,
         'selected_tab': 'departments',
@@ -218,7 +218,7 @@ def department_list(request, financial_year_id):
 
     for year in FinancialYear.get_available_years():
         is_selected = year.slug == financial_year_id
-        context['financial_years'].append({
+        page_data['financial_years'].append({
             'id': year.slug,
             'is_selected': is_selected,
             'closest_match': {
@@ -228,7 +228,7 @@ def department_list(request, financial_year_id):
         })
 
     for sphere_name in ('national', 'provincial'):
-        context[sphere_name] = []
+        page_data[sphere_name] = []
         for government in selected_year.spheres.filter(slug=sphere_name).first().governments.all():
             departments = []
             for department in government.departments.all():
@@ -240,14 +240,13 @@ def department_list(request, financial_year_id):
                     'website_url': department.get_latest_website_url(),
                 })
             departments = sorted(departments, key=lambda d: d['vote_number'])
-            context[sphere_name].append({
+            page_data[sphere_name].append({
                 'name': government.name,
                 'slug': str(government.slug),
                 'departments': departments,
             })
 
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
+    return page_data
 
 
 def department_data(financial_year_id, sphere_slug, government_slug, department_slug):
@@ -1078,6 +1077,44 @@ def department_yaml(request, financial_year_id, sphere_slug, government_slug, de
 def department_json(request, financial_year_id, sphere_slug, government_slug, department_slug):
     response_json = json.dumps(
         department_data(financial_year_id, sphere_slug, government_slug, department_slug),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+        cls=DjangoJSONEncoder
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
+def department_list(request, financial_year_id):
+    page_data = department_list_data(financial_year_id)
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page': {
+            'layout': 'department_list',
+            'data_key': 'departments',
+            'financial_year': financial_year_id,
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'dataset': page_data
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'department_list.html', context=context)
+
+
+def department_list_yaml(request, financial_year_id):
+    page_data = department_list_data(financial_year_id)
+    response_yaml = yaml.safe_dump(page_data, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def department_list_json(request, financial_year_id):
+    response_json = json.dumps(
+        department_list_data(financial_year_id),
         sort_keys=True,
         indent=4,
         separators=(",", ": "),
