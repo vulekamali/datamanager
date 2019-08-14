@@ -136,6 +136,21 @@ urlpatterns = [
         cache_page(CACHE_SECS)(views.department_json),
         kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
 
+    url(r'^(?P<financial_year_id>[\w-]+)'
+        '/(?P<sphere_slug>[\w-]+)'
+        '/(?P<government_slug>[\w-]+)'
+        '/departments'
+        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_migrated)),
+    url(r'^(?P<financial_year_id>[\w-]+)'
+        '/(?P<sphere_slug>[\w-]+)'
+        '/(?P<government_slug>[\w-]+)'
+        '/departments'
+        '/(?P<department_slug>[\w-]+),json$', cache_page(CACHE_SECS)(views.department_json)),
+    url(r'^(?P<financial_year_id>[\w-]+)'
+        '/(?P<sphere_slug>[\w-]+)'
+        '/(?P<government_slug>[\w-]+)'
+        '/departments'
+        '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department_yaml)),
 ]
 
 if settings.DEBUG:

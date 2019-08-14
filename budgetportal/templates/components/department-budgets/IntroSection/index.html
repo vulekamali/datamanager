@@ -1,5 +1,6 @@
 {% load define_action %}
-{% if include.location == 'National' %}
+{% load markdownify %}
+{% if location == 'National' %}
   {% assign 'ENE' as short_estimate %}
   {% assign 'Estimates of National Expenditure' as long_estimate %}
 {% else %}
@@ -11,7 +12,7 @@
   <div class="IntroSection-textWrap">
     <div class="js-initIntroSection">
       <div class="IntroSection-text js-content">
-        {{ include.description | striptags }} {# markdownify #}
+        {{ description  | markdownify }}
       </div>
     </div>
   </div>
