@@ -1735,7 +1735,7 @@ class InfrastructureProjectPart(models.Model):
 
     def build_complete_expenditure(self):
         complete_expenditure = []
-        projects = InfrastructureProjectPart.objects.filter(budget_phase='MTEF', project_slug=self.project_slug)
+        projects = InfrastructureProjectPart.objects.filter(project_slug=self.project_slug)
         for project in projects:
             complete_expenditure.append(
                 self._build_expenditure_item(project)

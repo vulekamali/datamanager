@@ -419,7 +419,7 @@ def dataset_data(category_slug, dataset_slug):
 
 def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
-    infrastructure_projects = InfrastructureProjectPart.objects.filter(featured=True)
+    infrastructure_projects = InfrastructureProjectPart.objects.filter(featured=True).distinct('project_slug')
     if infrastructure_projects is None:
         raise Http404()
     projects = []
@@ -440,13 +440,11 @@ def infrastructure_projects_overview(request):
             'provinces': project.provinces.split(','),
             'total_budget': project.total_project_cost,
             'detail': project.get_url_path(),
-            'dataset_url': 'project.get_dataset().get_url_path()',  ##########
             'slug': project.get_url_path(),
             'page_title': '{} - vulekamali'.format(project.project_name),
             'department': {
                 'name': project.department,
                 'url': department_url,
-                'budget_document': 'project.get_budget_document_url()'  ##################
             },
             'nature_of_investment': project.nature_of_investment,
             'infrastructure_type': project.infrastructure_type,
@@ -487,12 +485,12 @@ def infrastructure_project_list(request):
     return render(request, "infrastructure_project_list.html", context=context)
 
 
-def infrastructure_project_detail(request, project_slug):
-    project = InfrastructureProject.get_project_from_resource(project_slug)
+def infrastructure_project_detail_data(project_slug):
+    project = InfrastructureProjectPart.objects.filter(project_slug=project_slug).first()
     if project is None:
         return HttpResponse(status=404)
     departments = Department.objects.filter(
-        slug=slugify(project.department_name),
+        slug=slugify(project.department),
         government__sphere__slug='national'
     )
     department_url = None
@@ -500,29 +498,68 @@ def infrastructure_project_detail(request, project_slug):
         department_url = departments[0].get_latest_department_instance().get_url_path()
 
     project = {
-        'dataset_url': InfrastructureProject.get_dataset().get_url_path(),
-        'description': project.description,
-        'selected_tab': 'infrastructure-projects',
+        'name': project.project_name,
+        'coordinates': project.clean_coordinates(project.gps_code),
+        'projected_budget': project.calculate_projected_expenditure(),
+        'stage': project.current_project_stage,
+        'description': project.project_description,
+        'provinces': project.provinces.split(','),
+        'total_budget': project.total_project_cost,
+        'detail': project.get_url_path(),
+        'dataset_url': project.get_dataset().get_url_path(),
         'slug': project.get_url_path(),
-        'title': '{} - vulekamali'.format(project.name),
-        'name': project.name,
-        'coordinates': project.cleaned_coordinates,
-        'projected_budget': project.projected_expenditure,
-        'stage': project.stage,
+        'page_title': '{} - vulekamali'.format(project.project_name),
         'department': {
-            'name': project.department_name,
+            'name': project.department,
             'url': department_url,
             'budget_document': project.get_budget_document_url()
         },
-        'provinces': project.get_provinces(),
-        'total_budget': project.total_budget,
         'nature_of_investment': project.nature_of_investment,
         'infrastructure_type': project.infrastructure_type,
-        'expenditure': sorted(project.complete_expenditure, key=lambda e: e['year'])
+        'expenditure': sorted(project.build_complete_expenditure(), key=lambda e: e['year'])
+    }
+    return {
+        'dataset_url': InfrastructureProjectPart.get_dataset().get_url_path(),
+        'projects': [project],
+        'description': 'Infrastructure projects in South Africa for 2019-20',
+        'slug': 'infrastructure-projects',
+        'selected_tab': 'infrastructure-projects',
+        'title': 'Infrastructure Projects - vulekamali',
     }
 
-    response_yaml = yaml.safe_dump(project, default_flow_style=False, encoding='utf-8')
+def infrastructure_project_detail_yaml(request, project_slug):
+    response = infrastructure_project_detail_data(project_slug)
+    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def infrastructure_project_detail_json(request, project_slug):
+    response_json = json.dumps(
+        infrastructure_project_detail_data(project_slug),
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
+def infrastructure_project_detail(request, project_slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = {
+        'page': {
+            'layout': 'infrastructure_project',
+            'data_key': 'dataset',
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'dataset': infrastructure_project_detail_data(project_slug),
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    }
+    return render(request, 'infrastructure_project.html', context=context)
 
 
 def openspending_csv(request):
