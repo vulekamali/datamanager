@@ -1,4 +1,4 @@
-from budgetportal.models import Department, Government, Sphere, InfrastructureProjectPart, InfrastructureProject
+from budgetportal.models import Department, Government, Sphere, InfrastructureProjectPart
 from django import forms, VERSION
 from django.core.exceptions import ValidationError
 from django.db.models import Q, NOT_PROVIDED
@@ -43,11 +43,10 @@ class CustomProvinceWidget(Widget):
     Helper class for converting gps_code fields on the InfrastructureProjectPart model.
     """
     def clean(self, value, row=None, *args, **kwargs):
-        logger.info("CLEAN")
         project_name = row['project_name']
         gps_code = row['gps_code']
-        cleaned_coordinates = InfrastructureProject.clean_coordinates(gps_code)
-        provinces = InfrastructureProject.get_provinces(
+        cleaned_coordinates = InfrastructureProjectPart.clean_coordinates(gps_code)
+        provinces = InfrastructureProjectPart.get_provinces(
             cleaned_coordinates=cleaned_coordinates,
             project_name=project_name
         )

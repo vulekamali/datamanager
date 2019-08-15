@@ -1613,108 +1613,18 @@ class InfrastructureProjectPart(models.Model):
     def __str__(self):
         return "{} ({} {})".format(self.project_slug, self.budget_phase, self.financial_year)
 
-
-class InfrastructureProject:
-    """ Represents an infrastructure project stored in CKAN """
-
-    def __init__(self, **kwargs):
-        self.records = kwargs.get('records')
-        self.name = self.records[0]['Project name']
-        self.slug = self.records[0]['Project slug']
-        self.stage = self.records[0]['Current project stage']
-        self.department_name = self.records[0]['Department']
-        self.description = self.records[0]['Project description']
-        self.total_budget = float(self.records[0]['Total project cost'])
-        self.nature_of_investment = self.records[0]['Nature of investment']
-        self.infrastructure_type = self.records[0]['Infrastructure type']
-        self.raw_coordinate_string = self.records[0]['GPS code']
-        self.complete_expenditure = self._build_complete_expenditure(self.records)
-        self.cleaned_coordinates = self.clean_coordinates(self.raw_coordinate_string)
-        self.projected_expenditure = self._calculate_projected_expenditure(self.records)
-
-    @classmethod
-    def get_dataset(cls):
-        """ Return the first dataset in the Infrastructure Projects group. """
-        query = {
-            'q': '',
-            'fq': ('+organization:"national-treasury"'
-                   '+vocab_spheres:"national"'
-                   '+groups:"infrastructure-projects"'),
-            'rows': 1,
-        }
-        response = ckan.action.package_search(**query)
-        logger.info(
-            "query %s\nreturned %d results",
-            pformat(query),
-            len(response['results'])
-        )
-        if response['results']:
-            return Dataset.from_package(response['results'][0])
-        else:
-            return None
-
-    @classmethod
-    def get_project_from_resource(cls, project_slug):
-        """ Uses first CSV resource in dataset """
-        dataset = cls.get_dataset()
-        if not dataset:
-            return None
-        resource = dataset.get_resource(format='CSV')
-        sql = '''
-                SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}'
-            '''.format(resource['id'], project_slug)
-        params = {'sql': sql}
-        project_result = requests.get(CKAN_DATASTORE_URL, params=params)
-        project_result.raise_for_status()
-        project_records = project_result.json()['result']['records']
-        if project_records:
-            return InfrastructureProject(records=project_records)
-        else:
-            return None
-
-    @classmethod
-    def get_featured_projects_from_resource(cls):
-        """ Uses first CSV resource in dataset """
-        dataset = cls.get_dataset()
-        if not dataset:
-            return None
-        resource = dataset.get_resource(format='CSV')
-        sql = '''
-                SELECT * FROM "{}" WHERE "Featured"='TRUE'
-            '''.format(resource['id'])
-
-        params = {'sql': sql}
-        projects_result = requests.get(CKAN_DATASTORE_URL, params=params)
-        projects_result.raise_for_status()
-        project_records = projects_result.json()['result']['records']
-
-        # Assume project names are unique within the subset of featured projects
-        unique_project_names = []
-        for obj in project_records:
-            if obj['Project name'] not in unique_project_names:
-                unique_project_names.append(obj['Project name'])
-
-        projects = []
-        for project_name in unique_project_names:
-            project_list = filter(lambda x: x['Project name'] == project_name, project_records)
-            projects.append(InfrastructureProject(records=project_list))
-        return projects
-
-    def get_url_path(self):
-        return "/infrastructure-projects/{}".format(self.slug)
-
     def get_budget_document_url(self, document_format='PDF'):
         """
         Returns budget-vote-document URL, for given format,
         if the latest department instance matches the project year
         """
         departments = Department.objects.filter(
-            slug=slugify(self.department_name),
+            slug=slugify(self.department),
             government__sphere__slug='national'
         )
         if departments:
             latest_dept = departments[0].get_latest_department_instance()
-            project_year = InfrastructureProject.get_dataset().package['financial_year'][0]
+            project_year = self.get_dataset().package['financial_year'][0]
             if latest_dept.get_financial_year().slug == project_year:
                 budget_dataset = latest_dept.get_dataset(group_name='budget-vote-documents')
                 if budget_dataset:
@@ -1723,15 +1633,15 @@ class InfrastructureProject:
                         return document_resource['url']
         return None
 
-    @staticmethod
-    def _calculate_projected_expenditure(records):
+    def get_url_path(self):
+        return "/infrastructure-projects/{}".format(self.project_slug)
+
+    def calculate_projected_expenditure(self):
         """ Calculate sum of predicted amounts from a list of records """
-        if not isinstance(records, list):
-            raise TypeError('Invalid type for projected expenditure calculation')
-        projected_records_for_project = filter(lambda x: x['Budget Phase'] == 'MTEF', records)
+        projected_records_for_project = InfrastructureProjectPart.objects.filter(budget_phase='MTEF', project_slug=self.project_slug)
         projected_expenditure = 0
         for project in projected_records_for_project:
-            projected_expenditure += float(project['Amount'])
+            projected_expenditure += float(project.amount)
         return projected_expenditure
 
     @staticmethod
@@ -1816,21 +1726,42 @@ class InfrastructureProject:
         return list(provinces)
 
     @staticmethod
-    def _build_expenditure_item(record):
+    def _build_expenditure_item(project):
         return {
-            'year': record['Financial Year'],
-            'amount': float(record['Amount']),
-            'budget_phase': record['Budget Phase']
+            'year': project.financial_year,
+            'amount': project.amount,
+            'budget_phase': project.budget_phase
         }
 
-    @classmethod
-    def _build_complete_expenditure(cls, records):
+    def build_complete_expenditure(self):
         complete_expenditure = []
-        for record in records:
+        projects = InfrastructureProjectPart.objects.filter(budget_phase='MTEF', project_slug=self.project_slug)
+        for project in projects:
             complete_expenditure.append(
-                cls._build_expenditure_item(record)
+                self._build_expenditure_item(project)
             )
         return complete_expenditure
+
+    @classmethod
+    def get_dataset(cls):
+        """ Return the first dataset in the Infrastructure Projects group. """
+        query = {
+            'q': '',
+            'fq': ('+organization:"national-treasury"'
+                   '+vocab_spheres:"national"'
+                   '+groups:"infrastructure-projects"'),
+            'rows': 1,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nreturned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        if response['results']:
+            return Dataset.from_package(response['results'][0])
+        else:
+            return None
 
 
 class Language(models.Model):

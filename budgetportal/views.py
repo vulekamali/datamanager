@@ -10,9 +10,9 @@ from django.views import View
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
-from budgetportal.models import Video, Event
+from budgetportal.models import Video, Event, InfrastructureProjectPart
 from budgetportal.openspending import PAGE_SIZE
-from models import FinancialYear, Sphere, Department, InfrastructureProject
+from models import FinancialYear, Sphere, Department, InfrastructureProjectPart
 from datasets import Dataset, Category
 from summaries import (
     get_preview_page,
@@ -419,43 +419,42 @@ def dataset_data(category_slug, dataset_slug):
 
 def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
-    infrastructure_projects = InfrastructureProject.get_featured_projects_from_resource()
+    infrastructure_projects = InfrastructureProjectPart.objects.filter(featured=True)
     if infrastructure_projects is None:
         raise Http404()
     projects = []
     for project in infrastructure_projects:
         departments = Department.objects.filter(
-            slug=slugify(project.department_name),
+            slug=slugify(project.department),
             government__sphere__slug='national'
         )
         department_url = None
         if departments:
             department_url = departments[0].get_latest_department_instance().get_url_path()
-
         projects.append({
-            'name': project.name,
-            'coordinates': project.cleaned_coordinates,
-            'projected_budget': project.projected_expenditure,
-            'stage': project.stage,
-            'description': project.description,
-            'provinces': project.get_provinces(),
-            'total_budget': project.total_budget,
+            'name': project.project_name,
+            'coordinates': project.clean_coordinates(project.gps_code),
+            'projected_budget': project.calculate_projected_expenditure(),
+            'stage': project.current_project_stage,
+            'description': project.project_description,
+            'provinces': project.provinces.split(','),
+            'total_budget': project.total_project_cost,
             'detail': project.get_url_path(),
-            'dataset_url': InfrastructureProject.get_dataset().get_url_path(),
+            'dataset_url': 'project.get_dataset().get_url_path()',  ##########
             'slug': project.get_url_path(),
-            'page_title': '{} - vulekamali'.format(project.name),
+            'page_title': '{} - vulekamali'.format(project.project_name),
             'department': {
-                'name': project.department_name,
+                'name': project.department,
                 'url': department_url,
-                'budget_document': project.get_budget_document_url()
+                'budget_document': 'project.get_budget_document_url()'  ##################
             },
             'nature_of_investment': project.nature_of_investment,
             'infrastructure_type': project.infrastructure_type,
-            'expenditure': sorted(project.complete_expenditure, key=lambda e: e['year'])
+            'expenditure': sorted(project.build_complete_expenditure(), key=lambda e: e['year'])
         })
     projects = sorted(projects, key=lambda p: p['name'])
     return {
-        'dataset_url': InfrastructureProject.get_dataset().get_url_path(),
+        'dataset_url': InfrastructureProjectPart.get_dataset().get_url_path(),
         'projects': projects,
         'description': 'Infrastructure projects in South Africa for 2019-20',
         'slug': 'infrastructure-projects',

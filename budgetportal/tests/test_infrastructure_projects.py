@@ -31,19 +31,19 @@ class ProjectedExpenditureTestCase(TestCase):
         ]
 
     def test_success(self):
-        projected_expenditure = InfrastructureProject._calculate_projected_expenditure(
+        projected_expenditure = InfrastructureProject.calculate_projected_expenditure(
             self.fake_valid_records
         )
         self.assertEqual(projected_expenditure, 600)
 
     def test_empty_records_returns_zero(self):
-        projected_expenditure = InfrastructureProject._calculate_projected_expenditure([])
+        projected_expenditure = InfrastructureProject.calculate_projected_expenditure([])
         self.assertEqual(projected_expenditure, 0)
 
     def test_string_raises_type_error(self):
         self.assertRaises(
             TypeError,
-            InfrastructureProject._calculate_projected_expenditure,
+            InfrastructureProject.calculate_projected_expenditure,
             'test string raises exception'
         )
 
@@ -148,7 +148,7 @@ class ExpenditureTestCase(TestCase):
         )
 
     def test_success_build_complete_expenditure(self):
-        complete_expenditure = InfrastructureProject._build_complete_expenditure(self.fake_valid_records)
+        complete_expenditure = InfrastructureProject.build_complete_expenditure(self.fake_valid_records)
         self.assertIn(
             self.expected_output_2030,
             complete_expenditure
