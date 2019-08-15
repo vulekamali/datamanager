@@ -13,11 +13,13 @@
       {{ title | truncatechars:80}}
     </a>
     <div class="Preview-content">
+    {% if excerpt %}
       {% if full_height == "true" %}
         {{ excerpt }}
       {% else %}
         {{ excerpt | truncatechars:170}}
       {% endif %}
+    {% endif %}
     </div>
 
     {% if prompt %}
@@ -29,11 +31,13 @@
     <div class="Preview-heading">
       {{ title | truncatechars:70}}</div>
     <div class="Preview-content">
+    {% if excerpt %}
       {% if full_height == "true" %}
         {{ excerpt }}
       {% else %}
         {{ excerpt | truncatechars:190}}
       {% endif %}
+    {% endif %}
     </div>
   {% endif %}
 

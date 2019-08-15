@@ -1,8 +1,8 @@
 {% load define_action %}
-
+{% assign ""|add:source_type|add:" "|add:year as source_text %}
 {% assign "Learn more about the MTEF in the "|add:source_type|add:" as PDF" as pdf_text %}
-
-{% assign "Learn more about the MTEF in the "|add:source_type|add:" as PDF" as excel_text %}
+{% assign "Learn more about the MTEF in the "|add:source_type|add:" as Excel" as excel_text %}
+{% assign "Dataset Guide for "|add:source_type as guide_text %}
 
 <div class="ExpenditurePhaseSection" id="expenditure">
     <h3 class="Title Title--section">Budgeted and actual expenditure comparison</h3>

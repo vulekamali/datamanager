@@ -704,7 +704,6 @@ def glossary(request):
 
 def faq(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    faq_file_path = str(settings.ROOT_DIR.path('_data/faq.yaml'))
     context = {
         'page': {
             'layout': 'faq',
@@ -713,7 +712,11 @@ def faq(request):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'faq': read_object_from_yaml(faq_file_path),
+                'faq': {
+                    'title': 'FAQ - vulekamali',
+                    'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+                    'selected_tab': 'faq'
+                },
             },
             'latest_year': '2019-20'
         },
