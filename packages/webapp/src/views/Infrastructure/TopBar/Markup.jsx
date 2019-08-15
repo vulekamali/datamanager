@@ -281,8 +281,8 @@ const Markup = (props) => {
             {whiteTextRendering}
           </TextContainer>
           <TwoArrowButtons>
-            {buttonMarkup(id <= 0, null, true, previousId)}
-            {buttonMarkup(id + 1 >= amount, null, null, nextId)}
+            {!details ? buttonMarkup(id <= 0, null, true, previousId) : null}
+            {!details ? buttonMarkup(id + 1 >= amount, null, null, nextId) : null}
           </TwoArrowButtons>
         </NavItemsWrapper>
       </Wrapper>
