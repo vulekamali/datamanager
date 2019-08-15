@@ -2,7 +2,7 @@ import mock
 import yaml
 from django.test import TestCase, LiveServerTestCase, Client
 
-from budgetportal.models import InfrastructureProject, MAPIT_POINT_API_URL, CKAN_DATASTORE_URL
+from budgetportal.models import InfrastructureProjectPart, MAPIT_POINT_API_URL, CKAN_DATASTORE_URL
 import json
 from mock import Mock
 
@@ -31,19 +31,19 @@ class ProjectedExpenditureTestCase(TestCase):
         ]
 
     def test_success(self):
-        projected_expenditure = InfrastructureProject.calculate_projected_expenditure(
+        projected_expenditure = InfrastructureProjectPart.calculate_projected_expenditure(
             self.fake_valid_records
         )
         self.assertEqual(projected_expenditure, 600)
 
     def test_empty_records_returns_zero(self):
-        projected_expenditure = InfrastructureProject.calculate_projected_expenditure([])
+        projected_expenditure = InfrastructureProjectPart.calculate_projected_expenditure([])
         self.assertEqual(projected_expenditure, 0)
 
     def test_string_raises_type_error(self):
         self.assertRaises(
             TypeError,
-            InfrastructureProject.calculate_projected_expenditure,
+            InfrastructureProjectPart.calculate_projected_expenditure,
             'test string raises exception'
         )
 
@@ -53,7 +53,7 @@ class CoordinatesTestCase(TestCase):
 
     def test_success_simple_format(self):
         raw_coord_string = '-26.378582,27.654933'
-        cleaned_coord_object = InfrastructureProject._parse_coordinate(
+        cleaned_coord_object = InfrastructureProjectPart._parse_coordinate(
             raw_coord_string
         )
         self.assertEqual(
@@ -68,7 +68,7 @@ class CoordinatesTestCase(TestCase):
         invalid_coordinate = 25
         self.assertRaises(
             TypeError,
-            InfrastructureProject._parse_coordinate,
+            InfrastructureProjectPart._parse_coordinate,
             invalid_coordinate
         )
 
@@ -76,13 +76,13 @@ class CoordinatesTestCase(TestCase):
         invalid_coordinate = [25, 23]
         self.assertRaises(
             TypeError,
-            InfrastructureProject._parse_coordinate,
+            InfrastructureProjectPart._parse_coordinate,
             invalid_coordinate
         )
 
     def test_success_multiple_coordinates(self):
         raw_coordinate_string = '-26.378582,27.654933 and -22.111222,23.333444'
-        coords = InfrastructureProject.clean_coordinates(raw_coordinate_string)
+        coords = InfrastructureProjectPart.clean_coordinates(raw_coordinate_string)
         self.assertIn(
             {
                 'latitude': -26.378582,
@@ -100,7 +100,7 @@ class CoordinatesTestCase(TestCase):
 
     def test_empty_response_for_invalid_value(self):
         raw_coordinate_string = 'test string with, no coords and'
-        coords = InfrastructureProject.clean_coordinates(raw_coordinate_string)
+        coords = InfrastructureProjectPart.clean_coordinates(raw_coordinate_string)
         self.assertEqual(coords, [])
 
 
@@ -132,7 +132,7 @@ class ExpenditureTestCase(TestCase):
         }
 
     def test_success_build_expenditure_item(self):
-        expenditure_item = InfrastructureProject._build_expenditure_item(self.fake_valid_records[0])
+        expenditure_item = InfrastructureProjectPart._build_expenditure_item(self.fake_valid_records[0])
         self.assertEqual(
             expenditure_item,
             self.expected_output_2030
@@ -141,14 +141,14 @@ class ExpenditureTestCase(TestCase):
     def test_failure_missing_fields(self):
         self.assertRaises(
             KeyError,
-            InfrastructureProject._build_expenditure_item,
+            InfrastructureProjectPart._build_expenditure_item,
             {
                 'Not enough keys': 'to parse successfully'
             }
         )
 
     def test_success_build_complete_expenditure(self):
-        complete_expenditure = InfrastructureProject.build_complete_expenditure(self.fake_valid_records)
+        complete_expenditure = InfrastructureProjectPart.build_complete_expenditure(self.fake_valid_records)
         self.assertIn(
             self.expected_output_2030,
             complete_expenditure
@@ -234,16 +234,16 @@ class ProvinceTestCase(TestCase):
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_success_one_result(self, mock_get):
-        province = InfrastructureProject._get_province_from_coord(self.test_coordinates_one)
+        province = InfrastructureProjectPart._get_province_from_coord(self.test_coordinates_one)
         self.assertEqual(province, 'Fake Province 1')
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_success_no_results(self, mock_get):
-        province = InfrastructureProject._get_province_from_coord(self.test_coordinates_two)
+        province = InfrastructureProjectPart._get_province_from_coord(self.test_coordinates_two)
         self.assertEqual(province, None)
 
     def test_success_province_from_name(self):
-        province = InfrastructureProject._get_province_from_project_name('Eastern Cape: A New Test')
+        province = InfrastructureProjectPart._get_province_from_project_name('Eastern Cape: A New Test')
         self.assertEqual(province, 'Eastern Cape')
 
 
@@ -278,13 +278,13 @@ class OverviewIntegrationTest(LiveServerTestCase):
             {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2051'}
         ]
 
-    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=None)
+    @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=None)
     def test_missing_dataset_returns_404(self, mock_dataset):
         c = Client()
         response = c.get('/infrastructure-projects.yaml')
         self.assertEqual(response.status_code, 404)
 
-    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
+    @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
     @mock.patch('requests.get', return_value=empty_ckan_response)
     def test_success_empty_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
@@ -298,7 +298,7 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(content['slug'], 'infrastructure-projects')
         self.assertEqual(content['title'], 'Infrastructure Projects - vulekamali')
 
-    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
+    @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
@@ -352,13 +352,13 @@ class DetailIntegrationTest(LiveServerTestCase):
         self.project_slug = 'standard-fake-project'
         self.department_slug = 'health'
 
-    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=None)
+    @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=None)
     def test_missing_dataset_returns_404(self, mock_dataset):
         c = Client()
         response = c.get('/infrastructure-projects/{}-{}.yaml'.format(self.department_slug, self.project_slug))
         self.assertEqual(response.status_code, 404)
 
-    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
+    @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
     @mock.patch('requests.get', return_value=empty_ckan_response)
     def test_empty_project_records_returns_404(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
@@ -366,7 +366,7 @@ class DetailIntegrationTest(LiveServerTestCase):
         response = c.get('/infrastructure-projects/{}-{}.yaml'.format(self.department_slug, self.project_slug))
         self.assertEqual(response.status_code, 404)
 
-    @mock.patch('budgetportal.models.InfrastructureProject.get_dataset', return_value=MockDataset())
+    @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
