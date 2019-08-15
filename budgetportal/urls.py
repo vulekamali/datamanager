@@ -66,7 +66,7 @@ urlpatterns = [
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json)),
 
-    # Home Page
+    # Financial year home page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
         cache_page(CACHE_SECS)(views.year_home)),
 
@@ -105,7 +105,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
-    # Budget Portal
+    # Simple pages
     url(r'^about/?$', about, name="about"),
     url(r'^events/?$', events, name="events"),
     url(r'^videos/?$', videos, name="videos"),

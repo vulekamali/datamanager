@@ -1590,6 +1590,26 @@ class Programme(models.Model):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
+class InfrastructureProjectPart(models.Model):
+    sphere = models.CharField(max_length=255)
+    department = models.CharField(max_length=255)
+    sector = models.CharField(max_length=255)
+    project_name = models.CharField(max_length=255)
+    project_description = models.TextField()
+    gps_code = models.CharField(max_length=255)
+    nature_of_investment = models.CharField(max_length=255)
+    infrastructure_type = models.CharField(max_length=255)
+    current_project_stage = models.CharField(max_length=255)
+    sip_category = models.CharField(max_length=255)
+    total_project_cost = models.IntegerField()
+    br_featured = models.CharField(max_length=255)
+    featured = models.BooleanField()
+    financial_year = models.IntegerField()
+    budget_phase = models.CharField(max_length=255)
+    amount = models.IntegerField()
+    project_slug = models.CharField(max_length=255)
+
+
 class InfrastructureProject:
     """ Represents an infrastructure project stored in CKAN """
 
