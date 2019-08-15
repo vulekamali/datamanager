@@ -82,7 +82,7 @@ class CoordinatesTestCase(TestCase):
 
     def test_success_multiple_coordinates(self):
         raw_coordinate_string = '-26.378582,27.654933 and -22.111222,23.333444'
-        coords = InfrastructureProject._clean_coordinates(raw_coordinate_string)
+        coords = InfrastructureProject.clean_coordinates(raw_coordinate_string)
         self.assertIn(
             {
                 'latitude': -26.378582,
@@ -100,7 +100,7 @@ class CoordinatesTestCase(TestCase):
 
     def test_empty_response_for_invalid_value(self):
         raw_coordinate_string = 'test string with, no coords and'
-        coords = InfrastructureProject._clean_coordinates(raw_coordinate_string)
+        coords = InfrastructureProject.clean_coordinates(raw_coordinate_string)
         self.assertEqual(coords, [])
 
 

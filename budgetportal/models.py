@@ -1596,18 +1596,22 @@ class InfrastructureProjectPart(models.Model):
     sector = models.CharField(max_length=255)
     project_name = models.CharField(max_length=255)
     project_description = models.TextField()
-    gps_code = models.CharField(max_length=255)
     nature_of_investment = models.CharField(max_length=255)
     infrastructure_type = models.CharField(max_length=255)
     current_project_stage = models.CharField(max_length=255)
     sip_category = models.CharField(max_length=255)
-    total_project_cost = models.IntegerField()
     br_featured = models.CharField(max_length=255)
     featured = models.BooleanField()
-    financial_year = models.IntegerField()
     budget_phase = models.CharField(max_length=255)
-    amount = models.IntegerField()
     project_slug = models.CharField(max_length=255)
+    amount = models.BigIntegerField(default=0)
+    financial_year = models.BigIntegerField(default=0)
+    total_project_cost = models.BigIntegerField(default=0)
+    provinces = models.CharField(max_length=510, default="")
+    gps_code = models.CharField(max_length=255, default="")
+
+    def __str__(self):
+        return "{} ({} {})".format(self.project_slug, self.budget_phase, self.financial_year)
 
 
 class InfrastructureProject:
@@ -1625,7 +1629,7 @@ class InfrastructureProject:
         self.infrastructure_type = self.records[0]['Infrastructure type']
         self.raw_coordinate_string = self.records[0]['GPS code']
         self.complete_expenditure = self._build_complete_expenditure(self.records)
-        self.cleaned_coordinates = self._clean_coordinates(self.raw_coordinate_string)
+        self.cleaned_coordinates = self.clean_coordinates(self.raw_coordinate_string)
         self.projected_expenditure = self._calculate_projected_expenditure(self.records)
 
     @classmethod
@@ -1743,7 +1747,7 @@ class InfrastructureProject:
         return cleaned_coordinate
 
     @classmethod
-    def _clean_coordinates(cls, raw_coordinate_string):
+    def clean_coordinates(cls, raw_coordinate_string):
         cleaned_coordinates = []
         try:
             if 'and' in raw_coordinate_string:
@@ -1792,19 +1796,20 @@ class InfrastructureProject:
                 return name
         return None
 
-    def get_provinces(self):
+    @classmethod
+    def get_provinces(cls, cleaned_coordinates=None, project_name=""):
         """ Returns a list of provinces based on values in self.coordinates """
         provinces = set()
-        if self.cleaned_coordinates:
-            for c in self.cleaned_coordinates:
-                province = self._get_province_from_coord(c)
+        if cleaned_coordinates:
+            for c in cleaned_coordinates:
+                province = cls._get_province_from_coord(c)
                 if province:
                     provinces.add(province)
                 else:
                     logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
-                                   format(self.name, c))
+                                   format(project_name, c))
         else:
-            province = self._get_province_from_project_name(self.name)
+            province = cls._get_province_from_project_name(project_name)
             if province:
                 logger.info("Found province {} in project name".format(province))
                 provinces.add(province)
@@ -1856,6 +1861,7 @@ class Event(models.Model):
 
     def __str__(self):
         return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
+
 
 class Video(models.Model):
     title_id = models.CharField(max_length=255)
