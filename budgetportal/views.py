@@ -487,8 +487,12 @@ def infrastructure_project_list(request):
 
 def infrastructure_project_detail_data(project_slug):
     project = InfrastructureProjectPart.objects.filter(project_slug=project_slug).first()
-    if project is None:
+    if not project:
         return HttpResponse(status=404)
+    dataset = project.get_dataset()
+    if not dataset:
+        return HttpResponse(status=404)
+
     departments = Department.objects.filter(
         slug=slugify(project.department),
         government__sphere__slug='national'
@@ -506,7 +510,7 @@ def infrastructure_project_detail_data(project_slug):
         'provinces': project.provinces.split(','),
         'total_budget': project.total_project_cost,
         'detail': project.get_url_path(),
-        'dataset_url': project.get_dataset().get_url_path(),
+        'dataset_url': dataset.get_url_path(),
         'slug': project.get_url_path(),
         'page_title': '{} - vulekamali'.format(project.project_name),
         'department': {
@@ -527,15 +531,23 @@ def infrastructure_project_detail_data(project_slug):
         'title': 'Infrastructure Projects - vulekamali',
     }
 
+
 def infrastructure_project_detail_yaml(request, project_slug):
     response = infrastructure_project_detail_data(project_slug)
+    if isinstance(response, HttpResponse):
+        return response
+
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def infrastructure_project_detail_json(request, project_slug):
+    response = infrastructure_project_detail_data(project_slug)
+    if isinstance(response, HttpResponse):
+        return response
+
     response_json = json.dumps(
-        infrastructure_project_detail_data(project_slug),
+        response,
         sort_keys=True,
         indent=4,
         separators=(",", ": "),

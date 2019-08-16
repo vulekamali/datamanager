@@ -133,8 +133,10 @@ urlpatterns = [
     url(r"^infrastructure-projects/?$", views.infrastructure_project_list, name="infrastructure-project-list"),
     url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_yaml)),
     url(r'^json/infrastructure-projects.json$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)),
-    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
     url(r'^json/infrastructure-projects/(?P<project_slug>[\w-]+).json$', cache_page(CACHE_SECS)(views.infrastructure_project_detail_json)),
+    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
+    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$',
+        cache_page(CACHE_SECS)(views.infrastructure_project_detail_yaml)),
 
     # Department List
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'

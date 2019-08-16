@@ -25,7 +25,7 @@ class ProjectedExpenditureTestCase(TestCase):
 
     def test_success(self):
         projected_expenditure = self.project.calculate_projected_expenditure()
-        self.assertEqual(projected_expenditure, 600)
+        self.assertEqual(projected_expenditure, 5688808000.0)
 
 
 class CoordinatesTestCase(TestCase):
@@ -106,7 +106,7 @@ class ExpenditureTestCase(TestCase):
         )
 
     def test_success_build_complete_expenditure(self):
-        complete_expenditure = InfrastructureProjectPart.build_complete_expenditure(self.fake_valid_records)
+        complete_expenditure = self.project.build_complete_expenditure()
         self.assertIn(
             {
                 'year': self.project.financial_year,
@@ -140,24 +140,6 @@ def mocked_requests_get(*args, **kwargs):
     elif args[0] == MAPIT_POINT_API_URL.format(24.312526, -26.515232):
         return MockResponse(
             {},
-            200
-        )
-    elif args[0] == CKAN_DATASTORE_URL and 'health-standard-fake-project' in kwargs['params']['sql']:
-        return MockResponse(
-            {
-                'result': {
-                    'records': MOCK_DATA['detail_records']
-                }
-            },
-            200
-        )
-    elif args[0] == CKAN_DATASTORE_URL:
-        return MockResponse(
-            {
-                'result': {
-                    'records': MOCK_DATA['overview_records']
-                }
-            },
             200
         )
     elif args[0] == MAPIT_POINT_API_URL.format(29.45397, -31.45019):
@@ -297,6 +279,10 @@ class OverviewIntegrationTest(LiveServerTestCase):
 
 class DetailIntegrationTest(LiveServerTestCase):
 
+    fixtures = [
+        'test-infrastructure-pages'
+    ]
+
     def setUp(self):
         self.project = InfrastructureProjectPart.objects.all().first()
 
@@ -307,34 +293,25 @@ class DetailIntegrationTest(LiveServerTestCase):
         self.assertEqual(response.status_code, 404)
 
     @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
-    @mock.patch('requests.get', return_value=empty_ckan_response)
-    def test_empty_project_records_returns_404(self, mock_dataset, mock_get):
-        """ Test that it exists and that the correct years are linked. """
-        c = Client()
-        response = c.get('/infrastructure-projects/{}.yaml'.format(self.project.project_slug))
-        self.assertEqual(response.status_code, 404)
-
-    @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
         response = c.get('/infrastructure-projects/{}.yaml'.format(self.project.project_slug))
-        content = yaml.load(response.content)
+        content = yaml.load(response.content)['projects'][0]
 
-        self.assertEqual(content['dataset_url'], '')
-        self.assertEqual(content['description'], 'Just a project description')
+        self.assertEqual(content['dataset_url'], 'fake path')
+        self.assertEqual(content['description'], self.project.project_description)
         self.assertEqual(content['infrastructure_type'], self.project.infrastructure_type)
-        self.assertIn({'latitude': -31.45019, 'longitude': 29.45397}, content['coordinates'])
-        self.assertEqual(len(content['coordinates']), 1)
+        self.assertEqual(len(content['coordinates']), 0)
         self.assertEqual(len(content['expenditure']), 7)
-        for item in self.expected_expenditure:
+        for item in self.project.build_complete_expenditure():
             self.assertIn(item, content['expenditure'])
-        self.assertEqual(content['nature_of_investment'], 'standard fake investment')
-        self.assertEqual(content['title'], 'Standard fake project - vulekamali')
-        self.assertEqual(content['projected_budget'], 300.0)
-        self.assertIn('Fake Province 3', content['provinces'])
+        self.assertEqual(content['nature_of_investment'], self.project.nature_of_investment)
+        self.assertEqual(content['page_title'], '{} - vulekamali'.format(self.project.project_name))
+        self.assertEqual(content['projected_budget'], self.project.calculate_projected_expenditure())
         self.assertEqual(len(content['provinces']), 1)
-        self.assertEqual(content['slug'], '/infrastructure-projects/health-standard-fake-project')
-        self.assertEqual(content['stage'], 'Design')
-        self.assertEqual(content['total_budget'], 100.0)
+        self.assertIn('', content['provinces'][0])
+        self.assertEqual(content['slug'], '/infrastructure-projects/{}'.format(self.project.project_slug))
+        self.assertEqual(content['stage'], self.project.current_project_stage)
+        self.assertEqual(content['total_budget'], self.project.total_project_cost)
