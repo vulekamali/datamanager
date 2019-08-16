@@ -10,8 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -22,6 +22,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'true') == 'true'
 # THINK VERY CAREFULY before using the TEST variable.
 # Tests should aim to be as production-like as possible.
 import sys
+
 if 'test' in sys.argv or 'test_coverage' in sys.argv:
     TEST = True
 else:
@@ -30,7 +31,7 @@ else:
 import environ
 
 ROOT_DIR = (
-    environ.Path(__file__) - 2
+        environ.Path(__file__) - 2
 )
 PROJ_DIR = ROOT_DIR.path("budgetportal")
 
@@ -43,7 +44,6 @@ else:
 GOOGLE_ANALYTICS_ID = "UA-93649482-8"
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -103,6 +103,7 @@ INTERNAL_IPS = ['127.0.0.1']
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 import dj_database_url
+
 db_config = dj_database_url.config(default='postgres://budgetportal@localhost/budgetportal')
 db_config['ATOMIC_REQUESTS'] = True
 
@@ -134,8 +135,8 @@ else:
         }
     }
 
-
 from ckanapi import RemoteCKAN
+
 CKAN_URL = os.environ.get('CKAN_URL', 'https://treasurydata.openup.org.za')
 CKAN_API_KEY = os.environ.get('CKAN_API_KEY', None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
@@ -227,7 +228,6 @@ STATICFILES_DIRS = [
     str(ROOT_DIR.path("packages/webapp/build/static/js")),
 ]
 
-
 ASSETS_DEBUG = DEBUG
 ASSETS_URL_EXPIRE = False
 
@@ -284,7 +284,6 @@ PIPELINE = {
 if not TEST:
     STATICFILES_STORAGE = 'budgetportal.pipeline.GzipManifestPipelineStorage'
 
-
 # Logging
 
 LOGSTASH_URL = os.environ.get('LOGSTASH_URL', '')
@@ -330,7 +329,7 @@ LOGGING = {
     },
     'loggers': {
         'budgetportal': {
-           'level': 'DEBUG' if DEBUG else 'INFO',
+            'level': 'DEBUG' if DEBUG else 'INFO',
         },
         'django': {
             'level': 'DEBUG' if DEBUG else 'INFO',
@@ -341,12 +340,29 @@ LOGGING = {
 Q_CLUSTER = {
     'name': 'Something',
     'workers': 1,
-    'timeout': 30*60,     # Timeout a task after this many seconds
+    'timeout': 30 * 60,  # Timeout a task after this many seconds
     'retry': 5,
     'queue_limit': 1,
     'bulk': 1,
-    'orm': 'default',     # Use Django ORM as storage backend
-    'poll': 10,           # Check for queued tasks this frequently (seconds)
+    'orm': 'default',  # Use Django ORM as storage backend
+    'poll': 10,  # Check for queued tasks this frequently (seconds)
     'save_limit': 0,
-    'ack_failures': True, # Dequeue failed tasks
+    'ack_failures': True,  # Dequeue failed tasks
 }
+
+MARKDOWNIFY_WHITELIST_TAGS = [
+    'a',
+    'abbr',
+    'acronym',
+    'b',
+    'blockquote',
+    'em',
+    'i',
+    'li',
+    'ol',
+    'p',
+    'strong',
+    'ul',
+    'h1',
+    'h2'
+]
