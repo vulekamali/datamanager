@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0025_auto_20190815_0955'),
+        ('budgetportal', '0025_add-infraproject-bigint-fields'),
     ]
 
     operations = [

@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0024_auto_20190815_0954'),
+        ('budgetportal', '0024_remove-infraproject-fields'),
     ]
 
     operations = [

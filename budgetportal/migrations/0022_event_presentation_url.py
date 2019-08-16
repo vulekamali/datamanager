@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0021_auto_20190813_1118'),
+        ('budgetportal', '0021_edit-event-fields'),
     ]
 
     operations = [

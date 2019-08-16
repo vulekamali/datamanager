@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0016_auto_20190813_0812'),
+        ('budgetportal', '0016_add-language'),
     ]
 
     operations = [

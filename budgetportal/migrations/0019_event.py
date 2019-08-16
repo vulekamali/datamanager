@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0018_auto_20190813_0820'),
+        ('budgetportal', '0018_rename-language-on-video'),
     ]
 
     operations = [

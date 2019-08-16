@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0015_video'),
+        ('budgetportal', '0015_add-video'),
     ]
 
     operations = [
