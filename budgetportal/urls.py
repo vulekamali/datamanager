@@ -99,23 +99,18 @@ urlpatterns = [
 
     # Dataset landing page
     url(r'^datasets/?$', dataset_landing_page, name="dataset-landing-page"),
-    url(r'^datasets.json$', dataset_landing_page_json, name="dataset-landing-page-json"),
     url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_landing_page_yaml)),
 
     url(r'^datasets/contributed/?$', contributed_datasets_list, name="contributed-datasets"),
-    url(r'^datasets/contributed.json$', contributed_datasets_list_json, name="contributed-datasets-json"),
 
     url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', contributed_dataset, name="contributed-dataset"),
-    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+).json$', contributed_dataset_json, name="contributed-dataset"),
 
     # Dataset categories
     url(r'^datasets/(?P<category_slug>[-\w]+)/?$', dataset_category_migrated, name="dataset-category"),
-    url(r'^datasets/(?P<category_slug>[-\w]+).json?$', dataset_category_json, name="dataset-category-json"),
     url(r'^datasets/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category_yaml)),
 
     # Detaset detail
     url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', dataset_migrated, name="dataset"),
-    url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+).json?$', dataset_json, name="dataset-json"),
     url(r'^datasets/(?P<category_slug>[\w-]+)/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_yaml)),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', search_result, name="search-result"),
@@ -131,8 +126,6 @@ urlpatterns = [
         '/departments', cache_page(CACHE_SECS)(views.department_list)),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list_yaml)),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/departments.json', cache_page(CACHE_SECS)(views.department_list_json)),
     # Department detail
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
         cache_page(CACHE_SECS)(views.department_migrated),
@@ -140,20 +133,12 @@ urlpatterns = [
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+).yaml$',
         cache_page(CACHE_SECS)(views.department_yaml),
         kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+).json',
-        cache_page(CACHE_SECS)(views.department_json),
-        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
 
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
         '/departments'
         '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_migrated)),
-    url(r'^(?P<financial_year_id>[\w-]+)'
-        '/(?P<sphere_slug>[\w-]+)'
-        '/(?P<government_slug>[\w-]+)'
-        '/departments'
-        '/(?P<department_slug>[\w-]+),json$', cache_page(CACHE_SECS)(views.department_json)),
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'

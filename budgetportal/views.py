@@ -862,16 +862,6 @@ def dataset_landing_page_yaml(request):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset_landing_page_json(request):
-    response_json = json.dumps(
-        dataset_category_list_data(),
-        sort_keys=True,
-        indent=4,
-        separators=(",", ": "),
-    )
-    return HttpResponse(response_json, content_type="application/json")
-
-
 def dataset_landing_page(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
@@ -897,17 +887,6 @@ def dataset_category_yaml(request, category_slug):
     response = dataset_category_data(category_slug)
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def dataset_category_json(request, category_slug):
-    response_json = json.dumps(
-        dataset_category_data(category_slug),
-        sort_keys=True,
-        indent=4,
-        separators=(",", ": "),
-        cls=DjangoJSONEncoder
-    )
-    return HttpResponse(response_json, content_type="application/json")
 
 
 def dataset_category_migrated(request, category_slug):
@@ -936,17 +915,6 @@ def dataset_yaml(request, category_slug, dataset_slug):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset_json(request, category_slug, dataset_slug):
-    response_json = json.dumps(
-        dataset_data(category_slug, dataset_slug),
-        sort_keys=True,
-        indent=4,
-        separators=(",", ": "),
-        cls=DjangoJSONEncoder
-    )
-    return HttpResponse(response_json, content_type="application/json")
-
-
 def dataset_migrated(request, category_slug, dataset_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
@@ -973,17 +941,6 @@ def contributed_datasets_list_yaml(request):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def contributed_datasets_list_json(request):
-    response_json = json.dumps(
-        dataset_category_data('contributed'),
-        sort_keys=True,
-        indent=4,
-        separators=(",", ": "),
-        cls=DjangoJSONEncoder
-    )
-    return HttpResponse(response_json, content_type="application/json")
-
-
 def contributed_datasets_list(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
@@ -1007,17 +964,6 @@ def contributed_dataset_yaml(request, dataset_slug):
     response = dataset_data('contributed', dataset_slug)
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def contributed_dataset_json(request, dataset_slug):
-    response_json = json.dumps(
-        dataset_data('contributed', dataset_slug),
-        sort_keys=True,
-        indent=4,
-        separators=(",", ": "),
-        cls=DjangoJSONEncoder
-    )
-    return HttpResponse(response_json, content_type="application/json")
 
 
 def contributed_dataset(request, dataset_slug):
@@ -1074,17 +1020,6 @@ def department_yaml(request, financial_year_id, sphere_slug, government_slug, de
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def department_json(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    response_json = json.dumps(
-        department_data(financial_year_id, sphere_slug, government_slug, department_slug),
-        sort_keys=True,
-        indent=4,
-        separators=(",", ": "),
-        cls=DjangoJSONEncoder
-    )
-    return HttpResponse(response_json, content_type="application/json")
-
-
 def department_list(request, financial_year_id):
     page_data = department_list_data(financial_year_id)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
@@ -1110,14 +1045,3 @@ def department_list_yaml(request, financial_year_id):
     page_data = department_list_data(financial_year_id)
     response_yaml = yaml.safe_dump(page_data, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def department_list_json(request, financial_year_id):
-    response_json = json.dumps(
-        department_list_data(financial_year_id),
-        sort_keys=True,
-        indent=4,
-        separators=(",", ": "),
-        cls=DjangoJSONEncoder
-    )
-    return HttpResponse(response_json, content_type="application/json")
