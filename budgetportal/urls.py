@@ -1,10 +1,5 @@
 from adminplus.sites import AdminSitePlus
 
-from budgetportal.views import openspending_csv, about, events, videos, terms_and_conditions, search_result, resources, \
-    guides, dataset_landing_page, dataset_category_data, dataset_data, glossary, faq, contributed_datasets_list, \
-    contributed_dataset, dataset_category_migrated, dataset_migrated, infrastructure_project_list, \
-    dataset_landing_page_json, dataset_landing_page_yaml, dataset_category_yaml, dataset_category_json, dataset_json, \
-    contributed_datasets_list_json, contributed_dataset_json
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
@@ -80,43 +75,43 @@ urlpatterns = [
     url(r'^(?P<client_id>\w+)/sso$', sso),
 
     # CSV
-    url(r'^csv/$', openspending_csv, name='openspending_csv'),
+    url(r'^csv/$', views.openspending_csv, name='openspending_csv'),
 
     # Admin
     url(r'^admin/', admin.site.urls),
     url(r'^admin/bulk_upload/template', bulk_upload.template_view),
 
     # Budget Portal
-    url(r'^about/?$', about, name="about"),
-    url(r'^events/?$', events, name="events"),
-    url(r'^videos/?$', videos, name="videos"),
-    url(r'^terms-and-conditions/?$', terms_and_conditions, name="terms-and-conditions"),
-    url(r'^resources/?$', resources, name="resources"),
-    url(r'^glossary/?$', glossary, name="glossary"),
-    url(r'^faq/?$', faq, name="faq"),
-    url(r'^guides/?$', guides, name="guides", kwargs={'slug': 'index'}),
-    url(r'^guides/(?P<slug>[-\w]+)/?$', guides, name="guides"),
+    url(r'^about/?$', views.about, name="about"),
+    url(r'^events/?$', views.events, name="events"),
+    url(r'^videos/?$', views.videos, name="videos"),
+    url(r'^terms-and-conditions/?$', views.terms_and_conditions, name="terms-and-conditions"),
+    url(r'^resources/?$', views.resources, name="resources"),
+    url(r'^glossary/?$', views.glossary, name="glossary"),
+    url(r'^faq/?$', views.faq, name="faq"),
+    url(r'^guides/?$', views.guides, name="guides", kwargs={'slug': 'index'}),
+    url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guides"),
 
     # Dataset landing page
-    url(r'^datasets/?$', dataset_landing_page, name="dataset-landing-page"),
+    url(r'^datasets/?$', views.dataset_landing_page, name="dataset-landing-page"),
     url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_landing_page_yaml)),
 
-    url(r'^datasets/contributed/?$', contributed_datasets_list, name="contributed-datasets"),
+    url(r'^datasets/contributed/?$', views.contributed_datasets_list, name="contributed-datasets"),
 
-    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', contributed_dataset, name="contributed-dataset"),
+    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', views.contributed_dataset, name="contributed-dataset"),
 
     # Dataset categories
-    url(r'^datasets/(?P<category_slug>[-\w]+)/?$', dataset_category_migrated, name="dataset-category"),
+    url(r'^datasets/(?P<category_slug>[-\w]+)/?$', views.dataset_category_migrated, name="dataset-category"),
     url(r'^datasets/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category_yaml)),
 
     # Detaset detail
-    url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', dataset_migrated, name="dataset"),
+    url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', views.dataset_migrated, name="dataset"),
     url(r'^datasets/(?P<category_slug>[\w-]+)/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_yaml)),
 
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', search_result, name="search-result"),
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', views.search_result, name="search-result"),
 
     # Infrastructure projects
-    url(r"^infrastructure-projects/?$", infrastructure_project_list, name="infrastructure-project-list"),
+    url(r"^infrastructure-projects/?$", views.infrastructure_project_list, name="infrastructure-project-list"),
     url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_yaml)),
     url(r'^json/infrastructure-projects.json$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)),
     url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
