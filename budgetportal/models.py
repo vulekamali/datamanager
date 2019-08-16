@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from autoslug import AutoSlugField
 from slugify import slugify
 from budgetportal.datasets import (
@@ -1769,6 +1771,7 @@ prov_choices = tuple([(prov_key, prov_key) for prov_key in prov_keys])
 
 
 class Event(models.Model):
+    start_date = models.DateField(default=datetime.now())
     date = models.CharField(max_length=255)
     type = models.CharField(max_length=255, choices=(
         ('hackathon', 'hackathon'), ('dataquest', 'dataquest'), ('cid', 'cid'),
@@ -1782,6 +1785,9 @@ class Event(models.Model):
     rsvp_url = models.URLField(blank=True, null=True)
     presentation_url = models.URLField(blank=True, null=True)
     status = models.CharField(max_length=255, default='upcoming', choices=(('upcoming', 'upcoming'), ('past', 'past')))
+
+    class Meta:
+        ordering = ['-start_date', ]
 
     def __str__(self):
         return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
