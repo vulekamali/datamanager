@@ -13,39 +13,19 @@ requests.get = Mock
 requests.Session = Mock
 
 
-with open('budgetportal/tests/test_data/test_infrastructure_projects.json', 'r') as mock_data:
-    MOCK_DATA = json.load(mock_data)
-
-
 class ProjectedExpenditureTestCase(TestCase):
     """ Unit tests for get_projected_expenditure function """
 
+    fixtures = [
+        "test-infrastructure-pages",
+    ]
+
     def setUp(self):
-        self.fake_valid_records = [
-            {'Budget Phase': 'test phase one', 'Amount': 100},
-            {'Budget Phase': 'test phase one', 'Amount': 100},
-            {'Budget Phase': 'test phase two', 'Amount': 100},
-            {'Budget Phase': 'MTEF', 'Amount': 200},
-            {'Budget Phase': 'MTEF', 'Amount': 200},
-            {'Budget Phase': 'MTEF', 'Amount': 200},
-        ]
+        self.project = InfrastructureProjectPart.objects.all().first()
 
     def test_success(self):
-        projected_expenditure = InfrastructureProjectPart.calculate_projected_expenditure(
-            self.fake_valid_records
-        )
+        projected_expenditure = self.project.calculate_projected_expenditure()
         self.assertEqual(projected_expenditure, 600)
-
-    def test_empty_records_returns_zero(self):
-        projected_expenditure = InfrastructureProjectPart.calculate_projected_expenditure([])
-        self.assertEqual(projected_expenditure, 0)
-
-    def test_string_raises_type_error(self):
-        self.assertRaises(
-            TypeError,
-            InfrastructureProjectPart.calculate_projected_expenditure,
-            'test string raises exception'
-        )
 
 
 class CoordinatesTestCase(TestCase):
@@ -107,54 +87,32 @@ class CoordinatesTestCase(TestCase):
 class ExpenditureTestCase(TestCase):
     """ Unit tests for expenditure functions """
 
+    fixtures = [
+        "test-infrastructure-pages",
+    ]
+
     def setUp(self):
-        self.fake_valid_records = [
-            {
-                'Financial Year': 2030,
-                'Budget Phase': 'fake budget phase',
-                'Amount': 123
-            },
-            {
-                'Financial Year': 2031,
-                'Budget Phase': 'fake budget phase 2',
-                'Amount': 1000
-            },
-        ]
-        self.expected_output_2030 = {
-            'year': 2030,
-            'amount': 123.0,
-            'budget_phase': 'fake budget phase'
-        }
-        self.expected_output_2031 = {
-            'year': 2031,
-            'amount': 1000,
-            'budget_phase': 'fake budget phase 2'
-        }
+        self.project = InfrastructureProjectPart.objects.all().first()
 
     def test_success_build_expenditure_item(self):
-        expenditure_item = InfrastructureProjectPart._build_expenditure_item(self.fake_valid_records[0])
+        expenditure_item = InfrastructureProjectPart._build_expenditure_item(self.project)
         self.assertEqual(
             expenditure_item,
-            self.expected_output_2030
-        )
-
-    def test_failure_missing_fields(self):
-        self.assertRaises(
-            KeyError,
-            InfrastructureProjectPart._build_expenditure_item,
             {
-                'Not enough keys': 'to parse successfully'
+                'year': self.project.financial_year,
+                'amount': self.project.amount,
+                'budget_phase': self.project.budget_phase
             }
         )
 
     def test_success_build_complete_expenditure(self):
         complete_expenditure = InfrastructureProjectPart.build_complete_expenditure(self.fake_valid_records)
         self.assertIn(
-            self.expected_output_2030,
-            complete_expenditure
-        )
-        self.assertIn(
-            self.expected_output_2031,
+            {
+                'year': self.project.financial_year,
+                'amount': self.project.amount,
+                'budget_phase': self.project.budget_phase
+            },
             complete_expenditure
         )
 
@@ -340,22 +298,12 @@ class OverviewIntegrationTest(LiveServerTestCase):
 class DetailIntegrationTest(LiveServerTestCase):
 
     def setUp(self):
-        self.expected_expenditure = [
-            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2045'},
-            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2046'},
-            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2047'},
-            {'amount': 100.0, 'budget_phase': 'fake current phase', 'year': '2048'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2049'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2050'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2051'}
-        ]
-        self.project_slug = 'standard-fake-project'
-        self.department_slug = 'health'
+        self.project = InfrastructureProjectPart.objects.all().first()
 
     @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=None)
     def test_missing_dataset_returns_404(self, mock_dataset):
         c = Client()
-        response = c.get('/infrastructure-projects/{}-{}.yaml'.format(self.department_slug, self.project_slug))
+        response = c.get('/infrastructure-projects/{}.yaml'.format(self.project.project_slug))
         self.assertEqual(response.status_code, 404)
 
     @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
@@ -363,7 +311,7 @@ class DetailIntegrationTest(LiveServerTestCase):
     def test_empty_project_records_returns_404(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
-        response = c.get('/infrastructure-projects/{}-{}.yaml'.format(self.department_slug, self.project_slug))
+        response = c.get('/infrastructure-projects/{}.yaml'.format(self.project.project_slug))
         self.assertEqual(response.status_code, 404)
 
     @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
@@ -371,12 +319,12 @@ class DetailIntegrationTest(LiveServerTestCase):
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
-        response = c.get('/infrastructure-projects/{}-{}.yaml'.format(self.department_slug, self.project_slug))
+        response = c.get('/infrastructure-projects/{}.yaml'.format(self.project.project_slug))
         content = yaml.load(response.content)
 
-        self.assertEqual(content['dataset_url'], 'fake path')
-        self.assertEqual(content['description'], 'Typical project description')
-        self.assertEqual(content['infrastructure_type'], 'fake type')
+        self.assertEqual(content['dataset_url'], '')
+        self.assertEqual(content['description'], 'Just a project description')
+        self.assertEqual(content['infrastructure_type'], self.project.infrastructure_type)
         self.assertIn({'latitude': -31.45019, 'longitude': 29.45397}, content['coordinates'])
         self.assertEqual(len(content['coordinates']), 1)
         self.assertEqual(len(content['expenditure']), 7)
