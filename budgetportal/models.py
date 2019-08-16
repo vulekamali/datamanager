@@ -1764,13 +1764,6 @@ class InfrastructureProjectPart(models.Model):
             return None
 
 
-class Language(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
 prov_keys = prov_abbrev.keys()
 prov_choices = tuple([(prov_key, prov_key) for prov_key in prov_keys])
 
@@ -1792,38 +1785,6 @@ class Event(models.Model):
 
     def __str__(self):
         return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
-
-
-class Video(models.Model):
-    title_id = models.CharField(max_length=255)
-    title = models.CharField(max_length=255)
-    description = models.TextField(max_length=510)
-    language = models.ForeignKey(Language, null=True, blank=True)
-    video_id = models.CharField(max_length=255, null=True, blank=True)
-
-    @staticmethod
-    def group_by_video_id(unique_ids):
-        videos_data = []
-        for title_id in unique_ids:
-            videos_all_languages = Video.objects.filter(title_id=title_id)
-            languages = []
-            for video in videos_all_languages:
-                if video.language:
-                    languages.append({
-                        'name_id': video.video_id,
-                        'name': video.language.name
-                    })
-            if videos_all_languages.first():
-                videos_data.append({
-                    'id': videos_all_languages.first().title_id,
-                    'title': videos_all_languages.first().title,
-                    'description': videos_all_languages.first().description,
-                    'languages': languages
-                })
-        return sorted(videos_data, key=lambda x: x['description'], reverse=True)
-
-    def __str__(self):
-        return "{} - {}".format(self.title, self.language)
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
