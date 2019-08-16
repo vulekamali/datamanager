@@ -24,3 +24,5 @@ yarn-error.log
 
 package-lock.json
 storybook-build
+missing_departments.csv
+ghostdriver.log
