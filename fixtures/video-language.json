@@ -1,11 +1,315 @@
-/usr/local/lib/python2.7/site-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use "pip install psycopg2-binary" instead. For details see: <http://initd.org/psycopg/docs/install.html#binary-install-from-pypi>.
-  """)
-2019-08-16 13:52:28,502 DEBUG utils 1 139621092644352 (0.001) SELECT "budgetportal_financialyear"."id", "budgetportal_financialyear"."slug", "budgetportal_financialyear"."published" FROM "budgetportal_financialyear" ORDER BY "budgetportal_financialyear"."slug" DESC; args=()
-2019-08-16 13:52:28,506 DEBUG utils 1 139621092644352 (0.001) SELECT "budgetportal_sphere"."id", "budgetportal_sphere"."name", "budgetportal_sphere"."slug", "budgetportal_sphere"."financial_year_id" FROM "budgetportal_sphere" INNER JOIN "budgetportal_financialyear" ON ("budgetportal_sphere"."financial_year_id" = "budgetportal_financialyear"."id") WHERE "budgetportal_sphere"."financial_year_id" = 5 ORDER BY "budgetportal_financialyear"."slug" DESC, "budgetportal_sphere"."name" ASC; args=(5,)
-2019-08-16 13:52:28,510 DEBUG utils 1 139621092644352 (0.001) SELECT "budgetportal_sphere"."id", "budgetportal_sphere"."name", "budgetportal_sphere"."slug", "budgetportal_sphere"."financial_year_id" FROM "budgetportal_sphere" INNER JOIN "budgetportal_financialyear" ON ("budgetportal_sphere"."financial_year_id" = "budgetportal_financialyear"."id") WHERE "budgetportal_sphere"."financial_year_id" = 4 ORDER BY "budgetportal_financialyear"."slug" DESC, "budgetportal_sphere"."name" ASC; args=(4,)
-2019-08-16 13:52:28,513 DEBUG utils 1 139621092644352 (0.001) SELECT "budgetportal_sphere"."id", "budgetportal_sphere"."name", "budgetportal_sphere"."slug", "budgetportal_sphere"."financial_year_id" FROM "budgetportal_sphere" INNER JOIN "budgetportal_financialyear" ON ("budgetportal_sphere"."financial_year_id" = "budgetportal_financialyear"."id") WHERE "budgetportal_sphere"."financial_year_id" = 3 ORDER BY "budgetportal_financialyear"."slug" DESC, "budgetportal_sphere"."name" ASC; args=(3,)
-2019-08-16 13:52:28,516 DEBUG utils 1 139621092644352 (0.001) SELECT "budgetportal_sphere"."id", "budgetportal_sphere"."name", "budgetportal_sphere"."slug", "budgetportal_sphere"."financial_year_id" FROM "budgetportal_sphere" INNER JOIN "budgetportal_financialyear" ON ("budgetportal_sphere"."financial_year_id" = "budgetportal_financialyear"."id") WHERE "budgetportal_sphere"."financial_year_id" = 2 ORDER BY "budgetportal_financialyear"."slug" DESC, "budgetportal_sphere"."name" ASC; args=(2,)
-2019-08-16 13:52:28,518 DEBUG utils 1 139621092644352 (0.001) SELECT "budgetportal_sphere"."id", "budgetportal_sphere"."name", "budgetportal_sphere"."slug", "budgetportal_sphere"."financial_year_id" FROM "budgetportal_sphere" INNER JOIN "budgetportal_financialyear" ON ("budgetportal_sphere"."financial_year_id" = "budgetportal_financialyear"."id") WHERE "budgetportal_sphere"."financial_year_id" = 1 ORDER BY "budgetportal_financialyear"."slug" DESC, "budgetportal_sphere"."name" ASC; args=(1,)
-[2019-08-16 13:52:28,685 DEBUG utils 1 139621092644352 (0.001) DECLARE "_django_curs_139621092644352_1" NO SCROLL CURSOR WITH HOLD FOR SELECT "budgetportal_video"."id", "budgetportal_video"."title_id", "budgetportal_video"."title", "budgetportal_video"."description" FROM "budgetportal_video" ORDER BY "budgetportal_video"."id" ASC; args=()
-{"model": "budgetportal.video", "pk": 1, "fields": {"title_id": "onlineBudgetPortal", "title": "About the Online Budget Data Portal project", "description": "Learn more about the new Online Budget Data Portal that is being built to help you understand the country's finances in a simple way."}}, {"model": "budgetportal.video", "pk": 2, "fields": {"title_id": "whyBudgetIsImportant", "title": "Why the budget is important to all South Africans", "description": "Find out why the national budget is important to all South Africans, and how vulekamali.gov.za can help you explore and understand the budget."}}, {"model": "budgetportal.video", "pk": 3, "fields": {"title_id": "howCanTheBudgetPortalHelpYou", "title": "How can the budget portal help you?", "description": "Follow Xholiswa as she explores the budget and helps to bring change to her childhood school. Learn how understanding budgets can help you understand who is responsible for service delivery."}}, {"model": "budgetportal.video", "pk": 4, "fields": {"title_id": "theBudgetProcess", "title": "The budget process", "description": "Interested in finding out how the South African budget process works? Learn about the budget process, how it relates to our constitution and the role that it plays in a modern day democracy."}}, {"model": "budgetportal.video", "pk": 5, "fields": {"title_id": "participate", "title": "How to participate in the budget process?", "description": "The South African Constitution has several provisions that support people\u2019s participation in areas of democratic governance. One such area of participation is in the allocation of funding by mean of the national budget."}}2019-08-16 13:52:28,690 DEBUG utils 1 139621092644352 (0.001) DECLARE "_django_curs_139621092644352_2" NO SCROLL CURSOR WITH HOLD FOR SELECT "budgetportal_videolanguage"."id", "budgetportal_videolanguage"."label", "budgetportal_videolanguage"."youtube_id", "budgetportal_videolanguage"."video_id" FROM "budgetportal_videolanguage" ORDER BY "budgetportal_videolanguage"."id" ASC; args=()
-, {"model": "budgetportal.videolanguage", "pk": 1, "fields": {"label": "English", "youtube_id": "zFalZt862hk", "video": 1}}, {"model": "budgetportal.videolanguage", "pk": 2, "fields": {"label": "Afrikaans", "youtube_id": "jsT2YFRDETk", "video": 1}}, {"model": "budgetportal.videolanguage", "pk": 3, "fields": {"label": "isiZulu", "youtube_id": "lMUqzosN6ck", "video": 1}}, {"model": "budgetportal.videolanguage", "pk": 4, "fields": {"label": "isiXhosa", "youtube_id": "nHUDu2SJ9DQ", "video": 1}}, {"model": "budgetportal.videolanguage", "pk": 5, "fields": {"label": "Sesotho", "youtube_id": "lUbcKHxnGkI", "video": 1}}, {"model": "budgetportal.videolanguage", "pk": 6, "fields": {"label": "English", "youtube_id": "KwNr4_0md4k", "video": 2}}, {"model": "budgetportal.videolanguage", "pk": 7, "fields": {"label": "Afrikaans", "youtube_id": "rl8Qagr4UnU", "video": 2}}, {"model": "budgetportal.videolanguage", "pk": 8, "fields": {"label": "isiZulu", "youtube_id": "VTt7mhJTdKI", "video": 2}}, {"model": "budgetportal.videolanguage", "pk": 9, "fields": {"label": "isiXhosa", "youtube_id": "g6II7LrWgwk", "video": 2}}, {"model": "budgetportal.videolanguage", "pk": 10, "fields": {"label": "Sesotho", "youtube_id": "0113dqpYQD4", "video": 2}}, {"model": "budgetportal.videolanguage", "pk": 11, "fields": {"label": "English", "youtube_id": "wnsso3MgvEw", "video": 3}}, {"model": "budgetportal.videolanguage", "pk": 12, "fields": {"label": "Afrikaans", "youtube_id": "XKq0SeLlkNU", "video": 3}}, {"model": "budgetportal.videolanguage", "pk": 13, "fields": {"label": "isiZulu", "youtube_id": "Kq_2_tskRRs", "video": 3}}, {"model": "budgetportal.videolanguage", "pk": 14, "fields": {"label": "isiXhosa", "youtube_id": "Scex0GnDQRQ", "video": 3}}, {"model": "budgetportal.videolanguage", "pk": 15, "fields": {"label": "Sesotho", "youtube_id": "eNR7szO1m0U", "video": 3}}, {"model": "budgetportal.videolanguage", "pk": 16, "fields": {"label": "English", "youtube_id": "f8fkoWW33Gs", "video": 4}}, {"model": "budgetportal.videolanguage", "pk": 17, "fields": {"label": "Afrikaans", "youtube_id": "iXq0l040KSI", "video": 4}}, {"model": "budgetportal.videolanguage", "pk": 18, "fields": {"label": "isiZulu", "youtube_id": "bj0Ep5YfFEI", "video": 4}}, {"model": "budgetportal.videolanguage", "pk": 19, "fields": {"label": "isiXhosa", "youtube_id": "cs0JLUGQ-jI", "video": 4}}, {"model": "budgetportal.videolanguage", "pk": 20, "fields": {"label": "Sesotho", "youtube_id": "SmSPPJPdUEw", "video": 4}}, {"model": "budgetportal.videolanguage", "pk": 21, "fields": {"label": "English", "youtube_id": "UdahlP28-ok", "video": 5}}, {"model": "budgetportal.videolanguage", "pk": 22, "fields": {"label": "Afrikaans", "youtube_id": "izvIkGf4xuA", "video": 5}}, {"model": "budgetportal.videolanguage", "pk": 23, "fields": {"label": "isiZulu", "youtube_id": "-TCm9XcczTk", "video": 5}}, {"model": "budgetportal.videolanguage", "pk": 24, "fields": {"label": "isiXhosa", "youtube_id": "iH7JTKnN98s", "video": 5}}, {"model": "budgetportal.videolanguage", "pk": 25, "fields": {"label": "Sesotho", "youtube_id": "ftN0mlhnuNA", "video": 5}}]
+[
+  {
+    "model": "budgetportal.video",
+    "pk": 1,
+    "fields": {
+      "title_id": "onlineBudgetPortal",
+      "title": "About the Online Budget Data Portal project",
+      "description": "Learn more about the new Online Budget Data Portal that is being built to help you understand the country's finances in a simple way."
+    }
+  },
+  {
+    "model": "budgetportal.video",
+    "pk": 2,
+    "fields": {
+      "title_id": "whyBudgetIsImportant",
+      "title": "Why the budget is important to all South Africans",
+      "description": "Find out why the national budget is important to all South Africans, and how vulekamali.gov.za can help you explore and understand the budget."
+    }
+  },
+  {
+    "model": "budgetportal.video",
+    "pk": 3,
+    "fields": {
+      "title_id": "howCanTheBudgetPortalHelpYou",
+      "title": "How can the budget portal help you?",
+      "description": "Follow Xholiswa as she explores the budget and helps to bring change to her childhood school. Learn how understanding budgets can help you understand who is responsible for service delivery."
+    }
+  },
+  {
+    "model": "budgetportal.video",
+    "pk": 4,
+    "fields": {
+      "title_id": "theBudgetProcess",
+      "title": "The budget process",
+      "description": "Interested in finding out how the South African budget process works? Learn about the budget process, how it relates to our constitution and the role that it plays in a modern day democracy."
+    }
+  },
+  {
+    "model": "budgetportal.video",
+    "pk": 5,
+    "fields": {
+      "title_id": "participate",
+      "title": "How to participate in the budget process?",
+      "description": "The South African Constitution has several provisions that support people\u2019s participation in areas of democratic governance. One such area of participation is in the allocation of funding by mean of the national budget."
+    }
+  }
+  2019-08-16
+  13
+  :
+  52
+  :
+  28,
+  690
+  DEBUG
+  utils
+  1
+  139621092644352
+  (0.001)
+  DECLARE
+  "_django_curs_139621092644352_2"
+  NO
+  SCROLL
+  CURSOR
+  WITH
+  HOLD
+  FOR
+  SELECT
+  "budgetportal_videolanguage"
+  .
+  "id",
+  "budgetportal_videolanguage"
+  .
+  "label",
+  "budgetportal_videolanguage"
+  .
+  "youtube_id",
+  "budgetportal_videolanguage"
+  .
+  "video_id"
+  FROM
+  "budgetportal_videolanguage"
+  ORDER
+  BY
+  "budgetportal_videolanguage"
+  .
+  "id"
+  ASC
+  ;
+  args=(),
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 1,
+    "fields": {
+      "label": "English",
+      "youtube_id": "zFalZt862hk",
+      "video": 1
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 2,
+    "fields": {
+      "label": "Afrikaans",
+      "youtube_id": "jsT2YFRDETk",
+      "video": 1
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 3,
+    "fields": {
+      "label": "isiZulu",
+      "youtube_id": "lMUqzosN6ck",
+      "video": 1
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 4,
+    "fields": {
+      "label": "isiXhosa",
+      "youtube_id": "nHUDu2SJ9DQ",
+      "video": 1
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 5,
+    "fields": {
+      "label": "Sesotho",
+      "youtube_id": "lUbcKHxnGkI",
+      "video": 1
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 6,
+    "fields": {
+      "label": "English",
+      "youtube_id": "KwNr4_0md4k",
+      "video": 2
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 7,
+    "fields": {
+      "label": "Afrikaans",
+      "youtube_id": "rl8Qagr4UnU",
+      "video": 2
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 8,
+    "fields": {
+      "label": "isiZulu",
+      "youtube_id": "VTt7mhJTdKI",
+      "video": 2
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 9,
+    "fields": {
+      "label": "isiXhosa",
+      "youtube_id": "g6II7LrWgwk",
+      "video": 2
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 10,
+    "fields": {
+      "label": "Sesotho",
+      "youtube_id": "0113dqpYQD4",
+      "video": 2
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 11,
+    "fields": {
+      "label": "English",
+      "youtube_id": "wnsso3MgvEw",
+      "video": 3
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 12,
+    "fields": {
+      "label": "Afrikaans",
+      "youtube_id": "XKq0SeLlkNU",
+      "video": 3
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 13,
+    "fields": {
+      "label": "isiZulu",
+      "youtube_id": "Kq_2_tskRRs",
+      "video": 3
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 14,
+    "fields": {
+      "label": "isiXhosa",
+      "youtube_id": "Scex0GnDQRQ",
+      "video": 3
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 15,
+    "fields": {
+      "label": "Sesotho",
+      "youtube_id": "eNR7szO1m0U",
+      "video": 3
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 16,
+    "fields": {
+      "label": "English",
+      "youtube_id": "f8fkoWW33Gs",
+      "video": 4
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 17,
+    "fields": {
+      "label": "Afrikaans",
+      "youtube_id": "iXq0l040KSI",
+      "video": 4
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 18,
+    "fields": {
+      "label": "isiZulu",
+      "youtube_id": "bj0Ep5YfFEI",
+      "video": 4
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 19,
+    "fields": {
+      "label": "isiXhosa",
+      "youtube_id": "cs0JLUGQ-jI",
+      "video": 4
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 20,
+    "fields": {
+      "label": "Sesotho",
+      "youtube_id": "SmSPPJPdUEw",
+      "video": 4
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 21,
+    "fields": {
+      "label": "English",
+      "youtube_id": "UdahlP28-ok",
+      "video": 5
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 22,
+    "fields": {
+      "label": "Afrikaans",
+      "youtube_id": "izvIkGf4xuA",
+      "video": 5
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 23,
+    "fields": {
+      "label": "isiZulu",
+      "youtube_id": "-TCm9XcczTk",
+      "video": 5
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 24,
+    "fields": {
+      "label": "isiXhosa",
+      "youtube_id": "iH7JTKnN98s",
+      "video": 5
+    }
+  },
+  {
+    "model": "budgetportal.videolanguage",
+    "pk": 25,
+    "fields": {
+      "label": "Sesotho",
+      "youtube_id": "ftN0mlhnuNA",
+      "video": 5
+    }
+  }
+]]
