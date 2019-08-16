@@ -1,16 +1,18 @@
-{% if include.location == 'National' %}
-  {% assign short_estimate = 'ENE' %}
-  {% assign long_estimate = 'Estimates of National Expenditure' %}
+{% load define_action %}
+{% load markdownify %}
+{% if location == 'National' %}
+  {% assign 'ENE' as short_estimate %}
+  {% assign 'Estimates of National Expenditure' as long_estimate %}
 {% else %}
-  {% assign short_estimate = 'EPRE' %}
-  {% assign long_estimate = 'Estimates of Provincial Revenue and Expenditure' %}
+  {% assign 'EPRE' as short_estimate %}
+  {% assign 'Estimates of Provincial Revenue and Expenditure' as long_estimate %}
 {% endif %}
 
 <div class="IntroSection">
   <div class="IntroSection-textWrap">
     <div class="js-initIntroSection">
       <div class="IntroSection-text js-content">
-        {{ include.description | strip_html | markdownify  }}
+        {{ description  | markdownify }}
       </div>
     </div>
   </div>

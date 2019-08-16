@@ -1,38 +1,21 @@
 <div class="VideoSection">
   <div class="VideoSection-heading">
-    {%
-      include components/Icon/index.html
-      type="brain"
-      size="xl"
-    %}
+    {% include 'components/Icon/index.html' with type="brain" size="xl" %}
     <div class="Title u-marginTop15">Learn more about the budget</div>
   </div>
 
   <div class="VideoSection-list">
     <div class="VideoSection-item">
-      {% include 
-        components/universal/VideoCard/index.html 
-        compact="true" 
-        full_height="true"
-        video=include.video_1
-      %}
+      {% include 'components/universal/VideoCard/index.html' with compact="true" full_height="true" video=video_1 %}
     </div>
 
     <div class="VideoSection-item">
-      {% 
-        include components/universal/VideoCard/index.html
-        compact="true"
-        full_height="true"
-        video=include.video_2 %}
+      {% include 'components/universal/VideoCard/index.html' with compact="true" full_height="true" video=video_2 %}
     </div>
 
     <div class="VideoSection-item">
-      {% 
-        include components/universal/VideoCard/index.html
-        compact="true" 
-        full_height="true"
-        video=include.video_3
-      %}
+      {% include 'components/universal/VideoCard/index.html' with compact="true" full_height="true" video=video_3 %}
+
     </div>
   </div>
 

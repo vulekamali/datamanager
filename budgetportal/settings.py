@@ -206,7 +206,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            str(ROOT_DIR.path("budgetportal/templates")),
+            str(ROOT_DIR.path("assets/js")),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
