@@ -1792,6 +1792,9 @@ class VideoLanguage(models.Model):
     youtube_id = models.CharField(max_length=255, null=True, blank=True)
     video = models.ForeignKey('Video', null=True, blank=True)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return self.label
 

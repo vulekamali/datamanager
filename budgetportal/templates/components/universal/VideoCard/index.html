@@ -18,9 +18,9 @@
       <div class="VideoCard-info">
         <div class="VideoCard-title" data-title data-text>{{ video.title }}</div>
         <div>
-          {% for language in video.languages %}
-            <button class="Button is-inline is-small u-marginTop10 u-marginRight5" data-id="{{ language.name_id }}" data-buttons data-language>
-              {{ language.name }}
+          {% for language in video.videolanguage_set.all %}
+            <button class="Button is-inline is-small u-marginTop10 u-marginRight5" data-id="{{ language.youtube_id }}" data-buttons data-language>
+              {{ language.label }}
             </button>
           {% endfor %}
         </div>

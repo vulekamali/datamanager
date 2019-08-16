@@ -10,7 +10,7 @@ from django.views import View
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
-from budgetportal.models import Event, InfrastructureProjectPart
+from budgetportal.models import Video, Event, InfrastructureProjectPart
 from budgetportal.openspending import PAGE_SIZE
 from models import FinancialYear, Sphere, Department, InfrastructureProjectPart
 from datasets import Dataset, Category
@@ -631,7 +631,7 @@ def category_fields(category):
 
 
 def about(request):
-    videos_data = [] # Video.group_by_video_id({'onlineBudgetPortal'})
+    videos_data = Video.objects.filter(title_id='onlineBudgetPortal')
     about_date_file_path = str(settings.ROOT_DIR.path('_data/about.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
@@ -728,8 +728,7 @@ def faq(request):
 def videos(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
 
-    # titles = set([video.title_id for video in Video.objects.all()])
-    videos_data = [] # Video.group_by_video_id(titles)
+    videos_data = Video.objects.all()
 
     context = {
         'page': {
@@ -796,7 +795,7 @@ def resources(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
 
     titles = {'theBudgetProcess', 'participate'}
-    videos_data = [] # Video.group_by_video_id(titles)
+    videos_data = Video.objects.filter(title_id__in=titles)
 
     context = {
         'page': {
@@ -1091,7 +1090,7 @@ def treemaps_json(request, financial_year_id, phase_slug, sphere_slug):
 
 def homepage(request):
     titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
-    videos_data = [] # Video.group_by_video_id(titles)
+    videos_data = Video.objects.filter(title_id__in=titles)
 
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
