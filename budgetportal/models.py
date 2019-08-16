@@ -1787,6 +1787,24 @@ class Event(models.Model):
         return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
 
 
+class VideoLanguage(models.Model):
+    label = models.CharField(max_length=255)
+    youtube_id = models.CharField(max_length=255, null=True, blank=True)
+    video = models.ForeignKey('Video', null=True, blank=True)
+
+    def __str__(self):
+        return self.label
+
+
+class Video(models.Model):
+    title_id = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    description = models.TextField(max_length=510)
+
+    def __str__(self):
+        return self.title
+
+
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
 # -or-has-a-sp
 def none_selected_query(vocab_name):

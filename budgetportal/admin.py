@@ -10,7 +10,11 @@ from budgetportal.models import (
     GovtFunction,
     Programme,
     Sphere,
-    Video, Language, Event, InfrastructureProjectPart)
+    Event,
+    InfrastructureProjectPart,
+    Video,
+    VideoLanguage
+)
 from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -173,6 +177,14 @@ class SiteAdmin(admin.ModelAdmin):
     pass
 
 
+class VideoLanguageInline(admin.TabularInline):
+    model = VideoLanguage
+
+
+class VideoAdmin(admin.ModelAdmin):
+    inlines = [VideoLanguageInline, ]
+    model = Video
+
 admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
 
 
@@ -199,6 +211,5 @@ admin.site.register(InfrastructureProjectPart, InfrastructureProjectAdmin)
 admin.site.register(Programme, ProgrammeAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Site, SiteAdmin)
-admin.site.register(Video)
-admin.site.register(Language)
+admin.site.register(Video, VideoAdmin)
 admin.site.register(Event)
