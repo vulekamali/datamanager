@@ -225,7 +225,7 @@ TEMPLATES = [
 STATICFILES_DIRS = [
     str(PROJ_DIR.path("static")),
     str(ROOT_DIR.path("assets")),
-    str(ROOT_DIR.path("packages/webapp/build/static/js")),
+    str(ROOT_DIR.path("packages/webapp/build/static")),
 ]
 
 ASSETS_DEBUG = DEBUG
