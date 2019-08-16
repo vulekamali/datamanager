@@ -1,33 +1,23 @@
+{% load define_action %}
 {% if resource.format == "" %}
-  {% assign icon = "link" %}
+    {% assign "link" as icon %}
 {% else %}
-  {% assign icon = "download" %}
+    {% assign "download" as icon %}
 {% endif %}
 
-{% if include.resources %}
-  <div class="Downloads {{ include.utils }}">
-    <div class="Downloads-inner">
-      <div class="Downloads-title">Documents included in this dataset</div>
-      <div class="Downloads-content">
-        <ul class="LinksList">
-          {% for resource in include.resources %}
-            {% capture text %}
-              {{ resource.name }}
-              &nbsp; 
-              {% if resource.format != "" %}
-                ({{ resource.format }})
-              {% endif %}
-            {% endcapture %}
-
-            {%
-              include components/LinksList/item.html
-              text=text
-              url=resource.url
-              type=icon
-            %}
-          {% endfor %}
-        </ul>
-      </div>
+{% if resources %}
+    <div class="Downloads {{ utils }}">
+        <div class="Downloads-inner">
+            <div class="Downloads-title">Documents included in this dataset</div>
+            <div class="Downloads-content">
+                <ul class="LinksList">
+                    {% for resource in resources %}
+                        {% with ""|add:resource.name|add:" ("|add:resource.format|add:")" as text %}
+                        {% include 'components/LinksList/item.html' with text=text url=resource.url type=icon %}
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 {% endif %}

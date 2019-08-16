@@ -1,75 +1,68 @@
-<div class='Preview{% if include.transparent == "true" %} Preview--transparent{% endif %}{% if include.full_height == "true" %} Preview--fullHeight{% endif %}{% if include.top_align == "true" %} Preview--topAlign{% endif %}'>
+{% load define_action %}
 
-  {% if include.icon %}
+<div class='Preview{% if transparent == "true" %} Preview--transparent{% endif %}{% if full_height == "true" %} Preview--fullHeight{% endif %}{% if top_align == "true" %} Preview--topAlign{% endif %}'>
+
+  {% if icon %}
     <div class="Preview-icon">
-      {%
-        include components/Preview/components/Marker/index.html
-        type=include.icon
-        color=include.color
-      %}
+      {% include 'components/Preview/components/Marker/index.html' with type=icon color=color %}
     </div>
   {% endif %}
 
-  {% if include.url %}
-    <a href="{{ include.url }}" class="Preview-heading Preview-heading--link">
-      {{ include.title | truncate: 80}}
+  {% if url %}
+    <a href="{{ url }}" class="Preview-heading Preview-heading--link">
+      {{ title | truncatechars:80}}
     </a>
     <div class="Preview-content">
-      {% if include.full_height == "true" %}
-        {{ include.excerpt }}
+    {% if excerpt %}
+      {% if full_height == "true" %}
+        {{ excerpt }}
       {% else %}
-        {{ include.excerpt | truncate: 170}}
+        {{ excerpt | truncatechars:170}}
       {% endif %}
+    {% endif %}
     </div>
 
-    {% if include.prompt %}
+    {% if prompt %}
       <p>
-        <a class="Preview-link" href="{{ include.url }}"><strong>{{ include.prompt }}</strong></a>
+        <a class="Preview-link" href="{{ url }}"><strong>{{ prompt }}</strong></a>
       </p>
     {% endif %}
   {% else %}
     <div class="Preview-heading">
-      {{ include.title | truncate: 70}}</div>
+      {{ title | truncatechars:70}}</div>
     <div class="Preview-content">
-      {% if include.full_height == "true" %}
-        {{ include.excerpt }}
+    {% if excerpt %}
+      {% if full_height == "true" %}
+        {{ excerpt }}
       {% else %}
-        {{ include.excerpt | truncate: 190}}
+        {{ excerpt | truncatechars:190}}
       {% endif %}
+    {% endif %}
     </div>
   {% endif %}
 
-  {% assign info = include.info | split: ", " %}
-
-  {% if include.type and include.location %}
+  {% if type and location %}
     <ul class="LinksList u-marginTop25">
 
-    {% if include.type %}
+    {% if type %}
       <li class="LinksList-link">
         <span class="LinksList-icon">
-          {%
-            include components/Icon/index.html
-            type="star"
-            size="s"
-          %}
+          {% include 'components/Icon/index.html' with type="star" size="s" %}
         </span>
-        {{ include.type }}
+        {{ type }}
       </li>
     {% endif %}
 
-    {% if include.location %}
+    {% if location %}
       <li class="LinksList-link">
         <span class="LinksList-icon">
-          {%
-            include components/Icon/index.html
-            type="pin"
-            size="s"
-          %}
+          {% include 'components/Icon/index.html' with type="pin" size="s" %}
         </span>
-        {{ include.location }}
+        {{ location }}
       </li>
     {% endif %}
   
     </ul>
   {% endif %}
 </div>
+

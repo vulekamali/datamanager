@@ -2,15 +2,15 @@
 
 <ul class="Circles">
 
-  {% for item in include.items.data %}
+  {% for item in items.data %}
     <li class="Circles-wrap">
       {% if item.popup %}
         {% assign finalUrl = '' %}
       {% else %}
-        {% assign finalUrl = '/' | append: include.year | append: item.url %}
+        {% assign finalUrl = '/' | append: year | append: item.url %}
       {% endif %}
 
-      {% if item != include.items.data.first %}
+      {% if item != items.data.first %}
         {{ svgFloat }}
       {% endif %}
 

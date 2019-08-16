@@ -1,27 +1,24 @@
-{% if include.percentage > 0 %}
-  {% assign flip = "" %}
+{% load define_action %}
+{% if percentage > 0 %}
+  {% assign "" as flip %}
 {% else %}
-  {% assign flip = " ChangeIndicator-icon--flip" %}
+  {% assign " ChangeIndicator-icon--flip" as flip %}
 {% endif %}
 
-{% if include.priority %}
-  {% assign size = "large" %}
+{% if priority %}
+  {% assign "large" as size %}
 {% else %}
-  {% assign size = "" %}
+  {% assign "" as size %}
 {% endif %}
 
-<div class="ChangeIndicator {% if include.priority %}ChangeIndicator--priority{% endif %}" data-component="ChangeIndicator">
-    {% if include.icon == "true" and include.percentage != 0 %}
+<div class="ChangeIndicator {% if priority %}ChangeIndicator--priority{% endif %}" data-component="ChangeIndicator">
+    {% if icon == "true" and percentage != 0 %}
       <div class="ChangeIndicator-icon{{ flip }}">
-        {%
-          include components/Icon/index.html
-          type="arrow"
-          size=size
-        %}
+        {% include 'components/Icon/index.html' with type="arrow" size=size %}
       </div>
     {% endif %}
     <div class="ChangeIndicator-info">
-      <div class="ChangeIndicator-main">{{ include.percentage | round: 1 }}%</div>
-      <div class="ChangeIndicator-secondary" data-node data-amount="{{ include.amount }}"></div>
+      <div class="ChangeIndicator-main">{{ percentage|floatformat:1 }}%</div>
+      <div class="ChangeIndicator-secondary" data-node data-amount="{{ amount }}"></div>
     </div>
   </div>

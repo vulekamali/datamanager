@@ -1,84 +1,52 @@
-{% capture source_text %}
-  {{ include.source_type }} {{ include.year }}
-{% endcapture %}
-
-{% capture guide_text %}
-  Dataset Guide for {{ include.source_type }}
-{% endcapture %}
-
-{% capture pdf_text %}
-  Learn more about these programmes in the {{ source_type }} as PDF
-{% endcapture %}
-
-{% capture excel_text %}
-  Learn more about these programmes in the {{ source_type }} as Excel
-{% endcapture %}
+{% load define_action %}
 
 
-<div class="SmallMultiplesSection" id="{{ include.id }}">
-  <h3 class="Title Title--section">{{ include.title }}</h3>
+{% assign ""|add:source_type|add:" "|add:year as source_text %}
 
-  <div class="SmallMultiplesSection-share u-marginTop10 u-marginBottom15">
-    <div data-component="Share" data-anchor="{{ include.id }}" data-color="{{ include.color }}"></div>
-  </div>
+{% assign "Learn more about these programmes in the "|add:source_type|add:" as PDF" as pdf_text %}
 
-  <p>{{ include.description }}</p>
+{% assign "Learn more about these programmes in the "|add:source_type|add:" as Excel" as excel_text %}
 
-  <ul class="LinksList u-marginBottom15">
-      {%
-        include components/LinksList/item.html
-        prefix="Source"
-        text=source_text
-        url=include.dataset
-        type="dataset"
-      %}
+{% assign "Dataset Guide for "|add:source_type as guide_text %}
 
-      {%
-        include components/LinksList/item.html
-        text="Download this data for analysis (CSV)"
-        url=include.csv
-        type="download"
-      %}
+<div class="SmallMultiplesSection" id="{{ id }}">
+    <h3 class="Title Title--section">{{ title }}</h3>
 
-      {%
-        include components/LinksList/item.html
-        text=guide_text
-        url=include.guide
-        type="guide"
-      %}
+    <div class="SmallMultiplesSection-share u-marginTop10 u-marginBottom15">
+        <div data-component="Share" data-anchor="{{ id }}" data-color="{{ color }}"></div>
+    </div>
 
-      {%
-        include components/LinksList/item.html
-        text=pdf_text
-        url=include.pdf
-        type="download"
-      %}
+    <p>{{ description }}</p>
 
-      {%
-        include components/LinksList/item.html
-        text=excel_text
-        url=include.excel
-        type="download"
-      %}
-  </ul>
+    <ul class="LinksList u-marginBottom15">
+        {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=dataset type="dataset" %}
 
-  <div class="SmallMultiplesSection-container">
-    {% for chart in include.charts_list %}    
-      <div class="SmallMultiplesSection-item">  
-        <div class="Card Card--fullHeight">
-          <div class="Title Title--interSection">{{ chart.name }}</div>
-          <div 
-            data-component="ChartAdaptor"
-            data-type="multiple"
-            data-items="{{ chart.items | jsonify | escape }}"
-            data-scale="1"
-            data-title="{{ chart.name | truncate: 45 }}"
-            data-subtitle="{{ include.subtitle }}"
-            data-description="Main budget for subprogrammes of this department"
-          >
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+        {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=csv type="download" %}
+
+        {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+
+        {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
+
+        {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+    </ul>
+
+    <div class="SmallMultiplesSection-container">
+        {% for chart in charts_list %}
+            <div class="SmallMultiplesSection-item">
+                <div class="Card Card--fullHeight">
+                    <div class="Title Title--interSection">{{ chart.name }}</div>
+                    <div
+                            data-component="ChartAdaptor"
+                            data-type="multiple"
+                            data-items="{{ chart.items|jsonify|escape }}"
+                            data-scale="1"
+                            data-title="{{ chart.name | truncatechars:45 }}"
+                            data-subtitle="{{ subtitle }}"
+                            data-description="Main budget for subprogrammes of this department"
+                    >
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>

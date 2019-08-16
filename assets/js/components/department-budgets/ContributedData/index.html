@@ -1,7 +1,9 @@
-{% if include.datasets | size > 0 %}
-  {% assign padding = '' %}
+{% load define_action %}
+
+{% if datasets|length > 0 %}
+  {% assign '' as padding %}
 {% else %}
-  {% assign padding = ' u-paddingBottom0' %}
+  {% assign ' u-paddingBottom0' as padding %}
 {% endif %}
 
 
@@ -10,8 +12,8 @@
     <div class="Section-title">Contributed data</div>
   </div>
 
-  {% if include.datasets | size > 0 %}
-    {% for item in include.datasets %}
+  {% if datasets|length > 0 %}
+    {% for item in datasets %}
 
       <div class="Section-card u-marginBottom10">
         <div class="ContributedItem">

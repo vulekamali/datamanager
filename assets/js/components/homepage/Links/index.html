@@ -1,6 +1,6 @@
 <div class="Links">
 
-  {% if include.people_guide %} 
+  {% if people_guide %}
     <div class="Links-itemWrap Links-itemWrap--full">
       <span class="Links-item">
         <div class="Links-iconWrap">
@@ -16,7 +16,7 @@
         <div class="Links-text">
           <div class="Links-line">The people’s guide</div>
           <div class="Links-buttonList"><span class="Links-seperator">Open in </span>
-            {% for item in include.people_guide %}
+            {% for item in people_guide %}
               <a class="Links-button" href="{{ item.url }}" target="_blank">
                 {{ item.title }}
                 {% if forloop.last == false %}
@@ -31,8 +31,8 @@
     </div>
   {% endif %}
 
-  {% if include.webcast %} 
-    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ include.webcast }}" target="_blank">
+  {% if webcast %}
+    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ webcast }}" target="_blank">
       <div class="Links-iconWrap">
         <div class="Links-icon Links-icon--purple">
           <svg class="Links-svg" width="0" height="0" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" overflow="scroll">
@@ -44,8 +44,8 @@
     </div>
   {% endif %}
 
-  {% if include.speech %}        
-    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ include.speech }}" target="_blank">
+  {% if speech %}
+    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ speech }}" target="_blank">
       <div class="Links-iconWrap">
         <div class="Links-icon Links-icon--orange">
           <svg class="Links-svg" width="0" height="0" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" overflow="scroll">
@@ -57,8 +57,8 @@
     </div>
   {% endif %}
 
-  {% if include.highlights %}  
-    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ include.highlights }}" target="_blank">
+  {% if highlights %}
+    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ highlights }}" target="_blank">
       <div class="Links-iconWrap">
         <div class="Links-icon Links-icon--darkYellow">
           <svg class="Links-svg" width="0" height="0" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -70,8 +70,8 @@
     </div>
   {% endif %}
 
-  {% if include.expenditure %}  
-    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ include.expenditure }}" target="_blank">
+  {% if expenditure %}
+    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ expenditure }}" target="_blank">
       <div class="Links-iconWrap">
         <div class="Links-icon Links-icon--lightYellow">
           <svg class="Links-svg" width="0" height="0" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" overflow="scroll">
@@ -87,8 +87,8 @@
     </div>
   {% endif %}
 
-  {% if include.appropriation %}  
-    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ include.appropriation }}" target="_blank">
+  {% if appropriation %}
+    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ appropriation }}" target="_blank">
       <div class="Links-iconWrap">
         <div class="Links-icon Links-icon--lightGreen">
           <svg class="Links-svg" width="0" height="0" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" overflow="scroll">
@@ -100,8 +100,8 @@
     </div>
   {% endif %}
 
-  {% if include.division %}  
-    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ include.division }}" target="_blank">
+  {% if division %}
+    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ division }}" target="_blank">
       <div class="Links-iconWrap">
         <div class="Links-icon Links-icon--darkGreen">
           <svg class="Links-svg" width="0" height="0" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" overflow="scroll">
@@ -113,8 +113,8 @@
     </div>
   {% endif %}
 
-  {% if include.pocket_guide %} 
-    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ include.pocket_guide }}" target="_blank">
+  {% if pocket_guide %}
+    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ pocket_guide }}" target="_blank">
       <div class="Links-iconWrap">
         <div class="Links-icon Links-icon--dullBlue">
           <svg class="Links-svg" width="0" height="0" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" overflow="scroll">
@@ -126,8 +126,8 @@
     </div>
   {% endif %}
 
-  {% if include.presentation %} 
-    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ include.presentation }}" target="_blank">
+  {% if presentation %}
+    <div class="Links-itemWrap"><a class="Links-item Links-item--link" href="{{ presentation }}" target="_blank">
       <div class="Links-iconWrap">
         <div class="Links-icon Links-icon--brightBlue">
           <svg class="Links-svg" width="0" height="0" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" overflow="scroll">
