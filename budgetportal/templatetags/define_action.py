@@ -2,6 +2,9 @@ from django import template
 from django.utils.safestring import mark_safe
 
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 register = template.Library()
 
@@ -18,4 +21,6 @@ def hash(h, key):
   if h:
     if key in h:
       return h[key]
+  else:
+    logger.warning('Hash template tag received a null object for key {}'.format(key))
   return None
