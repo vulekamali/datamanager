@@ -19,7 +19,7 @@
       "amount": 1368285000,
       "financial_year": 2015,
       "total_project_cost": 9045389000,
-      "provinces": "",
+      "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
   },
@@ -67,7 +67,7 @@
       "amount": 1617716000,
       "financial_year": 2017,
       "total_project_cost": 9045389000,
-      "provinces": "",
+      "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
   },
@@ -91,7 +91,7 @@
       "amount": 2121045000,
       "financial_year": 2018,
       "total_project_cost": 9045389000,
-      "provinces": "",
+      "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
   },
@@ -115,7 +115,7 @@
       "amount": 1869482000,
       "financial_year": 2019,
       "total_project_cost": 9045389000,
-      "provinces": "",
+      "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
   },
@@ -139,7 +139,7 @@
       "amount": 1628591000,
       "financial_year": 2020,
       "total_project_cost": 9045389000,
-      "provinces": "",
+      "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
   },
@@ -163,8 +163,176 @@
       "amount": 2190735000,
       "financial_year": 2021,
       "total_project_cost": 9045389000,
-      "provinces": "",
+      "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
+    }
+  },
+  {
+    "model": "budgetportal.infrastructureprojectpart",
+    "pk": 190,
+    "fields": {
+      "sphere": "",
+      "department": "Fake department 2",
+      "sector": "Fake Sector",
+      "project_name": "Fake project 2",
+      "project_description": "Typical project description",
+      "nature_of_investment": "standard fake investment",
+      "infrastructure_type": "fake type",
+      "current_project_stage": "Fake stage",
+      "sip_category": "SIP 13:  National school build programme",
+      "br_featured": "BR 2019",
+      "featured": true,
+      "budget_phase": "Audited Outcome",
+      "project_slug": "fake-project-2",
+      "amount": 1368285000,
+      "financial_year": 2015,
+      "total_project_cost": 9045389000,
+      "provinces": "Fake province 2, Fake province 3",
+      "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
+    }
+  },
+  {
+    "model": "budgetportal.infrastructureprojectpart",
+    "pk": 191,
+    "fields": {
+      "sphere": "",
+      "department": "Fake department 2",
+      "sector": "Fake Sector",
+      "project_name": "Fake project 2",
+      "project_description": "Typical project description",
+      "nature_of_investment": "standard fake investment",
+      "infrastructure_type": "fake type",
+      "current_project_stage": "Fake stage",
+      "sip_category": "SIP 13:  National school build programme",
+      "br_featured": "BR 2019",
+      "featured": true,
+      "budget_phase": "Audited Outcome",
+      "project_slug": "fake-project-2",
+      "amount": 1049535000,
+      "financial_year": 2016,
+      "total_project_cost": 9045389000,
+      "provinces": "Fake province 2, Fake province 3",
+      "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
+    }
+  },
+  {
+    "model": "budgetportal.infrastructureprojectpart",
+    "pk": 192,
+    "fields": {
+      "sphere": "",
+      "department": "Fake department 2",
+      "sector": "Fake Sector",
+      "project_name": "Fake project 2",
+      "project_description": "Typical project description",
+      "nature_of_investment": "standard fake investment",
+      "infrastructure_type": "fake type",
+      "current_project_stage": "Fake stage",
+      "sip_category": "SIP 13:  National school build programme",
+      "br_featured": "BR 2019",
+      "featured": true,
+      "budget_phase": "Audited Outcome",
+      "project_slug": "fake-project-2",
+      "amount": 1617716000,
+      "financial_year": 2017,
+      "total_project_cost": 9045389000,
+      "provinces": "Fake province 2, Fake province 3",
+      "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
+    }
+  },
+  {
+    "model": "budgetportal.infrastructureprojectpart",
+    "pk": 193,
+    "fields": {
+      "sphere": "",
+      "department": "Fake department 2",
+      "sector": "Fake Sector",
+      "project_name": "Fake project 2",
+      "project_description": "Typical project description",
+      "nature_of_investment": "standard fake investment",
+      "infrastructure_type": "fake type",
+      "current_project_stage": "Fake stage",
+      "sip_category": "SIP 13:  National school build programme",
+      "br_featured": "BR 2019",
+      "featured": true,
+      "budget_phase": "Adjusted Appropriation",
+      "project_slug": "fake-project-2",
+      "amount": 2121045000,
+      "financial_year": 2018,
+      "total_project_cost": 9045389000,
+      "provinces": "Fake province 2, Fake province 3",
+      "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
+    }
+  },
+  {
+    "model": "budgetportal.infrastructureprojectpart",
+    "pk": 194,
+    "fields": {
+      "sphere": "",
+      "department": "Fake department 2",
+      "sector": "Fake Sector",
+      "project_name": "Fake project 2",
+      "project_description": "Typical project description",
+      "nature_of_investment": "standard fake investment",
+      "infrastructure_type": "fake type",
+      "current_project_stage": "Fake stage",
+      "sip_category": "SIP 13:  National school build programme",
+      "br_featured": "BR 2019",
+      "featured": true,
+      "budget_phase": "MTEF",
+      "project_slug": "fake-project-2",
+      "amount": 1869482000,
+      "financial_year": 2019,
+      "total_project_cost": 9045389000,
+      "provinces": "Fake province 2, Fake province 3",
+      "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
+    }
+  },
+  {
+    "model": "budgetportal.infrastructureprojectpart",
+    "pk": 195,
+    "fields": {
+      "sphere": "",
+      "department": "Fake department 2",
+      "sector": "Fake Sector",
+      "project_name": "Fake project 2",
+      "project_description": "Typical project description",
+      "nature_of_investment": "standard fake investment",
+      "infrastructure_type": "fake type",
+      "current_project_stage": "Fake stage",
+      "sip_category": "SIP 13:  National school build programme",
+      "br_featured": "BR 2019",
+      "featured": true,
+      "budget_phase": "MTEF",
+      "project_slug": "fake-project-2",
+      "amount": 1628591000,
+      "financial_year": 2020,
+      "total_project_cost": 9045389000,
+      "provinces": "Fake province 2, Fake province 3",
+      "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
+    }
+  },
+  {
+    "model": "budgetportal.infrastructureprojectpart",
+    "pk": 196,
+    "fields": {
+      "sphere": "",
+      "department": "Fake department 2",
+      "sector": "Fake Sector",
+      "project_name": "Fake project 2",
+      "project_description": "Typical project description",
+      "nature_of_investment": "standard fake investment",
+      "infrastructure_type": "fake type",
+      "current_project_stage": "Fake stage",
+      "sip_category": "SIP 13:  National school build programme",
+      "br_featured": "BR 2019",
+      "featured": true,
+      "budget_phase": "MTEF",
+      "project_slug": "fake-project-2",
+      "amount": 2190735000,
+      "financial_year": 2021,
+      "total_project_cost": 9045389000,
+      "provinces": "Fake province 2, Fake province 3",
+      "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
     }
   }
 ]
