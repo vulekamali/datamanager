@@ -1,4 +1,4 @@
 services:
-  - postgresql
+  - docker
 script:
   - docker-compose run test
