@@ -17,7 +17,7 @@ class ProjectedExpenditureTestCase(TestCase):
     """ Unit tests for get_projected_expenditure function """
 
     fixtures = [
-        "test-infrastructure-pages",
+        "test-infrastructure-pages-detail",
     ]
 
     def setUp(self):
@@ -88,7 +88,7 @@ class ExpenditureTestCase(TestCase):
     """ Unit tests for expenditure functions """
 
     fixtures = [
-        "test-infrastructure-pages",
+        "test-infrastructure-pages-detail",
     ]
 
     def setUp(self):
@@ -207,27 +207,18 @@ empty_ckan_response = MockResponse(
 
 class OverviewIntegrationTest(LiveServerTestCase):
 
-    def setUp(self):
-        self.expected_expenditure = [
-            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2045'},
-            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2046'},
-            {'amount': 100.0, 'budget_phase': 'fake old phase', 'year': '2047'},
-            {'amount': 100.0, 'budget_phase': 'fake current phase', 'year': '2048'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2049'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2050'},
-            {'amount': 100.0, 'budget_phase': 'MTEF', 'year': '2051'}
-        ]
+    fixtures = [
+        'test-infrastructure-pages-overview'
+    ]
 
-    @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=None)
-    def test_missing_dataset_returns_404(self, mock_dataset):
-        c = Client()
-        response = c.get('/infrastructure-projects.yaml')
-        self.assertEqual(response.status_code, 404)
+    def setUp(self):
+        self.standard_fake_project = InfrastructureProjectPart.objects.filter(name='Standard fake project').first()
 
     @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
     @mock.patch('requests.get', return_value=empty_ckan_response)
     def test_success_empty_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
+        InfrastructureProjectPart.objects.all().delete()
         c = Client()
         response = c.get('/infrastructure-projects.yaml')
         content = yaml.load(response.content)
@@ -253,18 +244,20 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(first_test_project['description'], 'Typical project description')
         self.assertEqual(first_test_project['detail'], '/infrastructure-projects/health-standard-fake-project')
         self.assertEqual(first_test_project['infrastructure_type'], 'fake type')
+        
         self.assertIn({'latitude': -31.45019, 'longitude': 29.45397}, first_test_project['coordinates'])
         self.assertEqual(len(first_test_project['coordinates']), 1)
+        
         self.assertEqual(len(first_test_project['expenditure']), 7)
-        for item in self.expected_expenditure:
+        for item in self.standard_fake_project.build_complete_expenditure():
             self.assertIn(item, first_test_project['expenditure'])
         self.assertEqual(first_test_project['nature_of_investment'], 'standard fake investment')
         self.assertEqual(first_test_project['page_title'], 'Standard fake project - vulekamali')
         self.assertEqual(first_test_project['projected_budget'], 300.0)
-        self.assertIn('Fake Province 3', first_test_project['provinces'])
+        self.assertIn('Fake province 1', first_test_project['provinces'])
         self.assertEqual(len(first_test_project['provinces']), 1)
         self.assertEqual(first_test_project['slug'], '/infrastructure-projects/health-standard-fake-project')
-        self.assertEqual(first_test_project['stage'], 'Design')
+        self.assertEqual(first_test_project['stage'], 'Fake stage')
         self.assertEqual(first_test_project['total_budget'], 100.0)
 
         # Second project (multiple coords, provinces)
@@ -280,7 +273,7 @@ class OverviewIntegrationTest(LiveServerTestCase):
 class DetailIntegrationTest(LiveServerTestCase):
 
     fixtures = [
-        'test-infrastructure-pages'
+        'test-infrastructure-pages-detail'
     ]
 
     def setUp(self):
