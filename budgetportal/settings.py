@@ -104,13 +104,10 @@ INTERNAL_IPS = ['127.0.0.1']
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 import dj_database_url
 
-db_config = dj_database_url.config(default='postgres://budgetportal@localhost/budgetportal')
+db_config = dj_database_url.config()
 db_config['ATOMIC_REQUESTS'] = True
 
-if TEST:
-    DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3'}}
-else:
-    DATABASES = {'default': db_config}
+DATABASES = {'default': db_config}
 
 # Caches
 if DEBUG:

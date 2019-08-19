@@ -23,5 +23,17 @@ services:
     depends_on:
       - db
 
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    command: tox
+    environment:
+      - DATABASE_URL=postgresql://budgetportal@db/budgetportal
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+
 volumes:
   db-data:
