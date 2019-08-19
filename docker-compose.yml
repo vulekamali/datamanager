@@ -8,6 +8,7 @@ services:
       - POSTGRES_DB=budgetportal
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
   app:
     build:
@@ -29,7 +30,7 @@ services:
       dockerfile: Dockerfile-test
     command: tox
     environment:
-      - DATABASE_URL=postgresql://budgetportal@db/budgetportal
+      - DATABASE_URL=postgresql://budgetportal@db/budgetportal_test
     volumes:
       - .:/code
     depends_on:
