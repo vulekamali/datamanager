@@ -35,6 +35,8 @@ start moving to summaries, and just call out to models and datasets as needed.
 Setting up Development environment
 -----------------------
 
+Set up the database
+
 ```
 docker-compose up db
 ```
@@ -67,6 +69,19 @@ Username: `admin@localhost`
 Password: `password`
 
 A fixture is needed to set this up instead of `createsuperuser` because Django Allauth is configured to require verified email addresses.
+
+If you want to reset the database and start fresh:
+
+```
+docker-compose down --volumes
+```
+
+And then:
+
+```
+docker-compose up
+```
+
 
 ### Load data
 
