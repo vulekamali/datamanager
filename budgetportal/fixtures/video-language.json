@@ -43,50 +43,7 @@
       "title": "How to participate in the budget process?",
       "description": "The South African Constitution has several provisions that support people\u2019s participation in areas of democratic governance. One such area of participation is in the allocation of funding by mean of the national budget."
     }
-  }
-  2019-08-16
-  13
-  :
-  52
-  :
-  28,
-  690
-  DEBUG
-  utils
-  1
-  139621092644352
-  (0.001)
-  DECLARE
-  "_django_curs_139621092644352_2"
-  NO
-  SCROLL
-  CURSOR
-  WITH
-  HOLD
-  FOR
-  SELECT
-  "budgetportal_videolanguage"
-  .
-  "id",
-  "budgetportal_videolanguage"
-  .
-  "label",
-  "budgetportal_videolanguage"
-  .
-  "youtube_id",
-  "budgetportal_videolanguage"
-  .
-  "video_id"
-  FROM
-  "budgetportal_videolanguage"
-  ORDER
-  BY
-  "budgetportal_videolanguage"
-  .
-  "id"
-  ASC
-  ;
-  args=(),
+  },
   {
     "model": "budgetportal.videolanguage",
     "pk": 1,
@@ -312,4 +269,4 @@
       "video": 5
     }
   }
-]]
+]

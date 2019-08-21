@@ -74,7 +74,7 @@ If you're setting up a new database:
 
 ```
 docker-compose run --rm app python manage.py migrate
-docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
+docker-compose run --rm app python manage.py loaddata development-first-user
 ```
 
 Then run the server
@@ -104,7 +104,7 @@ curl https://datamanager.vulekamali.gov.za/2018-19/provincial/departments.csv > 
 You can load this data into your environment with:
 
 ```
-docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
+docker-compose run --rm app python manage.py loaddata video-language years-spheres-governments
 docker-compose run --rm app python manage.py load_departments 2019-20 national departments-national-2018-19.csv
 docker-compose run --rm app python manage.py load_departments 2019-20 provincial departments-provincial-2018-19.csv
 ```
