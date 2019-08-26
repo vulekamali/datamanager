@@ -1771,7 +1771,7 @@ prov_choices = tuple([(prov_key, prov_key) for prov_key in prov_keys])
 
 
 class Event(models.Model):
-    start_date = models.DateField(default=datetime.now())
+    start_date = models.DateField(default=datetime.now)
     date = models.CharField(max_length=255)
     type = models.CharField(max_length=255, choices=(
         ('hackathon', 'hackathon'), ('dataquest', 'dataquest'), ('cid', 'cid'),

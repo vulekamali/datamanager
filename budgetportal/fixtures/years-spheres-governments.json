@@ -121,6 +121,15 @@
     }
 },
 {
+    "model": "budgetportal.sphere",
+    "pk": 10,
+    "fields": {
+        "name": "Provincial",
+        "slug": "provincial",
+        "financial_year": 5
+    }
+},
+{
     "model": "budgetportal.government",
     "pk": 1,
     "fields": {
@@ -485,6 +494,87 @@
     "pk": 41,
     "fields": {
         "sphere": 6,
+        "name": "Western Cape",
+        "slug": "western-cape"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 42,
+    "fields": {
+        "sphere": 10,
+        "name": "Eastern Cape",
+        "slug": "eastern-cape"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 43,
+    "fields": {
+        "sphere": 10,
+        "name": "Free State",
+        "slug": "free-state"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 44,
+    "fields": {
+        "sphere": 10,
+        "name": "Gauteng",
+        "slug": "gauteng"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 45,
+    "fields": {
+        "sphere": 10,
+        "name": "KwaZulu-Natal",
+        "slug": "kwazulu-natal"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 46,
+    "fields": {
+        "sphere": 10,
+        "name": "Limpopo",
+        "slug": "limpopo"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 47,
+    "fields": {
+        "sphere": 10,
+        "name": "Mpumalanga",
+        "slug": "mpumalanga"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 48,
+    "fields": {
+        "sphere": 10,
+        "name": "Northern Cape",
+        "slug": "northern-cape"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 49,
+    "fields": {
+        "sphere": 10,
+        "name": "North West",
+        "slug": "north-west"
+    }
+},
+{
+    "model": "budgetportal.government",
+    "pk": 50,
+    "fields": {
+        "sphere": 10,
         "name": "Western Cape",
         "slug": "western-cape"
     }
