@@ -104,7 +104,7 @@ curl https://datamanager.vulekamali.gov.za/2018-19/provincial/departments.csv > 
 You can load this data into your environment with:
 
 ```
-docker-compose run --rm app python manage.py loaddata video-language years-spheres-governments
+docker-compose run --rm app python manage.py loaddata years-spheres-governments video-language events
 docker-compose run --rm app python manage.py load_departments 2019-20 national departments-national-2018-19.csv
 docker-compose run --rm app python manage.py load_departments 2019-20 provincial departments-provincial-2018-19.csv
 ```
@@ -178,8 +178,8 @@ dokku config:set budgetportal DJANGO_DEBUG=false \
                               DISCOURSE_SSO_SECRET=... \
                               RECAPTCHA_PRIVATE_KEY=...
 git push dokku master
-dokku run python manage.py migrate
-dokku run python manage.py createsuperuser
+dokku run budgetportal python manage.py migrate
+dokku run budgetportal python manage.py createsuperuser
 dokku ps:scale budgetportal worker=1
 ```
 
