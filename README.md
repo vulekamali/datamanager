@@ -103,6 +103,13 @@ docker-compose run --rm app python manage.py load_departments 2019-20 national d
 docker-compose run --rm app python manage.py load_departments 2019-20 provincial departments-provincial-2018-19.csv
 ```
 
+Create and run database migrations with
+
+```
+docker-compose run --rm app python manage.py makemigrations
+
+```
+
 ### Development best practises
 
 * Always maintain or improve test coverage
