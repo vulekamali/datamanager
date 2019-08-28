@@ -70,6 +70,7 @@ urlpatterns = [
         cache_page(CACHE_SECS)(views.FinancialYearPage.as_view(
             slug='search-result',
         ))),
+    url(r'^json/static-search.json', cache_page(CACHE_SECS)(views.static_search_data)),
 
     # Department list as CSV
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
