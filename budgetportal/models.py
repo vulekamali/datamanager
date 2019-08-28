@@ -1607,7 +1607,7 @@ class InfrastructureProjectPart(models.Model):
     budget_phase = models.CharField(max_length=255)
     project_slug = models.CharField(max_length=255)
     amount = models.BigIntegerField(default=0)
-    financial_year = models.BigIntegerField(default=0)
+    financial_year = models.CharField(max_length=4)
     total_project_cost = models.BigIntegerField(default=0)
     provinces = models.CharField(max_length=510, default="")
     gps_code = models.CharField(max_length=255, default="")
