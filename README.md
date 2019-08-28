@@ -61,12 +61,6 @@ yarn build:webapp
 docker-compose up db
 ```
 
-Add the dokku remote to you local clone
-
-```
-git remote add dokku@treasury1.openup.org.za:budgetportal
-```
-
 Setup the database - either by running migrations against a new database, or by
 loading a dump from elsewhere:
 
