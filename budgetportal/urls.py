@@ -164,7 +164,7 @@ urlpatterns = [
         '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department_yaml)),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG_TOOLBAR:
     import debug_toolbar
 
     urlpatterns = [

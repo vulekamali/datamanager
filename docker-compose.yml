@@ -17,6 +17,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     environment:
       - DATABASE_URL=postgresql://budgetportal@db/budgetportal
+      - DJANGO_DEBUG_TOOLBAR=${DJANGO_DEBUG_TOOLBAR}
     volumes:
       - .:/code
     ports:

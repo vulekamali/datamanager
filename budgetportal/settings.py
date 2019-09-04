@@ -41,13 +41,15 @@ if DEBUG:
 else:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
+DEBUG_TOOLBAR = os.environ.get("DJANGO_DEBUG_TOOLBAR", "false").lower() == "true"
+
 GOOGLE_ANALYTICS_ID = "UA-93649482-8"
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'budgetportal',
     'allauth_facebook',
 
@@ -73,10 +75,12 @@ INSTALLED_APPS = (
 
     'import_export',
     'markdownify',
+]
 
-)
+if DEBUG_TOOLBAR:
+    INSTALLED_APPS.append("debug_toolbar")
 
-MIDDLEWARE = (
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,7 +90,11 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'elasticapm.contrib.django.middleware.TracingMiddleware',
     'elasticapm.contrib.django.middleware.Catch404Middleware',
-)
+]
+
+
+if DEBUG_TOOLBAR:
+    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
 SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
 
