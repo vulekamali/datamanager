@@ -615,8 +615,8 @@ def dataset_fields(dataset):
         'resources': [resource_fields(r) for r in dataset.resources],
         'organization': dataset.get_organization(),
         'author': dataset.author,
-        'created': datetime.strptime(dataset.created_date[:19], "%Y-%m-%dT%H:%M:%S"),
-        'last_updated': datetime.strptime(dataset.last_updated_date[:19], "%Y-%m-%dT%H:%M:%S"),
+        'created': dataset.created_date,
+        'last_updated': dataset.last_updated_date,
         'license': dataset.license,
         'intro': dataset.intro,
         'intro_short': dataset.intro_short,
@@ -976,12 +976,6 @@ def dataset_migrated(request, category_slug, dataset_slug):
     return render(request, 'government_dataset.html', context=context)
 
 
-def contributed_datasets_list_yaml(request):
-    response = dataset_category_data('contributed')
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def contributed_datasets_list(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
@@ -1001,14 +995,11 @@ def contributed_datasets_list(request):
     return render(request, 'contributed-data.html', context=context)
 
 
-def contributed_dataset_yaml(request, dataset_slug):
-    response = dataset_data('contributed', dataset_slug)
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def contributed_dataset(request, dataset_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    dataset = dataset_data('contributed', dataset_slug)
+    dataset["created"] = datetime.strptime(dataset["created"], "%Y-%m-%dT%H:%M:%S.%f")
+    dataset["last_updated"] = datetime.strptime(dataset["last_updated"], "%Y-%m-%dT%H:%M:%S.%f")
     context = {
         'page': {
             'layout': 'contributed_dataset',
@@ -1018,7 +1009,7 @@ def contributed_dataset(request, dataset_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': dataset_data('contributed', dataset_slug),
+                'dataset': dataset,
             },
             'latest_year': '2019-20'
         },
