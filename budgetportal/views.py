@@ -1213,8 +1213,8 @@ def department_preview_data(financial_year_id, sphere_slug, government_slug, pha
     return page_data
 
 
-def department_preview_yaml(financial_year_id, sphere_slug, government_slug, phase_slug):
-    response = department_preview_data(financial_year_id)
+def department_preview_yaml(request, financial_year_id, sphere_slug, government_slug, phase_slug):
+    response = department_preview_data(financial_year_id, sphere_slug, government_slug, phase_slug)
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
