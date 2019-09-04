@@ -27,6 +27,7 @@ from csv import DictWriter
 
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
+from django.forms.models import model_to_dict
 
 logger = logging.getLogger(__name__)
 
@@ -68,6 +69,30 @@ def year_home(request, financial_year_id):
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
+def financial_year_page_context(request, financial_year_id, slug, selected_tab=None):
+    context = {
+        'financial_years': [],
+        'selected_financial_year': financial_year_id,
+        'selected_tab': selected_tab,
+        'slug': slug,
+        'title': "Search Result - vulekamali",
+        'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
+        'url_path': '/%s/%s' % (financial_year_id, slug),
+    }
+
+    for year in FinancialYear.get_available_years():
+        is_selected = year.slug == financial_year_id
+        context['financial_years'].append({
+            'id': year.slug,
+            'is_selected': is_selected,
+            'closest_match': {
+                'is_exact_match': True,
+                'url_path': "/%s/%s" % (year.slug, slug),
+            },
+        })
+    return context
+
+
 class FinancialYearPage(View):
     """
     Generic page data for pages specific to a financial year
@@ -76,29 +101,9 @@ class FinancialYearPage(View):
     selected_tab = None
 
     def get(self, request, financial_year_id):
-        context = {
-            'financial_years': [],
-            'selected_financial_year': financial_year_id,
-            'selected_tab': self.selected_tab,
-            'slug': self.slug,
-            'title': "Search Result - vulekamali",
-            'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
-            'url_path': '/%s/%s' % (financial_year_id, self.slug),
-        }
-
-        for year in FinancialYear.get_available_years():
-            is_selected = year.slug == financial_year_id
-            context['financial_years'].append({
-                'id': year.slug,
-                'is_selected': is_selected,
-                'closest_match': {
-                    'is_exact_match': True,
-                    'url_path': "/%s/%s" % (year.slug, self.slug),
-                },
-            })
 
         response_yaml = yaml.safe_dump(
-            context,
+            financial_year_page_context(request, financial_year_id, self.slug, self.selected_tab),
             default_flow_style=False,
             encoding='utf-8'
         )
@@ -664,6 +669,25 @@ def about(request):
     return render(request, 'about.html', context=context)
 
 
+def static_search_data(request):
+    glossary_data_file_path = str(settings.ROOT_DIR.path('_data/glossary.json'))
+    with open(glossary_data_file_path) as glossary_file:
+        glossary_data = json.load(glossary_file)
+    context = {
+        "videos": [model_to_dict(v) for v in Video.objects.all()],
+        "glossary": glossary_data,
+    }
+
+    response_json = json.dumps(
+        context,
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+        cls=DjangoJSONEncoder
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
 def events(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
 
@@ -788,14 +812,17 @@ def search_result(request, financial_year_id):
     context = {
         'page': {
             'layout': 'search-result',
-            'data_key': 'search-result'
+            'data_key': 'search-result',
+            'financial_year': financial_year_id,
         },
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'search-result': yaml.load(FinancialYearPage.as_view(slug='search-result').content)
+                financial_year_id: {
+                    'search-result': financial_year_page_context(request, financial_year_id, 'search-result'),
+                },
             },
-            'latest_year': '2019-20'
+            'latest_year': '2019-20',
         },
         'debug': settings.DEBUG
     }
