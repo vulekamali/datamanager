@@ -45,11 +45,15 @@ yarn
 
 ### Run JS and CSS incremental build for the assets managed by yarn (except webapp package)
 
+This is an incremental build and will rebuild the root bundle until you Ctrl+C out of it.
+
 ```
 yarn build:dev
 ```
 
-### Build changes in webapp package
+### Build changes in webapp package.
+
+In another shell, build the webapp package. This is not an incremental build and needs to be rebuilt for each change in this package.
 
 ```
 yarn build:webapp
@@ -74,7 +78,7 @@ docker-compose run --rm app python manage.py loaddata development-first-user
 Then run the server
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 Now you can login with initial the *development superuser*:
@@ -90,18 +94,22 @@ Load an initial set of financial years, spheres and governments. You might need 
 
 You can download data from the production datamanager to use in your test environment as follows:
 
-```
-curl https://datamanager.vulekamali.gov.za/2018-19/national/departments.csv > departments-national-2018-19.csv
-curl https://datamanager.vulekamali.gov.za/2018-19/provincial/departments.csv > departments-provincial-2018-19.csv
+```bash
+for year in 2016-17 2017-18 2018-19 2019-20; do curl https://datamanager.vulekamali.gov.za/${year}/national/departments.csv > departments-national-${year}.csv; done
+for year in 2016-17 2017-18 2018-19 2019-20; do curl https://datamanager.vulekamali.gov.za/${year}/provincial/departments.csv > departments-provincial-${year}.csv; done
 ```
 
 You can load this data into your environment with:
 
-```
+```bash
 docker-compose run --rm app python manage.py loaddata years-spheres-governments video-language events
-docker-compose run --rm app python manage.py load_departments 2019-20 national departments-national-2018-19.csv
-docker-compose run --rm app python manage.py load_departments 2019-20 provincial departments-provincial-2018-19.csv
+for year in 2016-17 2017-18 2018-19 2019-20; do docker-compose run --rm app python manage.py load_departments ${year} national departments-national-${year}.csv; done
+for year in 2016-17 2017-18 2018-19 2019-20; do docker-compose run --rm app python manage.py load_departments ${year} provincial departments-provincial-${year}.csv; done
 ```
+
+Finally load the 2019-20 featured national infrastructure projects on the Infrastructure Project Parts admin page via the Import buton. Find the file to import at `budgetportal/fixtures/infrastructure-projects-2019-20.csv`.
+
+------
 
 Create and run database migrations with
 
