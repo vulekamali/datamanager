@@ -1,0 +1,235 @@
+{% load define_action %}
+
+
+{% assign ""|add:source_type|add:" "|add:year as source_text %}
+
+{% assign "Learn more about the Main Budget in the "|add:source_type|add:" as PDF" as pdf_text %}
+{% assign "Learn more about these changes in the "|add:source_type_adjusted|add:" as Excel" as pdf_adjusted_text %}
+
+{% assign "Learn more about the Main Budget in the "|add:source_type|add:" as Excel" as excel_text %}
+{% assign "Learn more about these changes in the "|add:source_type_adjusted|add:" as Excel" as excel_adjusted_text %}
+
+{% assign "Dataset Guide for "|add:source_type as guide_text %}
+
+
+<div class="AdjustedSection" id="adjusted">
+    <h3 class="Title Title--section">Budget changes in the Adjusted Budget</h3>
+
+    <div class="AdjustedSection-container">
+        <div class="AdjustedSection-item">
+            <div class="AdjustedSection-share u-marginTop10 u-marginBottom15">
+                <div data-component="Share" data-anchor="adjusted" data-color="{{ color }}"></div>
+            </div>
+
+            <p class="js-tooltips">
+                These charts show changes to the spending plans originally published in the {{ source_type }}.
+                Details of these changes are published in the {{ source_type_adjusted }}.
+            </p>
+
+            {% if items.special_appropriation %}
+                <p class="js-tooltips">
+                    Special appropriations are not included in the Adjustments Appropriation. Special appropriations
+                    passed before the adjusted budget are included in the dataset.
+                </p>
+            {% endif %}
+
+            {% if parliament == "true" %}
+                <p class="js-tooltips">
+                    Amendments to Parliaments' budget are determined independently of the national government's budget
+                    processes in accordance with the Financial Management of Parliament and Provincial Legislatures Act,
+                    (2009) as amended.
+                </p>
+            {% endif %}
+
+            <ul class="LinksList">
+                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=dataset type="dataset" %}
+
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=csv type="download" %}
+
+                {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+
+                {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
+
+                {% include 'components/LinksList/item.html' with text=pdf_adjusted_text url=pdf type="download" %}
+
+                {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+
+                {% include 'components/LinksList/item.html' with text=excel_adjusted_text url=excel type="download" %}
+            </ul>
+        </div>
+
+        {% if items == null %}
+            <div class="AdjustedSection-item">
+                <div class="Message Message--secondary u-marginBottom60 ">
+                    <div class="Message-content">
+                        {% include 'components/Icon/index.html' with type="info" size="large" %}
+                        <span class="Message-heading">
+              Please note
+            </span>
+                    </div>
+                    <div class="Message-text Message-text--secondary">No adjusted budget data available for this year
+                        yet
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if items %}
+            <div class="AdjustedSection-item">
+                <div class="AdjustedSection-indicatorsGrid">
+                    <div class="AdjustedSection-indicator">
+                        <div class="Title Title--interSection u-marginBottom10">
+                            Total adjustments
+                        </div>
+
+                        {% include 'scenes/department/AdjustedSection/components/ChangeIndicator/index.html' with percentage=items.total_change.percentage amount=items.total_change.amount icon="true" priority="true" %}
+
+                        <p>Total adjustment to the original budget for this department.</p>
+                    </div>
+
+                    <div class="AdjustedSection-indicator">
+                        <div class="Title Title--interSection u-marginBottom10">
+                            {{ items.virements.label }}
+                        </div>
+
+                        {% include 'scenes/department/AdjustedSection/components/ChangeIndicator/index.html' with percentage=items.virements.percentage amount=items.virements.amount %}
+
+                        <p>Changes to planned spending between categories within this department.</p>
+                    </div>
+
+                    {% if items.special_appropriation %}
+                        <div class="AdjustedSection-indicator">
+                            <div class="Title Title--interSection u-marginBottom10">
+                                Special Appropriation
+                            </div>
+
+                            {% include 'scenes/department/AdjustedSection/components/ChangeIndicator/index.html' with percentage=items.special_appropriation.percentage amount=items.special_appropriation.amount %}
+
+                            <p>A Special Appropriation has been tabled. Percentage of the total Main Appropriation.</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% if items.direct_charges %}
+                    <div>
+                        <div class="Title Title--interSection u-marginBottom10">
+                            Direct charge against the National Revenue Fund
+                        </div>
+
+                        <p>Adjustments as percentage of these budgets:</p>
+
+                        <div class="AdjustedSection-indicatorsGrid">
+                            {% for charge in items.direct_charges %}
+                                <div class="AdjustedSection-indicator AdjustedSection-indicator--small">
+                                    {% include 'scenes/department/AdjustedSection/components/ChangeIndicator/index.html' with percentage=charge.percentage amount=charge.amount icon="true" small="true" %}
+
+                                    <p>{{ charge.label }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if items and items.by_type %}
+            <div class="AdjustedSection-item">
+                <div class="Card Card--fullHeight">
+                    <div class="Title Title--interSection u-marginBottom15">
+                        Adjustments by type
+                    </div>
+
+                    <div
+                            data-component="ChartAdaptor"
+                            data-items="{{ items.by_type | jsonify | escape }}"
+                            data-type="adjusted"
+                            data-scale="1"
+                            data-color="{{ color }}"
+                            data-title="Adjustments by type"
+                            data-subtitle="{{ subtitle }}"
+                            data-description=""
+                    >
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if items and items.by_type == null %}
+            <div class="AdjustedSection-item">
+                <div class="Card Card--fullHeight Card--dark">
+                    <div class="Title Title--interSection u-marginBottom15">
+                        Adjustments by type
+                    </div>
+
+                    <p>No adjustments were made to the total budget of this department</p>
+                </div>
+            </div>
+        {% endif %}
+
+
+        {% if items and items.econ_classes %}
+            <div class="AdjustedSection-item">
+                <div class="Card Card--fullHeight">
+                    <div class="Title Title--interSection">
+                        Total adjustments by economic classification
+                    </div>
+                    <div
+                            data-component="ChartAdaptor"
+                            data-type="adjusted"
+                            data-items="{{ items.econ_classes | jsonify | escape }}"
+                            data-scale="1"
+                            data-title="Total adjustments by economic classification"
+                            data-subtitle="{{ subtitle }}"
+                            data-description=""
+                    >
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if items and items.econ_classes == null %}
+            <div class="AdjustedSection-item">
+                <div class="Card Card--fullHeight Card--dark">
+                    <div class="Title Title--interSection u-marginBottom15">
+                        Total adjustments by economic classification
+                    </div>
+
+                    <p>There were no adjustements to economic classification totals</p>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if items and items.programmes %}
+            <div class="AdjustedSection-item">
+                <div class="Card Card--fullHeight">
+                    <div class="Title Title--interSection">
+                        Total adjustments by programme
+                    </div>
+
+                    <div
+                            data-component="ChartAdaptor"
+                            data-type="adjusted"
+                            data-items="{{ items.programmes | jsonify | escape }}"
+                            data-scale="1"
+                            data-title="Total adjustments by programme"
+                            data-subtitle="{{ subtitle }}"
+                            data-description=""
+                    >
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if items and items.programmes == null %}
+            <div class="AdjustedSection-item">
+                <div class="Card Card--fullHeight Card--dark">
+                    <div class="Title Title--interSection u-marginBottom15">
+                        Total adjustments by economic classification
+                    </div>
+
+                    <p>There were no adjustements to programme totals</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,43 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% load markdownify %}
+{% block page_content %}
+
+{% assign site.data.dataset as page_data %}
+
+
+<div class="Page-content">
+  <main class="Page-contentInner">
+    <div class="Section is-invisible">
+      <a href="/">vulekamali</a>
+      <span> / </span>
+      <a href="/datasets">Data and Analysis</a>
+      <span> / {{ page_data.name }}</span>
+    </div>
+
+    <h1 class="Page-mainHeading u-marginTop15 u-marginBottom0">{{ page_data.name }}</h1>
+
+    <div class="Section is-invisible u-fontSize18">
+      <div>
+      {{ page_data.description|linebreaks }}
+      </div>
+
+      {% assign site.data.guide.slug as guide_slug %}
+      {% if guide_slug %}
+
+        <a href="/{{ site.data.guide.url }}" class="Button is-inline u-marginTop25 u-marginBottom10">
+          Learn more about {{ page_data.name }}
+        </a>
+      {% endif %}
+
+    </div>
+
+    <div class="Grid has-twoColumn">
+      {% for dataset in page_data.datasets %}
+        {% include 'components/Preview/index.html' with title=dataset.name excerpt=dataset.description url=dataset.url_path %}
+      {% endfor %}
+    </div>
+
+  </main>
+</div>
+{% endblock %}

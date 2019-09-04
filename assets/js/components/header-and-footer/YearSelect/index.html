@@ -1,0 +1,4 @@
+{% load define_action %}
+<section class="js-initYearSelect" data-json="{ &quot;data&quot; : {{ years|jsonify|escape }} }">
+  {% include 'components/header-and-footer/YearSelect/partials/skeleton-state.html' %}
+</section>

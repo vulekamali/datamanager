@@ -8,6 +8,7 @@ services:
       - POSTGRES_DB=budgetportal
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
   app:
     build:
@@ -16,10 +17,23 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     environment:
       - DATABASE_URL=postgresql://budgetportal@db/budgetportal
+      - DJANGO_DEBUG_TOOLBAR=${DJANGO_DEBUG_TOOLBAR}
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    command: tox
+    environment:
+      - DATABASE_URL=postgresql://budgetportal@db/budgetportal_test
+    volumes:
+      - .:/code
     depends_on:
       - db
 

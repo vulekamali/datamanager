@@ -1,7 +1,7 @@
-from budgetportal.models import Department, Government, Sphere
-from django import forms
+from budgetportal.models import Department, Government, Sphere, InfrastructureProjectPart
+from django import forms, VERSION
 from django.core.exceptions import ValidationError
-from django.db.models import Q
+from django.db.models import Q, NOT_PROVIDED
 from django.utils.text import slugify
 from import_export import resources
 from import_export.admin import ImportForm
@@ -9,6 +9,9 @@ from import_export.fields import Field
 from import_export.formats import base_formats
 from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import Widget
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class CustomIsVotePrimaryWidget(Widget):
@@ -27,6 +30,29 @@ class CustomIsVotePrimaryWidget(Widget):
             return True
         else:
             return False
+
+
+class CustomFeaturedWidget(CustomIsVotePrimaryWidget):
+    """
+    Widget for converting featured field on the InfrastructureProjectPart model.
+    """
+
+
+class CustomProvinceWidget(Widget):
+    """
+    Helper class for converting gps_code fields on the InfrastructureProjectPart model.
+    """
+    def clean(self, value, row=None, *args, **kwargs):
+        project_name = row['project_name']
+        gps_code = row['gps_code']
+        cleaned_coordinates = InfrastructureProjectPart.clean_coordinates(gps_code)
+        provinces = InfrastructureProjectPart.get_provinces(
+            cleaned_coordinates=cleaned_coordinates,
+            project_name=project_name
+        )
+        value = "".join([province for province in provinces])
+        return value
+
 
 
 class CustomGovernmentWidget(Widget):
@@ -125,3 +151,56 @@ class DepartmentImportForm(ImportForm):
         queryset=Sphere.objects.all(),
         required=True
     )
+
+
+class InfrastructureProjectProvinceField(Field):
+    """ The only reason to override this class is so that we can force the clean() method to run on the provinces
+    field, even though it doesn't exist in the import csv. The reason for this being that it doesn't seem like there's
+    another easy way to 'create' a new field by using other fields. """
+
+    def clean(self, data):
+        """
+        Translates the value stored in the imported datasource to an
+        appropriate Python object and returns it.
+        """
+        if self.column_name == 'provinces':
+            value = self.widget.clean('', row=data)
+            return value
+
+        try:
+            value = data[self.column_name]
+        except KeyError:
+            raise KeyError("Column '%s' not found in dataset. Available "
+                           "columns are: %s" % (self.column_name, list(data)))
+
+        # If ValueError is raised here, import_obj() will handle it
+        value = self.widget.clean(value, row=data)
+
+        if value in self.empty_values and self.default != NOT_PROVIDED:
+            if callable(self.default):
+                return self.default()
+            return self.default
+
+        return value
+
+
+class InfrastructureProjectResource(resources.ModelResource):
+    """
+    Class to help django-import-export know how to map the rows in infrastructure project
+    import files to django models.
+    """
+    featured = Field(attribute='featured', column_name='featured', widget=CustomFeaturedWidget())
+    provinces = InfrastructureProjectProvinceField(attribute='provinces', column_name='provinces', widget=CustomProvinceWidget())
+
+    class Meta:
+        model = InfrastructureProjectPart
+        import_id_fields = ['project_slug', 'financial_year']
+
+    def import_field(self, field, obj, data, is_m2m=False):
+        """ The only reason to override this function is so that we can force the clean() method to run on the provinces
+            field, even though it doesn't exist in the import csv. The reason for this being that it doesn't seem like there's
+            another easy way to 'create' a new field by using other fields. """
+
+        if (field.attribute and field.column_name in data) or field.attribute == 'provinces':
+            field.save(obj, data, is_m2m)
+

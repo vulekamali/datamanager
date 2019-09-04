@@ -1,0 +1,53 @@
+{% load define_action %}
+
+{% if fixed == "true" %}
+  {% assign "<nav class='ArrowButtons ArrowButtons--fixed' data-sticky-arrows>" as root %}
+  {% assign  "" as activeModifiers %}
+  {% assign "" as responsiveModifiers %}
+  {% assign "</nav>" as closingTag %}
+  {% assign " nav-link" as navlinkModifier %}
+{% else %}
+  {% assign "<div class='ArrowButtons'>" as root %}
+  {% assign " active" as activeModifiers %}
+  {% assign " is-responsive" as responsiveModifiers %}
+  {% assign "</div>" as closingTag %}
+  {% assign "" as navlinkModifier %}
+{% endif %}
+
+
+{{ root }}
+  <ul class="ArrowButtons-list nav">
+    <li class="ArrowButtons-item nav-item">
+      <a class="ArrowButtons-button ArrowButtons-button--link ArrowButtons-button--green{{ navlinkModifier }}{{ activeModifiers }}{{ responsiveModifiers }}" href="{{ link_1 }}" data-scroll-smooth="{{ link_1 }}">
+        <div class="ArrowButtons-box ArrowButtons-box--green{{ responsiveModifiers }}">
+          <div>
+            <div class="ArrowButtons-heading{{ responsiveModifiers }}">Plan</div>
+            <div class="ArrowButtons-description{{ responsiveModifiers }}">Budgets and expenditure planning.</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li class="ArrowButtons-item nav-item">
+      <a class="ArrowButtons-button ArrowButtons-button--link ArrowButtons-button--orange{{ navlinkModifier }}{{ activeModifiers }}{{ responsiveModifiers }}" href="{{ link_2 }}" data-scroll-smooth="{{ link_2 }}">
+        <div class="ArrowButtons-box ArrowButtons-box--orange{{ responsiveModifiers }}">
+          <div>
+            <div class="ArrowButtons-heading{{ responsiveModifiers }}">Implement</div>
+            <div class="ArrowButtons-description{{ responsiveModifiers }}">Implementation of department’s programmes.</div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li class="ArrowButtons-item nav-item">
+      <a class="ArrowButtons-button ArrowButtons-button--link ArrowButtons-button--purple {{ navlinkModifier }}{{ activeModifiers }}{{ responsiveModifiers }}" href="{{ link_3 }}" data-scroll-smooth="{{ link_3 }}">
+        <div class="ArrowButtons-box ArrowButtons-box--purple{{ responsiveModifiers }}">
+          <div>
+            <div class="ArrowButtons-heading{{ responsiveModifiers }}">Review</div>
+            <div class="ArrowButtons-description{{ responsiveModifiers }}">Review of expenditure over the fiscal year.</div>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+{{ closingTag }}

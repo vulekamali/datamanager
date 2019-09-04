@@ -7,7 +7,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 
 module.exports = {
-  entry: './_includes/scripts.js',
+  entry: './assets/js/scripts.js',
   output: {
     path: resolve(__dirname, 'assets/generated/'),
     filename: 'scripts.bundle.js',

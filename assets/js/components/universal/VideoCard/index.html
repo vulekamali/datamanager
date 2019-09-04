@@ -1,0 +1,31 @@
+{% load define_action %}
+{% if fullpage == "true" %}
+  {% assign  " VideoCard-container--fullPage" as video_card_root %}
+  {% assign " VideoCard-preview--fullPage" as video_card_preview %}
+{% else %}
+  {% assign "" as video_card_root %}
+  {% assign "" as video_card_preview %}
+{% endif %}
+
+<div class='VideoCard {% if full_height == "true" %}VideoCard--fullHeight{% endif %}'>
+  <div class='Card {% if full_height == "true" %}VideoCard-card--fullHeight{% endif %}'>
+    <div class="VideoCard-container{{ video_card_root }} {{ utils }} {% if compact %}VideoCard-container--compact{% endif %}" data-component="VideoCard">
+      <div class="VideoCard-preview{{ video_card_preview }}" data-thumbnail>
+        <div class="VideoCard-icon">
+          {% include 'components/Icon/index.html' with type="play" %}
+        </div>
+      </div>
+      <div class="VideoCard-info">
+        <div class="VideoCard-title" data-title data-text>{{ video.title }}</div>
+        <div>
+          {% for language in video.videolanguage_set.all %}
+            <button class="Button is-inline is-small u-marginTop10 u-marginRight5" data-id="{{ language.youtube_id }}" data-buttons data-language>
+              {{ language.label }}
+            </button>
+          {% endfor %}
+        </div>
+        <p class="mt-3">{{ video.description|truncatechars:180 }}</p>
+      </div>
+    </div>
+  </div>
+</div>

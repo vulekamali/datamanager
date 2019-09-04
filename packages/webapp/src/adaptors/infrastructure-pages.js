@@ -67,7 +67,10 @@ class InfrastructurePages extends Component {
   }
 
   componentDidMount() {
-    axios.get('/json/infrastructure-projects.json')
+    const { projectId } = this.props;
+    const apiUrl = !!projectId ? `/json/infrastructure-projects/${projectId}.json` : '/json/infrastructure-projects.json';
+
+    axios.get(apiUrl)
       .then(({ data }) => {
         this.setState({
         loading: false,

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from autoslug import AutoSlugField
 from slugify import slugify
 from budgetportal.datasets import (
@@ -1297,7 +1299,6 @@ class Department(models.Model):
             'data': {'items': expenditure, 'total': total_budget},
         } if expenditure else None
 
-
     def get_expenditure_time_series_summary(self):
         cpi_year_slug, cpi_resource_id = Dataset.get_latest_cpi_resource()
         base_year = get_base_year(cpi_year_slug)
@@ -1591,94 +1592,28 @@ class Programme(models.Model):
         return '<%s %s>' % (self.__class__.__name__, self.get_url_path())
 
 
-class InfrastructureProject:
-    """ Represents an infrastructure project stored in CKAN """
+class InfrastructureProjectPart(models.Model):
+    sphere = models.CharField(max_length=255)
+    department = models.CharField(max_length=255)
+    sector = models.CharField(max_length=255)
+    project_name = models.CharField(max_length=255)
+    project_description = models.TextField()
+    nature_of_investment = models.CharField(max_length=255)
+    infrastructure_type = models.CharField(max_length=255)
+    current_project_stage = models.CharField(max_length=255)
+    sip_category = models.CharField(max_length=255)
+    br_featured = models.CharField(max_length=255)
+    featured = models.BooleanField()
+    budget_phase = models.CharField(max_length=255)
+    project_slug = models.CharField(max_length=255)
+    amount = models.BigIntegerField(default=0)
+    financial_year = models.CharField(max_length=4)
+    total_project_cost = models.BigIntegerField(default=0)
+    provinces = models.CharField(max_length=510, default="")
+    gps_code = models.CharField(max_length=255, default="")
 
-    def __init__(self, **kwargs):
-        self.records = kwargs.get('records')
-        self.name = self.records[0]['Project name']
-        self.slug = self.records[0]['Project slug']
-        self.stage = self.records[0]['Current project stage']
-        self.department_name = self.records[0]['Department']
-        self.description = self.records[0]['Project description']
-        self.total_budget = float(self.records[0]['Total project cost'])
-        self.nature_of_investment = self.records[0]['Nature of investment']
-        self.infrastructure_type = self.records[0]['Infrastructure type']
-        self.raw_coordinate_string = self.records[0]['GPS code']
-        self.complete_expenditure = self._build_complete_expenditure(self.records)
-        self.cleaned_coordinates = self._clean_coordinates(self.raw_coordinate_string)
-        self.projected_expenditure = self._calculate_projected_expenditure(self.records)
-
-    @classmethod
-    def get_dataset(cls):
-        """ Return the first dataset in the Infrastructure Projects group. """
-        query = {
-            'q': '',
-            'fq': ('+organization:"national-treasury"'
-                   '+vocab_spheres:"national"'
-                   '+groups:"infrastructure-projects"'),
-            'rows': 1,
-        }
-        response = ckan.action.package_search(**query)
-        logger.info(
-            "query %s\nreturned %d results",
-            pformat(query),
-            len(response['results'])
-        )
-        if response['results']:
-            return Dataset.from_package(response['results'][0])
-        else:
-            return None
-
-    @classmethod
-    def get_project_from_resource(cls, project_slug):
-        """ Uses first CSV resource in dataset """
-        dataset = cls.get_dataset()
-        if not dataset:
-            return None
-        resource = dataset.get_resource(format='CSV')
-        sql = '''
-                SELECT * FROM "{}" WHERE "Featured"='TRUE' AND "Project slug"='{}'
-            '''.format(resource['id'], project_slug)
-        params = {'sql': sql}
-        project_result = requests.get(CKAN_DATASTORE_URL, params=params)
-        project_result.raise_for_status()
-        project_records = project_result.json()['result']['records']
-        if project_records:
-            return InfrastructureProject(records=project_records)
-        else:
-            return None
-
-    @classmethod
-    def get_featured_projects_from_resource(cls):
-        """ Uses first CSV resource in dataset """
-        dataset = cls.get_dataset()
-        if not dataset:
-            return None
-        resource = dataset.get_resource(format='CSV')
-        sql = '''
-                SELECT * FROM "{}" WHERE "Featured"='TRUE'
-            '''.format(resource['id'])
-
-        params = {'sql': sql}
-        projects_result = requests.get(CKAN_DATASTORE_URL, params=params)
-        projects_result.raise_for_status()
-        project_records = projects_result.json()['result']['records']
-
-        # Assume project names are unique within the subset of featured projects
-        unique_project_names = []
-        for obj in project_records:
-            if obj['Project name'] not in unique_project_names:
-                unique_project_names.append(obj['Project name'])
-
-        projects = []
-        for project_name in unique_project_names:
-            project_list = filter(lambda x: x['Project name'] == project_name, project_records)
-            projects.append(InfrastructureProject(records=project_list))
-        return projects
-
-    def get_url_path(self):
-        return "/infrastructure-projects/{}".format(self.slug)
+    def __str__(self):
+        return "{} ({} {})".format(self.project_slug, self.budget_phase, self.financial_year)
 
     def get_budget_document_url(self, document_format='PDF'):
         """
@@ -1686,12 +1621,12 @@ class InfrastructureProject:
         if the latest department instance matches the project year
         """
         departments = Department.objects.filter(
-            slug=slugify(self.department_name),
+            slug=slugify(self.department),
             government__sphere__slug='national'
         )
         if departments:
             latest_dept = departments[0].get_latest_department_instance()
-            project_year = InfrastructureProject.get_dataset().package['financial_year'][0]
+            project_year = self.get_dataset().package['financial_year'][0]
             if latest_dept.get_financial_year().slug == project_year:
                 budget_dataset = latest_dept.get_dataset(group_name='budget-vote-documents')
                 if budget_dataset:
@@ -1700,15 +1635,15 @@ class InfrastructureProject:
                         return document_resource['url']
         return None
 
-    @staticmethod
-    def _calculate_projected_expenditure(records):
+    def get_url_path(self):
+        return "/infrastructure-projects/{}".format(self.project_slug)
+
+    def calculate_projected_expenditure(self):
         """ Calculate sum of predicted amounts from a list of records """
-        if not isinstance(records, list):
-            raise TypeError('Invalid type for projected expenditure calculation')
-        projected_records_for_project = filter(lambda x: x['Budget Phase'] == 'MTEF', records)
+        projected_records_for_project = InfrastructureProjectPart.objects.filter(budget_phase='MTEF', project_slug=self.project_slug)
         projected_expenditure = 0
         for project in projected_records_for_project:
-            projected_expenditure += float(project['Amount'])
+            projected_expenditure += float(project.amount)
         return projected_expenditure
 
     @staticmethod
@@ -1724,7 +1659,7 @@ class InfrastructureProject:
         return cleaned_coordinate
 
     @classmethod
-    def _clean_coordinates(cls, raw_coordinate_string):
+    def clean_coordinates(cls, raw_coordinate_string):
         cleaned_coordinates = []
         try:
             if 'and' in raw_coordinate_string:
@@ -1773,40 +1708,110 @@ class InfrastructureProject:
                 return name
         return None
 
-    def get_provinces(self):
+    @classmethod
+    def get_provinces(cls, cleaned_coordinates=None, project_name=""):
         """ Returns a list of provinces based on values in self.coordinates """
         provinces = set()
-        if self.cleaned_coordinates:
-            for c in self.cleaned_coordinates:
-                province = self._get_province_from_coord(c)
+        if cleaned_coordinates:
+            for c in cleaned_coordinates:
+                province = cls._get_province_from_coord(c)
                 if province:
                     provinces.add(province)
                 else:
                     logger.warning("Couldn't find GPS co-ordinates for infrastructure project '{}' on MapIt: {}".
-                                   format(self.name, c))
+                                   format(project_name, c))
         else:
-            province = self._get_province_from_project_name(self.name)
+            province = cls._get_province_from_project_name(project_name)
             if province:
                 logger.info("Found province {} in project name".format(province))
                 provinces.add(province)
         return list(provinces)
 
     @staticmethod
-    def _build_expenditure_item(record):
+    def _build_expenditure_item(project):
         return {
-            'year': record['Financial Year'],
-            'amount': float(record['Amount']),
-            'budget_phase': record['Budget Phase']
+            'year': project.financial_year,
+            'amount': project.amount,
+            'budget_phase': project.budget_phase
         }
 
-    @classmethod
-    def _build_complete_expenditure(cls, records):
+    def build_complete_expenditure(self):
         complete_expenditure = []
-        for record in records:
+        projects = InfrastructureProjectPart.objects.filter(project_slug=self.project_slug)
+        for project in projects:
             complete_expenditure.append(
-                cls._build_expenditure_item(record)
+                self._build_expenditure_item(project)
             )
         return complete_expenditure
+
+    @classmethod
+    def get_dataset(cls):
+        """ Return the first dataset in the Infrastructure Projects group. """
+        query = {
+            'q': '',
+            'fq': ('+organization:"national-treasury"'
+                   '+vocab_spheres:"national"'
+                   '+groups:"infrastructure-projects"'),
+            'rows': 1,
+        }
+        response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nreturned %d results",
+            pformat(query),
+            len(response['results'])
+        )
+        if response['results']:
+            return Dataset.from_package(response['results'][0])
+        else:
+            return None
+
+
+prov_keys = prov_abbrev.keys()
+prov_choices = tuple([(prov_key, prov_key) for prov_key in prov_keys])
+
+
+class Event(models.Model):
+    start_date = models.DateField(default=datetime.now)
+    date = models.CharField(max_length=255)
+    type = models.CharField(max_length=255, choices=(
+        ('hackathon', 'hackathon'), ('dataquest', 'dataquest'), ('cid', 'cid'),
+        ('gift-dataquest', 'gift-dataquest'),
+    ))
+    province = models.CharField(max_length=255, choices=prov_choices)
+    where = models.CharField(max_length=255)
+    url = models.URLField(blank=True, null=True)
+    notes_url = models.URLField(blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
+    rsvp_url = models.URLField(blank=True, null=True)
+    presentation_url = models.URLField(blank=True, null=True)
+    status = models.CharField(max_length=255, default='upcoming', choices=(('upcoming', 'upcoming'), ('past', 'past')))
+
+    class Meta:
+        ordering = ['-start_date', ]
+
+    def __str__(self):
+        return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
+
+
+class VideoLanguage(models.Model):
+    label = models.CharField(max_length=255)
+    youtube_id = models.CharField(max_length=255, null=True, blank=True)
+    video = models.ForeignKey('Video', null=True, blank=True)
+
+    class Meta:
+        ordering = ['id']
+
+    def __str__(self):
+        return self.label
+
+
+class Video(models.Model):
+    title_id = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    description = models.TextField(max_length=510)
+
+    def __str__(self):
+        return self.title
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
@@ -1829,6 +1834,7 @@ def resource_name(department):
 
 def get_base_year(cpi_year_slug):
     return int(cpi_year_slug[:4]) - 1
+
 
 def get_cpi():
     cpi_year_slug, cpi_resource_id = Dataset.get_latest_cpi_resource()

@@ -1,0 +1,31 @@
+{% if currentPage == 'Videos' %}
+  {% assign videoState = ' is-active' %}
+{% else %}
+  {% assign videoState = '' %}
+{% endif %}
+
+{% if currentPage == 'Glossary' %}
+  {% assign glossaryState = ' is-active' %}
+{% else %}
+  {% assign glossaryState = '' %}
+{% endif %}
+
+{% if currentPage == 'Resources' %}
+  {% assign resourcesState = ' is-active' %}
+{% else %}
+  {% assign resourcesState = '' %}
+{% endif %}
+
+
+
+<ul class="SubLinks-subItems">
+  <li class="SubLinks-subItem">
+    <a class="SubLinks-subLink{{ videoState }}" href="/{{ year }}/videos">Videos</a>
+  </li>
+  <li class="SubLinks-subItem">
+    <a class="SubLinks-subLink{{ glossaryState }}" href="/{{ year }}/glossary">Glossary</a>
+  </li>
+  <li class="SubLinks-subItem">
+    <a class="SubLinks-subLink{{ resourcesState }}" href="/{{ year }}/resources">Resources</a>
+  </li>
+</ul>

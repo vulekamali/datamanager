@@ -1,0 +1,43 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% block page_content %}
+{% assign site.data.dataset as page_data %}
+
+<div class="Page-content">
+  <main class="Page-contentInner">
+    <div class="Section is-invisible">
+      <a href="/">vulekamali</a>
+      <span> / </span>
+      <a href="/datasets">Data and Analysis</a>
+      <span> / Contributed Data and Analysis</span>
+    </div>
+
+    <h1 class="Page-mainHeading u-marginTop15 u-marginBottom0">Contributed Data</h1>
+
+    <div class="Section is-invisible u-fontSize18">
+      Contibuted data and documentation for South African government budgets. Hosted by National Treasury in partnership with IMALI YETHU.
+    </div>
+
+    <div class="BasicContent is-green u-padding10 u-marginBottom25">
+      <div class="BasicContent">
+        <div class="Grid has-rightSidebar">
+          <div>
+            <div class="BasicContent-title">How can I contribute?</div>
+            <div>Do you have data or analysis related to the budget that you would like to contribute?</div>      
+          </div>
+          <div class="u-paddingTop15">
+            <a class="Button" target="_blank" href="https://data.vulekamali.gov.za/user/login?came_from=/dataset/new">Log in and submit your data</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Grid">
+      {% for dataset in page_data.datasets %}
+        {% include 'components/universal/ThumbPreview/index.html' with title=dataset.name source=dataset.organization.name source_url=dataset.organization.url logo=dataset.organization.logo_url url=dataset.url_path created=dataset.created updated=dataset.last_updated %}
+      {% endfor %}
+    </div>
+
+  </main>
+</div>
+{% endblock %}
