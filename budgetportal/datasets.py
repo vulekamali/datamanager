@@ -36,6 +36,7 @@ class Dataset():
         self.intro_short = kwargs['intro_short']
         self.methodology = kwargs['methodology']
         self.key_points = kwargs['key_points']
+        self.importance = kwargs['importance']
         self.use_for = kwargs['use_for']
         self.usage = kwargs['usage']
         self.organization_slug = kwargs['organization_slug']
@@ -83,6 +84,7 @@ class Dataset():
             intro_short=none_if_empty_or_missing(package, 'notes_short'),
             methodology=none_if_empty_or_missing(package, 'methodology'),
             key_points=none_if_empty_or_missing(package, 'key_points'),
+            importance=none_if_empty_or_missing(package, 'importance'),
             use_for=none_if_empty_or_missing(package, 'use_for'),
             usage=none_if_empty_or_missing(package, 'usage'),
             resources=resources,
