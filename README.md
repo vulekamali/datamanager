@@ -122,10 +122,52 @@ docker-compose run --rm app python manage.py makemigrations
 
 * Always maintain or improve test coverage
 * Follow the principles of the [test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid)
+
+#### Python/Django
+
+* Get better debugging with ``python manage.py runserver_plus``
+
+#### React stuff (package.json and packages/webapp/package.json)
+
+TBC
+
+#### Classic django+bower stuff:
+
 * Put javascript into ``budgetportal/static/javascript/app.js``
 * Put SCSS stylesheets into ``budgetportal/static/stylesheets/app.scss``
 * Install new asset packs with Bower: ``bower install -Sp package-to-install``
-* Get better debugging with ``python manage.py runserver_plus``
+
+### Frontend development
+
+#### Root NPM package
+
+See package.json and webpack.config.js
+
+#### packages/webapp NPM package
+
+See [README.md](packages/webapp/README.md)
+
+Specifically, it is set up so that development can happen both directly against the webapp, e.g.
+
+```
+cd packages/webapp
+yarn start
+```
+
+or
+
+```
+cd packages/webapp
+yarn start:storybook
+```
+
+Or as part of the django app where it gets embedded
+
+```
+yarn build:webapp
+```
+
+and reloading the django page.
 
 ### Single Sign-on (SSO)
 
