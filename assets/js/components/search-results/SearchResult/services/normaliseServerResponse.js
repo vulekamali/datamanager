@@ -54,7 +54,7 @@ const normaliseDepartmentItem = (item) => {
   const buildDeptName = () => `${regionString} Department: ${nameString}`;
   const title = isOfficial ? buildDeptName() : rawTitle;
 
-  const buildDeptUrl = () => `https://vulekamali.gov.za/${year}/${regionSlug}/departments/${nameSlug}`;
+  const buildDeptUrl = () => `/${year}/${regionSlug}/departments/${nameSlug}`;
   const url = buildUrl(isOfficial, buildDeptUrl, organization.name, name, groups);
   const sourceText = isOfficial ? createLinkText(regionSlug) : null;
 

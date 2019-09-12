@@ -2,7 +2,6 @@ import { createElement } from 'react';
 import { render } from 'react-dom';
 import Homepage from '../views/Homepage';
 
-
 const props = {
   image: 'https://via.placeholder.com/150',
   heading: 'New budget data is now live!',
@@ -10,7 +9,7 @@ const props = {
   buttons: {
     primary: {
       text: 'Select a department',
-      link: '/2019-20/departments'
+      link: '/2019-20/departments',
     },
     secondary: {
       text: 'Download budget resources',
@@ -22,7 +21,7 @@ const props = {
     heading: 'The Status of National Department Infrastructure Projects in South Africa',
     link: {
       text: 'Read this feature',
-      link: 'https://vulekamali.gov.za/infrastructure-projects',
+      link: '/infrastructure-projects',
     },
   },
   resources: [
