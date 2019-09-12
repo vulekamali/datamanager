@@ -1,3 +1,0 @@
-allauth_facebook
-budgetportal
-discourse
