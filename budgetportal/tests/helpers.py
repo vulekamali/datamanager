@@ -11,7 +11,7 @@ from selenium import webdriver
 
 class BaseSeleniumTestCase(StaticLiveServerTestCase):
     """
-    Base class for Selenium / PhantomJS tests.
+    Base class for Selenium tests.
 
     This saves a screenshot to the current directory on test failure.
     """
