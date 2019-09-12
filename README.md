@@ -194,16 +194,17 @@ Logout from ckan might not send you to the right URL to logout from DataManager.
 Running tests
 --------------
 
-Install PhantomJS according to the right way for your operating system.
+All tests
 
 ```
-tox
+docker-compose run test
 ```
 
-This should should exist with non-zero status and indicate that all tests passed.
+Specific tests, e.g.
 
-If any tests fail, the exit code will be non-zero and details will be printed to the console. Remember to scroll up a bit in the output to see stack traces corresponding server errors for HTTP-based tests.
-
+```
+docker-compose run --rm test python manage.py test budgetportal.tests.test_bulk_upload.BulkUploadTestCase
+```
 
 Production deployment
 ---------------------
