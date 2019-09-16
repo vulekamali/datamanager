@@ -388,52 +388,6 @@ def department_yaml(request, financial_year_id, sphere_slug, government_slug, de
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset_category_data(category_slug):
-    category = Category.get_by_slug(category_slug)
-    page_data = {
-        'datasets': [],
-        'selected_tab': 'datasets',
-        'slug': category.slug,
-        'name': category.name,
-        'title': '%s - vulekamali' % category.name,
-        'description': category.description,
-        'url_path': category.get_url_path(),
-    }
-
-    for dataset in category.get_datasets():
-        field_subset = dataset_fields(dataset)
-        field_subset['description'] = field_subset.pop('intro')
-        del field_subset['methodology']
-        del field_subset['key_points']
-        del field_subset['use_for']
-        del field_subset['usage']
-        page_data['datasets'].append(field_subset)
-
-    return page_data
-
-
-def dataset_data(category_slug, dataset_slug):
-    dataset = Dataset.fetch(dataset_slug)
-    assert (dataset.category.slug == category_slug)
-
-    if category_slug == 'contributed':
-        description = ("Data and/or documentation related to South African"
-                       " government budgets contributed by %s and hosted"
-                       " by National Treasury in partnership with IMALI YETHU"
-                       ) % dataset.get_organization()['name']
-    else:
-        description = dataset.intro
-
-    page_data = {
-        'selected_tab': 'datasets',
-        'title': "%s - vulekamali" % dataset.name,
-        'description': description,
-    }
-
-    page_data.update(dataset_fields(dataset))
-    return page_data
-
-
 def infrastructure_projects_overview(request):
     """ Overview page to showcase all featured infrastructure projects """
     infrastructure_projects = InfrastructureProjectPart.objects.filter(featured=True).distinct('project_slug')
@@ -898,13 +852,13 @@ def dataset_category_list_context():
     }
 
 
-def dataset_landing_page_yaml(request):
+def dataset_category_list_yaml(request):
     context = dataset_category_list_context()
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset_landing_page(request):
+def dataset_category_list_page(request):
     context = dataset_category_list_context()
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
@@ -912,97 +866,97 @@ def dataset_landing_page(request):
     return render(request, 'datasets.html', context=context)
 
 
+def dataset_category_context(category_slug):
+    category = Category.get_by_slug(category_slug)
+    context = {
+        'datasets': [],
+        'selected_tab': 'datasets',
+        'slug': category.slug,
+        'name': category.name,
+        'title': '%s - vulekamali' % category.name,
+        'description': category.description,
+        'url_path': category.get_url_path(),
+    }
+
+    for dataset in category.get_datasets():
+        field_subset = dataset_fields(dataset)
+        field_subset['description'] = field_subset.pop('intro')
+        del field_subset['methodology']
+        del field_subset['key_points']
+        del field_subset['use_for']
+        del field_subset['usage']
+        context['datasets'].append(field_subset)
+
+    return context
+
+
 def dataset_category_yaml(request, category_slug):
-    response = dataset_category_data(category_slug)
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    context = dataset_category_context(category_slug)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset_category_migrated(request, category_slug):
+def dataset_category_page(request, category_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = {
-        'page': {
-            'layout': 'government_dataset_category',
-            'data_key': category_slug,
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': dataset_category_data(category_slug),
-                'guide': {'slug': category_slug, 'url': 'guides/{}'.format(category_slug)}
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
+    context = dataset_category_context(category_slug)
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['latest_year'] = '2019-20'
     return render(request, 'government_dataset_category.html', context=context)
-
-
-def dataset_yaml(request, category_slug, dataset_slug):
-    response = dataset_data(category_slug, dataset_slug)
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def dataset_migrated(request, category_slug, dataset_slug):
-    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = {
-        'page': {
-            'layout': 'government_dataset',
-            'data_key': dataset_slug,
-            'category': category_slug,
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': dataset_data(category_slug, dataset_slug)
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
-    return render(request, 'government_dataset.html', context=context)
 
 
 def contributed_datasets_list(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = dataset_category_context('contributed')
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['latest_year'] = '2019-20'
+    return render(request, 'contributed_data_category.html', context=context)
+
+
+def dataset_context(category_slug, dataset_slug):
+    dataset = Dataset.fetch(dataset_slug)
+    assert (dataset.category.slug == category_slug)
+
+    if category_slug == 'contributed':
+        description = ("Data and/or documentation related to South African"
+                       " government budgets contributed by %s and hosted"
+                       " by National Treasury in partnership with IMALI YETHU"
+                       ) % dataset.get_organization()['name']
+    else:
+        description = dataset.intro
+
     context = {
-        'page': {
-            'layout': 'contributed-data',
-            'data_key': 'contributed',
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': dataset_category_data('contributed'),
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
+        'selected_tab': 'datasets',
+        'title': "%s - vulekamali" % dataset.name,
+        'description': description,
     }
-    return render(request, 'contributed-data.html', context=context)
+
+    context.update(dataset_fields(dataset))
+    return context
+
+
+def dataset_yaml(request, category_slug, dataset_slug):
+    context = dataset_context(category_slug, dataset_slug)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def dataset_page(request, category_slug, dataset_slug):
+    context = dataset_context(category_slug, dataset_slug)
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['latest_year'] = '2019-20'
+    context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
+    context["last_updated"] = datetime.strptime(context["last_updated"], "%Y-%m-%dT%H:%M:%S.%f")
+    return render(request, 'government_dataset.html', context=context)
 
 
 def contributed_dataset(request, dataset_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    dataset = dataset_data('contributed', dataset_slug)
-    dataset["created"] = datetime.strptime(dataset["created"], "%Y-%m-%dT%H:%M:%S.%f")
-    dataset["last_updated"] = datetime.strptime(dataset["last_updated"], "%Y-%m-%dT%H:%M:%S.%f")
-    context = {
-        'page': {
-            'layout': 'contributed_dataset',
-            'data_key': 'contributed',
-            'category': 'contributed',
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': dataset,
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
+    context = dataset_context('contributed', dataset_slug)
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['latest_year'] = '2019-20'
+    context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
+    context["last_updated"] = datetime.strptime(context["last_updated"], "%Y-%m-%dT%H:%M:%S.%f")
     return render(request, 'contributed_dataset.html', context=context)
 
 

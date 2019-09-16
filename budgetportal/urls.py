@@ -110,20 +110,19 @@ urlpatterns = [
     url(r'^guides/?$', views.guides, name="guides", kwargs={'slug': 'index'}),
     url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guides"),
 
-    # Dataset landing page
-    url(r'^datasets/?$', views.dataset_landing_page, name="dataset-landing-page"),
-    url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_landing_page_yaml)),
+    # Dataset category list
+    url(r'^datasets/?$', views.dataset_category_list_page, name="dataset-landing-page"),
+    url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_category_list_yaml)),
 
-    url(r'^datasets/contributed/?$', views.contributed_datasets_list, name="contributed-datasets"),
-
-    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', views.contributed_dataset, name="contributed-dataset"),
 
     # Dataset categories
-    url(r'^datasets/(?P<category_slug>[-\w]+)/?$', views.dataset_category_migrated, name="dataset-category"),
+    url(r'^datasets/contributed/?$', views.contributed_datasets_list, name="contributed-datasets"),
+    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', views.contributed_dataset, name="contributed-dataset"),
+    url(r'^datasets/(?P<category_slug>[-\w]+)/?$', views.dataset_category_page, name="dataset-category"),
     url(r'^datasets/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category_yaml)),
 
     # Detaset detail
-    url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', views.dataset_migrated, name="dataset"),
+    url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', views.dataset_page, name="dataset"),
     url(r'^datasets/(?P<category_slug>[\w-]+)/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_yaml)),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', views.search_result, name="search-result"),
