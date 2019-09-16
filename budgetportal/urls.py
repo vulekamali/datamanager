@@ -21,8 +21,6 @@ def permission_denied(request):
 
 
 urlpatterns = [
-    url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
-
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview)),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
@@ -61,9 +59,11 @@ urlpatterns = [
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json)),
 
+    # Homepage
+    url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
     # Financial year home page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
-        cache_page(CACHE_SECS)(views.year_home)),
+        cache_page(CACHE_SECS)(views.year_home_yaml)),
 
     # Search results
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result.yaml',

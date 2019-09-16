@@ -35,7 +35,7 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
-def year_home(request, financial_year_id):
+def year_home_context(request, financial_year_id):
     """
     View of a financial year homepage, e.g. /2017-18
     """
@@ -62,11 +62,44 @@ def year_home(request, financial_year_id):
                 'url_path': "/%s" % year.slug,
             },
         })
+    return context
 
+
+def year_home_yaml(request, financial_year_id):
+    context = year_home_context(request, financial_year_id)
     response_yaml = yaml.safe_dump(context,
                                    default_flow_style=False,
                                    encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
+
+
+def homepage(request):
+    context = {
+        "page": year_home_context(request, financial_year_id="2019-20")
+    }
+
+    titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
+    videos_data = Video.objects.filter(title_id__in=titles)
+
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
+
+    context.update({
+        'page': {
+            'layout': 'homepage',
+            'data_key': 'index',
+        },
+        'site': {
+            'data': {
+                'navbar': read_object_from_yaml(navbar_data_file_path),
+                'videos': {'data': videos_data},
+                'dataset': read_object_from_yaml(homepage_data_file_path)
+            },
+            'latest_year': '2019-20'
+        },
+        'debug': settings.DEBUG
+    })
+    return render(request, 'homepage.html', context=context)
 
 
 def financial_year_page_context(request, financial_year_id, slug, selected_tab=None):
@@ -1116,31 +1149,6 @@ def treemaps_json(request, financial_year_id, phase_slug, sphere_slug):
         separators=(",", ": "),
     )
     return HttpResponse(response_json, content_type="application/json")
-
-
-def homepage(request):
-    titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
-    videos_data = Video.objects.filter(title_id__in=titles)
-
-    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
-
-    context = {
-        'page': {
-            'layout': 'homepage',
-            'data_key': 'index',
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'videos': {'data': videos_data},
-                'dataset': read_object_from_yaml(homepage_data_file_path)
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
-    return render(request, 'homepage.html', context=context)
 
 
 def consolidated_treemap(financial_year_id):
