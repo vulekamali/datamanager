@@ -88,13 +88,14 @@ def homepage(request):
     return render(request, 'homepage.html', context=context)
 
 
-def financial_year_page_context(request, financial_year_id, slug, selected_tab=None):
+def search_result_page_context(request, financial_year_id):
+    slug = 'search-result'
     context = {
         'financial_years': [],
         'selected_financial_year': financial_year_id,
-        'selected_tab': selected_tab,
+        'selected_tab': None,
         'slug': slug,
-        'title': "Search Result - vulekamali",
+        'title': "Search Results - vulekamali",
         'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         'url_path': '/%s/%s' % (financial_year_id, slug),
     }
@@ -112,21 +113,22 @@ def financial_year_page_context(request, financial_year_id, slug, selected_tab=N
     return context
 
 
-class FinancialYearPage(View):
-    """
-    Generic page data for pages specific to a financial year
-    """
-    slug = None
-    selected_tab = None
+def search_result_page_yaml(request, financial_year_id):
+    context = search_result_page_context(request, financial_year_id)
+    response_yaml = yaml.safe_dump(
+        context,
+        default_flow_style=False,
+        encoding='utf-8'
+    )
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
-    def get(self, request, financial_year_id):
 
-        response_yaml = yaml.safe_dump(
-            financial_year_page_context(request, financial_year_id, self.slug, self.selected_tab),
-            default_flow_style=False,
-            encoding='utf-8'
-        )
-        return HttpResponse(response_yaml, content_type='text/x-yaml')
+def search_result(request, financial_year_id):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = search_result_page_context(request, financial_year_id)
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['latest_year'] = '2019-20'
+    return render(request, 'search-result.html', context=context)
 
 
 def programme_list_csv(request, financial_year_id, sphere_slug):
@@ -824,28 +826,6 @@ def terms_and_conditions(request):
         'debug': settings.DEBUG
     }
     return render(request, 'terms-and-conditions.html', context=context)
-
-
-def search_result(request, financial_year_id):
-    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = {
-        'page': {
-            'layout': 'search-result',
-            'data_key': 'search-result',
-            'financial_year': financial_year_id,
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                financial_year_id: {
-                    'search-result': financial_year_page_context(request, financial_year_id, 'search-result'),
-                },
-            },
-            'latest_year': '2019-20',
-        },
-        'debug': settings.DEBUG
-    }
-    return render(request, 'search-result.html', context=context)
 
 
 def resources(request):
