@@ -240,7 +240,7 @@ def department_list_data(financial_year_id):
     return page_data
 
 
-def department_data(financial_year_id, sphere_slug, government_slug, department_slug):
+def department_context(financial_year_id, sphere_slug, government_slug, department_slug):
     department = None
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
@@ -336,7 +336,7 @@ def department_data(financial_year_id, sphere_slug, government_slug, department_
     elif department.government.sphere.slug == 'provincial':
         description_govt = department.government.name
 
-    page_data = {
+    context = {
         'economic_classification_by_programme': department.get_econ_by_programme_budgets(),
         'programme_by_economic_classification': department.get_prog_by_econ_budgets(),
         'subprogramme_by_programme': department.get_subprog_budgets(),
@@ -381,7 +381,22 @@ def department_data(financial_year_id, sphere_slug, government_slug, department_
         'website_url': department.get_latest_website_url(),
     }
 
-    return page_data
+    return context
+
+
+def department_page(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    context = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['latest_year'] = '2019-20'
+    context['global_values'] = read_object_from_yaml(str(settings.ROOT_DIR.path('_data/global_values.yaml')))
+    return render(request, 'department.html', context=context)
+
+
+def department_yaml(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    context = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
+    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def dataset_category_list_data():
@@ -1020,35 +1035,6 @@ def contributed_dataset(request, dataset_slug):
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:
         return yaml.load(f)
-
-
-def department_migrated(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    page_data = department_data(financial_year_id, sphere_slug, government_slug, department_slug)
-    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = {
-        'page': {
-            'layout': 'department',
-            'data_key': department_slug,
-            'geographic_region': government_slug,
-            'sphere': sphere_slug,
-            'financial_year': financial_year_id,
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': page_data
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
-    return render(request, 'department.html', context=context)
-
-
-def department_yaml(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    page_data = department_data(financial_year_id, sphere_slug, government_slug, department_slug)
-    response_yaml = yaml.safe_dump(page_data, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def department_list(request, financial_year_id):

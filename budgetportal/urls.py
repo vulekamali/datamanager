@@ -143,18 +143,19 @@ urlpatterns = [
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list_yaml)),
     # Department detail
+    # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
-        cache_page(CACHE_SECS)(views.department_migrated),
+        cache_page(CACHE_SECS)(views.department_page),
         kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+).yaml$',
         cache_page(CACHE_SECS)(views.department_yaml),
         kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
-
+    # - Provincial
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
         '/departments'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_migrated)),
+        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page)),
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
