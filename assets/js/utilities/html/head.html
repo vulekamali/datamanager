@@ -37,10 +37,10 @@
         https://i.ytimg.com
         https://app.appzi.io
         https://d3js.org
-        {% if debug %}http://ajax.googleapis.com{% endif %}
         {% comment %} Google Tag Manager HEAD inline {% endcomment %}
         'sha256-v+9wGGBueHqSIuvMsUaFLaXTNw0D8igfDF+5k+9TVbE='
-      {% if debug %}
+      {% if debug %} {% comment %}for django-debug-toolbar{% endcomment %}
+        http://ajax.googleapis.com
         'unsafe-eval'
       {% endif %}
       ;
@@ -57,8 +57,7 @@
         https://data.vulekamali.gov.za
         https://img.youtube.com
         https://www.google-analytics.com
-        http://localhost;
-      "
+        http://localhost;"
     />
 
   {% if not debug %}
