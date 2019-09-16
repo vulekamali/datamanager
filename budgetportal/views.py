@@ -74,31 +74,30 @@ def year_home_yaml(request, financial_year_id):
 
 
 def homepage(request):
-    context = {
-        "page": year_home_context(request, financial_year_id="2019-20")
-    }
-
     titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
     videos_data = Video.objects.filter(title_id__in=titles)
 
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
 
-    context.update({
+    page_data = year_home_context(request, financial_year_id="2019-20")
+    page_data.update({
+        'navbar': read_object_from_yaml(navbar_data_file_path),
+        'videos': {'data': videos_data},
+    })
+    context = {
         'page': {
             'layout': 'homepage',
             'data_key': 'index',
         },
         'site': {
             'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'videos': {'data': videos_data},
-                'dataset': read_object_from_yaml(homepage_data_file_path)
+                'index': page_data,
             },
             'latest_year': '2019-20'
         },
         'debug': settings.DEBUG
-    })
+    }
     return render(request, 'homepage.html', context=context)
 
 
