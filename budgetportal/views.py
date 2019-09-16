@@ -388,19 +388,6 @@ def department_yaml(request, financial_year_id, sphere_slug, government_slug, de
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
-def dataset_category_list_data():
-    page_data = {
-        'categories': [category_fields(c) for c in Category.get_all()],
-        'selected_tab': 'datasets',
-        'slug': 'datasets',
-        'name': 'Datasets and Analysis',
-        'title': 'Datasets and Analysis - vulekamali',
-        'url_path': '/datasets',
-    }
-
-    return page_data
-
-
 def dataset_category_data(category_slug):
     category = Category.get_by_slug(category_slug)
     page_data = {
@@ -900,30 +887,28 @@ def guides(request, slug):
     return render(request, '{}.html'.format(template), context=context)
 
 
+def dataset_category_list_context():
+    return {
+        'categories': [category_fields(c) for c in Category.get_all()],
+        'selected_tab': 'datasets',
+        'slug': 'datasets',
+        'name': 'Datasets and Analysis',
+        'title': 'Datasets and Analysis - vulekamali',
+        'url_path': '/datasets',
+    }
+
+
 def dataset_landing_page_yaml(request):
-    response = dataset_category_list_data()
+    context = dataset_category_list_context()
     response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def dataset_landing_page(request):
+    context = dataset_category_list_context()
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = {
-        'page': {
-            'layout': 'dataset_landing_page',
-            'data_key': 'datasets',
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'datasets': {
-                    'index': dataset_category_list_data()
-                }
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['latest_year'] = '2019-20'
     return render(request, 'datasets.html', context=context)
 
 
