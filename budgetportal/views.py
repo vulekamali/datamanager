@@ -80,24 +80,11 @@ def homepage(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
 
-    page_data = year_home_context(request, financial_year_id="2019-20")
-    page_data.update({
-        'navbar': read_object_from_yaml(navbar_data_file_path),
-        'videos': {'data': videos_data},
-    })
-    context = {
-        'page': {
-            'layout': 'homepage',
-            'data_key': 'index',
-        },
-        'site': {
-            'data': {
-                'index': page_data,
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
+    context = year_home_context(request, financial_year_id="2019-20")
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path),
+    context['videos'] = {'data': videos_data},
+    context['latest_year'] = '2019-20'
+
     return render(request, 'homepage.html', context=context)
 
 

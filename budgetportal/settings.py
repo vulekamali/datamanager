@@ -221,6 +221,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "budgetportal.context_processors.google_analytics",
+                "budgetportal.context_processors.debug",
                 "django.template.context_processors.request",
             ],
         },
