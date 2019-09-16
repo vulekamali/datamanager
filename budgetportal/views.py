@@ -35,7 +35,7 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
-def year_home_context(request, financial_year_id):
+def homepage_context(request, financial_year_id):
     """
     View of a financial year homepage, e.g. /2017-18
     """
@@ -43,7 +43,6 @@ def year_home_context(request, financial_year_id):
     revenue_data = year.get_budget_revenue()
 
     context = {
-        'financial_years': [],
         'revenue': revenue.sort_categories(revenue_data),
         'selected_financial_year': financial_year_id,
         'selected_tab': 'homepage',
@@ -52,21 +51,11 @@ def year_home_context(request, financial_year_id):
         'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         'url_path': year.get_url_path(),
     }
-    for year in FinancialYear.get_available_years():
-        is_selected = year.slug == financial_year_id
-        context['financial_years'].append({
-            'id': year.slug,
-            'is_selected': is_selected,
-            'closest_match': {
-                'is_exact_match': True,
-                'url_path': "/%s" % year.slug,
-            },
-        })
     return context
 
 
-def year_home_yaml(request, financial_year_id):
-    context = year_home_context(request, financial_year_id)
+def homepage_yaml(request, financial_year_id):
+    context = homepage_context(request, financial_year_id)
     response_yaml = yaml.safe_dump(context,
                                    default_flow_style=False,
                                    encoding='utf-8')
@@ -80,7 +69,7 @@ def homepage(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
 
-    context = year_home_context(request, financial_year_id="2019-20")
+    context = homepage_context(request, financial_year_id="2019-20")
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['videos'] = videos
     context['latest_year'] = '2019-20'

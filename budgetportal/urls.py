@@ -63,7 +63,7 @@ urlpatterns = [
     url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
     # Financial year home page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
-        cache_page(CACHE_SECS)(views.year_home_yaml)),
+        cache_page(CACHE_SECS)(views.homepage_yaml)),
 
     # Search results
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result.yaml',
