@@ -44,7 +44,7 @@ def homepage_context(request, financial_year_id):
 
     context = {
         'revenue': revenue.sort_categories(revenue_data),
-        'selected_financial_year': financial_year_id,
+        'selected_financial_year': None,
         'selected_tab': 'homepage',
         'slug': financial_year_id,
         'title': "South African Government Budgets %s - vulekamali" % year.slug,

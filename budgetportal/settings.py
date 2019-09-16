@@ -341,9 +341,6 @@ LOGGING = {
         'django': {
             'level': 'DEBUG' if DEBUG else 'INFO',
         },
-        'django.template': {
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
     }
 }
 
