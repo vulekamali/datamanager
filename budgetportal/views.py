@@ -863,6 +863,7 @@ def dataset_category_list_page(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
+
     return render(request, 'datasets.html', context=context)
 
 
@@ -947,6 +948,12 @@ def dataset_page(request, category_slug, dataset_slug):
     context['latest_year'] = '2019-20'
     context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
     context["last_updated"] = datetime.strptime(context["last_updated"], "%Y-%m-%dT%H:%M:%S.%f")
+    external_resource_slugs = [
+        "socio-economic-data",
+        "performance-resources",
+        "procurement-portals-and-resources",
+    ]
+    context["external_resource_page"] = category_slug in external_resource_slugs
     return render(request, 'government_dataset.html', context=context)
 
 
@@ -958,11 +965,6 @@ def contributed_dataset(request, dataset_slug):
     context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
     context["last_updated"] = datetime.strptime(context["last_updated"], "%Y-%m-%dT%H:%M:%S.%f")
     return render(request, 'contributed_dataset.html', context=context)
-
-
-def read_object_from_yaml(path_file):
-    with open(path_file, 'r') as f:
-        return yaml.load(f)
 
 
 def department_list(request, financial_year_id):
@@ -1121,3 +1123,8 @@ def department_preview(request, financial_year_id, sphere_slug, government_slug,
         'debug': settings.DEBUG
     }
     return render(request, 'department_preview.html', context=context)
+
+
+def read_object_from_yaml(path_file):
+    with open(path_file, 'r') as f:
+        return yaml.load(f)

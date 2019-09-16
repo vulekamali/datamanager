@@ -1,5 +1,6 @@
 {% extends 'page-shell.html' %}
 {% load define_action %}
+{% load markdownify %}
 {% block page_content %}
 
 <div class="Page-content">
@@ -15,19 +16,19 @@
 
     <h1 class="Page-mainHeading u-marginTop15">{{ name }}</h1>
 
-    {% if category.slug != "socio-economic-data" %}
+    {% if not external_resource_page %}
       <main class="Page-main">
     {% endif %}
 
       {% if intro %}
         <div class="BasicContent">
 
-          {% if category.slug == "socio-economic-data" %}
+          {% if external_resource_page %}
             <div class="Screenshots">
               {% for resource in resources %}
                 {% if resource.format == 'PNG' %}
                   <a href="{{ resource.url }}" target="_blank" class="Screenshots-imageWrap">
-                    <img src="{{ resource.url }}" class="Screenshots-image">
+                    <img src="{{ resource.url }}" alt="{{ resource.name }}" class="Screenshots-image">
                   </a>
                 {% endif %}
               {% endfor %}
@@ -39,15 +40,20 @@
 
           {% if key_points %}
             <div class="BasicContent-title u-marginTop20">Key points</div>
-            {{ key_points }}
+            {{ key_points | markdownify }}
+          {% endif %}
+
+          {% if importance %}
+            <div class="BasicContent-title u-marginTop20">Why is it important?</div>
+            {{ importance | markdownify }}
           {% endif %}
 
           {% if use_for %}
             <div class="BasicContent-title u-marginTop20">What can it be used for?</div>
-            {{ use_for }}
+            {{ use_for | markdownify }}
           {% endif %}
 
-          {% if category.slug == "socio-economic-data" %}
+          {% if external_resource_page %}
             {% if resources %}
               <div>
                 {% for resource in resources %}
@@ -71,11 +77,11 @@
       {% if usage %}
         <div class="BasicContent u-marginTop20">
           <div class="BasicContent-title">How can it be accessed and used?</div>
-          {{ usage }}
+          {{ usage | markdownify }}
         </div>
       {% endif %}
 
-      {% if category.slug != "socio-economic-data" %}
+      {% if not external_resource_page %}
         {% include 'components/universal/Downloads/index.html' with resources=resources utils="u-marginTop20" %}
       {% endif %}
 
@@ -86,7 +92,7 @@
         </div>
       </div>
 
-    {% if category.slug != "socio-economic-data" %}
+    {% if not external_resource_page %}
       </main>
       <aside class="Page-sidebar">
 
@@ -176,7 +182,7 @@
       </div>
     {% endif %}
 
-    {% if category.slug != "socio-economic-data" %}
+    {% if not external_resource_page %}
       </aside>
     {% endif %}
   </div>
