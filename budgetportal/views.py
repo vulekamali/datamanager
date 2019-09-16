@@ -75,14 +75,14 @@ def year_home_yaml(request, financial_year_id):
 
 def homepage(request):
     titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
-    videos_data = Video.objects.filter(title_id__in=titles)
+    videos = Video.objects.filter(title_id__in=titles)
 
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
 
     context = year_home_context(request, financial_year_id="2019-20")
-    context['navbar'] = read_object_from_yaml(navbar_data_file_path),
-    context['videos'] = {'data': videos_data},
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['videos'] = videos
     context['latest_year'] = '2019-20'
 
     return render(request, 'homepage.html', context=context)
@@ -1072,23 +1072,10 @@ def department_yaml(request, financial_year_id, sphere_slug, government_slug, de
 
 
 def department_list(request, financial_year_id):
-    page_data = department_list_data(financial_year_id)
+    context = department_list_data(financial_year_id)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = {
-        'page': {
-            'layout': 'department_list',
-            'data_key': 'departments',
-            'financial_year': financial_year_id,
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': page_data
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
+    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
+    context['latest_year'] = '2019-20'
     return render(request, 'department_list.html', context=context)
 
 

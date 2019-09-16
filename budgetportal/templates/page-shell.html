@@ -5,11 +5,11 @@
     <div data-create-component="Modals"></div>
     <div class="Page">
         <header class="Page-head">
-            {% with items=site.data.navbar.array selected_tab=selected_tab latest_year=site.latest_year year=financial_year selected_sidebar=selected_sidebar %}
+            {% with items=navbar.array selected_tab=selected_tab latest_year=latest_year year=selected_financial_year selected_sidebar=selected_sidebar %}
                 {% include 'components/header-and-footer/HeaderBar/index.html' %}
             {% endwith %}
 
-            {% if financial_year %}
+            {% if selected_financial_year %}
                 {% include 'components/header-and-footer/YearSelect/index.html' with years=financial_years %}
             {% endif %}
         </header>
@@ -18,7 +18,7 @@
             {% endblock %}
         </div>
         <footer class="Page-footer">
-            {% include 'components/header-and-footer/Footer/index.html' with year=financial_year %}
+            {% include 'components/header-and-footer/Footer/index.html' with year=selected_financial_year %}
             {% include 'components/header-and-footer/ExtraFooter/index.html' %}
         </footer>
     </div>
