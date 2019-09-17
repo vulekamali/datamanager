@@ -45,6 +45,7 @@ def homepage_context(request, financial_year_id):
     context = {
         'revenue': revenue.sort_categories(revenue_data),
         'selected_financial_year': None,
+        'financial_years': [],
         'selected_tab': 'homepage',
         'slug': financial_year_id,
         'title': "South African Government Budgets %s - vulekamali" % year.slug,
@@ -620,6 +621,7 @@ def about(request):
         "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
         "selected_tab": "about",
         'selected_financial_year': None,
+        'financial_years': [],
         'video': Video.objects.get(title_id='onlineBudgetPortal'),
         'navbar': read_object_from_yaml(navbar_data_file_path),
         'latest_year': '2019-20',
