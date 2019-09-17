@@ -3,8 +3,6 @@
 
 {% block page_content %}
 
-{% assign site.data.guides.index as page_data %}
-
 <div class="Page-content">
   <div class="Page-contentInner Page-contentInner--floatingLinks">
     <div class="Section is-invisible">
@@ -17,11 +15,11 @@
     <h1 class="Page-mainHeading">Dataset Guides</h1>
 
     <div class="Section is-invisible u-fontSize18 u-paddingTop0">
-      {{ page_data.description }}
+      {{ description }}
     </div>
 
     <div class="Grid has-twoColumn">
-      {% for type in page_data.items %}
+      {% for type in items %}
         {% include 'components/Preview/index.html' with title=type.name excerpt=type.description url=type.url_path %}
       {% endfor %}
     </div>

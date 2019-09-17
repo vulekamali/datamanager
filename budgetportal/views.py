@@ -762,46 +762,35 @@ def resources(request):
 
 
 def guides(request, slug):
-    if slug not in [
+    guide_slugs = [
         'index',
         'adjusted-estimates-of-national-expenditure',
         'estimates-of-national-expenditure',
         'estimates-of-provincial-expenditure',
         'performance-and-expenditure-reviews',
         'frameworks-for-conditional-grants'
-    ]: return HttpResponse(status=404)
-    aene_file_path = str(settings.ROOT_DIR.path('_data/guides/adjusted-estimates-of-national-expenditure.yaml'))
-    ene_file_path = str(settings.ROOT_DIR.path('_data/guides/estimates-of-national-expenditure.yaml'))
-    epre_file_path = str(settings.ROOT_DIR.path('_data/guides/estimates-of-provincial-expenditure.yaml'))
-    per_file_path = str(settings.ROOT_DIR.path('_data/guides/performance-and-expenditure-reviews.yaml'))
-    index_file_path = str(settings.ROOT_DIR.path('_data/guides/index.yaml'))
+    ]
+    if slug not in guide_slugs:
+        return HttpResponse(status=404)
+    guide_data = {}
+    for load_slug in guide_slugs:
+        guide_data[load_slug] = read_object_from_yaml(
+            str(settings.ROOT_DIR.path('_data/guides/%s.yaml' % load_slug))
+        )
+
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = {
-        'page': {
-            'layout': 'guides',
-            'data_key': slug,
-            'content_template': 'guide-{}.html'.format(slug)
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'guides': {
-                    'index': read_object_from_yaml(index_file_path),
-                    'adjusted-estimates-of-national-expenditure': read_object_from_yaml(aene_file_path),
-                    'estimates-of-national-expenditure': read_object_from_yaml(ene_file_path),
-                    'estimates-of-provincial-expenditure': read_object_from_yaml(epre_file_path),
-                    'performance-and-expenditure-reviews': read_object_from_yaml(per_file_path),
-                }
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
-    }
-    if slug == 'index':
-        template = 'guides'
-    else:
-        template = 'guide_item'
-    return render(request, '{}.html'.format(template), context=context)
+
+    context = guide_data[slug]
+    context.update({
+        'content_template': 'guide-{}.html'.format(slug),
+        'navbar': read_object_from_yaml(navbar_data_file_path),
+        'guides': guide_data,
+        'latest_year': '2019-20',
+        'selected_financial_year': None,
+        'financial_years': [],
+    })
+    template = "guides.html" if slug == 'index' else "guide_item.html"
+    return render(request, template, context=context)
 
 
 def dataset_category_list_context():
