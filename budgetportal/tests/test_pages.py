@@ -17,6 +17,10 @@ requests.Session = Mock
 
 
 class BasicPagesTestCase(TestCase):
+    fixtures = [
+        "video-language",
+    ]
+
     def setUp(self):
         FinancialYear.objects.create(slug="2015-16", published=True)
         FinancialYear.objects.create(slug="2016-17", published=True)
