@@ -806,7 +806,7 @@ def dataset_category_list_context():
 
 def dataset_category_list_yaml(request):
     context = dataset_category_list_context()
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
+    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
