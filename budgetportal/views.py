@@ -677,23 +677,14 @@ def events(request):
 def glossary(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page': {
-            'layout': 'glossary',
-            'data_key': 'glossary'
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'glossary': {
-                    'selected_tab': 'learning-centre',
-                    'selected_sidebar': 'glossary',
-                    'title': 'Glossary - vulekamali',
-                    'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
-                }
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
+        'navbar': read_object_from_yaml(navbar_data_file_path),
+        'selected_tab': 'learning-centre',
+        'selected_sidebar': 'glossary',
+        'title': 'Glossary - vulekamali',
+        'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        'latest_year': '2019-20',
+        'selected_financial_year': None,
+        'financial_years': [],
     }
     return render(request, 'glossary.html', context=context)
 
