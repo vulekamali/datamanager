@@ -746,26 +746,17 @@ def terms_and_conditions(request):
 
 
 def resources(request):
-    resources_file_path = str(settings.ROOT_DIR.path('_data/resources.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-
     titles = {'theBudgetProcess', 'participate'}
-    videos_data = Video.objects.filter(title_id__in=titles)
 
     context = {
-        'page': {
-            'layout': 'resources',
-            'data_key': 'resources',
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path),
-                'videos': {'data': videos_data},
-                'resources': read_object_from_yaml(resources_file_path),
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
+        'navbar': read_object_from_yaml(navbar_data_file_path),
+        'videos': Video.objects.filter(title_id__in=titles),
+        'latest_year': '2019-20',
+        'title': "Resources - vulekamali",
+        'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        'selected_tab': "learning-centre",
+        'selected_sidebar': "resources",
     }
     return render(request, 'resources.html', context=context)
 
