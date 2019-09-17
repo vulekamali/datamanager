@@ -722,27 +722,14 @@ def faq(request):
 def videos(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
 
-    videos_data = Video.objects.all()
-
     context = {
-        'page': {
-            'layout': 'videos',
-            'data_key': 'videos'
-        },
-        'site': {
-            'data': {
-                'videos': {
-                    'title': 'Videos - vulekamali',
-                    'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
-                    'selected_tab': 'learning-centre',
-                    'selected_sidebar': 'videos',
-                    'data': videos_data
-                },
-                'navbar': read_object_from_yaml(navbar_data_file_path)
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
+        'title': 'Videos - vulekamali',
+        'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        'selected_tab': 'learning-centre',
+        'selected_sidebar': 'videos',
+        'videos': Video.objects.all(),
+        'navbar': read_object_from_yaml(navbar_data_file_path),
+        'latest_year': '2019-20',
     }
     return render(request, 'videos.html', context=context)
 
