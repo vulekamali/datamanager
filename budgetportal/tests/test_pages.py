@@ -57,8 +57,7 @@ class BasicPagesTestCase(TestCase):
         c = Client()
         response = c.get('/2019-20.yaml')
         content = yaml.load(response.content)
-        self.assertEqual(content['financial_years'][-1]['id'], '2019-20')
-        self.assertEqual(content['financial_years'][0]['id'], '2016-17')
+        self.assertEqual(content['selected_tab'], 'homepage')
 
     def test_department_detail_page_yaml(self):
         """Test that it exists and that the correct years are linked"""
