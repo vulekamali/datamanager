@@ -614,23 +614,15 @@ def category_fields(category):
 
 
 def about(request):
-    videos_data = Video.objects.filter(title_id='onlineBudgetPortal')
-    about_date_file_path = str(settings.ROOT_DIR.path('_data/about.yaml'))
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page': {
-            'layout': 'about',
-            'data_key': 'about'
-        },
-        'site': {
-            'data': {
-                'videos': {'data': videos_data},
-                'about': read_object_from_yaml(about_date_file_path),
-                'navbar': read_object_from_yaml(navbar_data_file_path)
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
+        "title": "About - vulekamali",
+        "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        "selected_tab": "about",
+        'selected_financial_year': None,
+        'video': Video.objects.get(title_id='onlineBudgetPortal'),
+        'navbar': read_object_from_yaml(navbar_data_file_path),
+        'latest_year': '2019-20',
     }
     return render(request, 'about.html', context=context)
 
