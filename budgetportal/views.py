@@ -19,6 +19,8 @@ from summaries import (
     get_focus_area_preview,
     get_consolidated_expenditure_treemap,
 )
+from guide_data import guides as guide_data
+from guide_data import category_guides
 import yaml
 import json
 import logging
@@ -763,22 +765,8 @@ def resources(request):
 
 
 def guides(request, slug):
-    guide_slugs = [
-        'index',
-        'adjusted-estimates-of-national-expenditure',
-        'estimates-of-national-expenditure',
-        'estimates-of-provincial-expenditure',
-        'performance-and-expenditure-reviews',
-        'frameworks-for-conditional-grants'
-    ]
-    if slug not in guide_slugs:
+    if slug not in guide_data:
         return HttpResponse(status=404)
-    guide_data = {}
-    for load_slug in guide_slugs:
-        guide_data[load_slug] = read_object_from_yaml(
-            str(settings.ROOT_DIR.path('_data/guides/%s.yaml' % load_slug))
-        )
-
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
 
     context = guide_data[slug]
@@ -856,6 +844,7 @@ def dataset_category_page(request, category_slug):
     context = dataset_category_context(category_slug)
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
+    context['guide'] = guide_data.get(category_guides.get(category_slug, None), None),
     return render(request, 'government_dataset_category.html', context=context)
 
 
@@ -907,6 +896,7 @@ def dataset_page(request, category_slug, dataset_slug):
         "performance-resources",
         "procurement-portals-and-resources",
     ]
+    context['guide'] = guide_data.get(category_guides.get(category_slug, None), None),
     context["external_resource_page"] = category_slug in external_resource_slugs
     return render(request, 'government_dataset.html', context=context)
 
