@@ -88,6 +88,19 @@ Password: `password`
 
 A fixture is needed to set this up instead of `createsuperuser` because Django Allauth is configured to require verified email addresses.
 
+If you want to reset the database and start fresh:
+
+```
+docker-compose down --volumes
+```
+
+And then:
+
+```
+docker-compose up
+```
+
+
 ### Load data
 
 Load an initial set of financial years, spheres and governments. You might need to add more recent ones manually in the admin interface.
@@ -197,7 +210,7 @@ Running tests
 All tests
 
 ```
-docker-compose run test
+docker-compose run --rm test
 ```
 
 Specific tests, e.g.

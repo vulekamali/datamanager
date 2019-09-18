@@ -588,6 +588,7 @@ def dataset_fields(dataset):
         'intro': dataset.intro,
         'intro_short': dataset.intro_short,
         'key_points': dataset.key_points,
+        'importance': dataset.importance,
         'use_for': dataset.use_for,
         'usage': dataset.usage,
         'methodology': dataset.methodology,
@@ -838,6 +839,7 @@ def dataset_category_context(category_slug):
         del field_subset['key_points']
         del field_subset['use_for']
         del field_subset['usage']
+        del field_subset['importance']
         context['datasets'].append(field_subset)
 
     return context
