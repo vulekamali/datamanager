@@ -31,7 +31,7 @@ const Markup = ({ items, initialSelected }) => {
   return (
     <ChartSection
       {...{ initialSelected }}
-      footer="Budget data from 1 April 2018 - 31 March 2019"
+      footer="Budget data from 1 April 2019 - 31 March 2020"
       chart={onSelectedChange => <Treemap {...{ onSelectedChange }} items={itemsWithColor} />}
       verb="Explore"
       subject="this department"
@@ -40,7 +40,7 @@ const Markup = ({ items, initialSelected }) => {
         disabled: 'Original budget',
       }}
       years={{
-        disabled: '2018-19',
+        disabled: '2019-20',
       }}
       anchor="provincial-treemap"
     />
