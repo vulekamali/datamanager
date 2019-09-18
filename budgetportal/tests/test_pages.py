@@ -141,47 +141,19 @@ class BasicPagesTestCase(TestCase):
         content = response.content
         self.assertTrue(content.find("The Estimates of National Expenditure (ENE) publications describe in detail"))
 
-    # def test_datasets_list_page(self):
-    #     """Test that it loads and that some text is present"""
-    #     c = Client()
-    #     response = c.get('/datasets')
-    #     content = response.content
-    #     self.assertTrue(content.find("Data and Analysis"))
-    #
-    # def test_dataset_category_page(self):
-    #     """Test that it loads and that some text is present"""
-    #     c = Client()
-    #     response = c.get('/datasets/adjusted-estimates-of-national-expenditure')
-    #     content = response.content
-    #     self.assertTrue(content.find("Adjustments to the expenditure plans."))
-    #
-    # def test_contributed_dataset_list_page(self):
-    #     """Test that it loads and that some text is present"""
-    #     c = Client()
-    #     response = c.get('/datasets/contributed')
-    #     content = response.content
-    #     self.assertTrue(content.find("Contibuted data and documentation for South African government budgets"))
+    def test_datasets_list_page(self):
+        """Test that it loads and that some text is present"""
+        c = Client()
+        response = c.get('/datasets')
+        content = response.content
+        self.assertTrue(content.find("Data and Analysis"))
 
-    # def test_contributed_dataset_page(self):
-    #     """Test that it loads and that some text is present"""
-    #     c = Client()
-    #     response = c.get('/datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa')
-    #     content = response.content
-    #     self.assertTrue(content.find("A Guide to Conducting Social Audits in South Africa"))
-    #
-    # def test_dataset_page(self):
-    #     """Test that it loads and that some text is present"""
-    #     c = Client()
-    #     response = c.get('/datasets/annual-reports/annual-report-expenditure-2016-17')
-    #     content = response.content
-    #     self.assertTrue(content.find("Annual Report Expenditure 2016-17"))
-
-    # def test_department_page(self):
-    #     """Test that it loads and that some text is present"""
-    #     c = Client()
-    #     response = c.get('/2019-20/national/departments/agriculture-forestry-and-fisheries')
-    #     content = response.content
-    #     self.assertTrue(content.find("Agriculture, Forestry and Fisheries"))
+    def test_dataset_category_page(self):
+        """Test that it loads and that some text is present"""
+        c = Client()
+        response = c.get('/datasets/adjusted-estimates-of-national-expenditure')
+        content = response.content
+        self.assertTrue(content.find("Adjustments to the expenditure plans."))
 
     def test_search_page(self):
         """Test that it exists and that the correct years are linked"""

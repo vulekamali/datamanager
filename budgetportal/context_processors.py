@@ -17,7 +17,4 @@ def google_analytics(request):
 
 
 def debug(request):
-    context = {}
-    if settings.DEBUG:
-        context["debug"] = True
-    return context
+    return {"debug": settings.DEBUG}
