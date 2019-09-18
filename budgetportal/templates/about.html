@@ -3,7 +3,7 @@
   <div class="Page-content">
     <main class="Page-contentInner Page-contentInner--floatingLinks">
 
-      {% with languages=site.data.videos.data.0.videolanguage_set.all year=page.financial_year %}
+      {% with languages=video.videolanguage_set.all year=latest_year %}
 
         {% include 'components/about/Background/index.html' %}
 

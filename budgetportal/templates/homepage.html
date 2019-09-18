@@ -2,11 +2,6 @@
 {% load define_action %}
 {% load staticfiles %}
 {% block page_content %}
-{% assign site.data.dataset as page_data %}
-
-{% assign site.data.videos.data.0 as video_1 %}
-{% assign site.data.videos.data.1 as video_2 %}
-{% assign site.data.videos.data.2 as video_3 %}
 
 <div class="Page-content u-paddingTop0">
     <div data-webapp="homepage-hero">
@@ -17,7 +12,7 @@
     <div id="provincial-treemap" class="national-treemap" data-webapp="provincial-treemap"></div>
     <div data-webapp="resources-homepage"></div>
 
-    {% with video_1=video_1 video_2=video_2 video_3=video_3 events_list=site.data.events.upcoming %}
+    {% with video_1=videos.1 video_2=videos.2 video_3=videos.2 events_list=events.upcoming %}
 
         {% include 'scenes/homepage/VideoSection/index.html' %}
 

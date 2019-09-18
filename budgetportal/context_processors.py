@@ -14,3 +14,10 @@ def google_analytics(request):
             'GOOGLE_ANALYTICS_ID': ga_tracking_id,
         }
     return {}
+
+
+def debug(request):
+    context = {}
+    if settings.DEBUG:
+        context["debug"] = True
+    return context

@@ -31,7 +31,7 @@
             {% assign '' as activeClass %}
             {% assign 'false' as activeValue %}
           {% endif %}
-          
+
           {% comment %} Create CSS that prevents parent from being highlighted as well on mobile {% endcomment %}
           {% if item.subLinks %}
             {% assign ' has-subLinks' as subLinkClass %}
@@ -44,7 +44,7 @@
             {% assign latest_year|add:"/"|add:item.url  as finalUrl %}
           {% else %}
             {% assign item.url as finalUrl %}
-          {% endif %} 
+          {% endif %}
           <li class="NavBar-item{{ alignmentClass }}">
             <a class="NavBar-link{{ activeClass }}{{ subLinkClass }}" href="/{{ finalUrl }}">
               {% if item.id == 'homepage' %}
@@ -57,9 +57,9 @@
               {% endif %}
 
             </a>
-            
+
             {% if item.children %}
-              {% include 'components/header-and-footer/SubLinks/index.html' with items=item.children active=activeValue layout=layout selected_sidebar=selected_sidebar %}
+              {% include 'components/header-and-footer/SubLinks/index.html' with items=item.children active=activeValue selected_sidebar=selected_sidebar %}
             {% endif %}
           </li>
 

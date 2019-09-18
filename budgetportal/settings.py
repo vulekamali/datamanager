@@ -42,6 +42,10 @@ else:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 DEBUG_TOOLBAR = os.environ.get("DJANGO_DEBUG_TOOLBAR", "false").lower() == "true"
+print("Django Debug Toolbar %s." % "enabled" if DEBUG_TOOLBAR else "disabled")
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": "budgetportal.debug_toolbar_config.show_toolbar_check"
+}
 
 GOOGLE_ANALYTICS_ID = "UA-93649482-8"
 
@@ -93,9 +97,8 @@ MIDDLEWARE = [
     'elasticapm.contrib.django.middleware.Catch404Middleware',
 ]
 
-
 if DEBUG_TOOLBAR:
-    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+    MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
 
@@ -106,8 +109,6 @@ ROOT_URLCONF = 'budgetportal.urls'
 WSGI_APPLICATION = 'budgetportal.wsgi.application'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
-
-INTERNAL_IPS = ['127.0.0.1']
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -220,6 +221,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "budgetportal.context_processors.google_analytics",
+                "budgetportal.context_processors.debug",
                 "django.template.context_processors.request",
             ],
         },
@@ -291,6 +293,16 @@ if not TEST:
 
 # Logging
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+SENTRY_DSN = os.environ.get('SENTRY_DSN', None)
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()]
+    )
+
 LOGSTASH_URL = os.environ.get('LOGSTASH_URL', '')
 APM_SERVER_URL = os.environ.get('APM_SERVER_URL', '')
 ELK_APP_NAME = 'vulekamali Data Manager'
@@ -330,7 +342,7 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-        'level': 'ERROR'
+        'level': 'INFO'
     },
     'loggers': {
         'budgetportal': {
@@ -338,7 +350,7 @@ LOGGING = {
         },
         'django': {
             'level': 'DEBUG' if DEBUG else 'INFO',
-        }
+        },
     }
 }
 

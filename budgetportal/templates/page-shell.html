@@ -2,47 +2,15 @@
 {% load define_action %}
 
 {% block content %}
-    {% assign "infrastructure-projects" as hardcoded_infrastructure %}
-
-    {% if page.financial_year %}
-        {% assign site.data.dataset as page_data %}
-
-    {% elif page.layout == 'contributed_dataset' %}
-        {% assign site.data.datasets.contributed|hash:page.data_key as page_data %}
-
-    {% elif page.layout == 'government_dataset' %}
-        {% assign site.data.dataset as page_data %}
-
-    {% elif page.layout == 'government_dataset_category' %}
-        {% assign site.data.dataset as page_data %}
-
-    {% elif page.layout == 'contributed-data' %}
-        {% assign site.data.datasets.contributed.index as page_data %}
-
-    {% elif page.layout == 'dataset_landing_page' %}
-        {% assign site.data.datasets.index as page_data %}
-
-    {% elif page.layout == 'guides' or page.layout == 'guide_item' %}
-        {% assign site.data.guides|hash:page.data_key as page_data %}
-
-    {% elif page.layout == 'infrastructure_project_list' %}
-        {% assign site.data|hash:hardcoded_infrastructure|hash:"index" as page_data %}
-
-    {% elif page.layout == 'infrastructure_project' %}
-        {% assign site.data|hash:hardcoded_infrastructure|hash:"index" as page_data %}
-    {% else %}
-        {% assign site.data|hash:page.data_key as page_data %}
-    {% endif %}
-
     <div data-create-component="Modals"></div>
     <div class="Page">
         <header class="Page-head">
-            {% with items=site.data.navbar.array selected_tab=page_data.selected_tab latest_year=site.latest_year year=page.financial_year selected_sidebar=page_data.selected_sidebar %}
+            {% with items=navbar.array selected_tab=selected_tab latest_year=latest_year year=selected_financial_year selected_sidebar=selected_sidebar %}
                 {% include 'components/header-and-footer/HeaderBar/index.html' %}
             {% endwith %}
 
-            {% if page.financial_year %}
-                {% include 'components/header-and-footer/YearSelect/index.html' with years=page_data.financial_years %}
+            {% if selected_financial_year %}
+                {% include 'components/header-and-footer/YearSelect/index.html' with years=financial_years %}
             {% endif %}
         </header>
         <div class="Page-contentWrap">
@@ -50,7 +18,7 @@
             {% endblock %}
         </div>
         <footer class="Page-footer">
-            {% include 'components/header-and-footer/Footer/index.html' with year=page.financial_year %}
+            {% include 'components/header-and-footer/Footer/index.html' with year=selected_financial_year %}
             {% include 'components/header-and-footer/ExtraFooter/index.html' %}
         </footer>
     </div>

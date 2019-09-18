@@ -20,8 +20,12 @@ def permission_denied(request):
     raise PermissionDenied()
 
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
 urlpatterns = [
-    url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
+    url('sentry-debug/', trigger_error),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview)),
@@ -61,15 +65,15 @@ urlpatterns = [
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json)),
 
+    # Homepage
+    url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
     # Financial year home page
     url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
-        cache_page(CACHE_SECS)(views.year_home)),
+        cache_page(CACHE_SECS)(views.homepage_yaml)),
 
     # Search results
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result.yaml',
-        cache_page(CACHE_SECS)(views.FinancialYearPage.as_view(
-            slug='search-result',
-        ))),
+        cache_page(CACHE_SECS)(views.search_result_page_yaml)),
     url(r'^json/static-search.json', cache_page(CACHE_SECS)(views.static_search_data)),
 
     # Department list as CSV
@@ -112,20 +116,19 @@ urlpatterns = [
     url(r'^guides/?$', views.guides, name="guides", kwargs={'slug': 'index'}),
     url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guides"),
 
-    # Dataset landing page
-    url(r'^datasets/?$', views.dataset_landing_page, name="dataset-landing-page"),
-    url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_landing_page_yaml)),
+    # Dataset category list
+    url(r'^datasets/?$', views.dataset_category_list_page, name="dataset-landing-page"),
+    url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_category_list_yaml)),
 
-    url(r'^datasets/contributed/?$', views.contributed_datasets_list, name="contributed-datasets"),
-
-    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', views.contributed_dataset, name="contributed-dataset"),
 
     # Dataset categories
-    url(r'^datasets/(?P<category_slug>[-\w]+)/?$', views.dataset_category_migrated, name="dataset-category"),
+    url(r'^datasets/contributed/?$', views.contributed_datasets_list, name="contributed-datasets"),
+    url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', views.contributed_dataset, name="contributed-dataset"),
+    url(r'^datasets/(?P<category_slug>[-\w]+)/?$', views.dataset_category_page, name="dataset-category"),
     url(r'^datasets/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category_yaml)),
 
     # Detaset detail
-    url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', views.dataset_migrated, name="dataset"),
+    url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', views.dataset_page, name="dataset"),
     url(r'^datasets/(?P<category_slug>[\w-]+)/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_yaml)),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', views.search_result, name="search-result"),
@@ -145,18 +148,19 @@ urlpatterns = [
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments.yaml', cache_page(CACHE_SECS)(views.department_list_yaml)),
     # Department detail
+    # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
-        cache_page(CACHE_SECS)(views.department_migrated),
+        cache_page(CACHE_SECS)(views.department_page),
         kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+).yaml$',
         cache_page(CACHE_SECS)(views.department_yaml),
         kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
-
+    # - Provincial
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
         '/departments'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_migrated)),
+        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page)),
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'

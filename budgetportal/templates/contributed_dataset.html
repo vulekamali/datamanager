@@ -2,7 +2,6 @@
 {% load define_action %}
 {% load markdownify %}
 {% block page_content %}
-{% assign site.data.dataset as page_data %}
 
 <div class="Page-content">
   <main class="Page-contentInner">
@@ -13,35 +12,35 @@
       <a href="/datasets/">Data and Analysis</a>
       <span> / </span>
       <a href="/datasets/contributed">Contributed Data and Analysis</a>
-      <span> / {{ page_data.name }}</span>
+      <span> / {{ name }}</span>
     </div>
 
-    <h1 class="Page-mainHeading u-marginTop15">{{ page_data.name }}</h1>
+    <h1 class="Page-mainHeading u-marginTop15">{{ name }}</h1>
 
-    {% include 'components/contributed-data/CsoMeta/index.html' with author=page_data.author created=page_data.created last_updated=page_data.last_updated organization=page_data.organization license=page_data.license facebook=page_data.facebook twitter=page_data.twitter %}
+    {% include 'components/contributed-data/CsoMeta/index.html' with author=author created=created last_updated=last_updated organization=organization license=license facebook=facebook twitter=twitter %}
 
     <main class="Page-main">
       <div class="Section u-marginBottom20">
-        {% if page_data.intro %}
+        {% if intro %}
           <div class="Section-card is-invisible">
-            <h2 class="Section-title">Data contributed by: {{ page_data.organization.name }}</h2>
-            {{ page_data.intro|linebreaks }}
+            <h2 class="Section-title">Data contributed by: {{ organization.name }}</h2>
+            {{ intro|linebreaks }}
           </div>
         {% endif %}
 
-        {% if page_data.methodology and page_data.methodology != '' %}
+        {% if methodology and methodology != '' %}
           <div class="Section-card is-invisible">
             <h2 class="Section-title">Methodology Used in Gathering and Analysis</h2>
-            {{ page_data.methodology|linebreaks }}
+            {{ methodology|linebreaks }}
           </div>
         {% endif %}
       </div>
 
-      {% include 'components/universal/Downloads/index.html' with resources=page_data.resources utils="u-marginBottom20" %}
+      {% include 'components/universal/Downloads/index.html' with resources=resources utils="u-marginBottom20" %}
 
       <div class="Section u-marginBottom20">
         <h2 class="Section-title">Discuss this dataset with others</h2>
-        <div data-enhance-component="Comments" data-url="https://vulekamali.gov.za{{ page_data.url_path }}">
+        <div data-enhance-component="Comments" data-url="https://vulekamali.gov.za{{ url_path }}">
           <div id="discourse-comments"></div>
         </div>
       </div>
