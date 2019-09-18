@@ -235,13 +235,12 @@ dokku apps:create budgetportal
 dokku config:set budgetportal DJANGO_DEBUG=false \
                               DISABLE_COLLECTSTATIC=1 \
                               DJANGO_SECRET_KEY=some-secret-key \
-                              NEW_RELIC_APP_NAME=cool app name \
-                              NEW_RELIC_LICENSE_KEY=new relic license key \
                               CKAN_API_KEY=... \
                               DATABASE_URL=postgresql://... \
                               EMAIL_HOST_PASSWORD=... \
                               DISCOURSE_SSO_SECRET=... \
-                              RECAPTCHA_PRIVATE_KEY=...
+                              RECAPTCHA_PRIVATE_KEY=... \
+                              SENTRY_DSN=https://5999094b0e214151bdfef41a5ad513c2@sentry.io/1730285
 git push dokku master
 dokku run budgetportal python manage.py migrate
 dokku run budgetportal python manage.py createsuperuser

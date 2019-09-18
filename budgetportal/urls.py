@@ -20,7 +20,13 @@ def permission_denied(request):
     raise PermissionDenied()
 
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
 urlpatterns = [
+    url('sentry-debug/', trigger_error),
+
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview)),
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'

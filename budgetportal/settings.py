@@ -293,6 +293,16 @@ if not TEST:
 
 # Logging
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+SENTRY_DSN = os.environ.get('SENTRY_DSN', None)
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()]
+    )
+
 LOGSTASH_URL = os.environ.get('LOGSTASH_URL', '')
 APM_SERVER_URL = os.environ.get('APM_SERVER_URL', '')
 ELK_APP_NAME = 'vulekamali Data Manager'
