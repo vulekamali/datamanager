@@ -1,0 +1,30 @@
+.ChartLabel {
+  position: relative;
+  left: 28px;
+
+  &::after {
+    content: '';
+    background: grey;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -2px;
+    left: -28px;
+  }
+
+  &--indexOf0::after {
+    background: #efd8e0;
+  }
+
+  &--indexOf1::after {
+    background: #deb1c1;
+  }
+
+  &--indexOf2::after {
+    background: #ce8aa2;
+  }
+
+  &--indexOf3::after {
+    background: #bd6383;
+  }
+}

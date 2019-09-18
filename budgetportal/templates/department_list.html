@@ -1,0 +1,11 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% block page_content %}
+
+<div class="Page-content Page-content--dynamicYears">
+  <main class="Page-contentInner">
+    <h1 class="Page-mainHeading">Department Budgets for {{ selected_financial_year }}</h1>
+    {% include 'components/department-budgets/DeptSearch/index.html' with provincial=provincial national=national.0 epres=epres %}
+  </main>
+</div>
+{% endblock %}

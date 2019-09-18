@@ -1,0 +1,14 @@
+{% load define_action %}
+<div class="Section is-bevel {{ utils }}" id="participate">
+  <div class="Section-card is-invisible u-paddingBottom15">
+    <div class="Section-title">{{ title }}</div>
+    <p>{{ description }}</p>
+  </div>
+  <div class="Section-card u-marginBottom20">
+    <div class="js-initParticipate"></div>
+  </div>
+
+    {% for video in videos %}
+      {% include "components/universal/VideoCard/index.html" with utils="u-marginTop15" %}
+    {% endfor %}
+</div>

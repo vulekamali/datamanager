@@ -1,0 +1,14 @@
+{% extends 'page-shell.html' %}
+
+{% block page_content %}
+    <div class="Page-content">
+        <div class="Page-contentInner">
+            <h2 class="Page-mainHeading">Join us at a Vulekamali event in your area</h2>
+                    {% include 'components/events/Events/index.html' with events=site.data.events.upcoming upcoming=true %}
+                {% if site.data.events.past %}
+                    <h2 class="Page-mainHeading">Past Events</h2>
+                    {% include 'components/events/Events/index.html' with events=site.data.events.past %}
+                {% endif %}
+        </div>
+    </div>
+{% endblock %}

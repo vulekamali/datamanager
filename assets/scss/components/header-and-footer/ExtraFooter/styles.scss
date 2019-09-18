@@ -1,0 +1,40 @@
+.ExtraFooter {
+  background-color: white;
+}
+
+.ExtraFooter-title {
+  font-size: 18px;
+  font-weight: bold;
+  font-weight: 900;
+  color: #3f3f3f;
+  padding-bottom: 20px;
+}
+
+.ExtraFooter-item {
+  display: block;
+
+  @media screen and (min-width: 800px) {
+    margin-right: 115px;
+    float: left;
+  }
+}
+
+.ExtraFooter-list {
+  padding-bottom: 85px;
+  @include clearfix;
+}
+
+.ExtraFooter-image {
+  width: 100%;
+  max-width: 175px;
+
+  &--larger {
+    max-width: 200px;
+  }
+}
+
+.ExtraFooter-wrap {
+  margin: 0 auto;
+  max-width: 1024px;
+  padding: 0 40px;
+}

@@ -1,0 +1,52 @@
+{% load define_action %}
+
+
+{% assign ""|add:source_type|add:" "|add:year as source_text %}
+
+{% assign "Learn more about these programmes in the "|add:source_type|add:" as PDF" as pdf_text %}
+
+{% assign "Learn more about these programmes in the "|add:source_type|add:" as Excel" as excel_text %}
+
+{% assign "Dataset Guide for "|add:source_type as guide_text %}
+
+<div class="SmallMultiplesSection" id="{{ id }}">
+    <h3 class="Title Title--section">{{ title }}</h3>
+
+    <div class="SmallMultiplesSection-share u-marginTop10 u-marginBottom15">
+        <div data-component="Share" data-anchor="{{ id }}" data-color="{{ color }}"></div>
+    </div>
+
+    <p>{{ description }}</p>
+
+    <ul class="LinksList u-marginBottom15">
+        {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=dataset type="dataset" %}
+
+        {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=csv type="download" %}
+
+        {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+
+        {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
+
+        {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+    </ul>
+
+    <div class="SmallMultiplesSection-container">
+        {% for chart in charts_list %}
+            <div class="SmallMultiplesSection-item">
+                <div class="Card Card--fullHeight">
+                    <div class="Title Title--interSection">{{ chart.name }}</div>
+                    <div
+                            data-component="ChartAdaptor"
+                            data-type="multiple"
+                            data-items="{{ chart.items|jsonify|escape }}"
+                            data-scale="1"
+                            data-title="{{ chart.name | truncatechars:45 }}"
+                            data-subtitle="{{ subtitle }}"
+                            data-description="Main budget for subprogrammes of this department"
+                    >
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

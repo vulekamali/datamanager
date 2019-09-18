@@ -1,0 +1,13 @@
+.ColumnChart-svg {
+  overflow: hidden;
+}
+
+.ColumnChart-tooltip {
+  .ColumnChart-svg.is-hoverable & {
+    opacity: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

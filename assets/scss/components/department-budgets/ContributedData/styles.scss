@@ -1,0 +1,25 @@
+.ContributedItem {
+  @media screen and ($mobile-breakpoint) {
+    display: table;
+    width: 100%;
+  }
+}
+
+.ContributedItem-info {
+  @media screen and ($mobile-breakpoint) {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.ContributedItem-button {
+  margin-top: 20px;
+
+  @media screen and ($mobile-breakpoint) {
+    margin-top: 0;
+    display: table-cell;
+    width: 190px;
+    vertical-align: middle;
+    text-align: center;
+  }
+}

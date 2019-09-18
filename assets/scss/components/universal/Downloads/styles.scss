@@ -1,0 +1,38 @@
+.Downloads {
+  background: #7BB344;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+
+.Downloads-inner {
+  background: white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.Downloads-title {
+  font-weight: 900;
+  line-height: normal;
+  font-size: 18px;
+  border-bottom: 1px solid #E6E6E6;
+  padding: 1rem 2rem;
+}
+
+.Downloads-content {
+  padding: 2rem;
+}
+
+.Downloads-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.Downloads-text {
+  margin-left: 1rem;
+  
+  &:hover {
+    background: darken(white, 15%);
+  }
+}

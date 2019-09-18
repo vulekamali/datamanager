@@ -1,0 +1,190 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% load markdownify %}
+{% block page_content %}
+
+<div class="Page-content">
+  <div class="Page-contentInner">
+    <div class="Section is-invisible">
+      <a href="/">vulekamali</a>
+      <span> / </span>
+      <a href="/datasets">Data and Analysis</a>
+      <span> / </span>
+      <a href="/datasets/{{ category.slug }}">{{ category.name }}</a>
+      <span> / {{ name }}</span>
+    </div>
+
+    <h1 class="Page-mainHeading u-marginTop15">{{ name }}</h1>
+
+    {% if not external_resource_page %}
+      <main class="Page-main">
+    {% endif %}
+
+      {% if intro %}
+        <div class="BasicContent">
+
+          {% if external_resource_page %}
+            <div class="Screenshots">
+              {% for resource in resources %}
+                {% if resource.format == 'PNG' %}
+                  <a href="{{ resource.url }}" target="_blank" class="Screenshots-imageWrap">
+                    <img src="{{ resource.url }}" alt="{{ resource.name }}" class="Screenshots-image">
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <div class="BasicContent-title">What is this?</div>
+          {{ intro }}
+
+          {% if key_points %}
+            <div class="BasicContent-title u-marginTop20">Key points</div>
+            {{ key_points | markdownify }}
+          {% endif %}
+
+          {% if importance %}
+            <div class="BasicContent-title u-marginTop20">Why is it important?</div>
+            {{ importance | markdownify }}
+          {% endif %}
+
+          {% if use_for %}
+            <div class="BasicContent-title u-marginTop20">What can it be used for?</div>
+            {{ use_for | markdownify }}
+          {% endif %}
+
+          {% if external_resource_page %}
+            {% if resources %}
+              <div>
+                {% for resource in resources %}
+                  {% if resource.format == 'PNG' %}
+                  {% else %}
+                    <a href="{{ resource.url }}" target="_blank" class="Button is-inline u-marginTop15">{{ resource.name }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+        {% endif %}
+        </div>
+      {% endif %}
+
+      {% if category.slug == "frameworks-for-conditional-grants-to-provinces" or category.slug == "frameworks-for-conditional-grants-to-municipalities" %}
+        {% assign resources.0.url as source %}
+        {% include 'scenes/government_dataset/PdfEmbed/index.html' with source=source %}
+      {% endif %}
+
+      {% if usage %}
+        <div class="BasicContent u-marginTop20">
+          <div class="BasicContent-title">How can it be accessed and used?</div>
+          {{ usage | markdownify }}
+        </div>
+      {% endif %}
+
+      {% if not external_resource_page %}
+        {% include 'components/universal/Downloads/index.html' with resources=resources utils="u-marginTop20" %}
+      {% endif %}
+
+      <div class="Section u-marginBottom20 u-marginTop20">
+        <h2 class="Section-title">Discuss this dataset with others</h2>
+        <div data-enhance-component="Comments" data-url="https://vulekamali.gov.za{{ url_path }}">
+          <div id="discourse-comments"></div>
+        </div>
+      </div>
+
+    {% if not external_resource_page %}
+      </main>
+      <aside class="Page-sidebar">
+
+        <div class="Section u-marginBottom20">
+          <h2 class="Section-title">Share this page:</h2>
+          <div data-component="Share"></div>
+        </div>
+    {% endif %}
+
+    {% if category.slug == "performance-and-expenditure-reviews" %}
+      <div class="Section is-bevel">
+        <div class="Section-card">
+          <h2 class="Section-title">What is a PER?</h2>
+          <p>A Performance and Expenditure Review (PER) is a process of reviewing government spending on a particular service, and how effective this spending is.</p>
+          <a href="/guides/performance-and-expenditure-reviews" class="Button">
+            Learn more
+          </a>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if category.slug == "estimates-of-national-expenditure" %}
+      <div class="Section is-bevel">
+        <div class="Section-card">
+          <h2 class="Section-title">What is an ENE?</h2>
+          <p>The Estimates of National Expenditure (ENE) publications describe in detail the planned spending in all national government votes over the three-year medium-term expenditure framework (MTEF) period, government’s expenditure planning window.</p>
+          <a href="/guides/estimates-of-national-expenditure" class="Button">
+            Learn more
+          </a>
+        </div>
+      </div>
+    {% endif %}
+
+
+    {% if category.slug == "frameworks-for-conditional-grants-to-provinces" %}
+      <div class="Section is-bevel">
+        <div class="Section-card">
+          <h2 class="Section-title">Allocations</h2>
+          <p>You can find grant allocations in the division of revenue bill annexures.</p>
+          <a href="/datasets/division-of-revenue-bills" class="Button">
+            View allocations
+          </a>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if category.slug == "estimates-of-provincial-expenditure" %}
+      <div class="Section is-bevel">
+        <div class="Section-card">
+          <h2 class="Section-title">What is an EPRE?</h2>
+          <p>
+            The Estimates of Provincial Revenue and Expenditure (EPRE) is
+            considered a summary of the departmental Strategic and Performance
+            Plan to a level at which the legislature and the public can engage
+            the provincial departments. It further contains a detailed analysis
+            of departmental receipt and payment performance; covering
+            infrastructure payments; transfers to public entities and local
+            government; personnel numbers and costs; and payments on training.
+          </p>
+          <a href="/guides/estimates-of-provincial-expenditure" class="Button">
+            Learn more
+          </a>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if category.slug == "adjusted-estimates-of-national-expenditure" %}
+      <div class="Section is-bevel">
+        <div class="Section-card">
+          <h2 class="Section-title">What is an AENE?</h2>
+          <p>
+            In the middle of each financial year, the adjustments process
+            provides an opportunity to make permissible revisions to the budget,
+            in response to changes that have affected the planned government
+            spending for that year. The adjusted budget may allocate unused
+            funds, mainly from the contingency reserve, and additional amounts
+            that have been approved for particular types of spending, if that be
+            the case.
+          </p>
+          <a
+            href="/guides/adjusted-estimates-of-national-expenditure"
+            class="Button"
+          >
+            Learn more
+          </a>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if not external_resource_page %}
+      </aside>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

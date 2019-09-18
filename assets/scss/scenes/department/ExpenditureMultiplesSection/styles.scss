@@ -1,0 +1,41 @@
+.ExpenditureMultiplesSection-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media screen and (min-width: 1000px) {
+    flex-flow: row wrap;
+  }
+}
+
+.ExpenditureMultiplesSection-item {
+  min-width: 0;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 1000px) {
+    width: (100% / 3);
+    padding-right: 1rem;
+
+    &--right {
+      padding-left: 1rem;
+      padding-right: 0;
+    }
+  }
+}
+
+.ExpenditureMultiplesSection-share {
+  max-width: 250px;
+}
+
+.ExpenditureMultiplesSection-cell {
+  padding: 0.25rem 1rem;
+}
+
+.ExpenditureMultiplesSection-label {
+  display: flex;
+}
+
+.ExpenditureMultiplesSection-labelItem {
+  margin-top: 1rem;
+  margin-right: 3rem;
+}

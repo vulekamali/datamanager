@@ -1,0 +1,93 @@
+{% load define_action %}
+{% assign ""|add:source_type|add:" "|add:year as source_text %}
+{% assign "Learn more about the MTEF in the "|add:source_type|add:" as PDF" as pdf_text %}
+{% assign "Learn more about the MTEF in the "|add:source_type|add:" as Excel" as excel_text %}
+{% assign "Dataset Guide for "|add:source_type as guide_text %}
+
+<div class="ExpenditurePhaseSection" id="expenditure">
+    <h3 class="Title Title--section">Budgeted and actual expenditure comparison</h3>
+
+    <div class="ExpenditurePhaseSection-container">
+        <div class="ExpenditurePhaseSection-item">
+            <div class="ExpenditurePhaseSection-share u-marginTop10 u-marginBottom15">
+                <div data-component="Share" data-anchor="expenditure" data-color="{{ color }}"></div>
+            </div>
+
+            <p class="js-tooltips">
+                Compare the adjusted appropriation to the main appropriation to see whether changes were made in the
+                adjustments budget to the appropriations set out in the budget. The audited outcome shows what was
+                actually spent.
+            </p>
+
+            <p class="js-tooltips">Note: Direct charges against the National Revenue Fund are excluded.</p>
+
+            {% if website_url %}
+                <p>Read more in the Annual Report on <a href="http://{{ website_url }}">the department's
+                    website.</a></p>
+            {% endif %}
+
+            <ul class="LinksList">
+                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=dataset type="dataset" %}
+
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=csv type="download" %}
+
+                {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+
+                {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
+
+                {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+            </ul>
+
+            {% if notices %}
+                {% for notice in notices %}
+                    <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
+                        <div class="Message-content">
+              <span class="Message-heading">
+                Please note
+              </span>
+                        </div>
+                        <div class="Message-text Message-text--secondary">
+                            {{ notice }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="ExpenditurePhaseSection-item ExpenditurePhaseSection-item--right">
+            <div class="ExpenditurePhaseSection-label u-marginBottom15">
+                <div class="ExpenditurePhaseSection-labelItem">
+                    {% include 'components/ChartLabel/index.html' with index="0" label="Main appropriation" %}
+                </div>
+
+                <div class="ExpenditurePhaseSection-labelItem">
+                    {% include 'components/ChartLabel/index.html' with index="1" label="Adjusted appropriation" %}
+                </div>
+
+                <div class="ExpenditurePhaseSection-labelItem">
+                    {% include 'components/ChartLabel/index.html' with index="2" label="Final appropriation" %}
+                </div>
+
+                <div class="ExpenditurePhaseSection-labelItem">
+                    {% include 'components/ChartLabel/index.html' with index="3" label="Audited outcome" %}
+                </div>
+            </div>
+
+            <div class="Card">
+                <div
+                        data-component="ChartAdaptor"
+                        data-items="{{ items | jsonify | escape }}"
+                        data-type="expenditurePhase"
+                        data-scale="2"
+                        data-color="purple"
+                        data-title="{{ title | truncatechars:45 }}"
+                        data-subtitle="{{ subtitle }}"
+                        data-description="{{ description }}"
+                        data-barTypes="[&quot;Main Appropriation&quot;, &quot;Adjusted Appropriation&quot;, &quot;Final Appropriation&quot;, &quot;Audited Outcome&quot;]"
+                        data-rotated
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

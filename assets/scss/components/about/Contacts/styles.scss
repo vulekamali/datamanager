@@ -1,0 +1,67 @@
+.Contacts-icon {
+  vertical-align: top;
+  display: block;
+  background: $colour-shading-dark;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid $colour-shading-dark;
+}
+
+.Contacts-iconWrap {
+  display: table-cell;
+}
+
+.Contacts-svg {
+  position: relative;
+  top: 3px;
+}
+
+.Contacts-title {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.57;
+  padding: 25px 0;
+}
+
+.Contacts-info {
+  vertical-align: top;
+  display: table-cell;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.Contacts-item {
+  display: table;
+  padding-bottom: 40px;
+}
+
+.Contacts-line {
+  font-size: 14px;
+  line-height: 1.45;
+
+  &.is-title {
+    font-weight: bold;
+  }
+}
+
+.Contacts-highlight {
+  &:target {
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    left: -20px;
+    top: -20px;
+    animation-name: background-pulse;
+    animation-duration: 3s;
+    animation-iteration-count: 2;
+    animation-fill-mode: forwards;
+
+    a {
+      color: white;
+    }
+  }
+}

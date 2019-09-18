@@ -1,0 +1,60 @@
+---
+name: Progressbar
+menu: Components
+---
+
+
+import { PropsTable, Playground } from 'docz';
+import Progressbar from './index';
+
+
+# Progressbar
+
+## `index.jsx`
+
+Component that does the following:
+
+ - adds custom styling to Material UI `<LinearProgress />` component.
+ - Calculates progress based on string that is passed.
+
+### Props
+
+<PropsTable of={Progressbar} />
+
+
+**⚠️The default `stage` of this component is set to `null` meaning that the progressbar will not render
+without passing a string to it.**
+
+### Table representing progress
+
+Strings are mapped to the following values:
+
+  | Stage               | Progress    |
+  | :-------------------| :----------- |
+  | Site identification | 11% |
+  | Pre-feasibility     | 22% |
+  | Feasibility         | 33% |
+  | Design              | 44% |
+  | Tender              | 56% |
+  | Construction        | 67% |
+  | Hand over           | 78% |
+  | Handed over         | 89% |
+  | Complete            | 100%|
+
+
+### Examples:
+
+### Construction `stage`
+<Playground>
+  <Progressbar stage="Construction" />
+</Playground>
+
+### Pre-feasibility `stage`
+<Playground>
+  <Progressbar stage="Pre-feasibility" />
+</Playground>
+
+### Complete `stage`
+<Playground>
+  <Progressbar stage="Complete" />
+</Playground>

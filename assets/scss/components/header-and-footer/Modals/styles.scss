@@ -1,0 +1,126 @@
+
+.Modals {
+  z-index: 10000;
+}
+
+.Modals-inner {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.Modals-overlay {
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  @supports (transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1)) {
+    transition: opacity 0.1s;
+  }
+
+  .Modals-inner.is-enter & {
+    opacity: 0;
+  }
+
+  .Modals-inner.is-enter-active & {
+    opacity: 1;
+  }
+
+  .Modals-inner.is-leave & {
+    opacity: 1;
+  }
+
+  .Modals-inner.is-leave-active & {
+    opacity: 0;
+  }
+}
+
+.Modals-boxWrap {
+  width: 100%;
+  margin: 40px auto;
+  position: relative;
+  max-width: 700px;
+  border-radius: 20px;
+  background-color: #e6e6e6;
+  padding: 10px;
+
+  @supports (transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1)) {
+    transition: transform 0.3s;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .Modals-inner.is-enter & {
+    transform: scale(0);
+  }
+
+  .Modals-inner.is-enter-active & {
+    transform: scale(1);
+  }
+
+  .Modals-inner.is-leave & {
+    transform: scale(1);
+  }
+
+  .Modals-inner.is-leave-active & {
+    transform: scale(0);
+  }
+}
+
+.Modals-box {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.Modals-heading {
+  font-size: 18px;
+  font-weight: 900;
+  padding: 15px 40px 15px 20px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.Modals-content {
+  padding: 15px 20px;
+}
+
+.Modals-close {
+  cursor: pointer;
+  position: absolute;
+  background: #e6e6e6;
+  padding: 10px;
+  border-radius: 50%;
+  fill: #c66347;
+  top: -12px; 
+  right: -12px;
+  border: 4px solid white;
+  line-height: 0;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    fill: darken(#c66347, 15%);
+    background: darken(#e6e6e6, 15%);
+    border: 4px solid darken(white, 15%);
+  }
+
+  &:focus {
+    outline: 0;
+    fill: darken(#c66347, 15%);
+    background: darken(#e6e6e6, 15%);
+    border: 4px solid darken(white, 15%);
+  }
+
+  &:active {
+    top: -11px;
+    right: -13px;
+    box-shadow: none;
+  }
+}

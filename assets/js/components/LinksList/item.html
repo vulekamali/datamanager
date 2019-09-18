@@ -1,0 +1,37 @@
+{% load define_action %}
+{% if url %}
+  {% if prefix %}
+    <li>
+      {% if type == 'download' or type  == 'link' %}
+        <a href="{{ url }}" target="_blank" rel="noopener noreferrer" class="LinksList-link LinksList-link--clickable">
+      {% else %}
+        <a href="{{ url }}" class="LinksList-link LinksList-link--clickable">
+      {% endif %}
+        <span class="LinksList-icon">
+          {% include 'components/Icon/index.html' with type=type size="s" %}
+        </span>
+        <div>
+          <span>{{ prefix }}:&nbsp;</span>
+          <span class="LinksList-title">
+            {{ text }}
+          </span>
+        </div>
+      </a>
+    </li>
+  {% else %}
+    <li>
+      {% if type == 'download' or type  == 'link' %}
+        <a href="{{ url }}" target="_blank" rel="noopener noreferrer" class="LinksList-link LinksList-link--clickable">
+      {% else %}
+        <a href="{{ url }}" class="LinksList-link LinksList-link--clickable">
+      {% endif %}
+        <span class="LinksList-icon">
+          {% include 'components/Icon/index.html' with type=type size="s" %}
+        </span>
+        <span class="LinksList-title">
+          {{ text }}
+        </span>
+      </a>
+    </li>
+  {% endif %}
+{% endif %}

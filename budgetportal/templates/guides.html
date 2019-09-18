@@ -1,0 +1,30 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+
+{% block page_content %}
+
+<div class="Page-content">
+  <div class="Page-contentInner Page-contentInner--floatingLinks">
+    <div class="Section is-invisible">
+      <a href="/">vulekamali</a>
+      <span> / </span>
+      <a href="/videos">Learning Resources</a>
+      <span> / Dataset Guides</span>
+    </div>
+
+    <h1 class="Page-mainHeading">Dataset Guides</h1>
+
+    <div class="Section is-invisible u-fontSize18 u-paddingTop0">
+      {{ description }}
+    </div>
+
+    <div class="Grid has-twoColumn">
+      {% for type in items %}
+        {% include 'components/Preview/index.html' with title=type.name excerpt=type.description url=type.url_path %}
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

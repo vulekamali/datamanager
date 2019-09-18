@@ -1,0 +1,204 @@
+---
+name: NationalMap
+menu: Components
+---
+
+
+import { PropsTable } from 'docz';
+import NationalMap from './index';
+import Markup from './Markup';
+import Point from './Point';
+import Province from './Province';
+import Tooltip from './Tooltip';
+
+
+# NationalMap
+
+**⚠️ In order to view or edit this component run `yarn start:storybook` to open it in a sandbox environment.**
+
+## `index.jsx`
+
+Manages state for entire component.
+
+### Props
+
+<PropsTable of={NationalMap} />
+
+### Initial state
+
+#### **hover**
+hardcoded: `null`
+
+#### **selected**
+Uses `calcSelected` helper function to determine whether a specific GPS point should be selected when the component is initialised.
+
+### Methods
+
+Has two methods `updateHover` and `updateSelected` that simply change the state value of these to the parameter supplied. `selectionCallback` prop is run when `updateSelected` is called.
+
+## `data.json`
+
+Contains the following constants used in the component:
+
+#### **provincesList**
+An array of all South African provinces (as strings)
+
+#### **countryGpsBounds**
+The most east, west, north and south coordinates of South Africa. Helpful when forcing GPS value into pixel positions on the map.
+
+#### **vectorMapSizes**
+The different dimensions for each of the map sizes ('small', 'medium' and 'large'). Helpful when forcing GPS values in pixel positions for specific map sizes.
+
+
+## `calcSelected.jsx`
+
+A curried function that returns the first GPS point associated with a project. If no project ID is passed `null` will be returned.
+
+### Parameters
+
+|Parameter|Type|Required|Default|Description
+|---|---|---|---|---|
+|projects|Array|true||A list of projects that follow the schema of the component `projects` prop|
+
+### Returned function prop
+
+|Properties|Type|Required|Default|Description
+|---|---|---|---|---|
+|id|String|false|null|An ID associated with a specific project|
+
+### Example
+
+```js
+calcSelected({ id: 'example-1' })('example-1');
+/* { id: 'example-1' } */
+
+calcSelected({ id: 'example-1' })();
+/* null */
+```
+
+## `scaleGpsToMapSize.js`
+
+A curried function that converts raw [decimal degrees](https://en.wikipedia.org/wiki/Decimal_degrees) GPS coordinates to x (from longitude) and y (from latitude)  values positioned in the Map SVG component.
+
+### Parameters
+
+|Parameter|Type|Required|Default|Description
+|---|---|---|---|---|
+|size|String|false|`'large'`|x|
+
+### Returned function prop
+
+|Properties|Type|Required|Default|Description
+|---|---|---|---|---|
+|id|String|false|null|A |
+
+### Example
+
+```js
+scaleGpsToMapSize()({ id: 'Cape Town', x: 18.468361, y: -33.920175 })
+/* { x: 51.058091393939435, y: 343.8512019230769, id: 'Cape Town' } */
+
+scaleGpsToMapSize('medium')({ id: 'Pretoria', x: 28.198471, y: --25.739050 })
+/* { x: 160.2336027878788, y: 55.94194038461538, id: 'Pretoria' } */
+
+scaleGpsToMapSize('small')({ id: 'Port Elizabeth', x: 25.620117, y: -33.954467 })
+/* { x: 124.91796618181819, y: 178.85721780769234, id: 'Port Elizabeth' } */
+```
+
+## `findProject.js`
+
+A curried function that returns the first project object associated with a specific GPS point id. Compares the value passed to `pointId` against all the strings in each object's `points` array value.
+
+### Parameters
+
+|Parameter|Type|Required|Default|Description
+|---|---|---|---|---|
+|projects|Array|true||A list of projects that follow the schema of the component `projects` prop|
+
+### Returned function parameters
+
+|Parameter|Type|Required|Default|Description
+|---|---|---|---|---|
+|pointsId|String|false|null|The GPS point that you want to use to find the first associate project|
+
+### Example
+
+```js
+const projects = [
+  { id: 'example', points: ['Cape Town'] },
+]
+
+findProject([{ id: 'example', points: ['Cape Town'] }])('Cape Town')
+/* { id: 'example', points: ['Cape Town'] } */
+```
+
+## `getById.js`
+
+A curried utility function that returns the object that has a specific `id` prop.
+
+### Parameters
+
+|Parameter|Type|Required|Default|Description
+|---|---|---|---|---|
+|array|Array|true||The array that should be searched. Must contain objects with `id` props at minimum.
+
+### Returned function parameters
+
+|Parameter|Type|Required|Default|Description
+|---|---|---|---|---|
+|id|String|false|null|The id to search for in all objects in the array|
+
+Example:
+
+```
+getById([{ id: 'example' }])('example')
+/* { id: 'example' } */
+```
+
+## `getPinStyling.js`
+
+A curried function used by `Point.jsx` to determine styling of pin (SVG circle).
+
+### Parameters
+
+|Parameter|Type|Required|Default|Description
+|---|---|---|---|---|
+|type|`'transform'`,`'fill'` or `'stroke'` |true||The styling attribute to calculate.
+
+### Returned function properties
+
+|Property|Type|Required|Default|Description
+|---|---|---|---|---|
+|hover|Boolean|false|null|Whether the point in question is hovered
+|selected|Boolean|false|null|Whether the point in question is selected
+
+## `Markup.jsx`
+
+Creates and returns the SVG markup needed to render the NationalMap components. This includes the following:
+
+- The shadow `<defs>` to use for in the hover state.
+- Mapping over all values `provinces` from `data.json` to create and update provinces. 
+- Mapping over all values in `points` prop to create and update dots.
+- Mapping over all values in `points` array of hovered project in order to tooltips.
+
+### Props
+
+<PropsTable of={Markup} />
+
+## `Point.jsx`
+
+Calculate and returns an SVG pin on the map with specific styling based on the following props:
+
+<PropsTable of={Point} />
+
+## `Province.jsx`
+
+Calculate and returns SVG path with specific styling based on the following props:
+
+<PropsTable of={Province} />
+
+## `Tooltip.jsx`
+
+Calculate and returns SVG path with specific styling based on the following props:
+
+<PropsTable of={Tooltip} />

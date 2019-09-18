@@ -1,0 +1,44 @@
+@keyframes homepage-hero {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.homepage-hero {
+  height: 450px;
+}
+
+.homepage-hero-image {
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background: #ececec;
+}
+
+.homepage-hero-loading {
+  margin: 0 auto;
+}
+
+.homepage-hero-spinner {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 4px solid #79b443;
+  border-right: 4px solid transparent;
+  animation-name: homepage-hero;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.homepage-hero-bar {
+  height: 50px;
+  background: #79b443;
+}

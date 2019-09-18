@@ -11,14 +11,17 @@ from selenium import webdriver
 
 class BaseSeleniumTestCase(StaticLiveServerTestCase):
     """
-    Base class for Selenium / PhantomJS tests.
+    Base class for Selenium tests.
 
     This saves a screenshot to the current directory on test failure.
     """
 
     def setUp(self):
         super(BaseSeleniumTestCase, self).setUp()
-        self.selenium = webdriver.PhantomJS()
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('headless')
+        chrome_options.add_argument('--no-sandbox')
+        self.selenium = webdriver.Chrome(chrome_options=chrome_options)
 
     def tearDown(self):
         super(BaseSeleniumTestCase, self).tearDown()

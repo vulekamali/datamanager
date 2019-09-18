@@ -1,0 +1,110 @@
+{% load define_action %}
+
+<div class="Events">
+  {% for event in events %}
+
+  {% if event.type == 'hackathon' %}
+    {% assign 'Hackathon' as title %}
+    {% assign 'Join developers, students, enterpreneurs and data experts at a Vulekamali hackathon. Build websites, mobile apps and other tools using the data and APIs behind vulekamali.' as description %}
+  {% elif event.type == 'cid' %}
+    {% assign 'Civic Information Drive' as title %}
+    {% assign 'Find out more about how to use vulekamali.gov.za to understand national and provincial budgets.' as description %}
+  {% elif event.type == 'dataquest' %}
+    {% assign 'Data Quest' as title %}
+    {% assign 'Tell us what you need to make Vulekamali and budget data more accessible and useful. Join us for a full day event discussing budget accessibility.' as description%}
+  {% elif event.type == 'gift-dataquest' %}
+    {% assign 'Better Budget Data Quest' as title %}
+    {% assign 'Find new insights on budget topics and innovative ideas to analyse and improve budget allocations and execution.' as description %}
+  {% else %}
+    {% assign 'Event' as title %}
+    {% assign '' as description %}
+  {% endif %}
+
+    <div class="Events-blockWrap">
+      <div class="Events-block{{ class }}">
+        <div class="Events-infoWrap">
+          <div class="Events-info">
+            <div class="Events-type">{{ event.date }} — {{ event.province }} — {{ title }}</div>
+
+            {% if event.date %}
+              <div class="Events-line">
+                <span class="Events-icon">
+                  {% include 'components/Icon/index.html' with type="date" size="xs" %}
+                </span>
+                <span>{{ event.date }}</span>
+              </div>
+            {% endif %}
+
+            {% if event.where %}
+              <div class="Events-line">
+                <span class="Events-icon">
+                  {% include 'components/Icon/index.html' with type="pin" size="xs" %}
+                </span>
+                <span>{{ event.where }}</span>
+              </div>
+            {% endif %}
+
+            <div class="Events-description">{{ description }}</div>
+          </div>
+        </div>
+
+        <div class="Events-pastWrap">
+          <div class="Events-past">
+
+            <div class="Events-buttons">
+
+              {% if event.rsvp_url or event.url %}
+
+                {% if event.rsvp_url %}
+                  <a class="Button is-small is-inline u-marginRight5" href="{{ event.rsvp_url }}" target="_blank">RSVP</a>
+                {% endif %}
+
+                {% if event.url %}
+                  <a class="Button is-small is-inline u-marginRight5" target="_blank" href="{{ event.url }}">Learn more</a>
+                {% endif %}
+
+              {% else %}
+
+              {% if upcoming %}
+                <a class="Button is-small is-inline u-marginRight5" target="_blank" href="http://eepurl.com/diwJEP">Receive updates</a>
+              {% endif %}
+
+              {% endif %}
+
+              {% if event.presentation_url %}
+                <a class="Button is-small is-inline u-marginRight5" target="_blank" href="{{ event.presentation_url }}">
+                  Download the hackathon presentations
+                </a>
+              {% endif %}
+
+              {% if event.notes_url %}
+                <a class="Button is-small is-inline u-marginRight5" target="_blank" href="{{ event.notes_url }}">
+                  Download the data quest notes
+                </a>
+              {% endif %}
+
+              {% if event.video_url %}
+                <a class="Button is-small is-inline u-marginRight5" target="_blank" href="{{ event.video_url }}">
+                  Watch the video
+                </a>
+              {% endif %}
+            </div>
+
+            {% if event.photos %}
+              <div class="Events-buttons">
+
+                {% for url in event.photos %}
+                  <a class="Events-link" target="_blank" target="_blank" href="{{ url }}">
+                    <img class="Events-image" src="{{ url }}" />
+                  </a>
+                {% endfor %}
+
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  {% endfor %}
+</div>

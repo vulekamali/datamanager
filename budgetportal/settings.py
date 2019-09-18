@@ -10,8 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -22,10 +22,18 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'true') == 'true'
 # THINK VERY CAREFULY before using the TEST variable.
 # Tests should aim to be as production-like as possible.
 import sys
+
 if 'test' in sys.argv or 'test_coverage' in sys.argv:
     TEST = True
 else:
     TEST = False
+
+import environ
+
+ROOT_DIR = (
+        environ.Path(__file__) - 2
+)
+PROJ_DIR = ROOT_DIR.path("budgetportal")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 if DEBUG:
@@ -33,22 +41,28 @@ if DEBUG:
 else:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
+DEBUG_TOOLBAR = os.environ.get("DJANGO_DEBUG_TOOLBAR", "false").lower() == "true"
+print("Django Debug Toolbar %s." % "enabled" if DEBUG_TOOLBAR else "disabled")
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": "budgetportal.debug_toolbar_config.show_toolbar_check"
+}
+
 GOOGLE_ANALYTICS_ID = "UA-93649482-8"
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'budgetportal',
     'allauth_facebook',
 
+    # before auth for LiveServerTestCase https://code.djangoproject.com/ticket/10827
+    'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'adminplus',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -65,9 +79,13 @@ INSTALLED_APPS = (
     'elasticapm.contrib.django',
 
     'import_export',
-)
+    'markdownify',
+]
 
-MIDDLEWARE = (
+if DEBUG_TOOLBAR:
+    INSTALLED_APPS.append("debug_toolbar")
+
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,7 +95,10 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'elasticapm.contrib.django.middleware.TracingMiddleware',
     'elasticapm.contrib.django.middleware.Catch404Middleware',
-)
+]
+
+if DEBUG_TOOLBAR:
+    MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
 
@@ -89,18 +110,14 @@ WSGI_APPLICATION = 'budgetportal.wsgi.application'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
-INTERNAL_IPS = ['127.0.0.1']
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 import dj_database_url
-db_config = dj_database_url.config(default='postgres://budgetportal@localhost/budgetportal')
+
+db_config = dj_database_url.config()
 db_config['ATOMIC_REQUESTS'] = True
 
-if TEST:
-    DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3'}}
-else:
-    DATABASES = {'default': db_config}
+DATABASES = {'default': db_config}
 
 # Caches
 if DEBUG:
@@ -125,8 +142,8 @@ else:
         }
     }
 
-
 from ckanapi import RemoteCKAN
+
 CKAN_URL = os.environ.get('CKAN_URL', 'https://treasurydata.openup.org.za')
 CKAN_API_KEY = os.environ.get('CKAN_API_KEY', None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
@@ -195,13 +212,16 @@ USE_TZ = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            str(ROOT_DIR.path("assets/js")),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "budgetportal.context_processors.google_analytics",
+                "budgetportal.context_processors.debug",
                 "django.template.context_processors.request",
             ],
         },
@@ -210,6 +230,10 @@ TEMPLATES = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+STATICFILES_DIRS = [
+    str(ROOT_DIR.path("assets")),
+    str(ROOT_DIR.path("packages/webapp/build/static")),
+]
 
 ASSETS_DEBUG = DEBUG
 ASSETS_URL_EXPIRE = False
@@ -267,8 +291,17 @@ PIPELINE = {
 if not TEST:
     STATICFILES_STORAGE = 'budgetportal.pipeline.GzipManifestPipelineStorage'
 
-
 # Logging
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+SENTRY_DSN = os.environ.get('SENTRY_DSN', None)
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()]
+    )
 
 LOGSTASH_URL = os.environ.get('LOGSTASH_URL', '')
 APM_SERVER_URL = os.environ.get('APM_SERVER_URL', '')
@@ -309,27 +342,44 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-        'level': 'ERROR'
+        'level': 'INFO'
     },
     'loggers': {
         'budgetportal': {
-           'level': 'DEBUG' if DEBUG else 'INFO',
+            'level': 'DEBUG' if DEBUG else 'INFO',
         },
         'django': {
             'level': 'DEBUG' if DEBUG else 'INFO',
-        }
+        },
     }
 }
 
 Q_CLUSTER = {
     'name': 'Something',
     'workers': 1,
-    'timeout': 30*60,     # Timeout a task after this many seconds
+    'timeout': 30 * 60,  # Timeout a task after this many seconds
     'retry': 5,
     'queue_limit': 1,
     'bulk': 1,
-    'orm': 'default',     # Use Django ORM as storage backend
-    'poll': 10,           # Check for queued tasks this frequently (seconds)
+    'orm': 'default',  # Use Django ORM as storage backend
+    'poll': 10,  # Check for queued tasks this frequently (seconds)
     'save_limit': 0,
-    'ack_failures': True, # Dequeue failed tasks
+    'ack_failures': True,  # Dequeue failed tasks
 }
+
+MARKDOWNIFY_WHITELIST_TAGS = [
+    'a',
+    'abbr',
+    'acronym',
+    'b',
+    'blockquote',
+    'em',
+    'i',
+    'li',
+    'ol',
+    'p',
+    'strong',
+    'ul',
+    'h1',
+    'h2'
+]

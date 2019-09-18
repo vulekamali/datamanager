@@ -1,0 +1,141 @@
+.CsoMeta {
+  // max-width: 940px;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  display: block;
+  padding: 20px 0;
+
+  @media screen and (min-width: 750px) {
+    display: table;
+  }
+}
+
+.CsoMeta-title {
+  font-size: 18px;
+  line-height: 1.44;
+  margin: 0 0 4px;
+  font-weight: bold;
+  font-weight: 900;
+}
+
+.CsoMeta-orgTitle {
+  display: block;
+  font-weight: normal;
+  max-width: 240px;
+}
+
+.CsoMeta-container {
+  margin-top: 10px;
+
+  @media screen and (min-width: 750px) {
+    margin-top: 0;
+    display: table-cell;
+  }
+}
+
+.CsoMeta-dataSetWrap {
+  border-radius: 20px;
+  background-color: #e6e6e6;
+  border: solid 1px #d2d2d2;
+  padding: 10px;
+}
+
+.CsoMeta-dataSet {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #d2d2d2;
+  padding: 11px 20px 32px;
+  display: block;
+  @include clearfix;
+}
+
+.CsoMeta-column {
+  padding-right: 20px;
+  float: left;
+  width: 100%;
+
+  @media screen and (min-width: 950px) {
+    width: 50%;
+  }
+}
+
+.CsoMeta-organisation {
+  display: block;
+  padding-left: 20px;
+
+  @media screen and (min-width: 750px) {
+    display: table-cell;
+    width: 300px;
+  }
+}
+
+.CsoMeta-logo {
+  max-width: 240px;
+  height: 100px;
+  width: 100%;
+  background-position: 0 center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.CsoMeta-line {
+  padding: 2px 0;
+  word-break: break-all;
+
+  &--link {
+    color: #4a4a4a;
+    border-radius: 6px;
+    padding: 0 6px;
+    position: relative;
+    left: -6px;
+
+    &:hover {
+      background: darken(white, 5%);
+    }
+  }
+}
+
+.CsoMeta-listItems {
+  margin: 0;
+  @include clearfix;
+}
+
+.CsoMeta-listItem {
+  float: left;
+  width: 100%;
+  margin: 0;
+
+  &.is-title {
+    font-weight: bold;
+    font-weight: 900;
+    padding-top: 14px;
+  }
+
+  &--icon {
+    padding-top: 7px;
+    display: inline-block;
+    width: auto;
+  }
+}
+
+.CsoMeta-item {
+  display: inline-block;
+
+  &--link {
+    color: #4a4a4a;
+    border-radius: 6px;
+    padding: 0 6px;
+    position: relative;
+    left: -6px;
+
+    &:hover {
+      background: darken(#f0f0f0, 5%);
+    }
+  }
+}
+
+.CsoMeta-list {
+  @include clearfix;
+}

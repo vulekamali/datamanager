@@ -35,16 +35,34 @@ start moving to summaries, and just call out to models and datasets as needed.
 Setting up Development environment
 -----------------------
 
-Set up the database
+### Build frontend dependencies
+
+First time, and any time dependencies might have changed
+
+```
+yarn
+```
+
+### Run JS and CSS incremental build for the assets managed by yarn (except webapp package)
+
+This is an incremental build and will rebuild the root bundle until you Ctrl+C out of it.
+
+```
+yarn build:dev
+```
+
+### Build changes in webapp package.
+
+In another shell, build the webapp package. This is not an incremental build and needs to be rebuilt for each change in this package.
+
+```
+yarn build:webapp
+```
+
+### Start development server
 
 ```
 docker-compose up db
-```
-
-Add the dokku remote to you local clone
-
-```
-git remote add dokku@treasury1.openup.org.za:budgetportal
 ```
 
 Setup the database - either by running migrations against a new database, or by
@@ -54,7 +72,7 @@ If you're setting up a new database:
 
 ```
 docker-compose run --rm app python manage.py migrate
-docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
+docker-compose run --rm app python manage.py loaddata development-first-user
 ```
 
 Then run the server
@@ -89,27 +107,80 @@ Load an initial set of financial years, spheres and governments. You might need 
 
 You can download data from the production datamanager to use in your test environment as follows:
 
-```
-curl https://datamanager.vulekamali.gov.za/2018-19/national/departments.csv > departments-national-2018-19.csv
-curl https://datamanager.vulekamali.gov.za/2018-19/provincial/departments.csv > departments-provincial-2018-19.csv
+```bash
+for year in 2016-17 2017-18 2018-19 2019-20; do curl https://datamanager.vulekamali.gov.za/${year}/national/departments.csv > departments-national-${year}.csv; done
+for year in 2016-17 2017-18 2018-19 2019-20; do curl https://datamanager.vulekamali.gov.za/${year}/provincial/departments.csv > departments-provincial-${year}.csv; done
 ```
 
 You can load this data into your environment with:
 
+```bash
+docker-compose run --rm app python manage.py loaddata years-spheres-governments video-language events
+for year in 2016-17 2017-18 2018-19 2019-20; do docker-compose run --rm app python manage.py load_departments ${year} national departments-national-${year}.csv; done
+for year in 2016-17 2017-18 2018-19 2019-20; do docker-compose run --rm app python manage.py load_departments ${year} provincial departments-provincial-${year}.csv; done
 ```
-docker-compose run --rm app python manage.py loaddata fixtures/development-first-user
-docker-compose run --rm app python manage.py load_departments 2019-20 national departments-national-2018-19.csv
-docker-compose run --rm app python manage.py load_departments 2019-20 provincial departments-provincial-2018-19.csv
+
+Finally load the 2019-20 featured national infrastructure projects on the Infrastructure Project Parts admin page via the Import buton. Find the file to import at `budgetportal/fixtures/infrastructure-projects-2019-20.csv`.
+
+------
+
+Create and run database migrations with
+
+```
+docker-compose run --rm app python manage.py makemigrations
+
 ```
 
 ### Development best practises
 
 * Always maintain or improve test coverage
 * Follow the principles of the [test pyramid](https://martinfowler.com/articles/practical-test-pyramid.html#TheTestPyramid)
+
+#### Python/Django
+
+* Get better debugging with ``python manage.py runserver_plus``
+
+#### React stuff (package.json and packages/webapp/package.json)
+
+TBC
+
+#### Classic django+bower stuff:
+
 * Put javascript into ``budgetportal/static/javascript/app.js``
 * Put SCSS stylesheets into ``budgetportal/static/stylesheets/app.scss``
 * Install new asset packs with Bower: ``bower install -Sp package-to-install``
-* Get better debugging with ``python manage.py runserver_plus``
+
+### Frontend development
+
+#### Root NPM package
+
+See package.json and webpack.config.js
+
+#### packages/webapp NPM package
+
+See [README.md](packages/webapp/README.md)
+
+Specifically, it is set up so that development can happen both directly against the webapp, e.g.
+
+```
+cd packages/webapp
+yarn start
+```
+
+or
+
+```
+cd packages/webapp
+yarn start:storybook
+```
+
+Or as part of the django app where it gets embedded
+
+```
+yarn build:webapp
+```
+
+and reloading the django page.
 
 ### Single Sign-on (SSO)
 
@@ -136,16 +207,17 @@ Logout from ckan might not send you to the right URL to logout from DataManager.
 Running tests
 --------------
 
-Install PhantomJS according to the right way for your operating system.
+All tests
 
 ```
-tox
+docker-compose run --rm test
 ```
 
-This should should exist with non-zero status and indicate that all tests passed.
+Specific tests, e.g.
 
-If any tests fail, the exit code will be non-zero and details will be printed to the console. Remember to scroll up a bit in the output to see stack traces corresponding server errors for HTTP-based tests.
-
+```
+docker-compose run --rm test python manage.py test budgetportal.tests.test_bulk_upload.BulkUploadTestCase
+```
 
 Production deployment
 ---------------------
@@ -163,16 +235,15 @@ dokku apps:create budgetportal
 dokku config:set budgetportal DJANGO_DEBUG=false \
                               DISABLE_COLLECTSTATIC=1 \
                               DJANGO_SECRET_KEY=some-secret-key \
-                              NEW_RELIC_APP_NAME=cool app name \
-                              NEW_RELIC_LICENSE_KEY=new relic license key \
                               CKAN_API_KEY=... \
                               DATABASE_URL=postgresql://... \
                               EMAIL_HOST_PASSWORD=... \
                               DISCOURSE_SSO_SECRET=... \
-                              RECAPTCHA_PRIVATE_KEY=...
+                              RECAPTCHA_PRIVATE_KEY=... \
+                              SENTRY_DSN=https://5999094b0e214151bdfef41a5ad513c2@sentry.io/1730285
 git push dokku master
-dokku run python manage.py migrate
-dokku run python manage.py createsuperuser
+dokku run budgetportal python manage.py migrate
+dokku run budgetportal python manage.py createsuperuser
 dokku ps:scale budgetportal worker=1
 ```
 

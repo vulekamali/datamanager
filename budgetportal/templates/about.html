@@ -1,0 +1,25 @@
+{% extends 'page-shell.html' %}
+{% block page_content %}
+  <div class="Page-content">
+    <main class="Page-contentInner Page-contentInner--floatingLinks">
+
+      {% with languages=video.videolanguage_set.all year=latest_year %}
+
+        {% include 'components/about/Background/index.html' %}
+
+        {% include 'components/about/Development/index.html' %}
+
+        {% include 'components/about/ProjectStatus/index.html' %}
+
+        {% include 'components/about/Contribution/index.html' %}
+
+        {% include 'components/about/Contacts/index.html' %}
+
+        {% include 'components/about/Media/index.html' %}
+
+        {% include 'components/about/DataScientists/index.html' %}
+
+      {% endwith %}
+    </main>
+  </div>
+{% endblock %}

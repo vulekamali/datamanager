@@ -1,0 +1,68 @@
+{% load define_action %}
+
+<div class='Preview{% if transparent == "true" %} Preview--transparent{% endif %}{% if full_height == "true" %} Preview--fullHeight{% endif %}{% if top_align == "true" %} Preview--topAlign{% endif %}'>
+
+  {% if icon %}
+    <div class="Preview-icon">
+      {% include 'components/Preview/components/Marker/index.html' with type=icon color=color %}
+    </div>
+  {% endif %}
+
+  {% if url %}
+    <a href="{{ url }}" class="Preview-heading Preview-heading--link">
+      {{ title | truncatechars:80}}
+    </a>
+    <div class="Preview-content">
+    {% if excerpt %}
+      {% if full_height == "true" %}
+        {{ excerpt }}
+      {% else %}
+        {{ excerpt | truncatechars:170}}
+      {% endif %}
+    {% endif %}
+    </div>
+
+    {% if prompt %}
+      <p>
+        <a class="Preview-link" href="{{ url }}"><strong>{{ prompt }}</strong></a>
+      </p>
+    {% endif %}
+  {% else %}
+    <div class="Preview-heading">
+      {{ title | truncatechars:70}}</div>
+    <div class="Preview-content">
+    {% if excerpt %}
+      {% if full_height == "true" %}
+        {{ excerpt }}
+      {% else %}
+        {{ excerpt | truncatechars:190}}
+      {% endif %}
+    {% endif %}
+    </div>
+  {% endif %}
+
+  {% if type and location %}
+    <ul class="LinksList u-marginTop25">
+
+    {% if type %}
+      <li class="LinksList-link">
+        <span class="LinksList-icon">
+          {% include 'components/Icon/index.html' with type="star" size="s" %}
+        </span>
+        {{ type }}
+      </li>
+    {% endif %}
+
+    {% if location %}
+      <li class="LinksList-link">
+        <span class="LinksList-icon">
+          {% include 'components/Icon/index.html' with type="pin" size="s" %}
+        </span>
+        {{ location }}
+      </li>
+    {% endif %}
+  
+    </ul>
+  {% endif %}
+</div>
+

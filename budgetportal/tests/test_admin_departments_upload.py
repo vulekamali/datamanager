@@ -78,7 +78,7 @@ class AdminDepartmentUploadTest(BaseSeleniumTestCase):
         file_import = selenium.find_element_by_id('id_import_file')
         sphere_select = Select(selenium.find_element_by_id('id_sphere'))
 
-        file_import.send_keys(filename)
+        file_import.send_keys(os.path.abspath(filename))
         sphere_select.select_by_value(str(self.national_sphere.id))
 
         selenium.find_element_by_css_selector(

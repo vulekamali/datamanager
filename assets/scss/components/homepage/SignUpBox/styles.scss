@@ -1,0 +1,40 @@
+.SignUpBox {
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #7d7d7d;
+  color: white;
+}
+
+.SignUpBox-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.SignUp-content {
+  width: 100%;
+
+  @media screen and (min-width: 450px) {
+    display: table;
+  }
+}
+
+.SignUpBox-input {
+  @media screen and (min-width: 450px) {
+    display: table;
+    width: 100%;
+  }
+}
+
+.SignUpBox-button {
+  padding-top: 20px;
+
+  @media screen and (min-width: 450px) {
+    vertical-align: top;
+    display: table-cell;
+    width: 110px;
+    padding-left: 10px;
+    padding-top: 0;
+  }
+}

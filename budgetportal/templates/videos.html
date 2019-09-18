@@ -1,0 +1,14 @@
+{% extends 'page-shell.html' %}
+
+{% block page_content %}
+<div class="Page-content">
+  <main class="Page-contentInner Page-contentInner--floatingLinks">
+    <h1 class="Page-mainHeading">Videos</h1>
+    {% for video in videos %}
+      <div class="u-marginBottom25">
+        {% include 'components/universal/VideoCard/index.html' with fullpage="true" %}
+      </div>
+    {% endfor %}
+  </main>
+</div>
+{% endblock %}

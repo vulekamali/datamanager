@@ -10,6 +10,10 @@ from budgetportal.models import (
     GovtFunction,
     Programme,
     Sphere,
+    Event,
+    InfrastructureProjectPart,
+    Video,
+    VideoLanguage
 )
 from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib.auth.decorators import login_required
@@ -24,7 +28,7 @@ import logging
 from .import_export_admin import (
     DepartmentResource,
     DepartmentImportForm,
-)
+    InfrastructureProjectResource)
 
 
 logger = logging.getLogger(__name__)
@@ -45,6 +49,12 @@ class GovernmentAdmin(admin.ModelAdmin):
 
 class GovtFunctionAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
+
+
+class InfrastructureProjectAdmin(ImportMixin, admin.ModelAdmin):
+    resource_class = InfrastructureProjectResource
+    formats = [CSV]
+
 
 class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
     # Resource class to be used by the django-import-export package
@@ -167,6 +177,14 @@ class SiteAdmin(admin.ModelAdmin):
     pass
 
 
+class VideoLanguageInline(admin.TabularInline):
+    model = VideoLanguage
+
+
+class VideoAdmin(admin.ModelAdmin):
+    inlines = [VideoLanguageInline, ]
+    model = Video
+
 admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
 
 
@@ -189,6 +207,9 @@ admin.site.register(Sphere, SphereAdmin)
 admin.site.register(Government, GovernmentAdmin)
 admin.site.register(GovtFunction, GovtFunctionAdmin)
 admin.site.register(Department, DepartmentAdmin)
+admin.site.register(InfrastructureProjectPart, InfrastructureProjectAdmin)
 admin.site.register(Programme, ProgrammeAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Site, SiteAdmin)
+admin.site.register(Video, VideoAdmin)
+admin.site.register(Event)

@@ -1,0 +1,129 @@
+.Stages {
+  padding-left: 0;
+  list-style: none;
+
+  @media screen and (min-width: 900px) {
+    display: table;
+    padding-bottom: 25px;
+  }
+}
+
+.Stages-item {
+  @media screen and (min-width: 900px) {
+    display: table-row;
+  }
+}
+
+.Stages-pinWrap {
+  @media screen and (min-width: 900px) {
+    display: table-cell;
+    width: 100px;
+  }
+}
+
+.Stages-descriptionWrap {
+  @media screen and (min-width: 900px) {
+    display: table-cell;
+  }
+}
+
+.Stages-pin {
+  line-height: 1;
+  position: relative;
+  margin: 40px 0 0 20px;
+  color: white;
+  font-size: 17px;
+
+  @media screen and (min-width: 900px) {
+    padding: 20px 15px;
+    font-weight: bold;
+    text-align: center;
+    background: #f0f0f0;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    z-index: 0;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .Stages-item:nth-of-type(1) & {
+      background-color: #7bb344;
+    }
+
+    .Stages-item:nth-of-type(2) & {
+      background-color: #ee9f31;
+    }
+
+    .Stages-item:nth-of-type(3) & {
+      background-color: #c66347;
+    }
+
+    .Stages-item:nth-of-type(4) & {
+      background-color: #ad3c64;
+    }
+
+    .Stages-item:nth-of-type(5) & {
+      background-color: #5793f3;
+    }
+  }
+
+  &::after {
+    width: 10px;
+    height: 10px;
+    content: '';
+    left: -20px;
+    top: 1px;
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+
+    .Stages-item:nth-of-type(1) & {
+      background-color: #7bb344;
+    }
+
+    .Stages-item:nth-of-type(2) & {
+      background-color: #ee9f31;
+    }
+
+    .Stages-item:nth-of-type(3) & {
+      background-color: #c66347;
+    }
+
+    .Stages-item:nth-of-type(4) & {
+      background-color: #ad3c64;
+    }
+
+    .Stages-item:nth-of-type(5) & {
+      background-color: #5793f3;
+    }
+
+    @media screen and (min-width: 900px) {
+      border-radius: 2px;
+      height: 58px;
+      width: 58px;
+      top: 50px;
+      left: 21px;
+      transform: rotate(45deg);
+      z-index: -1;
+    }
+  }
+}
+
+.Stages-descriptionWrap {
+  @media screen and (min-width: 900px) {
+    vertical-align: middle;
+  }
+}
+
+.Stages-description {
+  font-size: 14px;
+  line-height: 1.57;
+
+  @media screen and (min-width: 900px) {
+    padding: 16px;
+    padding-left: 40px;
+  }
+}

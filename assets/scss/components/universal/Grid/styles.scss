@@ -1,0 +1,32 @@
+.Grid {
+  & > * {
+    margin-bottom: 20px;
+  }
+
+  @supports (display: grid) {
+    @media screen and (min-width: 750px) {
+      & > * {
+        margin-bottom: 0;
+      }
+
+      display: grid;
+      grid-gap: 1rem;
+    }
+
+    &.has-twoColumn {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    &.has-threeColumn {
+      grid-template-columns: 1fr 1fr 1fr; 
+    }
+
+    &.has-rightSidebar {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    &.has-leftSidebar {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+}

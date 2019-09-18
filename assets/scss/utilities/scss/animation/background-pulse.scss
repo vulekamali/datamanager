@@ -1,0 +1,13 @@
+@keyframes background-pulse {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  50% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}

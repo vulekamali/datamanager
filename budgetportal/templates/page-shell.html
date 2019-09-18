@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load define_action %}
+
+{% block content %}
+    <div data-create-component="Modals"></div>
+    <div class="Page">
+        <header class="Page-head">
+            {% with items=navbar.array selected_tab=selected_tab latest_year=latest_year year=selected_financial_year selected_sidebar=selected_sidebar %}
+                {% include 'components/header-and-footer/HeaderBar/index.html' %}
+            {% endwith %}
+
+            {% if selected_financial_year %}
+                {% include 'components/header-and-footer/YearSelect/index.html' with years=financial_years %}
+            {% endif %}
+        </header>
+        <div class="Page-contentWrap">
+            {% block page_content %}
+            {% endblock %}
+        </div>
+        <footer class="Page-footer">
+            {% include 'components/header-and-footer/Footer/index.html' with year=selected_financial_year %}
+            {% include 'components/header-and-footer/ExtraFooter/index.html' %}
+        </footer>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+.LinksList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translateX(-0.5rem);
+}
+
+.LinksList-link {
+  display: inline-flex;
+  padding: 0.25rem 0.5rem;
+  border-radius: 2px;
+  fill: grey;
+  text-decoration: none;
+
+  &--clickable {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.LinksList-icon {
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.LinksList-title {
+  flex-grow: 1;
+  text-decoration: underline;
+}

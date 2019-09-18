@@ -1,0 +1,70 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% load markdownify %}
+{% block page_content %}
+
+<div class="Page-content">
+  <main class="Page-contentInner">
+
+    <div class="Section is-invisible">
+      <a href="/">vulekamali</a>
+      <span> / </span>
+      <a href="/datasets/">Data and Analysis</a>
+      <span> / </span>
+      <a href="/datasets/contributed">Contributed Data and Analysis</a>
+      <span> / {{ name }}</span>
+    </div>
+
+    <h1 class="Page-mainHeading u-marginTop15">{{ name }}</h1>
+
+    {% include 'components/contributed-data/CsoMeta/index.html' with author=author created=created last_updated=last_updated organization=organization license=license facebook=facebook twitter=twitter %}
+
+    <main class="Page-main">
+      <div class="Section u-marginBottom20">
+        {% if intro %}
+          <div class="Section-card is-invisible">
+            <h2 class="Section-title">Data contributed by: {{ organization.name }}</h2>
+            {{ intro|linebreaks }}
+          </div>
+        {% endif %}
+
+        {% if methodology and methodology != '' %}
+          <div class="Section-card is-invisible">
+            <h2 class="Section-title">Methodology Used in Gathering and Analysis</h2>
+            {{ methodology|linebreaks }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% include 'components/universal/Downloads/index.html' with resources=resources utils="u-marginBottom20" %}
+
+      <div class="Section u-marginBottom20">
+        <h2 class="Section-title">Discuss this dataset with others</h2>
+        <div data-enhance-component="Comments" data-url="https://vulekamali.gov.za{{ url_path }}">
+          <div id="discourse-comments"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <aside class="Page-sidebar">
+      <div class="Section u-marginBottom20">
+        <h2 class="Section-title">Share this page:</h2>
+        <div data-component="Share"></div>
+      </div>
+
+      <div class="Section is-bevel">
+        <div class="Section-card">
+          <h2 class="Section-title">How can I contribute?</h2>
+          <p>Do you have data related to this dataset that you would like to contribute?</p>
+          <a href="https://data.vulekamali.gov.za/user/login?came_from=/dataset/new" class="Button" target="_blank">
+            Log in and submit your data
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+</div>
+{% endblock %}

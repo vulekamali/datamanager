@@ -1,0 +1,70 @@
+{% load define_action %}
+<nav class="NavBar">
+  <div class="NavBar-mobileWrap js-mobileTrigger">
+    <div class="NavBar-mobileTrigger">
+      {% include 'components/Icon/index.html' with type="hamburger" %}
+    </div>
+  </div>
+  <h2 class="u-sReadOnly">Navigate to a section on this site:</h2>
+  <div class="NavBar-modalCover js-modalCover"></div>
+  <div class="NavBar-container js-mobileShow">
+    <div class="NavBar-wrap">
+      <div class="NavBar-expand js-closeIcon" aria-hidden="">
+        <div class="NavBar-expandText">Hide Menu</div>
+        <div class="NavBar-expandIcon"></div>
+      </div>
+      <ul class="NavBar-list">
+
+        {% for item in items %}
+          {% comment %} Create alignment CSS class {% endcomment %}
+          {% if item.align == 'right' %}
+            {% assign ' is-right' as alignmentClass %}
+          {% else %}
+            {% assign '' as alignmentClass %}
+          {% endif %}
+
+          {% comment %} Create CSS class that highlights location {% endcomment %}
+          {% if item.id == selected_tab %}
+            {% assign  ' is-active' as activeClass %}
+            {% assign 'true' as activeValue %}
+          {% else %}
+            {% assign '' as activeClass %}
+            {% assign 'false' as activeValue %}
+          {% endif %}
+
+          {% comment %} Create CSS that prevents parent from being highlighted as well on mobile {% endcomment %}
+          {% if item.subLinks %}
+            {% assign ' has-subLinks' as subLinkClass %}
+          {% else %}
+            {% assign '' as subLinkClass %}
+          {% endif %}
+
+          {% comment %} Create year specific URL if needed {% endcomment %}
+          {% if item|hash:"year-range" %}
+            {% assign latest_year|add:"/"|add:item.url  as finalUrl %}
+          {% else %}
+            {% assign item.url as finalUrl %}
+          {% endif %}
+          <li class="NavBar-item{{ alignmentClass }}">
+            <a class="NavBar-link{{ activeClass }}{{ subLinkClass }}" href="/{{ finalUrl }}">
+              {% if item.id == 'homepage' %}
+                <span class="NavBar-iconWrap">
+                  {% include 'components/Icon/index.html' with type="home"%}
+                </span>
+                <span class="NavBar-text is-mobileOnly">Home</span>
+              {% else %}
+                <span class="NavBar-text">{{ item.title }}</span>
+              {% endif %}
+
+            </a>
+
+            {% if item.children %}
+              {% include 'components/header-and-footer/SubLinks/index.html' with items=item.children active=activeValue selected_sidebar=selected_sidebar %}
+            {% endif %}
+          </li>
+
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</nav>

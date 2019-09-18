@@ -1,0 +1,27 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% load staticfiles %}
+{% block page_content %}
+
+<div class="Page-content u-paddingTop0">
+    <div data-webapp="homepage-hero">
+        {% include 'connections/homepage-hero/index.html' %}
+    </div>
+    <div id="national-treemap" class="national-treemap" data-webapp="consolidated-treemap"></div>
+    <div id="national-treemap" class="national-treemap" data-webapp="national-treemap"></div>
+    <div id="provincial-treemap" class="national-treemap" data-webapp="provincial-treemap"></div>
+    <div data-webapp="resources-homepage"></div>
+
+    {% with events_list=events.upcoming %}
+
+        {% include 'scenes/homepage/VideoSection/index.html' %}
+
+        {% if events_list %}
+            {% include 'scenes/homepage/EventSection/index.html' %}
+        {% endif %}
+
+        {% include 'scenes/homepage/AboutSection/index.html' %}
+
+    {% endwith %}
+</div>
+{% endblock %}

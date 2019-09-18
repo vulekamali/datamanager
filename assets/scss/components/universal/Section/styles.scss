@@ -1,0 +1,110 @@
+.Section {
+  text-align: left;
+  font-size: 14px;
+  display: block;
+  color: $colour-shading-dark;
+  text-decoration: none;
+  width: 100%;
+  padding: 20px 20px 25px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid $colour-shading-border;
+
+  @media ($mobile-breakpoint) {
+    padding: 25px 30px 30px;
+  }
+
+  @media ($tablet-breakpoint) {
+    padding: 25px 40px 30px;
+  }
+
+  &.is-link {
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(white, 10%);
+    }
+  }
+
+  &.is-bevel {
+    padding: 10px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 1px solid $colour-shading-border;
+    background-color: $colour-shading-light;
+
+    &.is-link:hover {
+      background-color: darken($colour-shading-light, 10%);
+    }
+  }
+
+  &.is-green {
+    background-color: $colour-brand-green;
+
+    &.is-link:hover {
+      background-color: darken($colour-brand-green, 10%);
+    }
+  }
+
+  &.is-purple {
+    background-color: #ad3c64;
+
+    &.is-link:hover {
+      background-color: darken(#ad3c64, 10%);
+    }
+  }
+
+  &.is-invisible {
+    box-shadow: none;
+    border-width: 0;
+    background: none;
+  }
+}
+
+.Section-card {
+  padding: 20px 10px 25px;
+  background: white;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid $colour-shading-border;
+
+  @media ($mobile-breakpoint) {
+    padding: 25px 20px 35px;
+  }
+
+  @media ($tablet-breakpoint) {
+    padding: 25px 30px 35px;
+  }
+
+  .Section.is-link:hover & {
+    background-color: darken(white, 15%);
+    border: 1px solid darken(#d2d2d2, 15%);
+  }
+
+  &.is-dark {
+    background-color: #7d7d7d;
+    color: white;
+  }
+
+  &.is-invisible {
+    box-shadow: none;
+    border-width: 0;
+    background: none;
+  }
+}
+
+.Section-title {
+  margin: 0 0 10px;
+  font-size: $font-size-medium;
+  font-weight: bold;
+  font-weight: 900;
+  display: block;
+  padding: 0;
+  width: 100%;
+
+  &.is-small {
+    font-size: $font-size-base;
+  }
+}

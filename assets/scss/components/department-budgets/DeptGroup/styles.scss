@@ -1,0 +1,68 @@
+.DeptGroup {
+  border-radius: 20px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  background-color: white;
+  padding: 23px 21px;
+  position: relative;
+  overflow: hidden;
+}
+
+.DeptGroup-title {
+  font-weight: bold;
+  font-weight: 900;
+  font-size: 18px;
+  padding-bottom: 23px;
+  margin: 0;
+}
+
+.DeptGroup-item {
+  font-size: 14px;
+}
+
+.DeptGroup-map {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: right;
+  padding: 5px;
+  fill: #f5f5f5;
+}
+
+.DeptGroup-svg {
+  height: 100%;
+  width: auto;
+}
+
+.DeptGroup-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+
+  &--doubleRow {
+    @media screen and (min-width: 750px) {
+      column-count: 2;
+    }
+  }
+}
+
+.DeptGroup-wrap {
+  position: relative;
+  z-index: 10;
+}
+
+.DeptGroup-link {
+  text-decoration: none;
+  color: #4a4a4a;
+  display: inline-block;
+  padding: 1px 6px;
+  position: relative;
+  left: -6px;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}

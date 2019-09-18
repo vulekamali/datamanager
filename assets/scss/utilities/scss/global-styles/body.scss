@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  font-family: Lato, sans-serif;
+  color: #3f3f3f;
+  overflow-y: scroll;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  overflow-x: hidden;
+
+  &.has-overlay {
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 750px) {
+    &.has-overlay {
+      overflow: scroll;
+    }
+  }
+}
