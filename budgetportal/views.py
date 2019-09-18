@@ -724,17 +724,10 @@ def videos(request):
 def terms_and_conditions(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context = {
-        'page': {
-            'layout': 'terms-and-conditions',
-            'data_key': 'terms-and-conditions'
-        },
-        'site': {
-            'data': {
-                'navbar': read_object_from_yaml(navbar_data_file_path)
-            },
-            'latest_year': '2019-20'
-        },
-        'debug': settings.DEBUG
+        'title': 'Terms of use - vulekamali',
+        'description': "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        'navbar': read_object_from_yaml(navbar_data_file_path),
+        'latest_year': '2019-20',
     }
     return render(request, 'terms-and-conditions.html', context=context)
 
