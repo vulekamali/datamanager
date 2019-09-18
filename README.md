@@ -78,7 +78,7 @@ docker-compose run --rm app python manage.py loaddata development-first-user
 Then run the server
 
 ```
-docker-compose up -d
+docker-compose up
 ```
 
 Now you can login with initial the *development superuser*:
