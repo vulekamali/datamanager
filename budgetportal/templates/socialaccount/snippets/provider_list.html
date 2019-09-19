@@ -11,18 +11,9 @@
     </span>
     <span>Log in with Google</span>
   </a>
-  {% elif provider.id == "facebook" %}
-  <a class="Button" href="{% provider_login_url provider.id openid=brand.openid_url process=process %}">
-    <span>
-      <svg class="Icon" version="1.2" width="0" height="0" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-        <path d="M38.3 24.3v11.2H25.4a2 2 0 0 0-2 2v16.3c0 1.1.9 2 2 2h12.9v41c0 1.1.9 2 2 2h16.8a2 2 0 0 0 2-2v-41h15.1a2 2 0 0 0 2-2V37.5c0-.5-.2-1-.6-1.4a2 2 0 0 0-1.4-.6H59.1V26c0-4.6 1.1-6.9 7-6.9h8.6a2 2 0 0 0 2-2V2A2 2 0 0 0 75.3.1H59.2C46.4 1.2 38.3 10.5 38.3 24.3z"></path>
-      </svg>
-    </span>
-    <span>Log in with Facebook</span>
-  </a>
   {% endif %}
 <!-- <li>
-  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" 
+  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}"
      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{{provider.name}}</a>
 </li> -->
 {% endfor %}
