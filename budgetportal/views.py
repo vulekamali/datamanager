@@ -30,6 +30,7 @@ from csv import DictWriter
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
@@ -373,20 +374,21 @@ def department_context(financial_year_id, sphere_slug, government_slug, departme
         'website_url': department.get_latest_website_url(),
     }
 
-    return context
+    return context, department
 
 
 def department_page(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    context = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
+    context, department = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
     context['global_values'] = read_object_from_yaml(str(settings.ROOT_DIR.path('_data/global_values.yaml')))
+    context['admin_url'] = reverse('admin:budgetportal_department_change', args=(department.pk,))
     return render(request, 'department.html', context=context)
 
 
 def department_yaml(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    context = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
+    context, department = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
     response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
     return HttpResponse(response_yaml, content_type='text/x-yaml')
 
@@ -717,6 +719,7 @@ def videos(request):
         'videos': Video.objects.all(),
         'navbar': read_object_from_yaml(navbar_data_file_path),
         'latest_year': '2019-20',
+        'admin_url': reverse('admin:budgetportal_video_changelist'),
     }
     return render(request, 'videos.html', context=context)
 
