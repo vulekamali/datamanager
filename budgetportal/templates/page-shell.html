@@ -20,6 +20,9 @@
         <footer class="Page-footer">
             {% include 'components/header-and-footer/Footer/index.html' with year=selected_financial_year %}
             {% include 'components/header-and-footer/ExtraFooter/index.html' %}
+            {% if admin_url %}
+            <a class="u-padding10" style="position: absolute; right: 0px;" href="{{ admin_url }}">Edit page</a>
+            {% endif %}
         </footer>
     </div>
 {% endblock %}
