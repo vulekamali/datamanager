@@ -38,42 +38,32 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
-def homepage_context(request, financial_year_id):
+def homepage(request, financial_year_id="2019-20"):
     """
-    View of a financial year homepage, e.g. /2017-18
+        View of a financial year homepage, e.g. /2017-18
     """
-    year = get_object_or_404(FinancialYear, slug=financial_year_id)
-    revenue_data = year.get_budget_revenue()
-
-    context = {
-        'revenue': revenue.sort_categories(revenue_data),
-        'selected_financial_year': None,
-        'financial_years': [],
-        'selected_tab': 'homepage',
-        'slug': financial_year_id,
-        'title': "South African Government Budgets %s - vulekamali" % year.slug,
-        'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
-        'url_path': year.get_url_path(),
-    }
-    return context
-
-
-def homepage(request):
     titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
     videos = Video.objects.filter(title_id__in=titles)
 
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
 
-    context = homepage_context(request, financial_year_id="2019-20")
-    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
-    context['videos'] = videos
-    context['latest_year'] = '2019-20'
+    year = get_object_or_404(FinancialYear, slug=financial_year_id)
+    revenue_data = year.get_budget_revenue()
+
+    context = {'revenue': revenue.sort_categories(revenue_data),
+               'selected_financial_year': None, 'financial_years': [],
+               'selected_tab': 'homepage', 'slug': financial_year_id,
+               'title': "South African Government Budgets %s - vulekamali" % year.slug,
+               'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
+               'url_path': year.get_url_path(),
+               'navbar': read_object_from_yaml(navbar_data_file_path),
+               'videos': videos, 'latest_year': '2019-20'}
 
     return render(request, 'homepage.html', context=context)
 
 
-def search_result_page_context(request, financial_year_id):
+def search_result(request, financial_year_id):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     slug = 'search-result'
     context = {
         'financial_years': [],
@@ -95,12 +85,6 @@ def search_result_page_context(request, financial_year_id):
                 'url_path': "/%s/%s" % (year.slug, slug),
             },
         })
-    return context
-
-
-def search_result(request, financial_year_id):
-    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = search_result_page_context(request, financial_year_id)
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
     return render(request, 'search-result.html', context=context)
@@ -215,7 +199,7 @@ def department_list_data(financial_year_id):
     return page_data
 
 
-def department_context(financial_year_id, sphere_slug, government_slug, department_slug):
+def department_page(request, financial_year_id, sphere_slug, government_slug, department_slug):
     department = None
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
@@ -355,12 +339,6 @@ def department_context(financial_year_id, sphere_slug, government_slug, departme
         },
         'website_url': department.get_latest_website_url(),
     }
-
-    return context, department
-
-
-def department_page(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    context, department = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
@@ -730,27 +708,21 @@ def guides(request, slug):
     return render(request, template, context=context)
 
 
-def dataset_category_list_context():
-    return {
-        'categories': [category_fields(c) for c in Category.get_all()],
-        'selected_tab': 'datasets',
-        'slug': 'datasets',
-        'name': 'Datasets and Analysis',
-        'title': 'Datasets and Analysis - vulekamali',
-        'url_path': '/datasets',
-    }
-
-
 def dataset_category_list_page(request):
-    context = dataset_category_list_context()
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
-    context['latest_year'] = '2019-20'
+    context = {'categories': [category_fields(c) for c in Category.get_all()],
+               'selected_tab': 'datasets', 'slug': 'datasets',
+               'name': 'Datasets and Analysis',
+               'title': 'Datasets and Analysis - vulekamali',
+               'url_path': '/datasets',
+               'navbar': read_object_from_yaml(navbar_data_file_path),
+               'latest_year': '2019-20'}
 
     return render(request, 'datasets.html', context=context)
 
 
-def dataset_category_context(category_slug):
+def dataset_category_page(request, category_slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     category = Category.get_by_slug(category_slug)
     context = {
         'datasets': [],
@@ -771,13 +743,6 @@ def dataset_category_context(category_slug):
         del field_subset['usage']
         del field_subset['importance']
         context['datasets'].append(field_subset)
-
-    return context
-
-
-def dataset_category_page(request, category_slug):
-    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = dataset_category_context(category_slug)
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
     context['guide'] = guide_data.get(category_guides.get(category_slug, None), None),
@@ -792,7 +757,7 @@ def contributed_datasets_list(request):
     return render(request, 'contributed_data_category.html', context=context)
 
 
-def dataset_context(category_slug, dataset_slug):
+def dataset_page(request, category_slug, dataset_slug):
     dataset = Dataset.fetch(dataset_slug)
     assert (dataset.category.slug == category_slug)
 
@@ -811,11 +776,6 @@ def dataset_context(category_slug, dataset_slug):
     }
 
     context.update(dataset_fields(dataset))
-    return context
-
-
-def dataset_page(request, category_slug, dataset_slug):
-    context = dataset_context(category_slug, dataset_slug)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
