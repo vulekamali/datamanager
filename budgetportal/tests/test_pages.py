@@ -7,7 +7,6 @@ from budgetportal.models import (
 from django.conf import settings
 from django.test import TestCase, Client
 from mock import patch, Mock
-import yaml
 
 # Hacky make sure we don't call out to openspending.
 import requests
@@ -59,17 +58,9 @@ class BasicPagesTestCase(TestCase):
     def test_overview_page(self):
         """Test that it exists and that the correct years are linked"""
         c = Client()
-        response = c.get('/2019-20.yaml')
-        content = yaml.load(response.content)
-        self.assertEqual(content['selected_tab'], 'homepage')
-
-    def test_department_detail_page_yaml(self):
-        """Test that it exists and that the correct years are linked"""
-        c = Client()
-        response = c.get('/2019-20/national/departments/the-presidency.yaml')
-        content = yaml.load(response.content)
-        self.assertEqual(content['financial_years'][-1]['id'], '2019-20')
-        self.assertEqual(content['financial_years'][0]['id'], '2016-17')
+        response = c.get('/')
+        content = response.content
+        self.assertTrue(content.find('<a class="NavBar-link is-active" href="/">'))
 
     def test_department_detail_page(self):
         """Test that it loads and that some text is present"""
@@ -158,7 +149,8 @@ class BasicPagesTestCase(TestCase):
     def test_search_page(self):
         """Test that it exists and that the correct years are linked"""
         c = Client()
-        response = c.get('/2019-20/search-result.yaml')
-        content = yaml.load(response.content)
-        self.assertEqual(content['financial_years'][-1]['id'], '2019-20')
-        self.assertEqual(content['financial_years'][0]['id'], '2016-17')
+        response = c.get('/2019-20/search-result')
+        content = response.content
+        self.assertTrue(content.find('<li class="YearSelect-item is-active"><span class="YearSelect-link">2019-20</span></li>'))
+        self.assertTrue(content.find('<a href="/2019-20/search-result" class="YearSelect-link">2019-20</a>'))
+        self.assertTrue(content.find('<a href="/2016-17/search-result" class="YearSelect-link">2016-17</a>'))

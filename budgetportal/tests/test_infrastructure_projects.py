@@ -1,5 +1,4 @@
 import mock
-import yaml
 from django.test import TestCase, LiveServerTestCase, Client
 
 from budgetportal.models import InfrastructureProjectPart, MAPIT_POINT_API_URL, CKAN_DATASTORE_URL
@@ -220,8 +219,8 @@ class OverviewIntegrationTest(LiveServerTestCase):
         """ Test that it exists and that the correct years are linked. """
         InfrastructureProjectPart.objects.all().delete()
         c = Client()
-        response = c.get('/infrastructure-projects.yaml')
-        content = yaml.load(response.content)
+        response = c.get('/json/infrastructure-projects.json')
+        content = response.json()
         self.assertEqual(content['projects'], [])
         self.assertEqual(content['dataset_url'], 'fake path')
         self.assertEqual(content['description'], 'Infrastructure projects in South Africa for 2019-20')
@@ -234,8 +233,8 @@ class OverviewIntegrationTest(LiveServerTestCase):
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
-        response = c.get('/infrastructure-projects.yaml')
-        content = yaml.load(response.content)
+        response = c.get('/json/infrastructure-projects.json')
+        content = response.json()
         self.assertEqual(len(content['projects']), 2)
 
         # First project (single coords, province)
@@ -281,7 +280,7 @@ class DetailIntegrationTest(LiveServerTestCase):
     @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=None)
     def test_missing_dataset_returns_404(self, mock_dataset):
         c = Client()
-        response = c.get('/infrastructure-projects/{}.yaml'.format(self.project.project_slug))
+        response = c.get('/json/infrastructure-projects/{}.json'.format(self.project.project_slug))
         self.assertEqual(response.status_code, 404)
 
     @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
@@ -289,8 +288,8 @@ class DetailIntegrationTest(LiveServerTestCase):
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
-        response = c.get('/infrastructure-projects/{}.yaml'.format(self.project.project_slug))
-        content = yaml.load(response.content)['projects'][0]
+        response = c.get('/json/infrastructure-projects/{}.json'.format(self.project.project_slug))
+        content = response.json()['projects'][0]
 
         self.assertEqual(content['dataset_url'], 'fake path')
         self.assertEqual(content['description'], self.project.project_description)
