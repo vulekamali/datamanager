@@ -61,6 +61,9 @@ class BasicPagesTestCase(TestCase):
         response = c.get('/')
         content = response.content
         self.assertTrue(content.find('<a class="NavBar-link is-active" href="/">'))
+        self.assertTrue(content.find('Consolidated Budget Summary'))
+        self.assertTrue(content.find('National Budget Summary'))
+        self.assertTrue(content.find('Provincial Budget Summary'))
 
     def test_department_detail_page(self):
         """Test that it loads and that some text is present"""
