@@ -65,12 +65,37 @@ class BasicPagesTestCase(TestCase):
         self.assertTrue(content.find('National Budget Summary'))
         self.assertTrue(content.find('Provincial Budget Summary'))
 
+    def test_departments_list_page(self):
+        """Test that it loads and that some text is present"""
+        c = Client()
+        response = c.get('/2019-20/departments')
+        content = response.content
+        self.assertTrue(content.find('Department budgets for the 2019-20 financial year from National Treasury in partnership with IMALI YETHU.'))
+        self.assertTrue(content.find('National Department Budgets'))
+        self.assertTrue(content.find('Eastern Cape Department Budgets'))
+        self.assertTrue(content.find('Free State Department Budgets'))
+        self.assertTrue(content.find('Gauteng Department Budgets'))
+        self.assertTrue(content.find('KwaZulu-Natal Department Budgets'))
+        self.assertTrue(content.find('Limpopo Department Budgets'))
+        self.assertTrue(content.find('Mpumalanga Department Budgets'))
+        self.assertTrue(content.find('North West Department Budgets'))
+        self.assertTrue(content.find('Northern Cape Department Budgets'))
+        self.assertTrue(content.find('Western Cape Department Budgets'))
+
     def test_department_detail_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/2019-20/national/departments/the-presidency')
         content = response.content
         self.assertTrue(content.find('The Presidency budget data for the 2019-20 financial year'))
+
+    def test_department_preview_page(self):
+        """Test that it loads and that some text is present"""
+        c = Client()
+        response = c.get('2019-20/previews/national/south-africa/social-development')
+        content = response.content
+        self.assertTrue(content.find('Focus areas of this department'))
+        self.assertTrue(content.find('<a href="/2019-20/focus/social-development"'))
 
     def test_about_page(self):
         """Test that it loads and that some text is present"""
@@ -135,7 +160,7 @@ class BasicPagesTestCase(TestCase):
         content = response.content
         self.assertTrue(content.find("The Estimates of National Expenditure (ENE) publications describe in detail"))
 
-    def test_datasets_list_page(self):
+    def test_dataset_category_list_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/datasets')
@@ -149,6 +174,22 @@ class BasicPagesTestCase(TestCase):
         content = response.content
         self.assertTrue(content.find("Adjustments to the expenditure plans."))
 
+    def test_contributed_datasets_list_page(self):
+        """Test that it loads and that some text is present"""
+        # TODO: not implemented yet
+        c = Client()
+        response = c.get('/datasets/contributed')
+        content = response.content
+        self.assertTrue(content.find("Contibuted data and documentation for South African government budgets."))
+
+    def test_contributed_dataset_page(self):
+        """Test that it exists and that the correct years are linked"""
+        # TODO: not implemented yet
+        c = Client()
+        response = c.get('/datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa')
+        content = response.content
+        self.assertTrue(content.find("Data contributed by: International Budget Partnership"))
+
     def test_search_page(self):
         """Test that it exists and that the correct years are linked"""
         c = Client()
@@ -157,3 +198,26 @@ class BasicPagesTestCase(TestCase):
         self.assertTrue(content.find('<li class="YearSelect-item is-active"><span class="YearSelect-link">2019-20</span></li>'))
         self.assertTrue(content.find('<a href="/2019-20/search-result" class="YearSelect-link">2019-20</a>'))
         self.assertTrue(content.find('<a href="/2016-17/search-result" class="YearSelect-link">2016-17</a>'))
+
+    def test_focus_page(self):
+        """Test that it loads and that some text is present"""
+        c = Client()
+        response = c.get('/2019-20/focus/social-development')
+        content = response.content
+        self.assertTrue(content.find('Social development'))
+        self.assertTrue(content.find('Contributing National Departments'))
+        self.assertTrue(content.find('Contributing Provincial Departments'))
+
+    def test_dataset_page(self):
+        """Test that it loads and that some text is present"""
+        c = Client()
+        response = c.get('datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2018-19')
+        content = response.content
+        self.assertTrue(content.find('What is an AENE?'))
+
+    def test_infrastructure_projects_list_page(self):
+        """Test that it loads and that some text is present"""
+        c = Client()
+        response = c.get('/infrastructure-projects')
+        content = response.content
+        self.assertTrue(content.find('national department infrastructure projects'))
