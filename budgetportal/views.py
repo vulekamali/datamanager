@@ -721,8 +721,7 @@ def dataset_category_list_page(request):
     return render(request, 'datasets.html', context=context)
 
 
-def dataset_category_page(request, category_slug):
-    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+def dataset_category_context(category_slug):
     category = Category.get_by_slug(category_slug)
     context = {
         'datasets': [],
@@ -743,6 +742,13 @@ def dataset_category_page(request, category_slug):
         del field_subset['usage']
         del field_subset['importance']
         context['datasets'].append(field_subset)
+
+    return context
+
+
+def dataset_category_page(request, category_slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    context = dataset_category_context(category_slug)
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
     context['guide'] = guide_data.get(category_guides.get(category_slug, None), None),
@@ -757,7 +763,7 @@ def contributed_datasets_list(request):
     return render(request, 'contributed_data_category.html', context=context)
 
 
-def dataset_page(request, category_slug, dataset_slug):
+def dataset_context(category_slug, dataset_slug):
     dataset = Dataset.fetch(dataset_slug)
     assert (dataset.category.slug == category_slug)
 
@@ -776,6 +782,11 @@ def dataset_page(request, category_slug, dataset_slug):
     }
 
     context.update(dataset_fields(dataset))
+    return context
+
+
+def dataset_page(request, category_slug, dataset_slug):
+    context = dataset_context(category_slug, dataset_slug)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
