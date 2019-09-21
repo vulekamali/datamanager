@@ -472,6 +472,10 @@ def infrastructure_project_detail_json(request, project_slug):
 
 def infrastructure_project_detail(request, project_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    dataset_response = infrastructure_project_detail_data(project_slug)
+    if isinstance(dataset_response, HttpResponse):
+        return dataset_response
+
     context = {
         'page': {
             'layout': 'infrastructure_project',
@@ -480,7 +484,7 @@ def infrastructure_project_detail(request, project_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': infrastructure_project_detail_data(project_slug),
+                'dataset': dataset_response,
             },
             'latest_year': '2019-20'
         },
