@@ -1,9 +1,13 @@
+import json
+
 from django.conf import settings
-from django.test import TestCase
+from django.test import TestCase, Client
 from mock import patch
 
 from budgetportal.datasets import Dataset
 
+with open('budgetportal/tests/test_data/test_contributed_dataset.json', 'r') as f:
+    CONTRIBUTED_DATASET_MOCK_DATA = json.load(f)
 
 class TestDataset(TestCase):
     def setUp(self):
@@ -55,3 +59,25 @@ class TestDataset(TestCase):
 
             ckan_mock.action.package_search.assert_called_with(
                 **self.cpi_cpi_query)
+
+    def test_contributed_datasets_list(self):
+        """Test that it loads and that some text is present"""
+        c = Client()
+        with patch('budgetportal.datasets.ckan') as ckan_mock:
+            ckan_mock.action.package_search.return_value = CONTRIBUTED_DATASET_MOCK_DATA
+            response = c.get('/datasets/contributed')
+            content = response.content
+            self.assertTrue(content.find("Education Budget Brief 2019/20"))
+            self.assertTrue(content.find("People's Guide to the Adjusted Budget 2018/19"))
+            self.assertTrue(content.find("db3ab7ec-9f62-46a6-94f9-e43f3c8536a5"))
+            self.assertTrue(content.find("9c7af295-9362-44ea-9731-b95bb1ea89d3"))
+
+    def test_contributed_dataset(self):
+        """Test that it exists and that the correct years are linked"""
+        # TODO: not implemented yet
+        c = Client()
+        with patch('budgetportal.datasets.ckan') as ckan_mock:
+            ckan_mock.action.package_search.return_value = CONTRIBUTED_DATASET_MOCK_DATA
+            response = c.get('/datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19')
+            content = response.content
+            self.assertTrue(content.find("Data contributed by: International Budget Partnership"))

@@ -174,22 +174,6 @@ class BasicPagesTestCase(TestCase):
         content = response.content
         self.assertTrue(content.find("Adjustments to the expenditure plans."))
 
-    def test_contributed_datasets_list_page(self):
-        """Test that it loads and that some text is present"""
-        # TODO: not implemented yet
-        c = Client()
-        response = c.get('/datasets/contributed')
-        content = response.content
-        self.assertTrue(content.find("Contibuted data and documentation for South African government budgets."))
-
-    def test_contributed_dataset_page(self):
-        """Test that it exists and that the correct years are linked"""
-        # TODO: not implemented yet
-        c = Client()
-        response = c.get('/datasets/contributed/a-guide-to-conducting-social-audits-in-south-africa')
-        content = response.content
-        self.assertTrue(content.find("Data contributed by: International Budget Partnership"))
-
     def test_search_page(self):
         """Test that it exists and that the correct years are linked"""
         c = Client()
