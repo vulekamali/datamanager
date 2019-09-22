@@ -40,7 +40,6 @@ COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YE
 
 def homepage(request, financial_year_id="2019-20"):
     """
-        View of a financial year homepage, e.g. /2017-18
     """
     titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
     videos = Video.objects.filter(title_id__in=titles)
