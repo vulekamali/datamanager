@@ -219,45 +219,67 @@ class OverviewIntegrationTest(LiveServerTestCase):
         """ Test that it exists and that the correct years are linked. """
         InfrastructureProjectPart.objects.all().delete()
         c = Client()
-        response = c.get('/infrastructure-projects')
-        content = response.content
-        self.assertTrue(content.find('fake path'))
-        self.assertTrue(content.find('Infrastructure projects in South Africa for 2019-20'))
-        self.assertTrue(content.find('Infrastructure Projects - vulekamali'))
+        response = c.get('/json/infrastructure-projects.json')
+        content = response.json()
+
+        self.assertEqual(content['projects'], [])
+        self.assertEqual(content['dataset_url'], 'fake path')
+        self.assertEqual(content['description'],
+                         'Infrastructure projects in South Africa for 2019-20')
+        self.assertEqual(content['selected_tab'], 'infrastructure-projects')
+        self.assertEqual(content['slug'], 'infrastructure-projects')
+        self.assertEqual(content['title'],
+                         'Infrastructure Projects - vulekamali')
 
     @mock.patch('budgetportal.models.InfrastructureProjectPart.get_dataset', return_value=MockDataset())
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
-        response = c.get('/infrastructure-projects')
-        content = response.content
+        response = c.get('/json/infrastructure-projects.json')
+        content = response.json()
 
-        # First project
-        self.assertTrue(content.find('Standard fake project'))
-        self.assertTrue(content.find('Typical project description'))
-        self.assertTrue(content.find('/infrastructure-projects/health-standard-fake-project'))
-        self.assertTrue(content.find('fake type'))
-        self.assertTrue(content.find('-31.45019'))
-        self.assertTrue(content.find('29.45397'))
-        self.assertTrue(content.find('standard fake investment'))
-        self.assertTrue(content.find('5688808000.0'))
-        self.assertTrue(content.find('Fake province 1'))
-        self.assertTrue(content.find('/infrastructure-projects/health-standard-fake-project'))
-        self.assertTrue(content.find('Fake stage'))
-        self.assertTrue(content.find('9045389000'))
+        self.assertEqual(len(content['projects']), 2)
 
+        # First project (single coords, province)
+        first_test_project = \
+        filter(lambda x: x['name'] == 'Standard fake project', content['projects'])[0]
+        self.assertEqual(first_test_project['description'],
+                         'Typical project description')
+        self.assertEqual(first_test_project['detail'],
+                         '/infrastructure-projects/health-standard-fake-project')
+        self.assertEqual(first_test_project['infrastructure_type'], 'fake type')
+
+        self.assertIn({'latitude': -31.45019, 'longitude': 29.45397},
+                      first_test_project['coordinates'])
+        self.assertEqual(len(first_test_project['coordinates']), 1)
+
+        self.assertEqual(len(first_test_project['expenditure']), 7)
         for item in self.standard_fake_project.build_complete_expenditure():
-            self.assertTrue(content.find(str(item)))
+            self.assertIn(item, first_test_project['expenditure'])
+        self.assertEqual(first_test_project['nature_of_investment'],
+                         'standard fake investment')
+        self.assertEqual(first_test_project['page_title'],
+                         'Standard fake project - vulekamali')
+        self.assertEqual(first_test_project['projected_budget'], 5688808000.0)
+        self.assertIn('Fake province 1', first_test_project['provinces'])
+        self.assertEqual(len(first_test_project['provinces']), 1)
+        self.assertEqual(first_test_project['slug'],
+                         '/infrastructure-projects/health-standard-fake-project')
+        self.assertEqual(first_test_project['stage'], 'Fake stage')
+        self.assertEqual(first_test_project['total_budget'], 9045389000)
 
-        # Second project
-        self.assertTrue(content.find('Fake project 2'))
-        self.assertTrue(content.find('-33.399790'))
-        self.assertTrue(content.find('25.443304'))
-        self.assertTrue(content.find('-30.399790'))
-        self.assertTrue(content.find('15.443304'))
-        self.assertTrue(content.find('Fake province 2'))
-        self.assertTrue(content.find(' Fake province 3'))
+        # Second project (multiple coords, provinces)
+        second_test_project = \
+        filter(lambda x: x['name'] == 'Fake project 2', content['projects'])[0]
+        self.assertIn({'latitude': -33.399790, 'longitude': 25.443304},
+                      second_test_project['coordinates'])
+        self.assertIn({'latitude': -30.399790, 'longitude': 15.443304},
+                      second_test_project['coordinates'])
+        self.assertEqual(len(second_test_project['coordinates']), 2)
+        self.assertIn('Fake province 2', second_test_project['provinces'])
+        self.assertIn(' Fake province 3', second_test_project['provinces'])
+        self.assertEqual(len(second_test_project['provinces']), 2)
 
 
 class DetailIntegrationTest(LiveServerTestCase):
@@ -280,17 +302,29 @@ class DetailIntegrationTest(LiveServerTestCase):
     def test_success_with_projects(self, mock_dataset, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
-        response = c.get('/infrastructure-projects/{}'.format(
+        response = c.get('/json/infrastructure-projects/{}.json'.format(
             self.project.project_slug))
-        content = response.content
+        content = response.json()['projects'][0]
 
-        self.assertTrue(content.find('fake path'))
-        self.assertTrue(content.find(self.project.project_description))
-        self.assertTrue(content.find(self.project.infrastructure_type))
-        self.assertTrue(content.find(self.project.nature_of_investment))
-        self.assertTrue(content.find('{} - vulekamali'.format(self.project.project_name)))
-        self.assertTrue(content.find(str(self.project.calculate_projected_expenditure())))
-        self.assertTrue(content.find('/infrastructure-projects/{}'.format(
-            self.project.project_slug)))
-        self.assertTrue(content.find(self.project.current_project_stage))
-        self.assertTrue(content.find(str(self.project.total_project_cost)))
+        self.assertEqual(content['dataset_url'], 'fake path')
+        self.assertEqual(content['description'],
+                         self.project.project_description)
+        self.assertEqual(content['infrastructure_type'],
+                         self.project.infrastructure_type)
+        self.assertEqual(len(content['coordinates']), 0)
+        self.assertEqual(len(content['expenditure']), 7)
+        for item in self.project.build_complete_expenditure():
+            self.assertIn(item, content['expenditure'])
+        self.assertEqual(content['nature_of_investment'],
+                         self.project.nature_of_investment)
+        self.assertEqual(content['page_title'],
+                         '{} - vulekamali'.format(self.project.project_name))
+        self.assertEqual(content['projected_budget'],
+                         self.project.calculate_projected_expenditure())
+        self.assertEqual(len(content['provinces']), 1)
+        self.assertIn('', content['provinces'][0])
+        self.assertEqual(content['slug'], '/infrastructure-projects/{}'.format(
+            self.project.project_slug))
+        self.assertEqual(content['stage'], self.project.current_project_stage)
+        self.assertEqual(content['total_budget'],
+                         self.project.total_project_cost)
