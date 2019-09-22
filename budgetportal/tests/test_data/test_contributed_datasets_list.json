@@ -1,0 +1,40 @@
+{
+  "count": 2,
+  "sort": "score desc, metadata_modified desc",
+  "facets": {},
+  "results": [
+    {
+      "name": "education-budget-brief-2019-20",
+      "title": "Education Budget Brief 2019/20",
+      "id": "db3ab7ec-9f62-46a6-94f9-e43f3c8536a5",
+      "metadata_created": "2019-05-13T07:10:42.235489",
+      "metadata_modified": "2019-05-14T11:32:53.564458",
+      "author": "Siyabulela Fobosi",
+      "author_email": "s.fobosi@ru.ac.za",
+      "license_title": "License not specified",
+      "resources": [],
+      "groups": [],
+      "organization": {
+        "name": "basic-organization-slug"
+      },
+      "state": ""
+    },
+    {
+      "name": "people-s-guide-to-the-adjusted-budget-2018-19",
+      "title": "People's Guide to the Adjusted Budget 2018/19",
+      "id": "9c7af295-9362-44ea-9731-b95bb1ea89d3",
+      "metadata_created": "2018-11-30T05:06:49.588395",
+      "metadata_modified": "2018-12-03T10:07:22.333285",
+      "author": "Vulekamali ",
+      "author_email": "",
+      "license_title": "Creative Commons Attribution Share-Alike",
+      "license_url": "http://www.opendefinition.org/licenses/cc-by-sa",
+      "resources": [],
+      "groups": [],
+      "organization": {
+        "name": "basic-organization-slug"
+      },
+      "state": ""
+    }
+  ]
+}
