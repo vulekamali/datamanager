@@ -78,7 +78,7 @@ class TestDataset(TestCase):
     @patch('budgetportal.datasets.ckan.action.organization_show', return_value=CONTRIBUTED_DATASET_MOCK_DATA)
     @patch('budgetportal.datasets.ckan.action.package_show', return_value=CONTRIBUTED_DATASET_MOCK_DATA)
     def test_contributed_dataset(self, mock_package_show, mock_organization_show):
-        """Test that it exists and that the correct years are linked"""
+        """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19')
         content = response.content
