@@ -39,8 +39,6 @@ COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YE
 
 
 def homepage(request, financial_year_id="2019-20"):
-    """
-    """
     titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
     videos = Video.objects.filter(title_id__in=titles)
 
