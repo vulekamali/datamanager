@@ -69,11 +69,10 @@ class TestDataset(TestCase):
         with patch('budgetportal.datasets.ckan') as ckan_mock:
             ckan_mock.action.package_search.return_value = CONTRIBUTED_DATASETS_LIST_MOCK_DATA
             response = c.get('/datasets/contributed')
-            content = response.content
-            self.assertTrue(content.find("Education Budget Brief 2019/20"))
-            self.assertTrue(content.find("People's Guide to the Adjusted Budget 2018/19"))
-            self.assertTrue(content.find("db3ab7ec-9f62-46a6-94f9-e43f3c8536a5"))
-            self.assertTrue(content.find("9c7af295-9362-44ea-9731-b95bb1ea89d3"))
+
+            self.assertContains(response, "<title>Contributed data and analysis - vulekamali</title>")
+            self.assertContains(response, "Education Budget Brief 2019/20")
+            self.assertContains(response, "People&#39;s Guide to the Adjusted Budget 2018/19")
 
     @patch('budgetportal.datasets.ckan.action.organization_show', return_value=CONTRIBUTED_DATASET_MOCK_DATA)
     @patch('budgetportal.datasets.ckan.action.package_show', return_value=CONTRIBUTED_DATASET_MOCK_DATA)
@@ -81,8 +80,9 @@ class TestDataset(TestCase):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/datasets/contributed/people-s-guide-to-the-adjusted-budget-2018-19')
-        content = response.content
-        self.assertTrue(content.find("People's Guide to the Adjusted Budget 2018/19"))
-        self.assertTrue(content.find("9c7af295-9362-44ea-9731-b95bb1ea89d3"))
-        self.assertTrue(content.find("test-url"))
-        self.assertTrue(content.find("basic-organization-slug"))
+
+        self.assertContains(response,
+                            "People&#39;s Guide to the Adjusted Budget 2018/19")
+        self.assertContains(response, "Contributed Data and Analysis")
+        self.assertContains(response, "About this dataset")
+        self.assertContains(response, "Last updated on 03 December 2018")
