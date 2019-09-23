@@ -82,6 +82,7 @@ INSTALLED_APPS = [
 
     'import_export',
     'markdownify',
+    'ckeditor',
 ]
 
 if DEBUG_TOOLBAR:
