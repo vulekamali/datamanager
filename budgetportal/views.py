@@ -38,50 +38,29 @@ COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
 
-def homepage_context(request, financial_year_id):
-    """
-    View of a financial year homepage, e.g. /2017-18
-    """
-    year = get_object_or_404(FinancialYear, slug=financial_year_id)
-    revenue_data = year.get_budget_revenue()
-
-    context = {
-        'revenue': revenue.sort_categories(revenue_data),
-        'selected_financial_year': None,
-        'financial_years': [],
-        'selected_tab': 'homepage',
-        'slug': financial_year_id,
-        'title': "South African Government Budgets %s - vulekamali" % year.slug,
-        'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
-        'url_path': year.get_url_path(),
-    }
-    return context
-
-
-def homepage_yaml(request, financial_year_id):
-    context = homepage_context(request, financial_year_id)
-    response_yaml = yaml.safe_dump(context,
-                                   default_flow_style=False,
-                                   encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def homepage(request):
+def homepage(request, financial_year_id="2019-20"):
     titles = {'whyBudgetIsImportant', 'howCanTheBudgetPortalHelpYou', 'theBudgetProcess'}
     videos = Video.objects.filter(title_id__in=titles)
 
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    homepage_data_file_path = str(settings.ROOT_DIR.path('_data/index.yaml'))
 
-    context = homepage_context(request, financial_year_id="2019-20")
-    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
-    context['videos'] = videos
-    context['latest_year'] = '2019-20'
+    year = get_object_or_404(FinancialYear, slug=financial_year_id)
+    revenue_data = year.get_budget_revenue()
+
+    context = {'revenue': revenue.sort_categories(revenue_data),
+               'selected_financial_year': None, 'financial_years': [],
+               'selected_tab': 'homepage', 'slug': financial_year_id,
+               'title': "South African Government Budgets %s - vulekamali" % year.slug,
+               'description': COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
+               'url_path': year.get_url_path(),
+               'navbar': read_object_from_yaml(navbar_data_file_path),
+               'videos': videos, 'latest_year': '2019-20'}
 
     return render(request, 'homepage.html', context=context)
 
 
-def search_result_page_context(request, financial_year_id):
+def search_result(request, financial_year_id):
+    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     slug = 'search-result'
     context = {
         'financial_years': [],
@@ -103,22 +82,6 @@ def search_result_page_context(request, financial_year_id):
                 'url_path': "/%s/%s" % (year.slug, slug),
             },
         })
-    return context
-
-
-def search_result_page_yaml(request, financial_year_id):
-    context = search_result_page_context(request, financial_year_id)
-    response_yaml = yaml.safe_dump(
-        context,
-        default_flow_style=False,
-        encoding='utf-8'
-    )
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
-def search_result(request, financial_year_id):
-    navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context = search_result_page_context(request, financial_year_id)
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
     return render(request, 'search-result.html', context=context)
@@ -233,7 +196,7 @@ def department_list_data(financial_year_id):
     return page_data
 
 
-def department_context(financial_year_id, sphere_slug, government_slug, department_slug):
+def department_page(request, financial_year_id, sphere_slug, government_slug, department_slug):
     department = None
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
@@ -373,24 +336,12 @@ def department_context(financial_year_id, sphere_slug, government_slug, departme
         },
         'website_url': department.get_latest_website_url(),
     }
-
-    return context, department
-
-
-def department_page(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    context, department = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
     context['navbar'] = read_object_from_yaml(navbar_data_file_path)
     context['latest_year'] = '2019-20'
     context['global_values'] = read_object_from_yaml(str(settings.ROOT_DIR.path('_data/global_values.yaml')))
     context['admin_url'] = reverse('admin:budgetportal_department_change', args=(department.pk,))
     return render(request, 'department.html', context=context)
-
-
-def department_yaml(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    context, department = department_context(financial_year_id, sphere_slug, government_slug, department_slug)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def infrastructure_projects_overview(request):
@@ -435,12 +386,6 @@ def infrastructure_projects_overview(request):
         'selected_tab': 'infrastructure-projects',
         'title': 'Infrastructure Projects - vulekamali',
     }
-
-
-def infrastructure_projects_overview_yaml(request):
-    response = infrastructure_projects_overview(request)
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def infrastructure_projects_overview_json(request):
@@ -508,15 +453,6 @@ def infrastructure_project_detail_data(project_slug):
     }
 
 
-def infrastructure_project_detail_yaml(request, project_slug):
-    response = infrastructure_project_detail_data(project_slug)
-    if isinstance(response, HttpResponse):
-        return response
-
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def infrastructure_project_detail_json(request, project_slug):
     response = infrastructure_project_detail_data(project_slug)
     if isinstance(response, HttpResponse):
@@ -533,6 +469,10 @@ def infrastructure_project_detail_json(request, project_slug):
 
 def infrastructure_project_detail(request, project_slug):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    dataset_response = infrastructure_project_detail_data(project_slug)
+    if isinstance(dataset_response, HttpResponse):
+        return dataset_response
+
     context = {
         'page': {
             'layout': 'infrastructure_project',
@@ -541,7 +481,7 @@ def infrastructure_project_detail(request, project_slug):
         'site': {
             'data': {
                 'navbar': read_object_from_yaml(navbar_data_file_path),
-                'dataset': infrastructure_project_detail_data(project_slug),
+                'dataset': dataset_response,
             },
             'latest_year': '2019-20'
         },
@@ -769,28 +709,15 @@ def guides(request, slug):
     return render(request, template, context=context)
 
 
-def dataset_category_list_context():
-    return {
-        'categories': [category_fields(c) for c in Category.get_all()],
-        'selected_tab': 'datasets',
-        'slug': 'datasets',
-        'name': 'Datasets and Analysis',
-        'title': 'Datasets and Analysis - vulekamali',
-        'url_path': '/datasets',
-    }
-
-
-def dataset_category_list_yaml(request):
-    context = dataset_category_list_context()
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def dataset_category_list_page(request):
-    context = dataset_category_list_context()
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
-    context['navbar'] = read_object_from_yaml(navbar_data_file_path)
-    context['latest_year'] = '2019-20'
+    context = {'categories': [category_fields(c) for c in Category.get_all()],
+               'selected_tab': 'datasets', 'slug': 'datasets',
+               'name': 'Datasets and Analysis',
+               'title': 'Datasets and Analysis - vulekamali',
+               'url_path': '/datasets',
+               'navbar': read_object_from_yaml(navbar_data_file_path),
+               'latest_year': '2019-20'}
 
     return render(request, 'datasets.html', context=context)
 
@@ -818,12 +745,6 @@ def dataset_category_context(category_slug):
         context['datasets'].append(field_subset)
 
     return context
-
-
-def dataset_category_yaml(request, category_slug):
-    context = dataset_category_context(category_slug)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def dataset_category_page(request, category_slug):
@@ -865,12 +786,6 @@ def dataset_context(category_slug, dataset_slug):
     return context
 
 
-def dataset_yaml(request, category_slug, dataset_slug):
-    context = dataset_context(category_slug, dataset_slug)
-    response_yaml = yaml.safe_dump(context, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def dataset_page(request, category_slug, dataset_slug):
     context = dataset_context(category_slug, dataset_slug)
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
@@ -906,12 +821,6 @@ def department_list(request, financial_year_id):
     return render(request, 'department_list.html', context=context)
 
 
-def department_list_yaml(request, financial_year_id):
-    page_data = department_list_data(financial_year_id)
-    response_yaml = yaml.safe_dump(page_data, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def department_list_json(request, financial_year_id):
     response_json = json.dumps(
         department_list_data(financial_year_id),
@@ -935,12 +844,6 @@ def treemaps_data(financial_year_id, phase_slug, sphere_slug):
     return page_data
 
 
-def treemaps_yaml(request, financial_year_id, phase_slug, sphere_slug):
-    response = treemaps_data(financial_year_id, phase_slug, sphere_slug)
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def treemaps_json(request, financial_year_id, phase_slug, sphere_slug):
     response_json = json.dumps(
         treemaps_data(financial_year_id, phase_slug, sphere_slug),
@@ -958,12 +861,6 @@ def consolidated_treemap(financial_year_id):
     return page_data
 
 
-def consolidated_treemap_yaml(request, financial_year_id):
-    response = consolidated_treemap(financial_year_id)
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
-
-
 def consolidated_treemap_json(request, financial_year_id):
     response_json = json.dumps(
         consolidated_treemap(financial_year_id),
@@ -979,12 +876,6 @@ def focus_preview_data(financial_year_id):
     financial_year = FinancialYear.objects.get(slug=financial_year_id)
     page_data = get_focus_area_preview(financial_year)
     return page_data
-
-
-def focus_preview_yaml(request, financial_year_id):
-    response = focus_preview_data(financial_year_id)
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def focus_preview_json(request, financial_year_id):
@@ -1019,12 +910,6 @@ def focus_area_preview(request, financial_year_id, focus_slug):
 def department_preview_data(financial_year_id, sphere_slug, government_slug, phase_slug):
     page_data = get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug)
     return page_data
-
-
-def department_preview_yaml(request, financial_year_id, sphere_slug, government_slug, phase_slug):
-    response = department_preview_data(financial_year_id, sphere_slug, government_slug, phase_slug)
-    response_yaml = yaml.safe_dump(response, default_flow_style=False, encoding='utf-8')
-    return HttpResponse(response_yaml, content_type='text/x-yaml')
 
 
 def department_preview_json(request, financial_year_id, sphere_slug, government_slug, phase_slug):

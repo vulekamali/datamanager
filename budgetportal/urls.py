@@ -29,15 +29,10 @@ urlpatterns = [
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview)),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/focus.yaml', cache_page(CACHE_SECS)(views.focus_preview_yaml)),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/focus.json', cache_page(CACHE_SECS)(views.focus_preview_json)),
 
     # National and provincial treemap data
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/(?P<sphere_slug>[\w-]+)'
-        '/(?P<phase_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.treemaps_yaml)),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<phase_slug>[\w-]+).json', cache_page(CACHE_SECS)(views.treemaps_json)),
@@ -48,11 +43,6 @@ urlpatterns = [
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
         '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_preview)),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/previews'
-        '/(?P<sphere_slug>[\w-]+)'
-        '/(?P<government_slug>[\w-]+)'
-        '/(?P<phase_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department_preview_yaml)),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/previews'
         '/(?P<sphere_slug>[\w-]+)'
@@ -60,20 +50,13 @@ urlpatterns = [
         '/(?P<phase_slug>[\w-]+).json', cache_page(CACHE_SECS)(views.department_preview_json)),
 
     # Consolidated
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/consolidated.yaml', cache_page(CACHE_SECS)(views.consolidated_treemap_yaml)),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json)),
 
     # Homepage
     url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
-    # Financial year home page
-    url(r'^(?P<financial_year_id>\d{4}-\d{2}).yaml$',
-        cache_page(CACHE_SECS)(views.homepage_yaml)),
 
     # Search results
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result.yaml',
-        cache_page(CACHE_SECS)(views.search_result_page_yaml)),
     url(r'^json/static-search.json', cache_page(CACHE_SECS)(views.static_search_data)),
 
     # Department list as CSV
@@ -118,42 +101,31 @@ urlpatterns = [
 
     # Dataset category list
     url(r'^datasets/?$', views.dataset_category_list_page, name="dataset-landing-page"),
-    url(r'^datasets.yaml$', cache_page(CACHE_SECS)(views.dataset_category_list_yaml)),
 
 
     # Dataset categories
     url(r'^datasets/contributed/?$', views.contributed_datasets_list, name="contributed-datasets"),
     url(r'^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$', views.contributed_dataset, name="contributed-dataset"),
     url(r'^datasets/(?P<category_slug>[-\w]+)/?$', views.dataset_category_page, name="dataset-category"),
-    url(r'^datasets/(?P<category_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_category_yaml)),
 
     # Detaset detail
     url(r'^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$', views.dataset_page, name="dataset"),
-    url(r'^datasets/(?P<category_slug>[\w-]+)/(?P<dataset_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.dataset_yaml)),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$', views.search_result, name="search-result"),
 
     # Infrastructure projects
     url(r"^infrastructure-projects/?$", views.infrastructure_project_list, name="infrastructure-project-list"),
-    url(r'^infrastructure-projects.yaml$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_yaml)),
     url(r'^json/infrastructure-projects.json$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)),
     url(r'^json/infrastructure-projects/(?P<project_slug>[\w-]+).json$', cache_page(CACHE_SECS)(views.infrastructure_project_detail_json)),
     url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
-    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+).yaml$',
-        cache_page(CACHE_SECS)(views.infrastructure_project_detail_yaml)),
 
     # Department List
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments$', cache_page(CACHE_SECS)(views.department_list)),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/departments.yaml', cache_page(CACHE_SECS)(views.department_list_yaml)),
     # Department detail
     # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
         cache_page(CACHE_SECS)(views.department_page),
-        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+).yaml$',
-        cache_page(CACHE_SECS)(views.department_yaml),
         kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
     # - Provincial
     url(r'^(?P<financial_year_id>[\w-]+)'
@@ -161,11 +133,6 @@ urlpatterns = [
         '/(?P<government_slug>[\w-]+)'
         '/departments'
         '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page)),
-    url(r'^(?P<financial_year_id>[\w-]+)'
-        '/(?P<sphere_slug>[\w-]+)'
-        '/(?P<government_slug>[\w-]+)'
-        '/departments'
-        '/(?P<department_slug>[\w-]+).yaml$', cache_page(CACHE_SECS)(views.department_yaml)),
 ]
 
 if settings.DEBUG_TOOLBAR:
