@@ -155,7 +155,7 @@ class BasicPagesTestCase(TestCase):
         c = Client()
         response = c.get('/faq')
 
-        self.assertContains(response, 'When is the budget data updated?')
+        self.assertContains(response, 'Frequently Asked Questions (FAQ)')
 
     def test_guides_list_page(self):
         """Test that it loads and that some text is present"""
