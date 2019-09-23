@@ -10,7 +10,7 @@ from django.views import View
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
-from budgetportal.models import Video, Event, InfrastructureProjectPart
+from budgetportal.models import Video, Event, InfrastructureProjectPart, FAQ
 from budgetportal.openspending import PAGE_SIZE
 from models import FinancialYear, Sphere, Department, InfrastructureProjectPart
 from datasets import Dataset, Category
@@ -636,6 +636,7 @@ def glossary(request):
 
 def faq(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path('_data/navbar.yaml'))
+    faq_list = FAQ.objects.all()
     context = {
         'navbar': read_object_from_yaml(navbar_data_file_path),
         'title': 'FAQ - vulekamali',
@@ -644,6 +645,7 @@ def faq(request):
         'latest_year': '2019-20',
         'selected_financial_year': None,
         'financial_years': [],
+        'faq_list': faq_list,
     }
     return render(request, 'faq.html', context=context)
 
