@@ -16,6 +16,7 @@ from budgetportal.models import (
     VideoLanguage,
     FAQ,
 )
+from adminsortable.admin import SortableAdmin
 from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -214,4 +215,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Site, SiteAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Event)
-admin.site.register(FAQ)
+admin.site.register(FAQ, SortableAdmin)

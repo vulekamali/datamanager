@@ -11,6 +11,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
+from adminsortable.models import SortableMixin
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from itertools import groupby
@@ -1815,12 +1816,20 @@ class Video(models.Model):
         return self.title
 
 
-class FAQ(models.Model):
+class FAQ(SortableMixin):
     title = models.CharField(max_length=255)
     content = RichTextField()
+    the_order = models.PositiveIntegerField(default=0, editable=False,
+                                            db_index=True)
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'FAQ'
+        verbose_name_plural = 'FAQs'
+        ordering = ['the_order']
+
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
