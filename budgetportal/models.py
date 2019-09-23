@@ -12,6 +12,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.db import models
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 from itertools import groupby
 from partial_index import PartialIndex
 from pprint import pformat
@@ -1809,6 +1810,14 @@ class Video(models.Model):
     title_id = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=510)
+
+    def __str__(self):
+        return self.title
+
+
+class FAQ(models.Model):
+    title = models.CharField(max_length=255)
+    content = RichTextField()
 
     def __str__(self):
         return self.title

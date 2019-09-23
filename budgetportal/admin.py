@@ -13,7 +13,8 @@ from budgetportal.models import (
     Event,
     InfrastructureProjectPart,
     Video,
-    VideoLanguage
+    VideoLanguage,
+    FAQ,
 )
 from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib.auth.decorators import login_required
@@ -213,3 +214,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Site, SiteAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Event)
+admin.site.register(FAQ)
