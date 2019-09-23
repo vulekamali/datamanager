@@ -1795,22 +1795,27 @@ class Event(models.Model):
         return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
 
 
-class VideoLanguage(models.Model):
+class VideoLanguage(SortableMixin):
     label = models.CharField(max_length=255)
     youtube_id = models.CharField(max_length=255, null=True, blank=True)
     video = models.ForeignKey('Video', null=True, blank=True)
+    video_language_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['video_language_order']
 
     def __str__(self):
         return self.label
 
 
-class Video(models.Model):
+class Video(SortableMixin):
     title_id = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=510)
+    video_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    class Meta:
+        ordering = ['video_order']
 
     def __str__(self):
         return self.title
