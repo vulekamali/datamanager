@@ -18,6 +18,7 @@ requests.Session = Mock
 class BasicPagesTestCase(TestCase):
     fixtures = [
         "video-language",
+        "faq",
     ]
 
     def setUp(self):
@@ -156,6 +157,8 @@ class BasicPagesTestCase(TestCase):
         response = c.get('/faq')
 
         self.assertContains(response, 'Frequently Asked Questions (FAQ)')
+        self.assertContains(response, 'When is the budget data updated?')
+        self.assertContains(response, 'A new budget is produced by government and added to the portal every financial year')
 
     def test_guides_list_page(self):
         """Test that it loads and that some text is present"""
