@@ -12,6 +12,7 @@ dj-database-url==0.3.0
 Django==1.11.20
 django-markdownify==0.8.0
 django-adminplus==0.5
+django-admin-sortable==2.1.18
 django-allauth==0.34.0
 django-autoslug==1.9.3
 django-ckeditor==5.7.1
