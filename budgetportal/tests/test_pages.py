@@ -49,6 +49,28 @@ class BasicPagesTestCase(TestCase):
         ckan_patch = patch('budgetportal.datasets.ckan')
         CKANMockClass = ckan_patch.start()
         CKANMockClass.action.package_search.return_value = {'results': []}
+        # self.addCleanup(ckan_patch.stop)
+
+        CKANMockClass.action.group_show.return_value = {'name': 'test', 'description': 'basic-test-description', 'title': 'test-slug'}
+        # self.addCleanup(ckan_patch.stop)
+
+        CKANMockClass.action.package_show.return_value = {
+            'state': '',
+            'resources': [],
+            'groups': [{'name': 'test-slug', 'description': 'basic-test-description', 'title': 'test-slug'}],
+            "name": "test-2018-19",
+            "title": "Test 2018/19",
+            "id": "9c7af295",
+            "metadata_created": "2018-11-30T05:06:49.588395",
+            "metadata_modified": "2018-12-03T10:07:22.333285",
+            "author": "Vulekamali ",
+            "author_email": "",
+            "license_title": "Creative Commons Attribution Share-Alike",
+            "license_url": "http://www.opendefinition.org/licenses/cc-by-sa",
+            "organization": {
+                "name": "basic-organization-slug"
+            },
+        }
         self.addCleanup(ckan_patch.stop)
 
         dataset_patch = patch('budgetportal.datasets.Dataset.get_latest_cpi_resource', return_value=('2018-19', '5b315ff0-55e9-4ba8-b88c-2d70093bfe9d'))
@@ -59,149 +81,141 @@ class BasicPagesTestCase(TestCase):
         """Test that it exists and that the correct years are linked"""
         c = Client()
         response = c.get('/')
-        content = response.content
-        self.assertTrue(content.find('<a class="NavBar-link is-active" href="/">'))
-        self.assertTrue(content.find('Consolidated Budget Summary'))
-        self.assertTrue(content.find('National Budget Summary'))
-        self.assertTrue(content.find('Provincial Budget Summary'))
+
+        self.assertContains(response, '<a class="NavBar-link is-active" href="/">')
+        self.assertContains(response, 'About Vulekamali')
+        self.assertContains(response, 'Vulekamali is a project by the South African National Treasury and Imali Yethu')
 
     def test_departments_list_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/2019-20/departments')
-        content = response.content
-        self.assertTrue(content.find('Department budgets for the 2019-20 financial year from National Treasury in partnership with IMALI YETHU.'))
-        self.assertTrue(content.find('National Department Budgets'))
-        self.assertTrue(content.find('Eastern Cape Department Budgets'))
-        self.assertTrue(content.find('Free State Department Budgets'))
-        self.assertTrue(content.find('Gauteng Department Budgets'))
-        self.assertTrue(content.find('KwaZulu-Natal Department Budgets'))
-        self.assertTrue(content.find('Limpopo Department Budgets'))
-        self.assertTrue(content.find('Mpumalanga Department Budgets'))
-        self.assertTrue(content.find('North West Department Budgets'))
-        self.assertTrue(content.find('Northern Cape Department Budgets'))
-        self.assertTrue(content.find('Western Cape Department Budgets'))
+
+        self.assertContains(response, 'Department Budgets for 2019-20 - vulekamali')
 
     def test_department_detail_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/2019-20/national/departments/the-presidency')
-        content = response.content
-        self.assertTrue(content.find('The Presidency budget data for the 2019-20 financial year'))
+
+        self.assertContains(response, 'The Presidency budget data for the 2019-20 financial year')
 
     def test_department_preview_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get('2019-20/previews/national/south-africa/social-development')
-        content = response.content
-        self.assertTrue(content.find('Focus areas of this department'))
-        self.assertTrue(content.find('<a href="/2019-20/focus/social-development"'))
+        response = c.get('/2019-20/previews/national/south-africa/social-development')
+
+        self.assertContains(response, '<div data-webapp="preview-pages"></div>')
+        self.assertContains(response, '=https://vulekamali.gov.za/2019-20/previews/national/south-africa/social-development\">')
 
     def test_about_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/about')
-        content = response.content
-        self.assertTrue(content.find('Learn more about the new Online Budget Data Portal'))
+
+        self.assertContains(response, 'Learn more about the new Online Budget Data Portal')
 
     def test_events_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/events')
-        content = response.content
-        self.assertTrue(content.find('Join us at a Vulekamali event in your area'))
+
+        self.assertContains(response, 'Join us at a Vulekamali event in your area')
 
     def test_videos_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/videos')
-        content = response.content
-        self.assertTrue(content.find('Learn more about the new Online Budget Data Portal'))
+
+        self.assertContains(response, 'Learn more about the new Online Budget Data Portal')
 
     def test_terms_and_conditions_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/terms-and-conditions')
-        content = response.content
-        self.assertTrue(content.find('Users are encouraged to utilise this data'))
+
+        self.assertContains(response, 'Users are encouraged to utilise this data')
 
     def test_resources_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/resources')
         content = response.content
-        self.assertTrue(content.find('The Budget Process and Public Participation'))
+        self.assertContains(response, 'The Budget Process and Public Participation')
 
     def test_glossary_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/glossary')
-        content = response.content
-        self.assertTrue(content.find('Accounting officer'))
+
+        self.assertContains(response, '<title>Glossary - vulekamali</title>')
 
     def test_faq_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/faq')
-        content = response.content
-        self.assertTrue(content.find('When is the budget data updated?'))
+
+        self.assertContains(response, 'When is the budget data updated?')
 
     def test_guides_list_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/guides')
-        content = response.content
-        self.assertTrue(content.find("South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU."))
+
+        self.assertContains(response, "Dataset Guides")
+        self.assertContains(response, "Estimates of National Expenditure (ENE)")
+        self.assertContains(response, "Performance and Expenditure Reviews (PER)")
 
     def test_guide_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/guides/estimates-of-national-expenditure')
-        content = response.content
-        self.assertTrue(content.find("The Estimates of National Expenditure (ENE) publications describe in detail"))
+
+        self.assertContains(response, "The Estimates of National Expenditure (ENE) publications describe in detail")
 
     def test_dataset_category_list_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/datasets')
-        content = response.content
-        self.assertTrue(content.find("Data and Analysis"))
+
+        self.assertContains(response, "Data and Analysis")
 
     def test_dataset_category_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get('/datasets/adjusted-estimates-of-national-expenditure')
-        content = response.content
-        self.assertTrue(content.find("Adjustments to the expenditure plans."))
+        response = c.get('/datasets/test-slug')
+
+        self.assertContains(response, "<title>test-slug - vulekamali</title>")
+        self.assertContains(response, "basic-test-description")
+        self.assertContains(response, "Learn more about test-slug")
 
     def test_search_page(self):
         """Test that it exists and that the correct years are linked"""
         c = Client()
-        response = c.get('/2019-20/search-result')
-        content = response.content
-        self.assertTrue(content.find('<li class="YearSelect-item is-active"><span class="YearSelect-link">2019-20</span></li>'))
-        self.assertTrue(content.find('<a href="/2019-20/search-result" class="YearSelect-link">2019-20</a>'))
-        self.assertTrue(content.find('<a href="/2016-17/search-result" class="YearSelect-link">2016-17</a>'))
+        response = c.get('/2019-20/search-result/?search_type=full-search&search_string=a&search=a')
+
+        self.assertContains(response, '<title>Search Results - vulekamali</title>')
+        self.assertContains(response, '<div data-component="SearchResult" data-year="2019-20" data-root></div>')
 
     def test_focus_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/2019-20/focus/social-development')
-        content = response.content
-        self.assertTrue(content.find('Social development'))
-        self.assertTrue(content.find('Contributing National Departments'))
-        self.assertTrue(content.find('Contributing Provincial Departments'))
+
+        self.assertContains(response, '<div data-webapp="focus-areas-preview"></div>')
 
     def test_dataset_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get('datasets/adjusted-estimates-of-national-expenditure/adjusted-estimates-of-national-expenditure-2018-19')
-        content = response.content
-        self.assertTrue(content.find('What is an AENE?'))
+        response = c.get('/datasets/test-slug/test-2018-19')
+
+        self.assertContains(response, '<title>Test 2018/19 - vulekamali</title>')
+        self.assertContains(response, '<a href="/datasets/test-slug">test-slug</a>')
+        self.assertContains(response, 'Test 2018/19')
 
     def test_infrastructure_projects_list_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
         response = c.get('/infrastructure-projects')
-        content = response.content
-        self.assertTrue(content.find('national department infrastructure projects'))
+
+        self.assertContains(response, '<div data-webapp="infrastructure-pages" class="infrastructure-projects"></div>')
