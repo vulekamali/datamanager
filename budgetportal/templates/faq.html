@@ -4,44 +4,14 @@
   <div class="Page-contentInner">
     <h2 class="Page-mainHeading">Frequently Asked Questions (FAQ)</h2>
 
+    {% for faq in faq_list %}
     <div class="Page-card u-marginBottom20">
       <div class="Section">
-        <h2 class="Section-title">When is the budget data updated?</h2>
-        <p>Budget data on Vulekamali is updated shortly after it’s made available by National Treasury. A new budget is produced by government and added to the portal every financial year.</p>
+        <h2 class="Section-title"> {{ faq.title }}</h2>
+        <div>{{ faq.content|safe }}</div>
       </div>
     </div>
-
-    <div class="Page-card u-marginBottom20">
-      <div class="Section">
-        <h2 class="Section-title">Do you have municipal budget information?</h2>
-        <p>The Vulekamali portal focuses on national and provincial budget information. For municipal budgets, please visit <a href="https://municipalmoney.gov.za/" target="_blank">MunicipalMoney.gov.za</a>.</p>
-      </div>
-    </div>
-
-    <div class="Page-card u-marginBottom20">
-      <div class="Section">
-        <h2 class="Section-title">The data I need is not on the site, will you be adding additional data and resources?</h2>
-        <p>The development of Vulekamali is ongoing and additional data and resources are still being added to the site. <a href="/about">Read more about the project timelines</a> to learn about what types of datasets will be added, and when.</p>
-
-        <p>Please tell us about the data you’re looking for by emailing us at feedback@vulekamali.gov.za.</p>
-      </div>
-    </div>
-
-    <div class="Page-card u-marginBottom20">
-      <div class="Section">
-        <h2 class="Section-title">I have an idea for the budget. Who should I send it to?</h2>
-        <p>You can send your budget ideas to the Minister of Finance using the <a href="https://www.google.com/url?q=http://forms.treasury.gov.za/_layouts/FormServer.aspx?XsnLocation%3Dhttp://forms.treasury.gov.za/FormServerTemplates/BudgetLive.xsn%26SaveLocation%3Dhttp://forms.treasury.gov.za/BudgetSuggestionForms%26Source%3Dhttp://forms.treasury.gov.za/_layouts/Redirector.aspx?target%3Dhttp://www.treasury.gov.za/tip.aspx%26DefaultItemOpen%3D1&sa=D&ust=1519047682054000&usg=AFQjCNGj9THP4f-lUMr4WTmwYL4-Edo5cQ" target="_blank">Budget Tips form</a>.</p>
-      </div>
-    </div>
-
-    <div class="Page-card u-marginBottom20">
-      <div class="Section">
-        <h2 class="Section-title">How does the search function work?</h2>
-        <p>The search box helps you to find budgets and datasets you may be interested in.</p>
-
-        <p>When you use the search box, we’ll try to find the most applicable budgets for your search terms. We use budget datasets and documents to help guide the results, not just department names. We do our best, but can’t always find the best budget for you. If you’re unable to find what you’re looking for please email us at feedback@vulekamali.gov.za and let us know.</p>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.admin.apps.SimpleAdminConfig',
     'adminplus',
+    'adminsortable',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -82,6 +83,7 @@ INSTALLED_APPS = [
 
     'import_export',
     'markdownify',
+    'ckeditor',
 ]
 
 if DEBUG_TOOLBAR:
@@ -225,6 +227,7 @@ TEMPLATES = [
                 "budgetportal.context_processors.google_analytics",
                 "budgetportal.context_processors.debug",
                 "django.template.context_processors.request",
+                "django.template.context_processors.static",
             ],
         },
     },
