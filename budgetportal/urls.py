@@ -4,12 +4,12 @@ from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.sitemaps import views as _views
 from django.views.decorators.cache import cache_page
 from . import views
+from sitemaps import sitemaps
 from django.core.exceptions import PermissionDenied
-from django.views.generic import TemplateView
 from . import bulk_upload
-
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
@@ -28,7 +28,7 @@ urlpatterns = [
     url('sentry-debug/', trigger_error),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview)),
+        '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview), name='focus'),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/focus.json', cache_page(CACHE_SECS)(views.focus_preview_json)),
 
@@ -97,7 +97,7 @@ urlpatterns = [
     url(r'^glossary/?$', views.glossary, name="glossary"),
     url(r'^faq/?$', views.faq, name="faq"),
     url(r'^guides/?$', views.guides, name="guides", kwargs={'slug': 'index'}),
-    url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guides"),
+    url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guide"),
 
     # Dataset category list
     url(r'^datasets/?$', views.dataset_category_list_page, name="dataset-landing-page"),
@@ -117,7 +117,7 @@ urlpatterns = [
     url(r"^infrastructure-projects/?$", views.infrastructure_project_list, name="infrastructure-project-list"),
     url(r'^json/infrastructure-projects.json$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)),
     url(r'^json/infrastructure-projects/(?P<project_slug>[\w-]+).json$', cache_page(CACHE_SECS)(views.infrastructure_project_detail_json)),
-    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
+    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail), name="infrastructure-projects"),
 
     # Department List
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
@@ -133,6 +133,17 @@ urlpatterns = [
         '/(?P<government_slug>[\w-]+)'
         '/departments'
         '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page)),
+
+    # TODO: clean redundant urls
+    # url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {'sitemaps': sitemaps}),
+    # url(r'^sitemap-(?P<section>.+)\.xml$', sitemap,
+        # {'sitemaps': sitemaps},
+        # name='django.contrib.sitemaps.views.sitemap'),
+    # url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^sitemap\.xml$', _views.index, {'sitemaps': sitemaps}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', _views.sitemap,
+        {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 if settings.DEBUG_TOOLBAR:
