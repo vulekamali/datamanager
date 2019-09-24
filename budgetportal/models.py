@@ -1640,6 +1640,9 @@ class InfrastructureProjectPart(models.Model):
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(self.project_slug)
 
+    def get_absolute_url(self):
+        return reverse('infrastructure-projects', args=[self.project_slug])
+
     def calculate_projected_expenditure(self):
         """ Calculate sum of predicted amounts from a list of records """
         projected_records_for_project = InfrastructureProjectPart.objects.filter(budget_phase='MTEF', project_slug=self.project_slug)
@@ -1794,6 +1797,9 @@ class Event(models.Model):
     def __str__(self):
         return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
 
+    def get_absolute_url(self):
+        return reverse("events")
+
 
 class VideoLanguage(models.Model):
     label = models.CharField(max_length=255)
@@ -1814,6 +1820,9 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("videos")
 
 
 class FAQ(SortableMixin):
