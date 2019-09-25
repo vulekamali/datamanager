@@ -1822,7 +1822,7 @@ class FAQ(SortableMixin):
     the_order = models.PositiveIntegerField(default=0, editable=False,
                                             db_index=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     class Meta:
