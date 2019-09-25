@@ -42,7 +42,7 @@ urlpatterns = [
         '/previews'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_preview)),
+        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_preview), name='department-preview'),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/previews'
         '/(?P<sphere_slug>[\w-]+)'

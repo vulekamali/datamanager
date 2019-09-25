@@ -1,9 +1,8 @@
 from django.contrib import sitemaps
-from django.contrib.sitemaps import GenericSitemap
 from django.urls import reverse
-
-from .models import InfrastructureProjectPart, FinancialYear
+from budgetportal.summaries import get_focus_area_preview
 from guide_data import category_guides
+from .models import InfrastructureProjectPart, FinancialYear
 
 
 class DepartmentListViewSitemap(sitemaps.Sitemap):
@@ -23,17 +22,26 @@ class InfrastructureProjectPartViewSitemap(sitemaps.Sitemap):
         return InfrastructureProjectPart.objects.all()
 
 
-class FocusViewSitemap(sitemaps.Sitemap):
+class DepartmentPreviewViewSitemap(sitemaps.Sitemap):
     def items(self):
-        years = []
-        for year in FinancialYear.get_available_years():
-            years.append(str(year.slug))
-
-        return years
+        financial_year = FinancialYear.objects.get(slug='2016-17')
+        focus_preview_2016_17 = get_focus_area_preview(financial_year)
+        department_slugs_2016_17 = []
+        for item in focus_preview_2016_17['data']['items']:
+            for data in item["national"]["data"]:
+                department_slugs_2016_17.append(data["slug"])
+        return department_slugs_2016_17
 
     def location(self, item):
-        # TODO: not working yet
-        return reverse('focus', kwargs={'financial_year_id':  item, 'focus_slug': 'health'})
+        return reverse(
+            'department-preview',
+            kwargs={
+                'financial_year_id': '2016-17',
+                'sphere_slug': 'national',
+                'government_slug': 'south-africa',
+                'department_slug': item
+            }
+        )
 
 
 class FocusJsonViewSitemap(sitemaps.Sitemap):
@@ -81,8 +89,8 @@ class StaticViewSitemap(sitemaps.Sitemap):
 sitemaps = {
     'static': StaticViewSitemap,
     'departments': DepartmentListViewSitemap,
+    'department_preview': DepartmentPreviewViewSitemap,
     'infrastructure_projects': InfrastructureProjectPartViewSitemap,
-    'focus': FocusViewSitemap,
     'focus_json': FocusJsonViewSitemap,
     'guides': GuidesViewSitemap,
     'search_results': SearchResultViewSitemap,
