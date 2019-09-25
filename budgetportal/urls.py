@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview), name='focus'),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
-        '/focus.json', cache_page(CACHE_SECS)(views.focus_preview_json)),
+        '/focus.json', cache_page(CACHE_SECS)(views.focus_preview_json), name='focus-json'),
 
     # National and provincial treemap data
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
@@ -54,7 +54,7 @@ urlpatterns = [
         '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json)),
 
     # Homepage
-    url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
+    url(r'^$', cache_page(CACHE_SECS)(views.homepage), name='home'),
 
     # Search results
     url(r'^json/static-search.json', cache_page(CACHE_SECS)(views.static_search_data)),
@@ -121,7 +121,7 @@ urlpatterns = [
 
     # Department List
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/departments$', cache_page(CACHE_SECS)(views.department_list)),
+        '/departments$', cache_page(CACHE_SECS)(views.department_list), name='department-list'),
     # Department detail
     # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
