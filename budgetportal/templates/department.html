@@ -137,28 +137,10 @@
             {% endif %}
         </div>
 
-        {% if programmes %}
-            <div class="u-marginBottom60">
-                {% include 'scenes/department/ProgrammesSection/index.html' with type="programmes" items=programmes.programme_budgets source_type=source_type year=selected_financial_year dataset=programmes.dataset_detail_page pdf=pdf excel=excel title="Programme budgets" subtitle=subtitle csv=programmes.department_data_csv guide=guide description="Activities of this department" %}
-            </div>
-        {% endif %}
+        <div class="u-marginBottom60">
+          {% include 'scenes/department/ProgrammesSection/index.html' with type="programmes" source_type=source_type year=selected_financial_year dataset=programmes.dataset_detail_page pdf=pdf excel=excel title="Programme budgets" subtitle=subtitle csv=programmes.department_data_csv guide=guide description="Activities of this department" %}
+        </div>
 
-        {% if subprogramme_by_programme %}
-            <div class="u-marginBottom60">
-                {% include 'scenes/department/SmallMultiplesSection/index.html' with id="subprogramme-by-programme" title="Budgeted spending by sub-programme for each programme" description="Each chart shows the budgeted spending by each sub-programme of that programme." charts_list=subprogramme_by_programme.programmes source_type=source_type year=selected_financial_year dataset=subprogramme_by_programme.dataset_detail_page pdf=pdf excel=excel csv=subprogramme_by_programme.department_data_csv guide=guide subtitle=subtitle %}
-            </div>
-        {% endif %}
-
-        {% if economic_classification_by_programme.programmes %}
-            <div class="u-marginBottom60">
-                {% include 'scenes/department/SmallMultiplesSection/index.html' with id="economic-classification-by-programme" title="Budgeted spending by Economic Classification for each programme" description="Each chart shows the budgeted spending by economic classification under that Programme." charts_list=economic_classification_by_programme.programmes source_type=source_type year=selected_financial_year dataset=economic_classification_by_programme.dataset_detail_page pdf=pdf excel=excel csv=economic_classification_by_programme.department_data_csv guide=guide subtitle=subtitle %}
-            </div>
-        {% endif %}
-
-        {% if programme_by_economic_classification.econ_classes %}
-            <div class="u-marginBottom60">
-            {% include 'scenes/department/SmallMultiplesSection/index.html' with id="programmes-by-economic-classification" title="Budgeted spending by programme for Economic Classification items" description="Each chart shows the budgeted spending of each Programme under that Economic Classification." charts_list=programme_by_economic_classification.econ_classes source_type=source_type year=selected_financial_year dataset=programme_by_economic_classification.dataset_detail_page pdf=pdf excel=excel csv=programme_by_economic_classification.department_data_csv guide=guide subtitle=subtitle %}
-        {% endif %}
         </div>
 
 

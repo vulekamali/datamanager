@@ -1,5 +1,8 @@
+import {createMainLabel, createSVG, colorMap} from './elements.js';
+import {crop, rand_fmt, rand_human_fmt} from '../../../utilities/js/modules/d3-charts.js';
+
 (function() {
-    var container = d3.select(".department-treemap");
+    var container = d3.select(".department-subprogramme-treemap");
     var url = container.attr("data-aggregate-url");
     var model = container.attr("data-openspending-model");
 
@@ -268,4 +271,4 @@
                 return rand_fmt(d.value)
             })
     })
-})()
+})();

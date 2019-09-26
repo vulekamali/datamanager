@@ -453,4 +453,4 @@ def department_subprogrammes_aggregate_url(department):
         cuts=cuts,
         drilldowns=drilldowns
     )
-    return openspending_api.model_json, aggregate_url
+    return openspending_api.model, aggregate_url

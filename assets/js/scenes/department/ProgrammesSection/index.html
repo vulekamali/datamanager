@@ -11,7 +11,7 @@
 
 
 <div class="ProgrammesSection" id="programmes">
-    <h3 class="Title Title--section">Programme budgets for {{ year }}</h3>
+    <h3 class="Title Title--section">Spending plans by programme and sub-programme</h3>
 
     <div class="ProgrammesSection-container">
         <div class="ProgrammesSection-item">
@@ -39,16 +39,12 @@
 
         <div class="ProgrammesSection-item ProgrammesSection-item--right">
             <div class="Card">
-                <div
-                        data-component="ChartAdaptor"
-                        data-type="programmes"
-                        data-items="{{ items | jsonify | escape }}"
-                        data-scale="2"
-                        data-title="{{ title | truncatechars:45 }}"
-                        data-subtitle="{{ subtitle }}"
-                        data-description="{{ description }}"
+              <div
+                class="department-subprogramme-treemap"
+                data-aggregate-url="{{ programme_treemap_aggregate_url }}"
+                data-openspending-model="{{ programme_treemap_model | jsonify | escape }}"
                 >
-                </div>
+              </div>
             </div>
         </div>
     </div>

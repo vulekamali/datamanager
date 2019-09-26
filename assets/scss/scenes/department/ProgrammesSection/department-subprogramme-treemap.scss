@@ -1,0 +1,77 @@
+.department-subprogramme-treemap * {
+
+    .heading {
+        font-family: sans-serif;
+        margin-left: 12px;
+        margin-bottom: 0px;
+        margin-top: 5px;
+        font-size: 0.8em;
+    }
+
+    .top-labels .label-separator {
+        stroke: #cccccc;
+    }
+
+    .programme-button rect, .subprogramme-button rect {
+        fill: #333333;
+    }
+
+    .programme-button text, .subprogramme-button text {
+        font-family: arial;
+        font-size: 10px;
+        fill: white;
+    }
+
+    .programme-button rect {
+        width: 80px;
+        height: 23px;
+    }
+
+    .subprogramme-button rect {
+        width: 105px;
+        height: 23px;
+    }
+
+    .top-labels .programme-label, .top-labels .subprogramme-label {
+        fill: black;
+        font-size: 11px;
+    }
+
+    .top-labels .programme-budget-label, .top-labels .subprogramme-budget-label  {
+        font-size: 22px;
+    }
+
+    .label {
+        font-weight: bold;
+    }
+
+    .tile {
+        stroke: none;
+    }
+
+    .tile:hover {
+        stroke:black;
+        stroke-width:2px;
+    }
+
+    text {
+        font-family: Arial;
+    }
+
+    .programme-label {
+        font-size: 13px;
+        pointer-events: none;
+    }
+
+    .subprogramme-label, .subprogramme-budget-label {
+        opacity: 0.7;
+        font-size: 11px;
+        pointer-events: none;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+        width: 100%;
+    }
+
+}

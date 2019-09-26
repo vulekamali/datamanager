@@ -504,53 +504,6 @@ class Department(models.Model):
         else:
             return None
 
-    def get_programme_budgets(self):
-        """
-        get the budget totals for all the department programmes
-        """
-        if self._programme_budgets is not None:
-            return self._programme_budgets
-        dataset = self.get_estimates_of_econ_classes_expenditure_dataset()
-        if not dataset:
-            return None
-        openspending_api = dataset.get_openspending_api()
-        financial_year_start = self.get_financial_year().get_starting_year()
-        cuts = [
-            openspending_api.get_financial_year_ref() + ':' +
-            financial_year_start
-        ]
-
-        if self.government.sphere.slug == 'provincial':
-            cuts.append(openspending_api.get_geo_ref() +
-                        ':"%s"' % self.government.name)
-
-        drilldowns = [
-            openspending_api.get_programme_number_ref(),
-            openspending_api.get_programme_name_ref(),
-            openspending_api.get_department_name_ref(),
-        ]
-
-        budget_results = openspending_api.aggregate(
-            cuts=cuts, drilldowns=drilldowns)
-        result = openspending_api.filter_dept(budget_results, self.name)
-        programmes = []
-        for cell in result['cells']:
-            programmes.append({
-                'name': cell[openspending_api.get_programme_name_ref()],
-                'total_budget': cell['value.sum']
-            })
-        csv_aggregate_url = openspending_api.aggregate_url(
-            cuts=cuts + [openspending_api.get_department_name_ref() + ':"' + self.name + '"'],
-            drilldowns=openspending_api.get_all_drilldowns()
-        )
-        self._programme_budgets = {
-            'programme_budgets': programmes,
-            'dataset_detail_page': dataset.get_url_path(),
-            'department_data_csv': csv_url(csv_aggregate_url),
-        }
-        return self._programme_budgets
-
-
     def get_expenditure_over_time(self):
         cpi_year_slug, cpi_resource_id = Dataset.get_latest_cpi_resource()
         base_year = get_base_year(cpi_year_slug)

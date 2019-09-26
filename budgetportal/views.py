@@ -18,6 +18,7 @@ from summaries import (
     get_preview_page,
     get_focus_area_preview,
     get_consolidated_expenditure_treemap,
+    department_subprogrammes_aggregate_url,
 )
 from guide_data import guides as guide_data
 from guide_data import category_guides
@@ -229,13 +230,13 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
             },
         })
 
-    contributed_datasets = []
-    for dataset in department.get_contributed_datasets():
-        contributed_datasets.append({
-            'name': dataset.name,
-            'contributor': dataset.get_organization()['name'],
-            'url_path': dataset.get_url_path(),
-        })
+    # contributed_datasets = []
+    # for dataset in department.get_contributed_datasets():
+    #     contributed_datasets.append({
+    #         'name': dataset.name,
+    #         'contributor': dataset.get_organization()['name'],
+    #         'url_path': dataset.get_url_path(),
+    #     })
 
     # ======= main budget docs =========================
     budget_dataset = department.get_dataset(
@@ -282,12 +283,16 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
     elif department.government.sphere.slug == 'provincial':
         description_govt = department.government.name
 
+    model, aggregate_url = department_subprogrammes_aggregate_url(department)
+
     context = {
-        'expenditure_over_time': department.get_expenditure_over_time(),
-        'budget_actual': department.get_expenditure_time_series_summary(),
-        'budget_actual_programmes': department.get_expenditure_time_series_by_programme(),
-        'adjusted_budget_summary': department.get_adjusted_budget_summary(),
-        'contributed_datasets': contributed_datasets if contributed_datasets else None,
+        'programme_treemap_model': model,
+        'programme_treemap_aggregate_url': aggregate_url,
+        # 'expenditure_over_time': department.get_expenditure_over_time(),
+        # 'budget_actual': department.get_expenditure_time_series_summary(),
+        # 'budget_actual_programmes': department.get_expenditure_time_series_by_programme(),
+        # 'adjusted_budget_summary': department.get_adjusted_budget_summary(),
+        # 'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'financial_years': financial_years_context,
         'government': {
             'name': department.government.name,
