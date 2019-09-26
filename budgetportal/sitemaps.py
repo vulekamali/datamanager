@@ -241,7 +241,7 @@ sitemaps = {
     'static': StaticViewSitemap,
     'consolidated': ConsolidatedJsonViewSitemap,
     'departments': DepartmentListViewSitemap,
-    'nationa_department_preview_2016_17': FirstNationalDepartmentPreviewSitemap,
+    'national_department_preview_2016_17': FirstNationalDepartmentPreviewSitemap,
     'national_department_preview_2017_18': SecondNationalDepartmentPreviewSitemap,
     'national_department_preview_2018_19': ThirdNationalDepartmentPreviewSitemap,
     'national_department_preview_2019_20': FourthNationalDepartmentPreviewSitemap,
