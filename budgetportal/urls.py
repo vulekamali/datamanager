@@ -51,7 +51,7 @@ urlpatterns = [
 
     # Consolidated
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
-        '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json)),
+        '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json), name='consolidated'),
 
     # Homepage
     url(r'^$', cache_page(CACHE_SECS)(views.homepage), name='home'),
