@@ -237,16 +237,6 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
             'url_path': dataset.get_url_path(),
         })
 
-    # ======== programmes =========================
-    programmes = department.get_programme_budgets()
-    if not programmes:
-        programmes = {}
-    if (not programmes) or (not programmes['programme_budgets']):
-        programmes['programme_budgets'] = [
-            {'name': p.name, 'total_budget': None}
-            for p in department.programmes.order_by('programme_number')
-        ]
-
     # ======= main budget docs =========================
     budget_dataset = department.get_dataset(
         group_name='budget-vote-documents')
@@ -293,9 +283,6 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
         description_govt = department.government.name
 
     context = {
-        'economic_classification_by_programme': department.get_econ_by_programme_budgets(),
-        'programme_by_economic_classification': department.get_prog_by_econ_budgets(),
-        'subprogramme_by_programme': department.get_subprog_budgets(),
         'expenditure_over_time': department.get_expenditure_over_time(),
         'budget_actual': department.get_expenditure_time_series_summary(),
         'budget_actual_programmes': department.get_expenditure_time_series_by_programme(),
@@ -315,7 +302,6 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
             'name': department.government.sphere.name,
             'slug': department.government.sphere.slug,
         },
-        'programmes': programmes,
         'selected_financial_year': financial_year_id,
         'selected_tab': 'departments',
         'title': "%s budget %s  - vulekamali" % (

@@ -427,3 +427,30 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
     return {
         'data': {'items': expenditure},
     } if expenditure else None
+
+
+def department_subprogrammes_aggregate_url(department):
+    dataset = department.get_estimates_of_subprogramme_expenditure_dataset()
+    if not dataset:
+        return None
+    openspending_api = dataset.get_openspending_api()
+    financial_year_start = department.get_financial_year().get_starting_year()
+
+    cuts = [
+        openspending_api.get_financial_year_ref() + ':' + financial_year_start,
+        openspending_api.get_department_name_ref() + ':' + department.name,
+    ]
+    if department.government.sphere.slug == 'provincial':
+        cuts.append(openspending_api.get_geo_ref() + ':"%s"' % department.government.name)
+
+    drilldowns = [
+        openspending_api.get_programme_number_ref(),
+        openspending_api.get_programme_name_ref(),
+        openspending_api.get_subprogramme_name_ref(),
+        openspending_api.get_department_name_ref()
+    ]
+    aggregate_url = openspending_api.aggregate_url(
+        cuts=cuts,
+        drilldowns=drilldowns
+    )
+    return openspending_api.model_json, aggregate_url
