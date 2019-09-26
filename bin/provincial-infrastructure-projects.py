@@ -1,7 +1,10 @@
 """
 Script to parse the "Project Contractor" columns from a IRMReport xlsx sheet.
 
-Run with `python bin/provincial-infrastructure-projects.py --input-path 'bin/20190722_proposed_IRM_field.xlsx' --output-path 'provincial-infrastructure-projects.csv'`
+Run with:
+```
+python bin/provincial-infrastructure-projects.py 'input.xlsx' 'output.csv' --sheet_name 'IRMReport (30)'     
+```
 """
 import argparse
 import sys
@@ -18,7 +21,6 @@ class IRMReportSheet(object):
         self.output_data_set = self.create_output_data_set()
         self.contractor_columns = self._get_project_contractor_columns(
             data_set)
-        self.first_contractor_column = self.contractor_columns[0]
 
     def _get_project_contractor_columns(self, data_set):
         headers = data_set.headers
@@ -91,31 +93,31 @@ def is_empty_row(row):
     return len(list(filter(is_not_empty_cell, row))) == 0
 
 
-def get_IRM_report_data_set(input_file):
+def get_IRM_report_data_set(input_file, sheet_name):
     print("Reading from file {}...".format(input_file))
-    data_book = Databook().load(
-        'xlsx',
-        open(input_file, 'rb').read())
+    data_book = Databook().load('xlsx', open(input_file, 'rb').read())
     sheets = data_book.sheets()
-    # TODO: select sheet by name
-    return sheets[1]
+    try:
+        return next(data_set for data_set in sheets if data_set.title.strip() == sheet_name)
+    except StopIteration:
+        sys.exit('Sheet not found in xlsx file.')
 
 
-def import_contractor_columns(input_file, output_path):
-    report_sheet = IRMReportSheet(get_IRM_report_data_set(input_file), output_path)
+def import_contractor_columns(input_file, output_path, sheet_name):
+    report_sheet = IRMReportSheet(
+        get_IRM_report_data_set(input_file, sheet_name), output_path)
     report_sheet.process()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input-path', help='Path to input xlsx file')
-    parser.add_argument('--output-path', help='Path to output csv')
+    parser.add_argument('input_path', help='Path to input xlsx file')
+    parser.add_argument('output_path', help='Path to output csv')
+    parser.add_argument('--sheet_name',
+                        help='Sheet in the xlsx file containing the IRM data',
+                        default='IRMReport (30)')
     args = parser.parse_args()
-    if not args.input_path:
-        sys.exit('Input file path not provided')
     if not os.path.isfile(args.input_path):
         sys.exit('Input file does not exist.')
-    if not args.output_path:
-        sys.exit('Output path not provided')
 
-    import_contractor_columns(args.input_path, args.output_path)
+    import_contractor_columns(args.input_path, args.output_path, args.sheet_name)
