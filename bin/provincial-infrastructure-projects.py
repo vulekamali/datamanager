@@ -1,12 +1,20 @@
+"""
+Script to parse the "Project Contractor" columns from a IRMReport xlsx sheet.
+
+Run with `python bin/provincial-infrastructure-projects.py --input-path 'bin/20190722_proposed_IRM_field.xlsx' --output-path 'provincial-infrastructure-projects.csv'`
+"""
+import argparse
 import sys
+import os.path
 from tablib import Databook, Dataset
 from irm_report_headers import *
 
 
 class IRMReportSheet(object):
-    def __init__(self, data_set):
+    def __init__(self, data_set, output_path):
         self.data_set = data_set
         self.data_set_dict = data_set.dict
+        self.output_path = output_path
         self.output_data_set = self.create_output_data_set()
         self.contractor_columns = self._get_project_contractor_columns(
             data_set)
@@ -17,13 +25,13 @@ class IRMReportSheet(object):
         return [i for i in range(len(headers)) if headers[i].strip() == 'Project Contractor']
 
     def create_output_data_set(self):
-        data = Dataset(title='provincial-infrastructure-projects.csv')
+        data = Dataset(title='provincial-infrastructure-projects')
         data.headers = HEADERS
         return data
 
     def save_to_csv(self):
         print('Saving data to csv...')
-        with open('provincial-infrastructure-projects.csv', 'w') as output_file:
+        with open(self.output_path, 'w') as output_file:
             output_file.write(self.output_data_set.export('csv'))
 
     def process(self):
@@ -93,13 +101,21 @@ def get_IRM_report_data_set(input_file):
     return sheets[1]
 
 
-def import_contractor_columns(input_file):
-    report_sheet = IRMReportSheet(get_IRM_report_data_set(input_file))
+def import_contractor_columns(input_file, output_path):
+    report_sheet = IRMReportSheet(get_IRM_report_data_set(input_file), output_path)
     report_sheet.process()
 
 
 if __name__ == "__main__":
-    input_file = "bin/20190722_proposed_IRM_field.xlsx"
-    if len(sys.argv) > 1:
-        input_file = sys.argv[1]
-    import_contractor_columns(input_file)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input-path', help='Path to input xlsx file')
+    parser.add_argument('--output-path', help='Path to output csv')
+    args = parser.parse_args()
+    if not args.input_path:
+        sys.exit('Input file path not provided')
+    if not os.path.isfile(args.input_path):
+        sys.exit('Input file does not exist.')
+    if not args.output_path:
+        sys.exit('Output path not provided')
+
+    import_contractor_columns(args.input_path, args.output_path)
