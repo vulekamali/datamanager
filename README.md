@@ -1,10 +1,49 @@
-vulekamali Data Manager
-=============
+vulekamali
+==========
 
-This app provides Single Sign-on (SSO) and support for maintaining correct and consistent data for the vulekamali Budget Data Portal by the National Treasury of South Africa.
+This is the source code for the South African National and Provincial Budget Portal.
+
+In addition to providing user-friendly overviews of the national and provincial
+budget data, this django app provides Single Sign-on (SSO) and support for
+maintaining correct and consistent data for the various tools and services
+around vulekamali.
+
+This django app used to just coordinate and serve data, hence being called
+`datamanager`, but now serves the actual website, so it will be renamed appropriately.
 
 Code Structure vision
 ---------------------
+
+### HTML, CSS, Javascript
+
+We use a yarn (Node.js) and webpack-based build system for CSS and Javascript.
+
+You can find frontend code in the following places:
+
+- HTML (Django template language)
+  - Page templates in `budgetportal/templates`
+  - Includes in `assets/js/...html`
+- Javascript (ES6)
+  - The package for the main site has `package.json` in the root, and source files in `assets/js`
+  - A package providing react views for certain pages in `packages/webapp`
+- CSS (SCSS) in `assets/scss`
+
+Most of the HTML has been migrated from Jekyll as simply and quickly as possible
+and we're figuring out how best to structure it going forward. *Find a balance
+between fitting in to the existing style and moving towards standard django
+template best practises* for the time being.
+
+When vulekamali was a jekyll site, there was an attempt to have a component-
+oriented file structure so that the HTML (Liquid template language), SCSS, and
+Javascript for a component were all in the same folder.
+
+When migrating to Django, we have tried to keep this structure but split out
+HTML (django template language) into the django template folder, SCSS in
+`assets/scss` and Javascript in `assets/js` but ran into trouble with javascript
+reading some HTML files. We decided to leave Django template include files in
+`assets/js` for the time being and set that up as an additional template directory.
+
+### Python code
 
 We're moving towards the following code structure:
 
@@ -35,9 +74,9 @@ start moving to summaries, and just call out to models and datasets as needed.
 Setting up Development environment
 -----------------------
 
-### Build frontend dependencies
+### Install frontend dependencies
 
-First time, and any time dependencies might have changed
+First time you clone this repo, and any time frontend dependencies might have changed
 
 ```
 yarn
@@ -50,6 +89,12 @@ This is an incremental build and will rebuild the root bundle until you Ctrl+C o
 ```
 yarn build:dev
 ```
+
+When it's done with the initial build it just sits waiting to build changes looking
+like this - it won't show anything when building subsequent changes unless there
+are errors:
+
+![yarn incremental build](docs/vulekamali-yarn-incremental-build.png)
 
 ### Build changes in webapp package.
 
