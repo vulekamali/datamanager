@@ -47,7 +47,7 @@ urlpatterns = [
         '/previews'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
-        '/(?P<phase_slug>[\w-]+).json', cache_page(CACHE_SECS)(views.department_preview_json)),
+        '/(?P<phase_slug>[\w-]+).json', cache_page(CACHE_SECS)(views.department_preview_json), name='department-preview-json'),
 
     # Consolidated
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
@@ -126,13 +126,13 @@ urlpatterns = [
     # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
         cache_page(CACHE_SECS)(views.department_page),
-        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
+        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}, name='national-department'),
     # - Provincial
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
         '/departments'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page)),
+        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page), name='provincial-department'),
 
     # TODO: clean redundant urls
     # url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {'sitemaps': sitemaps}),
