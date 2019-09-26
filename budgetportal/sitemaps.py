@@ -1,9 +1,9 @@
 from django.contrib import sitemaps
 from django.urls import reverse
 from budgetportal.summaries import get_consolidated_expenditure_treemap
-from budgetportal.views import department_list_data
 from guide_data import category_guides
-from .models import InfrastructureProjectPart, FinancialYear
+from .models import InfrastructureProjectPart, FinancialYear, Department, \
+    EXPENDITURE_TIME_SERIES_PHASE_MAPPING, Government
 
 
 class ConsolidatedJsonViewSitemap(sitemaps.Sitemap):
@@ -15,7 +15,7 @@ class ConsolidatedJsonViewSitemap(sitemaps.Sitemap):
         return years
 
     def location(self, item):
-        return reverse('consolidated', args=[item])
+        return reverse("consolidated", args=[item])
 
 
 class DepartmentListViewSitemap(sitemaps.Sitemap):
@@ -27,7 +27,70 @@ class DepartmentListViewSitemap(sitemaps.Sitemap):
         return years
 
     def location(self, item):
-        return reverse('department-list', args=[item])
+        return reverse("department-list", args=[item])
+
+
+class ProvincialDepartmentsSitemap(sitemaps.Sitemap):
+    def items(self):
+        return Department.objects.filter(government__sphere__slug='provincial')
+
+    def location(self, item):
+        return reverse(
+            "provincial-department",
+            args=[
+                item.government.sphere.financial_year.slug,
+                item.government.sphere.slug,
+                item.government.slug,
+                item.slug,
+            ],
+        )
+
+
+class NationalDepartmentsSitemap(sitemaps.Sitemap):
+    def items(self):
+        return Department.objects.filter(government__sphere__slug='national')
+
+    def location(self, item):
+        return reverse(
+            "national-department",
+            args=[
+                item.government.sphere.financial_year.slug,
+                item.slug,
+            ],
+        )
+
+
+class DepartmentPreviewSitemap(sitemaps.Sitemap):
+    def items(self):
+        return Department.objects.all()
+
+    def location(self, item):
+        print item
+        return reverse(
+            "department-preview",
+            args=[
+                item.government.sphere.financial_year.slug,
+                item.government.sphere.slug,
+                item.government.slug,
+                item.slug,
+            ],
+        )
+
+
+# class DepartmentPreviewJsonSitemap(sitemaps.Sitemap):
+#     def items(self):
+#         return Government.objects.all()
+#
+#     def location(self, item):
+#         return reverse(
+#             "department-preview-json",
+#             args=[
+#                 item.sphere.financial_year.slug,
+#                 item.sphere.slug,
+#                 item.slug,
+#                 EXPENDITURE_TIME_SERIES_PHASE_MAPPING.keys()[0],
+#             ],
+#         )
 
 
 class InfrastructureProjectPartViewSitemap(sitemaps.Sitemap):
@@ -35,93 +98,9 @@ class InfrastructureProjectPartViewSitemap(sitemaps.Sitemap):
         return InfrastructureProjectPart.objects.all()
 
 
-class FirstNationalDepartmentPreviewSitemap(sitemaps.Sitemap):
-    def items(self):
-        departments = department_list_data(financial_year_id='2016-17')
-        department_slugs_2016_17 = []
-        for department in departments["national"]:
-            for data in department["departments"]:
-                department_slugs_2016_17.append(data["slug"])
-        return department_slugs_2016_17
-
-    def location(self, item):
-        return reverse(
-            'department-preview',
-            kwargs={
-                'financial_year_id': '2016-17',
-                'sphere_slug': 'national',
-                'government_slug': 'south-africa',
-                'department_slug': item
-            }
-        )
-
-
-class SecondNationalDepartmentPreviewSitemap(sitemaps.Sitemap):
-    def items(self):
-        departments = department_list_data(financial_year_id='2017-18')
-        department_slugs_2017_18 = []
-        for department in departments["national"]:
-            for data in department["departments"]:
-                department_slugs_2017_18.append(data["slug"])
-        return department_slugs_2017_18
-
-    def location(self, item):
-        return reverse(
-            'department-preview',
-            kwargs={
-                'financial_year_id': '2017-18',
-                'sphere_slug': 'national',
-                'government_slug': 'south-africa',
-                'department_slug': item
-            }
-        )
-
-
-class ThirdNationalDepartmentPreviewSitemap(sitemaps.Sitemap):
-    def items(self):
-        departments = department_list_data(financial_year_id='2018-19')
-        department_slugs_2018_19 = []
-        for department in departments["national"]:
-            for data in department["departments"]:
-                department_slugs_2018_19.append(data["slug"])
-        return department_slugs_2018_19
-
-    def location(self, item):
-        return reverse(
-            'department-preview',
-            kwargs={
-                'financial_year_id': '2018-19',
-                'sphere_slug': 'national',
-                'government_slug': 'south-africa',
-                'department_slug': item
-            }
-        )
-
-
-class FourthNationalDepartmentPreviewSitemap(sitemaps.Sitemap):
-    def items(self):
-        departments = department_list_data(financial_year_id='2019-20')
-        department_slugs_2019_20 = []
-        for department in departments["national"]:
-            for data in department["departments"]:
-                department_slugs_2019_20.append(data["slug"])
-        return department_slugs_2019_20
-
-    def location(self, item):
-        return reverse(
-            'department-preview',
-            kwargs={
-                'financial_year_id': '2019-20',
-                'sphere_slug': 'national',
-                'government_slug': 'south-africa',
-                'department_slug': item
-            }
-        )
-
-
 class FirstFocusViewSitemap(sitemaps.Sitemap):
     def items(self):
-        financial_year = FinancialYear.objects.get(slug='2016-17')
+        financial_year = FinancialYear.objects.get(slug="2016-17")
         treemap = get_consolidated_expenditure_treemap(financial_year)
         focus_slugs_2016_17 = []
         for data in treemap["data"]["items"]:
@@ -130,17 +109,13 @@ class FirstFocusViewSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse(
-            'focus',
-            kwargs={
-                'financial_year_id': '2016-17',
-                'focus_slug': item,
-            }
+            "focus", kwargs={"financial_year_id": "2016-17", "focus_slug": item}
         )
 
 
 class SecondFocusViewSitemap(sitemaps.Sitemap):
     def items(self):
-        financial_year = FinancialYear.objects.get(slug='2017-18')
+        financial_year = FinancialYear.objects.get(slug="2017-18")
         treemap = get_consolidated_expenditure_treemap(financial_year)
         focus_slugs_2017_18 = []
         for data in treemap["data"]["items"]:
@@ -149,17 +124,13 @@ class SecondFocusViewSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse(
-            'focus',
-            kwargs={
-                'financial_year_id': '2017-18',
-                'focus_slug': item,
-            }
+            "focus", kwargs={"financial_year_id": "2017-18", "focus_slug": item}
         )
 
 
 class ThirdFocusViewSitemap(sitemaps.Sitemap):
     def items(self):
-        financial_year = FinancialYear.objects.get(slug='2018-19')
+        financial_year = FinancialYear.objects.get(slug="2018-19")
         treemap = get_consolidated_expenditure_treemap(financial_year)
         focus_slugs_2018_19 = []
         for data in treemap["data"]["items"]:
@@ -168,17 +139,13 @@ class ThirdFocusViewSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse(
-            'focus',
-            kwargs={
-                'financial_year_id': '2018-19',
-                'focus_slug': item,
-            }
+            "focus", kwargs={"financial_year_id": "2018-19", "focus_slug": item}
         )
 
 
 class FourthFocusViewSitemap(sitemaps.Sitemap):
     def items(self):
-        financial_year = FinancialYear.objects.get(slug='2019-20')
+        financial_year = FinancialYear.objects.get(slug="2019-20")
         treemap = get_consolidated_expenditure_treemap(financial_year)
         focus_slugs_2019_20 = []
         for data in treemap["data"]["items"]:
@@ -187,11 +154,7 @@ class FourthFocusViewSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse(
-            'focus',
-            kwargs={
-                'financial_year_id': '2019-20',
-                'focus_slug': item,
-            }
+            "focus", kwargs={"financial_year_id": "2019-20", "focus_slug": item}
         )
 
 
@@ -204,7 +167,7 @@ class FocusJsonViewSitemap(sitemaps.Sitemap):
         return years
 
     def location(self, item):
-        return reverse('focus-json', args=[item])
+        return reverse("focus-json", args=[item])
 
 
 class GuidesViewSitemap(sitemaps.Sitemap):
@@ -212,7 +175,7 @@ class GuidesViewSitemap(sitemaps.Sitemap):
         return category_guides.values()
 
     def location(self, item):
-        return reverse('guide', args=[item])
+        return reverse("guide", args=[item])
 
 
 class SearchResultViewSitemap(sitemaps.Sitemap):
@@ -224,33 +187,42 @@ class SearchResultViewSitemap(sitemaps.Sitemap):
         return years
 
     def location(self, item):
-        return reverse('search-result', args=[item])
+        return reverse("search-result", args=[item])
 
 
 class StaticViewSitemap(sitemaps.Sitemap):
     def items(self):
-        return ['home', 'about', 'events', 'videos', 'terms-and-conditions',
-                'resources', 'glossary', 'faq', 'dataset-landing-page',
-                'guides', 'infrastructure-project-list']
+        return [
+            "home",
+            "about",
+            "events",
+            "videos",
+            "terms-and-conditions",
+            "resources",
+            "glossary",
+            "faq",
+            "dataset-landing-page",
+            "guides",
+            "infrastructure-project-list",
+        ]
 
     def location(self, item):
         return reverse(item)
 
 
 sitemaps = {
-    'static': StaticViewSitemap,
-    'consolidated': ConsolidatedJsonViewSitemap,
-    'departments': DepartmentListViewSitemap,
-    'national_department_preview_2016_17': FirstNationalDepartmentPreviewSitemap,
-    'national_department_preview_2017_18': SecondNationalDepartmentPreviewSitemap,
-    'national_department_preview_2018_19': ThirdNationalDepartmentPreviewSitemap,
-    'national_department_preview_2019_20': FourthNationalDepartmentPreviewSitemap,
-    'infrastructure_projects': InfrastructureProjectPartViewSitemap,
-    'focus_2016_17': FirstFocusViewSitemap,
-    'focus_2017_18': SecondFocusViewSitemap,
-    'focus_2018_19': ThirdFocusViewSitemap,
-    'focus_2019_20': FourthFocusViewSitemap,
-    'focus_json': FocusJsonViewSitemap,
-    'guides': GuidesViewSitemap,
-    'search_results': SearchResultViewSitemap,
+    "static": StaticViewSitemap,
+    "consolidated": ConsolidatedJsonViewSitemap,
+    "provincial_departments": ProvincialDepartmentsSitemap,
+    "national_departments": NationalDepartmentsSitemap,
+    "department_preview": DepartmentPreviewSitemap,
+    # "department_preview_json": DepartmentPreviewJsonSitemap,
+    "infrastructure_projects": InfrastructureProjectPartViewSitemap,
+    "focus_2016_17": FirstFocusViewSitemap,
+    "focus_2017_18": SecondFocusViewSitemap,
+    "focus_2018_19": ThirdFocusViewSitemap,
+    "focus_2019_20": FourthFocusViewSitemap,
+    "focus_json": FocusJsonViewSitemap,
+    "guides": GuidesViewSitemap,
+    "search_results": SearchResultViewSitemap,
 }
