@@ -432,7 +432,7 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
 def department_subprogrammes_aggregate_url(department):
     dataset = department.get_estimates_of_subprogramme_expenditure_dataset()
     if not dataset:
-        return None
+        return None, None
     openspending_api = dataset.get_openspending_api()
     financial_year_start = department.get_financial_year().get_starting_year()
 

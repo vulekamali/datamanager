@@ -484,6 +484,10 @@ class Department(models.Model):
             return None
 
     def get_estimates_of_subprogramme_expenditure_dataset(self):
+        """
+        Gets the dataset that should have this department's budget data
+        for this year down to sub-programme level
+        """
         if self._estimates_of_subprogramme_expenditure_dataset is not None:
             return self._estimates_of_econ_classes_expenditure_dataset
         query = {
