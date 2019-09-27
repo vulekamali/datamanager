@@ -72,35 +72,16 @@
 <div class="Page-content Page-content--dynamicYears">
     <div class="Page-contentInner Page-contentInner--department is-full">
 
-        <nav class="SectionIndicator" data-sticky-arrows>
-            <ul class="SectionIndicator-list nav">
-                <li class="SectionIndicator-item nav-item">
-                    <a href="#section-plan" data-scroll-smooth="#section-plan"
-                       class="SectionIndicator-circle SectionIndicator-circle--green nav-link"></a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#section-implement" data-scroll-smooth="#section-implement"
-                       class="SectionIndicator-circle SectionIndicator-circle--orange nav-link"></a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#section-review" data-scroll-smooth="#section-review"
-                       class="SectionIndicator-circle SectionIndicator-circle--purple nav-link"></a>
-                </li>
-            </ul>
-        </nav>
-
         <h1 class="Page-mainHeading u-textAlignCenter u-marginBottom0 u-marginLeft0">
             {{ name }}
         </h1>
         <span class="Page-subHeading u-textAlignCenter">
-  {{ department_location }} Department Budget for {{ selected_financial_year }}
-</span>
+          {{ department_location }} Department Budget for {{ selected_financial_year }}
+        </span>
         {% if website_url %}
             <span class="Page-subHeading-link u-textAlignCenter">
-    <a href="http://{{ website_url }}">{{ website_url }}</a>
-</span>
+              <a href="http://{{ website_url }}">{{ website_url }}</a>
+            </span>
         {% endif %}
         {% include 'components/department-budgets/IntroSection/index.html' with description=intro datasets=treasury_datasets location=department_location %}
 
@@ -269,6 +250,25 @@
                 </div>
             </div>
         </div>
+        <nav class="SectionIndicator" data-sticky-arrows>
+            <ul class="SectionIndicator-list nav">
+                <li class="SectionIndicator-item nav-item">
+                    <a href="#section-plan" data-scroll-smooth="#section-plan"
+                       class="SectionIndicator-circle SectionIndicator-circle--green nav-link"></a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#section-implement" data-scroll-smooth="#section-implement"
+                       class="SectionIndicator-circle SectionIndicator-circle--orange nav-link"></a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#section-review" data-scroll-smooth="#section-review"
+                       class="SectionIndicator-circle SectionIndicator-circle--purple nav-link"></a>
+                </li>
+            </ul>
+        </nav>
+
     </div>
 </div>
 {% endblock %}
