@@ -439,6 +439,7 @@ def department_subprogrammes_aggregate_url(department):
     cuts = [
         openspending_api.get_financial_year_ref() + ':' + financial_year_start,
         openspending_api.get_department_name_ref() + ':' + department.name,
+        openspending_api.get_phase_ref() + ':' + "Main appropriation",
     ]
     if department.government.sphere.slug == 'provincial':
         cuts.append(openspending_api.get_geo_ref() + ':"%s"' % department.government.name)
