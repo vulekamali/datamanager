@@ -134,12 +134,6 @@ urlpatterns = [
         '/departments'
         '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page), name='provincial-department'),
 
-    # TODO: clean redundant urls
-    # url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {'sitemaps': sitemaps}),
-    # url(r'^sitemap-(?P<section>.+)\.xml$', sitemap,
-        # {'sitemaps': sitemaps},
-        # name='django.contrib.sitemaps.views.sitemap'),
-    # url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     url(r'^sitemap\.xml$', _views.index, {'sitemaps': sitemaps}),
     url(r'^sitemap-(?P<section>.+)\.xml$', _views.sitemap,
         {'sitemaps': sitemaps},
