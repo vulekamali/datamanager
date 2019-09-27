@@ -13,10 +13,11 @@
   padding-bottom: 1rem;
 
   @media screen and (min-width: 1000px) {
-    width: 50%;
+    width: 33%;
     padding-right: 1rem;
 
     &--right {
+      width: 66%;
       padding-left: 1rem;
       padding-right: 0;
     }
