@@ -1,10 +1,13 @@
 import {createMainLabel, createSVG, colorMap} from './elements.js';
 import {crop, rand_fmt, rand_human_fmt} from '../../../utilities/js/modules/d3-charts.js';
+import {getProgNameRef, getSubprogNameRef} from '../../../utilities/js/modules/vulekamali-openspending.js';
 
 (function() {
     var container = d3.select(".department-subprogramme-treemap");
     var url = container.attr("data-aggregate-url");
-    var model = container.attr("data-openspending-model");
+    var model = JSON.parse(container.attr("data-openspending-model"));
+    var progNameRef = getProgNameRef(model);
+    var subprogNameRef = getSubprogNameRef(model);
 
     var baseWidth = 800;
     var baseHeight = baseWidth;
@@ -26,7 +29,7 @@ import {crop, rand_fmt, rand_human_fmt} from '../../../utilities/js/modules/d3-c
 
     var nester = d3
         .nest()
-        .key(function(d) { return d["progno.programme"]})
+        .key(function(d) { return d[progNameRef]})
 
     var programmeButton = labels
         .append("g")
@@ -82,7 +85,7 @@ import {crop, rand_fmt, rand_human_fmt} from '../../../utilities/js/modules/d3-c
 
         if (budget == maxBudget) {
             if (d.y1 - d.y0 > 30) {
-                return d.data["progno.programme"]
+                return d.data[progNameRef]
             } else {
                 return ""
             }
@@ -156,7 +159,7 @@ import {crop, rand_fmt, rand_human_fmt} from '../../../utilities/js/modules/d3-c
             .transition(t)
             .attr("x", function(d) { return clamp(x, d.x0) + 5})
             .attr("y", function(d) { return clamp(y, d.y1) - 18})
-            .text(addSubprogrammeLabels("sprogno.subprogramme"))
+            .text(addSubprogrammeLabels(subprogNameRef))
             .style("display", displayLabels)
 
         d3.selectAll(".box .subprogramme-budget-label tspan")
@@ -210,16 +213,16 @@ import {crop, rand_fmt, rand_human_fmt} from '../../../utilities/js/modules/d3-c
             .style("fill", function(d, idx) {
                 var programmes = root.data.values.map(function(d) { return d.key});
                 var subprogrammes = d.parent.data.values;
-                var subprogramme_labels = subprogrammes.map(function(d) { return d["sprogno.subprogramme"];});
+                var subprogramme_labels = subprogrammes.map(function(d) { return d[subprogNameRef];});
 
-                var idx = programmes.indexOf(d.data["progno.programme"])
-                var idx2 = subprogramme_labels.indexOf(d.data["sprogno.subprogramme"]);
+                var idx = programmes.indexOf(d.data[progNameRef])
+                var idx2 = subprogramme_labels.indexOf(d.data[subprogNameRef]);
                 var hues = colorMap[idx];
                 return hues[idx2];
             })
             .on("mouseover", function(d) {
-                programmeLabel.text(d.data["progno.programme"])
-                subprogrammeLabel.text(d.data["sprogno.subprogramme"])
+                programmeLabel.text(d.data[progNameRef])
+                subprogrammeLabel.text(d.data[subprogNameRef])
                 programmeBudgetLabel.text(rand_fmt(d.parent.value));
                 subprogrammeBudgetLabel.text(rand_fmt(d.value));
 
@@ -249,7 +252,7 @@ import {crop, rand_fmt, rand_human_fmt} from '../../../utilities/js/modules/d3-c
             .classed("subprogramme-label", true)
             .attr("x", function(d) { return d.x0 + 5})
             .attr("y", function(d) { return d.y1 - 18})
-            .text(addSubprogrammeLabels("sprogno.subprogramme"))
+            .text(addSubprogrammeLabels(subprogNameRef))
             .attr("font-size", "0.6em")
             .attr("fill", "white")
             .call(crop)
