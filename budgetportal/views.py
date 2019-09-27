@@ -492,7 +492,11 @@ def openspending_csv(request):
 
     parsed_url = urlparse.urlparse(api_url)
     domain = '{uri.netloc}'.format(uri=parsed_url)
-    if domain != 'openspending.org':
+    allowed_domains = {
+        'openspending.org',
+        'openspending.vulekamali.gov.za',
+    }
+    if domain not in allowed_domains:
         return HttpResponse("Invalid domain received: %s (Only openspending.org is allowed)" % domain,
                             status=403)
 
