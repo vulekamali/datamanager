@@ -3,6 +3,7 @@ from models import (
     Department,
     FinancialYear,
     EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
+    csv_url,
 )
 import logging
 from datasets import (
@@ -429,7 +430,7 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
     } if expenditure else None
 
 
-def department_subprogrammes_aggregate_url(department):
+def department_subprogrammes(department):
     dataset = department.get_estimates_of_subprogramme_expenditure_dataset()
     if not dataset:
         return None, None
@@ -454,4 +455,13 @@ def department_subprogrammes_aggregate_url(department):
         cuts=cuts,
         drilldowns=drilldowns
     )
-    return openspending_api.model, aggregate_url
+    detail_aggregate_url = openspending_api.aggregate_url(
+        cuts=cuts,
+        drilldowns=openspending_api.get_all_drilldowns(),
+    )
+    return {
+        "model": openspending_api.model,
+        "aggregate_url": aggregate_url,
+        "dataset_detail_page": dataset.get_url_path(),
+        "detail_csv_url": csv_url(detail_aggregate_url),
+    }

@@ -18,7 +18,7 @@ from summaries import (
     get_preview_page,
     get_focus_area_preview,
     get_consolidated_expenditure_treemap,
-    department_subprogrammes_aggregate_url,
+    department_subprogrammes,
 )
 from guide_data import guides as guide_data
 from guide_data import category_guides
@@ -283,11 +283,9 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
     elif department.government.sphere.slug == 'provincial':
         description_govt = department.government.name
 
-    model, aggregate_url = department_subprogrammes_aggregate_url(department)
-
     context = {
-        'programme_treemap_model': model,
-        'programme_treemap_aggregate_url': aggregate_url,
+        'subprogramme_treemap': department_subprogrammes(department),
+
         # 'expenditure_over_time': department.get_expenditure_over_time(),
         # 'budget_actual': department.get_expenditure_time_series_summary(),
         # 'budget_actual_programmes': department.get_expenditure_time_series_by_programme(),

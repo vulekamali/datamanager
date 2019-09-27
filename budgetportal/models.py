@@ -1664,7 +1664,7 @@ def get_vocab_map():
 
 def csv_url(aggregate_url):
     querystring = '?api_url=' + urllib.quote(aggregate_url)
-    csv_url = urljoin(settings.DATAMANAGER_URL, reverse('openspending_csv') + querystring)
+    csv_url = reverse('openspending_csv') + querystring
     if len(csv_url) > URL_LENGTH_LIMIT:
         raise Exception("Generated URL exceeds max length of %s. "
                         "Some browsers may no longer be able to interpret the URL." %
