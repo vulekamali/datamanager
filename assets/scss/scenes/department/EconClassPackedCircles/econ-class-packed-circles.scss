@@ -1,0 +1,40 @@
+.EconClassPackedCirclesSection-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media screen and (min-width: 1000px) {
+    flex-flow: row wrap;
+  }
+}
+
+.EconClassPackedCirclesSection-item {
+  min-width: 0;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 1000px) {
+    width: 33%;
+    padding-right: 1rem;
+
+    &--right {
+      width: 66%;
+      padding-left: 1rem;
+      padding-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    &--right {
+      height: calc(100vh - 88px);
+    }
+
+    .Card {
+      position: absolute;
+      margin-left: -1.5rem;
+    }
+  }
+}
+
+.EconClassPackedCirclesSection-share {
+  max-width: 250px;
+}

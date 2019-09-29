@@ -119,10 +119,12 @@
         </div>
 
         <div class="u-marginBottom60">
-          {% include 'scenes/department/ProgrammesSection/index.html' with type="programmes" source_type=source_type year=selected_financial_year pdf=pdf excel=excel guide=guide description="Activities of this department" %}
+          {% include 'scenes/department/ProgrammesSection/index.html' with type="programmes" source_type=source_type year=selected_financial_year pdf=pdf excel=excel guide=guide %}
         </div>
 
-        <div data-aggregate-url="{{ econ_4_charts.aggregate_url }}"></div>
+        <div class="u-marginBottom60">
+          {% include 'scenes/department/EconClassPackedCircles/econ-class-packed-circles.html' with source_type=source_type year=selected_financial_year pdf=pdf excel=excel guide=guide %}
+        </div>
 
     <h3 class="Title Title--section">{{ selected_financial_year }} Adjusted Budget</h3>
     <p>
