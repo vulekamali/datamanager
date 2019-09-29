@@ -2,8 +2,13 @@ from django.contrib import sitemaps
 from django.urls import reverse
 from budgetportal.summaries import get_consolidated_expenditure_treemap
 from guide_data import category_guides
-from .models import InfrastructureProjectPart, FinancialYear, Department, \
-    EXPENDITURE_TIME_SERIES_PHASE_MAPPING, Government
+from .models import (
+    InfrastructureProjectPart,
+    FinancialYear,
+    Department,
+    EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
+    Government,
+)
 
 
 class ConsolidatedJsonViewSitemap(sitemaps.Sitemap):
@@ -32,7 +37,7 @@ class DepartmentListViewSitemap(sitemaps.Sitemap):
 
 class ProvincialDepartmentsSitemap(sitemaps.Sitemap):
     def items(self):
-        return Department.objects.filter(government__sphere__slug='provincial')
+        return Department.objects.filter(government__sphere__slug="provincial")
 
     def location(self, item):
         return reverse(
@@ -48,15 +53,12 @@ class ProvincialDepartmentsSitemap(sitemaps.Sitemap):
 
 class NationalDepartmentsSitemap(sitemaps.Sitemap):
     def items(self):
-        return Department.objects.filter(government__sphere__slug='national')
+        return Department.objects.filter(government__sphere__slug="national")
 
     def location(self, item):
         return reverse(
             "national-department",
-            args=[
-                item.government.sphere.financial_year.slug,
-                item.slug,
-            ],
+            args=[item.government.sphere.financial_year.slug, item.slug],
         )
 
 
@@ -65,7 +67,6 @@ class DepartmentPreviewSitemap(sitemaps.Sitemap):
         return Department.objects.all()
 
     def location(self, item):
-        print item
         return reverse(
             "department-preview",
             args=[
@@ -83,7 +84,7 @@ class DepartmentPreviewJsonSitemap(sitemaps.Sitemap):
         governments = Government.objects.all()
         for government in governments:
             for key in EXPENDITURE_TIME_SERIES_PHASE_MAPPING.keys():
-                department_preview_json.append({"government": government, 'phase': key})
+                department_preview_json.append({"government": government, "phase": key})
         return department_preview_json
 
     def location(self, item):
