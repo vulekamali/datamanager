@@ -130,64 +130,17 @@ class InfrastructureProjectPartViewSitemap(sitemaps.Sitemap):
         return InfrastructureProjectPart.objects.all()
 
 
-class FirstFocusViewSitemap(sitemaps.Sitemap):
+class FocusViewSitemap(sitemaps.Sitemap):
     def items(self):
-        financial_year = FinancialYear.objects.get(slug="2016-17")
-        treemap = get_consolidated_expenditure_treemap(financial_year)
-        focus_slugs_2016_17 = []
-        for data in treemap["data"]["items"]:
-            focus_slugs_2016_17.append(data["id"])
-        return focus_slugs_2016_17
+        focus_slugs = []
+        for year in FinancialYear.get_available_years():
+            treemap = get_consolidated_expenditure_treemap(year)
+            for data in treemap["data"]["items"]:
+                focus_slugs.append({"year": str(year.slug), "focus": data["id"]})
+        return focus_slugs
 
     def location(self, item):
-        return reverse(
-            "focus", kwargs={"financial_year_id": "2016-17", "focus_slug": item}
-        )
-
-
-class SecondFocusViewSitemap(sitemaps.Sitemap):
-    def items(self):
-        financial_year = FinancialYear.objects.get(slug="2017-18")
-        treemap = get_consolidated_expenditure_treemap(financial_year)
-        focus_slugs_2017_18 = []
-        for data in treemap["data"]["items"]:
-            focus_slugs_2017_18.append(data["id"])
-        return focus_slugs_2017_18
-
-    def location(self, item):
-        return reverse(
-            "focus", kwargs={"financial_year_id": "2017-18", "focus_slug": item}
-        )
-
-
-class ThirdFocusViewSitemap(sitemaps.Sitemap):
-    def items(self):
-        financial_year = FinancialYear.objects.get(slug="2018-19")
-        treemap = get_consolidated_expenditure_treemap(financial_year)
-        focus_slugs_2018_19 = []
-        for data in treemap["data"]["items"]:
-            focus_slugs_2018_19.append(data["id"])
-        return focus_slugs_2018_19
-
-    def location(self, item):
-        return reverse(
-            "focus", kwargs={"financial_year_id": "2018-19", "focus_slug": item}
-        )
-
-
-class FourthFocusViewSitemap(sitemaps.Sitemap):
-    def items(self):
-        financial_year = FinancialYear.objects.get(slug="2019-20")
-        treemap = get_consolidated_expenditure_treemap(financial_year)
-        focus_slugs_2019_20 = []
-        for data in treemap["data"]["items"]:
-            focus_slugs_2019_20.append(data["id"])
-        return focus_slugs_2019_20
-
-    def location(self, item):
-        return reverse(
-            "focus", kwargs={"financial_year_id": "2019-20", "focus_slug": item}
-        )
+        return reverse("focus", args=[item["year"], item["focus"]])
 
 
 class FocusJsonViewSitemap(sitemaps.Sitemap):
@@ -252,10 +205,7 @@ sitemaps = {
     "department_preview_json_2": SecondDepartmentPreviewJsonSitemap,
     "department_preview_json_3": ThirdDepartmentPreviewJsonSitemap,
     "infrastructure_projects": InfrastructureProjectPartViewSitemap,
-    "focus_2016_17": FirstFocusViewSitemap,
-    "focus_2017_18": SecondFocusViewSitemap,
-    "focus_2018_19": ThirdFocusViewSitemap,
-    "focus_2019_20": FourthFocusViewSitemap,
+    "focus": FocusViewSitemap,
     "focus_json": FocusJsonViewSitemap,
     "guides": GuidesViewSitemap,
     "search_results": SearchResultViewSitemap,
