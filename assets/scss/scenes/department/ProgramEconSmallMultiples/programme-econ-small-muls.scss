@@ -1,0 +1,29 @@
+.ProgramEconSmallMultiplesSection-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media screen and (min-width: 1000px) {
+    flex-flow: row wrap;
+  }
+}
+
+.ProgramEconSmallMultiplesSection-item {
+  min-width: 0;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 1000px) {
+    width: 33%;
+    padding-right: 1rem;
+
+    &--right {
+      width: 66%;
+      padding-left: 1rem;
+      padding-right: 0;
+    }
+  }
+}
+
+.ProgramEconSmallMultiplesSection-share {
+  max-width: 250px;
+}
