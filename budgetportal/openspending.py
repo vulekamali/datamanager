@@ -207,6 +207,12 @@ class EstimatesOfExpenditure(BabbageFiscalDataset):
     def get_econ_class_3_dimension(self):
         return self.get_dimension('economic_classification', level=2)
 
+    def get_econ_class_4_ref(self):
+        return self.get_ref(self.get_econ_class_4_dimension(), 'key')
+
+    def get_econ_class_4_dimension(self):
+        return self.get_dimension('economic_classification', level=3)
+
 
 class AdjustedEstimatesOfExpenditure(EstimatesOfExpenditure):
 

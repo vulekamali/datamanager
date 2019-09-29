@@ -19,6 +19,7 @@ from summaries import (
     get_focus_area_preview,
     get_consolidated_expenditure_treemap,
     department_subprogrammes,
+    dept_prog_subprog_econ4,
 )
 from guide_data import guides as guide_data
 from guide_data import category_guides
@@ -285,6 +286,7 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
 
     context = {
         'subprogramme_treemap': department_subprogrammes(department),
+        'econ_4_charts': dept_prog_subprog_econ4(department),
 
         # 'expenditure_over_time': department.get_expenditure_over_time(),
         # 'budget_actual': department.get_expenditure_time_series_summary(),
