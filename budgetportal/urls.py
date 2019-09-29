@@ -4,7 +4,7 @@ from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.sitemaps import views as _views
+from django.contrib.sitemaps import views as sitemap_views
 from django.views.decorators.cache import cache_page
 from . import views
 from sitemaps import sitemaps
@@ -134,8 +134,8 @@ urlpatterns = [
         '/departments'
         '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page), name='provincial-department'),
 
-    url(r'^sitemap\.xml$', _views.index, {'sitemaps': sitemaps}),
-    url(r'^sitemap-(?P<section>.+)\.xml$', _views.sitemap,
+    url(r'^sitemap\.xml$', sitemap_views.index, {'sitemaps': sitemaps}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', sitemap_views.sitemap,
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 ]
