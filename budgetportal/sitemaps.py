@@ -77,50 +77,23 @@ class DepartmentPreviewSitemap(sitemaps.Sitemap):
         )
 
 
-class FirstDepartmentPreviewJsonSitemap(sitemaps.Sitemap):
+class DepartmentPreviewJsonSitemap(sitemaps.Sitemap):
     def items(self):
-        return Government.objects.all()
+        department_preview_json = []
+        governments = Government.objects.all()
+        for government in governments:
+            for key in EXPENDITURE_TIME_SERIES_PHASE_MAPPING.keys():
+                department_preview_json.append({"government": government, 'phase': key})
+        return department_preview_json
 
     def location(self, item):
         return reverse(
             "department-preview-json",
             args=[
-                item.sphere.financial_year.slug,
-                item.sphere.slug,
-                item.slug,
-                EXPENDITURE_TIME_SERIES_PHASE_MAPPING.keys()[0],
-            ],
-        )
-
-
-class SecondDepartmentPreviewJsonSitemap(sitemaps.Sitemap):
-    def items(self):
-        return Government.objects.all()
-
-    def location(self, item):
-        return reverse(
-            "department-preview-json",
-            args=[
-                item.sphere.financial_year.slug,
-                item.sphere.slug,
-                item.slug,
-                EXPENDITURE_TIME_SERIES_PHASE_MAPPING.keys()[1],
-            ],
-        )
-
-
-class ThirdDepartmentPreviewJsonSitemap(sitemaps.Sitemap):
-    def items(self):
-        return Government.objects.all()
-
-    def location(self, item):
-        return reverse(
-            "department-preview-json",
-            args=[
-                item.sphere.financial_year.slug,
-                item.sphere.slug,
-                item.slug,
-                EXPENDITURE_TIME_SERIES_PHASE_MAPPING.keys()[2],
+                item["government"].sphere.financial_year.slug,
+                item["government"].sphere.slug,
+                item["government"].slug,
+                item["phase"],
             ],
         )
 
@@ -201,9 +174,7 @@ sitemaps = {
     "provincial_departments": ProvincialDepartmentsSitemap,
     "national_departments": NationalDepartmentsSitemap,
     "department_preview": DepartmentPreviewSitemap,
-    "department_preview_json_1": FirstDepartmentPreviewJsonSitemap,
-    "department_preview_json_2": SecondDepartmentPreviewJsonSitemap,
-    "department_preview_json_3": ThirdDepartmentPreviewJsonSitemap,
+    "department_preview_json": DepartmentPreviewJsonSitemap,
     "infrastructure_projects": InfrastructureProjectPartViewSitemap,
     "focus": FocusViewSitemap,
     "focus_json": FocusJsonViewSitemap,
