@@ -16,7 +16,7 @@ from budgetportal.models import (
     VideoLanguage,
     FAQ,
 )
-from adminsortable.admin import SortableAdmin
+from adminsortable.admin import SortableAdmin, SortableTabularInline
 from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -179,11 +179,11 @@ class SiteAdmin(admin.ModelAdmin):
     pass
 
 
-class VideoLanguageInline(admin.TabularInline):
+class VideoLanguageInline(SortableTabularInline):
     model = VideoLanguage
 
 
-class VideoAdmin(admin.ModelAdmin):
+class VideoAdmin(SortableAdmin):
     inlines = [VideoLanguageInline, ]
     model = Video
 
