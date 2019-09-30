@@ -85,7 +85,7 @@ class InfrastructureProjectPartViewSitemap(sitemaps.Sitemap):
 
 class FocusViewSitemap(sitemaps.Sitemap):
     def items(self):
-        focus_slugs = []
+        focus_area_page_params = []
         for year in FinancialYear.get_available_years():
             treemap = get_consolidated_expenditure_treemap(year)
             for data in treemap["data"]["items"]:
