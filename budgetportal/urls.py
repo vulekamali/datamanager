@@ -97,7 +97,7 @@ urlpatterns = [
     url(r'^glossary/?$', views.glossary, name="glossary"),
     url(r'^faq/?$', views.faq, name="faq"),
     url(r'^guides/?$', views.guides, name="guides", kwargs={'slug': 'index'}),
-    url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guide"),
+    url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guide-list"),
 
     # Dataset category list
     url(r'^datasets/?$', views.dataset_category_list_page, name="dataset-landing-page"),
