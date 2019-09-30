@@ -9,18 +9,6 @@ from .models import (
 )
 
 
-class ConsolidatedJsonViewSitemap(sitemaps.Sitemap):
-    def items(self):
-        years = []
-        for year in FinancialYear.get_available_years():
-            years.append(str(year.slug))
-
-        return years
-
-    def location(self, item):
-        return reverse("consolidated", args=[item])
-
-
 class DepartmentListViewSitemap(sitemaps.Sitemap):
     def items(self):
         years = []
@@ -99,7 +87,7 @@ class GuidesViewSitemap(sitemaps.Sitemap):
         return category_guides.values()
 
     def location(self, item):
-        return reverse("guide", args=[item])
+        return reverse("guide-list", args=[item])
 
 
 class SearchResultViewSitemap(sitemaps.Sitemap):
@@ -136,7 +124,6 @@ class StaticViewSitemap(sitemaps.Sitemap):
 
 sitemaps = {
     "static": StaticViewSitemap,
-    "consolidated": ConsolidatedJsonViewSitemap,
     "provincial_departments": ProvincialDepartmentsSitemap,
     "national_departments": NationalDepartmentsSitemap,
     "department_preview": DepartmentPreviewSitemap,
