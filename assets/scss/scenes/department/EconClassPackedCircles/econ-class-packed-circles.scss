@@ -24,14 +24,11 @@
   }
 
   @media screen and (max-width: 1000px) {
-    &--right {
-      height: calc(100vh - 88px);
+      &--right {
+          width: calc(100% + 4.5em);
+          margin-left: -1.5rem;
     }
 
-    .Card {
-      position: absolute;
-      margin-left: -1.5rem;
-    }
   }
 }
 
