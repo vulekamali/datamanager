@@ -11,7 +11,7 @@
   "scripts": {
     "build:webapp": "cd ./packages/webapp && node ./scripts/build",
     "build:root": "webpack --display errors-only --progress -p",
-    "build:dev": "webpack --display errors-only --progress --watch",
+    "build:dev": "webpack --progress --watch",
     "build": "yarn build:webapp && yarn build:root"
   },
   "devDependencies": {
