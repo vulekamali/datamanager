@@ -4,12 +4,12 @@ from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.sitemaps import views as sitemap_views
 from django.views.decorators.cache import cache_page
 from . import views
+from sitemaps import sitemaps
 from django.core.exceptions import PermissionDenied
-from django.views.generic import TemplateView
 from . import bulk_upload
-
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
@@ -28,9 +28,9 @@ urlpatterns = [
     url('sentry-debug/', trigger_error),
 
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview)),
+        '/focus/(?P<focus_slug>[\w-]+)/?$', cache_page(CACHE_SECS)(views.focus_area_preview), name='focus'),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
-        '/focus.json', cache_page(CACHE_SECS)(views.focus_preview_json)),
+        '/focus.json', cache_page(CACHE_SECS)(views.focus_preview_json), name='focus-json'),
 
     # National and provincial treemap data
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
@@ -42,19 +42,19 @@ urlpatterns = [
         '/previews'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_preview)),
+        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_preview), name='department-preview'),
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
         '/previews'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
-        '/(?P<phase_slug>[\w-]+).json', cache_page(CACHE_SECS)(views.department_preview_json)),
+        '/(?P<phase_slug>[\w-]+).json', cache_page(CACHE_SECS)(views.department_preview_json), name='department-preview-json'),
 
     # Consolidated
     url(r'^json/(?P<financial_year_id>\d{4}-\d{2})'
-        '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json)),
+        '/consolidated.json', cache_page(CACHE_SECS)(views.consolidated_treemap_json), name='consolidated-json'),
 
     # Homepage
-    url(r'^$', cache_page(CACHE_SECS)(views.homepage)),
+    url(r'^$', cache_page(CACHE_SECS)(views.homepage), name='home'),
 
     # Search results
     url(r'^json/static-search.json', cache_page(CACHE_SECS)(views.static_search_data)),
@@ -97,7 +97,7 @@ urlpatterns = [
     url(r'^glossary/?$', views.glossary, name="glossary"),
     url(r'^faq/?$', views.faq, name="faq"),
     url(r'^guides/?$', views.guides, name="guides", kwargs={'slug': 'index'}),
-    url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guides"),
+    url(r'^guides/(?P<slug>[-\w]+)/?$', views.guides, name="guide-list"),
 
     # Dataset category list
     url(r'^datasets/?$', views.dataset_category_list_page, name="dataset-landing-page"),
@@ -117,22 +117,27 @@ urlpatterns = [
     url(r"^infrastructure-projects/?$", views.infrastructure_project_list, name="infrastructure-project-list"),
     url(r'^json/infrastructure-projects.json$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)),
     url(r'^json/infrastructure-projects/(?P<project_slug>[\w-]+).json$', cache_page(CACHE_SECS)(views.infrastructure_project_detail_json)),
-    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail)),
+    url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail), name="infrastructure-projects"),
 
     # Department List
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/departments$', cache_page(CACHE_SECS)(views.department_list)),
+        '/departments$', cache_page(CACHE_SECS)(views.department_list), name='department-list'),
     # Department detail
     # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
         cache_page(CACHE_SECS)(views.department_page),
-        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}),
+        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}, name='national-department'),
     # - Provincial
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
         '/departments'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page)),
+        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page), name='provincial-department'),
+
+    url(r'^sitemap\.xml$', sitemap_views.index, {'sitemaps': sitemaps}),
+    url(r'^sitemap-(?P<section>.+)\.xml$', sitemap_views.sitemap,
+        {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 if settings.DEBUG_TOOLBAR:

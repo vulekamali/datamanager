@@ -1410,6 +1410,9 @@ class InfrastructureProjectPart(models.Model):
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(self.project_slug)
 
+    def get_absolute_url(self):
+        return reverse('infrastructure-projects', args=[self.project_slug])
+
     def calculate_projected_expenditure(self):
         """ Calculate sum of predicted amounts from a list of records """
         projected_records_for_project = InfrastructureProjectPart.objects.filter(budget_phase='MTEF', project_slug=self.project_slug)
@@ -1564,26 +1567,37 @@ class Event(models.Model):
     def __str__(self):
         return "{} {} ({} {})".format(self.type, self.date, self.where, self.province)
 
+    def get_absolute_url(self):
+        return reverse("events")
 
-class VideoLanguage(models.Model):
+
+class VideoLanguage(SortableMixin):
     label = models.CharField(max_length=255)
     youtube_id = models.CharField(max_length=255, null=True, blank=True)
     video = models.ForeignKey('Video', null=True, blank=True)
+    video_language_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['video_language_order']
 
     def __str__(self):
         return self.label
 
 
-class Video(models.Model):
+class Video(SortableMixin):
     title_id = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=510)
+    video_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    class Meta:
+        ordering = ['video_order']
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("videos")
 
 
 class FAQ(SortableMixin):
