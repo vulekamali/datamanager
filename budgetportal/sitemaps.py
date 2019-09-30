@@ -6,8 +6,6 @@ from .models import (
     InfrastructureProjectPart,
     FinancialYear,
     Department,
-    EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
-    Government,
 )
 
 
@@ -89,8 +87,8 @@ class FocusViewSitemap(sitemaps.Sitemap):
         for year in FinancialYear.get_available_years():
             treemap = get_consolidated_expenditure_treemap(year)
             for data in treemap["data"]["items"]:
-                focus_slugs.append({"year": str(year.slug), "focus": data["id"]})
-        return focus_slugs
+                focus_area_page_params.append({"year": str(year.slug), "focus": data["id"]})
+        return focus_area_page_params
 
     def location(self, item):
         return reverse("focus", args=[item["year"], item["focus"]])
