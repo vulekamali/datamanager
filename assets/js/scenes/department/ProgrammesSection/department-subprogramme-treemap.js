@@ -4,6 +4,9 @@ import {getProgNameRef, getSubprogNameRef} from '../../../utilities/js/modules/v
 
 (function() {
     var container = d3.select(".department-subprogramme-treemap");
+    if (container.empty())
+        return;
+
     var url = container.attr("data-aggregate-url");
     var model = JSON.parse(container.attr("data-openspending-model"));
     var progNameRef = getProgNameRef(model);
