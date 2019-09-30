@@ -38,3 +38,52 @@
 .EconClassPackedCirclesSection-share {
   max-width: 250px;
 }
+
+.department-econ-class-packed-circles * {
+    text {
+        font-family: arial;
+    }
+
+    .top-labels .budget-amount {
+        fill: black;
+        font-size: 3vh;
+        font-weight: bold;
+    }
+
+    .top-labels .programme-label, .top-labels .subprogramme-label, .top-labels .economic-classification {
+        fill: black;
+        font-size: 2vh;
+        font-family: arial;
+    }
+
+
+    rect.legend-item-box {
+        width: 2vh;
+        height: 2vh;
+    }
+
+    .legend-item-text-background {
+        fill: #F2F2F2;
+    }
+
+    .legend-item-text {
+        font-size: 1.5vh;
+    }
+
+    .bubble .econ-label {
+        fill: white;
+        text-anchor: middle;
+        font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        pointer-events: none;
+    }
+
+    .unselected {
+        opacity: 0.1;
+    }
+
+    .econ-circle:hover {
+        stroke:black;
+        stroke-width:2px;
+    }
+
+}
