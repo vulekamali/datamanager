@@ -78,27 +78,6 @@ class DepartmentPreviewSitemap(sitemaps.Sitemap):
         )
 
 
-class DepartmentPreviewJsonSitemap(sitemaps.Sitemap):
-    def items(self):
-        department_preview_json = []
-        governments = Government.objects.all()
-        for government in governments:
-            for key in EXPENDITURE_TIME_SERIES_PHASE_MAPPING.keys():
-                department_preview_json.append({"government": government, "phase": key})
-        return department_preview_json
-
-    def location(self, item):
-        return reverse(
-            "department-preview-json",
-            args=[
-                item["government"].sphere.financial_year.slug,
-                item["government"].sphere.slug,
-                item["government"].slug,
-                item["phase"],
-            ],
-        )
-
-
 class InfrastructureProjectPartViewSitemap(sitemaps.Sitemap):
     def items(self):
         return InfrastructureProjectPart.objects.all()
@@ -115,18 +94,6 @@ class FocusViewSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse("focus", args=[item["year"], item["focus"]])
-
-
-class FocusJsonViewSitemap(sitemaps.Sitemap):
-    def items(self):
-        years = []
-        for year in FinancialYear.get_available_years():
-            years.append(str(year.slug))
-
-        return years
-
-    def location(self, item):
-        return reverse("focus-json", args=[item])
 
 
 class GuidesViewSitemap(sitemaps.Sitemap):
@@ -175,10 +142,8 @@ sitemaps = {
     "provincial_departments": ProvincialDepartmentsSitemap,
     "national_departments": NationalDepartmentsSitemap,
     "department_preview": DepartmentPreviewSitemap,
-    "department_preview_json": DepartmentPreviewJsonSitemap,
     "infrastructure_projects": InfrastructureProjectPartViewSitemap,
     "focus": FocusViewSitemap,
-    "focus_json": FocusJsonViewSitemap,
     "guides": GuidesViewSitemap,
     "search_results": SearchResultViewSitemap,
 }
