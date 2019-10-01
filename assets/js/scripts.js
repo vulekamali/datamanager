@@ -44,5 +44,6 @@ import './services/chartAdaptor/scripts.js';
 import './scenes/department/AdjustedSection/components/ChangeIndicator/scripts.js';
 import './scenes/department/ProgrammesSection/department-subprogramme-treemap.js';
 import './scenes/department/EconClassPackedCircles/econ-class-packed-circles.js';
+import './scenes/department/ProgramEconSmallMultiples/programme-econ-small-muls.js';
 import './components/Share/scripts.js';
 import './scenes/homepage/Hero/scripts.js';

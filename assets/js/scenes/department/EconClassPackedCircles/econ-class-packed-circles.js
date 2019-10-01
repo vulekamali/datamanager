@@ -28,7 +28,7 @@ import {
     var progNameRef = getProgNameRef(model);
     var subprogNameRef = getSubprogNameRef(model);
     var econ4Ref = getEconClass4Ref(model);
-    var valueField = "value.sum"
+    var valueField = "value.sum";
 
     var viewport = getViewportDimensions();
     var sectionPadding = 24;
