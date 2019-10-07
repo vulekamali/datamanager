@@ -280,12 +280,18 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
 
     if department.government.sphere.slug == 'national':
         description_govt = "National"
+        subprogramme_viz_url = reverse(
+            "national-department-viz-subprogrammes",
+            args=[
+                selected_year.slug,
+                department.slug,
+            ],
+        )
     elif department.government.sphere.slug == 'provincial':
         description_govt = department.government.name
 
     context = {
-        'subprogramme_treemap': department_subprogrammes(department),
-
+        'subprogramme_viz_url': subprogramme_viz_url,
         # 'expenditure_over_time': department.get_expenditure_over_time(),
         # 'budget_actual': department.get_expenditure_time_series_summary(),
         # 'budget_actual_programmes': department.get_expenditure_time_series_by_programme(),
@@ -331,6 +337,19 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
     context['global_values'] = read_object_from_yaml(str(settings.ROOT_DIR.path('_data/global_values.yaml')))
     context['admin_url'] = reverse('admin:budgetportal_department_change', args=(department.pk,))
     return render(request, 'department.html', context=context)
+
+
+def department_page_subprogrammes(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    department = get_object_or_404(
+        Department,
+        slug=department_slug,
+        government__slug=government_slug,
+        government__sphere__slug=sphere_slug,
+        government__sphere__financial_year__slug=financial_year_id
+    )
+
+    context = department_subprogrammes(department)
+    return render(request, 'department_viz_subprogrammes.html', context=context)
 
 
 def infrastructure_projects_overview(request):
