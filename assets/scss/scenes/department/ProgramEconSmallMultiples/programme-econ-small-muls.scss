@@ -18,8 +18,6 @@
 
     &--right {
       width: 66%;
-      padding-left: 1rem;
-      padding-right: 0;
     }
   }
   @media screen and (max-width: 1000px) {
@@ -27,61 +25,20 @@
           width: calc(100% + 4.5em);
           margin-left: -1.5rem;
     }
-
   }
+
+  &--right .Card {
+
+    iframe {
+      width: 100%;
+      /* Set initial height, but pym will take over */
+      height: 75vh;
+      border: 0px;
+    }
+  }
+
 }
 
 .ProgramEconSmallMultiplesSection-share {
   max-width: 250px;
-}
-
-.programme-econ-small-multiples * {
-    .heading-line {
-        stroke: #ccc;
-        stroke-width: 1;
-    }
-
-    .programme-row text, .programme-row text tspan {
-        font-size: 1.6vh;
-        font-weight: bold;
-    }
-
-    .subprogramme-row text, .subprogramme-row text tspan {
-        font-size: 1.5vh;
-        fill: #5A5A5A;
-    }
-
-    text.spend-value , text.spend-value tspan {
-        font-size: 1.5vh;
-        fill: #484848;
-    }
-
-    .background-rect {
-        fill: #F2F2F2;
-    }
-
-    .bar-rect {
-        fill: url(#bar-gradient)
-    }
-
-    defs .bar-gradient  stop {
-        stop-color: blue;
-    }
-
-    #bar-gradient stop:nth-child(1) {
-        stop-color: #91C9C4;
-    }
-    #bar-gradient stop:nth-child(2) {
-        stop-color: #1D4A3F;
-    }
-
-    .gridline {
-        stroke: #EFEFEF;
-    }
-
-    .main-label text {
-        font-size: 1.5vh;
-        fill: white;
-    }
-
 }

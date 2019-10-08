@@ -42,5 +42,6 @@ import './components/universal/ThumbPreview/scripts.js';
 
 import './services/chartAdaptor/scripts.js';
 import './scenes/department/AdjustedSection/components/ChangeIndicator/scripts.js';
+import './scenes/department/ProgramEconSmallMultiples/programme-econ-small-muls.js';
 import './components/Share/scripts.js';
 import './scenes/homepage/Hero/scripts.js';

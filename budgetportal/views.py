@@ -366,7 +366,7 @@ def department_viz_subprog_econ4_circles(request, financial_year_id, sphere_slug
 def department_viz_subprog_econ4_bars(request, financial_year_id, sphere_slug, government_slug, department_slug):
     department = get_department_by_slugs(financial_year_id, sphere_slug, government_slug, department_slug)
     context = {
-        "viz_data": DepartmentSubprogrammes(department),
+        "viz_data": DepartmentSubprogEcon4(department),
     }
     return render(request, 'department_viz_subprog_econ4_bars.html', context=context)
 

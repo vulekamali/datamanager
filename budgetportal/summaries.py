@@ -474,6 +474,7 @@ class DepartmentSubprogrammes(object):
         )
 
     def get_detail_aggregate_url(self):
+        openspending_api = self.get_openspending_api()
         return openspending_api.aggregate_url(
             cuts=self.get_aggregate_cuts(),
             drilldowns=openspending_api.get_all_drilldowns(),
@@ -490,7 +491,7 @@ class DepartmentSubprogEcon4(DepartmentSubprogrammes):
     """
     def get_aggregate_drilldowns(self):
         openspending_api = self.get_openspending_api()
-        drilldowns = [
+        return [
             openspending_api.get_programme_name_ref(),
             openspending_api.get_subprogramme_name_ref(),
             openspending_api.get_econ_class_4_ref(),
