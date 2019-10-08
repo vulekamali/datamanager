@@ -1,48 +1,44 @@
 .department-subprogramme-treemap * {
-
-    .heading {
-        font-family: sans-serif;
-        margin-left: 12px;
-        margin-bottom: 0px;
-        margin-top: 5px;
-        font-size: 0.8em;
-    }
-
-    .top-labels .label-separator {
-        stroke: #cccccc;
-    }
-
-    .programme-button rect, .subprogramme-button rect {
-        fill: #333333;
-    }
-
-    .programme-button text, .subprogramme-button text {
-        font-family: arial;
-        font-size: 10px;
+    /** page **/
+    svg {
         fill: white;
     }
 
-    .programme-button rect {
-        width: 80px;
-        height: 23px;
+    /** main.css **/
+    text {
+        font-family: 'Roboto', sans-serif;
     }
 
-    .subprogramme-button rect {
-        width: 105px;
-        height: 23px;
+    .main-label rect {
+        fill: #333333;
     }
 
+    .main-label text {
+        font-size: 2.3vh;
+        fill: white;
+    }
+
+    .label-separator {
+        stroke: #cccccc;
+    }
+
+    .svg-content-responsive {
+        display: inline-block;
+    }
+
+    .bounding-box {
+        stroke: none;
+        fill: none;
+    }
+
+    /** treemap.css **/
     .top-labels .programme-label, .top-labels .subprogramme-label {
         fill: black;
-        font-size: 11px;
+        font-size: 2.0vh;
     }
 
     .top-labels .programme-budget-label, .top-labels .subprogramme-budget-label  {
-        font-size: 22px;
-    }
-
-    .label {
-        font-weight: bold;
+        font-size: 2.8vh;
     }
 
     .tile {
@@ -54,24 +50,23 @@
         stroke-width:2px;
     }
 
-    text {
-        font-family: Arial;
-    }
-
-    .programme-label {
-        font-size: 13px;
+    .programme-label, .programme-label tspan {
+        font-size: 2vh;
         pointer-events: none;
     }
 
-    .subprogramme-label, .subprogramme-budget-label {
+    .box .subprogramme-label, .box .subprogramme-budget-label {
         opacity: 0.7;
-        font-size: 11px;
+        font-size: 2vh;
         pointer-events: none;
     }
 
-    .svg-content-responsive {
-        display: inline-block;
-        width: 100%;
+    #my_dataviz {
     }
 
+
+
+    svg {
+        height: calc(100vh - 88px)
+    }
 }

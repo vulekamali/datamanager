@@ -1,0 +1,33 @@
+{% load define_action %}
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://adieyal.github.io/vulekamali-viz-sandbox/main.css"/>
+<link rel="stylesheet" href="https://adieyal.github.io/vulekamali-viz-sandbox/treemap.css"/>
+
+</style>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/saveSvgAsPng.js"></script>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/utils.js"></script>
+
+<button>Save as image</button>
+<div id="my_dataviz"
+     class="department-subprogramme-treemap"
+     data-aggregate-url="{{ viz_data.get_aggregate_url }}"
+     data-openspending-model="{{ viz_data.get_model | jsonify | escape }}"
+     >
+</div>
+
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/elements.js"></script>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/dept-treemap.js"></script>
+
+    <script>
+        d3.selectAll("button")
+            .on("click", function() {
+                svg = d3.selectAll("svg")
+                saveSvgAsPng(svg.node(), "diagram.png");
+            })
+    </script>

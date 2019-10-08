@@ -11,7 +11,7 @@
   "scripts": {
     "build:webapp": "cd ./packages/webapp && node ./scripts/build",
     "build:root": "webpack --display errors-only --progress -p",
-    "build:dev": "webpack --display errors-only --progress --watch",
+    "build:dev": "webpack --progress --watch",
     "build": "yarn build:webapp && yarn build:root"
   },
   "devDependencies": {
@@ -121,6 +121,7 @@
     "preact-css-transition-group": "^1.3.0",
     "preact-transition-group": "^1.1.1",
     "promise-polyfill": "^6.0.2",
+    "pym.js": "^1.3.2",
     "query-string": "^5.1.1",
     "react-ga": "^2.5.3",
     "react-html-connector": "^0.2.6",

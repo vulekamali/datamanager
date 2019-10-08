@@ -20,8 +20,7 @@
             </div>
 
             <p class="js-tooltips">A department&#x27;s programmes are the activities that it spends money on during the
-                financial year. Different programmes have different expenditure budgets, depending on their requirements
-                and available finances. More detail on the programmes is available in the
+                financial year. Different programmes have different budgets, depending on their objectives and available budgets. More detail on the programmes is available in the
                 department's {{ source_type }} documents.</p>
 
             <ul class="LinksList">
@@ -39,12 +38,8 @@
 
         <div class="ProgrammesSection-item ProgrammesSection-item--right">
             <div class="Card">
-              <div
-                class="department-subprogramme-treemap"
-                data-aggregate-url="{{ subprogramme_treemap.aggregate_url }}"
-                data-openspending-model="{{ subprogramme_treemap.model | jsonify | escape }}"
-                >
-              </div>
+              <iframe src="{{ subprog_treemap_url }}"></iframe>
             </div>
         </div>
     </div>
+</div>

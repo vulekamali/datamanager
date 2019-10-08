@@ -1,4 +1,4 @@
-.ProgrammesSection-container {
+.ProgramEconSmallMultiplesSection-container {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -8,7 +8,7 @@
   }
 }
 
-.ProgrammesSection-item {
+.ProgramEconSmallMultiplesSection-item {
   min-width: 0;
   padding-bottom: 1rem;
 
@@ -20,25 +20,25 @@
       width: 66%;
     }
   }
-
   @media screen and (max-width: 1000px) {
-    &--right {
-        width: calc(100% + 4.5em);
-        margin-left: -1.5rem;
+      &--right {
+          width: calc(100% + 4.5em);
+          margin-left: -1.5rem;
     }
   }
 
   &--right .Card {
-    height: calc(100vh - 145px);
 
     iframe {
       width: 100%;
-      height: 100%;
+      /* Set initial height, but pym will take over */
+      height: 75vh;
       border: 0px;
     }
   }
+
 }
 
-.ProgrammesSection-share {
+.ProgramEconSmallMultiplesSection-share {
   max-width: 250px;
 }

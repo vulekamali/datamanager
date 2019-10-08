@@ -1,0 +1,35 @@
+{% load define_action %}
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://adieyal.github.io/vulekamali-viz-sandbox/main.css"/>
+<link rel="stylesheet" href="https://adieyal.github.io/vulekamali-viz-sandbox/econ4.css"/>
+<style>
+
+#my_dataviz {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* aspect ratio */
+    vertical-align: top;
+}
+
+</style>
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/elements.js"></script>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/utils.js"></script>
+
+<div id="my_dataviz" class="department-econ4"
+     data-aggregate-url="{{ viz_data.get_aggregate_url }}"
+     data-openspending-model="{{ viz_data.get_model | jsonify | escape }}"
+     >
+</div>
+
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/dept-econ4.js"></script>
+<script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
+<script>
+  new pym.Child();
+</script>
