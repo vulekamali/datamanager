@@ -24,9 +24,9 @@
                 department's {{ source_type }} documents.</p>
 
             <ul class="LinksList">
-                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprogramme_treemap.dataset_detail_page type="dataset" %}
+                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprogramme_viz_data.get_dataset.get_url_path type="dataset" %}
 
-                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprogramme_treemap.detail_csv_url type="download" %}
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprogramme_viz_data.get_detail_csv_url type="download" %}
 
                 {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 

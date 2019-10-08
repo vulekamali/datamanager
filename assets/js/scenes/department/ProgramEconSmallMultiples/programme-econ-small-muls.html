@@ -26,9 +26,9 @@
             <p class="js-tooltips"Only the categories that this department spends on are shown in the filter.</p>
 
             <ul class="LinksList">
-                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=econ_4_charts.dataset_detail_page type="dataset" %}
+                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprog_econ4_viz_data.get_dataset.get_url_path type="dataset" %}
 
-                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=econ_4_charts.detail_csv_url type="download" %}
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprog_econ4_viz_data.get_detail_csv_url type="download" %}
 
                 {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 
