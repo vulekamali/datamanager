@@ -23,6 +23,20 @@ def permission_denied(request):
 def trigger_error(request):
     division_by_zero = 1 / 0
 
+department_urlpatterns = [
+    url(r'^$',
+        cache_page(CACHE_SECS)(views.department_page),
+        name='national-department'),
+    url(r'^/viz/subprog-treemap$',
+        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        name='national-department-viz-subprog-treemap'),
+    url(r'^/viz/subprog-econ4-circles$',
+        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        name='national-department-viz-subprog-econ4-circles'),
+    url(r'^/viz/subprog-econ4-bars$',
+        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        name='national-department-viz-subprog-econ4-bars'),
+]
 
 urlpatterns = [
     url('sentry-debug/', trigger_error),
@@ -124,38 +138,12 @@ urlpatterns = [
         '/departments$', cache_page(CACHE_SECS)(views.department_list), name='department-list'),
     # Department detail
     # - National
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
-        cache_page(CACHE_SECS)(views.department_page),
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)',
+        include(department_urlpatterns),
         kwargs={
             'sphere_slug': 'national',
             'government_slug': 'south-africa'
-        },
-        name='national-department'),
-    # Department visualisations
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)/'
-        'viz/subprog-treemap$',
-        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
-        kwargs={
-            'sphere_slug': 'national',
-            'government_slug': 'south-africa'
-        },
-        name='national-department-viz-subprog-treemap'),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)/'
-        'viz/subprog-econ4-circles$',
-        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
-        kwargs={
-            'sphere_slug': 'national',
-            'government_slug': 'south-africa'
-        },
-        name='national-department-viz-subprog-econ4-circles'),
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)/'
-        'viz/subprog-econ4-bars$',
-        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
-        kwargs={
-            'sphere_slug': 'national',
-            'government_slug': 'south-africa'
-        },
-        name='national-department-viz-subprog-econ4-bars'),
+        }),
     # - Provincial
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
