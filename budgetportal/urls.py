@@ -28,13 +28,13 @@ department_urlpatterns = [
         cache_page(CACHE_SECS)(views.department_page),
         name='national-department'),
     url(r'^/viz/subprog-treemap$',
-        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        cache_page(CACHE_SECS)(views.department_viz_subprog_treemap),
         name='national-department-viz-subprog-treemap'),
     url(r'^/viz/subprog-econ4-circles$',
-        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        cache_page(CACHE_SECS)(views.department_viz_subprog_econ4_circles),
         name='national-department-viz-subprog-econ4-circles'),
     url(r'^/viz/subprog-econ4-bars$',
-        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        cache_page(CACHE_SECS)(views.department_viz_subprog_econ4_bars),
         name='national-department-viz-subprog-econ4-bars'),
 ]
 
@@ -136,6 +136,7 @@ urlpatterns = [
     # Department List
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments$', cache_page(CACHE_SECS)(views.department_list), name='department-list'),
+
     # Department detail
     # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)',

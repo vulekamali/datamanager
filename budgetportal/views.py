@@ -338,8 +338,8 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
     return render(request, 'department.html', context=context)
 
 
-def department_page_subprogrammes(request, financial_year_id, sphere_slug, government_slug, department_slug):
-    department = get_object_or_404(
+def get_department_by_slugs(financial_year_id, sphere_slug, government_slug, department_slug):
+    return get_object_or_404(
         Department,
         slug=department_slug,
         government__slug=government_slug,
@@ -347,10 +347,28 @@ def department_page_subprogrammes(request, financial_year_id, sphere_slug, gover
         government__sphere__financial_year__slug=financial_year_id
     )
 
+def department_viz_subprog_treemap(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    department = get_department_by_slugs(financial_year_id, sphere_slug, government_slug, department_slug)
     context = {
         "viz_data": DepartmentSubprogrammes(department),
     }
     return render(request, 'department_viz_subprogrammes.html', context=context)
+
+
+def department_viz_subprog_econ4_circles(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    department = get_department_by_slugs(financial_year_id, sphere_slug, government_slug, department_slug)
+    context = {
+        "viz_data": DepartmentSubprogEcon4(department),
+    }
+    return render(request, 'department_viz_subprog_econ4_circles.html', context=context)
+
+
+def department_viz_subprog_econ4_bars(request, financial_year_id, sphere_slug, government_slug, department_slug):
+    department = get_department_by_slugs(financial_year_id, sphere_slug, government_slug, department_slug)
+    context = {
+        "viz_data": DepartmentSubprogrammes(department),
+    }
+    return render(request, 'department_viz_subprog_econ4_bars.html', context=context)
 
 
 def infrastructure_projects_overview(request):

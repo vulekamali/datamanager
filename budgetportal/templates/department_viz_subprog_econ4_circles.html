@@ -1,0 +1,22 @@
+{% load define_action %}
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://adieyal.github.io/vulekamali-viz-sandbox/main.css"/>
+<link rel="stylesheet" href="https://adieyal.github.io/vulekamali-viz-sandbox/bubbles.css"/>
+
+<!-- Load d3.js -->
+<!--<script src="https://d3js.org/d3.v4.js"></script>-->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/utils.js"></script>
+
+<div class="department-bubbles"
+     data-aggregate-url="{{ viz_data.get_aggregate_url }}"
+     data-openspending-model="{{ vizdata.get_model | jsonify | escape }}"
+     >
+</div>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/utils.js"></script>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/elements.js"></script>
+<script src="https://adieyal.github.io/vulekamali-viz-sandbox/dept-bubbles.js"></script>
