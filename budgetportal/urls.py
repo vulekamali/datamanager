@@ -126,7 +126,36 @@ urlpatterns = [
     # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$',
         cache_page(CACHE_SECS)(views.department_page),
-        kwargs={'sphere_slug': 'national', 'government_slug': 'south-africa'}, name='national-department'),
+        kwargs={
+            'sphere_slug': 'national',
+            'government_slug': 'south-africa'
+        },
+        name='national-department'),
+    # Department visualisations
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)/'
+        'viz/subprog-treemap$',
+        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        kwargs={
+            'sphere_slug': 'national',
+            'government_slug': 'south-africa'
+        },
+        name='national-department-viz-subprog-treemap'),
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)/'
+        'viz/subprog-econ4-circles$',
+        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        kwargs={
+            'sphere_slug': 'national',
+            'government_slug': 'south-africa'
+        },
+        name='national-department-viz-subprog-econ4-circles'),
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)/'
+        'viz/subprog-econ4-bars$',
+        cache_page(CACHE_SECS)(views.department_page_subprogrammes),
+        kwargs={
+            'sphere_slug': 'national',
+            'government_slug': 'south-africa'
+        },
+        name='national-department-viz-subprog-econ4-bars'),
     # - Provincial
     url(r'^(?P<financial_year_id>[\w-]+)'
         '/(?P<sphere_slug>[\w-]+)'
@@ -134,6 +163,7 @@ urlpatterns = [
         '/departments'
         '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page), name='provincial-department'),
 
+    # Sitemap
     url(r'^sitemap\.xml$', sitemap_views.index, {'sitemaps': sitemaps}),
     url(r'^sitemap-(?P<section>.+)\.xml$', sitemap_views.sitemap,
         {'sitemaps': sitemaps},

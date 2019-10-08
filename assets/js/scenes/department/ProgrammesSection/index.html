@@ -38,12 +38,7 @@
 
         <div class="ProgrammesSection-item ProgrammesSection-item--right">
             <div class="Card">
-              <div
-                class="department-subprogramme-treemap"
-                data-aggregate-url="{{ subprogramme_treemap.aggregate_url }}"
-                data-openspending-model="{{ subprogramme_treemap.model | jsonify | escape }}"
-                >
-              </div>
+              <iframe src="{{ subprog_treemap_url }}"></iframe>
             </div>
         </div>
     </div>
