@@ -9,8 +9,7 @@
 
 </style>
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="https://viz.vulekamali.gov.za/saveSvgAsPng.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://viz.vulekamali.gov.za/utils.js"></script>
 
 <button>Save as image</button>
@@ -25,11 +24,12 @@
 <script src="https://viz.vulekamali.gov.za/openspending.js"></script>
 <script src="https://viz.vulekamali.gov.za/vulekamali-openspending.js"></script>
 <script src="https://viz.vulekamali.gov.za/dept-treemap.js"></script>
+<script src="https://viz.vulekamali.gov.za/saveSvgAsPng.js"></script>
 
-    <script>
-        d3.selectAll("button")
-            .on("click", function() {
-                svg = d3.selectAll("svg")
-                saveSvgAsPng(svg.node(), "diagram.png");
-            })
-    </script>
+<script>
+  d3.selectAll("button")
+    .on("click", function() {
+        svg = d3.selectAll("svg")
+        saveSvgAsPng(svg.node(), "diagram.png");
+    })
+</script>
