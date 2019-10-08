@@ -26,16 +26,16 @@ def trigger_error(request):
 department_urlpatterns = [
     url(r'^$',
         cache_page(CACHE_SECS)(views.department_page),
-        name='national-department'),
+        name='department'),
     url(r'^/viz/subprog-treemap$',
         cache_page(CACHE_SECS)(views.department_viz_subprog_treemap),
-        name='national-department-viz-subprog-treemap'),
+        name='department-viz-subprog-treemap'),
     url(r'^/viz/subprog-econ4-circles$',
         cache_page(CACHE_SECS)(views.department_viz_subprog_econ4_circles),
-        name='national-department-viz-subprog-econ4-circles'),
+        name='department-viz-subprog-econ4-circles'),
     url(r'^/viz/subprog-econ4-bars$',
         cache_page(CACHE_SECS)(views.department_viz_subprog_econ4_bars),
-        name='national-department-viz-subprog-econ4-bars'),
+        name='department-viz-subprog-econ4-bars'),
 ]
 
 urlpatterns = [
@@ -134,13 +134,14 @@ urlpatterns = [
     url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail), name="infrastructure-projects"),
 
     # Department List
-    url(r'^(?P<financial_year_id>\d{4}-\d{2})'
-        '/departments$', cache_page(CACHE_SECS)(views.department_list), name='department-list'),
+    url(r'^(?P<financial_year_id>\d{4}-\d{2})/departments$',
+        cache_page(CACHE_SECS)(views.department_list),
+        name='department-list'),
 
     # Department detail
     # - National
     url(r'^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)',
-        include(department_urlpatterns),
+        include(department_urlpatterns, namespace="national"),
         kwargs={
             'sphere_slug': 'national',
             'government_slug': 'south-africa'
@@ -150,7 +151,8 @@ urlpatterns = [
         '/(?P<sphere_slug>[\w-]+)'
         '/(?P<government_slug>[\w-]+)'
         '/departments'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page), name='provincial-department'),
+        '/(?P<department_slug>[\w-]+)',
+        include(department_urlpatterns, namespace="provincial")),
 
     # Sitemap
     url(r'^sitemap\.xml$', sitemap_views.index, {'sitemaps': sitemaps}),

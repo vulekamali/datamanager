@@ -286,10 +286,10 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
 
     context = {
         'subprogramme_viz_data': DepartmentSubprogrammes(department),
-        'subprog_treemap_url': get_viz_url(department, "-department-viz-subprog-treemap"),
+        'subprog_treemap_url': get_viz_url(department, "department-viz-subprog-treemap"),
         'subprog_econ4_viz_data': DepartmentSubprogEcon4(department),
-        'subprog_econ4_circles_url': get_viz_url(department, "-department-viz-subprog-econ4-circles"),
-        'subprog_econ4_bars_url': get_viz_url(department, "-department-viz-subprog-econ4-bars"),
+        'subprog_econ4_circles_url': get_viz_url(department, "department-viz-subprog-econ4-circles"),
+        'subprog_econ4_bars_url': get_viz_url(department, "department-viz-subprog-econ4-bars"),
 
         # 'expenditure_over_time': department.get_expenditure_over_time(),
         # 'budget_actual': department.get_expenditure_time_series_summary(),
@@ -336,6 +336,27 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
     context['global_values'] = read_object_from_yaml(str(settings.ROOT_DIR.path('_data/global_values.yaml')))
     context['admin_url'] = reverse('admin:budgetportal_department_change', args=(department.pk,))
     return render(request, 'department.html', context=context)
+
+
+def get_viz_url(department, url_name_suffix):
+    if department.government.sphere.slug == 'national':
+        return reverse(
+            "national:" + url_name_suffix,
+            args=[
+                department.government.sphere.financial_year.slug,
+                department.slug,
+            ],
+        )
+    elif department.government.sphere.slug == 'provincial':
+        return reverse(
+           "provincial:" + url_name_suffix,
+            args=[
+                department.government.sphere.financial_year.slug,
+                department.government.sphere.slug,
+                department.government.slug,
+                department.slug,
+            ],
+        )
 
 
 def get_department_by_slugs(financial_year_id, sphere_slug, government_slug, department_slug):
@@ -977,24 +998,3 @@ def department_preview(request, financial_year_id, sphere_slug, government_slug,
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:
         return yaml.load(f)
-
-
-def get_viz_url(department, url_name_suffix):
-    if department.government.sphere.slug == 'national':
-        return reverse(
-            "national" + url_name_suffix,
-            args=[
-                department.government.sphere.financial_year.slug,
-                department.slug,
-            ],
-        )
-    elif department.government.sphere.slug == 'provincial':
-        return reverse(
-           "provincial" + url_name_suffix,
-            args=[
-                department.government.sphere.financial_year.slug,
-                department.government.sphere.slug,
-                department.government.slug,
-                department.slug,
-            ],
-        )
