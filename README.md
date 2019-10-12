@@ -115,7 +115,7 @@ for year in 2016-17 2017-18 2018-19 2019-20; do curl https://datamanager.vulekam
 You can load this data into your environment with:
 
 ```bash
-docker-compose run --rm app python manage.py loaddata years-spheres-governments video-language events
+docker-compose run --rm app python manage.py loaddata years-spheres-governments video-language events provincial-infrastructure-projects
 for year in 2016-17 2017-18 2018-19 2019-20; do docker-compose run --rm app python manage.py load_departments ${year} national departments-national-${year}.csv; done
 for year in 2016-17 2017-18 2018-19 2019-20; do docker-compose run --rm app python manage.py load_departments ${year} provincial departments-provincial-${year}.csv; done
 ```

@@ -15,6 +15,7 @@ from budgetportal.models import (
     Video,
     VideoLanguage,
     FAQ,
+    ProvInfraProject,
 )
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 from budgetportal.bulk_upload import bulk_upload_view
@@ -187,6 +188,11 @@ class VideoAdmin(SortableAdmin):
     inlines = [VideoLanguageInline, ]
     model = Video
 
+
+class ProvInfraProjectAdmin(admin.ModelAdmin):
+    model = ProvInfraProject
+
+
 admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
 
 
@@ -216,3 +222,4 @@ admin.site.register(Site, SiteAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Event)
 admin.site.register(FAQ, SortableAdmin)
+admin.site.register(ProvInfraProject, ProvInfraProjectAdmin)
