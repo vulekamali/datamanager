@@ -19,6 +19,48 @@ from import_export.widgets import Widget, ForeignKeyWidget
 import logging
 
 logger = logging.getLogger(__name__)
+NORMAL_HEADERS = ['Project ID',
+                  'Project No',
+                  'Project Name',
+                  'Province',
+                  'Department',
+                  'Local Municipality',
+                  'District Municipality',
+                  'Latitude',
+                  'Longitude',
+                  'Project Status',
+                  'Project Start Date',
+                  'Estimated Construction Start Date',
+                  'Estimated Project Completion Date',
+                  'Contracted Construction End Date',
+                  'Estimated Construction End Date',
+                  'Professional Fees',
+                  'Construction Costs',
+                  'Variation Orders',
+                  'Total Project Cost',
+                  'Project Expenditure from Previous Financial Years (Professional Fees)',
+                  'Project Expenditure from Previous Financial Years (Construction Costs)',
+                  'Project Expenditure from Previous Financial Years (TOTAL)',
+                  'Main Budget Appropriation (Professional Fees)',
+                  'Adjustment Budget Appropriation (Professional Fees)',
+                  'Main Budget Appropriation (Construction Costs)',
+                  'Adjustment Budget Appropriation (Construction Costs)',
+                  'Main Budget Appropriation (TOTAL)',
+                  'Adjustment Budget Appropriation (TOTAL)',
+                  'Main Budget Appropriation (Professional Fees)',
+                  'Adjustment Budget Appropriation (Professional Fees)',
+                  'Main Budget Appropriation (Construction Costs)',
+                  'Adjustment Budget Appropriation (Construction Costs)',
+                  'Main Budget Appropriation (TOTAL)',
+                  'Adjustment Budget Appropriation (TOTAL)',
+                  'Actual Expenditure Q1',
+                  'Actual Expenditure Q2',
+                  'Actual Expenditure Q3',
+                  'Actual Expenditure Q4',
+                  'Budget Programme',
+                  'Primary Funding Source',
+                  'Nature of Investment',
+                  'Funding Status']
 
 
 class CustomIsVotePrimaryWidget(Widget):
@@ -298,19 +340,19 @@ class ProvInfraProjectResource(resources.ModelResource):
         attribute="total_project_cost", column_name="Total Project Cost"
     )
     expenditure_from_previous_years_professional_fees = Field(
-        attribute="expenditurre_from_previous_years_professional_fees",
+        attribute="expenditure_from_previous_years_professional_fees",
         column_name="Project Expenditure from Previous Financial Years (Professional Fees)",
     )
     expenditure_from_previous_years_construction_costs = Field(
-        attribute="expenditurre_from_previous_years_construction_costs",
+        attribute="expenditure_from_previous_years_construction_costs",
         column_name="Project Expenditure from Previous Financial Years (Construction Costs)",
     )
     expenditure_from_previous_years_total = Field(
-        attribute="expenditurre_from_previous_years_total",
+        attribute="expenditure_from_previous_years_total",
         column_name="Project Expenditure from Previous Financial Years (TOTAL)",
     )
     project_expenditure_total = Field(
-        attribute="project_expenditure_tootal",
+        attribute="project_expenditure_total",
         column_name="Project Expenditure (TOTAL)",
     )
     main_appropriation_professional_fees = Field(
@@ -371,9 +413,17 @@ class ProvInfraProjectResource(resources.ModelResource):
 
     class Meta:
         model = ProvInfraProject
+        skip_unchanged = True
+        report_skipped = False
         exclude = ("id",)
         instance_loader_class = ProvInfraProjectLoader
         # import_id_fields = ('IRM_project_id',)
+
+    def before_import(self, dataset, using_transactions, dry_run, **kwargs):
+        headers = dataset.headers
+        difference = list(set(NORMAL_HEADERS) - set(headers))
+        if len(difference) != 0:
+            raise Exception("Following column(s) are missing: {}".format(', '.join(difference)))
 
     def before_import_row(self, row, **kwargs):
         financial_year = self.request.POST.get("financial_year", None)
