@@ -231,12 +231,11 @@ class ProvInfraProjectAdmin(ImportMixin, admin.ModelAdmin):
 
     def get_resource_kwargs(self, request, *args, **kwargs):
         """
-        Get the kwargs to send on to the department resource when
-        we import departments.
+        Return request which is necessary for import and confirm import requests
         """
-        if u'financial_year' in request.POST:
-            return {'financial_year': request.POST[u'financial_year']}
-        return {}
+        rk = super(ProvInfraProjectAdmin, self).get_resource_kwargs(request, *args, **kwargs)
+        rk['request'] = request
+        return rk
 
     def _financial_year(self, obj):
         return obj.financial_year.slug
