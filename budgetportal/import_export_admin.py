@@ -240,7 +240,7 @@ class ProvInfraProjectResource(resources.ModelResource):
     IRM_project_id = Field(attribute="IRM_project_id",
                            column_name="Project ID")
     project_number = Field(attribute="project_number",
-                           column_name="Project No.")
+                           column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
     province = Field(attribute="province", column_name="Province")
     department = Field(attribute="department", column_name="Department")
