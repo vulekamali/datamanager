@@ -10,6 +10,8 @@ from . import views
 from sitemaps import sitemaps
 from django.core.exceptions import PermissionDenied
 from . import bulk_upload
+from webflow import urls as webflow_urls
+
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
@@ -138,11 +140,13 @@ urlpatterns = [
     url(r'^sitemap-(?P<section>.+)\.xml$', sitemap_views.sitemap,
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
+
+    url('^', include(webflow_urls.urlpatterns)),
 ]
 
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar
 
     urlpatterns = [
-                      url(r'^__debug__/', include(debug_toolbar.urls)),
-                  ] + urlpatterns
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
