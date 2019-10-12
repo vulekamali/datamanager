@@ -1845,6 +1845,57 @@ class FAQ(SortableMixin):
         ordering = ['the_order']
 
 
+class ProvInfraProject(models.Model):
+    financial_year = models.ForeignKey(
+        FinancialYear,
+        on_delete=models.CASCADE,
+        related_name="prov_infra",
+    )
+    IRM_project_id = models.IntegerField(unique=True)
+    project_number = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    province = models.CharField(max_length=255)
+    department = models.CharField(max_length=255)
+    local_municipality = models.CharField(max_length=255)
+    district_municipality = models.CharField(max_length=255)
+    latitude = models.CharField(max_length=20)
+    longitude = models.CharField(max_length=20)
+    status = models.CharField(max_length=255)
+    start_date = models.DateField()
+    estimated_construction_start_date = models.DateField()
+    estimated_completion_date = models.DateField()
+    contracted_construction_end_date = models.DateField()
+    estimated_construction_end_date = models.DateField()
+    total_professional_fees = models.DecimalField()
+    total_construction_costs = models.DecimalField()
+    variation_orders = models.DecimalField()
+    total_project_cost = models.DecimalField()
+    expenditure_from_previous_years_professional_fees = models.DecimalField()
+    expenditure_from_previous_years_construction_costs = models.DecimalField()
+    expenditure_from_previous_years_total = models.DecimalField()
+    project_expenditure_total = models.DecimalField()
+    main_appropriation_professional_fees = models.DecimalField()
+    adjustment_appropriation_professional_fees = models.DecimalField()
+    main_appropriation_construction_costs = models.DecimalField()
+    adjustment_appropriation_construction_costs = models.DecimalField()
+    main_appropriation_total = models.DecimalField()
+    adjustment_appropriation_total = models.DecimalField()
+    actual_expenditure_q1 = models.DecimalField()
+    actual_expenditure_q2 = models.DecimalField()
+    actual_expenditure_q3 = models.DecimalField()
+    actual_expenditure_q4 = models.DecimalField()
+    budget_programme = models.CharField(max_length=255)
+    primary_funding_source = models.CharField(max_length=255)
+    nature_of_investment = models.CharField(max_length=255)
+    funding_status = models.CharField(max_length=255)
+    program_implementing_agent = models.CharField(max_length=255)
+    principle_agent = models.CharField(max_length=255)
+    main_contractor = models.CharField(max_length=255)
+    other_parties = models.TextField(max_length=510)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
 # -or-has-a-sp
