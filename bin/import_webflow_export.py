@@ -48,14 +48,12 @@ with ZipFile(args.webflow_zipfile, 'r') as zipObj:
         zipObj.extractall(tmp_dir)
 
         template_dir = os.path.join(args.webflow_app_dir, "templates/webflow")
-        for htmlfile in glob(tmp_dir + "/*.html"):
-            print(f"Copying {htmlfile} to {template_dir}")
-            shutil.copy(htmlfile, template_dir)
 
-        for htmlfile in glob(template_dir + "/*.html"):
-            template_dir = os.path.join(args.webflow_app_dir, "templates/webflow")
+        for htmlfile in glob(tmp_dir + "/*.html"):
             print(f"Adapting {htmlfile} as Django template")
             djangofy(htmlfile)
+            print(f"Copying {htmlfile} to {template_dir}")
+            shutil.copy(htmlfile, template_dir)
 
         copy_static_dir(os.path.join(tmp_dir, "css"),
                         os.path.join(args.webflow_app_dir, "static/css"))
