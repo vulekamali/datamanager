@@ -48,7 +48,7 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
         password.send_keys(PASSWORD)
         submit_button.click()
 
-        selenium.find_element_by_link_text('Prov Infra Projects').click()
+        selenium.find_element_by_link_text('Prov infra projects').click()
 
         selenium.find_element_by_link_text('IMPORT').click()
 
