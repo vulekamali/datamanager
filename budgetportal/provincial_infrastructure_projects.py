@@ -81,6 +81,10 @@ class IRMReportSheet(object):
             return
 
         row_contractors = self.get_row_contractors(row)
+        # empty strings should converted into null
+        for index, row in enumerate(row_contractors):
+            if row == '':
+                row_contractors[index] = None
         self.append_row_to_output_data_set(row_contractors)
 
     def append_row_to_output_data_set(self, row_data):
