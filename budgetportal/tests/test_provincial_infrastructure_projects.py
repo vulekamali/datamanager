@@ -34,7 +34,7 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
         super(ProvInfraProjectsTestCase, self).setUp()
 
     def test_upload_xlsx_for_prov_infra_projects(self):
-        filename = 'budgetportal/tests/test_data/test.xlsx'
+        filename = 'budgetportal/tests/test_data/test_import_prov_infra_projects.xlsx'
 
         selenium = self.selenium
 
