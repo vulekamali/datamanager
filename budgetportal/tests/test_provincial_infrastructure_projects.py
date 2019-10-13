@@ -76,7 +76,7 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
         self.assertEqual(first_project.project_expenditure_total, 1315479)
 
         # check whether null values are imported as null, and 0 imported as 0
-        self.assertEqual(first_project.total_construction_costs, None)
+        self.assertEqual(first_project.contracted_construction_end_date, None)
         self.assertEqual(first_project.variation_orders, 0)
 
         # check whether parties/contractor mapping worked correctly
