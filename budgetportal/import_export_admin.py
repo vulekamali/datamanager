@@ -16,51 +16,14 @@ from import_export.fields import Field
 from import_export.formats import base_formats
 from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import Widget, ForeignKeyWidget
+from provincial_infrastructure_projects import (
+    NORMAL_HEADERS,
+    AGENT_HEADERS,
+    IRMReportSheet
+)
 import logging
 
 logger = logging.getLogger(__name__)
-NORMAL_HEADERS = ['Project ID',
-                  'Project No',
-                  'Project Name',
-                  'Province',
-                  'Department',
-                  'Local Municipality',
-                  'District Municipality',
-                  'Latitude',
-                  'Longitude',
-                  'Project Status',
-                  'Project Start Date',
-                  'Estimated Construction Start Date',
-                  'Estimated Project Completion Date',
-                  'Contracted Construction End Date',
-                  'Estimated Construction End Date',
-                  'Professional Fees',
-                  'Construction Costs',
-                  'Variation Orders',
-                  'Total Project Cost',
-                  'Project Expenditure from Previous Financial Years (Professional Fees)',
-                  'Project Expenditure from Previous Financial Years (Construction Costs)',
-                  'Project Expenditure from Previous Financial Years (TOTAL)',
-                  'Main Budget Appropriation (Professional Fees)',
-                  'Adjustment Budget Appropriation (Professional Fees)',
-                  'Main Budget Appropriation (Construction Costs)',
-                  'Adjustment Budget Appropriation (Construction Costs)',
-                  'Main Budget Appropriation (TOTAL)',
-                  'Adjustment Budget Appropriation (TOTAL)',
-                  'Main Budget Appropriation (Professional Fees)',
-                  'Adjustment Budget Appropriation (Professional Fees)',
-                  'Main Budget Appropriation (Construction Costs)',
-                  'Adjustment Budget Appropriation (Construction Costs)',
-                  'Main Budget Appropriation (TOTAL)',
-                  'Adjustment Budget Appropriation (TOTAL)',
-                  'Actual Expenditure Q1',
-                  'Actual Expenditure Q2',
-                  'Actual Expenditure Q3',
-                  'Actual Expenditure Q4',
-                  'Budget Programme',
-                  'Primary Funding Source',
-                  'Nature of Investment',
-                  'Funding Status']
 
 
 class CustomIsVotePrimaryWidget(Widget):
@@ -324,7 +287,7 @@ class ProvInfraProjectResource(resources.ModelResource):
         column_name="Contracted Construction End Date",
     )
     estimated_constructtion_end_date = Field(
-        attribute="estimated_constructtion_end_date",
+        attribute="estimated_construction_end_date",
         column_name="Estimated Construction End Date",
     )
     total_professional_fees = Field(
@@ -352,8 +315,7 @@ class ProvInfraProjectResource(resources.ModelResource):
         column_name="Project Expenditure from Previous Financial Years (TOTAL)",
     )
     project_expenditure_total = Field(
-        attribute="project_expenditure_total",
-        column_name="Project Expenditure (TOTAL)",
+        attribute="project_expenditure_total", column_name="Project Expenditure (TOTAL)"
     )
     main_appropriation_professional_fees = Field(
         attribute="main_appropriation_professional_fees",
@@ -401,13 +363,15 @@ class ProvInfraProjectResource(resources.ModelResource):
         attribute="nature_of_investment", column_name="Nature of Investment"
     )
     funding_status = Field(attribute="funding_status", column_name="Funding Status")
-    # program_implementing_agent = Field(attribute="program_implementing_agent", column_name="")
-    # principle_agent = Field(attribute="principle_agent", column_name="")
-    # main_contractor = Field(attribute="main_contractor", column_name="")
-    # other_parties = Field(attribute="other_parties", column_name="")
+    program_implementing_agent = Field(
+        attribute="program_implementing_agent", column_name="Program Implementing Agent"
+    )
+    principle_agent = Field(attribute="principle_agent", column_name="Principal Agent")
+    main_contractor = Field(attribute="main_contractor", column_name="Main Contractor")
+    other_parties = Field(attribute="other_parties", column_name="Other parties")
     financial_year = Field(
         attribute="financial_year",
-        column_name="financial_year",
+        column_name="Financial Year",
         widget=ForeignKeyWidget(FinancialYear),
     )
 
@@ -417,19 +381,40 @@ class ProvInfraProjectResource(resources.ModelResource):
         report_skipped = False
         exclude = ("id",)
         instance_loader_class = ProvInfraProjectLoader
-        # import_id_fields = ('IRM_project_id',)
 
     def before_import(self, dataset, using_transactions, dry_run, **kwargs):
         headers = dataset.headers
+
+        # Check if the headers of the dataset and the specified headers are
+        # the same or not. If not, raise exception with the missing headers
         difference = list(set(NORMAL_HEADERS) - set(headers))
         if len(difference) != 0:
-            raise Exception("Following column(s) are missing: {}".format(', '.join(difference)))
+            raise Exception(
+                "Following column(s) are missing: {}".format(", ".join(difference))
+            )
 
-    def before_import_row(self, row, **kwargs):
+        # IRMReportSheet class processes the dataset and saves the processed
+        # dataset in it's output_data_set attribute
+        report_sheet = IRMReportSheet(dataset)
+        report_sheet.process()
+
+        # Following loops delete contractor columns and append mapped
+        # agent/contractor/parties columns respectively
+        for header in reversed(report_sheet.contractor_columns):
+            del dataset[dataset.headers[header]]
+        for agent in AGENT_HEADERS:
+            dataset.append_col(report_sheet.output_data_set[agent], header=agent)
+
+        # import_data() works with 2 requests, first one is import form request
+        # and the second one is confirm import form request. Since user selects
+        # financial year in import form request, it should be carried for
+        # the second request.
         financial_year = self.request.POST.get("financial_year", None)
         if financial_year:
             self.request.session["import_context_year"] = financial_year
         else:
+            # if it's confirm form request,it takes the selected financial year
+            # value from import form request using django sessions
             try:
                 financial_year = self.request.session["import_context_year"]
             except KeyError as e:
@@ -437,7 +422,7 @@ class ProvInfraProjectResource(resources.ModelResource):
                     "Financial year context failure on row import, "
                     + "check resources.py for more info: {0}".format(e)
                 )
-        row["financial_year"] = financial_year
+        dataset.append_col([financial_year] * dataset.height, header="Financial Year")
 
     def __init__(self, request=None, *args, **kwargs):
         super(ProvInfraProjectResource, self).__init__()
