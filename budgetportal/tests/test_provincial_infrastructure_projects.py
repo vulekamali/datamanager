@@ -56,7 +56,7 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
         financial_year_select = Select(selenium.find_element_by_id('id_financial_year'))
 
         file_import.send_keys(os.path.abspath(filename))
-        financial_year_select.select_by_value(self.financial_year.id)
+        financial_year_select.select_by_value(str(self.financial_year.id))
 
         selenium.find_element_by_css_selector(
             'input[type="submit"]').click()
