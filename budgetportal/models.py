@@ -1895,8 +1895,11 @@ class ProvInfraProject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
-    def __str__(self):
-        return "{0}".format(self.name)
+    def __unicode__(self):
+        return u"{0}".format(self.name)
+
+    def get_slug(self):
+        return slugify(u"{0} {1}".format(self.name, self.province))
 
 
 

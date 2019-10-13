@@ -27,9 +27,18 @@ def djangofy(htmlfile):
         file_contents = f.read()
 
     file_contents = asset_path_regex.sub(r'"/static/\1/', file_contents)
+    file_contents = insert_at_body_end(file_contents, "<script>var pageData = {{ page_data_json|safe }}</script>")
+    file_contents = insert_at_body_end(file_contents, '<script src="/static/js/vulekamali-webflow.js"></script>')
 
     with open(htmlfile, "w") as f:
         f.write(file_contents)
+
+def insert_at_body_end(page_html_string, string_to_insert):
+    replacement = string_to_insert + "\n</body>"
+    result_string = page_html_string.replace("</body>", replacement)
+    if len(result_string) <= len(page_html_string):
+        raise Exception("body end tag not found.")
+    return result_string
 
 
 # Create a ZipFile Object and load sample.zip in it
