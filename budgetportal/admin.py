@@ -193,11 +193,9 @@ class VideoAdmin(SortableAdmin):
 
 
 class ProvInfraProjectAdmin(ImportMixin, admin.ModelAdmin):
-    # model = ProvInfraProject
-
     # Resource class to be used by the django-import-export package
     resource_class = ProvInfraProjectResource
-    # File formats that can be used to import departments
+    # File format that can be used to import provincial infrastructure projects
     formats = [XLSX]
 
     def get_import_form(self):
