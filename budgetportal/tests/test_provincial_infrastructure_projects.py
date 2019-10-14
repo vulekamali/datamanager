@@ -30,6 +30,7 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
         )
         self.path = os.path.dirname(__file__)
         self.financial_year = FinancialYear.objects.create(slug="2019-20")
+        self.timeout = 10
 
         super(ProvInfraProjectsTestCase, self).setUp()
 
@@ -58,15 +59,11 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
         selenium.find_element_by_css_selector(
             'input[type="submit"]').click()
 
-        timeout = 2
-        WebDriverWait(selenium, timeout).until(
-            lambda driver: selenium.find_element_by_name('confirm'))
-
+        selenium.implicitly_wait(self.timeout)
         selenium.find_element_by_name('confirm').click()
 
-        timeout = 2
-        WebDriverWait(selenium, timeout).until(
-            lambda driver: selenium.find_element_by_class_name('success'))
+        selenium.implicitly_wait(self.timeout)
+        selenium.find_element_by_class_name('success')
 
         # check values of the first project
         first_project = ProvInfraProject.objects.get(IRM_project_id=30682)
@@ -77,6 +74,7 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
 
         # check whether null values are imported as null, and 0 imported as 0
         self.assertEqual(first_project.contracted_construction_end_date, None)
+        self.assertEqual(first_project.expenditure_from_previous_years_construction_costs, None)
         self.assertEqual(first_project.variation_orders, 0)
 
         # check whether parties/contractor mapping worked correctly
