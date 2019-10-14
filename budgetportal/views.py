@@ -19,6 +19,7 @@ from summaries import (
     get_focus_area_preview,
     get_consolidated_expenditure_treemap,
     DepartmentSubprogrammes,
+    DepartmentProgrammesEcon4,
     DepartmentSubprogEcon4,
 )
 from guide_data import guides as guide_data
@@ -287,8 +288,9 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
     context = {
         'subprogramme_viz_data': DepartmentSubprogrammes(department),
         'subprog_treemap_url': get_viz_url(department, "department-viz-subprog-treemap"),
-        'subprog_econ4_viz_data': DepartmentSubprogEcon4(department),
-        'subprog_econ4_circles_url': get_viz_url(department, "department-viz-subprog-econ4-circles"),
+        'prog_econ4_circles_data': DepartmentProgrammesEcon4(department),
+        'prog_econ4_circles_url': get_viz_url(department, "department-viz-subprog-econ4-circles"),
+        'subprog_econ4_bars_data': DepartmentSubprogEcon4(department),
         'subprog_econ4_bars_url': get_viz_url(department, "department-viz-subprog-econ4-bars"),
 
         # 'expenditure_over_time': department.get_expenditure_over_time(),
@@ -379,7 +381,7 @@ def department_viz_subprog_treemap(request, financial_year_id, sphere_slug, gove
 def department_viz_subprog_econ4_circles(request, financial_year_id, sphere_slug, government_slug, department_slug):
     department = get_department_by_slugs(financial_year_id, sphere_slug, government_slug, department_slug)
     context = {
-        "viz_data": DepartmentSubprogEcon4(department),
+        "viz_data": DepartmentProgrammesEcon4(department),
     }
     return render(request, 'department_viz_subprog_econ4_circles.html', context=context)
 

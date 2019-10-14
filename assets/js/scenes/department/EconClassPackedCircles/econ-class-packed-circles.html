@@ -26,9 +26,9 @@
             <p class="js-tooltips">This visualisation highlights how many categories of expenditure there are for this department at Economic Classification level 4, and which ones are the biggest.</p>
 
             <ul class="LinksList">
-                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprog_econ4_viz_data.get_dataset.get_url_path type="dataset" %}
+                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=prog_econ4_viz_data.get_dataset.get_url_path type="dataset" %}
 
-                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprog_econ4_viz_data.get_detail_csv_url type="download" %}
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=prog_econ4_viz_data.get_detail_csv_url type="download" %}
 
                 {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 
@@ -40,7 +40,7 @@
 
         <div class="EconClassPackedCirclesSection-item EconClassPackedCirclesSection-item--right">
             <div class="Card">
-              <iframe src="{{ subprog_econ4_circles_url }}"></iframe>
+              <iframe src="{{ prog_econ4_circles_url }}"></iframe>
             </div>
         </div>
     </div>
