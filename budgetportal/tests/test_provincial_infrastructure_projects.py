@@ -8,8 +8,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from tablib import Dataset
 
 from budgetportal.models import FinancialYear, ProvInfraProject
-from budgetportal.provincial_infrastructure_projects import NORMAL_HEADERS, \
-    IRMReportSheet
+from budgetportal.provincial_infrastructure_projects import (
+    NORMAL_HEADERS,
+    IRMReportSheet,
+)
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 
 USERNAME = "testuser"
@@ -115,12 +117,14 @@ class IRMReportSheetTestCase(TestCase):
 
     def test_assigned_correctly(self):
         self.report_sheet.process()
-        program_implementing_agent = self.report_sheet.output_data_set["Program Implementing Agent"]
+        program_implementing_agent = self.report_sheet.output_data_set[
+            "Program Implementing Agent"
+        ]
         main_contractor = self.report_sheet.output_data_set["Main Contractor"]
         principal_agent = self.report_sheet.output_data_set["Principal Agent"]
         other_parties = self.report_sheet.output_data_set["Other parties"]
 
-        self.assertEqual(program_implementing_agent, ['DOPW\nTEST'])
-        self.assertEqual(main_contractor, ['AAAA'])
-        self.assertEqual(principal_agent, ['BBBB'])
+        self.assertEqual(program_implementing_agent, ["DOPW\nTEST"])
+        self.assertEqual(main_contractor, ["AAAA"])
+        self.assertEqual(principal_agent, ["BBBB"])
         self.assertEqual(other_parties, [None])
