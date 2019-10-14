@@ -123,4 +123,4 @@ class IRMReportSheetTestCase(TestCase):
         self.assertEqual(program_implementing_agent, ['DOPW\nTEST'])
         self.assertEqual(main_contractor, ['AAAA'])
         self.assertEqual(principal_agent, ['BBBB'])
-        self.assertEqual(other_parties, None)
+        self.assertEqual(other_parties, [None])
