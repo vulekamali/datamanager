@@ -950,10 +950,13 @@ def provincial_infrastructure_project_detail(request, IRM_project_id, project_na
         raise Http404()
     endpoint = IRM_project_id + '-' + project_name_slug
     url = request.build_absolute_uri(location=endpoint)
-    return {
-        "url": url,
-        "project": project
-    }
+
+    context = {"url": url}
+    context.update(project.__dict__)
+    del context["IRM_project_id"]
+
+    return render(request, 'infrastructure_project.html', context=context)
+
 
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:
