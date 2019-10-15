@@ -4211,6 +4211,10 @@ p {
   color: rgba(51, 51, 51, 0.5);
 }
 
+.project-detail_text.other-service-providers {
+  white-space: pre-wrap;
+}
+
 .project-detail_heading {
   margin-top: 0px;
   margin-bottom: 0px;
