@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from allauth.account.models import EmailAddress
 from selenium.webdriver.support.select import Select
-from selenium.webdriver.support.wait import WebDriverWait
 from tablib import Dataset
 
 from budgetportal.models import FinancialYear, ProvInfraProject
