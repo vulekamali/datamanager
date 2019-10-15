@@ -7,12 +7,17 @@ import requests
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import View
+from django_filters import FilterSet
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics
+from rest_framework.filters import SearchFilter
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.models import Video, Event, InfrastructureProjectPart, FAQ, \
     ProvInfraProject
 from budgetportal.openspending import PAGE_SIZE
+from budgetportal.serializers import ProvInfraProjectSerializer
 from models import FinancialYear, Sphere, Department, InfrastructureProjectPart
 from datasets import Dataset, Category
 from summaries import (
@@ -956,6 +961,14 @@ def provincial_infrastructure_project_detail(request, IRM_project_id, project_na
     del context["IRM_project_id"]
 
     return render(request, 'infrastructure_project.html', context=context)
+
+
+class ProvInfraProjectView(generics.ListAPIView):
+    queryset = ProvInfraProject.objects.all()
+    serializer_class = ProvInfraProjectSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filter_fields = ["province", "department", "status", "primary_funding_source"]
+    search_fields = ["name", "district_municipality", "local_municipality", "province", "main_contractor", "principle_agent", "program_implementing_agent", "other_parties"]
 
 
 def read_object_from_yaml(path_file):
