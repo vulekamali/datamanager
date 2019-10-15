@@ -4256,10 +4256,6 @@ p {
 .muni-map {
   height: 300px;
   border-radius: 3px;
-  background-image: url('../images/Map_of_KwaZulu-Natal_with_Dannhauser_highlighted_2016.svg.png');
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .budget-overview__chart {
@@ -4540,6 +4536,10 @@ p {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+
+.project-location-map-container {
+  height: 300px;
 }
 
 @media (max-width: 991px) {
