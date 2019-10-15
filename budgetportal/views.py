@@ -10,7 +10,8 @@ from django.views import View
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
-from budgetportal.models import Video, Event, InfrastructureProjectPart, FAQ
+from budgetportal.models import Video, Event, InfrastructureProjectPart, FAQ, \
+    ProvInfraProject
 from budgetportal.openspending import PAGE_SIZE
 from models import FinancialYear, Sphere, Department, InfrastructureProjectPart
 from datasets import Dataset, Category
@@ -942,6 +943,17 @@ def department_preview(request, financial_year_id, sphere_slug, government_slug,
     }
     return render(request, 'department_preview.html', context=context)
 
+
+def provincial_infrastructure_project_detail(request, IRM_project_id, project_name_slug):
+    project = ProvInfraProject.objects.get(IRM_project_id=IRM_project_id)
+    if project is None:
+        raise Http404()
+    endpoint = IRM_project_id + '-' + project_name_slug
+    url = request.build_absolute_uri(location=endpoint)
+    return {
+        "url": url,
+        "project": project
+    }
 
 def read_object_from_yaml(path_file):
     with open(path_file, 'r') as f:

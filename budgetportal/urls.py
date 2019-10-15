@@ -118,7 +118,8 @@ urlpatterns = [
     url(r'^json/infrastructure-projects.json$', cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json)),
     url(r'^json/infrastructure-projects/(?P<project_slug>[\w-]+).json$', cache_page(CACHE_SECS)(views.infrastructure_project_detail_json)),
     url(r'^infrastructure-projects/(?P<project_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.infrastructure_project_detail), name="infrastructure-projects"),
-
+    url(r'^infrastructure-projects/provincial/(?P<IRM_project_id>[\d-]+)-(?P<project_name_slug>[\w-]+)$',
+        cache_page(CACHE_SECS)(views.provincial_infrastructure_project_detail), name="provincial-infrastructure-projects"),
     # Department List
     url(r'^(?P<financial_year_id>\d{4}-\d{2})'
         '/departments$', cache_page(CACHE_SECS)(views.department_list), name='department-list'),
