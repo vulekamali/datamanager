@@ -6,15 +6,13 @@ import urlparse
 import requests
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
-from django.views import View
-from django_filters import FilterSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.filters import SearchFilter
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
-from budgetportal.models import Video, Event, InfrastructureProjectPart, FAQ, \
+from budgetportal.models import Video, Event, FAQ, \
     ProvInfraProject
 from budgetportal.openspending import PAGE_SIZE
 from budgetportal.serializers import ProvInfraProjectSerializer
