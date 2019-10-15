@@ -1,4 +1,11 @@
 (function() {
+
+    function formatCurrency(decimalString) {
+        if (decimalString == null)
+            return "";
+        return "R " + Math.round(parseFloat(decimalString)).toLocaleString();
+    }
+
     if ($("body.provincial-infrastructure-project-detail-page")) {
         // Project definition
         $(".name-field").html(pageData.project.name);
@@ -21,7 +28,7 @@
         $(".program-implementing-agent-field").html(pageData.project.program_implementing_agent);
         $(".principle-agent-field").html(pageData.project.principle_agent);
         $(".main-contractor-field").html(pageData.project.main_contractor);
-        $(".other-parties-field").html(pageData.project.other_parties);
+        $(".other-service-providers-field").html(pageData.project.other_parties);
 
         // Dates
         $(".status-field").html(pageData.project.status);
@@ -32,27 +39,28 @@
         $(".estimated-construction-end-date-field").html(pageData.project.estimated_construction_end_date);
 
         // Budgets and spending
-        $(".total-project-cost-field").html(pageData.project.total_project_cost);
-        $(".total-professional-fees-field").html(pageData.project.total_professional_fees);
-        $(".total-construction-costs-field").html(pageData.project.total_construction_costs);
-        $(".variation-orders-field").html(pageData.project.variation_orders);
-        $(".expenditure-from-previous-years-professional-fees-field").html(pageData.project.expenditure_from_previous_years_professional_fees);
-        $(".expenditure-from-previous-years-construction-costs-field").html(pageData.project.expenditure_from_previous_years_construction_costs);
-        $(".expenditure-from-previous-years-total-field").html(pageData.project.expenditure_from_previous_years_total);
-        $(".project-expenditure-total-field").html(pageData.project.project_expenditure_total);
-        $(".main-appropriation-professional-fees-field").html(pageData.project.main_appropriation_professional_fees);
-        $(".adjustment-appropriation-professional-fees-field").html(pageData.project.adjustment_appropriation_professional_fees);
-        $(".main-appropriation-construction-costs-field").html(pageData.project.main_appropriation_construction_costs);
-        $(".adjustment-appropriation-construction-costs-field").html(pageData.project.adjustment_appropriation_construction_costs);
-        $(".main-appropriation-total-field").html(pageData.project.main_appropriation_total);
-        $(".adjustment-appropriation-total-field").html(pageData.project.adjustment_appropriation_total);
-        $(".actual-expenditure-q1-field").html(pageData.project.actual_expenditure_q1);
-        $(".actual-expenditure-q2-field").html(pageData.project.actual_expenditure_q2);
-        $(".actual-expenditure-q3-field").html(pageData.project.actual_expenditure_q3);
-        $(".actual-expenditure-q4-field").html(pageData.project.actual_expenditure_q4);
+        $(".total-project-cost-field").html(formatCurrency(pageData.project.total_project_cost));
+        $(".total-professional-fees-field").html(formatCurrency(pageData.project.total_professional_fees));
+        $(".total-construction-costs-field").html(formatCurrency(pageData.project.total_construction_costs));
+        $(".variation-orders-field").html(formatCurrency(pageData.project.variation_orders));
+        $(".expenditure-from-previous-years-professional-fees-field").html(formatCurrency(pageData.project.expenditure_from_previous_years_professional_fees));
+        $(".expenditure-from-previous-years-construction-costs-field").html(formatCurrency(pageData.project.expenditure_from_previous_years_construction_costs));
+        $(".expenditure-from-previous-years-total-field").html(formatCurrency(pageData.project.expenditure_from_previous_years_total));
+        $(".project-expenditure-total-field").html(formatCurrency(pageData.project.project_expenditure_total));
+        $(".main-appropriation-professional-fees-field").html(formatCurrency(pageData.project.main_appropriation_professional_fees));
+        $(".adjustment-appropriation-professional-fees-field").html(formatCurrency(pageData.project.adjustment_appropriation_professional_fees));
+        $(".main-appropriation-construction-costs-field").html(formatCurrency(pageData.project.main_appropriation_construction_costs));
+        $(".adjustment-appropriation-construction-costs-field").html(formatCurrency(pageData.project.adjustment_appropriation_construction_costs));
+        $(".main-appropriation-total-field").html(formatCurrency(pageData.project.main_appropriation_total));
+        $(".adjustment-appropriation-total-field").html(formatCurrency(pageData.project.adjustment_appropriation_total));
+        $(".actual-expenditure-q1-field").html(formatCurrency(pageData.project.actual_expenditure_q1));
+        $(".actual-expenditure-q2-field").html(formatCurrency(pageData.project.actual_expenditure_q2));
+        $(".actual-expenditure-q3-field").html(formatCurrency(pageData.project.actual_expenditure_q3));
+        $(".actual-expenditure-q4-field").html(formatCurrency(pageData.project.actual_expenditure_q4));
 
         // Maps and visualisations
         $(".embed-container").css("background-color", "#e1e1e1");
+
     }
 
 })();
