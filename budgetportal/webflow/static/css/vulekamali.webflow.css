@@ -1035,6 +1035,10 @@ p {
   width: 650px;
 }
 
+.chart_wrapper.embed-container {
+  min-height: 300px;
+}
+
 .chart-detail_wrapper {
   display: -webkit-box;
   display: -webkit-flex;
@@ -4211,7 +4215,7 @@ p {
   color: rgba(51, 51, 51, 0.5);
 }
 
-.project-detail_text.other-service-providers {
+.project-detail_text.other-service-providers-field {
   white-space: pre-wrap;
 }
 
