@@ -137,17 +137,16 @@ class IRMReportSheetTestCase(TestCase):
 class IRMReportSheetWithOtherKeysTestCase(TestCase):
     def setUp(self):
         dataset_with_other_keys = Dataset()
-        dataset_with_other_keys.headers = NORMAL_HEADERS + [
-            "Project Contractor"] * 50
+        dataset_with_other_keys.headers = NORMAL_HEADERS + ["Project Contractor"] * 50
         row_with_other_keys = (
-                [1] * len(NORMAL_HEADERS)
-                + [
-                    "Service Provider: DOPW",
-                    "Program Implementing Agent: TEST",
-                    "Service Provider: AAAA",
-                    "Principal Agent: BBBB",
-                ]
-                + [None] * 46
+            [1] * len(NORMAL_HEADERS)
+            + [
+                "Service Provider: DOPW",
+                "Program Implementing Agent: TEST",
+                "Service Provider: AAAA",
+                "Principal Agent: BBBB",
+            ]
+            + [None] * 46
         )
         dataset_with_other_keys.append(row_with_other_keys)
         self.sheet_with_other_keys = IRMReportSheet(dataset_with_other_keys)
@@ -155,31 +154,18 @@ class IRMReportSheetWithOtherKeysTestCase(TestCase):
     def test_other_parties(self):
         """Checks when different keys given in project contractor"""
 
-        # it basically does the same what process()->process_row() does
-        for index, row in enumerate(self.sheet_with_other_keys.data_set):
-            row_contractors = self.sheet_with_other_keys.get_row_contractors(
-                row)
-            for index, row in enumerate(row_contractors):
-                if row == "":
-                    row_contractors[index] = None
-            self.sheet_with_other_keys.output_data_set.append(
-                row_contractors)
+        self.sheet_with_other_keys.process()
 
-        program_implementing_agent = \
-        self.sheet_with_other_keys.output_data_set[
+        program_implementing_agent = self.sheet_with_other_keys.output_data_set[
             "Program Implementing Agent"
         ]
-        main_contractor = self.sheet_with_other_keys.output_data_set[
-            "Main Contractor"]
-        principal_agent = self.sheet_with_other_keys.output_data_set[
-            "Principal Agent"]
-        other_parties = self.sheet_with_other_keys.output_data_set[
-            "Other parties"]
+        main_contractor = self.sheet_with_other_keys.output_data_set["Main Contractor"]
+        principal_agent = self.sheet_with_other_keys.output_data_set["Principal Agent"]
+        other_parties = self.sheet_with_other_keys.output_data_set["Other parties"]
 
         self.assertEqual(program_implementing_agent, ["TEST"])
         self.assertEqual(main_contractor, [None])
         self.assertEqual(principal_agent, ["BBBB"])
         self.assertEqual(
-            other_parties,
-            ["Service Provider: DOPW\nService Provider: AAAA"]
+            other_parties, ["Service Provider: DOPW\nService Provider: AAAA"]
         )
