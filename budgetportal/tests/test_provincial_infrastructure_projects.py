@@ -1,5 +1,9 @@
 import os
+import random
 
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
 from django.test import TestCase
 from django.contrib.auth.models import User
 from allauth.account.models import EmailAddress
@@ -18,7 +22,7 @@ EMAIL = "testuser@domain.com"
 PASSWORD = "12345"
 
 
-class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
+class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
     def setUp(self):
         user = User.objects.create_user(
             username=USERNAME,
@@ -32,7 +36,7 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
         self.financial_year = FinancialYear.objects.create(slug="2019-20")
         self.timeout = 10
 
-        super(ProvInfraProjectsTestCase, self).setUp()
+        super(ProvInfraProjectSeleniumTestCase, self).setUp()
 
     def test_upload_xlsx_for_prov_infra_projects(self):
         filename = "budgetportal/tests/test_data/test_import_prov_infra_projects.xlsx"
@@ -168,3 +172,147 @@ class IRMReportSheetWithOtherKeysTestCase(TestCase):
         self.assertEqual(
             other_parties, ["Service Provider: DOPW\nService Provider: AAAA"]
         )
+
+
+class ProvInfraProjectAPITestCase(APITestCase):
+    def setUp(self):
+        """Create 30 Provincial Infrastructure Projects"""
+
+        self.url = reverse("search-provincial-infrastructure-projects")
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.provinces = ["Eastern Cape", "Free State","Gauteng","KwaZulu-Natal","Limpopo","Mpumalanga","North West","Northern Cape","Western Cape"]
+        self.statuses = ["Design", "Tender", "Feasibility", "Construction"]
+        self.sources = ["Equitable Share", "Education Infrastructure Grant", "Community Library Service Grant"]
+        for i in range(30):
+            ProvInfraProject.objects.create(
+                financial_year=self.fin_year,
+                IRM_project_id=i,
+                name="Project {}".format(i),
+                department="Department {}".format(i),
+                local_municipality="Local {}".format(i),
+                district_municipality="District {}".format(i),
+                province=random.choice(self.provinces),
+                status=random.choice(self.statuses),
+                primary_funding_source=random.choice(self.sources),
+                main_contractor="Contractor {}".format(i),
+                principle_agent="Principle Agent {}".format(i),
+                program_implementing_agent="Program Agent {}".format(i),
+                other_parties="Service Provider: XXXX{}".format(i),
+            )
+
+    def test_projects_per_page(self):
+        response = self.client.get(self.url, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_results = len(response.data["results"])
+        self.assertLessEqual(number_of_results, 20)
+
+    def test_filter_by_department(self):
+        department = u"Department 1"
+        project = ProvInfraProject.objects.get(department=department)
+
+        data = {"department": department}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        response_data = response.data["results"][0]
+        self.assertEqual(number_of_projects, 1)
+        self.assertEqual(response_data["name"], project.name)
+        self.assertEqual(response_data["province"], project.province)
+        self.assertEqual(response_data["local_municipality"], project.local_municipality)
+        self.assertEqual(response_data["district_municipality"], project.district_municipality)
+
+    def test_filter_by_province(self):
+        province = u"Eastern Cape"
+        projects = ProvInfraProject.objects.filter(province=province)
+
+        data = {"province": province}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, projects.count())
+
+    def test_filter_by_status(self):
+        status_ = u"Construction"
+        projects = ProvInfraProject.objects.filter(status=status_)
+
+        data = {"status": status_}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, projects.count())
+
+    def test_filter_by_funding_source(self):
+        source = u"Community Library Service Grant"
+        projects = ProvInfraProject.objects.filter(primary_funding_source=source)
+
+        data = {"primary_funding_source": source}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, projects.count())
+
+    def test_project_detail_content(self):
+        project = ProvInfraProject.objects.first()
+        args = [project.IRM_project_id, str(project.name).replace(" ", "-")]
+        url = reverse("provincial-infra-project-detail", args=args)
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, project.name)
+
+    # TODO: search correctly
+    def test_search_by_project_name(self):
+        name = u"Project 1"
+        projects = ProvInfraProject.objects.filter(
+            name=name)
+
+        data = {"search": name}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, projects.count())
+
+    def test_search_by_municipality(self):
+        municipality = u"Local 1"
+        projects = ProvInfraProject.objects.filter(
+            local_municipality=municipality)
+
+        data = {"search": municipality}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, projects.count())
+
+    def test_search_by_province(self):
+        province = u"Eastern Cape"
+        projects = ProvInfraProject.objects.filter(
+            province=province)
+
+        data = {"province": province}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, projects.count())
+
+    def test_search_by_contractor(self):
+        source = u"Community Library Service Grant"
+        projects = ProvInfraProject.objects.filter(
+            primary_funding_source=source)
+
+        data = {"primary_funding_source": source}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, projects.count())
+
+    def test_read_only(self):
+        print "test"
