@@ -1,7 +1,6 @@
 import os
 import random
 
-from django.db.models import Q
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -191,9 +190,23 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.municipality = u"Local 2"
         self.contractor = u"Contractor 3"
 
-        self.provinces = ["Eastern Cape", "Free State","Gauteng","KwaZulu-Natal","Limpopo","Mpumalanga","North West","Northern Cape","Western Cape"]
+        self.provinces = [
+            "Eastern Cape",
+            "Free State",
+            "Gauteng",
+            "KwaZulu-Natal",
+            "Limpopo",
+            "Mpumalanga",
+            "North West",
+            "Northern Cape",
+            "Western Cape",
+        ]
         self.statuses = ["Design", "Tender", "Feasibility", "Construction"]
-        self.sources = ["Equitable Share", "Education Infrastructure Grant", "Community Library Service Grant"]
+        self.sources = [
+            "Equitable Share",
+            "Education Infrastructure Grant",
+            "Community Library Service Grant",
+        ]
         for i in range(30):
             ProvInfraProject.objects.create(
                 financial_year=self.fin_year,
@@ -230,8 +243,12 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(number_of_projects, 1)
         self.assertEqual(response_data["name"], project.name)
         self.assertEqual(response_data["province"], project.province)
-        self.assertEqual(response_data["local_municipality"], project.local_municipality)
-        self.assertEqual(response_data["district_municipality"], project.district_municipality)
+        self.assertEqual(
+            response_data["local_municipality"], project.local_municipality
+        )
+        self.assertEqual(
+            response_data["district_municipality"], project.district_municipality
+        )
 
     def test_filter_by_province(self):
         projects = ProvInfraProject.objects.filter(province=self.province)
