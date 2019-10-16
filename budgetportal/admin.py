@@ -25,13 +25,16 @@ from django.contrib.sites.models import Site
 from django.db.utils import ProgrammingError
 from django.contrib import messages
 from import_export.admin import ImportMixin
-from import_export.formats.base_formats import CSV
+from import_export.formats.base_formats import CSV, XLSX
 import logging
 
 from .import_export_admin import (
     DepartmentResource,
     DepartmentImportForm,
-    InfrastructureProjectResource)
+    InfrastructureProjectResource,
+    ProvInfraProjectImportForm,
+    ProvInfraProjectResource
+)
 
 
 logger = logging.getLogger(__name__)
@@ -189,8 +192,51 @@ class VideoAdmin(SortableAdmin):
     model = Video
 
 
-class ProvInfraProjectAdmin(admin.ModelAdmin):
-    model = ProvInfraProject
+class ProvInfraProjectAdmin(ImportMixin, admin.ModelAdmin):
+    # Resource class to be used by the django-import-export package
+    resource_class = ProvInfraProjectResource
+    # File format that can be used to import provincial infrastructure projects
+    formats = [XLSX]
+
+    def get_import_form(self):
+        """
+        Get the import form to use by the django-import-export package
+        to import provincial infrastructure projects.
+        """
+        return ProvInfraProjectImportForm
+
+    list_display = (
+        'name',
+        'project_number',
+        'province',
+        'department',
+        '_financial_year',
+    )
+    list_display_links = (
+        'name',
+        'project_number',
+    )
+    list_filter = (
+        'financial_year__slug',
+        'province',
+        'department',
+    )
+    search_fields = (
+        'name',
+        'project_number',
+    )
+    list_per_page = 20
+
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        """
+        Return request which is necessary for import and confirm import requests
+        """
+        rk = super(ProvInfraProjectAdmin, self).get_resource_kwargs(request, *args, **kwargs)
+        rk['request'] = request
+        return rk
+
+    def _financial_year(self, obj):
+        return obj.financial_year.slug
 
 
 admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
