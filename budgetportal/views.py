@@ -977,39 +977,6 @@ def department_preview(
     return render(request, "department_preview.html", context=context)
 
 
-def provincial_infrastructure_project_detail(
-    request, IRM_project_id, project_name_slug
-):
-    project = ProvInfraProject.objects.get(IRM_project_id=IRM_project_id)
-    if project is None:
-        raise Http404()
-    endpoint = IRM_project_id + "-" + project_name_slug
-    url = request.build_absolute_uri(location=endpoint)
-
-    context = {"url": url}
-    context.update(project.__dict__)
-    del context["IRM_project_id"]
-
-    return render(request, "infrastructure_project.html", context=context)
-
-
-class ProvInfraProjectView(generics.ListAPIView):
-    queryset = ProvInfraProject.objects.all()
-    serializer_class = ProvInfraProjectSerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    filter_fields = ["province", "department", "status", "primary_funding_source"]
-    search_fields = [
-        "name",
-        "district_municipality",
-        "local_municipality",
-        "province",
-        "main_contractor",
-        "principle_agent",
-        "program_implementing_agent",
-        "other_parties",
-    ]
-
-
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
         return yaml.load(f)

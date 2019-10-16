@@ -11,4 +11,9 @@ urlpatterns = [
         views.provincial_infrastructure_project_detail,
         name='provincial-infra-project-detail'
     ),
+    url(
+        r"^infrastructure-projects/provincial/search/$",
+        views.ProvInfraProjectView.as_view(),
+        name="search-provincial-infrastructure-projects",
+    ),
 ]

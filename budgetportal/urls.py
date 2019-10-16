@@ -165,16 +165,7 @@ urlpatterns = [
         cache_page(CACHE_SECS)(views.infrastructure_project_detail),
         name="infrastructure-projects",
     ),
-    url(
-        r"^infrastructure-projects/provincial/(?P<IRM_project_id>[\d-]+)-(?P<project_name_slug>[\w-]+)$",
-        cache_page(CACHE_SECS)(views.provincial_infrastructure_project_detail),
-        name="provincial-infrastructure-projects",
-    ),
-    url(
-        r"^infrastructure-projects/provincial/search/$",
-        views.ProvInfraProjectView.as_view(),
-        name="search-provincial-infrastructure-projects",
-    ),
+
     # Department List
     url(
         r"^(?P<financial_year_id>\d{4}-\d{2})" "/departments$",
