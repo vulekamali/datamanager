@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from allauth.account.models import EmailAddress
 from selenium.webdriver.support.select import Select
-from selenium.webdriver.support.wait import WebDriverWait
 from tablib import Dataset
 
 from budgetportal.models import FinancialYear, ProvInfraProject
@@ -104,21 +103,6 @@ class IRMReportSheetTestCase(TestCase):
         dataset.append(row=row)
         self.report_sheet = IRMReportSheet(dataset)
 
-        dataset_with_other_keys = Dataset()
-        dataset_with_other_keys.headers = NORMAL_HEADERS + ["Project Contractor"] * 50
-        row_with_other_keys = (
-            [1] * len(NORMAL_HEADERS)
-            + [
-                "Service Provider: DOPW",
-                "Program Implementing Agent: TEST",
-                "Service Provider: AAAA",
-                "Principal Agent: BBBB",
-            ]
-            + [None] * 46
-        )
-        dataset_with_other_keys.append(row_with_other_keys)
-        self.sheet_with_other_keys = IRMReportSheet(dataset_with_other_keys)
-
     def test_clean_project_contractors(self):
         """Check that first dataset has 50 Project Contractor columns but output has 0"""
 
@@ -148,16 +132,28 @@ class IRMReportSheetTestCase(TestCase):
         self.assertEqual(principal_agent, ["BBBB"])
         self.assertEqual(other_parties, [None])
 
+
+class IRMReportSheetWithOtherKeysTestCase(TestCase):
+    def setUp(self):
+        dataset_with_other_keys = Dataset()
+        dataset_with_other_keys.headers = NORMAL_HEADERS + ["Project Contractor"] * 50
+        row_with_other_keys = (
+            [1] * len(NORMAL_HEADERS)
+            + [
+                "Service Provider: DOPW",
+                "Program Implementing Agent: TEST",
+                "Service Provider: AAAA",
+                "Principal Agent: BBBB",
+            ]
+            + [None] * 46
+        )
+        dataset_with_other_keys.append(row_with_other_keys)
+        self.sheet_with_other_keys = IRMReportSheet(dataset_with_other_keys)
+
     def test_other_parties(self):
         """Checks when different keys given in project contractor"""
 
-        # it basically does the same what process()->process_row() does
-        for index, row in enumerate(self.sheet_with_other_keys.data_set):
-            row_contractors = self.sheet_with_other_keys.get_row_contractors(row)
-            for index, row in enumerate(row_contractors):
-                if row == "":
-                    row_contractors[index] = None
-            self.sheet_with_other_keys.output_data_set.append(row_contractors)
+        self.sheet_with_other_keys.process()
 
         program_implementing_agent = self.sheet_with_other_keys.output_data_set[
             "Program Implementing Agent"
