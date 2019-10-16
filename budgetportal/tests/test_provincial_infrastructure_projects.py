@@ -1,6 +1,7 @@
 import os
 import random
 
+from django.db.models import Q
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -265,11 +266,10 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, project.name)
 
-    # TODO: search correctly
     def test_search_by_project_name(self):
         name = u"Project 1"
         projects = ProvInfraProject.objects.filter(
-            name=name)
+            Q(name__contains=name) | Q(name__endswith=name.split()[-1]))
 
         data = {"search": name}
         response = self.client.get(self.url, data)
@@ -279,9 +279,9 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(number_of_projects, projects.count())
 
     def test_search_by_municipality(self):
-        municipality = u"Local 1"
+        municipality = u"Local 2"
         projects = ProvInfraProject.objects.filter(
-            local_municipality=municipality)
+            Q(local_municipality__contains=municipality) | Q(local_municipality__endswith=municipality.split()[-1]))
 
         data = {"search": municipality}
         response = self.client.get(self.url, data)
@@ -295,7 +295,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
         projects = ProvInfraProject.objects.filter(
             province=province)
 
-        data = {"province": province}
+        data = {"search": province}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -303,16 +303,13 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(number_of_projects, projects.count())
 
     def test_search_by_contractor(self):
-        source = u"Community Library Service Grant"
+        contractor = u"Contractor 3"
         projects = ProvInfraProject.objects.filter(
-            primary_funding_source=source)
+            Q(main_contractor__contains=contractor)|Q(main_contractor__endswith=contractor.split()[-1]))
 
-        data = {"primary_funding_source": source}
+        data = {"search": contractor}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         number_of_projects = len(response.data["results"])
         self.assertEqual(number_of_projects, projects.count())
-
-    def test_read_only(self):
-        print "test"
