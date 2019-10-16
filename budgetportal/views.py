@@ -232,13 +232,13 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
             },
         })
 
-    # contributed_datasets = []
-    # for dataset in department.get_contributed_datasets():
-    #     contributed_datasets.append({
-    #         'name': dataset.name,
-    #         'contributor': dataset.get_organization()['name'],
-    #         'url_path': dataset.get_url_path(),
-    #     })
+    contributed_datasets = []
+    for dataset in department.get_contributed_datasets():
+        contributed_datasets.append({
+            'name': dataset.name,
+            'contributor': dataset.get_organization()['name'],
+            'url_path': dataset.get_url_path(),
+        })
 
     # ======= main budget docs =========================
     budget_dataset = department.get_dataset(
@@ -293,11 +293,11 @@ def department_page(request, financial_year_id, sphere_slug, government_slug, de
         'subprog_econ4_bars_data': DepartmentSubprogEcon4(department),
         'subprog_econ4_bars_url': get_viz_url(department, "department-viz-subprog-econ4-bars"),
 
-        # 'expenditure_over_time': department.get_expenditure_over_time(),
-        # 'budget_actual': department.get_expenditure_time_series_summary(),
-        # 'budget_actual_programmes': department.get_expenditure_time_series_by_programme(),
-        # 'adjusted_budget_summary': department.get_adjusted_budget_summary(),
-        # 'contributed_datasets': contributed_datasets if contributed_datasets else None,
+        'expenditure_over_time': department.get_expenditure_over_time(),
+        'budget_actual': department.get_expenditure_time_series_summary(),
+        'budget_actual_programmes': department.get_expenditure_time_series_by_programme(),
+        'adjusted_budget_summary': department.get_adjusted_budget_summary(),
+        'contributed_datasets': contributed_datasets if contributed_datasets else None,
         'financial_years': financial_years_context,
         'government': {
             'name': department.government.name,
