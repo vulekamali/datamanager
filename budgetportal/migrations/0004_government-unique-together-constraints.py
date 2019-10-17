@@ -7,23 +7,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0003_sphere-unique-together-constraints'),
-    ]
+    dependencies = [("budgetportal", "0003_sphere-unique-together-constraints")]
 
     operations = [
         migrations.AlterField(
-            model_name='government',
-            name='name',
-            field=models.CharField(max_length=200),
+            model_name="government", name="name", field=models.CharField(max_length=200)
         ),
         migrations.AlterField(
-            model_name='government',
-            name='slug',
-            field=models.SlugField(max_length=200),
+            model_name="government", name="slug", field=models.SlugField(max_length=200)
         ),
         migrations.AlterUniqueTogether(
-            name='government',
-            unique_together=set([('sphere', 'slug'), ('sphere', 'name')]),
+            name="government",
+            unique_together=set([("sphere", "slug"), ("sphere", "name")]),
         ),
     ]

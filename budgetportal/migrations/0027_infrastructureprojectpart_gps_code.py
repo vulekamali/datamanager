@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0026_add-provinces-to-infraproject'),
-    ]
+    dependencies = [("budgetportal", "0026_add-provinces-to-infraproject")]
 
     operations = [
         migrations.AddField(
-            model_name='infrastructureprojectpart',
-            name='gps_code',
-            field=models.CharField(default=b'', max_length=255),
-        ),
+            model_name="infrastructureprojectpart",
+            name="gps_code",
+            field=models.CharField(default=b"", max_length=255),
+        )
     ]

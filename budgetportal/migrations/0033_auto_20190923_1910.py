@@ -7,18 +7,20 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0032_faq'),
-    ]
+    dependencies = [("budgetportal", "0032_faq")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='faq',
-            options={'ordering': ['the_order'], 'verbose_name': 'FAQ', 'verbose_name_plural': 'FAQs'},
+            name="faq",
+            options={
+                "ordering": ["the_order"],
+                "verbose_name": "FAQ",
+                "verbose_name_plural": "FAQs",
+            },
         ),
         migrations.AddField(
-            model_name='faq',
-            name='the_order',
+            model_name="faq",
+            name="the_order",
             field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
         ),
     ]

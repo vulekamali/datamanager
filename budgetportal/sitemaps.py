@@ -2,11 +2,7 @@ from django.contrib import sitemaps
 from django.urls import reverse
 from budgetportal.summaries import get_consolidated_expenditure_treemap
 from guide_data import category_guides
-from .models import (
-    InfrastructureProjectPart,
-    FinancialYear,
-    Department,
-)
+from .models import InfrastructureProjectPart, FinancialYear, Department
 
 
 class DepartmentListViewSitemap(sitemaps.Sitemap):
@@ -75,7 +71,9 @@ class FocusViewSitemap(sitemaps.Sitemap):
         for year in FinancialYear.get_available_years():
             treemap = get_consolidated_expenditure_treemap(year)
             for data in treemap["data"]["items"]:
-                focus_area_page_params.append({"year": str(year.slug), "focus": data["id"]})
+                focus_area_page_params.append(
+                    {"year": str(year.slug), "focus": data["id"]}
+                )
         return focus_area_page_params
 
     def location(self, item):
