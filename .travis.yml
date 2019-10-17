@@ -1,5 +1,10 @@
+language: python
+python:
+  - "3.6"
 services:
   - docker
+install:
+  - pip install black==19.3b0
 script:
   - docker-compose run test
   - "black --check --diff budgetportal manage.py discours --exclude budgetportal/bulk_upload.py"
