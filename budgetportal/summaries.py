@@ -434,7 +434,7 @@ class DepartmentBudgetData(object):
         self.department = department
 
     def get_dataset(self):
-        return self.department.get_estimates_of_econ_classes_expenditure_dataset()
+        raise Exception("Not implemented")
 
     def get_openspending_api(self):
         return self.get_dataset().get_openspending_api()
@@ -466,6 +466,9 @@ class DepartmentBudgetData(object):
 
 
 class DepartmentSubprogrammes(DepartmentBudgetData):
+    def get_dataset(self):
+        return self.department.get_estimates_of_subprogramme_expenditure_dataset()
+
     def get_aggregate_cuts(self):
         openspending_api = self.get_openspending_api()
         financial_year_start = self.department.get_financial_year().get_starting_year()
@@ -490,6 +493,9 @@ class DepartmentSubprogrammes(DepartmentBudgetData):
 
 
 class DepartmentSubprogEcon4(DepartmentBudgetData):
+    def get_dataset(self):
+        return self.department.get_estimates_of_econ_classes_expenditure_dataset(4)
+
     def get_aggregate_cuts(self):
         openspending_api = self.get_openspending_api()
         financial_year_start = self.department.get_financial_year().get_starting_year()
@@ -515,6 +521,9 @@ class DepartmentSubprogEcon4(DepartmentBudgetData):
 
 
 class DepartmentProgrammesEcon4(DepartmentBudgetData):
+    def get_dataset(self):
+        return self.department.get_estimates_of_econ_classes_expenditure_dataset(4)
+
     def get_aggregate_cuts(self):
         openspending_api = self.get_openspending_api()
         financial_year_start = self.department.get_financial_year().get_starting_year()

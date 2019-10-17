@@ -226,13 +226,16 @@ class Department(models.Model):
     is_vote_primary = models.BooleanField(default=True)
     intro = models.TextField()
     website_url = models.URLField(default=None, null=True, blank=True)
-    _programme_budgets = None
-    _econ_by_programme_budgets = None
-    _prog_by_econ_budgets = None
-    _adjusted_estimates_of_expenditure_dataset = None
-    _estimates_of_econ_classes_expenditure_dataset = None
-    _estimates_of_subprogramme_expenditure_dataset = None
-    _expenditure_time_series_dataset = None
+
+    def __init__(self, *args, **kwargs):
+        self._programme_budgets = None
+        self._econ_by_programme_budgets = None
+        self._prog_by_econ_budgets = None
+        self._adjusted_estimates_of_expenditure_dataset = None
+        self._estimates_of_econ_classes_expenditure_dataset = {}
+        self._estimates_of_subprogramme_expenditure_dataset = None
+        self._expenditure_time_series_dataset = None
+        super(Department, self).__init__(*args, **kwargs)
 
     class Meta:
         unique_together = (("government", "slug"), ("government", "name"))
@@ -447,9 +450,9 @@ class Department(models.Model):
                     datasets[package["name"]] = dataset
         return datasets.values()
 
-    def get_estimates_of_econ_classes_expenditure_dataset(self):
-        if self._estimates_of_econ_classes_expenditure_dataset is not None:
-            return self._estimates_of_econ_classes_expenditure_dataset
+    def get_estimates_of_econ_classes_expenditure_dataset(self, level=3):
+        if self._estimates_of_econ_classes_expenditure_dataset.get(level, None) is not None:
+            return self._estimates_of_econ_classes_expenditure_dataset[level]
         query = {
             "q": "",
             "fq": "".join(
@@ -458,19 +461,21 @@ class Department(models.Model):
                     '+groups:"estimates-of-%s-expenditure"'
                     % self.government.sphere.slug,
                     '+vocab_financial_years:"%s"' % self.get_financial_year().slug,
-                    '+vocab_dimensions:"Economic classification 1"',
-                    '+vocab_dimensions:"Economic classification 2"',
+                    '+vocab_dimensions:"Economic classification %d"' % level,
                 ]
             ),
             "rows": 1000,
         }
         response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nreturned %d results", pformat(query), len(response["results"])
+        )
         if response["results"]:
             package = response["results"][0]
-            self._estimates_of_econ_classes_expenditure_dataset = Dataset.from_package(
+            self._estimates_of_econ_classes_expenditure_dataset[level] = Dataset.from_package(
                 package
             )
-            return self._estimates_of_econ_classes_expenditure_dataset
+            return self._estimates_of_econ_classes_expenditure_dataset[level]
         else:
             return None
 
@@ -490,6 +495,9 @@ class Department(models.Model):
             "rows": 1000,
         }
         response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nreturned %d results", pformat(query), len(response["results"])
+        )
         if response["results"]:
             package = response["results"][0]
             self._adjusted_estimates_of_expenditure_dataset = Dataset.from_package(
@@ -505,7 +513,7 @@ class Department(models.Model):
         for this year down to sub-programme level
         """
         if self._estimates_of_subprogramme_expenditure_dataset is not None:
-            return self._estimates_of_econ_classes_expenditure_dataset
+            return self._estimates_of_subprogramme_expenditure_dataset
         query = {
             "q": "",
             "fq": "".join(
@@ -520,6 +528,9 @@ class Department(models.Model):
             "rows": 1000,
         }
         response = ckan.action.package_search(**query)
+        logger.info(
+            "query %s\nreturned %d results", pformat(query), len(response["results"])
+        )
         if response["results"]:
             package = response["results"][0]
             self._estimates_of_subprogramme_expenditure_dataset = Dataset.from_package(
