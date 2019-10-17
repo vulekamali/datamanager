@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0030_auto_20190821_2046'),
-    ]
+    dependencies = [("budgetportal", "0030_auto_20190821_2046")]
 
     operations = [
         migrations.AlterField(
-            model_name='infrastructureprojectpart',
-            name='financial_year',
+            model_name="infrastructureprojectpart",
+            name="financial_year",
             field=models.CharField(max_length=4),
-        ),
+        )
     ]

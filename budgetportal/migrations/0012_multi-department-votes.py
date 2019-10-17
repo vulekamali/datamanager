@@ -8,22 +8,27 @@ import partial_index
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0011_govt-func-uniques'),
-    ]
+    dependencies = [("budgetportal", "0011_govt-func-uniques")]
 
     operations = [
         migrations.AddField(
-            model_name='department',
-            name='is_vote_primary',
+            model_name="department",
+            name="is_vote_primary",
             field=models.BooleanField(default=True),
         ),
         migrations.AlterUniqueTogether(
-            name='department',
-            unique_together=set([('government', 'slug'), ('government', 'name')]),
+            name="department",
+            unique_together=set([("government", "slug"), ("government", "name")]),
         ),
         migrations.AddIndex(
-            model_name='department',
-            index=partial_index.PartialIndex(fields=[b'government', b'vote_number'], name='budgetporta_governm_531bf0_partial', unique=True, where=b'is_vote_primary', where_postgresql=b'', where_sqlite=b''),
+            model_name="department",
+            index=partial_index.PartialIndex(
+                fields=[b"government", b"vote_number"],
+                name="budgetporta_governm_531bf0_partial",
+                unique=True,
+                where=b"is_vote_primary",
+                where_postgresql=b"",
+                where_sqlite=b"",
+            ),
         ),
     ]

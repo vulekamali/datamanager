@@ -165,7 +165,6 @@ urlpatterns = [
         cache_page(CACHE_SECS)(views.infrastructure_project_detail),
         name="infrastructure-projects",
     ),
-
     # Department List
     url(
         r"^(?P<financial_year_id>\d{4}-\d{2})" "/departments$",
@@ -181,18 +180,6 @@ urlpatterns = [
         name="national-department",
     ),
     # - Provincial
-    url(r'^(?P<financial_year_id>[\w-]+)'
-        '/(?P<sphere_slug>[\w-]+)'
-        '/(?P<government_slug>[\w-]+)'
-        '/departments'
-        '/(?P<department_slug>[\w-]+)$', cache_page(CACHE_SECS)(views.department_page), name='provincial-department'),
-
-    url(r'^sitemap\.xml$', sitemap_views.index, {'sitemaps': sitemaps}),
-    url(r'^sitemap-(?P<section>.+)\.xml$', sitemap_views.sitemap,
-        {'sitemaps': sitemaps},
-        name='django.contrib.sitemaps.views.sitemap'),
-
-    url('^', include(webflow_urls.urlpatterns)),
     url(
         r"^(?P<financial_year_id>[\w-]+)"
         "/(?P<sphere_slug>[\w-]+)"
@@ -209,12 +196,10 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+    url("^", include(webflow_urls.urlpatterns)),
 ]
 
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar
 
-    urlpatterns = [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
     urlpatterns = [url(r"^__debug__/", include(debug_toolbar.urls))] + urlpatterns

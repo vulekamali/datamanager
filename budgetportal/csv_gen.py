@@ -19,9 +19,10 @@ def generate_csv_response(data):
 
     Roughly based on https://docs.djangoproject.com/en/2.1/howto/outputting-csv/#streaming-large-csv-files
     """
-    response = StreamingHttpResponse(streaming_content=iter_items(data['cells'], Echo()),
-                                     content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=\"vulekamali-download.csv\"'
+    response = StreamingHttpResponse(
+        streaming_content=iter_items(data["cells"], Echo()), content_type="text/csv"
+    )
+    response["Content-Disposition"] = 'attachment; filename="vulekamali-download.csv"'
 
     return response
 

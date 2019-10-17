@@ -1,18 +1,15 @@
 from django.test import TestCase
 
-from budgetportal.import_export_admin import CustomIsVotePrimaryWidget, CustomGovernmentWidget
+from budgetportal.import_export_admin import (
+    CustomIsVotePrimaryWidget,
+    CustomGovernmentWidget,
+)
 from django.core.exceptions import ValidationError
 
-from budgetportal.models import (
-    Department,
-    FinancialYear,
-    Government,
-    Sphere,
-)
+from budgetportal.models import Department, FinancialYear, Government, Sphere
 
 
 class CustomIsVotePrimaryWidgetTest(TestCase):
-
     def setUp(self):
         self.widget = CustomIsVotePrimaryWidget()
 
@@ -32,36 +29,33 @@ class CustomIsVotePrimaryWidgetTest(TestCase):
 
 
 class CustomGovernmentWidgetTest(TestCase):
-
     def setUp(self):
         self.widget = CustomGovernmentWidget()
         self.year = FinancialYear.objects.create(slug="2030-31")
-        self.sphere = Sphere.objects.create(
-            financial_year=self.year, name="A sphere")
+        self.sphere = Sphere.objects.create(financial_year=self.year, name="A sphere")
         self.government = Government.objects.create(
-            sphere=self.sphere, name="A government")
+            sphere=self.sphere, name="A government"
+        )
 
     def test_set_sphere(self):
         self.widget.set_sphere(self.sphere.id)
         with self.assertRaises(ValidationError):
-            self.widget.set_sphere(self.sphere.id+1)
+            self.widget.set_sphere(self.sphere.id + 1)
 
     def test_clean(self):
         self.widget.set_sphere(self.sphere.id)
-        self.assertEqual(
-            self.government, self.widget.clean(self.government.name))
-        self.assertEqual(
-            self.government, self.widget.clean(self.government.slug))
+        self.assertEqual(self.government, self.widget.clean(self.government.name))
+        self.assertEqual(self.government, self.widget.clean(self.government.slug))
         with self.assertRaises(ValidationError):
-            self.widget.clean('another value')
+            self.widget.clean("another value")
 
         another_sphere = Sphere.objects.create(
-            financial_year=self.year, name="Another sphere")
+            financial_year=self.year, name="Another sphere"
+        )
         self.widget.set_sphere(another_sphere.id)
         with self.assertRaises(ValidationError):
             self.widget.clean(self.government.slug)
 
     def test_render(self):
         self.widget.set_sphere(self.sphere.id)
-        self.assertEqual(self.government.name,
-                         self.widget.render(self.government))
+        self.assertEqual(self.government.name, self.widget.render(self.government))

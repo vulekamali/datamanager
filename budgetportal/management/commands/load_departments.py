@@ -25,19 +25,19 @@ from django.utils.text import slugify
 
 
 class Command(BaseCommand):
-    help = 'load departments'
+    help = "load departments"
 
     def add_arguments(self, parser):
-        parser.add_argument('financial_year', type=str)
-        parser.add_argument('sphere', type=str)
-        parser.add_argument('filename', type=str)
-        parser.add_argument('update', type=bool, nargs='?', default=False)
+        parser.add_argument("financial_year", type=str)
+        parser.add_argument("sphere", type=str)
+        parser.add_argument("filename", type=str)
+        parser.add_argument("update", type=bool, nargs="?", default=False)
 
     def handle(self, *args, **options):
-        financial_year = options['financial_year']
-        sphere = options['sphere']
-        filename = options['filename']
-        update = options.get('update', False)
+        financial_year = options["financial_year"]
+        sphere = options["sphere"]
+        filename = options["filename"]
+        update = options.get("update", False)
 
         with open(filename) as csvfile:
             reader = csv.DictReader(csvfile)
@@ -46,38 +46,44 @@ class Command(BaseCommand):
                     government = Government.objects.get(
                         sphere__financial_year__slug=financial_year,
                         sphere__slug=sphere,
-                        slug=slugify(row['government']),
+                        slug=slugify(row["government"]),
                     )
                 except Government.DoesNotExist:
-                    print('Missing government: {} {} {}'.format(financial_year, sphere, row['government']))
+                    print(
+                        "Missing government: {} {} {}".format(
+                            financial_year, sphere, row["government"]
+                        )
+                    )
                     raise
                 intro = ""
                 website_url = None
-                if row.get('intro', False):
-                    intro += row['intro']
-                if row.get('website_url', False):
-                    website_url = row['website_url']
-                is_vote_primary = row.get('is_vote_primary', None)
+                if row.get("intro", False):
+                    intro += row["intro"]
+                if row.get("website_url", False):
+                    website_url = row["website_url"]
+                is_vote_primary = row.get("is_vote_primary", None)
                 if is_vote_primary is None:
                     is_vote_primary = True
                 else:
-                    is_vote_primary = is_vote_primary.upper() == 'TRUE'
+                    is_vote_primary = is_vote_primary.upper() == "TRUE"
 
                 def create_dept():
                     Department.objects.create(
                         government=government,
-                        name=row['department_name'],
-                        vote_number=row['vote_number'],
+                        name=row["department_name"],
+                        vote_number=row["vote_number"],
                         is_vote_primary=is_vote_primary,
                         intro=intro,
-                        website_url=website_url
+                        website_url=website_url,
                     )
 
                 try:
                     if update:
-                        department = Department.objects.get(government=government, name=row['department_name'])
+                        department = Department.objects.get(
+                            government=government, name=row["department_name"]
+                        )
                         department.government = government
-                        department.vote_number = row['vote_number']
+                        department.vote_number = row["vote_number"]
                         department.is_vote_primary = is_vote_primary
                         department.intro = intro
                         department.website_url = website_url

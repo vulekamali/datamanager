@@ -19,7 +19,7 @@ from import_export.widgets import Widget, ForeignKeyWidget
 from provincial_infrastructure_projects import (
     NORMAL_HEADERS,
     AGENT_HEADERS,
-    IRMReportSheet
+    IRMReportSheet,
 )
 import logging
 

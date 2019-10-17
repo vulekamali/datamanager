@@ -2081,24 +2081,60 @@ class ProvInfraProject(models.Model):
     estimated_construction_end_date = models.DateField(blank=True, null=True)
 
     # Budgets and spending
-    total_professional_fees = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    total_construction_costs = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    variation_orders = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    total_project_cost = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    expenditure_from_previous_years_professional_fees = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    expenditure_from_previous_years_construction_costs = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    expenditure_from_previous_years_total = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    project_expenditure_total = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    main_appropriation_professional_fees = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    adjustment_appropriation_professional_fees = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    main_appropriation_construction_costs = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    adjustment_appropriation_construction_costs = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    main_appropriation_total = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    adjustment_appropriation_total = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    actual_expenditure_q1 = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    actual_expenditure_q2 = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    actual_expenditure_q3 = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    actual_expenditure_q4 = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    total_professional_fees = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    total_construction_costs = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    variation_orders = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    total_project_cost = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    expenditure_from_previous_years_professional_fees = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    expenditure_from_previous_years_construction_costs = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    expenditure_from_previous_years_total = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    project_expenditure_total = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    main_appropriation_professional_fees = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    adjustment_appropriation_professional_fees = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    main_appropriation_construction_costs = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    adjustment_appropriation_construction_costs = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    main_appropriation_total = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    adjustment_appropriation_total = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    actual_expenditure_q1 = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    actual_expenditure_q2 = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    actual_expenditure_q3 = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
+    actual_expenditure_q4 = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True
+    )
 
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
