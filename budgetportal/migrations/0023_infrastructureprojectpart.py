@@ -7,32 +7,38 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0022_event_presentation_url'),
-    ]
+    dependencies = [("budgetportal", "0022_event_presentation_url")]
 
     operations = [
         migrations.CreateModel(
-            name='InfrastructureProjectPart',
+            name="InfrastructureProjectPart",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sphere', models.CharField(max_length=255)),
-                ('department', models.CharField(max_length=255)),
-                ('sector', models.CharField(max_length=255)),
-                ('project_name', models.CharField(max_length=255)),
-                ('project_description', models.TextField()),
-                ('gps_code', models.CharField(max_length=255)),
-                ('nature_of_investment', models.CharField(max_length=255)),
-                ('infrastructure_type', models.CharField(max_length=255)),
-                ('current_project_stage', models.CharField(max_length=255)),
-                ('sip_category', models.CharField(max_length=255)),
-                ('total_project_cost', models.IntegerField()),
-                ('br_featured', models.CharField(max_length=255)),
-                ('featured', models.BooleanField()),
-                ('financial_year', models.IntegerField()),
-                ('budget_phase', models.CharField(max_length=255)),
-                ('amount', models.IntegerField()),
-                ('project_slug', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("sphere", models.CharField(max_length=255)),
+                ("department", models.CharField(max_length=255)),
+                ("sector", models.CharField(max_length=255)),
+                ("project_name", models.CharField(max_length=255)),
+                ("project_description", models.TextField()),
+                ("gps_code", models.CharField(max_length=255)),
+                ("nature_of_investment", models.CharField(max_length=255)),
+                ("infrastructure_type", models.CharField(max_length=255)),
+                ("current_project_stage", models.CharField(max_length=255)),
+                ("sip_category", models.CharField(max_length=255)),
+                ("total_project_cost", models.IntegerField()),
+                ("br_featured", models.CharField(max_length=255)),
+                ("featured", models.BooleanField()),
+                ("financial_year", models.IntegerField()),
+                ("budget_phase", models.CharField(max_length=255)),
+                ("amount", models.IntegerField()),
+                ("project_slug", models.CharField(max_length=255)),
             ],
-        ),
+        )
     ]

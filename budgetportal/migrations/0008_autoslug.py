@@ -8,29 +8,35 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0007_add-programme-number'),
-    ]
+    dependencies = [("budgetportal", "0007_add-programme-number")]
 
     operations = [
         migrations.AlterField(
-            model_name='department',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(editable=False, max_length=200, populate_from=b'name'),
+            model_name="department",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                editable=False, max_length=200, populate_from=b"name"
+            ),
         ),
         migrations.AlterField(
-            model_name='government',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(editable=False, max_length=200, populate_from=b'name'),
+            model_name="government",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                editable=False, max_length=200, populate_from=b"name"
+            ),
         ),
         migrations.AlterField(
-            model_name='programme',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(editable=False, max_length=200, populate_from=b'name'),
+            model_name="programme",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                editable=False, max_length=200, populate_from=b"name"
+            ),
         ),
         migrations.AlterField(
-            model_name='sphere',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(editable=False, max_length=200, populate_from=b'name'),
+            model_name="sphere",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                editable=False, max_length=200, populate_from=b"name"
+            ),
         ),
     ]

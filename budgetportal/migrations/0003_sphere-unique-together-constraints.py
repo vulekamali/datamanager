@@ -7,23 +7,19 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0002_related-name-financial-year-spheres'),
-    ]
+    dependencies = [("budgetportal", "0002_related-name-financial-year-spheres")]
 
     operations = [
         migrations.AlterField(
-            model_name='sphere',
-            name='name',
-            field=models.CharField(max_length=200),
+            model_name="sphere", name="name", field=models.CharField(max_length=200)
         ),
         migrations.AlterField(
-            model_name='sphere',
-            name='slug',
-            field=models.SlugField(max_length=200),
+            model_name="sphere", name="slug", field=models.SlugField(max_length=200)
         ),
         migrations.AlterUniqueTogether(
-            name='sphere',
-            unique_together=set([('financial_year', 'slug'), ('financial_year', 'name')]),
+            name="sphere",
+            unique_together=set(
+                [("financial_year", "slug"), ("financial_year", "name")]
+            ),
         ),
     ]

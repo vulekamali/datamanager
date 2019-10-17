@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0021_edit-event-fields'),
-    ]
+    dependencies = [("budgetportal", "0021_edit-event-fields")]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='presentation_url',
+            model_name="event",
+            name="presentation_url",
             field=models.URLField(blank=True, null=True),
-        ),
+        )
     ]
