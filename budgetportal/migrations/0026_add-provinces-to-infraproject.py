@@ -7,18 +7,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0025_add-infraproject-bigint-fields'),
-    ]
+    dependencies = [("budgetportal", "0025_add-infraproject-bigint-fields")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='infrastructureprojectpart',
-            name='gps_code',
-        ),
+        migrations.RemoveField(model_name="infrastructureprojectpart", name="gps_code"),
         migrations.AddField(
-            model_name='infrastructureprojectpart',
-            name='provinces',
-            field=models.CharField(default=b'', max_length=510),
+            model_name="infrastructureprojectpart",
+            name="provinces",
+            field=models.CharField(default=b"", max_length=510),
         ),
     ]

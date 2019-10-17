@@ -7,19 +7,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0006_add-programmes'),
-    ]
+    dependencies = [("budgetportal", "0006_add-programmes")]
 
     operations = [
         migrations.AddField(
-            model_name='programme',
-            name='programme_number',
+            model_name="programme",
+            name="programme_number",
             field=models.IntegerField(default=-1),
             preserve_default=False,
         ),
         migrations.AlterUniqueTogether(
-            name='programme',
-            unique_together=set([('department', 'slug'), ('department', 'name'), ('department', 'programme_number')]),
+            name="programme",
+            unique_together=set(
+                [
+                    ("department", "slug"),
+                    ("department", "name"),
+                    ("department", "programme_number"),
+                ]
+            ),
         ),
     ]

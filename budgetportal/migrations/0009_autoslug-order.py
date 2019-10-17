@@ -8,29 +8,47 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0008_autoslug'),
-    ]
+    dependencies = [("budgetportal", "0008_autoslug")]
 
     operations = [
         migrations.AlterField(
-            model_name='department',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(always_update=True, editable=False, max_length=200, populate_from=b'name'),
+            model_name="department",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                always_update=True,
+                editable=False,
+                max_length=200,
+                populate_from=b"name",
+            ),
         ),
         migrations.AlterField(
-            model_name='government',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(always_update=True, editable=False, max_length=200, populate_from=b'name'),
+            model_name="government",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                always_update=True,
+                editable=False,
+                max_length=200,
+                populate_from=b"name",
+            ),
         ),
         migrations.AlterField(
-            model_name='programme',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(always_update=True, editable=False, max_length=200, populate_from=b'name'),
+            model_name="programme",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                always_update=True,
+                editable=False,
+                max_length=200,
+                populate_from=b"name",
+            ),
         ),
         migrations.AlterField(
-            model_name='sphere',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(always_update=True, editable=False, max_length=200, populate_from=b'name'),
+            model_name="sphere",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                always_update=True,
+                editable=False,
+                max_length=200,
+                populate_from=b"name",
+            ),
         ),
     ]

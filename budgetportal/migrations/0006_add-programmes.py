@@ -8,32 +8,50 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0005_department-unique-together-constraints'),
-    ]
+    dependencies = [("budgetportal", "0005_department-unique-together-constraints")]
 
     operations = [
         migrations.CreateModel(
-            name='Programme',
+            name="Programme",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('slug', models.SlugField(max_length=200)),
-                ('name', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("slug", models.SlugField(max_length=200)),
+                ("name", models.CharField(max_length=200)),
             ],
         ),
         migrations.AlterField(
-            model_name='department',
-            name='government',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='departments', to='budgetportal.Government'),
+            model_name="department",
+            name="government",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="departments",
+                to="budgetportal.Government",
+            ),
         ),
         migrations.AlterField(
-            model_name='government',
-            name='sphere',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='governments', to='budgetportal.Sphere'),
+            model_name="government",
+            name="sphere",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="governments",
+                to="budgetportal.Sphere",
+            ),
         ),
         migrations.AddField(
-            model_name='programme',
-            name='department',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='programmes', to='budgetportal.Department'),
+            model_name="programme",
+            name="department",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="programmes",
+                to="budgetportal.Department",
+            ),
         ),
     ]

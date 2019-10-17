@@ -7,27 +7,26 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0012_multi-department-votes'),
-    ]
+    dependencies = [("budgetportal", "0012_multi-department-votes")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='department',
-            options={'ordering': ['vote_number', 'name']},
+            name="department", options={"ordering": ["vote_number", "name"]}
         ),
         migrations.AlterModelOptions(
-            name='sphere',
-            options={'ordering': ['-financial_year__slug', 'name']},
+            name="sphere", options={"ordering": ["-financial_year__slug", "name"]}
         ),
         migrations.AddField(
-            model_name='department',
-            name='website_url',
+            model_name="department",
+            name="website_url",
             field=models.URLField(blank=True, default=None, null=True),
         ),
         migrations.AlterField(
-            model_name='department',
-            name='name',
-            field=models.CharField(help_text=b'The department name must precisely match the text used in the Appropriation Bill. All datasets must be normalised to match this name. Beware that changing this name might cause a mismatch with already-published datasets which might need to be update to match this.', max_length=200),
+            model_name="department",
+            name="name",
+            field=models.CharField(
+                help_text=b"The department name must precisely match the text used in the Appropriation Bill. All datasets must be normalised to match this name. Beware that changing this name might cause a mismatch with already-published datasets which might need to be update to match this.",
+                max_length=200,
+            ),
         ),
     ]

@@ -20,19 +20,21 @@ class JSONEncoder(json.JSONEncoder):
 
 def provincial_infrastructure_project_list(request):
     projects = ProvInfraProject.objects.all()
-    context = {
-        "projects": projects,
-    }
-    return render(request, 'webflow/infrastructure-project-list.html', context=context)
+    context = {"projects": projects}
+    return render(request, "webflow/infrastructure-project-list.html", context=context)
 
 
 def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
     project = get_object_or_404(ProvInfraProject, IRM_project_id=int(IRM_project_id))
-    page_data = {
-        "project": model_to_dict(project),
-    }
+    page_data = {"project": model_to_dict(project)}
     context = {
         "project": project,
-        "page_data_json": json.dumps(page_data, cls=JSONEncoder, sort_keys=True, indent=4),
+        "page_data_json": json.dumps(
+            page_data, cls=JSONEncoder, sort_keys=True, indent=4
+        ),
     }
-    return render(request, 'webflow/detail_provincial-infrastructure-projects.html', context=context)
+    return render(
+        request,
+        "webflow/detail_provincial-infrastructure-projects.html",
+        context=context,
+    )

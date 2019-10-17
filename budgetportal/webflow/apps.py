@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class WebflowConfig(AppConfig):
-    name = 'webflow'
+    name = "webflow"

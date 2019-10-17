@@ -9,11 +9,14 @@ class AccountAdapter(DefaultAccountAdapter):
     Add redirect URL to verification link so that users continue
     where they were headed after authentication.
     """
+
     def get_email_confirmation_url(self, request, emailconfirmation):
-        next_url = request.POST.get('next')
-        email_conf_url = super(AccountAdapter, self).get_email_confirmation_url(request, emailconfirmation)
+        next_url = request.POST.get("next")
+        email_conf_url = super(AccountAdapter, self).get_email_confirmation_url(
+            request, emailconfirmation
+        )
         if next_url:
-            return '%s?%s' % (email_conf_url, urlencode({'next': next_url}))
+            return "%s?%s" % (email_conf_url, urlencode({"next": next_url}))
         else:
             return email_conf_url
 
@@ -22,11 +25,13 @@ class AccountAdapter(DefaultAccountAdapter):
         Used during email confirmation.
         Gets the URL to send them after confirmation from the request URL
         """
-        next_url = request.GET.get('next')
+        next_url = request.GET.get("next")
         if next_url:
             return next_url
         else:
-            return super(AccountAdapter, self).get_email_confirmation_redirect_url(request)
+            return super(AccountAdapter, self).get_email_confirmation_redirect_url(
+                request
+            )
 
 
 # https://stackoverflow.com/questions/19354009/django-allauth-social-login-automatically-linking-social-site-profiles-using-th
@@ -50,13 +55,13 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         # some social logins don't have an email address, e.g. facebook accounts
         # with mobile numbers only, but allauth takes care of this case so just
         # ignore it
-        if 'email' not in sociallogin.account.extra_data:
+        if "email" not in sociallogin.account.extra_data:
             return
 
         # check if given email address already exists.
         # Note: __iexact is used to ignore cases
         try:
-            email = sociallogin.account.extra_data['email'].lower()
+            email = sociallogin.account.extra_data["email"].lower()
             email_address = EmailAddress.objects.get(email__iexact=email)
 
         # if it does not, let allauth take care of this new social account

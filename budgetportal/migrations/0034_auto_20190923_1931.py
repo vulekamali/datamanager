@@ -7,27 +7,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0033_auto_20190923_1910'),
-    ]
+    dependencies = [("budgetportal", "0033_auto_20190923_1910")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='video',
-            options={'ordering': ['video_order']},
+            name="video", options={"ordering": ["video_order"]}
         ),
         migrations.AlterModelOptions(
-            name='videolanguage',
-            options={'ordering': ['video_language_order']},
+            name="videolanguage", options={"ordering": ["video_language_order"]}
         ),
         migrations.AddField(
-            model_name='video',
-            name='video_order',
+            model_name="video",
+            name="video_order",
             field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
         ),
         migrations.AddField(
-            model_name='videolanguage',
-            name='video_language_order',
+            model_name="videolanguage",
+            name="video_language_order",
             field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
         ),
     ]

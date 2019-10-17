@@ -7,23 +7,47 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0014_add-published-to-financial-year'),
-    ]
+    dependencies = [("budgetportal", "0014_add-published-to-financial-year")]
 
     operations = [
         migrations.CreateModel(
-            name='Event',
+            name="Event",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.CharField(max_length=255)),
-                ('type', models.CharField(choices=[(b'hackathon', b'hackathon'), (b'dataquest', b'dataquest')], max_length=255)),
-                ('province', models.CharField(choices=[(b'Gauteng', b'Gauteng'), (b'Western Cape', b'Western Cape')], max_length=255)),
-                ('where', models.CharField(max_length=255)),
-                ('url', models.URLField()),
-                ('notes_url', models.URLField()),
-                ('video_url', models.URLField()),
-                ('rsvp_url', models.URLField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.CharField(max_length=255)),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[
+                            (b"hackathon", b"hackathon"),
+                            (b"dataquest", b"dataquest"),
+                        ],
+                        max_length=255,
+                    ),
+                ),
+                (
+                    "province",
+                    models.CharField(
+                        choices=[
+                            (b"Gauteng", b"Gauteng"),
+                            (b"Western Cape", b"Western Cape"),
+                        ],
+                        max_length=255,
+                    ),
+                ),
+                ("where", models.CharField(max_length=255)),
+                ("url", models.URLField()),
+                ("notes_url", models.URLField()),
+                ("video_url", models.URLField()),
+                ("rsvp_url", models.URLField()),
             ],
-        ),
+        )
     ]

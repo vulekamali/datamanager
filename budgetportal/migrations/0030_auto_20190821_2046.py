@@ -8,18 +8,15 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0029_auto_20190816_1435'),
-    ]
+    dependencies = [("budgetportal", "0029_auto_20190816_1435")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='event',
-            options={'ordering': ['-start_date']},
+            name="event", options={"ordering": ["-start_date"]}
         ),
         migrations.AlterField(
-            model_name='event',
-            name='start_date',
+            model_name="event",
+            name="start_date",
             field=models.DateField(default=datetime.datetime.now),
         ),
     ]

@@ -8,35 +8,49 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0009_autoslug-order'),
-    ]
+    dependencies = [("budgetportal", "0009_autoslug-order")]
 
     operations = [
         migrations.CreateModel(
-            name='GovtFunction',
+            name="GovtFunction",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('slug', autoslug.fields.AutoSlugField(always_update=True, editable=False, max_length=200, populate_from=b'name')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                (
+                    "slug",
+                    autoslug.fields.AutoSlugField(
+                        always_update=True,
+                        editable=False,
+                        max_length=200,
+                        populate_from=b"name",
+                    ),
+                ),
             ],
         ),
         migrations.AlterModelOptions(
-            name='department',
-            options={'ordering': ['vote_number']},
+            name="department", options={"ordering": ["vote_number"]}
         ),
         migrations.AlterModelOptions(
-            name='programme',
-            options={'ordering': ['programme_number']},
+            name="programme", options={"ordering": ["programme_number"]}
         ),
         migrations.AlterField(
-            model_name='department',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(always_update=True, editable=True, max_length=200, populate_from=b'name'),
+            model_name="department",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                always_update=True, editable=True, max_length=200, populate_from=b"name"
+            ),
         ),
         migrations.AddField(
-            model_name='programme',
-            name='govt_functions',
-            field=models.ManyToManyField(to='budgetportal.GovtFunction'),
+            model_name="programme",
+            name="govt_functions",
+            field=models.ManyToManyField(to="budgetportal.GovtFunction"),
         ),
     ]

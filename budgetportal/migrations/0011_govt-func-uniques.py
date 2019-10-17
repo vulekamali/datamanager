@@ -8,19 +8,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0010_add-govt-function-model'),
-    ]
+    dependencies = [("budgetportal", "0010_add-govt-function-model")]
 
     operations = [
         migrations.AlterField(
-            model_name='govtfunction',
-            name='name',
+            model_name="govtfunction",
+            name="name",
             field=models.CharField(max_length=200, unique=True),
         ),
         migrations.AlterField(
-            model_name='govtfunction',
-            name='slug',
-            field=autoslug.fields.AutoSlugField(always_update=True, editable=False, max_length=200, populate_from=b'name', unique=True),
+            model_name="govtfunction",
+            name="slug",
+            field=autoslug.fields.AutoSlugField(
+                always_update=True,
+                editable=False,
+                max_length=200,
+                populate_from=b"name",
+                unique=True,
+            ),
         ),
     ]

@@ -7,14 +7,16 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0019_event'),
-    ]
+    dependencies = [("budgetportal", "0019_event")]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='status',
-            field=models.CharField(choices=[(b'upcoming', b'upcoming'), (b'past', b'past')], default=b'upcoming', max_length=255),
-        ),
+            model_name="event",
+            name="status",
+            field=models.CharField(
+                choices=[(b"upcoming", b"upcoming"), (b"past", b"past")],
+                default=b"upcoming",
+                max_length=255,
+            ),
+        )
     ]

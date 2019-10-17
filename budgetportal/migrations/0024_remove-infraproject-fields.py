@@ -7,21 +7,14 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0023_infrastructureprojectpart'),
-    ]
+    dependencies = [("budgetportal", "0023_infrastructureprojectpart")]
 
     operations = [
+        migrations.RemoveField(model_name="infrastructureprojectpart", name="amount"),
         migrations.RemoveField(
-            model_name='infrastructureprojectpart',
-            name='amount',
+            model_name="infrastructureprojectpart", name="financial_year"
         ),
         migrations.RemoveField(
-            model_name='infrastructureprojectpart',
-            name='financial_year',
-        ),
-        migrations.RemoveField(
-            model_name='infrastructureprojectpart',
-            name='total_project_cost',
+            model_name="infrastructureprojectpart", name="total_project_cost"
         ),
     ]

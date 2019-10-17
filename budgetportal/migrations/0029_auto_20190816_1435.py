@@ -8,22 +8,20 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0028_video_videolanguage'),
-    ]
+    dependencies = [("budgetportal", "0028_video_videolanguage")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='event',
-            options={'ordering': ['start_date']},
+            name="event", options={"ordering": ["start_date"]}
         ),
         migrations.AlterModelOptions(
-            name='videolanguage',
-            options={'ordering': ['id']},
+            name="videolanguage", options={"ordering": ["id"]}
         ),
         migrations.AddField(
-            model_name='event',
-            name='start_date',
-            field=models.DateField(default=datetime.datetime(2019, 8, 16, 14, 35, 39, 966766)),
+            model_name="event",
+            name="start_date",
+            field=models.DateField(
+                default=datetime.datetime(2019, 8, 16, 14, 35, 39, 966766)
+            ),
         ),
     ]
