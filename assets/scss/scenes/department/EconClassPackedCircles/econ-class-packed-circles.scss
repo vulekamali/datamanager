@@ -1,4 +1,4 @@
-.ProgrammesSection-container {
+.EconClassPackedCirclesSection-container {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -8,7 +8,7 @@
   }
 }
 
-.ProgrammesSection-item {
+.EconClassPackedCirclesSection-item {
   min-width: 0;
   padding-bottom: 1rem;
 
@@ -23,8 +23,8 @@
 
   @media screen and (max-width: 1000px) {
     &--right {
-        width: calc(100% + 3rem);
-        margin-left: -1.5rem;
+      width: calc(100% + 3rem);
+      margin-left: -1.5rem;
     }
   }
 
@@ -39,6 +39,10 @@
   }
 }
 
-.ProgrammesSection-share {
+.EconClassPackedCirclesSection-share {
   max-width: 250px;
+}
+
+.Missing {
+    max-height: 100px;
 }

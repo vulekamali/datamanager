@@ -15,7 +15,8 @@ from webflow import urls as webflow_urls
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
-CACHE_SECS = 0
+CACHE_MINUTES_SECS = 60 * 5  # minutes
+CACHE_DAYS_SECS = 60 * 60 * 24 * 5  # days
 
 
 def permission_denied(request):
@@ -26,16 +27,36 @@ def trigger_error(request):
     division_by_zero = 1 / 0
 
 
+department_urlpatterns = [
+    url(
+        r"^$", cache_page(CACHE_MINUTES_SECS)(views.department_page), name="department"
+    ),
+    url(
+        r"^/viz/subprog-treemap$",
+        cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_treemap),
+        name="department-viz-subprog-treemap",
+    ),
+    url(
+        r"^/viz/subprog-econ4-circles$",
+        cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_econ4_circles),
+        name="department-viz-subprog-econ4-circles",
+    ),
+    url(
+        r"^/viz/subprog-econ4-bars$",
+        cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_econ4_bars),
+        name="department-viz-subprog-econ4-bars",
+    ),
+]
 urlpatterns = [
     url("sentry-debug/", trigger_error),
     url(
         r"^(?P<financial_year_id>\d{4}-\d{2})" "/focus/(?P<focus_slug>[\w-]+)/?$",
-        cache_page(CACHE_SECS)(views.focus_area_preview),
+        cache_page(CACHE_MINUTES_SECS)(views.focus_area_preview),
         name="focus",
     ),
     url(
         r"^json/(?P<financial_year_id>\d{4}-\d{2})" "/focus.json",
-        cache_page(CACHE_SECS)(views.focus_preview_json),
+        cache_page(CACHE_DAYS_SECS)(views.focus_preview_json),
         name="focus-json",
     ),
     # National and provincial treemap data
@@ -43,7 +64,7 @@ urlpatterns = [
         r"^json/(?P<financial_year_id>\d{4}-\d{2})"
         "/(?P<sphere_slug>[\w-]+)"
         "/(?P<phase_slug>[\w-]+).json",
-        cache_page(CACHE_SECS)(views.treemaps_json),
+        cache_page(CACHE_DAYS_SECS)(views.treemaps_json),
     ),
     # Preview pages
     url(
@@ -52,7 +73,7 @@ urlpatterns = [
         "/(?P<sphere_slug>[\w-]+)"
         "/(?P<government_slug>[\w-]+)"
         "/(?P<department_slug>[\w-]+)$",
-        cache_page(CACHE_SECS)(views.department_preview),
+        cache_page(CACHE_MINUTES_SECS)(views.department_preview),
         name="department-preview",
     ),
     url(
@@ -61,37 +82,40 @@ urlpatterns = [
         "/(?P<sphere_slug>[\w-]+)"
         "/(?P<government_slug>[\w-]+)"
         "/(?P<phase_slug>[\w-]+).json",
-        cache_page(CACHE_SECS)(views.department_preview_json),
+        cache_page(CACHE_DAYS_SECS)(views.department_preview_json),
         name="department-preview-json",
     ),
     # Consolidated
     url(
         r"^json/(?P<financial_year_id>\d{4}-\d{2})" "/consolidated.json",
-        cache_page(CACHE_SECS)(views.consolidated_treemap_json),
+        cache_page(CACHE_DAYS_SECS)(views.consolidated_treemap_json),
         name="consolidated-json",
     ),
     # Homepage
-    url(r"^$", cache_page(CACHE_SECS)(views.homepage), name="home"),
+    url(r"^$", cache_page(CACHE_DAYS_SECS)(views.homepage), name="home"),
     # Search results
-    url(r"^json/static-search.json", cache_page(CACHE_SECS)(views.static_search_data)),
+    url(
+        r"^json/static-search.json",
+        cache_page(CACHE_DAYS_SECS)(views.static_search_data),
+    ),
     # Department list as CSV
     url(
         r"^(?P<financial_year_id>\d{4}-\d{2})" "/departments.csv$",
-        cache_page(CACHE_SECS)(views.department_list_csv),
+        cache_page(CACHE_MINUTES_SECS)(views.department_list_csv),
     ),
     # Department list for sphere as CSV
     url(
         r"^(?P<financial_year_id>\d{4}-\d{2})"
         "/(?P<sphere_slug>[\w-]+)"
         "/departments.csv$",
-        cache_page(CACHE_SECS)(views.department_list_for_sphere_csv),
+        cache_page(CACHE_MINUTES_SECS)(views.department_list_for_sphere_csv),
     ),
     # Programme list as CSV
     url(
         r"^(?P<financial_year_id>\d{4}-\d{2})"
         "/(?P<sphere_slug>[\w-]+)"
         "/programmes.csv$",
-        cache_page(CACHE_SECS)(views.programme_list_csv),
+        cache_page(CACHE_MINUTES_SECS)(views.programme_list_csv),
     ),
     # Authentication
     url(r"^accounts/email.*", permission_denied),
@@ -99,83 +123,104 @@ urlpatterns = [
     # SSO Provider
     url(r"^(?P<client_id>\w+)/sso$", sso),
     # CSV
-    url(r"^csv/$", views.openspending_csv, name="openspending_csv"),
+    url(
+        r"^csv/$",
+        cache_page(CACHE_DAYS_SECS)(views.openspending_csv),
+        name="openspending_csv",
+    ),
     # Admin
     url(r"^admin/", admin.site.urls),
     url(r"^admin/bulk_upload/template", bulk_upload.template_view),
     # Budget Portal
-    url(r"^about/?$", views.about, name="about"),
-    url(r"^events/?$", views.events, name="events"),
-    url(r"^videos/?$", views.videos, name="videos"),
+    url(r"^about/?$", cache_page(CACHE_DAYS_SECS)(views.about), name="about"),
+    url(r"^events/?$", cache_page(CACHE_MINUTES_SECS)(views.events), name="events"),
+    url(r"^videos/?$", cache_page(CACHE_MINUTES_SECS)(views.videos), name="videos"),
     url(
         r"^terms-and-conditions/?$",
-        views.terms_and_conditions,
+        cache_page(CACHE_DAYS_SECS)(views.terms_and_conditions),
         name="terms-and-conditions",
     ),
-    url(r"^resources/?$", views.resources, name="resources"),
-    url(r"^glossary/?$", views.glossary, name="glossary"),
-    url(r"^faq/?$", views.faq, name="faq"),
-    url(r"^guides/?$", views.guides, name="guides", kwargs={"slug": "index"}),
-    url(r"^guides/(?P<slug>[-\w]+)/?$", views.guides, name="guide-list"),
+    url(
+        r"^resources/?$", cache_page(CACHE_DAYS_SECS)(views.resources), name="resources"
+    ),
+    url(
+        r"^glossary/?$", cache_page(CACHE_MINUTES_SECS)(views.glossary), name="glossary"
+    ),
+    url(r"^faq/?$", cache_page(CACHE_MINUTES_SECS)(views.faq), name="faq"),
+    url(
+        r"^guides/?$",
+        cache_page(CACHE_MINUTES_SECS)(views.guides),
+        name="guides",
+        kwargs={"slug": "index"},
+    ),
+    url(
+        r"^guides/(?P<slug>[-\w]+)/?$",
+        cache_page(CACHE_MINUTES_SECS)(views.guides),
+        name="guide-list",
+    ),
     # Dataset category list
-    url(r"^datasets/?$", views.dataset_category_list_page, name="dataset-landing-page"),
+    url(
+        r"^datasets/?$",
+        cache_page(CACHE_MINUTES_SECS)(views.dataset_category_list_page),
+        name="dataset-landing-page",
+    ),
     # Dataset categories
     url(
         r"^datasets/contributed/?$",
-        views.contributed_datasets_list,
+        cache_page(CACHE_MINUTES_SECS)(views.contributed_datasets_list),
         name="contributed-datasets",
     ),
     url(
         r"^datasets/contributed/(?P<dataset_slug>[-\w]+)/?$",
-        views.contributed_dataset,
+        cache_page(CACHE_MINUTES_SECS)(views.contributed_dataset),
         name="contributed-dataset",
     ),
     url(
         r"^datasets/(?P<category_slug>[-\w]+)/?$",
-        views.dataset_category_page,
+        cache_page(CACHE_MINUTES_SECS)(views.dataset_category_page),
         name="dataset-category",
     ),
     # Detaset detail
     url(
         r"^datasets/(?P<category_slug>[-\w]+)/(?P<dataset_slug>[-\w]+)/?$",
-        views.dataset_page,
+        cache_page(CACHE_MINUTES_SECS)(views.dataset_page),
         name="dataset",
     ),
     url(
         r"^(?P<financial_year_id>\d{4}-\d{2})/search-result/?$",
-        views.search_result,
+        cache_page(CACHE_MINUTES_SECS)(views.search_result),
         name="search-result",
     ),
     # Infrastructure projects
     url(
         r"^infrastructure-projects/?$",
-        views.infrastructure_project_list,
+        cache_page(CACHE_MINUTES_SECS)(views.infrastructure_project_list),
         name="infrastructure-project-list",
     ),
     url(
         r"^json/infrastructure-projects.json$",
-        cache_page(CACHE_SECS)(views.infrastructure_projects_overview_json),
+        cache_page(CACHE_MINUTES_SECS)(views.infrastructure_projects_overview_json),
     ),
     url(
         r"^json/infrastructure-projects/(?P<project_slug>[\w-]+).json$",
-        cache_page(CACHE_SECS)(views.infrastructure_project_detail_json),
+        cache_page(CACHE_MINUTES_SECS)(views.infrastructure_project_detail_json),
     ),
     url(
         r"^infrastructure-projects/(?P<project_slug>[\w-]+)$",
-        cache_page(CACHE_SECS)(views.infrastructure_project_detail),
+        cache_page(CACHE_MINUTES_SECS)(views.infrastructure_project_detail),
         name="infrastructure-projects",
     ),
     # Department List
     url(
-        r"^(?P<financial_year_id>\d{4}-\d{2})" "/departments$",
-        cache_page(CACHE_SECS)(views.department_list),
+        r"^(?P<financial_year_id>\d{4}-\d{2})/departments$",
+        cache_page(CACHE_MINUTES_SECS)(views.department_list),
         name="department-list",
     ),
     # Department detail
     # - National
     url(
-        r"^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)$",
-        cache_page(CACHE_SECS)(views.department_page),
+        r"^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)",
+        include(department_urlpatterns, namespace="national"),
         kwargs={"sphere_slug": "national", "government_slug": "south-africa"},
         name="national-department",
     ),
@@ -185,18 +230,21 @@ urlpatterns = [
         "/(?P<sphere_slug>[\w-]+)"
         "/(?P<government_slug>[\w-]+)"
         "/departments"
-        "/(?P<department_slug>[\w-]+)$",
-        cache_page(CACHE_SECS)(views.department_page),
-        name="provincial-department",
+        "/(?P<department_slug>[\w-]+)",
+        include(department_urlpatterns, namespace="provincial"),
     ),
-    url(r"^sitemap\.xml$", sitemap_views.index, {"sitemaps": sitemaps}),
+    # Sitemap
+    url(
+        r"^sitemap\.xml$",
+        cache_page(CACHE_DAYS_SECS)(sitemap_views.index),
+        {"sitemaps": sitemaps},
+    ),
     url(
         r"^sitemap-(?P<section>.+)\.xml$",
-        sitemap_views.sitemap,
+        cache_page(CACHE_DAYS_SECS)(sitemap_views.sitemap),
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
-    url("^", include(webflow_urls.urlpatterns)),
 ]
 
 if settings.DEBUG_TOOLBAR:
