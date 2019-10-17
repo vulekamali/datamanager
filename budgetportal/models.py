@@ -451,7 +451,10 @@ class Department(models.Model):
         return datasets.values()
 
     def get_estimates_of_econ_classes_expenditure_dataset(self, level=3):
-        if self._estimates_of_econ_classes_expenditure_dataset.get(level, None) is not None:
+        if (
+            self._estimates_of_econ_classes_expenditure_dataset.get(level, None)
+            is not None
+        ):
             return self._estimates_of_econ_classes_expenditure_dataset[level]
         query = {
             "q": "",
@@ -472,9 +475,9 @@ class Department(models.Model):
         )
         if response["results"]:
             package = response["results"][0]
-            self._estimates_of_econ_classes_expenditure_dataset[level] = Dataset.from_package(
-                package
-            )
+            self._estimates_of_econ_classes_expenditure_dataset[
+                level
+            ] = Dataset.from_package(package)
             return self._estimates_of_econ_classes_expenditure_dataset[level]
         else:
             return None
