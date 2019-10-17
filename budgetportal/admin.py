@@ -15,6 +15,7 @@ from budgetportal.models import (
     Video,
     VideoLanguage,
     FAQ,
+    ProvInfraProject,
 )
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 from budgetportal.bulk_upload import bulk_upload_view
@@ -24,13 +25,16 @@ from django.contrib.sites.models import Site
 from django.db.utils import ProgrammingError
 from django.contrib import messages
 from import_export.admin import ImportMixin
-from import_export.formats.base_formats import CSV
+from import_export.formats.base_formats import CSV, XLSX
 import logging
 
 from .import_export_admin import (
     DepartmentResource,
     DepartmentImportForm,
-    InfrastructureProjectResource)
+    InfrastructureProjectResource,
+    ProvInfraProjectImportForm,
+    ProvInfraProjectResource,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -42,15 +46,15 @@ class FinancialYearAdmin(admin.ModelAdmin):
 
 
 class SphereAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug',)
+    readonly_fields = ("slug",)
 
 
 class GovernmentAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug',)
+    readonly_fields = ("slug",)
 
 
 class GovtFunctionAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug',)
+    readonly_fields = ("slug",)
 
 
 class InfrastructureProjectAdmin(ImportMixin, admin.ModelAdmin):
@@ -76,33 +80,30 @@ class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
         Get the kwargs to send on to the department resource when
         we import departments.
         """
-        if u'sphere' in request.POST:
-            return {'sphere': request.POST[u'sphere']}
+        if u"sphere" in request.POST:
+            return {"sphere": request.POST[u"sphere"]}
         return {}
 
     list_display = (
-        'vote_number',
-        'name',
-        'get_government',
-        'get_sphere',
-        'get_financial_year',
+        "vote_number",
+        "name",
+        "get_government",
+        "get_sphere",
+        "get_financial_year",
     )
-    list_display_links = (
-        'vote_number',
-        'name',
-    )
+    list_display_links = ("vote_number", "name")
     list_filter = (
-        'government__sphere__financial_year__slug',
-        'government__sphere__name',
-        'government__name',
+        "government__sphere__financial_year__slug",
+        "government__sphere__name",
+        "government__name",
     )
     search_fields = (
-        'government__sphere__financial_year__slug',
-        'government__sphere__name',
-        'government__name',
-        'name',
+        "government__sphere__financial_year__slug",
+        "government__sphere__name",
+        "government__name",
+        "name",
     )
-    readonly_fields = ('slug',)
+    readonly_fields = ("slug",)
     list_per_page = 20
 
     def get_government(self, obj):
@@ -117,31 +118,28 @@ class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
 
 class ProgrammeAdmin(admin.ModelAdmin):
     list_display = (
-        'programme_number',
-        'name',
-        'get_department',
-        'get_government',
-        'get_sphere',
-        'get_financial_year',
+        "programme_number",
+        "name",
+        "get_department",
+        "get_government",
+        "get_sphere",
+        "get_financial_year",
     )
-    list_display_links = (
-        'programme_number',
-        'name',
-    )
+    list_display_links = ("programme_number", "name")
     list_filter = (
-        'department__government__sphere__financial_year__slug',
-        'department__government__sphere__name',
-        'department__government__name',
-        'department__name',
+        "department__government__sphere__financial_year__slug",
+        "department__government__sphere__name",
+        "department__government__name",
+        "department__name",
     )
     search_fields = (
-        'department__government__sphere__financial_year__slug',
-        'department__government__sphere__name',
-        'department__government__name',
-        'department__name',
-        'name',
+        "department__government__sphere__financial_year__slug",
+        "department__government__sphere__name",
+        "department__government__name",
+        "department__name",
+        "name",
     )
-    readonly_fields = ('slug',)
+    readonly_fields = ("slug",)
 
     def get_department(self, obj):
         return obj.department.name
@@ -163,12 +161,9 @@ class EntityDatasetsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         sphere = Sphere.objects.get(
-            financial_year__slug=self.financial_year_slug,
-            slug=self.sphere_slug,
+            financial_year__slug=self.financial_year_slug, slug=self.sphere_slug
         )
-        return {
-            'sphere': sphere,
-        }
+        return {"sphere": sphere}
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -184,23 +179,62 @@ class VideoLanguageInline(SortableTabularInline):
 
 
 class VideoAdmin(SortableAdmin):
-    inlines = [VideoLanguageInline, ]
+    inlines = [VideoLanguageInline]
     model = Video
 
-admin.site.register_view('bulk_upload', 'Bulk Upload', view=bulk_upload_view)
+
+class ProvInfraProjectAdmin(ImportMixin, admin.ModelAdmin):
+    # Resource class to be used by the django-import-export package
+    resource_class = ProvInfraProjectResource
+    # File format that can be used to import provincial infrastructure projects
+    formats = [XLSX]
+
+    def get_import_form(self):
+        """
+        Get the import form to use by the django-import-export package
+        to import provincial infrastructure projects.
+        """
+        return ProvInfraProjectImportForm
+
+    list_display = (
+        "name",
+        "project_number",
+        "province",
+        "department",
+        "_financial_year",
+    )
+    list_display_links = ("name", "project_number")
+    list_filter = ("financial_year__slug", "province", "department")
+    search_fields = ("name", "project_number")
+    list_per_page = 20
+
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        """
+        Return request which is necessary for import and confirm import requests
+        """
+        rk = super(ProvInfraProjectAdmin, self).get_resource_kwargs(
+            request, *args, **kwargs
+        )
+        rk["request"] = request
+        return rk
+
+    def _financial_year(self, obj):
+        return obj.financial_year.slug
+
+
+admin.site.register_view("bulk_upload", "Bulk Upload", view=bulk_upload_view)
 
 
 try:
     for financial_year in FinancialYear.objects.all():
         for sphere in financial_year.spheres.all():
             view = EntityDatasetsView.as_view(
-                financial_year_slug=financial_year.slug,
-                sphere_slug=sphere.slug,
+                financial_year_slug=financial_year.slug, sphere_slug=sphere.slug
             )
             path = "%s/%s/entity_datasets" % (financial_year.slug, sphere.slug)
             label = "Entity Datasets - %s %s" % (financial_year.slug, sphere.name)
             admin.site.register_view(path, label, view=view)
-except ProgrammingError, e:
+except ProgrammingError as e:
     logging.error(e, exc_info=True)
 
 
@@ -216,3 +250,4 @@ admin.site.register(Site, SiteAdmin)
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Event)
 admin.site.register(FAQ, SortableAdmin)
+admin.site.register(ProvInfraProject, ProvInfraProjectAdmin)

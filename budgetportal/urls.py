@@ -10,6 +10,7 @@ from . import views
 from sitemaps import sitemaps
 from django.core.exceptions import PermissionDenied
 from . import bulk_upload
+from webflow import urls as webflow_urls
 
 admin.site = AdminSitePlus()
 admin.autodiscover()
@@ -46,7 +47,6 @@ department_urlpatterns = [
         name="department-viz-subprog-econ4-bars",
     ),
 ]
-
 urlpatterns = [
     url("sentry-debug/", trigger_error),
     url(
@@ -73,7 +73,7 @@ urlpatterns = [
         "/(?P<sphere_slug>[\w-]+)"
         "/(?P<government_slug>[\w-]+)"
         "/(?P<department_slug>[\w-]+)$",
-        cache_page(CACHE_DAYS_SECS)(views.department_preview),
+        cache_page(CACHE_MINUTES_SECS)(views.department_preview),
         name="department-preview",
     ),
     url(
@@ -222,6 +222,7 @@ urlpatterns = [
         r"^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)",
         include(department_urlpatterns, namespace="national"),
         kwargs={"sphere_slug": "national", "government_slug": "south-africa"},
+        name="national-department",
     ),
     # - Provincial
     url(
