@@ -2,3 +2,4 @@ services:
   - docker
 script:
   - docker-compose run test
+  - "black --check --diff budgetportal manage.py discours --exclude budgetportal/bulk_upload.py"
