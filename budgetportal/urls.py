@@ -47,6 +47,7 @@ department_urlpatterns = [
         name="department-viz-subprog-econ4-bars",
     ),
 ]
+
 urlpatterns = [
     url("sentry-debug/", trigger_error),
     url(
@@ -245,6 +246,8 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+
+    url('^', include(webflow_urls.urlpatterns)),
 ]
 
 if settings.DEBUG_TOOLBAR:
