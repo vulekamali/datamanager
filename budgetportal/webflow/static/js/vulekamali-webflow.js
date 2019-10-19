@@ -1,9 +1,49 @@
 (function() {
+    var provinceCode = {
+        "Eastern Cape": "EC",
+        "Free State": "FS",
+        "Gauteng": "GT",
+        "KwaZulu-Natal": "KZN",
+        "Limpopo": "LIM",
+        "Mpumalanga": "MP",
+        "North West": "NW",
+        "Northern Cape": "NC",
+        "Western Cape": "WC"
+    };
+
 
     function formatCurrency(decimalString) {
         if (decimalString == null)
             return "";
         return "R " + Math.round(parseFloat(decimalString)).toLocaleString();
+    }
+
+    function addProvinceToMap(map, provinceName) {
+        $.get("https://mapit.code4sa.org/area/MDB:" + provinceCode[provinceName] +
+              "/feature.geojson?generation=2&simplify_tolerance=0.01")
+            .done(function(response) {
+                var layer = L.geoJSON(response).addTo(map);
+                map.fitBounds(layer.getBounds());
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error( jqXHR, textStatus, errorThrown );
+            });
+    }
+    function addMunisToMap(map, provinceName, districtName, localMuniName) {
+        $.get("https://mapit.code4sa.org/areas/MDB-levels:PR-" + provinceCode[provinceName] +
+              "|DC.geojson?generation=2&simplify_tolerance=0.01")
+            .done(function(response) {
+                var districts = response.features.filter(function(feature) {
+                    return feature.properties.name === districtName;
+                });
+                if (districts.length) {
+                    var district = districts[0];
+                    var layer = L.geoJSON(district).addTo(map);
+                }
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error( jqXHR, textStatus, errorThrown );
+            });
     }
 
     if ($("body.provincial-infrastructure-project-detail-page")) {
@@ -76,15 +116,20 @@
                 var muniMap = L.map("project-municipal-context-map-container")
                     .setView([response.centre_lat, response.centre_lon], 7);
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a><br\>Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                     maxZoom: 18,
                     id: 'mapbox.streets',
                     accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
                 }).addTo(muniMap);
+
+                addProvinceToMap(muniMap, pageData.project.province);
+                addMunisToMap(muniMap, pageData.project.province,
+                              pageData.project.district_municipality,
+                              pageData.project.local_municipality)
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
-                console.log( jqXHR, textStatus, errorThrown );
-            })
+                console.error( jqXHR, textStatus, errorThrown );
+            });
 
 
     }
