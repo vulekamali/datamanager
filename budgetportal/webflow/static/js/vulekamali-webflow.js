@@ -61,14 +61,32 @@
         // Maps and visualisations
         $(".embed-container").css("background-color", "#e1e1e1");
 
-        var mymap = L.map("project-location-map-container").setView([pageData.project.latitude, pageData.project.longitude], 13);
+        var locationMap = L.map("project-location-map-container")
+            .setView([pageData.project.latitude, pageData.project.longitude], 13);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
             id: 'mapbox.streets',
             accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
-        }).addTo(mymap);
-        var marker = L.marker([pageData.project.latitude, pageData.project.longitude]).addTo(mymap);
+        }).addTo(locationMap);
+        var marker = L.marker([pageData.project.latitude, pageData.project.longitude]).addTo(locationMap);
+
+        $.get("https://mapit.code4sa.org/area/MDB:LIM/geometry")
+            .done(function(response) {
+                var muniMap = L.map("project-municipal-context-map-container")
+                    .setView([response.centre_lat, response.centre_lon], 7);
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
+                }).addTo(muniMap);
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.log( jqXHR, textStatus, errorThrown );
+            })
+
+
     }
 
 })();
