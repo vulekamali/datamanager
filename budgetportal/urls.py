@@ -246,8 +246,7 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
-
-    url('^', include(webflow_urls.urlpatterns)),
+    url("^", include(webflow_urls.urlpatterns)),
 ]
 
 if settings.DEBUG_TOOLBAR:
