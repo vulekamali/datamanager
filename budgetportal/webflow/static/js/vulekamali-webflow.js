@@ -1,6 +1,6 @@
 (function() {
     // MapBox
-    var accessToken = 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
+    var accessToken = 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjazF3aXZ3NnYwMjU4M29udWppMWp6enVxIn0.yGE8zxBnb4g6A1QadgGY7g'
     var provinceCode = {
         "Eastern Cape": "EC",
         "Free State": "FS",
