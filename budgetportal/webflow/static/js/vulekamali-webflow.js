@@ -18,6 +18,32 @@
         return "R " + Math.round(parseFloat(decimalString)).toLocaleString();
     }
 
+    function initPointMap(lat, lon) {
+        var map = L.map("project-location-map-container")
+            .setView([lat, lon], 13);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
+        }).addTo(map);
+        return map;
+    }
+
+    function initMuniMap(lat, lon) {
+        var map = L.map("project-municipal-context-map-container")
+            .setView([lat, lon], 7);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a><br\>Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
+        }).addTo(map);
+        return map;
+    }
+
     function addProvinceToMap(map, provinceName) {
         $.get("https://mapit.code4sa.org/area/MDB:" + provinceCode[provinceName] +
               "/feature.geojson?generation=2&simplify_tolerance=0.01")
@@ -106,29 +132,15 @@
         // Maps and visualisations
         $(".embed-container").css("background-color", "#e1e1e1");
 
-        if (response.centre_lat !== null & response.centre_lon !== null) {
-            var locationMap = L.map("project-location-map-container")
-                .setView([project.latitude, project.longitude], 13);
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                maxZoom: 18,
-                id: 'mapbox.streets',
-                accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
-            }).addTo(locationMap);
+        if (project.latitude !== null & project.longitude !== null) {
+            var locationMap = initPointMap(project.latitude, project.longitude);
             var marker = L.marker([project.latitude, project.longitude]).addTo(locationMap);
 
         }
 
-        $.get("https://mapit.code4sa.org/area/MDB:" + provinceCode[response.project.province] + "/geometry")
+        $.get("https://mapit.code4sa.org/area/MDB:" + provinceCode[project.province] + "/geometry")
             .done(function(response) {
-                var muniMap = L.map("project-municipal-context-map-container")
-                    .setView([response.centre_lat, response.centre_lon], 7);
-                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a><br\>Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    maxZoom: 18,
-                    id: 'mapbox.streets',
-                    accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
-                }).addTo(muniMap);
+                var muniMap = initMuniMap(response.centre_lat, response.centre_lon);
 
                 addProvinceToMap(muniMap, project.province);
 
