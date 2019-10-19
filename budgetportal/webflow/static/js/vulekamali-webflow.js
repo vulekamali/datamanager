@@ -24,30 +24,25 @@
         return "R " + Math.round(parseFloat(decimalString)).toLocaleString();
     }
 
+    function createTileLayer() {
+        return L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 18,
+            subdomains: 'abc',
+        });
+    }
+
     function initPointMap(lat, lon) {
         var map = L.map("project-location-map-container")
             .setView([lat, lon], 13);
-
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken: accessToken,
-        }).addTo(map);
+        createTileLayer().addTo(map);
         return map;
     }
 
     function initMuniMap(lat, lon) {
         var map = L.map("project-municipal-context-map-container")
             .setView([lat, lon], 7);
-
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a><br\>Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken: accessToken,
-        }).addTo(map);
-
+        createTileLayer().addTo(map);
         return map;
     }
 
@@ -55,7 +50,12 @@
         $.get("https://mapit.code4sa.org/area/MDB:" + provinceCode[provinceName] +
               "/feature.geojson?generation=2&simplify_tolerance=0.01")
             .done(function(response) {
-                var layer = L.geoJSON(response).addTo(map)
+                var layer = L.geoJSON(response, {
+                    weight: 1,
+                    "fillColor": "#66c2a5",
+                    "fillOpacity": 0.3,
+                })
+                    .addTo(map)
                     .bindTooltip(function (layer) {
                         return layer.feature.properties.name + " Province";
                     }).addTo(map);
@@ -76,8 +76,13 @@
                     return feature.properties.name === muniName;
                 });
                 if (munis.length) {
-                    var muni = munis[0];
-                    var layer = L.geoJSON(muni).addTo(map)
+                    var muni = munis[0]; // Assume no duplicate names in a province
+                    var layer = L.geoJSON(muni, {
+                        weight: 1,
+                        "fillColor": "#66c2a5",
+                        "fillOpacity": 0.3,
+                    })
+                        .addTo(map)
                         .bindTooltip(function (layer) {
                             return layer.feature.properties.name + " " + level;
                         }).addTo(map);
