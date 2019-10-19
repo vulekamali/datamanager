@@ -1,4 +1,6 @@
 (function() {
+    // MapBox
+    var accessToken = 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
     var provinceCode = {
         "Eastern Cape": "EC",
         "Free State": "FS",
@@ -10,7 +12,11 @@
         "Northern Cape": "NC",
         "Western Cape": "WC"
     };
-
+    var levelToCode = {
+        "Local Municipality": "MN",
+        "Metro Municipality": "MN",
+        "District Municipality": "DC"
+    };
 
     function formatCurrency(decimalString) {
         if (decimalString == null)
@@ -26,7 +32,7 @@
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
             id: 'mapbox.streets',
-            accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
+            accessToken: accessToken,
         }).addTo(map);
         return map;
     }
@@ -39,8 +45,9 @@
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a><br\>Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
             id: 'mapbox.streets',
-            accessToken: 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjaW1uaHJ4dG0wMDIzeDNrcWxzMjd5NzBsIn0.KD3J1aUI7uB7n_yOOwoTnQ'
+            accessToken: accessToken,
         }).addTo(map);
+
         return map;
     }
 
@@ -48,7 +55,11 @@
         $.get("https://mapit.code4sa.org/area/MDB:" + provinceCode[provinceName] +
               "/feature.geojson?generation=2&simplify_tolerance=0.01")
             .done(function(response) {
-                var layer = L.geoJSON(response).addTo(map);
+                var layer = L.geoJSON(response).addTo(map)
+                    .bindTooltip(function (layer) {
+                        return layer.feature.properties.name + " Province";
+                    }).addTo(map);
+
                 map.fitBounds(layer.getBounds());
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
@@ -56,16 +67,20 @@
             });
     }
 
-    function addMuniToMap(map, provinceName, levelCode, muniName) {
+    function addMuniToMap(map, provinceName, level, muniName) {
+        var levelCode = levelToCode[level];
         $.get("https://mapit.code4sa.org/areas/MDB-levels:PR-" + provinceCode[provinceName] +
               "|" + levelCode + ".geojson?generation=2&simplify_tolerance=0.01")
             .done(function(response) {
-                var districts = response.features.filter(function(feature) {
+                var munis = response.features.filter(function(feature) {
                     return feature.properties.name === muniName;
                 });
-                if (districts.length) {
-                    var district = districts[0];
-                    var layer = L.geoJSON(district).addTo(map);
+                if (munis.length) {
+                    var muni = munis[0];
+                    var layer = L.geoJSON(muni).addTo(map)
+                        .bindTooltip(function (layer) {
+                            return layer.feature.properties.name + " " + level;
+                        }).addTo(map);
                 } else {
                     console.info("Couldn't find muni " + muniName + " by name in province");
                 }
@@ -146,12 +161,12 @@
 
                 if (project.district_municipality === project.local_municipality
                     & project.district_municipality != null) {
-                    addMuniToMap(muniMap, project.province, "MN", project.local_municipality);
+                    addMuniToMap(muniMap, project.province, "Metro Municipality", project.local_municipality);
                 } else {
                     if (project.district_municipality != null)
-                        addMuniToMap(muniMap, project.province, "DC", project.district_municipality);
+                        addMuniToMap(muniMap, project.province, "District Municipality", project.district_municipality);
                     if (project.local_municipality != null)
-                        addMuniToMap(muniMap, project.province, "MN", project.local_municipality);
+                        addMuniToMap(muniMap, project.province, "Local Municipality", project.local_municipality);
                 }
             })
             .fail(function(jqXHR, textStatus, errorThrown) {
