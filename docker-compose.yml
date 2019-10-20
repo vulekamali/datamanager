@@ -14,7 +14,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-dev
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver_plus 0.0.0.0:8000
     environment:
       - DATABASE_URL=postgresql://budgetportal@db/budgetportal
       - DJANGO_DEBUG_TOOLBAR=${DJANGO_DEBUG_TOOLBAR}
