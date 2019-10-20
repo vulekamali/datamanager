@@ -134,16 +134,16 @@ class IRMReportSheetTestCase(TestCase):
 
     def test_empty_rows_deleted(self):
         empty_row = [None] * self.report_sheet.data_set.width
-        num_of_current_rows = self.report_sheet.data_set.height
+        num_nonempty_rows = self.report_sheet.data_set.height
         num_of_empty_rows = 100
         for i in range(num_of_empty_rows):
             self.report_sheet.data_set.append(empty_row)
 
-        total_rows = num_of_current_rows + num_of_empty_rows
+        total_rows = num_nonempty_rows + num_of_empty_rows
         self.assertEqual(self.report_sheet.data_set.height, total_rows)
 
         self.report_sheet.process()
-        self.assertEqual(self.report_sheet.data_set.height, num_of_current_rows)
+        self.assertEqual(self.report_sheet.data_set.height, num_nonempty_rows)
 
 
 class IRMReportSheetWithOtherKeysTestCase(TestCase):
