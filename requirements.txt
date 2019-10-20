@@ -5,7 +5,7 @@ blessed==1.15.0
 cachetools==3.1.0
 certifi==2017.11.5
 chardet==3.0.4
-ckanapi==4.1
+ckanapi==4.3
 defusedxml==0.6.0
 diff-match-patch==20181111
 dj-database-url==0.3.0
@@ -27,7 +27,6 @@ django-q==0.9.4
 django-recaptcha==1.4.0
 docopt==0.6.2
 elastic-apm==3.0.2
-enum34==1.0.4
 et-xmlfile==1.0.1
 futures==3.0.3
 gevent==1.2.1
