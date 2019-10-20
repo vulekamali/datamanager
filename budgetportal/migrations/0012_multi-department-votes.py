@@ -21,14 +21,21 @@ class Migration(migrations.Migration):
             unique_together=set([("government", "slug"), ("government", "name")]),
         ),
         migrations.AddIndex(
-            model_name="department",
+            model_name='department',
             index=partial_index.PartialIndex(
-                fields=[b"government", b"vote_number"],
-                name="budgetporta_governm_531bf0_partial",
+                fields=['government', 'vote_number'],
+                name='budgetporta_governm_531bf0_partial',
                 unique=True,
-                where=b"is_vote_primary",
-                where_postgresql=b"",
-                where_sqlite=b"",
+                where=partial_index.PQ(is_vote_primary=True)
             ),
         ),
+        # migrations.AddIndex(
+        #     model_name="department",
+        #     index=partial_index.PartialIndex(
+        #         fields=[b"government", b"vote_number"],
+        #         name="budgetporta_governm_531bf0_partial",
+        #         unique=True,
+        #         where=partial_index.PQ(is_vote_primary=True),
+        #     ),
+        # ),
     ]

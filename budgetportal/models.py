@@ -12,7 +12,7 @@ from adminsortable.models import SortableMixin
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from itertools import groupby
-from partial_index import PartialIndex
+from partial_index import PartialIndex, PQ
 from pprint import pformat
 from urllib.parse import urljoin
 import logging
@@ -243,7 +243,7 @@ class Department(models.Model):
             PartialIndex(
                 fields=["government", "vote_number"],
                 unique=True,
-                where="is_vote_primary",
+                where=PQ(is_vote_primary=True),
             )
         ]
 
