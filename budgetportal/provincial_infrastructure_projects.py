@@ -103,7 +103,7 @@ class IRMReportSheet(object):
 
 
 def is_empty_cell(cell):
-    return not cell or (isinstance(cell, basestring) and len(cell.strip()) == 0)
+    return not cell or (isinstance(cell, str) and len(cell.strip()) == 0)
 
 
 def is_not_empty_cell(cell):

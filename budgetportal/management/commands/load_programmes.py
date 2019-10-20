@@ -61,7 +61,7 @@ class Command(BaseCommand):
                         else:
                             number_existing += 1
                     else:
-                        print("Couldn't find department for %r" % row)
+                        print(("Couldn't find department for %r" % row))
                         number_missing_department += 1
                         missing_departments.writerow(row)
         return yaml.dump(

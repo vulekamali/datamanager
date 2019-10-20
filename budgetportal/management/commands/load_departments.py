@@ -49,11 +49,11 @@ class Command(BaseCommand):
                         slug=slugify(row["government"]),
                     )
                 except Government.DoesNotExist:
-                    print(
+                    print((
                         "Missing government: {} {} {}".format(
                             financial_year, sphere, row["government"]
                         )
-                    )
+                    ))
                     raise
                 intro = ""
                 website_url = None

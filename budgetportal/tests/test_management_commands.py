@@ -2,7 +2,7 @@ from budgetportal.models import FinancialYear, Sphere, Government, Department, P
 from django.core.management import call_command
 from django.test import TestCase
 from tempfile import NamedTemporaryFile
-from StringIO import StringIO
+from io import StringIO
 import yaml
 from mock import Mock
 

@@ -80,8 +80,8 @@ class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
         Get the kwargs to send on to the department resource when
         we import departments.
         """
-        if u"sphere" in request.POST:
-            return {"sphere": request.POST[u"sphere"]}
+        if "sphere" in request.POST:
+            return {"sphere": request.POST["sphere"]}
         return {}
 
     list_display = (

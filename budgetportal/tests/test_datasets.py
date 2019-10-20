@@ -25,16 +25,16 @@ class TestDataset(TestCase):
     def test_get_latest_cpi_resource(self):
         results = [
             {
-                "financial_year": [u"2020-21"],
+                "financial_year": ["2020-21"],
                 "resources": [
-                    {"format": u"CSV", "id": u"0c173948-9674-4ca9-aec6-f144bde5cc1e"}
+                    {"format": "CSV", "id": "0c173948-9674-4ca9-aec6-f144bde5cc1e"}
                 ],
             },
             {
-                "financial_year": [u"2018-19"],
+                "financial_year": ["2018-19"],
                 "resources": [
-                    {"format": u"XLSX", "id": u"d1f96183-83e5-4ff1-87f5-c58e279b6f63"},
-                    {"format": u"CSV", "id": u"5b315ff0-55e9-4ba8-b88c-2d70093bfe9d"},
+                    {"format": "XLSX", "id": "d1f96183-83e5-4ff1-87f5-c58e279b6f63"},
+                    {"format": "CSV", "id": "5b315ff0-55e9-4ba8-b88c-2d70093bfe9d"},
                 ],
             },
         ]
@@ -48,9 +48,9 @@ class TestDataset(TestCase):
     def test_get_latest_cpi_resource_multiple_financial_year_values(self):
         results = [
             {
-                "financial_year": [u"2019-20", "2020-21"],
+                "financial_year": ["2019-20", "2020-21"],
                 "resources": [
-                    {"format": u"CSV", "id": u"0c173948-9674-4ca9-aec6-f144bde5cc1e"}
+                    {"format": "CSV", "id": "0c173948-9674-4ca9-aec6-f144bde5cc1e"}
                 ],
             }
         ]

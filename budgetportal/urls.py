@@ -7,10 +7,10 @@ from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.views.decorators.cache import cache_page
 from . import views
-from sitemaps import sitemaps
+from .sitemaps import sitemaps
 from django.core.exceptions import PermissionDenied
 from . import bulk_upload
-from webflow import urls as webflow_urls
+from .webflow import urls as webflow_urls
 
 admin.site = AdminSitePlus()
 admin.autodiscover()

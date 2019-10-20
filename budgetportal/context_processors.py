@@ -1,4 +1,4 @@
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
 from django.core.urlresolvers import reverse

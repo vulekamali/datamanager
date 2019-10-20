@@ -1,7 +1,7 @@
 from django.contrib import sitemaps
 from django.urls import reverse
 from budgetportal.summaries import get_consolidated_expenditure_treemap
-from guide_data import category_guides
+from .guide_data import category_guides
 from .models import InfrastructureProjectPart, FinancialYear, Department
 
 
@@ -82,7 +82,7 @@ class FocusViewSitemap(sitemaps.Sitemap):
 
 class GuidesViewSitemap(sitemaps.Sitemap):
     def items(self):
-        return category_guides.values()
+        return list(category_guides.values())
 
     def location(self, item):
         return reverse("guide-list", args=[item])

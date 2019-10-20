@@ -55,7 +55,7 @@ guides = {
                 "url_path": "/guides/estimates-of-provincial-expenditure",
             },
             {
-                "description": u"This guide relates to the structured adjusted estimates of expenditure data in CSV form the AENE PDF documents on each department page, and the accompanying Excel file with the document\u2019s tables",
+                "description": "This guide relates to the structured adjusted estimates of expenditure data in CSV form the AENE PDF documents on each department page, and the accompanying Excel file with the document\u2019s tables",
                 "name": "Adjusted Estimates of National Expenditure",
                 "url_path": "/guides/adjusted-estimates-of-national-expenditure",
             },
@@ -78,6 +78,6 @@ guides = {
     },
 }
 
-for slug, guide in guides.iteritems():
+for slug, guide in guides.items():
     guide["slug"] = slug
     guide["url"] = "/guides/%s" % slug

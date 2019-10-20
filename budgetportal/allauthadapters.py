@@ -1,7 +1,7 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.account.models import EmailAddress
-from urllib import urlencode
+from urllib.parse import urlencode
 
 
 class AccountAdapter(DefaultAccountAdapter):

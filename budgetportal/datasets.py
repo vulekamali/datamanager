@@ -6,12 +6,12 @@ from budgetportal.openspending import (
 from tempfile import mkdtemp
 import os
 import shutil
-import urlparse
+import urllib.parse
 import logging
 from django.conf import settings
 from pprint import pformat
 from ckanapi import NotFound
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 
 logger = logging.getLogger(__name__)
@@ -135,10 +135,10 @@ class Dataset:
                 url = url.replace(" ", "%20")
             logger.info("Downloading %s to upload to package %s", url, self.slug)
             tempdir = mkdtemp(prefix="budgetportal")
-            basename = urllib.unquote(os.path.basename(urlparse.urlparse(url).path))
+            basename = urllib.parse.unquote(os.path.basename(urllib.parse.urlparse(url).path))
             filename = os.path.join(tempdir, basename)
             logger.info("Downloading %s to %s", url, filename)
-            urllib.urlretrieve(url, filename)[0]
+            urllib.request.urlretrieve(url, filename)[0]
 
             logger.info(
                 "Uploading file %s as resource '%s' to package %s",
@@ -186,9 +186,7 @@ class Dataset:
         if self._openspending_api is not None:
             return self._openspending_api
         try:
-            api_resource = filter(
-                lambda r: r["format"].lower() == "openspending api", self.resources
-            )[0]
+            api_resource = [r for r in self.resources if r["format"].lower() == "openspending api"][0]
         except IndexError:
             return None
         api_class_mapping = {
@@ -235,14 +233,12 @@ class Dataset:
 
         # Get the dataset with the latest financial_year
         latest_dataset = max(
-            map(get_financial_year_and_resources, results),
+            list(map(get_financial_year_and_resources, results)),
             key=lambda x: x["financial_year"],
         )
 
         # Get the only resource with the CSV format
-        resources = filter(
-            lambda x: x.get("format", None) == "CSV", latest_dataset["resources"]
-        )
+        resources = [x for x in latest_dataset["resources"] if x.get("format", None) == "CSV"]
 
         assert len(resources) == 1 and "id" in resources[0]
 

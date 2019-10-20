@@ -1,7 +1,7 @@
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from datetime import datetime
 
-import urlparse
+import urllib.parse
 
 import requests
 from django.http import HttpResponse, Http404
@@ -12,9 +12,9 @@ from slugify import slugify
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.models import Video, Event, InfrastructureProjectPart, FAQ
 from budgetportal.openspending import PAGE_SIZE
-from models import FinancialYear, Sphere, Department, InfrastructureProjectPart
-from datasets import Dataset, Category
-from summaries import (
+from .models import FinancialYear, Sphere, Department, InfrastructureProjectPart
+from .datasets import Dataset, Category
+from .summaries import (
     get_preview_page,
     get_focus_area_preview,
     get_consolidated_expenditure_treemap,
@@ -22,8 +22,8 @@ from summaries import (
     DepartmentProgrammesEcon4,
     DepartmentSubprogEcon4,
 )
-from guide_data import guides as guide_data
-from guide_data import category_guides
+from .guide_data import guides as guide_data
+from .guide_data import category_guides
 import yaml
 import json
 import logging
@@ -591,9 +591,9 @@ def openspending_csv(request):
     :param request: HttpRequest
     :return: StreamingHttpResponse
     """
-    api_url = urllib.unquote(str(request.GET.get("api_url")))
+    api_url = urllib.parse.unquote(str(request.GET.get("api_url")))
 
-    parsed_url = urlparse.urlparse(api_url)
+    parsed_url = urllib.parse.urlparse(api_url)
     domain = "{uri.netloc}".format(uri=parsed_url)
     allowed_domains = {"openspending.org", "openspending.vulekamali.gov.za"}
     if domain not in allowed_domains:

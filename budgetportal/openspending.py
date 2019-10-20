@@ -2,7 +2,7 @@
 Abstracts away some of the mechanics of querying OpenSpending and some of the
 conventions of how we name fields in our Fiscal Data Packages.
 """
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from collections import OrderedDict
 from django.conf import settings
@@ -40,7 +40,7 @@ class BabbageFiscalDataset:
 
     def get_all_drilldowns(self):
         drilldowns = []
-        for key, value in self.model["dimensions"].iteritems():
+        for key, value in self.model["dimensions"].items():
             drilldowns.append(self.get_ref(key, "key"))
             drilldowns.append(self.get_ref(key, "label"))
         # Enforce uniqueness
@@ -50,9 +50,7 @@ class BabbageFiscalDataset:
 
     @staticmethod
     def filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value):
-        filtered_cells = filter(
-            lambda cell: cell[filter_ref] != filter_exclusion_value, cells
-        )
+        filtered_cells = [cell for cell in cells if cell[filter_ref] != filter_exclusion_value]
         return filtered_cells
 
     def aggregate_url(self, cuts=None, drilldowns=None, order=None):
@@ -67,8 +65,8 @@ class BabbageFiscalDataset:
         if order is not None:
             params["order"] = "|".join(order)
         url = self.cube_url + "aggregate/"
-        sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
-        return url + "?" + urllib.urlencode(sorted_params)
+        sorted_params = OrderedDict(sorted(list(params.items()), key=lambda t: t[0]))
+        return url + "?" + urllib.parse.urlencode(sorted_params)
 
     def aggregate(self, cuts=None, drilldowns=None, order=None):
         url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns, order=order)

@@ -28,7 +28,7 @@ def generate_csv_response(data):
 
 
 def iter_items(cells, pseudo_buffer):
-    headers_list = cells[0].keys()
+    headers_list = list(cells[0].keys())
     headers_dict = {}
     writer = csv.DictWriter(pseudo_buffer, fieldnames=sorted(headers_list))
 

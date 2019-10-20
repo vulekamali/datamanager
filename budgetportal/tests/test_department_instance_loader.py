@@ -41,7 +41,7 @@ class DepartmentInstanceLoaderTest(TestCase):
         self.instance_loader = DepartmentInstanceLoader(self.resource, self.dataset)
 
         instance = self.instance_loader.get_instance(self.dataset.dict[0])
-        self.assertEquals(self.department, instance)
+        self.assertEqual(self.department, instance)
 
     def test_get_instance_by_slug(self):
         row = [
@@ -54,7 +54,7 @@ class DepartmentInstanceLoaderTest(TestCase):
         self.instance_loader = DepartmentInstanceLoader(self.resource, self.dataset)
 
         instance = self.instance_loader.get_instance(self.dataset.dict[0])
-        self.assertEquals(self.department, instance)
+        self.assertEqual(self.department, instance)
 
     def test_get_instance_by_vote_number(self):
         row = [self.government.name, "Different department name", "True", 1]
@@ -62,7 +62,7 @@ class DepartmentInstanceLoaderTest(TestCase):
         self.instance_loader = DepartmentInstanceLoader(self.resource, self.dataset)
 
         instance = self.instance_loader.get_instance(self.dataset.dict[0])
-        self.assertEquals(self.department, instance)
+        self.assertEqual(self.department, instance)
 
     def test_get_non_existent_instance(self):
         row = [self.government.name, "Different department name", "False", 1]

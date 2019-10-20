@@ -14,12 +14,12 @@ from ckeditor.fields import RichTextField
 from itertools import groupby
 from partial_index import PartialIndex
 from pprint import pformat
-from urlparse import urljoin
+from urllib.parse import urljoin
 import logging
 import re
 import requests
 import string
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -448,7 +448,7 @@ class Department(models.Model):
                 if package["name"] not in datasets:
                     dataset = Dataset.from_package(package)
                     datasets[package["name"]] = dataset
-        return datasets.values()
+        return list(datasets.values())
 
     def get_estimates_of_econ_classes_expenditure_dataset(self, level=3):
         if (
@@ -548,7 +548,7 @@ class Department(models.Model):
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [
             str(y)
-            for y in xrange(financial_year_start_int - 4, financial_year_start_int + 3)
+            for y in range(financial_year_start_int - 4, financial_year_start_int + 3)
         ]
         expenditure = {
             "base_financial_year": FinancialYear.slug_from_year_start(str(base_year)),
@@ -714,7 +714,7 @@ class Department(models.Model):
             ]
 
             whitelist = {"Adjusted appropriation": types}
-            whitelist_keys = whitelist.keys()
+            whitelist_keys = list(whitelist.keys())
             phase = cell[budget_phase_ref]
             descript = cell[adjustment_kind_ref]
             if phase in whitelist_keys:
@@ -722,7 +722,7 @@ class Department(models.Model):
                     return True
             return False
 
-        cells_by_type = filter(filter_by_type, cells)
+        cells_by_type = list(filter(filter_by_type, cells))
         by_type = []
         for cell in cells_by_type:
             name = cell[adjustment_kind_ref]
@@ -818,7 +818,7 @@ class Department(models.Model):
                 "amount": cell["value.sum"],
             }
             if cell["value.sum"] != 0:
-                if cell[econ_class_2_ref] not in econ_classes.keys():
+                if cell[econ_class_2_ref] not in list(econ_classes.keys()):
                     econ_classes[cell[econ_class_2_ref]] = {
                         "type": "economic_classification_2",
                         "name": cell[econ_class_2_ref],
@@ -833,7 +833,7 @@ class Department(models.Model):
             econ_classes[econ_2_name]["items"] = sorted(
                 econ_classes[econ_2_name]["items"], key=name_func
             )
-        econ_classes_list = sorted(econ_classes.values(), key=name_func)
+        econ_classes_list = sorted(list(econ_classes.values()), key=name_func)
         return econ_classes_list if econ_classes_list else None
 
     @staticmethod
@@ -979,7 +979,7 @@ class Department(models.Model):
                     "label": cell[subprog_ref],
                 }
 
-        for subprog in subprog_dict.keys():
+        for subprog in list(subprog_dict.keys()):
             for cell in result_for_direct_charges["cells"]:
                 if cell[subprog_ref] == subprog:
                     if cell[phase_ref] == "Voted (Main appropriation)":
@@ -988,7 +988,7 @@ class Department(models.Model):
                             / float(cell["value.sum"])
                         ) * 100
 
-        return subprog_dict.values() if subprog_dict else None
+        return list(subprog_dict.values()) if subprog_dict else None
 
     def get_all_budget_totals_by_year_and_phase(self):
         """ Returns the total for each year:phase combination from the expenditure time series dataset. """
@@ -1021,7 +1021,7 @@ class Department(models.Model):
 
         total_budgets = {}
         for cell in total_budget_aggregated:
-            if cell[phase_ref] not in total_budgets.keys():
+            if cell[phase_ref] not in list(total_budgets.keys()):
                 total_budgets[cell[phase_ref]] = {
                     cell[year_ref]: float(cell["value.sum"])
                 }
@@ -1211,7 +1211,7 @@ class Department(models.Model):
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [
             str(y)
-            for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)
+            for y in range(financial_year_start_int - 3, financial_year_start_int + 1)
         ]
 
         expenditure = {"nominal": [], "real": []}
@@ -1325,7 +1325,7 @@ class Department(models.Model):
             no_data_for_years = []
             no_dept_for_years = []
             notices = []
-            for year, count in missing_phases_count.items():
+            for year, count in list(missing_phases_count.items()):
                 # 8 because 4 phases real and nominal
                 if count != 8:
                     # All phases for a given year must be missing before starting any checks
@@ -1383,7 +1383,7 @@ class Department(models.Model):
     def get_expenditure_time_series_by_programme(self):
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
-        year_ints = xrange(financial_year_start_int - 3, financial_year_start_int + 1)
+        year_ints = range(financial_year_start_int - 3, financial_year_start_int + 1)
         financial_year_starts = [str(y) for y in year_ints]
 
         programmes = {}
@@ -1470,7 +1470,7 @@ class Department(models.Model):
                             else:
                                 if (
                                     program
-                                    not in missing_phases_count[fiscal_year].keys()
+                                    not in list(missing_phases_count[fiscal_year].keys())
                                 ):
                                     missing_phases_count[fiscal_year][program] = 1
                                 else:
@@ -1478,10 +1478,10 @@ class Department(models.Model):
 
             no_prog_for_years = False
             notices = []
-            for year, progs in missing_phases_count.items():
+            for year, progs in list(missing_phases_count.items()):
                 if no_prog_for_years:
                     break
-                for p, count in progs.items():
+                for p, count in list(progs.items()):
                     if no_prog_for_years:
                         break
                     if count == 4:
@@ -1626,7 +1626,7 @@ class InfrastructureProjectPart(models.Model):
     @staticmethod
     def _parse_coordinate(coordinate):
         """ Expects a single set of coordinates (lat, long) split by a comma """
-        if not isinstance(coordinate, (str, unicode)):
+        if not isinstance(coordinate, str):
             raise TypeError("Invalid type for coordinate parsing")
         lat_long = [float(x) for x in coordinate.split(",")]
         cleaned_coordinate = {"latitude": lat_long[0], "longitude": lat_long[1]}
@@ -1662,7 +1662,7 @@ class InfrastructureProjectPart(models.Model):
         )
         province_result.raise_for_status()
         r = province_result.json()
-        list_of_objects_returned = r.values()
+        list_of_objects_returned = list(r.values())
         if len(list_of_objects_returned) > 0:
             province_name = list_of_objects_returned[0]["name"]
             return province_name
@@ -1674,9 +1674,9 @@ class InfrastructureProjectPart(models.Model):
         """ Searches name of project for province name or abbreviation """
         project_name_slug = slugify(project_name)
         new_dict = {}
-        for prov_name in prov_abbrev.keys():
+        for prov_name in list(prov_abbrev.keys()):
             new_dict[prov_name] = slugify(prov_name)
-        for name, slug in new_dict.items():
+        for name, slug in list(new_dict.items()):
             if slug in project_name_slug:
                 return name
         return None
@@ -1742,7 +1742,7 @@ class InfrastructureProjectPart(models.Model):
             return None
 
 
-prov_keys = prov_abbrev.keys()
+prov_keys = list(prov_abbrev.keys())
 prov_choices = tuple([(prov_key, prov_key) for prov_key in prov_keys])
 
 
@@ -1917,10 +1917,10 @@ class ProvInfraProject(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __unicode__(self):
-        return u"{0}".format(self.name)
+        return "{0}".format(self.name)
 
     def get_slug(self):
-        return slugify(u"{0} {1}".format(self.name, self.province))
+        return slugify("{0} {1}".format(self.name, self.province))
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
@@ -1968,7 +1968,7 @@ def get_cpi():
             cell["index"] = 100
     for idx in range(base_year_index - 1, -1, -1):
         cpi[idx]["index"] = cpi[idx + 1]["index"] / (1 + Decimal(cpi[idx + 1]["CPI"]))
-    for idx in xrange(base_year_index + 1, len(cpi)):
+    for idx in range(base_year_index + 1, len(cpi)):
         cpi[idx]["index"] = cpi[idx - 1]["index"] * (1 + Decimal(cpi[idx]["CPI"]))
     cpi_dict = {}
     for cell in cpi:
@@ -1984,7 +1984,7 @@ def get_vocab_map():
 
 
 def csv_url(aggregate_url):
-    querystring = "?api_url=" + urllib.quote(aggregate_url)
+    querystring = "?api_url=" + urllib.parse.quote(aggregate_url)
     csv_url = reverse("openspending_csv") + querystring
     if len(csv_url) > URL_LENGTH_LIMIT:
         raise Exception(

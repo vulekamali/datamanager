@@ -8,7 +8,7 @@ from budgetportal import models
 from django.test import TestCase
 from mock import Mock, patch
 import json
-import mock_data
+from . import mock_data
 
 # Hacky make sure we don't call out to openspending.
 import requests
@@ -455,11 +455,11 @@ class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
         )
         data = result["data"]
         self.assertEqual(len(data), 2)
-        data_keys = data.keys()
+        data_keys = list(data.keys())
         self.assertIn("items", data_keys)
         self.assertIn("total", data_keys)
         self.assertEqual(len(data["items"]), 3)
-        expenditure_keys = data["items"][0].keys()
+        expenditure_keys = list(data["items"][0].keys())
         self.assertIn("name", expenditure_keys)
         self.assertIn("amount", expenditure_keys)
         self.assertIn("percentage_of_total", expenditure_keys)
