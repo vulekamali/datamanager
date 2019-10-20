@@ -25,6 +25,21 @@ services:
     depends_on:
       - db
 
+  budgetportal:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev-py3
+    command: python manage.py runserver 0.0.0.0:8003
+    environment:
+      - DATABASE_URL=postgresql://budgetportal@db/budgetportal
+      - DJANGO_DEBUG_TOOLBAR=${DJANGO_DEBUG_TOOLBAR}
+    volumes:
+      - .:/code
+    ports:
+      - "8003:8003"
+    depends_on:
+      - db
+
   test:
     build:
       context: .
