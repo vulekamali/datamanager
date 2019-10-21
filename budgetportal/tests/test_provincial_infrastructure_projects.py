@@ -302,6 +302,18 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, contractor)
 
+    def test_search_multiple_fields(self):
+        ProvInfraProject.objects.create(
+            financial_year=self.fin_year,
+            IRM_project_id=12345,
+            name="Eastern Cape School",
+        )
+        data = {"search": "Eastern Cape"}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, '"name":"Eastern Cape School"')
+        self.assertContains(response, '"province":"Eastern Cape"')
+
     def test_create_project_failed(self):
         data = {"financial_year": self.fin_year, "IRM_project_id": 12345}
         response = self.client.post(self.url, data=data)
