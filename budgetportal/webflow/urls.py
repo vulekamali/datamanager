@@ -13,8 +13,8 @@ urlpatterns = [
         name="provincial-infra-project-detail",
     ),
     url(
-        r"^infrastructure-projects/provincial/search/$",
+        r"^/api/v1/infrastructure-projects/provincial/search/$",
         views.ProvInfraProjectView.as_view(),
-        name="search-provincial-infrastructure-projects",
+        name="provincial-infrastructure-project-api",
     ),
 ]

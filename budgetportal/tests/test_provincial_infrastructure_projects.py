@@ -181,7 +181,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
         """Create 30 Provincial Infrastructure Projects"""
 
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
-        self.url = reverse("search-provincial-infrastructure-projects")
+        self.url = reverse("provincial-infrastructure-project-api")
         self.provinces = [
             "Eastern Cape",
             "Free State",
