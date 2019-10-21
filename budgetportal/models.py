@@ -1925,6 +1925,7 @@ class ProvInfraProject(models.Model):
     def get_url_path(self):
         return slugify(u"/{0} {1}".format(self.IRM_project_id, self.name))
 
+
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
 # -or-has-a-sp
 def none_selected_query(vocab_name):
