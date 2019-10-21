@@ -1,0 +1,28 @@
+{% load define_action %}
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link crossorigin href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+<link crossorigin rel="stylesheet" href="https://viz.vulekamali.gov.za/main.css"/>
+<link crossorigin rel="stylesheet" href="https://viz.vulekamali.gov.za/econ4.css"/>
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://viz.vulekamali.gov.za/elements.js"></script>
+<script src="https://viz.vulekamali.gov.za/utils.js"></script>
+
+<div id="my_dataviz" class="department-econ4"
+     data-aggregate-url="{{ viz_data.get_aggregate_url }}"
+     data-openspending-model="{{ viz_data.get_model | jsonify | escape }}"
+     >
+</div>
+
+<script src="https://viz.vulekamali.gov.za/openspending.js"></script>
+<script src="https://viz.vulekamali.gov.za/vulekamali-openspending.js"></script>
+<script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
+<script>
+  var pymChild = new pym.Child();
+</script>
+<script src="https://viz.vulekamali.gov.za/dept-econ4.js"></script>
+<script src="https://viz.vulekamali.gov.za/saveSvgAsPng.js"></script>

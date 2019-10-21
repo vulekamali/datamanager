@@ -1,0 +1,55 @@
+{% load define_action %}
+
+
+{% assign ""|add:source_type|add:" "|add:year as source_text %}
+
+{% assign "Learn more about spending in the "|add:source_type|add:" as PDF" as pdf_text %}
+
+{% assign "Learn more about spending in the "|add:source_type|add:" as Excel" as excel_text %}
+
+{% assign "Dataset Guide for "|add:source_type as guide_text %}
+
+
+<div class="EconClassPackedCirclesSection" id="econ-classification">
+    <h3 class="Title Title--section">Classification of spending items</h3>
+
+    <div class="EconClassPackedCirclesSection-container">
+        <div class="EconClassPackedCirclesSection-item">
+            <div class="EconClassPackedCirclesSection-share u-marginTop10 u-marginBottom15">
+                <div data-component="Share" data-anchor="econ-classification" data-color="{{ color }}"></div>
+            </div>
+
+            <p class="js-tooltips">In addition to exploring the department budget by programmes, the budget is classified according to Economic Classification.</p>
+
+            <p class="js-tooltips">The Economic Classification of a department's expenditure distinguishes between various categories of current expenditure and capital expenditure. The purpose of the economic classification is to categorise transactions according to type of object or input, such as <em>compensation of employees</em> or <em>capital assets</em>.</p>
+
+            <p class="js-tooltips">This visualisation highlights how many categories of expenditure there are for this department at Economic Classification level 4, and which ones are the biggest.</p>
+
+            <ul class="LinksList">
+                {% if prog_econ4_circles_data.get_dataset %}
+                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=prog_econ4_circles_data.get_dataset.get_url_path type="dataset" %}
+                {% endif %}
+
+                {% if prog_econ4_circles_data.get_dataset %}
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=prog_econ4_circles_data.get_detail_csv_url type="download" %}
+                {% endif %}
+
+                {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+
+                {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
+
+                {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+            </ul>
+        </div>
+
+        {% if prog_econ4_circles_data.get_dataset %}
+        <div class="EconClassPackedCirclesSection-item EconClassPackedCirclesSection-item--right">
+            <div class="Card">
+              <iframe src="{{ prog_econ4_circles_url }}"></iframe>
+            </div>
+        </div>
+        {% else %}
+        <div class="Message Message--secondary Missing">Economic Classification level 4 data for this financial year is not available on vulekamali.</div>
+        {% endif %}
+    </div>
+</div>

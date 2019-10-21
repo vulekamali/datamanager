@@ -28,8 +28,9 @@ def djangofy(htmlfile):
 
     file_contents = asset_path_regex.sub(r'"/static/\1/', file_contents)
     file_contents = insert_at_body_end(file_contents, "<script>var pageData = {{ page_data_json|safe }}</script>")
+    file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>')
     file_contents = insert_at_body_end(file_contents, '<script src="/static/js/vulekamali-webflow.js"></script>')
-
+    file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>')
     with open(htmlfile, "w") as f:
         f.write(file_contents)
 
@@ -38,6 +39,14 @@ def insert_at_body_end(page_html_string, string_to_insert):
     result_string = page_html_string.replace("</body>", replacement)
     if len(result_string) <= len(page_html_string):
         raise Exception("body end tag not found.")
+    return result_string
+
+
+def insert_at_head_end(page_html_string, string_to_insert):
+    replacement = string_to_insert + "\n</head>"
+    result_string = page_html_string.replace("</head>", replacement)
+    if len(result_string) <= len(page_html_string):
+        raise Exception("head end tag not found.")
     return result_string
 
 

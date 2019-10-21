@@ -17,6 +17,9 @@ from summaries import (
     get_preview_page,
     get_focus_area_preview,
     get_consolidated_expenditure_treemap,
+    DepartmentSubprogrammes,
+    DepartmentProgrammesEcon4,
+    DepartmentSubprogEcon4,
 )
 from guide_data import guides as guide_data
 from guide_data import category_guides
@@ -260,16 +263,6 @@ def department_page(
             }
         )
 
-    # ======== programmes =========================
-    programmes = department.get_programme_budgets()
-    if not programmes:
-        programmes = {}
-    if (not programmes) or (not programmes["programme_budgets"]):
-        programmes["programme_budgets"] = [
-            {"name": p.name, "total_budget": None}
-            for p in department.programmes.order_by("programme_number")
-        ]
-
     # ======= main budget docs =========================
     budget_dataset = department.get_dataset(group_name="budget-vote-documents")
     if budget_dataset:
@@ -318,9 +311,18 @@ def department_page(
         description_govt = department.government.name
 
     context = {
-        "economic_classification_by_programme": department.get_econ_by_programme_budgets(),
-        "programme_by_economic_classification": department.get_prog_by_econ_budgets(),
-        "subprogramme_by_programme": department.get_subprog_budgets(),
+        "subprogramme_viz_data": DepartmentSubprogrammes(department),
+        "subprog_treemap_url": get_viz_url(
+            department, "department-viz-subprog-treemap"
+        ),
+        "prog_econ4_circles_data": DepartmentProgrammesEcon4(department),
+        "prog_econ4_circles_url": get_viz_url(
+            department, "department-viz-subprog-econ4-circles"
+        ),
+        "subprog_econ4_bars_data": DepartmentSubprogEcon4(department),
+        "subprog_econ4_bars_url": get_viz_url(
+            department, "department-viz-subprog-econ4-bars"
+        ),
         "expenditure_over_time": department.get_expenditure_over_time(),
         "budget_actual": department.get_expenditure_time_series_summary(),
         "budget_actual_programmes": department.get_expenditure_time_series_by_programme(),
@@ -340,7 +342,6 @@ def department_page(
             "name": department.government.sphere.name,
             "slug": department.government.sphere.slug,
         },
-        "programmes": programmes,
         "selected_financial_year": financial_year_id,
         "selected_tab": "departments",
         "title": "%s budget %s  - vulekamali" % (department.name, selected_year.slug),
@@ -371,6 +372,66 @@ def department_page(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
     return render(request, "department.html", context=context)
+
+
+def get_viz_url(department, url_name_suffix):
+    if department.government.sphere.slug == "national":
+        return reverse(
+            "national:" + url_name_suffix,
+            args=[department.government.sphere.financial_year.slug, department.slug],
+        )
+    elif department.government.sphere.slug == "provincial":
+        return reverse(
+            "provincial:" + url_name_suffix,
+            args=[
+                department.government.sphere.financial_year.slug,
+                department.government.sphere.slug,
+                department.government.slug,
+                department.slug,
+            ],
+        )
+
+
+def get_department_by_slugs(
+    financial_year_id, sphere_slug, government_slug, department_slug
+):
+    return get_object_or_404(
+        Department,
+        slug=department_slug,
+        government__slug=government_slug,
+        government__sphere__slug=sphere_slug,
+        government__sphere__financial_year__slug=financial_year_id,
+    )
+
+
+def department_viz_subprog_treemap(
+    request, financial_year_id, sphere_slug, government_slug, department_slug
+):
+    department = get_department_by_slugs(
+        financial_year_id, sphere_slug, government_slug, department_slug
+    )
+    context = {"viz_data": DepartmentSubprogrammes(department)}
+    return render(request, "department_viz_subprogrammes.html", context=context)
+
+
+def department_viz_subprog_econ4_circles(
+    request, financial_year_id, sphere_slug, government_slug, department_slug
+):
+    department = get_department_by_slugs(
+        financial_year_id, sphere_slug, government_slug, department_slug
+    )
+    context = {"viz_data": DepartmentProgrammesEcon4(department)}
+    return render(request, "department_viz_subprog_econ4_circles.html", context=context)
+
+
+def department_viz_subprog_econ4_bars(
+    request, financial_year_id, sphere_slug, government_slug, department_slug
+):
+    department = get_department_by_slugs(
+        financial_year_id, sphere_slug, government_slug, department_slug
+    )
+    context = {"viz_data": DepartmentSubprogEcon4(department)}
+    return render(request, "department_viz_subprog_econ4_bars.html", context=context)
 
 
 def infrastructure_projects_overview(request):
@@ -533,7 +594,8 @@ def openspending_csv(request):
 
     parsed_url = urlparse.urlparse(api_url)
     domain = "{uri.netloc}".format(uri=parsed_url)
-    if domain != "openspending.org":
+    allowed_domains = {"openspending.org", "openspending.vulekamali.gov.za"}
+    if domain not in allowed_domains:
         return HttpResponse(
             "Invalid domain received: %s (Only openspending.org is allowed)" % domain,
             status=403,

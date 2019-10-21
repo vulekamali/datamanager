@@ -1,0 +1,55 @@
+{% load define_action %}
+
+
+{% assign ""|add:source_type|add:" "|add:year as source_text %}
+
+{% assign "Learn more about spending in the "|add:source_type|add:" as PDF" as pdf_text %}
+
+{% assign "Learn more about spending in the "|add:source_type|add:" as Excel" as excel_text %}
+
+{% assign "Dataset Guide for "|add:source_type as guide_text %}
+
+
+<div class="ProgramEconSmallMultiplesSection" id="econ-classification">
+    <h3 class="Title Title--section">Programme spending under economic classifications</h3>
+
+    <div class="ProgramEconSmallMultiplesSection-container">
+        <div class="ProgramEconSmallMultiplesSection-item">
+            <div class="ProgramEconSmallMultiplesSection-share u-marginTop10 u-marginBottom15">
+                <div data-component="Share" data-anchor="econ-classification" data-color="{{ color }}"></div>
+            </div>
+
+            <p class="js-tooltips">Budget programmes will differ in composition of spending, from compensation of employees, transfers to other agencies and goods and services, depending on their objective.</p>
+
+            <p class="js-tooltips">Select an Economic Classification to filter the data in this chart and see how much programmes spend on that category.</p>
+
+            <p class="js-tooltips"Only the categories that this department spends on are shown in the filter.</p>
+
+            <ul class="LinksList">
+                {% if subprog_econ4_bars_data.get_dataset %}
+                {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprog_econ4_bars_data.get_dataset.get_url_path type="dataset" %}
+                {% endif %}
+
+                {% if subprog_econ4_bars_data.get_dataset %}
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprog_econ4_bars_data.get_detail_csv_url type="download" %}
+                {% endif %}
+
+                {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+
+                {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
+
+                {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+            </ul>
+        </div>
+
+        {% if subprog_econ4_bars_data.get_dataset %}
+        <div class="ProgramEconSmallMultiplesSection-item ProgramEconSmallMultiplesSection-item--right">
+            <div class="Card">
+              <div id="programme-econ-small-multiples" data-src="{{ subprog_econ4_bars_url }}"></div>
+            </div>
+        </div>
+        {% else %}
+        <div class="Message Message--secondary Missing">Economic Classification level 4 data for this financial year is not available on vulekamali.</div>
+        {% endif %}
+    </div>
+</div>
