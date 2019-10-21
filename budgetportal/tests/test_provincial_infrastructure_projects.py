@@ -303,10 +303,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertContains(response, contractor)
 
     def test_create_project_failed(self):
-        data = {
-            "financial_year": self.fin_year,
-            "IRM_project_id": 12345,
-        }
+        data = {"financial_year": self.fin_year, "IRM_project_id": 12345}
         response = self.client.post(self.url, data=data)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
@@ -318,14 +315,12 @@ class ProvInfraProjectAPITestCase(APITestCase):
             "status": "CHANGED",
         }
         response = self.client.patch(self.url, data=data)
-        self.assertEqual(response.status_code,
-                         status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_delete_project_failed(self):
         data = {"id": 1}
         response = self.client.delete(self.url, data=data)
-        self.assertEqual(response.status_code,
-                         status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 class ProvInfraProjectContentTestCase(APITestCase):
