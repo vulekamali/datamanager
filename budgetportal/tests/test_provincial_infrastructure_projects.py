@@ -182,24 +182,9 @@ class ProvInfraProjectAPITestCase(APITestCase):
 
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.url = reverse("search-provincial-infrastructure-projects")
-        self.province = u"Eastern Cape"
-        self.status = u"Construction"
-        self.source = u"Community Library Service Grant"
-        self.department = u"Department 1"
-        self.name = u"Project 1"
-        self.municipality = u"Local 2"
-        self.contractor = u"Contractor 3"
-
         self.provinces = [
             "Eastern Cape",
             "Free State",
-            "Gauteng",
-            "KwaZulu-Natal",
-            "Limpopo",
-            "Mpumalanga",
-            "North West",
-            "Northern Cape",
-            "Western Cape",
         ]
         self.statuses = ["Design", "Tender", "Feasibility", "Construction"]
         self.sources = [
@@ -232,9 +217,10 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertLessEqual(number_of_results, 20)
 
     def test_filter_by_department(self):
-        project = ProvInfraProject.objects.get(department=self.department)
+        department = "Department 1"
+        project = ProvInfraProject.objects.get(department=department)
 
-        data = {"department": self.department}
+        data = {"department": department}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -242,18 +228,12 @@ class ProvInfraProjectAPITestCase(APITestCase):
         response_data = response.data["results"][0]
         self.assertEqual(number_of_projects, 1)
         self.assertEqual(response_data["name"], project.name)
-        self.assertEqual(response_data["province"], project.province)
-        self.assertEqual(
-            response_data["local_municipality"], project.local_municipality
-        )
-        self.assertEqual(
-            response_data["district_municipality"], project.district_municipality
-        )
 
     def test_filter_by_province(self):
-        projects = ProvInfraProject.objects.filter(province=self.province)
+        province = "Eastern Cape"
+        projects = ProvInfraProject.objects.filter(province=province)
 
-        data = {"province": self.province}
+        data = {"province": province}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -261,9 +241,10 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(number_of_projects, projects.count())
 
     def test_filter_by_status(self):
-        projects = ProvInfraProject.objects.filter(status=self.status)
+        status_ = "Construction"
+        projects = ProvInfraProject.objects.filter(status=status_)
 
-        data = {"status": self.status}
+        data = {"status": status_}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -271,9 +252,10 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(number_of_projects, projects.count())
 
     def test_filter_by_funding_source(self):
-        projects = ProvInfraProject.objects.filter(primary_funding_source=self.source)
+        source = "Community Library Service Grant"
+        projects = ProvInfraProject.objects.filter(primary_funding_source=source)
 
-        data = {"primary_funding_source": self.source}
+        data = {"primary_funding_source": source}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -281,28 +263,32 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(number_of_projects, projects.count())
 
     def test_search_by_project_name(self):
-        data = {"search": self.name}
+        name = "Project 1"
+        data = {"search": name}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, self.name)
+        self.assertContains(response, name)
 
     def test_search_by_municipality(self):
-        data = {"search": self.municipality}
+        municipality = "Local 1"
+        data = {"search": municipality}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, self.municipality)
+        self.assertContains(response, municipality)
 
     def test_search_by_province(self):
-        data = {"search": self.province}
+        province = "Eastern Cape"
+        data = {"search": province}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, self.province)
+        self.assertContains(response, province)
 
     def test_search_by_contractor(self):
-        data = {"search": self.contractor}
+        contractor = "Contractor 3"
+        data = {"search": contractor}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, self.contractor)
+        self.assertContains(response, contractor)
 
     def test_project_detail_content(self):
         project = ProvInfraProject.objects.first()
