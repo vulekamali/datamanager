@@ -64,16 +64,25 @@ class ProvInfraProjectView(generics.ListAPIView):
     ]
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = ProvInfraProjectSerializer(queryset, many=True)
-
         base_url = (
             get_current_site(request).domain + "/infrastructure-projects/provincial/"
         )
         project_urls = []
+
+        queryset = self.filter_queryset(self.get_queryset())
         for project in queryset:
             project_urls.append(project.get_url_path())
 
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            response_list = serializer.data
+            for index, response in enumerate(response_list):
+                url = base_url + project_urls[index]
+                response.update({"url": url})
+            return self.get_paginated_response(response_list)
+
+        serializer = self.get_serializer(queryset, many=True)
         response_list = serializer.data
         for index, response in enumerate(response_list):
             url = base_url + project_urls[index]
