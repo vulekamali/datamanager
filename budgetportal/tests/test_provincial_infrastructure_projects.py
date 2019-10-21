@@ -292,7 +292,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
 
     def test_project_detail_content(self):
         project = ProvInfraProject.objects.first()
-        args = [project.IRM_project_id, str(project.name).replace(" ", "-")]
+        args = [project.IRM_project_id, project.get_slug()]
         url = reverse("provincial-infra-project-detail", args=args)
         response = self.client.get(url)
 
