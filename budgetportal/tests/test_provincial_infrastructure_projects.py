@@ -182,10 +182,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
 
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.url = reverse("provincial-infrastructure-project-api")
-        self.provinces = [
-            "Eastern Cape",
-            "Free State",
-        ]
+        self.provinces = ["Eastern Cape", "Free State"]
         self.statuses = ["Design", "Construction"]
         self.sources = [
             "Education Infrastructure Grant",
@@ -291,6 +288,10 @@ class ProvInfraProjectAPITestCase(APITestCase):
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, contractor)
+
+
+class ProvInfraProjectContentTestCase(APITestCase):
+    fixtures = ["provincial-infrastructure-projects"]
 
     def test_project_detail_content(self):
         project = ProvInfraProject.objects.first()
