@@ -186,13 +186,21 @@ class ProvInfraProjectAPITestCase(APITestCase):
             "Eastern Cape",
             "Free State",
         ]
-        self.statuses = ["Design", "Tender", "Feasibility", "Construction"]
+        self.statuses = ["Design", "Construction"]
         self.sources = [
-            "Equitable Share",
             "Education Infrastructure Grant",
             "Community Library Service Grant",
         ]
         for i in range(30):
+            if i < 15:
+                status = self.statuses[0]
+                province = self.provinces[0]
+                source = self.sources[0]
+            else:
+                status = self.statuses[1]
+                province = self.provinces[1]
+                source = self.sources[1]
+
             ProvInfraProject.objects.create(
                 financial_year=self.fin_year,
                 IRM_project_id=i,
@@ -200,9 +208,9 @@ class ProvInfraProjectAPITestCase(APITestCase):
                 department="Department {}".format(i),
                 local_municipality="Local {}".format(i),
                 district_municipality="District {}".format(i),
-                province=random.choice(self.provinces),
-                status=random.choice(self.statuses),
-                primary_funding_source=random.choice(self.sources),
+                province=province,
+                status=status,
+                primary_funding_source=source,
                 main_contractor="Contractor {}".format(i),
                 principle_agent="Principle Agent {}".format(i),
                 program_implementing_agent="Program Agent {}".format(i),
@@ -231,36 +239,30 @@ class ProvInfraProjectAPITestCase(APITestCase):
 
     def test_filter_by_province(self):
         province = "Eastern Cape"
-        projects = ProvInfraProject.objects.filter(province=province)
-
         data = {"province": province}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         number_of_projects = len(response.data["results"])
-        self.assertEqual(number_of_projects, projects.count())
+        self.assertEqual(number_of_projects, 15)
 
     def test_filter_by_status(self):
         status_ = "Construction"
-        projects = ProvInfraProject.objects.filter(status=status_)
-
         data = {"status": status_}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         number_of_projects = len(response.data["results"])
-        self.assertEqual(number_of_projects, projects.count())
+        self.assertEqual(number_of_projects, 15)
 
     def test_filter_by_funding_source(self):
         source = "Community Library Service Grant"
-        projects = ProvInfraProject.objects.filter(primary_funding_source=source)
-
         data = {"primary_funding_source": source}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         number_of_projects = len(response.data["results"])
-        self.assertEqual(number_of_projects, projects.count())
+        self.assertEqual(number_of_projects, 15)
 
     def test_search_by_project_name(self):
         name = "Project 1"
