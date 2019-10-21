@@ -51,6 +51,7 @@ class IRMReportSheet(object):
         self.data_set_dict = data_set.dict
         self.output_data_set = self.create_output_data_set()
         self.contractor_columns = self._get_project_contractor_columns(data_set)
+        self.row_to_delete = []
 
     @staticmethod
     def _get_project_contractor_columns(data_set):
@@ -68,10 +69,12 @@ class IRMReportSheet(object):
     def process(self):
         for i in range(len(self.data_set)):
             self.process_row(i)
+        self.delete_empty_rows()
 
     def process_row(self, row_index):
         row = self.data_set[row_index]
         if is_empty_row(row):
+            self.row_to_delete.append(row_index)
             return
 
         row_contractors = self.get_row_contractors(row)
@@ -100,6 +103,10 @@ class IRMReportSheet(object):
                 row_contractors[EXTRA_AGENT_HEADER].append(cell)
 
         return ["\n".join(row_contractors[k]) for k in AGENT_HEADERS]
+
+    def delete_empty_rows(self):
+        for index in reversed(self.row_to_delete):
+            del self.data_set[index]
 
 
 def is_empty_cell(cell):

@@ -398,6 +398,18 @@ class ProvInfraProjectResource(resources.ModelResource):
         report_sheet = IRMReportSheet(dataset)
         report_sheet.process()
 
+        # During process, empty rows must be deleted first from the dataset
+        # the following code checks whether number of rows are the same for
+        # the given dataset and the output dataset. If not, raises exception
+        num_of_rows_dataset = report_sheet.data_set.height
+        num_of_rows_output_dataset = report_sheet.output_data_set.height
+        if num_of_rows_dataset != num_of_rows_output_dataset:
+            raise Exception(
+                "Number of rows in dataset({0}) don't match with the number of rows in the output dataset({1})!".format(
+                    num_of_rows_dataset, num_of_rows_output_dataset
+                )
+            )
+
         # Following loops delete contractor columns and append mapped
         # agent/contractor/parties columns respectively
         for header in reversed(report_sheet.contractor_columns):
