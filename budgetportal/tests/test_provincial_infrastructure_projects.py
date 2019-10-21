@@ -302,6 +302,31 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, contractor)
 
+    def test_create_project_failed(self):
+        data = {
+            "financial_year": self.fin_year,
+            "IRM_project_id": 12345,
+        }
+        response = self.client.post(self.url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_change_project_failed(self):
+        data = {
+            "id": 1,
+            "financial_year": self.fin_year,
+            "IRM_project_id": 123456789,
+            "status": "CHANGED",
+        }
+        response = self.client.patch(self.url, data=data)
+        self.assertEqual(response.status_code,
+                         status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_delete_project_failed(self):
+        data = {"id": 1}
+        response = self.client.delete(self.url, data=data)
+        self.assertEqual(response.status_code,
+                         status.HTTP_405_METHOD_NOT_ALLOWED)
+
 
 class ProvInfraProjectContentTestCase(APITestCase):
     fixtures = ["provincial-infrastructure-projects"]
