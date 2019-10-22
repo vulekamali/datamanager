@@ -1,5 +1,13 @@
 [
 {
+  "model": "budgetportal.financialyear",
+  "pk": 1,
+  "fields": {
+      "slug": "2029-30",
+      "published": false
+  }
+},
+{
   "model": "budgetportal.provinfraproject",
   "pk": 1,
   "fields": {
