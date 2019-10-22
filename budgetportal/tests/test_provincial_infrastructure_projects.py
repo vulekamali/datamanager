@@ -304,12 +304,19 @@ class ProvInfraProjectAPITestCase(APITestCase):
             financial_year=self.fin_year,
             IRM_project_id=12345,
             name="Something School",
+            province="Eastern Cape",
         )
         data = {"search": "Eastern Cape School"}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, '"name":"Eastern Cape School"')
-        self.assertContains(response, '"province":"Eastern Cape"')
+
+        results = response.data["results"]
+
+        # There should be only one match because first 30 objects don't
+        # have school word
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["province"], "Eastern Cape")
+        self.assertEqual(results[0]["name"], "Something School")
 
     def test_create_project_failed(self):
         data = {"financial_year": self.fin_year, "IRM_project_id": 12345}
@@ -330,6 +337,19 @@ class ProvInfraProjectAPITestCase(APITestCase):
         data = {"id": 1}
         response = self.client.delete(self.url, data=data)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_url_path(self):
+        name = "Project 10"
+        data = {"search": name}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        result = response.data["results"][0]
+        url = result["url"]
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, name)
 
 
 class ProvInfraProjectContentTestCase(APITestCase):
