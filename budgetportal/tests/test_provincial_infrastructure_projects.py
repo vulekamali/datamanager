@@ -305,7 +305,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
             IRM_project_id=12345,
             name="Eastern Cape School",
         )
-        data = {"search": "Eastern Cape"}
+        data = {"search": "Eastern Cape School"}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, '"name":"Eastern Cape School"')
