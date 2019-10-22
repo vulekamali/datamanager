@@ -303,7 +303,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
         ProvInfraProject.objects.create(
             financial_year=self.fin_year,
             IRM_project_id=12345,
-            name="Eastern Cape School",
+            name="Something School",
         )
         data = {"search": "Eastern Cape School"}
         response = self.client.get(self.url, data)
