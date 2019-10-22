@@ -333,12 +333,11 @@ class ProvInfraProjectAPITestCase(APITestCase):
 
 
 class ProvInfraProjectContentTestCase(APITestCase):
-    fixtures = ["provincial-infrastructure-projects"]
+    fixtures = ["test-provincial-infrastructure-projects"]
 
     def test_project_detail_content(self):
         project = ProvInfraProject.objects.first()
-        args = [project.IRM_project_id, project.get_slug()]
-        url = reverse("provincial-infra-project-detail", args=args)
+        url = project.get_url_path(project)
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
