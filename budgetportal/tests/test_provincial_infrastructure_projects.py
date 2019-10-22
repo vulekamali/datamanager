@@ -333,7 +333,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
 
 
 class ProvInfraProjectContentTestCase(APITestCase):
-    fixtures = ["test-provincial-infrastructure-projects"]
+    fixtures = ["test-prov-infra-project-content"]
 
     def test_project_detail_content(self):
         project = ProvInfraProject.objects.first()
