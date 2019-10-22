@@ -1,5 +1,4 @@
 import os
-import random
 
 from django.urls import reverse
 from rest_framework import status
@@ -20,8 +19,6 @@ from budgetportal.tests.helpers import BaseSeleniumTestCase
 USERNAME = "testuser"
 EMAIL = "testuser@domain.com"
 PASSWORD = "12345"
-
-random.seed(123456789)
 
 
 class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
