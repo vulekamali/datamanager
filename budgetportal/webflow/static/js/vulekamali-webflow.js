@@ -1,4 +1,5 @@
 (function() {
+
     // MapBox
     var accessToken = 'pk.eyJ1IjoiamJvdGhtYSIsImEiOiJjazF3aXZ3NnYwMjU4M29udWppMWp6enVxIn0.yGE8zxBnb4g6A1QadgGY7g'
     var provinceCode = {
@@ -95,9 +96,10 @@
             });
     }
 
-    var project = pageData.project;
 
-    if ($("body.provincial-infrastructure-project-detail-page")) {
+    if ($("body.provincial-infrastructure-project-detail-page").length) {
+        var project = pageData.project;
+
         // Project definition
         $(".name-field").html(project.name);
         $(".project-number-field").html(project.project_number);
@@ -177,8 +179,23 @@
             .fail(function(jqXHR, textStatus, errorThrown) {
                 console.error(jqXHR, textStatus, errorThrown);
             });
+    }  // end project page
 
+    if ($("#Infrastructure-Search-Input").length) {
+        var template = $("#result-list-container .narrow-card_wrapper:first").clone();
+        $("#result-list-container .narrow-card_wrapper").remove()
+        template.find(".narrow-card_icon").remove();
 
-    }
+        pageData.projects.forEach(function(project) {
+            var resultItem = template.clone();
+            resultItem.attr("href", project.url_path);
+            resultItem.find(".narrow-card_title").html(project.name);
+            resultItem.find(".narrow-card_middle-column:first").html(project.status);
+            resultItem.find(".narrow-card_middle-column:last").html(project.estimated_completion_date);
+            resultItem.find(".narrow-card_last-column").html(formatCurrency(project.total_project_cost));
+            $("#result-list-container").append(resultItem);
+        });
+
+    } // end search page
 
 })();

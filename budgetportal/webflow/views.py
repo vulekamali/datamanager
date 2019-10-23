@@ -25,7 +25,8 @@ class JSONEncoder(json.JSONEncoder):
 
 
 def provincial_infrastructure_project_list(request):
-    return render(request, "webflow/infrastructure-project-list.html", context=context)
+    context = {}
+    return render(request, "webflow/infrastructure-search.html", context=context)
 
 
 def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
