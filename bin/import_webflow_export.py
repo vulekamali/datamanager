@@ -31,6 +31,16 @@ def djangofy(htmlfile):
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>')
     file_contents = insert_at_body_end(file_contents, '<script src="/static/js/vulekamali-webflow.js"></script>')
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>')
+    file_contents = remove_tag(file_contents, "title")
+    file_contents = insert_at_head_end(file_contents, "<title>{{ page_title }}</title>")
+    file_contents = insert_at_head_end(file_contents, '<meta name="description" content="{{ page_description }}">')
+    file_contents = insert_at_head_end(file_contents, '<meta name="twitter:title" content="{{ page_title }}">')
+    file_contents = insert_at_head_end(file_contents, '<meta name="twitter:description" content="{{ page_description }}">')
+    file_contents = insert_at_head_end(file_contents, '<meta name="twitter:card" content="page_summary">')
+    file_contents = insert_at_head_end(file_contents, '<meta name="twitter:site" content="@vulekamali">')
+    file_contents = insert_at_head_end(file_contents, '<meta property="og:title" content="{{ page_title }}" />')
+    file_contents = insert_at_head_end(file_contents, '<meta property="og:description" content="{{ page_description }}" />')
+
     with open(htmlfile, "w") as f:
         f.write(file_contents)
 
@@ -49,6 +59,12 @@ def insert_at_head_end(page_html_string, string_to_insert):
         raise Exception("head end tag not found.")
     return result_string
 
+def remove_tag(page_html_string, tag_name):
+    length_before = len(page_html_string)
+    page_html_string = re.sub(r"<title[^<]+<\/title>", "", page_html_string)
+    if len(page_html_string) == length_before:
+        raise Exception("tag not found")
+    return page_html_string
 
 # Create a ZipFile Object and load sample.zip in it
 with ZipFile(args.webflow_zipfile, 'r') as zipObj:
