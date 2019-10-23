@@ -909,13 +909,10 @@ textarea.w-select {
   background-size: cover;
   background-position: 50% 50%;
   position: absolute;
-  right: -100%;
-  bottom: -100%;
-  top: -100%;
-  left: -100%;
   margin: auto;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   z-index: -100;
 }
 .w-background-video > video::-webkit-media-controls-start-playback-button {
