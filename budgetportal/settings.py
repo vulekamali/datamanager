@@ -72,6 +72,8 @@ INSTALLED_APPS = [
     "django_extensions",
     "django_q",
     "captcha",
+    "rest_framework",
+    "django_filters",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -359,3 +361,9 @@ MARKDOWNIFY_WHITELIST_TAGS = [
     "h1",
     "h2",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 20,
+}
