@@ -1,5 +1,8 @@
 import os
 
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
 from django.test import TestCase
 from django.contrib.auth.models import User
 from allauth.account.models import EmailAddress
@@ -18,7 +21,7 @@ EMAIL = "testuser@domain.com"
 PASSWORD = "12345"
 
 
-class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
+class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
     def setUp(self):
         user = User.objects.create_user(
             username=USERNAME,
@@ -32,7 +35,7 @@ class ProvInfraProjectsTestCase(BaseSeleniumTestCase):
         self.financial_year = FinancialYear.objects.create(slug="2019-20")
         self.timeout = 10
 
-        super(ProvInfraProjectsTestCase, self).setUp()
+        super(ProvInfraProjectSeleniumTestCase, self).setUp()
 
     def test_upload_xlsx_for_prov_infra_projects(self):
         filename = "budgetportal/tests/test_data/test_import_prov_infra_projects.xlsx"
@@ -181,3 +184,181 @@ class IRMReportSheetWithOtherKeysTestCase(TestCase):
         self.assertEqual(
             other_parties, ["Service Provider: DOPW\nService Provider: AAAA"]
         )
+
+
+class ProvInfraProjectAPITestCase(APITestCase):
+    def setUp(self):
+        """Create 30 Provincial Infrastructure Projects"""
+
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("provincial-infrastructure-project-api")
+        self.provinces = ["Eastern Cape", "Free State"]
+        self.statuses = ["Design", "Construction"]
+        self.sources = [
+            "Education Infrastructure Grant",
+            "Community Library Service Grant",
+        ]
+        for i in range(30):
+            if i < 15:
+                status = self.statuses[0]
+                province = self.provinces[0]
+                source = self.sources[0]
+            else:
+                status = self.statuses[1]
+                province = self.provinces[1]
+                source = self.sources[1]
+
+            ProvInfraProject.objects.create(
+                financial_year=self.fin_year,
+                IRM_project_id=i,
+                name="Project {}".format(i),
+                department="Department {}".format(i),
+                local_municipality="Local {}".format(i),
+                district_municipality="District {}".format(i),
+                province=province,
+                status=status,
+                primary_funding_source=source,
+                main_contractor="Contractor {}".format(i),
+                principle_agent="Principle Agent {}".format(i),
+                program_implementing_agent="Program Agent {}".format(i),
+                other_parties="Service Provider: XXXX{}".format(i),
+            )
+
+    def test_projects_per_page(self):
+        response = self.client.get(self.url, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_results = len(response.data["results"])
+        self.assertLessEqual(number_of_results, 20)
+
+    def test_filter_by_department(self):
+        department = "Department 1"
+        project = ProvInfraProject.objects.get(department=department)
+
+        data = {"department": department}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        response_data = response.data["results"][0]
+        self.assertEqual(number_of_projects, 1)
+        self.assertEqual(response_data["name"], project.name)
+
+    def test_filter_by_province(self):
+        province = "Eastern Cape"
+        data = {"province": province}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, 15)
+
+    def test_filter_by_status(self):
+        status_ = "Construction"
+        data = {"status": status_}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, 15)
+
+    def test_filter_by_funding_source(self):
+        source = "Community Library Service Grant"
+        data = {"primary_funding_source": source}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = len(response.data["results"])
+        self.assertEqual(number_of_projects, 15)
+
+    def test_search_by_project_name(self):
+        name = "Project 1"
+        data = {"search": name}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, name)
+
+    def test_search_by_municipality(self):
+        municipality = "Local 1"
+        data = {"search": municipality}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, municipality)
+
+    def test_search_by_province(self):
+        province = "Eastern Cape"
+        data = {"search": province}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, province)
+
+    def test_search_by_contractor(self):
+        contractor = "Contractor 3"
+        data = {"search": contractor}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, contractor)
+
+    def test_search_multiple_fields(self):
+        ProvInfraProject.objects.create(
+            financial_year=self.fin_year,
+            IRM_project_id=12345,
+            name="Something School",
+            province="Eastern Cape",
+        )
+        data = {"search": "Eastern Cape School"}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        results = response.data["results"]
+
+        # There should be only one match because first 30 objects don't
+        # have school word
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["province"], "Eastern Cape")
+        self.assertEqual(results[0]["name"], "Something School")
+
+    def test_create_project_failed(self):
+        data = {"financial_year": self.fin_year, "IRM_project_id": 12345}
+        response = self.client.post(self.url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_change_project_failed(self):
+        data = {
+            "id": 1,
+            "financial_year": self.fin_year,
+            "IRM_project_id": 123456789,
+            "status": "CHANGED",
+        }
+        response = self.client.patch(self.url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_delete_project_failed(self):
+        data = {"id": 1}
+        response = self.client.delete(self.url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_url_path(self):
+        name = "Project 10"
+        data = {"search": name}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        result = response.data["results"][0]
+        url_path = result["url_path"]
+
+        response = self.client.get(url_path)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, name)
+
+
+class ProvInfraProjectContentTestCase(APITestCase):
+    fixtures = ["test-prov-infra-project-content"]
+
+    def test_project_detail_content(self):
+        project = ProvInfraProject.objects.first()
+        url = project.get_absolute_url()
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, project.name)
