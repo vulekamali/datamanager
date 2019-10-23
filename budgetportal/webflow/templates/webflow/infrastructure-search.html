@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Oct 23 2019 13:41:47 GMT+0000 (UTC)  -->
+<!--  Last Published: Wed Oct 23 2019 18:21:21 GMT+0000 (UTC)  -->
 <html data-wf-page="5d6788c8f62c49de19517016" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
@@ -48,7 +48,7 @@
         }
       }
     </style>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -87,8 +87,8 @@
           <div class="page-header__infra_search">
             <div class="small-detail-heading cc-mb-4 cc-ml-4">Search for a specific project:</div>
             <div class="cc-flex-h">
-              <div class="search-field_wrapper cc-mr-12"><input type="text" class="search-field w-input" maxlength="256" name="Infrastructure-Search" data-name="Infrastructure Search" placeholder="Enter a project name, location, main contractor etc." id="Infrastructure-Search-3" required=""></div>
-              <div class="button_wrapper"><a href="#" class="button w-inline-block"><img src="/static/images/search-white-24px.svg" alt="" class="button-icon _24px"><div class="button-text">Search</div></a></div>
+              <div class="search-field_wrapper cc-mr-12"><input type="text" class="search-field w-input" maxlength="256" name="Infrastructure-Search" data-name="Infrastructure Search" placeholder="Enter a project name, location, main contractor etc." id="Infrastructure-Search-Input" required=""></div>
+              <div class="button_wrapper"><a id="Search-Button" href="#" class="button w-inline-block"><img src="/static/images/search-white-24px.svg" alt="" class="button-icon _24px"><div class="button-text">Search</div></a></div>
             </div>
             <div class="search-chips_wrapper hidden">
               <div class="search-chip">
@@ -106,7 +106,7 @@
         <div class="col col-3 col-m-6 col-xs-12">
           <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER BY province:</div>
           <div class="dropdown_wrapper">
-            <div data-delay="0" class="dropdown w-dropdown">
+            <div data-delay="0" id="province-dropdown" class="dropdown w-dropdown">
               <div class="chart-dropdown_trigger w-dropdown-toggle">
                 <div class="text-block">Eastern Cape, Western Cape...</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
               <nav class="chart-dropdown_list w-dropdown-list">
@@ -167,7 +167,7 @@
         <div class="col col-3 col-m-6 col-xs-12">
           <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by department:</div>
           <div class="dropdown_wrapper">
-            <div data-delay="0" class="dropdown w-dropdown">
+            <div data-delay="0" id="department-dropdown" class="dropdown w-dropdown">
               <div class="chart-dropdown_trigger w-dropdown-toggle">
                 <div class="text-block">Basic Education</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
               <nav class="chart-dropdown_list w-dropdown-list">
@@ -228,8 +228,8 @@
         <div class="col col-3 col-m-6 col-xs-12">
           <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by project Status:</div>
           <div class="dropdown_wrapper">
-            <div data-delay="0" class="dropdown w-dropdown">
-              <div class="chart-dropdown_trigger w-dropdown-toggle">
+            <div data-delay="0" id="status-dropdown" class="dropdown w-dropdown">
+              <div id="status-dropdown" class="chart-dropdown_trigger w-dropdown-toggle">
                 <div class="text-block">All Project Statuses</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
               <nav class="chart-dropdown_list w-dropdown-list">
                 <a href="#" class="dropdown-link w-inline-block">
@@ -289,8 +289,8 @@
         <div class="col col-3 col-m-6 col-xs-12">
           <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by PRIMARY FUNDING SOURCE:</div>
           <div class="dropdown_wrapper">
-            <div data-delay="0" class="dropdown w-dropdown">
-              <div class="chart-dropdown_trigger w-dropdown-toggle">
+            <div data-delay="0" id="funding-source-dropdown" class="dropdown w-dropdown">
+              <div id="primary-funding-source-dropdown" class="chart-dropdown_trigger w-dropdown-toggle">
                 <div class="text-block">All Funding Sources</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
               <nav class="chart-dropdown_list w-dropdown-list">
                 <a href="#" class="dropdown-link w-inline-block">
@@ -356,15 +356,15 @@
         <div class="col col-2 col-sm-6">
           <div class="search-detail_wrapper">
             <div class="small-detail-heading">TOTAL PROJECTS:</div>
-            <div class="search-detail-value">12,312</div>
+            <div id="num-matching-projects-field" class="search-detail-value">12,312</div>
           </div>
         </div>
         <div class="col col-2 col-sm-6">
           <div class="search-detail_wrapper cc-border-left">
             <div class="small-detail-heading">Total value:</div>
             <div class="search-detail__amount">
-              <div class="search-detail-value">R4.2</div>
-              <div class="units-label">BN</div>
+              <div id="matching-projects-total-cost-field" class="search-detail-value">R4.2</div>
+              <div id="matching-projects-total-cost-unit" class="units-label">BN</div>
             </div>
           </div>
         </div>
@@ -373,7 +373,7 @@
             <div class="small-detail_wrapper cc-mb-4">
               <div class="small-detail-heading">project status overview:</div>
             </div>
-            <div class="progress-chart_wrapper">
+            <div id="matching-status-chart-container" class="progress-chart_wrapper">
               <div class="vertical-bar_wrapper first">
                 <div class="bar cc-vertical _1"></div>
               </div>
@@ -433,7 +433,7 @@
             <h2 class="sub-section__title">Project list</h2>
             <div class="list-sorting_wrapper">
               <div class="sort-by-label">Sorting by:</div>
-              <div data-delay="0" class="dropdown cc-align-right w-dropdown">
+              <div data-delay="0" id="sort-order-dropdown" class="dropdown cc-align-right w-dropdown">
                 <div class="sorting-dropdown_trigger w-dropdown-toggle">
                   <div class="text-block">Value (Descending)</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
                 <nav class="sorting-dropdown_list w-dropdown-list">
@@ -469,7 +469,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <div class="narrow-list_wrapper">
+          <div id="result-list-container" class="narrow-list_wrapper">
             <a href="#" class="narrow-card_header w-inline-block">
               <div class="narrow-card_first-header">
                 <div>PROJECT NAME</div>
@@ -769,7 +769,7 @@
         <div class="col col-12">
           <div class="load-more_wrapper">
             <div class="button_wrapper cc-full-width">
-              <a href="#" class="button cc-grey cc-full-width w-inline-block">
+              <a id="load-more-results-button" href="#" class="button cc-grey cc-full-width w-inline-block">
                 <div class="button-text">Load more projects</div>
               </a>
             </div>
@@ -782,7 +782,7 @@
   <script src="/static/js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 <script>var pageData = {{ page_data_json|safe }}</script>
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 <script src="/static/js/vulekamali-webflow.js"></script>
 </body>
 </html>

@@ -24,9 +24,16 @@ class JSONEncoder(json.JSONEncoder):
 
 
 def provincial_infrastructure_project_list(request):
-    projects = ProvInfraProject.objects.all()
-    context = {"projects": projects}
-    return render(request, "webflow/infrastructure-project-list.html", context=context)
+    projects = ProvInfraProject.objects.all()[:20]
+    page_data = {
+        "projects": [model_to_dict(p) for p in projects],
+    }
+    context = {
+        "page_data_json":json.dumps(
+            page_data, cls=JSONEncoder, sort_keys=True, indent=4
+        ),
+    }
+    return render(request, "webflow/infrastructure-search.html", context=context)
 
 
 def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
