@@ -37,7 +37,8 @@ def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
         "page_data_json": json.dumps(
             page_data, cls=JSONEncoder, sort_keys=True, indent=4
         ),
-        "page_title": "%s, %s Infrastructure projects - vulekamali" % (project.name, project.province),
+        "page_title": "%s, %s Infrastructure projects - vulekamali"
+        % (project.name, project.province),
         "page_description": "Provincial infrastructure project by the %s %s department."
         % (project.province, project.department),
     }
