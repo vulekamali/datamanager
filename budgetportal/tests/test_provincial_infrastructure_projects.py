@@ -345,9 +345,9 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         result = response.data["results"][0]
-        url = result["url"]
+        url_path = result["url_path"]
 
-        response = self.client.get(url)
+        response = self.client.get(url_path)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, name)
 
@@ -357,7 +357,7 @@ class ProvInfraProjectContentTestCase(APITestCase):
 
     def test_project_detail_content(self):
         project = ProvInfraProject.objects.first()
-        url = project.get_url_path(project)
+        url = project.get_absolute_url()
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

@@ -4,10 +4,10 @@ from budgetportal.models import ProvInfraProject
 
 
 class ProvInfraProjectSerializer(ModelSerializer):
-    url = SerializerMethodField("url_path")
+    url_path = SerializerMethodField()
 
-    def url_path(self, project):
-        return project.get_url_path(project)
+    def get_url_path(self, project):
+        return project.get_absolute_url()
 
     class Meta:
         model = ProvInfraProject
@@ -52,5 +52,5 @@ class ProvInfraProjectSerializer(ModelSerializer):
             "principle_agent",
             "main_contractor",
             "other_parties",
-            "url",
+            "url_path",
         )
