@@ -1844,7 +1844,9 @@ class ProvInfraProject(models.Model):
     primary_funding_source = models.CharField(max_length=1024, blank=True, null=True)
     nature_of_investment = models.CharField(max_length=1024, blank=True, null=True)
     funding_status = models.CharField(max_length=1024, blank=True, null=True)
-    program_implementing_agent = models.CharField(max_length=1024, blank=True, null=True)
+    program_implementing_agent = models.CharField(
+        max_length=1024, blank=True, null=True
+    )
     principle_agent = models.CharField(max_length=1024, blank=True, null=True)
     main_contractor = models.CharField(max_length=1024, blank=True, null=True)
     other_parties = models.TextField(blank=True, null=True)
