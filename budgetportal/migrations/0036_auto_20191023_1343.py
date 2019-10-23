@@ -7,179 +7,211 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0035_provinfraproject'),
-    ]
+    dependencies = [("budgetportal", "0035_provinfraproject")]
 
     operations = [
         migrations.AlterField(
-            model_name='faq',
-            name='title',
-            field=models.CharField(max_length=1024),
+            model_name="faq", name="title", field=models.CharField(max_length=1024)
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='actual_expenditure_q1',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="actual_expenditure_q1",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='actual_expenditure_q2',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="actual_expenditure_q2",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='actual_expenditure_q3',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="actual_expenditure_q3",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='actual_expenditure_q4',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="actual_expenditure_q4",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='adjustment_appropriation_construction_costs',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="adjustment_appropriation_construction_costs",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='adjustment_appropriation_professional_fees',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="adjustment_appropriation_professional_fees",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='adjustment_appropriation_total',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="adjustment_appropriation_total",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='budget_programme',
+            model_name="provinfraproject",
+            name="budget_programme",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='department',
+            model_name="provinfraproject",
+            name="department",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='district_municipality',
+            model_name="provinfraproject",
+            name="district_municipality",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='expenditure_from_previous_years_construction_costs',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="expenditure_from_previous_years_construction_costs",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='expenditure_from_previous_years_professional_fees',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="expenditure_from_previous_years_professional_fees",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='expenditure_from_previous_years_total',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="expenditure_from_previous_years_total",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='funding_status',
+            model_name="provinfraproject",
+            name="funding_status",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='local_municipality',
+            model_name="provinfraproject",
+            name="local_municipality",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='main_appropriation_construction_costs',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="main_appropriation_construction_costs",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='main_appropriation_professional_fees',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="main_appropriation_professional_fees",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='main_appropriation_total',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="main_appropriation_total",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='main_contractor',
+            model_name="provinfraproject",
+            name="main_contractor",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='name',
+            model_name="provinfraproject",
+            name="name",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='nature_of_investment',
+            model_name="provinfraproject",
+            name="nature_of_investment",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='other_parties',
+            model_name="provinfraproject",
+            name="other_parties",
             field=models.TextField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='primary_funding_source',
+            model_name="provinfraproject",
+            name="primary_funding_source",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='principle_agent',
+            model_name="provinfraproject",
+            name="principle_agent",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='program_implementing_agent',
+            model_name="provinfraproject",
+            name="program_implementing_agent",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='project_expenditure_total',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="project_expenditure_total",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='project_number',
+            model_name="provinfraproject",
+            name="project_number",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='province',
+            model_name="provinfraproject",
+            name="province",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='status',
+            model_name="provinfraproject",
+            name="status",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='total_construction_costs',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="total_construction_costs",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='total_professional_fees',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="total_professional_fees",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='total_project_cost',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="total_project_cost",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='provinfraproject',
-            name='variation_orders',
-            field=models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True),
+            model_name="provinfraproject",
+            name="variation_orders",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, max_digits=20, null=True
+            ),
         ),
     ]
