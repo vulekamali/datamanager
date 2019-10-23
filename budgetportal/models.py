@@ -1922,8 +1922,10 @@ class ProvInfraProject(models.Model):
     def get_slug(self):
         return slugify(u"{0} {1}".format(self.name, self.province))
 
-    def get_url_path(self):
-        return slugify(u"/{0} {1}".format(self.IRM_project_id, self.name))
+    def get_url_path(self, project):
+        args = [project.IRM_project_id, project.get_slug()]
+        url = reverse("provincial-infra-project-detail", args=args)
+        return url
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty

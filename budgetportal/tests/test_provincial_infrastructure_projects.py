@@ -1,5 +1,4 @@
 import os
-import random
 
 from django.urls import reverse
 from rest_framework import status
@@ -20,8 +19,6 @@ from budgetportal.tests.helpers import BaseSeleniumTestCase
 USERNAME = "testuser"
 EMAIL = "testuser@domain.com"
 PASSWORD = "12345"
-
-random.seed(123456789)
 
 
 class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
@@ -306,13 +303,20 @@ class ProvInfraProjectAPITestCase(APITestCase):
         ProvInfraProject.objects.create(
             financial_year=self.fin_year,
             IRM_project_id=12345,
-            name="Eastern Cape School",
+            name="Something School",
+            province="Eastern Cape",
         )
-        data = {"search": "Eastern Cape"}
+        data = {"search": "Eastern Cape School"}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, '"name":"Eastern Cape School"')
-        self.assertContains(response, '"province":"Eastern Cape"')
+
+        results = response.data["results"]
+
+        # There should be only one match because first 30 objects don't
+        # have school word
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["province"], "Eastern Cape")
+        self.assertEqual(results[0]["name"], "Something School")
 
     def test_create_project_failed(self):
         data = {"financial_year": self.fin_year, "IRM_project_id": 12345}
@@ -334,14 +338,26 @@ class ProvInfraProjectAPITestCase(APITestCase):
         response = self.client.delete(self.url, data=data)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
+    def test_url_path(self):
+        name = "Project 10"
+        data = {"search": name}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        result = response.data["results"][0]
+        url = result["url"]
+
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, name)
+
 
 class ProvInfraProjectContentTestCase(APITestCase):
-    fixtures = ["provincial-infrastructure-projects"]
+    fixtures = ["test-prov-infra-project-content"]
 
     def test_project_detail_content(self):
         project = ProvInfraProject.objects.first()
-        args = [project.IRM_project_id, project.get_slug()]
-        url = reverse("provincial-infra-project-detail", args=args)
+        url = project.get_url_path(project)
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

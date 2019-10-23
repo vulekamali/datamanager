@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, get_object_or_404
 from django.forms.models import model_to_dict
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.filters import SearchFilter
-from rest_framework.response import Response
-
 from budgetportal.webflow.serializers import ProvInfraProjectSerializer
 from ..models import ProvInfraProject
+
 import json
 import decimal
 import datetime
@@ -62,30 +60,3 @@ class ProvInfraProjectView(generics.ListAPIView):
         "program_implementing_agent",
         "other_parties",
     ]
-
-    def list(self, request, *args, **kwargs):
-        base_url = (
-            get_current_site(request).domain + "/infrastructure-projects/provincial/"
-        )
-        project_urls = []
-
-        queryset = self.filter_queryset(self.get_queryset())
-        for project in queryset:
-            project_urls.append(project.get_url_path())
-
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            response_list = serializer.data
-            for index, response in enumerate(response_list):
-                url = base_url + project_urls[index]
-                response.update({"url": url})
-            return self.get_paginated_response(response_list)
-
-        serializer = self.get_serializer(queryset, many=True)
-        response_list = serializer.data
-        for index, response in enumerate(response_list):
-            url = base_url + project_urls[index]
-            response.update({"url": url})
-
-        return Response(response_list)
