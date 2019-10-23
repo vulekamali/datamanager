@@ -1813,7 +1813,7 @@ class Video(SortableMixin):
 
 
 class FAQ(SortableMixin):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=1024)
     content = RichTextField()
     the_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
@@ -1831,23 +1831,25 @@ class ProvInfraProject(models.Model):
         FinancialYear, on_delete=models.CASCADE, related_name="prov_infra"
     )
     IRM_project_id = models.IntegerField(unique=True)
-    project_number = models.CharField(max_length=255, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    province = models.CharField(max_length=255, blank=True, null=True)
-    department = models.CharField(max_length=255, blank=True, null=True)
-    local_municipality = models.CharField(max_length=255, blank=True, null=True)
-    district_municipality = models.CharField(max_length=255, blank=True, null=True)
+    project_number = models.CharField(max_length=1024, blank=True, null=True)
+    name = models.CharField(max_length=1024, blank=True, null=True)
+    province = models.CharField(max_length=1024, blank=True, null=True)
+    department = models.CharField(max_length=1024, blank=True, null=True)
+    local_municipality = models.CharField(max_length=1024, blank=True, null=True)
+    district_municipality = models.CharField(max_length=1024, blank=True, null=True)
     latitude = models.CharField(max_length=20, blank=True, null=True)
     longitude = models.CharField(max_length=20, blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
-    budget_programme = models.CharField(max_length=255, blank=True, null=True)
-    primary_funding_source = models.CharField(max_length=255, blank=True, null=True)
-    nature_of_investment = models.CharField(max_length=255, blank=True, null=True)
-    funding_status = models.CharField(max_length=255, blank=True, null=True)
-    program_implementing_agent = models.CharField(max_length=255, blank=True, null=True)
-    principle_agent = models.CharField(max_length=255, blank=True, null=True)
-    main_contractor = models.CharField(max_length=255, blank=True, null=True)
-    other_parties = models.TextField(max_length=510, blank=True, null=True)
+    status = models.CharField(max_length=1024, blank=True, null=True)
+    budget_programme = models.CharField(max_length=1024, blank=True, null=True)
+    primary_funding_source = models.CharField(max_length=1024, blank=True, null=True)
+    nature_of_investment = models.CharField(max_length=1024, blank=True, null=True)
+    funding_status = models.CharField(max_length=1024, blank=True, null=True)
+    program_implementing_agent = models.CharField(
+        max_length=1024, blank=True, null=True
+    )
+    principle_agent = models.CharField(max_length=1024, blank=True, null=True)
+    main_contractor = models.CharField(max_length=1024, blank=True, null=True)
+    other_parties = models.TextField(blank=True, null=True)
 
     # Dates
     start_date = models.DateField(blank=True, null=True)
@@ -1858,58 +1860,58 @@ class ProvInfraProject(models.Model):
 
     # Budgets and spending
     total_professional_fees = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     total_construction_costs = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     variation_orders = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     total_project_cost = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     expenditure_from_previous_years_professional_fees = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     expenditure_from_previous_years_construction_costs = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     expenditure_from_previous_years_total = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     project_expenditure_total = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     main_appropriation_professional_fees = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     adjustment_appropriation_professional_fees = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     main_appropriation_construction_costs = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     adjustment_appropriation_construction_costs = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     main_appropriation_total = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     adjustment_appropriation_total = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     actual_expenditure_q1 = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     actual_expenditure_q2 = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     actual_expenditure_q3 = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
     actual_expenditure_q4 = models.DecimalField(
-        max_digits=20, decimal_places=10, blank=True, null=True
+        max_digits=20, decimal_places=2, blank=True, null=True
     )
 
     # Metadata
