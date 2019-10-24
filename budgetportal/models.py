@@ -1579,7 +1579,7 @@ class InfrastructureProjectPart(models.Model):
     gps_code = models.CharField(max_length=255, default="")
 
     class Meta:
-        verbose_name = "National infrastructure project parts"
+        verbose_name = "National infrastructure project part"
 
     def __str__(self):
         return "{} ({} {})".format(
