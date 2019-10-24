@@ -21,9 +21,6 @@ import requests
 import string
 import urllib
 import uuid
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -1873,13 +1870,6 @@ class IRMSnapshot(models.Model):
             self.quarter.number,
             self.date_taken.isoformat()[:18],
         )
-
-
-@receiver([post_save], sender=IRMSnapshot)
-def handle_post_save(sender, instance, created, raw, using, update_fields, **kwargs):
-    provincial_infrastructure_projects.import_snapshot()
-
-
 
 
 class ProvInfraProject(models.Model):
