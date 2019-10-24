@@ -33,7 +33,7 @@ def provincial_infrastructure_project_list(request):
             page_data, cls=JSONEncoder, sort_keys=True, indent=4
         ),
     }
-    return render(request, "webflow/infrastructure-search.html", context=context)
+    return render(request, "webflow/infrastructure-search-template.html", context=context)
 
 
 def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
