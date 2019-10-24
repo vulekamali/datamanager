@@ -1578,6 +1578,9 @@ class InfrastructureProjectPart(models.Model):
     provinces = models.CharField(max_length=510, default="")
     gps_code = models.CharField(max_length=255, default="")
 
+    class Meta:
+        verbose_name = "National infrastructure project parts"
+
     def __str__(self):
         return "{} ({} {})".format(
             self.project_slug, self.budget_phase, self.financial_year
@@ -1831,6 +1834,8 @@ class Quarter(models.Model):
     class Meta:
         ordering = ["number"]
 
+    def __unicode__(self):
+        return u"Quarter %d" % self.number
 
 class IRMSnapshot(models.Model):
     """This represents a particular snapshot from IRM"""
@@ -1847,9 +1852,10 @@ class IRMSnapshot(models.Model):
 
     class Meta:
         ordering = ["financial_year", "quarter"]
+        verbose_name = "IRM Snapshot"
 
     def __unicode__(self):
-        return "%s Q%d taken %s" % (self.financial_year.slug, sef.quarter, date_taken.isoformat())
+        return "%s Q%d taken %s" % (self.financial_year.slug, self.quarter.number, self.date_taken.isoformat()[:18])
 
 
 class ProvInfraProject(models.Model):
@@ -1863,7 +1869,17 @@ class ProvInfraProject(models.Model):
         verbose_name = "Provincial infrastructure project"
 
     def __unicode__(self):
-        return project_snapshots.latest().name
+        if self.project_snapshots.count():
+            return self.project_snapshots.latest().name
+        else:
+            return u"IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
+
+    def get_slug(self):
+        return slugify(u"{0} {1}".format(self.latest().name, self.latest().province))
+
+    def get_absolute_url(self):
+        args = [self.IRM_project_id, self.get_slug()]
+        return reverse("provincial-infra-project-detail", args=args)
 
 
 class ProvInfraProjectSnapshot(models.Model):
@@ -1964,17 +1980,11 @@ class ProvInfraProjectSnapshot(models.Model):
 
     class Meta:
         ordering = ["irm_snapshot"]
+        get_latest_by = "irm_snapshot"
         verbose_name = "Provincial infrastructure project snapshot"
 
     def __unicode__(self):
         return self.name
-
-    def get_slug(self):
-        return slugify(u"{0} {1}".format(self.name, self.province))
-
-    def get_absolute_url(self):
-        args = [self.IRM_project_id, self.get_slug()]
-        return reverse("provincial-infra-project-detail", args=args)
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty

@@ -207,6 +207,12 @@ class ProvInfraProjectSnapshotAdmin(ImportMixin, admin.ModelAdmin):
     search_fields = ("name", "project_number")
     list_per_page = 20
 
+    def get_readonly_fields(self, request, obj=None):
+        return list(set(
+            [field.name for field in self.opts.local_fields] +
+            [field.name for field in self.opts.local_many_to_many]
+        ))
+
     def get_resource_kwargs(self, request, *args, **kwargs):
         """
         Return request which is necessary for import and confirm import requests
