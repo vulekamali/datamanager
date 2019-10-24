@@ -202,6 +202,21 @@
             .fail(function(jqXHR, textStatus, errorThrown) {
                 console.error( jqXHR, textStatus, errorThrown );
             });
+
+        $("#map").empty();
+        var map = L.map("map")
+            .setView([-30.5595, 22.9375], 4);
+        createTileLayer().addTo(map);
+        var markers = L.markerClusterGroup();
+        pageData.all_matches.forEach(function(project) {
+            if (project.latitude !== null && project.longitude !== null) {
+                var marker = L.marker([project.latitude, project.longitude])
+                    .bindPopup(project.name + '<br><a target="_blank" href="' +
+                               project.url_path + '">Jump to project</a>');
+                markers.addLayer(marker);
+            }
+        });
+        map.addLayer(markers);
     } // end search page
 
 })();

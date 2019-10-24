@@ -25,7 +25,10 @@ class JSONEncoder(json.JSONEncoder):
 
 
 def provincial_infrastructure_project_list(request):
-    context = {}
+    context = {
+        "page_title": "Provincial infrastructure project search - vulekamali",
+        "page_description": "Find infrastructure projects by provincial departments.",
+    }
     return render(request, "webflow/infrastructure-search-template.html", context=context)
 
 
