@@ -1,4 +1,9 @@
 from tablib import Databook, Dataset
+from import_export.instance_loaders import ModelInstanceLoader
+from import_export import resources
+from import_export.fields import Field
+from import_export.widgets import Widget, ForeignKeyWidget
+from budgetportal import models
 
 
 NORMAL_HEADERS = [
@@ -43,18 +48,6 @@ EXTRA_AGENT_HEADER = "Other parties"
 AGENTS = ["Program Implementing Agent", "Principal Agent", "Main Contractor"]
 AGENT_HEADERS = AGENTS + [EXTRA_AGENT_HEADER]
 HEADERS = NORMAL_HEADERS + AGENT_HEADERS
-
-
-
-
-class ProvInfraProjectSnapshotImportForm(ImportForm):
-    """
-    Form class to use to upload a CSV file to import provincial infrastructure projects.
-    """
-
-    financial_year = forms.ModelChoiceField(
-        queryset=FinancialYear.objects.all(), required=True
-    )
 
 
 class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
@@ -186,76 +179,18 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
     financial_year = Field(
         attribute="financial_year",
         column_name="Financial Year",
-        widget=ForeignKeyWidget(FinancialYear),
+        widget=ForeignKeyWidget(models.FinancialYear),
     )
 
     class Meta:
-        model = ProvInfraProjectSnapshot
+        model = models.ProvInfraProjectSnapshot
         skip_unchanged = True
         report_skipped = False
         exclude = ("id",)
         instance_loader_class = ProvInfraProjectSnapshotLoader
 
-    def before_import(self, dataset, using_transactions, dry_run, **kwargs):
-        headers = dataset.headers
 
-        # Check if the headers of the dataset and the specified headers are
-        # the same or not. If not, raise exception with the missing headers
-        difference = list(set(NORMAL_HEADERS) - set(headers))
-        if len(difference) != 0:
-            raise Exception(
-                "Following column(s) are missing: {}".format(", ".join(difference))
-            )
-
-        # IRMReportSheet class processes the dataset and saves the processed
-        # dataset in it's output_data_set attribute
-        report_sheet = IRMReportSheet(dataset)
-        report_sheet.process()
-
-        # During process, empty rows must be deleted first from the dataset
-        # the following code checks whether number of rows are the same for
-        # the given dataset and the output dataset. If not, raises exception
-        num_of_rows_dataset = report_sheet.data_set.height
-        num_of_rows_output_dataset = report_sheet.output_data_set.height
-        if num_of_rows_dataset != num_of_rows_output_dataset:
-            raise Exception(
-                "Number of rows in dataset({0}) don't match with the number of rows in the output dataset({1})!".format(
-                    num_of_rows_dataset, num_of_rows_output_dataset
-                )
-            )
-
-        # Following loops delete contractor columns and append mapped
-        # agent/contractor/parties columns respectively
-        for header in reversed(report_sheet.contractor_columns):
-            del dataset[dataset.headers[header]]
-        for agent in AGENT_HEADERS:
-            dataset.append_col(report_sheet.output_data_set[agent], header=agent)
-
-        # import_data() works with 2 requests, first one is import form request
-        # and the second one is confirm import form request. Since user selects
-        # financial year in import form request, it should be carried for
-        # the second request.
-        financial_year = self.request.POST.get("financial_year", None)
-        if financial_year:
-            self.request.session["import_context_year"] = financial_year
-        else:
-            # if it's confirm form request,it takes the selected financial year
-            # value from import form request using django sessions
-            try:
-                financial_year = self.request.session["import_context_year"]
-            except KeyError as e:
-                raise Exception(
-                    "Financial year context failure on row import, "
-                    + "check resources.py for more info: {0}".format(e)
-                )
-        dataset.append_col([financial_year] * dataset.height, header="Financial Year")
-
-    def __init__(self, request=None, *args, **kwargs):
-        super(ProvInfraProjectSnapshotResource, self).__init__()
-        self.request = request
-
-
-class IRMReportSheet(object):
+class IRMToUniqueColumnsProcessor(object):
     def __init__(self, data_set):
         self.data_set = data_set
         self.data_set_dict = data_set.dict
@@ -280,6 +215,26 @@ class IRMReportSheet(object):
         for i in range(len(self.data_set)):
             self.process_row(i)
         self.delete_empty_rows()
+
+        # During process, empty rows must be deleted first from the dataset
+        # the following code checks whether number of rows are the same for
+        # the given dataset and the output dataset. If not, raises exception
+        num_of_rows_dataset = self.data_set.height
+        num_of_rows_output_dataset = self.output_data_set.height
+        if num_of_rows_dataset != num_of_rows_output_dataset:
+            raise Exception(
+                "Number of rows in dataset({0}) don't match with the number of rows in the output dataset({1})!".format(
+                    num_of_rows_dataset, num_of_rows_output_dataset
+                )
+            )
+
+        # Following loops delete contractor columns and append mapped
+        # agent/contractor/parties columns respectively
+        for header in reversed(self.contractor_columns):
+            del dataset[dataset.headers[header]]
+        for agent in AGENT_HEADERS:
+            dataset.append_col(self.output_data_set[agent], header=agent)
+
 
     def process_row(self, row_index):
         row = self.data_set[row_index]
@@ -317,6 +272,19 @@ class IRMReportSheet(object):
     def delete_empty_rows(self):
         for index in reversed(self.row_to_delete):
             del self.data_set[index]
+
+
+def import_snapshot(file):
+    # IRMReportSheet class processes the dataset and saves the processed
+    # dataset in it's output_data_set attribute
+    data_book = Databook().load('xlsx', file)
+    datadataset = data_book.sheets()[0]
+    preprocessor = IRMToUniqueColumnsProcessor(dataset)
+    preprocessor.process()
+    resource = ProvInfraProjectSnapshotResource()
+    result = resource.import_data(preprocessor.output_dataset)
+    print(result)
+
 
 
 def is_empty_cell(cell):

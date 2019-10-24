@@ -54,7 +54,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # Application definition
 
 INSTALLED_APPS = [
-    "budgetportal",
+    "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
     "allauth_facebook",
     # before auth for LiveServerTestCase https://code.djangoproject.com/ticket/10827
