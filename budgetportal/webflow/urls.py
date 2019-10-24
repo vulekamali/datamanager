@@ -14,7 +14,7 @@ urlpatterns = [
     ),
     url(
         r"^api/v1/infrastructure-projects/provincial/$",
-        views.ProvInfraProjectView.as_view(),
+        views.ProvInfraProjectAPIView.as_view(),
         name="provincial-infrastructure-project-api",
     ),
 ]

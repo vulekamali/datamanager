@@ -24,14 +24,25 @@ class JSONEncoder(json.JSONEncoder):
 
 
 def provincial_infrastructure_project_list(request):
-    projects = ProvInfraProject.objects.all()[:20]
+    all_matches = ProvInfraProject.objects.all()
+    all_matches_data = map(
+        lambda p: {
+            "name": p.name,
+            "latitude": p.latitude,
+            "longitude": p.longitude,
+            "url_path": p.get_absolute_url(),
+        },
+        all_matches
+    )
     page_data = {
-        "projects": [model_to_dict(p) for p in projects],
+        "all_matches": all_matches_data,
     }
     context = {
-        "page_data_json":json.dumps(
+        "page_data_json": json.dumps(
             page_data, cls=JSONEncoder, sort_keys=True, indent=4
         ),
+        "page_title": "Provincial infrastructure project search - vulekamali",
+        "page_description": "Find infrastructure projects by provincial departments.",
     }
     return render(request, "webflow/infrastructure-search-template.html", context=context)
 
@@ -56,7 +67,7 @@ def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
     )
 
 
-class ProvInfraProjectView(generics.ListAPIView):
+class ProvInfraProjectAPIView(generics.ListAPIView):
     queryset = ProvInfraProject.objects.all()
     serializer_class = ProvInfraProjectSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
