@@ -3,20 +3,8 @@ from django.views.generic import TemplateView
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
-from budgetportal.models import (
-    Department,
-    FinancialYear,
-    Government,
-    GovtFunction,
-    Programme,
-    Sphere,
-    Event,
-    InfrastructureProjectPart,
-    Video,
-    VideoLanguage,
-    FAQ,
-    ProvInfraProject,
-)
+from budgetportal import models
+
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib.auth.decorators import login_required
@@ -32,8 +20,8 @@ from .import_export_admin import (
     DepartmentResource,
     DepartmentImportForm,
     InfrastructureProjectResource,
-    ProvInfraProjectImportForm,
-    ProvInfraProjectResource,
+    ProvInfraProjectSnapshotImportForm,
+    ProvInfraProjectSnapshotResource,
 )
 
 
@@ -175,17 +163,28 @@ class SiteAdmin(admin.ModelAdmin):
 
 
 class VideoLanguageInline(SortableTabularInline):
-    model = VideoLanguage
+    model = models.VideoLanguage
 
 
 class VideoAdmin(SortableAdmin):
     inlines = [VideoLanguageInline]
-    model = Video
+    model = models.Video
 
 
-class ProvInfraProjectAdmin(ImportMixin, admin.ModelAdmin):
+class ProvInfraProjectSnapshotInline(admin.StackedInline):
+    model = models.ProvInfraProjectSnapshot
+    fields = ["name", "province", "department", "irm_snapshot"]
+    readonly_fields = fields
+
+
+class ProvInfraProjectAdmin(admin.ModelAdmin):
+    model = models.ProvInfraProject
+    inines = [ProvInfraProjectSnapshotInline]
+
+
+class ProvInfraProjectSnapshotAdmin(ImportMixin, admin.ModelAdmin):
     # Resource class to be used by the django-import-export package
-    resource_class = ProvInfraProjectResource
+    resource_class = ProvInfraProjectSnapshotResource
     # File format that can be used to import provincial infrastructure projects
     formats = [XLSX]
 
@@ -194,17 +193,17 @@ class ProvInfraProjectAdmin(ImportMixin, admin.ModelAdmin):
         Get the import form to use by the django-import-export package
         to import provincial infrastructure projects.
         """
-        return ProvInfraProjectImportForm
+        return ProvInfraProjectSnapshotImportForm
 
     list_display = (
         "name",
         "project_number",
         "province",
         "department",
-        "_financial_year",
+        "irm_snapshot",
     )
     list_display_links = ("name", "project_number")
-    list_filter = ("financial_year__slug", "province", "department")
+    list_filter = ("irm_snapshot__financial_year__slug", "province", "department")
     search_fields = ("name", "project_number")
     list_per_page = 20
 
@@ -212,7 +211,7 @@ class ProvInfraProjectAdmin(ImportMixin, admin.ModelAdmin):
         """
         Return request which is necessary for import and confirm import requests
         """
-        rk = super(ProvInfraProjectAdmin, self).get_resource_kwargs(
+        rk = super(ProvInfraProjectSnapshotAdmin, self).get_resource_kwargs(
             request, *args, **kwargs
         )
         rk["request"] = request
@@ -226,7 +225,7 @@ admin.site.register_view("bulk_upload", "Bulk Upload", view=bulk_upload_view)
 
 
 try:
-    for financial_year in FinancialYear.objects.all():
+    for financial_year in models.FinancialYear.objects.all():
         for sphere in financial_year.spheres.all():
             view = EntityDatasetsView.as_view(
                 financial_year_slug=financial_year.slug, sphere_slug=sphere.slug
@@ -238,16 +237,18 @@ except ProgrammingError as e:
     logging.error(e, exc_info=True)
 
 
-admin.site.register(FinancialYear, FinancialYearAdmin)
-admin.site.register(Sphere, SphereAdmin)
-admin.site.register(Government, GovernmentAdmin)
-admin.site.register(GovtFunction, GovtFunctionAdmin)
-admin.site.register(Department, DepartmentAdmin)
-admin.site.register(InfrastructureProjectPart, InfrastructureProjectAdmin)
-admin.site.register(Programme, ProgrammeAdmin)
+admin.site.register(models.FinancialYear, FinancialYearAdmin)
+admin.site.register(models.Sphere, SphereAdmin)
+admin.site.register(models.Government, GovernmentAdmin)
+admin.site.register(models.GovtFunction, GovtFunctionAdmin)
+admin.site.register(models.Department, DepartmentAdmin)
+admin.site.register(models.InfrastructureProjectPart, InfrastructureProjectAdmin)
+admin.site.register(models.Programme, ProgrammeAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Site, SiteAdmin)
-admin.site.register(Video, VideoAdmin)
-admin.site.register(Event)
-admin.site.register(FAQ, SortableAdmin)
-admin.site.register(ProvInfraProject, ProvInfraProjectAdmin)
+admin.site.register(models.Video, VideoAdmin)
+admin.site.register(models.Event)
+admin.site.register(models.FAQ, SortableAdmin)
+admin.site.register(models.ProvInfraProject, ProvInfraProjectAdmin)
+admin.site.register(models.ProvInfraProjectSnapshot, ProvInfraProjectSnapshotAdmin)
+admin.site.register(models.IRMSnapshot, admin.ModelAdmin)

@@ -4,7 +4,7 @@ from budgetportal.models import (
     Sphere,
     InfrastructureProjectPart,
     FinancialYear,
-    ProvInfraProject,
+    ProvInfraProjectSnapshot,
 )
 from django import forms, VERSION
 from django.core.exceptions import ValidationError
@@ -233,7 +233,7 @@ class InfrastructureProjectResource(resources.ModelResource):
             field.save(obj, data, is_m2m)
 
 
-class ProvInfraProjectImportForm(ImportForm):
+class ProvInfraProjectSnapshotImportForm(ImportForm):
     """
     Form class to use to upload a CSV file to import provincial infrastructure projects.
     """
@@ -243,7 +243,7 @@ class ProvInfraProjectImportForm(ImportForm):
     )
 
 
-class ProvInfraProjectLoader(ModelInstanceLoader):
+class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
     def get_instance(self, row):
         """
         Gets a Provincial Infrastructure project instance by IRM_project_id.
@@ -251,14 +251,14 @@ class ProvInfraProjectLoader(ModelInstanceLoader):
         project_id = self.resource.fields["IRM_project_id"].clean(row)
 
         try:
-            return ProvInfraProject.objects.get(IRM_project_id=project_id)
-        except ProvInfraProject.DoesNotExist:
+            return ProvInfraProjectSnapshot.objects.get(IRM_project_id=project_id)
+        except ProvInfraProjectSnapshot.DoesNotExist:
             pass
 
         return None
 
 
-class ProvInfraProjectResource(resources.ModelResource):
+class ProvInfraProjectSnapshotResource(resources.ModelResource):
     IRM_project_id = Field(attribute="IRM_project_id", column_name="Project ID")
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
@@ -376,11 +376,11 @@ class ProvInfraProjectResource(resources.ModelResource):
     )
 
     class Meta:
-        model = ProvInfraProject
+        model = ProvInfraProjectSnapshot
         skip_unchanged = True
         report_skipped = False
         exclude = ("id",)
-        instance_loader_class = ProvInfraProjectLoader
+        instance_loader_class = ProvInfraProjectSnapshotLoader
 
     def before_import(self, dataset, using_transactions, dry_run, **kwargs):
         headers = dataset.headers
@@ -437,5 +437,5 @@ class ProvInfraProjectResource(resources.ModelResource):
         dataset.append_col([financial_year] * dataset.height, header="Financial Year")
 
     def __init__(self, request=None, *args, **kwargs):
-        super(ProvInfraProjectResource, self).__init__()
+        super(ProvInfraProjectSnapshotResource, self).__init__()
         self.request = request
