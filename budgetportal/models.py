@@ -1877,7 +1877,7 @@ class IRMSnapshot(models.Model):
 
 @receiver([post_save], sender=IRMSnapshot)
 def handle_post_save(sender, instance, created, raw, using, update_fields, **kwargs):
-    print(instance.file)
+    provincial_infrastructure_projects.import_snapshot()
 
 
 
