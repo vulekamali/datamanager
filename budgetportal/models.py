@@ -75,7 +75,6 @@ EXPENDITURE_TIME_SERIES_PHASE_MAPPING = {
     "actual": "Audit Outcome",
 }
 
-
 class FinancialYear(models.Model):
     organisational_unit = "financial_year"
     slug = models.SlugField(max_length=7, unique=True)
@@ -1826,11 +1825,56 @@ class FAQ(SortableMixin):
         ordering = ["the_order"]
 
 
-class ProvInfraProject(models.Model):
+class Quarter(models.Model):
+    number = models.IntegerField(unique=True)
+
+    class Meta:
+        ordering = ["number"]
+
+
+class IRMSnapshot(models.Model):
+    """This represents a particular snapshot from IRM"""
+
     financial_year = models.ForeignKey(
-        FinancialYear, on_delete=models.CASCADE, related_name="prov_infra"
+        FinancialYear, on_delete=models.CASCADE
     )
+    quarter = models.ForeignKey(
+        Quarter, on_delete=models.CASCADE
+    )
+    date_taken = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    class Meta:
+        ordering = ["financial_year", "quarter"]
+
+    def __unicode__(self):
+        return "%s Q%d taken %s" % (self.financial_year.slug, sef.quarter, date_taken.isoformat())
+
+
+class ProvInfraProject(models.Model):
+    """This represents a project, grouping its snapshots"""
+
     IRM_project_id = models.IntegerField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Provincial infrastructure project"
+
+    def __unicode__(self):
+        return project_snapshots.latest().name
+
+
+class ProvInfraProjectSnapshot(models.Model):
+    """This represents a snapshot of a project, as it occurred in an IRM snapshot"""
+
+    irm_snapshot = models.ForeignKey(
+        IRMSnapshot, on_delete=models.CASCADE, related_name="project_snapshots"
+    )
+    project = models.ForeignKey(
+        ProvInfraProject, on_delete=models.CASCADE, related_name="project_snapshots"
+    )
     project_number = models.CharField(max_length=1024, blank=True, null=True)
     name = models.CharField(max_length=1024, blank=True, null=True)
     province = models.CharField(max_length=1024, blank=True, null=True)
@@ -1918,8 +1962,12 @@ class ProvInfraProject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
+    class Meta:
+        ordering = ["irm_snapshot"]
+        verbose_name = "Provincial infrastructure project snapshot"
+
     def __unicode__(self):
-        return u"{0}".format(self.name)
+        return self.name
 
     def get_slug(self):
         return slugify(u"{0} {1}".format(self.name, self.province))
