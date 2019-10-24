@@ -20,6 +20,10 @@ import re
 import requests
 import string
 import urllib
+import uuid
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -1842,10 +1846,19 @@ class Quarter(models.Model):
 class IRMSnapshot(models.Model):
     """This represents a particular snapshot from IRM"""
 
+    def file_path(instance, filename):
+        extension = filename.split('.')[-1]
+        return "irm-snapshots/%s/%s-Q%d-taken-%s.%s" % (
+            uuid.uuid4(),
+            instance.financial_year.slug,
+            instance.quarter.number,
+            instance.date_taken.isoformat()[:18],
+            extension
+        )
     financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
     quarter = models.ForeignKey(Quarter, on_delete=models.CASCADE)
     date_taken = models.DateTimeField()
-    file = models.FileField(upload_to="irm_snapshots/")
+    file = models.FileField(upload_to=file_path)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
@@ -1855,11 +1868,18 @@ class IRMSnapshot(models.Model):
         unique_together = ["financial_year", "quarter", "date_taken"]
 
     def __unicode__(self):
-        return "%s Q%d taken %s" % (
+        return u"%s Q%d taken %s" % (
             self.financial_year.slug,
             self.quarter.number,
             self.date_taken.isoformat()[:18],
         )
+
+
+@receiver([post_save], sender=IRMSnapshot)
+def handle_post_save(sender, instance, created, raw, using, update_fields, **kwargs):
+    print(instance.file)
+
+
 
 
 class ProvInfraProject(models.Model):
