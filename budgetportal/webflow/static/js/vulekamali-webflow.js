@@ -186,16 +186,22 @@
         $("#result-list-container .narrow-card_wrapper").remove()
         template.find(".narrow-card_icon").remove();
 
-        pageData.projects.forEach(function(project) {
-            var resultItem = template.clone();
-            resultItem.attr("href", project.url_path);
-            resultItem.find(".narrow-card_title").html(project.name);
-            resultItem.find(".narrow-card_middle-column:first").html(project.status);
-            resultItem.find(".narrow-card_middle-column:last").html(project.estimated_completion_date);
-            resultItem.find(".narrow-card_last-column").html(formatCurrency(project.total_project_cost));
-            $("#result-list-container").append(resultItem);
-        });
+        $.get("/api/v1/infrastructure-projects/provincial/")
+            .done(function(response) {
 
+                response.results.forEach(function(project) {
+                    var resultItem = template.clone();
+                    resultItem.attr("href", project.url_path);
+                    resultItem.find(".narrow-card_title").html(project.name);
+                    resultItem.find(".narrow-card_middle-column:first").html(project.status);
+                    resultItem.find(".narrow-card_middle-column:last").html(project.estimated_completion_date);
+                    resultItem.find(".narrow-card_last-column").html(formatCurrency(project.total_project_cost));
+                    $("#result-list-container").append(resultItem);
+                });
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error( jqXHR, textStatus, errorThrown );
+            });
     } // end search page
 
 })();
