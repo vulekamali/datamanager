@@ -231,9 +231,9 @@ class IRMToUniqueColumnsProcessor(object):
         # Following loops delete contractor columns and append mapped
         # agent/contractor/parties columns respectively
         for header in reversed(self.contractor_columns):
-            del dataset[dataset.headers[header]]
+            del self.output_data_set[self.output_data_set.headers[header]]
         for agent in AGENT_HEADERS:
-            dataset.append_col(self.output_data_set[agent], header=agent)
+            self.output_data_set.append_col(self.output_data_set[agent], header=agent)
 
 
     def process_row(self, row_index):
@@ -278,7 +278,7 @@ def import_snapshot(file):
     # IRMReportSheet class processes the dataset and saves the processed
     # dataset in it's output_data_set attribute
     data_book = Databook().load('xlsx', file)
-    datadataset = data_book.sheets()[0]
+    dataset = data_book.sheets()[0]
     preprocessor = IRMToUniqueColumnsProcessor(dataset)
     preprocessor.process()
     resource = ProvInfraProjectSnapshotResource()
