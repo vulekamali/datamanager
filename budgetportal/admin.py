@@ -195,23 +195,19 @@ class ProvInfraProjectSnapshotAdmin(ImportMixin, admin.ModelAdmin):
         """
         return ProvInfraProjectSnapshotImportForm
 
-    list_display = (
-        "name",
-        "project_number",
-        "province",
-        "department",
-        "irm_snapshot",
-    )
+    list_display = ("name", "project_number", "province", "department", "irm_snapshot")
     list_display_links = ("name", "project_number")
     list_filter = ("irm_snapshot__financial_year__slug", "province", "department")
     search_fields = ("name", "project_number")
     list_per_page = 20
 
     def get_readonly_fields(self, request, obj=None):
-        return list(set(
-            [field.name for field in self.opts.local_fields] +
-            [field.name for field in self.opts.local_many_to_many]
-        ))
+        return list(
+            set(
+                [field.name for field in self.opts.local_fields]
+                + [field.name for field in self.opts.local_many_to_many]
+            )
+        )
 
     def get_resource_kwargs(self, request, *args, **kwargs):
         """
