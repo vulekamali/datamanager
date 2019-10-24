@@ -1845,12 +1845,14 @@ class IRMSnapshot(models.Model):
     financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
     quarter = models.ForeignKey(Quarter, on_delete=models.CASCADE)
     date_taken = models.DateTimeField()
+    file = models.FileField(upload_to="irm_snapshots/")
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
         ordering = ["financial_year", "quarter"]
         verbose_name = "IRM Snapshot"
+        unique_together = ["financial_year", "quarter", "date_taken"]
 
     def __unicode__(self):
         return "%s Q%d taken %s" % (

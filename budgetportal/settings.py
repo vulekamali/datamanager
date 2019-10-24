@@ -123,6 +123,16 @@ db_config["ATOMIC_REQUESTS"] = True
 
 DATABASES = {"default": db_config}
 
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
+AWS_DEFAULT_ACL = "private"
+AWS_BUCKET_ACL = "private"
+AWS_AUTO_CREATE_BUCKET = True
+AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
+AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
+
 # Caches
 if DEBUG:
     if os.environ.get("DEBUG_CACHE", "false").lower() == "true":
@@ -296,9 +306,12 @@ APM_SERVER_URL = os.environ.get("APM_SERVER_URL", "")
 ELK_APP_NAME = "vulekamali Data Manager"
 ELASTIC_APM = {"SERVICE_NAME": ELK_APP_NAME, "SERVER_URL": APM_SERVER_URL}
 
+import boto3, logging
+boto3.set_stream_logger('boto3.resources', logging.INFO)
+
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": True,
+    "disable_existing_loggers": False,
     "formatters": {
         "simple": {
             "format": "%(asctime)s %(levelname)s %(module)s %(process)d %(thread)d %(message)s"
