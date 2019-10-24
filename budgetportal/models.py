@@ -75,6 +75,7 @@ EXPENDITURE_TIME_SERIES_PHASE_MAPPING = {
     "actual": "Audit Outcome",
 }
 
+
 class FinancialYear(models.Model):
     organisational_unit = "financial_year"
     slug = models.SlugField(max_length=7, unique=True)
@@ -1837,15 +1838,12 @@ class Quarter(models.Model):
     def __unicode__(self):
         return u"Quarter %d" % self.number
 
+
 class IRMSnapshot(models.Model):
     """This represents a particular snapshot from IRM"""
 
-    financial_year = models.ForeignKey(
-        FinancialYear, on_delete=models.CASCADE
-    )
-    quarter = models.ForeignKey(
-        Quarter, on_delete=models.CASCADE
-    )
+    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
+    quarter = models.ForeignKey(Quarter, on_delete=models.CASCADE)
     date_taken = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -1855,7 +1853,11 @@ class IRMSnapshot(models.Model):
         verbose_name = "IRM Snapshot"
 
     def __unicode__(self):
-        return "%s Q%d taken %s" % (self.financial_year.slug, self.quarter.number, self.date_taken.isoformat()[:18])
+        return "%s Q%d taken %s" % (
+            self.financial_year.slug,
+            self.quarter.number,
+            self.date_taken.isoformat()[:18],
+        )
 
 
 class ProvInfraProject(models.Model):

@@ -32,11 +32,9 @@ def provincial_infrastructure_project_list(request):
             "longitude": p.longitude,
             "url_path": p.get_absolute_url(),
         },
-        all_matches
+        all_matches,
     )
-    page_data = {
-        "all_matches": all_matches_data,
-    }
+    page_data = {"all_matches": all_matches_data}
     context = {
         "page_data_json": json.dumps(
             page_data, cls=JSONEncoder, sort_keys=True, indent=4
@@ -44,7 +42,9 @@ def provincial_infrastructure_project_list(request):
         "page_title": "Provincial infrastructure project search - vulekamali",
         "page_description": "Find infrastructure projects by provincial departments.",
     }
-    return render(request, "webflow/infrastructure-search-template.html", context=context)
+    return render(
+        request, "webflow/infrastructure-search-template.html", context=context
+    )
 
 
 def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
