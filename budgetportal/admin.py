@@ -20,8 +20,6 @@ from .import_export_admin import (
     DepartmentResource,
     DepartmentImportForm,
     InfrastructureProjectResource,
-    ProvInfraProjectSnapshotImportForm,
-    ProvInfraProjectSnapshotResource,
 )
 
 
@@ -182,19 +180,7 @@ class ProvInfraProjectAdmin(admin.ModelAdmin):
     inines = [ProvInfraProjectSnapshotInline]
 
 
-class ProvInfraProjectSnapshotAdmin(ImportMixin, admin.ModelAdmin):
-    # Resource class to be used by the django-import-export package
-    resource_class = ProvInfraProjectSnapshotResource
-    # File format that can be used to import provincial infrastructure projects
-    formats = [XLSX]
-
-    def get_import_form(self):
-        """
-        Get the import form to use by the django-import-export package
-        to import provincial infrastructure projects.
-        """
-        return ProvInfraProjectSnapshotImportForm
-
+class ProvInfraProjectSnapshotAdmin(admin.ModelAdmin):
     list_display = ("name", "project_number", "province", "department", "irm_snapshot")
     list_display_links = ("name", "project_number")
     list_filter = ("irm_snapshot__financial_year__slug", "province", "department")
@@ -208,19 +194,6 @@ class ProvInfraProjectSnapshotAdmin(ImportMixin, admin.ModelAdmin):
                 + [field.name for field in self.opts.local_many_to_many]
             )
         )
-
-    def get_resource_kwargs(self, request, *args, **kwargs):
-        """
-        Return request which is necessary for import and confirm import requests
-        """
-        rk = super(ProvInfraProjectSnapshotAdmin, self).get_resource_kwargs(
-            request, *args, **kwargs
-        )
-        rk["request"] = request
-        return rk
-
-    def _financial_year(self, obj):
-        return obj.financial_year.slug
 
 
 admin.site.register_view("bulk_upload", "Bulk Upload", view=bulk_upload_view)

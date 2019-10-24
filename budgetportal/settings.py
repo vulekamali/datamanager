@@ -311,7 +311,7 @@ boto3.set_stream_logger('boto3.resources', logging.INFO)
 
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": False,
+    "disable_existing_loggers": True,
     "formatters": {
         "simple": {
             "format": "%(asctime)s %(levelname)s %(module)s %(process)d %(thread)d %(message)s"
