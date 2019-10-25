@@ -5,5 +5,5 @@ from django.dispatch import receiver
 from django.contrib import messages
 
 
-#@receiver([post_save], sender=models.IRMSnapshot)
-#def handle_irm_snapshot_post_save(sender, instance, created, raw, using, update_fields, **kwargs):
+# @receiver([post_save], sender=models.IRMSnapshot)
+# def handle_irm_snapshot_post_save(sender, instance, created, raw, using, update_fields, **kwargs):

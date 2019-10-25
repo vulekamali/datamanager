@@ -171,15 +171,12 @@ class VideoAdmin(SortableAdmin):
 
 
 class IRMSnapshotAdmin(admin.ModelAdmin):
-
     def save_model(self, request, obj, form, change):
         super(IRMSnapshotAdmin, self).save_model(request, obj, form, change)
         result = prov_infra_projects.import_snapshot(obj.file.read())
         for row in result.rows:
             for error in row.errors:
                 raise error.error
-
-
 
 
 class ProvInfraProjectSnapshotInline(admin.StackedInline):

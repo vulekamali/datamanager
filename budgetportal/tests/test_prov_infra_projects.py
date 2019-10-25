@@ -10,10 +10,7 @@ from selenium.webdriver.support.select import Select
 from tablib import Dataset
 
 from budgetportal.models import FinancialYear, ProvInfraProject
-from budgetportal.prov_infra_projects import (
-    BASE_HEADERS,
-    IRMToUniqueColumnsProcessor,
-)
+from budgetportal.prov_infra_projects import BASE_HEADERS, IRMToUniqueColumnsProcessor
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 
 USERNAME = "testuser"

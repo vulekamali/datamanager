@@ -70,7 +70,9 @@ class CustomGovernmentWidget(Widget):
 
     def clean(self, value, row=None, *args, **kwargs):
         try:
-            government = models.Government.objects.get(sphere=self.sphere, slug=slugify(value))
+            government = models.Government.objects.get(
+                sphere=self.sphere, slug=slugify(value)
+            )
         except models.Government.DoesNotExist:
             raise ValidationError(
                 "Government '%s' does not exist in sphere '%s'." % (value, self.sphere)

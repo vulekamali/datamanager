@@ -50,7 +50,6 @@ IMPLEMENTOR_HEADERS = IMPLEMENTORS + [EXTRA_IMPLEMENTOR_HEADER]
 OUTPUT_HEADERS = NORMAL_HEADERS + IMPLEMENTOR_HEADERS
 
 
-
 class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
     def get_instance(self, row):
         """
@@ -60,7 +59,9 @@ class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
         irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
 
         try:
-            return ProvInfraProjectSnapshot.objects.get(project=project_id, irm_snapshot=irm_snapshot_id)
+            return ProvInfraProjectSnapshot.objects.get(
+                project=project_id, irm_snapshot=irm_snapshot_id
+            )
         except ProvInfraProjectSnapshot.DoesNotExist:
             pass
 
@@ -68,8 +69,11 @@ class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
 
 
 class ProvInfraProjectSnapshotResource(resources.ModelResource):
-    IRM_project_id = Field(attribute="project", column_name="Project ID",
-                           widget=ForeignKeyWidget(models.ProvInfraProject, "IRM_project_id"))
+    IRM_project_id = Field(
+        attribute="project",
+        column_name="Project ID",
+        widget=ForeignKeyWidget(models.ProvInfraProject, "IRM_project_id"),
+    )
     irm_snapshot = Field(attribute="irm_snapshot", column_name="irm_snapshot")
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
@@ -288,14 +292,13 @@ class IRMToUniqueColumnsProcessor(object):
 def import_snapshot(file):
     # IRMReportSheet class processes the dataset and saves the processed
     # dataset in it's output_dataset attribute
-    data_book = Databook().load('xlsx', file)
+    data_book = Databook().load("xlsx", file)
     dataset = data_book.sheets()[0]
     preprocessor = IRMToUniqueColumnsProcessor(dataset)
     preprocessor.process()
     resource = ProvInfraProjectSnapshotResource()
     result = resource.import_data(preprocessor.output_dataset)
     return result
-
 
 
 def is_empty_cell(cell):

@@ -1,8 +1,9 @@
 from django.apps import AppConfig
 
+
 class BudgetPortalConfig(AppConfig):
-    name = 'budgetportal'
+    name = "budgetportal"
     verbose_name = "Budget Portal"
 
     def ready(self):
-        import budgetportal.signals #noqa
+        import budgetportal.signals  # noqa

@@ -7,31 +7,38 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0037_auto_20191024_1043'),
-    ]
+    dependencies = [("budgetportal", "0037_auto_20191024_1043")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='infrastructureprojectpart',
-            options={'verbose_name': 'National infrastructure project part'},
+            name="infrastructureprojectpart",
+            options={"verbose_name": "National infrastructure project part"},
         ),
         migrations.AlterModelOptions(
-            name='irmsnapshot',
-            options={'ordering': ['financial_year', 'quarter'], 'verbose_name': 'IRM Snapshot'},
+            name="irmsnapshot",
+            options={
+                "ordering": ["financial_year", "quarter"],
+                "verbose_name": "IRM Snapshot",
+            },
         ),
         migrations.AlterModelOptions(
-            name='provinfraprojectsnapshot',
-            options={'get_latest_by': 'irm_snapshot', 'ordering': ['irm_snapshot'], 'verbose_name': 'Provincial infrastructure project snapshot'},
+            name="provinfraprojectsnapshot",
+            options={
+                "get_latest_by": "irm_snapshot",
+                "ordering": ["irm_snapshot"],
+                "verbose_name": "Provincial infrastructure project snapshot",
+            },
         ),
         migrations.AddField(
-            model_name='irmsnapshot',
-            name='file',
-            field=models.FileField(default='bogus file for adding field', upload_to=b'irm_snapshots/'),
+            model_name="irmsnapshot",
+            name="file",
+            field=models.FileField(
+                default="bogus file for adding field", upload_to=b"irm_snapshots/"
+            ),
             preserve_default=False,
         ),
         migrations.AlterUniqueTogether(
-            name='irmsnapshot',
-            unique_together=set([('financial_year', 'quarter', 'date_taken')]),
+            name="irmsnapshot",
+            unique_together=set([("financial_year", "quarter", "date_taken")]),
         ),
     ]

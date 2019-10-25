@@ -1841,13 +1841,13 @@ class Quarter(models.Model):
 
 
 def irm_snapshot_file_path(instance, filename):
-    extension = filename.split('.')[-1]
+    extension = filename.split(".")[-1]
     return "irm-snapshots/%s/%s-Q%d-taken-%s.%s" % (
         uuid.uuid4(),
         instance.financial_year.slug,
         instance.quarter.number,
         instance.date_taken.isoformat()[:18],
-        extension
+        extension,
     )
 
 

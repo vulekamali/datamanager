@@ -307,7 +307,8 @@ ELK_APP_NAME = "vulekamali Data Manager"
 ELASTIC_APM = {"SERVICE_NAME": ELK_APP_NAME, "SERVER_URL": APM_SERVER_URL}
 
 import boto3, logging
-boto3.set_stream_logger('boto3.resources', logging.INFO)
+
+boto3.set_stream_logger("boto3.resources", logging.INFO)
 
 LOGGING = {
     "version": 1,
