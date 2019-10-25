@@ -184,6 +184,12 @@ class ProvInfraProjectAdmin(admin.ModelAdmin):
     model = models.ProvInfraProject
     inlines = [ProvInfraProjectSnapshotInline]
     readonly_fields = ["IRM_project_id"]
+    list_filter = (
+        "project_snapshots__irm_snapshot",
+        "project_snapshots__province",
+        "project_snapshots__department",
+    )
+    search_fields = ("project_snapshots__name", "project_snapshots__project_number")
 
 
 class ProvInfraProjectSnapshotAdmin(admin.ModelAdmin):
