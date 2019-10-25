@@ -1,4 +1,4 @@
-from tablib import Databook, Dataset
+from tablib import Databook
 from import_export.instance_loaders import ModelInstanceLoader
 from import_export import resources
 from import_export.fields import Field
@@ -199,8 +199,6 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
 
 
 def import_snapshot(file, irm_snapshot_id):
-    # IRMReportSheet class processes the dataset and saves the processed
-    # dataset in it's output_dataset attribute
     data_book = Databook().load("xlsx", file)
     dataset = data_book.sheets()[0]
     preprocessed_dataset = preprocess(dataset)
