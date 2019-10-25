@@ -104,13 +104,15 @@ def get_row_implementors(row, implementor_column_indexes):
     row_implementors = {header: [] for header in IMPLEMENTOR_HEADERS}
     for col in implementor_column_indexes:
         cell = row[col]
-        for prefix in prefixes:
-            if cell.lower().strip().startswith(prefix):
-                implementor_value = cell.split(":")[1].strip()
-                row_implementors[prefixes[prefix]].append(implementor_value)
-                break
-        else:
-            # Implementor hasn't been found, append to "Other parties"
-            row_implementors[EXTRA_IMPLEMENTOR_HEADER].append(cell)
+        if cell is not None and cell.strip():
+            for prefix in prefixes:
+                if cell.lower().strip().startswith(prefix):
+                    implementor_value = cell.split(":")[1].strip()
+                    row_implementors[prefixes[prefix]].append(implementor_value)
+                    break
+            else:
+
+                # Implementor hasn't been found, append to "Other parties"
+                row_implementors[EXTRA_IMPLEMENTOR_HEADER].append(cell)
 
     return ["\n".join(row_implementors[k]) for k in IMPLEMENTOR_HEADERS]

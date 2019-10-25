@@ -47,15 +47,58 @@ class PreprocessHeaderTestCase(unittest.TestCase):
 
 class PreprocessImplementorTestCase(unittest.TestCase):
     def test_get_row_implementors(self):
+        """Regardless of order in input, they are output in IMPLEMENTOR_HEADERS order"""
         row = [1] * len(BASE_HEADERS) + [
             "Main Contractor: C",
             "Principal Agent: B",
             "Program Implementing Agent: A",
+            "Unexpected Implementor: D",
         ]
         offset = len(BASE_HEADERS)
-        implementor_column_indexes = [offset, offset + 1, offset + 2]
-        import pdb; pdb.set_trace()
+        implementor_column_indexes = list(xrange(offset, offset + 4))
         implementors = get_row_implementors(row, implementor_column_indexes)
         self.assertEqual(implementors[0], "A")
         self.assertEqual(implementors[1], "B")
         self.assertEqual(implementors[2], "C")
+        self.assertEqual(implementors[3], "Unexpected Implementor: D")
+
+    def test_get_row_implementors_blanks(self):
+        """Regardless of order in input, they are output in IMPLEMENTOR_HEADERS order"""
+        row = [1] * len(BASE_HEADERS) + [
+            "Main Contractor: C",
+            "",
+            "Principal Agent: B",
+            None,
+            "Program Implementing Agent: A",
+            "",
+            "Unexpected Implementor: D",
+        ]
+        offset = len(BASE_HEADERS)
+        implementor_column_indexes = list(xrange(offset, offset + 7))
+        implementors = get_row_implementors(row, implementor_column_indexes)
+        self.assertEqual(implementors[0], "A")
+        self.assertEqual(implementors[1], "B")
+        self.assertEqual(implementors[2], "C")
+        self.assertEqual(implementors[3], "Unexpected Implementor: D")
+
+    def test_get_row_implementors_multiple(self):
+        """Regardless of order in input, they are output in IMPLEMENTOR_HEADERS order"""
+        row = [1] * len(BASE_HEADERS) + [
+            "Main Contractor: A",
+            "Main Contractor: B",
+            "Principal Agent: C",
+            "Principal Agent: D",
+            "Program Implementing Agent: E",
+            "Program Implementing Agent: F",
+            "Unexpected Implementor: G",
+            "Unexpected Something: H",
+        ]
+        offset = len(BASE_HEADERS)
+        implementor_column_indexes = list(xrange(offset, offset + 8))
+        implementors = get_row_implementors(row, implementor_column_indexes)
+        self.assertEqual(implementors[0], "E\nF")  # Prog Impl Agent
+        self.assertEqual(implementors[1], "C\nD")  # Principal Agent
+        self.assertEqual(implementors[2], "A\nB")  # Main Contractor
+        self.assertEqual(
+            implementors[3], "Unexpected Implementor: G\nUnexpected Something: H"
+        )
