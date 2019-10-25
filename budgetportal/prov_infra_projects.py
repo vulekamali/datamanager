@@ -50,15 +50,17 @@ AGENT_HEADERS = AGENTS + [EXTRA_AGENT_HEADER]
 HEADERS = NORMAL_HEADERS + AGENT_HEADERS
 
 
+
 class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
     def get_instance(self, row):
         """
         Gets a Provincial Infrastructure project instance by IRM_project_id.
         """
         project_id = self.resource.fields["IRM_project_id"].clean(row)
+        irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
 
         try:
-            return ProvInfraProjectSnapshot.objects.get(IRM_project_id=project_id)
+            return ProvInfraProjectSnapshot.objects.get(project=project_id, irm_snapshot=irm_snapshot_id)
         except ProvInfraProjectSnapshot.DoesNotExist:
             pass
 
@@ -66,7 +68,9 @@ class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
 
 
 class ProvInfraProjectSnapshotResource(resources.ModelResource):
-    IRM_project_id = Field(attribute="IRM_project_id", column_name="Project ID")
+    IRM_project_id = Field(attribute="project", column_name="Project ID",
+                           widget=ForeignKeyWidget(models.ProvInfraProject, "IRM_project_id"))
+    irm_snapshot = Field(attribute="irm_snapshot", column_name="irm_snapshot")
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
     province = Field(attribute="province", column_name="Province")
@@ -176,11 +180,6 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
     principle_agent = Field(attribute="principle_agent", column_name="Principal Agent")
     main_contractor = Field(attribute="main_contractor", column_name="Main Contractor")
     other_parties = Field(attribute="other_parties", column_name="Other parties")
-    financial_year = Field(
-        attribute="financial_year",
-        column_name="Financial Year",
-        widget=ForeignKeyWidget(models.FinancialYear),
-    )
 
     class Meta:
         model = models.ProvInfraProjectSnapshot
@@ -228,12 +227,12 @@ class IRMToUniqueColumnsProcessor(object):
                 )
             )
 
-        # Following loops delete contractor columns and append mapped
-        # agent/contractor/parties columns respectively
-        for header in reversed(self.contractor_columns):
-            del self.output_data_set[self.output_data_set.headers[header]]
-        for agent in AGENT_HEADERS:
-            self.output_data_set.append_col(self.output_data_set[agent], header=agent)
+        ## Following loops delete contractor columns and append mapped
+        ## agent/contractor/parties columns respectively
+        #for header in reversed(self.contractor_columns):
+        #    del self.output_data_set[self.output_data_set.headers[header]]
+        #for agent in AGENT_HEADERS:
+        #    self.output_data_set.append_col(self.output_data_set[agent], header=agent)
 
 
     def process_row(self, row_index):
@@ -282,8 +281,8 @@ def import_snapshot(file):
     preprocessor = IRMToUniqueColumnsProcessor(dataset)
     preprocessor.process()
     resource = ProvInfraProjectSnapshotResource()
-    result = resource.import_data(preprocessor.output_dataset)
-    print(result)
+    result = resource.import_data(preprocessor.output_data_set)
+    return result
 
 
 

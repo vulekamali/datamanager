@@ -1840,22 +1840,24 @@ class Quarter(models.Model):
         return u"Quarter %d" % self.number
 
 
+def irm_snapshot_file_path(instance, filename):
+    extension = filename.split('.')[-1]
+    return "irm-snapshots/%s/%s-Q%d-taken-%s.%s" % (
+        uuid.uuid4(),
+        instance.financial_year.slug,
+        instance.quarter.number,
+        instance.date_taken.isoformat()[:18],
+        extension
+    )
+
+
 class IRMSnapshot(models.Model):
     """This represents a particular snapshot from IRM"""
 
-    def file_path(instance, filename):
-        extension = filename.split('.')[-1]
-        return "irm-snapshots/%s/%s-Q%d-taken-%s.%s" % (
-            uuid.uuid4(),
-            instance.financial_year.slug,
-            instance.quarter.number,
-            instance.date_taken.isoformat()[:18],
-            extension
-        )
     financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
     quarter = models.ForeignKey(Quarter, on_delete=models.CASCADE)
     date_taken = models.DateTimeField()
-    file = models.FileField(upload_to=file_path)
+    file = models.FileField(upload_to=irm_snapshot_file_path)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
@@ -1996,6 +1998,7 @@ class ProvInfraProjectSnapshot(models.Model):
         ordering = ["irm_snapshot"]
         get_latest_by = "irm_snapshot"
         verbose_name = "Provincial infrastructure project snapshot"
+        unique_together = ["irm_snapshot", "project"]
 
     def __unicode__(self):
         return self.name

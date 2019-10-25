@@ -21,6 +21,7 @@ from .import_export_admin import (
     DepartmentImportForm,
     InfrastructureProjectResource,
 )
+import prov_infra_projects
 
 
 logger = logging.getLogger(__name__)
@@ -169,6 +170,18 @@ class VideoAdmin(SortableAdmin):
     model = models.Video
 
 
+class IRMSnapshotAdmin(admin.ModelAdmin):
+
+    def save_model(self, request, obj, form, change):
+        super(IRMSnapshotAdmin, self).save_model(request, obj, form, change)
+        result = prov_infra_projects.import_snapshot(obj.file.read())
+        for row in result.rows:
+            for error in row.errors:
+                raise error.error
+
+
+
+
 class ProvInfraProjectSnapshotInline(admin.StackedInline):
     model = models.ProvInfraProjectSnapshot
     fields = ["name", "province", "department", "irm_snapshot"]
@@ -226,4 +239,4 @@ admin.site.register(models.Event)
 admin.site.register(models.FAQ, SortableAdmin)
 admin.site.register(models.ProvInfraProject, ProvInfraProjectAdmin)
 admin.site.register(models.ProvInfraProjectSnapshot, ProvInfraProjectSnapshotAdmin)
-admin.site.register(models.IRMSnapshot, admin.ModelAdmin)
+admin.site.register(models.IRMSnapshot, IRMSnapshotAdmin)
