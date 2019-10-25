@@ -180,7 +180,7 @@ class IRMSnapshotAdmin(admin.ModelAdmin):
             print(row.validation_error)
 
 
-class ProvInfraProjectSnapshotInline(admin.StackedInline):
+class ProvInfraProjectSnapshotInline(admin.TabularInline):
     model = models.ProvInfraProjectSnapshot
     fields = ["name", "province", "department", "irm_snapshot"]
     readonly_fields = fields
@@ -188,7 +188,8 @@ class ProvInfraProjectSnapshotInline(admin.StackedInline):
 
 class ProvInfraProjectAdmin(admin.ModelAdmin):
     model = models.ProvInfraProject
-    inines = [ProvInfraProjectSnapshotInline]
+    inlines = [ProvInfraProjectSnapshotInline]
+    readonly_fields = ["IRM_project_id"]
 
 
 class ProvInfraProjectSnapshotAdmin(admin.ModelAdmin):
