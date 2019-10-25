@@ -2,11 +2,11 @@ from tablib import Databook, Dataset
 from import_export.instance_loaders import ModelInstanceLoader
 from import_export import resources
 from import_export.fields import Field
-from import_export.widgets import Widget, ForeignKeyWidget
+from import_export.widgets import ForeignKeyWidget
 from budgetportal import models
 
 
-NORMAL_HEADERS = [
+BASE_HEADERS = [
     "Project ID",
     "Project No",
     "Project Name",
@@ -47,7 +47,7 @@ NORMAL_HEADERS = [
 EXTRA_IMPLEMENTOR_HEADER = "Other parties"
 IMPLEMENTORS = ["Program Implementing Agent", "Principal Agent", "Main Contractor"]
 IMPLEMENTOR_HEADERS = IMPLEMENTORS + [EXTRA_IMPLEMENTOR_HEADER]
-OUTPUT_HEADERS = NORMAL_HEADERS + IMPLEMENTOR_HEADERS
+OUTPUT_HEADERS = BASE_HEADERS + IMPLEMENTOR_HEADERS
 
 
 class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
@@ -59,10 +59,10 @@ class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
         irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
 
         try:
-            return ProvInfraProjectSnapshot.objects.get(
+            return models.ProvInfraProjectSnapshot.objects.get(
                 project=project_id, irm_snapshot=irm_snapshot_id
             )
-        except ProvInfraProjectSnapshot.DoesNotExist:
+        except models.ProvInfraProjectSnapshot.DoesNotExist:
             pass
 
         return None
@@ -193,121 +193,96 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
         instance_loader_class = ProvInfraProjectSnapshotLoader
 
 
-class IRMToUniqueColumnsProcessor(object):
-    """
-    The data we get from IRM has a number of columns with heading "Project Contractor"
-    as the last few columns. The values in those columns tend to start with a prefix
-    with a colon, e.g. "Main Contractor: Fred Bloggs".
-    django-import-export needs each column to have a unique heading.
-
-    This class looks for predefined prefixes, creates columns with those prefixes,
-    and places matching values in those columns. Any other values get placed
-    in the "Other parties" column. The result with unique columns is stored in
-    the attribute output_dataset".
-    """
-
-    def __init__(self, dataset):
-        self.dataset = dataset
-        self.dataset_dict = dataset.dict
-        self.output_dataset = self.create_output_dataset()
-        self.input_contractor_columns = self._get_input_contractor_columns(dataset)
-        self.row_to_delete = []
-
-    @staticmethod
-    def _get_input_contractor_columns(dataset):
-        headers = dataset.headers
-        return [
-            i for i in range(len(headers)) if headers[i].strip() == "Project Contractor"
-        ]
-
-    @staticmethod
-    def create_output_dataset():
-        dataset = Dataset(title="provincial-infrastructure-projects")
-        dataset.headers = NORMAL_HEADERS + IMPLEMENTOR_HEADERS
-        return dataset
-
-    def process(self):
-        for i in range(len(self.dataset)):
-            self.process_row(i)
-        self.delete_empty_rows()
-
-        # During process, empty rows must be deleted first from the dataset
-        # the following code checks whether number of rows are the same for
-        # the given dataset and the output dataset. If not, raises exception
-        num_of_rows_dataset = self.dataset.height
-        num_of_rows_output_dataset = self.output_dataset.height
-        if num_of_rows_dataset != num_of_rows_output_dataset:
-            raise Exception(
-                "Number of rows in dataset({0}) don't match with the number of rows in the output dataset({1})!".format(
-                    num_of_rows_dataset, num_of_rows_output_dataset
-                )
-            )
-
-    def process_row(self, row_index):
-        row = self.dataset[row_index]
-        if is_empty_row(row):
-            self.row_to_delete.append(row_index)
-            return
-
-        row_base_columns = self.get_row_base_columns(row)
-        row_implementors = self.get_row_implementors(row)
-        output_row = row_base_columns + row_implementors
-        # empty strings should converted into null
-        for index, cell in enumerate(output_row):
-            if cell == "":
-                output_row[index] = None
-        self.append_row_to_output_dataset(output_row)
-
-    def append_row_to_output_dataset(self, row):
-        self.output_dataset.append(row)
-
-    def get_row_base_columns(self, row):
-        return [row[c] for c in BASE_HEADERS]
-
-    def get_row_implementors(self, row):
-        """
-        Returns implementors columns
-        """
-        row_implementors = {k: [] for k in IMPLEMENTOR_HEADERS}
-        for col in self.input_contractor_columns:
-            cell = row[col]
-            if is_empty_cell(cell):
-                continue
-            for agent_header in IMPLEMENTORS:
-                if cell.lower().strip().startswith(agent_header.lower()):
-                    agent_value = cell.split(":")[1].strip()
-                    row_implementors[agent_header].append(agent_value)
-                    break
-            else:
-                # Agent hasn't been found, append to "Other parties"
-                row_implementors[EXTRA_IMPLEMENTOR_HEADER].append(cell)
-
-        return ["\n".join(row_implementors[k]) for k in IMPLEMENTOR_HEADERS]
-
-    def delete_empty_rows(self):
-        for index in reversed(self.row_to_delete):
-            del self.dataset[index]
-
-
-def import_snapshot(file):
-    # IRMReportSheet class processes the dataset and saves the processed
-    # dataset in it's output_dataset attribute
-    data_book = Databook().load("xlsx", file)
-    dataset = data_book.sheets()[0]
-    preprocessor = IRMToUniqueColumnsProcessor(dataset)
-    preprocessor.process()
-    resource = ProvInfraProjectSnapshotResource()
-    result = resource.import_data(preprocessor.output_dataset)
-    return result
-
-
-def is_empty_cell(cell):
-    return not cell or (isinstance(cell, basestring) and len(cell.strip()) == 0)
-
-
-def is_not_empty_cell(cell):
-    return not is_empty_cell(cell)
-
-
-def is_empty_row(row):
-    return len(list(filter(is_not_empty_cell, row))) == 0
+# class IRMToUniqueColumnsProcessor(object):
+#     """
+#     The data we get from IRM has a number of columns with heading "Project Contractor"
+#     as the last few columns. The values in those columns tend to start with a prefix
+#     with a colon, e.g. "Main Contractor: Fred Bloggs".
+#     django-import-export needs each column to have a unique heading.
+#
+#     This class looks for predefined prefixes, creates columns with those prefixes,
+#     and places matching values in those columns. Any other values get placed
+#     in the "Other parties" column. The result with unique columns is stored in
+#     the attribute output_dataset".
+#     """
+#
+#     def __init__(self, dataset):
+#         self._input_dataset = dataset
+#         self._output_dataset = self._create_output_dataset()
+#         self.input_contractor_columns = self._get_input_contractor_columns()
+#
+#
+#     @staticmethod
+#     def _create_output_dataset():
+#         dataset = Dataset(title="provincial-infrastructure-projects")
+#         dataset.headers = BASE_HEADERS + IMPLEMENTOR_HEADERS
+#         return dataset
+#
+#     def get_output_dataset(self):
+#         self.assert_expected_input_columns
+#         self.process()
+#         return self._output_dataset
+#
+#     def process(self):
+#         for row in self._input_dataset)
+#             self.process_row(row)
+#
+#     def process_row(self, row):
+#         if is_empty_row(row):
+#             return
+#
+#         row_base_columns = self.get_row_base_columns(row)
+#         row_implementors = self.get_row_implementors(row)
+#         output_row = row_base_columns + row_implementors
+#
+#         self.append_row_to_output_dataset(output_row)
+#
+#     def append_row_to_output_dataset(self, row):
+#         self._output_dataset.append(row)
+#
+#     def get_row_base_columns(self, row):
+#
+#
+#     def get_row_implementors(self, row):
+#         """
+#         Returns implementors columns
+#         """
+#         row_implementors = {k: [] for k in IMPLEMENTOR_HEADERS}
+#         for col in self.input_contractor_columns:
+#             cell = row[col]
+#             if is_empty_cell(cell):
+#                 continue
+#             for agent_header in IMPLEMENTORS:
+#                 if cell.lower().strip().startswith(agent_header.lower()):
+#                     agent_value = cell.split(":")[1].strip()
+#                     row_implementors[agent_header].append(agent_value)
+#                     break
+#             else:
+#                 # Agent hasn't been found, append to "Other parties"
+#                 row_implementors[EXTRA_IMPLEMENTOR_HEADER].append(cell)
+#
+#         return ["\n".join(row_implementors[k]) for k in IMPLEMENTOR_HEADERS]
+#
+#
+# def import_snapshot(file):
+#     # IRMReportSheet class processes the dataset and saves the processed
+#     # dataset in it's output_dataset attribute
+#     data_book = Databook().load("xlsx", file)
+#     dataset = data_book.sheets()[0]
+#     preprocessor = IRMToUniqueColumnsProcessor(dataset)
+#     preprocessor.process()
+#     resource = ProvInfraProjectSnapshotResource()
+#     result = resource.import_data(preprocessor.output_dataset)
+#     return result
+#
+#
+# def is_empty_cell(cell):
+#     return not cell or (isinstance(cell, basestring) and len(cell.strip()) == 0)
+#
+#
+# def is_not_empty_cell(cell):
+#     return not is_empty_cell(cell)
+#
+#
+# def is_empty_row(row):
+#     return len(list(filter(is_not_empty_cell, row))) == 0
