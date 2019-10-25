@@ -36,6 +36,10 @@ services:
     command: tox
     environment:
       - DATABASE_URL=postgresql://budgetportal@db/budgetportal_test
+      - AWS_ACCESS_KEY_ID=minio-access-key
+      - AWS_SECRET_ACCESS_KEY=minio-secret-key
+      - AWS_STORAGE_BUCKET_NAME=budgetportal-storage
+      - AWS_S3_ENDPOINT_URL=http://minio:9000
     volumes:
       - .:/code
     depends_on:

@@ -10,9 +10,9 @@ from selenium.webdriver.support.select import Select
 from tablib import Dataset
 
 from budgetportal.models import FinancialYear, ProvInfraProject
-from budgetportal.provincial_infrastructure_projects import (
-    NORMAL_HEADERS,
-    IRMReportSheet,
+from budgetportal.prov_infra_projects import (
+    BASE_HEADERS,
+    IRMToUniqueColumnsProcessor,
 )
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 
@@ -80,7 +80,7 @@ class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
         )
         self.assertEqual(first_project.variation_orders, 0)
 
-        # check whether parties/contractor mapping worked correctly
+        # check whether parties/implementor mapping worked correctly
         self.assertEqual(first_project.program_implementing_agent, "DOPW")
         self.assertEqual(first_project.other_parties, None)
 
@@ -89,12 +89,12 @@ class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
         self.assertEqual(count, 11)
 
 
-class IRMReportSheetTestCase(TestCase):
+class IRMToUniqueColumnsProcessorTestCase(TestCase):
     def setUp(self):
         dataset = Dataset()
-        dataset.headers = NORMAL_HEADERS + ["Project Contractor"] * 50
+        dataset.headers = BASE_HEADERS + ["Project Contractor"] * 50
         row = (
-            [1] * len(NORMAL_HEADERS)
+            [1] * len(BASE_HEADERS)
             + [
                 "Program Implementing Agent: DOPW",
                 "Program Implementing Agent: TEST",
@@ -104,31 +104,31 @@ class IRMReportSheetTestCase(TestCase):
             + [None] * 46
         )
         dataset.append(row=row)
-        self.report_sheet = IRMReportSheet(dataset)
+        self.processor = IRMToUniqueColumnsProcessor(dataset)
 
-    def test_clean_project_contractors(self):
+    def test_clean_project_implementors(self):
         """Check that first dataset has 50 Project Contractor columns but output has 0"""
 
-        report_sheet = self.report_sheet
-        num_project_contractor_columns = len(report_sheet.contractor_columns)
-        self.assertEqual(num_project_contractor_columns, 50)
+        processor = self.processor
+        num_project_implementor_columns = len(processor.input_implementor_columns)
+        self.assertEqual(num_project_implementor_columns, 50)
 
-        report_sheet.process()
-        new_report_sheet = IRMReportSheet(report_sheet.output_data_set)
+        processor.process()
+        new_processor = IRMToUniqueColumnsProcessor(processor.output_dataset)
 
-        num_project_contractor_columns = len(new_report_sheet.contractor_columns)
-        self.assertEqual(num_project_contractor_columns, 0)
+        num_project_implementor_columns = len(new_processor.implementor_columns)
+        self.assertEqual(num_project_implementor_columns, 0)
 
     def test_assigned_correctly(self):
-        """Check that project contractors successfully mapped"""
+        """Check that project implementors successfully mapped"""
 
-        self.report_sheet.process()
-        program_implementing_agent = self.report_sheet.output_data_set[
+        self.processor.process()
+        program_implementing_agent = self.processor.output_dataset[
             "Program Implementing Agent"
         ]
-        main_contractor = self.report_sheet.output_data_set["Main Contractor"]
-        principal_agent = self.report_sheet.output_data_set["Principal Agent"]
-        other_parties = self.report_sheet.output_data_set["Other parties"]
+        main_contractor = self.processor.output_dataset["Main Contractor"]
+        principal_agent = self.processor.output_dataset["Principal Agent"]
+        other_parties = self.processor.output_dataset["Other parties"]
 
         self.assertEqual(program_implementing_agent, ["DOPW\nTEST"])
         self.assertEqual(main_contractor, ["AAAA"])
@@ -136,25 +136,25 @@ class IRMReportSheetTestCase(TestCase):
         self.assertEqual(other_parties, [None])
 
     def test_empty_rows_deleted(self):
-        empty_row = [None] * self.report_sheet.data_set.width
-        num_nonempty_rows = self.report_sheet.data_set.height
+        empty_row = [None] * self.processor.dataset.width
+        num_nonempty_rows = self.processor.dataset.height
         num_of_empty_rows = 100
         for i in range(num_of_empty_rows):
-            self.report_sheet.data_set.append(empty_row)
+            self.processor.dataset.append(empty_row)
 
         total_rows = num_nonempty_rows + num_of_empty_rows
-        self.assertEqual(self.report_sheet.data_set.height, total_rows)
+        self.assertEqual(self.processor.dataset.height, total_rows)
 
-        self.report_sheet.process()
-        self.assertEqual(self.report_sheet.data_set.height, num_nonempty_rows)
+        self.processor.process()
+        self.assertEqual(self.processor.dataset.height, num_nonempty_rows)
 
 
-class IRMReportSheetWithOtherKeysTestCase(TestCase):
+class MultipleOthersTestCase(TestCase):
     def setUp(self):
         dataset_with_other_keys = Dataset()
-        dataset_with_other_keys.headers = NORMAL_HEADERS + ["Project Contractor"] * 50
+        dataset_with_other_keys.headers = BASE_HEADERS + ["Project Contractor"] * 50
         row_with_other_keys = (
-            [1] * len(NORMAL_HEADERS)
+            [1] * len(BASE_HEADERS)
             + [
                 "Service Provider: DOPW",
                 "Program Implementing Agent: TEST",
@@ -164,19 +164,19 @@ class IRMReportSheetWithOtherKeysTestCase(TestCase):
             + [None] * 46
         )
         dataset_with_other_keys.append(row_with_other_keys)
-        self.sheet_with_other_keys = IRMReportSheet(dataset_with_other_keys)
+        self.processor = IRMToUniqueColumnsProcessor(dataset_with_other_keys)
 
     def test_other_parties(self):
         """Checks when different keys given in project contractor"""
 
-        self.sheet_with_other_keys.process()
+        self.processor.process()
 
-        program_implementing_agent = self.sheet_with_other_keys.output_data_set[
+        program_implementing_agent = self.processor.output_dataset[
             "Program Implementing Agent"
         ]
-        main_contractor = self.sheet_with_other_keys.output_data_set["Main Contractor"]
-        principal_agent = self.sheet_with_other_keys.output_data_set["Principal Agent"]
-        other_parties = self.sheet_with_other_keys.output_data_set["Other parties"]
+        main_contractor = self.processor.output_dataset["Main Contractor"]
+        principal_agent = self.processor.output_dataset["Principal Agent"]
+        other_parties = self.processor.output_dataset["Other parties"]
 
         self.assertEqual(program_implementing_agent, ["TEST"])
         self.assertEqual(main_contractor, [None])
