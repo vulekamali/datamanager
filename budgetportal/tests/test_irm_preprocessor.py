@@ -27,7 +27,7 @@ class PreprocessHeaderTestCase(unittest.TestCase):
             headers = BASE_HEADERS + ["badheader"]
             preprocess(Dataset(headers=headers))
         expected_message = (
-            "Expected header Project Contractor in column 37 but got badheader"
+            "Expected header Project Contractor in column 38 but got badheader"
         )
         self.assertEqual(expected_message, context.exception.message)
 
@@ -36,7 +36,7 @@ class PreprocessHeaderTestCase(unittest.TestCase):
             headers = BASE_HEADERS + [REPEATED_IMPLEMENTOR_HEADER] * 3 + ["badheader"]
             preprocess(Dataset(headers=headers))
         expected_message = (
-            "Expected header Project Contractor in column 40 but got badheader"
+            "Expected header Project Contractor in column 41 but got badheader"
         )
         self.assertEqual(expected_message, context.exception.message)
 
@@ -63,7 +63,6 @@ class PreprocessImplementorTestCase(unittest.TestCase):
         self.assertEqual(implementors[3], "Unexpected Implementor: D")
 
     def test_get_row_implementors_blanks(self):
-        """Regardless of order in input, they are output in IMPLEMENTOR_HEADERS order"""
         row = [1] * len(BASE_HEADERS) + [
             "Main Contractor: C",
             "",
@@ -82,7 +81,6 @@ class PreprocessImplementorTestCase(unittest.TestCase):
         self.assertEqual(implementors[3], "Unexpected Implementor: D")
 
     def test_get_row_implementors_multiple(self):
-        """Regardless of order in input, they are output in IMPLEMENTOR_HEADERS order"""
         row = [1] * len(BASE_HEADERS) + [
             "Main Contractor: A",
             "Main Contractor: B",
@@ -102,3 +100,13 @@ class PreprocessImplementorTestCase(unittest.TestCase):
         self.assertEqual(
             implementors[3], "Unexpected Implementor: G\nUnexpected Something: H"
         )
+
+    def test_get_row_implementors_just_one(self):
+        row = [1] * len(BASE_HEADERS) + ["Main Contractor: C"]
+        offset = len(BASE_HEADERS)
+        implementor_column_indexes = list(xrange(offset, offset + 1))
+        implementors = get_row_implementors(row, implementor_column_indexes)
+        self.assertEqual(implementors[0], "")
+        self.assertEqual(implementors[1], "")
+        self.assertEqual(implementors[2], "C")
+        self.assertEqual(implementors[3], "")

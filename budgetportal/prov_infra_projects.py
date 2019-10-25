@@ -4,6 +4,7 @@ from import_export import resources
 from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget
 from budgetportal import models
+from irm_preprocessor import preprocess
 
 
 BASE_HEADERS = [
@@ -74,7 +75,11 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
         column_name="Project ID",
         widget=ForeignKeyWidget(models.ProvInfraProject, "IRM_project_id"),
     )
-    irm_snapshot = Field(attribute="irm_snapshot", column_name="irm_snapshot")
+    irm_snapshot = Field(
+        attribute="irm_snapshot",
+        column_name="irm_snapshot",
+        widget=ForeignKeyWidget(models.IRMSnapshot)
+    )
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
     province = Field(attribute="province", column_name="Province")
@@ -193,96 +198,15 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
         instance_loader_class = ProvInfraProjectSnapshotLoader
 
 
-# class IRMToUniqueColumnsProcessor(object):
-#     """
-#     The data we get from IRM has a number of columns with heading "Project Contractor"
-#     as the last few columns. The values in those columns tend to start with a prefix
-#     with a colon, e.g. "Main Contractor: Fred Bloggs".
-#     django-import-export needs each column to have a unique heading.
-#
-#     This class looks for predefined prefixes, creates columns with those prefixes,
-#     and places matching values in those columns. Any other values get placed
-#     in the "Other parties" column. The result with unique columns is stored in
-#     the attribute output_dataset".
-#     """
-#
-#     def __init__(self, dataset):
-#         self._input_dataset = dataset
-#         self._output_dataset = self._create_output_dataset()
-#         self.input_contractor_columns = self._get_input_contractor_columns()
-#
-#
-#     @staticmethod
-#     def _create_output_dataset():
-#         dataset = Dataset(title="provincial-infrastructure-projects")
-#         dataset.headers = BASE_HEADERS + IMPLEMENTOR_HEADERS
-#         return dataset
-#
-#     def get_output_dataset(self):
-#         self.assert_expected_input_columns
-#         self.process()
-#         return self._output_dataset
-#
-#     def process(self):
-#         for row in self._input_dataset)
-#             self.process_row(row)
-#
-#     def process_row(self, row):
-#         if is_empty_row(row):
-#             return
-#
-#         row_base_columns = self.get_row_base_columns(row)
-#         row_implementors = self.get_row_implementors(row)
-#         output_row = row_base_columns + row_implementors
-#
-#         self.append_row_to_output_dataset(output_row)
-#
-#     def append_row_to_output_dataset(self, row):
-#         self._output_dataset.append(row)
-#
-#     def get_row_base_columns(self, row):
-#
-#
-#     def get_row_implementors(self, row):
-#         """
-#         Returns implementors columns
-#         """
-#         row_implementors = {k: [] for k in IMPLEMENTOR_HEADERS}
-#         for col in self.input_contractor_columns:
-#             cell = row[col]
-#             if is_empty_cell(cell):
-#                 continue
-#             for agent_header in IMPLEMENTORS:
-#                 if cell.lower().strip().startswith(agent_header.lower()):
-#                     agent_value = cell.split(":")[1].strip()
-#                     row_implementors[agent_header].append(agent_value)
-#                     break
-#             else:
-#                 # Agent hasn't been found, append to "Other parties"
-#                 row_implementors[EXTRA_IMPLEMENTOR_HEADER].append(cell)
-#
-#         return ["\n".join(row_implementors[k]) for k in IMPLEMENTOR_HEADERS]
-#
-#
-# def import_snapshot(file):
-#     # IRMReportSheet class processes the dataset and saves the processed
-#     # dataset in it's output_dataset attribute
-#     data_book = Databook().load("xlsx", file)
-#     dataset = data_book.sheets()[0]
-#     preprocessor = IRMToUniqueColumnsProcessor(dataset)
-#     preprocessor.process()
-#     resource = ProvInfraProjectSnapshotResource()
-#     result = resource.import_data(preprocessor.output_dataset)
-#     return result
-#
-#
-# def is_empty_cell(cell):
-#     return not cell or (isinstance(cell, basestring) and len(cell.strip()) == 0)
-#
-#
-# def is_not_empty_cell(cell):
-#     return not is_empty_cell(cell)
-#
-#
-# def is_empty_row(row):
-#     return len(list(filter(is_not_empty_cell, row))) == 0
+def import_snapshot(file, irm_snapshot_id):
+    # IRMReportSheet class processes the dataset and saves the processed
+    # dataset in it's output_dataset attribute
+    data_book = Databook().load("xlsx", file)
+    dataset = data_book.sheets()[0]
+    preprocessed_dataset = preprocess(dataset)
+    preprocessed_dataset.append_col(
+        [irm_snapshot_id] * len(preprocessed_dataset), header="irm_snapshot"
+    )
+    resource = ProvInfraProjectSnapshotResource()
+    result = resource.import_data(preprocessed_dataset)
+    return result

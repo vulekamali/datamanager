@@ -2,46 +2,47 @@ from tablib import Dataset
 
 
 BASE_HEADERS = [
-    "Project ID",
-    "Project No",
-    "Project Name",
-    "Province",
-    "Department",
-    "Local Municipality",
-    "District Municipality",
-    "Latitude",
-    "Longitude",
-    "Project Status",
-    "Project Start Date",
-    "Estimated Construction Start Date",
-    "Estimated Project Completion Date",
-    "Contracted Construction End Date",
-    "Estimated Construction End Date",
-    "Professional Fees",
-    "Construction Costs",
-    "Variation Orders",
-    "Total Project Cost",
-    "Project Expenditure from Previous Financial Years (Professional Fees)",
-    "Project Expenditure from Previous Financial Years (Construction Costs)",
-    "Project Expenditure from Previous Financial Years (TOTAL)",
-    "Main Budget Appropriation (Professional Fees)",
-    "Adjustment Budget Appropriation (Professional Fees)",
-    "Main Budget Appropriation (Construction Costs)",
-    "Adjustment Budget Appropriation (Construction Costs)",
-    "Main Budget Appropriation (TOTAL)",
-    "Adjustment Budget Appropriation (TOTAL)",
-    "Actual Expenditure Q1",
-    "Actual Expenditure Q2",
-    "Actual Expenditure Q3",
-    "Actual Expenditure Q4",
-    "Budget Programme",
-    "Primary Funding Source",
-    "Nature of Investment",
-    "Funding Status",
+    u"Project ID",
+    u"Project No",
+    u"Project Name",
+    u"Province",
+    u"Department",
+    u"Local Municipality",
+    u"District Municipality",
+    u"Latitude",
+    u"Longitude",
+    u"Project Status",
+    u"Project Start Date",
+    u"Estimated Construction Start Date",
+    u"Estimated Project Completion Date",
+    u"Contracted Construction End Date",
+    u"Estimated Construction End Date",
+    u"Professional Fees",
+    u"Construction Costs",
+    u"Variation Orders",
+    u"Total Project Cost",
+    u"Project Expenditure from Previous Financial Years (Professional Fees)",
+    u"Project Expenditure from Previous Financial Years (Construction Costs)",
+    u"Project Expenditure from Previous Financial Years (TOTAL)",
+    u"Project Expenditure (TOTAL)",
+    u"Main Budget Appropriation (Professional Fees)",
+    u"Adjustment Budget Appropriation (Professional Fees)",
+    u"Main Budget Appropriation (Construction Costs)",
+    u"Adjustment Budget Appropriation (Construction Costs)",
+    u"Main Budget Appropriation (TOTAL)",
+    u"Adjustment Budget Appropriation (TOTAL)",
+    u"Actual Expenditure Q1",
+    u"Actual Expenditure Q2",
+    u"Actual Expenditure Q3",
+    u"Actual Expenditure Q4",
+    u"Budget Programme",
+    u"Primary Funding Source",
+    u"Nature of Investment",
+    u"Funding Status",
 ]
-REPEATED_IMPLEMENTOR_HEADER = "Project Contractor"
+REPEATED_IMPLEMENTOR_HEADER = u"Project Contractor"
 EXTRA_IMPLEMENTOR_HEADER = "Other parties"
-IMPLEMENTORS = ["Program Implementing Agent", "Principal Agent", "Main Contractor"]
+IMPLEMENTORS = [u"Program Implementing Agent", u"Principal Agent", u"Main Contractor"]
 IMPLEMENTOR_HEADERS = IMPLEMENTORS + [EXTRA_IMPLEMENTOR_HEADER]
 OUTPUT_HEADERS = BASE_HEADERS + IMPLEMENTOR_HEADERS
 
@@ -62,9 +63,7 @@ def preprocess(input_dataset):
     # in the order we expect.
     check_input_column_order(input_dataset.headers)
     implementor_column_indexes = get_implementor_column_indexes(input_dataset.headers)
-    output_dataset = Dataset(
-        headers=BASE_HEADERS + IMPLEMENTOR_HEADERS + [EXTRA_IMPLEMENTOR_HEADER]
-    )
+    output_dataset = Dataset(headers=BASE_HEADERS + IMPLEMENTOR_HEADERS)
     for row in input_dataset:
         output_dataset.append(preprocess_row(row, implementor_column_indexes))
     return output_dataset
@@ -94,7 +93,7 @@ def get_implementor_column_indexes(headers):
 
 
 def preprocess_row(row, implementor_column_indexes):
-    base_columns = row[: len(BASE_HEADERS)]
+    base_columns = list(row[: len(BASE_HEADERS)])
     implementor_columns = get_row_implementors(row, implementor_column_indexes)
     return base_columns + implementor_columns
 
