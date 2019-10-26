@@ -93,10 +93,9 @@ class ProvInfraProjectFilter(HaystackFacetFilter):
         queryset = super(ProvInfraProjectFilter, self).filter_queryset(
             request, queryset, view, *args, **kwargs
         )
-        text_query = request.GET.get("q", None)
-        print("##### text_query: %s" % text_query)
+        text_query = request.query_params.get("q", None)
         if text_query:
-            queryset.filter(text=text_query)
+            queryset = queryset.filter(text=text_query)
         return queryset
 
 
@@ -110,4 +109,4 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
 
     serializer_class = ProvInfraProjectSerializer
     facet_serializer_class = ProvInfraProjectFacetSerializer
-    # facet_filter_backends = [ProvInfraProjectFilter]
+    facet_filter_backends = [ProvInfraProjectFilter]

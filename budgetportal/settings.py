@@ -141,6 +141,7 @@ HAYSTACK_CONNECTIONS = {
         'ADMIN_URL': 'http://solr:8983/solr/admin/cores',
     },
 }
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 
 # Caches
