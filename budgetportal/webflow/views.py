@@ -3,10 +3,12 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
 from django.forms.models import model_to_dict
-from drf_haystack.serializers import HaystackSerializer
+from drf_haystack.serializers import HaystackSerializer, HaystackFacetSerializer
 from drf_haystack.viewsets import HaystackViewSet
+from drf_haystack.mixins import FacetMixin
 from budgetportal import models
 from ..search_indexes import ProvInfraProjectIndex
+from drf_haystack.filters import HaystackFacetFilter
 
 import json
 import decimal
@@ -68,7 +70,37 @@ class ProvInfraProjectSerializer(HaystackSerializer):
         ]
 
 
-class ProvInfraProjectSearchView(HaystackViewSet):
+class ProvInfraProjectFacetSerializer(HaystackFacetSerializer):
+
+    serialize_objects = True  # Setting this to True will serialize the
+    # queryset into an `objects` list. This
+    # is useful if you need to display the faceted
+    # results. Defaults to False.
+
+    class Meta:
+        index_classes = [ProvInfraProjectIndex]
+        fields = ["province", "department", "status", "primary_funding_source"]
+        field_options = {
+            "province": {},
+            "department": {},
+            "status": {},
+            "primary_funding_source": {},
+        }
+
+
+class ProvInfraProjectFilter(HaystackFacetFilter):
+    def filter_queryset(self, request, queryset, view, *args, **kwargs):
+        queryset = super(ProvInfraProjectFilter, self).filter_queryset(
+            request, queryset, view, *args, **kwargs
+        )
+        text_query = request.GET.get("q", None)
+        print("##### text_query: %s" % text_query)
+        if text_query:
+            queryset.filter(text=text_query)
+        return queryset
+
+
+class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
 
     # `index_models` is an optional list of which models you would like to include
     # in the search result. You might have several models indexed, and this provides
@@ -77,3 +109,5 @@ class ProvInfraProjectSearchView(HaystackViewSet):
     # index_models = [Location]
 
     serializer_class = ProvInfraProjectSerializer
+    facet_serializer_class = ProvInfraProjectFacetSerializer
+    # facet_filter_backends = [ProvInfraProjectFilter]

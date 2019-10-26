@@ -1,1 +1,0 @@
-{{ object.project_snapshots.latest.province }}
