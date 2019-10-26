@@ -186,10 +186,10 @@
         $("#result-list-container .narrow-card_wrapper").remove()
         template.find(".narrow-card_icon").remove();
 
-        $.get("/api/v1/infrastructure-projects/provincial/")
+        $.get("/api/v1/infrastructure-projects/provincial/search/facets")
             .done(function(response) {
 
-                response.results.forEach(function(project) {
+                response.objects.results.forEach(function(project) {
                     var resultItem = template.clone();
                     resultItem.attr("href", project.url_path);
                     resultItem.find(".narrow-card_title").html(project.name);
@@ -203,6 +203,7 @@
                 console.error( jqXHR, textStatus, errorThrown );
             });
 
+        /**
         $("#map").empty();
         var map = L.map("map")
             .setView([-30.5595, 22.9375], 4);
@@ -217,6 +218,7 @@
             }
         });
         map.addLayer(markers);
+        **/
     } // end search page
 
 })();

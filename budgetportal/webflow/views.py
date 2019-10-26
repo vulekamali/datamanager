@@ -28,24 +28,26 @@ def provincial_infrastructure_project_list(request):
     context = {
         "page_title": "Provincial infrastructure project search - vulekamali",
         "page_description": "Find infrastructure projects by provincial departments.",
+        "page_data_json": "null",
     }
     return render(request, "webflow/infrastructure-search-template.html", context=context)
 
 
-def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
+def provincial_infrastructure_project_detail(request, id, slug):
     project = get_object_or_404(
-        models.ProvInfraProject, IRM_project_id=int(IRM_project_id)
+        models.ProvInfraProject, pk=int(id)
     )
-    page_data = {"project": model_to_dict(project)}
+    snapshot = project.project_snapshots.latest()
+    page_data = {"project": model_to_dict(snapshot)}
     context = {
         "project": project,
         "page_data_json": json.dumps(
             page_data, cls=JSONEncoder, sort_keys=True, indent=4
         ),
         "page_title": "%s, %s Infrastructure projects - vulekamali"
-        % (project.name, project.province),
+        % (snapshot.name, snapshot.province),
         "page_description": "Provincial infrastructure project by the %s %s department."
-        % (project.province, project.department),
+        % (snapshot.province, snapshot.department),
     }
     return render(
         request,
