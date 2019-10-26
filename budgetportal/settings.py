@@ -78,10 +78,10 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    "elasticapm.contrib.django",
     "import_export",
     "markdownify",
     "ckeditor",
+    "haystack",
 ]
 
 if DEBUG_TOOLBAR:
@@ -132,6 +132,16 @@ AWS_BUCKET_ACL = "private"
 AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
+
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://solr:8983/solr/budgetportal',
+        'ADMIN_URL': 'http://solr:8983/solr/admin/cores',
+    },
+}
+
 
 # Caches
 if DEBUG:

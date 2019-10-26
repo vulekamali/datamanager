@@ -1,0 +1,5 @@
+{{ object.project_snapshots.latest.name }}
+{{ object.project_snapshots.latest.province }}
+{{ object.project_snapshots.latest.department }}
+{{ object.project_snapshots.latest.local_municipality }}
+{{ object.project_snapshots.latest.district_municipality }}

@@ -74,6 +74,18 @@ services:
       - MINIO_SECRET_KEY=minio-secret-key
     command: minio --compat server data
 
+  solr:
+    build:
+      context: docker/solr
+    image: budgetportal-solr
+    ports:
+      - "8983:8983"
+    volumes:
+      - solr-data:/opt/solr/server/solr/budgetportal/data
+
+
+
 volumes:
   db-data:
   minio-data:
+  solr-data:
