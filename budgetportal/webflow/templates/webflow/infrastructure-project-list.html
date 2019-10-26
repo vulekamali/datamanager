@@ -1,8 +1,8 @@
 {% for project in projects %}
 <p>
   <a href="{% url 'provincial-infra-project-detail' project.IRM_project_id project.get_slug %}">
-    {{ project.name }}
+    {{ project.latest_snapshots.1.name }}
   </a>
-  {{ project.department }}, {{ project.province }}
+  {{ project.latest_snapshots.1.department }}, {{ project.latest_snapshots.1.province }} - {{ project.latest_snapshots.1.status }}
 </p>
 {% endfor %}

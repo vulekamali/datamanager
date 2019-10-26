@@ -202,6 +202,9 @@ def import_snapshot(file, irm_snapshot_id):
     data_book = Databook().load("xlsx", file)
     dataset = data_book.sheets()[0]
     preprocessed_dataset = preprocess(dataset)
+    # Ensure projects exist
+    for IRM_project_id in preprocessed_dataset["Project ID"]:
+        models.ProvInfraProject.objects.get_or_create(IRM_project_id=IRM_project_id)
     preprocessed_dataset.append_col(
         [irm_snapshot_id] * len(preprocessed_dataset), header="irm_snapshot"
     )

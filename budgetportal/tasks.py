@@ -48,14 +48,12 @@ def import_irm_snapshot(snapshot_id):
         result = prov_infra_projects.import_snapshot(snapshot.file.read(), snapshot.id)
         for row in result.rows:
             for error in row.errors:
+                logger.error(error.error, exc_info=True)
                 raise error.error
         return {
             "totals": result.totals,
             "validation_errors": [row.validation_error for row in result.rows],
         }
     except Exception as e:
-        logger.exception(e)
-        return {
-            "status": "exception",
-            "traceback": traceback.format_exc(),
-        }
+        logger.error(e, exc_info=True)
+        raise Exception(traceback.format_exc())

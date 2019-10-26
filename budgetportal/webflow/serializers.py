@@ -1,16 +1,16 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
-from budgetportal.models import ProvInfraProject
+from budgetportal.models import ProvInfraProjectSnapshot
 
 
-class ProvInfraProjectSerializer(ModelSerializer):
+class ProvInfraProjectSnapshotSerializer(ModelSerializer):
     url_path = SerializerMethodField()
 
     def get_url_path(self, project):
         return project.get_absolute_url()
 
     class Meta:
-        model = ProvInfraProject
+        model = ProvInfraProjectSnapshot
         fields = (
             "project_number",
             "name",

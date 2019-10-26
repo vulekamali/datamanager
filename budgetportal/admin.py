@@ -176,7 +176,7 @@ class IRMSnapshotAdmin(admin.ModelAdmin):
 
 class ProvInfraProjectSnapshotInline(admin.TabularInline):
     model = models.ProvInfraProjectSnapshot
-    fields = ["name", "province", "department", "irm_snapshot"]
+    fields = ["name", "province", "department", "status", "irm_snapshot"]
     readonly_fields = fields
 
 

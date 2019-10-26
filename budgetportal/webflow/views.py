@@ -6,8 +6,9 @@ from django.forms.models import model_to_dict
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.filters import SearchFilter
-from budgetportal.webflow.serializers import ProvInfraProjectSerializer
-from ..models import ProvInfraProject
+from budgetportal.webflow.serializers import ProvInfraProjectSnapshotSerializer
+from ..models import ProvInfraProjectSnapshot, ProvInfraProject
+from django.db.models import Subquery, OuterRef, Max, Prefetch
 
 import json
 import decimal
@@ -24,13 +25,49 @@ class JSONEncoder(json.JSONEncoder):
 
 
 def provincial_infrastructure_project_list(request):
-    projects = ProvInfraProject.objects.all()
+    latest_snapshots = ProvInfraProjectSnapshot.objects.filter(
+        project=Subquery(
+            (
+                ProvInfraProjectSnapshot.objects.filter(
+                    project=OuterRef("project"), status="Tender"
+                )
+                .values("project")
+                .annotate(latest_snapshot=Max("project"))
+                .values("latest_snapshot")[:1]
+            )
+        )
+    )
+    # hottest_cakes = Cake.objects.filter(
+    #    baked_at=Subquery(
+    #        (Cake.objects
+    #            .filter(bakery=OuterRef('bakery'))
+    #            .values('bakery')
+    #            .annotate(last_bake=Max('baked_at'))
+    #            .values('last_bake')[:1]
+    #        )
+    #    )
+    # )
+    # bakeries = Bakery.objects.all().prefetch_related(
+    #     Prefetch('cake_set',
+    #         queryset=hottest_cakes,
+    #         to_attr='hottest_cakes'
+    #     )
+    # )
+    # for bakery in bakeries:
+    #    print 'Bakery %s has %s hottest_cakes' % (bakery, len(bakery.hottest_cakes))
+    projects = ProvInfraProject.objects.all().prefetch_related(
+        Prefetch(
+            "project_snapshots", queryset=latest_snapshots, to_attr="latest_snapshots"
+        )
+    )
     context = {"projects": projects}
     return render(request, "webflow/infrastructure-project-list.html", context=context)
 
 
 def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
-    project = get_object_or_404(ProvInfraProject, IRM_project_id=int(IRM_project_id))
+    project = get_object_or_404(
+        ProvInfraProjectSnapshot, IRM_project_id=int(IRM_project_id)
+    )
     page_data = {"project": model_to_dict(project)}
     context = {
         "project": project,
@@ -51,7 +88,7 @@ def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
 
 class ProvInfraProjectView(generics.ListAPIView):
     queryset = ProvInfraProject.objects.all()
-    serializer_class = ProvInfraProjectSerializer
+    serializer_class = ProvInfraProjectSnapshotSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filter_fields = ["province", "department", "status", "primary_funding_source"]
     search_fields = [

@@ -1891,7 +1891,12 @@ class ProvInfraProject(models.Model):
             return u"IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
 
     def get_slug(self):
-        return slugify(u"{0} {1}".format(self.latest().name, self.latest().province))
+        return slugify(
+            u"{0} {1}".format(
+                self.project_snapshots.latest().name,
+                self.project_snapshots.latest().province,
+            )
+        )
 
     def get_absolute_url(self):
         args = [self.IRM_project_id, self.get_slug()]
