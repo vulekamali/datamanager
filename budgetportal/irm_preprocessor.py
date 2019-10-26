@@ -65,8 +65,13 @@ def preprocess(input_dataset):
     implementor_column_indexes = get_implementor_column_indexes(input_dataset.headers)
     output_dataset = Dataset(headers=BASE_HEADERS + IMPLEMENTOR_HEADERS)
     for row in input_dataset:
-        output_dataset.append(preprocess_row(row, implementor_column_indexes))
+        if not row_is_empty(row):
+            output_dataset.append(preprocess_row(row, implementor_column_indexes))
     return output_dataset
+
+
+def row_is_empty(row):
+    return not any(row)
 
 
 def check_input_column_order(input_headers):
