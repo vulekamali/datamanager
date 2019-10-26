@@ -1,0 +1,1 @@
+{{ object.project_snapshots.latest.primary_funding_source }}

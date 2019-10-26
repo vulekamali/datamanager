@@ -1,0 +1,1 @@
+{{ object.project_snapshots.latest.estimated_completion_date.isoformat }}

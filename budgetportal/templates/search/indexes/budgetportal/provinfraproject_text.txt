@@ -3,3 +3,11 @@
 {{ object.project_snapshots.latest.department }}
 {{ object.project_snapshots.latest.local_municipality }}
 {{ object.project_snapshots.latest.district_municipality }}
+{{ object.project_snapshots.latest.project_number }}
+{{ object.project_snapshots.latest.budget_programme }}
+{{ object.project_snapshots.latest.primary_funding_source }}
+{{ object.project_snapshots.latest.nature_of_investment }}
+{{ object.project_snapshots.latest.program_implementing_agent }}
+{{ object.project_snapshots.latest.principle_agent }}
+{{ object.project_snapshots.latest.main_contractor }}
+{{ object.project_snapshots.latest.other_parties }}
