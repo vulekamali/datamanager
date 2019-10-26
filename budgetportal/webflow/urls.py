@@ -1,5 +1,13 @@
 from django.conf.urls import url, include
 from . import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(
+    "infrastructure-projects/provincial/search",
+    views.ProvInfraProjectSearchView,
+    base_name="provincial-infrastructure-project-api",
+)
 
 urlpatterns = [
     url(
@@ -12,9 +20,5 @@ urlpatterns = [
         views.provincial_infrastructure_project_detail,
         name="provincial-infra-project-detail",
     ),
-    url(
-        r"^api/v1/infrastructure-projects/provincial/$",
-        views.ProvInfraProjectView.as_view(),
-        name="provincial-infrastructure-project-api",
-    ),
+    url(r"^api/v1/", include(router.urls)),
 ]

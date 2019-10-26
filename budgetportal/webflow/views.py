@@ -3,12 +3,10 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
 from django.forms.models import model_to_dict
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics
-from rest_framework.filters import SearchFilter
-from budgetportal.webflow.serializers import ProvInfraProjectSnapshotSerializer
-from ..models import ProvInfraProjectSnapshot, ProvInfraProject
-from django.db.models import Subquery, OuterRef, Max, Prefetch
+from drf_haystack.serializers import HaystackSerializer
+from drf_haystack.viewsets import HaystackViewSet
+from budgetportal import models
+from ..search_indexes import ProvInfraProjectIndex
 
 import json
 import decimal
@@ -25,48 +23,12 @@ class JSONEncoder(json.JSONEncoder):
 
 
 def provincial_infrastructure_project_list(request):
-    latest_snapshots = ProvInfraProjectSnapshot.objects.filter(
-        project=Subquery(
-            (
-                ProvInfraProjectSnapshot.objects.filter(
-                    project=OuterRef("project"), status="Tender"
-                )
-                .values("project")
-                .annotate(latest_snapshot=Max("project"))
-                .values("latest_snapshot")[:1]
-            )
-        )
-    )
-    # hottest_cakes = Cake.objects.filter(
-    #    baked_at=Subquery(
-    #        (Cake.objects
-    #            .filter(bakery=OuterRef('bakery'))
-    #            .values('bakery')
-    #            .annotate(last_bake=Max('baked_at'))
-    #            .values('last_bake')[:1]
-    #        )
-    #    )
-    # )
-    # bakeries = Bakery.objects.all().prefetch_related(
-    #     Prefetch('cake_set',
-    #         queryset=hottest_cakes,
-    #         to_attr='hottest_cakes'
-    #     )
-    # )
-    # for bakery in bakeries:
-    #    print 'Bakery %s has %s hottest_cakes' % (bakery, len(bakery.hottest_cakes))
-    projects = ProvInfraProject.objects.all().prefetch_related(
-        Prefetch(
-            "project_snapshots", queryset=latest_snapshots, to_attr="latest_snapshots"
-        )
-    )
-    context = {"projects": projects}
     return render(request, "webflow/infrastructure-project-list.html", context=context)
 
 
 def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
     project = get_object_or_404(
-        ProvInfraProjectSnapshot, IRM_project_id=int(IRM_project_id)
+        models.ProvInfraProject, IRM_project_id=int(IRM_project_id)
     )
     page_data = {"project": model_to_dict(project)}
     context = {
@@ -86,18 +48,32 @@ def provincial_infrastructure_project_detail(request, IRM_project_id, slug):
     )
 
 
-class ProvInfraProjectView(generics.ListAPIView):
-    queryset = ProvInfraProject.objects.all()
-    serializer_class = ProvInfraProjectSnapshotSerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    filter_fields = ["province", "department", "status", "primary_funding_source"]
-    search_fields = [
-        "name",
-        "district_municipality",
-        "local_municipality",
-        "province",
-        "main_contractor",
-        "principle_agent",
-        "program_implementing_agent",
-        "other_parties",
-    ]
+class ProvInfraProjectSerializer(HaystackSerializer):
+    class Meta:
+        # The `index_classes` attribute is a list of which search indexes
+        # we want to include in the search.
+        index_classes = [ProvInfraProjectIndex]
+
+        # The `fields` contains all the fields we want to include.
+        # NOTE: Make sure you don't confuse these with model attributes. These
+        # fields belong to the search index!
+        fields = [
+            "name",
+            "province",
+            "department",
+            "status",
+            "primary_funding_source",
+            "estimated_completion_date",
+            "total_project_cost",
+        ]
+
+
+class ProvInfraProjectSearchView(HaystackViewSet):
+
+    # `index_models` is an optional list of which models you would like to include
+    # in the search result. You might have several models indexed, and this provides
+    # a way to filter out those of no interest for this particular view.
+    # (Translates to `SearchQuerySet().models(*index_models)` behind the scenes.
+    # index_models = [Location]
+
+    serializer_class = ProvInfraProjectSerializer
