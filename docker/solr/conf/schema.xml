@@ -81,21 +81,25 @@
     <field name="django_ct" type="string" indexed="true" stored="true" multiValued="false"/>
     <field name="django_id" type="string" indexed="true" stored="true" multiValued="false"/>
     
-    <field name="province" type="text_en" indexed="true" stored="true" multiValued="false" />
-    
     <field name="status" type="text_en" indexed="true" stored="true" multiValued="false" />
+    
+    <field name="province" type="text_en" indexed="true" stored="true" multiValued="false" />
     
     <field name="province_exact" type="string" indexed="true" stored="true" multiValued="false" />
     
     <field name="primary_funding_source_exact" type="string" indexed="true" stored="true" multiValued="false" />
     
-    <field name="name" type="text_en" indexed="true" stored="true" multiValued="false" />
-    
     <field name="total_project_cost" type="float" indexed="true" stored="true" multiValued="false" />
+    
+    <field name="department_exact" type="string" indexed="true" stored="true" multiValued="false" />
     
     <field name="text" type="text_en" indexed="true" stored="true" multiValued="false" />
     
     <field name="status_exact" type="string" indexed="true" stored="true" multiValued="false" />
+    
+    <field name="latitude" type="text_en" indexed="true" stored="true" multiValued="false" />
+    
+    <field name="longitude" type="text_en" indexed="true" stored="true" multiValued="false" />
     
     <field name="estimated_completion_date" type="date" indexed="true" stored="true" multiValued="false" />
     
@@ -103,7 +107,9 @@
     
     <field name="primary_funding_source" type="text_en" indexed="true" stored="true" multiValued="false" />
     
-    <field name="department_exact" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="url_path" type="text_en" indexed="true" stored="true" multiValued="false" />
+    
+    <field name="name" type="text_en" indexed="true" stored="true" multiValued="false" />
     
     <uniqueKey>id</uniqueKey>
 

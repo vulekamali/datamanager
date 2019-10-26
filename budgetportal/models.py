@@ -1899,7 +1899,7 @@ class ProvInfraProject(models.Model):
         )
 
     def get_absolute_url(self):
-        args = [self.IRM_project_id, self.get_slug()]
+        args = [self.pk, self.get_slug()]
         return reverse("provincial-infra-project-detail", args=args)
 
 

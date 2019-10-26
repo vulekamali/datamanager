@@ -71,6 +71,9 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             "primary_funding_source",
             "estimated_completion_date",
             "total_project_cost",
+            "url_path",
+            "latitude",
+            "longitude",
         ]
 
 
