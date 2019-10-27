@@ -182,29 +182,62 @@
     }  // end project page
 
     if ($("#Infrastructure-Search-Input").length) {
-        var template = $("#result-list-container .narrow-card_wrapper:first").clone();
-        template.find(".narrow-card_icon").remove();
-        var searchURL = "/api/v1/infrastructure-projects/provincial/search/facets";
+
+        /** Get templates of dynamically inserted elements **/
+
+        var resultRowTemplate = $("#result-list-container .narrow-card_wrapper:first").clone();
+        resultRowTemplate.find(".narrow-card_icon").remove();
+
+        var dropdownItemTemplate = $("#province-dropdown * .dropdown-link:first");
+        dropdownItemTemplate.find(".search-status").removeClass("active");
+        dropdownItemTemplate.find(".search-dropdown_label").text("");
+        dropdownItemTemplate.find(".search-dropdown_value").text("");
+
+
+        /** initial page state **/
+
+        var location = "/api/v1/infrastructure-projects/provincial/search/facets";
+        var params = new URLSearchParams();
+
+        function loadNewParams(url) {
+            var parts = url.split('?');
+            var location = parts[0];
+            var queryString = parts[1];
+            params = new URLSearchParams(queryString);
+        }
+
+        function buildSearchURL() {
+            return location + "?" + params.toString();
+        }
 
         function resetResults() {
             $("#num-matching-projects-field").text("");
             $("#result-list-container .narrow-card_wrapper").remove()
+            resetDropdown("#province-dropdown");
+            resetDropdown("#department-dropdown");
+            resetDropdown("#status-dropdown");
+            resetDropdown("#funding-source-dropdown");
         }
 
-        function updateSearchURL() {
-            var parts = searchURL.split('?');
-            var location = parts[0];
-            var queryString = parts[1];
-            var params = new URLSearchParams(queryString);
+        function updateFreeTextParam() {
             params.set("q", $("#Infrastructure-Search-Input").val());
-            searchURL = location + "?" + params.toString();
         }
+
         function search() {
-            $.get(searchURL)
+            var url = buildSearchURL();
+            $.get(url)
                 .done(function(response) {
+                    loadNewParams(url);
+
                     $("#num-matching-projects-field").text(response.objects.count);
+                    updateDropdown("#province-dropdown", response.fields, params, "province");
+                    updateDropdown("#department-dropdown", response.fields, params, "department");
+                    updateDropdown("#status-dropdown", response.fields, params, "status");
+                    updateDropdown("#funding-source-dropdown", response.fields, params, "primary_funding_source");
+
+
                     response.objects.results.forEach(function(project) {
-                        var resultItem = template.clone();
+                        var resultItem = resultRowTemplate.clone();
                         resultItem.attr("href", project.url_path);
                         resultItem.find(".narrow-card_title").html(project.name);
                         resultItem.find(".narrow-card_middle-column:first").html(project.status);
@@ -218,11 +251,39 @@
                     console.error( jqXHR, textStatus, errorThrown );
                 });
         }
+
         function updateSearch() {
             resetResults();
-            updateSearchURL();
+            // maybe create new params from facet narrowing URL here?
+            updateFreeTextParam();
             search();
         }
+
+        function resetDropdown(selector) {
+            $(selector).find(".text-block").text("");
+            $(selector).find(".dropdown-link").remove();
+        }
+
+        function getSelectedOption(params, fieldName) {
+            var selectedFacets = params.getAll("selected_facets");
+            console.log(selectedFacets);
+        }
+
+        function updateDropdown(selector, fields, params, fieldName) {
+            var container = $(selector);
+            var optionContainer = container.find(".chart-dropdown_list");
+            options = fields[fieldName];
+            selectedOption = getSelectedOption(params, fieldName);
+            fields[fieldName].forEach(function (option) {
+                optionElement = dropdownItemTemplate.clone();
+                optionElement.find(".search-dropdown_label").text(option.text);
+                optionElement.find(".search-dropdown_value").text("(" + option.count + ")");
+                optionContainer.append(optionElement);
+            });
+        }
+
+
+        /** Set up search triggering events **/
 
         $("#Infrastructure-Search-Input").keypress(function (e) {
             var key = e.which;
@@ -232,24 +293,11 @@
         });
         $("#Search-Button").on("click", updateSearch);
 
+
+        /** Search on page load **/
+
         updateSearch()
 
-        /**
-        $("#map").empty();
-        var map = L.map("map")
-            .setView([-30.5595, 22.9375], 4);
-        createTileLayer().addTo(map);
-        var markers = L.markerClusterGroup();
-        pageData.all_matches.forEach(function(project) {
-            if (project.latitude !== null && project.longitude !== null) {
-                var marker = L.marker([project.latitude, project.longitude])
-                    .bindPopup(project.name + '<br><a target="_blank" href="' +
-                               project.url_path + '">Jump to project</a>');
-                markers.addLayer(marker);
-            }
-        });
-        map.addLayer(markers);
-        **/
     } // end search page
 
 })();
