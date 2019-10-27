@@ -183,25 +183,56 @@
 
     if ($("#Infrastructure-Search-Input").length) {
         var template = $("#result-list-container .narrow-card_wrapper:first").clone();
-        $("#result-list-container .narrow-card_wrapper").remove()
         template.find(".narrow-card_icon").remove();
+        var searchURL = "/api/v1/infrastructure-projects/provincial/search/facets";
 
-        $.get("/api/v1/infrastructure-projects/provincial/search/facets")
-            .done(function(response) {
+        function resetResults() {
+            $("#num-matching-projects-field").text("");
+            $("#result-list-container .narrow-card_wrapper").remove()
+        }
 
-                response.objects.results.forEach(function(project) {
-                    var resultItem = template.clone();
-                    resultItem.attr("href", project.url_path);
-                    resultItem.find(".narrow-card_title").html(project.name);
-                    resultItem.find(".narrow-card_middle-column:first").html(project.status);
-                    resultItem.find(".narrow-card_middle-column:last").html(project.estimated_completion_date);
-                    resultItem.find(".narrow-card_last-column").html(formatCurrency(project.total_project_cost));
-                    $("#result-list-container").append(resultItem);
+        function updateSearchURL() {
+            var parts = searchURL.split('?');
+            var location = parts[0];
+            var queryString = parts[1];
+            var params = new URLSearchParams(queryString);
+            params.set("q", $("#Infrastructure-Search-Input").val());
+            searchURL = location + "?" + params.toString();
+        }
+        function search() {
+            $.get(searchURL)
+                .done(function(response) {
+                    $("#num-matching-projects-field").text(response.objects.count);
+                    response.objects.results.forEach(function(project) {
+                        var resultItem = template.clone();
+                        resultItem.attr("href", project.url_path);
+                        resultItem.find(".narrow-card_title").html(project.name);
+                        resultItem.find(".narrow-card_middle-column:first").html(project.status);
+                        resultItem.find(".narrow-card_middle-column:last").html(project.estimated_completion_date);
+                        resultItem.find(".narrow-card_last-column").html(formatCurrency(project.total_project_cost));
+                        $("#result-list-container").append(resultItem);
+                    });
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    alert("Something went wrong when searching. Please try again.");
+                    console.error( jqXHR, textStatus, errorThrown );
                 });
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                console.error( jqXHR, textStatus, errorThrown );
-            });
+        }
+        function updateSearch() {
+            resetResults();
+            updateSearchURL();
+            search();
+        }
+
+        $("#Infrastructure-Search-Input").keypress(function (e) {
+            var key = e.which;
+            if (key == 13) {  // the enter key code
+                updateSearch();
+            }
+        });
+        $("#Search-Button").on("click", updateSearch);
+
+        updateSearch()
 
         /**
         $("#map").empty();
