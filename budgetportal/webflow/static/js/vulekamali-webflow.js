@@ -195,19 +195,28 @@
 
 
         /** initial page state **/
+        var searchState = {
+            location: "/api/v1/infrastructure-projects/provincial/search/facets",
+            params: new URLSearchParams(),
+            selectedFacets: {},
+        }
 
-        var location = "/api/v1/infrastructure-projects/provincial/search/facets";
-        var params = new URLSearchParams();
+        function updateFreeTextParam() {
+            searchState.params.set("q", $("#Infrastructure-Search-Input").val());
+        }
 
-        function loadNewParams(url) {
-            var parts = url.split('?');
-            var location = parts[0];
-            var queryString = parts[1];
-            params = new URLSearchParams(queryString);
+        function updateFacetParam() {
+            searchState.params.delete("selected_facets");
+            for (fieldName in searchState.selectedFacets) {
+                var paramValue = fieldName + "_exact:" + searchState.selectedFacets[fieldName];
+                searchState.params.set("selected_facets", paramValue);
+            }
         }
 
         function buildSearchURL() {
-            return location + "?" + params.toString();
+            updateFreeTextParam();
+            updateFacetParam();
+            return searchState.location + "?" + searchState.params.toString();
         }
 
         function resetResults() {
@@ -219,21 +228,17 @@
             resetDropdown("#funding-source-dropdown");
         }
 
-        function updateFreeTextParam() {
-            params.set("q", $("#Infrastructure-Search-Input").val());
-        }
-
-        function search() {
+        function triggerSearch() {
             var url = buildSearchURL();
             $.get(url)
                 .done(function(response) {
-                    loadNewParams(url);
+                    resetResults();
 
                     $("#num-matching-projects-field").text(response.objects.count);
-                    updateDropdown("#province-dropdown", response.fields, params, "province");
-                    updateDropdown("#department-dropdown", response.fields, params, "department");
-                    updateDropdown("#status-dropdown", response.fields, params, "status");
-                    updateDropdown("#funding-source-dropdown", response.fields, params, "primary_funding_source");
+                    updateDropdown("#province-dropdown", response.fields, "province");
+                    updateDropdown("#department-dropdown", response.fields, "department");
+                    updateDropdown("#status-dropdown", response.fields, "status");
+                    updateDropdown("#funding-source-dropdown", response.fields, "primary_funding_source");
 
 
                     response.objects.results.forEach(function(project) {
@@ -252,32 +257,29 @@
                 });
         }
 
-        function updateSearch() {
-            resetResults();
-            // maybe create new params from facet narrowing URL here?
-            updateFreeTextParam();
-            search();
-        }
-
         function resetDropdown(selector) {
             $(selector).find(".text-block").text("");
             $(selector).find(".dropdown-link").remove();
         }
 
-        function getSelectedOption(params, fieldName) {
-            var selectedFacets = params.getAll("selected_facets");
-            console.log(selectedFacets);
+        function getSelectedOption(fieldName) {
+            console.log(searchState.selectedFacets[fieldName]);
         }
 
-        function updateDropdown(selector, fields, params, fieldName) {
+        function updateDropdown(selector, fields, fieldName) {
             var container = $(selector);
             var optionContainer = container.find(".chart-dropdown_list");
             options = fields[fieldName];
-            selectedOption = getSelectedOption(params, fieldName);
+            selectedOption = getSelectedOption(fieldName);
             fields[fieldName].forEach(function (option) {
                 optionElement = dropdownItemTemplate.clone();
                 optionElement.find(".search-dropdown_label").text(option.text);
                 optionElement.find(".search-dropdown_value").text("(" + option.count + ")");
+                optionElement.click(function() {
+                    searchState.selectedFacets[fieldName] = option.text;
+                    optionContainer.removeClass("w--open");
+                    triggerSearch();
+                });
                 optionContainer.append(optionElement);
             });
         }
@@ -288,15 +290,15 @@
         $("#Infrastructure-Search-Input").keypress(function (e) {
             var key = e.which;
             if (key == 13) {  // the enter key code
-                updateSearch();
+                triggerSearch();
             }
         });
-        $("#Search-Button").on("click", updateSearch);
+        $("#Search-Button").on("click", triggerSearch);
 
 
         /** Search on page load **/
 
-        updateSearch()
+        triggerSearch()
 
     } // end search page
 
