@@ -199,7 +199,13 @@
             location: "/api/v1/infrastructure-projects/provincial/search/facets",
             params: new URLSearchParams(),
             selectedFacets: {},
-        }
+        };
+        var facetPlurals = {
+            province: "provinces",
+            department: "departments",
+            status: "project statuses",
+            primary_funding_source: "funding sources",
+        };
 
         function updateFreeTextParam() {
             searchState.params.set("q", $("#Infrastructure-Search-Input").val());
@@ -209,7 +215,7 @@
             searchState.params.delete("selected_facets");
             for (fieldName in searchState.selectedFacets) {
                 var paramValue = fieldName + "_exact:" + searchState.selectedFacets[fieldName];
-                searchState.params.set("selected_facets", paramValue);
+                searchState.params.append("selected_facets", paramValue);
             }
         }
 
@@ -263,14 +269,21 @@
         }
 
         function getSelectedOption(fieldName) {
-            console.log(searchState.selectedFacets[fieldName]);
+            return searchState.selectedFacets[fieldName];
         }
 
         function updateDropdown(selector, fields, fieldName) {
             var container = $(selector);
+
+            var selectedOption = getSelectedOption(fieldName);
+            if (typeof(selectedOption) == "undefined") {
+                $(container).find(".text-block").text("All " + facetPlurals[fieldName]);
+            } else {
+                $(container).find(".text-block").text(selectedOption);
+            }
+
             var optionContainer = container.find(".chart-dropdown_list");
-            options = fields[fieldName];
-            selectedOption = getSelectedOption(fieldName);
+            var options = fields[fieldName];
             fields[fieldName].forEach(function (option) {
                 optionElement = dropdownItemTemplate.clone();
                 optionElement.find(".search-dropdown_label").text(option.text);
