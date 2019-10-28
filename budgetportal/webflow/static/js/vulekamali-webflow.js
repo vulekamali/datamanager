@@ -189,7 +189,7 @@
         resultRowTemplate.find(".narrow-card_icon").remove();
 
         var dropdownItemTemplate = $("#province-dropdown * .dropdown-link:first");
-        dropdownItemTemplate.find(".search-status").removeClass("active");
+        dropdownItemTemplate.find(".search-status").remove();
         dropdownItemTemplate.find(".search-dropdown_label").text("");
         dropdownItemTemplate.find(".search-dropdown_value").text("");
 
@@ -274,15 +274,24 @@
 
         function updateDropdown(selector, fields, fieldName) {
             var container = $(selector);
+            var optionContainer = container.find(".chart-dropdown_list");
 
             var selectedOption = getSelectedOption(fieldName);
             if (typeof(selectedOption) == "undefined") {
-                $(container).find(".text-block").text("All " + facetPlurals[fieldName]);
+                container.find(".text-block").text("All " + facetPlurals[fieldName]);
             } else {
-                $(container).find(".text-block").text(selectedOption);
+                container.find(".text-block").text(selectedOption);
+                // Add "clear filter" option
+                optionElement = dropdownItemTemplate.clone();
+                optionElement.find(".search-dropdown_label").text("All " + facetPlurals[fieldName]);
+                optionElement.click(function() {
+                    delete searchState.selectedFacets[fieldName];
+                    optionContainer.removeClass("w--open");
+                    triggerSearch();
+                });
+                optionContainer.append(optionElement);
             }
 
-            var optionContainer = container.find(".chart-dropdown_list");
             var options = fields[fieldName];
             fields[fieldName].forEach(function (option) {
                 optionElement = dropdownItemTemplate.clone();
