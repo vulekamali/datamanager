@@ -1,6 +1,6 @@
 from haystack import indexes
 from budgetportal.models import ProvInfraProject, ProvInfraProjectSnapshot
-from django.db.models import Prefetch, OuterRef, Subquery, Max
+from django.db.models import Prefetch, OuterRef, Subquery, Max, Count
 
 
 class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
@@ -51,3 +51,8 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
 
     def should_update(self, instance, **kwargs):
         return instance.project_snapshots.count()
+
+    def index_queryset(self, using=None):
+        return ProvInfraProject.objects.annotate(
+            project_snapshots_count=Count("project_snapshots")
+        ).filter(project_snapshots_count__gte=1)

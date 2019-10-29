@@ -133,15 +133,15 @@ AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
 
+SOLR_URL = os.environ["SOLR_URL"]
 
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://solr:8983/solr/budgetportal',
-        'ADMIN_URL': 'http://solr:8983/solr/admin/cores',
+        'URL': SOLR_URL,
+        'ADMIN_URL': '',
     },
 }
-HAYSTACK_SIGNAL_PROCESSOR = 'budgetportal.signals.ProvInfraProjectSnapshotSignalProcessor'
 
 
 # Caches

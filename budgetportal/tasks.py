@@ -8,6 +8,8 @@ from budgetportal.models import Department, IRMSnapshot
 from django.conf import settings
 from budgetportal import prov_infra_projects
 import traceback
+import django_q
+from django.core.management import call_command
 
 
 ckan = settings.CKAN
@@ -50,6 +52,7 @@ def import_irm_snapshot(snapshot_id):
             for error in row.errors:
                 logger.error(error.error, exc_info=True)
                 raise error.error
+        django_q.tasks.async(index_irm_projects, snapshot_id=snapshot_id)
         return {
             "totals": result.totals,
             "validation_errors": [row.validation_error for row in result.rows],
@@ -57,3 +60,7 @@ def import_irm_snapshot(snapshot_id):
     except Exception as e:
         logger.error(e, exc_info=True)
         raise Exception(traceback.format_exc())
+
+
+def index_irm_projects(snapshot_id):
+    call_command("update_index", "-r")
