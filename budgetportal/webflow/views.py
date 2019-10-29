@@ -8,7 +8,7 @@ from drf_haystack.viewsets import HaystackViewSet
 from drf_haystack.mixins import FacetMixin
 from budgetportal import models
 from ..search_indexes import ProvInfraProjectIndex
-from drf_haystack.filters import HaystackFacetFilter
+from drf_haystack.filters import HaystackFacetFilter, HaystackFilter
 
 import json
 import decimal
@@ -111,7 +111,18 @@ class ProvInfraProjectFacetSerializer(HaystackFacetSerializer):
         }
 
 
-class ProvInfraProjectFilter(HaystackFacetFilter):
+class ProvInfraProjectFacetFilter(HaystackFacetFilter):
+    def filter_queryset(self, request, queryset, view, *args, **kwargs):
+        queryset = super(ProvInfraProjectFacetFilter, self).filter_queryset(
+            request, queryset, view, *args, **kwargs
+        )
+        text_query = request.query_params.get("q", None)
+        if text_query:
+            queryset = queryset.filter(text=text_query)
+        return queryset
+
+
+class ProvInfraProjectFilter(HaystackFilter):
     def filter_queryset(self, request, queryset, view, *args, **kwargs):
         queryset = super(ProvInfraProjectFilter, self).filter_queryset(
             request, queryset, view, *args, **kwargs
@@ -131,5 +142,7 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     # index_models = [Location]
 
     serializer_class = ProvInfraProjectSerializer
+    filter_backends = [ProvInfraProjectFilter]
+
     facet_serializer_class = ProvInfraProjectFacetSerializer
-    facet_filter_backends = [ProvInfraProjectFilter]
+    facet_filter_backends = [ProvInfraProjectFacetFilter]

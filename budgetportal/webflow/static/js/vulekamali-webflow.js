@@ -234,7 +234,7 @@
 
         function buildAllCoordinatesSearchURL() {
             var params = new URLSearchParams()
-            params.set("text", $("#Infrastructure-Search-Input").val());
+            params.set("q", $("#Infrastructure-Search-Input").val());
             for (fieldName in searchState.selectedFacets) {
                 params.set(fieldName, searchState.selectedFacets[fieldName])
             }
