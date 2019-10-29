@@ -39,6 +39,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
     )
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
+    page_data["project"]["irm_snapshot"] = snapshot.irm_snapshot.__unicode__()
     context = {
         "project": project,
         "page_data_json": json.dumps(
