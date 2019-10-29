@@ -369,6 +369,7 @@
 
         /** Search on page load **/
 
+        resetResults();
         triggerSearch()
 
     } // end search page
