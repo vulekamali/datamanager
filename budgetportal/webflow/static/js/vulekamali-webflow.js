@@ -202,8 +202,10 @@
             params: new URLSearchParams(),
             selectedFacets: {},
             map: L.map("map").setView([-30.5595, 22.9375], 4),
+            markers: L.markerClusterGroup(),
         };
         createTileLayer().addTo(searchState.map);
+        searchState.map.addLayer(searchState.markers);
 
         var facetPlurals = {
             province: "provinces",
@@ -266,7 +268,7 @@
                     showMapPoints(response);
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
-                    alert("Something went wrong when . Please try again.");
+                    alert("Something went wrong when loading map data. Please try again.");
                     console.error( jqXHR, textStatus, errorThrown );
                 });
         }
@@ -291,21 +293,23 @@
         }
 
         function resetMapPoints() {
+            searchState.markers.clearLayers();
         }
 
         function showMapPoints(response) {
-
-            var markers = L.markerClusterGroup();
             response.results.forEach(function(project) {
-                if (project.latitude !== null && project.longitude !== null) {
-                    var marker = L.marker([project.latitude, project.longitude])
-                        .bindPopup(project.name + '<br><a target="_blank" href="' +
-                                   project.url_path + '">Jump to project</a>');
-                    markers.addLayer(marker);
-                }
-            });
-            searchState.map.addLayer(markers);
+                if (parseInt(project.latitude) == 0 ||
+                    parseInt(project.longitude) === 0 ||
+                    project.latitude === null ||
+                    project.longitude === null)
+                    return;
 
+                var marker = L.marker([project.latitude, project.longitude])
+                    .bindPopup(project.name + '<br><a target="_blank" href="' +
+                               project.url_path + '">Jump to project</a>');
+                searchState.markers.addLayer(marker);
+            });
+            searchState.map.fitBounds(searchState.markers.getBounds());
         }
 
         function resetDropdown(selector) {
