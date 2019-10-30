@@ -183,6 +183,7 @@ const BudgetTitle = styled.div`
   color: #79B443;
   font-weight: 700;
   font-size: 10px;
+  text-transform: Uppercase;
   font-family: Lato;
   letter-spacing: 1px;
   padding-bottom: 12px;
@@ -191,7 +192,6 @@ const BudgetTitle = styled.div`
 const BudgetHeading = styled.div`
   font-size: 16px;
   font-weight: 700;
-  text-transform: Capitalize;
   padding-bottom: 16px;
 
   @media screen and (min-width: 650px) {

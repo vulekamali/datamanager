@@ -7,24 +7,22 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0037_homepage'),
-    ]
+    dependencies = [("budgetportal", "0037_homepage")]
 
     operations = [
         migrations.AddField(
-            model_name='homepage',
-            name='call_to_action_link_target',
+            model_name="homepage",
+            name="call_to_action_link_target",
             field=models.CharField(blank=True, max_length=1000),
         ),
         migrations.AddField(
-            model_name='homepage',
-            name='primary_button_target',
+            model_name="homepage",
+            name="primary_button_target",
             field=models.CharField(blank=True, max_length=1000),
         ),
         migrations.AddField(
-            model_name='homepage',
-            name='secondary_button_target',
+            model_name="homepage",
+            name="secondary_button_target",
             field=models.CharField(blank=True, max_length=1000),
         ),
     ]

@@ -7,25 +7,46 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0036_auto_20191023_1343'),
-    ]
+    dependencies = [("budgetportal", "0036_auto_20191023_1343")]
 
     operations = [
         migrations.CreateModel(
-            name='Homepage',
+            name="Homepage",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('main_heading', models.CharField(blank=True, max_length=1000)),
-                ('sub_heading', models.CharField(blank=True, max_length=1000)),
-                ('primary_button_label', models.CharField(blank=True, max_length=1000)),
-                ('primary_button_url', models.CharField(blank=True, max_length=1000)),
-                ('secondary_button_label', models.CharField(blank=True, max_length=1000)),
-                ('secondary_button_url', models.CharField(blank=True, max_length=1000)),
-                ('call_to_action_sub_heading', models.CharField(blank=True, max_length=1000)),
-                ('call_to_action_heading', models.CharField(blank=True, max_length=1000)),
-                ('call_to_action_link_label', models.CharField(blank=True, max_length=1000)),
-                ('call_to_action_link_url', models.CharField(blank=True, max_length=1000)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("main_heading", models.CharField(blank=True, max_length=1000)),
+                ("sub_heading", models.CharField(blank=True, max_length=1000)),
+                ("primary_button_label", models.CharField(blank=True, max_length=1000)),
+                ("primary_button_url", models.CharField(blank=True, max_length=1000)),
+                (
+                    "secondary_button_label",
+                    models.CharField(blank=True, max_length=1000),
+                ),
+                ("secondary_button_url", models.CharField(blank=True, max_length=1000)),
+                (
+                    "call_to_action_sub_heading",
+                    models.CharField(blank=True, max_length=1000),
+                ),
+                (
+                    "call_to_action_heading",
+                    models.CharField(blank=True, max_length=1000),
+                ),
+                (
+                    "call_to_action_link_label",
+                    models.CharField(blank=True, max_length=1000),
+                ),
+                (
+                    "call_to_action_link_url",
+                    models.CharField(blank=True, max_length=1000),
+                ),
             ],
-        ),
+        )
     ]
