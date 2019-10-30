@@ -1,3 +1,9 @@
+##########################################################################################
+#
+# This is for DEVELOPMENT purposes. We deploy using similar configuration but using dokku.
+#
+##########################################################################################
+
 version: '3'
 
 services:
@@ -78,8 +84,7 @@ services:
     command: minio --compat server data
 
   solr:
-    build:
-      context: docker/solr
+    build: "https://github.com/vulekamali/solr-dokku.git"
     image: budgetportal-solr
     ports:
       - "8983:8983"
