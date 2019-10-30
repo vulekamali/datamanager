@@ -50,12 +50,12 @@ const generateLinkProps = link => {
 
 const Buttons = ({ primary, secondary }) => (
   <ButtonsWrapper>
-    <LinkWrapper {...generateLinkProps(primary.link)}>
+    <a href={primary.link} target={primary.target}>
       <PrimaryButton variant="contained">{primary.text}</PrimaryButton>
-    </LinkWrapper>
-    <ScrollLinkWrapper to="anchor" smooth={true} duration={500}>
+    </a>
+    <a href={secondary.link} target={secondary.target}>
       <SecondaryButton variant="contained">{secondary.text}</SecondaryButton>
-    </ScrollLinkWrapper>
+    </a>
   </ButtonsWrapper>
 );
 
