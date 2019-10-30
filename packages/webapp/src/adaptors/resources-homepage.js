@@ -52,6 +52,12 @@ const props = {
       format: 'Web',
       link: 'http://www.treasury.gov.za/documents/national%20budget/2019/excelFormat.aspx',
     },
+    {
+      heading: 'All resources',
+      size: null,
+      format: 'Web',
+      link: 'http://www.treasury.gov.za/documents/mtbps/2019/',
+    },
   ],
   resources: [
     {
