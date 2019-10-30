@@ -298,13 +298,22 @@
 
         function showMapPoints(response) {
             response.results.forEach(function(project) {
-                if (parseInt(project.latitude) == 0 ||
-                    parseInt(project.longitude) === 0 ||
-                    project.latitude === null ||
-                    project.longitude === null)
+                if (! project.latitude || ! project.longitude)
                     return;
 
-                var marker = L.marker([project.latitude, project.longitude])
+                var latitude = parseFloat(project.latitude);
+                if (latitude < -34.5916 || latitude > -21.783733) {
+                    console.log("Ignoring latitude " + latitude);
+                    return;
+                }
+
+                var longitude = parseFloat(project.longitude);
+                if (longitude < 14.206737 || longitude > 33.074960) {
+                    console.log("Ignoring longitude " + longitude);
+                    return;
+                }
+
+                var marker = L.marker([latitude, longitude])
                     .bindPopup(project.name + '<br><a target="_blank" href="' +
                                project.url_path + '">Jump to project</a>');
                 searchState.markers.addLayer(marker);

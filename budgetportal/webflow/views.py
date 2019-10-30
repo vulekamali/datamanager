@@ -9,6 +9,8 @@ from drf_haystack.mixins import FacetMixin
 from budgetportal import models
 from ..search_indexes import ProvInfraProjectIndex
 from drf_haystack.filters import HaystackFacetFilter, HaystackFilter
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 import json
 import decimal
@@ -147,3 +149,7 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
 
     facet_serializer_class = ProvInfraProjectFacetSerializer
     facet_filter_backends = [ProvInfraProjectFacetFilter]
+
+    @method_decorator(cache_page(60 * 30))  # minutes
+    def get(self, *args, **kwargs):
+        super(ProvInfraProjectSearchView, self).get(*args, **kwargs)
