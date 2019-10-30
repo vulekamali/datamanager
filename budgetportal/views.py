@@ -11,7 +11,13 @@ from slugify import slugify
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.models import Video, Event, FAQ
 from budgetportal.openspending import PAGE_SIZE
-from models import FinancialYear, Sphere, Department, InfrastructureProjectPart, Homepage
+from models import (
+    FinancialYear,
+    Sphere,
+    Department,
+    InfrastructureProjectPart,
+    Homepage,
+)
 from datasets import Dataset, Category
 from summaries import (
     get_preview_page,
