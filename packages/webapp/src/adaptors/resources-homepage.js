@@ -3,6 +3,56 @@ import { render } from 'react-dom';
 import Resources from '../views/Resources';
 
 const props = {
+  aeneResources: [
+    {
+      heading: 'MTBPS Speech',
+      size: '0.6MB',
+      format: 'PDF',
+      link: 'http://www.treasury.gov.za/documents/mtbps/2019/speech/speech.pdf',
+    },
+    {
+      heading: 'MTBPS Presentation',
+      size: '0.7MB',
+      format: 'PDF',
+      link: 'http://www.treasury.gov.za/documents/mtbps/2019/2019%20MTBPS%20presentation.pdf',
+    },
+    {
+      heading: 'Medium Term Budget Policy Statement (MTBPS)',
+      size: null,
+      format: 'Web',
+      link: 'http://www.treasury.gov.za/documents/mtbps/2019/mtbps.aspx',
+    },
+    {
+      heading: 'Adjusted Estimates of National Expenditure',
+      size: null,
+      format: 'Web',
+      link: 'http://www.treasury.gov.za/documents/mtbps/2019/Estimates.aspx',
+    },
+    {
+      heading: 'Division of Revenue Amendment Bill (Bill 15 of 2019)',
+      size: '1MB',
+      format: 'PDF',
+      link: 'http://www.treasury.gov.za/legislation/bills/2019/[B15-2019]%20(Division%20of%20Revenue%20Amendment%20Bill).pdf',
+    },
+    {
+      heading: 'Adjustments Appropriation Bill (Bill 16 of 2019)',
+      size: '0.3MB',
+      format: 'PDF',
+      link: 'http://www.treasury.gov.za/legislation/bills/2019/[B16-2019]%20(Adjustments%20Appropriation%20Bill).pdf',
+    },
+    {
+      heading: '2019 MTBPS data in Excel format',
+      size: null,
+      format: 'Web',
+      link: 'http://www.treasury.gov.za/documents/mtbps/2019/datasheet.aspx',
+    },
+    {
+      heading: '2019 Budget data and time series in Excel format ',
+      size: null,
+      format: 'Web',
+      link: 'http://www.treasury.gov.za/documents/national%20budget/2019/excelFormat.aspx',
+    },
+  ],
   resources: [
     {
       heading: 'Budget Speech',
