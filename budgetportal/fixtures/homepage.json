@@ -1,0 +1,21 @@
+[
+{
+  "model": "budgetportal.homepage",
+  "pk": 1,
+  "fields": {
+    "main_heading": "2019 MTBPS is live",
+    "sub_heading": "The 2019 medium term budget policy statement is published",
+    "primary_button_label": "View speech video",
+    "primary_button_url": "https://www.youtube.com/watch?v=xAmf6sbI4ss",
+    "primary_button_target": "_blank",
+    "secondary_button_label": "MTBPS resources",
+    "secondary_button_url": "http://www.treasury.gov.za/documents/mtbps/2019/",
+    "secondary_button_target": "_bank",
+    "call_to_action_sub_heading": "Budget feature",
+    "call_to_action_heading": "Check back soon to see the summary of each department's adjustments",
+    "call_to_action_link_label": "",
+    "call_to_action_link_url": "",
+    "call_to_action_link_target": ""
+  }
+}
+]

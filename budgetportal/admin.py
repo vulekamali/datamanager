@@ -16,6 +16,7 @@ from budgetportal.models import (
     VideoLanguage,
     FAQ,
     ProvInfraProject,
+    Homepage,
 )
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 from budgetportal.bulk_upload import bulk_upload_view
@@ -251,3 +252,4 @@ admin.site.register(Video, VideoAdmin)
 admin.site.register(Event)
 admin.site.register(FAQ, SortableAdmin)
 admin.site.register(ProvInfraProject, ProvInfraProjectAdmin)
+admin.site.register(Homepage, admin.ModelAdmin)
