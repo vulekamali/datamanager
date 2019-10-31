@@ -1,6 +1,9 @@
 import { createElement } from 'react';
 import { render } from 'react-dom';
 import Homepage from '../views/Homepage';
+import polyfillHTMLElementDataset from '../helpers/polyfillHTMLElementDataset';
+
+polyfillHTMLElementDataset();
 
 const node = document.querySelector('[data-webapp="homepage-hero"]');
 
