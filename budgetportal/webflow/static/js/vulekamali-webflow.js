@@ -297,6 +297,7 @@
         }
 
         function showMapPoints(response) {
+            var markers = [];
             response.results.forEach(function(project) {
                 if (! project.latitude || ! project.longitude)
                     return;
@@ -316,8 +317,9 @@
                 var marker = L.marker([latitude, longitude])
                     .bindPopup(project.name + '<br><a target="_blank" href="' +
                                project.url_path + '">Jump to project</a>');
-                searchState.markers.addLayer(marker);
+                markers.push(marker);
             });
+            searchState.markers.addLayers(markers);
             searchState.map.fitBounds(searchState.markers.getBounds());
         }
 
