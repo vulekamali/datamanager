@@ -239,7 +239,7 @@
                 params.set(fieldName, searchState.selectedFacets[fieldName])
             }
             params.set("fields", "url_path,name,latitude,longitude");
-            params.set("limit", "1000000");
+            params.set("limit", "1000");
             return searchState.baseLocation + "?" + params.toString();
         }
 
@@ -263,9 +263,16 @@
                     console.error( jqXHR, textStatus, errorThrown );
                 });
             resetMapPoints();
-            $.get(buildAllCoordinatesSearchURL())
+            getMapPoints(buildAllCoordinatesSearchURL());
+        }
+
+        function getMapPoints(url) {
+            $.get(url)
                 .done(function(response) {
-                    showMapPoints(response);
+                    addMapPoints(response);
+                    if (response.next) {
+                        getMapPoints(response.next);
+                    }
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
                     alert("Something went wrong when loading map data. Please try again.");
@@ -296,7 +303,7 @@
             searchState.markers.clearLayers();
         }
 
-        function showMapPoints(response) {
+        function addMapPoints(response) {
             var markers = [];
             response.results.forEach(function(project) {
                 if (! project.latitude || ! project.longitude)
