@@ -203,6 +203,8 @@
             selectedFacets: {},
             map: L.map("map").setView([-30.5595, 22.9375], 4),
             markers: L.markerClusterGroup(),
+            noResultsMessage: $("#result-list-container * .w-dyn-empty"),
+            loadingSpinner: $(".loading-spinner"),
         };
         createTileLayer().addTo(searchState.map);
         searchState.map.addLayer(searchState.markers);
@@ -249,7 +251,8 @@
             resetDropdown("#province-dropdown");
             resetDropdown("#department-dropdown");
             resetDropdown("#status-dropdown");
-            resetDropdown("#funding-source-dropdown");
+            resetDropdown("#primary-funding-source-dropdown");
+            searchState.noResultsMessage.hide();
         }
 
         function triggerSearch() {
@@ -267,11 +270,14 @@
         }
 
         function getMapPoints(url) {
+            searchState.loadingSpinner.show();
             $.get(url)
                 .done(function(response) {
                     addMapPoints(response);
                     if (response.next) {
                         getMapPoints(response.next);
+                    } else {
+                        searchState.loadingSpinner.hide();
                     }
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
@@ -285,18 +291,22 @@
             updateDropdown("#province-dropdown", response.fields, "province");
             updateDropdown("#department-dropdown", response.fields, "department");
             updateDropdown("#status-dropdown", response.fields, "status");
-            updateDropdown("#funding-source-dropdown", response.fields, "primary_funding_source");
+            updateDropdown("#primary-funding-source-dropdown", response.fields, "primary_funding_source");
 
-
-            response.objects.results.forEach(function(project) {
-                var resultItem = resultRowTemplate.clone();
-                resultItem.attr("href", project.url_path);
-                resultItem.find(".narrow-card_title").html(project.name);
-                resultItem.find(".narrow-card_middle-column:first").html(project.status);
-                resultItem.find(".narrow-card_middle-column:last").html(project.estimated_completion_date);
-                resultItem.find(".narrow-card_last-column").html(formatCurrency(project.total_project_cost));
-                $("#result-list-container").append(resultItem);
-            });
+            if (response.objects.results.length) {
+                searchState.noResultsMessage.hide();
+                response.objects.results.forEach(function(project) {
+                    var resultItem = resultRowTemplate.clone();
+                    resultItem.attr("href", project.url_path);
+                    resultItem.find(".narrow-card_title").html(project.name);
+                    resultItem.find(".narrow-card_middle-column:first").html(project.status);
+                    resultItem.find(".narrow-card_middle-column:last").html(project.estimated_completion_date);
+                    resultItem.find(".narrow-card_last-column").html(formatCurrency(project.total_project_cost));
+                    $("#result-list-container").append(resultItem);
+                });
+            } else {
+                searchState.noResultsMessage.show();
+            }
         }
 
         function resetMapPoints() {
@@ -326,8 +336,10 @@
                                project.url_path + '">Jump to project</a>');
                 markers.push(marker);
             });
-            searchState.markers.addLayers(markers);
-            searchState.map.fitBounds(searchState.markers.getBounds());
+            if (markers.length) {
+                searchState.markers.addLayers(markers);
+                searchState.map.fitBounds(searchState.markers.getBounds());
+            }
         }
 
         function resetDropdown(selector) {
@@ -363,7 +375,9 @@
             fields[fieldName].forEach(function (option) {
                 optionElement = dropdownItemTemplate.clone();
                 optionElement.find(".search-dropdown_label").text(option.text);
-                optionElement.find(".search-dropdown_value").text("(" + option.count + ")");
+                if (option.count) {
+                    optionElement.find(".search-dropdown_value").text("(" + option.count + ")");
+                }
                 optionElement.click(function() {
                     searchState.selectedFacets[fieldName] = option.text;
                     optionContainer.removeClass("w--open");

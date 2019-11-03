@@ -3,12 +3,14 @@ Infrastructure Project Search page
 
 - `#Infrastructure-Search-Input`
 - `#Search-Button`
+- `#clear-filters-button`
 - `#province-dropdown`
 - `#department-dropdown`
 - `#status-dropdown`
-- `#funding-source-dropdown`
+- `#primary-funding-source-dropdown`
 - `#num-matching-projects-field`
 - `#matching-projects-total-cost-field`
+- `#matching-projects-total-cost-units-field`
 - `#matching-status-chart-container`
 - `#sort-order-dropdown`
 - `#result-list-container` Result list
