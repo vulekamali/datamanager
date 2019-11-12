@@ -1,4 +1,4 @@
-budgetportal.webflow
+Webflow frontend in this Django app
 ====================
 
 ![Diagram of how we use Webflow exports with Django](https://docs.google.com/drawings/d/e/2PACX-1vStj7WS2XgSqr_TNU0tr9rHj--b8p8tPicugHmJNn8SRSHKNkVPucR68Ck7YzsOiVOhNALIVDpq907z/pub?w=954&h=482)
@@ -30,6 +30,11 @@ the correct fields.
 
 Provincial Infrastructure Project Search page `/infrastructure-projects/provincial`
 ----------------------------------
+
+Webflow
+
+- Page name: Infrastructure Search Template
+- File name: infrastructure-search-template.html
 
 This page primarily uses the API to fetch and display data.
 At the time of writing, the main reason for this is that the design appends
@@ -66,4 +71,59 @@ Selectors for templating in data:
 Infrastructure Project Detail page `/infrastructure-projects/provincial/<id>-<slug>-<province-slug>`
 ----------------------------------
 
+
+Webflow
+
+- Page name: Provincial Infrastructure Project Template
+- File name: detail_provincial-infrastructure-projects.html
+
 Selectors for templating in data:
+
+- `body.provincial-infrastructure-project-detail-page`
+- `#project-location-map-container`
+- `#project-municipal-context-map-container`
+- Project definition
+  - `.name-field`
+  - `.project-number-field`
+  - `.budget-programme-field`
+  - `.nature-of-investment-field`
+- Administrative details
+  - `.primary-funding-source-field`
+  - `.funding-status-field`
+  - `.province-field`
+  - `.department-field`
+- Location
+  - `.local-municipality-field`
+  - `.district-municipality-field`
+  - `.coordinates-field`
+- Implementation
+  - `.program-implementing-agent-field`
+  - `.principle-agent-field`
+  - `.main-contractor-field`
+  - `.other-service-providers-field`
+- Dates
+  - `.status-field`
+  - `.start-date-field`
+  - `.estimated-construction-start-date-field`
+  - `.estimated-completion-date-field`
+  - `.contracted-construction-end-date-field`
+  - `.estimated-construction-end-date-field`
+- Budgets and spending
+  - `.total-project-cost-field`
+  - `.total-professional-fees-field`
+  - `.total-construction-costs-field`
+  - `.variation-orders-field`
+  - `.expenditure-from-previous-years-professional-fees-field`
+  - `.expenditure-from-previous-years-construction-costs-field`
+  - `.expenditure-from-previous-years-total-field`
+  - `.project-expenditure-total-field`
+  - `.main-appropriation-professional-fees-field`
+  - `.adjustment-appropriation-professional-fees-field`
+  - `.main-appropriation-construction-costs-field`
+  - `.adjustment-appropriation-construction-costs-field`
+  - `.main-appropriation-total-field`
+  - `.adjustment-appropriation-total-field`
+  - `.actual-expenditure-q1-field`
+  - `.actual-expenditure-q2-field`
+  - `.actual-expenditure-q3-field`
+  - `.actual-expenditure-q4-field`
