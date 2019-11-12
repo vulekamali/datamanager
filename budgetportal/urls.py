@@ -93,7 +93,7 @@ urlpatterns = [
         name="consolidated-json",
     ),
     # Homepage
-    url(r"^$", cache_page(CACHE_DAYS_SECS)(views.homepage), name="home"),
+    url(r"^$", cache_page(CACHE_MINUTES_SECS)(views.homepage), name="home"),
     # Search results
     url(
         r"^json/static-search.json",

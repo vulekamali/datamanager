@@ -11,7 +11,13 @@ from slugify import slugify
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.models import Video, Event, FAQ
 from budgetportal.openspending import PAGE_SIZE
-from models import FinancialYear, Sphere, Department, InfrastructureProjectPart
+from models import (
+    FinancialYear,
+    Sphere,
+    Department,
+    InfrastructureProjectPart,
+    Homepage,
+)
 from datasets import Dataset, Category
 from summaries import (
     get_preview_page,
@@ -52,6 +58,7 @@ def homepage(request, financial_year_id="2019-20"):
 
     year = get_object_or_404(FinancialYear, slug=financial_year_id)
     revenue_data = year.get_budget_revenue()
+    page_data = Homepage.objects.first()
 
     context = {
         "revenue": revenue.sort_categories(revenue_data),
@@ -65,6 +72,16 @@ def homepage(request, financial_year_id="2019-20"):
         "navbar": read_object_from_yaml(navbar_data_file_path),
         "videos": videos,
         "latest_year": "2019-20",
+        "main_heading": page_data.main_heading,
+        "sub_heading": page_data.sub_heading,
+        "primary_button_label": page_data.primary_button_label,
+        "primary_button_url": page_data.primary_button_url,
+        "secondary_button_label": page_data.secondary_button_label,
+        "secondary_button_url": page_data.secondary_button_url,
+        "call_to_action_sub_heading": page_data.call_to_action_sub_heading,
+        "call_to_action_heading": page_data.call_to_action_heading,
+        "call_to_action_link_label": page_data.call_to_action_link_label,
+        "call_to_action_link_url": page_data.call_to_action_link_url,
     }
 
     return render(request, "homepage.html", context=context)

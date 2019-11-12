@@ -4,7 +4,21 @@
 {% block page_content %}
 
 <div class="Page-content u-paddingTop0">
-    <div data-webapp="homepage-hero">
+    <div data-webapp="homepage-hero"
+         data-main-heading="{{ main_heading }}"
+         data-sub-heading="{{ sub_heading }}"
+         data-primary-button-label="{{ primary_button_label }}"
+         data-primary-button-url="{{ primary_button_url }}"
+         data-primary-button-target="{{ primary_button_target }}"
+         data-secondary-button-label="{{ secondary_button_label }}"
+         data-secondary-button-url="{{ secondary_button_url }}"
+         data-secondary-button-target="{{ secondary_button_target }}"
+         data-call-to-action-sub-heading="{{ call_to_action_sub_heading }}"
+         data-call-to-action-heading="{{ call_to_action_heading }}"
+         data-call-to-action-link-label="{{ call_to_action_link_label }}"
+         data-call-to-action-link-url="{{ call_to_action_link_url }}"
+         data-call-to-action-link-target="{{ call_to_action_link_target }}"
+         >
         {% include 'connections/homepage-hero/index.html' %}
     </div>
     <div id="national-treemap" class="national-treemap" data-webapp="consolidated-treemap"></div>

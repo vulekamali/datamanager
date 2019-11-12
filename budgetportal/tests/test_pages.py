@@ -11,7 +11,7 @@ requests.Session = Mock
 
 
 class BasicPagesTestCase(TestCase):
-    fixtures = ["video-language", "faq"]
+    fixtures = ["video-language", "faq", "homepage"]
 
     def setUp(self):
         FinancialYear.objects.create(slug="2015-16", published=True)
@@ -80,7 +80,7 @@ class BasicPagesTestCase(TestCase):
         dataset_patch.start()
         self.addCleanup(dataset_patch.stop)
 
-    def test_overview_page(self):
+    def test_homepage(self):
         """Test that it exists and that the correct years are linked"""
         c = Client()
         response = c.get("/")

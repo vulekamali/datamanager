@@ -192,7 +192,6 @@ const BudgetTitle = styled.div`
 const BudgetHeading = styled.div`
   font-size: 16px;
   font-weight: 700;
-  text-transform: Capitalize;
   padding-bottom: 16px;
 
   @media screen and (min-width: 650px) {
@@ -220,14 +219,17 @@ const buildCallToAction = callToActionData => (
           <CallToActionDescription>
             <BudgetTitle>{callToActionData.subheading}</BudgetTitle>
             <BudgetHeading>{callToActionData.heading}</BudgetHeading>
-            <CallToActionLink href={callToActionData.link.link}>
-              <CallToActionButton>
-                <span>
-                  {callToActionData.link.text}
-                </span>
-                <ForwardArrow />
-              </CallToActionButton>
-            </CallToActionLink>
+            {
+                (callToActionData.link.link.length > 0) &&
+                  <CallToActionLink href={callToActionData.link.link}>
+                    <CallToActionButton>
+                      <span>
+                        {callToActionData.link.text}
+                      </span>
+                      <ForwardArrow />
+                    </CallToActionButton>
+                  </CallToActionLink>
+            }
           </CallToActionDescription>
         </BuildPosition>
       </CallToAction>

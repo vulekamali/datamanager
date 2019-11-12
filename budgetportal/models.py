@@ -77,6 +77,22 @@ EXPENDITURE_TIME_SERIES_PHASE_MAPPING = {
 }
 
 
+class Homepage(models.Model):
+    main_heading = models.CharField(max_length=1000, blank=True)
+    sub_heading = models.CharField(max_length=1000, blank=True)
+    primary_button_label = models.CharField(max_length=1000, blank=True)
+    primary_button_url = models.CharField(max_length=1000, blank=True)
+    primary_button_target = models.CharField(max_length=1000, blank=True)
+    secondary_button_label = models.CharField(max_length=1000, blank=True)
+    secondary_button_url = models.CharField(max_length=1000, blank=True)
+    secondary_button_target = models.CharField(max_length=1000, blank=True)
+    call_to_action_sub_heading = models.CharField(max_length=1000, blank=True)
+    call_to_action_heading = models.CharField(max_length=1000, blank=True)
+    call_to_action_link_label = models.CharField(max_length=1000, blank=True)
+    call_to_action_link_url = models.CharField(max_length=1000, blank=True)
+    call_to_action_link_target = models.CharField(max_length=1000, blank=True)
+
+
 class FinancialYear(models.Model):
     organisational_unit = "financial_year"
     slug = models.SlugField(max_length=7, unique=True)

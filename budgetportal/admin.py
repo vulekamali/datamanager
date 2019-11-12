@@ -147,7 +147,7 @@ class EntityDatasetsView(TemplateView):
     sphere_slug = None
 
     def get_context_data(self, **kwargs):
-        sphere = Sphere.objects.get(
+        sphere = models.Sphere.objects.get(
             financial_year__slug=self.financial_year_slug, slug=self.sphere_slug
         )
         return {"sphere": sphere}
@@ -239,3 +239,4 @@ admin.site.register(models.FAQ, SortableAdmin)
 admin.site.register(models.ProvInfraProject, ProvInfraProjectAdmin)
 admin.site.register(models.ProvInfraProjectSnapshot, ProvInfraProjectSnapshotAdmin)
 admin.site.register(models.IRMSnapshot, IRMSnapshotAdmin)
+admin.site.register(models.Homepage, admin.ModelAdmin)

@@ -4,10 +4,14 @@ import Layout from '../../components/Layout';
 
 import { Wrapper, Heading, ResourceWrapper } from './styled';
 
-const Resources = ({ resources }) => (
+const Resources = ({ resources, aeneResources }) => (
   <Layout>
     <Wrapper>
-      <Heading id="anchor">2019 budget resources</Heading>
+      <Heading id="adjustments-budget-resources">2019 adjustments budget resources</Heading>
+      <ResourceWrapper>
+        <ResourceList {...{ resources: aeneResources }} />
+      </ResourceWrapper>
+      <Heading id="budget-resources">2019 budget resources</Heading>
       <ResourceWrapper>
         <ResourceList {...{ resources }} />
       </ResourceWrapper>
