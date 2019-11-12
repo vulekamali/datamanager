@@ -28,13 +28,12 @@ in all these pages, which is the Javascript we use to insert page data into
 the correct fields.
 
 
-Provincial Infrastructure Project Search page `/infrastructure-projects/provincial`
+Provincial Infrastructure Project Search page
 ----------------------------------
 
-Webflow
-
-- Page name: Infrastructure Search Template
-- File name: infrastructure-search-template.html
+Route: `/infrastructure-projects/provincial`
+Webflow page name: `Infrastructure Search Template`
+Template File name: `infrastructure-search-template.html`
 
 This page primarily uses the API to fetch and display data.
 At the time of writing, the main reason for this is that the design appends
@@ -68,14 +67,12 @@ Selectors for templating in data:
 - `#load-more-results-button`
 
 
-Infrastructure Project Detail page `/infrastructure-projects/provincial/<id>-<slug>-<province-slug>`
+Infrastructure Project Detail page
 ----------------------------------
 
-
-Webflow
-
-- Page name: Provincial Infrastructure Project Template
-- File name: detail_provincial-infrastructure-projects.html
+Route: `/infrastructure-projects/provincial/<id>-<slug>-<province-slug>`
+Webflow page name: `Provincial Infrastructure Project`
+Template file name: `detail_provincial-infrastructure-projects.html`
 
 Selectors for templating in data:
 
