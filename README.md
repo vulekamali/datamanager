@@ -16,7 +16,7 @@ Code Structure vision
 
 ### Browser support requirements
 
-See [browserslist](package.json)
+See [browserslist](package.json#L85)
 
 ### HTML, CSS, Javascript
 
