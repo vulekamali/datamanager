@@ -14,6 +14,10 @@ This django app used to just coordinate and serve data, hence being called
 Code Structure vision
 ---------------------
 
+### Browser support requirements
+
+See [browserslist](package.json)
+
 ### HTML, CSS, Javascript
 
 We use a yarn (Node.js) and webpack-based build system for CSS and Javascript.

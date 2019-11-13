@@ -251,7 +251,7 @@
             resetDropdown("#province-dropdown");
             resetDropdown("#department-dropdown");
             resetDropdown("#status-dropdown");
-            resetDropdown("#primary-funding-source-dropdown");
+            resetDropdown("#funding-source-dropdown");
             searchState.noResultsMessage.hide();
         }
 
@@ -291,7 +291,7 @@
             updateDropdown("#province-dropdown", response.fields, "province");
             updateDropdown("#department-dropdown", response.fields, "department");
             updateDropdown("#status-dropdown", response.fields, "status");
-            updateDropdown("#primary-funding-source-dropdown", response.fields, "primary_funding_source");
+            updateDropdown("#funding-source-dropdown", response.fields, "primary_funding_source");
 
             if (response.objects.results.length) {
                 searchState.noResultsMessage.hide();

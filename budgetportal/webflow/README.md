@@ -31,9 +31,9 @@ the correct fields.
 Provincial Infrastructure Project Search page
 ----------------------------------
 
-Route: `/infrastructure-projects/provincial`
-Webflow page name: `Infrastructure Search Template`
-Template File name: `infrastructure-search-template.html`
+- Route: `/infrastructure-projects/provincial`
+- Webflow page name: `Infrastructure Search Template`
+- Template File name: `infrastructure-search-template.html`
 
 This page primarily uses the API to fetch and display data.
 At the time of writing, the main reason for this is that the design appends
@@ -51,7 +51,7 @@ Selectors for templating in data:
 - `#province-dropdown`
 - `#department-dropdown`
 - `#status-dropdown`
-- `#primary-funding-source-dropdown`
+- `#funding-source-dropdown`
 - `#num-matching-projects-field`
 - `#matching-projects-total-cost-field`
 - `#matching-projects-total-cost-units-field`
@@ -70,9 +70,9 @@ Selectors for templating in data:
 Infrastructure Project Detail page
 ----------------------------------
 
-Route: `/infrastructure-projects/provincial/<id>-<slug>-<province-slug>`
-Webflow page name: `Provincial Infrastructure Project`
-Template file name: `detail_provincial-infrastructure-projects.html`
+- Route: `/infrastructure-projects/provincial/<id>-<slug>-<province-slug>`
+- Webflow page name: `Provincial Infrastructure Project`
+- Template file name: `detail_provincial-infrastructure-projects.html`
 
 Selectors for templating in data:
 
