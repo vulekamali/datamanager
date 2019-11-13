@@ -35,6 +35,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - solr
+      - minio
 
   # Should be same as app except for command and ports
   worker:
@@ -54,6 +56,9 @@ services:
       - .:/code
     depends_on:
       - db
+      - solr
+      - minio
+    restart: on-failure
 
   test:
     build:
@@ -71,6 +76,8 @@ services:
       - .:/code
     depends_on:
       - db
+      - solr
+      - minio
 
   minio:
     image: "minio/minio:RELEASE.2019-10-12T01-39-57Z"
