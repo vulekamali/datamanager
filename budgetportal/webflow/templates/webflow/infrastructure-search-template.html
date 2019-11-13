@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Oct 23 2019 19:44:18 GMT+0000 (UTC)  -->
-<html data-wf-page="5db0ac42df851f09ecfc7a65" data-wf-site="5d660ef145315201ac996790">
+<!--  Last Published: Wed Nov 13 2019 09:17:33 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5dbe998e04f8b27c9e750273" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
   
@@ -30,6 +30,13 @@
   <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="/static/images/webclip.png" rel="apple-touch-icon">
   <style>
+      .search-dropdown_label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    </style>
+  <style>
       #map {
         width: 100%;
         height: 30vh;
@@ -45,6 +52,69 @@
           width: 100%;
           height: 220px;
           pointer-events: none;
+        }
+      }
+      .search-dropdown_label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      /*LOADER*/
+      .loader,
+      .loader:before,
+      .loader:after {
+        border-radius: 50%;
+        width: 2.5em;
+        height: 2.5em;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation: load7 1.8s infinite ease-in-out;
+        animation: load7 1.8s infinite ease-in-out;
+      }
+      .loader {
+        color: #151515;
+        font-size: 10px;
+        margin: 80px auto;
+        position: relative;
+        text-indent: -9999em;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+      }
+      .loader:before,
+      .loader:after {
+        content: '';
+        position: absolute;
+        top: 0;
+      }
+      .loader:before {
+        left: -3.5em;
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+      }
+      .loader:after {
+        left: 3.5em;
+      }
+      @-webkit-keyframes load7 {
+        0%,
+        80%,
+        100% {
+          box-shadow: 0 2.5em 0 -1.3em;
+        }
+        40% {
+          box-shadow: 0 2.5em 0 0;
+        }
+      }
+      @keyframes load7 {
+        0%,
+        80%,
+        100% {
+          box-shadow: 0 2.5em 0 -1.3em;
+        }
+        40% {
+          box-shadow: 0 2.5em 0 0;
         }
       }
     </style>
@@ -76,12 +146,12 @@
   </div>
   <div class="section page-header">
     <div class="container">
-      <div class="row cc-border-bottom">
+      <div class="row">
         <div class="col">
           <div class="page-header__title">
             <h1 class="page-heading">Provincial Infrastructure Projects</h1>
-            <div class="button_wrapper cc-align-right"><a href="#" class="button cc-grey w-inline-block"><img src="/static/images/share-24px.svg" alt="" class="button-icon _20px"><div class="button-text hide-sm">Share</div></a></div>
           </div>
+          <div class="divider"></div>
         </div>
       </div>
       <div class="row cc-mb-12">
@@ -110,14 +180,14 @@
           <div class="dropdown_wrapper">
             <div data-delay="0" id="province-dropdown" class="dropdown w-dropdown">
               <div class="chart-dropdown_trigger w-dropdown-toggle">
-                <div class="text-block">Eastern Cape, Western Cape...</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
+                <div class="text-block">Eastern Cape</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
               <nav class="chart-dropdown_list w-dropdown-list">
                 <a href="#" class="dropdown-link w-inline-block">
                   <div class="search-status"></div>
                   <div class="search-dropdown_label">All provinces</div>
                   <div class="search-dropdown_value">(1204)</div>
                 </a>
-                <a href="#" class="dropdown-link w-inline-block">
+                <a href="#" class="dropdown-link selected w-inline-block">
                   <div class="search-status active"></div>
                   <div class="search-dropdown_label">Eastern Cape</div>
                   <div class="search-dropdown_value">(205)</div>
@@ -171,11 +241,11 @@
           <div class="dropdown_wrapper">
             <div data-delay="0" id="department-dropdown" class="dropdown w-dropdown">
               <div class="chart-dropdown_trigger w-dropdown-toggle">
-                <div class="text-block">Basic Education</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
+                <div class="text-block">All Departments</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
               <nav class="chart-dropdown_list w-dropdown-list">
-                <a href="#" class="dropdown-link w-inline-block">
+                <a href="#" class="dropdown-link selected w-inline-block">
                   <div class="search-status"></div>
-                  <div class="search-dropdown_label">All provinces</div>
+                  <div class="search-dropdown_label">All Departments</div>
                   <div class="search-dropdown_value">(1204)</div>
                 </a>
                 <a href="#" class="dropdown-link w-inline-block">
@@ -231,12 +301,12 @@
           <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by project Status:</div>
           <div class="dropdown_wrapper">
             <div data-delay="0" id="status-dropdown" class="dropdown w-dropdown">
-              <div id="status-dropdown" class="chart-dropdown_trigger w-dropdown-toggle">
-                <div class="text-block">All Project Statuses</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
+              <div class="chart-dropdown_trigger w-dropdown-toggle">
+                <div class="text-block">All Project Statuses</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
               <nav class="chart-dropdown_list w-dropdown-list">
-                <a href="#" class="dropdown-link w-inline-block">
+                <a href="#" class="dropdown-link selected w-inline-block">
                   <div class="search-status"></div>
-                  <div class="search-dropdown_label">All provinces</div>
+                  <div class="search-dropdown_label">All Project Statuses</div>
                   <div class="search-dropdown_value">(1204)</div>
                 </a>
                 <a href="#" class="dropdown-link w-inline-block">
@@ -256,7 +326,7 @@
                 </a>
                 <a href="#" class="dropdown-link w-inline-block">
                   <div class="search-status"></div>
-                  <div class="search-dropdown_label">KwaZulu-Natal</div>
+                  <div class="search-dropdown_label">KwaZulu-Natal yiyasdiyy iya sidy iasyd iasyd</div>
                   <div class="search-dropdown_value">(23)</div>
                 </a>
                 <a href="#" class="dropdown-link w-inline-block">
@@ -291,13 +361,13 @@
         <div class="col col-3 col-m-6 col-xs-12">
           <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by PRIMARY FUNDING SOURCE:</div>
           <div class="dropdown_wrapper">
-            <div data-delay="0" id="funding-source-dropdown" class="dropdown w-dropdown">
-              <div id="primary-funding-source-dropdown" class="chart-dropdown_trigger w-dropdown-toggle">
-                <div class="text-block">All Funding Sources</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
+            <div data-delay="0" id="primary-funding-source-dropdown" class="dropdown w-dropdown">
+              <div class="chart-dropdown_trigger w-dropdown-toggle">
+                <div class="text-block">All Primary Funding Sources</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
               <nav class="chart-dropdown_list w-dropdown-list">
-                <a href="#" class="dropdown-link w-inline-block">
+                <a href="#" class="dropdown-link selected w-inline-block">
                   <div class="search-status"></div>
-                  <div class="search-dropdown_label">All provinces</div>
+                  <div class="search-dropdown_label">All Primary Funding Sources</div>
                   <div class="search-dropdown_value">(1204)</div>
                 </a>
                 <a href="#" class="dropdown-link w-inline-block">
@@ -350,74 +420,41 @@
           </div>
         </div>
       </div>
+      <div class="row justify-end">
+        <div class="col">
+          <div class="div-block-20">
+            <a id="clear-filters-button" href="#" class="clear-filters-button w-inline-block">
+              <div class="clear-filter__text">Clear all filters</div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="section cc-last">
     <div class="container">
       <div class="row filtered-projects-info">
-        <div class="col col-2 col-sm-6">
+        <div class="col col-2 col-m-3 col-sm-6">
           <div class="search-detail_wrapper">
-            <div class="small-detail-heading">TOTAL PROJECTS:</div>
-            <div id="num-matching-projects-field" class="search-detail-value"></div>
+            <div class="small-detail-heading">filtered projects:</div>
+            <div id="num-matching-projects-field" class="search-detail-value"> </div>
           </div>
         </div>
-        <div class="col col-2 col-sm-6">
+        <div class="col col-2 col-m-3 col-sm-6">
           <div class="search-detail_wrapper cc-border-left">
             <div class="small-detail-heading">Total value:</div>
             <div class="search-detail__amount">
-              <div id="matching-projects-total-cost-field" class="search-detail-value"></div>
-              <div id="matching-projects-total-cost-unit" class="units-label"></div>
+              <div id="matching-projects-total-cost-field" class="search-detail-value"> </div>
+              <div id="matching-projects-total-cost-units-field" class="units-label"> </div>
             </div>
           </div>
         </div>
-        <div class="col col-8 cc-border-left col-sm-12 cc-no-border-sm">
+        <div class="col col-8 col-m-6 col-sm-12 cc-border-left cc-no-border-sm">
           <div class="project-status-overview">
             <div class="small-detail_wrapper cc-mb-4">
               <div class="small-detail-heading">project status overview:</div>
             </div>
-            <div id="matching-status-chart-container" class="progress-chart_wrapper">
-              <div class="vertical-bar_wrapper first">
-                <div class="bar cc-vertical _1"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _2"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _3"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _4"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _5"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _6"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _7"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _8"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _9"></div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _10">
-                  <div class="div-block-15">
-                    <div class="div-block-16"></div>
-                    <div class="text-block-5">8%</div>
-                  </div>
-                </div>
-              </div>
-              <div class="vertical-bar_wrapper">
-                <div class="bar cc-vertical _11"></div>
-              </div>
-              <div class="vertical-bar_wrapper last">
-                <div class="bar cc-vertical _12 cc-last"></div>
-              </div>
-            </div>
+            <div id="matching-status-chart-container" class="progress-chart_wrapper"></div>
           </div>
         </div>
       </div>
@@ -426,18 +463,23 @@
           <div class="small-detail_wrapper cc-mb-4">
             <div class="small-detail-heading">Map of filtered projects:</div>
           </div>
-          <div id="map" class="map__embed w-embed w-iframe"><iframe id="map" width="100%" height="" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=1.5051269531250002%2C-34.651285198954135%2C26.883544921875004%2C-22.39071391683855&amp;layer=mapnik" style="float:left"></iframe></div>
+          <div class="project-map">
+            <div class="loading-spinner">
+              <div class="loader"></div>
+            </div>
+            <div id="map" class="map__embed w-embed"></div>
+          </div>
         </div>
       </div>
-      <div class="row project-info__header">
+      <div class="row">
         <div class="col">
           <div class="sub-section__title_wrapper">
             <h2 class="sub-section__title">Project list</h2>
             <div class="list-sorting_wrapper">
               <div class="sort-by-label">Sorting by:</div>
-              <div data-delay="0" id="sort-order-dropdown" class="dropdown cc-align-right w-dropdown">
+              <div data-delay="0" id="sort-order-dropdown" class="dropdown small cc-align-right w-dropdown">
                 <div class="sorting-dropdown_trigger w-dropdown-toggle">
-                  <div class="text-block">Value (Descending)</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
+                  <div class="text-block">Value (Descending)</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
                 <nav class="sorting-dropdown_list w-dropdown-list">
                   <a href="#" class="dropdown-link w-inline-block">
                     <div class="dropdown-label">Alphabetical (a-z)</div>
@@ -467,6 +509,7 @@
               </div>
             </div>
           </div>
+          <div class="divider"></div>
         </div>
       </div>
       <div class="row">
@@ -476,30 +519,39 @@
               <div class="narrow-card_first-header">
                 <div>PROJECT NAME</div>
               </div>
-              <div class="narrow-card_middle-header hide-sm">
-                <div>PROJECT STATUS</div>
+              <div class="narrow-card_middle-header large-column hide-sm">
+                <div class="align-right">PROJECT STATUS</div>
               </div>
               <div class="narrow-card_middle-header hide-m">
-                <div>COMPLETION DATE</div>
+                <div class="align-right">COMPLETION DATE</div>
               </div>
               <div class="narrow-card_last-header">
-                <div>ESTIMATED TOTAL PROKECT COST</div>
+                <div>ESTIMATED TOTAL PROJECT COST</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block">
-              <div class="narrow-card_first-column">
-                <div class="narrow-card_title"></div>
+            <div class="w-dyn-list">
+              <div class="w-dyn-items">
+                <div class="w-dyn-item">
+                  <a href="project.html" class="narrow-card_wrapper w-inline-block">
+                    <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
+                      <div class="narrow-card_title truncate"></div>
+                    </div>
+                    <div class="narrow-card_middle-column large-column hide-sm">
+                      <div class="align-right"></div>
+                    </div>
+                    <div class="narrow-card_middle-column hide-m">
+                      <div class="align-right"></div>
+                    </div>
+                    <div class="narrow-card_last-column">
+                      <div class="align-right"></div>
+                    </div>
+                  </a>
+                </div>
               </div>
-              <div class="narrow-card_middle-column hide-sm">
-                <div></div>
+              <div class="w-dyn-empty">
+                <div>No items found.</div>
               </div>
-              <div class="narrow-card_middle-column hide-m">
-                <div></div>
-              </div>
-              <div class="narrow-card_last-column">
-                <div></div>
-              </div>
-            </a>
+            </div>
           </div>
         </div>
         <div class="col col-12">

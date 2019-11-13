@@ -205,6 +205,8 @@
             markers: L.markerClusterGroup(),
             noResultsMessage: $("#result-list-container * .w-dyn-empty"),
             loadingSpinner: $(".loading-spinner"),
+            facetsRequest: null,
+            mapPointsRequest: null,
         };
         createTileLayer().addTo(searchState.map);
         searchState.map.addLayer(searchState.markers);
@@ -251,19 +253,23 @@
             resetDropdown("#province-dropdown");
             resetDropdown("#department-dropdown");
             resetDropdown("#status-dropdown");
-            resetDropdown("#funding-source-dropdown");
+            resetDropdown("#primary-funding-source-dropdown");
             searchState.noResultsMessage.hide();
         }
 
         function triggerSearch() {
-            $.get(buildPagedSearchURL())
+            if (searchState.facetsRequest !== null)
+                searchState.facetsRequest.abort();
+            searchState.facetsRequest = $.get(buildPagedSearchURL())
                 .done(function(response) {
                     resetResults();
                     showResults(response);
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
-                    alert("Something went wrong when searching. Please try again.");
-                    console.error( jqXHR, textStatus, errorThrown );
+                    if (textStatus !== "abort") {
+                        alert("Something went wrong when searching. Please try again.");
+                        console.error( jqXHR, textStatus, errorThrown );
+                    }
                 });
             resetMapPoints();
             getMapPoints(buildAllCoordinatesSearchURL());
@@ -271,7 +277,9 @@
 
         function getMapPoints(url) {
             searchState.loadingSpinner.show();
-            $.get(url)
+            if (searchState.mapPointsRequest !== null)
+                searchState.mapPointsRequest.abort();
+            searchState.mapPointsRequest = $.get(url)
                 .done(function(response) {
                     addMapPoints(response);
                     if (response.next) {
@@ -281,8 +289,10 @@
                     }
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
-                    alert("Something went wrong when loading map data. Please try again.");
-                    console.error( jqXHR, textStatus, errorThrown );
+                    if (textStatus !== "abort") {
+                        alert("Something went wrong when loading map data. Please try again.");
+                        console.error( jqXHR, textStatus, errorThrown );
+                    }
                 });
         }
 
@@ -291,7 +301,7 @@
             updateDropdown("#province-dropdown", response.fields, "province");
             updateDropdown("#department-dropdown", response.fields, "department");
             updateDropdown("#status-dropdown", response.fields, "status");
-            updateDropdown("#funding-source-dropdown", response.fields, "primary_funding_source");
+            updateDropdown("#primary-funding-source-dropdown", response.fields, "primary_funding_source");
 
             if (response.objects.results.length) {
                 searchState.noResultsMessage.hide();
