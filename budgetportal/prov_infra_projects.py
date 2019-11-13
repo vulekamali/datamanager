@@ -78,7 +78,7 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
     irm_snapshot = Field(
         attribute="irm_snapshot",
         column_name="irm_snapshot",
-        widget=ForeignKeyWidget(models.IRMSnapshot)
+        widget=ForeignKeyWidget(models.IRMSnapshot),
     )
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")

@@ -8,18 +8,18 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('budgetportal', '0038_auto_20191024_1407'),
-    ]
+    dependencies = [("budgetportal", "0038_auto_20191024_1407")]
 
     operations = [
         migrations.AlterField(
-            model_name='irmsnapshot',
-            name='file',
-            field=models.FileField(upload_to=budgetportal.models.irm_snapshot_file_path),
+            model_name="irmsnapshot",
+            name="file",
+            field=models.FileField(
+                upload_to=budgetportal.models.irm_snapshot_file_path
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='provinfraprojectsnapshot',
-            unique_together=set([('irm_snapshot', 'project')]),
+            name="provinfraprojectsnapshot",
+            unique_together=set([("irm_snapshot", "project")]),
         ),
     ]

@@ -136,11 +136,11 @@ AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
 SOLR_URL = os.environ["SOLR_URL"]
 
 HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': SOLR_URL,
-        'ADMIN_URL': '',
-    },
+    "default": {
+        "ENGINE": "haystack.backends.solr_backend.SolrEngine",
+        "URL": SOLR_URL,
+        "ADMIN_URL": "",
+    }
 }
 
 
@@ -388,8 +388,8 @@ MARKDOWNIFY_WHITELIST_TAGS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [],
-    'DEFAULT_PERMISSION_CLASSES': [],
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": [],
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 20,

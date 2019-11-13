@@ -32,13 +32,13 @@ def provincial_infrastructure_project_list(request):
         "page_description": "Find infrastructure projects by provincial departments.",
         "page_data_json": "null",
     }
-    return render(request, "webflow/infrastructure-search-template.html", context=context)
+    return render(
+        request, "webflow/infrastructure-search-template.html", context=context
+    )
 
 
 def provincial_infrastructure_project_detail(request, id, slug):
-    project = get_object_or_404(
-        models.ProvInfraProject, pk=int(id)
-    )
+    project = get_object_or_404(models.ProvInfraProject, pk=int(id))
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
     page_data["project"]["irm_snapshot"] = snapshot.irm_snapshot.__unicode__()
@@ -86,9 +86,9 @@ class ProvInfraProjectSerializer(HaystackSerializer):
         # Instantiate the superclass normally
         super(ProvInfraProjectSerializer, self).__init__(*args, **kwargs)
 
-        fields = self.context['request'].query_params.get('fields')
+        fields = self.context["request"].query_params.get("fields")
         if fields:
-            fields = fields.split(',')
+            fields = fields.split(",")
             # Drop any fields that are not specified in the `fields` argument.
             allowed = set(fields)
             existing = set(self.fields.keys())

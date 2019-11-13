@@ -21,6 +21,5 @@ urlpatterns = [
         views.provincial_infrastructure_project_detail,
         name="provincial-infra-project-detail",
     ),
-
     url(r"^api/v1/", include(router.urls)),
 ]
