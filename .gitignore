@@ -26,3 +26,7 @@ package-lock.json
 storybook-build
 missing_departments.csv
 ghostdriver.log
+.idea
+*.egg-info*
+departments-national-*.csv
+2019-11-*.png
