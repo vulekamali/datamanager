@@ -29,4 +29,4 @@ ghostdriver.log
 .idea
 *.egg-info*
 departments-national-*.csv
-2019-11-*.png
+departments-provicial-*.csv
