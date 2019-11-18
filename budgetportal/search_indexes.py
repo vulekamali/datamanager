@@ -1,5 +1,5 @@
 from haystack import indexes
-from budgetportal.models import ProvInfraProject, ProvInfraProjectSnapshot
+from budgetportal.models import ProvInfraProject
 from django.db.models import Prefetch, OuterRef, Subquery, Max, Count
 
 
