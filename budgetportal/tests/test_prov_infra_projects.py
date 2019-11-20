@@ -296,11 +296,48 @@ class ProvInfraProjectContentTestCase(APITestCase):
         self.assertContains(response, project.name)
 
 
-class ProvInfraProjectSnapshotTestCase(APITestCase):
-    fixtures = ["test_latest_project_snapshot"]
+class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
+    def setUp(self):
+        self.financial_year = FinancialYear.objects.create(slug="2030-31")
+        self.quarter_1 = Quarter.objects.create(number=1)
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.irm_snapshot_1 = IRMSnapshot.objects.create(
+            financial_year=self.financial_year,
+            quarter=self.quarter_1,
+            date_taken=date.today(),
+        )
+        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot_1,
+            project=self.project,
+            status="Construction"
+        )
+
+        self.quarter_2 = Quarter.objects.create(number=2)
+        self.irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=self.financial_year,
+            quarter=self.quarter_2,
+            date_taken=date.today()+timedelta(days=30)
+        )
+        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot_2,
+            project=self.project,
+            status="Completed"
+        )
+
+    def test_latest_status_in_the_content(self):
+        url = self.project.get_absolute_url()
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, '"status": "Completed"')
+        self.assertNotContains(response, '"status": "Construction"')
 
     def test_latest_in_the_same_year(self):
-        pass
+        # TODO: Not working yet
+        latest = ProvInfraProjectSnapshot.objects.filter(project=self.project).latest()
+
+        self.assertEqual(self.project_snapshot_2, latest)
+        self.assertNotEqual(latest.quarter, self.quarter_1)
 
     def test_latest_in_different_years(self):
         pass
