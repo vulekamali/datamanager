@@ -132,6 +132,11 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
 
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
+        self.irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=date(year=2019, month=1, day=1),
+        )
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.provinces = ["Eastern Cape", "Free State"]
         self.statuses = ["Design", "Construction"]
@@ -139,41 +144,31 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
             "Education Infrastructure Grant",
             "Community Library Service Grant",
         ]
-        name = "budgetportal/tests/test_data/test_import_prov_infra_projects.xlsx"
-        random_date = date.today() + timedelta(days=5)
 
-        self.irm_snapshot = IRMSnapshot()
-        self.irm_snapshot.date_taken = random_date
-        self.irm_snapshot.financial_year = self.fin_year
-        self.irm_snapshot.quarter = self.quarter
-        self.irm_snapshot.file.name = name
-        self.irm_snapshot.save()
-        irm_snapshot = IRMSnapshot.objects.first()
         for i in range(30):
             if i < 15:
-                status = self.statuses[0]
+                status_ = self.statuses[0]
                 province = self.provinces[0]
                 source = self.sources[0]
             else:
-                status = self.statuses[1]
+                status_ = self.statuses[1]
                 province = self.provinces[1]
                 source = self.sources[1]
             project = ProvInfraProject.objects.create(IRM_project_id=i)
             ProvInfraProjectSnapshot.objects.create(
-                irm_snapshot=irm_snapshot,
+                irm_snapshot=self.irm_snapshot,
                 project=project,
                 name="Project {}".format(i),
                 department="Department {}".format(i),
                 local_municipality="Local {}".format(i),
                 district_municipality="District {}".format(i),
                 province=province,
-                status=status,
+                status=status_,
                 primary_funding_source=source,
                 main_contractor="Contractor {}".format(i),
                 principle_agent="Principle Agent {}".format(i),
                 program_implementing_agent="Program Agent {}".format(i),
                 other_parties="Service Provider: XXXX{}".format(i),
-                estimated_completion_date=random_date,
             )
 
     def test_projects_per_page(self):
