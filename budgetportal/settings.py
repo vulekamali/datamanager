@@ -357,6 +357,8 @@ LOGGING = {
     },
 }
 
+DJANGO_Q_SYNC = os.environ.get("DJANGO_Q_SYNC", "false").lower() == "true"
+
 Q_CLUSTER = {
     "name": "Something",
     "workers": 1,
@@ -368,6 +370,7 @@ Q_CLUSTER = {
     "poll": 10,  # Check for queued tasks this frequently (seconds)
     "save_limit": 0,
     "ack_failures": True,  # Dequeue failed tasks
+    "sync": DJANGO_Q_SYNC,
 }
 
 MARKDOWNIFY_WHITELIST_TAGS = [
