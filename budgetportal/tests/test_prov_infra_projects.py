@@ -289,18 +289,6 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertContains(response, name)
 
 
-class ProvInfraProjectContentTestCase(APITestCase):
-    fixtures = ["test-prov-infra-project-content"]
-
-    def test_project_detail_content(self):
-        project = ProvInfraProject.objects.first()
-        url = project.get_absolute_url()
-        response = self.client.get(url)
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, project.name)
-
-
 class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
     def setUp(self):
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
