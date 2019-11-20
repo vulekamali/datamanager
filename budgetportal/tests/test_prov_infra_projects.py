@@ -298,13 +298,13 @@ class ProvInfraProjectContentTestCase(APITestCase):
 
 class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
     def setUp(self):
-        self.financial_year = FinancialYear.objects.create(slug="2030-31")
-        self.quarter_1 = Quarter.objects.create(number=1)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.quarter_1 = Quarter.objects.create(number=1)
         self.irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.financial_year,
+            financial_year=self.fin_year,
             quarter=self.quarter_1,
-            date_taken=date.today(),
+            date_taken=date(year=2019, month=1, day=1),
         )
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_1,
@@ -314,9 +314,9 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
 
         self.quarter_2 = Quarter.objects.create(number=2)
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.financial_year,
+            financial_year=self.fin_year,
             quarter=self.quarter_2,
-            date_taken=date.today()+timedelta(days=30)
+            date_taken=date(year=2019, month=6, day=1)
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_2,
@@ -333,11 +333,38 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.assertNotContains(response, '"status": "Construction"')
 
     def test_latest_in_the_same_year(self):
-        # TODO: Not working yet
         latest = ProvInfraProjectSnapshot.objects.filter(project=self.project).latest()
 
         self.assertEqual(self.project_snapshot_2, latest)
-        self.assertNotEqual(latest.quarter, self.quarter_1)
+
+
+class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
+    def setUp(self):
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.quarter_1 = Quarter.objects.create(number=1)
+
+        self.irm_snapshot_1 = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=self.quarter_1,
+            date_taken=date(year=2019, month=1, day=1),
+        )
+        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot_1,
+            project=self.project,
+        )
+
+        self.irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=self.quarter_1,
+            date_taken=date(year=2020, month=1, day=1),
+        )
+        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot_2,
+            project=self.project,
+        )
 
     def test_latest_in_different_years(self):
-        pass
+        latest = ProvInfraProjectSnapshot.objects.filter(project=self.project).latest()
+
+        self.assertEqual(self.project_snapshot_2, latest)
