@@ -1,9 +1,10 @@
 import os
 from datetime import date, timedelta
 
+from django.core.files import File
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase, APITransactionTestCase
 from django.contrib.auth.models import User
 from allauth.account.models import EmailAddress
 from selenium.webdriver.support.select import Select
@@ -120,13 +121,12 @@ class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
         selenium.implicitly_wait(self.timeout)
 
 
-class ProvInfraProjectAPITestCase(APITestCase):
+class ProvInfraProjectAPITestCase(APITransactionTestCase):
     def setUp(self):
         """Create 30 Provincial Infrastructure Projects"""
 
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
-        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.provinces = ["Eastern Cape", "Free State"]
         self.statuses = ["Design", "Construction"]
@@ -134,13 +134,16 @@ class ProvInfraProjectAPITestCase(APITestCase):
             "Education Infrastructure Grant",
             "Community Library Service Grant",
         ]
+        name = "budgetportal/tests/test_data/test_import_prov_infra_projects.xlsx"
         random_date = date.today() + timedelta(days=5)
-        self.irm_snapshot = IRMSnapshot.objects.create(
-            date_taken=random_date,
-            financial_year=self.fin_year,
-            quarter=self.quarter,
-        )
 
+        self.irm_snapshot = IRMSnapshot()
+        self.irm_snapshot.date_taken = random_date
+        self.irm_snapshot.financial_year=self.fin_year
+        self.irm_snapshot.quarter=self.quarter
+        self.irm_snapshot.file.name = name
+        self.irm_snapshot.save()
+        irm_snapshot = IRMSnapshot.objects.first()
         for i in range(30):
             if i < 15:
                 status = self.statuses[0]
@@ -150,9 +153,10 @@ class ProvInfraProjectAPITestCase(APITestCase):
                 status = self.statuses[1]
                 province = self.provinces[1]
                 source = self.sources[1]
+            project = ProvInfraProject.objects.create(IRM_project_id=i)
             ProvInfraProjectSnapshot.objects.create(
-                irm_snapshot=self.irm_snapshot,
-                project=self.project,
+                irm_snapshot=irm_snapshot,
+                project=project,
                 name="Project {}".format(i),
                 department="Department {}".format(i),
                 local_municipality="Local {}".format(i),
@@ -285,3 +289,13 @@ class ProvInfraProjectContentTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, project.name)
+
+
+class ProvInfraProjectSnapshotTestCase(APITestCase):
+    fixtures = ["test_latest_project_snapshot"]
+
+    def test_latest_in_the_same_year(self):
+        pass
+
+    def test_latest_in_different_years(self):
+        pass
