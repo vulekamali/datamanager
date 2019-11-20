@@ -1,16 +1,17 @@
 import os
+from datetime import date, timedelta
 
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from django.test import TestCase
 from django.contrib.auth.models import User
 from allauth.account.models import EmailAddress
 from selenium.webdriver.support.select import Select
 from tablib import Dataset
 import unittest
 
-from budgetportal.models import FinancialYear, ProvInfraProject
+from budgetportal.models import FinancialYear, ProvInfraProject, \
+    ProvInfraProjectSnapshot, IRMSnapshot, Quarter
 from budgetportal import irm_preprocessor
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 
@@ -31,6 +32,7 @@ class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
         EmailAddress.objects.create(user=user, email=EMAIL, verified=True)
         self.path = os.path.dirname(__file__)
         self.financial_year = FinancialYear.objects.create(slug="2019-20")
+        self.quarter = Quarter.objects.create(number=1)
         self.timeout = 10
 
         super(ProvInfraProjectSeleniumTestCase, self).setUp()
@@ -86,19 +88,59 @@ class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
         count = ProvInfraProject.objects.count()
         self.assertEqual(count, 11)
 
+    def test_import_irm_snapshot(self):
+        # TODO: not completed yet
+        filename = "budgetportal/tests/test_data/test_import_prov_infra_projects2.xlsx"
+
+        selenium = self.selenium
+
+        # Login
+        selenium.get("%s%s" % (self.live_server_url, "/admin/"))
+        username = selenium.find_element_by_id("id_login")
+        password = selenium.find_element_by_id("id_password")
+        submit_button = selenium.find_element_by_css_selector('button[type="submit"]')
+        username.send_keys(EMAIL)
+        password.send_keys(PASSWORD)
+        submit_button.click()
+
+        selenium.find_element_by_link_text("IRM Snapshots").click()
+        selenium.find_element_by_link_text("ADD IRM SNAPSHOT").click()
+
+        financial_year_select = Select(selenium.find_element_by_id("id_financial_year"))
+        quarter_select = Select(selenium.find_element_by_id("id_quarter"))
+        file_import = selenium.find_element_by_id("id_file")
+
+        selenium.find_element_by_link_text("Today").click()
+        selenium.find_element_by_link_text("Now").click()
+        financial_year_select.select_by_value(str(self.financial_year.id))
+        quarter_select.select_by_value(str(self.quarter.id))
+        file_import.send_keys(os.path.abspath(filename))
+
+        selenium.find_element_by_css_selector('input[value="Save"]').click()
+        selenium.implicitly_wait(self.timeout)
+
 
 class ProvInfraProjectAPITestCase(APITestCase):
     def setUp(self):
         """Create 30 Provincial Infrastructure Projects"""
 
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
-        self.url = reverse("provincial-infrastructure-project-api")
+        self.quarter = Quarter.objects.create(number=1)
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.url = reverse("provincial-infrastructure-project-api-list")
         self.provinces = ["Eastern Cape", "Free State"]
         self.statuses = ["Design", "Construction"]
         self.sources = [
             "Education Infrastructure Grant",
             "Community Library Service Grant",
         ]
+        random_date = date.today() + timedelta(days=5)
+        self.irm_snapshot = IRMSnapshot.objects.create(
+            date_taken=random_date,
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+        )
+
         for i in range(30):
             if i < 15:
                 status = self.statuses[0]
@@ -108,10 +150,9 @@ class ProvInfraProjectAPITestCase(APITestCase):
                 status = self.statuses[1]
                 province = self.provinces[1]
                 source = self.sources[1]
-
-            ProvInfraProject.objects.create(
-                financial_year=self.fin_year,
-                IRM_project_id=i,
+            ProvInfraProjectSnapshot.objects.create(
+                irm_snapshot=self.irm_snapshot,
+                project=self.project,
                 name="Project {}".format(i),
                 department="Department {}".format(i),
                 local_municipality="Local {}".format(i),
@@ -123,6 +164,7 @@ class ProvInfraProjectAPITestCase(APITestCase):
                 principle_agent="Principle Agent {}".format(i),
                 program_implementing_agent="Program Agent {}".format(i),
                 other_parties="Service Provider: XXXX{}".format(i),
+                estimated_completion_date=random_date,
             )
 
     def test_projects_per_page(self):
@@ -218,7 +260,6 @@ class ProvInfraProjectAPITestCase(APITestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0]["province"], "Eastern Cape")
         self.assertEqual(results[0]["name"], "Something School")
-
 
     def test_url_path(self):
         name = "Project 10"
