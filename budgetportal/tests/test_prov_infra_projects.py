@@ -11,8 +11,13 @@ from selenium.webdriver.support.select import Select
 from tablib import Dataset
 import unittest
 
-from budgetportal.models import FinancialYear, ProvInfraProject, \
-    ProvInfraProjectSnapshot, IRMSnapshot, Quarter
+from budgetportal.models import (
+    FinancialYear,
+    ProvInfraProject,
+    ProvInfraProjectSnapshot,
+    IRMSnapshot,
+    Quarter,
+)
 from budgetportal import irm_preprocessor
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 
@@ -139,8 +144,8 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
 
         self.irm_snapshot = IRMSnapshot()
         self.irm_snapshot.date_taken = random_date
-        self.irm_snapshot.financial_year=self.fin_year
-        self.irm_snapshot.quarter=self.quarter
+        self.irm_snapshot.financial_year = self.fin_year
+        self.irm_snapshot.quarter = self.quarter
         self.irm_snapshot.file.name = name
         self.irm_snapshot.save()
         irm_snapshot = IRMSnapshot.objects.first()
