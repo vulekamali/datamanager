@@ -19,6 +19,7 @@ from budgetportal.models import (
     Quarter,
 )
 from budgetportal import irm_preprocessor
+from budgetportal.search_indexes import ProvInfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 
 USERNAME = "testuser"
@@ -169,18 +170,24 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
                 principle_agent="Principle Agent {}".format(i),
                 program_implementing_agent="Program Agent {}".format(i),
                 other_parties="Service Provider: XXXX{}".format(i),
+                estimated_completion_date=date(year=2020, month=1, day=1),
             )
+
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
 
     def test_projects_per_page(self):
         response = self.client.get(self.url, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         number_of_results = len(response.data["results"])
-        self.assertLessEqual(number_of_results, 20)
+        self.assertEqual(number_of_results, 20)
 
     def test_filter_by_department(self):
         department = "Department 1"
-        project = ProvInfraProject.objects.get(department=department)
+        project = ProvInfraProjectSnapshot.objects.get(department=department)
 
         data = {"department": department}
         response = self.client.get(self.url, data)
@@ -220,36 +227,39 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
 
     def test_search_by_project_name(self):
         name = "Project 1"
-        data = {"search": name}
+        data = {"name": name}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, name)
 
     def test_search_by_municipality(self):
-        municipality = "Local 1"
-        data = {"search": municipality}
+        municipality = "Local"
+        data = {"local_municipality": municipality}
         response = self.client.get(self.url, data)
+        print response.data["results"]
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, municipality)
 
     def test_search_by_province(self):
         province = "Eastern Cape"
-        data = {"search": province}
+        data = {"province": province}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, province)
 
+    # TODO: following 3 tests not working yet
     def test_search_by_contractor(self):
         contractor = "Contractor 3"
-        data = {"search": contractor}
+        data = {"main_contractor": contractor}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, contractor)
 
     def test_search_multiple_fields(self):
-        ProvInfraProject.objects.create(
-            financial_year=self.fin_year,
-            IRM_project_id=12345,
+        project = ProvInfraProject.objects.create(IRM_project_id=123456789)
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=project,
             name="Something School",
             province="Eastern Cape",
         )
