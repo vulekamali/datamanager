@@ -155,6 +155,12 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         num_of_departments = response.data["objects"]["count"]
         self.assertEqual(num_of_departments, 5)
 
+        province = "Eastern Cape"
+        data = {"selected_facets": "province_exact:{0}".format(province)}
+        response = self.client.get(self.facet_url, data)
+        num_of_provinces = response.data["objects"]["count"]
+        self.assertNotEqual(num_of_departments, num_of_provinces)
+
     def test_filter_by_province(self):
         province = "Eastern Cape"
         data = {"province": province}
