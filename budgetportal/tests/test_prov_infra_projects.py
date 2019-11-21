@@ -233,15 +233,15 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(results[0]["name"], name)
 
     def test_search_by_municipality(self):
-        # TODO : not working yet
+        name = "Project 1"
         municipality = "Local 1"
-        data = {"local_municipality": municipality}
+        data = {"q": municipality}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         results = response.data["results"]
         self.assertEqual(len(results), 1)
-        self.assertEqual(results[0]["local_municipality"], municipality)
+        self.assertEqual(results[0]["name"], name)
 
     def test_search_by_province(self):
         province = "Eastern Cape"
