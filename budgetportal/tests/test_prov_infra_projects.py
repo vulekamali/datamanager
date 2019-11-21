@@ -77,7 +77,9 @@ class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
 
         # Get search url
         selenium.get("%s%s" % (self.live_server_url, self.search_url))
-        num_of_projects = selenium.find_element_by_xpath('//*[@id="num-matching-projects-field"]').text
+        num_of_projects = selenium.find_element_by_xpath(
+            '//*[@id="num-matching-projects-field"]'
+        ).text
         self.assertEqual(num_of_projects, 11)
 
 
