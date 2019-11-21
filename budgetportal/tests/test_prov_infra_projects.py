@@ -2,6 +2,10 @@ import os
 from datetime import date
 
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 
 from allauth.account.models import EmailAddress
 from budgetportal.models import (
@@ -36,13 +40,13 @@ class ProvInfraProjectSeleniumIRMSnapshotTestCase(BaseSeleniumTestCase):
         self.path = os.path.dirname(__file__)
         self.financial_year = FinancialYear.objects.create(slug="2019-20")
         self.quarter = Quarter.objects.create(number=1)
-        self.timeout = 10
+        self.timeout = 60
         self.search_url = "/infrastructure-projects/provincial/"
         super(ProvInfraProjectSeleniumIRMSnapshotTestCase, self).setUp()
 
     def test_import_irm_snapshot(self):
         # TODO: not completed yet
-        filename = "budgetportal/tests/test_data/test_import_prov_infra_projects2.xlsx"
+        filename = "budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx"
 
         selenium = self.selenium
 
@@ -71,10 +75,14 @@ class ProvInfraProjectSeleniumIRMSnapshotTestCase(BaseSeleniumTestCase):
         quarter_select.select_by_value(str(self.quarter.id))
         file_import.send_keys(os.path.abspath(filename))
 
-        # Save the form and wait 10 seconds
+        # Save the form and wait until success
         selenium.find_element_by_css_selector('input[value="Save"]').click()
-        selenium.implicitly_wait(self.timeout)
-
+        try:
+            success = WebDriverWait(selenium, self.timeout).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "success"))
+            )
+        except TimeoutException:
+            self.fail("Loading took too much time!")
         # Get search url
         selenium.get("%s%s" % (self.live_server_url, self.search_url))
         num_of_projects = selenium.find_element_by_xpath(
@@ -135,7 +143,9 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
         num_of_projects = int(num_of_projects)
         self.assertEqual(num_of_projects, 11)
 
-        num_of_items = len(selenium.find_elements_by_xpath('//*[@id="result-list-container"]/a'))
+        num_of_items = len(
+            selenium.find_elements_by_xpath('//*[@id="result-list-container"]/a')
+        )
         # Header is also counted
         num_of_items = num_of_items - 1
         self.assertEqual(num_of_projects, num_of_items)
@@ -651,5 +661,3 @@ class ProvInfraProjectDetailPageTestCase(APITransactionTestCase):
         self.assertContains(
             response, '"primary_funding_source": "Health Infrastructure Grant"'
         )
-
-
