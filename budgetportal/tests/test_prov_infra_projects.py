@@ -296,18 +296,36 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(number_of_projects, 15)
 
     def test_facet_filter_by_province(self):
-        province = "Eastern Cape"
+        department = "Department 1"
+        project = ProvInfraProject.objects.create(IRM_project_id=123456)
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=project,
+            department=department,
+            province="Western Cape",
+            estimated_completion_date=date(year=2029, month=1, day=30),
+        )
+        ProvInfraProjectIndex().update()
 
+        response = self.client.get(self.facet_url)
+        department_facets = response.data["fields"]["department"]
+        departments_before_filtering = 0
+        for value in department_facets:
+            if department == value["text"]:
+                departments_before_filtering = value["count"]
+        self.assertEqual(departments_before_filtering, 2)
+
+        province = "Eastern Cape"
         data = {"selected_facets": "province_exact:{0}".format(province)}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        province_facets = response.data["fields"]["province"]
-        num_of_provinces = 0
-        for value in province_facets:
-            if province == value["text"]:
-                num_of_provinces = value["count"]
-        self.assertEqual(num_of_provinces, 15)
+        department_facets = response.data["fields"]["department"]
+        departments_after_filtering = 0
+        for value in department_facets:
+            if department == value["text"]:
+                departments_after_filtering = value["count"]
+        self.assertEqual(departments_after_filtering, 1)
 
     def test_filter_by_status(self):
         status_ = "Construction"
