@@ -446,3 +446,49 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         latest = ProvInfraProjectSnapshot.objects.filter(project=self.project).latest()
 
         self.assertEqual(self.project_snapshot_2, latest)
+
+
+class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
+    def setUp(self):
+        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.quarter = Quarter.objects.create(number=1)
+        self.date = date(year=2019, month=1, day=1)
+        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
+
+        self.irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+        )
+        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=self.project_1,
+            name="Blue School",
+            province="Eastern Cape",
+            estimated_completion_date=self.date,
+        )
+
+        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
+        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=self.project_2,
+            name="Red School",
+            province="Limpopo",
+            estimated_completion_date=self.date,
+        )
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
+
+    def test_correct_project_returned(self):
+        search = "Eastern Cape School"
+        data = {"q": search}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        results = response.data["results"]
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["name"], "Blue School")
+        self.assertNotContains(response, "Red School")
