@@ -128,13 +128,6 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
     def tearDown(self):
         ProvInfraProjectIndex().clear()
 
-    def test_projects_per_page(self):
-        response = self.client.get(self.url, format="json")
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        number_of_results = len(response.data["results"])
-        self.assertEqual(number_of_results, 20)
-
     def test_filter_by_department(self):
         department = "Department 1"
         project = ProvInfraProjectSnapshot.objects.get(department=department)
