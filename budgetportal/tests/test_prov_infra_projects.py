@@ -202,6 +202,16 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         number_of_projects = len(response.data["results"])
         self.assertEqual(number_of_projects, 15)
 
+    def test_facet_filter_by_status(self):
+        status_ = "Construction"
+        data = {"selected_facets": "status_exact:{0}".format(status_)}
+        response = self.client.get(self.facet_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        objects = response.data["objects"]
+        num_of_statuses = objects["count"]
+        self.assertEqual(num_of_statuses, 15)
+
     def test_filter_by_funding_source(self):
         source = "Community Library Service Grant"
         data = {"primary_funding_source": source}
