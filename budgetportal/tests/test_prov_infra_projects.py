@@ -144,11 +144,9 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
     def test_facet_filter_by_department(self):
         department = "Test Department"
         for i in range(1, 6):
-            date_ = date(year=2019, month=1, day=i*5)
+            date_ = date(year=2019, month=1, day=i * 5)
             irm_snapshot = IRMSnapshot.objects.create(
-                financial_year=self.fin_year,
-                quarter=self.quarter,
-                date_taken=date_,
+                financial_year=self.fin_year, quarter=self.quarter, date_taken=date_,
             )
             project = ProvInfraProject.objects.get(IRM_project_id=i)
             ProvInfraProjectSnapshot.objects.create(
@@ -325,19 +323,17 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_1,
             project=self.project,
-            status="Construction"
+            status="Construction",
         )
 
         self.quarter_2 = Quarter.objects.create(number=2)
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year,
             quarter=self.quarter_2,
-            date_taken=date(year=2019, month=6, day=1)
+            date_taken=date(year=2019, month=6, day=1),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=self.irm_snapshot_2,
-            project=self.project,
-            status="Completed"
+            irm_snapshot=self.irm_snapshot_2, project=self.project, status="Completed"
         )
 
     def test_latest_status_in_the_content(self):
@@ -366,8 +362,7 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
             date_taken=date(year=2019, month=1, day=1),
         )
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=self.irm_snapshot_1,
-            project=self.project,
+            irm_snapshot=self.irm_snapshot_1, project=self.project,
         )
 
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
@@ -376,8 +371,7 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
             date_taken=date(year=2020, month=1, day=1),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=self.irm_snapshot_2,
-            project=self.project,
+            irm_snapshot=self.irm_snapshot_2, project=self.project,
         )
 
     def test_latest_in_different_years(self):
