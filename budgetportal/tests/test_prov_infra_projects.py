@@ -297,6 +297,15 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0]["name"], name)
 
+    def test_facet_search_by_contractor(self):
+        contractor = "Contractor 3"
+        data = {"q": contractor}
+        response = self.client.get(self.facet_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        results = response.data["objects"]["count"]
+        self.assertNotEqual(results, 0)
+
     def test_search_multiple_fields(self):
         project = ProvInfraProject.objects.create(IRM_project_id=123456789)
         ProvInfraProjectSnapshot.objects.create(
