@@ -149,6 +149,7 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(response_data["name"], project.name)
 
     def test_facet_filter_by_department(self):
+        # Add 5 projects with Test Department
         department = "Test Department"
         for i in range(1, 6):
             date_ = date(year=2019, month=1, day=i * 5)
@@ -168,13 +169,22 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        num_of_departments = response.data["objects"]["count"]
+        department_facets = response.data["fields"]["department"]
+        num_of_departments = 0
+        for value in department_facets:
+            if department == value["text"]:
+                num_of_departments = value["count"]
         self.assertEqual(num_of_departments, 5)
 
         province = "Eastern Cape"
         data = {"selected_facets": "province_exact:{0}".format(province)}
         response = self.client.get(self.facet_url, data)
-        num_of_provinces = response.data["objects"]["count"]
+        province_facets = response.data["fields"]["province"]
+        num_of_provinces = 0
+        for value in province_facets:
+            if province == value["text"]:
+                num_of_provinces = value["count"]
+
         self.assertNotEqual(num_of_departments, num_of_provinces)
 
     def test_filter_by_province(self):
@@ -193,8 +203,11 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        objects = response.data["objects"]
-        num_of_provinces = objects["count"]
+        province_facets = response.data["fields"]["province"]
+        num_of_provinces = 0
+        for value in province_facets:
+            if province == value["text"]:
+                num_of_provinces = value["count"]
         self.assertEqual(num_of_provinces, 15)
 
     def test_filter_by_status(self):
@@ -212,8 +225,11 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        objects = response.data["objects"]
-        num_of_statuses = objects["count"]
+        status_facets = response.data["fields"]["status"]
+        num_of_statuses = 0
+        for value in status_facets:
+            if status_ == value["text"]:
+                num_of_statuses = value["count"]
         self.assertEqual(num_of_statuses, 15)
 
     def test_filter_by_funding_source(self):
@@ -231,9 +247,12 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        objects = response.data["objects"]
-        num_of_statuses = objects["count"]
-        self.assertEqual(num_of_statuses, 15)
+        source_facets = response.data["fields"]["primary_funding_source"]
+        num_of_sources = 0
+        for value in source_facets:
+            if source == value["text"]:
+                num_of_sources = value["count"]
+        self.assertEqual(num_of_sources, 15)
 
     def test_search_by_project_name(self):
         name = "Project 1"
