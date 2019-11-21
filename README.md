@@ -153,8 +153,8 @@ Load an initial set of financial years, spheres and governments. You might need 
 You can download data from the production datamanager to use in your test environment as follows:
 
 ```bash
-for year in 2016-17 2017-18 2018-19 2019-20; do curl https://datamanager.vulekamali.gov.za/${year}/national/departments.csv > departments-national-${year}.csv; done
-for year in 2016-17 2017-18 2018-19 2019-20; do curl https://datamanager.vulekamali.gov.za/${year}/provincial/departments.csv > departments-provincial-${year}.csv; done
+for year in 2016-17 2017-18 2018-19 2019-20; do curl https://vulekamali.gov.za/${year}/national/departments.csv > departments-national-${year}.csv; done
+for year in 2016-17 2017-18 2018-19 2019-20; do curl https://vulekamali.gov.za/${year}/provincial/departments.csv > departments-provincial-${year}.csv; done
 ```
 
 You can load this data into your environment with:
@@ -246,7 +246,7 @@ EMAIL_USE_TLS= \
 python manage.py runserver
 ```
 
-Logout from ckan might not send you to the right URL to logout from DataManager. You can manually go to logout from this app at http://localhost:8000/accounts/logout/.
+Logout from ckan might not send you to the right URL to logout from this site. You can manually go to logout from this app at http://localhost:8000/accounts/logout/.
 
 ### Additional environment variables sometimes needing customisation for development
 
