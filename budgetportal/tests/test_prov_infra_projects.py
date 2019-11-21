@@ -1,5 +1,5 @@
 import os
-from datetime import date
+from datetime import date, timedelta
 
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
@@ -46,7 +46,9 @@ class ProvInfraProjectSeleniumIRMSnapshotTestCase(BaseSeleniumTestCase):
 
     def test_import_irm_snapshot(self):
         # TODO: not completed yet
-        filename = "budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx"
+        filename = (
+            "budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx"
+        )
 
         selenium = self.selenium
 
@@ -243,41 +245,46 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
     def test_facet_filter_by_department(self):
         # Add 5 projects with Test Department
         department = "Test Department"
-        for i in range(1, 6):
-            date_ = date(year=2019, month=1, day=i * 5)
+        for i in range(100, 106):
+            if i < 103:
+                province = "Eastern Cape"
+            else:
+                province = "Free State"
+            date_ = date(year=2019, month=1, day=1) + timedelta(days=i)
             irm_snapshot = IRMSnapshot.objects.create(
                 financial_year=self.fin_year, quarter=self.quarter, date_taken=date_,
             )
-            project = ProvInfraProject.objects.get(IRM_project_id=i)
+            project = ProvInfraProject.objects.create(IRM_project_id=i)
             ProvInfraProjectSnapshot.objects.create(
                 irm_snapshot=irm_snapshot,
                 project=project,
                 department=department,
+                province=province,
                 estimated_completion_date=date_,
             )
         ProvInfraProjectIndex().update()
 
+        province = "Eastern Cape"
+        response = self.client.get(self.facet_url)
+        province_facets = response.data["fields"]["province"]
+        provinces_before_filtering = 0
+        for value in province_facets:
+            if province == value["text"]:
+                provinces_before_filtering = value["count"]
+
+        self.assertEqual(provinces_before_filtering, 18)
+
         data = {"selected_facets": "department_exact:{0}".format(department)}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        department_facets = response.data["fields"]["department"]
-        num_of_departments = 0
-        for value in department_facets:
-            if department == value["text"]:
-                num_of_departments = value["count"]
-        self.assertEqual(num_of_departments, 5)
-
-        province = "Eastern Cape"
-        data = {"selected_facets": "province_exact:{0}".format(province)}
-        response = self.client.get(self.facet_url, data)
         province_facets = response.data["fields"]["province"]
-        num_of_provinces = 0
+        provinces_after_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                num_of_provinces = value["count"]
+                provinces_after_filtering = value["count"]
 
-        self.assertNotEqual(num_of_departments, num_of_provinces)
+        self.assertEqual(provinces_after_filtering, 3)
+        self.assertNotEqual(provinces_before_filtering, provinces_after_filtering)
 
     def test_filter_by_province(self):
         province = "Eastern Cape"
