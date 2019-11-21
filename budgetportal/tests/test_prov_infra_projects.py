@@ -4,8 +4,13 @@ from datetime import date
 from selenium.webdriver.support.select import Select
 
 from allauth.account.models import EmailAddress
-from budgetportal.models import (FinancialYear, IRMSnapshot, ProvInfraProject,
-                                 ProvInfraProjectSnapshot, Quarter)
+from budgetportal.models import (
+    FinancialYear,
+    IRMSnapshot,
+    ProvInfraProject,
+    ProvInfraProjectSnapshot,
+    Quarter,
+)
 from budgetportal.search_indexes import ProvInfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 from django.contrib.auth.models import User
@@ -487,3 +492,99 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0]["name"], "Blue School")
         self.assertNotContains(response, "Red School")
+
+
+class ProvInfraProjectDetailPageTestCase(APITransactionTestCase):
+    def setUp(self):
+        self.fin_year = FinancialYear.objects.create(slug="2050-51")
+        self.quarter = Quarter.objects.create(number=3)
+        self.irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=date(year=2019, month=1, day=1),
+        )
+        self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=self.project,
+            name="Project 123456",
+            department="Health",
+            province="Eastern Cape",
+            status="Construction",
+            primary_funding_source="Health Infrastructure Grant",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+        )
+
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
+
+    def test_project_detail_page_fields(self):
+        url = self.project.get_absolute_url()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(
+            response,
+            "<title>Project 123456, Eastern Cape Infrastructure projects - vulekamali</title>",
+        )
+        self.assertContains(
+            response,
+            '"Provincial infrastructure project by the Eastern Cape Health department."',
+        )
+        self.assertContains(response, '"name": "Project 123456"')
+        self.assertContains(response, '"department": "Health"')
+        self.assertContains(response, '"province": "Eastern Cape"')
+        self.assertContains(response, '"status": "Construction"')
+        self.assertContains(
+            response, '"primary_funding_source": "Health Infrastructure Grant"'
+        )
+
+# TODO: Not working yet
+class ProvInfraProjectWebflowIntegrationTestCase(APITransactionTestCase):
+    def setUp(self):
+        self.fin_year = FinancialYear.objects.create(slug="2050-51")
+        self.quarter = Quarter.objects.create(number=3)
+        self.irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=date(year=2019, month=1, day=1),
+        )
+        self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=self.project,
+            name="Project 123456",
+            department="Health",
+            province="Eastern Cape",
+            status="Construction",
+            primary_funding_source="Health Infrastructure Grant",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+        )
+        # Add ten projects
+        provinces = ["Eastern Cape", "Free State"]
+        for i in range(10):
+            if i < 5:
+                province = provinces[0]
+            else:
+                province = provinces[1]
+            project = ProvInfraProject.objects.create(IRM_project_id=i)
+            ProvInfraProjectSnapshot.objects.create(
+                irm_snapshot=self.irm_snapshot,
+                project=project,
+                name="Project {}".format(i),
+                province=province,
+                estimated_completion_date=date(year=2020, month=1, day=1),
+            )
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
+
+    def test_correct_numbers_showed(self):
+        url = reverse("provincial-infra-project-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_number_updated_after_search(self):
+        pass
