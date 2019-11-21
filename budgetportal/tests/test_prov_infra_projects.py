@@ -491,7 +491,11 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        province_results = response.data["objects"]["count"]
+        province_facets = response.data["fields"]["province"]
+        province_results = 0
+        for value in province_facets:
+            if province == value["text"]:
+                province_results = value["count"]
         self.assertEqual(province_results, 15)
 
     def test_search_by_contractor(self):
