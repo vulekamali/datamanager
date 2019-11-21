@@ -232,6 +232,16 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0]["name"], name)
 
+    def test_facet_search_by_project_name(self):
+        name = "Project 1"
+        data = {"q": name}
+        response = self.client.get(self.facet_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        results = response.data["objects"]["results"]
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["name"], name)
+
     def test_search_by_municipality(self):
         name = "Project 1"
         municipality = "Local 1"
