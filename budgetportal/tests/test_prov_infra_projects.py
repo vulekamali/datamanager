@@ -154,7 +154,7 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
 
     def test_number_updated_after_search(self):
         # TODO: Not working yet
-        province = "Project 1"
+        province = "Eastern Cape"
         selenium = self.selenium
         selenium.get("%s%s" % (self.live_server_url, self.url))
         num_of_projects = selenium.find_element_by_xpath(
@@ -174,7 +174,7 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
             '//*[@id="num-matching-projects-field"]'
         ).text
         filtered_num_of_projects = int(filtered_num_of_projects)
-        # self.assertEqual(filtered_num_of_projects, 5)
+        self.assertEqual(filtered_num_of_projects, 5)
 
 
 class ProvInfraProjectAPITestCase(APITransactionTestCase):
