@@ -179,22 +179,31 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         data = {"name": name}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, name)
+
+        results = response.data["results"]
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["name"], name)
 
     def test_search_by_municipality(self):
-        municipality = "Local"
+        # TODO : not working yet
+        municipality = "Local 1"
         data = {"local_municipality": municipality}
         response = self.client.get(self.url, data)
-        print response.data["results"]
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, municipality)
+
+        results = response.data["results"]
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["local_municipality"], municipality)
 
     def test_search_by_province(self):
         province = "Eastern Cape"
         data = {"province": province}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, province)
+
+        results = response.data["results"]
+        self.assertEqual(len(results), 15)
+        self.assertEqual(results[0]["province"], province)
 
     # TODO: following 3 tests not working yet
     def test_search_by_contractor(self):
