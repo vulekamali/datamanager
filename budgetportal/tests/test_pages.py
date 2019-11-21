@@ -3,12 +3,6 @@ from django.conf import settings
 from django.test import TestCase, Client
 from mock import patch, Mock
 
-# Hacky make sure we don't call out to openspending.
-import requests
-
-requests.get = Mock
-requests.Session = Mock
-
 
 class BasicPagesTestCase(TestCase):
     fixtures = ["video-language", "faq", "homepage"]
