@@ -296,6 +296,18 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, name)
 
+    def test_facet_url_path(self):
+        province = "Eastern Cape"
+        data = {"selected_facets": "province_exact:{0}".format(province)}
+        response = self.client.get(self.facet_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        result = response.data["objects"]["results"][0]
+        url_path = result["url_path"]
+        response = self.client.get(url_path)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, province)
+
 
 class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
     def setUp(self):
