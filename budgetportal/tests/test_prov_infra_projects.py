@@ -182,6 +182,17 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         number_of_projects = len(response.data["results"])
         self.assertEqual(number_of_projects, 15)
 
+    def test_facet_filter_by_province(self):
+        province = "Eastern Cape"
+
+        data = {"selected_facets": "province_exact:{0}".format(province)}
+        response = self.client.get(self.facet_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        objects = response.data["objects"]
+        num_of_provinces = objects["count"]
+        self.assertEqual(num_of_provinces, 15)
+
     def test_filter_by_status(self):
         status_ = "Construction"
         data = {"status": status_}
