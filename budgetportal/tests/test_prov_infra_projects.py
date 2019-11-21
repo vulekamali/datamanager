@@ -284,6 +284,29 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(results[0]["province"], "Eastern Cape")
         self.assertEqual(results[0]["name"], "Something School")
 
+    def test_facet_search_multiple_fields(self):
+        project = ProvInfraProject.objects.create(IRM_project_id=123456789)
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=project,
+            name="Something School",
+            province="Eastern Cape",
+            estimated_completion_date=date(year=2020, month=6, day=1),
+        )
+        ProvInfraProjectIndex().update()
+
+        data = {"q": "Eastern Cape School"}
+        response = self.client.get(self.facet_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        results = response.data["objects"]["results"]
+
+        # There should be only one match because first 30 objects don't
+        # have school word
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["province"], "Eastern Cape")
+        self.assertEqual(results[0]["name"], "Something School")
+
     def test_url_path(self):
         name = "Project 10"
         data = {"name": name}
