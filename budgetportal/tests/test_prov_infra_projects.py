@@ -253,8 +253,8 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(len(results), 15)
         self.assertEqual(results[0]["province"], province)
 
-    # TODO: following 2 tests not working yet
     def test_search_by_contractor(self):
+        # TODO: not working yet
         contractor = "Contractor 3"
         data = {"main_contractor": contractor}
         response = self.client.get(self.url, data)
@@ -272,7 +272,7 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         )
         ProvInfraProjectIndex().update()
 
-        data = {"text": "Eastern Cape School"}
+        data = {"q": "Eastern Cape School"}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
