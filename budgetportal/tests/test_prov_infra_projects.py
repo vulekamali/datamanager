@@ -1,26 +1,17 @@
 import os
-from datetime import date, timedelta
+from datetime import date
 
-from django.core.files import File
-from django.urls import reverse
-from rest_framework import status
-from rest_framework.test import APITestCase, APITransactionTestCase
-from django.contrib.auth.models import User
-from allauth.account.models import EmailAddress
 from selenium.webdriver.support.select import Select
-from tablib import Dataset
-import unittest
 
-from budgetportal.models import (
-    FinancialYear,
-    ProvInfraProject,
-    ProvInfraProjectSnapshot,
-    IRMSnapshot,
-    Quarter,
-)
-from budgetportal import irm_preprocessor
+from allauth.account.models import EmailAddress
+from budgetportal.models import (FinancialYear, IRMSnapshot, ProvInfraProject,
+                                 ProvInfraProjectSnapshot, Quarter)
 from budgetportal.search_indexes import ProvInfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
+from django.contrib.auth.models import User
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITransactionTestCase
 
 USERNAME = "testuser"
 EMAIL = "testuser@domain.com"
@@ -457,9 +448,7 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
 
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
-            quarter=self.quarter,
-            date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
         )
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
