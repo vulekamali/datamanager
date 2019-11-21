@@ -12,7 +12,7 @@ router.register(
 
 urlpatterns = [
     url(
-        r"^infrastructure-projects/provincial/?$",
+        r"^infrastructure-projects/provincial/$",
         views.provincial_infrastructure_project_list,
         name="provincial-infra-project-list",
     ),
