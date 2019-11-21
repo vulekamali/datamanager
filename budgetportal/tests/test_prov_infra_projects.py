@@ -88,6 +88,7 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
             date_taken=date(year=2019, month=1, day=1),
         )
         self.url = reverse("provincial-infrastructure-project-api-list")
+        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.provinces = ["Eastern Cape", "Free State"]
         self.statuses = ["Design", "Construction"]
         self.sources = [
@@ -146,6 +147,31 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         response_data = response.data["results"][0]
         self.assertEqual(number_of_projects, 1)
         self.assertEqual(response_data["name"], project.name)
+
+    def test_facet_filter_by_department(self):
+        department = "Test Department"
+        for i in range(1, 6):
+            date_ = date(year=2019, month=1, day=i*5)
+            irm_snapshot = IRMSnapshot.objects.create(
+                financial_year=self.fin_year,
+                quarter=self.quarter,
+                date_taken=date_,
+            )
+            project = ProvInfraProject.objects.get(IRM_project_id=i)
+            ProvInfraProjectSnapshot.objects.create(
+                irm_snapshot=irm_snapshot,
+                project=project,
+                department=department,
+                estimated_completion_date=date_,
+            )
+        ProvInfraProjectIndex().update()
+
+        data = {"selected_facets": "department_exact:{0}".format(department)}
+        response = self.client.get(self.facet_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        num_of_departments = response.data["objects"]["count"]
+        self.assertEqual(num_of_departments, 5)
 
     def test_filter_by_province(self):
         province = "Eastern Cape"
