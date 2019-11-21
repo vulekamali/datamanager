@@ -337,17 +337,47 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         self.assertEqual(number_of_projects, 15)
 
     def test_facet_filter_by_status(self):
-        status_ = "Construction"
-        data = {"selected_facets": "status_exact:{0}".format(status_)}
+        new_status = "Completed"
+        for i in range(100, 106):
+            if i < 103:
+                province = "Eastern Cape"
+            else:
+                province = "Free State"
+            date_ = date(year=2019, month=1, day=1) + timedelta(days=i)
+            irm_snapshot = IRMSnapshot.objects.create(
+                financial_year=self.fin_year, quarter=self.quarter, date_taken=date_,
+            )
+            project = ProvInfraProject.objects.create(IRM_project_id=i)
+            ProvInfraProjectSnapshot.objects.create(
+                irm_snapshot=irm_snapshot,
+                project=project,
+                status=new_status,
+                province=province,
+                estimated_completion_date=date_,
+            )
+        ProvInfraProjectIndex().update()
+
+        province = "Eastern Cape"
+        response = self.client.get(self.facet_url)
+        province_facets = response.data["fields"]["province"]
+        provinces_before_filtering = 0
+        for value in province_facets:
+            if province == value["text"]:
+                provinces_before_filtering = value["count"]
+
+        self.assertEqual(provinces_before_filtering, 18)
+
+        data = {"selected_facets": "status_exact:{0}".format(new_status)}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        status_facets = response.data["fields"]["status"]
-        num_of_statuses = 0
-        for value in status_facets:
-            if status_ == value["text"]:
-                num_of_statuses = value["count"]
-        self.assertEqual(num_of_statuses, 15)
+        province_facets = response.data["fields"]["province"]
+        provinces_after_filtering = 0
+        for value in province_facets:
+            if province == value["text"]:
+                provinces_after_filtering = value["count"]
+
+        self.assertEqual(provinces_after_filtering, 3)
 
     def test_filter_by_funding_source(self):
         source = "Community Library Service Grant"
