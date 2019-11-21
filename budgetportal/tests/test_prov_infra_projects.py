@@ -224,7 +224,7 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
 
     def test_search_by_project_name(self):
         name = "Project 1"
-        data = {"name": name}
+        data = {"q": name}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -245,21 +245,23 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
 
     def test_search_by_province(self):
         province = "Eastern Cape"
-        data = {"province": province}
+        data = {"q": province}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         results = response.data["results"]
         self.assertEqual(len(results), 15)
-        self.assertEqual(results[0]["province"], province)
 
     def test_search_by_contractor(self):
-        # TODO: not working yet
+        name = "Project 3"
         contractor = "Contractor 3"
-        data = {"main_contractor": contractor}
+        data = {"q": contractor}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, contractor)
+
+        results = response.data["results"]
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["name"], name)
 
     def test_search_multiple_fields(self):
         project = ProvInfraProject.objects.create(IRM_project_id=123456789)
