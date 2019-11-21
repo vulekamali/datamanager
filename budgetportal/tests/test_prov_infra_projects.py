@@ -285,7 +285,7 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
 
     def test_url_path(self):
         name = "Project 10"
-        data = {"search": name}
+        data = {"name": name}
         response = self.client.get(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
