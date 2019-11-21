@@ -37,7 +37,7 @@ class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
         self.financial_year = FinancialYear.objects.create(slug="2019-20")
         self.quarter = Quarter.objects.create(number=1)
         self.timeout = 10
-
+        self.search_url = "/infrastructure-projects/provincial/"
         super(ProvInfraProjectSeleniumTestCase, self).setUp()
 
     def test_import_irm_snapshot(self):
@@ -55,21 +55,30 @@ class ProvInfraProjectSeleniumTestCase(BaseSeleniumTestCase):
         password.send_keys(PASSWORD)
         submit_button.click()
 
+        # Navigate to form
         selenium.find_element_by_link_text("IRM Snapshots").click()
         selenium.find_element_by_link_text("ADD IRM SNAPSHOT").click()
 
+        # Select dropdown menus and "browse" button
         financial_year_select = Select(selenium.find_element_by_id("id_financial_year"))
         quarter_select = Select(selenium.find_element_by_id("id_quarter"))
         file_import = selenium.find_element_by_id("id_file")
 
+        # Fill the form
         selenium.find_element_by_link_text("Today").click()
         selenium.find_element_by_link_text("Now").click()
         financial_year_select.select_by_value(str(self.financial_year.id))
         quarter_select.select_by_value(str(self.quarter.id))
         file_import.send_keys(os.path.abspath(filename))
 
+        # Save the form and wait 10 seconds
         selenium.find_element_by_css_selector('input[value="Save"]').click()
         selenium.implicitly_wait(self.timeout)
+
+        # Get search url
+        selenium.get("%s%s" % (self.live_server_url, self.search_url))
+        num_of_projects = selenium.find_element_by_xpath('//*[@id="num-matching-projects-field"]').text
+        self.assertEqual(num_of_projects, 11)
 
 
 class ProvInfraProjectAPITestCase(APITransactionTestCase):
