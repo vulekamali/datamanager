@@ -271,7 +271,7 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
         self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infra-project-list")
-        super(ProvInfraProjectWebflowIntegrationTestCase, self).setUp()
+        super(ProvInfraProjectSearchPageTestCase, self).setUp()
         self.timeout = 10
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=3)
