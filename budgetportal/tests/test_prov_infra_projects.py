@@ -58,9 +58,7 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(2050, 1, 1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
-            quarter=self.quarter,
-            date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
         )
         self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
         ProvInfraProjectSnapshot.objects.create(
@@ -676,19 +674,17 @@ class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
-            quarter=self.quarter,
-            date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
         )
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
-                irm_snapshot=self.irm_snapshot,
-                project=self.project,
-                name="Project 1",
-                estimated_completion_date=date(year=2020, month=1, day=1),
-            )
+            irm_snapshot=self.irm_snapshot,
+            project=self.project,
+            name="Project 1",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+        )
 
         ProvInfraProjectIndex().reindex()
 
@@ -844,9 +840,7 @@ class ProvInfraProjectDetailPageTestCase(TransactionTestCase):
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
-            quarter=self.quarter,
-            date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
         )
         self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
         ProvInfraProjectSnapshot.objects.create(
