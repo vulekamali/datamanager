@@ -1,8 +1,9 @@
 import os
-import time
 from datetime import date
 
 from django.core.files import File
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 from budgetportal.models import (
     FinancialYear,
@@ -16,6 +17,7 @@ from budgetportal.tests.helpers import BaseSeleniumTestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITransactionTestCase
+from selenium.webdriver.support import expected_conditions as EC
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
@@ -328,17 +330,17 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
     def test_search_homepage_correct_numbers(self):
         selenium = self.selenium
         selenium.get("%s%s" % (self.live_server_url, self.url))
-        num_of_projects = selenium.find_element_by_xpath(
-            '//*[@id="num-matching-projects-field"]'
+        num_of_projects = selenium.find_element_by_css_selector(
+            "#num-matching-projects-field"
         ).text
         num_of_projects = int(num_of_projects)
         self.assertEqual(num_of_projects, 11)
 
         num_of_items = len(
-            selenium.find_elements_by_xpath('//*[@id="result-list-container"]/a')
+            selenium.find_elements_by_css_selector(
+                "#result-list-container .narrow-card_wrapper"
+            )
         )
-        # Header is also counted
-        num_of_items = num_of_items - 1
         self.assertEqual(num_of_projects, num_of_items)
 
     def test_number_updated_after_search(self):
@@ -351,13 +353,22 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         num_of_projects = int(num_of_projects)
         self.assertEqual(num_of_projects, 11)
 
-        search_field = selenium.find_element_by_name("Infrastructure-Search")
-        search_button = selenium.find_element_by_xpath('//*[@id="Search-Button"]')
+        search_field = selenium.find_element_by_css_selector(
+            "#Infrastructure-Search-Input"
+        )
+        search_button = selenium.find_element_by_css_selector("#Search-Button")
         search_field.send_keys(province)
         search_button.click()
-        time.sleep(self.timeout)
-        filtered_num_of_projects = selenium.find_element_by_xpath(
-            '//*[@id="num-matching-projects-field"]'
+        wait = WebDriverWait(selenium, self.timeout)
+        wait.until(
+            EC.text_to_be_present_in_element(
+                (By.CSS_SELECTOR, ".page-heading"),
+                u"Provincial Infrastructure Projects",
+            )
+        )
+
+        filtered_num_of_projects = selenium.find_element_by_css_selector(
+            "#num-matching-projects-field"
         ).text
         filtered_num_of_projects = int(filtered_num_of_projects)
         self.assertEqual(filtered_num_of_projects, 5)
