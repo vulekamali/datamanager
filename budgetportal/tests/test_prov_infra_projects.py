@@ -277,6 +277,80 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
         self.assertEqual(departments_after_filtering, 1)
 
 
+class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
+    def setUp(self):
+        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.quarter = Quarter.objects.create(number=1)
+        self.date = date(year=2050, month=1, day=1)
+        self.irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+        )
+        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=self.project_1,
+            province="Eastern Cape",
+            status="Construction",
+            estimated_completion_date=self.date,
+        )
+        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=self.project_2,
+            province="Free State",
+            status="Construction",
+            estimated_completion_date=self.date,
+        )
+        self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=self.project_3,
+            province="Eastern Cape",
+            status="Completed",
+            estimated_completion_date=self.date,
+        )
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
+
+    def test_filter_by_status(self):
+        status_ = "Construction"
+        data = {"status": status_}
+        response = self.client.get(self.url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        number_of_projects = response.data["count"]
+        self.assertEqual(number_of_projects, 2)
+
+    def test_facet_filter_by_status(self):
+        status_ = "Construction"
+        province = "Eastern Cape"
+
+        response = self.client.get(self.facet_url)
+        province_facets = response.data["fields"]["province"]
+        provinces_before_filtering = 0
+        for value in province_facets:
+            if province == value["text"]:
+                provinces_before_filtering = value["count"]
+
+        self.assertEqual(provinces_before_filtering, 2)
+
+        data = {"selected_facets": "status_exact:{0}".format(status_)}
+        response = self.client.get(self.facet_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        province_facets = response.data["fields"]["province"]
+        provinces_after_filtering = 0
+        for value in province_facets:
+            if province == value["text"]:
+                provinces_after_filtering = value["count"]
+
+        self.assertEqual(provinces_after_filtering, 1)
+
+
 class ProvInfraProjectAPITestCase(APITransactionTestCase):
     def setUp(self):
         """Create 30 Provincial Infrastructure Projects"""
@@ -329,59 +403,6 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
     def tearDown(self):
         ProvInfraProjectIndex().clear()
 
-
-
-    def test_filter_by_status(self):
-        status_ = "Construction"
-        data = {"status": status_}
-        response = self.client.get(self.url, data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        number_of_projects = len(response.data["results"])
-        self.assertEqual(number_of_projects, 15)
-
-    def test_facet_filter_by_status(self):
-        new_status = "Completed"
-        for i in range(100, 106):
-            if i < 103:
-                province = "Eastern Cape"
-            else:
-                province = "Free State"
-            date_ = date(year=2019, month=1, day=1) + timedelta(days=i)
-            irm_snapshot = IRMSnapshot.objects.create(
-                financial_year=self.fin_year, quarter=self.quarter, date_taken=date_,
-            )
-            project = ProvInfraProject.objects.create(IRM_project_id=i)
-            ProvInfraProjectSnapshot.objects.create(
-                irm_snapshot=irm_snapshot,
-                project=project,
-                status=new_status,
-                province=province,
-                estimated_completion_date=date_,
-            )
-        ProvInfraProjectIndex().update()
-
-        province = "Eastern Cape"
-        response = self.client.get(self.facet_url)
-        province_facets = response.data["fields"]["province"]
-        provinces_before_filtering = 0
-        for value in province_facets:
-            if province == value["text"]:
-                provinces_before_filtering = value["count"]
-
-        self.assertEqual(provinces_before_filtering, 18)
-
-        data = {"selected_facets": "status_exact:{0}".format(new_status)}
-        response = self.client.get(self.facet_url, data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        province_facets = response.data["fields"]["province"]
-        provinces_after_filtering = 0
-        for value in province_facets:
-            if province == value["text"]:
-                provinces_after_filtering = value["count"]
-
-        self.assertEqual(provinces_after_filtering, 3)
 
     def test_filter_by_funding_source(self):
         source = "Community Library Service Grant"
