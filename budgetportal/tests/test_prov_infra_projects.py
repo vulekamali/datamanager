@@ -751,7 +751,7 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         self.assertNotContains(response, "Red School")
 
 
-class ProvInfraProjectDetailPageTestCase(APITransactionTestCase):
+class ProvInfraProjectDetailPageTestCase(TransactionTestCase):
     def setUp(self):
         self.fin_year = FinancialYear.objects.create(slug="2050-51")
         self.quarter = Quarter.objects.create(number=3)
