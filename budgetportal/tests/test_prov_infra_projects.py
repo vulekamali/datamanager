@@ -185,7 +185,7 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
 
     def test_filter_by_department(self):
         department = "Department 1"
-        project = ProvInfraProjectSnapshot.objects.get(department=department)
+        project_snapshot = ProvInfraProjectSnapshot.objects.get(department=department)
 
         data = {"department": department}
         response = self.client.get(self.url, data)
