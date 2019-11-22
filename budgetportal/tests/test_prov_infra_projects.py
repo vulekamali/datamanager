@@ -1,8 +1,7 @@
 import os
-from datetime import date, timedelta
+from datetime import date
 
 from django.core.files import File
-from django.test import TransactionTestCase
 
 from budgetportal.models import (
     FinancialYear,
@@ -64,54 +63,44 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             irm_snapshot=self.irm_snapshot,
             project=self.project,
             name="BLUE JUNIOR SECONDARY SCHOOL",
-
             # Administration
             department="Education",
             budget_programme="Programme 2 - Public Ordinary School Education",
             project_number="W/50042423/WS",
             status="Construction",
-
             # Location
             province="KwaZulu-Natal",
             local_municipality="Dr Nkosazana Dlamini Zuma",
             district_municipality="Harry Gwala",
-
             # Implementation
             program_implementing_agent="DOPW",
             principle_agent="PRINCIPLE AGENT",
             main_contractor="MAIN CONTRACTOR",
             other_parties="OTHERS",
-
             # Funding
             primary_funding_source="Education Infrastructure Grant",
             nature_of_investment="Upgrading and Additions",
             funding_status="Tabled",
-
             # Budget
             total_project_cost=680000,
             total_construction_costs=562000,
             total_professional_fees=118000,
-
             # Cost to date
             expenditure_from_previous_years_total=556479,
             expenditure_from_previous_years_professional_fees=118000,
             expenditure_from_previous_years_construction_costs=0,
             variation_orders=0,
-
             # Original Budget FY
             main_appropriation_total=337000,
             main_appropriation_construction_costs=276000,
             main_appropriation_professional_fees=61000,
-
             # Adjustment Budget FY
             adjustment_appropriation_total=1,
             adjustment_appropriation_construction_costs=2,
             adjustment_appropriation_professional_fees=3,
-
             # Overall timeline
             start_date=date(2016, 6, 13),
             estimated_completion_date=date(year=2021, month=6, day=30),
-
             # Construction timeline
             estimated_construction_start_date=date(2017, 2, 1),
             estimated_construction_end_date=date(2020, 12, 31),
@@ -127,11 +116,12 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         selenium = self.selenium
         url = self.project.get_absolute_url()
         selenium.get("%s%s" % (self.live_server_url, url))
-        title = selenium.find_element_by_css_selector('.page-heading').text
+        title = selenium.find_element_by_css_selector(".page-heading").text
         self.assertEqual(title, u"BLUE JUNIOR SECONDARY SCHOOL")
 
         funding = selenium.find_element_by_xpath(
-            "//html/body/div[4]/div/div[2]/div[1]/div")
+            "//html/body/div[4]/div/div[2]/div[1]/div"
+        )
         total_cost = funding.find_element_by_xpath(".//div[2]/div[2]").text
         source = funding.find_element_by_xpath(".//div[3]/div[2]").text
         investment = funding.find_element_by_xpath(".//div[4]/div[2]").text
@@ -143,20 +133,23 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         self.assertEqual(funding_status, u"Tabled")
 
         administration = selenium.find_element_by_xpath(
-            "//html/body/div[4]/div/div[2]/div[2]/div")
+            "//html/body/div[4]/div/div[2]/div[2]/div"
+        )
         department = administration.find_element_by_xpath(".//div[2]/div[2]").text
         budget_programme = administration.find_element_by_xpath(".//div[3]/div[2]").text
         project_status = administration.find_element_by_xpath(".//div[4]/div[2]").text
         project_number = administration.find_element_by_xpath(".//div[5]/div[2]").text
 
         self.assertEqual(department, u"Education")
-        self.assertEqual(budget_programme,
-                         u"Programme 2 - Public Ordinary School Education")
+        self.assertEqual(
+            budget_programme, u"Programme 2 - Public Ordinary School Education"
+        )
         self.assertEqual(project_status, u"Construction")
         self.assertEqual(project_number, u"W/50042423/WS")
 
         location = selenium.find_element_by_xpath(
-            "//html/body/div[4]/div/div[2]/div[3]/div")
+            "//html/body/div[4]/div/div[2]/div[3]/div"
+        )
         province = location.find_element_by_xpath(".//div[2]/div[2]").text
         local_muni = location.find_element_by_xpath(".//div[3]/div[2]").text
         district_muni = location.find_element_by_xpath(".//div[4]/div[2]").text
@@ -168,9 +161,11 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         # self.assertEqual(gps_location, u"")
 
         implementation = selenium.find_element_by_xpath(
-            "//html/body/div[4]/div/div[2]/div[4]/div")
+            "//html/body/div[4]/div/div[2]/div[4]/div"
+        )
         implementing_agent = implementation.find_element_by_xpath(
-            ".//div[2]/div[2]").text
+            ".//div[2]/div[2]"
+        ).text
         principle_agent = implementation.find_element_by_xpath(".//div[3]/div[2]").text
         main_contractor = implementation.find_element_by_xpath(".//div[4]/div[2]").text
         others = implementation.find_element_by_xpath(".//div[5]/div[2]").text
@@ -195,11 +190,14 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             "//html/body/div[5]/div/div[2]/div[2]/div"
         )
         expenditure_from_prev = cost_to_date.find_element_by_xpath(
-            ".//div[2]/div[2]").text
+            ".//div[2]/div[2]"
+        ).text
         const_cost_from_prev = cost_to_date.find_element_by_xpath(
-            ".//div[3]/div[2]").text
+            ".//div[3]/div[2]"
+        ).text
         prof_cost_from_prev = cost_to_date.find_element_by_xpath(
-            ".//div[4]/div[2]").text
+            ".//div[4]/div[2]"
+        ).text
         variation_order = cost_to_date.find_element_by_xpath(".//div[5]/div[2]").text
 
         self.assertEqual(expenditure_from_prev, u"R 556,479")
@@ -212,9 +210,11 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         )
         total_main_approp = orig_budget.find_element_by_xpath(".//div[2]/div[2]").text
         const_cost_main_approp = orig_budget.find_element_by_xpath(
-            ".//div[3]/div[2]").text
+            ".//div[3]/div[2]"
+        ).text
         prof_fees_main_approp = orig_budget.find_element_by_xpath(
-            ".//div[4]/div[2]").text
+            ".//div[4]/div[2]"
+        ).text
 
         self.assertEqual(total_main_approp, u"R 337,000")
         self.assertEqual(const_cost_main_approp, u"R 276,000")
@@ -225,7 +225,8 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         )
         total_adj_approp = adj_budget.find_element_by_xpath(".//div[2]/div[2]").text
         const_cost_adj_approp = adj_budget.find_element_by_xpath(
-            ".//div[3]/div[2]").text
+            ".//div[3]/div[2]"
+        ).text
         prof_fees_adj_approp = adj_budget.find_element_by_xpath(".//div[4]/div[2]").text
 
         self.assertEqual(total_adj_approp, u"R 1")
@@ -236,7 +237,9 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             "//html/body/div[6]/div/div[2]/div[1]/div"
         )
         start_date = overall_timeline.find_element_by_xpath(".//div[2]/div[2]").text
-        estimated_completion = overall_timeline.find_element_by_xpath(".//div[3]/div[2]").text
+        estimated_completion = overall_timeline.find_element_by_xpath(
+            ".//div[3]/div[2]"
+        ).text
 
         self.assertEqual(start_date, u"2016-06-13")
         self.assertEqual(estimated_completion, u"2021-06-30")
@@ -244,11 +247,15 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         const_timeline = selenium.find_element_by_xpath(
             "//html/body/div[6]/div/div[2]/div[2]/div"
         )
-        est_const_start_date = const_timeline.find_element_by_xpath(".//div[2]/div[2]").text
+        est_const_start_date = const_timeline.find_element_by_xpath(
+            ".//div[2]/div[2]"
+        ).text
         contracted_const_end_date = const_timeline.find_element_by_xpath(
-            ".//div[3]/div[2]").text
+            ".//div[3]/div[2]"
+        ).text
         est__const_end_date = const_timeline.find_element_by_xpath(
-            ".//div[4]/div[2]").text
+            ".//div[4]/div[2]"
+        ).text
 
         self.assertEqual(est_const_start_date, u"2017-02-01")
         self.assertEqual(contracted_const_end_date, u"2021-01-01")
@@ -264,7 +271,7 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(2050, 1, 1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
         )
         self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
         ProvInfraProjectSnapshot.objects.create(
@@ -275,7 +282,7 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
             province="Western Cape",
             status="Construction",
             primary_funding_source="Health Infrastructure Grant",
-            estimated_completion_date=date(year=2020, month=1, day=1),
+            estimated_completion_date=date(year=2020, month=1, day=1)
         )
         # Add ten projects
         provinces = ["Eastern Cape", "Free State"]
@@ -290,7 +297,7 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
                 project=project,
                 name="Project {}".format(i),
                 province=province,
-                estimated_completion_date=date(year=2020, month=1, day=1),
+                estimated_completion_date=date(year=2020, month=1, day=1)
             )
         ProvInfraProjectIndex().reindex()
 
@@ -346,7 +353,7 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -354,7 +361,7 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
             project=self.project_1,
             department="Department 1",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -362,7 +369,7 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
             project=self.project_2,
             department="Department 1",
             province="Free State",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
         ProvInfraProjectSnapshot.objects.create(
@@ -370,7 +377,7 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
             project=self.project_3,
             department="Department 2",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         ProvInfraProjectIndex().reindex()
 
@@ -420,7 +427,7 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -428,7 +435,7 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
             project=self.project_1,
             department="Department 1",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -436,7 +443,7 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
             project=self.project_2,
             department="Department 1",
             province="Free State",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
         ProvInfraProjectSnapshot.objects.create(
@@ -444,7 +451,7 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
             project=self.project_3,
             department="Department 2",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         ProvInfraProjectIndex().reindex()
 
@@ -524,7 +531,7 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -532,7 +539,7 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
             project=self.project_1,
             province="Eastern Cape",
             status="Construction",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -540,7 +547,7 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
             project=self.project_2,
             province="Free State",
             status="Construction",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
         ProvInfraProjectSnapshot.objects.create(
@@ -548,7 +555,7 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
             project=self.project_3,
             province="Eastern Cape",
             status="Completed",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         ProvInfraProjectIndex().reindex()
 
@@ -598,7 +605,7 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -606,7 +613,7 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
             project=self.project_1,
             province="Eastern Cape",
             primary_funding_source="Community Library Service Grant",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -614,7 +621,7 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
             project=self.project_2,
             province="Free State",
             primary_funding_source="Community Library Service Grant",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
         ProvInfraProjectSnapshot.objects.create(
@@ -622,7 +629,7 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
             project=self.project_3,
             province="Eastern Cape",
             primary_funding_source="Equitable Share",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         ProvInfraProjectIndex().reindex()
 
@@ -672,7 +679,7 @@ class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -680,7 +687,7 @@ class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
             project=self.project_1,
             name="Project 1",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -688,7 +695,7 @@ class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
             project=self.project_2,
             name="Project 2",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         ProvInfraProjectIndex().reindex()
 
@@ -739,7 +746,7 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -748,7 +755,7 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
             name="Project 1",
             province="Eastern Cape",
             local_municipality="Local 1",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -757,7 +764,7 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
             name="Project 2",
             province="Eastern Cape",
             local_municipality="Local 2",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         ProvInfraProjectIndex().reindex()
 
@@ -809,7 +816,7 @@ class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -818,7 +825,7 @@ class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
             name="Project 1",
             main_contractor="Contractor 1",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -827,7 +834,7 @@ class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
             name="Project 2",
             main_contractor="Contractor 2",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=self.date
         )
         ProvInfraProjectIndex().reindex()
 
@@ -887,7 +894,7 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
             project=self.project_1,
             name="Something School",
             province="Eastern Cape",
-            estimated_completion_date=date(year=2020, month=6, day=1),
+            estimated_completion_date=date(year=2020, month=6, day=1)
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -895,7 +902,7 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
             project=self.project_2,
             name="Project 2",
             province="Eastern Cape",
-            estimated_completion_date=date(year=2020, month=6, day=1),
+            estimated_completion_date=date(year=2020, month=6, day=1)
         )
         ProvInfraProjectIndex().reindex()
 
