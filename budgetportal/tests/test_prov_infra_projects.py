@@ -412,9 +412,7 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
 
         self.assertEqual(provinces_before_filtering, 2)
 
-        data = {
-            "selected_facets": "primary_funding_source_exact:{0}".format(source)
-        }
+        data = {"selected_facets": "primary_funding_source_exact:{0}".format(source)}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
