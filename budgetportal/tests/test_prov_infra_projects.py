@@ -440,23 +440,23 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
 
         response = self.client.get(self.facet_url)
         province_facets = response.data["fields"]["province"]
-        provinces_before_filtering = 0
+        province_projects_before_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_before_filtering = value["count"]
+                province_projects_before_filtering = value["count"]
 
-        self.assertEqual(provinces_before_filtering, 2)
+        self.assertEqual(province_projects_before_filtering, 2)
 
         data = {"selected_facets": "department_exact:{0}".format(department)}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         province_facets = response.data["fields"]["province"]
-        provinces_after_filtering = 0
+        province_projects_after_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_after_filtering = value["count"]
+                province_projects_after_filtering = value["count"]
 
-        self.assertEqual(provinces_after_filtering, 1)
+        self.assertEqual(province_projects_after_filtering, 1)
 
 
 class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
@@ -518,22 +518,22 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
 
         response = self.client.get(self.facet_url)
         department_facets = response.data["fields"]["department"]
-        departments_before_filtering = 0
+        department_projects_before_filtering = 0
         for value in department_facets:
             if department == value["text"]:
-                departments_before_filtering = value["count"]
-        self.assertEqual(departments_before_filtering, 2)
+                department_projects_before_filtering = value["count"]
+        self.assertEqual(department_projects_before_filtering, 2)
 
         data = {"selected_facets": "province_exact:{0}".format(province)}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         department_facets = response.data["fields"]["department"]
-        departments_after_filtering = 0
+        department_projects_after_filtering = 0
         for value in department_facets:
             if department == value["text"]:
-                departments_after_filtering = value["count"]
-        self.assertEqual(departments_after_filtering, 1)
+                department_projects_after_filtering = value["count"]
+        self.assertEqual(department_projects_after_filtering, 1)
 
     def test_search_by_province(self):
         province = "Eastern Cape"
@@ -550,22 +550,22 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
 
         response = self.client.get(self.facet_url)
         department_facets = response.data["fields"]["department"]
-        departments_before_filtering = 0
+        department_projects_before_filtering = 0
         for value in department_facets:
             if department == value["text"]:
-                departments_before_filtering = value["count"]
-        self.assertEqual(departments_before_filtering, 2)
+                department_projects_before_filtering = value["count"]
+        self.assertEqual(department_projects_before_filtering, 2)
 
         data = {"q": province}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         department_facets = response.data["fields"]["department"]
-        departments_after_filtering = 0
+        department_projects_after_filtering = 0
         for value in department_facets:
             if department == value["text"]:
-                departments_after_filtering = value["count"]
-        self.assertEqual(departments_after_filtering, 1)
+                department_projects_after_filtering = value["count"]
+        self.assertEqual(department_projects_after_filtering, 1)
 
 
 class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
@@ -627,24 +627,24 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
 
         response = self.client.get(self.facet_url)
         province_facets = response.data["fields"]["province"]
-        provinces_before_filtering = 0
+        province_projects_before_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_before_filtering = value["count"]
+                province_projects_before_filtering = value["count"]
 
-        self.assertEqual(provinces_before_filtering, 2)
+        self.assertEqual(province_projects_before_filtering, 2)
 
         data = {"selected_facets": "status_exact:{0}".format(status_)}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         province_facets = response.data["fields"]["province"]
-        provinces_after_filtering = 0
+        province_projects_after_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_after_filtering = value["count"]
+                province_projects_after_filtering = value["count"]
 
-        self.assertEqual(provinces_after_filtering, 1)
+        self.assertEqual(province_projects_after_filtering, 1)
 
 
 class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
@@ -706,24 +706,24 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
 
         response = self.client.get(self.facet_url)
         province_facets = response.data["fields"]["province"]
-        provinces_before_filtering = 0
+        province_projects_before_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_before_filtering = value["count"]
+                province_projects_before_filtering = value["count"]
 
-        self.assertEqual(provinces_before_filtering, 2)
+        self.assertEqual(province_projects_before_filtering, 2)
 
         data = {"selected_facets": "primary_funding_source_exact:{0}".format(source)}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         province_facets = response.data["fields"]["province"]
-        provinces_after_filtering = 0
+        province_projects_after_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_after_filtering = value["count"]
+                province_projects_after_filtering = value["count"]
 
-        self.assertEqual(provinces_after_filtering, 1)
+        self.assertEqual(province_projects_after_filtering, 1)
 
 
 class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
@@ -778,24 +778,24 @@ class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
 
         response = self.client.get(self.facet_url)
         province_facets = response.data["fields"]["province"]
-        provinces_before_filtering = 0
+        province_projects_before_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_before_filtering = value["count"]
+                province_projects_before_filtering = value["count"]
 
-        self.assertEqual(provinces_before_filtering, 2)
+        self.assertEqual(province_projects_before_filtering, 2)
 
         data = {"q": name}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         province_facets = response.data["fields"]["province"]
-        provinces_after_filtering = 0
+        province_projects_after_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_after_filtering = value["count"]
+                province_projects_after_filtering = value["count"]
 
-        self.assertEqual(provinces_after_filtering, 1)
+        self.assertEqual(province_projects_after_filtering, 1)
 
 
 class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
@@ -853,24 +853,24 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
 
         response = self.client.get(self.facet_url)
         province_facets = response.data["fields"]["province"]
-        provinces_before_filtering = 0
+        province_projects_before_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_before_filtering = value["count"]
+                province_projects_before_filtering = value["count"]
 
-        self.assertEqual(provinces_before_filtering, 2)
+        self.assertEqual(province_projects_before_filtering, 2)
 
         data = {"q": municipality}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         province_facets = response.data["fields"]["province"]
-        provinces_after_filtering = 0
+        province_projects_after_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_after_filtering = value["count"]
+                province_projects_after_filtering = value["count"]
 
-        self.assertEqual(provinces_after_filtering, 1)
+        self.assertEqual(province_projects_after_filtering, 1)
 
 
 class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
@@ -928,24 +928,24 @@ class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
 
         response = self.client.get(self.facet_url)
         province_facets = response.data["fields"]["province"]
-        provinces_before_filtering = 0
+        province_projects_before_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_before_filtering = value["count"]
+                province_projects_before_filtering = value["count"]
 
-        self.assertEqual(provinces_before_filtering, 2)
+        self.assertEqual(province_projects_before_filtering, 2)
 
         data = {"q": contractor}
         response = self.client.get(self.facet_url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         province_facets = response.data["fields"]["province"]
-        provinces_after_filtering = 0
+        province_projects_after_filtering = 0
         for value in province_facets:
             if province == value["text"]:
-                provinces_after_filtering = value["count"]
+                province_projects_after_filtering = value["count"]
 
-        self.assertEqual(provinces_after_filtering, 1)
+        self.assertEqual(province_projects_after_filtering, 1)
 
 
 class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
