@@ -22,9 +22,9 @@ PASSWORD = "12345"
 
 class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
     def setUp(self):
-        file_path = os.path.abspath((
-            "budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx"
-        ))
+        file_path = os.path.abspath(
+            ("budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx")
+        )
         self.file = File(open(file_path))
         self.financial_year = FinancialYear.objects.create(slug="2019-20")
         self.quarter = Quarter.objects.create(number=1)
@@ -33,7 +33,7 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
             financial_year=self.financial_year,
             quarter=self.quarter,
             date_taken=self.date,
-            file=self.file
+            file=self.file,
         )
         self.url = reverse("provincial-infrastructure-project-api-list")
 
