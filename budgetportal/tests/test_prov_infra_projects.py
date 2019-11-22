@@ -317,8 +317,8 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         province = "Eastern Cape"
         selenium = self.selenium
         selenium.get("%s%s" % (self.live_server_url, self.url))
-        num_of_projects = selenium.find_element_by_xpath(
-            '//*[@id="num-matching-projects-field"]'
+        num_of_projects = selenium.find_element_by_css_selector(
+            "#num-matching-projects-field"
         ).text
         num_of_projects = int(num_of_projects)
         self.assertEqual(num_of_projects, 11)
