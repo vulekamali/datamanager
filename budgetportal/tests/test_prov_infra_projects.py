@@ -31,15 +31,26 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
         self.financial_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
+        self.url = reverse("provincial-infrastructure-project-api-list")
+
+    def tearDown(self):
+        self.file.close()
+
+    def test_import_irm_snapshot(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Check that there is no project at the beginning
+        results = response.data["results"]
+        num_of_results = len(results)
+        self.assertEqual(num_of_results, 0)
+
         IRMSnapshot.objects.create(
             financial_year=self.financial_year,
             quarter=self.quarter,
             date_taken=self.date,
             file=self.file,
         )
-        self.url = reverse("provincial-infrastructure-project-api-list")
-
-    def test_import_irm_snapshot(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
