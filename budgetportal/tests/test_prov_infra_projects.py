@@ -49,6 +49,212 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
         self.assertEqual(num_of_results, 3)
 
 
+class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
+    def setUp(self):
+        super(ProvInfraProjectDetailPageTestCase, self).setUp()
+
+        self.fin_year = FinancialYear.objects.create(slug="2050-51")
+        self.quarter = Quarter.objects.create(number=3)
+        self.date = date(year=2050, month=1, day=1)
+        self.irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+        )
+        self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
+        self.project_snapshot = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=self.irm_snapshot,
+            project=self.project,
+            name="BLUE JUNIOR SECONDARY SCHOOL",
+
+            # Administration
+            department="Education",
+            budget_programme="Programme 2 - Public Ordinary School Education",
+            project_number="W/50042423/WS",
+            status="Construction",
+
+            # Location
+            province="KwaZulu-Natal",
+            local_municipality="Dr Nkosazana Dlamini Zuma",
+            district_municipality="Harry Gwala",
+
+            # Implementation
+            program_implementing_agent="DOPW",
+            principle_agent="PRINCIPLE AGENT",
+            main_contractor="MAIN CONTRACTOR",
+            other_parties="OTHERS",
+
+            # Funding
+            primary_funding_source="Education Infrastructure Grant",
+            nature_of_investment="Upgrading and Additions",
+            funding_status="Tabled",
+
+            # Budget
+            total_project_cost=680000,
+            total_construction_costs=562000,
+            total_professional_fees=118000,
+
+            # Cost to date
+            expenditure_from_previous_years_total=556479,
+            expenditure_from_previous_years_professional_fees=118000,
+            expenditure_from_previous_years_construction_costs=0,
+            variation_orders=0,
+
+            # Original Budget FY
+            main_appropriation_total=337000,
+            main_appropriation_construction_costs=276000,
+            main_appropriation_professional_fees=61000,
+
+            # Adjustment Budget FY
+            adjustment_appropriation_total=1,
+            adjustment_appropriation_construction_costs=2,
+            adjustment_appropriation_professional_fees=3,
+
+            # Overall timeline
+            start_date=date(2016, 6, 13),
+            estimated_completion_date=date(year=2021, month=6, day=30),
+
+            # Construction timeline
+            estimated_construction_start_date=date(2017, 2, 1),
+            estimated_construction_end_date=date(2020, 12, 31),
+            contracted_construction_end_date=date(2021, 1, 1)
+        )
+
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
+
+    def test_project_detail_page_fields(self):
+        selenium = self.selenium
+        url = self.project.get_absolute_url()
+        selenium.get("%s%s" % (self.live_server_url, url))
+        title = selenium.find_element_by_css_selector('.page-heading').text
+        self.assertEqual(title, u"BLUE JUNIOR SECONDARY SCHOOL")
+
+        funding = selenium.find_element_by_xpath(
+            "//html/body/div[4]/div/div[2]/div[1]/div")
+        total_cost = funding.find_element_by_xpath(".//div[2]/div[2]").text
+        source = funding.find_element_by_xpath(".//div[3]/div[2]").text
+        investment = funding.find_element_by_xpath(".//div[4]/div[2]").text
+        funding_status = funding.find_element_by_xpath(".//div[5]/div[2]").text
+
+        self.assertEqual(total_cost, u"R 680,000")
+        self.assertEqual(source, u"Education Infrastructure Grant")
+        self.assertEqual(investment, u"Upgrading and Additions")
+        self.assertEqual(funding_status, u"Tabled")
+
+        administration = selenium.find_element_by_xpath(
+            "//html/body/div[4]/div/div[2]/div[2]/div")
+        department = administration.find_element_by_xpath(".//div[2]/div[2]").text
+        budget_programme = administration.find_element_by_xpath(".//div[3]/div[2]").text
+        project_status = administration.find_element_by_xpath(".//div[4]/div[2]").text
+        project_number = administration.find_element_by_xpath(".//div[5]/div[2]").text
+
+        self.assertEqual(department, u"Education")
+        self.assertEqual(budget_programme,
+                         u"Programme 2 - Public Ordinary School Education")
+        self.assertEqual(project_status, u"Construction")
+        self.assertEqual(project_number, u"W/50042423/WS")
+
+        location = selenium.find_element_by_xpath(
+            "//html/body/div[4]/div/div[2]/div[3]/div")
+        province = location.find_element_by_xpath(".//div[2]/div[2]").text
+        local_muni = location.find_element_by_xpath(".//div[3]/div[2]").text
+        district_muni = location.find_element_by_xpath(".//div[4]/div[2]").text
+        gps_location = location.find_element_by_xpath(".//div[5]/div[2]").text
+
+        self.assertEqual(province, u"KwaZulu-Natal")
+        self.assertEqual(local_muni, u"Dr Nkosazana Dlamini Zuma")
+        self.assertEqual(district_muni, u"Harry Gwala")
+        # self.assertEqual(gps_location, u"")
+
+        implementation = selenium.find_element_by_xpath(
+            "//html/body/div[4]/div/div[2]/div[4]/div")
+        implementing_agent = implementation.find_element_by_xpath(
+            ".//div[2]/div[2]").text
+        principle_agent = implementation.find_element_by_xpath(".//div[3]/div[2]").text
+        main_contractor = implementation.find_element_by_xpath(".//div[4]/div[2]").text
+        others = implementation.find_element_by_xpath(".//div[5]/div[2]").text
+
+        self.assertEqual(implementing_agent, u"DOPW")
+        self.assertEqual(principle_agent, u"PRINCIPLE AGENT")
+        self.assertEqual(main_contractor, u"MAIN CONTRACTOR")
+        self.assertEqual(others, u"OTHERS")
+
+        budget = selenium.find_element_by_xpath(
+            "//html/body/div[5]/div/div[2]/div[1]/div"
+        )
+        total_project_cost = budget.find_element_by_xpath(".//div[2]/div[2]").text
+        construction_costs = budget.find_element_by_xpath(".//div[3]/div[2]").text
+        professional_fees = budget.find_element_by_xpath(".//div[4]/div[2]").text
+
+        self.assertEqual(total_project_cost, u"R 680,000")
+        self.assertEqual(construction_costs, u"R 562,000")
+        self.assertEqual(professional_fees, u"R 118,000")
+
+        cost_to_date = selenium.find_element_by_xpath(
+            "//html/body/div[5]/div/div[2]/div[2]/div"
+        )
+        expenditure_from_prev = cost_to_date.find_element_by_xpath(
+            ".//div[2]/div[2]").text
+        const_cost_from_prev = cost_to_date.find_element_by_xpath(
+            ".//div[3]/div[2]").text
+        prof_cost_from_prev = cost_to_date.find_element_by_xpath(
+            ".//div[4]/div[2]").text
+        variation_order = cost_to_date.find_element_by_xpath(".//div[5]/div[2]").text
+
+        self.assertEqual(expenditure_from_prev, u"R 556,479")
+        self.assertEqual(const_cost_from_prev, u"R 0")
+        self.assertEqual(prof_cost_from_prev, u"R 118,000")
+        self.assertEqual(variation_order, u"R 0")
+
+        orig_budget = selenium.find_element_by_xpath(
+            "//html/body/div[5]/div/div[2]/div[3]/div"
+        )
+        total_main_approp = orig_budget.find_element_by_xpath(".//div[2]/div[2]").text
+        const_cost_main_approp = orig_budget.find_element_by_xpath(
+            ".//div[3]/div[2]").text
+        prof_fees_main_approp = orig_budget.find_element_by_xpath(
+            ".//div[4]/div[2]").text
+
+        self.assertEqual(total_main_approp, u"R 337,000")
+        self.assertEqual(const_cost_main_approp, u"R 276,000")
+        self.assertEqual(prof_fees_main_approp, u"R 61,000")
+
+        adj_budget = selenium.find_element_by_xpath(
+            "//html/body/div[5]/div/div[2]/div[4]/div"
+        )
+        total_adj_approp = adj_budget.find_element_by_xpath(".//div[2]/div[2]").text
+        const_cost_adj_approp = adj_budget.find_element_by_xpath(
+            ".//div[3]/div[2]").text
+        prof_fees_adj_approp = adj_budget.find_element_by_xpath(".//div[4]/div[2]").text
+
+        self.assertEqual(total_adj_approp, u"R 1")
+        self.assertEqual(const_cost_adj_approp, u"R 2")
+        self.assertEqual(prof_fees_adj_approp, u"R 3")
+
+        overall_timeline = selenium.find_element_by_xpath(
+            "//html/body/div[6]/div/div[2]/div[1]/div"
+        )
+        start_date = overall_timeline.find_element_by_xpath(".//div[2]/div[2]").text
+        estimated_completion = overall_timeline.find_element_by_xpath(".//div[3]/div[2]").text
+
+        self.assertEqual(start_date, u"2016-06-13")
+        self.assertEqual(estimated_completion, u"2021-06-30")
+
+        const_timeline = selenium.find_element_by_xpath(
+            "//html/body/div[6]/div/div[2]/div[2]/div"
+        )
+        est_const_start_date = const_timeline.find_element_by_xpath(".//div[2]/div[2]").text
+        contracted_const_end_date = const_timeline.find_element_by_xpath(
+            ".//div[3]/div[2]").text
+        est__const_end_date = const_timeline.find_element_by_xpath(
+            ".//div[4]/div[2]").text
+
+        self.assertEqual(est_const_start_date, u"2017-02-01")
+        self.assertEqual(contracted_const_end_date, u"2021-01-01")
+        self.assertEqual(est__const_end_date, u"2020-12-31")
+
+
 class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
     def setUp(self):
         self.url = reverse("provincial-infra-project-list")
@@ -881,49 +1087,3 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0]["name"], "Blue School")
         self.assertNotContains(response, "Red School")
-
-
-class ProvInfraProjectDetailPageTestCase(TransactionTestCase):
-    def setUp(self):
-        self.fin_year = FinancialYear.objects.create(slug="2050-51")
-        self.quarter = Quarter.objects.create(number=3)
-        self.date = date(year=2050, month=1, day=1)
-        self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
-        )
-        self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
-        ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=self.irm_snapshot,
-            project=self.project,
-            name="Project 123456",
-            department="Health",
-            province="Eastern Cape",
-            status="Construction",
-            primary_funding_source="Health Infrastructure Grant",
-            estimated_completion_date=date(year=2020, month=1, day=1),
-        )
-
-        ProvInfraProjectIndex().reindex()
-
-    def tearDown(self):
-        ProvInfraProjectIndex().clear()
-
-    def test_project_detail_page_fields(self):
-        url = self.project.get_absolute_url()
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(
-            response,
-            "<title>Project 123456, Eastern Cape Infrastructure projects - vulekamali</title>",
-        )
-        self.assertContains(
-            response,
-            '"Provincial infrastructure project by the Eastern Cape Health department."',
-        )
-        self.assertContains(response, '"name": "Project 123456"')
-        self.assertContains(response, '"department": "Health"')
-        self.assertContains(response, '"province": "Eastern Cape"')
-        self.assertContains(response, '"status": "Construction"')
-        self.assertContains(
-            response, '"primary_funding_source": "Health Infrastructure Grant"'
-        )
