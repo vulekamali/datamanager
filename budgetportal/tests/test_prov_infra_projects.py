@@ -1,4 +1,5 @@
 import os
+import time
 from datetime import date
 
 from django.core.files import File
@@ -321,7 +322,6 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
         self.assertEqual(num_of_projects, num_of_items)
 
     def test_number_updated_after_search(self):
-        # TODO: Not working yet
         province = "Eastern Cape"
         selenium = self.selenium
         selenium.get("%s%s" % (self.live_server_url, self.url))
@@ -331,18 +331,16 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
         num_of_projects = int(num_of_projects)
         self.assertEqual(num_of_projects, 11)
 
-        # search_field = selenium.find_element_by_name("Infrastructure-Search")
-        # search_field.send_keys(province)
-        # selenium.implicitly_wait(self.timeout)
-        # search_button = selenium.find_element_by_id("Search-Button")
-        # search_button.click()
-        # selenium.implicitly_wait(self.timeout)
-        # selenium.refresh()
-        # filtered_num_of_projects = selenium.find_element_by_xpath(
-        #     '//*[@id="num-matching-projects-field"]'
-        # ).text
-        # filtered_num_of_projects = int(filtered_num_of_projects)
-        # self.assertEqual(filtered_num_of_projects, 5)
+        search_field = selenium.find_element_by_name("Infrastructure-Search")
+        search_button = selenium.find_element_by_xpath('//*[@id="Search-Button"]')
+        search_field.send_keys(province)
+        search_button.click()
+        time.sleep(self.timeout)
+        filtered_num_of_projects = selenium.find_element_by_xpath(
+            '//*[@id="num-matching-projects-field"]'
+        ).text
+        filtered_num_of_projects = int(filtered_num_of_projects)
+        self.assertEqual(filtered_num_of_projects, 5)
 
 
 class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
