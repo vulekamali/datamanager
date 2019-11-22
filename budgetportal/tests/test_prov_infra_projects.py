@@ -702,7 +702,7 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         )
 
     def test_latest_in_different_years(self):
-        latest = ProvInfraProjectSnapshot.objects.filter(project=self.project).latest()
+        latest = self.project.project_snapshots.latest()
 
         self.assertEqual(self.project_snapshot_2, latest)
 
