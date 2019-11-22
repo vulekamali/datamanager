@@ -1,13 +1,7 @@
 import os
 from datetime import date, timedelta
 
-from selenium.webdriver.support.select import Select
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-
-from allauth.account.models import EmailAddress
+from django.core.files import File
 from budgetportal.models import (
     FinancialYear,
     IRMSnapshot,
@@ -17,7 +11,6 @@ from budgetportal.models import (
 )
 from budgetportal.search_indexes import ProvInfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
-from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITransactionTestCase
@@ -27,70 +20,31 @@ EMAIL = "testuser@domain.com"
 PASSWORD = "12345"
 
 
-class ProvInfraProjectSeleniumIRMSnapshotTestCase(BaseSeleniumTestCase):
+class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
     def setUp(self):
-        user = User.objects.create_user(
-            username=USERNAME,
-            password=PASSWORD,
-            is_staff=True,
-            is_superuser=True,
-            is_active=True,
-        )
-        EmailAddress.objects.create(user=user, email=EMAIL, verified=True)
-        self.path = os.path.dirname(__file__)
+        file_path = os.path.abspath((
+            "budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx"
+        ))
+        self.file = File(open(file_path))
         self.financial_year = FinancialYear.objects.create(slug="2019-20")
         self.quarter = Quarter.objects.create(number=1)
-        self.timeout = 60
-        self.search_url = "/infrastructure-projects/provincial/"
-        super(ProvInfraProjectSeleniumIRMSnapshotTestCase, self).setUp()
+        self.date = date(year=2020, month=1, day=1)
+        IRMSnapshot.objects.create(
+            financial_year=self.financial_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=self.file
+        )
+        self.url = reverse("provincial-infrastructure-project-api-list")
 
     def test_import_irm_snapshot(self):
-        # TODO: not completed yet
-        filename = (
-            "budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx"
-        )
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        selenium = self.selenium
-
-        # Login
-        selenium.get("%s%s" % (self.live_server_url, "/admin/"))
-        username = selenium.find_element_by_id("id_login")
-        password = selenium.find_element_by_id("id_password")
-        submit_button = selenium.find_element_by_css_selector('button[type="submit"]')
-        username.send_keys(EMAIL)
-        password.send_keys(PASSWORD)
-        submit_button.click()
-
-        # Navigate to form
-        selenium.find_element_by_link_text("IRM Snapshots").click()
-        selenium.find_element_by_link_text("ADD IRM SNAPSHOT").click()
-
-        # Select dropdown menus and "browse" button
-        financial_year_select = Select(selenium.find_element_by_id("id_financial_year"))
-        quarter_select = Select(selenium.find_element_by_id("id_quarter"))
-        file_import = selenium.find_element_by_id("id_file")
-
-        # Fill the form
-        selenium.find_element_by_link_text("Today").click()
-        selenium.find_element_by_link_text("Now").click()
-        financial_year_select.select_by_value(str(self.financial_year.id))
-        quarter_select.select_by_value(str(self.quarter.id))
-        file_import.send_keys(os.path.abspath(filename))
-
-        # Save the form and wait until success
-        selenium.find_element_by_css_selector('input[value="Save"]').click()
-        try:
-            success = WebDriverWait(selenium, self.timeout).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "success"))
-            )
-        except TimeoutException:
-            self.fail("Loading took too much time!")
-        # Get search url
-        selenium.get("%s%s" % (self.live_server_url, self.search_url))
-        num_of_projects = selenium.find_element_by_xpath(
-            '//*[@id="num-matching-projects-field"]'
-        ).text
-        self.assertEqual(num_of_projects, 11)
+        # Check that 3 projects are indexed and searchable
+        results = response.data["results"]
+        num_of_results = len(results)
+        self.assertEqual(num_of_results, 3)
 
 
 class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
