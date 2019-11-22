@@ -137,26 +137,20 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         title = selenium.find_element_by_css_selector(".page-heading").text
         self.assertEqual(title, u"BLUE JUNIOR SECONDARY SCHOOL")
 
-        funding = selenium.find_element_by_xpath(
-            "//html/body/div[4]/div/div[2]/div[1]/div"
-        )
-        total_cost = funding.find_element_by_xpath(".//div[2]/div[2]").text
-        source = funding.find_element_by_xpath(".//div[3]/div[2]").text
-        investment = funding.find_element_by_xpath(".//div[4]/div[2]").text
-        funding_status = funding.find_element_by_xpath(".//div[5]/div[2]").text
+        total_cost = selenium.find_element_by_css_selector(".total-project-cost-field").text
+        source = selenium.find_element_by_css_selector(".primary-funding-source-field").text
+        investment = selenium.find_element_by_css_selector(".nature-of-investment-field").text
+        funding_status = selenium.find_element_by_css_selector(".funding-status-field").text
 
         self.assertEqual(total_cost, u"R 680,000")
         self.assertEqual(source, u"Education Infrastructure Grant")
         self.assertEqual(investment, u"Upgrading and Additions")
         self.assertEqual(funding_status, u"Tabled")
 
-        administration = selenium.find_element_by_xpath(
-            "//html/body/div[4]/div/div[2]/div[2]/div"
-        )
-        department = administration.find_element_by_xpath(".//div[2]/div[2]").text
-        budget_programme = administration.find_element_by_xpath(".//div[3]/div[2]").text
-        project_status = administration.find_element_by_xpath(".//div[4]/div[2]").text
-        project_number = administration.find_element_by_xpath(".//div[5]/div[2]").text
+        department = selenium.find_element_by_css_selector(".department-field").text
+        budget_programme = selenium.find_element_by_css_selector(".budget-programme-field").text
+        project_status = selenium.find_element_by_css_selector(".status-field").text
+        project_number = selenium.find_element_by_css_selector(".project-number-field").text
 
         self.assertEqual(department, u"Education")
         self.assertEqual(
@@ -165,114 +159,90 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         self.assertEqual(project_status, u"Construction")
         self.assertEqual(project_number, u"W/50042423/WS")
 
-        location = selenium.find_element_by_xpath(
-            "//html/body/div[4]/div/div[2]/div[3]/div"
-        )
-        province = location.find_element_by_xpath(".//div[2]/div[2]").text
-        local_muni = location.find_element_by_xpath(".//div[3]/div[2]").text
-        district_muni = location.find_element_by_xpath(".//div[4]/div[2]").text
-        gps_location = location.find_element_by_xpath(".//div[5]/div[2]").text
+        province = selenium.find_element_by_css_selector(".province-field").text
+        local_muni = selenium.find_element_by_css_selector(".local-municipality-field").text
+        district_muni = selenium.find_element_by_css_selector(".district-municipality-field").text
+        # gps_location = selenium.find_element_by_css_selector(".coordinates-field").text
 
         self.assertEqual(province, u"KwaZulu-Natal")
         self.assertEqual(local_muni, u"Dr Nkosazana Dlamini Zuma")
         self.assertEqual(district_muni, u"Harry Gwala")
         # self.assertEqual(gps_location, u"")
 
-        implementation = selenium.find_element_by_xpath(
-            "//html/body/div[4]/div/div[2]/div[4]/div"
-        )
-        implementing_agent = implementation.find_element_by_xpath(
-            ".//div[2]/div[2]"
+        implementing_agent = selenium.find_element_by_css_selector(
+            ".program-implementing-agent-field"
         ).text
-        principle_agent = implementation.find_element_by_xpath(".//div[3]/div[2]").text
-        main_contractor = implementation.find_element_by_xpath(".//div[4]/div[2]").text
-        others = implementation.find_element_by_xpath(".//div[5]/div[2]").text
+        principle_agent = selenium.find_element_by_css_selector(".principle-agent-field").text
+        main_contractor = selenium.find_element_by_css_selector(".main-contractor-field").text
+        others = selenium.find_element_by_css_selector(".other-service-providers-field").text
 
         self.assertEqual(implementing_agent, u"DOPW")
         self.assertEqual(principle_agent, u"PRINCIPLE AGENT")
         self.assertEqual(main_contractor, u"MAIN CONTRACTOR")
         self.assertEqual(others, u"OTHERS")
 
-        budget = selenium.find_element_by_xpath(
-            "//html/body/div[5]/div/div[2]/div[1]/div"
-        )
-        total_project_cost = budget.find_element_by_xpath(".//div[2]/div[2]").text
-        construction_costs = budget.find_element_by_xpath(".//div[3]/div[2]").text
-        professional_fees = budget.find_element_by_xpath(".//div[4]/div[2]").text
+        total_project_cost = selenium.find_element_by_css_selector(".total-project-cost-field").text
+        construction_costs = selenium.find_element_by_css_selector(".total-construction-costs-field").text
+        professional_fees = selenium.find_element_by_css_selector(".total-professional-fees-field").text
 
         self.assertEqual(total_project_cost, u"R 680,000")
         self.assertEqual(construction_costs, u"R 562,000")
         self.assertEqual(professional_fees, u"R 118,000")
 
-        cost_to_date = selenium.find_element_by_xpath(
-            "//html/body/div[5]/div/div[2]/div[2]/div"
-        )
-        expenditure_from_prev = cost_to_date.find_element_by_xpath(
-            ".//div[2]/div[2]"
+        expenditure_from_prev = selenium.find_element_by_css_selector(
+            ".expenditure-from-previous-years-total-field"
         ).text
-        const_cost_from_prev = cost_to_date.find_element_by_xpath(
-            ".//div[3]/div[2]"
+        const_cost_from_prev = selenium.find_element_by_css_selector(
+            ".expenditure-from-previous-years-construction-costs-field"
         ).text
-        prof_cost_from_prev = cost_to_date.find_element_by_xpath(
-            ".//div[4]/div[2]"
+        prof_cost_from_prev = selenium.find_element_by_css_selector(
+            ".expenditure-from-previous-years-professional-fees-field"
         ).text
-        variation_order = cost_to_date.find_element_by_xpath(".//div[5]/div[2]").text
+        variation_order = selenium.find_element_by_css_selector(".variation-orders-field").text
 
         self.assertEqual(expenditure_from_prev, u"R 556,479")
         self.assertEqual(const_cost_from_prev, u"R 0")
         self.assertEqual(prof_cost_from_prev, u"R 118,000")
         self.assertEqual(variation_order, u"R 0")
 
-        orig_budget = selenium.find_element_by_xpath(
-            "//html/body/div[5]/div/div[2]/div[3]/div"
-        )
-        total_main_approp = orig_budget.find_element_by_xpath(".//div[2]/div[2]").text
-        const_cost_main_approp = orig_budget.find_element_by_xpath(
-            ".//div[3]/div[2]"
+        total_main_approp = selenium.find_element_by_css_selector(".main-appropriation-total-field").text
+        const_cost_main_approp = selenium.find_element_by_css_selector(
+            ".main-appropriation-construction-costs-field"
         ).text
-        prof_fees_main_approp = orig_budget.find_element_by_xpath(
-            ".//div[4]/div[2]"
+        prof_fees_main_approp = selenium.find_element_by_css_selector(
+            ".main-appropriation-professional-fees-field"
         ).text
 
         self.assertEqual(total_main_approp, u"R 337,000")
         self.assertEqual(const_cost_main_approp, u"R 276,000")
         self.assertEqual(prof_fees_main_approp, u"R 61,000")
 
-        adj_budget = selenium.find_element_by_xpath(
-            "//html/body/div[5]/div/div[2]/div[4]/div"
-        )
-        total_adj_approp = adj_budget.find_element_by_xpath(".//div[2]/div[2]").text
-        const_cost_adj_approp = adj_budget.find_element_by_xpath(
-            ".//div[3]/div[2]"
+        total_adj_approp = selenium.find_element_by_css_selector(".adjustment-appropriation-total-field").text
+        const_cost_adj_approp = selenium.find_element_by_css_selector(
+            ".adjustment-appropriation-construction-costs-field"
         ).text
-        prof_fees_adj_approp = adj_budget.find_element_by_xpath(".//div[4]/div[2]").text
+        prof_fees_adj_approp = selenium.find_element_by_css_selector(".adjustment-appropriation-professional-fees-field").text
 
         self.assertEqual(total_adj_approp, u"R 1")
         self.assertEqual(const_cost_adj_approp, u"R 2")
         self.assertEqual(prof_fees_adj_approp, u"R 3")
 
-        overall_timeline = selenium.find_element_by_xpath(
-            "//html/body/div[6]/div/div[2]/div[1]/div"
-        )
-        start_date = overall_timeline.find_element_by_xpath(".//div[2]/div[2]").text
-        estimated_completion = overall_timeline.find_element_by_xpath(
-            ".//div[3]/div[2]"
+        start_date = selenium.find_element_by_css_selector(".start-date-field").text
+        estimated_completion = selenium.find_element_by_css_selector(
+            ".estimated-completion-date-field"
         ).text
 
         self.assertEqual(start_date, u"2016-06-13")
         self.assertEqual(estimated_completion, u"2021-06-30")
 
-        const_timeline = selenium.find_element_by_xpath(
-            "//html/body/div[6]/div/div[2]/div[2]/div"
-        )
-        est_const_start_date = const_timeline.find_element_by_xpath(
-            ".//div[2]/div[2]"
+        est_const_start_date = selenium.find_element_by_css_selector(
+            ".estimated-construction-start-date-field"
         ).text
-        contracted_const_end_date = const_timeline.find_element_by_xpath(
-            ".//div[3]/div[2]"
+        contracted_const_end_date = selenium.find_element_by_css_selector(
+            ".contracted-construction-end-date-field"
         ).text
-        est__const_end_date = const_timeline.find_element_by_xpath(
-            ".//div[4]/div[2]"
+        est__const_end_date = selenium.find_element_by_css_selector(
+            ".estimated-construction-end-date-field"
         ).text
 
         self.assertEqual(est_const_start_date, u"2017-02-01")
