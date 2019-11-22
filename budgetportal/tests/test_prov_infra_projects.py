@@ -267,7 +267,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         self.assertEqual(est__const_end_date, u"2020-12-31")
 
 
-class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
+class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
         self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infra-project-list")
