@@ -672,7 +672,7 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.assertNotContains(response, '"status": "Construction"')
 
     def test_latest_in_the_same_year(self):
-        latest = ProvInfraProjectSnapshot.objects.filter(project=self.project).latest()
+        latest = self.project.project_snapshots.latest()
 
         self.assertEqual(self.project_snapshot_2, latest)
 
