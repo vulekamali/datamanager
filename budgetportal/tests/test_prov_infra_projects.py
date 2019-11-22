@@ -194,7 +194,7 @@ class ProvInfraProjectAPITestCase(APITransactionTestCase):
         number_of_projects = len(response.data["results"])
         response_data = response.data["results"][0]
         self.assertEqual(number_of_projects, 1)
-        self.assertEqual(response_data["name"], project.name)
+        self.assertEqual(response_data["name"], project_snapshot.name)
 
     def test_facet_filter_by_department(self):
         # Add 5 projects with Test Department
