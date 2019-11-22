@@ -314,7 +314,7 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         ProvInfraProjectIndex().clear()
         self.file.close()
 
-    def test_correct_numbers_showed(self):
+    def test_search_homepage_correct_numbers(self):
         selenium = self.selenium
         selenium.get("%s%s" % (self.live_server_url, self.url))
         num_of_projects = selenium.find_element_by_xpath(
