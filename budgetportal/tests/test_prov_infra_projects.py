@@ -17,9 +17,9 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITransactionTestCase
 
-USERNAME = "testuser"
-EMAIL = "testuser@domain.com"
-PASSWORD = "12345"
+EMPTY_FILE_PATH = os.path.abspath(
+    "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
+)
 
 
 class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
@@ -52,12 +52,15 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
 class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
         super(ProvInfraProjectDetailPageTestCase, self).setUp()
-
+        self.file = open(EMPTY_FILE_PATH)
         self.fin_year = FinancialYear.objects.create(slug="2050-51")
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
         self.project_snapshot = ProvInfraProjectSnapshot.objects.create(
@@ -105,13 +108,14 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             # Construction timeline
             estimated_construction_start_date=date(2017, 2, 1),
             estimated_construction_end_date=date(2020, 12, 31),
-            contracted_construction_end_date=date(2021, 1, 1)
+            contracted_construction_end_date=date(2021, 1, 1),
         )
 
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_project_detail_page_fields(self):
         selenium = self.selenium
@@ -265,6 +269,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
 
 class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infra-project-list")
         super(ProvInfraProjectWebflowIntegrationTestCase, self).setUp()
         self.timeout = 10
@@ -272,7 +277,10 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(2050, 1, 1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
         ProvInfraProjectSnapshot.objects.create(
@@ -283,7 +291,7 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
             province="Western Cape",
             status="Construction",
             primary_funding_source="Health Infrastructure Grant",
-            estimated_completion_date=date(year=2020, month=1, day=1)
+            estimated_completion_date=date(year=2020, month=1, day=1),
         )
         # Add ten projects
         provinces = ["Eastern Cape", "Free State"]
@@ -298,12 +306,13 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
                 project=project,
                 name="Project {}".format(i),
                 province=province,
-                estimated_completion_date=date(year=2020, month=1, day=1)
+                estimated_completion_date=date(year=2020, month=1, day=1),
             )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_correct_numbers_showed(self):
         selenium = self.selenium
@@ -345,13 +354,17 @@ class ProvInfraProjectWebflowIntegrationTestCase(BaseSeleniumTestCase):
 
 class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -359,7 +372,7 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
             project=self.project_1,
             department="Department 1",
             province="Eastern Cape",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -367,7 +380,7 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
             project=self.project_2,
             department="Department 1",
             province="Free State",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
         ProvInfraProjectSnapshot.objects.create(
@@ -375,12 +388,13 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
             project=self.project_3,
             department="Department 2",
             province="Eastern Cape",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_filter_by_department(self):
         department = "Department 1"
@@ -419,13 +433,17 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -433,7 +451,7 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
             project=self.project_1,
             department="Department 1",
             province="Eastern Cape",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -441,7 +459,7 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
             project=self.project_2,
             department="Department 1",
             province="Free State",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
         ProvInfraProjectSnapshot.objects.create(
@@ -449,12 +467,13 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
             project=self.project_3,
             department="Department 2",
             province="Eastern Cape",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_filter_by_province(self):
         province = "Eastern Cape"
@@ -523,13 +542,17 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -537,7 +560,7 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
             project=self.project_1,
             province="Eastern Cape",
             status="Construction",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -545,7 +568,7 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
             project=self.project_2,
             province="Free State",
             status="Construction",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
         ProvInfraProjectSnapshot.objects.create(
@@ -553,12 +576,13 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
             project=self.project_3,
             province="Eastern Cape",
             status="Completed",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_filter_by_status(self):
         status_ = "Construction"
@@ -597,13 +621,17 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -611,7 +639,7 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
             project=self.project_1,
             province="Eastern Cape",
             primary_funding_source="Community Library Service Grant",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -619,7 +647,7 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
             project=self.project_2,
             province="Free State",
             primary_funding_source="Community Library Service Grant",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
         ProvInfraProjectSnapshot.objects.create(
@@ -627,12 +655,13 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
             project=self.project_3,
             province="Eastern Cape",
             primary_funding_source="Equitable Share",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_filter_by_funding_source(self):
         source = "Community Library Service Grant"
@@ -671,13 +700,17 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -685,7 +718,7 @@ class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
             project=self.project_1,
             name="Project 1",
             province="Eastern Cape",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -693,12 +726,13 @@ class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
             project=self.project_2,
             name="Project 2",
             province="Eastern Cape",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_search_by_project_name(self):
         name = "Project 1"
@@ -738,13 +772,17 @@ class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -753,7 +791,7 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
             name="Project 1",
             province="Eastern Cape",
             local_municipality="Local 1",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -762,12 +800,13 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
             name="Project 2",
             province="Eastern Cape",
             local_municipality="Local 2",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_search_by_municipality(self):
         name = "Project 1"
@@ -808,13 +847,17 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -823,7 +866,7 @@ class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
             name="Project 1",
             main_contractor="Contractor 1",
             province="Eastern Cape",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -832,12 +875,13 @@ class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
             name="Project 2",
             main_contractor="Contractor 2",
             province="Eastern Cape",
-            estimated_completion_date=self.date
+            estimated_completion_date=self.date,
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_search_by_contractor(self):
         name = "Project 1"
@@ -878,13 +922,17 @@ class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         ProvInfraProjectSnapshot.objects.create(
@@ -892,7 +940,7 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
             project=self.project_1,
             name="Something School",
             province="Eastern Cape",
-            estimated_completion_date=date(year=2020, month=6, day=1)
+            estimated_completion_date=date(year=2020, month=6, day=1),
         )
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
         ProvInfraProjectSnapshot.objects.create(
@@ -900,12 +948,13 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
             project=self.project_2,
             name="Project 2",
             province="Eastern Cape",
-            estimated_completion_date=date(year=2020, month=6, day=1)
+            estimated_completion_date=date(year=2020, month=6, day=1),
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_search_multiple_fields(self):
         data = {"q": "Eastern Cape School"}
@@ -930,11 +979,15 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
@@ -950,6 +1003,7 @@ class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_url_path(self):
         name = "Project 1"
@@ -979,6 +1033,8 @@ class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
 
 class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file_1 = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter_1 = Quarter.objects.create(number=1)
@@ -988,11 +1044,13 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
             financial_year=self.fin_year,
             quarter=self.quarter_1,
             date_taken=self.date_1,
+            file=File(self.file_1),
         )
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_1,
             project=self.project,
             status="Construction",
+            estimated_completion_date=date(year=2020, month=1, day=1),
         )
 
         self.quarter_2 = Quarter.objects.create(number=2)
@@ -1000,10 +1058,18 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
             financial_year=self.fin_year,
             quarter=self.quarter_2,
             date_taken=self.date_2,
+            file=File(self.file_2),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=self.irm_snapshot_2, project=self.project, status="Completed"
+            irm_snapshot=self.irm_snapshot_2,
+            project=self.project,
+            status="Completed",
+            estimated_completion_date=date(year=2020, month=1, day=1),
         )
+
+    def tearDown(self):
+        self.file_1.close()
+        self.file_2.close()
 
     def test_latest_status_in_the_content(self):
         url = self.project.get_absolute_url()
@@ -1021,6 +1087,8 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
 
 class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file_1 = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter_1 = Quarter.objects.create(number=1)
@@ -1030,19 +1098,29 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
             financial_year=self.fin_year,
             quarter=self.quarter_1,
             date_taken=self.date_1,
+            file=File(self.file_1),
         )
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=self.irm_snapshot_1, project=self.project,
+            irm_snapshot=self.irm_snapshot_1,
+            project=self.project,
+            estimated_completion_date=date(year=2020, month=1, day=1),
         )
 
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year,
             quarter=self.quarter_1,
             date_taken=self.date_2,
+            file=File(self.file_2),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=self.irm_snapshot_2, project=self.project,
+            irm_snapshot=self.irm_snapshot_2,
+            project=self.project,
+            estimated_completion_date=date(year=2020, month=1, day=1),
         )
+
+    def tearDown(self):
+        self.file_1.close()
+        self.file_2.close()
 
     def test_latest_in_different_years(self):
         latest = self.project.project_snapshots.latest()
@@ -1052,6 +1130,7 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
 
 class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=1)
@@ -1059,14 +1138,17 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
 
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=self.quarter, date_taken=self.date,
+            financial_year=self.fin_year,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(self.file),
         )
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             name="Blue School",
             province="Eastern Cape",
-            estimated_completion_date=self.date,
+            estimated_completion_date=date(year=2020, month=1, day=1),
         )
 
         self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
@@ -1075,12 +1157,13 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
             project=self.project_2,
             name="Red School",
             province="Limpopo",
-            estimated_completion_date=self.date,
+            estimated_completion_date=date(year=2020, month=1, day=1),
         )
         ProvInfraProjectIndex().reindex()
 
     def tearDown(self):
         ProvInfraProjectIndex().clear()
+        self.file.close()
 
     def test_correct_project_returned(self):
         search = "Eastern Cape School"
