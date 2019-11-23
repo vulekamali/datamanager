@@ -138,8 +138,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         wait = WebDriverWait(selenium, self.timeout)
         wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, ".page-heading"),
-                u"BLUE JUNIOR SECONDARY SCHOOL",
+                (By.CSS_SELECTOR, ".page-heading"), u"BLUE JUNIOR SECONDARY SCHOOL"
             )
         )
         title = selenium.find_element_by_css_selector(".page-heading").text
@@ -346,8 +345,7 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         selenium.get("%s%s" % (self.live_server_url, self.url))
         self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, "#num-matching-projects-field"),
-                u"11",
+                (By.CSS_SELECTOR, "#num-matching-projects-field"), u"11"
             )
         )
         num_of_projects = selenium.find_element_by_css_selector(
@@ -369,8 +367,7 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         selenium.get("%s%s" % (self.live_server_url, self.url))
         self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, "#num-matching-projects-field"),
-                u"11",
+                (By.CSS_SELECTOR, "#num-matching-projects-field"), u"11"
             )
         )
         num_of_projects = selenium.find_element_by_css_selector(
@@ -387,8 +384,7 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         search_button.click()
         self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, "#num-matching-projects-field"),
-                u"5",
+                (By.CSS_SELECTOR, "#num-matching-projects-field"), u"5"
             )
         )
         filtered_num_of_projects = selenium.find_element_by_css_selector(
