@@ -206,9 +206,10 @@ def import_snapshot(file, irm_snapshot_id):
     for IRM_project_id in preprocessed_dataset["Project ID"]:
         if IRM_project_id:
             models.ProvInfraProject.objects.get_or_create(IRM_project_id=IRM_project_id)
-    preprocessed_dataset.append_col(
-        [irm_snapshot_id] * len(preprocessed_dataset), header="irm_snapshot"
-    )
+    if len(preprocessed_dataset) > 0:
+        preprocessed_dataset.append_col(
+            [irm_snapshot_id] * len(preprocessed_dataset), header="irm_snapshot"
+        )
     resource = ProvInfraProjectSnapshotResource()
     result = resource.import_data(preprocessed_dataset)
     return result

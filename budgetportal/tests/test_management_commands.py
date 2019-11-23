@@ -4,13 +4,6 @@ from django.test import TestCase
 from tempfile import NamedTemporaryFile
 from StringIO import StringIO
 import yaml
-from mock import Mock
-
-# Hacky make sure we don't call out to openspending.
-import requests
-
-requests.get = Mock
-requests.Session = Mock
 
 
 class BasicPagesTestCase(TestCase):

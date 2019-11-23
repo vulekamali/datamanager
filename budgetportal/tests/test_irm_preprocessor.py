@@ -110,3 +110,27 @@ class PreprocessImplementorTestCase(unittest.TestCase):
         self.assertEqual(implementors[1], "")
         self.assertEqual(implementors[2], "C")
         self.assertEqual(implementors[3], "")
+
+
+class PreprocessEmptyRowTestCase(unittest.TestCase):
+    def test_empty_rows_removed(self):
+        headers = BASE_HEADERS + [REPEATED_IMPLEMENTOR_HEADER] * 20
+        dataset = Dataset(headers=headers)
+        non_empty_row = [1] * len(BASE_HEADERS) + [""] * 20
+        dataset.append(non_empty_row)
+        # There is only one row
+        num_nonempty_rows = dataset.height
+
+        # Insert 100 empty rows
+        num_of_empty_rows = 100
+        empty_row = [None] * len(headers)
+        for i in range(num_of_empty_rows):
+            dataset.append(empty_row)
+
+        # There must be 100 empty + 1 non empty rows
+        total_rows = num_nonempty_rows + num_of_empty_rows
+        self.assertEqual(101, total_rows)
+
+        # There must be only non empty row left
+        dataset = preprocess(dataset)
+        self.assertEqual(1, num_nonempty_rows)
