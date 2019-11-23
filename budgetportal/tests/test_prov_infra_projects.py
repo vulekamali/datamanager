@@ -65,6 +65,7 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
 class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
         super(ProvInfraProjectDetailPageTestCase, self).setUp()
+        self.timeout = 5
         self.file = open(EMPTY_FILE_PATH)
         self.fin_year = FinancialYear.objects.create(slug="2050-51")
         self.quarter = Quarter.objects.create(number=3)
@@ -134,6 +135,13 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         selenium = self.selenium
         url = self.project.get_absolute_url()
         selenium.get("%s%s" % (self.live_server_url, url))
+        wait = WebDriverWait(selenium, self.timeout)
+        wait.until(
+            EC.text_to_be_present_in_element(
+                (By.CSS_SELECTOR, ".page-heading"),
+                u"BLUE JUNIOR SECONDARY SCHOOL",
+            )
+        )
         title = selenium.find_element_by_css_selector(".page-heading").text
         self.assertEqual(title, u"BLUE JUNIOR SECONDARY SCHOOL")
 
@@ -288,10 +296,10 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
 
 class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
+        super(ProvInfraProjectSearchPageTestCase, self).setUp()
         self.file = open(EMPTY_FILE_PATH)
         self.url = reverse("provincial-infra-project-list")
-        super(ProvInfraProjectSearchPageTestCase, self).setUp()
-        self.timeout = 10
+        self.wait = WebDriverWait(self.selenium, 5)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(2050, 1, 1)
@@ -336,6 +344,12 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
     def test_search_homepage_correct_numbers(self):
         selenium = self.selenium
         selenium.get("%s%s" % (self.live_server_url, self.url))
+        self.wait.until(
+            EC.text_to_be_present_in_element(
+                (By.CSS_SELECTOR, "#num-matching-projects-field"),
+                u"11",
+            )
+        )
         num_of_projects = selenium.find_element_by_css_selector(
             "#num-matching-projects-field"
         ).text
@@ -353,6 +367,12 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         province = "Eastern Cape"
         selenium = self.selenium
         selenium.get("%s%s" % (self.live_server_url, self.url))
+        self.wait.until(
+            EC.text_to_be_present_in_element(
+                (By.CSS_SELECTOR, "#num-matching-projects-field"),
+                u"11",
+            )
+        )
         num_of_projects = selenium.find_element_by_css_selector(
             "#num-matching-projects-field"
         ).text
@@ -365,14 +385,12 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         search_button = selenium.find_element_by_css_selector("#Search-Button")
         search_field.send_keys(province)
         search_button.click()
-        wait = WebDriverWait(selenium, self.timeout)
-        wait.until(
+        self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, ".page-heading"),
-                u"Provincial Infrastructure Projects",
+                (By.CSS_SELECTOR, "#num-matching-projects-field"),
+                u"5",
             )
         )
-
         filtered_num_of_projects = selenium.find_element_by_css_selector(
             "#num-matching-projects-field"
         ).text
