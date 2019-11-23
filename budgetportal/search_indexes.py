@@ -38,7 +38,9 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
         return object.project_snapshots.latest().total_project_cost
 
     def prepare_estimated_completion_date(sef, object):
-        return object.project_snapshots.latest().estimated_completion_date.isoformat()
+        date = object.project_snapshots.latest().estimated_completion_date
+        if date:
+            return date.isoformat()
 
     def prepare_latitude(sef, object):
         return object.project_snapshots.latest().latitude
