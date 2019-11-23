@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Oct 23 2019 13:41:47 GMT+0000 (UTC)  -->
-<html data-wf-page="5da2d98c5ac6b0f3d81f285f" data-wf-site="5d660ef145315201ac996790">
+<!--  Last Published: Wed Nov 13 2019 09:17:33 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5db0b167ab837b98707b114e" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
   
@@ -28,7 +28,16 @@
     </script>
   <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="/static/images/webclip.png" rel="apple-touch-icon">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+  <style>
+      .search-dropdown_label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -285,7 +294,7 @@
               <div class="small-detail_wrapper cc-mb-4">
                 <div class="small-detail-heading underline">PROFESSIONAL COSTS  from previous years</div>
               </div>
-              <div class="project-detail_text total-professional-fees-field"></div>
+              <div class="project-detail_text expenditure-from-previous-years-professional-fees-field"></div>
             </div>
             <div class="project-details__item">
               <div class="small-detail_wrapper cc-mb-4">
@@ -451,7 +460,9 @@
   <script src="/static/js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 <script>var pageData = {{ page_data_json|safe }}</script>
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
+<script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>
 <script src="/static/js/vulekamali-webflow.js"></script>
 </body>
 </html>

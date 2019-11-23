@@ -1,11 +1,4 @@
-from budgetportal.models import (
-    Department,
-    Government,
-    Sphere,
-    InfrastructureProjectPart,
-    FinancialYear,
-    ProvInfraProject,
-)
+from budgetportal import models
 from django import forms, VERSION
 from django.core.exceptions import ValidationError
 from django.db.models import Q, NOT_PROVIDED
@@ -16,11 +9,6 @@ from import_export.fields import Field
 from import_export.formats import base_formats
 from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import Widget, ForeignKeyWidget
-from provincial_infrastructure_projects import (
-    NORMAL_HEADERS,
-    AGENT_HEADERS,
-    IRMReportSheet,
-)
 import logging
 
 logger = logging.getLogger(__name__)
@@ -73,8 +61,8 @@ class CustomGovernmentWidget(Widget):
 
     def set_sphere(self, sphere):
         try:
-            self.sphere = Sphere.objects.get(id=sphere)
-        except Sphere.DoesNotExist:
+            self.sphere = models.Sphere.objects.get(id=sphere)
+        except models.Sphere.DoesNotExist:
             raise ValidationError("Sphere with id %s does not exist." % sphere)
 
     def render(self, value, obj=None):
@@ -82,8 +70,10 @@ class CustomGovernmentWidget(Widget):
 
     def clean(self, value, row=None, *args, **kwargs):
         try:
-            government = Government.objects.get(sphere=self.sphere, slug=slugify(value))
-        except Government.DoesNotExist:
+            government = models.Government.objects.get(
+                sphere=self.sphere, slug=slugify(value)
+            )
+        except models.Government.DoesNotExist:
             raise ValidationError(
                 "Government '%s' does not exist in sphere '%s'." % (value, self.sphere)
             )
@@ -119,8 +109,8 @@ class DepartmentInstanceLoader(ModelInstanceLoader):
             q |= Q(vote_number=vote_number, government=government)
 
         try:
-            return Department.objects.get(q)
-        except Department.DoesNotExist:
+            return models.Department.objects.get(q)
+        except models.Department.DoesNotExist:
             pass
 
         return None
@@ -146,7 +136,7 @@ class DepartmentResource(resources.ModelResource):
     )
 
     class Meta:
-        model = Department
+        model = models.Department
         fields = (
             "government",
             "name",
@@ -169,7 +159,7 @@ class DepartmentImportForm(ImportForm):
     Form class to use to upload a CSV file to import departments.
     """
 
-    sphere = forms.ModelChoiceField(queryset=Sphere.objects.all(), required=True)
+    sphere = forms.ModelChoiceField(queryset=models.Sphere.objects.all(), required=True)
 
 
 class InfrastructureProjectProvinceField(Field):
@@ -219,7 +209,7 @@ class InfrastructureProjectResource(resources.ModelResource):
     )
 
     class Meta:
-        model = InfrastructureProjectPart
+        model = models.InfrastructureProjectPart
         import_id_fields = ["project_slug", "financial_year"]
 
     def import_field(self, field, obj, data, is_m2m=False):
@@ -231,211 +221,3 @@ class InfrastructureProjectResource(resources.ModelResource):
             field.attribute and field.column_name in data
         ) or field.attribute == "provinces":
             field.save(obj, data, is_m2m)
-
-
-class ProvInfraProjectImportForm(ImportForm):
-    """
-    Form class to use to upload a CSV file to import provincial infrastructure projects.
-    """
-
-    financial_year = forms.ModelChoiceField(
-        queryset=FinancialYear.objects.all(), required=True
-    )
-
-
-class ProvInfraProjectLoader(ModelInstanceLoader):
-    def get_instance(self, row):
-        """
-        Gets a Provincial Infrastructure project instance by IRM_project_id.
-        """
-        project_id = self.resource.fields["IRM_project_id"].clean(row)
-
-        try:
-            return ProvInfraProject.objects.get(IRM_project_id=project_id)
-        except ProvInfraProject.DoesNotExist:
-            pass
-
-        return None
-
-
-class ProvInfraProjectResource(resources.ModelResource):
-    IRM_project_id = Field(attribute="IRM_project_id", column_name="Project ID")
-    project_number = Field(attribute="project_number", column_name="Project No")
-    name = Field(attribute="name", column_name="Project Name")
-    province = Field(attribute="province", column_name="Province")
-    department = Field(attribute="department", column_name="Department")
-    local_municipality = Field(
-        attribute="local_municipality", column_name="Local Municipality"
-    )
-    district_municipality = Field(
-        attribute="district_municipality", column_name="District Municipality"
-    )
-    latitude = Field(attribute="latitude", column_name="Latitude")
-    longitude = Field(attribute="longitude", column_name="Longitude")
-    status = Field(attribute="status", column_name="Project Status")
-    start_date = Field(attribute="start_date", column_name="Project Start Date")
-    estimated_construction_start_date = Field(
-        attribute="estimated_construction_start_date",
-        column_name="Estimated Construction Start Date",
-    )
-    estimated_completion_date = Field(
-        attribute="estimated_completion_date",
-        column_name="Estimated Project Completion Date",
-    )
-    contracted_construction_end_date = Field(
-        attribute="contracted_construction_end_date",
-        column_name="Contracted Construction End Date",
-    )
-    estimated_constructtion_end_date = Field(
-        attribute="estimated_construction_end_date",
-        column_name="Estimated Construction End Date",
-    )
-    total_professional_fees = Field(
-        attribute="total_professional_fees", column_name="Professional Fees"
-    )
-    total_construction_costs = Field(
-        attribute="total_construction_costs", column_name="Construction Costs"
-    )
-    variation_orders = Field(
-        attribute="variation_orders", column_name="Variation Orders"
-    )
-    total_project_cost = Field(
-        attribute="total_project_cost", column_name="Total Project Cost"
-    )
-    expenditure_from_previous_years_professional_fees = Field(
-        attribute="expenditure_from_previous_years_professional_fees",
-        column_name="Project Expenditure from Previous Financial Years (Professional Fees)",
-    )
-    expenditure_from_previous_years_construction_costs = Field(
-        attribute="expenditure_from_previous_years_construction_costs",
-        column_name="Project Expenditure from Previous Financial Years (Construction Costs)",
-    )
-    expenditure_from_previous_years_total = Field(
-        attribute="expenditure_from_previous_years_total",
-        column_name="Project Expenditure from Previous Financial Years (TOTAL)",
-    )
-    project_expenditure_total = Field(
-        attribute="project_expenditure_total", column_name="Project Expenditure (TOTAL)"
-    )
-    main_appropriation_professional_fees = Field(
-        attribute="main_appropriation_professional_fees",
-        column_name="Main Budget Appropriation (Professional Fees)",
-    )
-    adjustment_appropriation_professional_fees = Field(
-        attribute="adjustment_appropriation_professional_fees",
-        column_name="Adjustment Budget Appropriation (Professional Fees)",
-    )
-    main_appropriation_construction_costs = Field(
-        attribute="main_appropriation_construction_costs",
-        column_name="Main Budget Appropriation (Construction Costs)",
-    )
-    adjustment_appropriation_construction_costs = Field(
-        attribute="adjustment_appropriation_construction_costs",
-        column_name="Adjustment Budget Appropriation (Construction Costs)",
-    )
-    main_appropriation_total = Field(
-        attribute="main_appropriation_total",
-        column_name="Main Budget Appropriation (TOTAL)",
-    )
-    adjustment_appropriation_total = Field(
-        attribute="adjustment_appropriation_total",
-        column_name="Adjustment Budget Appropriation (TOTAL)",
-    )
-    actual_expenditure_q1 = Field(
-        attribute="actual_expenditure_q1", column_name="Actual Expenditure Q1"
-    )
-    actual_expenditure_q2 = Field(
-        attribute="actual_expenditure_q2", column_name="Actual Expenditure Q2"
-    )
-    actual_expenditure_q3 = Field(
-        attribute="actual_expenditure_q3", column_name="Actual Expenditure Q3"
-    )
-    actual_expenditure_q4 = Field(
-        attribute="actual_expenditure_q4", column_name="Actual Expenditure Q4"
-    )
-    budget_programme = Field(
-        attribute="budget_programme", column_name="Budget Programme"
-    )
-    primary_funding_source = Field(
-        attribute="primary_funding_source", column_name="Primary Funding Source"
-    )
-    nature_of_investment = Field(
-        attribute="nature_of_investment", column_name="Nature of Investment"
-    )
-    funding_status = Field(attribute="funding_status", column_name="Funding Status")
-    program_implementing_agent = Field(
-        attribute="program_implementing_agent", column_name="Program Implementing Agent"
-    )
-    principle_agent = Field(attribute="principle_agent", column_name="Principal Agent")
-    main_contractor = Field(attribute="main_contractor", column_name="Main Contractor")
-    other_parties = Field(attribute="other_parties", column_name="Other parties")
-    financial_year = Field(
-        attribute="financial_year",
-        column_name="Financial Year",
-        widget=ForeignKeyWidget(FinancialYear),
-    )
-
-    class Meta:
-        model = ProvInfraProject
-        skip_unchanged = True
-        report_skipped = False
-        exclude = ("id",)
-        instance_loader_class = ProvInfraProjectLoader
-
-    def before_import(self, dataset, using_transactions, dry_run, **kwargs):
-        headers = dataset.headers
-
-        # Check if the headers of the dataset and the specified headers are
-        # the same or not. If not, raise exception with the missing headers
-        difference = list(set(NORMAL_HEADERS) - set(headers))
-        if len(difference) != 0:
-            raise Exception(
-                "Following column(s) are missing: {}".format(", ".join(difference))
-            )
-
-        # IRMReportSheet class processes the dataset and saves the processed
-        # dataset in it's output_data_set attribute
-        report_sheet = IRMReportSheet(dataset)
-        report_sheet.process()
-
-        # During process, empty rows must be deleted first from the dataset
-        # the following code checks whether number of rows are the same for
-        # the given dataset and the output dataset. If not, raises exception
-        num_of_rows_dataset = report_sheet.data_set.height
-        num_of_rows_output_dataset = report_sheet.output_data_set.height
-        if num_of_rows_dataset != num_of_rows_output_dataset:
-            raise Exception(
-                "Number of rows in dataset({0}) don't match with the number of rows in the output dataset({1})!".format(
-                    num_of_rows_dataset, num_of_rows_output_dataset
-                )
-            )
-
-        # Following loops delete contractor columns and append mapped
-        # agent/contractor/parties columns respectively
-        for header in reversed(report_sheet.contractor_columns):
-            del dataset[dataset.headers[header]]
-        for agent in AGENT_HEADERS:
-            dataset.append_col(report_sheet.output_data_set[agent], header=agent)
-
-        # import_data() works with 2 requests, first one is import form request
-        # and the second one is confirm import form request. Since user selects
-        # financial year in import form request, it should be carried for
-        # the second request.
-        financial_year = self.request.POST.get("financial_year", None)
-        if financial_year:
-            self.request.session["import_context_year"] = financial_year
-        else:
-            # if it's confirm form request,it takes the selected financial year
-            # value from import form request using django sessions
-            try:
-                financial_year = self.request.session["import_context_year"]
-            except KeyError as e:
-                raise Exception(
-                    "Financial year context failure on row import, "
-                    + "check resources.py for more info: {0}".format(e)
-                )
-        dataset.append_col([financial_year] * dataset.height, header="Financial Year")
-
-    def __init__(self, request=None, *args, **kwargs):
-        super(ProvInfraProjectResource, self).__init__()
-        self.request = request

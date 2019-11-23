@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Oct 23 2019 13:41:47 GMT+0000 (UTC)  -->
-<html data-wf-page="5d6783c6f35f89734f9bc870" data-wf-site="5d660ef145315201ac996790">
+<!--  Last Published: Wed Nov 13 2019 09:17:33 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5db0b167ab837bf5647b114c" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
   
@@ -29,7 +29,16 @@
     </script>
   <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="/static/images/webclip.png" rel="apple-touch-icon">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+  <style>
+      .search-dropdown_label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -57,7 +66,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <div class="breadcrumbs"><a href="infrastructure-search.html" class="breadcrumbs__crumb">Provincial Infrastructure</a><a href="#" class="breadcrumbs__crumb">Eastern Cape</a></div>
+          <div class="breadcrumbs"><a href="project-search.html" class="breadcrumbs__crumb">Provincial Infrastructure</a><a href="#" class="breadcrumbs__crumb">Eastern Cape</a></div>
         </div>
       </div>
       <div class="row">
@@ -469,7 +478,7 @@
                 <div>VALUE</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block w--current">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block w--current">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -483,7 +492,7 @@
                 <div>R300,000,042,610</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block w--current">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block w--current">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -497,7 +506,7 @@
                 <div>R300,000,042,610</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block w--current">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block w--current">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -511,7 +520,7 @@
                 <div>R300,000,042,610</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block w--current">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block w--current">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -525,7 +534,7 @@
                 <div>R300,000,042,610</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block w--current">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block w--current">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -558,7 +567,9 @@
   <script src="/static/js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 <script>var pageData = {{ page_data_json|safe }}</script>
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
+<script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>
 <script src="/static/js/vulekamali-webflow.js"></script>
 </body>
 </html>

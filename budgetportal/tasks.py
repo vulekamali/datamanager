@@ -4,8 +4,12 @@ Tasks for async work.
 Tasks MUST be idempotent.
 """
 import logging
-from budgetportal.models import Department
+from budgetportal.models import Department, IRMSnapshot
 from django.conf import settings
+from budgetportal import prov_infra_projects
+import traceback
+import django_q
+from django.core.management import call_command
 
 
 ckan = settings.CKAN
@@ -38,3 +42,25 @@ def create_resource(department_id, group_name, dataset_name, name, format, url):
     else:
         resource = dataset.create_resource(name, format, url)
         return {"status": "Created", "package": resource}
+
+
+def import_irm_snapshot(snapshot_id):
+    try:
+        snapshot = IRMSnapshot.objects.get(pk=snapshot_id)
+        result = prov_infra_projects.import_snapshot(snapshot.file.read(), snapshot.id)
+        for row in result.rows:
+            for error in row.errors:
+                logger.error(error.error, exc_info=True)
+                raise error.error
+        django_q.tasks.async(index_irm_projects, snapshot_id=snapshot_id)
+        return {
+            "totals": result.totals,
+            "validation_errors": [row.validation_error for row in result.rows],
+        }
+    except Exception as e:
+        logger.error(e, exc_info=True)
+        raise Exception(traceback.format_exc())
+
+
+def index_irm_projects(snapshot_id):
+    call_command("update_index", "-r")

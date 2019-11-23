@@ -14,6 +14,10 @@ This django app used to just coordinate and serve data, hence being called
 Code Structure vision
 ---------------------
 
+### Browser support requirements
+
+See [browserslist](package.json#L85)
+
 ### HTML, CSS, Javascript
 
 We use a yarn (Node.js) and webpack-based build system for CSS and Javascript.
@@ -27,6 +31,7 @@ You can find frontend code in the following places:
   - The package for the main site has `package.json` in the root, and source files in `assets/js`
   - A package providing react views for certain pages in `packages/webapp`
 - CSS (SCSS) in `assets/scss`
+- [Webflow-built pages](#webflow)
 
 Most of the HTML has been migrated from Jekyll as simply and quickly as possible
 and we're figuring out how best to structure it going forward. *Find a balance
@@ -42,6 +47,31 @@ HTML (django template language) into the django template folder, SCSS in
 `assets/scss` and Javascript in `assets/js` but ran into trouble with javascript
 reading some HTML files. We decided to leave Django template include files in
 `assets/js` for the time being and set that up as an additional template directory.
+
+#### Webflow
+
+We are using for new content and are potentially replacing the current frontend
+with one built using webflow. Webflow is a web design tool, which provides hosting
+and integrates with their own content management system. We don't use their hosting
+or CMS for production pages of vulekamali.gov.za, but rather export the HTML,
+CSS and Javascript and use that for those content areas on this site. Page data
+is either provided to the client via JSON embedded in the page, or via AJAX
+requests to APIs.
+
+By using webflow, we can build semi-working interactive prototypes in a convenient
+design tool, refine these into mockups, export these and use it as the ready-built
+frontend. There is no need for a web developer to write markup and style the page
+manually. This means we can preview changes to the design in webflow, and
+reflect those changes in this django site with little further frontend development.
+
+The webflow frontend is in the Django app `budgetportal.webflow`.
+
+***Webflow HTML, CSS and Javascript must not be edited manually***. Those edits
+will be overridden on the next import from Webflow.
+
+See the [budgetportal.webflow](budgetportal/webflow/README.md) docs for
+how to work on the webflow-based parts of the site.
+
 
 ### Python code
 
@@ -163,8 +193,8 @@ You can load this data into your environment with:
 docker-compose run --rm app python manage.py loaddata years-spheres-governments \
                                                       video-language \
                                                       events \
-                                                      provincial-infrastructure-projects \
-                                                      homepage
+                                                      homepage \
+                                                      quarters
 for year in 2016-17 2017-18 2018-19 2019-20; do docker-compose run --rm app python manage.py load_departments ${year} national departments-national-${year}.csv; done
 for year in 2016-17 2017-18 2018-19 2019-20; do docker-compose run --rm app python manage.py load_departments ${year} provincial departments-provincial-${year}.csv; done
 ```

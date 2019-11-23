@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Oct 23 2019 13:41:47 GMT+0000 (UTC)  -->
-<html data-wf-page="5d660ef14531528e89996791" data-wf-site="5d660ef145315201ac996790">
+<!--  Last Published: Wed Nov 13 2019 09:17:33 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5db0b167ab837bab477b10f2" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
   
@@ -29,8 +29,17 @@
     </script>
   <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="/static/images/webclip.png" rel="apple-touch-icon">
+  <style>
+      .search-dropdown_label {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    </style>
   <link rel="stylesheet" href="https://adieyal.github.io/tableau_test/style.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -239,7 +248,7 @@
               <div class="chart-header_wrapper">
                 <div data-delay="0" class="dropdown full-width w-dropdown">
                   <div class="chart-dropdown_trigger w-dropdown-toggle">
-                    <div class="text-block">Select an economic classification...</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
+                    <div class="text-block">Select an economic classification...</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
                   <nav class="chart-dropdown_list w-dropdown-list"><a href="#" class="dropdown-link w-dropdown-link">All Provinces</a><a href="#" class="dropdown-link w-dropdown-link">Eastern Cape</a><a href="#" class="dropdown-link w-dropdown-link">Free State</a><a href="#" class="dropdown-link w-dropdown-link">Gauteng</a><a href="#" class="dropdown-link w-dropdown-link">KwaZulu-Natal</a><a href="#" class="dropdown-link w-dropdown-link">Limpopo</a><a href="#" class="dropdown-link w-dropdown-link">Mpumalanga</a><a href="#" class="dropdown-link w-dropdown-link">Northern Cape</a><a href="#" class="dropdown-link w-dropdown-link">North West</a><a href="#" class="dropdown-link w-dropdown-link">Western Cape</a></nav>
                 </div>
               </div>
@@ -319,7 +328,7 @@
                 <div class="showing-text">Showing 3 of 20</div>
               </div>
               <div class="button_wrapper">
-                <a href="infrastructure-search.html" class="button cc-icon-right w-inline-block">
+                <a href="project-search.html" class="button cc-icon-right w-inline-block">
                   <div class="button-text">More resources</div><img src="/static/images/forward-white-24px.svg" alt="" class="icon_20px cc-o-60p"></a>
               </div>
             </div>
@@ -360,7 +369,7 @@
                     </div>
                     <div data-delay="0" class="dropdown w-dropdown">
                       <div class="chart-dropdown_trigger w-dropdown-toggle">
-                        <div class="text-block">Advertising</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
+                        <div class="text-block">Advertising</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
                       <nav class="chart-dropdown_list w-dropdown-list"><a href="#" class="dropdown-link w-dropdown-link">List item 1</a><a href="#" class="dropdown-link w-dropdown-link">List item 2</a><a href="#" class="dropdown-link w-dropdown-link">List item 3</a><a href="#" class="dropdown-link w-dropdown-link">List item 4</a></nav>
                     </div>
                   </div>
@@ -393,7 +402,7 @@
                       <div class="div-block-6">
                         <div class="text_dropdown-discriptor cc-small">Sort by:</div>
                         <div class="button cc-grey cc-small cc-dropdown">
-                          <div class="chart-dropdown_text">Value descending</div><img src="/static/images/dropdown-24px.svg" alt="" class="icon_16px"></div>
+                          <div class="chart-dropdown_text">Value descending</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
                       </div>
                     </div>
                   </div>
@@ -519,7 +528,7 @@
                 <div>VALUE</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -533,7 +542,7 @@
                 <div>R300,000,042,610</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -547,7 +556,7 @@
                 <div>R300,000,042,610</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -561,7 +570,7 @@
                 <div>R300,000,042,610</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -575,7 +584,7 @@
                 <div>R300,000,042,610</div>
               </div>
             </a>
-            <a href="infrastructure-project.html" class="narrow-card_wrapper w-inline-block">
+            <a href="project.html" class="narrow-card_wrapper w-inline-block">
               <div class="narrow-card_first-column"><img src="/static/images/school-24px.svg" alt="" class="narrow-card_icon">
                 <div class="narrow-card_title">Pelonami Inter</div>
               </div>
@@ -597,7 +606,7 @@
               <div class="showing-text">Showing 5 of 3509</div>
             </div>
             <div class="button_wrapper">
-              <a href="infrastructure-search.html" class="button cc-icon-right w-inline-block">
+              <a href="project-search.html" class="button cc-icon-right w-inline-block">
                 <div class="button-text">View all projects</div><img src="/static/images/forward-white-24px.svg" alt="" class="icon_20px cc-o-60p"></a>
             </div>
           </div>
@@ -635,7 +644,9 @@
       }, 2000);
     </script>
 <script>var pageData = {{ page_data_json|safe }}</script>
-<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
+<script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>
 <script src="/static/js/vulekamali-webflow.js"></script>
 </body>
 </html>

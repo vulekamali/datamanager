@@ -20,6 +20,7 @@ import re
 import requests
 import string
 import urllib
+import uuid
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -1595,6 +1596,9 @@ class InfrastructureProjectPart(models.Model):
     provinces = models.CharField(max_length=510, default="")
     gps_code = models.CharField(max_length=255, default="")
 
+    class Meta:
+        verbose_name = "National infrastructure project part"
+
     def __str__(self):
         return "{} ({} {})".format(
             self.project_slug, self.budget_phase, self.financial_year
@@ -1842,11 +1846,88 @@ class FAQ(SortableMixin):
         ordering = ["the_order"]
 
 
-class ProvInfraProject(models.Model):
-    financial_year = models.ForeignKey(
-        FinancialYear, on_delete=models.CASCADE, related_name="prov_infra"
+class Quarter(models.Model):
+    number = models.IntegerField(unique=True)
+
+    class Meta:
+        ordering = ["number"]
+
+    def __unicode__(self):
+        return u"Quarter %d" % self.number
+
+
+def irm_snapshot_file_path(instance, filename):
+    extension = filename.split(".")[-1]
+    return "irm-snapshots/%s/%s-Q%d-taken-%s.%s" % (
+        uuid.uuid4(),
+        instance.financial_year.slug,
+        instance.quarter.number,
+        instance.date_taken.isoformat()[:18],
+        extension,
     )
+
+
+class IRMSnapshot(models.Model):
+    """This represents a particular snapshot from IRM"""
+
+    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
+    quarter = models.ForeignKey(Quarter, on_delete=models.CASCADE)
+    date_taken = models.DateTimeField()
+    file = models.FileField(upload_to=irm_snapshot_file_path)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    class Meta:
+        ordering = ["financial_year", "quarter"]
+        verbose_name = "IRM Snapshot"
+        unique_together = ["financial_year", "quarter", "date_taken"]
+
+    def __unicode__(self):
+        return u"%s Q%d taken %s" % (
+            self.financial_year.slug,
+            self.quarter.number,
+            self.date_taken.isoformat()[:18],
+        )
+
+
+class ProvInfraProject(models.Model):
+    """This represents a project, grouping its snapshots"""
+
     IRM_project_id = models.IntegerField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Provincial infrastructure project"
+
+    def __unicode__(self):
+        if self.project_snapshots.count():
+            return self.project_snapshots.latest().name
+        else:
+            return u"IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
+
+    def get_slug(self):
+        return slugify(
+            u"{0} {1}".format(
+                self.project_snapshots.latest().name,
+                self.project_snapshots.latest().province,
+            )
+        )
+
+    def get_absolute_url(self):
+        args = [self.pk, self.get_slug()]
+        return reverse("provincial-infra-project-detail", args=args)
+
+
+class ProvInfraProjectSnapshot(models.Model):
+    """This represents a snapshot of a project, as it occurred in an IRM snapshot"""
+
+    irm_snapshot = models.ForeignKey(
+        IRMSnapshot, on_delete=models.CASCADE, related_name="project_snapshots"
+    )
+    project = models.ForeignKey(
+        ProvInfraProject, on_delete=models.CASCADE, related_name="project_snapshots"
+    )
     project_number = models.CharField(max_length=1024, blank=True, null=True)
     name = models.CharField(max_length=1024, blank=True, null=True)
     province = models.CharField(max_length=1024, blank=True, null=True)
@@ -1934,15 +2015,14 @@ class ProvInfraProject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
+    class Meta:
+        ordering = ["irm_snapshot"]
+        get_latest_by = "irm_snapshot"
+        verbose_name = "Provincial infrastructure project snapshot"
+        unique_together = ["irm_snapshot", "project"]
+
     def __unicode__(self):
-        return u"{0}".format(self.name)
-
-    def get_slug(self):
-        return slugify(u"{0} {1}".format(self.name, self.province))
-
-    def get_absolute_url(self):
-        args = [self.IRM_project_id, self.get_slug()]
-        return reverse("provincial-infra-project-detail", args=args)
+        return self.name
 
 
 # https://stackoverflow.com/questions/35633037/search-for-document-in-solr-where-a-multivalue-field-is-either-empty
