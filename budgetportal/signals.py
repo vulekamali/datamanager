@@ -13,5 +13,5 @@ def handle_irm_snapshot_post_save(sender, instance, created, raw, using, update_
 
 
 @receiver([post_delete], sender=models.IRMSnapshot)
-def handle_irm_snapshot_post_delete(sender, instance, created, raw, using, update_fields, **kwargs):
+def handle_irm_snapshot_post_delete(sender, instance, using, **kwargs):
     django_q.tasks.async(tasks.index_irm_projects, snapshot_id=instance.id)
