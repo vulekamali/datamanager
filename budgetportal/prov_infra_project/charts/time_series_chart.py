@@ -5,16 +5,16 @@ def time_series_data(project):
     chart_data = {"snapshots": [], "events": []}
     project_snapshots = project.project_snapshots.all()
     for snapshot in project_snapshots:
-        quarter = snapshot.irm_snapshot.quarter
+        quarter_number = snapshot.irm_snapshot.quarter.number
         fin_year = snapshot.irm_snapshot.financial_year
 
         total_estimated_project_cost = snapshot.total_project_cost
         status = snapshot.status
         date, quarter_label, fin_year_label = extract_date_quarter_year(
-            quarter.number, fin_year
+            quarter_number, fin_year
         )
         total_spent_to_date, total_spent_in_quarter = compute_total_spent(
-            snapshot, quarter.number
+            snapshot, quarter_number
         )
         chart_data["snapshots"].append(
             {
@@ -27,9 +27,9 @@ def time_series_data(project):
                 "status": status,
             }
         )
-        if quarter.number > 1:
+        if quarter_number > 1:
             chart_data = update_previous_chart_values(
-                chart_data, snapshot, quarter, fin_year
+                chart_data, snapshot, quarter_number, fin_year
             )
 
     latest_snapshot = project.project_snapshots.latest()
@@ -37,8 +37,9 @@ def time_series_data(project):
     return json.dumps(chart_data, use_decimal=True)
 
 
-def update_previous_chart_values(chart_data, snapshot, quarter, fin_year):
-    for i in range(quarter.number, 0, -1):
+def update_previous_chart_values(chart_data, snapshot, quarter_number, fin_year):
+    for i in range(quarter_number, 0, -1):
+        quarter_is_found = False
         date, quarter_label, fin_year_label = extract_date_quarter_year(i, fin_year)
         total_spent_to_date, total_spent_in_quarter = compute_total_spent(snapshot, i)
         for data in chart_data["snapshots"]:
@@ -49,6 +50,22 @@ def update_previous_chart_values(chart_data, snapshot, quarter, fin_year):
                         "total_spent_in_quarter": total_spent_in_quarter,
                     }
                 )
+                quarter_is_found = True
+
+        if quarter_is_found is False:
+            total_estimated_project_cost = snapshot.total_project_cost
+            status = snapshot.status
+            chart_data["snapshots"].append(
+                {
+                    "date": date,
+                    "quarter_label": quarter_label,
+                    "financial_year_label": fin_year_label,
+                    "total_spent_to_date": total_spent_to_date,
+                    "total_spent_in_quarter": total_spent_in_quarter,
+                    "total_estimated_project_cost": total_estimated_project_cost,
+                    "status": status,
+                }
+            )
     return chart_data
 
 
