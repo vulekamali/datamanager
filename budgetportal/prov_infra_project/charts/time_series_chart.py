@@ -71,7 +71,11 @@ def update_previous_chart_values(chart_data, snapshot, quarter_number, fin_year)
 
 def extract_date_quarter_year(quarter_number, financial_year):
     dates = {1: "-06-30", 2: "-09-30", 3: "-12-31", 4: "-03-31"}
-    date = financial_year.get_starting_year() + dates[quarter_number]
+    if quarter_number == 4:
+        date = str(int(financial_year.get_starting_year())+1) + dates[quarter_number]
+    else:
+        date = financial_year.get_starting_year() + dates[quarter_number]
+
     quarter_label = "END Q{}".format(quarter_number)
     financial_year_label = ""
     if quarter_number == 1:
