@@ -1,6 +1,10 @@
 import simplejson as json
 
 
+def order_chart_data(snapshot_list):
+    return sorted(snapshot_list, key=lambda x: x["date"])
+
+
 def time_series_data(project):
     chart_data = {"snapshots": [], "events": []}
     project_snapshots = project.project_snapshots.all()
@@ -31,9 +35,11 @@ def time_series_data(project):
             chart_data = update_previous_chart_values(
                 chart_data, snapshot, quarter_number, fin_year
             )
+    chart_data["snapshots"] = order_chart_data(chart_data["snapshots"])
 
     latest_snapshot = project.project_snapshots.latest()
     chart_data["events"] = extract_events(latest_snapshot)
+
     return json.dumps(chart_data, use_decimal=True)
 
 
