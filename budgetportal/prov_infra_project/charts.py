@@ -89,8 +89,11 @@ def extract_date_quarter_year(quarter_number, financial_year):
 
 
 def compute_total_spent(project_snapshot, quarter_number):
-    total_spent_to_date = project_snapshot.expenditure_from_previous_years_total
     total_spent_in_quarter = None
+    total_spent_to_date = None
+    total_from_previous_years = project_snapshot.expenditure_from_previous_years_total
+    if total_from_previous_years is not None:
+        total_spent_to_date = total_from_previous_years
 
     for i in range(1, quarter_number + 1):
         field = "actual_expenditure_q{}".format(i)
@@ -100,7 +103,8 @@ def compute_total_spent(project_snapshot, quarter_number):
             total_spent_to_date = None
             break
 
-        total_spent_to_date += quarterly_spent
+        if total_spent_to_date:
+            total_spent_to_date += quarterly_spent
 
         if i == quarter_number:
             total_spent_in_quarter = quarterly_spent
