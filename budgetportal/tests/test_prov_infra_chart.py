@@ -20,7 +20,7 @@ class Q1UpdateTestCase(TestCase):
         irm_snapshot_1 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
         )
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
             project=self.project,
             actual_expenditure_q1=10,
@@ -33,9 +33,11 @@ class Q1UpdateTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 1)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["total_spent_in_quarter"], 10)
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 210)
 
+        # Create Q2 snapshot
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
@@ -47,10 +49,12 @@ class Q1UpdateTestCase(TestCase):
             actual_expenditure_q2=20,
             expenditure_from_previous_years_total=200,
         )
+        # Recreate the chart data
         snapshots_data = json.loads(time_series_data(self.project))
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["total_spent_in_quarter"], 11)
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 211)
 
@@ -63,7 +67,7 @@ class Q1Q2UpdateTestCase(TestCase):
         irm_snapshot_1 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
         )
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
             project=self.project,
             actual_expenditure_q1=10,
@@ -73,7 +77,7 @@ class Q1Q2UpdateTestCase(TestCase):
         irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
         )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
             actual_expenditure_q1=11,
@@ -87,12 +91,15 @@ class Q1Q2UpdateTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["total_spent_in_quarter"], 11)
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 211)
 
+        # Check Q2 values
         self.assertEqual(snapshots_data[1]["total_spent_in_quarter"], 20)
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], 231)
 
+        # Create Q3 snapshot
         q3 = Quarter.objects.create(number=3)
         irm_snapshot_3 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q3, date_taken="2030-12-31"
@@ -105,13 +112,16 @@ class Q1Q2UpdateTestCase(TestCase):
             actual_expenditure_q3=30,
             expenditure_from_previous_years_total=200,
         )
+        # Recreate the chart data
         snapshots_data = json.loads(time_series_data(self.project))
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 3)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["total_spent_in_quarter"], 12)
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 212)
 
+        # Check Q2 values
         self.assertEqual(snapshots_data[1]["total_spent_in_quarter"], 21)
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], 233)
 
@@ -124,7 +134,7 @@ class NullQuarterlySpendTestCase(TestCase):
         irm_snapshot_1 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
         )
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
             project=self.project,
             actual_expenditure_q1=None,
@@ -134,7 +144,7 @@ class NullQuarterlySpendTestCase(TestCase):
         irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
         )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
             actual_expenditure_q1=None,
@@ -148,6 +158,7 @@ class NullQuarterlySpendTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check total_spent_to_date values for Q1 and Q2
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], None)
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
 
@@ -160,7 +171,7 @@ class NullQuarterlySpendSecondTestCase(TestCase):
         irm_snapshot_1 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
         )
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
             project=self.project,
             actual_expenditure_q1=10,
@@ -170,7 +181,7 @@ class NullQuarterlySpendSecondTestCase(TestCase):
         irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
         )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
             actual_expenditure_q1=10,
@@ -184,8 +195,11 @@ class NullQuarterlySpendSecondTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["total_spent_in_quarter"], 10)
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 210)
+
+        # Check Q2 values
         self.assertEqual(snapshots_data[1]["total_spent_in_quarter"], None)
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
 
@@ -198,7 +212,7 @@ class LatestValueTestCase(TestCase):
         irm_snapshot_1 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
         )
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
             project=self.project,
             actual_expenditure_q1=10,
@@ -214,20 +228,24 @@ class LatestValueTestCase(TestCase):
         self.assertEqual(len(snapshots_data), 1)
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 110)
 
+        # Create Q2 Snapshot
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
         )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
             actual_expenditure_q1=10,
             actual_expenditure_q2=20,
             expenditure_from_previous_years_total=200,
         )
+        # Recreate the chart data
         snapshots_data = json.loads(time_series_data(self.project))
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
+
+        # Check total_spent_to_date values for Q1 and Q2
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 210)
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], 230)
 
@@ -240,7 +258,7 @@ class NullExpenditureFromPreviousFinYearsTestCase(TestCase):
         irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
         )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
             actual_expenditure_q1=10,
@@ -249,12 +267,13 @@ class NullExpenditureFromPreviousFinYearsTestCase(TestCase):
         )
 
     def test_total_spends_are_none(self):
-        """Test that Q1 and Q2 total_spent values when expenditure_from_previous_years
-        _total is empty"""
+        """Test that Q1 and Q2 total_spent values when expenditure_
+        from_previous_years_total is empty."""
         snapshots_data = json.loads(time_series_data(self.project))
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check total_spent_to_date values for Q1 and Q2
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], None)
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
 
@@ -277,15 +296,14 @@ class EmitMissingQuartersTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["financial_year_label"], "2030-31")
         self.assertEqual(snapshots_data[0]["date"], "2030-06-30")
         self.assertEqual(snapshots_data[0]["quarter_label"], "END Q1")
+
+        # Check Q2 values
         self.assertEqual(snapshots_data[1]["date"], "2030-09-30")
         self.assertEqual(snapshots_data[1]["quarter_label"], "END Q2")
-
-        quarters = [x["quarter_label"] for x in snapshots_data]
-        self.assertNotIn("END Q3", quarters)
-        self.assertNotIn("END Q4", quarters)
 
 
 class EmitMissingQuartersSecondTestCase(TestCase):
@@ -314,12 +332,14 @@ class EmitMissingQuartersSecondTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 6)
 
+        # Check 2018's Q1 and Q2 in a row
         self.assertEqual(snapshots_data[0]["financial_year_label"], "2018-19")
         self.assertEqual(snapshots_data[0]["date"], "2018-06-30")
         self.assertEqual(snapshots_data[0]["quarter_label"], "END Q1")
         self.assertEqual(snapshots_data[1]["date"], "2018-09-30")
         self.assertEqual(snapshots_data[1]["quarter_label"], "END Q2")
 
+        # Check 2019's Q1, Q2, Q3 and Q4 in a row
         self.assertEqual(snapshots_data[2]["financial_year_label"], "2019-20")
         self.assertEqual(snapshots_data[2]["date"], "2019-06-30")
         self.assertEqual(snapshots_data[2]["quarter_label"], "END Q1")
@@ -349,6 +369,7 @@ class FinancialYearLabelTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["quarter_label"], "END Q1")
         self.assertEqual(snapshots_data[0]["financial_year_label"], "2030-31")
 
@@ -358,6 +379,7 @@ class FinancialYearLabelTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check Q2 values
         self.assertEqual(snapshots_data[1]["quarter_label"], "END Q2")
         self.assertEqual(snapshots_data[1]["financial_year_label"], "")
 
@@ -380,6 +402,7 @@ class QuarterLabelTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 4)
 
+        # Check quarter label texts for all quarters
         self.assertEqual(snapshots_data[0]["quarter_label"], "END Q1")
         self.assertEqual(snapshots_data[1]["quarter_label"], "END Q2")
         self.assertEqual(snapshots_data[2]["quarter_label"], "END Q3")
@@ -404,6 +427,7 @@ class TotalEstimatedProjectCostTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["total_estimated_project_cost"], None)
 
     def test_total_project_cost_assigned_correctly(self):
@@ -411,6 +435,8 @@ class TotalEstimatedProjectCostTestCase(TestCase):
         snapshots_data = json.loads(time_series_data(self.project))
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
+
+        # Check Q2 values
         self.assertEqual(snapshots_data[1]["total_estimated_project_cost"], 100)
 
 
@@ -432,6 +458,7 @@ class StatusTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
+        # Check Q1 values
         self.assertEqual(snapshots_data[0]["status"], None)
 
     def test_status_assigned_correctly(self):
@@ -439,6 +466,8 @@ class StatusTestCase(TestCase):
         snapshots_data = json.loads(time_series_data(self.project))
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
+
+        # Check Q2 values
         self.assertEqual(snapshots_data[1]["status"], "Tender")
 
 
@@ -461,9 +490,9 @@ class EventsTestCase(TestCase):
         """Test that estimated constructions dates are assigned correctly"""
         events_data = json.loads(time_series_data(self.project))
         events_data = events_data[u"events"]
-
         self.assertEqual(len(events_data), 2)
-        # Estimated construction start date is the first item of the events
+
+        # Estimated construction start date
         self.assertEqual(events_data[0]["date"], "2030-01-01")
-        # Estimated construction end date is the first item of the events
+        # Estimated construction end date
         self.assertEqual(events_data[1]["date"], "2032-12-31")
