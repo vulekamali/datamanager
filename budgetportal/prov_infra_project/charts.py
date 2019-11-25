@@ -53,8 +53,6 @@ def update_previous_chart_values(chart_data, snapshot, quarter_number, fin_year)
                 quarter_is_found = True
 
         if quarter_is_found is False:
-            total_estimated_project_cost = snapshot.total_project_cost
-            status = snapshot.status
             chart_data["snapshots"].append(
                 {
                     "date": date,
@@ -62,8 +60,8 @@ def update_previous_chart_values(chart_data, snapshot, quarter_number, fin_year)
                     "financial_year_label": fin_year_label,
                     "total_spent_to_date": total_spent_to_date,
                     "total_spent_in_quarter": total_spent_in_quarter,
-                    "total_estimated_project_cost": total_estimated_project_cost,
-                    "status": status,
+                    "total_estimated_project_cost": None,
+                    "status": None,
                 }
             )
     return chart_data
