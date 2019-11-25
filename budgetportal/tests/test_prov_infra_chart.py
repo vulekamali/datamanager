@@ -422,3 +422,27 @@ class StatusTestCase(TestCase):
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
         self.assertEqual(snapshots_data[1]["status"], "Tender")
+
+
+class EventsTestCase(TestCase):
+    def setUp(self):
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        q2 = Quarter.objects.create(number=2)
+        irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=fin_year, quarter=q2, date_taken="2030-09-30"
+        )
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot,
+            project=self.project,
+            estimated_construction_start_date="2030-01-01",
+            estimated_construction_end_date="2032-12-31",
+        )
+
+    def test_events_assigned_correctly(self):
+        events_data = json.loads(time_series_data(self.project))
+        events_data = events_data[u"events"]
+
+        self.assertEqual(len(events_data), 2)
+        self.assertEqual(events_data[0]["date"], "2030-01-01")
+        self.assertEqual(events_data[1]["date"], "2032-12-31")
