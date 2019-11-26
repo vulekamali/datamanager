@@ -37,7 +37,7 @@ def time_series_data(project):
             )
     chart_data["snapshots"] = order_chart_data(chart_data["snapshots"])
 
-    latest_snapshot = project.project_snapshots.latest()
+    latest_snapshot = find_latest_snapshot_with_dates(project)
     chart_data["events"] = extract_events(latest_snapshot)
 
     return json.dumps(chart_data, use_decimal=True)
@@ -76,7 +76,7 @@ def update_previous_chart_values(chart_data, snapshot, quarter_number, fin_year)
 def extract_date_quarter_year(quarter_number, financial_year):
     dates = {1: "-06-30", 2: "-09-30", 3: "-12-31", 4: "-03-31"}
     if quarter_number == 4:
-        date = str(int(financial_year.get_starting_year())+1) + dates[quarter_number]
+        date = str(int(financial_year.get_starting_year()) + 1) + dates[quarter_number]
     else:
         date = financial_year.get_starting_year() + dates[quarter_number]
 
@@ -110,6 +110,18 @@ def compute_total_spent(project_snapshot, quarter_number):
             total_spent_in_quarter = quarterly_spent
 
     return total_spent_to_date, total_spent_in_quarter
+
+
+def find_latest_snapshot_with_dates(project):
+    snapshots = project.project_snapshots.all().order_by("-irm_snapshot")
+    for snapshot in snapshots:
+        if (
+            snapshot.estimated_construction_start_date
+            and snapshot.estimated_construction_end_date
+        ):
+            return snapshot
+
+    return None
 
 
 def extract_events(project_snapshot):
