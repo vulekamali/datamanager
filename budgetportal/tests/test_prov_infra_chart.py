@@ -600,7 +600,10 @@ class EventsTestCase(TransactionTestCase):
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot,
             project=self.project,
+            start_date="2029-09-30",
             estimated_construction_start_date="2030-01-01",
+            estimated_completion_date="2033-02-01",
+            contracted_construction_end_date="2033-01-31",
             estimated_construction_end_date="2032-12-31",
         )
 
@@ -609,18 +612,24 @@ class EventsTestCase(TransactionTestCase):
         self.file_2.close()
 
     def test_events_assigned_correctly(self):
-        """Test that estimated constructions dates are assigned correctly"""
+        """Test that all dates are assigned correctly"""
         events_data = time_series_data(self.project.project_snapshots.all())
         events_data = events_data[u"events"]
-        self.assertEqual(len(events_data), 2)
+        self.assertEqual(len(events_data), 5)
 
-        # Estimated construction start date
-        self.assertEqual(events_data[0]["date"], "2030-01-01")
-        # Estimated construction end date
-        self.assertEqual(events_data[1]["date"], "2032-12-31")
+        # Project Start Date
+        self.assertEqual(events_data[0]["date"], "2029-09-30")
+        # Estimated Construction Start Date
+        self.assertEqual(events_data[1]["date"], "2030-01-01")
+        # Estimated Completion Date
+        self.assertEqual(events_data[2]["date"], "2033-02-01")
+        # Contracted Construction End Date
+        self.assertEqual(events_data[3]["date"], "2033-01-31")
+        # Estimated Construction End Date
+        self.assertEqual(events_data[4]["date"], "2032-12-31")
 
     def test_events_when_latest_snapshot_has_empty_dates(self):
-        """Test that dates are taken from Q2 instead of Q3"""
+        """Test that only not null values emitted to events"""
         q3 = Quarter.objects.create(number=3)
         irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year,
@@ -629,16 +638,14 @@ class EventsTestCase(TransactionTestCase):
             file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_2, project=self.project
+            irm_snapshot=irm_snapshot_2, project=self.project, start_date="2029-09-30",
         )
         events_data = time_series_data(self.project.project_snapshots.all())
         events_data = events_data[u"events"]
-        self.assertEqual(len(events_data), 2)
+        self.assertEqual(len(events_data), 1)
 
-        # Estimated construction start date
-        self.assertEqual(events_data[0]["date"], "2030-01-01")
-        # Estimated construction end date
-        self.assertEqual(events_data[1]["date"], "2032-12-31")
+        # Project Start Date
+        self.assertEqual(events_data[0]["date"], "2029-09-30")
 
 
 class SerializeChartDataResultTestCase(TransactionTestCase):
