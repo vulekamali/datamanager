@@ -56,6 +56,68 @@ class DateQuarterMatchTestCase(TestCase):
         self.assertEqual(snapshots_data[3]["quarter_label"], "END Q4")
 
 
+class TotalEstimatedProjectCostTestCase(TestCase):
+    def setUp(self):
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        q2 = Quarter.objects.create(number=2)
+        irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+        )
+        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_2, project=self.project, total_project_cost=100
+        )
+
+    def test_total_project_cost_is_null(self):
+        """Test that total project cost for Q1 (which created by Q2) is Null"""
+        snapshots_data = json.loads(time_series_data(self.project))
+        snapshots_data = snapshots_data[u"snapshots"]
+        self.assertEqual(len(snapshots_data), 2)
+
+        # Check Q1 values
+        self.assertEqual(snapshots_data[0]["total_estimated_project_cost"], None)
+
+    def test_total_project_cost_assigned_correctly(self):
+        """Test that total project cost for Q2 is 100"""
+        snapshots_data = json.loads(time_series_data(self.project))
+        snapshots_data = snapshots_data[u"snapshots"]
+        self.assertEqual(len(snapshots_data), 2)
+
+        # Check Q2 values
+        self.assertEqual(snapshots_data[1]["total_estimated_project_cost"], 100)
+
+
+class StatusTestCase(TestCase):
+    def setUp(self):
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        q2 = Quarter.objects.create(number=2)
+        irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+        )
+        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_2, project=self.project, status="Tender"
+        )
+
+    def test_status_is_null(self):
+        """Test that status for Q1 (which created by Q2) is Null"""
+        snapshots_data = json.loads(time_series_data(self.project))
+        snapshots_data = snapshots_data[u"snapshots"]
+        self.assertEqual(len(snapshots_data), 2)
+
+        # Check Q1 values
+        self.assertEqual(snapshots_data[0]["status"], None)
+
+    def test_status_assigned_correctly(self):
+        """Test that status for Q2 is Tender"""
+        snapshots_data = json.loads(time_series_data(self.project))
+        snapshots_data = snapshots_data[u"snapshots"]
+        self.assertEqual(len(snapshots_data), 2)
+
+        # Check Q2 values
+        self.assertEqual(snapshots_data[1]["status"], "Tender")
+
+
 class Q1UpdateTestCase(TestCase):
     def setUp(self):
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
@@ -209,7 +271,7 @@ class Q1Q2Q3UpdateTestCase(TestCase):
         )
 
     def test_q1_q2_q3_updated_after_q4_snapshot_inserted(self):
-        """Test that Q1 and Q2 are updated correctly when Q3 inserted"""
+        """Test that Q1, Q2 and Q3 are updated correctly when Q4 inserted"""
         snapshots_data = json.loads(time_series_data(self.project))
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 3)
@@ -539,68 +601,6 @@ class QuarterLabelTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["quarter_label"], "END Q2")
         self.assertEqual(snapshots_data[2]["quarter_label"], "END Q3")
         self.assertEqual(snapshots_data[3]["quarter_label"], "END Q4")
-
-
-class TotalEstimatedProjectCostTestCase(TestCase):
-    def setUp(self):
-        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
-        q2 = Quarter.objects.create(number=2)
-        irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
-        )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_2, project=self.project, total_project_cost=100
-        )
-
-    def test_total_project_cost_is_null(self):
-        """Test that total project cost for Q1 (which created by Q2) is Null"""
-        snapshots_data = json.loads(time_series_data(self.project))
-        snapshots_data = snapshots_data[u"snapshots"]
-        self.assertEqual(len(snapshots_data), 2)
-
-        # Check Q1 values
-        self.assertEqual(snapshots_data[0]["total_estimated_project_cost"], None)
-
-    def test_total_project_cost_assigned_correctly(self):
-        """Test that total project cost for Q2 is 100"""
-        snapshots_data = json.loads(time_series_data(self.project))
-        snapshots_data = snapshots_data[u"snapshots"]
-        self.assertEqual(len(snapshots_data), 2)
-
-        # Check Q2 values
-        self.assertEqual(snapshots_data[1]["total_estimated_project_cost"], 100)
-
-
-class StatusTestCase(TestCase):
-    def setUp(self):
-        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
-        q2 = Quarter.objects.create(number=2)
-        irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
-        )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_2, project=self.project, status="Tender"
-        )
-
-    def test_status_is_null(self):
-        """Test that status for Q1 (which created by Q2) is Null"""
-        snapshots_data = json.loads(time_series_data(self.project))
-        snapshots_data = snapshots_data[u"snapshots"]
-        self.assertEqual(len(snapshots_data), 2)
-
-        # Check Q1 values
-        self.assertEqual(snapshots_data[0]["status"], None)
-
-    def test_status_assigned_correctly(self):
-        """Test that status for Q2 is Tender"""
-        snapshots_data = json.loads(time_series_data(self.project))
-        snapshots_data = snapshots_data[u"snapshots"]
-        self.assertEqual(len(snapshots_data), 2)
-
-        # Check Q2 values
-        self.assertEqual(snapshots_data[1]["status"], "Tender")
 
 
 class EventsTestCase(TestCase):
