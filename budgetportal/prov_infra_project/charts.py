@@ -1,4 +1,3 @@
-
 def order_chart_data(snapshot_list):
     return sorted(snapshot_list, key=lambda x: x["date"])
 
@@ -34,9 +33,8 @@ def time_series_data(project_snapshots):
             )
     chart_data["snapshots"] = order_chart_data(chart_data["snapshots"])
 
-    latest_snapshot = find_latest_snapshot_with_dates(project_snapshots)
-    if latest_snapshot:
-        chart_data["events"] = extract_events(latest_snapshot)
+    latest_snapshot = project_snapshots.latest()
+    chart_data["events"] = extract_events(latest_snapshot)
 
     return chart_data
 
@@ -108,24 +106,44 @@ def compute_total_spent(project_snapshot, quarter_number):
     return total_spent_to_date, total_spent_in_quarter
 
 
-def find_latest_snapshot_with_dates(project_snapshots):
-    for snapshot in project_snapshots:
-        if (
-            snapshot.estimated_construction_start_date
-            and snapshot.estimated_construction_end_date
-        ):
-            return snapshot
-
-    return None
-
-
 def extract_events(project_snapshot):
     events = []
-    start_date = project_snapshot.estimated_construction_start_date
-    events.append(
-        {"date": str(start_date), "label": "Estimated construction start date"}
-    )
-    end_date = project_snapshot.estimated_construction_end_date
-    events.append({"date": str(end_date), "label": "Estimated construction end date"})
+    start_date = project_snapshot.start_date
+    if start_date:
+        events.append({"date": str(start_date), "label": "Project Start Date"})
+
+    estimated_const_start_date = project_snapshot.estimated_construction_start_date
+    if estimated_const_start_date:
+        events.append(
+            {
+                "date": str(estimated_const_start_date),
+                "label": "Estimated Construction Start Date",
+            }
+        )
+    estimated_completion_date = project_snapshot.estimated_completion_date
+    if estimated_completion_date:
+        events.append(
+            {
+                "date": str(estimated_completion_date),
+                "label": "Estimated Completion Date",
+            }
+        )
+    contracted_construction_end_date = project_snapshot.contracted_construction_end_date
+    if contracted_construction_end_date:
+        events.append(
+            {
+                "date": str(contracted_construction_end_date),
+                "label": "Contracted Construction End Date",
+            }
+        )
+
+    estimated_construction_end_date = project_snapshot.estimated_construction_end_date
+    if estimated_construction_end_date:
+        events.append(
+            {
+                "date": str(estimated_construction_end_date),
+                "label": "Estimated Construction End Date",
+            }
+        )
 
     return events
