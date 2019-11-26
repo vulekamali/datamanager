@@ -14,7 +14,7 @@ parser.add_argument('webflow_app_dir', help='Path to the Django app where we kee
 args = parser.parse_args()
 
 
-asset_path_regex = re.compile("\"(js|css|images)/")
+asset_path_regex = re.compile("\"(js|css|images|fonts)/")
 
 
 def copy_static_dir(src, dst):
@@ -93,3 +93,5 @@ with ZipFile(args.webflow_zipfile, 'r') as zipObj:
                         os.path.join(args.webflow_app_dir, "static/js"))
         copy_static_dir(os.path.join(tmp_dir, "images"),
                         os.path.join(args.webflow_app_dir, "static/images"))
+        copy_static_dir(os.path.join(tmp_dir, "fonts"),
+                        os.path.join(args.webflow_app_dir, "static/fonts"))
