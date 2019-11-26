@@ -1,13 +1,10 @@
-import simplejson as json
-
 
 def order_chart_data(snapshot_list):
     return sorted(snapshot_list, key=lambda x: x["date"])
 
 
-def time_series_data(project):
+def time_series_data(project_snapshots):
     chart_data = {"snapshots": [], "events": []}
-    project_snapshots = project.project_snapshots.all()
     for snapshot in project_snapshots:
         quarter_number = snapshot.irm_snapshot.quarter.number
         fin_year = snapshot.irm_snapshot.financial_year
@@ -37,11 +34,11 @@ def time_series_data(project):
             )
     chart_data["snapshots"] = order_chart_data(chart_data["snapshots"])
 
-    latest_snapshot = find_latest_snapshot_with_dates(project)
+    latest_snapshot = find_latest_snapshot_with_dates(project_snapshots)
     if latest_snapshot:
         chart_data["events"] = extract_events(latest_snapshot)
 
-    return json.dumps(chart_data, use_decimal=True)
+    return chart_data
 
 
 def update_previous_chart_values(chart_data, snapshot, quarter_number, fin_year):
@@ -111,9 +108,8 @@ def compute_total_spent(project_snapshot, quarter_number):
     return total_spent_to_date, total_spent_in_quarter
 
 
-def find_latest_snapshot_with_dates(project):
-    snapshots = project.project_snapshots.all().order_by("-irm_snapshot")
-    for snapshot in snapshots:
+def find_latest_snapshot_with_dates(project_snapshots):
+    for snapshot in project_snapshots:
         if (
             snapshot.estimated_construction_start_date
             and snapshot.estimated_construction_end_date
