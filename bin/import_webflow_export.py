@@ -32,7 +32,8 @@ def djangofy(htmlfile):
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>')
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>')
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>')
-    file_contents = insert_at_body_end(file_contents, '<script src="/static/js/vulekamali-webflow.js"></script>')
+
+    file_contents = insert_at_body_end(file_contents, '<script src="/static/generated/vulekamali-webflow.bundle.js"></script>')
 
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>')
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>')

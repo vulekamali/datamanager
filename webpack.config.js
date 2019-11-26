@@ -7,10 +7,13 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 
 module.exports = {
-  entry: './assets/js/scripts.js',
+  entry: {
+    'frontend-v1': './assets/js/scripts.js',
+    'vulekamali-webflow': './assets/js/webflow/index.js',
+  },
   output: {
     path: resolve(__dirname, 'assets/generated/'),
-    filename: 'scripts.bundle.js',
+    filename: '[name].bundle.js',
   },
 
   devtool: 'source-map',

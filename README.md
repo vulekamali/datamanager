@@ -29,9 +29,14 @@ You can find frontend code in the following places:
   - Includes in `assets/js/...html`
 - Javascript (ES6)
   - The package for the main site has `package.json` in the root, and source files in `assets/js`
+    - This is bundled as `frontend-v1.bundle.js`
   - A package providing react views for certain pages in `packages/webapp`
+    - This is bundled as `webapp.bundle.js`
 - CSS (SCSS) in `assets/scss`
 - [Webflow-built pages](#webflow)
+  - `webflow.js` and other assets are served from the `webflow` app static directory
+  - JS to integrate the webflow frontend with the django project is also built using webpack
+    - This is bundled as `vulekamali-webflow.bundle.js`
 
 Most of the HTML has been migrated from Jekyll as simply and quickly as possible
 and we're figuring out how best to structure it going forward. *Find a balance
