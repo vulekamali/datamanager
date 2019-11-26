@@ -12,6 +12,50 @@ from budgetportal.models import (
 from budgetportal.prov_infra_project.charts import time_series_data
 
 
+class DateQuarterMatchTestCase(TestCase):
+    def setUp(self):
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.fin_year = FinancialYear.objects.create(slug="2019-20")
+        q4 = Quarter.objects.create(number=4)
+        irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year, quarter=q4, date_taken="2020-03-31"
+        )
+        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot,
+            project=self.project,
+            estimated_construction_start_date="2019-01-01",
+            estimated_construction_end_date="2021-12-31",
+        )
+
+    def test_dates_are_end_of_quarters(self):
+        """Test that all dates are end day of a quarter"""
+        snapshots_data = json.loads(time_series_data(self.project))
+        snapshots_data = snapshots_data[u"snapshots"]
+        self.assertEqual(len(snapshots_data), 4)
+
+        # Q1->06-30, Q2->09-30, Q3->12-31, Q4->03-31
+        self.assertEqual(snapshots_data[0]["date"], "2019-06-30")
+        self.assertEqual(snapshots_data[1]["date"], "2019-09-30")
+        self.assertEqual(snapshots_data[2]["date"], "2019-12-31")
+        self.assertEqual(snapshots_data[3]["date"], "2020-03-31")
+
+    def test_dates_match_with_quarters(self):
+        """Test that dates and quarter_labels match"""
+        snapshots_data = json.loads(time_series_data(self.project))
+        snapshots_data = snapshots_data[u"snapshots"]
+        self.assertEqual(len(snapshots_data), 4)
+
+        # Q1->06-30, Q2->09-30, Q3->12-31, Q4->03-31
+        self.assertEqual(snapshots_data[0]["date"], "2019-06-30")
+        self.assertEqual(snapshots_data[0]["quarter_label"], "END Q1")
+        self.assertEqual(snapshots_data[1]["date"], "2019-09-30")
+        self.assertEqual(snapshots_data[1]["quarter_label"], "END Q2")
+        self.assertEqual(snapshots_data[2]["date"], "2019-12-31")
+        self.assertEqual(snapshots_data[2]["quarter_label"], "END Q3")
+        self.assertEqual(snapshots_data[3]["date"], "2020-03-31")
+        self.assertEqual(snapshots_data[3]["quarter_label"], "END Q4")
+
+
 class Q1UpdateTestCase(TestCase):
     def setUp(self):
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
@@ -504,8 +548,7 @@ class EventsTestCase(TestCase):
             financial_year=self.fin_year, quarter=q3, date_taken="2030-09-30"
         )
         ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot,
-            project=self.project,
+            irm_snapshot=irm_snapshot, project=self.project
         )
         events_data = json.loads(time_series_data(self.project))
         events_data = events_data[u"events"]
