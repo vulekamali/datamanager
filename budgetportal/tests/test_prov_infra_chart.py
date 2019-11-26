@@ -294,103 +294,37 @@ class Q1Q2UpdateTestCase(TransactionTestCase):
 class NullQuarterlySpendTestCase(TransactionTestCase):
     def setUp(self):
         self.file = open(EMPTY_FILE_PATH)
-        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
-        q1 = Quarter.objects.create(number=1)
-        irm_snapshot_1 = IRMSnapshot.objects.create(
+        q3 = Quarter.objects.create(number=3)
+        irm_snapshot = IRMSnapshot.objects.create(
             financial_year=self.fin_year,
-            quarter=q1,
-            date_taken=date(2030, 6, 30),
+            quarter=q3,
+            date_taken=date(2030, 12, 31),
             file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_1,
-            project=self.project,
-            actual_expenditure_q1=None,
-            expenditure_from_previous_years_total=200,
-        )
-        q2 = Quarter.objects.create(number=2)
-        irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
-            quarter=q2,
-            date_taken=date(2030, 9, 30),
-            file=File(self.file_2),
-        )
-        ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_2,
-            project=self.project,
-            actual_expenditure_q1=None,
-            actual_expenditure_q2=20,
-            expenditure_from_previous_years_total=200,
-        )
-
-    def tearDown(self):
-        self.file.close()
-        self.file_2.close()
-
-    def test_total_spends_are_none(self):
-        """Test that total spends are none because of actual_expenditure_q1"""
-        snapshots_data = time_series_data(self.project.project_snapshots.all())
-        snapshots_data = snapshots_data[u"snapshots"]
-        self.assertEqual(len(snapshots_data), 2)
-
-        # Check total_spent_to_date values for Q1 and Q2
-        self.assertEqual(snapshots_data[0]["total_spent_to_date"], None)
-        self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
-
-
-class NullQuarterlySpendSecondTestCase(TransactionTestCase):
-    def setUp(self):
-        self.file = open(EMPTY_FILE_PATH)
-        self.file_2 = open(EMPTY_FILE_PATH)
-        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
-        q1 = Quarter.objects.create(number=1)
-        irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
-            quarter=q1,
-            date_taken=date(2030, 6, 30),
-            file=File(self.file),
-        )
-        ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_1,
-            project=self.project,
-            actual_expenditure_q1=10,
-            expenditure_from_previous_years_total=200,
-        )
-        q2 = Quarter.objects.create(number=2)
-        irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
-            quarter=q2,
-            date_taken=date(2030, 9, 30),
-            file=File(self.file_2),
-        )
-        ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_2,
+            irm_snapshot=irm_snapshot,
             project=self.project,
             actual_expenditure_q1=10,
             actual_expenditure_q2=None,
+            actual_expenditure_q3=30,
             expenditure_from_previous_years_total=200,
         )
 
     def tearDown(self):
         self.file.close()
-        self.file_2.close()
 
-    def test_second_total_spend_is_none(self):
-        """Test that Q2 total values are none because of actual_expenditure_q2"""
+    def test_total_spends_are_correct(self):
+        """Test that total spends are none because of actual_expenditure_q1"""
         snapshots_data = time_series_data(self.project.project_snapshots.all())
         snapshots_data = snapshots_data[u"snapshots"]
-        self.assertEqual(len(snapshots_data), 2)
+        self.assertEqual(len(snapshots_data), 3)
 
-        # Check Q1 values
-        self.assertEqual(snapshots_data[0]["total_spent_in_quarter"], 10)
+        # Check total_spent_to_date values for Q1, Q2 and Q3
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 210)
-
-        # Check Q2 values
-        self.assertEqual(snapshots_data[1]["total_spent_in_quarter"], None)
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
+        self.assertEqual(snapshots_data[2]["total_spent_to_date"], None)
 
 
 class LatestValueTestCase(TransactionTestCase):
