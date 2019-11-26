@@ -1,6 +1,9 @@
 import json
+import os
+from datetime import date
 
-from django.test import TestCase
+from django.core.files import File
+from django.test import TransactionTestCase
 
 from budgetportal.models import (
     ProvInfraProjectSnapshot,
@@ -11,14 +14,22 @@ from budgetportal.models import (
 )
 from budgetportal.prov_infra_project.charts import time_series_data
 
+EMPTY_FILE_PATH = os.path.abspath(
+    "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
+)
 
-class DateQuarterMatchTestCase(TestCase):
+
+class DateQuarterMatchTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2019-20")
         q4 = Quarter.objects.create(number=4)
         irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q4, date_taken="2020-03-31"
+            financial_year=self.fin_year,
+            quarter=q4,
+            date_taken=date(2020, 3, 31),
+            file=File(self.file),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot,
@@ -26,6 +37,9 @@ class DateQuarterMatchTestCase(TestCase):
             estimated_construction_start_date="2019-01-01",
             estimated_construction_end_date="2021-12-31",
         )
+
+    def tearDown(self):
+        self.file.close()
 
     def test_dates_are_end_of_quarters(self):
         """Test that all dates are end day of a quarter"""
@@ -56,17 +70,24 @@ class DateQuarterMatchTestCase(TestCase):
         self.assertEqual(snapshots_data[3]["quarter_label"], "END Q4")
 
 
-class TotalEstimatedProjectCostTestCase(TestCase):
+class TotalEstimatedProjectCostTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q2 = Quarter.objects.create(number=2)
-        irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+        irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_2, project=self.project, total_project_cost=100
+            irm_snapshot=irm_snapshot, project=self.project, total_project_cost=100
         )
+
+    def tearDown(self):
+        self.file.close()
 
     def test_total_project_cost_is_null(self):
         """Test that total project cost for Q1 (which created by Q2) is Null"""
@@ -87,17 +108,24 @@ class TotalEstimatedProjectCostTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["total_estimated_project_cost"], 100)
 
 
-class StatusTestCase(TestCase):
+class StatusTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2, project=self.project, status="Tender"
         )
+
+    def tearDown(self):
+        self.file.close()
 
     def test_status_is_null(self):
         """Test that status for Q1 (which created by Q2) is Null"""
@@ -118,13 +146,18 @@ class StatusTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["status"], "Tender")
 
 
-class Q1UpdateTestCase(TestCase):
+class Q1UpdateTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q1 = Quarter.objects.create(number=1)
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
+            financial_year=self.fin_year,
+            quarter=q1,
+            date_taken=date(2030, 6, 30),
+            file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
@@ -132,6 +165,10 @@ class Q1UpdateTestCase(TestCase):
             actual_expenditure_q1=10,
             expenditure_from_previous_years_total=200,
         )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
 
     def test_q1_updated_after_q2_snapshot_inserted(self):
         """Test that Q1 is updated correctly when Q2 inserted"""
@@ -146,7 +183,10 @@ class Q1UpdateTestCase(TestCase):
         # Create Q2 snapshot
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
@@ -165,13 +205,20 @@ class Q1UpdateTestCase(TestCase):
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 211)
 
 
-class Q1Q2UpdateTestCase(TestCase):
+class Q1Q2UpdateTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
+        self.file_3 = open(EMPTY_FILE_PATH)
+
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q1 = Quarter.objects.create(number=1)
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
+            financial_year=self.fin_year,
+            quarter=q1,
+            date_taken=date(2030, 6, 30),
+            file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
@@ -181,7 +228,10 @@ class Q1Q2UpdateTestCase(TestCase):
         )
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
@@ -190,6 +240,11 @@ class Q1Q2UpdateTestCase(TestCase):
             actual_expenditure_q2=20,
             expenditure_from_previous_years_total=200,
         )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
+        self.file_3.close()
 
     def test_q1_q2_updated_after_q3_snapshot_inserted(self):
         """Test that Q1 and Q2 are updated correctly when Q3 inserted"""
@@ -208,7 +263,10 @@ class Q1Q2UpdateTestCase(TestCase):
         # Create Q3 snapshot
         q3 = Quarter.objects.create(number=3)
         irm_snapshot_3 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q3, date_taken="2030-12-31"
+            financial_year=self.fin_year,
+            quarter=q3,
+            date_taken=date(2030, 12, 31),
+            file=File(self.file_3),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_3,
@@ -232,13 +290,21 @@ class Q1Q2UpdateTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], 233)
 
 
-class Q1Q2Q3UpdateTestCase(TestCase):
+class Q1Q2Q3UpdateTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
+        self.file_3 = open(EMPTY_FILE_PATH)
+        self.file_4 = open(EMPTY_FILE_PATH)
+
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q1 = Quarter.objects.create(number=1)
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
+            financial_year=self.fin_year,
+            quarter=q1,
+            date_taken=date(2030, 6, 30),
+            file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
@@ -248,7 +314,10 @@ class Q1Q2Q3UpdateTestCase(TestCase):
         )
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
@@ -259,7 +328,10 @@ class Q1Q2Q3UpdateTestCase(TestCase):
         )
         q3 = Quarter.objects.create(number=3)
         irm_snapshot_3 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q3, date_taken="2030-12-31"
+            financial_year=self.fin_year,
+            quarter=q3,
+            date_taken=date(2030, 12, 31),
+            file=File(self.file_3),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_3,
@@ -269,6 +341,12 @@ class Q1Q2Q3UpdateTestCase(TestCase):
             actual_expenditure_q3=30,
             expenditure_from_previous_years_total=200,
         )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
+        self.file_3.close()
+        self.file_4.close()
 
     def test_q1_q2_q3_updated_after_q4_snapshot_inserted(self):
         """Test that Q1, Q2 and Q3 are updated correctly when Q4 inserted"""
@@ -291,7 +369,10 @@ class Q1Q2Q3UpdateTestCase(TestCase):
         # Create Q4 snapshot
         q4 = Quarter.objects.create(number=4)
         irm_snapshot_4 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q4, date_taken="2030-12-31"
+            financial_year=self.fin_year,
+            quarter=q4,
+            date_taken=date(2031, 3, 31),
+            file=File(self.file_4),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_4,
@@ -320,13 +401,18 @@ class Q1Q2Q3UpdateTestCase(TestCase):
         self.assertEqual(snapshots_data[2]["total_spent_to_date"], 266)
 
 
-class NullQuarterlySpendTestCase(TestCase):
+class NullQuarterlySpendTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q1 = Quarter.objects.create(number=1)
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
+            financial_year=self.fin_year,
+            quarter=q1,
+            date_taken=date(2030, 6, 30),
+            file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
@@ -336,7 +422,10 @@ class NullQuarterlySpendTestCase(TestCase):
         )
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
@@ -345,6 +434,10 @@ class NullQuarterlySpendTestCase(TestCase):
             actual_expenditure_q2=20,
             expenditure_from_previous_years_total=200,
         )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
 
     def test_total_spends_are_none(self):
         """Test that total spends are none because of actual_expenditure_q1"""
@@ -357,13 +450,18 @@ class NullQuarterlySpendTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
 
 
-class NullQuarterlySpendSecondTestCase(TestCase):
+class NullQuarterlySpendSecondTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q1 = Quarter.objects.create(number=1)
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
+            financial_year=self.fin_year,
+            quarter=q1,
+            date_taken=date(2030, 6, 30),
+            file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
@@ -373,7 +471,10 @@ class NullQuarterlySpendSecondTestCase(TestCase):
         )
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
@@ -382,6 +483,10 @@ class NullQuarterlySpendSecondTestCase(TestCase):
             actual_expenditure_q2=None,
             expenditure_from_previous_years_total=200,
         )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
 
     def test_second_total_spend_is_none(self):
         """Test that Q2 total values are none because of actual_expenditure_q2"""
@@ -398,13 +503,18 @@ class NullQuarterlySpendSecondTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
 
 
-class LatestValueTestCase(TestCase):
+class LatestValueTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q1 = Quarter.objects.create(number=1)
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q1, date_taken="2030-06-30"
+            financial_year=self.fin_year,
+            quarter=q1,
+            date_taken=date(2030, 6, 30),
+            file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
@@ -412,6 +522,10 @@ class LatestValueTestCase(TestCase):
             actual_expenditure_q1=10,
             expenditure_from_previous_years_total=100,
         )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
 
     def test_correct_value_used_for_previous_total(self):
         """
@@ -425,7 +539,10 @@ class LatestValueTestCase(TestCase):
         # Create Q2 Snapshot
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
@@ -444,13 +561,17 @@ class LatestValueTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], 230)
 
 
-class NullExpenditureFromPreviousFinYearsTestCase(TestCase):
+class NullExpenditureFromPreviousFinYearsTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
@@ -459,6 +580,9 @@ class NullExpenditureFromPreviousFinYearsTestCase(TestCase):
             actual_expenditure_q2=20,
             expenditure_from_previous_years_total=None,
         )
+
+    def tearDown(self):
+        self.file.close()
 
     def test_total_spends_are_none(self):
         """Test that Q1 and Q2 total_spent values when expenditure_
@@ -472,17 +596,24 @@ class NullExpenditureFromPreviousFinYearsTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
 
 
-class EmitMissingQuartersTestCase(TestCase):
+class EmitMissingQuartersTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2, project=self.project
         )
+
+    def tearDown(self):
+        self.file.close()
 
     def test_two_snapshots_emitted(self):
         """Test that Q2 created 2 items"""
@@ -500,13 +631,18 @@ class EmitMissingQuartersTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["quarter_label"], "END Q2")
 
 
-class EmitMissingQuartersSecondTestCase(TestCase):
+class EmitMissingQuartersSecondTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year_1 = FinancialYear.objects.create(slug="2018-19")
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year_1, quarter=q2, date_taken="2018-09-30"
+            financial_year=self.fin_year_1,
+            quarter=q2,
+            date_taken=date(2018, 9, 30),
+            file=File(self.file),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2, project=self.project
@@ -514,11 +650,18 @@ class EmitMissingQuartersSecondTestCase(TestCase):
         self.fin_year_2 = FinancialYear.objects.create(slug="2019-20")
         q4 = Quarter.objects.create(number=4)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year_2, quarter=q4, date_taken="2020-03-31"
+            financial_year=self.fin_year_2,
+            quarter=q4,
+            date_taken=date(2020, 3, 31),
+            file=File(self.file_2),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2, project=self.project
         )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
 
     def test_six_snapshots_emitted(self):
         """Test that 2018 Q2 created 2, and 2019 Q4 created 4 items"""
@@ -545,17 +688,24 @@ class EmitMissingQuartersSecondTestCase(TestCase):
         self.assertEqual(snapshots_data[5]["quarter_label"], "END Q4")
 
 
-class FinancialYearLabelTestCase(TestCase):
+class FinancialYearLabelTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q2 = Quarter.objects.create(number=2)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2, project=self.project
         )
+
+    def tearDown(self):
+        self.file.close()
 
     def test_label_is_assigned_to_q1(self):
         """Test that financial year label is correctly assigned for Q1"""
@@ -578,17 +728,24 @@ class FinancialYearLabelTestCase(TestCase):
         self.assertEqual(snapshots_data[1]["financial_year_label"], "")
 
 
-class QuarterLabelTestCase(TestCase):
+class QuarterLabelTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q4 = Quarter.objects.create(number=4)
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q4, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q4,
+            date_taken=date(2031, 3, 31),
+            file=File(self.file),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2, project=self.project
         )
+
+    def tearDown(self):
+        self.file.close()
 
     def test_label_is_correct(self):
         """Test that quarter labels start with 'END Q' and ends with (1,2,3,4)"""
@@ -603,13 +760,18 @@ class QuarterLabelTestCase(TestCase):
         self.assertEqual(snapshots_data[3]["quarter_label"], "END Q4")
 
 
-class EventsTestCase(TestCase):
+class EventsTestCase(TransactionTestCase):
     def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q2 = Quarter.objects.create(number=2)
         irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file),
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot,
@@ -617,6 +779,10 @@ class EventsTestCase(TestCase):
             estimated_construction_start_date="2030-01-01",
             estimated_construction_end_date="2032-12-31",
         )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
 
     def test_events_assigned_correctly(self):
         """Test that estimated constructions dates are assigned correctly"""
@@ -632,11 +798,14 @@ class EventsTestCase(TestCase):
     def test_events_when_latest_snapshot_has_empty_dates(self):
         """Test that dates are taken from Q2 instead of Q3"""
         q3 = Quarter.objects.create(number=3)
-        irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year, quarter=q3, date_taken="2030-09-30"
+        irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=q3,
+            date_taken=date(2030, 12, 31),
+            file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot, project=self.project
+            irm_snapshot=irm_snapshot_2, project=self.project
         )
         events_data = json.loads(time_series_data(self.project))
         events_data = events_data[u"events"]
