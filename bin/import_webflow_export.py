@@ -28,7 +28,8 @@ def djangofy(htmlfile):
 
     file_contents = asset_path_regex.sub(r'"/static/\1/', file_contents)
 
-    file_contents = insert_at_body_end(file_contents, "<script>var pageData = {{ page_data_json|safe }}</script>")
+    file_contents = insert_at_file_start(file_contents, '{% load json_script_escape %}\n')
+    file_contents = insert_at_body_end(file_contents, '<script id="page-data" type="application/json">{{ page_data_json|json_script_escape:True }}</script>')
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>')
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>')
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>')
@@ -50,6 +51,13 @@ def djangofy(htmlfile):
 
     with open(htmlfile, "w") as f:
         f.write(file_contents)
+
+
+def insert_at_file_start(page_html_string, string_to_insert):
+    result_string = string_to_insert + page_html_string
+    if len(result_string) <= len(page_html_string):
+        raise Exception()
+    return result_string
 
 
 def insert_at_body_end(page_html_string, string_to_insert):

@@ -2,7 +2,7 @@ import { formatCurrency } from '../util.js';
 import { createTileLayer } from '../maps.js';
 
 
-export function searchPage() {
+export function searchPage(pageData) {
 
   /** Get templates of dynamically inserted elements **/
 

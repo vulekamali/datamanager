@@ -72,7 +72,7 @@ var levelToCode = {
   "District Municipality": "DC"
 };
 
-export function projectPage() {
+export function projectPage(pageData) {
   var project = pageData.project;
 
   // Project definition
