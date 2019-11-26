@@ -512,6 +512,59 @@ class EmitMissingQuartersSecondTestCase(TransactionTestCase):
         self.assertEqual(snapshots_data[5]["quarter_label"], "END Q4")
 
 
+class ComputeTotalSpentIn2YearsTestCase(TransactionTestCase):
+    def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.file_2 = open(EMPTY_FILE_PATH)
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.fin_year_1 = FinancialYear.objects.create(slug="2018-19")
+        q4 = Quarter.objects.create(number=4)
+        irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=self.fin_year_1,
+            quarter=q4,
+            date_taken=date(2019, 3, 31),
+            file=File(self.file),
+        )
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_2,
+            project=self.project,
+            actual_expenditure_q1=1,
+            actual_expenditure_q2=2,
+            actual_expenditure_q3=3,
+            actual_expenditure_q4=4,
+            expenditure_from_previous_years_total=100,
+        )
+        self.fin_year_2 = FinancialYear.objects.create(slug="2019-20")
+        q1 = Quarter.objects.create(number=1)
+        irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=self.fin_year_2,
+            quarter=q1,
+            date_taken=date(2020, 3, 31),
+            file=File(self.file_2),
+        )
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_2,
+            project=self.project,
+            actual_expenditure_q1=50,
+            expenditure_from_previous_years_total=200,
+        )
+
+    def tearDown(self):
+        self.file.close()
+        self.file_2.close()
+
+    def test_total_spent_to_dates_are_correct(self):
+        """Test that the second year's total_spent_to_date starts from the second
+        year's total_from_previous_financial_years."""
+        snapshots_data = time_series_data(self.project.project_snapshots.all())
+        snapshots_data = snapshots_data[u"snapshots"]
+        self.assertEqual(len(snapshots_data), 5)
+
+        # Check that 2019 Q1 Snapshot's total_spent_to_date is correct
+        self.assertNotEqual(snapshots_data[4]["total_spent_to_date"], 110)
+        self.assertEqual(snapshots_data[4]["total_spent_to_date"], 250)
+
+
 class FinancialYearLabelTestCase(TransactionTestCase):
     def setUp(self):
         self.file = open(EMPTY_FILE_PATH)
