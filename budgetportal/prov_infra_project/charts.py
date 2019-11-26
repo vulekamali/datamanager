@@ -38,7 +38,8 @@ def time_series_data(project):
     chart_data["snapshots"] = order_chart_data(chart_data["snapshots"])
 
     latest_snapshot = find_latest_snapshot_with_dates(project)
-    chart_data["events"] = extract_events(latest_snapshot)
+    if latest_snapshot:
+        chart_data["events"] = extract_events(latest_snapshot)
 
     return json.dumps(chart_data, use_decimal=True)
 
