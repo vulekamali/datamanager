@@ -419,7 +419,7 @@ class LatestValueTestCase(TransactionTestCase):
 
     def test_correct_value_used_for_previous_total(self):
         """
-        Test that Q2's expenditure_from_previous_years_total changes total_spent of Q1.
+        Q2 snapshot's expenditure_from_previous_years_total updates total_spent of Q1 chart item.
         """
         snapshots_data = time_series_data(self.project.project_snapshots.all())
         snapshots_data = snapshots_data[u"snapshots"]
