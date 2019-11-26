@@ -638,7 +638,7 @@ class EventsTestCase(TransactionTestCase):
             file=File(self.file_2),
         )
         ProvInfraProjectSnapshot.objects.create(
-            irm_snapshot=irm_snapshot_2, project=self.project, start_date="2029-09-30",
+            irm_snapshot=irm_snapshot_2, project=self.project, start_date="2029-09-30"
         )
         events_data = time_series_data(self.project.project_snapshots.all())
         events_data = events_data[u"events"]
