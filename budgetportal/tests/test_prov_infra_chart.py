@@ -172,7 +172,7 @@ class Q1UpdateTestCase(TransactionTestCase):
         self.file_2.close()
 
     def test_q1_updated_after_q2_snapshot_inserted(self):
-        """Test that Q1 is updated correctly when Q2 inserted"""
+        """Test that Q1 values are updated correctly when Q2 snapshot is added"""
         snapshots_data = time_series_data(self.project.project_snapshots.all())
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 1)
