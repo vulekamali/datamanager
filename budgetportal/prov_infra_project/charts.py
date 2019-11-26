@@ -100,9 +100,7 @@ def compute_total_spent(project_snapshot, quarter_number):
         field = "actual_expenditure_q{}".format(i)
         quarterly_spent = getattr(project_snapshot, field)
         if quarterly_spent is None:
-            total_spent_in_quarter = None
             total_spent_to_date = None
-            break
 
         if total_spent_to_date:
             total_spent_to_date += quarterly_spent
