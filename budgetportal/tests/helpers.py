@@ -42,7 +42,5 @@ class BaseSeleniumTestCase(StaticLiveServerTestCase):
 
     def wait_until_text_in(self, selector, text):
         self.wait.until(
-            EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, selector), text
-            )
+            EC.text_to_be_present_in_element((By.CSS_SELECTOR, selector), text)
         )
