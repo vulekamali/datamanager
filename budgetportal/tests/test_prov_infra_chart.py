@@ -474,10 +474,10 @@ class StatusTestCase(TestCase):
 class EventsTestCase(TestCase):
     def setUp(self):
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
         q2 = Quarter.objects.create(number=2)
         irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=fin_year, quarter=q2, date_taken="2030-09-30"
+            financial_year=self.fin_year, quarter=q2, date_taken="2030-09-30"
         )
         ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot,
@@ -488,6 +488,25 @@ class EventsTestCase(TestCase):
 
     def test_events_assigned_correctly(self):
         """Test that estimated constructions dates are assigned correctly"""
+        events_data = json.loads(time_series_data(self.project))
+        events_data = events_data[u"events"]
+        self.assertEqual(len(events_data), 2)
+
+        # Estimated construction start date
+        self.assertEqual(events_data[0]["date"], "2030-01-01")
+        # Estimated construction end date
+        self.assertEqual(events_data[1]["date"], "2032-12-31")
+
+    def test_events_when_latest_snapshot_has_empty_dates(self):
+        """Test that dates are taken from Q2 instead of Q3"""
+        q3 = Quarter.objects.create(number=3)
+        irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=self.fin_year, quarter=q3, date_taken="2030-09-30"
+        )
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot,
+            project=self.project,
+        )
         events_data = json.loads(time_series_data(self.project))
         events_data = events_data[u"events"]
         self.assertEqual(len(events_data), 2)
