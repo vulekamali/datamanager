@@ -13,6 +13,7 @@ from budgetportal.models import (
     Quarter,
 )
 from budgetportal.prov_infra_project.charts import time_series_data
+from budgetportal.json_encoder import JSONEncoder
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
@@ -815,3 +816,31 @@ class EventsTestCase(TransactionTestCase):
         self.assertEqual(events_data[0]["date"], "2030-01-01")
         # Estimated construction end date
         self.assertEqual(events_data[1]["date"], "2032-12-31")
+
+
+class SerializeChartDataResultTestCase(TransactionTestCase):
+    def setUp(self):
+        self.file = open(EMPTY_FILE_PATH)
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        q2 = Quarter.objects.create(number=2)
+        irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=self.fin_year,
+            quarter=q2,
+            date_taken=date(2030, 9, 30),
+            file=File(self.file),
+        )
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_2, project=self.project, status="Tender"
+        )
+
+    def tearDown(self):
+        self.file.close()
+
+    def test_chart_data_can_be_serialized(self):
+        """Test that it is possible to serialize and deserialize chart data"""
+        original_chart_data = time_series_data(self.project.project_snapshots.all())
+        serialized_data = json.dumps(original_chart_data, cls=JSONEncoder)
+        converted_chart_data = json.loads(serialized_data)
+
+        self.assertEqual(original_chart_data, converted_chart_data)
