@@ -45,7 +45,7 @@ export function searchPage() {
 
   function updateFacetParam() {
     searchState.params.delete("selected_facets");
-    for (fieldName in searchState.selectedFacets) {
+    for (let fieldName in searchState.selectedFacets) {
       var paramValue = fieldName + "_exact:" + searchState.selectedFacets[fieldName];
       searchState.params.append("selected_facets", paramValue);
     }
@@ -58,10 +58,10 @@ export function searchPage() {
   }
 
   function buildAllCoordinatesSearchURL() {
-    var params = new URLSearchParams()
+    var params = new URLSearchParams();
     params.set("q", $("#Infrastructure-Search-Input").val());
-    for (fieldName in searchState.selectedFacets) {
-      params.set(fieldName, searchState.selectedFacets[fieldName])
+    for (let fieldName in searchState.selectedFacets) {
+      params.set(fieldName, searchState.selectedFacets[fieldName]);
     }
     params.set("fields", "url_path,name,latitude,longitude");
     params.set("limit", "1000");
@@ -70,7 +70,7 @@ export function searchPage() {
 
   function resetResults() {
     $("#num-matching-projects-field").text("");
-    $("#result-list-container .narrow-card_wrapper").remove()
+    $("#result-list-container .narrow-card_wrapper").remove();
     resetDropdown("#province-dropdown");
     resetDropdown("#department-dropdown");
     resetDropdown("#status-dropdown");
