@@ -340,7 +340,7 @@ class NullQuarterlySpendTestCase(TransactionTestCase):
         self.assertEqual(snapshots_data[1]["total_spent_to_date"], None)
 
 
-class NullQuarterlySpendSecondTestCase(TransactionTestCase):
+class NullQ2SubsequentNullSpendTestCase(TransactionTestCase):
     def setUp(self):
         self.file = open(EMPTY_FILE_PATH)
         self.file_2 = open(EMPTY_FILE_PATH)
