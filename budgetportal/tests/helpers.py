@@ -7,6 +7,9 @@ from datetime import datetime
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BaseSeleniumTestCase(StaticLiveServerTestCase):
@@ -22,6 +25,8 @@ class BaseSeleniumTestCase(StaticLiveServerTestCase):
         chrome_options.add_argument("headless")
         chrome_options.add_argument("--no-sandbox")
         self.selenium = webdriver.Chrome(chrome_options=chrome_options)
+        self.selenium.implicitly_wait(10)
+        self.wait = WebDriverWait(self.selenium, 5)
 
     def tearDown(self):
         super(BaseSeleniumTestCase, self).tearDown()
@@ -34,3 +39,10 @@ class BaseSeleniumTestCase(StaticLiveServerTestCase):
 
         finally:
             self.selenium.quit()
+
+    def wait_until_text_in(self, selector, text):
+        self.wait.until(
+            EC.text_to_be_present_in_element(
+                (By.CSS_SELECTOR, selector), text
+            )
+        )

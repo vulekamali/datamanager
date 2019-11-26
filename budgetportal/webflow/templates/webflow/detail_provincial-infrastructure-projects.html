@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Tue Nov 26 2019 08:45:49 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Tue Nov 26 2019 15:34:14 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5db0b167ab837b98707b114e" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
@@ -270,7 +270,7 @@
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text status-field"></div>
+              <div class="project-detail_text budget-programme-field"></div>
             </div>
             <div data-w-id="e714ba17-eab3-3b69-c836-ec92727192cd" class="project-details__item">
               <div class="item-heading--with-tooltip">
@@ -321,7 +321,7 @@
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text"></div>
+              <div id="local-municipality-field" class="project-detail_text"></div>
             </div>
             <div data-w-id="ea231c92-9932-572f-2a16-4b51cbdb545a" class="project-details__item">
               <div class="item-heading--with-tooltip">
@@ -332,7 +332,7 @@
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text"></div>
+              <div id="district-municipality-field" class="project-detail_text"></div>
             </div>
             <div data-w-id="23c09ae1-02a7-9699-0bce-f85359fcddb3" class="project-details__item">
               <div class="item-heading--with-tooltip">
@@ -422,7 +422,7 @@
             </div>
             <div data-w-id="bd686e30-8cc0-6a99-2f2e-b70452a19ab9" class="project-details__item">
               <div class="item-heading--with-tooltip">
-                <div class="small-detail-heading underline">Total project cost</div>
+                <div class="small-detail-heading underline">Total estimated project cost</div>
                 <div style="display:none" class="small-tooltip__plate">
                   <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
                   <div class="small-tooltip__notch"></div>
@@ -433,25 +433,25 @@
             </div>
             <div data-w-id="862f828d-d72b-161d-459a-6763cfcd11ac" class="project-details__item">
               <div class="item-heading--with-tooltip">
-                <div class="small-detail-heading underline">Construction costs</div>
+                <div class="small-detail-heading underline">estimated Construction costs</div>
                 <div style="display:none" class="small-tooltip__plate">
                   <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
                   <div class="small-tooltip__notch"></div>
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text total-construction-costs-field"></div>
+              <div id="total-construction-costs-field" class="project-detail_text total-construction-costs-field"></div>
             </div>
             <div data-w-id="f7afc6e1-5e48-31a9-e33a-0f5f7a584478" class="project-details__item">
               <div class="item-heading--with-tooltip">
-                <div class="small-detail-heading underline">Professional fees</div>
+                <div class="small-detail-heading underline">estimated Professional fees</div>
                 <div style="display:none" class="small-tooltip__plate">
                   <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
                   <div class="small-tooltip__notch"></div>
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text expenditure-from-previous-years-professional-fees-field"></div>
+              <div id="total-professional-fees-field" class="project-detail_text total-professional-fees-field"></div>
             </div>
           </div>
         </div>
@@ -491,7 +491,7 @@
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text expenditure-from-previous-years-professional-fees-field"></div>
+              <div id="expenditure-from-previous-years-professional-fees-field" class="project-detail_text"></div>
             </div>
             <div data-w-id="4a8817dd-51ec-8a90-76f8-ee714c4d53ad" class="project-details__item">
               <div class="item-heading--with-tooltip">
@@ -560,7 +560,7 @@
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text actual-q1"></div>
+              <div id="actual-expenditure-q1-field" class="project-detail_text"></div>
             </div>
             <div data-w-id="396e5812-6baa-f36c-d065-31cad262aad0" class="project-details__item">
               <div class="item-heading--with-tooltip">
@@ -571,7 +571,7 @@
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text actual-q2"></div>
+              <div id="actual-expenditure-q2-field" class="project-detail_text"></div>
             </div>
             <div data-w-id="52230809-e2da-2c27-99ea-2529a2cf0753" class="project-details__item">
               <div class="item-heading--with-tooltip">
@@ -582,7 +582,7 @@
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text actual-q3"></div>
+              <div id="actual-expenditure-q3-field" class="project-detail_text"></div>
             </div>
             <div data-w-id="e6416af3-12cb-8cb6-a1f6-927ac5e45592" class="project-details__item">
               <div class="item-heading--with-tooltip">
@@ -593,7 +593,7 @@
                 </div>
               </div>
               <div style="display:none" class="project-detail__tooltip_highlight"></div>
-              <div class="project-detail_text actual-q4"></div>
+              <div id="actual-expenditure-q4-field" class="project-detail_text"></div>
             </div>
           </div>
         </div>

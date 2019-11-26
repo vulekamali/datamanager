@@ -101,55 +101,52 @@
         var project = pageData.project;
 
         // Project definition
-        $(".name-field").html(project.name);
-        $(".project-number-field").html(project.project_number);
-        $(".budget-programme-field").html(project.budget_programme);
-        $(".nature-of-investment-field").html(project.nature_of_investment);
+        $(".name-field").text(project.name);
+        $(".project-number-field").text(project.project_number);
+        $(".budget-programme-field").text(project.budget_programme);
+        $(".nature-of-investment-field").text(project.nature_of_investment);
 
         // Administrative details
-        $(".primary-funding-source-field").html(project.primary_funding_source);
-        $(".funding-status-field").html(project.funding_status);
-        $(".province-field").html(project.province);
-        $(".department-field").html(project.department);
+        $(".primary-funding-source-field").text(project.primary_funding_source);
+        $(".funding-status-field").text(project.funding_status);
+        $(".province-field").text(project.province);
+        $(".department-field").text(project.department);
 
         // Location
-        $(".local-municipality-field").html(project.local_municipality);
-        $(".district-municipality-field").html(project.district_municipality);
-        $(".coordinates-field").html(project.latitude + ", " + project.longitude);
+        $("#local-municipality-field").text(project.local_municipality);
+        $("#district-municipality-field").text(project.district_municipality);
+        $(".coordinates-field").text(project.latitude + ", " + project.longitude);
 
         // Implementation
-        $(".program-implementing-agent-field").html(project.program_implementing_agent);
-        $(".principle-agent-field").html(project.principle_agent);
-        $(".main-contractor-field").html(project.main_contractor);
-        $(".other-service-providers-field").html(project.other_parties);
+        $(".program-implementing-agent-field").text(project.program_implementing_agent);
+        $(".principle-agent-field").text(project.principle_agent);
+        $(".main-contractor-field").text(project.main_contractor);
+        $(".other-service-providers-field").text(project.other_parties);
 
         // Dates
-        $(".status-field").html(project.status);
-        $(".start-date-field").html(project.start_date);
-        $(".estimated-construction-start-date-field").html(project.estimated_construction_start_date);
-        $(".estimated-completion-date-field").html(project.estimated_completion_date);
-        $(".contracted-construction-end-date-field").html(project.contracted_construction_end_date);
-        $(".estimated-construction-end-date-field").html(project.estimated_construction_end_date);
+        $(".status-field").text(project.status);
+        $(".start-date-field").text(project.start_date);
+        $(".estimated-construction-start-date-field").text(project.estimated_construction_start_date);
+        $(".estimated-completion-date-field").text(project.estimated_completion_date);
+        $(".contracted-construction-end-date-field").text(project.contracted_construction_end_date);
+        $(".estimated-construction-end-date-field").text(project.estimated_construction_end_date);
 
         // Budgets and spending
-        $(".total-project-cost-field").html(formatCurrency(project.total_project_cost));
-        $(".total-professional-fees-field").html(formatCurrency(project.total_professional_fees));
-        $(".total-construction-costs-field").html(formatCurrency(project.total_construction_costs));
-        $(".variation-orders-field").html(formatCurrency(project.variation_orders));
-        $(".expenditure-from-previous-years-professional-fees-field").html(formatCurrency(project.expenditure_from_previous_years_professional_fees));
-        $(".expenditure-from-previous-years-construction-costs-field").html(formatCurrency(project.expenditure_from_previous_years_construction_costs));
-        $(".expenditure-from-previous-years-total-field").html(formatCurrency(project.expenditure_from_previous_years_total));
-        $(".project-expenditure-total-field").html(formatCurrency(project.project_expenditure_total));
-        $(".main-appropriation-professional-fees-field").html(formatCurrency(project.main_appropriation_professional_fees));
-        $(".adjustment-appropriation-professional-fees-field").html(formatCurrency(project.adjustment_appropriation_professional_fees));
-        $(".main-appropriation-construction-costs-field").html(formatCurrency(project.main_appropriation_construction_costs));
-        $(".adjustment-appropriation-construction-costs-field").html(formatCurrency(project.adjustment_appropriation_construction_costs));
-        $(".main-appropriation-total-field").html(formatCurrency(project.main_appropriation_total));
-        $(".adjustment-appropriation-total-field").html(formatCurrency(project.adjustment_appropriation_total));
-        $(".actual-expenditure-q1-field").html(formatCurrency(project.actual_expenditure_q1));
-        $(".actual-expenditure-q2-field").html(formatCurrency(project.actual_expenditure_q2));
-        $(".actual-expenditure-q3-field").html(formatCurrency(project.actual_expenditure_q3));
-        $(".actual-expenditure-q4-field").html(formatCurrency(project.actual_expenditure_q4));
+        $(".total-project-cost-field").text(formatCurrency(project.total_project_cost));
+        $("#total-professional-fees-field").text(formatCurrency(project.total_professional_fees));
+        $(".total-construction-costs-field").text(formatCurrency(project.total_construction_costs));
+        $(".variation-orders-field").text(formatCurrency(project.variation_orders));
+        $("#expenditure-from-previous-years-professional-fees-field").text(formatCurrency(project.expenditure_from_previous_years_professional_fees));
+        $(".expenditure-from-previous-years-construction-costs-field").text(formatCurrency(project.expenditure_from_previous_years_construction_costs));
+        $(".expenditure-from-previous-years-total-field").text(formatCurrency(project.expenditure_from_previous_years_total));
+        $(".project-expenditure-total-field").text(formatCurrency(project.project_expenditure_total));
+        $(".main-appropriation-professional-fees-field").text(formatCurrency(project.main_appropriation_professional_fees));
+        $(".main-appropriation-construction-costs-field").text(formatCurrency(project.main_appropriation_construction_costs));
+        $(".main-appropriation-total-field").text(formatCurrency(project.main_appropriation_total));
+        $("#actual-expenditure-q1-field").text(formatCurrency(project.actual_expenditure_q1));
+        $("#actual-expenditure-q2-field").text(formatCurrency(project.actual_expenditure_q2));
+        $("#actual-expenditure-q3-field").text(formatCurrency(project.actual_expenditure_q3));
+        $("#actual-expenditure-q4-field").text(formatCurrency(project.actual_expenditure_q4));
 
         // Maps and visualisations
         $(".embed-container").css("background-color", "#e1e1e1");
@@ -308,10 +305,10 @@
                 response.objects.results.forEach(function(project) {
                     var resultItem = resultRowTemplate.clone();
                     resultItem.attr("href", project.url_path);
-                    resultItem.find(".narrow-card_title").html(project.name);
-                    resultItem.find(".narrow-card_middle-column:first").html(project.status);
-                    resultItem.find(".narrow-card_middle-column:last").html(project.estimated_completion_date);
-                    resultItem.find(".narrow-card_last-column").html(formatCurrency(project.total_project_cost));
+                    resultItem.find(".narrow-card_title").text(project.name);
+                    resultItem.find(".narrow-card_middle-column:first").text(project.status);
+                    resultItem.find(".narrow-card_middle-column:last").text(project.estimated_completion_date);
+                    resultItem.find(".narrow-card_last-column").text(formatCurrency(project.total_project_cost));
                     $("#result-list-container").append(resultItem);
                 });
             } else {
