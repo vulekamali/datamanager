@@ -440,7 +440,7 @@ class EmitMissingQuartersTestCase(TransactionTestCase):
         self.file.close()
 
     def test_two_snapshots_emitted(self):
-        """Test that Q2 created 2 items"""
+        """Test that if the first snapshot is Q2, items are created for Q1 and Q2 but nothing later than Q2."""
         snapshots_data = time_series_data(self.project.project_snapshots.all())
         snapshots_data = snapshots_data[u"snapshots"]
         self.assertEqual(len(snapshots_data), 2)
