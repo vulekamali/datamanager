@@ -2,7 +2,53 @@ import { formatCurrency } from '../util.js';
 import { createTileLayer } from '../maps.js';
 
 
+const searchState = {
+  filters: null,
+  facetsRequest: null,
+  mapPointsRequest: null,
+};
+
+const baseLocation = "/api/v1/infrastructure-projects/provincial/search/";
+const facetsLocation = "/api/v1/infrastructure-projects/provincial/search/facets/";
+
+const facetPlurals = {
+  province: "provinces",
+  department: "departments",
+  status: "project statuses",
+  primary_funding_source: "funding sources",
+};
+
+
+function onPopstate(event) {
+  loadSearchFromURL();
+}
+
+function loadSearchFromCurrentURL() {
+  const queryString = window.location.search.substring(1);
+  const params = new URLSearchParams(queryString);
+
+  const textQuery = params.get("q");
+  $("#Infrastructure-Search-Input").val(textQuery);
+
+  const filterParams = params.getAll("filter");
+  searchState.filters = {};
+  filterParams.forEach(param => {
+    const pieces = param.split(/:/);
+    const key = pieces.shift();
+    const val = pieces.join(':');
+    searchState.filters[key] = val;
+  });
+}
+
+
 export function searchPage(pageData) {
+  loadSearchFromCurrentURL();
+
+  const noResultsMessage = $("#result-list-container * .w-dyn-empty");
+  const loadingSpinner = $(".loading-spinner");
+  const map = L.map("map").setView([-30.5595, 22.9375], 4);
+  const markers = L.markerClusterGroup();
+
 
   /** Get templates of dynamically inserted elements **/
 
@@ -14,30 +60,14 @@ export function searchPage(pageData) {
   dropdownItemTemplate.find(".search-dropdown_label").text("");
   dropdownItemTemplate.find(".search-dropdown_value").text("");
 
+
+  /** initialise stuff **/
+
   $("#map").empty();
 
-  /** initial page state **/
-  var searchState = {
-    baseLocation: "/api/v1/infrastructure-projects/provincial/search/",
-    facetsLocation: "/api/v1/infrastructure-projects/provincial/search/facets/",
-    params: new URLSearchParams(),
-    selectedFacets: {},
-    map: L.map("map").setView([-30.5595, 22.9375], 4),
-    markers: L.markerClusterGroup(),
-    noResultsMessage: $("#result-list-container * .w-dyn-empty"),
-    loadingSpinner: $(".loading-spinner"),
-    facetsRequest: null,
-    mapPointsRequest: null,
-  };
   createTileLayer().addTo(searchState.map);
   searchState.map.addLayer(searchState.markers);
 
-  var facetPlurals = {
-    province: "provinces",
-    department: "departments",
-    status: "project statuses",
-    primary_funding_source: "funding sources",
-  };
 
   function updateFreeTextParam() {
     searchState.params.set("q", $("#Infrastructure-Search-Input").val());
@@ -45,8 +75,8 @@ export function searchPage(pageData) {
 
   function updateFacetParam() {
     searchState.params.delete("selected_facets");
-    for (let fieldName in searchState.selectedFacets) {
-      var paramValue = fieldName + "_exact:" + searchState.selectedFacets[fieldName];
+    for (let fieldName in searchState.filters) {
+      var paramValue = fieldName + "_exact:" + searchState.filters[fieldName];
       searchState.params.append("selected_facets", paramValue);
     }
   }
@@ -54,18 +84,18 @@ export function searchPage(pageData) {
   function buildPagedSearchURL() {
     updateFreeTextParam();
     updateFacetParam();
-    return searchState.facetsLocation + "?" + searchState.params.toString();
+    return facetsLocation + "?" + searchState.params.toString();
   }
 
   function buildAllCoordinatesSearchURL() {
     var params = new URLSearchParams();
     params.set("q", $("#Infrastructure-Search-Input").val());
-    for (let fieldName in searchState.selectedFacets) {
-      params.set(fieldName, searchState.selectedFacets[fieldName]);
+    for (let fieldName in searchState.filters) {
+      params.set(fieldName, searchState.filters[fieldName]);
     }
     params.set("fields", "url_path,name,latitude,longitude");
     params.set("limit", "1000");
-    return searchState.baseLocation + "?" + params.toString();
+    return baseLocation + "?" + params.toString();
   }
 
   function resetResults() {
@@ -75,7 +105,7 @@ export function searchPage(pageData) {
     resetDropdown("#department-dropdown");
     resetDropdown("#status-dropdown");
     resetDropdown("#primary-funding-source-dropdown");
-    searchState.noResultsMessage.hide();
+    noResultsMessage.hide();
   }
 
   function triggerSearch() {
@@ -97,7 +127,7 @@ export function searchPage(pageData) {
   }
 
   function getMapPoints(url) {
-    searchState.loadingSpinner.show();
+    loadingSpinner.show();
     if (searchState.mapPointsRequest !== null)
       searchState.mapPointsRequest.abort();
     searchState.mapPointsRequest = $.get(url)
@@ -106,7 +136,7 @@ export function searchPage(pageData) {
         if (response.next) {
           getMapPoints(response.next);
         } else {
-          searchState.loadingSpinner.hide();
+          loadingSpinner.hide();
         }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
@@ -125,7 +155,7 @@ export function searchPage(pageData) {
     updateDropdown("#primary-funding-source-dropdown", response.fields, "primary_funding_source");
 
     if (response.objects.results.length) {
-      searchState.noResultsMessage.hide();
+      noResultsMessage.hide();
       response.objects.results.forEach(function(project) {
         var resultItem = resultRowTemplate.clone();
         resultItem.attr("href", project.url_path);
@@ -136,7 +166,7 @@ export function searchPage(pageData) {
         $("#result-list-container").append(resultItem);
       });
     } else {
-      searchState.noResultsMessage.show();
+      noResultsMessage.show();
     }
   }
 
@@ -179,7 +209,7 @@ export function searchPage(pageData) {
   }
 
   function getSelectedOption(fieldName) {
-    return searchState.selectedFacets[fieldName];
+    return searchState.filters[fieldName];
   }
 
   function updateDropdown(selector, fields, fieldName) {
@@ -195,7 +225,7 @@ export function searchPage(pageData) {
       const optionElement = dropdownItemTemplate.clone();
       optionElement.find(".search-dropdown_label").text("All " + facetPlurals[fieldName]);
       optionElement.click(function() {
-        delete searchState.selectedFacets[fieldName];
+        delete searchState.filters[fieldName];
         optionContainer.removeClass("w--open");
         triggerSearch();
       });
@@ -210,7 +240,7 @@ export function searchPage(pageData) {
         optionElement.find(".search-dropdown_value").text("(" + option.count + ")");
       }
       optionElement.click(function() {
-        searchState.selectedFacets[fieldName] = option.text;
+        searchState.filters[fieldName] = option.text;
         optionContainer.removeClass("w--open");
         triggerSearch();
       });
