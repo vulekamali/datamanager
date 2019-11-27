@@ -31,15 +31,15 @@ const facetPlurals = {
 };
 
 function onPopstate(event) {
-  loadSearchFromCurrentURL();
-  searchState.triggerSearch();
+  loadSearchStateFromCurrentURL();
+  searchState.triggerSearch(false);
 }
 
 function pushState() {
   window.history.pushState(null, "", urlFromSearchState());
 }
 
-function loadSearchFromCurrentURL() {
+function loadSearchStateFromCurrentURL() {
   const queryString = window.location.search.substring(1);
   const params = new URLSearchParams(queryString);
 
@@ -100,9 +100,6 @@ export function searchPage(pageData) {
 
   const noResultsMessage = $("#result-list-container * .w-dyn-empty");
   const loadingSpinner = $(".loading-spinner");
-  const map = L.map("map").setView([-30.5595, 22.9375], 4);
-  const markers = L.markerClusterGroup();
-
 
   /** Get templates of dynamically inserted elements **/
 
@@ -118,6 +115,8 @@ export function searchPage(pageData) {
   /** initialise stuff **/
 
   $("#map").empty();
+  const map = L.map("map").setView([-30.5595, 22.9375], 4);
+  const markers = L.markerClusterGroup();
   createTileLayer().addTo(map);
   map.addLayer(markers);
 
@@ -131,8 +130,9 @@ export function searchPage(pageData) {
     noResultsMessage.hide();
   }
 
-  searchState.triggerSearch = function() {
-    pushState();
+  searchState.triggerSearch = function(pushHistory = true) {
+    if (pushHistory)
+      pushState();
 
     if (searchState.facetsRequest !== null)
       searchState.facetsRequest.abort();
@@ -291,7 +291,7 @@ export function searchPage(pageData) {
 
   /** Search on page load **/
 
-  loadSearchFromCurrentURL();
+  loadSearchStateFromCurrentURL();
   resetResults();
   searchState.triggerSearch();
 
