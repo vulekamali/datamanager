@@ -1,3 +1,14 @@
+/**************************************************************
+  Style vision:
+    Starting to move things out of searchPage, binding
+    data and functions dependent on page-specific variables
+    to searchState so that they can be reached from smaller
+    functions.
+    I think searchPage should as far as possible just bind variables
+    and event listeners for page elements and trigger ajax calls
+    needed on page load.
+/***************************************************************/
+
 import { formatCurrency } from '../util.js';
 import { createTileLayer } from '../maps.js';
 
@@ -6,6 +17,7 @@ const searchState = {
   filters: null,
   facetsRequest: null,
   mapPointsRequest: null,
+  triggerSearch: null,
 };
 
 const baseLocation = "/api/v1/infrastructure-projects/provincial/search/";
@@ -18,9 +30,13 @@ const facetPlurals = {
   primary_funding_source: "funding sources",
 };
 
-
 function onPopstate(event) {
-  loadSearchFromURL();
+  loadSearchFromCurrentURL();
+  searchState.triggerSearch();
+}
+
+function pushState() {
+  window.history.pushState(null, "", urlFromSearchState());
 }
 
 function loadSearchFromCurrentURL() {
@@ -40,9 +56,47 @@ function loadSearchFromCurrentURL() {
   });
 }
 
+function urlFromSearchState() {
+  var params = new URLSearchParams();
+  params.set("q", $("#Infrastructure-Search-Input").val());
+
+  for (let fieldName in searchState.filters) {
+    params.append("filter", `${fieldName}:${searchState.filters[fieldName]}`);
+  }
+  const queryString = params.toString();
+  return `${window.location.protocol}//${window.location.host}${window.location.pathname}?${queryString}`;
+}
+
+function clearFilters() {
+  searchState.filters = {};
+  $("#Infrastructure-Search-Input").val("");
+  searchState.triggerSearch();
+}
+
+function buildPagedSearchURL() {
+  var params = new URLSearchParams();
+  params.set("q", $("#Infrastructure-Search-Input").val());
+  for (let fieldName in searchState.filters) {
+    var paramValue = fieldName + "_exact:" + searchState.filters[fieldName];
+    params.append("selected_facets", paramValue);
+  }
+  return facetsLocation + "?" + params.toString();
+}
+
+function buildAllCoordinatesSearchURL() {
+  var params = new URLSearchParams();
+  params.set("q", $("#Infrastructure-Search-Input").val());
+  for (let fieldName in searchState.filters) {
+    params.set(fieldName, searchState.filters[fieldName]);
+  }
+  params.set("fields", "url_path,name,latitude,longitude");
+  params.set("limit", "1000");
+  return baseLocation + "?" + params.toString();
+}
+
+
 
 export function searchPage(pageData) {
-  loadSearchFromCurrentURL();
 
   const noResultsMessage = $("#result-list-container * .w-dyn-empty");
   const loadingSpinner = $(".loading-spinner");
@@ -64,39 +118,8 @@ export function searchPage(pageData) {
   /** initialise stuff **/
 
   $("#map").empty();
-
-  createTileLayer().addTo(searchState.map);
-  searchState.map.addLayer(searchState.markers);
-
-
-  function updateFreeTextParam() {
-    searchState.params.set("q", $("#Infrastructure-Search-Input").val());
-  }
-
-  function updateFacetParam() {
-    searchState.params.delete("selected_facets");
-    for (let fieldName in searchState.filters) {
-      var paramValue = fieldName + "_exact:" + searchState.filters[fieldName];
-      searchState.params.append("selected_facets", paramValue);
-    }
-  }
-
-  function buildPagedSearchURL() {
-    updateFreeTextParam();
-    updateFacetParam();
-    return facetsLocation + "?" + searchState.params.toString();
-  }
-
-  function buildAllCoordinatesSearchURL() {
-    var params = new URLSearchParams();
-    params.set("q", $("#Infrastructure-Search-Input").val());
-    for (let fieldName in searchState.filters) {
-      params.set(fieldName, searchState.filters[fieldName]);
-    }
-    params.set("fields", "url_path,name,latitude,longitude");
-    params.set("limit", "1000");
-    return baseLocation + "?" + params.toString();
-  }
+  createTileLayer().addTo(map);
+  map.addLayer(markers);
 
   function resetResults() {
     $("#num-matching-projects-field").text("");
@@ -108,7 +131,9 @@ export function searchPage(pageData) {
     noResultsMessage.hide();
   }
 
-  function triggerSearch() {
+  searchState.triggerSearch = function() {
+    pushState();
+
     if (searchState.facetsRequest !== null)
       searchState.facetsRequest.abort();
     searchState.facetsRequest = $.get(buildPagedSearchURL())
@@ -124,12 +149,15 @@ export function searchPage(pageData) {
       });
     resetMapPoints();
     getMapPoints(buildAllCoordinatesSearchURL());
-  }
+  };
 
   function getMapPoints(url) {
     loadingSpinner.show();
-    if (searchState.mapPointsRequest !== null)
+
+    if (searchState.mapPointsRequest !== null) {
       searchState.mapPointsRequest.abort();
+    }
+
     searchState.mapPointsRequest = $.get(url)
       .done(function(response) {
         addMapPoints(response);
@@ -171,11 +199,11 @@ export function searchPage(pageData) {
   }
 
   function resetMapPoints() {
-    searchState.markers.clearLayers();
+    markers.clearLayers();
   }
 
   function addMapPoints(response) {
-    var markers = [];
+    var newMarkers = [];
     response.results.forEach(function(project) {
       if (! project.latitude || ! project.longitude)
         return;
@@ -195,11 +223,11 @@ export function searchPage(pageData) {
       var marker = L.marker([latitude, longitude])
           .bindPopup(project.name + '<br><a target="_blank" href="' +
                      project.url_path + '">Jump to project</a>');
-      markers.push(marker);
+      newMarkers.push(marker);
     });
-    if (markers.length) {
-      searchState.markers.addLayers(markers);
-      searchState.map.fitBounds(searchState.markers.getBounds());
+    if (newMarkers.length) {
+      markers.addLayers(newMarkers);
+      map.fitBounds(markers.getBounds());
     }
   }
 
@@ -227,7 +255,7 @@ export function searchPage(pageData) {
       optionElement.click(function() {
         delete searchState.filters[fieldName];
         optionContainer.removeClass("w--open");
-        triggerSearch();
+        searchState.triggerSearch();
       });
       optionContainer.append(optionElement);
     }
@@ -242,7 +270,7 @@ export function searchPage(pageData) {
       optionElement.click(function() {
         searchState.filters[fieldName] = option.text;
         optionContainer.removeClass("w--open");
-        triggerSearch();
+        searchState.triggerSearch();
       });
       optionContainer.append(optionElement);
     });
@@ -254,15 +282,17 @@ export function searchPage(pageData) {
   $("#Infrastructure-Search-Input").keypress(function (e) {
     var key = e.which;
     if (key == 13) {  // the enter key code
-      triggerSearch();
+      searchState.triggerSearch();
     }
   });
-  $("#Search-Button").on("click", triggerSearch);
-
+  $("#Search-Button").on("click", searchState.triggerSearch);
+  $("#clear-filters-button").on("click", clearFilters);
+  window.addEventListener("popstate", onPopstate);
 
   /** Search on page load **/
 
+  loadSearchFromCurrentURL();
   resetResults();
-  triggerSearch();
+  searchState.triggerSearch();
 
 } // end search page
