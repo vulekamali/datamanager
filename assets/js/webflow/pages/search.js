@@ -298,6 +298,6 @@ export function searchPage(pageData) {
 
   loadSearchStateFromCurrentURL();
   resetResults();
-  triggerSearch();
+  triggerSearch(false);
 
 } // end search page
