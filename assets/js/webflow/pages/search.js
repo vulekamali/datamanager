@@ -17,6 +17,7 @@ const pageState = {
   filters: null,
   facetsRequest: null,
   mapPointsRequest: null,
+  listRequest: null,
   map: null,
   markers: null,
   resultRowTemplate: null,
@@ -97,13 +98,24 @@ function buildAllCoordinatesSearchURL() {
   return baseLocation + "?" + params.toString();
 }
 
+function buildListSearchURL() {
+  var params = new URLSearchParams();
+  params.set("q", $("#Infrastructure-Search-Input").val());
+  for (let fieldName in pageState.filters) {
+    params.set(fieldName, pageState.filters[fieldName]);
+  }
+  params.set("fields", "url_path,name,status,estimated_completion_date,total_project_cost");
+  params.set("limit", "20");
+  return baseLocation + "?" + params.toString();
+}
+
 function updateFacets() {
   if (pageState.facetsRequest !== null)
     pageState.facetsRequest.abort();
   pageState.facetsRequest = $.get(buildFacetSearchURL())
     .done(function(response) {
-      resetResults();
-      showResults(response);
+      resetFacets();
+      showFacetResults(response);
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
       if (textStatus !== "abort") {
@@ -132,6 +144,21 @@ function updateMapPoints(url) {
     .fail(function(jqXHR, textStatus, errorThrown) {
       if (textStatus !== "abort") {
         alert("Something went wrong when loading map data. Please try again.");
+        console.error( jqXHR, textStatus, errorThrown );
+      }
+    });
+}
+
+function updateResultList(url) {
+  if (pageState.listRequest !== null)
+    pageState.listRequest.abort();
+  pageState.listRequest = $.get(url)
+    .done(function(response) {
+      addListResults(response);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      if (textStatus !== "abort") {
+        alert("Something went wrong when searching. Please try again.");
         console.error( jqXHR, textStatus, errorThrown );
       }
     });
@@ -168,15 +195,23 @@ function addMapPoints(response) {
 
 const getLoadingSpinner = () => $(".loading-spinner");
 const getNoResultsMessage = () => $("#result-list-container * .w-dyn-empty");
+const getLoadMoreResultsButton = () => $("#load-more-results-button");
+const getAllResultListItems = () => $("#result-list-container .narrow-card_wrapper");
 
-function resetResults() {
+function resetFacets() {
   $("#num-matching-projects-field").text("");
-  $("#result-list-container .narrow-card_wrapper").remove();
   resetDropdown("#province-dropdown");
   resetDropdown("#department-dropdown");
   resetDropdown("#status-dropdown");
   resetDropdown("#primary-funding-source-dropdown");
+}
+
+function resetResultList() {
+  getAllResultListItems().remove();
   getNoResultsMessage().hide();
+  getLoadMoreResultsButton()
+    .hide()
+    .off("click");
 }
 
 function triggerSearch(pushHistory = true) {
@@ -184,20 +219,18 @@ function triggerSearch(pushHistory = true) {
     pushState();
 
   updateFacets();
+
   resetMapPoints();
   updateMapPoints(buildAllCoordinatesSearchURL());
+
+  resetResultList();
+  updateResultList(buildListSearchURL());
 };
 
-function showResults(response) {
-  $("#num-matching-projects-field").text(response.objects.count);
-  updateDropdown("#province-dropdown", response.fields, "province");
-  updateDropdown("#department-dropdown", response.fields, "department");
-  updateDropdown("#status-dropdown", response.fields, "status");
-  updateDropdown("#primary-funding-source-dropdown", response.fields, "primary_funding_source");
-
-  if (response.objects.results.length) {
+function addListResults(response) {
+  if (response.results.length) {
     getNoResultsMessage().hide();
-    response.objects.results.forEach(function(project) {
+    response.results.forEach(function(project) {
       var resultItem = pageState.resultRowTemplate.clone();
       resultItem.attr("href", project.url_path);
       resultItem.find(".narrow-card_title").text(project.name);
@@ -206,9 +239,24 @@ function showResults(response) {
       resultItem.find(".narrow-card_last-column").text(formatCurrency(project.total_project_cost));
       $("#result-list-container").append(resultItem);
     });
+
+    if (response.next) {
+      const nextButton = getLoadMoreResultsButton();
+      nextButton.off("click");
+      nextButton.on("click", () => updateResultList(response.next));
+      nextButton.show();
+    }
   } else {
     getNoResultsMessage().show();
   }
+}
+
+function showFacetResults(response) {
+  $("#num-matching-projects-field").text(response.objects.count);
+  updateDropdown("#province-dropdown", response.fields, "province");
+  updateDropdown("#department-dropdown", response.fields, "department");
+  updateDropdown("#status-dropdown", response.fields, "status");
+  updateDropdown("#primary-funding-source-dropdown", response.fields, "primary_funding_source");
 }
 
 function resetMapPoints() {
@@ -296,8 +344,9 @@ export function searchPage(pageData) {
 
   /** Search on page load **/
 
+  resetFacets();
+  resetResultList();
   loadSearchStateFromCurrentURL();
-  resetResults();
   triggerSearch(false);
 
 } // end search page
