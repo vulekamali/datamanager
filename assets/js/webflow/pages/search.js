@@ -9,7 +9,7 @@
     needed on page load.
 /***************************************************************/
 
-import { formatCurrency } from '../util.js';
+import { formatCurrency, statusOrder, sortByOrderArray } from '../util.js';
 import { createTileLayer } from '../maps.js';
 import { reusableBarChart } from 'vulekamali-visualisations/src/charts/bar/reusable-bar-chart/reusable-bar-chart.js';
 import { select } from 'd3-selection';
@@ -322,13 +322,16 @@ function initStatusChart() {
 
   container.call(chart);
 
+  chart.padding(80);
+
   return chart;
 }
 
 function updateStatusChart(statusFacet) {
-  pageState.statusChart.data(statusFacet.map(item => ({
+  const ordered = sortByOrderArray(statusOrder, "text", statusFacet);
+  pageState.statusChart.data(ordered.map(item => ({
     "label": item.text,
-    "value": item.count
+    "value": item.count ? item.count : 0
   })));
 }
 
