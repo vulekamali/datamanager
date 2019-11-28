@@ -12,7 +12,7 @@
 import { formatCurrency } from '../util.js';
 import { createTileLayer } from '../maps.js';
 import { reusableBarChart } from 'vulekamali-visualisations/src/charts/bar/reusable-bar-chart/reusable-bar-chart.js';
-import {select} from 'd3-selection';
+import { select } from 'd3-selection';
 
 
 const pageState = {
