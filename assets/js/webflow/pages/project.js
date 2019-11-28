@@ -3,15 +3,21 @@ import { provinceCode, createTileLayer } from '../maps.js';
 
 
 function initPointMap(lat, lon) {
-  var map = L.map("project-location-map-container")
-      .setView([lat, lon], 13);
+  var map = L.map("project-location-map-container", {
+    center: [lat, lon],
+    zoom: 13,
+    scrollWheelZoom: false,
+  });
   createTileLayer().addTo(map);
   return map;
 }
 
 function initMuniMap(lat, lon) {
-  var map = L.map("project-municipal-context-map-container")
-      .setView([lat, lon], 7);
+  var map = L.map("project-municipal-context-map-container", {
+    center: [lat, lon],
+    zoom: 7,
+    scrollWheelZoom: false,
+  })
   createTileLayer().addTo(map);
   return map;
 }

@@ -353,7 +353,11 @@ export function searchPage(pageData) {
   /** initialise stuff **/
 
   $("#map").empty();
-  pageState.map = L.map("map").setView([-30.5595, 22.9375], 4);
+  pageState.map = L.map("map", {
+    center: [-30.5595, 22.9375],
+    zoom: 4,
+    scrollWheelZoom: false
+  });
   pageState.markers = L.markerClusterGroup();
   createTileLayer().addTo(pageState.map);
   pageState.map.addLayer(pageState.markers);
