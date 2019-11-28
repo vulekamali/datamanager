@@ -39,6 +39,7 @@ def djangofy(htmlfile):
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>')
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>')
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>')
+    file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="/static/css/vulekamali-webflow.css">')
     file_contents = remove_tag(file_contents, "title")
     file_contents = insert_at_head_end(file_contents, "<title>{{ page_title }}</title>")
     file_contents = insert_at_head_end(file_contents, '<meta name="description" content="{{ page_description }}">')

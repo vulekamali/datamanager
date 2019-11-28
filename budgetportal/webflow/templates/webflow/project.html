@@ -1,7 +1,7 @@
 {% load json_script_escape %}
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Tue Nov 26 2019 15:34:14 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Thu Nov 28 2019 08:21:27 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5db0b167ab837bf5647b114c" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
@@ -96,6 +96,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>
+<link rel="stylesheet" href="/static/css/vulekamali-webflow.css">
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -604,7 +605,7 @@
           </div>
           <div class="col col-8 col-m-12">
             <div class="subsection-chart_wrapper">
-              <div class="chart_wrapper"><img src="/static/images/Group-78-5.svg" alt="" class="project-budget-image"></div>
+              <div id="project-time-series" class="chart_wrapper--time-series"><img src="/static/images/Group-78-5.svg" alt="" class="project-budget-image"></div>
               <div class="chart-detail_wrapper">
                 <div class="source_wrapper">
                   <div class="source">Source:</div>
@@ -851,7 +852,7 @@
             <div class="subsection-details__heading">
               <h3 class="project-detail_heading">Timeline summary</h3>
             </div>
-            <div class="chart_wrapper"><img src="/static/images/Group-71-1.svg" alt="" class="timeline-summary-image"></div>
+            <div id="project-timeline" class="chart_wrapper--timeline"><img src="/static/images/Group-71-1.svg" alt="" class="timeline-summary-image"></div>
             <div class="chart-detail_wrapper">
               <div class="source_wrapper">
                 <div class="source">Source:</div>

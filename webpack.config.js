@@ -69,11 +69,6 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin('assets/generated/*'),
     new ExtractTextPlugin('styles.bundle.css'),
-    new ManifestPlugin({
-      fileName: '../../_data/assets.json',
-      basePath: 'assets/generated/',
-    }),
   ],
 };

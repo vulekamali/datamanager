@@ -11,6 +11,8 @@
 
 import { formatCurrency } from '../util.js';
 import { createTileLayer } from '../maps.js';
+import { reusableBarChart } from 'vulekamali-visualisations/src/charts/bar/reusable-bar-chart/reusable-bar-chart.js';
+import {select} from 'd3-selection';
 
 
 const pageState = {
@@ -22,6 +24,7 @@ const pageState = {
   markers: null,
   resultRowTemplate: null,
   dropdownItemTemplate: null,
+  statusChart: null,
 };
 
 const baseLocation = "/api/v1/infrastructure-projects/provincial/search/";
@@ -257,6 +260,7 @@ function showFacetResults(response) {
   updateDropdown("#department-dropdown", response.fields, "department");
   updateDropdown("#status-dropdown", response.fields, "status");
   updateDropdown("#primary-funding-source-dropdown", response.fields, "primary_funding_source");
+  updateStatusChart(response.fields.status);
 }
 
 function resetMapPoints() {
@@ -308,6 +312,26 @@ function updateDropdown(selector, fields, fieldName) {
   });
 }
 
+function initStatusChart() {
+  const container = select("#matching-status-chart-container");
+  const boundingRect = container.node().getBoundingClientRect();
+
+  const chart = reusableBarChart()
+        .width(boundingRect.width)
+        .height(boundingRect.height);
+
+  container.call(chart);
+
+  return chart;
+}
+
+function updateStatusChart(statusFacet) {
+  pageState.statusChart.data(statusFacet.map(item => ({
+    "label": item.text,
+    "value": item.count
+  })));
+}
+
 export function searchPage(pageData) {
 
   /** Get templates of dynamically inserted elements **/
@@ -319,6 +343,8 @@ export function searchPage(pageData) {
   pageState.dropdownItemTemplate.find(".search-status").remove();
   pageState.dropdownItemTemplate.find(".search-dropdown_label").text("");
   pageState.dropdownItemTemplate.find(".search-dropdown_value").text("");
+
+  pageState.statusChart = initStatusChart();
 
 
   /** initialise stuff **/

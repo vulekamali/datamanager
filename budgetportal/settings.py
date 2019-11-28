@@ -285,6 +285,10 @@ PIPELINE = {
             "source_filenames": ("stylesheets/app.scss",),
             "output_filename": "app.css",
         },
+        "vulekamali-webflow-css": {
+            "source_filenames": ("scss/vulekamali-webflow.scss",),
+            "output_filename": "vulekamali-webflow.css",
+        },
         "admin": {
             "source_filenames": ("stylesheets/admin.scss",),
             "output_filename": "admin.css",

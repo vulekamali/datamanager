@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
 <!--  Last Published: Thu Nov 28 2019 08:21:27 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="5dd4d2a49fa9b15fb86c0901" data-wf-site="5d660ef145315201ac996790">
+<html data-wf-page="5dde82ba63de4e94dc65fbcf" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
   
-  <meta content="Search Results" property="og:title">
+  <meta content="Protected page" property="og:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="/static/css/normalize.css" rel="stylesheet" type="text/css">
@@ -107,9 +107,25 @@
 <meta property="og:description" content="{{ page_description }}" />
 </head>
 <body>
-  <div class="w-container">
-    <h1>Search results</h1>
-    <form action="/search" class="w-form"><input type="search" class="w-input" maxlength="256" name="query" placeholder="Search…" id="search" required=""><input type="submit" value="Search" class="w-button"></form>
+  <div class="utility-page-wrap">
+    <div class="utility-page-content w-password-page w-form">
+      <form action="/.wf_auth" method="post" class="utility-page-form w-password-page"><img src="https://d3e54v103j8qbb.cloudfront.net/static/password-page-lock.832ca8e2c9.svg" alt="">
+        <h2>Protected Page</h2><input type="password" autofocus="true" maxlength="256" name="pass" placeholder="Enter your password" class="w-password-page w-input"><input type="submit" value="Submit" data-wait="Please wait..." class="w-password-page w-button">
+        <div class="w-password-page w-form-fail">
+          <div>Incorrect password. Please try again.</div>
+        </div>
+        <div style="display:none" class="w-password-page w-embed w-script"><input type="hidden" name="path" value="<%WF_FORM_VALUE_PATH%>"><input type="hidden" name="page" value="<%WF_FORM_VALUE_PAGE%>"></div>
+        <div style="display:none" class="w-password-page w-embed w-script">
+          <script type="application/javascript">
+              (function _handlePasswordPageOnload() {
+                if (/[?&]e=1(&|$)/.test(document.location.search)) {
+                  document.querySelector('.w-password-page.w-form-fail').style.display = 'block';
+                }
+              })()
+            </script>
+        </div>
+      </form>
+    </div>
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="/static/js/webflow.js" type="text/javascript"></script>
