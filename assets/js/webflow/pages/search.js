@@ -256,11 +256,13 @@ function addListResults(response) {
 
 function showFacetResults(response) {
   $("#num-matching-projects-field").text(response.objects.count);
-  updateDropdown("#province-dropdown", response.fields, "province");
-  updateDropdown("#department-dropdown", response.fields, "department");
-  updateDropdown("#status-dropdown", response.fields, "status");
-  updateDropdown("#primary-funding-source-dropdown", response.fields, "primary_funding_source");
-  updateStatusChart(response.fields.status);
+  updateDropdown("#province-dropdown", response.fields["province"], "province");
+  updateDropdown("#department-dropdown", response.fields["department"], "department");
+  updateDropdown("#primary-funding-source-dropdown", response.fields["primary_funding_source"], "primary_funding_source");
+
+  const statusOptions = sortByOrderArray(statusOrder, "text", response.fields["status"]);
+  updateDropdown("#status-dropdown", statusOptions, "status");
+  updateStatusChart(statusOptions);
 }
 
 function resetMapPoints() {
@@ -276,7 +278,7 @@ function getSelectedOption(fieldName) {
   return pageState.filters[fieldName];
 }
 
-function updateDropdown(selector, fields, fieldName) {
+function updateDropdown(selector, options, fieldName) {
   var container = $(selector);
   var optionContainer = container.find(".chart-dropdown_list");
 
@@ -296,8 +298,7 @@ function updateDropdown(selector, fields, fieldName) {
     optionContainer.append(optionElement);
   }
 
-  var options = fields[fieldName];
-  fields[fieldName].forEach(function (option) {
+  options.forEach(function (option) {
     const optionElement = pageState.dropdownItemTemplate.clone();
     optionElement.find(".search-dropdown_label").text(option.text);
     if (option.count) {
@@ -327,9 +328,8 @@ function initStatusChart() {
   return chart;
 }
 
-function updateStatusChart(statusFacet) {
-  const ordered = sortByOrderArray(statusOrder, "text", statusFacet);
-  pageState.statusChart.data(ordered.map(item => ({
+function updateStatusChart(statusOptions) {
+  pageState.statusChart.data(statusOptions.map(item => ({
     "label": item.text,
     "value": item.count ? item.count : 0
   })));
