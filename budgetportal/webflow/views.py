@@ -8,7 +8,7 @@ from drf_haystack.viewsets import HaystackViewSet
 from drf_haystack.mixins import FacetMixin
 from budgetportal import models
 from ..search_indexes import ProvInfraProjectIndex
-from drf_haystack.filters import HaystackFacetFilter, HaystackFilter
+from drf_haystack.filters import HaystackFacetFilter, HaystackFilter, HaystackOrderingFilter
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
@@ -73,6 +73,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             "province",
             "department",
             "status",
+            "status_order",
             "primary_funding_source",
             "estimated_completion_date",
             "total_project_cost",
@@ -145,10 +146,17 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     # index_models = [Location]
 
     serializer_class = ProvInfraProjectSerializer
-    filter_backends = [ProvInfraProjectFilter]
+    filter_backends = [ProvInfraProjectFilter, HaystackOrderingFilter]
 
     facet_serializer_class = ProvInfraProjectFacetSerializer
     facet_filter_backends = [ProvInfraProjectFacetFilter]
+
+    ordering_fields = [
+        'name',
+        'total_project_cost',
+        'status_order',
+        'estimated_completion_date',
+    ]
 
     @method_decorator(cache_page(60 * 30))  # minutes
     def get(self, *args, **kwargs):
