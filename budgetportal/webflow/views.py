@@ -7,23 +7,13 @@ from drf_haystack.serializers import HaystackSerializer, HaystackFacetSerializer
 from drf_haystack.viewsets import HaystackViewSet
 from drf_haystack.mixins import FacetMixin
 from budgetportal import models
+from budgetportal.json_encoder import JSONEncoder
 from ..search_indexes import ProvInfraProjectIndex
 from drf_haystack.filters import HaystackFacetFilter, HaystackFilter, HaystackOrderingFilter
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
 import json
-import decimal
-import datetime
-
-
-class JSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, decimal.Decimal):
-            return str(o)
-        if isinstance(o, (datetime.date, datetime.datetime)):
-            return o.isoformat()
-        return json.JSONEncoder.default(self, o)
 
 
 def provincial_infrastructure_project_list(request):
