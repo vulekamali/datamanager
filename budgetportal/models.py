@@ -1878,7 +1878,7 @@ class IRMSnapshot(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        ordering = ["financial_year", "quarter"]
+        ordering = ["financial_year__slug", "quarter__number"]
         verbose_name = "IRM Snapshot"
         unique_together = ["financial_year", "quarter", "date_taken"]
 
@@ -2016,7 +2016,7 @@ class ProvInfraProjectSnapshot(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        ordering = ["irm_snapshot"]
+        ordering = ["irm_snapshot__financial_year__slug", "irm_snapshot__quarter__number"]
         get_latest_by = "irm_snapshot"
         verbose_name = "Provincial infrastructure project snapshot"
         unique_together = ["irm_snapshot", "project"]

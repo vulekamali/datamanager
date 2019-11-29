@@ -188,7 +188,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         self.assertEqual(province, u"KwaZulu-Natal")
         self.assertEqual(local_muni, u"Dr Nkosazana Dlamini Zuma")
         self.assertEqual(district_muni, u"Harry Gwala")
-        self.assertEqual(gps_location, u"null, null")
+        self.assertEqual(gps_location, u"Not available")
 
         implementing_agent = selenium.find_element_by_css_selector(
             ".program-implementing-agent-field"
@@ -1061,8 +1061,8 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
         self.fin_year = FinancialYear.objects.create(slug="2030-31")
         self.quarter_1 = Quarter.objects.create(number=1)
+        self.quarter_2 = Quarter.objects.create(number=2)
         self.date_1 = date(year=2050, month=1, day=1)
-        self.date_2 = date(year=2070, month=1, day=1)
         self.irm_snapshot_1 = IRMSnapshot.objects.create(
             financial_year=self.fin_year,
             quarter=self.quarter_1,
@@ -1072,21 +1072,20 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_1,
             project=self.project,
-            status="Construction",
+            local_municipality="MUNI A",
             estimated_completion_date=date(year=2020, month=1, day=1),
         )
 
-        self.quarter_2 = Quarter.objects.create(number=2)
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year,
             quarter=self.quarter_2,
-            date_taken=self.date_2,
+            date_taken=self.date_1,
             file=File(self.file_2),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_2,
             project=self.project,
-            status="Completed",
+            local_municipality="MUNI B",
             estimated_completion_date=date(year=2020, month=1, day=1),
         )
 
@@ -1099,8 +1098,8 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, '"status": "Completed"')
-        self.assertNotContains(response, '"status": "Construction"')
+        self.assertContains(response, "MUNI B")
+        self.assertNotContains(response, "MUNI A")
 
     def test_latest_in_the_same_year(self):
         latest = self.project.project_snapshots.latest()
