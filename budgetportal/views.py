@@ -9,7 +9,6 @@ from django.shortcuts import get_object_or_404, render
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
-from budgetportal.models import Video, Event, FAQ
 from budgetportal.openspending import PAGE_SIZE
 from models import (
     FinancialYear,
@@ -17,6 +16,10 @@ from models import (
     Department,
     InfrastructureProjectPart,
     Homepage,
+    Video,
+    Event,
+    FAQ,
+    IRMSnapshot,
 )
 from datasets import Dataset, Category
 from summaries import (
@@ -34,6 +37,8 @@ import json
 import logging
 from . import revenue
 from csv import DictWriter
+
+from haystack.query import SearchQuerySet
 
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
@@ -352,8 +357,10 @@ def department_page(
         },
         "government_functions": [f.name for f in department.get_govt_functions()],
         "intro": department.intro,
+        "infra_enabled": department.government.sphere.slug == "provincial" and IRMSnapshot.objects.count(),
         "is_vote_primary": department.is_vote_primary,
         "name": department.name,
+        "projects": get_department_project_summary(department),
         "slug": str(department.slug),
         "sphere": {
             "name": department.government.sphere.name,
@@ -389,6 +396,12 @@ def department_page(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
     return render(request, "department.html", context=context)
+
+
+def get_department_project_summary(department):
+    return SearchQuerySet() \
+        .filter(province=department.government.name, department=department.name) \
+        .order_by("-total_project_cost")[:10]
 
 
 def get_viz_url(department, url_name_suffix):
