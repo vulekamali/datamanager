@@ -1,7 +1,8 @@
+{% load static %}
 {% load json_script_escape %}
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Thu Nov 28 2019 08:21:27 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Fri Nov 29 2019 10:02:42 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5dc3e665b2b24ebc7384e0f0" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
@@ -99,7 +100,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>
-<link rel="stylesheet" href="/static/css/vulekamali-webflow.css">
+<link rel="stylesheet" href="{% static "css/vulekamali-webflow.css" %}">
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -145,13 +146,8 @@
   </div>
   <div class="section--hero">
     <div class="container">
-      <div class="row">
-        <div class="col col-12">
-          <div class="procurement__meta"></div>
-        </div>
-      </div>
       <div class="row align-center reverse">
-        <div class="col col-5 col-sm-10 col-xs-12">
+        <div class="col col-5 col-sm-12">
           <div class="procurement__hero_title--home">
             <h1 class="hero__heading">A guide to procurement</h1>
             <div class="hero__description">
@@ -160,7 +156,7 @@
             <div class="button_wrapper"><a href="#faq" class="button w-inline-block"><img src="/static/images/question_answer-white-24px.svg" alt="" class="button-icon"><div class="button-text">Procurement FAQs</div></a></div>
           </div>
         </div>
-        <div class="col col-7 col-sm-6 col-xs-8">
+        <div class="col col-7 col-sm-9">
           <div class="procurement__hero"><img src="/static/images/procurement-header.svg" alt="" class="procurement__hero_image"></div>
         </div>
       </div>
@@ -756,6 +752,6 @@
 <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
 <script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>
-<script src="/static/generated/vulekamali-webflow.bundle.js"></script>
+<script src="{% static "generated/vulekamali-webflow.bundle.js" %}"></script>
 </body>
 </html>

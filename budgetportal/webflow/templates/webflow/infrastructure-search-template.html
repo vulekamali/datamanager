@@ -1,7 +1,8 @@
+{% load static %}
 {% load json_script_escape %}
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Thu Nov 28 2019 08:21:27 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Fri Nov 29 2019 10:02:42 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5dbe998e04f8b27c9e750273" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
@@ -178,7 +179,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>
-<link rel="stylesheet" href="/static/css/vulekamali-webflow.css">
+<link rel="stylesheet" href="{% static "css/vulekamali-webflow.css" %}">
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -205,8 +206,7 @@
           <div data-w-id="505b95b7-062c-dafb-5a18-96ee222ccfff" class="nav-menu__dropdown_trigger"><img src="/static/images/menu-24px.svg" alt="" class="nav-menu__icon-open"><img src="/static/images/close-24px.svg" alt="" class="nav-menu__icon-close"></div>
           <div class="nav-menu__items">
             <div class="nav-menu__links">
-              <div class="nav-menu__stages">
-                <div class="nav-link--label">Stages</div><a href="procurement/stages/planning.html" class="nav-menu__stages_link">Planning</a><a href="procurement/stages/initiation.html" class="nav-menu__stages_link">Initiation</a><a href="procurement/stages/award.html" class="nav-menu__stages_link">Award</a><a href="procurement/stages/contract.html" class="nav-menu__stages_link">Contract</a><a href="procurement/stages/implementation.html" class="nav-menu__stages_link">Implementation</a></div><a href="project-search.html" class="nav-link w-nav-link">Project list</a><a href="https://vulekamali.gov.za/" target="_blank" class="nav-link--feature w-nav-link">Visit vulekamali</a></div>
+              <div class="nav-menu__stages"></div><a href="project-search.html" class="nav-link w-nav-link">Project list</a><a href="https://vulekamali.gov.za/" target="_blank" class="nav-link--feature w-nav-link">Visit vulekamali</a></div>
             <div class="nav-menu__search">
               <div class="nav-menu__search-box">
                 <form action="/search" class="search w-form"><input type="search" class="search-input w-input" maxlength="256" name="query" placeholder="What are you searching for?" id="search" required=""><input type="submit" value="Search" class="search-button w-button"></form>
@@ -511,13 +511,13 @@
   <div class="section__project-search_body">
     <div class="container">
       <div class="row filtered-projects-info">
-        <div class="col col-2 col-m-3 col-sm-6">
+        <div class="col col-4 col-sm-12">
           <div class="search-detail_wrapper">
             <div class="small-detail-heading">filtered projects:</div>
             <div id="num-matching-projects-field" class="search-detail-value"> </div>
           </div>
         </div>
-        <div class="col col-2 col-m-3 col-sm-6">
+        <div class="col col-2 col-m-3 col-sm-6 hide">
           <div class="search-detail_wrapper cc-border-left">
             <div class="small-detail-heading">Total value:</div>
             <div class="search-detail__amount">
@@ -554,33 +554,24 @@
             <h2 class="sub-section__title">Project list</h2>
             <div class="list-sorting_wrapper">
               <div class="sort-by-label">Sorting by:</div>
-              <div data-delay="0" id="sort-order-dropdown" class="dropdown small cc-align-right w-dropdown">
-                <div class="sorting-dropdown_trigger w-dropdown-toggle">
+              <div data-delay="0" id="sort-order-dropdown" class="dropdown small w-dropdown">
+                <div class="sorting-dropdown_trigger--small w-dropdown-toggle">
                   <div class="text-block">Value (Descending)</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
                 <nav class="sorting-dropdown_list w-dropdown-list">
-                  <a href="#" class="dropdown-link w-inline-block">
-                    <div class="dropdown-label">Alphabetical (a-z)</div>
+                  <a href="#" class="dropdown-link--small w-inline-block">
+                    <div class="dropdown-label">Total Estimated Project Cost (Descending)</div>
                   </a>
-                  <a href="#" class="dropdown-link w-inline-block">
-                    <div class="dropdown-label">Alphabetical (z-a)</div>
+                  <a href="#" class="dropdown-link--small w-inline-block">
+                    <div class="dropdown-label">Total Estimated Project Cost (Descending)</div>
                   </a>
-                  <a href="#" class="dropdown-link cc-active w-inline-block">
-                    <div class="dropdown-label">Value (descending)</div>
+                  <a href="#" class="dropdown-link--small w-inline-block">
+                    <div class="dropdown-label">Status (Ascending)</div>
                   </a>
-                  <a href="#" class="dropdown-link w-inline-block">
-                    <div class="dropdown-label">Value (ascending)</div>
+                  <a href="#" class="dropdown-link--small w-inline-block">
+                    <div class="dropdown-label">Estimated Project Completion Date (Ascending)</div>
                   </a>
-                  <a href="#" class="dropdown-link w-inline-block">
-                    <div class="dropdown-label">Project Status (ascending)</div>
-                  </a>
-                  <a href="#" class="dropdown-link w-inline-block">
-                    <div class="dropdown-label">Project Status (descending)</div>
-                  </a>
-                  <a href="#" class="dropdown-link w-inline-block">
-                    <div class="dropdown-label">Completion (ascending)</div>
-                  </a>
-                  <a href="#" class="dropdown-link w-inline-block">
-                    <div class="dropdown-label">Completion (descending)</div>
+                  <a href="#" class="dropdown-link--small w-inline-block">
+                    <div class="dropdown-label">Estimated Project Completion Date (Ascending)</div>
                   </a>
                 </nav>
               </div>
@@ -679,6 +670,6 @@
 <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
 <script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>
-<script src="/static/generated/vulekamali-webflow.bundle.js"></script>
+<script src="{% static "generated/vulekamali-webflow.bundle.js" %}"></script>
 </body>
 </html>

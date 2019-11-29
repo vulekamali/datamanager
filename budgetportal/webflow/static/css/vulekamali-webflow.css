@@ -44,4 +44,9 @@
 
 .bar {
     height: inherit;
+    rx: 1px;
+}
+
+.bar-area {
+    rx: 1px;
 }

@@ -297,7 +297,7 @@ function resetMapPoints() {
 
 function resetDropdown(selector) {
   $(selector).find(".text-block").text("");
-  $(selector).find(".dropdown-link").remove();
+  $(selector).find(".dropdown-link--small").remove();
 }
 
 function getSelectedOption(fieldName) {
@@ -341,7 +341,7 @@ function updateDropdown(selector, options, fieldName) {
 
 function initSortDropdown() {
   const selector = "#sort-order-dropdown";
-  const dropdownItemTemplate = $("#sort-order-dropdown * .dropdown-link:first");
+  const dropdownItemTemplate = $("#sort-order-dropdown * .dropdown-link--small:first");
   dropdownItemTemplate.find(".sorting-status").remove();
   dropdownItemTemplate.find(".dropdown-label").text("");
   resetDropdown(selector);
