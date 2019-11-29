@@ -37,7 +37,7 @@ const pageState = {
   filters: null,
   facetsRequest: null,
   mapPointsRequest: null,
-  sortField: "-total_project_cost",
+  sortField: null,
   listRequest: null,
   map: null,
   markers: null,
@@ -83,8 +83,7 @@ function loadSearchStateFromCurrentURL() {
   });
 
   const sortField = params.get("order_by");
-  if (sortField)
-    pageState.sortField = sortField;
+  pageState.sortField = sortField || "-total_project_cost";
 }
 
 function urlFromSearchState() {
@@ -427,12 +426,17 @@ export function searchPage(pageData) {
   $("#clear-filters-button").on("click", clearFilters);
   window.addEventListener("popstate", onPopstate);
 
-  /** Search on page load **/
+  /**
+   * Search on page load
+   *
+   * Ordering may be important based on setting up and depending on pageState.
+   */
+
 
   resetFacets();
-  initSortDropdown();
   resetResultList();
   loadSearchStateFromCurrentURL();
+  initSortDropdown();
   triggerSearch(false);
 
 } // end search page
