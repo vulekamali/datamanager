@@ -12,6 +12,7 @@ from ..search_indexes import ProvInfraProjectIndex
 from drf_haystack.filters import HaystackFacetFilter, HaystackFilter, HaystackOrderingFilter
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from ..prov_infra_project.charts import time_series_data
 
 import json
 
@@ -32,6 +33,8 @@ def provincial_infrastructure_project_detail(request, id, slug):
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
     page_data["project"]["irm_snapshot"] = snapshot.irm_snapshot.__unicode__()
+    snapshot_list = list(project.project_snapshots.all())
+    page_data["time_series_chart"] = time_series_data(snapshot_list)
     context = {
         "project": project,
         "page_data_json": json.dumps(

@@ -1,5 +1,7 @@
-import { formatCurrency } from '../util.js';
+import { formatCurrency, coordsAvailable } from '../util.js';
 import { provinceCode, createTileLayer } from '../maps.js';
+import { reusableLineChart } from 'vulekamali-visualisations/src/charts/line/reusable-line-chart/reusable-line-chart.js';
+import { select } from 'd3-selection';
 
 
 function initPointMap(lat, lon) {
@@ -89,6 +91,19 @@ function updateTextField(selector, text) {
   }
 }
 
+function initTimeSeriesChart(chartData) {
+  const container = select("#time-series-chart-container");
+  const boundingRect = container.node().getBoundingClientRect();
+
+  const chart = reusableLineChart()
+        .width(boundingRect.width)
+        .height(boundingRect.height);
+
+  container.call(chart.data(chartData.snapshots));
+
+  return chart;
+}
+
 export function projectPage(pageData) {
   var project = pageData.project;
 
@@ -108,7 +123,7 @@ export function projectPage(pageData) {
   updateTextField("#local-municipality-field", project.local_municipality);
   updateTextField("#district-municipality-field", project.district_municipality);
   updateTextField(".coordinates-field",
-                  (project.latitude && project.longitude) ? `${project.latitude}, ${project.longitude}` : null);
+                  coordsAvailable(project.latitude, project.longitude) ? `${project.latitude}, ${project.longitude}` : null);
 
   // Implementation
   updateTextField(".program-implementing-agent-field", project.program_implementing_agent);
@@ -158,10 +173,11 @@ export function projectPage(pageData) {
   // Maps and visualisations
   $(".embed-container").css("background-color", "#e1e1e1");
 
-  if (project.latitude !== null & project.longitude !== null) {
+  if (coordsAvailable(project.latitude, project.longiture)) {
     var locationMap = initPointMap(project.latitude, project.longitude);
     var marker = L.marker([project.latitude, project.longitude]).addTo(locationMap);
-
+  } else {
+    $("#project-location-map-container .map__no-data").css("display", "flex");
   }
 
   $.get("https://mapit.code4sa.org/area/MDB:" + provinceCode[project.province] + "/geometry")
@@ -183,4 +199,6 @@ export function projectPage(pageData) {
     .fail(function(jqXHR, textStatus, errorThrown) {
       console.error(jqXHR, textStatus, errorThrown);
     });
+
+  initTimeSeriesChart(pageData.time_series_chart);
 }  // end project page

@@ -2,11 +2,11 @@
 {% load json_script_escape %}
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Fri Nov 29 2019 10:02:42 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Fri Nov 29 2019 12:02:34 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5db0b167ab837b98707b114e" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
-  
+
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="/static/css/normalize.css" rel="stylesheet" type="text/css">
@@ -168,7 +168,11 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">Project location</h3>
             </div>
-            <div id="project-location-map-container" class="project-location-map-container embed-container w-embed"></div>
+            <div id="project-location-map-container" class="project-location-map-container">
+              <div class="map__no-data">
+                <div>Location not available</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col col-4 col-sm-5 col-xs-12">
@@ -176,7 +180,11 @@
             <h3 class="project-detail_heading">Municipality map</h3>
           </div>
           <div class="search-detail_wrapper">
-            <div id="project-municipal-context-map-container" class="muni-map project-municipal-context-map-container embed-container"></div>
+            <div id="project-municipal-context-map-container" class="project-municipal-context-map-container">
+              <div class="map__no-data">
+                <div>Location not available</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -615,7 +623,7 @@
           </div>
           <div class="col col-8 col-m-12">
             <div class="subsection-chart_wrapper">
-              <div class="chart_wrapper"><img src="/static/images/Group-78-4.svg" alt="" class="project-budget-image"></div>
+              <div id="time-series-chart-container" class="chart_wrapper"></div>
               <div class="chart-detail_wrapper">
                 <div class="source_wrapper">
                   <div class="source">Source:</div>

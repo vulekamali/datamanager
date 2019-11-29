@@ -62,3 +62,9 @@ export const sortOptions = new Map([
   ["estimated_completion_date", "Estimated Project Completion Date (Ascending)"],
   ["-estimated_completion_date", "Estimated Project Completion Date (Ascending)"],
 ]);
+
+export function coordsAvailable(lat, lon) {
+  // Don't try and parse null
+  // Parse because "0" is true
+  return (lat && parseInt(lat)) && (lon && parseInt(lat));
+}
