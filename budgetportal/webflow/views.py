@@ -9,7 +9,11 @@ from drf_haystack.mixins import FacetMixin
 from budgetportal import models
 from budgetportal.json_encoder import JSONEncoder
 from ..search_indexes import ProvInfraProjectIndex
-from drf_haystack.filters import HaystackFacetFilter, HaystackFilter, HaystackOrderingFilter
+from drf_haystack.filters import (
+    HaystackFacetFilter,
+    HaystackFilter,
+    HaystackOrderingFilter,
+)
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from ..prov_infra_project.charts import time_series_data
@@ -145,10 +149,10 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     facet_filter_backends = [ProvInfraProjectFacetFilter]
 
     ordering_fields = [
-        'name',
-        'total_project_cost',
-        'status_order',
-        'estimated_completion_date',
+        "name",
+        "total_project_cost",
+        "status_order",
+        "estimated_completion_date",
     ]
 
     @method_decorator(cache_page(60 * 30))  # minutes

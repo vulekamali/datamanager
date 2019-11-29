@@ -357,7 +357,8 @@ def department_page(
         },
         "government_functions": [f.name for f in department.get_govt_functions()],
         "intro": department.intro,
-        "infra_enabled": department.government.sphere.slug == "provincial" and IRMSnapshot.objects.count(),
+        "infra_enabled": department.government.sphere.slug == "provincial"
+        and IRMSnapshot.objects.count(),
         "is_vote_primary": department.is_vote_primary,
         "name": department.name,
         "projects": get_department_project_summary(department),
@@ -399,9 +400,11 @@ def department_page(
 
 
 def get_department_project_summary(department):
-    return SearchQuerySet() \
-        .filter(province=department.government.name, department=department.name) \
+    return (
+        SearchQuerySet()
+        .filter(province=department.government.name, department=department.name)
         .order_by("-total_project_cost")[:10]
+    )
 
 
 def get_viz_url(department, url_name_suffix):
