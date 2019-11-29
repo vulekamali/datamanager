@@ -52,3 +52,13 @@ export function sortByOrderArray(orderArray, sortKey, unsortedArray) {
   map.forEach(val => sortedArray.push(val));
   return sortedArray;
 }
+
+// Ordered map of options. Keys are the query string values to pass to the API.
+export const sortOptions = new Map([
+  ["total_project_cost", "Total Estimated Project Cost (Ascending)"],
+  ["-total_project_cost", "Total Estimated Project Cost (Descending)"],
+  ["status_order", "Status (Ascending)"],
+  ["-status_order", "Status (Descending)"],
+  ["estimated_completion_date", "Estimated Project Completion Date (Ascending)"],
+  ["-estimated_completion_date", "Estimated Project Completion Date (Ascending)"],
+]);

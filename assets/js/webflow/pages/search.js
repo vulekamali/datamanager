@@ -1,15 +1,33 @@
 /**************************************************************
   Style vision:
-    Starting to move things out of searchPage, binding
-    data and functions dependent on page-specific variables
-    to pageState so that they can be reached from smaller
-    functions.
-    I think searchPage should as far as possible just bind variables
-    and event listeners for page elements and trigger ajax calls
-    needed on page load.
+    It would be nice if there weren't a million things updating
+    and reading pageState but it seems necessary for event handlers
+    to figure out the right thing to do.
+
+  pageState is module-global and initialises fields that will be
+  used later.
+
+  searchPage is called only on the search page, and initialises
+  things dependent on the page markup.
+
+  Each interaction that should trigger a search updates pageState
+  if needed (e.g. if it was a dropdown selection, it updates the
+  relevant pageState.filters field) and then calls triggerSearch.
+
+  triggerSearch always looks at the current pageState and starts
+  the search requests based on that.
+
+  The success handler of each of the search request updates anything
+  it needs to in pageState, and updates the UI to reflect the response
+  from the server.
+
+  ajax requests should always cancel the relevant previous request
+  if it's still in flight before being sent, and should always have
+  an error handler giving some user feedback as well as technical
+  information in the console to notice and understand errors.
 /***************************************************************/
 
-import { formatCurrency, statusOrder, sortByOrderArray } from '../util.js';
+import { formatCurrency, statusOrder, sortByOrderArray, sortOptions } from '../util.js';
 import { createTileLayer } from '../maps.js';
 import { reusableBarChart } from 'vulekamali-visualisations/src/charts/bar/reusable-bar-chart/reusable-bar-chart.js';
 import { select } from 'd3-selection';
@@ -19,6 +37,7 @@ const pageState = {
   filters: null,
   facetsRequest: null,
   mapPointsRequest: null,
+  sortField: "-total_project_cost",
   listRequest: null,
   map: null,
   markers: null,
@@ -51,7 +70,8 @@ function loadSearchStateFromCurrentURL() {
   const params = new URLSearchParams(queryString);
 
   const textQuery = params.get("q");
-  $("#Infrastructure-Search-Input").val(textQuery);
+  if (textQuery)
+    $("#Infrastructure-Search-Input").val(textQuery);
 
   const filterParams = params.getAll("filter");
   pageState.filters = {};
@@ -61,6 +81,10 @@ function loadSearchStateFromCurrentURL() {
     const val = pieces.join(':');
     pageState.filters[key] = val;
   });
+
+  const sortField = params.get("order_by");
+  if (sortField)
+    pageState.sortField = sortField;
 }
 
 function urlFromSearchState() {
@@ -70,6 +94,8 @@ function urlFromSearchState() {
   for (let fieldName in pageState.filters) {
     params.append("filter", `${fieldName}:${pageState.filters[fieldName]}`);
   }
+
+  params.set("order_by", pageState.sortField);
   const queryString = params.toString();
   return `${window.location.protocol}//${window.location.host}${window.location.pathname}?${queryString}`;
 }
@@ -108,6 +134,7 @@ function buildListSearchURL() {
     params.set(fieldName, pageState.filters[fieldName]);
   }
   params.set("fields", "url_path,name,status,estimated_completion_date,total_project_cost");
+  params.set("ordering", pageState.sortField);
   params.set("limit", "20");
   return baseLocation + "?" + params.toString();
 }
@@ -313,6 +340,31 @@ function updateDropdown(selector, options, fieldName) {
   });
 }
 
+function initSortDropdown() {
+  const selector = "#sort-order-dropdown";
+  const dropdownItemTemplate = $("#sort-order-dropdown * .dropdown-link:first");
+  dropdownItemTemplate.find(".sorting-status").remove();
+  dropdownItemTemplate.find(".dropdown-label").text("");
+  resetDropdown(selector);
+
+  var container = $(selector);
+  var optionContainer = container.find(".sorting-dropdown_list");
+
+  container.find(".text-block").text(sortOptions.get(pageState.sortField));
+
+  sortOptions.forEach((label, key) => {
+    const optionElement = dropdownItemTemplate.clone();
+    optionElement.find(".dropdown-label").text(label);
+    optionElement.click(function() {
+      container.find(".text-block").text(label);
+      pageState.sortField = key;
+      optionContainer.removeClass("w--open");
+      triggerSearch();
+    });
+    optionContainer.append(optionElement);
+  });
+}
+
 function initStatusChart() {
   const container = select("#matching-status-chart-container");
   const boundingRect = container.node().getBoundingClientRect();
@@ -378,6 +430,7 @@ export function searchPage(pageData) {
   /** Search on page load **/
 
   resetFacets();
+  initSortDropdown();
   resetResultList();
   loadSearchStateFromCurrentURL();
   triggerSearch(false);
