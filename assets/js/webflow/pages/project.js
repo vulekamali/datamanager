@@ -173,7 +173,7 @@ export function projectPage(pageData) {
   // Maps and visualisations
   $(".embed-container").css("background-color", "#e1e1e1");
 
-  if (coordsAvailable(project.latitude, project.longiture)) {
+  if (coordsAvailable(project.latitude, project.longitude)) {
     var locationMap = initPointMap(project.latitude, project.longitude);
     var marker = L.marker([project.latitude, project.longitude]).addTo(locationMap);
   } else {

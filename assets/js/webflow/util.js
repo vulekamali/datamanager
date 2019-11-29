@@ -66,5 +66,5 @@ export const sortOptions = new Map([
 export function coordsAvailable(lat, lon) {
   // Don't try and parse null
   // Parse because "0" is true
-  return (lat && parseInt(lat)) && (lon && parseInt(lat));
+  return (lat && parseInt(lat)) && (lon && parseInt(lon));
 }
