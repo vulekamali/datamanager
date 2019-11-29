@@ -17,7 +17,7 @@ function initMuniMap(lat, lon) {
     center: [lat, lon],
     zoom: 7,
     scrollWheelZoom: false,
-  })
+  });
   createTileLayer().addTo(map);
   return map;
 }
@@ -78,56 +78,82 @@ var levelToCode = {
   "District Municipality": "DC"
 };
 
+function updateTextField(selector, text) {
+  const match = $(selector);
+  if (text === "" || text === null) {
+    match.text("Not available");
+    match.addClass("no-data");
+  } else {
+    match.text(text);
+    match.removeClass("no-data");
+  }
+}
+
 export function projectPage(pageData) {
   var project = pageData.project;
 
   // Project definition
-  $(".name-field").text(project.name);
-  $(".project-number-field").text(project.project_number);
-  $(".budget-programme-field").text(project.budget_programme);
-  $(".nature-of-investment-field").text(project.nature_of_investment);
+  updateTextField(".name-field", project.name);
+  updateTextField(".project-number-field", project.project_number);
+  updateTextField(".budget-programme-field", project.budget_programme);
+  updateTextField(".nature-of-investment-field", project.nature_of_investment);
 
   // Administrative details
-  $(".primary-funding-source-field").text(project.primary_funding_source);
-  $(".funding-status-field").text(project.funding_status);
-  $(".province-field").text(project.province);
-  $(".department-field").text(project.department);
+  updateTextField(".primary-funding-source-field", project.primary_funding_source);
+  updateTextField(".funding-status-field", project.funding_status);
+  updateTextField(".province-field", project.province);
+  updateTextField(".department-field", project.department);
 
   // Location
-  $("#local-municipality-field").text(project.local_municipality);
-  $("#district-municipality-field").text(project.district_municipality);
-  $(".coordinates-field").text(project.latitude + ", " + project.longitude);
+  updateTextField("#local-municipality-field", project.local_municipality);
+  updateTextField("#district-municipality-field", project.district_municipality);
+  updateTextField(".coordinates-field",
+                  (project.latitude && project.longitude) ? `${project.latitude}, ${project.longitude}` : null);
 
   // Implementation
-  $(".program-implementing-agent-field").text(project.program_implementing_agent);
-  $(".principle-agent-field").text(project.principle_agent);
-  $(".main-contractor-field").text(project.main_contractor);
-  $(".other-service-providers-field").text(project.other_parties);
+  updateTextField(".program-implementing-agent-field", project.program_implementing_agent);
+  updateTextField(".principle-agent-field", project.principle_agent);
+  updateTextField(".main-contractor-field", project.main_contractor);
+  updateTextField(".other-service-providers-field", project.other_parties);
 
   // Dates
-  $(".status-field").text(project.status);
-  $(".start-date-field").text(project.start_date);
-  $(".estimated-construction-start-date-field").text(project.estimated_construction_start_date);
-  $(".estimated-completion-date-field").text(project.estimated_completion_date);
-  $(".contracted-construction-end-date-field").text(project.contracted_construction_end_date);
-  $(".estimated-construction-end-date-field").text(project.estimated_construction_end_date);
+  updateTextField(".status-field", project.status);
+  updateTextField(".start-date-field", project.start_date);
+  updateTextField(".estimated-construction-start-date-field",
+                  project.estimated_construction_start_date);
+  updateTextField(".estimated-completion-date-field",
+                  project.estimated_completion_date);
+  updateTextField(".contracted-construction-end-date-field",
+                  project.contracted_construction_end_date);
+  updateTextField(".estimated-construction-end-date-field",
+                  project.estimated_construction_end_date);
 
   // Budgets and spending
-  $(".total-project-cost-field").text(formatCurrency(project.total_project_cost));
-  $("#total-professional-fees-field").text(formatCurrency(project.total_professional_fees));
-  $(".total-construction-costs-field").text(formatCurrency(project.total_construction_costs));
-  $(".variation-orders-field").text(formatCurrency(project.variation_orders));
-  $("#expenditure-from-previous-years-professional-fees-field").text(formatCurrency(project.expenditure_from_previous_years_professional_fees));
-  $(".expenditure-from-previous-years-construction-costs-field").text(formatCurrency(project.expenditure_from_previous_years_construction_costs));
-  $(".expenditure-from-previous-years-total-field").text(formatCurrency(project.expenditure_from_previous_years_total));
-  $(".project-expenditure-total-field").text(formatCurrency(project.project_expenditure_total));
-  $(".main-appropriation-professional-fees-field").text(formatCurrency(project.main_appropriation_professional_fees));
-  $(".main-appropriation-construction-costs-field").text(formatCurrency(project.main_appropriation_construction_costs));
-  $(".main-appropriation-total-field").text(formatCurrency(project.main_appropriation_total));
-  $("#actual-expenditure-q1-field").text(formatCurrency(project.actual_expenditure_q1));
-  $("#actual-expenditure-q2-field").text(formatCurrency(project.actual_expenditure_q2));
-  $("#actual-expenditure-q3-field").text(formatCurrency(project.actual_expenditure_q3));
-  $("#actual-expenditure-q4-field").text(formatCurrency(project.actual_expenditure_q4));
+  updateTextField(".total-project-cost-field",
+                  formatCurrency(project.total_project_cost));
+  updateTextField("#total-professional-fees-field",
+                  formatCurrency(project.total_professional_fees));
+  updateTextField(".total-construction-costs-field",
+                  formatCurrency(project.total_construction_costs));
+  updateTextField(".variation-orders-field",
+                  formatCurrency(project.variation_orders));
+  updateTextField("#expenditure-from-previous-years-professional-fees-field",
+                  formatCurrency(project.expenditure_from_previous_years_professional_fees));
+  updateTextField(".expenditure-from-previous-years-construction-costs-field",
+                  formatCurrency(project.expenditure_from_previous_years_construction_costs));
+  updateTextField(".expenditure-from-previous-years-total-field",
+                  formatCurrency(project.expenditure_from_previous_years_total));
+  updateTextField(".project-expenditure-total-field",
+                  formatCurrency(project.project_expenditure_total));
+  updateTextField(".main-appropriation-professional-fees-field",
+                  formatCurrency(project.main_appropriation_professional_fees));
+  updateTextField(".main-appropriation-construction-costs-field",
+                  formatCurrency(project.main_appropriation_construction_costs));
+  updateTextField(".main-appropriation-total-field", formatCurrency(project.main_appropriation_total));
+  updateTextField("#actual-expenditure-q1-field", formatCurrency(project.actual_expenditure_q1));
+  updateTextField("#actual-expenditure-q2-field", formatCurrency(project.actual_expenditure_q2));
+  updateTextField("#actual-expenditure-q3-field", formatCurrency(project.actual_expenditure_q3));
+  updateTextField("#actual-expenditure-q4-field", formatCurrency(project.actual_expenditure_q4));
 
   // Maps and visualisations
   $(".embed-container").css("background-color", "#e1e1e1");

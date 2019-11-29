@@ -1,6 +1,6 @@
 export function formatCurrency(decimalString) {
   if (decimalString == null)
-    return "";
+    return null;
   return "R " + Math.round(parseFloat(decimalString)).toLocaleString();
 }
 
