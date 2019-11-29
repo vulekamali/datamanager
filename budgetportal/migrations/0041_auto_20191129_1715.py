@@ -8,16 +8,26 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0040_merge_20191113_1304'),
+        ("budgetportal", "0040_merge_20191113_1304"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='irmsnapshot',
-            options={'ordering': ['financial_year__slug', 'quarter__number'], 'verbose_name': 'IRM Snapshot'},
+            name="irmsnapshot",
+            options={
+                "ordering": ["financial_year__slug", "quarter__number"],
+                "verbose_name": "IRM Snapshot",
+            },
         ),
         migrations.AlterModelOptions(
-            name='provinfraprojectsnapshot',
-            options={'get_latest_by': 'irm_snapshot', 'ordering': ['irm_snapshot__financial_year__slug', 'irm_snapshot__quarter__number'], 'verbose_name': 'Provincial infrastructure project snapshot'},
+            name="provinfraprojectsnapshot",
+            options={
+                "get_latest_by": "irm_snapshot",
+                "ordering": [
+                    "irm_snapshot__financial_year__slug",
+                    "irm_snapshot__quarter__number",
+                ],
+                "verbose_name": "Provincial infrastructure project snapshot",
+            },
         ),
     ]

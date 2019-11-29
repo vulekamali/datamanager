@@ -2016,7 +2016,10 @@ class ProvInfraProjectSnapshot(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        ordering = ["irm_snapshot__financial_year__slug", "irm_snapshot__quarter__number"]
+        ordering = [
+            "irm_snapshot__financial_year__slug",
+            "irm_snapshot__quarter__number",
+        ]
         get_latest_by = "irm_snapshot"
         verbose_name = "Provincial infrastructure project snapshot"
         unique_together = ["irm_snapshot", "project"]
