@@ -5215,7 +5215,7 @@ li {
   right: 0%;
   bottom: 32px;
   z-index: 100;
-  display: block;
+  display: none;
   width: 300px;
   padding: 8px;
   border-radius: 3px;

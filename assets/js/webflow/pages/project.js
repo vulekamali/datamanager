@@ -111,6 +111,10 @@ function updateLinkField(selector, label, url) {
   fieldContainers.find("a").text(label);
 }
 
+const  buildSearchURL = (province) => (
+  `/infrastructure-projects/provincial/?filter=province:${encodeURIComponent(province)}`
+);
+
 export function projectPage(pageData) {
   var project = pageData.project;
 
@@ -124,6 +128,8 @@ export function projectPage(pageData) {
   updateTextField(".primary-funding-source-field", project.primary_funding_source);
   updateTextField(".funding-status-field", project.funding_status);
 
+  $("#breadcrumb-level-2").text(project.province);
+  $("#breadcrumb-level-2").attr("href", buildSearchURL(project.province));
   updateLinkField(".province-field", project.province, pageData.province_depts_url);
 
   if (pageData.department_url) {
