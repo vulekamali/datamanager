@@ -308,25 +308,32 @@ function getSelectedOption(fieldName) {
 }
 
 function updateDropdown(selector, options, fieldName) {
-  var container = $(selector);
-  var optionContainer = container.find(".chart-dropdown_list");
+  const container = $(selector);
+  const trigger = container.find(".chart-dropdown_trigger");
+  const optionContainer = container.find(".chart-dropdown_list");
+  // Replace webflow tap handlers with our own for opening dropdown
+  trigger.off("tap")
+    .on("click", () => optionContainer.addClass("w--open"));
 
-  var selectedOption = getSelectedOption(fieldName);
+  const selectedOption = getSelectedOption(fieldName);
+  const currentSelectionLabel = container.find(".text-block");
+
   if (typeof(selectedOption) == "undefined") {
-    container.find(".text-block").text("All " + facetPlurals[fieldName]);
+    currentSelectionLabel.text("All " + facetPlurals[fieldName]);
   } else {
-    container.find(".text-block").text(selectedOption);
-    // Add "clear filter" option
-    const optionElement = pageState.dropdownItemTemplate.clone();
-    optionElement.find(".search-dropdown_label").text("All " + facetPlurals[fieldName]);
-    optionElement.click(function(e) {
-      e.preventDefault();
-      delete pageState.filters[fieldName];
-      optionContainer.removeClass("w--open");
-      triggerSearch();
-    });
-    optionContainer.append(optionElement);
+    currentSelectionLabel.text(selectedOption);
   }
+
+  // Add "clear filter" option
+  const optionElement = pageState.dropdownItemTemplate.clone();
+  optionElement.find(".search-dropdown_label").text("All " + facetPlurals[fieldName]);
+  optionElement.click(function(e) {
+    e.preventDefault();
+    delete pageState.filters[fieldName];
+    optionContainer.removeClass("w--open");
+    triggerSearch();
+  });
+  optionContainer.append(optionElement);
 
   options.forEach(function (option) {
     const optionElement = pageState.dropdownItemTemplate.clone();
