@@ -4,13 +4,13 @@ Tasks for async work.
 Tasks MUST be idempotent.
 """
 import logging
+import traceback
+
+import django_q
+from budgetportal import prov_infra_projects
 from budgetportal.models import Department, IRMSnapshot
 from django.conf import settings
-from budgetportal import prov_infra_projects
-import traceback
-import django_q
 from django.core.management import call_command
-
 
 ckan = settings.CKAN
 logger = logging.getLogger(__name__)

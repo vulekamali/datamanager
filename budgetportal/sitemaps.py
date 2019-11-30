@@ -1,8 +1,9 @@
+from budgetportal.summaries import get_consolidated_expenditure_treemap
 from django.contrib import sitemaps
 from django.urls import reverse
-from budgetportal.summaries import get_consolidated_expenditure_treemap
 from guide_data import category_guides
-from .models import InfrastructureProjectPart, FinancialYear, Department
+
+from .models import Department, FinancialYear, InfrastructureProjectPart
 
 
 class DepartmentListViewSitemap(sitemaps.Sitemap):

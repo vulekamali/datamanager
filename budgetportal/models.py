@@ -1,26 +1,27 @@
-from datetime import datetime
-
-from autoslug import AutoSlugField
-from slugify import slugify
-from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
-from collections import OrderedDict
-from decimal import Decimal
-from django.conf import settings
-from django.core.exceptions import ValidationError, MultipleObjectsReturned
-from django.db import models
-from adminsortable.models import SortableMixin
-from django.urls import reverse
-from ckeditor.fields import RichTextField
-from itertools import groupby
-from partial_index import PartialIndex
-from pprint import pformat
-from urlparse import urljoin
 import logging
 import re
-import requests
 import string
 import urllib
 import uuid
+from collections import OrderedDict
+from datetime import datetime
+from decimal import Decimal
+from itertools import groupby
+from pprint import pformat
+from urlparse import urljoin
+
+import requests
+from slugify import slugify
+
+from adminsortable.models import SortableMixin
+from autoslug import AutoSlugField
+from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
+from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.db import models
+from django.urls import reverse
+from partial_index import PartialIndex
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -281,6 +282,20 @@ class Department(models.Model):
                 "There is already a primary department for "
                 "vote %d" % self.vote_number
             )
+
+    @classmethod
+    def get_in_latest_government(cls, name, government_name):
+        """
+        Get a department instance whose slug matches the provided name slugified,
+        in the government with the provided name in the latest financial year.
+        Returns None if a matching department is not found.
+        """
+        try:
+            return cls.objects.filter(
+                slug=slugify(name), government__name=government_name
+            ).order_by("-government__sphere__financial_year__slug")[0]
+        except IndexError:
+            return None
 
     def create_dataset(self, name, title, group_name):
         vocab_map = get_vocab_map()
@@ -1878,7 +1893,7 @@ class IRMSnapshot(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        ordering = ["financial_year", "quarter"]
+        ordering = ["financial_year__slug", "quarter__number"]
         verbose_name = "IRM Snapshot"
         unique_together = ["financial_year", "quarter", "date_taken"]
 
@@ -2016,7 +2031,10 @@ class ProvInfraProjectSnapshot(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        ordering = ["irm_snapshot"]
+        ordering = [
+            "irm_snapshot__financial_year__slug",
+            "irm_snapshot__quarter__number",
+        ]
         get_latest_by = "irm_snapshot"
         verbose_name = "Provincial infrastructure project snapshot"
         unique_together = ["irm_snapshot", "project"]

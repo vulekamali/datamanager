@@ -1,6 +1,7 @@
+from budgetportal.models import ProvInfraProject
+from django.db.models import Count
 from haystack import indexes
-from budgetportal.models import ProvInfraProject, ProvInfraProjectSnapshot
-from django.db.models import Prefetch, OuterRef, Subquery, Max, Count
+from prov_infra_projects import status_order
 
 
 class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
@@ -9,6 +10,7 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     province = indexes.CharField(faceted=True)
     department = indexes.CharField(faceted=True)
     status = indexes.CharField(faceted=True)
+    status_order = indexes.IntegerField()
     primary_funding_source = indexes.CharField(faceted=True)
     estimated_completion_date = indexes.DateField()
     total_project_cost = indexes.FloatField()
@@ -25,6 +27,9 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_status(sef, object):
         return object.project_snapshots.latest().status
 
+    def prepare_status_order(self, object):
+        return status_order.get(object.project_snapshots.latest().status, 100)
+
     def prepare_province(sef, object):
         return object.project_snapshots.latest().province
 
@@ -38,7 +43,9 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
         return object.project_snapshots.latest().total_project_cost
 
     def prepare_estimated_completion_date(sef, object):
-        return object.project_snapshots.latest().estimated_completion_date.isoformat()
+        date = object.project_snapshots.latest().estimated_completion_date
+        if date:
+            return date.isoformat()
 
     def prepare_latitude(sef, object):
         return object.project_snapshots.latest().latitude

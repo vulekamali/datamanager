@@ -1,44 +1,47 @@
+import json
+import logging
 import urllib
+import urlparse
+from csv import DictWriter
 from datetime import datetime
 
-import urlparse
-
 import requests
-from django.http import HttpResponse, Http404
-from django.shortcuts import get_object_or_404, render
+import yaml
 from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
-from budgetportal.models import Video, Event, FAQ
 from budgetportal.openspending import PAGE_SIZE
-from models import (
-    FinancialYear,
-    Sphere,
-    Department,
-    InfrastructureProjectPart,
-    Homepage,
-)
-from datasets import Dataset, Category
-from summaries import (
-    get_preview_page,
-    get_focus_area_preview,
-    get_consolidated_expenditure_treemap,
-    DepartmentSubprogrammes,
-    DepartmentProgrammesEcon4,
-    DepartmentSubprogEcon4,
-)
-from guide_data import guides as guide_data
-from guide_data import category_guides
-import yaml
-import json
-import logging
-from . import revenue
-from csv import DictWriter
-
+from datasets import Category, Dataset
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
+from django.http import Http404, HttpResponse
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from guide_data import category_guides
+from guide_data import guides as guide_data
+from haystack.query import SearchQuerySet
+from models import (
+    FAQ,
+    Department,
+    Event,
+    FinancialYear,
+    Homepage,
+    InfrastructureProjectPart,
+    IRMSnapshot,
+    Sphere,
+    Video,
+)
+from summaries import (
+    DepartmentProgrammesEcon4,
+    DepartmentSubprogEcon4,
+    DepartmentSubprogrammes,
+    get_consolidated_expenditure_treemap,
+    get_focus_area_preview,
+    get_preview_page,
+)
+
+from . import revenue
 
 logger = logging.getLogger(__name__)
 
@@ -352,8 +355,11 @@ def department_page(
         },
         "government_functions": [f.name for f in department.get_govt_functions()],
         "intro": department.intro,
+        "infra_enabled": department.government.sphere.slug == "provincial"
+        and IRMSnapshot.objects.count(),
         "is_vote_primary": department.is_vote_primary,
         "name": department.name,
+        "projects": get_department_project_summary(department),
         "slug": str(department.slug),
         "sphere": {
             "name": department.government.sphere.name,
@@ -389,6 +395,14 @@ def department_page(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
     return render(request, "department.html", context=context)
+
+
+def get_department_project_summary(department):
+    return (
+        SearchQuerySet()
+        .filter(province=department.government.name, department=department.name)
+        .order_by("-total_project_cost")[:10]
+    )
 
 
 def get_viz_url(department, url_name_suffix):

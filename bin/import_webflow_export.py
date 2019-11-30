@@ -14,7 +14,7 @@ parser.add_argument('webflow_app_dir', help='Path to the Django app where we kee
 args = parser.parse_args()
 
 
-asset_path_regex = re.compile("\"(js|css|images)/")
+asset_path_regex = re.compile("\"(js|css|images|fonts)/")
 
 
 def copy_static_dir(src, dst):
@@ -28,15 +28,19 @@ def djangofy(htmlfile):
 
     file_contents = asset_path_regex.sub(r'"/static/\1/', file_contents)
 
-    file_contents = insert_at_body_end(file_contents, "<script>var pageData = {{ page_data_json|safe }}</script>")
+    file_contents = insert_at_file_start(file_contents, '{% load json_script_escape %}\n')
+    file_contents = insert_at_file_start(file_contents, '{% load static %}\n')
+    file_contents = insert_at_body_end(file_contents, '<script id="page-data" type="application/json">{{ page_data_json|json_script_escape:True }}</script>')
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>')
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>')
     file_contents = insert_at_body_end(file_contents, '<script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>')
-    file_contents = insert_at_body_end(file_contents, '<script src="/static/js/vulekamali-webflow.js"></script>')
+
+    file_contents = insert_at_body_end(file_contents, '<script src="{% static "generated/vulekamali-webflow.bundle.js" %}"></script>')
 
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>')
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>')
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>')
+    file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="{% static "css/vulekamali-webflow.css" %}">')
     file_contents = remove_tag(file_contents, "title")
     file_contents = insert_at_head_end(file_contents, "<title>{{ page_title }}</title>")
     file_contents = insert_at_head_end(file_contents, '<meta name="description" content="{{ page_description }}">')
@@ -49,6 +53,13 @@ def djangofy(htmlfile):
 
     with open(htmlfile, "w") as f:
         f.write(file_contents)
+
+
+def insert_at_file_start(page_html_string, string_to_insert):
+    result_string = string_to_insert + page_html_string
+    if len(result_string) <= len(page_html_string):
+        raise Exception()
+    return result_string
 
 
 def insert_at_body_end(page_html_string, string_to_insert):
@@ -93,3 +104,5 @@ with ZipFile(args.webflow_zipfile, 'r') as zipObj:
                         os.path.join(args.webflow_app_dir, "static/js"))
         copy_static_dir(os.path.join(tmp_dir, "images"),
                         os.path.join(args.webflow_app_dir, "static/images"))
+        copy_static_dir(os.path.join(tmp_dir, "fonts"),
+                        os.path.join(args.webflow_app_dir, "static/fonts"))

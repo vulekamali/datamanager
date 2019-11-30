@@ -1,15 +1,16 @@
+import logging
+
 from budgetportal import models
-from django import forms, VERSION
+from django import VERSION, forms
 from django.core.exceptions import ValidationError
-from django.db.models import Q, NOT_PROVIDED
+from django.db.models import NOT_PROVIDED, Q
 from django.utils.text import slugify
 from import_export import resources
 from import_export.admin import ImportForm
 from import_export.fields import Field
 from import_export.formats import base_formats
 from import_export.instance_loaders import ModelInstanceLoader
-from import_export.widgets import Widget, ForeignKeyWidget
-import logging
+from import_export.widgets import ForeignKeyWidget, Widget
 
 logger = logging.getLogger(__name__)
 

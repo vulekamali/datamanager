@@ -1,10 +1,6 @@
 import os
 from datetime import date
 
-from django.core.files import File
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-
 from budgetportal.models import (
     FinancialYear,
     IRMSnapshot,
@@ -14,10 +10,13 @@ from budgetportal.models import (
 )
 from budgetportal.search_indexes import ProvInfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
+from django.core.files import File
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITransactionTestCase
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
@@ -65,9 +64,8 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
 class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
         super(ProvInfraProjectDetailPageTestCase, self).setUp()
-        self.timeout = 5
         self.file = open(EMPTY_FILE_PATH)
-        self.fin_year = FinancialYear.objects.create(slug="2050-51")
+        self.fin_year = FinancialYear.objects.create(slug="2050-51", published=True)
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
@@ -132,11 +130,10 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         self.file.close()
 
     def test_project_detail_page_fields(self):
-        selenium = self.selenium
         url = self.project.get_absolute_url()
-        selenium.get("%s%s" % (self.live_server_url, url))
-        wait = WebDriverWait(selenium, self.timeout)
-        wait.until(
+        self.selenium.get("%s%s" % (self.live_server_url, url))
+        selenium = self.selenium
+        self.wait.until(
             EC.text_to_be_present_in_element(
                 (By.CSS_SELECTOR, ".page-heading"), u"BLUE JUNIOR SECONDARY SCHOOL"
             )
@@ -180,17 +177,17 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
 
         province = selenium.find_element_by_css_selector(".province-field").text
         local_muni = selenium.find_element_by_css_selector(
-            ".local-municipality-field"
+            "#local-municipality-field"
         ).text
         district_muni = selenium.find_element_by_css_selector(
-            ".district-municipality-field"
+            "#district-municipality-field"
         ).text
-        # gps_location = selenium.find_element_by_css_selector(".coordinates-field").text
+        gps_location = selenium.find_element_by_css_selector(".coordinates-field").text
 
         self.assertEqual(province, u"KwaZulu-Natal")
         self.assertEqual(local_muni, u"Dr Nkosazana Dlamini Zuma")
         self.assertEqual(district_muni, u"Harry Gwala")
-        # self.assertEqual(gps_location, u"")
+        self.assertEqual(gps_location, u"Not available")
 
         implementing_agent = selenium.find_element_by_css_selector(
             ".program-implementing-agent-field"
@@ -213,15 +210,12 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         total_project_cost = selenium.find_element_by_css_selector(
             ".total-project-cost-field"
         ).text
-        construction_costs = selenium.find_element_by_css_selector(
-            ".total-construction-costs-field"
-        ).text
         professional_fees = selenium.find_element_by_css_selector(
-            ".total-professional-fees-field"
+            "#total-professional-fees-field"
         ).text
 
         self.assertEqual(total_project_cost, u"R 680,000")
-        self.assertEqual(construction_costs, u"R 562,000")
+        self.wait_until_text_in("#total-construction-costs-field", u"R 562,000")
         self.assertEqual(professional_fees, u"R 118,000")
 
         expenditure_from_prev = selenium.find_element_by_css_selector(
@@ -231,7 +225,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             ".expenditure-from-previous-years-construction-costs-field"
         ).text
         prof_cost_from_prev = selenium.find_element_by_css_selector(
-            ".expenditure-from-previous-years-professional-fees-field"
+            "#expenditure-from-previous-years-professional-fees-field"
         ).text
         variation_order = selenium.find_element_by_css_selector(
             ".variation-orders-field"
@@ -255,20 +249,6 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         self.assertEqual(total_main_approp, u"R 337,000")
         self.assertEqual(const_cost_main_approp, u"R 276,000")
         self.assertEqual(prof_fees_main_approp, u"R 61,000")
-
-        total_adj_approp = selenium.find_element_by_css_selector(
-            ".adjustment-appropriation-total-field"
-        ).text
-        const_cost_adj_approp = selenium.find_element_by_css_selector(
-            ".adjustment-appropriation-construction-costs-field"
-        ).text
-        prof_fees_adj_approp = selenium.find_element_by_css_selector(
-            ".adjustment-appropriation-professional-fees-field"
-        ).text
-
-        self.assertEqual(total_adj_approp, u"R 1")
-        self.assertEqual(const_cost_adj_approp, u"R 2")
-        self.assertEqual(prof_fees_adj_approp, u"R 3")
 
         start_date = selenium.find_element_by_css_selector(".start-date-field").text
         estimated_completion = selenium.find_element_by_css_selector(
@@ -1022,7 +1002,7 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
 class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
     def setUp(self):
         self.file = open(EMPTY_FILE_PATH)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
@@ -1039,6 +1019,8 @@ class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
             project=self.project,
             name="Project 1",
             estimated_completion_date=date(year=2020, month=1, day=1),
+            province="Fake prov",
+            department="Fake dept",
         )
 
         ProvInfraProjectIndex().reindex()
@@ -1078,10 +1060,10 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.file_1 = open(EMPTY_FILE_PATH)
         self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
         self.quarter_1 = Quarter.objects.create(number=1)
+        self.quarter_2 = Quarter.objects.create(number=2)
         self.date_1 = date(year=2050, month=1, day=1)
-        self.date_2 = date(year=2070, month=1, day=1)
         self.irm_snapshot_1 = IRMSnapshot.objects.create(
             financial_year=self.fin_year,
             quarter=self.quarter_1,
@@ -1091,22 +1073,25 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_1,
             project=self.project,
-            status="Construction",
+            local_municipality="MUNI A",
             estimated_completion_date=date(year=2020, month=1, day=1),
+            department="Fake Dept",
+            province="Fake Prov",
         )
 
-        self.quarter_2 = Quarter.objects.create(number=2)
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=self.fin_year,
             quarter=self.quarter_2,
-            date_taken=self.date_2,
+            date_taken=self.date_1,
             file=File(self.file_2),
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_2,
             project=self.project,
-            status="Completed",
+            local_municipality="MUNI B",
             estimated_completion_date=date(year=2020, month=1, day=1),
+            department="Fake Dept",
+            province="Fake Prov",
         )
 
     def tearDown(self):
@@ -1114,12 +1099,11 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.file_2.close()
 
     def test_latest_status_in_the_content(self):
-        url = self.project.get_absolute_url()
-        response = self.client.get(url)
+        response = self.client.get(self.project.get_absolute_url())
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, '"status": "Completed"')
-        self.assertNotContains(response, '"status": "Construction"')
+        self.assertContains(response, "MUNI B")
+        self.assertNotContains(response, "MUNI A")
 
     def test_latest_in_the_same_year(self):
         latest = self.project.project_snapshots.latest()

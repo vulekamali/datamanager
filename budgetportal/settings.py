@@ -8,8 +8,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
+import logging
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
+# THINK VERY CAREFULY before using the TEST variable.
+# Tests should aim to be as production-like as possible.
+import sys
+
+import boto3
+
+# Database
+# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+import dj_database_url
+import environ
+import sentry_sdk
+from ckanapi import RemoteCKAN
+from sentry_sdk.integrations.django import DjangoIntegration
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -19,16 +35,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "true") == "true"
 
-# THINK VERY CAREFULY before using the TEST variable.
-# Tests should aim to be as production-like as possible.
-import sys
 
 if "test" in sys.argv or "test_coverage" in sys.argv:
     TEST = True
 else:
     TEST = False
 
-import environ
 
 ROOT_DIR = environ.Path(__file__) - 2
 PROJ_DIR = ROOT_DIR.path("budgetportal")
@@ -62,6 +74,7 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.sites",
     "django.contrib.sitemaps",
+    "django.contrib.humanize",
     "django.contrib.admin.apps.SimpleAdminConfig",
     "adminplus",
     "adminsortable",
@@ -114,9 +127,6 @@ WSGI_APPLICATION = "budgetportal.wsgi.application"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-import dj_database_url
 
 db_config = dj_database_url.config()
 db_config["ATOMIC_REQUESTS"] = True
@@ -163,7 +173,6 @@ else:
         }
     }
 
-from ckanapi import RemoteCKAN
 
 CKAN_URL = os.environ.get("CKAN_URL", "https://treasurydata.openup.org.za")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY", None)
@@ -285,6 +294,10 @@ PIPELINE = {
             "source_filenames": ("stylesheets/app.scss",),
             "output_filename": "app.css",
         },
+        "vulekamali-webflow-css": {
+            "source_filenames": ("scss/vulekamali-webflow.scss",),
+            "output_filename": "vulekamali-webflow.css",
+        },
         "admin": {
             "source_filenames": ("stylesheets/admin.scss",),
             "output_filename": "admin.css",
@@ -305,8 +318,6 @@ if not TEST:
 
 # Logging
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN", None)
 if SENTRY_DSN:
@@ -317,7 +328,6 @@ APM_SERVER_URL = os.environ.get("APM_SERVER_URL", "")
 ELK_APP_NAME = "vulekamali Data Manager"
 ELASTIC_APM = {"SERVICE_NAME": ELK_APP_NAME, "SERVER_URL": APM_SERVER_URL}
 
-import boto3, logging
 
 boto3.set_stream_logger("boto3.resources", logging.INFO)
 

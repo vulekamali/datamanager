@@ -1,15 +1,14 @@
 """
 Tests of models.Department
 """
-import mock
+import json
 
-from budgetportal.models import FinancialYear, Sphere, Government, Department
+import mock
+import mock_data
 from budgetportal import models
+from budgetportal.models import Department, FinancialYear, Government, Sphere
 from django.test import TestCase
 from mock import Mock, patch
-import json
-import mock_data
-
 
 with open("budgetportal/tests/test_data/budget_and_actual.json", "r") as f:
     DEPARTMENT_MOCK_DATA = json.load(f)

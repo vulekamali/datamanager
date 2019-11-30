@@ -1,7 +1,7 @@
-from budgetportal.models import FinancialYear, Sphere, Government, Department
+from budgetportal.models import Department, FinancialYear, Government, Sphere
 from django.conf import settings
-from django.test import TestCase, Client
-from mock import patch, Mock
+from django.test import Client, TestCase
+from mock import Mock, patch
 
 
 class BasicPagesTestCase(TestCase):

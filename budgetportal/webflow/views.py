@@ -1,29 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, get_object_or_404
-from django.forms.models import model_to_dict
-from drf_haystack.serializers import HaystackSerializer, HaystackFacetSerializer
-from drf_haystack.viewsets import HaystackViewSet
-from drf_haystack.mixins import FacetMixin
+import json
+
+from slugify import slugify
+
 from budgetportal import models
-from ..search_indexes import ProvInfraProjectIndex
-from drf_haystack.filters import HaystackFacetFilter, HaystackFilter
+from budgetportal.json_encoder import JSONEncoder
+from django.forms.models import model_to_dict
+from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from drf_haystack.filters import (
+    HaystackFacetFilter,
+    HaystackFilter,
+    HaystackOrderingFilter,
+)
+from drf_haystack.mixins import FacetMixin
+from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
+from drf_haystack.viewsets import HaystackViewSet
 
-import json
-import decimal
-import datetime
-
-
-class JSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, decimal.Decimal):
-            return str(o)
-        if isinstance(o, (datetime.date, datetime.datetime)):
-            return o.isoformat()
-        return json.JSONEncoder.default(self, o)
+from ..prov_infra_project.charts import time_series_data
+from ..search_indexes import ProvInfraProjectIndex
 
 
 def provincial_infrastructure_project_list(request):
@@ -42,6 +40,16 @@ def provincial_infrastructure_project_detail(request, id, slug):
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
     page_data["project"]["irm_snapshot"] = snapshot.irm_snapshot.__unicode__()
+    snapshot_list = list(project.project_snapshots.all())
+    page_data["time_series_chart"] = time_series_data(snapshot_list)
+    department = models.Department.get_in_latest_government(
+        snapshot.department, snapshot.province
+    )
+    page_data["department_url"] = department.get_url_path() if department else None
+    page_data["province_depts_url"] = (
+        "/%s/departments?province=%s&sphere=provincial"
+        % (models.FinancialYear.get_latest_year().slug, slugify(snapshot.province),)
+    )
     context = {
         "project": project,
         "page_data_json": json.dumps(
@@ -73,6 +81,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             "province",
             "department",
             "status",
+            "status_order",
             "primary_funding_source",
             "estimated_completion_date",
             "total_project_cost",
@@ -145,10 +154,17 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     # index_models = [Location]
 
     serializer_class = ProvInfraProjectSerializer
-    filter_backends = [ProvInfraProjectFilter]
+    filter_backends = [ProvInfraProjectFilter, HaystackOrderingFilter]
 
     facet_serializer_class = ProvInfraProjectFacetSerializer
     facet_filter_backends = [ProvInfraProjectFacetFilter]
+
+    ordering_fields = [
+        "name",
+        "total_project_cost",
+        "status_order",
+        "estimated_completion_date",
+    ]
 
     @method_decorator(cache_page(60 * 30))  # minutes
     def get(self, *args, **kwargs):

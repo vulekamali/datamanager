@@ -1,6 +1,8 @@
+{% load static %}
+{% load json_script_escape %}
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Nov 13 2019 09:17:33 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Nov 30 2019 15:28:00 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5db0b167ab837bf5647b114c" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
@@ -27,18 +29,93 @@
         n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
       }(window, document);
     </script>
-  <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="/static/images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="/static/images/webclip.png" rel="apple-touch-icon">
+  <!--  Google Tag Manager  -->
+  <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-5DR7PKG');
+    </script>
+  <!--  End Google Tag Manager  -->
   <style>
       .search-dropdown_label {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
       }
+      .truncate {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    </style>
+  <style>
+      /* Blending modes */
+      .mbm-normal {
+        mix-blend-mode: normal;
+      }
+      .mbm-multiply {
+        mix-blend-mode: multiply;
+      }
+      .mbm-screen {
+        mix-blend-mode: screen;
+      }
+      .mbm-overlay {
+        mix-blend-mode: overlay;
+      }
+      .mbm-darken {
+        mix-blend-mode: darken;
+      }
+      .mbm-lighten {
+        mix-blend-mode: lighten;
+      }
+      .mbm-color-dodge {
+        mix-blend-mode: color-dodge
+      }
+      .mbm-color-burn {
+        mix-blend-mode: color-burn;
+      }
+      .mbm-hard-light {
+        mix-blend-mode: hard-light;
+      }
+      .mbm-soft-light {
+        mix-blend-mode: soft-light;
+      }
+      .mbm-difference {
+        mix-blend-mode: difference;
+      }
+      .mbm-exclusion {
+        mix-blend-mode: exclusion;
+      }
+      .mbm-hue {
+        mix-blend-mode: hue;
+      }
+      .mbm-saturation {
+        mix-blend-mode: saturation;
+      }
+      .mbm-color {
+        mix-blend-mode: color;
+      }
+      .mbm-luminosity {
+        mix-blend-mode: luminosity;
+      }
     </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>
+<link rel="stylesheet" href="{% static "css/vulekamali-webflow.css" %}">
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -49,16 +126,34 @@
 <meta property="og:description" content="{{ page_description }}" />
 </head>
 <body>
-  <div data-collapse="medium" data-animation="default" data-duration="400" class="w-nav">
+  <div class="section__data-warning">
     <div class="container">
-      <a href="index.html" class="brand w-nav-brand">
-        <div class="div-block-13">
-          <div>Home</div>
+      <div class="row">
+        <div class="col">
+          <div class="data-warning__description">This page is a preview of upcoming vulekamali functionality. The information on this site is presented as the provincial treasury submitted it to <a href="http://www.treasury.gov.za/" target="_blank">National Treasury</a>.</div>
         </div>
-      </a>
-      <nav role="navigation" class="w-nav-menu"><a href="#" class="w-nav-link">Home</a><a href="#" class="w-nav-link">About</a><a href="#" class="w-nav-link">Contact</a></nav>
-      <div class="w-nav-button">
-        <div class="w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+  <div data-collapse="none" data-animation="default" data-duration="400" data-easing="ease-in" data-easing2="ease-out" class="navbar w-nav">
+    <div class="container">
+      <div class="navbar__plate"><a href="infrastructure-search-template.html" class="brand w-nav-brand"><img src="/static/images/Vukilemali-Logo_FINAL2018.svg" alt="" class="image-6"><div class="text-block-14">Infrastructure</div></a>
+        <nav role="navigation" class="nav-menu w-nav-menu">
+          <div data-w-id="505b95b7-062c-dafb-5a18-96ee222ccfff" class="nav-menu__dropdown_trigger"><img src="/static/images/menu-24px.svg" alt="" class="nav-menu__icon-open"><img src="/static/images/close-24px.svg" alt="" class="nav-menu__icon-close"></div>
+          <div class="nav-menu__items">
+            <div class="nav-menu__links">
+              <div class="nav-menu__stages"></div><a href="/infrastructure-projects/provincial/" class="nav-link w-nav-link">Project search</a><a href="https://vulekamali.gov.za/" target="_blank" class="nav-link--feature w-nav-link">Visit vulekamali</a></div>
+            <div class="nav-menu__search">
+              <div class="nav-menu__search-box">
+                <form action="/search" class="search w-form"><input type="search" class="search-input w-input" maxlength="256" name="query" placeholder="What are you searching for?" id="search" required=""><input type="submit" value="Search" class="search-button w-button"></form>
+              </div>
+              <div class="nav-menu__search-trigger">
+                <div data-w-id="505b95b7-062c-dafb-5a18-96ee222cd02c" class="search__open"><img src="/static/images/search-24px.svg" alt=""></div>
+                <div class="search__close"><img src="/static/images/close-24px.svg" alt=""></div>
+              </div>
+            </div>
+          </div>
+        </nav>
       </div>
     </div>
   </div>
@@ -92,7 +187,7 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">Project location</h3>
             </div>
-            <div class="w-embed w-iframe"><iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=25.10513305664063%2C-34.46467409091155%2C27.79678344726563%2C-33.0098151127053&amp;layer=mapnik" style=""></iframe></div>
+            <div class="html-embed-3 w-embed w-iframe"><iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=25.10513305664063%2C-34.46467409091155%2C27.79678344726563%2C-33.0098151127053&amp;layer=mapnik" style=""></iframe></div>
           </div>
         </div>
         <div class="col col-4 col-sm-5 col-xs-12">
@@ -114,34 +209,60 @@
         </div>
       </div>
       <div class="row project-info__body">
+        <div class="col col-12">
+          <div class="project-details__info-message">
+            <div class="fas-icon"></div>
+            <div>Hover or tap on any heading to learn more</div>
+          </div>
+        </div>
         <div class="col col-3 col-m-6 col-sm-12">
           <div class="project-details _1-4">
             <div class="project-details__heading">
               <h3 class="project-detail_heading">Funding</h3>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="e61ea2bd-2c4f-103f-9497-ccaab5a5efa4" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">total value</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">R4,702,310,000</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="9b22a128-090c-eee5-29d7-7f59eabf8723" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Funding source</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">Education infrastructure grant<br></div>
+              <div class="project-detail_text">Education infrastructure grant</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="1a7d69ff-b30c-96a0-faa6-2ff77f96ddb9" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Nature of investment</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">Infrastructure Transfers - Capital</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="e9c069cf-5a75-cff3-500b-12b1db92d54c" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Funding status</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">Tabled</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
           </div>
         </div>
@@ -151,22 +272,37 @@
               <h3 class="project-detail_heading">Administration</h3>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="a54bf56d-89a9-59d0-c47b-f4a469f4337f" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">DEPARTMENT</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text"><a href="#"><span class="project-detail_link">Agriculture</span></a></div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="e8320f45-12b4-cc1d-e76e-160a74712314" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Budget programme</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">Programme 3 - Farmer Support and Development</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="0a3d7794-bec5-39f1-da57-e923be410398" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Project Status</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">Tender</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
           </div>
         </div>
@@ -176,28 +312,48 @@
               <h3 class="project-detail_heading">Location</h3>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="ab54366f-42e2-2b24-578c-caa6aa810eca" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Province</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text"><a href="#"><span class="project-detail_link project-detail_link">Limpopo</span></a></div>
+              <div class="project-detail_text"><a href="#"><span class="project-detail_link">Limpopo</span></a></div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="a503ace5-d105-564b-2c2d-2a650fc34ce0" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Local Municipality</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">Ephraim Mogale</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="65d19aa9-5a30-0198-72d8-cee221720ecf" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">District Municipality</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">Sekhukhune</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="8307d534-21ee-5b23-82d7-70606c95b358" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">GPS Location</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">-24.72691, 29.42721</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
           </div>
         </div>
@@ -207,28 +363,48 @@
               <h3 class="project-detail_heading">Parties</h3>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="b13ce617-ba74-b4f9-de77-5ad9bb1a097e" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Implementing agent</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">LDARD (Limpopo Department of Agriculture and Rural Development)</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="408a27c4-cf69-d6f0-e290-dae32192fb0e" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Public agent</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">Public Works</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="091ad592-df16-5e6e-fead-ec878fc687ec" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Project Contractor</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">MOHLATLEGO-MACHABA SECONDARY</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
             <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+              <div data-w-id="7a86ea17-fc89-9662-57d5-460a70494531" class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">professional service providers</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">BVI Consulting<br>Element Consulting Engineer<br></div>
+              <div class="project-detail_text">BVI Consulting<br>Element Consulting Engineer</div>
+              <div class="project-detail__tooltip_highlight"></div>
             </div>
           </div>
         </div>
@@ -243,27 +419,48 @@
         </div>
       </div>
       <div class="row project-info__body">
+        <div class="col col-12">
+          <div class="project-details__info-message">
+            <div class="fas-icon"></div>
+            <div>Hover or tap any value to learn more</div>
+          </div>
+        </div>
         <div class="col col-3 col-m-6 col-sm-12">
           <div class="project-details _1-4">
             <div class="project-details__heading">
               <h3 class="project-detail_heading">BUDGET</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="db481d16-52b8-c157-3bad-1e44b949c54b" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Total project cost</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
               <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="ff74e4c9-9e47-0d15-a6c5-fcd9e9b5a700" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Construction costs</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text">R4,000,000</div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="5a8de314-b133-5896-195c-febd8607e201" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Professional fees</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text">R250,000</div>
             </div>
           </div>
@@ -273,23 +470,38 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">COST TO DATE</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="7771d424-857d-1038-228a-58a93cdae280" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">TOTAL EXPENDITURE TO DATE</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">R2,340,239</div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="40c21f72-5fa8-51f1-3baa-96227f770eb2" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Construction costs TO DATE</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">R2,340,500</div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="c26d1e37-8720-6354-6eaf-9f5c4208e5ce" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">PROFESSIONAL COSTS TO DATE</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">R0</div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
           </div>
         </div>
@@ -298,31 +510,49 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">MAIN &amp; ADJUSTED BUDGET</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="22a1de52-5e87-0093-0bc2-c7fb4687f93c" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">construction costs (main budget)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">R0</div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="c73cb2f2-b702-7be6-195c-e819e1e1c82d" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Professional fees (main budget)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">R250,000</div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="f0473060-94cf-9674-b699-ae32fa180363" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">construction costs (adjustements budget)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="no-data">
-                <div class="project-detail_text">No data</div><img src="/static/images/info-24px.svg" alt="" class="no-data__icon"></div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="83edfb21-281f-09ad-2819-e0a89828fd90" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Professional fees (Adjustments budget)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="no-data">
-                <div class="project-detail_text">No data</div><img src="/static/images/info-24px.svg" alt="" class="no-data__icon"></div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
           </div>
         </div>
@@ -331,17 +561,49 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">APPROPRIATIONS</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="b6f7b919-a718-b82d-d7f7-126c04157e46" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">MAIN BUDGET appropriation total</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">R250,000</div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="63f0af9a-3db1-6c2c-47d6-7d65c4281ab1" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Adjustments budget appropriation total</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text">R0</div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div data-w-id="aa3d47dd-d560-e679-d1c1-1b3d6956e28b" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Total project cost</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div data-w-id="b576da64-431d-6f64-17f8-46dc38c5f0ce" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Total project cost</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
             </div>
           </div>
         </div>
@@ -361,7 +623,7 @@
           </div>
           <div class="col col-8 col-m-12">
             <div class="subsection-chart_wrapper">
-              <div class="chart_wrapper"><img src="/static/images/Group-68-2.svg" alt="" class="project-budget-image"></div>
+              <div id="project-time-series" class="chart_wrapper--time-series"><img src="/static/images/Group-78-5.svg" alt="" class="project-budget-image"></div>
               <div class="chart-detail_wrapper">
                 <div class="source_wrapper">
                   <div class="source">Source:</div>
@@ -380,6 +642,178 @@
       <div class="row project-info__header">
         <div class="col">
           <h2 class="sub-section__title">Project timelines</h2>
+        </div>
+      </div>
+      <div class="row project-info__body">
+        <div class="col col-12">
+          <div class="project-details__info-message">
+            <div class="fas-icon"></div>
+            <div>Hover or tap on any heading to learn more</div>
+          </div>
+        </div>
+        <div class="col col-3 col-m-6 col-sm-12">
+          <div class="project-details _1-4">
+            <div class="project-details__heading">
+              <h3 class="project-detail_heading">BUDGET</h3>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f110ca" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Total project cost</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R4,500,000</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f110d5" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Construction costs</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R4,000,000</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f110e0" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Professional fees</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R250,000</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-3 col-m-6 col-sm-12">
+          <div class="project-details _2-4">
+            <div class="project-details__heading">
+              <h3 class="project-detail_heading">COST TO DATE</h3>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f110f0" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">TOTAL EXPENDITURE TO DATE</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R2,340,239</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f110fb" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Construction costs TO DATE</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R2,340,500</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f11106" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">PROFESSIONAL COSTS TO DATE</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R0</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-3 col-m-6 col-sm-12">
+          <div class="project-details _3-4">
+            <div class="project-details__heading">
+              <h3 class="project-detail_heading">MAIN &amp; ADJUSTED BUDGET</h3>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f11116" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">construction costs (main budget)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R4,702,310,000</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f11121" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Professional fees (main budget)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R4,702,310,000</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f1112c" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">construction costs (adjustements budget)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail__tooltip_highlight"></div>
+              <div class="no-data">
+                <div class="project-detail_text">No data</div>
+              </div>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f11138" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Professional fees (Adjustments budget)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="no-data">
+                <div class="project-detail_text">No data</div>
+              </div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-3 col-m-6 col-sm-12">
+          <div class="project-details _4-4">
+            <div class="project-details__heading">
+              <h3 class="project-detail_heading">APPROPRIATIONS</h3>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f11149" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">MAIN BUDGET appropriation total</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R250,000</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+            <div class="project-details__item">
+              <div data-w-id="27a0f1c2-3b1d-68a4-cdf2-4c4ac3f11154" class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Adjustments budget appropriation total</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eleifend posuere sem vitae porta. Mauris vulputate in quam vitae dictum. Donec porttitor dolor in elit malesuada, ut suscipit justo dignissim.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div class="project-detail_text">R0</div>
+              <div class="project-detail__tooltip_highlight"></div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row project-info__body">
@@ -430,13 +864,13 @@
           </div>
         </div>
       </div>
-      <div class="row fullwidth-chart">
+      <div class="row">
         <div class="info-chart__body">
           <div class="col col-12">
             <div class="subsection-details__heading">
               <h3 class="project-detail_heading">Timeline summary</h3>
             </div>
-            <div class="chart_wrapper"><img src="/static/images/Group-71-1.svg" alt="" class="timeline-summary-image"></div>
+            <div id="project-timeline" class="chart_wrapper--timeline"><img src="/static/images/Group-71-1.svg" alt="" class="timeline-summary-image"></div>
             <div class="chart-detail_wrapper">
               <div class="source_wrapper">
                 <div class="source">Source:</div>
@@ -449,7 +883,7 @@
       </div>
     </div>
   </div>
-  <div class="section">
+  <div class="section--last">
     <div class="container">
       <div class="row project-info__header">
         <div class="col">
@@ -562,14 +996,45 @@
       </div>
     </div>
   </div>
-  <div class="footer"></div>
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col col-4 col-sm-6 col-xs-8"><a href="https://vulekamali.gov.za/" target="_blank" class="footer__logo_plate w-inline-block"><img src="/static/images/Vukilemali-Logo_FINAL2018.svg" alt="" class="image-5"></a></div>
+        <div class="col col-4 col-sm-12">
+          <div class="footer__description">
+            <h4 class="footer__heading">About vulekamali</h4>
+            <p>Vulekamali is an online budget portal helping you understand South Africa&#x27;s finances in a simple way.</p>
+          </div>
+        </div>
+        <div class="col col-4 col-sm-12">
+          <div class="footer__links">
+            <h4 class="footer__heading">useful links</h4>
+            <ul class="list w-list-unstyled">
+              <li class="list-item"><a href="https://vulekamali.gov.za/" class="footer__link-item">vulekamali</a></li>
+              <li><a href="http://www.treasury.gov.za/" class="footer__link-item">National Treasury</a></li>
+              <li><a href="https://imaliyethu.org.za/" class="footer__link-item">Imali Yethu</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col col-12">
+          <div class="footer__legal">
+            <p>Vulekamali is a project by the South African National Treasury and IMALI YETHU</p>
+            <div class="footer__social"><a href="https://twitter.com/vulekamali" class="footer__social_link-item w-inline-block"><img src="/static/images/iconmonstr-twitter-1-white.svg" alt="" class="image-3"></a><a href="https://www.facebook.com/vulekamali/" class="footer__social_link-item w-inline-block"><img src="/static/images/iconmonstr-facebook-1-white.svg" alt="" class="image-4"></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="/static/js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-<script>var pageData = {{ page_data_json|safe }}</script>
+  <!--  Google Tag Manager (noscript)  -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DR7PKG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!--  End Google Tag Manager (noscript)  -->
+<script id="page-data" type="application/json">{{ page_data_json|json_script_escape:True }}</script>
 <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
 <script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>
-<script src="/static/js/vulekamali-webflow.js"></script>
+<script src="{% static "generated/vulekamali-webflow.bundle.js" %}"></script>
 </body>
 </html>

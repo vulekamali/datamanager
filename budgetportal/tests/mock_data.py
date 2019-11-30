@@ -1,6 +1,5 @@
 from decimal import Decimal
 
-
 CPI_2019_20 = {
     u"1996": {
         u"CPI": u"0.081341339073298",

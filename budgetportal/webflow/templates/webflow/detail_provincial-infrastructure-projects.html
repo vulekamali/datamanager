@@ -1,6 +1,8 @@
+{% load static %}
+{% load json_script_escape %}
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Nov 13 2019 09:17:33 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Nov 30 2019 15:28:00 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5db0b167ab837b98707b114e" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
@@ -26,18 +28,93 @@
         n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
       }(window, document);
     </script>
-  <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="/static/images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="/static/images/webclip.png" rel="apple-touch-icon">
+  <!--  Google Tag Manager  -->
+  <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-5DR7PKG');
+    </script>
+  <!--  End Google Tag Manager  -->
   <style>
       .search-dropdown_label {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
       }
+      .truncate {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    </style>
+  <style>
+      /* Blending modes */
+      .mbm-normal {
+        mix-blend-mode: normal;
+      }
+      .mbm-multiply {
+        mix-blend-mode: multiply;
+      }
+      .mbm-screen {
+        mix-blend-mode: screen;
+      }
+      .mbm-overlay {
+        mix-blend-mode: overlay;
+      }
+      .mbm-darken {
+        mix-blend-mode: darken;
+      }
+      .mbm-lighten {
+        mix-blend-mode: lighten;
+      }
+      .mbm-color-dodge {
+        mix-blend-mode: color-dodge
+      }
+      .mbm-color-burn {
+        mix-blend-mode: color-burn;
+      }
+      .mbm-hard-light {
+        mix-blend-mode: hard-light;
+      }
+      .mbm-soft-light {
+        mix-blend-mode: soft-light;
+      }
+      .mbm-difference {
+        mix-blend-mode: difference;
+      }
+      .mbm-exclusion {
+        mix-blend-mode: exclusion;
+      }
+      .mbm-hue {
+        mix-blend-mode: hue;
+      }
+      .mbm-saturation {
+        mix-blend-mode: saturation;
+      }
+      .mbm-color {
+        mix-blend-mode: color;
+      }
+      .mbm-luminosity {
+        mix-blend-mode: luminosity;
+      }
     </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin=""/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>
+<link rel="stylesheet" href="{% static "css/vulekamali-webflow.css" %}">
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_description }}">
 <meta name="twitter:title" content="{{ page_title }}">
@@ -48,16 +125,34 @@
 <meta property="og:description" content="{{ page_description }}" />
 </head>
 <body class="provincial-infrastructure-project-detail-page">
-  <div data-collapse="medium" data-animation="default" data-duration="400" class="w-nav">
+  <div class="section__data-warning">
     <div class="container">
-      <a href="index.html" class="brand w-nav-brand">
-        <div class="div-block-13">
-          <div>Home</div>
+      <div class="row">
+        <div class="col">
+          <div class="data-warning__description">This page is a preview of upcoming vulekamali functionality. The information on this site is presented as the provincial treasury submitted it to <a href="http://www.treasury.gov.za/" target="_blank">National Treasury</a>.</div>
         </div>
-      </a>
-      <nav role="navigation" class="w-nav-menu"><a href="#" class="w-nav-link">Home</a><a href="#" class="w-nav-link">About</a><a href="#" class="w-nav-link">Contact</a></nav>
-      <div class="w-nav-button">
-        <div class="w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+  <div data-collapse="none" data-animation="default" data-duration="400" data-easing="ease-in" data-easing2="ease-out" class="navbar w-nav">
+    <div class="container">
+      <div class="navbar__plate"><a href="infrastructure-search-template.html" class="brand w-nav-brand"><img src="/static/images/Vukilemali-Logo_FINAL2018.svg" alt="" class="image-6"><div class="text-block-14">Infrastructure</div></a>
+        <nav role="navigation" class="nav-menu w-nav-menu">
+          <div data-w-id="505b95b7-062c-dafb-5a18-96ee222ccfff" class="nav-menu__dropdown_trigger"><img src="/static/images/menu-24px.svg" alt="" class="nav-menu__icon-open"><img src="/static/images/close-24px.svg" alt="" class="nav-menu__icon-close"></div>
+          <div class="nav-menu__items">
+            <div class="nav-menu__links">
+              <div class="nav-menu__stages"></div><a href="/infrastructure-projects/provincial/" class="nav-link w-nav-link">Project search</a><a href="https://vulekamali.gov.za/" target="_blank" class="nav-link--feature w-nav-link">Visit vulekamali</a></div>
+            <div class="nav-menu__search">
+              <div class="nav-menu__search-box">
+                <form action="/search" class="search w-form"><input type="search" class="search-input w-input" maxlength="256" name="query" placeholder="What are you searching for?" id="search" required=""><input type="submit" value="Search" class="search-button w-button"></form>
+              </div>
+              <div class="nav-menu__search-trigger">
+                <div data-w-id="505b95b7-062c-dafb-5a18-96ee222cd02c" class="search__open"><img src="/static/images/search-24px.svg" alt=""></div>
+                <div class="search__close"><img src="/static/images/close-24px.svg" alt=""></div>
+              </div>
+            </div>
+          </div>
+        </nav>
       </div>
     </div>
   </div>
@@ -65,14 +160,14 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <div class="breadcrumbs"><a href="/infrastructure-projects/provincial/" class="breadcrumbs__crumb">Provincial Infrastructure</a><a href="#" class="breadcrumbs__crumb department-field"></a></div>
+          <div class="breadcrumbs"><a href="/infrastructure-projects/provincial/" class="breadcrumbs__crumb">Provincial Infrastructure</a><a id="breadcrumb-level-2" href="#" class="breadcrumbs__crumb"></a></div>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="page-header__title">
             <h1 class="page-heading name-field"></h1>
-            <div class="button_wrapper cc-align-right"><a href="#" class="button cc-grey share-link w-inline-block"><img src="/static/images/share-24px.svg" alt="" class="button-icon _20px"><div class="button-text hide-sm">Share</div></a></div>
+            <div class="button_wrapper cc-align-right hide"><a href="#" class="button cc-grey share-link w-inline-block"><img src="/static/images/share-24px.svg" alt="" class="button-icon _20px"><div class="button-text hide-sm">Share</div></a></div>
           </div>
         </div>
       </div>
@@ -91,7 +186,11 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">Project location</h3>
             </div>
-            <div id="project-location-map-container" class="project-location-map-container embed-container w-embed"></div>
+            <div id="project-location-map-container" class="project-location-map-container">
+              <div class="map__no-data">
+                <div>Location not available</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col col-4 col-sm-5 col-xs-12">
@@ -99,7 +198,11 @@
             <h3 class="project-detail_heading">Municipality map</h3>
           </div>
           <div class="search-detail_wrapper">
-            <div id="project-municipal-context-map-container" class="muni-map project-municipal-context-map-container embed-container"></div>
+            <div id="project-municipal-context-map-container" class="project-municipal-context-map-container">
+              <div class="map__no-data">
+                <div>Location not available</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -113,33 +216,59 @@
         </div>
       </div>
       <div class="row project-info__body">
+        <div class="col col-12">
+          <div class="project-details__info-message">
+            <div class="fas-icon"></div>
+            <div>Hover or tap on any value to learn more</div>
+          </div>
+        </div>
         <div class="col col-3 col-m-6 col-sm-12">
           <div class="project-details _1-4">
             <div class="project-details__heading">
               <h3 class="project-detail_heading">Funding</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">total Cost</div>
+            <div data-w-id="7bfce866-8c66-8216-9ce8-c66a49dfb9b5" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Estimated total cost</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The total cost for the project. This is an estimate updated during the project until it is completed, when it becomes the actual final cost.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text total-project-cost-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="de858151-d24f-bc99-3f6d-90d185c9b97b" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Primary Funding source</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The source of most of the money for this project. This might be conditional grants, equitable share, or others.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text primary-funding-source-field"><br></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div class="project-detail_text primary-funding-source-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="4f3d17ae-a185-519d-a197-610a25b8b71c" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Nature of investment</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">This indicates whether the project is maintenance of existing infrastructure, new infrastructure, replacement, etc.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text nature-of-investment-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="4c0cc05a-c996-a9e9-d00f-4b550bb8f423" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Funding status</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">This indicates whether the project was included when the original budget was tabled at the start of the financial year.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text funding-status-field"></div>
             </div>
           </div>
@@ -149,28 +278,48 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">Administration</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="a5e4b837-01f3-c8a0-b593-efdf8c60dd32" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">DEPARTMENT</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The provincial department undertaking the project.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text department-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="533b2662-6a6d-c7d5-9b61-03b1a75371c6" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Budget programme</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The budget programme of the department undertaking this project under which this project is carried out.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text budget-programme-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="e714ba17-eab3-3b69-c836-ec92727192cd" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Project Status</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">A successful project goes through the following statuses in order:<br><br>- Pre - Feasibility<br>- Project Initiation<br>- Feasibility<br>- Tender<br>- Design<br>- Site Handed - Over to Contractor<br>- Construction 1% - 25%<br>- Construction 26% - 50%<br>- Construction 51% - 75%<br>- Construction 76% - 99%<br>- Practical Completion (100%)<br>- Final Completion<br><br>A project might get canceled along the way and end with Terminated status.<br><br>At any time during the life of a project, it may go into one of these statuses before returning to the normal flow of statuses:<br><br>- On Hold- Other<br> - Compensation of Employees<br>- Other - Packaged Ongoing Project</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text status-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">Project Number</div>
+            <div data-w-id="0c91fab1-8cb8-9233-4bdf-dd8dc3f79220" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Project number</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The reference used by the provincial government to uniquely refer to the project. This is not standardised but ought to be unique within a department.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text project-number-field"></div>
             </div>
           </div>
@@ -180,28 +329,48 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">Location</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="aaadf212-3082-80c6-8a4e-1f902bc0aa0c" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Province</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The provincial government undertaking the project.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text province-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="96879b57-da92-7cfe-6aab-3f205d884c2d" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Local Municipality</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The local municipality in which the project is being delivered. This is left blank when the beneficiary area is larger than one local or metropolitan municipality.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text local-municipality-field"></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="local-municipality-field" class="project-detail_text"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="ea231c92-9932-572f-2a16-4b51cbdb545a" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">District Municipality</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The district municipality in which the project is being delivered. This is left blank when the beneficiary area is larger than one district municipality.is larger than one local or metropolitan municipality.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text district-municipality-field"></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="district-municipality-field" class="project-detail_text"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="23c09ae1-02a7-9699-0bce-f85359fcddb3" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">GPS Location</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The coordinates to look up the project precisely on the map. This is may be left blank when the project is across multiple locations.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text coordinates-field"></div>
             </div>
           </div>
@@ -209,30 +378,50 @@
         <div class="col col-3 col-m-6 col-sm-12">
           <div class="project-details _4-4">
             <div class="project-details__heading">
-              <h3 class="project-detail_heading">Implementation</h3>
+              <h3 class="project-detail_heading">Parties</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">Implementing agent</div>
+            <div data-w-id="eba366d8-0cbc-ae68-d368-03810ac4019b" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Programme Implementing agent</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The programme implementing agent is responsible for appointing and managing project managers, assess feasibility, appoint and monitor performance of service providers, ensure compliance and report to the client. See Template 2T06 of the CIDB for more. Request from the department if not available.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text program-implementing-agent-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">Principle agent</div>
+            <div data-w-id="d9ffe8ef-0fd6-e992-17ab-8a7b811a600b" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">principle agent</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The principle agent is responsible for the leadership of the team and overall administration of all sections of the project and its service providers. Request from the department if not available.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text principle-agent-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">Main Contractor</div>
+            <div data-w-id="0d5d345a-6a4e-be8a-4f75-56d5652e87ce" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">main Contractor</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The contractor awarded the tender for the construction of the project. If they subcontract other contractors to do part of the work, they are referred to as the Main contractor. Request from the department if not available.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text main-contractor-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="207eb912-5aaa-3737-22c5-c60d8d779dff" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Other service providers</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">Other service providers, e.g. additional contractors. Request from the department if not available.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text other-service-providers-field"><br></div>
             </div>
           </div>
@@ -248,28 +437,49 @@
         </div>
       </div>
       <div class="row project-info__body">
+        <div class="col col-12">
+          <div class="project-details__info-message">
+            <div class="fas-icon"></div>
+            <div>Hover or tap on any value to learn more</div>
+          </div>
+        </div>
         <div class="col col-3 col-m-6 col-sm-12">
           <div class="project-details _1-4">
             <div class="project-details__heading">
               <h3 class="project-detail_heading">BUDGET</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">Total project cost</div>
+            <div data-w-id="bd686e30-8cc0-6a99-2f2e-b70452a19ab9" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Total estimated project cost</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The total cost for the project. This is an estimate updated during the project until it is completed, when it becomes the actual final cost.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text total-project-cost-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">Construction costs</div>
+            <div data-w-id="862f828d-d72b-161d-459a-6763cfcd11ac" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">estimated Construction costs</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The total cost for construction. This is an estimate updated during the project until it is completed, when it becomes the actual final cost. This field can be blank until XXX</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text total-construction-costs-field"></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="total-construction-costs-field" class="project-detail_text total-construction-costs-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">Professional fees</div>
+            <div data-w-id="f7afc6e1-5e48-31a9-e33a-0f5f7a584478" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">estimated Professional fees</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The total cost for professional fees. This is an estimate updated during the project until it is completed, when it becomes the actual final cost. </div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text total-professional-fees-field"></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="total-professional-fees-field" class="project-detail_text total-professional-fees-field"></div>
             </div>
           </div>
         </div>
@@ -278,28 +488,48 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">COST TO DATE</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="fd06048f-514b-41e2-ff04-9a3eb71bb564" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">TOTAL EXPENDITURE from previous years</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The total actual expenditure in all financial years before the current. This field can be blank until the start of the second financial year in which the project is active.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text expenditure-from-previous-years-total-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="a15e034a-e8bf-2894-16b4-5f0cc3103f1b" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Construction costs  from previous years</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The actual expenditure on construction in all financial years before the current. This field can be blank until the start of the second financial year in which the project is active.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text expenditure-from-previous-years-construction-costs-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="9b7d40a8-ee5d-9f89-f9c5-adf5e13713cb" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">PROFESSIONAL COSTS  from previous years</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The actual expenditure on professional fees in all financial years before the current. This field can be blank until the start of the second financial year in which the project is active.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text expenditure-from-previous-years-professional-fees-field"></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="expenditure-from-previous-years-professional-fees-field" class="project-detail_text"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="4a8817dd-51ec-8a90-76f8-ee714c4d53ad" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Variation Orders</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The total for variation orders to date. These are changes to the originally agreed scope of work, e.g. because the requirements are better understood. This field is zero until variations have been accepted by the Main Contractor and Programme Implementing Agent.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text variation-orders-field"></div>
             </div>
           </div>
@@ -307,24 +537,39 @@
         <div class="col col-3 col-m-6 col-sm-12">
           <div class="project-details _3-4">
             <div class="project-details__heading">
-              <h3 class="project-detail_heading main-appropriation-heading">Original BUDGET FY</h3>
+              <h3 class="project-detail_heading main-appropriation-heading">Original BUDGET <span class="latest-financial-year"> FY</span></h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="77277783-3bd5-35c4-2625-b2aec17f18bb" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">total (MAIN appropriation)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The amount ringfenced for this project in the current financial year&#x27;s original budget. This field may only be blank if the project was not part of the tabled original budget.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text main-appropriation-total-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="77abc67e-90e0-ef95-8dbb-233f3909ae9c" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">construction costs (main appropriation)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The amount ringfenced for construction costs for this project in the current financial year&#x27;s original budget. This field may only be blank if the project was not part of the tabled original budget.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text main-appropriation-construction-costs-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="f945a2b8-51bf-87cf-91bb-3bfab74ed318" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Professional fees (main appropriation)</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The amount ringfenced for professional fees for this project in the current financial year&#x27;s original budget. This field may only be blank if the project was not part of the tabled original budget.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text main-appropriation-professional-fees-field"></div>
             </div>
           </div>
@@ -332,25 +577,51 @@
         <div class="col col-3 col-m-6 col-sm-12">
           <div class="project-details _4-4">
             <div class="project-details__heading">
-              <h3 class="project-detail_heading adjustment-appropriation-heading">Adjustment Budget FY</h3>
+              <h3 class="project-detail_heading quarterly-heading">Quarterly actual spend <span class="latest-financial-year"> FY</span></h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">total (Adjustment appropriation)</div>
+            <div data-w-id="ab013cef-d6ab-9a02-2ac6-b66fa4a87019" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Quarter 1</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The amount spent between April and June of this financial year. This field may only be blank until reporting for the quarter is concluded in the next quarter.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text adjustment-appropriation-total-field"></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="actual-expenditure-q1-field" class="project-detail_text"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">construction costs (adjustements appropriation) (i)</div>
+            <div data-w-id="396e5812-6baa-f36c-d065-31cad262aad0" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Quarter 2</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The amount spent between July and September of this financial year. This field may only be blank until reporting for the quarter is concluded in the next quarter.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text adjustment-appropriation-construction-costs-field"></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="actual-expenditure-q2-field" class="project-detail_text"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
-                <div class="small-detail-heading underline">Professional fees (Adjustment appropriation)</div>
+            <div data-w-id="52230809-e2da-2c27-99ea-2529a2cf0753" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Quarter 3</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The amount spent between October and December of this financial year. This field may only be blank until reporting for the quarter is concluded in the next quarter.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
-              <div class="project-detail_text adjustment-appropriation-professional-fees-field"></div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="actual-expenditure-q3-field" class="project-detail_text"></div>
+            </div>
+            <div data-w-id="e6416af3-12cb-8cb6-a1f6-927ac5e45592" class="project-details__item">
+              <div class="item-heading--with-tooltip">
+                <div class="small-detail-heading underline">Quarter 4</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The amount spent between January and March of this financial year. This field may only be blank until reporting for the quarter is concluded in the next quarter.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
+              </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
+              <div id="actual-expenditure-q4-field" class="project-detail_text"></div>
             </div>
           </div>
         </div>
@@ -364,19 +635,19 @@
           </div>
           <div class="col col-4 col-m-12">
             <div class="subsection-detail_wrapper">
-              <p class="text_subsection-detail">This chart shows how much has been spent in total at each quarter. The diagonal line starts at the beginning of the project or with the earliest data available with the total spent to date. Each quarter, the line goes up by the amount spent in that quarter.<br><br>The dotted line shows Estimated Total Project Cost, and steps up or down when that changes. That is the amount that is expected to be spent on this project when the project is completed.</p>
-              <div class="detail-button_wrapper"><a href="#" class="button w-inline-block"><img src="/static/images/book-white-24px.svg" alt="" class="button-icon _20px"><div class="button-text">Learn about budget schedules</div></a></div>
+              <p class="text_subsection-detail">The dotted line shows Estimated Total Project Cost, and steps up or down when that changes. That is the amount that is expected to be spent on this project when the project is completed.<br>‍<br>This chart shows how much has been spent in total at each quarter. The diagonal line starts at the beginning of the project or with the earliest data available with the total spent to date. Each quarter, the line goes up by the amount spent in that quarter.</p>
+              <div class="detail-button_wrapper"><a href="https://vulekamali.gov.za/resources#participate" class="button w-inline-block"><img src="/static/images/book-white-24px.svg" alt="" class="button-icon _20px"><div class="button-text">Learn about budget schedules</div></a></div>
             </div>
           </div>
           <div class="col col-8 col-m-12">
             <div class="subsection-chart_wrapper">
-              <div class="chart_wrapper"><img src="/static/images/Group-68-2.svg" alt="" class="project-budget-image"></div>
+              <div id="time-series-chart-container" class="chart_wrapper"></div>
               <div class="chart-detail_wrapper">
                 <div class="source_wrapper">
                   <div class="source">Source:</div>
-                  <div class="text-source-link">Estimates of National Expenditure</div>
+                  <div class="text-source-link">Provincial Infastructure Reporting Model</div>
                 </div>
-                <div class="small-button_wrapper"><a href="http://www.google.com" class="icon-button cc-text w-inline-block"><img src="/static/images/download-24px.svg" alt="" class="icon_16px"><div class="text_icon-button">Download data</div></a><a href="http://www.google.com" class="icon-button cc-text w-inline-block"><img src="/static/images/image-24px.svg" alt="" class="icon_16px"><div class="text_icon-button">Download image</div></a></div>
+                <div class="small-button_wrapper hide"><a href="http://www.google.com" class="icon-button cc-text w-inline-block"><img src="/static/images/download-24px.svg" alt="" class="icon_16px"><div class="text_icon-button">Download data</div></a><a href="http://www.google.com" class="icon-button cc-text w-inline-block"><img src="/static/images/image-24px.svg" alt="" class="icon_16px"><div class="text_icon-button">Download image</div></a></div>
               </div>
             </div>
           </div>
@@ -392,21 +663,37 @@
         </div>
       </div>
       <div class="row project-info__body">
+        <div class="col col-12">
+          <div class="project-details__info-message">
+            <div class="fas-icon"></div>
+            <div>Hover or tap on any value to learn more</div>
+          </div>
+        </div>
         <div class="col col-6 col-sm-12">
           <div class="project-details _1-2">
             <div class="project-details__heading">
               <h3 class="project-detail_heading">overall timeline</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="9a918115-9315-2ae2-5cce-8d18f225a1be" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Project start date</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The date the project is started and enters the Initiation status. This field is blank until the Project Initiation phase.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text start-date-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="7b25a661-ebb2-008a-dcfd-15af2915874d" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Estimated completion date</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The date that the implementing agent estimates that construction will end.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text estimated-completion-date-field"></div>
             </div>
           </div>
@@ -416,28 +703,43 @@
             <div class="project-details__heading">
               <h3 class="project-detail_heading">Construction timeline</h3>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="2cba62ea-9b3d-8776-93c3-18fb12944c4e" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Estimated construction start date</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The date that the implementing agent estimates that the project will be completed and handed over.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text estimated-construction-start-date-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="ad59d4e0-d188-2083-5f1e-89ecfc83ed62" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Contracted construction end date</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The date that the main contractor is contracted to complete construction.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text contracted-construction-end-date-field"></div>
             </div>
-            <div class="project-details__item">
-              <div class="small-detail_wrapper cc-mb-4">
+            <div data-w-id="a07c7452-5439-46ba-ad02-26f99f04fbbe" class="project-details__item">
+              <div class="item-heading--with-tooltip">
                 <div class="small-detail-heading underline">Estimated construction end date</div>
+                <div style="display:none" class="small-tooltip__plate">
+                  <div class="small-tooltip__text">The date that the main contractor is contracted to complete construction.</div>
+                  <div class="small-tooltip__notch"></div>
+                </div>
               </div>
+              <div style="display:none" class="project-detail__tooltip_highlight"></div>
               <div class="project-detail_text estimated-construction-end-date-field"></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row fullwidth-chart">
+      <div class="row hide">
         <div class="info-chart__body">
           <div class="col col-12">
             <div class="subsection-details__heading">
@@ -456,13 +758,45 @@
       </div>
     </div>
   </div>
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col col-4 col-sm-6 col-xs-8"><a href="https://vulekamali.gov.za/" target="_blank" class="footer__logo_plate w-inline-block"><img src="/static/images/Vukilemali-Logo_FINAL2018.svg" alt="" class="image-5"></a></div>
+        <div class="col col-4 col-sm-12">
+          <div class="footer__description">
+            <h4 class="footer__heading">About vulekamali</h4>
+            <p>Vulekamali is an online budget portal helping you understand South Africa&#x27;s finances in a simple way.</p>
+          </div>
+        </div>
+        <div class="col col-4 col-sm-12">
+          <div class="footer__links">
+            <h4 class="footer__heading">useful links</h4>
+            <ul class="list w-list-unstyled">
+              <li class="list-item"><a href="https://vulekamali.gov.za/" class="footer__link-item">vulekamali</a></li>
+              <li><a href="http://www.treasury.gov.za/" class="footer__link-item">National Treasury</a></li>
+              <li><a href="https://imaliyethu.org.za/" class="footer__link-item">Imali Yethu</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col col-12">
+          <div class="footer__legal">
+            <p>Vulekamali is a project by the South African National Treasury and IMALI YETHU</p>
+            <div class="footer__social"><a href="https://twitter.com/vulekamali" class="footer__social_link-item w-inline-block"><img src="/static/images/iconmonstr-twitter-1-white.svg" alt="" class="image-3"></a><a href="https://www.facebook.com/vulekamali/" class="footer__social_link-item w-inline-block"><img src="/static/images/iconmonstr-facebook-1-white.svg" alt="" class="image-4"></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="/static/js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
-<script>var pageData = {{ page_data_json|safe }}</script>
+  <!--  Google Tag Manager (noscript)  -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DR7PKG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!--  End Google Tag Manager (noscript)  -->
+<script id="page-data" type="application/json">{{ page_data_json|json_script_escape:True }}</script>
 <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
 <script src="https://unpkg.com/@ungap/url-search-params@0.1.2"></script>
-<script src="/static/js/vulekamali-webflow.js"></script>
+<script src="{% static "generated/vulekamali-webflow.bundle.js" %}"></script>
 </body>
 </html>

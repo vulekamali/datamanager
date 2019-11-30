@@ -1,0 +1,115 @@
+.d3-tip {
+    line-height: 1;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+/* Style northward tooltips specifically */
+.d3-tip.n:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+
+    margin: -2px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+
+/* Style southward tooltips specifically */
+.d3-tip.s:before {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25B2";
+    position: absolute;
+    text-align: center;
+
+    margin: 0 0 -2px 0;
+    bottom: 100%;
+    left: 0;
+}
+
+#matching-status-chart-container * .bar {
+    height: inherit;
+    rx: 1px;
+}
+
+#matching-status-chart-container * .bar-area {
+    rx: 1px;
+}
+
+
+
+
+
+
+#time-series-chart-container * .axis-tick-label, .axis-tick-year-label {
+    font-size: 14px;
+}
+
+#time-series-chart-container * .axis, .spent-line-path {
+    pointer-events: none;
+}
+
+#time-series-chart-container * .y.axis > .tick text {
+    font-size: 14px;
+}
+
+#time-series-chart-container * .x.axis > .tick line {
+    stroke: black !important;
+}
+
+#time-series-chart-container * .spent-line-circle:hover, .total-cost-line-circle:hover {
+    fill: rgb(0, 137, 123);
+    cursor: pointer;
+}
+
+#time-series-chart-container * .background-rectangle {
+    pointer-events: all;
+}
+
+#time-series-chart-container * .background-rectangle:hover {
+    fill: black;
+    fill-opacity: 0.04;
+}
+
+#time-series-chart-container * .tooltip-value {
+    font-weight: bold;
+}
+
+#time-series-chart-container * .legend > text{
+    font-size:11px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    color: black;
+    opacity: 0.3;
+}
+
+#time-series-chart-container * .legend > rect{
+    fill: black;
+    fill-opacity: 0.1;
+}
+
+#time-series-chart-container * .legend > line{
+    stroke: black;
+    stroke-width: 1px;
+}
+
+#time-series-chart-container * .status-line-label{
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size:11px;
+}

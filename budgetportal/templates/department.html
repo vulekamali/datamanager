@@ -1,5 +1,6 @@
 {% extends 'page-shell.html' %}
 {% load define_action %}
+{% load humanize %}
 {% block page_content %}
 
 {% if government.slug == 'south-africa' %}
@@ -202,17 +203,76 @@
             </div>
         </div>
 
+        {% if infra_enabled %}
+        <div id="InfraSection">
+          <h3 class="Title Title--section">Department infrastructure projects</h3>
 
-        <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
+          <p>Largest infrastructure projects by this department.</p>
+
+          <div class="Section-card">
+            <table class="u-widthFull u-textAlignLeft">
+              <tr>
+                <th>Project name</th>
+                <th class="hidden-sm">Status</th>
+                <th class="hidden-md">Estimated completion date</th>
+                <th class="u-textAlignRight">Estimated total project cost</th>
+              </tr>
+              {% for project in projects %}
+              <tr>
+                <td>
+                  <a href="{{ project.url_path }}">
+                    {{ project.name }}
+                  </a>
+                </td>
+                <td class="hidden-sm">{{ project.status|default:"Not available" }}</td>
+                <td class="hidden-md">{{ project.estimated_completion_date|default:"Not available" }}</td>
+                <td class="u-textAlignRight">
+                  {% if project.total_project_cost %}
+                  R{{ project.total_project_cost|floatformat|intcomma }}
+                  {% else %}
+                  Not available
+                  {% endif %}
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4">No projects available for this department.</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+
+          <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
             <div class="Message-content">
-                {% include 'components/Icon/index.html' with  type="info" size="l" %}
-                <span class="Message-heading">
-      Please note
-    </span>
+              {% include 'components/Icon/index.html' with  type="info" size="m" %}
+              <span class="Message-heading">
+                Please note
+              </span>
             </div>
-            <div class="Message-text Message-text--secondary">Implementation data coming soon</div>
-        </div>
+            <div class="Message-text Message-text--secondary">
+              This is a preview of upcoming vulekamali functionality.
+            </div>
+          </div>
 
+          <div class="u-textAlignRight">
+            <a class="Button is-secondary is-inline u-marginTop20 u-textAlignRight"
+               href="/infrastructure-projects/provincial/?q=&filter=department%3A{{ name|iriencode }}&filter=province%3A{{ government.name|iriencode }}">
+              View all projects
+            </a>
+          </div>
+
+        </div>
+        {% else %}
+        <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
+          <div class="Message-content">
+            {% include 'components/Icon/index.html' with  type="info" size="l" %}
+            <span class="Message-heading">
+              Please note
+            </span>
+          </div>
+          <div class="Message-text Message-text--secondary">Implementation data coming soon.</div>
+        </div>
+        {% endif %}
 
         <div class="u-marginTop100">
             <div class="DeptSectionHead DeptSectionHead--purple" id="section-review">

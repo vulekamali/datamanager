@@ -26,3 +26,4 @@ package-lock.json
 storybook-build
 missing_departments.csv
 ghostdriver.log
+201*-*-*_*.png

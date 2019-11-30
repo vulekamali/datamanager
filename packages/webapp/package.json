@@ -17,8 +17,6 @@
     "copy-to-clipboard": "^3.0.8",
     "core-js": "^2.6.5",
     "css-loader": "1.0.0",
-    "d3": "^5.9.2",
-    "d3plus": "2.0.0-alpha.18",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
     "eslint-config-react-app": "^3.0.7",

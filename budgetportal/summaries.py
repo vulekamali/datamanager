@@ -1,14 +1,16 @@
+import logging
+
 from slugify import slugify
+
+from datasets import (
+    get_consolidated_expenditure_budget_dataset,
+    get_expenditure_time_series_dataset,
+)
 from models import (
+    EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
     Department,
     FinancialYear,
-    EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
     csv_url,
-)
-import logging
-from datasets import (
-    get_expenditure_time_series_dataset,
-    get_consolidated_expenditure_budget_dataset,
 )
 
 logger = logging.getLogger(__name__)

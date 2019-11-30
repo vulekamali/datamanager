@@ -1,11 +1,10 @@
-from tablib import Databook
-from import_export.instance_loaders import ModelInstanceLoader
+from budgetportal import models
 from import_export import resources
 from import_export.fields import Field
+from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import ForeignKeyWidget
-from budgetportal import models
 from irm_preprocessor import preprocess
-
+from tablib import Databook
 
 BASE_HEADERS = [
     "Project ID",
@@ -49,6 +48,26 @@ EXTRA_IMPLEMENTOR_HEADER = "Other parties"
 IMPLEMENTORS = ["Program Implementing Agent", "Principal Agent", "Main Contractor"]
 IMPLEMENTOR_HEADERS = IMPLEMENTORS + [EXTRA_IMPLEMENTOR_HEADER]
 OUTPUT_HEADERS = BASE_HEADERS + IMPLEMENTOR_HEADERS
+
+STATUS_ORDERING = [
+    "Project Initiation",
+    "Pre - Feasibility",
+    "Feasibility",
+    "Tender",
+    "Design",
+    "Site Handed - Over to Contractor",
+    "Construction 1% - 25%",
+    "Construction 26% - 50%",
+    "Construction 51% - 75%",
+    "Construction 76% - 99%",
+    "Practical Completion (100%)",
+    "Final Completion",
+    "On Hold",
+    "Terminated",
+    "Other - Compensation of Employees",
+    "Other - Packaged Ongoing Project",
+]
+status_order = {status: index for index, status in enumerate(STATUS_ORDERING)}
 
 
 class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
