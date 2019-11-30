@@ -272,7 +272,10 @@ function addListResults(response) {
     if (response.next) {
       const nextButton = getLoadMoreResultsButton();
       nextButton.off("click");
-      nextButton.on("click", () => updateResultList(response.next));
+      nextButton.on("click", (e) => {
+        e.preventDefault();
+        updateResultList(response.next);
+      });
       nextButton.show();
     }
   } else {
@@ -316,7 +319,8 @@ function updateDropdown(selector, options, fieldName) {
     // Add "clear filter" option
     const optionElement = pageState.dropdownItemTemplate.clone();
     optionElement.find(".search-dropdown_label").text("All " + facetPlurals[fieldName]);
-    optionElement.click(function() {
+    optionElement.click(function(e) {
+      e.preventDefault();
       delete pageState.filters[fieldName];
       optionContainer.removeClass("w--open");
       triggerSearch();
@@ -330,7 +334,8 @@ function updateDropdown(selector, options, fieldName) {
     if (option.count) {
       optionElement.find(".search-dropdown_value").text("(" + option.count + ")");
     }
-    optionElement.click(function() {
+    optionElement.click(function(e) {
+      e.preventDefault();
       pageState.filters[fieldName] = option.text;
       optionContainer.removeClass("w--open");
       triggerSearch();
@@ -355,7 +360,8 @@ function initSortDropdown() {
   sortOptions.forEach((label, key) => {
     const optionElement = dropdownItemTemplate.clone();
     optionElement.find(".dropdown-label").text(label);
-    optionElement.click(function() {
+    optionElement.click(function(e) {
+      e.preventDefault();
       container.find(".text-block").text(label);
       pageState.sortField = key;
       optionContainer.removeClass("w--open");
@@ -423,8 +429,14 @@ export function searchPage(pageData) {
       triggerSearch();
     }
   });
-  $("#Search-Button").on("click", triggerSearch);
-  $("#clear-filters-button").on("click", clearFilters);
+  $("#Search-Button").on("click", (e) => {
+    e.preventDefault();
+    triggerSearch();
+  });
+  $("#clear-filters-button").on("click", (e) => {
+    e.preventDefault();
+    clearFilters();
+  });
   window.addEventListener("popstate", onPopstate);
 
   /**
