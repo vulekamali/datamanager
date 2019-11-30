@@ -17,6 +17,7 @@ from drf_haystack.filters import (
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from ..prov_infra_project.charts import time_series_data
+from slugify import slugify
 
 import json
 
@@ -43,6 +44,10 @@ def provincial_infrastructure_project_detail(request, id, slug):
         snapshot.department, snapshot.province
     )
     page_data["department_url"] = department.get_url_path() if department else None
+    page_data["province_depts_url"] = "/%s/departments?province=%s&sphere=provincial" % (
+        models.FinancialYear.get_latest_year().slug,
+        slugify(snapshot.province),
+    )
     context = {
         "project": project,
         "page_data_json": json.dumps(

@@ -104,6 +104,13 @@ function initTimeSeriesChart(chartData) {
   return chart;
 }
 
+function updateLinkField(selector, label, url) {
+  const fieldContainers = $(selector);
+  fieldContainers.html(`<a class="project-detail_link" href="${url}"></a>`);
+  // Set text using .text() to avoid HTML injection
+  fieldContainers.find("a").text(label);
+}
+
 export function projectPage(pageData) {
   var project = pageData.project;
 
@@ -116,12 +123,11 @@ export function projectPage(pageData) {
   // Administrative details
   updateTextField(".primary-funding-source-field", project.primary_funding_source);
   updateTextField(".funding-status-field", project.funding_status);
-  updateTextField(".province-field", project.province);
+
+  updateLinkField(".province-field", project.province, pageData.province_depts_url);
+
   if (pageData.department_url) {
-    const fieldContainers = $(".department-field");
-    fieldContainers.html(`<a class="project-detail_link" href="${pageData.department_url}"></a>`);
-    // Set text using .text() to avoid HTML injection
-    fieldContainers.find("a").text(project.department);
+    updateLinkField(".department-field", project.department, pageData.department_url);
   } else {
     updateTextField(".department-field", project.department);
   }
