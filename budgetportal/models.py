@@ -282,6 +282,20 @@ class Department(models.Model):
                 "vote %d" % self.vote_number
             )
 
+    @classmethod
+    def get_in_latest_government(cls, name, government_name):
+        """
+        Get a department instance whose slug matches the provided name slugified,
+        in the government with the provided name in the latest financial year.
+        Returns None if a matching department is not found.
+        """
+        try:
+            return cls.objects.filter(
+                slug=slugify(name), government__name=government_name
+            ).order_by("-government__sphere__financial_year__slug")[0]
+        except IndexError:
+            return None
+
     def create_dataset(self, name, title, group_name):
         vocab_map = get_vocab_map()
         tags = [

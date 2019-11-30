@@ -39,6 +39,10 @@ def provincial_infrastructure_project_detail(request, id, slug):
     page_data["project"]["irm_snapshot"] = snapshot.irm_snapshot.__unicode__()
     snapshot_list = list(project.project_snapshots.all())
     page_data["time_series_chart"] = time_series_data(snapshot_list)
+    department = models.Department.get_in_latest_government(
+        snapshot.department, snapshot.province
+    )
+    page_data["department_url"] = department.get_url_path() if department else None
     context = {
         "project": project,
         "page_data_json": json.dumps(

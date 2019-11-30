@@ -13,7 +13,7 @@ services:
   - docker
 
 install:
-  - pip install black==19.3b0
+  - pip install black==19.10b0
   - yarn
   - yarn build
 

@@ -117,7 +117,14 @@ export function projectPage(pageData) {
   updateTextField(".primary-funding-source-field", project.primary_funding_source);
   updateTextField(".funding-status-field", project.funding_status);
   updateTextField(".province-field", project.province);
-  updateTextField(".department-field", project.department);
+  if (pageData.department_url) {
+    const fieldContainers = $(".department-field");
+    fieldContainers.html(`<a class="project-detail_link" href="${pageData.department_url}"></a>`);
+    // Set text using .text() to avoid HTML injection
+    fieldContainers.find("a").text(project.department);
+  } else {
+    updateTextField(".department-field", project.department);
+  }
 
   // Location
   updateTextField("#local-municipality-field", project.local_municipality);
