@@ -317,6 +317,7 @@ li {
 
 .section {
   position: relative;
+  display: block;
   padding-top: 60px;
 }
 
@@ -2860,6 +2861,7 @@ li {
 
 .project-location-map-container {
   height: 300px;
+  background-color: #e9e9e9;
 }
 
 .project-location-map-container.embed-container {
@@ -5213,7 +5215,7 @@ li {
   right: 0%;
   bottom: 32px;
   z-index: 100;
-  display: none;
+  display: block;
   width: 300px;
   padding: 8px;
   border-radius: 3px;
@@ -5222,7 +5224,15 @@ li {
 }
 
 .small-tooltip__text {
+  position: static;
+  z-index: auto;
+  float: none;
+  clear: none;
   font-size: 12px;
+}
+
+.small-tooltip__text.bah {
+  display: none;
 }
 
 .project-detail__tooltip_highlight {
@@ -5399,6 +5409,7 @@ li {
   display: -ms-flexbox;
   display: flex;
   height: 300px;
+  background-color: #e9e9e9;
 }
 
 @media (max-width: 991px) {
