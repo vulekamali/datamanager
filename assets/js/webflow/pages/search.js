@@ -165,7 +165,7 @@ function updateMapPoints(url) {
     .done(function(response) {
       addMapPoints(response);
       if (response.next) {
-        getMapPoints(response.next);
+        updateMapPoints(response.next);
       } else {
         getLoadingSpinner().hide();
       }
