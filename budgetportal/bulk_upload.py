@@ -2,33 +2,27 @@
 Admin View for bulk uploading
 """
 
-from budgetportal.models import (
-    Sphere,
-    Government,
-    Department,
-)
-from datasets import (
-    Dataset,
-    Category,
-    PackageDeletedException,
-    PackageWithoutGroupException,
-)
-from django import forms
-from django.contrib import messages
-from django.http import HttpResponse
-from django.shortcuts import render
-from django_q.brokers import get_broker
-from django_q.tasks import async
+import logging
 from io import BytesIO
-from openpyxl import load_workbook, Workbook
+
+from openpyxl import Workbook, load_workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.write_only import WriteOnlyCell
 from openpyxl.writer.excel import save_virtual_workbook
 from slugify import slugify
-import logging
+
 import tasks
+from budgetportal.models import Department, Government, Sphere
+from datasets import (Category, Dataset, PackageDeletedException,
+                      PackageWithoutGroupException)
+from django import forms
+from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import render
+from django_q.brokers import get_broker
+from django_q.tasks import async
 
 logger = logging.getLogger(__name__)
 

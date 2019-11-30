@@ -1,8 +1,9 @@
-from django.core.management.base import BaseCommand
-from budgetportal.models import GovtFunction, Programme
 import csv
-from django.utils.text import slugify
 import re
+
+from budgetportal.models import GovtFunction, Programme
+from django.core.management.base import BaseCommand
+from django.utils.text import slugify
 
 
 def clean_programme_name(name):

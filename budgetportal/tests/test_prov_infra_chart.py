@@ -1,16 +1,15 @@
 import json
 
-from django.test import TestCase
-
+from budgetportal.json_encoder import JSONEncoder
 from budgetportal.models import (
-    ProvInfraProjectSnapshot,
-    ProvInfraProject,
-    IRMSnapshot,
     FinancialYear,
+    IRMSnapshot,
+    ProvInfraProject,
+    ProvInfraProjectSnapshot,
     Quarter,
 )
 from budgetportal.prov_infra_project.charts import time_series_data
-from budgetportal.json_encoder import JSONEncoder
+from django.test import TestCase
 
 
 class DateQuarterMatchTestCase(TestCase):

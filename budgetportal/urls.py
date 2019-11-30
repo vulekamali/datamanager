@@ -1,16 +1,15 @@
 from adminplus.sites import AdminSitePlus
-
 from discourse.views import sso
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
-from django.views.decorators.cache import cache_page
-from . import views
-from sitemaps import sitemaps
 from django.core.exceptions import PermissionDenied
-from . import bulk_upload
+from django.views.decorators.cache import cache_page
+from sitemaps import sitemaps
 from webflow import urls as webflow_urls
+
+from . import bulk_upload, views
 
 admin.site = AdminSitePlus()
 admin.autodiscover()

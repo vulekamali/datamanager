@@ -2,16 +2,17 @@
 Abstracts away some of the mechanics of querying OpenSpending and some of the
 conventions of how we name fields in our Fiscal Data Packages.
 """
-import urllib
-
-from collections import OrderedDict
-from django.conf import settings
-from django.core.cache import cache
-from hashlib import sha1
 import logging
 import random
-import requests
 import re
+import urllib
+from collections import OrderedDict
+from hashlib import sha1
+
+import requests
+
+from django.conf import settings
+from django.core.cache import cache
 
 logger = logging.getLogger(__name__)
 

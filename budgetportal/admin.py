@@ -1,28 +1,25 @@
-from django.contrib import admin
-from django.views.generic import TemplateView
-from django.core.exceptions import ValidationError
-from django.utils.text import slugify
+import logging
 
-from budgetportal import models
-
+import prov_infra_projects
 from adminsortable.admin import SortableAdmin, SortableTabularInline
+from budgetportal import models
 from budgetportal.bulk_upload import bulk_upload_view
+from django.contrib import admin, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.core.exceptions import ValidationError
 from django.db.utils import ProgrammingError
-from django.contrib import messages
+from django.utils.text import slugify
+from django.views.generic import TemplateView
 from import_export.admin import ImportMixin
 from import_export.formats.base_formats import CSV, XLSX
-import logging
 
 from .import_export_admin import (
-    DepartmentResource,
     DepartmentImportForm,
+    DepartmentResource,
     InfrastructureProjectResource,
 )
-import prov_infra_projects
-
 
 logger = logging.getLogger(__name__)
 admin.site.login = login_required(admin.site.login)

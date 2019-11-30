@@ -1,26 +1,27 @@
-from datetime import datetime
-
-from autoslug import AutoSlugField
-from slugify import slugify
-from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
-from collections import OrderedDict
-from decimal import Decimal
-from django.conf import settings
-from django.core.exceptions import ValidationError, MultipleObjectsReturned
-from django.db import models
-from adminsortable.models import SortableMixin
-from django.urls import reverse
-from ckeditor.fields import RichTextField
-from itertools import groupby
-from partial_index import PartialIndex
-from pprint import pformat
-from urlparse import urljoin
 import logging
 import re
-import requests
 import string
 import urllib
 import uuid
+from collections import OrderedDict
+from datetime import datetime
+from decimal import Decimal
+from itertools import groupby
+from pprint import pformat
+from urlparse import urljoin
+
+import requests
+from slugify import slugify
+
+from adminsortable.models import SortableMixin
+from autoslug import AutoSlugField
+from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
+from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.db import models
+from django.urls import reverse
+from partial_index import PartialIndex
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN

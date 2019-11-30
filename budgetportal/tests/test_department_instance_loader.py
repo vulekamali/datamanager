@@ -1,14 +1,12 @@
-from django.test import TestCase
-from tablib import Dataset
-from import_export import instance_loaders, resources
-
 from budgetportal.import_export_admin import (
     DepartmentInstanceLoader,
     DepartmentResource,
 )
-from django.core.exceptions import ValidationError
-
 from budgetportal.models import Department, FinancialYear, Government, Sphere
+from django.core.exceptions import ValidationError
+from django.test import TestCase
+from import_export import instance_loaders, resources
+from tablib import Dataset
 
 
 class DepartmentInstanceLoaderTest(TestCase):

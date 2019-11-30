@@ -1,12 +1,10 @@
-from django.test import TestCase
-
 from budgetportal.import_export_admin import (
-    CustomIsVotePrimaryWidget,
     CustomGovernmentWidget,
+    CustomIsVotePrimaryWidget,
 )
-from django.core.exceptions import ValidationError
-
 from budgetportal.models import Department, FinancialYear, Government, Sphere
+from django.core.exceptions import ValidationError
+from django.test import TestCase
 
 
 class CustomIsVotePrimaryWidgetTest(TestCase):

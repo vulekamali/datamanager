@@ -1,10 +1,9 @@
 import json
 
-from django.conf import settings
-from django.test import TestCase, Client
-from mock import patch
-
 from budgetportal.datasets import Dataset
+from django.conf import settings
+from django.test import Client, TestCase
+from mock import patch
 
 with open("budgetportal/tests/test_data/test_contributed_datasets_list.json", "r") as f:
     CONTRIBUTED_DATASETS_LIST_MOCK_DATA = json.load(f)

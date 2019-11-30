@@ -1,9 +1,8 @@
-from budgetportal import models
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
-from django.contrib import messages
 import django_q
-from budgetportal import tasks
+from budgetportal import models, tasks
+from django.contrib import messages
+from django.db.models.signals import post_delete, post_save
+from django.dispatch import receiver
 from haystack.signals import BaseSignalProcessor
 
 

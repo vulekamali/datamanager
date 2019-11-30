@@ -3,17 +3,17 @@ Tests of budgetportal.summaries
 """
 
 
-from django.test import TestCase
 import json
-from mock import MagicMock, Mock, patch
-from budgetportal.models import FinancialYear, Sphere, Government, Department
+
+from budgetportal.models import Department, FinancialYear, Government, Sphere
+from budgetportal.openspending import BabbageFiscalDataset
 from budgetportal.summaries import (
     get_consolidated_expenditure_treemap,
     get_focus_area_preview,
     get_preview_page,
 )
-from budgetportal.openspending import BabbageFiscalDataset
-
+from django.test import TestCase
+from mock import MagicMock, Mock, patch
 
 with open("budgetportal/tests/test_data/consolidated_treemap.json", "r") as f:
     CONSOLIDATED_MOCK_DATA = json.load(f)

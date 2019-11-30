@@ -1,25 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, get_object_or_404
-from django.forms.models import model_to_dict
-from drf_haystack.serializers import HaystackSerializer, HaystackFacetSerializer
-from drf_haystack.viewsets import HaystackViewSet
-from drf_haystack.mixins import FacetMixin
+import json
+
+from slugify import slugify
+
 from budgetportal import models
 from budgetportal.json_encoder import JSONEncoder
-from ..search_indexes import ProvInfraProjectIndex
+from django.forms.models import model_to_dict
+from django.shortcuts import get_object_or_404, render
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from drf_haystack.filters import (
     HaystackFacetFilter,
     HaystackFilter,
     HaystackOrderingFilter,
 )
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from ..prov_infra_project.charts import time_series_data
-from slugify import slugify
+from drf_haystack.mixins import FacetMixin
+from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
+from drf_haystack.viewsets import HaystackViewSet
 
-import json
+from ..prov_infra_project.charts import time_series_data
+from ..search_indexes import ProvInfraProjectIndex
 
 
 def provincial_infrastructure_project_list(request):
@@ -44,9 +46,9 @@ def provincial_infrastructure_project_detail(request, id, slug):
         snapshot.department, snapshot.province
     )
     page_data["department_url"] = department.get_url_path() if department else None
-    page_data["province_depts_url"] = "/%s/departments?province=%s&sphere=provincial" % (
-        models.FinancialYear.get_latest_year().slug,
-        slugify(snapshot.province),
+    page_data["province_depts_url"] = (
+        "/%s/departments?province=%s&sphere=provincial"
+        % (models.FinancialYear.get_latest_year().slug, slugify(snapshot.province),)
     )
     context = {
         "project": project,

@@ -1,11 +1,10 @@
 import mock
-from django.test import TestCase, LiveServerTestCase, Client
-
 from budgetportal.models import (
-    InfrastructureProjectPart,
-    MAPIT_POINT_API_URL,
     CKAN_DATASTORE_URL,
+    MAPIT_POINT_API_URL,
+    InfrastructureProjectPart,
 )
+from django.test import Client, LiveServerTestCase, TestCase
 
 
 class ProjectedExpenditureTestCase(TestCase):

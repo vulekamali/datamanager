@@ -1,8 +1,8 @@
-from django import template
-from django.utils.safestring import mark_safe
-
 import json
 import logging
+
+from django import template
+from django.utils.safestring import mark_safe
 
 logger = logging.getLogger(__name__)
 

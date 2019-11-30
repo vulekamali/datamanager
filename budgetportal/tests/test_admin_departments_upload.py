@@ -1,15 +1,14 @@
-from budgetportal.models import FinancialYear, Sphere, Government, Department
+import os
+
 from allauth.account.models import EmailAddress
+from budgetportal.models import Department, FinancialYear, Government, Sphere
+from budgetportal.tests.helpers import BaseSeleniumTestCase
 from ckanapi import NotFound
 from django.conf import settings
 from django.contrib.auth.models import User
 from mock import Mock
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support.ui import Select
-import os
-
-from budgetportal.tests.helpers import BaseSeleniumTestCase
 
 USERNAME = "testuser"
 EMAIL = "testuser@domain.com"

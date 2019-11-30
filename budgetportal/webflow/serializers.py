@@ -1,6 +1,5 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
-
 from budgetportal.models import ProvInfraProjectSnapshot
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 
 class ProvInfraProjectSnapshotSerializer(ModelSerializer):

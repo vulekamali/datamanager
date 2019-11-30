@@ -18,9 +18,10 @@ Optional columns:
  - website_url
 
 """
-from django.core.management.base import BaseCommand
-from budgetportal.models import Department, Government
 import csv
+
+from budgetportal.models import Department, Government
+from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 
 

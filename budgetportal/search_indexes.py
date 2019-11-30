@@ -1,6 +1,6 @@
-from haystack import indexes
 from budgetportal.models import ProvInfraProject
 from django.db.models import Count
+from haystack import indexes
 from prov_infra_projects import status_order
 
 

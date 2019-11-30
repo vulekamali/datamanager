@@ -1,9 +1,11 @@
-from budgetportal.models import FinancialYear, Sphere, Government, Department, Programme
+from StringIO import StringIO
+from tempfile import NamedTemporaryFile
+
+import yaml
+
+from budgetportal.models import Department, FinancialYear, Government, Programme, Sphere
 from django.core.management import call_command
 from django.test import TestCase
-from tempfile import NamedTemporaryFile
-from StringIO import StringIO
-import yaml
 
 
 class BasicPagesTestCase(TestCase):

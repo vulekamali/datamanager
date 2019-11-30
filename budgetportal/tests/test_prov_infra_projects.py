@@ -1,10 +1,6 @@
 import os
 from datetime import date
 
-from django.core.files import File
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-
 from budgetportal.models import (
     FinancialYear,
     IRMSnapshot,
@@ -14,10 +10,13 @@ from budgetportal.models import (
 )
 from budgetportal.search_indexes import ProvInfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
+from django.core.files import File
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITransactionTestCase
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
@@ -66,7 +65,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
         super(ProvInfraProjectDetailPageTestCase, self).setUp()
         self.file = open(EMPTY_FILE_PATH)
-        self.fin_year = FinancialYear.objects.create(slug="2050-51")
+        self.fin_year = FinancialYear.objects.create(slug="2050-51", published=True)
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
@@ -1003,7 +1002,7 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
 class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
     def setUp(self):
         self.file = open(EMPTY_FILE_PATH)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
@@ -1020,6 +1019,8 @@ class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
             project=self.project,
             name="Project 1",
             estimated_completion_date=date(year=2020, month=1, day=1),
+            province="Fake prov",
+            department="Fake dept",
         )
 
         ProvInfraProjectIndex().reindex()
@@ -1059,7 +1060,7 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.file_1 = open(EMPTY_FILE_PATH)
         self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
         self.quarter_1 = Quarter.objects.create(number=1)
         self.quarter_2 = Quarter.objects.create(number=2)
         self.date_1 = date(year=2050, month=1, day=1)
@@ -1074,6 +1075,8 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
             project=self.project,
             local_municipality="MUNI A",
             estimated_completion_date=date(year=2020, month=1, day=1),
+            department="Fake Dept",
+            province="Fake Prov",
         )
 
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
@@ -1087,6 +1090,8 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
             project=self.project,
             local_municipality="MUNI B",
             estimated_completion_date=date(year=2020, month=1, day=1),
+            department="Fake Dept",
+            province="Fake Prov",
         )
 
     def tearDown(self):
@@ -1094,8 +1099,7 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.file_2.close()
 
     def test_latest_status_in_the_content(self):
-        url = self.project.get_absolute_url()
-        response = self.client.get(url)
+        response = self.client.get(self.project.get_absolute_url())
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertContains(response, "MUNI B")
