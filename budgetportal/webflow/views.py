@@ -50,7 +50,9 @@ def provincial_infrastructure_project_detail(request, id, slug):
         "/%s/departments?province=%s&sphere=provincial"
         % (models.FinancialYear.get_latest_year().slug, slugify(snapshot.province),)
     )
-    page_data["latest_snapshot_financial_year"] = snapshot.irm_snapshot.financial_year.slug
+    page_data[
+        "latest_snapshot_financial_year"
+    ] = snapshot.irm_snapshot.financial_year.slug
     context = {
         "project": project,
         "page_data_json": json.dumps(
