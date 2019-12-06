@@ -184,6 +184,15 @@ export function projectPage(pageData) {
   updateTextField(".main-appropriation-construction-costs-field",
                   formatCurrency(project.main_appropriation_construction_costs));
   updateTextField(".main-appropriation-total-field", formatCurrency(project.main_appropriation_total));
+
+  $(".main-appropriation-heading").text(
+    $(".main-appropriation-heading").text().replace(/ FY$/, pageData.latest_snapshot_financial_year)
+  );
+
+  $(".quarterly-heading").text(
+    $(".quarterly-heading").text().replace(/ FY$/, pageData.latest_snapshot_financial_year)
+  );
+
   updateTextField("#actual-expenditure-q1-field", formatCurrency(project.actual_expenditure_q1));
   updateTextField("#actual-expenditure-q2-field", formatCurrency(project.actual_expenditure_q2));
   updateTextField("#actual-expenditure-q3-field", formatCurrency(project.actual_expenditure_q3));
