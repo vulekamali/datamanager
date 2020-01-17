@@ -29,6 +29,7 @@ services:
       - AWS_STORAGE_BUCKET_NAME=budgetportal-storage
       - AWS_S3_ENDPOINT_URL=http://minio:9000
       - SOLR_URL=http://solr:8983/solr/budgetportal
+      - DEBUG_CACHE=${DEBUG_CACHE}
     volumes:
       - .:/code
     ports:
@@ -64,7 +65,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-test
-    command: tox
+    command: coverage run --source='.' manage.py test
     environment:
       - DATABASE_URL=postgresql://budgetportal@db/budgetportal_test
       - AWS_ACCESS_KEY_ID=minio-access-key

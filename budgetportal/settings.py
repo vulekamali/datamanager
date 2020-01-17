@@ -157,6 +157,7 @@ HAYSTACK_CONNECTIONS = {
 # Caches
 if DEBUG:
     if os.environ.get("DEBUG_CACHE", "false").lower() == "true":
+        print("\nDEBUG_CACHE=True: Django cache enabled.\n")
         CACHES = {
             "default": {
                 "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
