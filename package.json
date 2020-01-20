@@ -1,5 +1,8 @@
 {
   "private": true,
+  "engines": {
+    "node": "13.6.x"
+  },
   "workspaces": [
     "packages/webapp"
   ],
