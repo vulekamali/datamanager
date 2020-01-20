@@ -41,7 +41,6 @@ from summaries import (
     get_preview_page,
 )
 
-from . import revenue
 
 logger = logging.getLogger(__name__)
 
@@ -60,11 +59,9 @@ def homepage(request):
 
     navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
 
-    revenue_data = year.get_budget_revenue()
     page_data = Homepage.objects.first()
 
     context = {
-        "revenue": revenue.sort_categories(revenue_data),
         "selected_financial_year": None,
         "financial_years": [],
         "selected_tab": "homepage",
