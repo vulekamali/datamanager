@@ -309,12 +309,14 @@
                 <div>
                     {% include 'components/universal/Participate/index.html' with title="Timelines for this department and ways to participate" description="National Treasury, departments and commitees are busy with different things depending on the time of year:" %}
 
+                   {% if comments_enabled %}
                     <div class="Section u-marginTop20">
                         <h2 class="Title Title--section">Discuss this budget with others</h2>
                         <div data-enhance-component="Comments" data-url="https://vulekamali.gov.za{{ request.path }}">
                             <div id="discourse-comments"></div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

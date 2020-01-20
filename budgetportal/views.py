@@ -331,6 +331,7 @@ def department_page(
         description_govt = department.government.name
 
     context = {
+        "comments_enabled": settings.COMMENTS_ENABLED,
         "subprogramme_viz_data": DepartmentSubprogrammes(department),
         "subprog_treemap_url": get_viz_url(
             department, "department-viz-subprog-treemap"
@@ -921,6 +922,7 @@ def dataset_page(request, category_slug, dataset_slug):
     ]
     context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
     context["external_resource_page"] = category_slug in external_resource_slugs
+    context["comments_enabled"] = settings.COMMENTS_ENABLED
     return render(request, "government_dataset.html", context=context)
 
 
@@ -933,6 +935,7 @@ def contributed_dataset(request, dataset_slug):
     context["last_updated"] = datetime.strptime(
         context["last_updated"], "%Y-%m-%dT%H:%M:%S.%f"
     )
+    context["comments_enabled"] = settings.COMMENTS_ENABLED
     return render(request, "contributed_dataset.html", context=context)
 
 
