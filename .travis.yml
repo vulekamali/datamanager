@@ -26,4 +26,4 @@ after_script:
   - docker-compose logs db elasticsearch
 
   # Run codecov passing appropriate codecov.io CI environment variables to container
-  - "docker-compose run --rm `bash <(curl -s https://codecov.io/env)` web codecov"
+  - "docker-compose run --rm `bash <(curl -s https://codecov.io/env)` test codecov"
