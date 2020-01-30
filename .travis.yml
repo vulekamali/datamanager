@@ -20,3 +20,10 @@ install:
 script:
   - docker-compose run test
   - "black --check --diff budgetportal manage.py discourse --exclude 'budgetportal/(bulk_upload|signals).py'"
+
+after_script:
+  # Log output in case issues occurred where this can help us debug quicly
+  - docker-compose logs db elasticsearch
+
+  # Run codecov passing appropriate codecov.io CI environment variables to container
+  - "docker-compose run --rm `bash <(curl -s https://codecov.io/env)` test codecov"
