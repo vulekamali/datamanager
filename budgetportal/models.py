@@ -1895,7 +1895,7 @@ class IRMSnapshot(models.Model):
     class Meta:
         ordering = ["financial_year__slug", "quarter__number"]
         verbose_name = "IRM Snapshot"
-        unique_together = ["financial_year", "quarter", "date_taken"]
+        unique_together = ["financial_year", "quarter"]
 
     def __unicode__(self):
         return u"%s Q%d taken %s" % (

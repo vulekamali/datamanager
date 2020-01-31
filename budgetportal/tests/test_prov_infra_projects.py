@@ -1116,12 +1116,13 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         self.file_1 = open(EMPTY_FILE_PATH)
         self.file_2 = open(EMPTY_FILE_PATH)
         self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.fin_year_1 = FinancialYear.objects.create(slug="2030-31")
+        self.fin_year_2 = FinancialYear.objects.create(slug="2031-32")
         self.quarter_1 = Quarter.objects.create(number=1)
         self.date_1 = date(year=2050, month=1, day=1)
         self.date_2 = date(year=2070, month=1, day=1)
         self.irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            financial_year=self.fin_year_1,
             quarter=self.quarter_1,
             date_taken=self.date_1,
             file=File(self.file_1),
@@ -1133,7 +1134,7 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         )
 
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            financial_year=self.fin_year_2,
             quarter=self.quarter_1,
             date_taken=self.date_2,
             file=File(self.file_2),

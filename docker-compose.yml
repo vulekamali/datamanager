@@ -14,7 +14,6 @@ services:
       - POSTGRES_DB=budgetportal
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
   app:
     build:
@@ -65,9 +64,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-test
-    command: coverage run --source='.' manage.py test
+    command: coverage run --source='budgetportal' manage.py test
     environment:
-      - DATABASE_URL=postgresql://budgetportal@db/budgetportal_test
+      - DATABASE_URL=postgresql://budgetportal@db/budgetportal
       - AWS_ACCESS_KEY_ID=minio-access-key
       - AWS_SECRET_ACCESS_KEY=minio-secret-key
       - AWS_STORAGE_BUCKET_NAME=budgetportal-storage
