@@ -29,6 +29,7 @@ from models import (
     Homepage,
     InfrastructureProjectPart,
     IRMSnapshot,
+    Posts,
     Sphere,
     Video,
 )
@@ -748,6 +749,23 @@ def glossary(request):
 def faq(request):
     navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     faq_list = FAQ.objects.all()
+    context = {
+        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "title": "FAQ - vulekamali",
+        "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        "selected_tab": "faq",
+        "latest_year": "2019-20",
+        "selected_financial_year": None,
+        "financial_years": [],
+        "faq_list": faq_list,
+    }
+    return render(request, "faq.html", context=context)
+
+
+def post(request, slug):
+    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
+    post = get_object_or_404(Post, slug=slug)
+
     context = {
         "navbar": read_object_from_yaml(navbar_data_file_path),
         "title": "FAQ - vulekamali",

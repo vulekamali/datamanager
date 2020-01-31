@@ -205,6 +205,12 @@ class ProvInfraProjectSnapshotAdmin(admin.ModelAdmin):
         )
 
 
+class PostAdmin(admin.ModelAdmin):
+    model = models.Post
+    readonly_fields = ["created_at", "updated_at"]
+    list_display = ("title", "url", "created_at", "updated_at")
+
+
 admin.site.register_view("bulk_upload", "Bulk Upload", view=bulk_upload_view)
 
 
@@ -233,6 +239,7 @@ admin.site.register(Site, SiteAdmin)
 admin.site.register(models.Video, VideoAdmin)
 admin.site.register(models.Event)
 admin.site.register(models.FAQ, SortableAdmin)
+admin.site.register(models.Post, PostAdmin)
 admin.site.register(models.ProvInfraProject, ProvInfraProjectAdmin)
 admin.site.register(models.ProvInfraProjectSnapshot, ProvInfraProjectSnapshotAdmin)
 admin.site.register(models.IRMSnapshot, IRMSnapshotAdmin)

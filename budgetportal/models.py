@@ -1871,6 +1871,15 @@ class Quarter(models.Model):
         return u"Quarter %d" % self.number
 
 
+class Post(models.Model):
+    title = models.CharField(max_length=1024)
+    description = models.TextField(blank=True)
+    slug = models.SlugField(max_length=1024, unique=True, help_text="This will be the unique part of this page's URL, e.g. /posts/tips-to-the-minister")
+    body = RichTextField()
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+
 def irm_snapshot_file_path(instance, filename):
     extension = filename.split(".")[-1]
     return "irm-snapshots/%s/%s-Q%d-taken-%s.%s" % (
