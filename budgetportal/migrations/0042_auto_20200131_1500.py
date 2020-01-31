@@ -8,12 +8,11 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0041_auto_20191129_1715'),
+        ("budgetportal", "0041_auto_20191129_1715"),
     ]
 
     operations = [
         migrations.AlterUniqueTogether(
-            name='irmsnapshot',
-            unique_together=set([('financial_year', 'quarter')]),
+            name="irmsnapshot", unique_together=set([("financial_year", "quarter")]),
         ),
     ]

@@ -7,7 +7,9 @@ from haystack.signals import BaseSignalProcessor
 
 
 @receiver([post_save], sender=models.IRMSnapshot)
-def handle_irm_snapshot_post_save(sender, instance, created, raw, using, update_fields, **kwargs):
+def handle_irm_snapshot_post_save(
+    sender, instance, created, raw, using, update_fields, **kwargs
+):
     django_q.tasks.async(tasks.import_irm_snapshot, snapshot_id=instance.id)
 
 
