@@ -1685,6 +1685,18 @@ li {
   z-index: 100;
 }
 
+.dropdown.department {
+  z-index: 998;
+}
+
+.dropdown.status {
+  z-index: 997;
+}
+
+.dropdown.source {
+  z-index: 996;
+}
+
 .sub-section {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2562,6 +2574,10 @@ li {
   background-color: #f1f1f1;
 }
 
+.sorting-dropdown_list {
+  display: none;
+}
+
 .sorting-dropdown_list.w--open {
   left: auto;
   right: 0%;
@@ -2605,6 +2621,10 @@ li {
 
 .project-detail_text.other-service-providers-field {
   white-space: pre-wrap;
+}
+
+.project-detail_text.total-professional-fees-field {
+  display: block;
 }
 
 .project-detail_heading {
@@ -3047,6 +3067,10 @@ li {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -3171,6 +3195,7 @@ li {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  min-height: 208px;
   margin-top: 32px;
   margin-bottom: 16px;
 }
@@ -3872,10 +3897,9 @@ li {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  max-height: 370px;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 32px;
+  padding-left: 48px;
   -webkit-box-align: end;
   -webkit-align-items: flex-end;
   -ms-flex-align: end;
@@ -3991,6 +4015,10 @@ li {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -4117,6 +4145,7 @@ li {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  padding-bottom: 24px;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   -ms-grid-row-align: center;
@@ -4131,7 +4160,6 @@ li {
   display: flex;
   height: 100%;
   margin-right: auto;
-  padding-bottom: 24px;
   padding-left: 24px;
   -webkit-box-align: end;
   -webkit-align-items: flex-end;
@@ -4586,9 +4614,22 @@ li {
 }
 
 .footer__logo_plate {
-  width: 100%;
-  margin-right: 48px;
-  padding: 24px 32px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50%;
+  margin: 12px;
+  padding: 16px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   border-radius: 3px;
   background-color: #fff;
   box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.2);
@@ -4809,6 +4850,18 @@ li {
 .nav-link--feature:hover {
   background-color: #fc8200;
   color: #fff;
+}
+
+.procurement__hero_title--home {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .nav-menu__items {
@@ -5412,6 +5465,17 @@ li {
   background-color: #e9e9e9;
 }
 
+.div-block-21 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: -12px;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
 @media (max-width: 991px) {
   h1 {
     font-size: 26px;
@@ -5673,7 +5737,7 @@ li {
     right: 24px;
   }
   .footer__logo_plate {
-    margin-right: 16px;
+    width: 100%;
   }
   .footer__description {
     padding-left: 0px;
@@ -5712,6 +5776,12 @@ li {
   }
   .dropdown-link--small {
     max-width: 100%;
+  }
+  .div-block-21 {
+    padding-right: 32px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 }
 
@@ -5949,6 +6019,10 @@ li {
     -ms-flex-item-align: center;
     -ms-grid-row-align: center;
     align-self: center;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
   }
   .nav__top_button {
     right: 16px;
@@ -6020,16 +6094,23 @@ li {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
   }
   .procurement__card--header.w--current {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
   }
   .stage__nav_marker--2 {
     display: none;
   }
   .stage__hero {
     padding-bottom: 12px;
+    padding-left: 0px;
   }
   .stage__section--hero {
     padding-top: 32px;
@@ -6062,6 +6143,25 @@ li {
   .stage__nav_marker--5 {
     display: none;
   }
+  .procurement__card_main {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
   .procurement__section_sidebar--empty {
     margin-top: 0px;
     padding-top: 12px;
@@ -6070,6 +6170,13 @@ li {
   }
   .procurement__meta_share {
     right: 16px;
+  }
+  .footer__logo_plate {
+    width: 50%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
   }
   .footer__description {
     margin-top: 24px;
@@ -6217,6 +6324,12 @@ li {
     -ms-flex-direction: column;
     flex-direction: column;
   }
+  .div-block-21 {
+    padding-right: 0px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 479px) {
@@ -6317,6 +6430,12 @@ li {
     -ms-flex-item-align: start;
     align-self: flex-start;
     font-size: 26px;
+  }
+  .chart-dropdown_trigger {
+    z-index: 9998;
+  }
+  .chart-dropdown_list {
+    z-index: auto;
   }
   .dropdown.cc-align-right {
     -webkit-box-flex: 1;
@@ -6538,6 +6657,10 @@ li {
   }
   .stage__section--hero-grey {
     padding-top: 24px;
+  }
+  .treasury-logo {
+    width: 300px;
+    height: auto;
   }
 }
 
