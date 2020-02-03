@@ -44,29 +44,35 @@ def create_resource(department_id, group_name, dataset_name, name, format, url):
         return {"status": "Created", "package": resource}
 
 
+class RowError(Exception):
+    def __init__(self, message, row_result, row_num):
+        super(ValidationError, self).__init__(message)
+        self.row_result = row_result
+        self.row_num = row_num
+
+
 def import_irm_snapshot(snapshot_id):
-    row_num = None
-    row = None
     try:
         snapshot = IRMSnapshot.objects.get(pk=snapshot_id)
         result = prov_infra_projects.import_snapshot(snapshot.file.read(), snapshot.id)
         for row_num, row_result in enumerate(result.rows):
-            if row.errors:
-                raise Exception("Error with row %d" % row_num)
+            if row_result.errors:
+                raise RowError("Error with row %d" % row_num, row_result, row_num)
         django_q.tasks.async(index_irm_projects, snapshot_id=snapshot_id)
         return {
             "totals": result.totals,
             "validation_errors": [row.validation_error for row in result.rows],
         }
-    except Exception as e:
-        logger.error(e, exc_info=True)
+    except RowError as e:
         raise Exception(
-            ("Error on row %d%s\n\n"
+            ("Error on row %d: %s\n\n"
+             "Row values: %r\n\n"
              "Technical details: \n\n"
-             "%r\n\n"
-             "%s")
-            % (e, row_num, row.raw_values, traceback.format_exc())
+             "%r")
+            % (e, e.row_num, e.row_result.raw_values, e.errors)
         )
+    except Exception as e:
+        raise Exception("Error: %s\n\n%s" % (e, traceback.format_exc()))
 
 
 def index_irm_projects(snapshot_id):
