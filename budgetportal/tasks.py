@@ -60,7 +60,10 @@ def import_irm_snapshot(snapshot_id):
         }
     except Exception as e:
         logger.error(e, exc_info=True)
-        raise Exception("Error on row %d%s\n\nTechnical details: \n\n%s" % (e, row_num, traceback.format_exc()))
+        raise Exception(
+            "Error on row %d%s\n\nTechnical details: \n\n%s"
+            % (e, row_num, traceback.format_exc())
+        )
 
 
 def index_irm_projects(snapshot_id):
