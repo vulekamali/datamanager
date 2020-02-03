@@ -1,8 +1,32 @@
+import { format as d3Format } from 'd3-format';
+
 export function formatCurrency(decimalString) {
   if (decimalString == null)
     return null;
-  return "R " + Math.round(parseFloat(decimalString)).toLocaleString();
+  return humaniseNumber(parseFloat(decimalString));
 }
+
+const humaniseNumber = function(x, longForm) {
+  longForm = longForm == undefined ? true : longForm;
+  const suffixBillion = longForm == true ? " billion" : "bn";
+  const suffixMillion = longForm == true ? " million" : "m";
+  const suffixThousand = longForm == true ? "  thousand" : "k";
+
+  if (Math.abs(x) >= 1000000000) {
+    return formatRand(x / 1000000000) + suffixBillion;
+  } else if (Math.abs(x) >= 1000000) {
+    return formatRand(x / 1000000) + suffixMillion;
+  } else if (!longForm && Math.abs(x) >= 100000) {
+    return formatRand(x / 1000) + suffixThousand;
+  } else {
+    return formatRand(x, 0);
+  }
+};
+
+const formatRand = function(x, decimals) {
+  decimals = decimals == undefined ? 1 : decimals;
+  return "R " + d3Format(`,.${decimals}f`)(x);
+};
 
 export const statusOrder = [
   "Project Initiation",
