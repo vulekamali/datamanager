@@ -1,5 +1,5 @@
 import json
-
+from budgetportal.models import FinancialYear
 from budgetportal.datasets import Dataset
 from django.conf import settings
 from django.test import Client, TestCase
@@ -20,6 +20,10 @@ class TestDataset(TestCase):
             ),
             "rows": 1000,
         }
+        FinancialYear.objects.create(slug="2016-17", published=True)
+        FinancialYear.objects.create(slug="2017-18", published=True)
+        FinancialYear.objects.create(slug="2018-19", published=True)
+        FinancialYear.objects.create(slug="2019-20", published=True)
 
     def test_get_latest_cpi_resource(self):
         results = [
