@@ -1066,6 +1066,16 @@ def department_preview(
     return render(request, "department_preview.html", context=context)
 
 
+def robots(request):
+    if settings.ROBOTS_DENY_ALL:
+        text = "User-agent: *\nDisallow: /"
+    else:
+        text = "Sitemap: %s" % request.build_absolute_uri("/sitemap.xml")
+
+    response = HttpResponse(text, content_type="text/plain")
+    return response
+
+
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
         return yaml.load(f)

@@ -2,18 +2,15 @@ language: python
 python:
   - "3.6"
 node_js:
-  - "10"
-
-cache:
-  yarn: true
-  directories:
-    - node_modules
 
 services:
   - docker
 
 install:
   - pip install black==19.10b0
+  - nvm install
+  - nvm use
+  - npm install -g yarn@1.21.1
   - yarn
   - yarn build
 

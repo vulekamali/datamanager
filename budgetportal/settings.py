@@ -317,6 +317,8 @@ PIPELINE = {
 if not TEST:
     STATICFILES_STORAGE = "budgetportal.pipeline.GzipManifestPipelineStorage"
 
+ROBOTS_DENY_ALL = os.environ.get("ROBOTS_DENY_ALL", "false").lower() == "true"
+
 # Logging
 
 
