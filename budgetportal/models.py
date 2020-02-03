@@ -34,13 +34,6 @@ MAPIT_POINT_API_URL = "https://mapit.code4sa.org/point/4326/{},{}"
 
 DIRECT_CHARGE_NRF = "Direct charge against the National Revenue Fund"
 
-REVENUE_RESOURCE_IDS = {
-    "2018-19": "7ad5e908-5814-4581-a9df-a6f37c56d5bd",
-    "2017-18": "b59a852f-7ae1-4a60-a827-643b151e458f",
-    "2016-17": "69b54066-00e0-4d7b-8b33-1ccbace5ba8e",
-    "2015-16": "c484cd2b-da4e-4e71-aca8-f23989d0f3e0",
-}
-
 prov_abbrev = {
     "Eastern Cape": "EC",
     "Free State": "FS",
@@ -135,28 +128,6 @@ class FinancialYear(models.Model):
         if not department:
             return government, False
         return department, True
-
-    def get_budget_revenue(self):
-        """
-        Get revenue data for the financial year
-        """
-        if self.slug not in REVENUE_RESOURCE_IDS:
-            return []
-
-        sql = """
-        SELECT category_two, SUM(amount) AS amount FROM "{}"
-         WHERE "phase"='After tax proposals'
-         GROUP BY "category_two" ORDER BY amount DESC
-        """.format(
-            REVENUE_RESOURCE_IDS[self.slug]
-        )
-
-        params = {"sql": sql}
-        revenue_result = requests.get(CKAN_DATASTORE_URL, params=params)
-
-        revenue_result.raise_for_status()
-        revenue_data = revenue_result.json()["result"]["records"]
-        return revenue_data
 
     @classmethod
     def get_available_years(cls):

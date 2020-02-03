@@ -38,12 +38,14 @@
 
       {% include 'components/universal/Downloads/index.html' with resources=resources utils="u-marginBottom20" %}
 
+      {% if comments_enabled %}
       <div class="Section u-marginBottom20">
         <h2 class="Section-title">Discuss this dataset with others</h2>
         <div data-enhance-component="Comments" data-url="https://vulekamali.gov.za{{ url_path }}">
           <div id="discourse-comments"></div>
         </div>
       </div>
+      {% endif %}
 
     </main>
 

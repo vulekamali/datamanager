@@ -108,18 +108,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "elasticapm.contrib.django.middleware.TracingMiddleware",
-    "elasticapm.contrib.django.middleware.Catch404Middleware",
 ]
 
 if DEBUG_TOOLBAR:
     MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
-
-DATAMANAGER_URL = os.environ.get(
-    "DATAMANAGER_URL", "https://datamanager.vulekamali.gov.za/"
-)
 
 ROOT_URLCONF = "budgetportal.urls"
 
@@ -186,6 +180,7 @@ DISCOURSE_SSO_URLS = {
     "ckan": os.environ.get("CKAN_SSO_URL", "https://data.vulekamali.gov.za/user/login"),
 }
 DISCOURSE_SSO_SECRET = os.environ.get("DISCOURSE_SSO_SECRET", None)
+COMMENTS_ENABLED = os.environ.get("COMMENTS_ENABLED", "false").lower() == "true"
 
 BUST_OPENSPENDING_CACHE = (
     os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
@@ -206,7 +201,9 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = os.environ.get("HTTP_PROTOCOL", "https")
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_FORM_CLASS = "budgetportal.forms.AllauthSignupForm"
 LOGIN_REDIRECT_URL = "/"
-ACCOUNT_LOGOUT_REDIRECT_URL = "https://vulekamali.gov.za"
+ACCOUNT_LOGOUT_REDIRECT_URL = os.environ.get(
+    "ACCOUNT_LOGOUT_REDIRECT_URL", "https://vulekamali.gov.za"
+)
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
@@ -326,12 +323,6 @@ SENTRY_DSN = os.environ.get("SENTRY_DSN", None)
 if SENTRY_DSN:
     sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
 
-LOGSTASH_URL = os.environ.get("LOGSTASH_URL", "")
-APM_SERVER_URL = os.environ.get("APM_SERVER_URL", "")
-ELK_APP_NAME = "vulekamali Data Manager"
-ELASTIC_APM = {"SERVICE_NAME": ELK_APP_NAME, "SERVER_URL": APM_SERVER_URL}
-
-
 boto3.set_stream_logger("boto3.resources", logging.INFO)
 
 LOGGING = {
@@ -347,20 +338,6 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "simple",
-        },
-        "logstash": {
-            "level": "DEBUG",
-            "class": "logstash.TCPLogstashHandler",
-            "host": LOGSTASH_URL,
-            "port": 5959,
-            "version": 1,
-            "message_type": "logstash",
-            "fqdn": False,
-            "tags": [ELK_APP_NAME],
-        },
-        "elasticapm": {
-            "level": "INFO",
-            "class": "elasticapm.contrib.django.handlers.LoggingHandler",
         },
     },
     "root": {"handlers": ["console"], "level": "INFO"},
