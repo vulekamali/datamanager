@@ -117,7 +117,6 @@
     "canvg-browser": "^1.0.0",
     "chart.js": "^2.7.3",
     "color-string": "^1.5.3",
-    "vulekamali-visualisations": "https://github.com/vulekamali/data-visualisations.git#8c15838",
     "jquery": "^3.3.1",
     "js-yaml": "^3.11.0",
     "lodash": "^4.17.11",
@@ -134,6 +133,7 @@
     "redux": "^4.0.1",
     "save-svg-as-png": "^1.4.6",
     "uuid": "^3.3.2",
+    "vulekamali-visualisations": "https://github.com/vulekamali/data-visualisations.git#2a9bd9f78e42de1b15dc2e5c5ea1c59328723f5c",
     "whatwg-fetch": "^2.0.3",
     "yarn": "^1.13.0"
   }

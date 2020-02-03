@@ -384,7 +384,9 @@ function initStatusChart() {
 
   const chart = reusableBarChart()
         .width(boundingRect.width)
-        .height(boundingRect.height);
+        .height(boundingRect.height)
+        .colors(['#65b344', '#65b344']);
+;
 
   container.call(chart);
 
