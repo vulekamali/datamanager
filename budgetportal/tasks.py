@@ -45,12 +45,13 @@ def create_resource(department_id, group_name, dataset_name, name, format, url):
 
 
 def import_irm_snapshot(snapshot_id):
+    row_num = None
     try:
         snapshot = IRMSnapshot.objects.get(pk=snapshot_id)
         result = prov_infra_projects.import_snapshot(snapshot.file.read(), snapshot.id)
-        for row in result.rows:
+        for row_num, row in enumerate(result.rows):
             for error in row.errors:
-                logger.error(error.error, exc_info=True)
+                logger.error("Row %d: %s" % (row_num, error.error), exc_info=True)
                 raise error.error
         django_q.tasks.async(index_irm_projects, snapshot_id=snapshot_id)
         return {
@@ -59,8 +60,11 @@ def import_irm_snapshot(snapshot_id):
         }
     except Exception as e:
         logger.error(e, exc_info=True)
-        raise Exception(traceback.format_exc())
+        raise Exception(
+            "Error on row %d%s\n\nTechnical details: \n\n%s"
+            % (e, row_num, traceback.format_exc())
+        )
 
 
 def index_irm_projects(snapshot_id):
-    call_command("update_index", "-r")
+    return call_command("update_index", "-r")
