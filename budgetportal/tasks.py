@@ -46,13 +46,13 @@ def create_resource(department_id, group_name, dataset_name, name, format, url):
 
 def import_irm_snapshot(snapshot_id):
     row_num = None
+    row = None
     try:
         snapshot = IRMSnapshot.objects.get(pk=snapshot_id)
         result = prov_infra_projects.import_snapshot(snapshot.file.read(), snapshot.id)
-        for row_num, row in enumerate(result.rows):
-            for error in row.errors:
-                logger.error("Row %d: %s" % (row_num, error.error), exc_info=True)
-                raise error.error
+        for row_num, row_result in enumerate(result.rows):
+            if row.errors:
+                raise Exception("Error with row %d" % row_num)
         django_q.tasks.async(index_irm_projects, snapshot_id=snapshot_id)
         return {
             "totals": result.totals,
@@ -61,8 +61,11 @@ def import_irm_snapshot(snapshot_id):
     except Exception as e:
         logger.error(e, exc_info=True)
         raise Exception(
-            "Error on row %d%s\n\nTechnical details: \n\n%s"
-            % (e, row_num, traceback.format_exc())
+            ("Error on row %d%s\n\n"
+             "Technical details: \n\n"
+             "%r\n\n"
+             "%s")
+            % (e, row_num, row.raw_values, traceback.format_exc())
         )
 
 
