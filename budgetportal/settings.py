@@ -201,7 +201,9 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = os.environ.get("HTTP_PROTOCOL", "https")
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_FORM_CLASS = "budgetportal.forms.AllauthSignupForm"
 LOGIN_REDIRECT_URL = "/"
-ACCOUNT_LOGOUT_REDIRECT_URL = os.environ.get("ACCOUNT_LOGOUT_REDIRECT_URL", "https://vulekamali.gov.za")
+ACCOUNT_LOGOUT_REDIRECT_URL = os.environ.get(
+    "ACCOUNT_LOGOUT_REDIRECT_URL", "https://vulekamali.gov.za"
+)
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
