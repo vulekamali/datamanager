@@ -84,7 +84,7 @@ export const sortOptions = new Map([
   ["status_order", "Status (Ascending)"],
   ["-status_order", "Status (Descending)"],
   ["estimated_completion_date", "Estimated Project Completion Date (Ascending)"],
-  ["-estimated_completion_date", "Estimated Project Completion Date (Ascending)"],
+  ["-estimated_completion_date", "Estimated Project Completion Date (Descending)"],
 ]);
 
 export function coordsAvailable(lat, lon) {
