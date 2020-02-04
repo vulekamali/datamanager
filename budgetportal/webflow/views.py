@@ -168,7 +168,3 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
         "status_order",
         "estimated_completion_date",
     ]
-
-    @method_decorator(cache_page(60 * 30))  # minutes
-    def get(self, *args, **kwargs):
-        super(ProvInfraProjectSearchView, self).get(*args, **kwargs)

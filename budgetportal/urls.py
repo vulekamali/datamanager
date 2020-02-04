@@ -121,7 +121,7 @@ urlpatterns = [
     url(r"^accounts/email.*", permission_denied),
     url(r"^accounts/", include("allauth.urls")),
     # SSO Provider
-    url(r"^(?P<client_id>\w+)/sso$", sso),
+    url(r"^(?P<client_id>\w+)/sso$", cache_page(0)(sso)),
     # CSV
     url(
         r"^csv/$",
