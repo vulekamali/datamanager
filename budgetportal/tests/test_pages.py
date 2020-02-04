@@ -79,7 +79,7 @@ class BasicPagesTestCase(TestCase):
         c = Client()
         response = c.get("/")
 
-        self.assertContains(response, '<a class="NavBar-link is-active" href="/">')
+        self.assertContains(response, 'class="NavBar-link is-active')
         self.assertContains(response, "About Vulekamali")
         self.assertContains(
             response,
