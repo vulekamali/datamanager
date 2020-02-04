@@ -77,16 +77,8 @@ def import_irm_snapshot(snapshot_id):
         }
     except RowError as e:
         raise Exception(
-            (
-                "Error on row %d: %s\n\n"
-                "Technical details: \n\n"
-                "%s"
-            )
-            % (
-                e.row_num,
-                e,
-                "\n".join([format_error(e) for e in e.row_result.errors]),
-            )
+            ("Error on row %d: %s\n\n" "Technical details: \n\n" "%s")
+            % (e.row_num, e, "\n".join([format_error(e) for e in e.row_result.errors]),)
         )
     except Exception as e:
         raise Exception("Error: %s\n\n%s" % (e, traceback.format_exc()))
