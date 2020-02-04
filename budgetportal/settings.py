@@ -101,6 +101,8 @@ if DEBUG_TOOLBAR:
     INSTALLED_APPS.append("debug_toolbar")
 
 MIDDLEWARE = [
+
+    'django.middleware.cache.UpdateCacheMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -108,6 +110,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 if DEBUG_TOOLBAR:
@@ -167,6 +170,7 @@ else:
             "LOCATION": "/var/tmp/django_cache",
         }
     }
+CACHE_MIDDLEWARE_SECONDS = 600
 
 
 CKAN_URL = os.environ.get("CKAN_URL", "https://treasurydata.openup.org.za")
