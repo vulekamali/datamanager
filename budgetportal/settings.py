@@ -101,8 +101,7 @@ if DEBUG_TOOLBAR:
     INSTALLED_APPS.append("debug_toolbar")
 
 MIDDLEWARE = [
-
-    'django.middleware.cache.UpdateCacheMiddleware',
+    "django.middleware.cache.UpdateCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -110,7 +109,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 
 if DEBUG_TOOLBAR:
