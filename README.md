@@ -288,6 +288,8 @@ Logout from ckan might not send you to the right URL to logout from DataManager.
 | Environment variable | Description |
 | -------------------- | ------------|
 | `DEBUG_CACHE`          | Enable the django app cache. Normally disabled by `DEBUG=True`, this enables it for development - see more in `settings.py`. |
+| `ROBOTS_DENY_ALL`    | Set to `true` to disallow robots, e.g. to avoid sandbox getting indexed by google |
+
 
 Running tests
 --------------
