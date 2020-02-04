@@ -1,14 +1,14 @@
 array:
 - id: homepage
   title: Home
-  url: ''
+  url: '/'
 - id: departments
   title: Department Budgets
-  url: departments
+  url: /departments
   year-range: true
 - id: learning-centre
   title: Learning
-  url: videos
+  url: /videos
   subLinks: true
   children:
   - title: Videos
@@ -23,12 +23,23 @@ array:
   - title: Dataset Guides
     id: guides
     url: guides
+- id: infrastructure
+  title: Infrastructure
+  url: null
+  is_dropdown: true
+  children:
+    - title: National
+      url: infrastructure-projects/
+      id: national
+    - title: Provincial
+      url: infrastructure-projects/provincial/
+      id: provincial
 - id: datasets
   title: Data and Analysis
-  url: datasets
+  url: /datasets
 - id: about
   title: About
-  url: about
+  url: /about
   align: right
   subLinks: true
   children:
@@ -55,5 +66,5 @@ array:
     connected: data-scientists
 - id: faq
   title: FAQ
-  url: faq
+  url: /faq
   align: right

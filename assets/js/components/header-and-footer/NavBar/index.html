@@ -41,12 +41,16 @@
 
           {% comment %} Create year specific URL if needed {% endcomment %}
           {% if item|hash:"year-range" %}
-            {% assign latest_year|add:"/"|add:item.url  as finalUrl %}
+            {% assign latest_year|add:item.url  as finalUrl %}
           {% else %}
             {% assign item.url as finalUrl %}
           {% endif %}
           <li class="NavBar-item{{ alignmentClass }}">
-            <a class="NavBar-link{{ activeClass }}{{ subLinkClass }}" href="/{{ finalUrl }}">
+            {% if item.url %}
+            <a class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.is_dropdown %}dropdown{% endif %}" href="{{ finalUrl }}">
+            {% else %}
+            <span class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.is_dropdown %}dropdown{% endif %}">
+            {% endif %}
               {% if item.id == 'homepage' %}
                 <span class="NavBar-iconWrap">
                   {% include 'components/Icon/index.html' with type="home"%}
@@ -55,8 +59,11 @@
               {% else %}
                 <span class="NavBar-text">{{ item.title }}</span>
               {% endif %}
-
+            {% if item.url %}
             </a>
+            {% else %}
+            </span>
+            {% endif %}
 
             {% if item.children %}
               {% include 'components/header-and-footer/SubLinks/index.html' with items=item.children active=activeValue selected_sidebar=selected_sidebar %}
