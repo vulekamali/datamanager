@@ -26,6 +26,15 @@ $mobile-break: 900px;
   }
 }
 
+/* Overrides for dropdown on wide viewport */
+@media screen and (min-width: $mobile-break) {
+  .NavBar-link.dropdown:hover + .SubLinks, .SubLinks:hover {
+    display: block;
+    position: absolute;
+    z-index: 1;
+  }
+}
+
 .SubLinks-subItems {
   list-style: none;
   padding-left: 0;
