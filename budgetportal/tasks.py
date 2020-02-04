@@ -46,9 +46,21 @@ def create_resource(department_id, group_name, dataset_name, name, format, url):
 
 class RowError(Exception):
     def __init__(self, message, row_result, row_num):
-        super(ValidationError, self).__init__(message)
+        super(Exception, self).__init__(message)
         self.row_result = row_result
         self.row_num = row_num
+
+
+def format_error(error):
+    return ("Error:\n%r\n\nTraceback:\n%s\n\nRow:\n%s\n") % (
+        error.error,
+        error.traceback,
+        format_row(error.row),
+    )
+
+
+def format_row(ordered_dict):
+    return "\n".join(["%s: %r" % (k, v) for (k, v) in ordered_dict.iteritems()])
 
 
 def import_irm_snapshot(snapshot_id):
@@ -65,11 +77,16 @@ def import_irm_snapshot(snapshot_id):
         }
     except RowError as e:
         raise Exception(
-            ("Error on row %d: %s\n\n"
-             "Row values: %r\n\n"
-             "Technical details: \n\n"
-             "%r")
-            % (e, e.row_num, e.row_result.raw_values, e.errors)
+            (
+                "Error on row %d: %s\n\n"
+                "Technical details: \n\n"
+                "%s"
+            )
+            % (
+                e.row_num,
+                e,
+                "\n".join([format_error(e) for e in e.row_result.errors]),
+            )
         )
     except Exception as e:
         raise Exception("Error: %s\n\n%s" % (e, traceback.format_exc()))
