@@ -16060,9 +16060,9 @@ vuex@^3.1.0:
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
   integrity sha512-ER5moSbLZuNSMBFnEBVGhQ1uCBNJslH9W/Dw2W7GZN23UQA69uapP5GTT9Vm8Trc0PzBSVt6LzF3hGjmv41xcg==
 
-"vulekamali-visualisations@https://github.com/vulekamali/data-visualisations.git#dfb98bd65b0b5c128c38a3ad134b18ce215cfce7":
+"vulekamali-visualisations@https://github.com/vulekamali/data-visualisations.git#b5a77d78e9290b31eaf160dacfd6eb3ea4f7519d":
   version "1.0.0"
-  resolved "https://github.com/vulekamali/data-visualisations.git#dfb98bd65b0b5c128c38a3ad134b18ce215cfce7"
+  resolved "https://github.com/vulekamali/data-visualisations.git#b5a77d78e9290b31eaf160dacfd6eb3ea4f7519d"
   dependencies:
     "@babel/polyfill" "^7.7.0"
     core-js "^3.4.1"
