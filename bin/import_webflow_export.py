@@ -46,7 +46,7 @@ def djangofy(htmlfile):
     file_contents = insert_at_head_end(file_contents, '<meta name="description" content="{{ page_description }}">')
     file_contents = insert_at_head_end(file_contents, '<meta name="twitter:title" content="{{ page_title }}">')
     file_contents = insert_at_head_end(file_contents, '<meta name="twitter:description" content="{{ page_description }}">')
-    file_contents = insert_at_head_end(file_contents, '<meta name="twitter:card" content="page_summary">')
+    file_contents = insert_at_head_end(file_contents, '<meta name="twitter:card" content="summary">')
     file_contents = insert_at_head_end(file_contents, '<meta name="twitter:site" content="@vulekamali">')
     file_contents = insert_at_head_end(file_contents, '<meta property="og:title" content="{{ page_title }}" />')
     file_contents = insert_at_head_end(file_contents, '<meta property="og:description" content="{{ page_description }}" />')
