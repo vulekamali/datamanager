@@ -30,8 +30,9 @@ function addProvinceToMap(map, provinceName) {
     .done(function(response) {
       var layer = L.geoJSON(response, {
         weight: 1,
-        "fillColor": "#66c2a5",
-        "fillOpacity": 0.3,
+        "fillColor": "#ff9829",
+        "fillOpacity": 0.2,
+        "color": "#ff9829",
       })
           .addTo(map)
           .bindTooltip(function (layer) {
@@ -58,8 +59,9 @@ function addMuniToMap(map, provinceName, level, muniName) {
         var muni = munis[0]; // Assume no duplicate names in a province
         var layer = L.geoJSON(muni, {
           weight: 1,
-          "fillColor": "#66c2a5",
-          "fillOpacity": 0.3,
+          "fillColor": "#ff9829",
+          "fillOpacity": 0.2,
+          "color": "#ff9829",
         })
             .addTo(map)
             .bindTooltip(function (layer) {
