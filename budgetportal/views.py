@@ -144,9 +144,7 @@ def programme_list_csv(request, financial_year_id, sphere_slug):
 
 
 def department_list_for_sphere_csv(request, financial_year_id, sphere_slug):
-    get_object_or_404(
-        Sphere, financial_year__slug=financial_year_id, slug=sphere_slug
-    )
+    get_object_or_404(Sphere, financial_year__slug=financial_year_id, slug=sphere_slug)
     return department_list_csv(request, financial_year_id, [sphere_slug])
 
 
