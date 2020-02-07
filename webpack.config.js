@@ -1,5 +1,6 @@
 const { resolve } = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 const normalize = require('postcss-normalize');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -32,42 +33,39 @@ module.exports = {
 
       {
         test: /\.s?css$/,
-        use: ExtractTextPlugin.extract(
+        use: [
+          MiniCssExtractPlugin.loader,
+
           {
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  sourceMap: true,
-                },
-              },
-
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: true,
-                  plugins: () => [
-                    autoprefixer(),
-                    normalize(),
-                  ],
-                },
-              },
-
-              {
-                loader: 'sass-loader',
-                options: {
-                  sourceMap: true,
-                },
-              },
-            ],
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
           },
-        ),
+
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              plugins: () => [
+                autoprefixer(),
+                normalize(),
+              ],
+            },
+          },
+
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
     ],
   },
 
   plugins: [
-    new ExtractTextPlugin('styles.bundle.css'),
+     new MiniCssExtractPlugin({filename: 'styles.bundle.css'}),
   ],
 };
