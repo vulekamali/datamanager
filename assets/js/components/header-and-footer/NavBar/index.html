@@ -39,26 +39,24 @@
             {% assign '' as subLinkClass %}
           {% endif %}
 
-          {% comment %} Create year specific URL if needed {% endcomment %}
-          {% if item|hash:"year-range" %}
-            {% assign latest_year|add:item.url  as finalUrl %}
-          {% else %}
-            {% assign item.url as finalUrl %}
-          {% endif %}
           <li class="NavBar-item{{ alignmentClass }}">
             {% if item.url %}
-            <a class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.is_dropdown %}dropdown{% endif %}" href="{{ finalUrl }}">
+            <a class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.is_dropdown %}dropdown{% endif %}" href="{{ item.url }}">
             {% else %}
             <span class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.is_dropdown %}dropdown{% endif %}">
             {% endif %}
-              {% if item.id == 'homepage' %}
-                <span class="NavBar-iconWrap">
-                  {% include 'components/Icon/index.html' with type="home"%}
-                </span>
-                <span class="NavBar-text is-mobileOnly">Home</span>
-              {% else %}
-                <span class="NavBar-text">{{ item.title }}</span>
-              {% endif %}
+
+
+            {% if item.id == 'homepage' %}
+            <span class="NavBar-iconWrap">
+              {% include 'components/Icon/index.html' with type="home" %}
+            </span>
+            <span class="NavBar-text is-mobileOnly">Home</span>
+            {% else %}
+            <span class="NavBar-text">{{ item.title }}</span>
+            {% endif %}
+
+
             {% if item.url %}
             </a>
             {% else %}

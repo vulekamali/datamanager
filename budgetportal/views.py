@@ -11,6 +11,7 @@ from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
+import nav_bar
 from datasets import Category, Dataset
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
@@ -57,8 +58,6 @@ def homepage(request):
     }
     videos = Video.objects.filter(title_id__in=titles)
 
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
-
     page_data = Homepage.objects.first()
 
     context = {
@@ -69,7 +68,7 @@ def homepage(request):
         "title": "South African Government Budgets %s - vulekamali" % year.slug,
         "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "url_path": year.get_url_path(),
-        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "videos": videos,
         "latest_year": year.slug,
         "main_heading": page_data.main_heading,
@@ -88,7 +87,6 @@ def homepage(request):
 
 
 def search_result(request, financial_year_id):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     slug = "search-result"
     context = {
         "financial_years": [],
@@ -112,7 +110,7 @@ def search_result(request, financial_year_id):
                 },
             }
         )
-    context["navbar"] = read_object_from_yaml(navbar_data_file_path)
+    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "search-result.html", context=context)
 
@@ -146,9 +144,7 @@ def programme_list_csv(request, financial_year_id, sphere_slug):
 
 
 def department_list_for_sphere_csv(request, financial_year_id, sphere_slug):
-    sphere = get_object_or_404(
-        Sphere, financial_year__slug=financial_year_id, slug=sphere_slug
-    )
+    get_object_or_404(Sphere, financial_year__slug=financial_year_id, slug=sphere_slug)
     return department_list_csv(request, financial_year_id, [sphere_slug])
 
 
@@ -383,8 +379,7 @@ def department_page(
         },
         "website_url": department.get_latest_website_url(),
     }
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
-    context["navbar"] = read_object_from_yaml(navbar_data_file_path)
+    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["global_values"] = read_object_from_yaml(
         str(settings.ROOT_DIR.path("_data/global_values.yaml"))
@@ -591,7 +586,6 @@ def infrastructure_project_detail_json(request, project_slug):
 
 
 def infrastructure_project_detail(request, project_slug):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     dataset_response = infrastructure_project_detail_data(project_slug)
     if isinstance(dataset_response, HttpResponse):
         return dataset_response
@@ -600,7 +594,7 @@ def infrastructure_project_detail(request, project_slug):
         "page": {"layout": "infrastructure_project", "data_key": "dataset"},
         "site": {
             "data": {
-                "navbar": read_object_from_yaml(navbar_data_file_path),
+                "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
                 "dataset": dataset_response,
             },
             "latest_year": "2019-20",
@@ -679,15 +673,14 @@ def category_fields(category):
 
 
 def about(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     context = {
         "title": "About - vulekamali",
-        "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "selected_tab": "about",
         "selected_financial_year": None,
         "financial_years": [],
         "video": Video.objects.get(title_id="onlineBudgetPortal"),
-        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "about.html", context=context)
@@ -709,8 +702,6 @@ def static_search_data(request):
 
 
 def events(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
-
     upcoming_events = Event.objects.filter(status="upcoming")
     past_events = Event.objects.filter(status="past")
 
@@ -719,7 +710,7 @@ def events(request):
         "site": {
             "data": {
                 "events": {"upcoming": upcoming_events, "past": past_events},
-                "navbar": read_object_from_yaml(navbar_data_file_path),
+                "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
             },
             "latest_year": FinancialYear.get_latest_year().slug,
         },
@@ -729,13 +720,12 @@ def events(request):
 
 
 def glossary(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     context = {
-        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "selected_tab": "learning-centre",
         "selected_sidebar": "glossary",
         "title": "Glossary - vulekamali",
-        "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "latest_year": FinancialYear.get_latest_year().slug,
         "selected_financial_year": None,
         "financial_years": [],
@@ -744,12 +734,11 @@ def glossary(request):
 
 
 def faq(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     faq_list = FAQ.objects.all()
     context = {
-        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "title": "FAQ - vulekamali",
-        "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "selected_tab": "faq",
         "latest_year": FinancialYear.get_latest_year().slug,
         "selected_financial_year": None,
@@ -760,15 +749,13 @@ def faq(request):
 
 
 def videos(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
-
     context = {
         "title": "Videos - vulekamali",
-        "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "selected_tab": "learning-centre",
         "selected_sidebar": "videos",
         "videos": Video.objects.all(),
-        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
         "admin_url": reverse("admin:budgetportal_video_changelist"),
     }
@@ -776,26 +763,24 @@ def videos(request):
 
 
 def terms_and_conditions(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     context = {
         "title": "Terms of use - vulekamali",
-        "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
-        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "terms-and-conditions.html", context=context)
 
 
 def resources(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     titles = {"theBudgetProcess", "participate"}
 
     context = {
-        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "videos": Video.objects.filter(title_id__in=titles),
         "latest_year": FinancialYear.get_latest_year().slug,
         "title": "Resources - vulekamali",
-        "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
+        "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "selected_tab": "learning-centre",
         "selected_sidebar": "resources",
     }
@@ -805,13 +790,12 @@ def resources(request):
 def guides(request, slug):
     if slug not in guide_data:
         return HttpResponse(status=404)
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
 
     context = guide_data[slug]
     context.update(
         {
             "content_template": "guide-{}.html".format(slug),
-            "navbar": read_object_from_yaml(navbar_data_file_path),
+            "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
             "guides": guide_data,
             "latest_year": FinancialYear.get_latest_year().slug,
             "selected_financial_year": None,
@@ -823,7 +807,6 @@ def guides(request, slug):
 
 
 def dataset_category_list_page(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     context = {
         "categories": [category_fields(c) for c in Category.get_all()],
         "selected_tab": "datasets",
@@ -831,7 +814,7 @@ def dataset_category_list_page(request):
         "name": "Datasets and Analysis",
         "title": "Datasets and Analysis - vulekamali",
         "url_path": "/datasets",
-        "navbar": read_object_from_yaml(navbar_data_file_path),
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
 
@@ -864,18 +847,16 @@ def dataset_category_context(category_slug):
 
 
 def dataset_category_page(request, category_slug):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     context = dataset_category_context(category_slug)
-    context["navbar"] = read_object_from_yaml(navbar_data_file_path)
+    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
     return render(request, "government_dataset_category.html", context=context)
 
 
 def contributed_datasets_list(request):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     context = dataset_category_context("contributed")
-    context["navbar"] = read_object_from_yaml(navbar_data_file_path)
+    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "contributed_data_category.html", context=context)
 
@@ -905,8 +886,7 @@ def dataset_context(category_slug, dataset_slug):
 
 def dataset_page(request, category_slug, dataset_slug):
     context = dataset_context(category_slug, dataset_slug)
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
-    context["navbar"] = read_object_from_yaml(navbar_data_file_path)
+    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
     context["last_updated"] = datetime.strptime(
@@ -924,9 +904,8 @@ def dataset_page(request, category_slug, dataset_slug):
 
 
 def contributed_dataset(request, dataset_slug):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
     context = dataset_context("contributed", dataset_slug)
-    context["navbar"] = read_object_from_yaml(navbar_data_file_path)
+    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
     context["last_updated"] = datetime.strptime(
@@ -938,8 +917,7 @@ def contributed_dataset(request, dataset_slug):
 
 def department_list(request, financial_year_id):
     context = department_list_data(financial_year_id)
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
-    context["navbar"] = read_object_from_yaml(navbar_data_file_path)
+    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "department_list.html", context=context)
 
@@ -1014,12 +992,10 @@ def focus_preview_json(request, financial_year_id):
 
 
 def focus_area_preview(request, financial_year_id, focus_slug):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
-
     context = {
         "page": {"layout": "focus_page", "data_key": ""},
         "site": {
-            "data": {"navbar": read_object_from_yaml(navbar_data_file_path)},
+            "data": {"navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug)},
             "latest_year": FinancialYear.get_latest_year().slug,
         },
         "debug": settings.DEBUG,
@@ -1053,12 +1029,10 @@ def department_preview_json(
 def department_preview(
     request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
-    navbar_data_file_path = str(settings.ROOT_DIR.path("_data/navbar.yaml"))
-
     context = {
         "page": {"layout": "department_preview", "data_key": ""},
         "site": {
-            "data": {"navbar": read_object_from_yaml(navbar_data_file_path)},
+            "data": {"navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug)},
             "latest_year": FinancialYear.get_latest_year().slug,
         },
         "debug": settings.DEBUG,
