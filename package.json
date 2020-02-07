@@ -48,7 +48,6 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.11.0",
     "eslint-plugin-react-app": "^5.0.1",
-    "extract-text-webpack-plugin": "^3.0.2",
     "front-matter": "^2.3.0",
     "frontmatter": "0.0.3",
     "fs-extra": "^7.0.1",
