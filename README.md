@@ -289,6 +289,7 @@ Logout from ckan might not send you to the right URL to logout from DataManager.
 | -------------------- | ------------|
 | `DEBUG_CACHE`          | Enable the django app cache. Normally disabled by `DEBUG=True`, this enables it for development - see more in `settings.py`. |
 | `ROBOTS_DENY_ALL`    | Set to `true` to disallow robots, e.g. to avoid sandbox getting indexed by google |
+| `GUNICORN_WORKERS_ARG` | e.g. `--workers 2` - use this to specify the number of workers gunicorn should run. |
 
 
 Running tests
