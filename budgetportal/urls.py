@@ -8,7 +8,9 @@ from django.core.exceptions import PermissionDenied
 from django.views.decorators.cache import cache_page
 from sitemaps import sitemaps
 from webflow import urls as webflow_urls
-
+from wagtail.wagtailadmin import urls as wagtailadmin_urls
+from wagtail.wagtaildocs import urls as wagtaildocs_urls
+from wagtail.wagtailcore import urls as wagtail_urls
 from . import bulk_upload, views
 
 admin.site = AdminSitePlus()
@@ -247,6 +249,10 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     url("^", include(webflow_urls.urlpatterns)),
+
+    url(r'^cms/', include(wagtailadmin_urls)),
+    url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^', include(wagtail_urls)),
 ]
 
 if settings.DEBUG_TOOLBAR:

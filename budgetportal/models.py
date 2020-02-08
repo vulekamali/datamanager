@@ -22,6 +22,13 @@ from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.db import models
 from django.urls import reverse
 from partial_index import PartialIndex
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
+
+from wagtail.wagtailcore.models import Page as WagtailPage
+from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
+
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -2084,3 +2091,34 @@ def csv_url(aggregate_url):
             % URL_LENGTH_LIMIT
         )
     return csv_url
+
+
+class Page(WagtailPage):
+    # category = models.ForeignKey(
+    #     'budgetportal.PageCategory',
+    #     on_delete=models.CASCADE,
+    # )
+    body = RichTextField()
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    content_panels = WagtailPage.content_panels + [
+        FieldPanel('body', classname="full"),
+    ]
+
+
+# class PageCategory(models.Model):
+#     name = models.CharField(max_length=255)
+#
+#    def __str__(self):
+#         return self.name
+#
+#     class Meta:
+#         verbose_name_plural = 'page categories'
