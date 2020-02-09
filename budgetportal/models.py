@@ -6,9 +6,7 @@ import uuid
 from collections import OrderedDict
 from datetime import datetime
 from decimal import Decimal
-from itertools import groupby
 from pprint import pformat
-from urlparse import urljoin
 
 import requests
 from slugify import slugify
@@ -25,9 +23,11 @@ from partial_index import PartialIndex
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 
 from wagtail.wagtailcore.models import Page as WagtailPage
-from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 
 logger = logging.getLogger(__name__)
@@ -2098,7 +2098,12 @@ class Page(WagtailPage):
     #     'budgetportal.PageCategory',
     #     on_delete=models.CASCADE,
     # )
-    body = RichTextField()
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+        ('html', blocks.RawHTMLBlock()),
+    ])
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     image = models.ForeignKey(
@@ -2110,7 +2115,7 @@ class Page(WagtailPage):
     )
 
     content_panels = WagtailPage.content_panels + [
-        FieldPanel('body', classname="full"),
+        StreamFieldPanel('body'),
     ]
 
 

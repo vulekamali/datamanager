@@ -5,7 +5,7 @@
   <div class="Page-contentInner">
     <h2 class="Page-mainHeading">{{ page.title }}</h2>
 
-    {{ page.body|richtext }}
+    {% include_block page.body %}
   </div>
 </div>
 {% endblock %}

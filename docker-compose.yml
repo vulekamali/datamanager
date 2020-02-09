@@ -36,7 +36,7 @@ services:
     depends_on:
       - db
       - solr
-      - minio
+      - minio-client
 
   # Should be same as app except for command and ports
   worker:
@@ -89,7 +89,22 @@ services:
     environment:
       - MINIO_ACCESS_KEY=minio-access-key
       - MINIO_SECRET_KEY=minio-secret-key
+      - MINIO_DOMAIN=minio
     command: minio --compat server data
+
+  minio-client:
+    image: "minio/mc"
+    depends_on:
+      - minio
+    environment:
+      - MINIO_ACCESS_KEY=minio-access-key
+      - MINIO_SECRET_KEY=minio-secret-key
+      - MINIO_DOMAIN=minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc mb budgetportal-storage;
+      /usr/bin/mc policy set public budgetportal-storage;
+      "
 
   solr:
     build: "https://github.com/vulekamali/solr-dokku.git"

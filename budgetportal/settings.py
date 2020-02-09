@@ -150,11 +150,13 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
 AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
-AWS_DEFAULT_ACL = "private"
-AWS_BUCKET_ACL = "private"
-AWS_AUTO_CREATE_BUCKET = True
+AWS_DEFAULT_ACL = "public-read"
+AWS_BUCKET_ACL = "public-read"
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
+#AWS_S3_CUSTOM_DOMAIN = 'budgetportal-storage.minio:9000'
+AWS_S3_SECURE_URLS = False
+
 
 SOLR_URL = os.environ["SOLR_URL"]
 
