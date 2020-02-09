@@ -28,6 +28,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+import nav_bar
 
 
 logger = logging.getLogger(__name__)
@@ -2093,15 +2094,22 @@ def csv_url(aggregate_url):
     return csv_url
 
 
+class SectionBlock(blocks.StructBlock):
+    presentation_class = blocks.ChoiceBlock(choices=[
+        ('is-default', 'Default'),
+        ('is-invisible', 'No background/border'),
+        ('is-bevel', 'Bevel'),
+    ])
+    heading = blocks.CharBlock()
+    content = blocks.RichTextBlock()
+
+    class Meta:
+        template = "budgetportal/blocks/section_block.html"
+
+
 class Page(WagtailPage):
-    # category = models.ForeignKey(
-    #     'budgetportal.PageCategory',
-    #     on_delete=models.CASCADE,
-    # )
     body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('section', SectionBlock()),
         ('html', blocks.RawHTMLBlock()),
     ])
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -2118,12 +2126,14 @@ class Page(WagtailPage):
         StreamFieldPanel('body'),
     ]
 
+    def get_context(self, request):
+        context = super(Page, self).get_context(request)
+        nav = nav_bar.get_items(FinancialYear.get_latest_year().slug)
 
-# class PageCategory(models.Model):
-#     name = models.CharField(max_length=255)
-#
-#    def __str__(self):
-#         return self.name
-#
-#     class Meta:
-#         verbose_name_plural = 'page categories'
+        context["navbar"] = nav
+
+        for item in nav:
+            if item["url"] and request.path.startswith(item["url"]):
+                context["selected_tab"] = item["id"]
+
+        return context
