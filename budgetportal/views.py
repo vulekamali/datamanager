@@ -787,10 +787,8 @@ def resources(request):
     return render(request, "resources.html", context=context)
 
 
-def guides(request, slug):
-    if slug not in guide_data:
-        return HttpResponse(status=404)
-
+def guides(request):
+    slug = "index"
     context = guide_data[slug]
     context.update(
         {

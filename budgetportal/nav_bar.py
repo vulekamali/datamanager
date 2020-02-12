@@ -9,13 +9,13 @@ def get_items(financial_year):
         {
             "id": "learning-centre",
             "title": "Learning",
-            "url": "/videos",
+            "url": "/learning-resources",
             "subLinks": True,
             "children": [
-                {"title": "Videos", "id": "videos", "url": "videos"},
-                {"title": "Glossary", "id": "glossary", "url": "glossary"},
-                {"title": "Resources", "id": "resources", "url": "resources"},
-                {"title": "Dataset Guides", "id": "guides", "url": "guides"},
+                {"title": "Videos", "id": "videos", "url": "/learning-resources"},
+                {"title": "Glossary", "id": "glossary", "url": "/learning-resources/glossary"},
+                {"title": "Resources", "id": "resources", "url": "/learning-resources/resources"},
+                {"title": "Dataset Guides", "id": "guides", "url": "/learning-resources/guides"},
             ],
         },
         {
@@ -26,12 +26,12 @@ def get_items(financial_year):
             "children": [
                 {
                     "title": "National",
-                    "url": "infrastructure-projects/",
+                    "url": "/infrastructure-projects/",
                     "id": "national",
                 },
                 {
                     "title": "Provincial",
-                    "url": "infrastructure-projects/provincial/",
+                    "url": "/infrastructure-projects/provincial/",
                     "id": "provincial",
                 },
             ],
@@ -46,33 +46,33 @@ def get_items(financial_year):
             "children": [
                 {
                     "title": "Background",
-                    "url": "about#background",
+                    "url": "/about#background",
                     "connected": "background",
                 },
                 {
                     "title": "Development",
-                    "url": "about#development",
+                    "url": "/about#development",
                     "connected": "development",
                 },
                 {
                     "title": "Project Status",
-                    "url": "about#project-status",
+                    "url": "/about#project-status",
                     "connected": "project-status",
                 },
                 {
                     "title": "Your Contribution",
-                    "url": "about#your-contribution",
+                    "url": "/about#your-contribution",
                     "connected": "your-contribution",
                 },
                 {"title": "Contacts", "url": "about#contacts", "connected": "contacts"},
                 {
                     "title": "Media & Other Information",
-                    "url": "about#media-and-other-information",
+                    "url": "/about#media-and-other-information",
                     "connected": "media-and-other-information",
                 },
                 {
                     "title": "Information for Developers and Data Scientists",
-                    "url": "about#data-scientists",
+                    "url": "/about#data-scientists",
                     "connected": "data-scientists",
                 },
             ],
