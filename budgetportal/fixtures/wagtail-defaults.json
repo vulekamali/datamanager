@@ -1,0 +1,314 @@
+[
+{
+  "model": "wagtailcore.page",
+  "pk": 1,
+  "fields": {
+    "path": "0001",
+    "depth": 1,
+    "numchild": 1,
+    "title": "Root",
+    "draft_title": "Root",
+    "slug": "root",
+    "content_type": [
+      "wagtailcore",
+      "page"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": null,
+    "last_published_at": null,
+    "latest_revision_created_at": null,
+    "live_revision": null
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 10,
+  "fields": {
+    "path": "00010001",
+    "depth": 2,
+    "numchild": 2,
+    "title": "vulekamali",
+    "draft_title": "vulekamali",
+    "slug": "vulekamali",
+    "content_type": [
+      "budgetportal",
+      "wagtailhomepage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/",
+    "owner": [
+      "admin@localhost"
+    ],
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:28:38.491Z",
+    "last_published_at": "2020-02-14T15:28:38.491Z",
+    "latest_revision_created_at": "2020-02-14T15:28:38.462Z",
+    "live_revision": 46
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 11,
+  "fields": {
+    "path": "000100010001",
+    "depth": 3,
+    "numchild": 1,
+    "title": "Learning Resources",
+    "draft_title": "Learning Resources",
+    "slug": "videos",
+    "content_type": [
+      "budgetportal",
+      "learningindexpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/videos/",
+    "owner": [
+      "admin@localhost"
+    ],
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:29:29.418Z",
+    "last_published_at": "2020-02-14T15:33:55.789Z",
+    "latest_revision_created_at": "2020-02-14T15:33:55.755Z",
+    "live_revision": 50
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 13,
+  "fields": {
+    "path": "000100010002",
+    "depth": 3,
+    "numchild": 2,
+    "title": "Posts",
+    "draft_title": "Posts",
+    "slug": "posts",
+    "content_type": [
+      "budgetportal",
+      "postindexpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/posts/",
+    "owner": [
+      "admin@localhost"
+    ],
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:32:17.937Z",
+    "last_published_at": "2020-02-14T15:32:17.937Z",
+    "latest_revision_created_at": "2020-02-14T15:32:17.908Z",
+    "live_revision": 49
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 14,
+  "fields": {
+    "path": "0001000100020001",
+    "depth": 4,
+    "numchild": 0,
+    "title": "Competition!",
+    "draft_title": "Competition!",
+    "slug": "competition",
+    "content_type": [
+      "budgetportal",
+      "postpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/posts/competition/",
+    "owner": [
+      "admin@localhost"
+    ],
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:52:07.076Z",
+    "last_published_at": "2020-02-14T15:52:07.076Z",
+    "latest_revision_created_at": "2020-02-14T15:52:07.052Z",
+    "live_revision": 51
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 15,
+  "fields": {
+    "path": "0001000100020002",
+    "depth": 4,
+    "numchild": 0,
+    "title": "Budget lockup",
+    "draft_title": "Budget lockup",
+    "slug": "budget-lockup",
+    "content_type": [
+      "budgetportal",
+      "postpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/posts/budget-lockup/",
+    "owner": [
+      "admin@localhost"
+    ],
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:52:49.754Z",
+    "last_published_at": "2020-02-14T15:52:49.754Z",
+    "latest_revision_created_at": "2020-02-14T15:52:49.727Z",
+    "live_revision": 53
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 16,
+  "fields": {
+    "path": "0001000100010001",
+    "depth": 4,
+    "numchild": 2,
+    "title": "Dataset Guides",
+    "draft_title": "Dataset Guides",
+    "slug": "dataset-guides",
+    "content_type": [
+      "budgetportal",
+      "guideindexpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/videos/dataset-guides/",
+    "owner": [
+      "admin@localhost"
+    ],
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:53:38.945Z",
+    "last_published_at": "2020-02-14T15:53:38.945Z",
+    "latest_revision_created_at": "2020-02-14T15:53:38.915Z",
+    "live_revision": 54
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 17,
+  "fields": {
+    "path": "00010001000100010001",
+    "depth": 5,
+    "numchild": 0,
+    "title": "ENE",
+    "draft_title": "ENE",
+    "slug": "ene",
+    "content_type": [
+      "budgetportal",
+      "guidepage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/videos/dataset-guides/ene/",
+    "owner": [
+      "admin@localhost"
+    ],
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:54:20.995Z",
+    "last_published_at": "2020-02-14T15:54:20.995Z",
+    "latest_revision_created_at": "2020-02-14T15:54:20.965Z",
+    "live_revision": 56
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 18,
+  "fields": {
+    "path": "00010001000100010002",
+    "depth": 5,
+    "numchild": 0,
+    "title": "Another guide",
+    "draft_title": "Another guide",
+    "slug": "another-guide",
+    "content_type": [
+      "budgetportal",
+      "guidepage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/videos/dataset-guides/another-guide/",
+    "owner": [
+      "admin@localhost"
+    ],
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:54:55.668Z",
+    "last_published_at": "2020-02-14T15:54:55.668Z",
+    "latest_revision_created_at": "2020-02-14T15:54:55.635Z",
+    "live_revision": 57
+  }
+},
+{
+  "model": "budgetportal.wagtailhomepage",
+  "pk": 10,
+  "fields": {}
+},
+{
+  "model": "budgetportal.learningindexpage",
+  "pk": 11,
+  "fields": {}
+},
+{
+  "model": "budgetportal.guideindexpage",
+  "pk": 16,
+  "fields": {
+    "intro": "<p>Learn the specifics of the kinds of data on vulekamali.<br/></p>"
+  }
+}
+]
