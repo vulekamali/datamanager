@@ -3,7 +3,7 @@
   "engines": {
     "node": ">=12.x <14",
     "npm": ">=6.13.x <7",
-    "yarn": ">=1.21.x <1.22.x"
+    "yarn": ">=1.21.x <=1.22.x"
   },
   "workspaces": [
     "packages/webapp"

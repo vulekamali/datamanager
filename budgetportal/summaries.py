@@ -6,7 +6,7 @@ from datasets import (
     get_consolidated_expenditure_budget_dataset,
     get_expenditure_time_series_dataset,
 )
-from models import (
+from models.gov_structure import (
     EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
     Department,
     FinancialYear,
