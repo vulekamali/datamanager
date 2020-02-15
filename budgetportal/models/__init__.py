@@ -22,6 +22,7 @@ from .gov_structure import (
     Sphere,
 )
 
+
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 

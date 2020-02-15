@@ -20,17 +20,7 @@
   <div class="Page-contentInner">
 
 
-    {% if self.get_ancestors|length > 1 %}
-    <div class="Section is-invisible">
-      {% for page in self.get_ancestors %}
-      {% if page.is_root == False %}
-      <a href="{% pageurl page %}">{{ page.title }}</a> /
-      {% endif %}
-      {% endfor %}
-
-      {{ self.title }}
-    </div>
-    {% endif %}
+    {% include 'breadcrumbs.html' %}
 
 
     <h2 class="Page-mainHeading">{{ page.title }}</h2>

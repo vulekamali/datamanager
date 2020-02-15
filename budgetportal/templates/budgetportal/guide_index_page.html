@@ -1,0 +1,29 @@
+{% extends 'budgetportal/page.html' %}
+
+{% block page_content %}
+
+<div class="Page-content">
+  <div class="Page-contentInner Page-contentInner--floatingLinks">
+
+    {% include 'breadcrumbs.html' %}
+
+    <h1 class="Page-mainHeading">{{ page.title }}</h1>
+
+    <div class="Section is-invisible u-fontSize18 u-paddingTop0">
+      {{ page.intro }}
+    </div>
+
+    <div class="Grid has-twoColumn">
+      {% for category_guide in page.guides %}
+      {% if category_guide.external_url %}
+      {% include 'components/Preview/index.html' with title=category_guide.external_url_title excerpt=category_guide.external_url_description url=category_guide.external_url %}
+      {% else %}
+      {% include 'components/Preview/index.html' with title=guide.datasettitle excerpt=guide.seo_description url='' %}
+      {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
