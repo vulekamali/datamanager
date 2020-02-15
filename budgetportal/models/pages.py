@@ -108,11 +108,12 @@ class GuideIndexPage(NavContextMixin, Page):
     content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
     def get_context(self, request):
-        context = super(NavContextMixin, self).get_context(request)
+        context = super(GuideIndexPage, self).get_context(request)
         guides_ordering = OrderedDict([(p.title, p) for p in self.get_children()])
         for external in CategoryGuide.objects.filter(external_url__isnull=False):
-            guides_ordering[external.title] = external
-        context["guides"] = guides_ordering.items()
+            guides_ordering[external.external_url_title] = external
+        context["guides"] = guides_ordering.values()
+        return context
 
 
 class PostPage(NavContextMixin, Page):

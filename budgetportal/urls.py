@@ -138,7 +138,7 @@ urlpatterns = [
     url(r"^about/?$", cache_page(CACHE_DAYS_SECS)(views.about), name="about"),
     url(r"^events/?$", cache_page(CACHE_MINUTES_SECS)(views.events), name="events"),
     url(
-        r"^learning-resources/?$",
+        r"^learning-resources/videos/?$",
         cache_page(CACHE_MINUTES_SECS)(views.videos),
         name="videos",
     ),
@@ -158,11 +158,6 @@ urlpatterns = [
         name="glossary",
     ),
     url(r"^faq/?$", cache_page(CACHE_MINUTES_SECS)(views.faq), name="faq"),
-    url(
-        r"^learning-resources/guides/?$",
-        cache_page(CACHE_MINUTES_SECS)(views.guides),
-        name="guides",
-    ),
     # Dataset category list
     url(
         r"^datasets/?$",

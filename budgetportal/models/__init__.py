@@ -21,7 +21,7 @@ from .gov_structure import (
     Programme,
     Sphere,
 )
-
+from .pages import CategoryGuide
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN

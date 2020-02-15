@@ -9,7 +9,7 @@ def get_items(financial_year):
         {
             "id": "learning-centre",
             "title": "Learning",
-            "url": "/learning-resources/videos",
+            "url": "/learning-resources",
             "subLinks": True,
             "children": [
                 {
@@ -30,7 +30,7 @@ def get_items(financial_year):
                 {
                     "title": "Dataset Guides",
                     "id": "guides",
-                    "url": "/learning-resources/guides",
+                    "url": "/learning-resources/guides/",
                 },
             ],
         },
