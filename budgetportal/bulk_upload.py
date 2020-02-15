@@ -15,8 +15,12 @@ from slugify import slugify
 
 import tasks
 from budgetportal.models import Department, Government, Sphere
-from datasets import (Category, Dataset, PackageDeletedException,
-                      PackageWithoutGroupException)
+from datasets import (
+    Category,
+    Dataset,
+    PackageDeletedException,
+    PackageWithoutGroupException,
+)
 from django import forms
 from django.contrib import messages
 from django.http import HttpResponse

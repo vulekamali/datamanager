@@ -15,7 +15,7 @@ class WagtailHomePage(Page):
     parent_page_types = []
 
     class Meta:
-        app_label = 'budgetportal'
+        app_label = "budgetportal"
 
 
 class LearningIndexPage(Page):
@@ -26,23 +26,18 @@ class PostIndexPage(Page):
     parent_page_types = []
     intro = RichTextField(blank=True)
 
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
+    content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
 
 class GuideIndexPage(Page):
     max_count = 1
-    parent_page_types = ['budgetportal.LearningIndexPage']
+    parent_page_types = ["budgetportal.LearningIndexPage"]
     intro = RichTextField(blank=True)
 
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
+    content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
 
 class NavContextMixin(object):
-
     def get_context(self, request):
         context = super(NavContextMixin, self).get_context(request)
         nav = nav_bar.get_items(FinancialYear.get_latest_year().slug)
@@ -57,42 +52,40 @@ class NavContextMixin(object):
 
 
 class PostPage(NavContextMixin, Page):
-    parent_page_types = ['budgetportal.PostIndexPage']
-    body = StreamField([
-        ('section', SectionBlock()),
-        ('html', wagtail_blocks.RawHTMLBlock()),
-    ])
+    parent_page_types = ["budgetportal.PostIndexPage"]
+    body = StreamField(
+        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+    )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        StreamFieldPanel("body"),
     ]
 
 
 class GuidePage(NavContextMixin, Page):
-    parent_page_types = ['budgetportal.GuideIndexPage']
-    body = StreamField([
-        ('section', SectionBlock()),
-        ('html', wagtail_blocks.RawHTMLBlock()),
-    ])
+    parent_page_types = ["budgetportal.GuideIndexPage"]
+    body = StreamField(
+        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+    )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        StreamFieldPanel("body"),
     ]

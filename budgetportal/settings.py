@@ -9,13 +9,16 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 import logging
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 # THINK VERY CAREFULY before using the TEST variable.
 # Tests should aim to be as production-like as possible.
 import sys
 
 import boto3
+
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 import dj_database_url
@@ -93,20 +96,19 @@ INSTALLED_APPS = [
     "ckeditor",
     "haystack",
     # wagtail
-    'wagtail.wagtailforms',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailembeds',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailimages',
-    'wagtail.wagtailsearch',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtailcore',
-
-    'modelcluster',
-    'taggit',
+    "wagtail.wagtailforms",
+    "wagtail.wagtailredirects",
+    "wagtail.wagtailembeds",
+    "wagtail.wagtailsites",
+    "wagtail.wagtailusers",
+    "wagtail.wagtailsnippets",
+    "wagtail.wagtaildocs",
+    "wagtail.wagtailimages",
+    "wagtail.wagtailsearch",
+    "wagtail.wagtailadmin",
+    "wagtail.wagtailcore",
+    "modelcluster",
+    "taggit",
 ]
 
 if DEBUG_TOOLBAR:
@@ -122,8 +124,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    "wagtail.wagtailcore.middleware.SiteMiddleware",
+    "wagtail.wagtailredirects.middleware.RedirectMiddleware",
 ]
 
 if DEBUG_TOOLBAR:
@@ -151,7 +153,7 @@ AWS_DEFAULT_ACL = "public-read"
 AWS_BUCKET_ACL = "public-read"
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
-#AWS_S3_CUSTOM_DOMAIN = 'budgetportal-storage.minio:9000'
+# AWS_S3_CUSTOM_DOMAIN = 'budgetportal-storage.minio:9000'
 AWS_S3_SECURE_URLS = False
 
 

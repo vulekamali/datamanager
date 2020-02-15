@@ -1,8 +1,13 @@
 import os
 from datetime import date
 
-from budgetportal.models import (FinancialYear, IRMSnapshot, ProvInfraProject,
-                                 ProvInfraProjectSnapshot, Quarter)
+from budgetportal.models import (
+    FinancialYear,
+    IRMSnapshot,
+    ProvInfraProject,
+    ProvInfraProjectSnapshot,
+    Quarter,
+)
 from budgetportal.search_indexes import ProvInfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 from django.core.files import File

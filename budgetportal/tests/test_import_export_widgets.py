@@ -1,5 +1,7 @@
-from budgetportal.import_export_admin import (CustomGovernmentWidget,
-                                              CustomIsVotePrimaryWidget)
+from budgetportal.import_export_admin import (
+    CustomGovernmentWidget,
+    CustomIsVotePrimaryWidget,
+)
 from budgetportal.models import Department, FinancialYear, Government, Sphere
 from django.core.exceptions import ValidationError
 from django.test import TestCase

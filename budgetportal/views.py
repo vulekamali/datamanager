@@ -22,12 +22,25 @@ from django.urls import reverse
 from guide_data import category_guides
 from guide_data import guides as guide_data
 from haystack.query import SearchQuerySet
-from models import (FAQ, Department, Event, FinancialYear, Homepage,
-                    InfrastructureProjectPart, IRMSnapshot, Sphere, Video)
-from summaries import (DepartmentProgrammesEcon4, DepartmentSubprogEcon4,
-                       DepartmentSubprogrammes,
-                       get_consolidated_expenditure_treemap,
-                       get_focus_area_preview, get_preview_page)
+from models import (
+    FAQ,
+    Department,
+    Event,
+    FinancialYear,
+    Homepage,
+    InfrastructureProjectPart,
+    IRMSnapshot,
+    Sphere,
+    Video,
+)
+from summaries import (
+    DepartmentProgrammesEcon4,
+    DepartmentSubprogEcon4,
+    DepartmentSubprogrammes,
+    get_consolidated_expenditure_treemap,
+    get_focus_area_preview,
+    get_preview_page,
+)
 
 logger = logging.getLogger(__name__)
 

@@ -13,8 +13,14 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
-from .gov_structure import (Department, FinancialYear, Government,
-                            GovtFunction, Programme, Sphere)
+from .gov_structure import (
+    Department,
+    FinancialYear,
+    Government,
+    GovtFunction,
+    Programme,
+    Sphere,
+)
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN

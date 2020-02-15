@@ -15,8 +15,11 @@ from django.views.generic import TemplateView
 from import_export.admin import ImportMixin
 from import_export.formats.base_formats import CSV, XLSX
 
-from .import_export_admin import (DepartmentImportForm, DepartmentResource,
-                                  InfrastructureProjectResource)
+from .import_export_admin import (
+    DepartmentImportForm,
+    DepartmentResource,
+    InfrastructureProjectResource,
+)
 
 logger = logging.getLogger(__name__)
 admin.site.login = login_required(admin.site.login)

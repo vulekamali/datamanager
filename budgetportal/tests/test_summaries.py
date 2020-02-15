@@ -7,8 +7,11 @@ import json
 
 from budgetportal.models import Department, FinancialYear, Government, Sphere
 from budgetportal.openspending import BabbageFiscalDataset
-from budgetportal.summaries import (get_consolidated_expenditure_treemap,
-                                    get_focus_area_preview, get_preview_page)
+from budgetportal.summaries import (
+    get_consolidated_expenditure_treemap,
+    get_focus_area_preview,
+    get_preview_page,
+)
 from django.test import TestCase
 from mock import MagicMock, Mock, patch
 

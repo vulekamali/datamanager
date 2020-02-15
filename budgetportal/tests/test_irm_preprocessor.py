@@ -1,9 +1,12 @@
 import unittest
 
-from budgetportal.irm_preprocessor import (BASE_HEADERS,
-                                           REPEATED_IMPLEMENTOR_HEADER,
-                                           InputException,
-                                           get_row_implementors, preprocess)
+from budgetportal.irm_preprocessor import (
+    BASE_HEADERS,
+    REPEATED_IMPLEMENTOR_HEADER,
+    InputException,
+    get_row_implementors,
+    preprocess,
+)
 from tablib import Dataset
 
 

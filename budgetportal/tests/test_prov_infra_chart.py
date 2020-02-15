@@ -1,8 +1,13 @@
 import json
 
 from budgetportal.json_encoder import JSONEncoder
-from budgetportal.models import (FinancialYear, IRMSnapshot, ProvInfraProject,
-                                 ProvInfraProjectSnapshot, Quarter)
+from budgetportal.models import (
+    FinancialYear,
+    IRMSnapshot,
+    ProvInfraProject,
+    ProvInfraProjectSnapshot,
+    Quarter,
+)
 from budgetportal.prov_infra_project.charts import time_series_data
 from django.test import TestCase
 

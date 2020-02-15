@@ -8,22 +8,14 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailforms', '0003_capitalizeverbose'),
-        ('wagtailcore', '0040_page_draft_title'),
-        ('wagtailredirects', '0005_capitalizeverbose'),
-        ('budgetportal', '0044_auto_20200209_0626'),
+        ("wagtailforms", "0003_capitalizeverbose"),
+        ("wagtailcore", "0040_page_draft_title"),
+        ("wagtailredirects", "0005_capitalizeverbose"),
+        ("budgetportal", "0044_auto_20200209_0626"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='page',
-            name='image',
-        ),
-        migrations.RemoveField(
-            model_name='page',
-            name='page_ptr',
-        ),
-        migrations.DeleteModel(
-            name='Page',
-        ),
+        migrations.RemoveField(model_name="page", name="image",),
+        migrations.RemoveField(model_name="page", name="page_ptr",),
+        migrations.DeleteModel(name="Page",),
     ]

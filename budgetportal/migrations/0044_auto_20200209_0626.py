@@ -12,18 +12,25 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0043_auto_20200208_1458'),
+        ("budgetportal", "0043_auto_20200208_1458"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='faq',
-            name='content',
-            field=ckeditor.fields.RichTextField(),
+            model_name="faq", name="content", field=ckeditor.fields.RichTextField(),
         ),
         migrations.AlterField(
-            model_name='page',
-            name='body',
-            field=wagtail.wagtailcore.fields.StreamField([(b'heading', wagtail.wagtailcore.blocks.CharBlock(classname=b'full title')), (b'paragraph', wagtail.wagtailcore.blocks.RichTextBlock()), (b'image', wagtail.wagtailimages.blocks.ImageChooserBlock())]),
+            model_name="page",
+            name="body",
+            field=wagtail.wagtailcore.fields.StreamField(
+                [
+                    (
+                        b"heading",
+                        wagtail.wagtailcore.blocks.CharBlock(classname=b"full title"),
+                    ),
+                    (b"paragraph", wagtail.wagtailcore.blocks.RichTextBlock()),
+                    (b"image", wagtail.wagtailimages.blocks.ImageChooserBlock()),
+                ]
+            ),
         ),
     ]
