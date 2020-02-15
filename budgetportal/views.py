@@ -9,9 +9,9 @@ import requests
 import yaml
 from slugify import slugify
 
+import nav_bar
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-import nav_bar
 from datasets import Category, Dataset
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
@@ -22,26 +22,12 @@ from django.urls import reverse
 from guide_data import category_guides
 from guide_data import guides as guide_data
 from haystack.query import SearchQuerySet
-from models import (
-    FAQ,
-    Department,
-    Event,
-    FinancialYear,
-    Homepage,
-    InfrastructureProjectPart,
-    IRMSnapshot,
-    Sphere,
-    Video,
-)
-from summaries import (
-    DepartmentProgrammesEcon4,
-    DepartmentSubprogEcon4,
-    DepartmentSubprogrammes,
-    get_consolidated_expenditure_treemap,
-    get_focus_area_preview,
-    get_preview_page,
-)
-
+from models import (FAQ, Department, Event, FinancialYear, Homepage,
+                    InfrastructureProjectPart, IRMSnapshot, Sphere, Video)
+from summaries import (DepartmentProgrammesEcon4, DepartmentSubprogEcon4,
+                       DepartmentSubprogrammes,
+                       get_consolidated_expenditure_treemap,
+                       get_focus_area_preview, get_preview_page)
 
 logger = logging.getLogger(__name__)
 

@@ -7,10 +7,11 @@ from django.contrib.sitemaps import views as sitemap_views
 from django.core.exceptions import PermissionDenied
 from django.views.decorators.cache import cache_page
 from sitemaps import sitemaps
-from webflow import urls as webflow_urls
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
+from wagtail.wagtaildocs import urls as wagtaildocs_urls
+from webflow import urls as webflow_urls
+
 from . import bulk_upload, views
 
 admin.site = AdminSitePlus()
@@ -33,17 +34,17 @@ department_urlpatterns = [
         r"^$", cache_page(CACHE_MINUTES_SECS)(views.department_page), name="department"
     ),
     url(
-        r"^/viz/subprog-treemap$",
+        r"^viz/subprog-treemap$",
         cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_treemap),
         name="department-viz-subprog-treemap",
     ),
     url(
-        r"^/viz/subprog-econ4-circles$",
+        r"^viz/subprog-econ4-circles$",
         cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_econ4_circles),
         name="department-viz-subprog-econ4-circles",
     ),
     url(
-        r"^/viz/subprog-econ4-bars$",
+        r"^viz/subprog-econ4-bars$",
         cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_econ4_bars),
         name="department-viz-subprog-econ4-bars",
     ),
@@ -215,7 +216,7 @@ urlpatterns = [
     # Department detail
     # - National
     url(
-        r"^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)",
+        r"^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)/",
         include(department_urlpatterns, namespace="national"),
         kwargs={"sphere_slug": "national", "government_slug": "south-africa"},
         name="national-department",

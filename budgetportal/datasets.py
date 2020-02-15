@@ -6,11 +6,9 @@ import urlparse
 from pprint import pformat
 from tempfile import mkdtemp
 
-from budgetportal.openspending import (
-    AdjustedEstimatesOfExpenditure,
-    EstimatesOfExpenditure,
-    ExpenditureTimeSeries,
-)
+from budgetportal.openspending import (AdjustedEstimatesOfExpenditure,
+                                       EstimatesOfExpenditure,
+                                       ExpenditureTimeSeries)
 from ckanapi import NotFound
 from django.conf import settings
 

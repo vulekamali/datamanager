@@ -9,16 +9,13 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 import logging
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
 # THINK VERY CAREFULY before using the TEST variable.
 # Tests should aim to be as production-like as possible.
 import sys
 
 import boto3
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 import dj_database_url
@@ -191,7 +188,7 @@ else:
 CACHE_MIDDLEWARE_SECONDS = 600
 
 
-CKAN_URL = os.environ.get("CKAN_URL", "https://treasurydata.openup.org.za")
+CKAN_URL = os.environ.get("CKAN_URL", "https://data.vulekamali.gov.za")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY", None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
 

@@ -11,13 +11,11 @@ from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from drf_haystack.filters import (
-    HaystackFacetFilter,
-    HaystackFilter,
-    HaystackOrderingFilter,
-)
+from drf_haystack.filters import (HaystackFacetFilter, HaystackFilter,
+                                  HaystackOrderingFilter)
 from drf_haystack.mixins import FacetMixin
-from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
+from drf_haystack.serializers import (HaystackFacetSerializer,
+                                      HaystackSerializer)
 from drf_haystack.viewsets import HaystackViewSet
 
 from ..prov_infra_project.charts import time_series_data

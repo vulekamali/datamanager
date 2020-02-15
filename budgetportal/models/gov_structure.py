@@ -1,20 +1,21 @@
 import logging
 import re
 import string
+import urllib
 from collections import OrderedDict
+from decimal import Decimal
+from pprint import pformat
+
+import requests
+from slugify import slugify
+
 from autoslug import AutoSlugField
 from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
-from django.core.exceptions import MultipleObjectsReturned, ValidationError
-from partial_index import PartialIndex
-from django.db import models
-from slugify import slugify
 from django.conf import settings
-from pprint import pformat
-import urllib
-from decimal import Decimal
-import requests
+from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.db import models
 from django.urls import reverse
-
+from partial_index import PartialIndex
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN

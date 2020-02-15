@@ -1,9 +1,6 @@
 import mock
-from budgetportal.models import (
-    CKAN_DATASTORE_URL,
-    MAPIT_POINT_API_URL,
-    InfrastructureProjectPart,
-)
+from budgetportal.models import (CKAN_DATASTORE_URL, MAPIT_POINT_API_URL,
+                                 InfrastructureProjectPart)
 from django.test import Client, LiveServerTestCase, TestCase
 
 

@@ -7,29 +7,14 @@ import requests
 from slugify import slugify
 
 from adminsortable.models import SortableMixin
+from budgetportal.datasets import Dataset
 from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from budgetportal.datasets import Dataset
 
-from .pages import (
-    WagtailHomePage,
-    LearningIndexPage,
-    PostIndexPage,
-    GuideIndexPage,
-#    PostPage,
-#    GuidePage,
-)
-from .gov_structure import (
-    FinancialYear,
-    Sphere,
-    Government,
-    Department,
-    Programme,
-    GovtFunction,
-)
-
+from .gov_structure import (Department, FinancialYear, Government,
+                            GovtFunction, Programme, Sphere)
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN

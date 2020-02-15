@@ -1,14 +1,13 @@
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore import blocks as wagtail_blocks
 from blocks import SectionBlock
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from django.db import models
-from wagtail.wagtailcore.fields import RichTextField
-
 from budgetportal import nav_bar
+from django.db import models
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailcore import blocks as wagtail_blocks
+from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+
 from .gov_structure import FinancialYear
 
 

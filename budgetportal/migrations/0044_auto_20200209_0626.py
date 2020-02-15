@@ -3,10 +3,10 @@
 from __future__ import unicode_literals
 
 import ckeditor.fields
-from django.db import migrations
 import wagtail.wagtailcore.blocks
 import wagtail.wagtailcore.fields
 import wagtail.wagtailimages.blocks
+from django.db import migrations
 
 
 class Migration(migrations.Migration):
