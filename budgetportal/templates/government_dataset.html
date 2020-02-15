@@ -104,82 +104,21 @@
         </div>
     {% endif %}
 
-    {% if category.slug == "performance-and-expenditure-reviews" %}
+    {% if guide %}
       <div class="Section is-bevel">
         <div class="Section-card">
-          <h2 class="Section-title">What is a PER?</h2>
-          <p>A Performance and Expenditure Review (PER) is a process of reviewing government spending on a particular service, and how effective this spending is.</p>
-          <a href="/guides/performance-and-expenditure-reviews" class="Button">
-            Learn more
-          </a>
-        </div>
-      </div>
-    {% endif %}
-
-    {% if category.slug == "estimates-of-national-expenditure" %}
-      <div class="Section is-bevel">
-        <div class="Section-card">
-          <h2 class="Section-title">What is an ENE?</h2>
-          <p>The Estimates of National Expenditure (ENE) publications describe in detail the planned spending in all national government votes over the three-year medium-term expenditure framework (MTEF) period, government’s expenditure planning window.</p>
-          <a href="/guides/estimates-of-national-expenditure" class="Button">
-            Learn more
-          </a>
-        </div>
-      </div>
-    {% endif %}
-
-
-    {% if category.slug == "frameworks-for-conditional-grants-to-provinces" %}
-      <div class="Section is-bevel">
-        <div class="Section-card">
-          <h2 class="Section-title">Allocations</h2>
-          <p>You can find grant allocations in the division of revenue bill annexures.</p>
-          <a href="/datasets/division-of-revenue-bills" class="Button">
-            View allocations
-          </a>
-        </div>
-      </div>
-    {% endif %}
-
-    {% if category.slug == "estimates-of-provincial-expenditure" %}
-      <div class="Section is-bevel">
-        <div class="Section-card">
-          <h2 class="Section-title">What is an EPRE?</h2>
-          <p>
-            The Estimates of Provincial Revenue and Expenditure (EPRE) is
-            considered a summary of the departmental Strategic and Performance
-            Plan to a level at which the legislature and the public can engage
-            the provincial departments. It further contains a detailed analysis
-            of departmental receipt and payment performance; covering
-            infrastructure payments; transfers to public entities and local
-            government; personnel numbers and costs; and payments on training.
-          </p>
-          <a href="/guides/estimates-of-provincial-expenditure" class="Button">
-            Learn more
-          </a>
-        </div>
-      </div>
-    {% endif %}
-
-    {% if category.slug == "adjusted-estimates-of-national-expenditure" %}
-      <div class="Section is-bevel">
-        <div class="Section-card">
-          <h2 class="Section-title">What is an AENE?</h2>
-          <p>
-            In the middle of each financial year, the adjustments process
-            provides an opportunity to make permissible revisions to the budget,
-            in response to changes that have affected the planned government
-            spending for that year. The adjusted budget may allocate unused
-            funds, mainly from the contingency reserve, and additional amounts
-            that have been approved for particular types of spending, if that be
-            the case.
-          </p>
-          <a
-            href="/guides/adjusted-estimates-of-national-expenditure"
-            class="Button"
-          >
-            Learn more
-          </a>
+          <h2 class="Section-title">Learn more</h2>
+          {% if guide.external_url %}
+            <p>{{ guide.external_url_description }}</p>
+            <a href="{{ guide.external_url }}" class="Button">
+              Dataset guide
+            </a>
+          {% else %}
+            <p>{{ guide.guide_page.search_description }}</p>
+            <a href="{{ guide.guide_page.url }}" class="Button">
+              Dataset guide
+            </a>
+          {% endif %}
         </div>
       </div>
     {% endif %}

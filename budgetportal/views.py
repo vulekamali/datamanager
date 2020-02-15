@@ -19,8 +19,6 @@ from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from guide_data import category_guides
-from guide_data import guides as guide_data
 from haystack.query import SearchQuerySet
 from models import (
     FAQ,
@@ -41,6 +39,8 @@ from summaries import (
     get_focus_area_preview,
     get_preview_page,
 )
+from models.pages import CategoryGuide
+
 
 logger = logging.getLogger(__name__)
 
@@ -786,23 +786,6 @@ def resources(request):
     return render(request, "resources.html", context=context)
 
 
-def guides(request):
-    slug = "index"
-    context = guide_data[slug]
-    context.update(
-        {
-            "content_template": "guide-{}.html".format(slug),
-            "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
-            "guides": guide_data,
-            "latest_year": FinancialYear.get_latest_year().slug,
-            "selected_financial_year": None,
-            "financial_years": [],
-        }
-    )
-    template = "guides.html" if slug == "index" else "guide_item.html"
-    return render(request, template, context=context)
-
-
 def dataset_category_list_page(request):
     context = {
         "categories": [category_fields(c) for c in Category.get_all()],
@@ -847,7 +830,10 @@ def dataset_category_page(request, category_slug):
     context = dataset_category_context(category_slug)
     context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
-    context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
+    try:
+        context["guide"] = CategoryGuide.objects.get(category_slug=category_slug)
+    except CategoryGuide.DoesNotExist:
+        context["guide"] = None
     return render(request, "government_dataset_category.html", context=context)
 
 
@@ -894,7 +880,10 @@ def dataset_page(request, category_slug, dataset_slug):
         "performance-resources",
         "procurement-portals-and-resources",
     ]
-    context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
+    try:
+        context["guide"] = CategoryGuide.objects.get(category_slug=category_slug)
+    except CategoryGuide.DoesNotExist:
+        context["guide"] = None
     context["external_resource_page"] = category_slug in external_resource_slugs
     context["comments_enabled"] = settings.COMMENTS_ENABLED
     return render(request, "government_dataset.html", context=context)

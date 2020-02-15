@@ -66,7 +66,7 @@ class GuidePage(NavContextMixin, Page):
 class CategoryGuide(models.Model):
     """Link GuidePages or external URLs to dataset category slugs"""
 
-    category_slug = models.SlugField(max_length=200)
+    category_slug = models.SlugField(max_length=200, unique=True)
     guide_page = models.ForeignKey(
         GuidePage, null=True, blank=True, on_delete=models.CASCADE
     )
@@ -98,6 +98,9 @@ class CategoryGuide(models.Model):
             raise ValidationError("Title is required when using External URL.")
 
         super(CategoryGuide, self).clean()
+
+    def __unicode__(self):
+        return "%s - %s" % (self.category_slug, self.guide_page or self.external_url)
 
 
 class GuideIndexPage(NavContextMixin, Page):
