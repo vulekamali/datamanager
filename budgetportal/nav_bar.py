@@ -30,7 +30,7 @@ def get_items(financial_year):
                 {
                     "title": "Dataset Guides",
                     "id": "guides",
-                    "url": "/learning-resources/guides/",
+                    "url": "/learning-resources/guides",
                 },
             ],
         },

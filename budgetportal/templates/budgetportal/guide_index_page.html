@@ -35,7 +35,7 @@
         {% if category_guide.external_url %}
           {% include 'components/Preview/index.html' with title=category_guide.external_url_title excerpt=category_guide.external_url_description url=category_guide.external_url %}
         {% else %}
-          {% include 'components/Preview/index.html' with title=category_guide.title excerpt=category_guide.seo_description url=category_guide.url %}
+          {% include 'components/Preview/index.html' with title=category_guide.title excerpt=category_guide.search_description url=category_guide.url %}
         {% endif %}
       {% endfor %}
     </div>
