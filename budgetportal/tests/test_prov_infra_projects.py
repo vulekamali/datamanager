@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*
 import os
 from datetime import date
 
@@ -455,7 +457,7 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
 
 class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
     def setUp(self):
-        self.file = open(EMPTY_FILE_PATH)
+        self.file = open(EMPTY_FILE_PATH, encoding="utf-8")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
         self.fin_year = FinancialYear.objects.create(slug="2030-31")

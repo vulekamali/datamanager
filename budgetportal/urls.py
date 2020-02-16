@@ -2,12 +2,13 @@ from adminplus.sites import AdminSitePlus
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import include, url
+from django.urls import path, include
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.core.exceptions import PermissionDenied
 from django.views.decorators.cache import cache_page
-from sitemaps import sitemaps
-from webflow import urls as webflow_urls
+from .sitemaps import sitemaps
+from .webflow import urls as webflow_urls
 
 from . import bulk_upload, views
 
@@ -25,23 +26,24 @@ def permission_denied(request):
 def trigger_error(request):
     division_by_zero = 1 / 0
 
+app_name = 'budgetportal'
 
 department_urlpatterns = [
     url(
         r"^$", cache_page(CACHE_MINUTES_SECS)(views.department_page), name="department"
     ),
     url(
-        r"^/viz/subprog-treemap$",
+        r"^viz/subprog-treemap$",
         cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_treemap),
         name="department-viz-subprog-treemap",
     ),
     url(
-        r"^/viz/subprog-econ4-circles$",
+        r"^viz/subprog-econ4-circles$",
         cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_econ4_circles),
         name="department-viz-subprog-econ4-circles",
     ),
     url(
-        r"^/viz/subprog-econ4-bars$",
+        r"^viz/subprog-econ4-bars$",
         cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_econ4_bars),
         name="department-viz-subprog-econ4-bars",
     ),
@@ -219,8 +221,8 @@ urlpatterns = [
     # Department detail
     # - National
     url(
-        r"^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)",
-        include(department_urlpatterns, namespace="national"),
+        r"^(?P<financial_year_id>\d{4}-\d{2})/national/departments/(?P<department_slug>[\w-]+)/",
+        include((department_urlpatterns, "national"), namespace="national"),
         kwargs={"sphere_slug": "national", "government_slug": "south-africa"},
         name="national-department",
     ),
@@ -230,8 +232,8 @@ urlpatterns = [
         "/(?P<sphere_slug>[\w-]+)"
         "/(?P<government_slug>[\w-]+)"
         "/departments"
-        "/(?P<department_slug>[\w-]+)",
-        include(department_urlpatterns, namespace="provincial"),
+        "/(?P<department_slug>[\w-]+)/",
+        include((department_urlpatterns, "provincial"), namespace="provincial")
     ),
     url(r"^robots\.txt$", views.robots,),
     # Sitemap

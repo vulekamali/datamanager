@@ -8,7 +8,7 @@ import urllib
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.conf import settings
 
-from urlparse import parse_qs, urljoin
+from urllib.parse import parse_qs, urljoin
 
 from allauth.account.decorators import verified_email_required
 

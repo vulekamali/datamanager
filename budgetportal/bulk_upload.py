@@ -9,13 +9,12 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter
-from openpyxl.worksheet.write_only import WriteOnlyCell
 from openpyxl.writer.excel import save_virtual_workbook
 from slugify import slugify
 
-import tasks
+from .tasks import * 
 from budgetportal.models import Department, Government, Sphere
-from datasets import (
+from .datasets import (
     Category,
     Dataset,
     PackageDeletedException,
@@ -26,7 +25,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render
 from django_q.brokers import get_broker
-from django_q.tasks import async
+from django_q.tasks import async_task
 
 logger = logging.getLogger(__name__)
 
@@ -394,8 +393,8 @@ def queue_actions(post_data):
     # Using kwargs to django-q so it shows field names in Admin
     for preview_idx, action in enumerate(post_data.getlist("dataset_action[]")):
         if action == "create":
-            async(
-                tasks.create_dataset,
+            async_task(
+                create_dataset,
                 **{
                     "department_id": post_data.getlist("department_id[]")[preview_idx],
                     "name": post_data.getlist("dataset_name[]")[preview_idx],
@@ -406,8 +405,8 @@ def queue_actions(post_data):
             action_count += 1
     for preview_idx, action in enumerate(post_data.getlist("resource_action[]")):
         if action == "create":
-            async(
-                tasks.create_resource,
+            async_task(
+                create_resource,
                 **{
                     "department_id": post_data.getlist("department_id[]")[preview_idx],
                     "dataset_name": post_data.getlist("dataset_name[]")[preview_idx],

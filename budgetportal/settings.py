@@ -106,7 +106,6 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
@@ -225,7 +224,7 @@ DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "info@vulekamali.gov.z
 RECAPTCHA_PUBLIC_KEY = os.environ.get(
     "RECAPTCHA_PUBLIC_KEY", "6LfV_1EUAAAAAAZtrLkMOG6Fyyepj-Mgs1cVH5_c"
 )
-RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "")
 NOCAPTCHA = True
 RECAPTCHA_USE_SSL = True
 
@@ -315,7 +314,7 @@ PIPELINE = {
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 if not TEST:
-    STATICFILES_STORAGE = "budgetportal.pipeline.GzipManifestPipelineStorage"
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 ROBOTS_DENY_ALL = os.environ.get("ROBOTS_DENY_ALL", "false").lower() == "true"
 

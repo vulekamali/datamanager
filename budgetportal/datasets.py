@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import urllib
-import urlparse
+import urllib.parse as urlparse
 from pprint import pformat
 from tempfile import mkdtemp
 

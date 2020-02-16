@@ -1,7 +1,7 @@
 import json
 import logging
 import urllib
-import urlparse
+import urllib.parse as urlparse
 from csv import DictWriter
 from datetime import datetime
 
@@ -11,18 +11,18 @@ from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-import nav_bar
-from datasets import Category, Dataset
+from .nav_bar import get_items
+from .datasets import Category, Dataset
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from guide_data import category_guides
-from guide_data import guides as guide_data
+from .guide_data import category_guides
+from .guide_data import guides as guide_data
 from haystack.query import SearchQuerySet
-from models import (
+from .models import (
     FAQ,
     Department,
     Event,
@@ -33,7 +33,7 @@ from models import (
     Sphere,
     Video,
 )
-from summaries import (
+from .summaries import (
     DepartmentProgrammesEcon4,
     DepartmentSubprogEcon4,
     DepartmentSubprogrammes,
@@ -68,7 +68,7 @@ def homepage(request):
         "title": "South African Government Budgets %s - vulekamali" % year.slug,
         "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "url_path": year.get_url_path(),
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": get_items(FinancialYear.get_latest_year().slug),
         "videos": videos,
         "latest_year": year.slug,
         "main_heading": page_data.main_heading,
@@ -110,7 +110,7 @@ def search_result(request, financial_year_id):
                 },
             }
         )
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "search-result.html", context=context)
 
@@ -379,7 +379,7 @@ def department_page(
         },
         "website_url": department.get_latest_website_url(),
     }
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["global_values"] = read_object_from_yaml(
         str(settings.ROOT_DIR.path("_data/global_values.yaml"))
@@ -594,7 +594,7 @@ def infrastructure_project_detail(request, project_slug):
         "page": {"layout": "infrastructure_project", "data_key": "dataset"},
         "site": {
             "data": {
-                "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+                "navbar": get_items(FinancialYear.get_latest_year().slug),
                 "dataset": dataset_response,
             },
             "latest_year": "2019-20",
@@ -680,7 +680,7 @@ def about(request):
         "selected_financial_year": None,
         "financial_years": [],
         "video": Video.objects.get(title_id="onlineBudgetPortal"),
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "about.html", context=context)
@@ -710,7 +710,7 @@ def events(request):
         "site": {
             "data": {
                 "events": {"upcoming": upcoming_events, "past": past_events},
-                "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+                "navbar": get_items(FinancialYear.get_latest_year().slug),
             },
             "latest_year": FinancialYear.get_latest_year().slug,
         },
@@ -721,7 +721,7 @@ def events(request):
 
 def glossary(request):
     context = {
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": get_items(FinancialYear.get_latest_year().slug),
         "selected_tab": "learning-centre",
         "selected_sidebar": "glossary",
         "title": "Glossary - vulekamali",
@@ -736,7 +736,7 @@ def glossary(request):
 def faq(request):
     faq_list = FAQ.objects.all()
     context = {
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": get_items(FinancialYear.get_latest_year().slug),
         "title": "FAQ - vulekamali",
         "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "selected_tab": "faq",
@@ -755,7 +755,7 @@ def videos(request):
         "selected_tab": "learning-centre",
         "selected_sidebar": "videos",
         "videos": Video.objects.all(),
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
         "admin_url": reverse("admin:budgetportal_video_changelist"),
     }
@@ -766,7 +766,7 @@ def terms_and_conditions(request):
     context = {
         "title": "Terms of use - vulekamali",
         "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "terms-and-conditions.html", context=context)
@@ -776,7 +776,7 @@ def resources(request):
     titles = {"theBudgetProcess", "participate"}
 
     context = {
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": get_items(FinancialYear.get_latest_year().slug),
         "videos": Video.objects.filter(title_id__in=titles),
         "latest_year": FinancialYear.get_latest_year().slug,
         "title": "Resources - vulekamali",
@@ -795,7 +795,7 @@ def guides(request, slug):
     context.update(
         {
             "content_template": "guide-{}.html".format(slug),
-            "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+            "navbar": get_items(FinancialYear.get_latest_year().slug),
             "guides": guide_data,
             "latest_year": FinancialYear.get_latest_year().slug,
             "selected_financial_year": None,
@@ -814,7 +814,7 @@ def dataset_category_list_page(request):
         "name": "Datasets and Analysis",
         "title": "Datasets and Analysis - vulekamali",
         "url_path": "/datasets",
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
 
@@ -848,7 +848,7 @@ def dataset_category_context(category_slug):
 
 def dataset_category_page(request, category_slug):
     context = dataset_category_context(category_slug)
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
     return render(request, "government_dataset_category.html", context=context)
@@ -856,7 +856,7 @@ def dataset_category_page(request, category_slug):
 
 def contributed_datasets_list(request):
     context = dataset_category_context("contributed")
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "contributed_data_category.html", context=context)
 
@@ -886,7 +886,7 @@ def dataset_context(category_slug, dataset_slug):
 
 def dataset_page(request, category_slug, dataset_slug):
     context = dataset_context(category_slug, dataset_slug)
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
     context["last_updated"] = datetime.strptime(
@@ -905,7 +905,7 @@ def dataset_page(request, category_slug, dataset_slug):
 
 def contributed_dataset(request, dataset_slug):
     context = dataset_context("contributed", dataset_slug)
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
     context["last_updated"] = datetime.strptime(
@@ -917,7 +917,7 @@ def contributed_dataset(request, dataset_slug):
 
 def department_list(request, financial_year_id):
     context = department_list_data(financial_year_id)
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "department_list.html", context=context)
 
@@ -995,7 +995,7 @@ def focus_area_preview(request, financial_year_id, focus_slug):
     context = {
         "page": {"layout": "focus_page", "data_key": ""},
         "site": {
-            "data": {"navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug)},
+            "data": {"navbar": get_items(FinancialYear.get_latest_year().slug)},
             "latest_year": FinancialYear.get_latest_year().slug,
         },
         "debug": settings.DEBUG,
@@ -1032,7 +1032,7 @@ def department_preview(
     context = {
         "page": {"layout": "department_preview", "data_key": ""},
         "site": {
-            "data": {"navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug)},
+            "data": {"navbar": get_items(FinancialYear.get_latest_year().slug)},
             "latest_year": FinancialYear.get_latest_year().slug,
         },
         "debug": settings.DEBUG,

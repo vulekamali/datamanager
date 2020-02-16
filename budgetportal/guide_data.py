@@ -78,6 +78,6 @@ guides = {
     },
 }
 
-for slug, guide in guides.iteritems():
+for slug, guide in guides.items():
     guide["slug"] = slug
     guide["url"] = "/guides/%s" % slug

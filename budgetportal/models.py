@@ -8,7 +8,7 @@ from datetime import datetime
 from decimal import Decimal
 from itertools import groupby
 from pprint import pformat
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 import requests
 from slugify import slugify
@@ -1790,7 +1790,7 @@ class Event(models.Model):
 class VideoLanguage(SortableMixin):
     label = models.CharField(max_length=255)
     youtube_id = models.CharField(max_length=255, null=True, blank=True)
-    video = models.ForeignKey("Video", null=True, blank=True)
+    video = models.ForeignKey("Video", null=True, blank=True, on_delete=models.SET_NULL)
     video_language_order = models.PositiveIntegerField(
         default=0, editable=False, db_index=True
     )

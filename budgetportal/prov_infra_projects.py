@@ -3,7 +3,7 @@ from import_export import resources
 from import_export.fields import Field
 from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import ForeignKeyWidget
-from irm_preprocessor import preprocess
+from .irm_preprocessor import preprocess
 from tablib import Databook
 
 BASE_HEADERS = [
