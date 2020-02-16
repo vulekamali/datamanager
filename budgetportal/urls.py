@@ -5,6 +5,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from sitemaps import sitemaps
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
@@ -137,6 +138,11 @@ urlpatterns = [
     # Budget Portal
     url(r"^about/?$", cache_page(CACHE_DAYS_SECS)(views.about), name="about"),
     url(r"^events/?$", cache_page(CACHE_MINUTES_SECS)(views.events), name="events"),
+    url(
+        r"^learning-resources/?$",
+        lambda request: redirect("/learning-resources/videos/", permanent=True),
+        name="learning-resources",
+    ),
     url(
         r"^learning-resources/videos/?$",
         cache_page(CACHE_MINUTES_SECS)(views.videos),
