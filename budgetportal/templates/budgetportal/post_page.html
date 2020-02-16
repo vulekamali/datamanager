@@ -1,1 +1,15 @@
 {% extends 'budgetportal/page.html' %}
+{% load wagtailcore_tags %}
+
+{% block page_content %}
+<article class="Page-content">
+  <div class="Page-contentInner">
+
+    <h2 class="Page-mainHeading">{{ page.title }}</h2>
+
+    {% for block in page.body %}
+        {% include_block block %}
+    {% endfor %}
+  </div>
+</article>
+{% endblock page_content %}
