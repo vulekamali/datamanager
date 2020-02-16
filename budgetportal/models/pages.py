@@ -105,7 +105,7 @@ class CategoryGuide(models.Model):
 
 class GuideIndexPage(NavContextMixin, Page):
     max_count = 1
-    parent_page_types = ["budgetportal.LearningIndexPage"]
+    parent_page_types = []
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]

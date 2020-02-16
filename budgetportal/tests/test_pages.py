@@ -132,7 +132,7 @@ class BasicPagesTestCase(TestCase):
     def test_videos_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get("/videos")
+        response = c.get("/videos", follow=True)
 
         self.assertContains(
             response, "Learn more about the new Online Budget Data Portal"
@@ -148,14 +148,14 @@ class BasicPagesTestCase(TestCase):
     def test_resources_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get("/resources")
+        response = c.get("/resources", follow=True)
         content = response.content
         self.assertContains(response, "The Budget Process and Public Participation")
 
     def test_glossary_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get("/glossary")
+        response = c.get("/glossary", follow=True)
 
         self.assertContains(response, "<title>Glossary - vulekamali</title>")
 
@@ -174,7 +174,7 @@ class BasicPagesTestCase(TestCase):
     def test_guides_list_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get("/guides")
+        response = c.get("/guides", follow=True)
 
         self.assertContains(response, "Dataset Guides")
         self.assertContains(response, "Estimates of National Expenditure (ENE)")
@@ -183,7 +183,7 @@ class BasicPagesTestCase(TestCase):
     def test_guide_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get("/guides/estimates-of-national-expenditure")
+        response = c.get("/guides/estimates-of-national-expenditure", follow=True)
 
         self.assertContains(
             response,

@@ -149,6 +149,11 @@ urlpatterns = [
         name="videos",
     ),
     url(
+        r"^videos/?$",
+        lambda request: redirect("/learning-resources/videos/", permanent=True),
+        name="learning-resources",
+    ),
+    url(
         r"^terms-and-conditions/?$",
         cache_page(CACHE_DAYS_SECS)(views.terms_and_conditions),
         name="terms-and-conditions",
@@ -159,9 +164,19 @@ urlpatterns = [
         name="resources",
     ),
     url(
+        r"^resources?$",
+        lambda request: redirect("/learning-resources/resources/", permanent=True),
+        name="learning-resources",
+    ),
+    url(
         r"^learning-resources/glossary/?$",
         cache_page(CACHE_MINUTES_SECS)(views.glossary),
         name="glossary",
+    ),
+    url(
+        r"^glossary?$",
+        lambda request: redirect("/learning-resources/glossary/", permanent=True),
+        name="learning-resources",
     ),
     url(r"^faq/?$", cache_page(CACHE_MINUTES_SECS)(views.faq), name="faq"),
     # Dataset category list
