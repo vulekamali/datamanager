@@ -26,7 +26,6 @@ def permission_denied(request):
 def trigger_error(request):
     division_by_zero = 1 / 0
 
-app_name = 'budgetportal'
 
 department_urlpatterns = [
     url(
@@ -233,7 +232,7 @@ urlpatterns = [
         "/(?P<government_slug>[\w-]+)"
         "/departments"
         "/(?P<department_slug>[\w-]+)/",
-        include((department_urlpatterns, "provincial"), namespace="provincial")
+        include((department_urlpatterns, "provincial"), namespace="provincial"),
     ),
     url(r"^robots\.txt$", views.robots,),
     # Sitemap
