@@ -1,0 +1,461 @@
+government,department_name,vote_number,is_vote_primary,intro,website_url
+South Africa,The Presidency,1,True,"## Vote purpose 
+
+Facilitate a common programme towards the achievement of the electoral mandate and the enhanced integrity of the state through considered planning, coordination, oversight, mobilisation and support.
+
+## Vote mandate
+
+To serve the president in the execution of his responsibilities and duties, supported by the deputy president, as articulated in chapter 5 of the Constitution. ",www.thepresidency.gov.za
+South Africa,Parliament,2,True,"## Vote purpose 
+
+Provide the support services required by Parliament to fulfil its constitutional functions, assist political parties represented in Parliament to secure administrative support and service constituents, and provide members of Parliament with the necessary facilities.
+
+## Vote mandate
+
+The mandate of Parliament is based on the provisions of chapter 4 of the Constitution, which establishes Parliament and sets out the functions it performs. Parliament is elected to represent the people, ensure government by the people under the Constitution, and represent the interests of provinces in the national sphere of government. Members of Parliament elect the president, provide a national forum for the public consideration of issues, pass legislation, and scrutinise and oversee executive action.
+
+Parliament’s policy priorities set out long-term policy and outcomes. These are aligned with the priorities and outcomes of the National Development Plan. To ensure that these outcomes are met over feasible timeframes, 5-year, 10-year and 15-year milestones have been set. The tabled strategic plan for the fifth Parliament is aimed at implementing the first milestone.",www.parliament.gov.za
+South Africa,Communications,3,True,"## Vote purpose 
+
+Create an enabling environment for the provision of inclusive communication services to all South Africans in a manner that promotes socioeconomic development and investment through broadcasting, new media, print media and other new technologies. Brand the country locally and internationally.
+
+## Vote mandate
+
+The Department of Communications is responsible for the national communications policy and strategy; information dissemination and publicity; and the branding of South Africa. Improved communication and marketing will promote an informed citizenry and assist the country in promoting investments, economic growth and job creation. The department’s mandate is derived from section 192 of the Constitution, which provides for the independence of broadcasting regulation in the public interest, the International Telecommunications Union and the World Intellectual Property Organisation.
+The department is responsible for the administration and implementation of:
+-  the Films and Publications Act (1996)
+-  the Broadcasting Act (1999)
+- the Media Development and Diversity Agency Act (2002)
+- the Independent Communications Authority of South Africa Act (2000), a joint responsibility with the Minister of Telecommunications and Postal Services
+- the Electronic Communications and Transactions Act (2002), a joint responsibility with the Minister of Telecommunications and Postal Services
+- the Electronic Communications and Transactions Act (2005), a joint responsibility with the Minister of Telecommunications and Postal Services.",www.doc.gov.za
+South Africa,Cooperative Governance and Traditional Affairs,4,True,"## Vote purpose 
+
+Improve cooperative governance across the three spheres of government, in partnership with institutions of traditional leadership, to ensure that provinces and municipalities carry out their service delivery and development functions effectively. 
+
+## Vote mandate
+
+The Department of Cooperative Governance is mandated to: develop and monitor the implementation of national policy and legislation aimed at transforming and strengthening key institutions and mechanisms of governance in national, provincial and local government to fulfil their developmental role; develop, promote and monitor mechanisms, systems and structures to enable integrated service delivery and implementation within government; and promote sustainable development by providing support to and exercising oversight of provincial and local government. This mandate is derived from the following legislation:
+- the Intergovernmental Relations Framework Act (2005)
+- the Municipal Property Rates Act (2004)
+- the Municipal Systems Act (2000)
+- the Municipal Structures Act (1998)
+- the Disaster Management Act (2002).",www.cogta.gov.za
+South Africa,Home Affairs,5,True,"## Vote purpose 
+
+Efficiently determine and safeguard the identity and status of citizens. Regulate immigration to ensure security, promote development and fulfil South Africa’s international obligations.
+
+## Vote mandate
+
+The mandate of the Department of Home Affairs is derived from the Constitution, and various acts of Parliament and policy documents. The department’s services are divided into two broad categories: civic services and immigration services. The primary mandate of the department is to secure and manage identity and international migration through the delivery of enabling services to all citizens, foreign nationals, government and the private sector.",www.dha.gov.za
+South Africa,International Relations and Cooperation,6,True,"## Vote purpose 
+
+Formulate, coordinate, implement and manage South Africa’s foreign policy and international relations programmes.
+
+## Vote mandate
+
+According to the Constitution, the president is ultimately responsible for the foreign policy and international relations of South Africa. As such, it is the president’s prerogative to appoint heads of mission, receive foreign heads of mission, conduct state to state relations, and negotiate and sign all international agreements. International agreements that are not of a technical, administrative or executive nature will only bind the country after being approved by Parliament, which also approves the country’s ratification of or accession to multilateral agreements. All international agreements must be tabled in Parliament for information purposes.
+The Minister of International Relations and Cooperation is entrusted with the formulation, promotion, execution and daily conduct of South Africa’s foreign policy. The department’s overall mandate is to work for the realisation of South Africa’s foreign policy objectives. This is done by:
+- coordinating and aligning South Africa’s international relations 
+- monitoring developments in the international environment
+- communicating government’s policy positions
+- developing and advising government on policy options, and creating mechanisms and avenues for achieving objectives
+- protecting South Africa’s sovereignty and territorial integrity
+- contributing to the creation of an enabling international environment for South African businesses
+- sourcing developmental assistance
+- assisting South African citizens abroad",www.dirco.gov.za
+South Africa,National Treasury,7,True,"## Vote purpose 
+
+Support economic growth and development, good governance, social progress and rising living standards through the accountable, economical, efficient, equitable and sustainable management of public finances, maintenance of macroeconomic and financial sector stability, and effective financial regulation of the economy.
+
+## Vote mandate
+
+National Treasury’s legislative mandate is based on section 216(1) of the Constitution, which calls for the establishment of a national treasury to ensure transparency, accountability and sound financial controls in the management of the country’s public finances. This role is further elaborated in the Public Finance Management Act (1999). The department is mandated to:
+- promote national government’s fiscal policy and the coordination of macroeconomic policy
+- ensure the stability and soundness of the financial system and financial services
+- coordinate intergovernmental financial and fiscal relations
+- manage the budget preparation process
+- enforce transparency and effective management in respect of revenue and expenditure, assets and liabilities, public entities, and constitutional institutions.",www.treasury.gov.za
+South Africa,"Planning, Monitoring and Evaluation",8,True,"## Vote purpose 
+
+Improve government service delivery through integrated planning, monitoring and evaluation.
+
+## Vote mandate
+
+The Department of Planning, Monitoring and Evaluation is mandated to:
+- facilitate the implementation of the National Development Plan (NDP) through the development of 
+sector-specific and outcome-specific medium-term plans and delivery agreements, and monitor and evaluate the implementation of these plans
+- ensure the alignment of departmental strategic and annual plans and budget allocations with government’s medium-term strategic framework
+- facilitate socioeconomic impact assessments of legislation and regulations
+- monitor the performance of individual national and provincial government departments and municipalities, and related improvement plans, and facilitate targeted intervention programmes
+- monitor frontline service delivery and manage the presidential hotline
+- develop and implement the annual national evaluations plan and support the national evaluations system
+- promote good planning, monitoring and evaluation practices in government
+- facilitate the integration of youth development priorities into key government programmes.",www.dpme.gov.za
+South Africa,Public Enterprises,9,True,"## Vote purpose 
+
+Drive investment, productivity and transformation in the department’s portfolio of state-owned companies to unlock growth, drive industrialisation, create jobs and develop skills. 
+
+## Vote mandate
+
+The Department of Public Enterprises is government’s shareholder representative for the state-owned companies in its portfolio. The department’s mandate is to fulfil oversight responsibilities at these 
+state-owned companies to ensure that they contribute to the realisation of government’s strategic objectives, as articulated in the National Development Plan (NDP), government’s 2014-2019 medium-term strategic framework, the new growth path and the industrial policy action plan. State-owned companies are crucial to driving the state’s strategic objectives of creating jobs, and enhancing equity and transformation. The department does not directly execute programmes but seeks to use state ownership in the economy to support the achievement of these objectives.",www.dpe.gov.za
+South Africa,Public Service and Administration,10,True,"## Vote purpose 
+
+Lead the modernisation of the public service, through a generally applicable framework of norms and standards, to improve service delivery.
+
+## Vote mandate
+
+The Department of Public Service and Administration draws its mandate from section 195(1) of the Constitution, which sets out basic values and principles the public service should adhere to, and the Public Service Act (1994). 
+
+In terms of the act, the Minister of Public Service and Administration is responsible for establishing norms and standards relating to:
+
+- the functions of the public service
+- organisational structures and establishments of departments, and other organisational and governance arrangements in the public service
+- labour relations, conditions of service and other employment practices for employees
+- the health and wellness of employees
+- information management
+- electronic government in the public service
+- integrity, ethics, conduct and anti-corruption
+- transformation, reform, innovation and any other matter to improve the effectiveness and efficiency of the public service and its service delivery to the public.",www.dpsa.gov.za
+South Africa,Public Works,11,True,"## Vote purpose 
+
+Provide policy formulation for, as well as coordination, regulation and oversight of, the public works sector in relation to the accommodation, housing, land and infrastructure needs of national departments. Enhance intergovernmental relations by coordinating concurrent public works functions. Lead and direct the implementation of the national expanded public works programme. Promote growth, job creation and transformation in the construction and property industries.
+
+## Vote mandate
+
+As set out in the Government Immovable Asset Management Act (2007), the Department of Public Works is mandated to be the custodian and portfolio manager of government’s immovable assets. Following the shift of functions in 2015/16, the department’s role now consists of policy formulation, coordination, regulation and oversight relating to the provision of accommodation and expert built environment services to client departments at national level; and, through the Property Management Trading Entity, the planning, acquiring, managing and disposing of immovable assets in the department’s custody. The department is further mandated to coordinate and provide strategic leadership in job creation initiatives through the implementation of the expanded public works programme. Public works is constitutionally designated as a concurrent function exercised by the national and provincial spheres of government.",www.publicworks.gov.za
+South Africa,Statistics South Africa,12,True,"## Vote purpose 
+
+Lead and partner in the production of statistics, in line with internationally recognised principles and standards, to inform users about socioeconomic dynamics for evidence-based decisions.
+
+## Vote mandate
+
+Statistics South Africa is a national government department accountable to the Minister in the Presidency: Planning, Monitoring and Evaluation. The department’s activities are regulated by the Statistics Act (1999), which mandates the department to advance the production, dissemination, use and coordination of official and other statistics to assist organs of state, businesses, other organisations and the public in planning, monitoring and decision-making. The act also requires that the department coordinates statistical production among organs of state in line with the purpose of official statistics and statistical principles.",www.statssa.gov.za
+South Africa,Women,13,True,"## Vote purpose 
+
+Lead, coordinate and oversee the transformation agenda on women’s socioeconomic empowerment, rights and equality.
+
+## Vote mandate
+
+The Department of Women derives its mandate from the Constitution and the presidential proclamation made in 2014 that mandates the department to champion gender equality, and the achievement of women’s socioeconomic empowerment and rights.",www.women.gov.za
+South Africa,Basic Education,14,True,"## Vote purpose 
+
+Develop, maintain and support a South African school education system for the 21st century.
+
+## Vote mandate
+
+The Department of Basic Education derives its mandate from the following legislation:
+
+- the National Education Policy Act (1996), which inscribed into law the policies, the legislative and monitoring responsibilities of the Minister of Basic Education, and the formal relations between national and provincial authorities
+- the South African Schools Act (1996), which promotes access to education, promotes quality and democratic governance in the schooling system, and makes schooling compulsory for children aged 7 to 15, to ensure that all learners have access to quality education without discrimination
+- the Employment of Educators Act (1998), which regulates the professional, moral and ethical responsibilities of educators, as well as the competency requirements for teachers.",www.education.gov.za
+South Africa,Higher Education and Training,15,True,"## Vote purpose 
+
+Develop and support a quality higher and vocational education sector. Promote access to higher education, vocational education, and skills development training opportunities.
+
+## Vote mandate
+
+The Department of Higher Education and Training derives its mandate from:
+- the Higher Education Act (1997), which provides for a unified national system of higher education
+- the National Student Financial Aid Scheme Act (1999), which provides for the granting of loans and bursaries to eligible students attending public higher education and training institutions, and the subsequent administration of such loans and bursaries
+- the Continuing Education and Training Colleges Act (2006), which provides for the regulation of continuing education and training, the establishment of governance structures for and the funding of public technical and vocational education and training (TVET) colleges and community education and training colleges, the registration of private colleges, and the promotion of quality in continuing education and training 
+- the Skills Development Levies Act (1999), which provides for the imposition of skills development levies
+- the Skills Development Act (2008), which enables the creation of the National Skills Agency; the establishment of the Quality Council for Trades and Occupations; and the regulation of apprenticeships, learnerships and other matters relating to skills development
+- the National Qualifications Framework Act (2008), which provides for the national qualifications framework, the South African Qualifications Authority and quality councils, for the issuing and quality assurance of qualifications required on the sub-frameworks of the national qualifications framework.",www.dhet.gov.za
+South Africa,Health,16,True,"## Vote purpose 
+
+Provide leadership and coordination of health services to promote the health of all people in South Africa through an accessible, caring and high quality health system, based on the primary health care approach. 
+
+## Vote mandate
+
+The Department of Health derives its mandate from the National Health Act (2003), which requires that the department provides a framework for a structured and uniform health system for South Africa. The act sets out the responsibilities of the three levels of government in the provision of health services. The department contributes directly to the realisation of outcome 2 (a long and healthy life for all South Africans) of government’s 2014-2019 medium-term strategic framework.",www.doh.gov.za
+South Africa,Social Development,17,True,"## Vote purpose 
+
+Ensure protection against vulnerability by creating an enabling environment for the provision of a comprehensive, integrated and sustainable social development service. 
+
+## Vote mandate
+
+The Department of Social Development is not established in terms of a single act. Several pieces of legislation determine its mandate, many of which are under review. This includes the Social Assistance Act (2004), which provides a legislative framework for providing social assistance. The act sets out the different types of grants payable, as well as their qualifying criteria. It also makes provision for the establishment of the inspectorate for social assistance. Other pieces of legislation further define the department’s mandate:
+- the Non-Profit Organisations Act (1997) establishes an administrative and regulatory framework within which non-profit organisations can conduct their affairs, and provides for their registration by the department
+- the Older Persons Act (2006) establishes a framework for empowering and protecting older persons, and promoting and maintaining their status, rights, wellbeing, safety and security. It provides for older persons to enjoy good quality services while staying with their families in their communities for as long as possible. It also makes provision for older persons to live in residential care facilities 
+- the Children’s Act (2005) sets out principles relating to the care and protection of children, and defines parental responsibilities and rights. It deals with early childhood development (ECD), drop-in centres and early intervention, children in alternative care such as foster care, child and youth care centres, and the adoption of children
+- the Prevention of and Treatment for Substance Abuse Act (2008) regulates substance abuse services and facilities
+- the 1998 White Paper on Population Policy for South Africa is aimed at promoting the sustainable development of all South Africans by integrating population issues with development planning in all spheres of government and all sectors of society
+- the 2015 White Paper on the Rights of Persons with Disabilities focuses on putting in place measures that will reduce the exclusion and inequality experienced by persons with disabilities. This includes contributing towards fighting poverty among persons with disabilities and their families, and providing policy guidelines on building capacity in the public sector to deliver equitable and accessible services
+- the 1997 White Paper for Social Welfare sets out the principles, guidelines, policies and programmes for developmental social welfare in South Africa. It provides the foundation for social welfare in the post-1994 era
+- the Social Service Professions Act (1978) provides for the regulation of social service professionals 
+- the Victim Empowerment Support Services Bill is aimed at regulating victim support services and empowering victims.",www.dsd.gov.za
+South Africa,Correctional Services,18,True,"## Vote purpose 
+
+Contribute to a just, peaceful and safer South Africa through the effective and humane incarceration of inmates and the rehabilitation and social reintegration of offenders.
+
+## Vote mandate
+
+The mandate of the Department of Correctional Services is derived from the Correctional Services Act (1998), the Criminal Procedure Act (1977), the 2005 White Paper on Corrections, and the 2014 White Paper on Remand Detention Management in South Africa. The legislation requires the department to contribute to maintaining and promoting a just, peaceful and safe society by correcting offending behaviour in a safe, secure and humane environment, which allows for optimal rehabilitation and reduced repeat offending.",www.dcs.gov.za
+South Africa,Defence and Military Veterans,19,True,"## Vote purpose 
+
+Defend and protect the Republic of South Africa, its territorial integrity and its people, in accordance with the Constitution and the principles of international law regulating the use of force. Provide for military veterans’ benefits.
+
+## Vote mandate
+
+The Department of Defence derives its mandate from section 200 of the Constitution, the Defence Act (2002) as amended by the Defence Amendment Act (2010), the 1996 White Paper on Defence and the 2015 South African Defence Review. The department is required to provide, manage, prepare and employ defence capabilities that are commensurate with the needs of South Africa.",www.dod.mil.za
+South Africa,Independent Police Investigative Directorate,20,True,"## Vote purpose 
+
+Ensure independent oversight of the South African Police Service and the Municipal Police Services. Conduct independent and impartial investigations of identified criminal offences allegedly committed by members of the South African Police Service and the Municipal Police Services; and make appropriate recommendations.
+
+## Vote mandate
+
+The Independent Police Investigative Directorate exercises its functions in accordance with the Independent Police Investigative Directorate Act (2011). The act gives effect to the provisions of section 206(6) of the Constitution, which provides for the establishment of an independent police complaints body that must investigate any alleged misconduct of, or offence committed by, a member of the police service. The thrust of the directorate’s work is to investigate serious and priority crimes allegedly committed by members of the South African Police Service and Municipal Police Services.
+
+The Independent Police Investigative Directorate Act (2011), which came into effect on 1 April 2012, grants the directorate an extended mandate and changes the focus of the directorate’s work from a complaints-driven organisation to one that prioritises the investigative function. The act further places stringent obligations on the South African Police Service and Municipal Police Services to report matters that must be investigated by the directorate and ensure the implementation of resultant disciplinary recommendations made by the directorate.",www.ipid.gov.za
+South Africa,Justice and Constitutional Development,21,True,"## Vote purpose 
+
+Uphold and protect the Constitution and the rule of law, and render accessible, fair, speedy and cost-effective administration of justice in the interests of a safer and more secure South Africa.
+
+## Vote mandate
+
+The Department of Justice and Constitutional Development derives its mandate from a number of acts, in addition to the mandate it derives from the Constitution. These acts and the constitutional framework assign functions to the department, such as: the establishment of magistrate’s courts, and the appointment of magistrates and other judicial officers; the establishment and functioning of the Special Investigating Unit and the National Prosecuting Authority, including the asset forfeiture unit; the conducting of criminal proceedings; the prosecution of organised crime and corruption, and the forfeiture of assets obtained through illicit means; the provision of witness protection to vulnerable and intimidated witnesses and their related persons in judicial proceedings; the establishment and functioning of bodies responsible for legal aid, law reform and rule making; the appointment of masters of the high courts; the administration of the Guardian’s Fund and deceased and insolvent estates; the regulation and provision of legal advisory services to government departments; the promotion, protection and enforcement of certain human rights; the protection of vulnerable groups; the management of third-party funds; and the provision of support to chapter 9 institutions.",www.justice.gov.za
+South Africa,Office of the Chief Justice and Judicial Administration,22,True,"## Vote purpose 
+
+Strengthen judicial governance and independence by rendering effective support to the Chief Justice in executing administrative and judicial powers and duties as both head of the Judiciary and the Constitutional Court.
+
+## Vote mandate
+
+As prescribed in section 165 (6) of the Constitution, read together with the Superior Courts Act (2013), the Office of the Chief Justice is mandated to render support to the chief justice as the head of the judiciary. In addition to its mandate, the Office of the Chief Justice is also required to: provide and coordinate legal and administrative support to the chief justice; provide communication and relationship management services; provide intergovernmental and internal coordination services; develop administration policies for courts; support the development of judicial policy, norms and standards; support the judicial function of the Constitutional Court; and support the Judicial Service Commission and South African Judicial Education Institute in the execution of their mandates.",www.judiciary.org.za
+South Africa,Police,23,True,"## Vote purpose 
+
+Prevent, combat and investigate crime, maintain public order, protect and secure the inhabitants of South Africa and their property, and uphold and enforce the law.
+
+## Vote mandate
+
+The South African Police Service derives its powers and functions from section 205 of the Constitution and from the South African Police Service Act (1995). This legislation regulates the police service in terms of its core function, which is to prevent, investigate and combat crime.",www.saps.gov.za
+South Africa,"Agriculture, Forestry and Fisheries",24,True,"## Vote purpose 
+
+Lead, support and promote agricultural, forestry and fisheries resources management through policies, strategies and programmes to enhance sustainable use and achieve economic growth, job creation, food security, rural development and transformation.
+
+## Vote mandate
+
+The mandate of the Department of Agriculture, Forestry and Fisheries includes value chains, inputs, production and consumption in the agriculture, forestry and fishery sectors. The department’s mandate is derived from a range of legislation, including the Sea Fishery Act (1988), the National Forests Act (1998), the Agricultural Products Standards Act (1990), and the Conservation of Agricultural Resources Act (1983).",www.daff.gov.za
+South Africa,Economic Development,25,True,"## Vote purpose 
+
+Promote economic development policy formulation and planning for the benefit of all South Africans.
+
+## Vote mandate
+
+The Economic Development Department was established in 2009 and has assumed responsibilities relating to the creation of decent employment through inclusive growth, as captured in outcome 4 (decent employment through inclusive growth) of government’s 2014-2019 medium-term strategic framework. This includes the implementation of certain aspects of the National Development Plan (NDP), the new growth path and the national infrastructure plan, as well as the framework’s outcome 6 (an efficient, competitive and responsive economic infrastructure network) and outcome 7 (comprehensive rural development and land reform).
+
+The department is also responsible for five public entities, comprising three regulatory bodies (the Competition Commission, the Competition Tribunal and the International Trade Administration Commission of South Africa) and two development finance institutions (the Industrial Development Corporation of South Africa and the Small Enterprise Finance Agency).
+
+In line with these responsibilities, the department’s mandate includes the administration of the following legislation:
+
+- the Industrial Development Corporation Act (1940)
+-the Competition Act (1998)
+- the International Trade Administration Act (2002)
+- the Infrastructure Development Act (2014).",www.economic.gov.za
+South Africa,Energy,26,True,"## Vote purpose 
+
+Formulate energy policies, regulatory frameworks and legislation, and oversee their implementation, to ensure energy security, the promotion of environmentally friendly energy carriers, and access to affordable and reliable energy for all South Africans. 
+
+## Vote mandate
+
+The Department of Energy is mandated to ensure the secure and sustainable provision of energy in support of socioeconomic development. It aims to achieve this by developing an integrated energy plan for the entire energy sector and regulating energy industries, and promoting investment in accordance with the integrated resource plan for electricity. A number of acts regulate the energy sector and reflect the legislative measures the department has instituted to govern the sector. Key among these are:
+- the National Energy Act (2008)
+- the Petroleum Products Act (1977)
+- the Electricity Regulation Act (2006).
+
+The National Energy Act (2008) sets out the core aspects of the department’s mandate and is the enabling legislation that empowers the Minister of Energy to:
+
+- ensure that diverse energy resources are available in sustainable quantities and at affordable prices in the South African economy to support economic growth and poverty alleviation, while taking into account environmental considerations
+- plan for the increased generation and consumption of renewable energy, a contingency energy supply, the holding of strategic energy feedstock and carriers, adequate investment in appropriate upkeep, and access to energy infrastructure
+- collect data and information regarding energy demand, supply and generation
+- promote electricity regulation, energy research and the efficient generation and consumption of energy.
+
+The department is also mandated to regulate the petroleum industry at the manufacturing, wholesale and retail levels through the implementation of the Petroleum Products Act (1977). The Petroleum and Liquid Fuels Charter is annexed to the Petroleum Products Amendment Act (2003), and outlines the department’s strategy to effect transformation in the industry.
+
+In terms of its policy mandate, the department is working with a range of documents and legislation that support the long-term vision for South Africa to use as much renewable energy as possible; create the necessary conditions to stimulate an efficient electricity market; and position South Africa to become globally competitive in the use of innovative technology for the design, manufacture and deployment of state of the art nuclear energy systems, power reactors and nuclear fuel cycle systems",www.energy.gov.za
+South Africa,Environmental Affairs,27,True,"## Vote purpose 
+
+Lead South Africa's environmental sector to achieve sustainable development towards a better quality of life for all. 
+
+## Vote mandate
+
+The Department of Environmental Affairs is mandated to give effect to the right of citizens to an environment that is not harmful to their health or wellbeing, and to have the environment protected for the benefit of present and future generations. To this end, the department provides leadership in environmental management, conservation and protection towards sustainability for the benefit of South Africans and the global community.
+
+This mandate is derived from the following legislation:
+
+- the National Environmental Management Act (1998), which provides for specific legislation on biodiversity and heritage resources; oceans and coasts; climate change and air quality management; and waste and chemicals management
+- the National Environmental Management Amendment Act (2004), which streamlines the process of regulating and administering the environmental impact assessment process
+- the National Environmental Management: Protected Areas Amendment Act (2009), which provides for the assignment of national parks, special parks and heritage sites to South Africa in terms of the World Heritage Convention Act (1999)
+- the National Environmental Management: Biodiversity Act (2004), which significantly reforms South Africa’s laws regulating biodiversity
+- the National Environmental Management: Air Quality and Atmospheric Act (2004), which reforms the law regulating air quality in order to protect the environment by providing reasonable measures for preventing pollution and ecological degradation, and securing ecologically sustainable development; and provides for national norms and standards regulating the monitoring of air quality 
+- the National Environmental Management: Waste Act (2008), which reforms the law regulating waste management in order to protect health and the environment by providing reasonable measures for the prevention of pollution
+- the National Environmental Management: Integrated Coastal Management Act (2008), which promotes the conservation of the coastal environment and ensures sustainable development practices and the use of natural resources.",www.environment.gov.za
+South Africa,Labour,28,True,"## Vote purpose 
+
+Play a significant role in reducing unemployment, poverty and inequality by pursuing the objectives of decent work for all through: employment creation and enterprise development; the setting of standards and the protection of rights at work, including the facilitation of equal opportunities and social dialogue; and the provision of social protection.
+
+## Vote mandate
+
+The Department of Labour derives its legislative mandate from the Constitution, particularly the Bill of Rights, which is given effect through a number of acts that regulate labour matters in South Africa. The most important of these are the Labour Relations Act (1995), the Basic Conditions of Employment Act (1997), the Employment Equity Act (1998), the Occupational Health and Safety Act (1993), and the Employment Services Act (2014).
+
+The mandate of the department is to regulate the labour market through policies and programmes developed in consultation with social partners. These aim to:
+
+- improve economic efficiency and productivity
+- facilitate decent employment creation
+- promote labour standards and fundamental rights at work 
+- provide adequate social safety nets to protect vulnerable workers
+- promote and enforce sound labour relations
+- promote equity and eliminate unfair discrimination in the workplace
+- eliminate inequality and discrimination in the workplace
+- enhance occupational health and safety awareness and compliance in the workplace
+- give value to social dialogue in the formulation of sound and responsive legislation and policies to attain labour market flexibility for the competitiveness of enterprises, balanced with the promotion of decent employment.",www.labour.gov.za
+South Africa,Mineral Resources,29,True,"## Vote purpose 
+
+Promote and regulate the minerals and mining sector for transformation, growth and development. Ensure that all South Africans derive sustainable benefits from the country’s mineral wealth. 
+
+## Vote mandate
+
+The mandate of the Department of Mineral Resources is broadly informed by:
+
+- the Mineral and Petroleum Resources Development Act (2002), which provides the regulatory framework for equitable access to and the sustainable development of mineral resources and related matters
+- the Mine Health and Safety Act (1996), which governs mine health and safety
+- the 1998 White Paper on Minerals and Mining Policy for South Africa, which ensures the transparent and efficient regulation of the development of South Africa’s mineral resources and mineral industry to meet national objectives and bring optimum benefit to the nation.",www.dmr.gov.za
+South Africa,Science and Technology,30,True,"## Vote purpose 
+
+Realise the full potential of science and technology in social and economic development by developing human resources, research and innovation. 
+
+## Vote mandate
+
+The Department of Science and Technology derives its mandate from the 1996 White Paper on Science and Technology, which introduced the concept of the national system of innovation, a set of interacting organisa-tions and policies through which the country creates, acquires, diffuses and puts into practice new knowledge to help achieve individual and collective goals. A coordinated and efficient national system of in-novation will help the country achieve its national development priorities by promoting change through in-novation, enabling all South Africans to enjoy the economic, sociopolitical and intellectual benefits of sci-ence, technology and innovation.",www.dst.gov.za
+South Africa,Small Business Development,31,True,"## Vote purpose 
+
+Promote the development of small businesses and cooperatives that contribute to inclusive economic growth and job creation.
+
+## Vote mandate
+
+The department is tasked with the responsibility of leading an integrated approach to the promotion and development of small businesses and cooperatives through a focus on the economic and legislative drivers that stimulate entrepreneurship to contribute to radical socioeconomic transformation. The realisation of this mandate will lead to increased employment, poverty reduction and reduced inequality.
+The department’s mandate is guided by a legislative framework that includes:
+
+- the National Small Business Act (1996)
+-the National Small Business Amendment Act (2004)
+- the Small Business Development Act (1981)
+- the Cooperatives Act (2005)
+- the Cooperatives Amendment Act (2013).",www.dsbd.gov.za
+South Africa,Telecommunications and Postal Services,32,True,"## Vote purpose 
+
+Develop ICT policies and legislation that create favourable conditions for accelerated and shared sustainable economic growth that positively impacts on the wellbeing of all South Africans.
+
+## Vote mandate
+
+The mandate of the Department of Telecommunications and Postal Services is to develop ICT policies that will contribute to an inclusive information society. The department has a responsibility to modernise the economy and economic infrastructure through: facilitating the rollout of ICT infrastructure, applications and services; enabling the rollout of postal and banking services; developing e-strategies to roll out e-government and e-sectoral services; promoting cybersecurity and the security of networks; and promoting universal service and electronic communications in underserviced areas.
+
+The department also sets guidelines for the determinations of its regulatory authority, the Independent Communications Authority of South Africa, and oversees and strengthens the capacity of state-owned companies within its portfolio.
+
+The department derives its legislative mandate from the Electronic Communications Act (2005) and the Electronic Communications and Transactions Act (2002).",www.dtps.gov.za
+South Africa,Tourism,33,True,"## Vote purpose 
+
+Promote and support the growth and development of an equitable, competitive and sustainable tourism sector, enhancing its contribution to national priorities.
+
+## Vote mandate
+
+The mandate of the Department of Tourism, as outlined in the Tourism Act (2014), is to promote the growth and development of the tourism sector; promote quality tourism products and services; provide for the effective domestic and international marketing of South Africa as a tourist destination; enhance cooperation and coordination between all spheres of government in developing and managing tourism; and promote the practice of responsible tourism for the benefit of South Africa and for the enjoyment of all its residents and foreign visitors.
+
+In recognition of tourism as a national priority with the potential to contribute significantly to economic development, the 1996 White Paper on the Development and Promotion of Tourism in South Africa provides for the promotion of domestic and international tourism. The national tourism sector strategy provides a blueprint for the sector to meet the growth targets contained in the National Development Plan (NDP).",www.tourism.gov.za
+South Africa,Trade and Industry,34,True,"## Vote purpose 
+
+Lead and facilitate access to sustainable economic activity and employment for all South Africans through an understanding of the economy, knowledge of economic opportunities and potential, and anticipation of future economic trends. Catalyse economic transformation and development, and provide a predictable, competitive, equitable and socially responsible environment for investment, enterprise and trade for economic citizens. Contribute to achieving government’s vision of an adaptive and restructured economy, characterised by accelerated economic growth, employment creation and greater equity.
+
+## Vote mandate
+
+The mandate of the Department of Trade and Industry is derived from a wide legislative framework that includes: 
+
+- the Companies Act (2008)
+- the Manufacturing Development Act (1993) 
+- the Broad-Based Black Economic Empowerment Act (2003) 
+- the Consumer Protection Act (2008).",www.thedti.gov.za
+South Africa,Transport,35,True,"## Vote purpose 
+
+Lead the provision of an integrated, sustainable, reliable and safe transport system through planning, developing, coordinating, promoting and implementing transport policies, regulations and strategies.
+
+## Vote mandate
+
+The Constitution identifies the legislative responsibilities of different spheres of government with regards to airports and civil aviation, road infrastructure, rail transport, maritime transport, road traffic management and public transport. Transport is a function that is legislated and executed at the national, provincial and local government levels. The implementation of transport functions at the national level takes place through public entities that are overseen by the department, each with a specific delivery mandate, as specified in legislation establishing these entities.
+
+The 1996 White Paper on Transport defines the infrastructure and operations of rail, pipelines, roads, airports, harbours, and the intermodal operations of public transport and freight. The Department of Transport is responsible for the legislation and policies for all these sub-sectors. The department is therefore responsible for conducting sector research, formulating legislation and policy to set the strategic direction of sub-sectors, assigning responsibilities to public entities and other spheres of government, regulating through setting norms and standards, and monitoring implementation.",www.transport.gov.za
+South Africa,Water and Sanitation,36,True,"## Vote purpose 
+
+Ensure the availability of water resources to facilitate equitable and sustainable socioeconomic development, and ensure universal access to water and sanitation services.
+
+## Vote mandate
+
+The mandate of the Department of Water and Sanitation is set out in the National Water Act (1998) and the Water Services Act (1997). The department’s legislative mandate is to ensure that the country’s water resources are protected, managed, used, developed, conserved and controlled by regulating and supporting the delivery of effective water supply and sanitation. This is done in accordance with the requirements of water-related policies and legislation that are critical in delivering on the people’s right to have sufficient food and water, growing the economy, and eradicating poverty.",www.dwa.gov.za
+South Africa,Arts and Culture,37,True,"## Vote purpose 
+
+Contribute to sustainable economic development and enhance job creation by preserving, protecting and developing South African arts, culture and heritage to sustain a socially cohesive and democratic nation.
+
+## Vote mandate
+
+The Department of Arts and Culture derives its mandate from the following legislation: 
+
+- the Heraldry Act (1962)
+- the Culture Promotion Act (1983)
+- the National Archives and Record Services of South Africa Act (1996)
+- the Legal Deposit Act (1997)
+- the South African Geographical Names Council Act (1998)
+- the Cultural Institutions Act (1998)
+- the National Heritage Resources Act (1999)
+- the National Council for Library and Information Act (2001)
+- the Use of Official Languages Act (2012). 
+
+Broadly, this legislation mandates the department to:
+
+- preserve, develop, protect and promote the cultural, heritage and linguistic diversity and legacy of South Africa
+- lead nation building and social cohesion through societal transformation 
+- enhance archives and records management structures and systems, and promote access to information 
+- provide leadership to the arts and culture sector so as to accelerate its transformation.",www.dac.gov.za
+South Africa,Human Settlements,38,True,"## Vote purpose 
+
+Facilitate the creation of sustainable human settlements and the improvement to household quality of life.
+
+## Vote mandate
+
+The Department of Human Settlements derives its core mandate and responsibilities from section 26 of the Constitution and section 3 of the Housing Act (1997), read in with conjunction approved policies and chapter 8 of the National Development Plan (NDP). This allows the department, in collaboration with provinces and municipalities, to establish and facilitate a sustainable national housing development process and related interventions. The department does this by: determining national policy and national norms and standards for housing and human settlements development; setting broad national housing delivery goals; providing funding to provinces and metropolitan cities; and monitoring the financial and non-financial performance of provinces and municipalities against these goals. In executing these roles and responsibilities, the department also builds capacity for provinces and municipalities; and promotes consultation with all stakeholders in the housing delivery chain, including other sector departments, civil society and the private sector.",www.dhs.gov.za
+South Africa,Rural Development and Land Reform,39,True,"## Vote purpose 
+
+Create and maintain an equitable and sustainable land dispensation, and act as a catalyst in rural development, to ensure sustainable rural livelihoods, decent work and continued social and economic advancement for all South Africans.
+
+## Vote mandate
+
+The Department of Rural Development and Land Reform executes its legislative mandate based on several acts:
+
+- the State Land Disposal Act (1961), which makes provision for the disposal of certain state land and prohibits the acquisition of state land by prescription
+- the Sectional Titles Act (1986), which makes provision for the division of buildings into sections and common property and for the acquisition of separate ownership in sections coupled with joint ownership in common property. It further regulates the transfer of ownership of sections and the registration of sectional mortgage bonds, and real rights in such sections. It also makes provision for the establishment of body corporates to control common property
+- the Physical Planning Act (1991), which promotes the orderly physical development of South Africa, with provisions for the division of the country into regions; and for the preparation of national development plans, regional development plans, regional structural plans and urban structure plans
+- the Upgrading of Land Tenure Rights Act (1991), which makes provision for the upgrading and conversion into ownership of certain rights graded in respect of land, and for the transfer of tribal land in full ownership to a tribe
+- the Distribution and Transfer of Certain State Land Act (1993), which makes provision for the distribution and transfer of certain land belonging to the state and designated by the Minister of Rural Development and Land Reform as land to be dealt with in accordance with the provisions of the act
+- the Land Titles Adjustment Act (1993), which regulates the allocation or devolution of certain land in respect of one or more persons who claim ownership, but do not have registered title deeds in respect thereof
+- the Provision of Land and Assistance Act (1993), which provides for the designation of certain land, the regulation of the subdivision of such land and the settlement of persons on it. It also provides for the acquisition, maintenance, planning, development, improvement, and disposal of property and the provision of financial assistance for land reform purposes
+- the Restitution of Land Rights Act (1994), which makes provision for the restitution of rights in land to persons or communities dispossessed of such rights after 19 June 1913 as a result of past racially discriminatory laws or practices. To administer this task, the act established a Commission on the Restitution of Land Rights and a land claims court. The Minister of the Department of Rural Development and Land Reform is authorised to purchase, acquire in any other manner or expropriate land or rights in land for the purpose of restitution awards
+- the Land Administration Act (1995), which provides for the delegation of powers and the assignment of the administration of laws regarding land matters to provinces
+- the Communal Property Associations Act (1996), which makes provision for communities, to form juristic persons, to be known as communal property associations, to acquire, hold and manage property on a basis agreed to by members of a community. This has to be done in terms of a written constitution
+- the Interim Protection of Informal Land Rights Act (1996), which makes provision for temporary protection of certain rights to and interests in land that are not otherwise adequately protected by law
+- the Land Reform (Labour Tenants) Act (1996), which makes provision for the security of tenure of labour tenants and those persons occupying or using land as a result of their association with labour tenants. It also makes provision for the acquisition of land and rights in land by labour tenants
+- the Extension of Security of Tenure Act (1997), which makes provision for the facilitation of long-term security of land tenure to regulate the conditions of residence on certain land, and to regulate the conditions on and circumstances under which the right of persons to reside on land may be terminated
+- the Land Survey Act (1997), which makes provision for the regulation of the survey of land in South Africa
+- the Transformation of Certain Rural Areas Act (1998), which provides for the transfer of certain land to municipalities and certain other legal entities, and for the removal of restrictions on the alienation of land
+- the Planning Profession Act (2002), which makes provision for the South African Council for Planners. 
+
+The act makes provision for different categories of planners and the registration of planners, and authorises the identification of areas of work for planners. The act seeks to protect the public from unethical practices, and ensure a high standard of professional conduct and integrity
+
+- the Spatial Data Infrastructure Act (2003), which makes provision for the establishment of South African spatial data infrastructure, the committee for spatial information and an electronic metadata catalogue; for the determination of standards and prescriptions with regard to the facilitation of the sharing of spatial information; and for the capture and publishing of metadata
+- the Geomatics Profession Act (2013), which makes provision for the establishment of the South African Geomatics Council; for different categories of registered persons and branches in the geomatics profession; and for the identification of areas of work to be performed by the different categories of registered persons
+- the Spatial Planning and Land Use Management Act (2013), which provides for a framework for spatial planning and land use management in South Africa
+- the Property Valuation Act (2014), which provides for the establishment of the Office of the Valuer General for the regulation of the valuation of property that has been identified for land reform, and property that has been identified for acquisition or disposal by a department.",www.ruraldevelopment.gov.za
+South Africa,Sport and Recreation South Africa,40,True,"## Vote purpose 
+
+Transform the delivery of sport and recreation by ensuring equitable access, development and excellence at all levels of participation, thereby improving social cohesion, nation building and the quality of life of all South Africans.
+
+## Vote mandate
+
+The Department of Sport and Recreation South Africa is established in terms of the Public Service Act (1994). Its legal mandate is derived from the National Sport and Recreation Act (1998), which requires it to oversee the development and management of sport and recreation in South Africa. The act provides the framework for relationships between the department and its external clients. This includes the department’s partnership with the South African Sports Confederation and Olympic Committee. The partnership is key to improving South Africa’s international ranking in selected sports. The act also ensures that sport and physical activity contribute to social cohesion by legislating on sports participation and sports infrastructure.",www.srsa.gov.za

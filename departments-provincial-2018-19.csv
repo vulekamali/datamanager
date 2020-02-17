@@ -1,0 +1,190 @@
+government,department_name,vote_number,is_vote_primary,intro,website_url
+Eastern Cape,Office Of The Premier,1,True,,
+Eastern Cape,Provincial Legislature,2,True,,
+Eastern Cape,Health,3,True,,
+Eastern Cape,Social Development,4,True,,
+Eastern Cape,Roads And Public Works,5,True,,
+Eastern Cape,Education,6,True,,
+Eastern Cape,Cooperative Governance And Traditional Affairs,7,True,,
+Eastern Cape,Rural Development And Agrarian Reform,8,True,,
+Eastern Cape,"Economic Development, Environmental Affairs And Tourism",9,True,,
+Eastern Cape,Transport,10,True,,
+Eastern Cape,Human Settlements,11,True,,
+Eastern Cape,Provincial Treasury,12,True,,
+Eastern Cape,"Sport, Recreation, Arts And Culture",14,True,,
+Eastern Cape,Safety And Liaison,15,True,,
+Free State,Premier,1,True,"## Mandate
+
+In terms of the Constitution, the Premier (supported by the Department), is responsible for:
+
+ * Implementing provincial legislation;
+ * Implementing all national legislation within functional areas;
+ * Administering in the province  national legislation outside functional areas; 
+ * Developing and implementing provincial policy;
+ * Co-ordinating the functions of the Provincial Administration and its departments.
+ * Preparing and initiating provincial legislation and,
+ * Performing any other function assigned to the provincial executive in terms of the Constitution or an Act of Parliament.
+
+## Vision
+
+Leading Free State Province towards Service Excellence
+
+## Mission
+
+To provide strategic direction and coordinate integrated service delivery within government in the Free State 
+
+",
+Free State,Free State Legislature,2,True,"## Mandate
+
+Section 10 (1) of the Constitution provides that: “The legislative authority of a province is vested in its provincial legislature.  Section 114(1) and (2) of the Constitution provide further for the powers of a Provincial Legislature to include; (a) the consideration, passing, amendment or rejection of bills; (b) to initiate or prepare legislation, except money bills; (c) to ensure that all provincial executive organs of state in the province are accountable to it and (d) to maintain oversight of the exercise of provincial executive authority in the province, including the implementation of legislation and any provincial organ of state.
+In addition to its constitutional mandate and obligations, the general and specific powers of the Legislature are set out in Rules 127 to 130 of the Standing Rules and Orders.
+The Legislature has developed a range of policies pertaining to elected representatives, political parties, staff and various institutional practices in order to guide and regulate the daily implementation of services and projects.  In respect of such policies, the review highlighted the need to ensure that existing shortcomings and weaknesses are identified and that key legislation and good governance principles, are incorporated into the existing policy framework. 
+The provincial strategic outcomes developed by the Executive are the key points of departure that define the priorities for the province.  Within this framework, the Legislature has to engage with and identify whether there are any gaps or whether enabling policy is required to support the achievement of provincial goals. The Legislature, also has to prioritise how it will meaningfully perform oversight to ensure delivery against the stated strategies.  
+
+## Vision
+
+The vision of the Free State Legislature is in line with its mandate as derived from the Constitution of the Republic of South Africa (Act 108 of 1996). The vision encapsulates the core principles of the Legislature as follows; “An Activist Legislature that Champions Democracy”.
+
+## Mission
+
+To promote good governance and a culture of human rights through oversight, law-making and public participation. 
+
+",
+Free State,"Economic And Small Business Development, Tourism And Environmental Affairs",3,True,"## Mandate
+
+
+There are several legislations and policies that the Department has to operate within as it conducts its mandate. Below is the main legislation the Department has to comply to:
+
+ * Tourism second amendment Act, 2000 (Act No.70 of 2000)
+ * National Environmental Management Act No. 107 of 1998, as amended
+ * Environment Conservation Act No. 73 of 1989, as amended
+ * National Environmental Management: Air Quality Management Act No. 39 of 2004
+ * NEM: Biodiversity Act, 2004 (Act No.10 of 2004)
+ * NEM: Protected Areas Act, 2003 (Act No. 57 of 2003)
+ * The Free State Nature Conservation Ordinance,1969 (Ord. No.8 of 1969)
+ * Environment Conservation Act of 1989, as amended.
+ * World Heritage Conservation Act, 1999
+ * Conservation of Agricultural Resources Act, 1983 (Act No. 43 of 1983)
+ * Animal Protection Act, 1962 (Act No. 71 of 1962)
+ * National Forest Act, 1998 (Act No. 84 of 1998)
+ * Veld and Forest Fire Act, 1998 (Act No. 101 of 1998)
+ * Game Theft Act, 1991 (Act No. 105 of 1991)
+ * National Heritage Resources, 1999 ( Act No. 25 of 1999)
+ * National Water Act, 1998 (Act No. 36 of 1998)
+ * Co-operative Act, 2005 (Act No 14. of  2005)
+
+## Vision
+
+A transformed economy and a prosperous society that is living in harmony with its natural resources through integrated and sustainable economic growth.
+
+## Mission
+
+Radically create a conducive, enabling environment for the creation of decent jobs, poverty and inequality reduction through sustainably managed environment and economic development programmes in the Free State
+
+",
+Free State,Provincial Treasury,4,True,,
+Free State,Health,5,True,,
+Free State,Education,6,True,,
+Free State,Social Development,7,True,,
+Free State,Cooperative Governance And Traditional Affairs,8,True,,
+Free State,Public Works And Infrastructure,9,True,,
+Free State,"Police, Roads And Transport",10,True,,
+Free State,Agriculture And Rural Development,11,True,,
+Free State,"Sport, Arts, Culture And Recreation",12,True,,
+Free State,Human Settlements,13,True,,
+Gauteng,Office Of The Premier,1,True,,
+Gauteng,Gauteng Provincial Legislature,2,True,,
+Gauteng,Economic Development,3,True,,
+Gauteng,Health,4,True,,
+Gauteng,Education,5,True,,
+Gauteng,Social Development,6,True,,
+Gauteng,Cooperative Governance And Traditional Affairs,7,True,,
+Gauteng,Human Settlements,8,True,,
+Gauteng,Roads And Transport,9,True,,
+Gauteng,Community Safety,10,True,,
+Gauteng,Agriculture And Rural Development,11,True,,
+Gauteng,"Sport, Arts, Culture And Recreation",12,True,,
+Gauteng,E-Government,13,True,,
+Gauteng,Gauteng Provincial Treasury,14,True,,
+Gauteng,Infrastructure Development,15,True,,
+KwaZulu-Natal,Office Of The Premier,1,True,,
+KwaZulu-Natal,Provincial Legislature,2,True,,
+KwaZulu-Natal,Agriculture And Rural Development,3,True,,
+KwaZulu-Natal,"Economic Development, Tourism And Environmental Affairs",4,True,,
+KwaZulu-Natal,Education,5,True,,
+KwaZulu-Natal,Provincial Treasury,6,True,,
+KwaZulu-Natal,Health,7,True,,
+KwaZulu-Natal,Human Settlements,8,True,,
+KwaZulu-Natal,Community Safety And Liaison,9,True,,
+KwaZulu-Natal,Sport And Recreation,10,True,,
+KwaZulu-Natal,Co-Operative Governance And Traditional Affairs,11,True,,
+KwaZulu-Natal,Transport,12,True,,
+KwaZulu-Natal,Social Development,13,True,,
+KwaZulu-Natal,Public Works,14,True,,
+KwaZulu-Natal,Arts And Culture,15,True,,
+Limpopo,Office Of The Premier,1,True,,
+Limpopo,Provincial Legislature,2,True,,
+Limpopo,Education,3,True,,
+Limpopo,Agriculture,4,True,,
+Limpopo,Provincial Treasury,5,True,,
+Limpopo,"Economic Development, Environment And Tourism",6,True,,
+Limpopo,Health,7,True,,
+Limpopo,Transport,8,True,,
+Limpopo,"Public Works, Roads And Infrastructure",9,True,,
+Limpopo,Community Safety,10,True,,
+Limpopo,"Co-Operative Governance, Human Settlements And Traditional Affairs",11,True,,
+Limpopo,Social Development,12,True,,
+Limpopo,"Sport, Arts And Culture",13,True,,
+Mpumalanga,Office Of The Premier,1,True,,
+Mpumalanga,Provincial Legislature,2,True,,
+Mpumalanga,Finance,3,True,,
+Mpumalanga,Co-Operative Governance And Traditional Affairs,4,True,,
+Mpumalanga,"Agriculture, Rural Development, Land And Environmental Affairs",5,True,,
+Mpumalanga,Economic Development And Tourism,6,True,,
+Mpumalanga,Education,7,True,,
+Mpumalanga,"Public Works, Roads And Transport",8,True,,
+Mpumalanga,"Community Safety, Security And Liaison",9,True,,
+Mpumalanga,Health,10,True,,
+Mpumalanga,"Culture, Sport And Recreation",11,True,,
+Mpumalanga,Social Development,12,True,,
+Mpumalanga,Human Settlements,13,True,,
+Northern Cape,Office Of The Premier,1,True,,
+Northern Cape,Provincial Legislature,2,True,,
+Northern Cape,"Transport, Safety And Liaison",3,True,,
+Northern Cape,Education,4,True,,
+Northern Cape,Roads And Public Works,5,True,,
+Northern Cape,Economic Development And Tourism,6,True,,
+Northern Cape,"Sport, Arts And Culture",7,True,,
+Northern Cape,Provincial Treasury,8,True,,
+Northern Cape,"Cooperative Governance, Human Settlements And Traditional Affairs",9,True,,
+Northern Cape,Health,10,True,,
+Northern Cape,Social Development,11,True,,
+Northern Cape,"Agriculture, Land Reform And Rural Development",12,True,,
+Northern Cape,Environment And Nature Conservation,13,True,,
+North West,Office Of The Premier,1,True,,
+North West,Provincial Legislature,2,True,,
+North West,Health,3,True,,
+North West,"Culture, Arts And Traditional Affairs",4,True,,
+North West,Community Safety And Transport Management,5,True,,
+North West,Economy And Enterprise Development,6,True,,
+North West,Finance,7,True,,
+North West,Education And Sports Development,8,True,,
+North West,Local Government And Human Settlements,9,True,,
+North West,Tourism,10,True,,
+North West,Public Works And Roads,11,True,,
+North West,Social Development,12,True,,
+North West,"Rural, Environment And Agricultural Development",13,True,,
+Western Cape,Premier,1,True,,
+Western Cape,Provincial Parliament,2,True,,
+Western Cape,Provincial Treasury,3,True,,
+Western Cape,Community Safety,4,True,,
+Western Cape,Education,5,True,,
+Western Cape,Health,6,True,,
+Western Cape,Social Development,7,True,,
+Western Cape,Human Settlements,8,True,,
+Western Cape,Environmental Affairs And Development Planning,9,True,,
+Western Cape,Transport And Public Works,10,True,,
+Western Cape,Agriculture,11,True,,
+Western Cape,Economic Development And Tourism,12,True,,
+Western Cape,Cultural Affairs And Sport,13,True,,
+Western Cape,Local Government,14,True,,

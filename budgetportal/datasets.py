@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import urllib
-import urllib.parse as urlparse
+from urllib.parse import urlparse
 from pprint import pformat
 from tempfile import mkdtemp
 
@@ -135,7 +135,7 @@ class Dataset:
                 url = url.replace(" ", "%20")
             logger.info("Downloading %s to upload to package %s", url, self.slug)
             tempdir = mkdtemp(prefix="budgetportal")
-            basename = urllib.unquote(os.path.basename(urlparse.urlparse(url).path))
+            basename = urllib.unquote(os.path.basename(urlparse(url).path))
             filename = os.path.join(tempdir, basename)
             logger.info("Downloading %s to %s", url, filename)
             urllib.urlretrieve(url, filename)[0]

@@ -1,7 +1,7 @@
 import json
 import logging
 import urllib
-import urllib.parse as urlparse
+from urllib.parse import urlparse
 from csv import DictWriter
 from datetime import datetime
 
@@ -615,7 +615,7 @@ def openspending_csv(request):
     """
     api_url = urllib.unquote(str(request.GET.get("api_url")))
 
-    parsed_url = urlparse.urlparse(api_url)
+    parsed_url = urlparse(api_url)
     domain = "{uri.netloc}".format(uri=parsed_url)
     allowed_domains = {"openspending.org", "openspending.vulekamali.gov.za"}
     if domain not in allowed_domains:
