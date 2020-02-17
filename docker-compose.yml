@@ -65,7 +65,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-test
-    command: coverage run --source='budgetportal' manage.py test
+    command: bin/wait-for-db.sh coverage run --source='budgetportal' manage.py test
     environment:
       - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
       - AWS_ACCESS_KEY_ID=minio-access-key
