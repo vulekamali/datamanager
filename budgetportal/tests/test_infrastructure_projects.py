@@ -199,9 +199,9 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(len(content["projects"]), 2)
 
         # First project (single coords, province)
-        first_test_project = filter(
+        first_test_project = list(filter(
             lambda x: x["name"] == "Standard fake project", content["projects"]
-        )[0]
+        ))[0]
         self.assertEqual(
             first_test_project["description"], "Typical project description"
         )

@@ -117,7 +117,7 @@ class BabbageFiscalDataset:
         for unique_ref_combo in unique_reference_combos:
             value_sum = 0
             count_sum = 0
-            ex_cell = None
+            ex_cell = {}
             for cell in cells:
                 full_ref_match = compare_equal_indices(
                     cell, aggregate_refs, unique_ref_combo

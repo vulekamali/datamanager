@@ -1632,7 +1632,7 @@ class InfrastructureProjectPart(models.Model):
     @staticmethod
     def _parse_coordinate(coordinate):
         """ Expects a single set of coordinates (lat, long) split by a comma """
-        if not isinstance(coordinate, (str, unicode)):
+        if not isinstance(coordinate, str):
             raise TypeError("Invalid type for coordinate parsing")
         lat_long = [float(x) for x in coordinate.split(",")]
         cleaned_coordinate = {"latitude": lat_long[0], "longitude": lat_long[1]}
@@ -1668,7 +1668,7 @@ class InfrastructureProjectPart(models.Model):
         )
         province_result.raise_for_status()
         r = province_result.json()
-        list_of_objects_returned = r.values()
+        list_of_objects_returned = list(r.values())
         if len(list_of_objects_returned) > 0:
             province_name = list_of_objects_returned[0]["name"]
             return province_name
