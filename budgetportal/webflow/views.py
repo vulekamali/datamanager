@@ -31,7 +31,7 @@ def provincial_infrastructure_project_list(request):
         "page_data_json": "null",
     }
     return render(
-        request, "webflow/infrastructure-search-template.html", context=context
+        request, "webflow/infrastructure-search-template.html", context
     )
 
 
@@ -66,7 +66,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
     return render(
         request,
         "webflow/detail_provincial-infrastructure-projects.html",
-        context=context,
+        context
     )
 
 
