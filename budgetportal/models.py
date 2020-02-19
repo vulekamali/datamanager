@@ -1091,14 +1091,16 @@ class Department(models.Model):
             government__sphere__slug="national", is_vote_primary=True
         )
 
+        dept = None
         for cell in result_cells:
             try:
-                dept = national_depts.get(
-                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
-                        str(cell[year_ref])
-                    ),
-                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
-                )
+                if year_ref in cell:
+                    dept = national_depts.get(
+                        government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
+                            str(cell[year_ref])
+                        ),
+                        slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                    )
             except Department.DoesNotExist:
                 logger.warning(
                     "Excluding: national {} {}".format(
@@ -1112,11 +1114,15 @@ class Department(models.Model):
             filtered_result_cells.append(cell)
 
         for cell in filtered_result_cells:
-            percentage_of_total = float(cell["value.sum"]) / total_budget * 100
+
+            percentage_of_total = float(cell["value.sum"]) / total_budget * 100 if cell["value.sum"] else 0
+
+            name = cell[openspending_api.get_department_name_ref()] if openspending_api.get_department_name_ref() in cell else ""
+
             expenditure.append(
                 {
-                    "name": cell[openspending_api.get_department_name_ref()],
-                    "slug": slugify(cell[openspending_api.get_department_name_ref()]),
+                    "name": name,
+                    "slug": slugify(name),
                     "amount": float(cell["value.sum"]),
                     "percentage_of_total": percentage_of_total,
                     "province": None,  # to keep a consistent schema
@@ -1632,7 +1638,7 @@ class InfrastructureProjectPart(models.Model):
     @staticmethod
     def _parse_coordinate(coordinate):
         """ Expects a single set of coordinates (lat, long) split by a comma """
-        if not isinstance(coordinate, (str, unicode)):
+        if not isinstance(coordinate, str):
             raise TypeError("Invalid type for coordinate parsing")
         lat_long = [float(x) for x in coordinate.split(",")]
         cleaned_coordinate = {"latitude": lat_long[0], "longitude": lat_long[1]}
@@ -1668,7 +1674,7 @@ class InfrastructureProjectPart(models.Model):
         )
         province_result.raise_for_status()
         r = province_result.json()
-        list_of_objects_returned = r.values()
+        list_of_objects_returned = list(r.values())
         if len(list_of_objects_returned) > 0:
             province_name = list_of_objects_returned[0]["name"]
             return province_name

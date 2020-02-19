@@ -95,7 +95,7 @@ def is_empty_row(row):
 
 def get_IRM_report_data_set(input_file, sheet_name):
     print("Reading from file {}...".format(input_file))
-    data_book = Databook().load('xlsx', open(input_file, 'rb').read())
+    data_book = Databook().load(open(input_file, 'rb').read(), 'xlsx')
     sheets = data_book.sheets()
     try:
         return next(data_set for data_set in sheets if data_set.title.strip() == sheet_name)
