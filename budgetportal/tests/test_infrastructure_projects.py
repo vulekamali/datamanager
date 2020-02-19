@@ -237,9 +237,9 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(first_test_project["total_budget"], 9045389000)
 
         # Second project (multiple coords, provinces)
-        second_test_project = filter(
+        second_test_project = list(filter(
             lambda x: x["name"] == "Fake project 2", content["projects"]
-        )[0]
+        ))[0]
         self.assertIn(
             {"latitude": -33.399790, "longitude": 25.443304},
             second_test_project["coordinates"],

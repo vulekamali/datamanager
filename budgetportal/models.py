@@ -551,7 +551,7 @@ class Department(models.Model):
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [
             str(y)
-            for y in xrange(financial_year_start_int - 4, financial_year_start_int + 3)
+            for y in range(financial_year_start_int - 4, financial_year_start_int + 3)
         ]
         expenditure = {
             "base_financial_year": FinancialYear.slug_from_year_start(str(base_year)),
@@ -1220,7 +1220,7 @@ class Department(models.Model):
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [
             str(y)
-            for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)
+            for y in range(financial_year_start_int - 3, financial_year_start_int + 1)
         ]
 
         expenditure = {"nominal": [], "real": []}
@@ -1392,7 +1392,7 @@ class Department(models.Model):
     def get_expenditure_time_series_by_programme(self):
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
-        year_ints = xrange(financial_year_start_int - 3, financial_year_start_int + 1)
+        year_ints = range(financial_year_start_int - 3, financial_year_start_int + 1)
         financial_year_starts = [str(y) for y in year_ints]
 
         programmes = {}
@@ -2065,7 +2065,7 @@ def get_cpi():
             cell["index"] = 100
     for idx in range(base_year_index - 1, -1, -1):
         cpi[idx]["index"] = cpi[idx + 1]["index"] / (1 + Decimal(cpi[idx + 1]["CPI"]))
-    for idx in xrange(base_year_index + 1, len(cpi)):
+    for idx in range(base_year_index + 1, len(cpi)):
         cpi[idx]["index"] = cpi[idx - 1]["index"] * (1 + Decimal(cpi[idx]["CPI"]))
     cpi_dict = {}
     for cell in cpi:
