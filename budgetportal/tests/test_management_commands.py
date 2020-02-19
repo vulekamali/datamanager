@@ -115,7 +115,7 @@ class ExportImportProgrammesTestCase(TestCase):
             result = call_command(
                 "load_programmes", "2030-31", "national", csv_file.name, stdout=out
             )
-            result = yaml.load(out.getvalue())
+            result = yaml.load(out.getvalue(), yaml.SafeLoader)
             self.assertEqual(result["number_added"], 2)
 
             # Check that it was successful

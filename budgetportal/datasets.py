@@ -240,11 +240,11 @@ class Dataset:
         )
 
         # Get the only resource with the CSV format
-        resources = filter(
+        resources = list(filter(
             lambda x: x.get("format", None) == "CSV", latest_dataset["resources"]
-        )
+        ))
 
-        assert len(list(resources)) == 1 and "id" in resources[0]
+        assert len(resources) == 1 and "id" in resources[0]
 
         return latest_dataset["financial_year"], resources[0]["id"]
 

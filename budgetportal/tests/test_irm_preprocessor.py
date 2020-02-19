@@ -15,13 +15,13 @@ class PreprocessHeaderTestCase(unittest.TestCase):
         with self.assertRaises(InputException) as context:
             preprocess(Dataset(headers=["badheader"]))
         expected_message = "Expected header Project ID in column 1 but got badheader"
-        self.assertEqual(expected_message, context.exception)
+        self.assertEqual(expected_message, str(context.exception))
 
     def test_incorrect_other_base_header(self):
         with self.assertRaises(InputException) as context:
             preprocess(Dataset(headers=["Project ID", "badheader"]))
         expected_message = "Expected header Project No in column 2 but got badheader"
-        self.assertEqual(expected_message, context.exception)
+        self.assertEqual(expected_message, str(context.exception))
 
     def test_incorrect_first_project_contractor_header(self):
         with self.assertRaises(InputException) as context:
@@ -30,7 +30,7 @@ class PreprocessHeaderTestCase(unittest.TestCase):
         expected_message = (
             "Expected header Project Contractor in column 38 but got badheader"
         )
-        self.assertEqual(expected_message, context.exception)
+        self.assertEqual(expected_message, str(context.exception))
 
     def test_incorrect_other_project_contractor_header(self):
         with self.assertRaises(InputException) as context:
@@ -39,7 +39,7 @@ class PreprocessHeaderTestCase(unittest.TestCase):
         expected_message = (
             "Expected header Project Contractor in column 41 but got badheader"
         )
-        self.assertEqual(expected_message, context.exception)
+        self.assertEqual(expected_message, str(context.exception))
 
     def test_correct_header(self):
         headers = BASE_HEADERS + [REPEATED_IMPLEMENTOR_HEADER] * 20

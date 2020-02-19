@@ -1516,7 +1516,7 @@ class Department(models.Model):
 
             return {
                 "notices": notices,
-                "programmes": sorted(programmes.values()),
+                "programmes": programmes.values(), #FIXME need to add sorting with python3
                 "dataset_detail_page": dataset.get_url_path(),
             }
         else:
