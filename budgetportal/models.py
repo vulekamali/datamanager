@@ -1091,14 +1091,16 @@ class Department(models.Model):
             government__sphere__slug="national", is_vote_primary=True
         )
 
+        dept = None
         for cell in result_cells:
             try:
-                dept = national_depts.get(
-                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
-                        str(cell[year_ref])
-                    ),
-                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
-                )
+                if year_ref in cell:
+                    dept = national_depts.get(
+                        government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
+                            str(cell[year_ref])
+                        ),
+                        slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                    )
             except Department.DoesNotExist:
                 logger.warning(
                     "Excluding: national {} {}".format(
@@ -1112,11 +1114,15 @@ class Department(models.Model):
             filtered_result_cells.append(cell)
 
         for cell in filtered_result_cells:
-            percentage_of_total = float(cell["value.sum"]) / total_budget * 100
+
+            percentage_of_total = float(cell["value.sum"]) / total_budget * 100 if cell["value.sum"] else 0
+
+            name = cell[openspending_api.get_department_name_ref()] if openspending_api.get_department_name_ref() in cell else ""
+
             expenditure.append(
                 {
-                    "name": cell[openspending_api.get_department_name_ref()],
-                    "slug": slugify(cell[openspending_api.get_department_name_ref()]),
+                    "name": name,
+                    "slug": slugify(name),
                     "amount": float(cell["value.sum"]),
                     "percentage_of_total": percentage_of_total,
                     "province": None,  # to keep a consistent schema

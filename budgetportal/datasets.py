@@ -186,9 +186,9 @@ class Dataset:
         if self._openspending_api is not None:
             return self._openspending_api
         try:
-            api_resource = filter(
+            api_resource = list(filter(
                 lambda r: r["format"].lower() == "openspending api", self.resources
-            )[0]
+            ))[0]
         except IndexError:
             return None
         api_class_mapping = {
