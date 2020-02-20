@@ -96,7 +96,7 @@ class BasicPagesTestCase(TestCase):
     def test_department_detail_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get("/2019-20/national/departments/the-presidency")
+        response = c.get("/2019-20/national/departments/the-presidency/")
 
         self.assertContains(
             response, "The Presidency budget data for the 2019-20 financial year"
