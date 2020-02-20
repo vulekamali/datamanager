@@ -187,7 +187,7 @@ class ExportImportDepartmentsTestCase(TestCase):
                     csv_file.name,
                     stdout=out,
                 )
-                result = yaml.load(out.getvalue())
+                result = yaml.load(out.getvalue(), Loader=yaml.FullLoader)
 
                 # Check that it was successful
                 dept_1 = Department.objects.get(

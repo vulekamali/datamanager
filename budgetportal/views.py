@@ -1052,4 +1052,4 @@ def robots(request):
 
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
-        return yaml.load(f)
+        return yaml.load(f, Loader=yaml.FullLoader)
