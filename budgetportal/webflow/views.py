@@ -39,7 +39,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
     project = get_object_or_404(models.ProvInfraProject, pk=int(id))
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
-    page_data["project"]["irm_snapshot"] = snapshot.irm_snapshot.__unicode__()
+    page_data["project"]["irm_snapshot"] = str(snapshot.irm_snapshot)
     snapshot_list = list(project.project_snapshots.all())
     page_data["time_series_chart"] = time_series_data(snapshot_list)
     department = models.Department.get_in_latest_government(
