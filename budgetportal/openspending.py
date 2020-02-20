@@ -41,7 +41,7 @@ class BabbageFiscalDataset:
 
     def get_all_drilldowns(self):
         drilldowns = []
-        for key, value in self.model["dimensions"].iteritems():
+        for key, value in self.model["dimensions"].items():
             drilldowns.append(self.get_ref(key, "key"))
             drilldowns.append(self.get_ref(key, "label"))
         # Enforce uniqueness

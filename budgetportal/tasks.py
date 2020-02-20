@@ -60,7 +60,7 @@ def format_error(error):
 
 
 def format_row(ordered_dict):
-    return "\n".join(["%s: %r" % (k, v) for (k, v) in ordered_dict.iteritems()])
+    return "\n".join(["%s: %r" % (k, v) for (k, v) in ordered_dict.items()])
 
 
 def import_irm_snapshot(snapshot_id):
