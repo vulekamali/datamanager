@@ -1115,9 +1115,17 @@ class Department(models.Model):
 
         for cell in filtered_result_cells:
 
-            percentage_of_total = float(cell["value.sum"]) / total_budget * 100 if cell["value.sum"] else 0
+            percentage_of_total = (
+                float(cell["value.sum"]) / total_budget * 100
+                if cell["value.sum"]
+                else 0
+            )
 
-            name = cell[openspending_api.get_department_name_ref()] if openspending_api.get_department_name_ref() in cell else ""
+            name = (
+                cell[openspending_api.get_department_name_ref()]
+                if openspending_api.get_department_name_ref() in cell
+                else ""
+            )
 
             expenditure.append(
                 {
@@ -1515,7 +1523,7 @@ class Department(models.Model):
 
             return {
                 "notices": notices,
-                "programmes": programmes.values(), #FIXME need to add sorting with python3
+                "programmes": programmes.values(),  # FIXME need to add sorting with python3
                 "dataset_detail_page": dataset.get_url_path(),
             }
         else:

@@ -328,7 +328,9 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
 
     # Filter departments that belong to the selected government
     expenditure_results_filter_government_complete_breakdown = [
-        x for x in expenditure_results["cells"] if slugify(x[geo_ref]) == government_slug
+        x
+        for x in expenditure_results["cells"]
+        if slugify(x[geo_ref]) == government_slug
     ]
     focus_results_filter_government = [
         x for x in focus_results["cells"] if slugify(x[geo_ref]) == government_slug
@@ -377,13 +379,15 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
         percentage_of_total = float(cell["value.sum"]) / total_budget * 100
 
         department_programmes = [
-            x for x in expenditure_results_filter_government_programme_breakdown
+            x
+            for x in expenditure_results_filter_government_programme_breakdown
             if x[department_ref] == cell[department_ref]
         ]
         programmes = []
 
         department_functions = [
-            x for x in focus_results_filter_government
+            x
+            for x in focus_results_filter_government
             if x[department_ref] == cell[department_ref]
         ]
         functions = []

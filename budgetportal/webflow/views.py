@@ -30,9 +30,7 @@ def provincial_infrastructure_project_list(request):
         "page_description": "Find infrastructure projects by provincial departments.",
         "page_data_json": "null",
     }
-    return render(
-        request, "webflow/infrastructure-search-template.html", context
-    )
+    return render(request, "webflow/infrastructure-search-template.html", context)
 
 
 def provincial_infrastructure_project_detail(request, id, slug):
@@ -64,9 +62,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
         % (snapshot.province, snapshot.department),
     }
     return render(
-        request,
-        "webflow/detail_provincial-infrastructure-projects.html",
-        context
+        request, "webflow/detail_provincial-infrastructure-projects.html", context
     )
 
 
