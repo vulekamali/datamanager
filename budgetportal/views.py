@@ -134,9 +134,9 @@ def programme_list_csv(request, financial_year_id, sphere_slug):
         for department in government.departments.all():
             for programme in department.programmes.all():
                 row = {
-                    "government_name": government.name.encode("utf-8"),
-                    "department_name": department.name.encode("utf-8"),
-                    "programme_name": programme.name.encode("utf-8"),
+                    "government_name": government.name,
+                    "department_name": department.name,
+                    "programme_name": programme.name,
                     "programme_number": programme.programme_number,
                 }
                 writer.writerow(row)
@@ -173,11 +173,11 @@ def department_list_csv(request, financial_year_id, spheres=["national", "provin
             for department in government.departments.all():
                 writer.writerow(
                     {
-                        "government": government.name.encode("utf-8"),
-                        "department_name": department.name.encode("utf-8"),
+                        "government": government.name,
+                        "department_name": department.name,
                         "vote_number": department.vote_number,
                         "is_vote_primary": department.is_vote_primary,
-                        "intro": department.intro.encode("utf-8"),
+                        "intro": department.intro,
                         "website_url": department.get_latest_website_url(),
                     }
                 )
