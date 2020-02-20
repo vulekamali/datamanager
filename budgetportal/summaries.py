@@ -327,12 +327,12 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
     )
 
     # Filter departments that belong to the selected government
-    expenditure_results_filter_government_complete_breakdown = filter(
-        lambda x: slugify(x[geo_ref]) == government_slug, expenditure_results["cells"]
-    )
-    focus_results_filter_government = filter(
-        lambda x: slugify(x[geo_ref]) == government_slug, focus_results["cells"]
-    )
+    expenditure_results_filter_government_complete_breakdown = [
+        x for x in expenditure_results["cells"] if slugify(x[geo_ref]) == government_slug
+    ]
+    focus_results_filter_government = [
+        x for x in focus_results["cells"] if slugify(x[geo_ref]) == government_slug
+    ]
 
     # Used to determine programmes for departments
     expenditure_results_filter_government_programme_breakdown = openspending_api.aggregate_by_refs(
@@ -354,7 +354,6 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
         government__slug=government_slug,
         is_vote_primary=True,
     )
-
     for cell in expenditure_results_filter_government_department_breakdown:
         try:
             dept = sphere_depts.get(
