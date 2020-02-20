@@ -186,9 +186,7 @@ class Dataset:
         if self._openspending_api is not None:
             return self._openspending_api
         try:
-            api_resource = list(filter(
-                lambda r: r["format"].lower() == "openspending api", self.resources
-            ))[0]
+            api_resource = [r for r in self.resources if r["format"].lower() == "openspending api"]
         except IndexError:
             return None
         api_class_mapping = {
@@ -240,9 +238,7 @@ class Dataset:
         )
 
         # Get the only resource with the CSV format
-        resources = list(filter(
-            lambda x: x.get("format", None) == "CSV", latest_dataset["resources"]
-        ))
+        resources = [x for x in latest_dataset["resources"] if x.get("format") == "CSV"]
 
         assert len(resources) == 1 and "id" in resources[0]
 
