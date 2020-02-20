@@ -323,6 +323,9 @@ def department_page(
     elif department.government.sphere.slug == "provincial":
         description_govt = department.government.name
 
+    ds = DepartmentSubprogrammes(department)
+    print(ds.get_detail_aggregate_url())
+
     context = {
         "comments_enabled": settings.COMMENTS_ENABLED,
         "subprogramme_viz_data": DepartmentSubprogrammes(department),
