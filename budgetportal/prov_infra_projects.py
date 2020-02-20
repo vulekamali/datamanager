@@ -214,6 +214,7 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
         skip_unchanged = True
         report_skipped = False
         exclude = ("id",)
+        import_id_fields = ("IRM_project_id",)
         instance_loader_class = ProvInfraProjectSnapshotLoader
 
 
