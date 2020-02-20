@@ -1242,7 +1242,6 @@ class Department(models.Model):
         ]
         budget_results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
         result = openspending_api.filter_dept(budget_results, self.name)
-        #raise Exception(cuts, drilldowns, budget_results, result)
         filtered_cells = openspending_api.filter_by_ref_exclusion(
             result["cells"],
             openspending_api.get_programme_name_ref(),
