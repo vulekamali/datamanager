@@ -1829,7 +1829,7 @@ class FAQ(SortableMixin):
     content = RichTextField()
     the_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -1844,7 +1844,7 @@ class Quarter(models.Model):
     class Meta:
         ordering = ["number"]
 
-    def __unicode__(self):
+    def __str__(self):
         return u"Quarter %d" % self.number
 
 
@@ -1874,7 +1874,7 @@ class IRMSnapshot(models.Model):
         verbose_name = "IRM Snapshot"
         unique_together = ["financial_year", "quarter"]
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s Q%d taken %s" % (
             self.financial_year.slug,
             self.quarter.number,
@@ -1892,7 +1892,7 @@ class ProvInfraProject(models.Model):
     class Meta:
         verbose_name = "Provincial infrastructure project"
 
-    def __unicode__(self):
+    def __str__(self):
         if self.project_snapshots.count():
             return self.project_snapshots.latest().name
         else:
@@ -2016,7 +2016,7 @@ class ProvInfraProjectSnapshot(models.Model):
         verbose_name = "Provincial infrastructure project snapshot"
         unique_together = ["irm_snapshot", "project"]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 

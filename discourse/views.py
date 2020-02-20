@@ -37,7 +37,7 @@ def sso(request, client_id):
 
     key = settings.DISCOURSE_SSO_SECRET  # must not be unicode
     h = hmac.new(key, payload, digestmod=hashlib.sha256)
-    this_signature = unicode(h.hexdigest())
+    this_signature = str(h.hexdigest())
 
     if not hmac.compare_digest(this_signature, signature):
         return HttpResponseBadRequest(
