@@ -40,7 +40,6 @@ def get_focus_area_preview(financial_year):
 
     function_objects = []
     for function in unique_functions:
-        print(function)
         function_objects.append(
             {
                 "title": function,
