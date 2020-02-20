@@ -8,7 +8,7 @@ from datetime import datetime
 from decimal import Decimal
 from itertools import groupby
 from pprint import pformat
-from urllib.parse import urljoin
+from urllib.parse import urljoin, quote
 
 import requests
 from slugify import slugify
@@ -725,11 +725,11 @@ class Department(models.Model):
                     return True
             return False
 
-        cells_by_type = filter(filter_by_type, cells)
+        cells_by_type = [c for c in cells if filter_by_type(c)]
         by_type = []
         for cell in cells_by_type:
             name = cell[adjustment_kind_ref]
-            name = string.replace(name, "Adjustments - ", "")
+            name = name.replace("Adjustments - ", "")
             if cell["value.sum"]:
                 by_type.append(
                     {"name": name, "amount": cell["value.sum"], "type": "kind"}
@@ -1242,7 +1242,7 @@ class Department(models.Model):
         ]
         budget_results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
         result = openspending_api.filter_dept(budget_results, self.name)
-
+        #raise Exception(cuts, drilldowns, budget_results, result)
         filtered_cells = openspending_api.filter_by_ref_exclusion(
             result["cells"],
             openspending_api.get_programme_name_ref(),
@@ -2081,7 +2081,7 @@ def get_vocab_map():
 
 
 def csv_url(aggregate_url):
-    querystring = "?api_url=" + urllib.quote(aggregate_url)
+    querystring = "?api_url=" + quote(aggregate_url)
     csv_url = reverse("openspending_csv") + querystring
     if len(csv_url) > URL_LENGTH_LIMIT:
         raise Exception(

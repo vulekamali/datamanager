@@ -51,10 +51,7 @@ class BabbageFiscalDataset:
 
     @staticmethod
     def filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value):
-        filtered_cells = filter(
-            lambda cell: cell[filter_ref] != filter_exclusion_value, cells
-        )
-        return filtered_cells
+        return [c for c in cells if c[filter_ref] != filter_exclusion_value]
 
     def aggregate_url(self, cuts=None, drilldowns=None, order=None):
         params = {"pagesize": PAGE_SIZE}

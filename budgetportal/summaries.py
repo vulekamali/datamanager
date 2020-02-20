@@ -87,8 +87,7 @@ def get_focus_area_data(financial_year, sphere_slug):
 
     results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
     cells = results["cells"]
-    cells = filter(lambda c: c[function_ref] != "", cells)
-
+    cells = [c for c in cells if c[function_ref] != ""]
     return cells, openspending_api
 
 
@@ -377,16 +376,16 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
     for cell in filtered_result_cells:
         percentage_of_total = float(cell["value.sum"]) / total_budget * 100
 
-        department_programmes = filter(
-            lambda x: x[department_ref] == cell[department_ref],
-            expenditure_results_filter_government_programme_breakdown,
-        )
+        department_programmes = [
+            x for x in expenditure_results_filter_government_programme_breakdown
+            if x[department_ref] == cell[department_ref]
+        ]
         programmes = []
 
-        department_functions = filter(
-            lambda x: x[department_ref] == cell[department_ref],
-            focus_results_filter_government,
-        )
+        department_functions = [
+            x for x in focus_results_filter_government
+            if x[department_ref] == cell[department_ref]
+        ]
         functions = []
 
         for programme in department_programmes:
