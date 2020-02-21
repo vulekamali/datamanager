@@ -5,14 +5,15 @@ import sys
 import warnings
 from datetime import datetime
 
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.contrib.staticfiles.testing import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from django.core.management import call_command
 
 
-class BaseSeleniumTestCase(StaticLiveServerTestCase):
+class BaseSeleniumTestCase(LiveServerTestCase):
     """
     Base class for Selenium tests.
 

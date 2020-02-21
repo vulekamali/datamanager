@@ -6,7 +6,7 @@ Tasks MUST be idempotent.
 import logging
 import traceback
 
-import django_q
+from django_q.tasks import async_task
 from budgetportal import prov_infra_projects
 from budgetportal.models import Department, IRMSnapshot
 from django.conf import settings
@@ -60,7 +60,7 @@ def format_error(error):
 
 
 def format_row(ordered_dict):
-    return "\n".join(["%s: %r" % (k, v) for (k, v) in ordered_dict.iteritems()])
+    return "\n".join(["%s: %r" % (k, v) for (k, v) in ordered_dict.items()])
 
 
 def import_irm_snapshot(snapshot_id):
@@ -70,7 +70,7 @@ def import_irm_snapshot(snapshot_id):
         for row_num, row_result in enumerate(result.rows):
             if row_result.errors:
                 raise RowError("Error with row %d" % row_num, row_result, row_num)
-        django_q.tasks.async(index_irm_projects, snapshot_id=snapshot_id)
+        async_task(index_irm_projects, snapshot_id=snapshot_id)
         return {
             "totals": result.totals,
             "validation_errors": [row.validation_error for row in result.rows],

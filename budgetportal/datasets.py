@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import urllib
-import urlparse
+from urllib.parse import urlparse
 from pprint import pformat
 from tempfile import mkdtemp
 
@@ -135,7 +135,7 @@ class Dataset:
                 url = url.replace(" ", "%20")
             logger.info("Downloading %s to upload to package %s", url, self.slug)
             tempdir = mkdtemp(prefix="budgetportal")
-            basename = urllib.unquote(os.path.basename(urlparse.urlparse(url).path))
+            basename = urllib.unquote(os.path.basename(urlparse(url).path))
             filename = os.path.join(tempdir, basename)
             logger.info("Downloading %s to %s", url, filename)
             urllib.urlretrieve(url, filename)[0]
@@ -186,9 +186,9 @@ class Dataset:
         if self._openspending_api is not None:
             return self._openspending_api
         try:
-            api_resource = filter(
-                lambda r: r["format"].lower() == "openspending api", self.resources
-            )[0]
+            api_resource = [
+                r for r in self.resources if r["format"].lower() == "openspending api"
+            ][0]
         except IndexError:
             return None
         api_class_mapping = {
@@ -240,9 +240,7 @@ class Dataset:
         )
 
         # Get the only resource with the CSV format
-        resources = filter(
-            lambda x: x.get("format", None) == "CSV", latest_dataset["resources"]
-        )
+        resources = [x for x in latest_dataset["resources"] if x.get("format") == "CSV"]
 
         assert len(resources) == 1 and "id" in resources[0]
 

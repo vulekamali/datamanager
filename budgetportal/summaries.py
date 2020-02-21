@@ -2,11 +2,11 @@ import logging
 
 from slugify import slugify
 
-from datasets import (
+from .datasets import (
     get_consolidated_expenditure_budget_dataset,
     get_expenditure_time_series_dataset,
 )
-from models import (
+from .models import (
     EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
     Department,
     FinancialYear,
@@ -86,8 +86,7 @@ def get_focus_area_data(financial_year, sphere_slug):
 
     results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
     cells = results["cells"]
-    cells = filter(lambda c: c[function_ref] != "", cells)
-
+    cells = [c for c in cells if c[function_ref] != ""]
     return cells, openspending_api
 
 
@@ -129,7 +128,7 @@ def national_summary_for_function(
     dept_ref = openspending_api.get_department_name_ref()
     function_ref = openspending_api.get_function_ref()
 
-    function_cells = filter(lambda x: x[function_ref] == function, expenditure_results)
+    function_cells = [x for x in expenditure_results if x[function_ref] == function]
     national = {"data": [], "footnotes": [], "notices": []}
     national["total"] = sum(c["value.sum"] for c in function_cells)
 
@@ -180,7 +179,7 @@ def provincial_summary_for_function(
     geo_ref = openspending_api.get_geo_ref()
     no_provincial_in_year = not expenditure_results
 
-    function_cells = filter(lambda x: x[function_ref] == function, expenditure_results)
+    function_cells = [x for x in expenditure_results if x[function_ref] == function]
     provincial = {"data": [], "footnotes": [], "notices": []}
     if no_provincial_in_year:
         provincial["total"] = None
@@ -327,12 +326,14 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
     )
 
     # Filter departments that belong to the selected government
-    expenditure_results_filter_government_complete_breakdown = filter(
-        lambda x: slugify(x[geo_ref]) == government_slug, expenditure_results["cells"]
-    )
-    focus_results_filter_government = filter(
-        lambda x: slugify(x[geo_ref]) == government_slug, focus_results["cells"]
-    )
+    expenditure_results_filter_government_complete_breakdown = [
+        x
+        for x in expenditure_results["cells"]
+        if slugify(x[geo_ref]) == government_slug
+    ]
+    focus_results_filter_government = [
+        x for x in focus_results["cells"] if slugify(x[geo_ref]) == government_slug
+    ]
 
     # Used to determine programmes for departments
     expenditure_results_filter_government_programme_breakdown = openspending_api.aggregate_by_refs(
@@ -354,7 +355,6 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
         government__slug=government_slug,
         is_vote_primary=True,
     )
-
     for cell in expenditure_results_filter_government_department_breakdown:
         try:
             dept = sphere_depts.get(
@@ -377,16 +377,18 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
     for cell in filtered_result_cells:
         percentage_of_total = float(cell["value.sum"]) / total_budget * 100
 
-        department_programmes = filter(
-            lambda x: x[department_ref] == cell[department_ref],
-            expenditure_results_filter_government_programme_breakdown,
-        )
+        department_programmes = [
+            x
+            for x in expenditure_results_filter_government_programme_breakdown
+            if x[department_ref] == cell[department_ref]
+        ]
         programmes = []
 
-        department_functions = filter(
-            lambda x: x[department_ref] == cell[department_ref],
-            focus_results_filter_government,
-        )
+        department_functions = [
+            x
+            for x in focus_results_filter_government
+            if x[department_ref] == cell[department_ref]
+        ]
         functions = []
 
         for programme in department_programmes:

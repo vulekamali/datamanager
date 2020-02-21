@@ -5,7 +5,7 @@ conventions of how we name fields in our Fiscal Data Packages.
 import logging
 import random
 import re
-import urllib
+from urllib.parse import urlencode
 from collections import OrderedDict
 from hashlib import sha1
 
@@ -41,7 +41,7 @@ class BabbageFiscalDataset:
 
     def get_all_drilldowns(self):
         drilldowns = []
-        for key, value in self.model["dimensions"].iteritems():
+        for key, value in self.model["dimensions"].items():
             drilldowns.append(self.get_ref(key, "key"))
             drilldowns.append(self.get_ref(key, "label"))
         # Enforce uniqueness
@@ -51,10 +51,7 @@ class BabbageFiscalDataset:
 
     @staticmethod
     def filter_by_ref_exclusion(cells, filter_ref, filter_exclusion_value):
-        filtered_cells = filter(
-            lambda cell: cell[filter_ref] != filter_exclusion_value, cells
-        )
-        return filtered_cells
+        return [c for c in cells if c[filter_ref] != filter_exclusion_value]
 
     def aggregate_url(self, cuts=None, drilldowns=None, order=None):
         params = {"pagesize": PAGE_SIZE}
@@ -69,7 +66,7 @@ class BabbageFiscalDataset:
             params["order"] = "|".join(order)
         url = self.cube_url + "aggregate/"
         sorted_params = OrderedDict(sorted(params.items(), key=lambda t: t[0]))
-        return url + "?" + urllib.urlencode(sorted_params)
+        return url + "?" + urlencode(sorted_params)
 
     def aggregate(self, cuts=None, drilldowns=None, order=None):
         url = self.aggregate_url(cuts=cuts, drilldowns=drilldowns, order=order)
@@ -117,7 +114,7 @@ class BabbageFiscalDataset:
         for unique_ref_combo in unique_reference_combos:
             value_sum = 0
             count_sum = 0
-            ex_cell = None
+            ex_cell = {}
             for cell in cells:
                 full_ref_match = compare_equal_indices(
                     cell, aggregate_refs, unique_ref_combo
@@ -242,4 +239,5 @@ def cube_url(model_url):
 
 
 def cache_key(url):
+    url = url.encode("utf-8")
     return sha1(url).hexdigest()

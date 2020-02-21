@@ -3,7 +3,7 @@ from import_export import resources
 from import_export.fields import Field
 from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import ForeignKeyWidget
-from irm_preprocessor import preprocess
+from .irm_preprocessor import preprocess
 from tablib import Databook
 
 BASE_HEADERS = [
@@ -214,11 +214,12 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
         skip_unchanged = True
         report_skipped = False
         exclude = ("id",)
+        import_id_fields = ("IRM_project_id",)
         instance_loader_class = ProvInfraProjectSnapshotLoader
 
 
 def import_snapshot(file, irm_snapshot_id):
-    data_book = Databook().load("xlsx", file)
+    data_book = Databook().load(file, "xlsx")
     dataset = data_book.sheets()[0]
     preprocessed_dataset = preprocess(dataset)
     # Ensure projects exist

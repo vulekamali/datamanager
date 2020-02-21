@@ -15,13 +15,13 @@ class PreprocessHeaderTestCase(unittest.TestCase):
         with self.assertRaises(InputException) as context:
             preprocess(Dataset(headers=["badheader"]))
         expected_message = "Expected header Project ID in column 1 but got badheader"
-        self.assertEqual(expected_message, context.exception.message)
+        self.assertEqual(expected_message, str(context.exception))
 
     def test_incorrect_other_base_header(self):
         with self.assertRaises(InputException) as context:
             preprocess(Dataset(headers=["Project ID", "badheader"]))
         expected_message = "Expected header Project No in column 2 but got badheader"
-        self.assertEqual(expected_message, context.exception.message)
+        self.assertEqual(expected_message, str(context.exception))
 
     def test_incorrect_first_project_contractor_header(self):
         with self.assertRaises(InputException) as context:
@@ -30,7 +30,7 @@ class PreprocessHeaderTestCase(unittest.TestCase):
         expected_message = (
             "Expected header Project Contractor in column 38 but got badheader"
         )
-        self.assertEqual(expected_message, context.exception.message)
+        self.assertEqual(expected_message, str(context.exception))
 
     def test_incorrect_other_project_contractor_header(self):
         with self.assertRaises(InputException) as context:
@@ -39,7 +39,7 @@ class PreprocessHeaderTestCase(unittest.TestCase):
         expected_message = (
             "Expected header Project Contractor in column 41 but got badheader"
         )
-        self.assertEqual(expected_message, context.exception.message)
+        self.assertEqual(expected_message, str(context.exception))
 
     def test_correct_header(self):
         headers = BASE_HEADERS + [REPEATED_IMPLEMENTOR_HEADER] * 20
@@ -56,7 +56,7 @@ class PreprocessImplementorTestCase(unittest.TestCase):
             "Unexpected Implementor: D",
         ]
         offset = len(BASE_HEADERS)
-        implementor_column_indexes = list(xrange(offset, offset + 4))
+        implementor_column_indexes = list(range(offset, offset + 4))
         implementors = get_row_implementors(row, implementor_column_indexes)
         self.assertEqual(implementors[0], "A")
         self.assertEqual(implementors[1], "B")
@@ -74,7 +74,7 @@ class PreprocessImplementorTestCase(unittest.TestCase):
             "Unexpected Implementor: D",
         ]
         offset = len(BASE_HEADERS)
-        implementor_column_indexes = list(xrange(offset, offset + 7))
+        implementor_column_indexes = list(range(offset, offset + 7))
         implementors = get_row_implementors(row, implementor_column_indexes)
         self.assertEqual(implementors[0], "A")
         self.assertEqual(implementors[1], "B")
@@ -93,7 +93,7 @@ class PreprocessImplementorTestCase(unittest.TestCase):
             "Unexpected Something: H",
         ]
         offset = len(BASE_HEADERS)
-        implementor_column_indexes = list(xrange(offset, offset + 8))
+        implementor_column_indexes = list(range(offset, offset + 8))
         implementors = get_row_implementors(row, implementor_column_indexes)
         self.assertEqual(implementors[0], "E\nF")  # Prog Impl Agent
         self.assertEqual(implementors[1], "C\nD")  # Principal Agent
@@ -105,7 +105,7 @@ class PreprocessImplementorTestCase(unittest.TestCase):
     def test_get_row_implementors_just_one(self):
         row = [1] * len(BASE_HEADERS) + ["Main Contractor: C"]
         offset = len(BASE_HEADERS)
-        implementor_column_indexes = list(xrange(offset, offset + 1))
+        implementor_column_indexes = list(range(offset, offset + 1))
         implementors = get_row_implementors(row, implementor_column_indexes)
         self.assertEqual(implementors[0], "")
         self.assertEqual(implementors[1], "")

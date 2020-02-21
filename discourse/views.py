@@ -8,7 +8,7 @@ import urllib
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.conf import settings
 
-from urlparse import parse_qs, urljoin
+from urllib.parse import parse_qs, urljoin
 
 from allauth.account.decorators import verified_email_required
 
@@ -37,7 +37,7 @@ def sso(request, client_id):
 
     key = settings.DISCOURSE_SSO_SECRET  # must not be unicode
     h = hmac.new(key, payload, digestmod=hashlib.sha256)
-    this_signature = unicode(h.hexdigest())
+    this_signature = str(h.hexdigest())
 
     if not hmac.compare_digest(this_signature, signature):
         return HttpResponseBadRequest(

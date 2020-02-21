@@ -8,7 +8,7 @@ from datetime import datetime
 from decimal import Decimal
 from itertools import groupby
 from pprint import pformat
-from urlparse import urljoin
+from urllib.parse import urljoin, quote
 
 import requests
 from slugify import slugify
@@ -551,7 +551,7 @@ class Department(models.Model):
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [
             str(y)
-            for y in xrange(financial_year_start_int - 4, financial_year_start_int + 3)
+            for y in range(financial_year_start_int - 4, financial_year_start_int + 3)
         ]
         expenditure = {
             "base_financial_year": FinancialYear.slug_from_year_start(str(base_year)),
@@ -725,11 +725,11 @@ class Department(models.Model):
                     return True
             return False
 
-        cells_by_type = filter(filter_by_type, cells)
+        cells_by_type = [c for c in cells if filter_by_type(c)]
         by_type = []
         for cell in cells_by_type:
             name = cell[adjustment_kind_ref]
-            name = string.replace(name, "Adjustments - ", "")
+            name = name.replace("Adjustments - ", "")
             if cell["value.sum"]:
                 by_type.append(
                     {"name": name, "amount": cell["value.sum"], "type": "kind"}
@@ -1091,14 +1091,16 @@ class Department(models.Model):
             government__sphere__slug="national", is_vote_primary=True
         )
 
+        dept = None
         for cell in result_cells:
             try:
-                dept = national_depts.get(
-                    government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
-                        str(cell[year_ref])
-                    ),
-                    slug=slugify(cell[openspending_api.get_department_name_ref()]),
-                )
+                if year_ref in cell:
+                    dept = national_depts.get(
+                        government__sphere__financial_year__slug=FinancialYear.slug_from_year_start(
+                            str(cell[year_ref])
+                        ),
+                        slug=slugify(cell[openspending_api.get_department_name_ref()]),
+                    )
             except Department.DoesNotExist:
                 logger.warning(
                     "Excluding: national {} {}".format(
@@ -1112,11 +1114,23 @@ class Department(models.Model):
             filtered_result_cells.append(cell)
 
         for cell in filtered_result_cells:
-            percentage_of_total = float(cell["value.sum"]) / total_budget * 100
+
+            percentage_of_total = (
+                float(cell["value.sum"]) / total_budget * 100
+                if cell["value.sum"]
+                else 0
+            )
+
+            name = (
+                cell[openspending_api.get_department_name_ref()]
+                if openspending_api.get_department_name_ref() in cell
+                else ""
+            )
+
             expenditure.append(
                 {
-                    "name": cell[openspending_api.get_department_name_ref()],
-                    "slug": slugify(cell[openspending_api.get_department_name_ref()]),
+                    "name": name,
+                    "slug": slugify(name),
                     "amount": float(cell["value.sum"]),
                     "percentage_of_total": percentage_of_total,
                     "province": None,  # to keep a consistent schema
@@ -1214,7 +1228,7 @@ class Department(models.Model):
         financial_year_start_int = int(financial_year_start)
         financial_year_starts = [
             str(y)
-            for y in xrange(financial_year_start_int - 3, financial_year_start_int + 1)
+            for y in range(financial_year_start_int - 3, financial_year_start_int + 1)
         ]
 
         expenditure = {"nominal": [], "real": []}
@@ -1236,7 +1250,6 @@ class Department(models.Model):
         ]
         budget_results = openspending_api.aggregate(cuts=cuts, drilldowns=drilldowns)
         result = openspending_api.filter_dept(budget_results, self.name)
-
         filtered_cells = openspending_api.filter_by_ref_exclusion(
             result["cells"],
             openspending_api.get_programme_name_ref(),
@@ -1386,7 +1399,7 @@ class Department(models.Model):
     def get_expenditure_time_series_by_programme(self):
         financial_year_start = self.get_financial_year().get_starting_year()
         financial_year_start_int = int(financial_year_start)
-        year_ints = xrange(financial_year_start_int - 3, financial_year_start_int + 1)
+        year_ints = range(financial_year_start_int - 3, financial_year_start_int + 1)
         financial_year_starts = [str(y) for y in year_ints]
 
         programmes = {}
@@ -1510,7 +1523,7 @@ class Department(models.Model):
 
             return {
                 "notices": notices,
-                "programmes": sorted(programmes.values()),
+                "programmes": programmes.values(),  # FIXME need to add sorting with python3
                 "dataset_detail_page": dataset.get_url_path(),
             }
         else:
@@ -1632,7 +1645,7 @@ class InfrastructureProjectPart(models.Model):
     @staticmethod
     def _parse_coordinate(coordinate):
         """ Expects a single set of coordinates (lat, long) split by a comma """
-        if not isinstance(coordinate, (str, unicode)):
+        if not isinstance(coordinate, str):
             raise TypeError("Invalid type for coordinate parsing")
         lat_long = [float(x) for x in coordinate.split(",")]
         cleaned_coordinate = {"latitude": lat_long[0], "longitude": lat_long[1]}
@@ -1668,7 +1681,7 @@ class InfrastructureProjectPart(models.Model):
         )
         province_result.raise_for_status()
         r = province_result.json()
-        list_of_objects_returned = r.values()
+        list_of_objects_returned = list(r.values())
         if len(list_of_objects_returned) > 0:
             province_name = list_of_objects_returned[0]["name"]
             return province_name
@@ -1790,7 +1803,7 @@ class Event(models.Model):
 class VideoLanguage(SortableMixin):
     label = models.CharField(max_length=255)
     youtube_id = models.CharField(max_length=255, null=True, blank=True)
-    video = models.ForeignKey("Video", null=True, blank=True)
+    video = models.ForeignKey("Video", null=True, blank=True, on_delete=models.SET_NULL)
     video_language_order = models.PositiveIntegerField(
         default=0, editable=False, db_index=True
     )
@@ -1823,7 +1836,7 @@ class FAQ(SortableMixin):
     content = RichTextField()
     the_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -1838,7 +1851,7 @@ class Quarter(models.Model):
     class Meta:
         ordering = ["number"]
 
-    def __unicode__(self):
+    def __str__(self):
         return u"Quarter %d" % self.number
 
 
@@ -1868,7 +1881,7 @@ class IRMSnapshot(models.Model):
         verbose_name = "IRM Snapshot"
         unique_together = ["financial_year", "quarter"]
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s Q%d taken %s" % (
             self.financial_year.slug,
             self.quarter.number,
@@ -1886,7 +1899,7 @@ class ProvInfraProject(models.Model):
     class Meta:
         verbose_name = "Provincial infrastructure project"
 
-    def __unicode__(self):
+    def __str__(self):
         if self.project_snapshots.count():
             return self.project_snapshots.latest().name
         else:
@@ -2010,7 +2023,7 @@ class ProvInfraProjectSnapshot(models.Model):
         verbose_name = "Provincial infrastructure project snapshot"
         unique_together = ["irm_snapshot", "project"]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -2059,7 +2072,7 @@ def get_cpi():
             cell["index"] = 100
     for idx in range(base_year_index - 1, -1, -1):
         cpi[idx]["index"] = cpi[idx + 1]["index"] / (1 + Decimal(cpi[idx + 1]["CPI"]))
-    for idx in xrange(base_year_index + 1, len(cpi)):
+    for idx in range(base_year_index + 1, len(cpi)):
         cpi[idx]["index"] = cpi[idx - 1]["index"] * (1 + Decimal(cpi[idx]["CPI"]))
     cpi_dict = {}
     for cell in cpi:
@@ -2075,7 +2088,7 @@ def get_vocab_map():
 
 
 def csv_url(aggregate_url):
-    querystring = "?api_url=" + urllib.quote(aggregate_url)
+    querystring = "?api_url=" + quote(aggregate_url)
     csv_url = reverse("openspending_csv") + querystring
     if len(csv_url) > URL_LENGTH_LIMIT:
         raise Exception(

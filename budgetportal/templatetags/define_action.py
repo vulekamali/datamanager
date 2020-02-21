@@ -14,7 +14,7 @@ def json_dumps(data):
     return json.dumps(data)
 
 
-@register.assignment_tag
+@register.simple_tag
 def assign(val=None):
     return val
 

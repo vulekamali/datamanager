@@ -23,12 +23,12 @@ class Migration(migrations.Migration):
         migrations.AddIndex(
             model_name="department",
             index=partial_index.PartialIndex(
-                fields=[b"government", b"vote_number"],
+                fields=["government", "vote_number"],
                 name="budgetporta_governm_531bf0_partial",
                 unique=True,
-                where=b"is_vote_primary",
-                where_postgresql=b"",
-                where_sqlite=b"",
+                where="is_vote_primary",
+                where_postgresql="",
+                where_sqlite="",
             ),
         ),
     ]

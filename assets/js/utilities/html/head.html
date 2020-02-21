@@ -87,8 +87,8 @@
   {% comment %} Facebook's Open Graph data {% endcomment %}
   <meta property="og:title" content="{{ title }}" />
   <meta property="og:description" content="{{ description }}" />
-  <meta property="og:image" content="https://{{ request.META.HTTP_HOST }}/static/images/vulekamali-logo-sq-social-1200.png" />
-  <meta property="og:url" content="https://{{ request.META.HTTP_HOST }}{{ page.url }}" />
+  <meta property="og:image" content="https://{{ request.get_host }}/static/images/vulekamali-logo-sq-social-1200.png" />
+  <meta property="og:url" content="https://{{ request.get_host }}{{ page.url }}" />
   <meta property="og:type" content="website" />
   <meta property="fb:app_id" content="346780042475150" />
 

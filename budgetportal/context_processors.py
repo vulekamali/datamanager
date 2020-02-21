@@ -1,7 +1,7 @@
 import urllib
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 def google_analytics(request):

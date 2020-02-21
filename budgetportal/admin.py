@@ -1,6 +1,5 @@
 import logging
 
-import prov_infra_projects
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 from budgetportal import models
 from budgetportal.bulk_upload import bulk_upload_view

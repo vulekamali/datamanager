@@ -30,16 +30,14 @@ def provincial_infrastructure_project_list(request):
         "page_description": "Find infrastructure projects by provincial departments.",
         "page_data_json": "null",
     }
-    return render(
-        request, "webflow/infrastructure-search-template.html", context=context
-    )
+    return render(request, "webflow/infrastructure-search-template.html", context)
 
 
 def provincial_infrastructure_project_detail(request, id, slug):
     project = get_object_or_404(models.ProvInfraProject, pk=int(id))
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
-    page_data["project"]["irm_snapshot"] = snapshot.irm_snapshot.__unicode__()
+    page_data["project"]["irm_snapshot"] = str(snapshot.irm_snapshot)
     snapshot_list = list(project.project_snapshots.all())
     page_data["time_series_chart"] = time_series_data(snapshot_list)
     department = models.Department.get_in_latest_government(
@@ -64,9 +62,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
         % (snapshot.province, snapshot.department),
     }
     return render(
-        request,
-        "webflow/detail_provincial-infrastructure-projects.html",
-        context=context,
+        request, "webflow/detail_provincial-infrastructure-projects.html", context
     )
 
 

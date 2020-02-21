@@ -1,4 +1,4 @@
-from urllib import urlencode
+from urllib.parse import urlencode
 
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.models import EmailAddress

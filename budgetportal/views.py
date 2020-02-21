@@ -1,7 +1,7 @@
 import json
 import logging
 import urllib
-import urlparse
+from urllib.parse import urlparse
 from csv import DictWriter
 from datetime import datetime
 
@@ -11,18 +11,18 @@ from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-import nav_bar
-from datasets import Category, Dataset
+from budgetportal import nav_bar
+from .datasets import Category, Dataset
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from guide_data import category_guides
-from guide_data import guides as guide_data
+from .guide_data import category_guides
+from .guide_data import guides as guide_data
 from haystack.query import SearchQuerySet
-from models import (
+from .models import (
     FAQ,
     Department,
     Event,
@@ -33,7 +33,7 @@ from models import (
     Sphere,
     Video,
 )
-from summaries import (
+from .summaries import (
     DepartmentProgrammesEcon4,
     DepartmentSubprogEcon4,
     DepartmentSubprogrammes,
@@ -83,7 +83,7 @@ def homepage(request):
         "call_to_action_link_url": page_data.call_to_action_link_url,
     }
 
-    return render(request, "homepage.html", context=context)
+    return render(request, "homepage.html", context)
 
 
 def search_result(request, financial_year_id):
@@ -112,7 +112,7 @@ def search_result(request, financial_year_id):
         )
     context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
-    return render(request, "search-result.html", context=context)
+    return render(request, "search-result.html", context)
 
 
 def programme_list_csv(request, financial_year_id, sphere_slug):
@@ -134,9 +134,9 @@ def programme_list_csv(request, financial_year_id, sphere_slug):
         for department in government.departments.all():
             for programme in department.programmes.all():
                 row = {
-                    "government_name": government.name.encode("utf-8"),
-                    "department_name": department.name.encode("utf-8"),
-                    "programme_name": programme.name.encode("utf-8"),
+                    "government_name": government.name,
+                    "department_name": department.name,
+                    "programme_name": programme.name,
                     "programme_number": programme.programme_number,
                 }
                 writer.writerow(row)
@@ -173,11 +173,11 @@ def department_list_csv(request, financial_year_id, spheres=["national", "provin
             for department in government.departments.all():
                 writer.writerow(
                     {
-                        "government": government.name.encode("utf-8"),
-                        "department_name": department.name.encode("utf-8"),
+                        "government": government.name,
+                        "department_name": department.name,
                         "vote_number": department.vote_number,
                         "is_vote_primary": department.is_vote_primary,
-                        "intro": department.intro.encode("utf-8"),
+                        "intro": department.intro,
                         "website_url": department.get_latest_website_url(),
                     }
                 )
@@ -387,7 +387,7 @@ def department_page(
     context["admin_url"] = reverse(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
-    return render(request, "department.html", context=context)
+    return render(request, "department.html", context)
 
 
 def get_department_project_summary(department):
@@ -435,7 +435,7 @@ def department_viz_subprog_treemap(
         financial_year_id, sphere_slug, government_slug, department_slug
     )
     context = {"viz_data": DepartmentSubprogrammes(department)}
-    return render(request, "department_viz_subprogrammes.html", context=context)
+    return render(request, "department_viz_subprogrammes.html", context)
 
 
 def department_viz_subprog_econ4_circles(
@@ -445,7 +445,7 @@ def department_viz_subprog_econ4_circles(
         financial_year_id, sphere_slug, government_slug, department_slug
     )
     context = {"viz_data": DepartmentProgrammesEcon4(department)}
-    return render(request, "department_viz_subprog_econ4_circles.html", context=context)
+    return render(request, "department_viz_subprog_econ4_circles.html", context)
 
 
 def department_viz_subprog_econ4_bars(
@@ -455,7 +455,7 @@ def department_viz_subprog_econ4_bars(
         financial_year_id, sphere_slug, government_slug, department_slug
     )
     context = {"viz_data": DepartmentSubprogEcon4(department)}
-    return render(request, "department_viz_subprog_econ4_bars.html", context=context)
+    return render(request, "department_viz_subprog_econ4_bars.html", context)
 
 
 def infrastructure_projects_overview(request):
@@ -521,7 +521,7 @@ def infrastructure_project_list(request):
         "page": {"layout": "about", "data_key": "about"},
         "site": {"latest_year": FinancialYear.get_latest_year().slug},
     }
-    return render(request, "infrastructure_project_list.html", context=context)
+    return render(request, "infrastructure_project_list.html", context)
 
 
 def infrastructure_project_detail_data(project_slug):
@@ -601,7 +601,7 @@ def infrastructure_project_detail(request, project_slug):
         },
         "debug": settings.DEBUG,
     }
-    return render(request, "infrastructure_project.html", context=context)
+    return render(request, "infrastructure_project.html", context)
 
 
 def openspending_csv(request):
@@ -615,7 +615,7 @@ def openspending_csv(request):
     """
     api_url = urllib.unquote(str(request.GET.get("api_url")))
 
-    parsed_url = urlparse.urlparse(api_url)
+    parsed_url = urlparse(api_url)
     domain = "{uri.netloc}".format(uri=parsed_url)
     allowed_domains = {"openspending.org", "openspending.vulekamali.gov.za"}
     if domain not in allowed_domains:
@@ -683,7 +683,7 @@ def about(request):
         "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
-    return render(request, "about.html", context=context)
+    return render(request, "about.html", context)
 
 
 def static_search_data(request):
@@ -716,7 +716,7 @@ def events(request):
         },
         "debug": settings.DEBUG,
     }
-    return render(request, "events.html", context=context)
+    return render(request, "events.html", context)
 
 
 def glossary(request):
@@ -730,7 +730,7 @@ def glossary(request):
         "selected_financial_year": None,
         "financial_years": [],
     }
-    return render(request, "glossary.html", context=context)
+    return render(request, "glossary.html", context)
 
 
 def faq(request):
@@ -745,7 +745,7 @@ def faq(request):
         "financial_years": [],
         "faq_list": faq_list,
     }
-    return render(request, "faq.html", context=context)
+    return render(request, "faq.html", context)
 
 
 def videos(request):
@@ -759,7 +759,7 @@ def videos(request):
         "latest_year": FinancialYear.get_latest_year().slug,
         "admin_url": reverse("admin:budgetportal_video_changelist"),
     }
-    return render(request, "videos.html", context=context)
+    return render(request, "videos.html", context)
 
 
 def terms_and_conditions(request):
@@ -769,7 +769,7 @@ def terms_and_conditions(request):
         "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
-    return render(request, "terms-and-conditions.html", context=context)
+    return render(request, "terms-and-conditions.html", context)
 
 
 def resources(request):
@@ -784,7 +784,7 @@ def resources(request):
         "selected_tab": "learning-centre",
         "selected_sidebar": "resources",
     }
-    return render(request, "resources.html", context=context)
+    return render(request, "resources.html", context)
 
 
 def guides(request, slug):
@@ -803,7 +803,7 @@ def guides(request, slug):
         }
     )
     template = "guides.html" if slug == "index" else "guide_item.html"
-    return render(request, template, context=context)
+    return render(request, template, context)
 
 
 def dataset_category_list_page(request):
@@ -818,7 +818,7 @@ def dataset_category_list_page(request):
         "latest_year": FinancialYear.get_latest_year().slug,
     }
 
-    return render(request, "datasets.html", context=context)
+    return render(request, "datasets.html", context)
 
 
 def dataset_category_context(category_slug):
@@ -851,14 +851,14 @@ def dataset_category_page(request, category_slug):
     context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
-    return render(request, "government_dataset_category.html", context=context)
+    return render(request, "government_dataset_category.html", context)
 
 
 def contributed_datasets_list(request):
     context = dataset_category_context("contributed")
     context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
-    return render(request, "contributed_data_category.html", context=context)
+    return render(request, "contributed_data_category.html", context)
 
 
 def dataset_context(category_slug, dataset_slug):
@@ -900,7 +900,7 @@ def dataset_page(request, category_slug, dataset_slug):
     context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
     context["external_resource_page"] = category_slug in external_resource_slugs
     context["comments_enabled"] = settings.COMMENTS_ENABLED
-    return render(request, "government_dataset.html", context=context)
+    return render(request, "government_dataset.html", context)
 
 
 def contributed_dataset(request, dataset_slug):
@@ -912,14 +912,14 @@ def contributed_dataset(request, dataset_slug):
         context["last_updated"], "%Y-%m-%dT%H:%M:%S.%f"
     )
     context["comments_enabled"] = settings.COMMENTS_ENABLED
-    return render(request, "contributed_dataset.html", context=context)
+    return render(request, "contributed_dataset.html", context)
 
 
 def department_list(request, financial_year_id):
     context = department_list_data(financial_year_id)
     context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
-    return render(request, "department_list.html", context=context)
+    return render(request, "department_list.html", context)
 
 
 def department_list_json(request, financial_year_id):
@@ -1000,7 +1000,7 @@ def focus_area_preview(request, financial_year_id, focus_slug):
         },
         "debug": settings.DEBUG,
     }
-    return render(request, "focus_page.html", context=context)
+    return render(request, "focus_page.html", context)
 
 
 def department_preview_data(
@@ -1037,7 +1037,7 @@ def department_preview(
         },
         "debug": settings.DEBUG,
     }
-    return render(request, "department_preview.html", context=context)
+    return render(request, "department_preview.html", context)
 
 
 def robots(request):
@@ -1052,4 +1052,4 @@ def robots(request):
 
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
-        return yaml.load(f)
+        return yaml.load(f, Loader=yaml.FullLoader)

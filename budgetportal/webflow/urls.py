@@ -7,7 +7,7 @@ router = routers.DefaultRouter()
 router.register(
     "infrastructure-projects/provincial/search",
     views.ProvInfraProjectSearchView,
-    base_name="provincial-infrastructure-project-api",
+    basename="provincial-infrastructure-project-api",
 )
 
 urlpatterns = [
