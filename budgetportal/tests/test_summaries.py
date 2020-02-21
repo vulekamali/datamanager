@@ -259,7 +259,7 @@ class NationalDepartmentPreviewTestCase(TestCase):
             government_slug="south-africa",
             sphere_slug="national",
         )
-        data = result["data"] if result else []
+        data = result["data"]
         self.assertEqual(len(data), 1)
         data_keys = data.keys()
         self.assertIn("items", data_keys)
