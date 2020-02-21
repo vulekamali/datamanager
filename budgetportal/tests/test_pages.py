@@ -5,10 +5,6 @@ from django.test import Client, TestCase
 from mock import MagicMock, patch
 
 
-with open("budgetportal/tests/test_data/consolidated_treemap.json", "r") as f:
-    CONSOLIDATED_MOCK_DATA = json.load(f)
-
-
 class BasicPagesTestCase(TestCase):
     fixtures = ["video-language", "faq", "homepage"]
 
@@ -18,9 +14,6 @@ class BasicPagesTestCase(TestCase):
             "adjustment_kind_ref"
         )
         self.mock_openspending_api.aggregate_url.return_value = "some-url"
-        self.mock_openspending_api.aggregate.return_value = {
-            "cells": CONSOLIDATED_MOCK_DATA["complete"]
-        }
         self.mock_openspending_api.get_function_ref.return_value = (
             "function_group.function_group"
         )
