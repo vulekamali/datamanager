@@ -46,7 +46,9 @@ class CustomProvinceWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         project_name = row["project_name"]
         gps_code = row["gps_code"]
-        cleaned_coordinates = models.InfrastructureProjectPart.clean_coordinates(gps_code)
+        cleaned_coordinates = models.InfrastructureProjectPart.clean_coordinates(
+            gps_code
+        )
         provinces = models.InfrastructureProjectPart.get_provinces(
             cleaned_coordinates=cleaned_coordinates, project_name=project_name
         )
