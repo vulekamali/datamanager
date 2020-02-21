@@ -1,16 +1,15 @@
 import logging
 
 from budgetportal import models
-from django import VERSION, forms
+from django import forms
 from django.core.exceptions import ValidationError
 from django.db.models import NOT_PROVIDED, Q
 from django.utils.text import slugify
 from import_export import resources
 from import_export.admin import ImportForm
 from import_export.fields import Field
-from import_export.formats import base_formats
 from import_export.instance_loaders import ModelInstanceLoader
-from import_export.widgets import ForeignKeyWidget, Widget
+from import_export.widgets import Widget
 
 logger = logging.getLogger(__name__)
 
@@ -47,8 +46,10 @@ class CustomProvinceWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         project_name = row["project_name"]
         gps_code = row["gps_code"]
-        cleaned_coordinates = InfrastructureProjectPart.clean_coordinates(gps_code)
-        provinces = InfrastructureProjectPart.get_provinces(
+        cleaned_coordinates = models.InfrastructureProjectPart.clean_coordinates(
+            gps_code
+        )
+        provinces = models.InfrastructureProjectPart.get_provinces(
             cleaned_coordinates=cleaned_coordinates, project_name=project_name
         )
         value = "".join([province for province in provinces])
@@ -96,8 +97,6 @@ class DepartmentInstanceLoader(ModelInstanceLoader):
         name = self.resource.fields["name"].clean(row)
         slug = slugify(name)
         government = self.resource.fields["government"].clean(row)
-
-        instance = None
 
         q = Q(name=name, government=government)
         q |= Q(slug=slug, government=government)
@@ -164,9 +163,12 @@ class DepartmentImportForm(ImportForm):
 
 
 class InfrastructureProjectProvinceField(Field):
-    """ The only reason to override this class is so that we can force the clean() method to run on the provinces
-    field, even though it doesn't exist in the import csv. The reason for this being that it doesn't seem like there's
-    another easy way to 'create' a new field by using other fields. """
+    """
+    The only reason to override this class is so that we can force the clean()
+    method to run on the provinces field, even though it doesn't exist in the
+    import csv. The reason for this being that it doesn't seem like there's
+    another easy way to 'create' a new field by using other fields.
+    """
 
     def clean(self, data):
         """
@@ -214,9 +216,13 @@ class InfrastructureProjectResource(resources.ModelResource):
         import_id_fields = ["project_slug", "financial_year"]
 
     def import_field(self, field, obj, data, is_m2m=False):
-        """ The only reason to override this function is so that we can force the clean() method to run on the provinces
-            field, even though it doesn't exist in the import csv. The reason for this being that it doesn't seem like there's
-            another easy way to 'create' a new field by using other fields. """
+        """
+        The only reason to override this function is so that we can force the
+        clean() method to run on the provinces field, even though it doesn't
+        exist in the import csv. The reason for this being that it doesn't seem
+        like there's another easy way to 'create' a new field by using other
+        fields.
+        """
 
         if (
             field.attribute and field.column_name in data
