@@ -1,13 +1,36 @@
+import json
 from budgetportal.models import Department, FinancialYear, Government, Sphere
 from django.conf import settings
 from django.test import Client, TestCase
-from mock import Mock, patch
+from mock import MagicMock, patch
+
+
+with open("budgetportal/tests/test_data/consolidated_treemap.json", "r") as f:
+    CONSOLIDATED_MOCK_DATA = json.load(f)
 
 
 class BasicPagesTestCase(TestCase):
     fixtures = ["video-language", "faq", "homepage"]
 
     def setUp(self):
+        self.mock_openspending_api = MagicMock()
+        self.mock_openspending_api.get_adjustment_kind_ref.return_value = (
+            "adjustment_kind_ref"
+        )
+        self.mock_openspending_api.aggregate_url.return_value = "some-url"
+        self.mock_openspending_api.aggregate.return_value = {
+            "cells": CONSOLIDATED_MOCK_DATA["complete"]
+        }
+        self.mock_openspending_api.get_function_ref.return_value = (
+            "function_group.function_group"
+        )
+        self.mock_openspending_api.get_year_ref.return_value = (
+            "function_group.function_group"
+        )
+        self.mock_openspending_api.get_financial_year_ref.return_value = (
+            "financial_year.financial_year"
+        )
+
         FinancialYear.objects.create(slug="2015-16", published=True)
         FinancialYear.objects.create(slug="2016-17", published=True)
         FinancialYear.objects.create(slug="2017-18", published=True)
@@ -95,8 +118,12 @@ class BasicPagesTestCase(TestCase):
 
     def test_department_detail_page(self):
         """Test that it loads and that some text is present"""
-        c = Client()
-        response = c.get("/2019-20/national/departments/the-presidency/")
+        with patch(
+            "budgetportal.views.DepartmentSubprogrammes.get_openspending_api",
+            MagicMock(return_value=self.mock_openspending_api),
+        ):
+            c = Client()
+            response = c.get("/2019-20/national/departments/the-presidency/")
 
         self.assertContains(
             response, "The Presidency budget data for the 2019-20 financial year"
