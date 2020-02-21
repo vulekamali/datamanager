@@ -12,7 +12,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.writer.excel import save_virtual_workbook
 from slugify import slugify
 
-from .tasks import * 
+from .tasks import *
 from budgetportal.models import Department, Government, Sphere
 from .datasets import (
     Category,

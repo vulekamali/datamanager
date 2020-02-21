@@ -35,13 +35,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "true") == "true"
 
-
-if "test" in sys.argv or "test_coverage" in sys.argv:
-    TEST = True
-else:
-    TEST = False
-
-
 ROOT_DIR = environ.Path(__file__) - 2
 PROJ_DIR = ROOT_DIR.path("budgetportal")
 
@@ -66,6 +59,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
     "allauth_facebook",
@@ -101,6 +95,9 @@ if DEBUG_TOOLBAR:
     INSTALLED_APPS.append("debug_toolbar")
 
 MIDDLEWARE = [
+    # Don't use StaticLiveServerTestCase with WhiteNoise. Use LiveServerTestCase
+    # https://github.com/evansd/whitenoise/issues/206
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -292,7 +289,7 @@ PIPELINE = {
     "STYLESHEETS": {
         "css": {
             "source_filenames": ("stylesheets/app.scss",),
-            "output_filename": "app.css",
+            "output_filename": "stylesheets/app.css",
         },
         "vulekamali-webflow-css": {
             "source_filenames": ("scss/vulekamali-webflow.scss",),
@@ -300,7 +297,7 @@ PIPELINE = {
         },
         "admin": {
             "source_filenames": ("stylesheets/admin.scss",),
-            "output_filename": "admin.css",
+            "output_filename": "stylesheets/admin.css",
         },
     },
     "JAVASCRIPT": {
@@ -313,8 +310,10 @@ PIPELINE = {
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-if not TEST:
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "budgetportal.pipeline.CompressedManifestPipelineStorage"
+WHITENOISE_AUTOREFRESH = (
+    os.environ.get("DJANGO_WHITENOISE_AUTOREFRESH", "false").lower() == True
+)
 
 ROBOTS_DENY_ALL = os.environ.get("ROBOTS_DENY_ALL", "false").lower() == "true"
 
