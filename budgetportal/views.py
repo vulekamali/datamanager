@@ -567,7 +567,8 @@ def infrastructure_project_detail_data(project_slug):
     return {
         "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
         "projects": [project_dict],
-        "description": project.project_description or "Infrastructure projects in South Africa",
+        "description": project.project_description
+        or "Infrastructure projects in South Africa",
         "slug": "infrastructure-projects",
         "selected_tab": "infrastructure-projects",
         "title": f"{project.project_name} - Infrastructure Projects - vulekamali",

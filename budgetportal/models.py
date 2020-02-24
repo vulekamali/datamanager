@@ -1685,7 +1685,9 @@ class InfrastructureProjectPart(models.Model):
             logger.info(f"Coordinate Province Cache MISS for coordinate {key}")
             params = {"type": "PR"}
             province_result = requests.get(
-                MAPIT_POINT_API_URL.format(coordinate["longitude"], coordinate["latitude"]),
+                MAPIT_POINT_API_URL.format(
+                    coordinate["longitude"], coordinate["latitude"]
+                ),
                 params=params,
             )
             province_result.raise_for_status()
@@ -1864,7 +1866,7 @@ class Quarter(models.Model):
         ordering = ["number"]
 
     def __str__(self):
-        return u"Quarter %d" % self.number
+        return "Quarter %d" % self.number
 
 
 def irm_snapshot_file_path(instance, filename):
@@ -1894,7 +1896,7 @@ class IRMSnapshot(models.Model):
         unique_together = ["financial_year", "quarter"]
 
     def __str__(self):
-        return u"%s Q%d taken %s" % (
+        return "%s Q%d taken %s" % (
             self.financial_year.slug,
             self.quarter.number,
             self.date_taken.isoformat()[:18],
@@ -1915,11 +1917,11 @@ class ProvInfraProject(models.Model):
         if self.project_snapshots.count():
             return self.project_snapshots.latest().name
         else:
-            return u"IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
+            return "IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
 
     def get_slug(self):
         return slugify(
-            u"{0} {1}".format(
+            "{0} {1}".format(
                 self.project_snapshots.latest().name,
                 self.project_snapshots.latest().province,
             )
