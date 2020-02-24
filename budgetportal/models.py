@@ -1513,7 +1513,9 @@ class Department(models.Model):
                         )
 
                         if single_year_budget_results["cells"]:
-                            value_sum = single_year_budget_results["cells"][0]["value.sum"]
+                            value_sum = single_year_budget_results["cells"][0][
+                                "value.sum"
+                            ]
                             if value_sum is not None and value_sum > 0:
                                 # prog did not exist, since there is data for other programmes
                                 no_prog_for_years = True
