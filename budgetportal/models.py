@@ -1355,7 +1355,8 @@ class Department(models.Model):
                 )
 
                 if single_year_budget_results["cells"]:
-                    if single_year_budget_results["cells"][0]["value.sum"] > 0:
+                    value_sum = single_year_budget_results["cells"][0]["value.sum"]
+                    if value_sum is not None and value_sum > 0:
                         # dept did not exist, since there is data for other departments
                         no_dept_for_years.append(year)
                     else:
@@ -1512,7 +1513,10 @@ class Department(models.Model):
                         )
 
                         if single_year_budget_results["cells"]:
-                            if single_year_budget_results["cells"][0]["value.sum"] > 0:
+                            value_sum = single_year_budget_results["cells"][0][
+                                "value.sum"
+                            ]
+                            if value_sum is not None and value_sum > 0:
                                 # prog did not exist, since there is data for other programmes
                                 no_prog_for_years = True
 
