@@ -18,6 +18,8 @@ def sso(request, client_id):
     payload = request.GET.get("sso")
     signature = request.GET.get("sig")
 
+    print(request.GET)
+
     if payload is None or signature is None:
         return HttpResponseBadRequest(
             "No SSO payload or signature. Please contact support if this problem persists."

@@ -24,8 +24,8 @@ class SSOTestCase(TestCase):
             },
         ):
             params = {
-                "payload": "bm9uY2U9Y2I2ODI1MWVlZmI1MjExZTU4YzAwZmYxMzk1ZjBjMGI=\n",
-                "signature": "2828aa29899722b35a2f191d34ef9b3ce695e0e6eeec47deb46d588d70c7cb56",
+                "sso": "bm9uY2U9Y2I2ODI1MWVlZmI1MjExZTU4YzAwZmYxMzk1ZjBjMGI=\n",
+                "sig": "2828aa29899722b35a2f191d34ef9b3ce695e0e6eeec47deb46d588d70c7cb56",
             }
             response = self.client.get("/somessoclient/sso", params)
             redirect_url = (
@@ -33,6 +33,7 @@ class SSOTestCase(TestCase):
                 "sso=bm9uY2U9Y2I2ODI1MWVlZmI1MjExZTU4YzAwZmYxMzk1ZjBjMGI%3D%0A&"
                 "sig=2828aa29899722b35a2f191d34ef9b3ce695e0e6eeec47deb46d588d70c7cb56"
             )
+            print(response.content)
             self.assertRedirects(
                 response, redirect_url, status_code=302, fetch_redirect_response=False
             )
