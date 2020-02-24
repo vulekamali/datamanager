@@ -42,6 +42,7 @@ def djangofy(htmlfile):
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin=""/>')
     file_contents = insert_at_head_end(file_contents, '<link rel="stylesheet" href="{% static "css/vulekamali-webflow.css" %}">')
     file_contents = remove_tag(file_contents, "title")
+    file_contents = remove_meta_tag(file_contents, "og:title", raise_not_found=False)
     file_contents = insert_at_head_end(file_contents, "<title>{{ page_title }}</title>")
     file_contents = insert_at_head_end(file_contents, '<meta name="description" content="{{ page_description }}">')
     file_contents = insert_at_head_end(file_contents, '<meta name="twitter:title" content="{{ page_title }}">')
@@ -77,12 +78,23 @@ def insert_at_head_end(page_html_string, string_to_insert):
         raise Exception("head end tag not found.")
     return result_string
 
+
 def remove_tag(page_html_string, tag_name):
     length_before = len(page_html_string)
-    page_html_string = re.sub(r"<title[^<]+<\/title>", "", page_html_string)
+    page_html_string = re.sub(fr"<{tag_name}[^<]+<\/{tag_name}>", "", page_html_string)
     if len(page_html_string) == length_before:
         raise Exception("tag not found")
     return page_html_string
+
+
+def remove_meta_tag(page_html_string, property_name, raise_not_found=True):
+    length_before = len(page_html_string)
+    regexp = fr'<meta[^>]+property=\"{property_name}\"[^>]*\/?>'
+    page_html_string = re.sub(regexp, "", page_html_string)
+    if raise_not_found and len(page_html_string) == length_before:
+        raise Exception(f"tag not found for regexp {regexp}")
+    return page_html_string
+
 
 # Create a ZipFile Object and load sample.zip in it
 with ZipFile(args.webflow_zipfile, 'r') as zipObj:
