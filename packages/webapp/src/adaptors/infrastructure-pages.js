@@ -9,7 +9,7 @@ import {
 import Infrastructure from '../views/Infrastructure';
 import Loading from '../views/Loading';
 
-const isConnectionYear = year => year === '2017' || year === '2018';
+const isConnectionYear = year => year === '2017' || year === '2018' || year === '2019';
 
 
 const buildEne = url => ({
