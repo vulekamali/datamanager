@@ -499,7 +499,7 @@ def infrastructure_projects_overview(request):
     return {
         "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
         "projects": projects,
-        "description": "Infrastructure projects in South Africa for 2019-20",
+        "description": "National department Infrastructure projects in South Africa",
         "slug": "infrastructure-projects",
         "selected_tab": "infrastructure-projects",
         "title": "Infrastructure Projects - vulekamali",
@@ -541,7 +541,7 @@ def infrastructure_project_detail_data(project_slug):
     if departments:
         department_url = departments[0].get_latest_department_instance().get_url_path()
 
-    project = {
+    project_dict = {
         "name": project.project_name,
         "coordinates": project.clean_coordinates(project.gps_code),
         "projected_budget": project.calculate_projected_expenditure(),
@@ -566,11 +566,11 @@ def infrastructure_project_detail_data(project_slug):
     }
     return {
         "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
-        "projects": [project],
-        "description": "Infrastructure projects in South Africa for 2019-20",
+        "projects": [project_dict],
+        "description": project.project_description or "Infrastructure projects in South Africa",
         "slug": "infrastructure-projects",
         "selected_tab": "infrastructure-projects",
-        "title": "Infrastructure Projects - vulekamali",
+        "title": f"{project.project_name} - Infrastructure Projects - vulekamali",
     }
 
 
