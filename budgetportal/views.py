@@ -1002,6 +1002,7 @@ def focus_preview_json(request, financial_year_id):
 def focus_area_preview(request, financial_year_id, focus_slug):
     selected_financial_year = get_object_or_404(FinancialYear, slug=financial_year_id)
     context = {
+        "focus_area_slug": focus_slug,
         "selected_financial_year": selected_financial_year.slug,
         "page": {"layout": "focus_page", "data_key": ""},
         "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),

@@ -7,7 +7,7 @@ import {
   Route
 } from 'react-router-dom';
 
-const passRouteValues = ({ match }) => createElement(DataLoader, match.params)
+const passRouteValues = ({ match }) => createElement(DataLoader, match.params);
 
 const routeConfig = {
   path: "/:year/focus/:department",
@@ -17,7 +17,7 @@ const routeConfig = {
 const resolveRoute = createElement(Route, routeConfig);
 
 const Routing = () => {
-  return createElement(Router, {}, resolveRoute)
+  return createElement(Router, {}, resolveRoute);
 };
 
 export default Routing;

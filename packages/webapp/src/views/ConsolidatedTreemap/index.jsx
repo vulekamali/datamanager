@@ -7,17 +7,17 @@ import colorsList from '../../helpers/colorsList';
 import mapFocusToIcon from './mapFocusToIcon';
 import sortItems from './sortItems';
 
-const footer = financialYearInt => (
+const footer = (
   <Fragment>
     <div>
       Please note the above treemap is a representation of the allocation of the National Revenue
       Fund to functions of government.
     </div>
-    <div>Budget data for the financial year 1 April {financialYearInt} - 31 March {financialYearInt+1}</div>
+    <div>Budget data for the financial year 1 April 2019 - 31 March 2020</div>
   </Fragment>
 );
 
-const Markup = ({ items, initialSelected, financialYearSlug, financialYearInt }) => {
+const Markup = ({ items, initialSelected }) => {
   const sortedItems = sortItems(items);
   const itemsWithColor = sortedItems.map((item, index) => ({
     ...item,
@@ -28,12 +28,10 @@ const Markup = ({ items, initialSelected, financialYearSlug, financialYearInt })
     ...item,
     icon: mapFocusToIcon(item.id),
   }));
-  const footerMarkup = footer(financialYearInt);
-  console.log(footerMarkup);
 
   return (
     <ChartSection
-      {...{ initialSelected, footerMarkup }}
+      {...{ initialSelected, footer }}
       chart={onSelectedChange => <Treemap {...{ onSelectedChange }} items={itemsWithIcons} icons />}
       verb="Explore"
       subject="this focus area"
@@ -42,17 +40,17 @@ const Markup = ({ items, initialSelected, financialYearSlug, financialYearInt })
         disabled: 'Original budget',
       }}
       years={{
-        disabled: financialYearSlug,
+        disabled: '2019-20',
       }}
       anchor="consolidated-treemap"
     />
   );
 };
 
-const ConsolidatedTreemap = props => (
+const NationalTreemap = props => (
   <MediaQuery query="(min-width: 600px)">
     {matches => !!matches && <Markup {...props} />}
   </MediaQuery>
 );
 
-export default ConsolidatedTreemap;
+export default NationalTreemap;

@@ -19,7 +19,7 @@ class DataLoader extends Component {
 
   componentDidMount() {
     const { sphere, government, department } = this.props;
-    const endpoint = `/json/${this.state.financialYearSlug}/previews/${sphere}/${government}/original.json`;
+    const endpoint = `/json/${ this.state.financialYearSlug }/previews/${ sphere }/${ government }/original.json`;
 
     const loadliveData = ({ data }) =>
       this.setState({ data: transformData(data, department), loading: false });

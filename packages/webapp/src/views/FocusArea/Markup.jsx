@@ -81,8 +81,7 @@ const Markup = props => {
     eventHandler,
     initialSelectedNational,
     initialSelectedProvincial,
-    financialYearSlug,
-    financialYearInt,
+    year,
   } = props;
 
   const selectedInstance = items.find(({ id }) => id === selected);
@@ -94,7 +93,7 @@ const Markup = props => {
 
   return (
     <Wrapper>
-      <Heading {...{ departmentNames, selected, eventHandler, financialYearInt }} />
+      <Heading {...{ departmentNames, selected, eventHandler, year }} />
       <div key={`${selected}-national`}>
         <ChartSection
           initialSelected={initialSelectedNational}

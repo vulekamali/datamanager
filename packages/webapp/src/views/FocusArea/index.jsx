@@ -26,7 +26,7 @@ class Preview extends Component {
       return null;
     }
     if (updateUrl) {
-      const newUrl = `/${this.props.financialYearSlug}/focus/${e.target.value}`;
+      const newUrl = `/${this.props.year}/focus/${e.target.value}`;
       window.history.pushState({}, window.document.title, newUrl);
     }
     this.setState({ selected: e.target.value });
@@ -58,10 +58,9 @@ class Preview extends Component {
       selected: state.selected,
       government: props.government,
       departmentNames: this.departmentNames,
+      year: props.year,
       initialSelectedNational,
       initialSelectedProvincial,
-      financialYearSlug,
-      financialYearInt,
     };
 
     return <Markup {...passedProps} />;

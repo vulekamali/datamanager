@@ -19,7 +19,7 @@ class DataLoader extends Component {
 
   componentDidMount() {
     const endpoint = `/json/${this.state.financialYearSlug}/focus.json`;
-
+    console.log(endpoint);
     const loadliveData = ({ data }) =>
       this.setState({ data: transformData(data), loading: false });
 
@@ -40,8 +40,8 @@ class DataLoader extends Component {
       items: data,
       department: this.props.department,
       updateUrl: true,
-      financialYearSlug,
-      financialYearInt,
+      financialYearSlug: financialYearSlug,
+      financialYearInt: financialYearInt,
     };
 
     return createElement(FocusAreaPreview, passedProps);
