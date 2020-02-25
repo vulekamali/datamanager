@@ -1,7 +1,7 @@
 import json
 import logging
 import urllib
-from urllib.parse import urlparse
+from urllib.parse import urlparse, unquote
 from csv import DictWriter
 from datetime import datetime
 
@@ -577,7 +577,8 @@ def infrastructure_project_detail_data(project_slug):
 
 def infrastructure_project_detail_json(request, project_slug):
     response = infrastructure_project_detail_data(project_slug)
-    if isinstance(response, HttpResponse):  # For 404 - not sure why not raising a 404 exception.
+    # For 404 - not sure why not raising a 404 exception.
+    if isinstance(response, HttpResponse):
         return response
 
     response_json = json.dumps(
@@ -588,7 +589,8 @@ def infrastructure_project_detail_json(request, project_slug):
 
 def infrastructure_project_detail(request, project_slug):
     dataset_response = infrastructure_project_detail_data(project_slug)
-    if isinstance(dataset_response, HttpResponse):  # For 404 - not sure why not raising a 404 exception.
+    # For 404 - not sure why not raising a 404 exception.
+    if isinstance(dataset_response, HttpResponse):
         return dataset_response
     latest_year_slug = FinancialYear.get_latest_year().slug
 
@@ -615,11 +617,15 @@ def openspending_csv(request):
     :param request: HttpRequest
     :return: StreamingHttpResponse
     """
-    api_url = urllib.unquote(str(request.GET.get("api_url")))
+    api_url = unquote(str(request.GET.get("api_url")))
 
     parsed_url = urlparse(api_url)
     domain = "{uri.netloc}".format(uri=parsed_url)
-    allowed_domains = {"openspending.org", "openspending.vulekamali.gov.za"}
+    allowed_domains = {
+        "openspending.org",
+        "openspending.vulekamali.gov.za",
+        "openspending-dedicated.vulekamali.gov.za",
+    }
     if domain not in allowed_domains:
         return HttpResponse(
             "Invalid domain received: %s (Only openspending.org is allowed)" % domain,
