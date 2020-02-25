@@ -21,9 +21,24 @@
          >
         {% include 'connections/homepage-hero/index.html' %}
     </div>
-    <div id="national-treemap" class="national-treemap" data-webapp="consolidated-treemap"></div>
-    <div id="national-treemap" class="national-treemap" data-webapp="national-treemap"></div>
-    <div id="provincial-treemap" class="national-treemap" data-webapp="provincial-treemap"></div>
+    <div id="national-treemap"
+         class="national-treemap"
+         data-webapp="consolidated-treemap"
+         data-year="{{ latest_year }}">
+    </div>
+
+    <div id="national-treemap"
+         class="national-treemap"
+         data-webapp="national-treemap"
+         data-year="{{ latest_year }}">
+    </div>
+
+    <div id="provincial-treemap"
+         class="national-treemap"
+         data-webapp="provincial-treemap"
+         data-year="{{ latest_year }}">
+    </div>
+
     <div data-webapp="resources-homepage"></div>
 
     {% with events_list=events.upcoming %}

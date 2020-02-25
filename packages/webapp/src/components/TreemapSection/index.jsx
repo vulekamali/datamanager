@@ -12,7 +12,7 @@ class TreeMapSection extends Component {
         if (departmentData !== null) {
             const deptAmounts = departmentData['expenditure']['national'];
             const originalBudget = deptAmounts.filter(function (amount) {
-                return amount['budget_phase'] === "Main appropriation" && amount.financial_year === 2019;
+                return amount['budget_phase'] === "Main appropriation" && amount.financial_year === financialYearInt;
             });
             let sortedBudget = originalBudget.sort((a, b) => b.amount - a.amount);
             const colored = index => colorArray[index];
