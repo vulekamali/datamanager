@@ -9,7 +9,7 @@
                 {% include 'components/header-and-footer/HeaderBar/index.html' %}
             {% endwith %}
 
-            {% if selected_financial_year %}
+            {% if years and selected_financial_year %}
                 {% include 'components/header-and-footer/YearSelect/index.html' with years=financial_years %}
             {% endif %}
         </header>
