@@ -577,7 +577,7 @@ def infrastructure_project_detail_data(project_slug):
 
 def infrastructure_project_detail_json(request, project_slug):
     response = infrastructure_project_detail_data(project_slug)
-    if isinstance(response, HttpResponse):
+    if isinstance(response, HttpResponse):  # For 404 - not sure why not raising a 404 exception.
         return response
 
     response_json = json.dumps(
@@ -588,17 +588,18 @@ def infrastructure_project_detail_json(request, project_slug):
 
 def infrastructure_project_detail(request, project_slug):
     dataset_response = infrastructure_project_detail_data(project_slug)
-    if isinstance(dataset_response, HttpResponse):
+    if isinstance(dataset_response, HttpResponse):  # For 404 - not sure why not raising a 404 exception.
         return dataset_response
+    latest_year_slug = FinancialYear.get_latest_year().slug
 
     context = {
         "page": {"layout": "infrastructure_project", "data_key": "dataset"},
         "site": {
             "data": {
-                "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+                "navbar": nav_bar.get_items(latest_year_slug),
                 "dataset": dataset_response,
             },
-            "latest_year": "2019-20",
+            "latest_year": latest_year_slug,
         },
         "debug": settings.DEBUG,
     }
