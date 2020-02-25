@@ -7,29 +7,30 @@ import transformData from './transformData';
 class DataLoader extends Component {
   constructor(props) {
     super(props);
+    const { financialYearSlug } = props;
 
     this.state = {
       loading: true,
       data: null,
+      financialYearSlug: financialYearSlug,
+      financialYearInt: parseInt(financialYearSlug.substring(4)),
     };
   }
 
   componentDidMount() {
-    const { year } = this.props;
-    const api = `/json/${year}/focus.json`;
+    const endpoint = `/json/${this.state.financialYearSlug}/focus.json`;
 
     const loadliveData = ({ data }) =>
       this.setState({ data: transformData(data), loading: false });
 
-    return axios.get(api)
+    return axios.get(endpoint)
       .then(({ data }) => data)
       .then(loadliveData);
   }
 
   render() {
     const { state, props } = this;
-    const { loading, data } = state;
-    const { year } = props;
+    const { loading, data, financialYearSlug, financialYearInt } = state;
 
     if (loading || !data) {
       return createElement('div', {}, 'Loading...');
@@ -38,10 +39,11 @@ class DataLoader extends Component {
     const passedProps = {
       items: data,
       department: this.props.department,
-      year,
-      updateUrl: true
-    }
-    
+      updateUrl: true,
+      financialYearSlug,
+      financialYearInt,
+    };
+
     return createElement(FocusAreaPreview, passedProps);
   }
 }

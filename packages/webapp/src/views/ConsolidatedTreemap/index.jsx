@@ -7,7 +7,7 @@ import colorsList from '../../helpers/colorsList';
 import mapFocusToIcon from './mapFocusToIcon';
 import sortItems from './sortItems';
 
-const footer = (financialYearInt) => (
+const footer = financialYearInt => (
   <Fragment>
     <div>
       Please note the above treemap is a representation of the allocation of the National Revenue
@@ -29,6 +29,7 @@ const Markup = ({ items, initialSelected, financialYearSlug, financialYearInt })
     icon: mapFocusToIcon(item.id),
   }));
   const footerMarkup = footer(financialYearInt);
+  console.log(footerMarkup);
 
   return (
     <ChartSection
