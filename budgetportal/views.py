@@ -1000,32 +1000,22 @@ def focus_preview_json(request, financial_year_id):
 
 
 def focus_area_preview(request, financial_year_id, focus_slug):
+    selected_financial_year = get_object_or_404(FinancialYear, slug=financial_year_id)
     context = {
+        "selected_financial_year": selected_financial_year.slug,
         "page": {"layout": "focus_page", "data_key": ""},
-        "site": {
-            "data": {"navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug)},
-            "latest_year": FinancialYear.get_latest_year().slug,
-        },
-        "debug": settings.DEBUG,
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "focus_page.html", context)
 
 
-def department_preview_data(
-    financial_year_id, sphere_slug, government_slug, phase_slug
-):
-    page_data = get_preview_page(
-        financial_year_id, phase_slug, government_slug, sphere_slug
-    )
-    return page_data
-
-
 def department_preview_json(
-    request, financial_year_id, sphere_slug, government_slug, phase_slug
+        request, financial_year_id, sphere_slug, government_slug, phase_slug
 ):
     response_json = json.dumps(
-        department_preview_data(
-            financial_year_id, sphere_slug, government_slug, phase_slug
+        get_preview_page(
+            financial_year_id, phase_slug, government_slug, sphere_slug
         ),
         sort_keys=True,
         indent=4,
@@ -1037,12 +1027,12 @@ def department_preview_json(
 def department_preview(
     request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
+    selected_financial_year = get_object_or_404(FinancialYear, slug=financial_year_id)
     context = {
+        "selected_financial_year": selected_financial_year.slug,
         "page": {"layout": "department_preview", "data_key": ""},
-        "site": {
-            "data": {"navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug)},
-            "latest_year": FinancialYear.get_latest_year().slug,
-        },
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "latest_year": FinancialYear.get_latest_year().slug,
         "debug": settings.DEBUG,
     }
     return render(request, "department_preview.html", context)

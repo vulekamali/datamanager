@@ -180,7 +180,11 @@ function scripts() {
       // Find DOM node that will house the Preact app and get associated data attributes that are passed via HTML
       const component = componentsList[i];
       const requestOverride = component.getAttribute('data-request-override');
-      const selectedYear = component.getAttribute('data-year') || '2019-20';
+      const selectedYear = component.getAttribute('data-year');
+
+      if (!selectedYear) {
+        console.error("year data attribute not found in page.");
+      }
 
       // Initialise Search Preact App
       render(
