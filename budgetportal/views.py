@@ -1011,12 +1011,10 @@ def focus_area_preview(request, financial_year_id, focus_slug):
 
 
 def department_preview_json(
-        request, financial_year_id, sphere_slug, government_slug, phase_slug
+    request, financial_year_id, sphere_slug, government_slug, phase_slug
 ):
     response_json = json.dumps(
-        get_preview_page(
-            financial_year_id, phase_slug, government_slug, sphere_slug
-        ),
+        get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug),
         sort_keys=True,
         indent=4,
         separators=(",", ": "),
