@@ -179,7 +179,7 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(content["dataset_url"], "fake path")
         self.assertEqual(
             content["description"],
-            "Infrastructure projects in South Africa for 2019-20",
+            "National department Infrastructure projects in South Africa",
         )
         self.assertEqual(content["selected_tab"], "infrastructure-projects")
         self.assertEqual(content["slug"], "infrastructure-projects")
