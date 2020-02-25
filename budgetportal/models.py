@@ -19,6 +19,7 @@ from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
 from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.core.cache import cache
 from django.db import models
 from django.urls import reverse
 from partial_index import PartialIndex
@@ -1678,19 +1679,28 @@ class InfrastructureProjectPart(models.Model):
     @staticmethod
     def _get_province_from_coord(coordinate):
         """ Expects a cleaned coordinate """
-        params = {"type": "PR"}
-        province_result = requests.get(
-            MAPIT_POINT_API_URL.format(coordinate["longitude"], coordinate["latitude"]),
-            params=params,
-        )
-        province_result.raise_for_status()
-        r = province_result.json()
-        list_of_objects_returned = list(r.values())
-        if len(list_of_objects_returned) > 0:
-            province_name = list_of_objects_returned[0]["name"]
-            return province_name
+        key = f"coordinate province {coordinate['latitude']}, {coordinate['longitude']}"
+        province_name = cache.get(key, default="cache-miss")
+        if province_name == "cache-miss":
+            logger.info(f"Coordinate Province Cache MISS for coordinate {key}")
+            params = {"type": "PR"}
+            province_result = requests.get(
+                MAPIT_POINT_API_URL.format(
+                    coordinate["longitude"], coordinate["latitude"]
+                ),
+                params=params,
+            )
+            province_result.raise_for_status()
+            r = province_result.json()
+            list_of_objects_returned = list(r.values())
+            if len(list_of_objects_returned) > 0:
+                province_name = list_of_objects_returned[0]["name"]
+            else:
+                province_name = None
+            cache.set(key, province_name)
         else:
-            return None
+            logger.info(f"Coordinate Province Cache HIT for coordinate {key}")
+        return province_name
 
     @staticmethod
     def _get_province_from_project_name(project_name):
@@ -1856,7 +1866,7 @@ class Quarter(models.Model):
         ordering = ["number"]
 
     def __str__(self):
-        return u"Quarter %d" % self.number
+        return "Quarter %d" % self.number
 
 
 def irm_snapshot_file_path(instance, filename):
@@ -1886,7 +1896,7 @@ class IRMSnapshot(models.Model):
         unique_together = ["financial_year", "quarter"]
 
     def __str__(self):
-        return u"%s Q%d taken %s" % (
+        return "%s Q%d taken %s" % (
             self.financial_year.slug,
             self.quarter.number,
             self.date_taken.isoformat()[:18],
@@ -1907,11 +1917,11 @@ class ProvInfraProject(models.Model):
         if self.project_snapshots.count():
             return self.project_snapshots.latest().name
         else:
-            return u"IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
+            return "IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
 
     def get_slug(self):
         return slugify(
-            u"{0} {1}".format(
+            "{0} {1}".format(
                 self.project_snapshots.latest().name,
                 self.project_snapshots.latest().province,
             )

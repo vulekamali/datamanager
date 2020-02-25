@@ -499,7 +499,7 @@ def infrastructure_projects_overview(request):
     return {
         "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
         "projects": projects,
-        "description": "Infrastructure projects in South Africa for 2019-20",
+        "description": "National department Infrastructure projects in South Africa",
         "slug": "infrastructure-projects",
         "selected_tab": "infrastructure-projects",
         "title": "Infrastructure Projects - vulekamali",
@@ -541,7 +541,7 @@ def infrastructure_project_detail_data(project_slug):
     if departments:
         department_url = departments[0].get_latest_department_instance().get_url_path()
 
-    project = {
+    project_dict = {
         "name": project.project_name,
         "coordinates": project.clean_coordinates(project.gps_code),
         "projected_budget": project.calculate_projected_expenditure(),
@@ -566,17 +566,18 @@ def infrastructure_project_detail_data(project_slug):
     }
     return {
         "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
-        "projects": [project],
-        "description": "Infrastructure projects in South Africa for 2019-20",
+        "projects": [project_dict],
+        "description": project.project_description
+        or "Infrastructure projects in South Africa",
         "slug": "infrastructure-projects",
         "selected_tab": "infrastructure-projects",
-        "title": "Infrastructure Projects - vulekamali",
+        "title": f"{project.project_name} - Infrastructure Projects - vulekamali",
     }
 
 
 def infrastructure_project_detail_json(request, project_slug):
     response = infrastructure_project_detail_data(project_slug)
-    if isinstance(response, HttpResponse):
+    if isinstance(response, HttpResponse):  # For 404 - not sure why not raising a 404 exception.
         return response
 
     response_json = json.dumps(
@@ -587,17 +588,18 @@ def infrastructure_project_detail_json(request, project_slug):
 
 def infrastructure_project_detail(request, project_slug):
     dataset_response = infrastructure_project_detail_data(project_slug)
-    if isinstance(dataset_response, HttpResponse):
+    if isinstance(dataset_response, HttpResponse):  # For 404 - not sure why not raising a 404 exception.
         return dataset_response
+    latest_year_slug = FinancialYear.get_latest_year().slug
 
     context = {
         "page": {"layout": "infrastructure_project", "data_key": "dataset"},
         "site": {
             "data": {
-                "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+                "navbar": nav_bar.get_items(latest_year_slug),
                 "dataset": dataset_response,
             },
-            "latest_year": "2019-20",
+            "latest_year": latest_year_slug,
         },
         "debug": settings.DEBUG,
     }
