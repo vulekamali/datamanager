@@ -27,7 +27,7 @@ class Preview extends Component {
       return null;
     }
 
-    const newUrl = `/${this.props.year}/previews/${this.props.sphere}/${this.props.government}/${e.target.value}`;
+    const newUrl = `/${this.props.financialYearSlug}/previews/${this.props.sphere}/${this.props.government}/${e.target.value}`;
     window.history.pushState({}, window.document.title, newUrl );
     this.setState({ selected: e.target.value });
   }
@@ -44,7 +44,8 @@ class Preview extends Component {
       selected: state.selected,
       government: props.government,
       departmentNames: this.departmentNames,
-      year: props.year,
+      financialYearslug: props.financialYearSlug,
+      financialYearInt: props.financialYearInt,
     };
 
     return <Markup {...passedProps } />
@@ -52,4 +53,3 @@ class Preview extends Component {
 }
 
 export default Preview;
-

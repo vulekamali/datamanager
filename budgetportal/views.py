@@ -17,6 +17,7 @@ from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from .guide_data import category_guides
@@ -59,6 +60,12 @@ def homepage(request):
     videos = Video.objects.filter(title_id__in=titles)
 
     page_data = Homepage.objects.first()
+    latest_provincial_year = (
+        FinancialYear.objects.filter(spheres__slug="provincial")
+        .annotate(num_depts=Count("spheres__governments__departments"))
+        .filter(num_depts__gt=0)
+        .first()
+    )
 
     context = {
         "selected_financial_year": None,
@@ -71,6 +78,7 @@ def homepage(request):
         "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "videos": videos,
         "latest_year": year.slug,
+        "latest_provincial_year": latest_provincial_year.slug,
         "main_heading": page_data.main_heading,
         "sub_heading": page_data.sub_heading,
         "primary_button_label": page_data.primary_button_label,
@@ -1000,33 +1008,22 @@ def focus_preview_json(request, financial_year_id):
 
 
 def focus_area_preview(request, financial_year_id, focus_slug):
+    selected_financial_year = get_object_or_404(FinancialYear, slug=financial_year_id)
     context = {
+        "focus_area_slug": focus_slug,
+        "selected_financial_year": selected_financial_year.slug,
         "page": {"layout": "focus_page", "data_key": ""},
-        "site": {
-            "data": {"navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug)},
-            "latest_year": FinancialYear.get_latest_year().slug,
-        },
-        "debug": settings.DEBUG,
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "focus_page.html", context)
-
-
-def department_preview_data(
-    financial_year_id, sphere_slug, government_slug, phase_slug
-):
-    page_data = get_preview_page(
-        financial_year_id, phase_slug, government_slug, sphere_slug
-    )
-    return page_data
 
 
 def department_preview_json(
     request, financial_year_id, sphere_slug, government_slug, phase_slug
 ):
     response_json = json.dumps(
-        department_preview_data(
-            financial_year_id, sphere_slug, government_slug, phase_slug
-        ),
+        get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug),
         sort_keys=True,
         indent=4,
         separators=(",", ": "),
@@ -1037,12 +1034,15 @@ def department_preview_json(
 def department_preview(
     request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
+    selected_financial_year = get_object_or_404(FinancialYear, slug=financial_year_id)
     context = {
+        "department_slug": department_slug,
+        "sphere_slug": sphere_slug,
+        "government_slug": government_slug,
+        "selected_financial_year": selected_financial_year.slug,
         "page": {"layout": "department_preview", "data_key": ""},
-        "site": {
-            "data": {"navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug)},
-            "latest_year": FinancialYear.get_latest_year().slug,
-        },
+        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "latest_year": FinancialYear.get_latest_year().slug,
         "debug": settings.DEBUG,
     }
     return render(request, "department_preview.html", context)

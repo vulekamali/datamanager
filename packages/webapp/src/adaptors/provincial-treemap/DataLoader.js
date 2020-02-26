@@ -3,30 +3,33 @@ import axios from 'axios';
 
 import ProvincialTreemap from '../../views/ProvincialTreemap';
 import transformData from './transformData';
-import { api } from './config.json';
 
 class DataLoader extends Component {
   constructor(props) {
     super(props);
+    const { financialYearSlug } = props;
 
     this.state = {
       loading: true,
       data: null,
+      financialYearSlug: financialYearSlug,
+      financialYearInt: parseInt(financialYearSlug.substring(0, 4)),
     };
   }
 
   componentDidMount() {
     const loadliveData = ({ data }) => this.setState({ data: transformData(data), loading: false });
+    const endpoint = `/json/${this.state.financialYearSlug}/provincial/original.json`;
 
     return axios
-      .get(api)
+      .get(endpoint)
       .then(({ data }) => data)
       .then(loadliveData);
   }
 
   render() {
     const { state } = this;
-    const { loading, data } = state;
+    const { loading, data, financialYearSlug, financialYearInt } = state;
 
     if (loading || !data) {
       return createElement('div', {}, 'Loading...');
@@ -40,7 +43,7 @@ class DataLoader extends Component {
       color: '#D8D8D8',
     };
 
-    const passedProps = { items, initialSelected };
+    const passedProps = { items, initialSelected, financialYearSlug, financialYearInt };
 
     return createElement(ProvincialTreemap, passedProps);
   }

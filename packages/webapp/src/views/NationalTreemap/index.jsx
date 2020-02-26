@@ -7,24 +7,25 @@ import sortItems from './sortItems';
 
 import colorsList from '../../helpers/colorsList.js';
 
-const footer = (
+const makeFooter = financialYearInt => (
   <Fragment>
     <div>
       Please note the above treemap is a representation of expenditure of national government
       departments.
     </div>
-    <div>Budget data for the financial year 1 April 2019 - 31 March 2020</div>
+    <div>Budget data for the financial year 1 April { financialYearInt } - 31 March { financialYearInt +1 }</div>
     <div>Direct charges against the National Revenue Fund are excluded</div>
   </Fragment>
 );
 
-const Markup = ({ items, initialSelected }) => {
+const Markup = ({ items, initialSelected, financialYearInt, financialYearSlug }) => {
   const sortedItems = sortItems(items);
   const itemsWithColor = sortedItems.map((item, index) => ({
     ...item,
     color: colorsList[index],
   }));
 
+  const footer = makeFooter(financialYearInt);
   return (
     <ChartSection
       {...{ initialSelected, footer }}
@@ -36,7 +37,7 @@ const Markup = ({ items, initialSelected }) => {
         disabled: 'Original budget',
       }}
       years={{
-        disabled: '2019-20',
+        disabled: financialYearSlug,
       }}
       anchor="national-treemap"
     />

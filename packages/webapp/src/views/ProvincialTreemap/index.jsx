@@ -22,7 +22,7 @@ const transformData = item => ({
   children: !!item.children && item.children.map(transformData),
 });
 
-const Markup = ({ items, initialSelected }) => {
+const Markup = ({ items, initialSelected, financialYearSlug, financialYearInt }) => {
   const itemKeys = Object.keys(items);
   const itemsAsArray = itemKeys.map(key => items[key]);
   const transformedItems = itemsAsArray.map(transformData);
@@ -31,7 +31,7 @@ const Markup = ({ items, initialSelected }) => {
   return (
     <ChartSection
       {...{ initialSelected }}
-      footer="Budget data from 1 April 2019 - 31 March 2020"
+      footer={`Budget data from 1 April ${ financialYearInt } - 31 March ${ financialYearInt +1 }`}
       chart={onSelectedChange => <Treemap {...{ onSelectedChange }} items={itemsWithColor} />}
       verb="Explore"
       subject="this department"
@@ -40,7 +40,7 @@ const Markup = ({ items, initialSelected }) => {
         disabled: 'Original budget',
       }}
       years={{
-        disabled: '2019-20',
+        disabled: financialYearSlug,
       }}
       anchor="provincial-treemap"
     />

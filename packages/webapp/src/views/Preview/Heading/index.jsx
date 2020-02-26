@@ -2,7 +2,6 @@ import React from 'react';
 
 import calcPrettyName from './calcPrettyName';
 
-import CustomizedDateSelect from './CustomizedDateSelect';
 import CustomizedSelect from './CustomizedSelect';
 
 
@@ -18,12 +17,13 @@ import {
   ButtonText,
   ArrowStyled,
   Details,
-  DetailedAnalysis
+  DetailedAnalysis,
+  DataYear,
  } from './styled';
 
-const Heading = ({ government, departmentNames, selected, eventHandler, year, sphere }) => {
+const Heading = ({ government, departmentNames, selected, eventHandler, financialYearSlug, sphere }) => {
   const provinceFolder = government === 'south-africa' ? '' : `${government}/`;
-  const url = `/${year}/${sphere}/${provinceFolder}departments/${selected}`;
+  const url = `/${financialYearSlug}/${sphere}/${provinceFolder}departments/${selected}`;
 
   return (
     <HeadingWrapper>
@@ -34,7 +34,7 @@ const Heading = ({ government, departmentNames, selected, eventHandler, year, sp
         <SelectsGroup>
           <CustomizedSelect {...{ departmentNames, selected, eventHandler }} />
           <RightOptions>
-            <CustomizedDateSelect />
+            <DataYear>{ financialYearSlug }</DataYear>
             <Link href={url}>
             <ButtonDetails>
               <ButtonText><Details>Details</Details><DetailedAnalysis>Detailed Analysis</DetailedAnalysis></ButtonText>

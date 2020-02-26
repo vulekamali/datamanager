@@ -1,14 +1,18 @@
 import { createElement } from 'react';
 import { render } from 'react-dom';
 
-import Routing from './Routing';
+import DataLoader from './DataLoader';
 
-const node = document.querySelector('[data-webapp="focus-areas-preview"]')
+const node = document.querySelector('[data-webapp="focus-areas-preview"]');
 
-const connection = () => {
+const initialise = () => {
   if (node) {
-    render(createElement(Routing), node);
+    const financialYearSlug = node.getAttribute('data-year');
+    const focusAreaSlug = node.getAttribute('data-focus-area');
+    const component = createElement(DataLoader, { financialYearSlug, focusAreaSlug });
+    render(component, node);
   }
+  return null;
 };
 
-export default connection();
+export default initialise();

@@ -32,16 +32,22 @@ class BasicPagesTestCase(TestCase):
         for year in FinancialYear.objects.all():
             # spheres
             national = Sphere.objects.create(financial_year=year, name="National")
-            Sphere.objects.create(financial_year=year, name="Provincial")
+            provincial = Sphere.objects.create(financial_year=year, name="Provincial")
 
             # governments
             south_africa = Government.objects.create(
                 sphere=national, name="South Africa"
             )
+            fake_cape = Government.objects.create(
+                sphere=provincial, name="Fake Cape"
+            )
 
             # departments
             Department.objects.create(
                 government=south_africa, name="The Presidency", vote_number=1, intro=""
+            )
+            Department.objects.create(
+                government=fake_cape, name="Fake Health", vote_number=1, intro=""
             )
         ckan_patch = patch("budgetportal.models.ckan")
         CKANMockClass = ckan_patch.start()
@@ -127,7 +133,7 @@ class BasicPagesTestCase(TestCase):
         c = Client()
         response = c.get("/2019-20/previews/national/south-africa/social-development")
 
-        self.assertContains(response, '<div data-webapp="preview-pages"></div>')
+        self.assertContains(response, '<div data-webapp="preview-pages"')
         self.assertContains(
             response,
             '=https://vulekamali.gov.za/2019-20/previews/national/south-africa/social-development">',
@@ -244,7 +250,7 @@ class BasicPagesTestCase(TestCase):
         c = Client()
         response = c.get("/2019-20/focus/social-development")
 
-        self.assertContains(response, '<div data-webapp="focus-areas-preview"></div>')
+        self.assertContains(response, 'data-webapp="focus-areas-preview"')
 
     def test_dataset_page(self):
         """Test that it loads and that some text is present"""

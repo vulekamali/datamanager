@@ -58,6 +58,9 @@ const RightOptions = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 100%;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 120%;
 
   @media screen and (min-width: 600px) {
     margin-top: 24px;

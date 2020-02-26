@@ -7,30 +7,33 @@ import transformData from './transformData';
 class DataLoader extends Component {
   constructor(props) {
     super(props);
+    const { financialYearSlug } = props;
 
     this.state = {
       loading: true,
       data: null,
+      financialYearSlug: financialYearSlug,
+      financialYearInt: parseInt(financialYearSlug.substring(0, 4)),
     };
   }
 
   componentDidMount() {
-    const { year, sphere, government, department } = this.props;
-    const api = `/json/${year}/previews/${sphere}/${government}/original.json`;
+    const { financialYearSlug, sphere, government, department } = this.props;
+    const endpoint = `/json/${ financialYearSlug }/previews/${ sphere }/${ government }/original.json`;
 
     const loadliveData = ({ data }) =>
       this.setState({ data: transformData(data, department), loading: false });
 
     return axios
-      .get(api)
+      .get(endpoint)
       .then(({ data }) => data)
       .then(loadliveData);
   }
 
   render() {
     const { state, props } = this;
-    const { loading, data } = state;
-    const { sphere, department, government, year } = props;
+    const { loading, data, financialYearSlug, financialYearInt } = state;
+    const { sphere, department, government } = props;
 
     if (loading || !data) {
       return createElement('div', {}, 'Loading...');
@@ -41,7 +44,8 @@ class DataLoader extends Component {
       sphere,
       department,
       government,
-      year,
+      financialYearSlug,
+      financialYearInt,
     };
     return createElement(Preview, passedProps);
   }
