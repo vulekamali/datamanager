@@ -237,7 +237,7 @@ def get_consolidated_expenditure_treemap(financial_year):
     """ Returns a data object for each function group for a specific year. Used by the consolidated treemap. """
 
     expenditure = []
-    dataset = get_consolidated_expenditure_budget_dataset(financial_year)
+    dataset = get_consolidated_expenditure_budget_dataset()
     if not dataset:
         return None
     openspending_api = dataset.get_openspending_api()

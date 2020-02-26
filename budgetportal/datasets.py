@@ -349,14 +349,13 @@ def get_expenditure_time_series_dataset(sphere_slug):
         return None
 
 
-def get_consolidated_expenditure_budget_dataset(financial_year):
+def get_consolidated_expenditure_budget_dataset():
     query = {
         "q": "",
         "fq": "".join(
             [
                 '+organization:"national-treasury"',
                 '+groups:"consolidated-expenditure-budget"',
-                f'+vocab_financial_years:"{financial_year.slug}"'
             ]
         ),
         "rows": 1000,
