@@ -19,7 +19,7 @@ class DataLoader extends Component {
 
   componentDidMount() {
     const endpoint = `/json/${this.state.financialYearSlug}/focus.json`;
-    console.log(endpoint);
+
     const loadliveData = ({ data }) =>
       this.setState({ data: transformData(data), loading: false });
 

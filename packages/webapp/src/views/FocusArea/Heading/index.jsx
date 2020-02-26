@@ -2,7 +2,6 @@ import React from 'react';
 
 import calcPrettyName from './calcPrettyName';
 
-import CustomizedDateSelect from './CustomizedDateSelect';
 import CustomizedSelect from './CustomizedSelect';
 
 
@@ -15,7 +14,7 @@ import {
   RightOptions
  } from './styled';
 
-const Heading = ({ government, departmentNames, selected, eventHandler, year, sphere }) => (
+const Heading = ({ government, departmentNames, selected, eventHandler, financialYearSlug, sphere }) => (
   <HeadingWrapper>
     <HeadingContainer>
       <HeadingText>
@@ -23,9 +22,7 @@ const Heading = ({ government, departmentNames, selected, eventHandler, year, sp
       </HeadingText>
       <SelectsGroup>
         <CustomizedSelect {...{ departmentNames, selected, eventHandler }} />
-        <RightOptions>
-          <CustomizedDateSelect />
-        </RightOptions>
+        <RightOptions>{financialYearSlug}</RightOptions>
       </SelectsGroup>
     </HeadingContainer>
   </HeadingWrapper>
