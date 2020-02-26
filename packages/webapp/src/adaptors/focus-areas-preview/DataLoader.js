@@ -13,7 +13,7 @@ class DataLoader extends Component {
       loading: true,
       data: null,
       financialYearSlug: financialYearSlug,
-      financialYearInt: parseInt(financialYearSlug.substring(4)),
+      financialYearInt: parseInt(financialYearSlug.substring(0, 4)),
     };
   }
 

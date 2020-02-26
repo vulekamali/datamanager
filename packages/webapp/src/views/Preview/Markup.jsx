@@ -5,7 +5,6 @@ import Heading from './Heading';
 import BudgetAmounts from './BudgetAmounts';
 import SectionHeading from './SectionHeading';
 import BarChart from '../../components/BarChart';
-import calcFineprint from './calcFineprint';
 
 import {
   Wrapper,
@@ -73,13 +72,14 @@ const Markup = props => {
     departmentNames,
     selected,
     eventHandler,
-    year,
+    financialYearSlug,
+    financialYearInt,
     focusAreas,
   } = props;
 
   return (
     <Wrapper>
-      <Heading {...{ departmentNames, government, selected, eventHandler, year, sphere }} />
+      <Heading {...{ departmentNames, government, selected, eventHandler, financialYearSlug, sphere }} />
       <BudgetAmounts {...resources} sphere={sphere} />
       {callDescription(description)}
       <SectionHeading title="Department programmes" />
@@ -88,7 +88,9 @@ const Markup = props => {
       </div>
       <FooterWrapper>
         <FooterContainer>
-          <FooterDetails>{calcFineprint(year)}</FooterDetails>
+          <FooterDetails>
+            Budget data from 1 April { financialYearInt } - 31 March {financialYearInt + 1 }
+          </FooterDetails>
           <FooterDetails>
             Direct charges against the national revenue fund included here, while it is not normally
             counted as part of the total budget of the department, as it is not part of the voted

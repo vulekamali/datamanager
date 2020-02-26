@@ -74,6 +74,13 @@ const RightOptions = styled.div`
   }
 `;
 
+const DataYear = styled.div`
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 120%;
+  padding: 10px 13px 9px 16px;
+`;
+
 const Link = styled.a`
   text-decoration: none;
 `;
@@ -154,7 +161,8 @@ export {
   ButtonText,
   ArrowStyled,
   Details,
-  DetailedAnalysis
+  DetailedAnalysis,
+  DataYear,
 }
 
 export default {
@@ -169,5 +177,6 @@ export default {
   ButtonText,
   ArrowStyled,
   Details,
-  DetailedAnalysis
+  DetailedAnalysis,
+  DataYear,
 }
