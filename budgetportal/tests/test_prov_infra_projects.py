@@ -146,9 +146,6 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         title = selenium.find_element_by_css_selector(".page-heading").text
         self.assertEqual(title, u"BLUE JUNIOR SECONDARY SCHOOL")
 
-        total_cost = selenium.find_element_by_css_selector(
-            ".total-project-cost-field"
-        ).text
         source = selenium.find_element_by_css_selector(
             ".primary-funding-source-field"
         ).text
@@ -159,7 +156,6 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             ".funding-status-field"
         ).text
 
-        self.assertEqual(total_cost, u"R 680,000")
         self.assertEqual(source, u"Education Infrastructure Grant")
         self.assertEqual(investment, u"Upgrading and Additions")
         self.assertEqual(funding_status, u"Tabled")
@@ -212,14 +208,10 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         self.assertEqual(main_contractor, u"MAIN CONTRACTOR")
         self.assertEqual(others, u"OTHERS")
 
-        total_project_cost = selenium.find_element_by_css_selector(
-            ".total-project-cost-field"
-        ).text
         professional_fees = selenium.find_element_by_css_selector(
             "#total-professional-fees-field"
         ).text
 
-        self.assertEqual(total_project_cost, u"R 680,000")
         self.wait_until_text_in("#total-construction-costs-field", u"R 562,000")
         self.assertEqual(professional_fees, u"R 118,000")
 

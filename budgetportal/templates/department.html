@@ -215,7 +215,6 @@
                 <th>Project name</th>
                 <th class="hidden-sm">Status</th>
                 <th class="hidden-md">Estimated completion date</th>
-                <th class="u-textAlignRight">Estimated total project cost</th>
               </tr>
               {% for project in projects %}
               <tr>
@@ -226,13 +225,6 @@
                 </td>
                 <td class="hidden-sm">{{ project.status|default:"Not available" }}</td>
                 <td class="hidden-md">{{ project.estimated_completion_date|default:"Not available" }}</td>
-                <td class="u-textAlignRight">
-                  {% if project.total_project_cost %}
-                  R{{ project.total_project_cost|floatformat|intcomma }}
-                  {% else %}
-                  Not available
-                  {% endif %}
-                </td>
               </tr>
               {% empty %}
               <tr>
