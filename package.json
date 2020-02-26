@@ -132,7 +132,7 @@
     "redux": "^4.0.1",
     "save-svg-as-png": "^1.4.6",
     "uuid": "^3.3.2",
-    "vulekamali-visualisations": "https://github.com/vulekamali/data-visualisations.git#c1208127eab627d614f3de934433762e59dc50a3",
+    "vulekamali-visualisations": "https://github.com/vulekamali/data-visualisations.git#5ddac5cb4a7c3c86fc2b3391f9b984794a579d1a",
     "whatwg-fetch": "^2.0.3",
     "yarn": "^1.13.0"
   }

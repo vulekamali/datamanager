@@ -100,8 +100,12 @@ function initTimeSeriesChart(chartData) {
   const chart = reusableLineChart()
         .width(boundingRect.width)
         .height(boundingRect.height);
-
-  container.call(chart.data(chartData.snapshots));
+  const snapshots = chartData.snapshots.map(snapshot => {
+    const chartSnapshot = { ...snapshot };
+    chartSnapshot["total_estimated_project_cost"] = null;
+    return chartSnapshot;
+  });
+  container.call(chart.data(snapshots));
 
   return chart;
 }
