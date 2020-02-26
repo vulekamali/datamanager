@@ -17,6 +17,7 @@ from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from .guide_data import category_guides
@@ -59,6 +60,12 @@ def homepage(request):
     videos = Video.objects.filter(title_id__in=titles)
 
     page_data = Homepage.objects.first()
+    latest_provincial_year = (
+        FinancialYear.objects.filter(spheres__slug="provincial")
+        .annotate(num_depts=Count("spheres__governments__departments"))
+        .filter(num_depts__gt=0)
+        .first()
+    )
 
     context = {
         "selected_financial_year": None,
@@ -71,6 +78,7 @@ def homepage(request):
         "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "videos": videos,
         "latest_year": year.slug,
+        "latest_provincial_year": latest_provincial_year.slug,
         "main_heading": page_data.main_heading,
         "sub_heading": page_data.sub_heading,
         "primary_button_label": page_data.primary_button_label,
