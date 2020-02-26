@@ -165,8 +165,7 @@ export function projectPage(pageData) {
                   project.estimated_construction_end_date);
 
   // Budgets and spending
-  updateTextField(".total-project-cost-field",
-                  formatCurrency(project.total_project_cost));
+  $(".total-project-cost-field").parent().remove();
   updateTextField("#total-professional-fees-field",
                   formatCurrency(project.total_professional_fees));
   updateTextField(".total-construction-costs-field",

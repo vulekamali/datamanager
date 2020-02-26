@@ -83,7 +83,7 @@ function loadSearchStateFromCurrentURL() {
   });
 
   const sortField = params.get("order_by");
-  pageState.sortField = sortField || "-total_project_cost";
+  pageState.sortField = sortField || "status_order";
 }
 
 function urlFromSearchState() {
@@ -132,7 +132,7 @@ function buildListSearchURL() {
   for (let fieldName in pageState.filters) {
     params.set(fieldName, pageState.filters[fieldName]);
   }
-  params.set("fields", "url_path,name,status,estimated_completion_date,total_project_cost");
+  params.set("fields", "url_path,name,status,estimated_completion_date");
   params.set("ordering", pageState.sortField);
   params.set("limit", "20");
   return baseLocation + "?" + params.toString();
@@ -265,7 +265,7 @@ function addListResults(response) {
       resultItem.find(".narrow-card_title").text(project.name);
       resultItem.find(".narrow-card_middle-column:first").text(project.status);
       resultItem.find(".narrow-card_middle-column:last").text(project.estimated_completion_date);
-      resultItem.find(".narrow-card_last-column").text(formatCurrency(project.total_project_cost));
+      resultItem.find(".narrow-card_last-column").remove();
       $("#result-list-container").append(resultItem);
     });
 
@@ -406,6 +406,7 @@ export function searchPage(pageData) {
 
   /** Get templates of dynamically inserted elements **/
 
+  $("#result-list-container .narrow-card_last-header").remove();
   pageState.resultRowTemplate = $("#result-list-container .narrow-card_wrapper:first").clone();
   pageState.resultRowTemplate.find(".narrow-card_icon").remove();
 
