@@ -78,7 +78,8 @@ def homepage(request):
         "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
         "videos": videos,
         "latest_year": year.slug,
-        "latest_provincial_year": latest_provincial_year and latest_provincial_year.slug,
+        "latest_provincial_year": latest_provincial_year
+        and latest_provincial_year.slug,
         "main_heading": page_data.main_heading,
         "sub_heading": page_data.sub_heading,
         "primary_button_label": page_data.primary_button_label,
