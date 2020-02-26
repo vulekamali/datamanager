@@ -356,7 +356,7 @@ def get_consolidated_expenditure_budget_dataset(financial_year):
             [
                 '+organization:"national-treasury"',
                 '+groups:"consolidated-expenditure-budget"',
-                f'+vocab_financial_years:"{financial_year.slug}"'
+                f'+vocab_financial_years:"{financial_year.slug}"',
             ]
         ),
         "rows": 1000,
