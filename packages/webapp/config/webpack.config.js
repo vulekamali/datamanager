@@ -450,8 +450,8 @@ module.exports = function(webpackEnv) {
                   removeEmptyAttributes: true,
                   removeStyleLinkTypeAttributes: true,
                   keepClosingSlash: true,
-                  minifyJS: true,
-                  minifyCSS: true,
+                  minifyJS: false,
+                  minifyCSS: false,
                   minifyURLs: true,
                 },
               }
