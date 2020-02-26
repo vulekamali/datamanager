@@ -7,7 +7,7 @@ import transformData from './transformData';
 class DataLoader extends Component {
   constructor(props) {
     super(props);
-    const { financialYearSlug } = props;
+    const { financialYearSlug, focusAreaSlug } = props;
 
     this.state = {
       loading: true,
@@ -38,7 +38,7 @@ class DataLoader extends Component {
 
     const passedProps = {
       items: data,
-      department: this.props.department,
+      focusAreaSlug: this.props.focusAreaSlug,
       updateUrl: true,
       financialYearSlug: financialYearSlug,
       financialYearInt: financialYearInt,
