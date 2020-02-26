@@ -1028,6 +1028,9 @@ def department_preview(
 ):
     selected_financial_year = get_object_or_404(FinancialYear, slug=financial_year_id)
     context = {
+        "department_slug": department_slug,
+        "sphere_slug": sphere_slug,
+        "government_slug": government_slug,
         "selected_financial_year": selected_financial_year.slug,
         "page": {"layout": "department_preview", "data_key": ""},
         "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
