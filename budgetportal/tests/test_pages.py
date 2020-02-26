@@ -38,9 +38,7 @@ class BasicPagesTestCase(TestCase):
             south_africa = Government.objects.create(
                 sphere=national, name="South Africa"
             )
-            fake_cape = Government.objects.create(
-                sphere=provincial, name="Fake Cape"
-            )
+            fake_cape = Government.objects.create(sphere=provincial, name="Fake Cape")
 
             # departments
             Department.objects.create(
