@@ -37,7 +37,7 @@ const Markup = ({ items, initialSelected, financialYearInt, financialYearSlug })
         disabled: 'Original budget',
       }}
       years={{
-        disabled: '2019-20',
+        disabled: financialYearSlug,
       }}
       anchor="national-treemap"
     />
