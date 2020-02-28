@@ -1,8 +1,8 @@
 import logging
 import os
 import shutil
-import urllib
 from urllib.parse import urlparse, unquote
+from urllib.request import urlretrieve
 from pprint import pformat
 from tempfile import mkdtemp
 
@@ -138,7 +138,7 @@ class Dataset:
             basename = unquote(os.path.basename(urlparse(url).path))
             filename = os.path.join(tempdir, basename)
             logger.info("Downloading %s to %s", url, filename)
-            urllib.urlretrieve(url, filename)[0]
+            urlretrieve(url, filename)[0]
 
             logger.info(
                 "Uploading file %s as resource '%s' to package %s",
