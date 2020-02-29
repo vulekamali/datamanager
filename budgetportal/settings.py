@@ -261,6 +261,7 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATICFILES_DIRS = [
     str(ROOT_DIR.path("assets")),
+    str(ROOT_DIR.path("budgetportal/static")),
     str(ROOT_DIR.path("packages/webapp/build/static")),
 ]
 

@@ -1,0 +1,143 @@
+{% load static %}
+
+<h1 class="Page-mainHeading">Dataset Guide: In-year spending data</h1>
+
+<p>
+  The in-year spending dataset provides monthly totals from the transactions of each department. This data is classified in fine detail by the department when recording their transactions.
+</p>
+
+<a href="{% static 'images/in-year-higher-edu-example.png' %}">
+  <img src="{% static 'images/in-year-higher-edu-example.png' %}" alt="In-year higher-education transfers chart example"/>
+</a>
+
+<div class="BasicContent u-marginBottom15">
+  <h2 class="BasicContent-title">Dataset purpose</h2>
+  <p>
+    This dataset is particularly suited to two somewhat different uses:
+  </p>
+
+  <ul>
+    <li>
+      <b>Monitoring in-year spending</b> at department, programme or economic classification level and exploring in-year trends over time at these levels. Comparing this to budgets is informative.
+    </li>
+    <li>
+      <b>Exploring payments at very low levels of classification detail</b> and learning about the activities of a department for further exploration. <em>Be careful about drawing conclusions from low level payment data alone</em> - this usually requires a fair amount of contextual information which can be sought from
+
+      <ul>
+        <li>Strategic Plan documents</li>
+        <li>
+          Budget documents, e.g. <a href="/2020-21/departments">ENE and EPRE publications</a>
+          <ul>
+            <li>Find the publication for the department needed at the top of the department’s page or in the full document list</li>
+          </ul>
+        </li>
+        <li>
+          Adjustment budget documents, e.g. AENE, AEPRE
+          <ul>
+            <li>Also on department pages, in Adjusted Budget section, or in the full document list</li>
+          </ul>
+        </li>
+        <li>
+          Annual Performance Plan documents
+          <ul>
+            <li>Available from each department's website (See link from their page on vulekamali) or by contacting to the department</li>
+          </ul>
+        </li>
+    </li>
+  </ul>
+</div>
+
+<div class="BasicContent u-marginBottom15">
+  <h2 class="BasicContent-title">Field Definitions</h2>
+
+  <h3>Amounts</h3>
+  <p>Amounts in this dataset are in Thousands of Rands.</p>
+  <p>Amounts are given in period-specific columns.</p>
+
+  <h3>Department and Vote Number</h3>
+
+  <p>Vote refers to the budget vote in parliament when the budget is tabled. Vote number is the identifier given to a budget vote in that financial year. It might be different in other financial years. Most departments are voted on individually. Some departments’ budget are voted on as part of another department. Learn more about departments and their mandates and purposes.</p>
+
+  <h3>Programme and Programme Number</h3>
+
+  <p>Programmes are the names given to the high level activities of a department. Programme Numbers are the identifiers used for specific programmes in a financial year. Learn more about a specific programme in a national department’s ENE or a provincial department’s EPRE PDF.</p>
+
+  <h3>Subprogramme and Subprogramme number</h3>
+
+  <p>Subprogramme is a subdivision of a programme. Learn more about a specific subprogramme in a national department’s ENE or a provincial department’s EPRE PDF.</p>
+
+  <h3>Economic Classification fields</h3>
+
+  <p>The Economic Classification is a categorisation of receipts and payments that identifies the nature and economic effect of government operations on the economy of the country. The Economic Reporting Format is the budget reporting format whose aim is to make government budget data more user-friendly through a simplified presentation of the economic classification of receipts and payments</p>
+
+  <p>Each level provides greater detail. It is derived from the Item, Project and Asset SCoA segments.</p>
+
+  <h3>Standard Chart of Accounts (SCoA) fields</h3>
+
+  <p>The SCoA is the system by which financial transactions are recorded in BAS. The coding structure comprises seven segments. When recording a transaction, a selection must be made from each of the segments, meaning that all segments must be used for recording a single transaction. The segments are</p>
+
+  <ul>
+    <li>Item</li>
+    <li>Responsibility</li>
+    <li>Fund</li>
+    <li>Asset</li>
+    <li>Project</li>
+    <li>Objective</li>
+    <li>Regional</li>
+    <li>Infrastructure</li>
+  </ul>
+
+  <img src="" alt="Standard Chart of Accounts segments"/>
+
+  <p>For details of what these fields mean, see the following resources:</p>
+
+  <ul>
+    <li>
+      Basic Accounting Handbook for Government Departments - Chapter 2: BAS and the Standard Chart of Accounts
+      <ul>
+        <li>This is a PDF book chapter with very accessible explanations of how payments should be classified when entered in an accounting system.</li>
+      </ul>
+Standard Chart of Accounts
+Download the version that would have been published just before the date of the payments you are using, unzip the file, and open the Excel file that was unpacked.
+Each worksheet describes one “segment” of classification, e.g. Item or Responsibility. Each level is in a column. Some segments, e.g. Item have detailed descriptions for almost every classification.
+
+This dataset includes a column with the suffix “Lowest Level” for each of these segments. This column contains the lowest level of classification that was available for that row in that segment. This is useful when a segment is not consistently used at the same depth - blanks in a low level of classification usually just mean that category does not need as detailed subdivision as others.
+Financial Year
+The financial year 2019-20 refers to the period 1 April 2019 to 31 March 2020.
+In national and provincial data, Financial Year 2019 refers to 2019-20.
+Quarter
+Quarter 1 refers to the 3-month period 1 April to 30 June.
+Quarter 2 refers to the 3-month period 1 July to 30 August.
+etc.
+How to use this data
+Filter Fund_Level_2 for “DEPARTMENTAL APPROPRIATION”
+The Standard Chart of Accounts (SCoA) report tables separate Direct Charges from Appropriated Fund spending, and the same approach has been used here by filtering on FUND_LEVEL_2
+Debt Service Costs and National Revenue Fund payments
+Debt Service Costs and National Revenue Fund Payments (under National Treasury) are included at Economic Classification level since these payments are not made through the main government accounting system (BAS).
+Data provenance (where does it come from?)
+This dataset is a monthly aggregate of data in vulindlela. For most departments, that data comes from their accounting system via the centralised Basic Accounting System BAS) used to collect all government spending data. Departments that do not submit their data to BAS have their data uploaded to vulindlela in other ways.
+Department specifics
+
+Police data is presented only at Economic Classification level as the department does not use the main government accounting system (BAS). Integration has a 6 weeks lag.
+Defence data is presented at Economic Classification level as the department does not use the main government accounting system (BAS). Integration has a 6 weeks lag and only at the item level.
+Parliament and some Provincial Legislatures are excluded from the dataset.
+Examples
+Asset spend by Economic Classification
+An easy way to start exploring the data is by creating a Pivot Table in Excel or LibreOffice.
+
+In this example, we’re defining rows as unique combinations of Department, Assets Lowest Level and Economic Classification level 2.
+
+We’re adding Fund Level 2 as a filter field, and we'll have sum-aggregate columns from the Budget column, the Adjustment Budget column and the Quarter 1 column.
+
+
+By browsing around the results a little, interesting items surface, like Correctional Services spend on animals.
+
+
+Searching for relevant narrative in the Correctional Services department’s Estimates of National Expenditure ePublication, we see mention of farms, which might be related:
+
+
+To explore further, we can replace the Economic Classification column with Responsibility Lowest Level which shows the organisational units responsible for this budget and spending:
+
+
+
+</div>

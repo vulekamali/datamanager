@@ -5,6 +5,7 @@ category_guides = {
     "frameworks-for-conditional-grants-to-municipalities": "frameworks-for-conditional-grants",
     "estimates-of-national-expenditure": "estimates-of-national-expenditure",
     "performance-and-expenditure-reviews": "performance-and-expenditure-reviews",
+    "in-year-spending": "in-year-spending",
 }
 
 guides = {
@@ -36,6 +37,13 @@ guides = {
         "selected_tab": "learning-centre",
         "title": "Frameworks for Conditional Grants - vulekamali",
     },
+    "in-year-spending": {
+        "description": "The in-year spending dataset provides monthly totals from the transactions of each department.",
+        "name": "In-year spending data",
+        "selected_sidebar": "guides",
+        "selected_tab": "learning-centre",
+        "title": "In-year spending data - vulekamali",
+    },
     "index": {
         "description": "South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU.",
         "items": [
@@ -63,6 +71,11 @@ guides = {
                 "description": "Learn where to find the rules for how conditional grants may be spent and how much has been allocated to each municipality and province",
                 "name": "Conditional Grant Frameworks and Allocations",
                 "url_path": "/guides/frameworks-for-conditional-grants",
+            },
+            {
+                "description": "The in-year spending dataset provides monthly totals from the transactions of each department.",
+                "name": "In-year spending data",
+                "url_path": "/guides/in-year-spending",
             },
         ],
         "selected_sidebar": "guides",
