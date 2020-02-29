@@ -10,6 +10,7 @@ router.register(
     basename="provincial-infrastructure-project-api",
 )
 
+
 urlpatterns = [
     url(
         r"^infrastructure-projects/provincial/$",
@@ -21,5 +22,15 @@ urlpatterns = [
         views.provincial_infrastructure_project_detail,
         name="provincial-infra-project-detail",
     ),
+    url(
+        r"^infrastructure-projects/provincial/(?P<id>\d+)-(?P<slug>[\w-]+)/csv-download$",
+        views.ProvInfaProjectCSVDownload.as_view(),
+        name="provincial-infra-project-detail-csv-download",
+    ),
     url(r"^api/v1/", include(router.urls)),
+    url(
+        r"^api/v1/infrastructure-projects/provincial/search/csv-download/<uuid:uuid>",
+        views.ProvInfraProjectSearchViewCSVDownload.as_view(),
+        name="provincial-infrastructure-project-api-csv-download",
+    )
 ]

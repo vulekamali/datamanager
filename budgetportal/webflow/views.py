@@ -9,8 +9,6 @@ from budgetportal import models
 from budgetportal.json_encoder import JSONEncoder
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404, render
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
 from drf_haystack.filters import (
     HaystackFacetFilter,
     HaystackFilter,
@@ -19,7 +17,13 @@ from drf_haystack.filters import (
 from drf_haystack.mixins import FacetMixin
 from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
 from drf_haystack.viewsets import HaystackViewSet
+from rest_framework import serializers
+from rest_framework.views import Response
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.settings import api_settings
+from rest_framework_csv import renderers
 
+from ..models import ProvInfraProjectSnapshot, SearchPageCSVDownloadRequest
 from ..prov_infra_project.charts import time_series_data
 from ..search_indexes import ProvInfraProjectIndex
 
@@ -60,11 +64,40 @@ def provincial_infrastructure_project_detail(request, id, slug):
         % (snapshot.name, snapshot.province),
         "page_description": "Provincial infrastructure project by the %s %s department."
         % (snapshot.province, snapshot.department),
+        "download_url": project.csv_download_url
     }
     return render(
         request, "webflow/detail_provincial-infrastructure-projects.html", context
     )
 
+
+class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProvInfraProjectSnapshot
+        fields = "__all__"
+
+
+class ProvInfaProjectCSVDownload(RetrieveAPIView):
+    queryset = models.ProvInfraProject.objects.prefetch_related("project_snapshots")
+    serializer_class = ProvInfaProjectCSVSnapshotSerializer
+    renderer_classes = (renderers.CSVRenderer,) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
+
+    def get(self, request, *args, **kwargs):
+        project = self.queryset.get(id=int(kwargs['id']))
+        serializer = self.serializer_class(project.project_snapshots.iterator(), many=True)
+        return Response(serializer.data)
+
+
+class ProvInfraProjectSearchViewCSVDownload(RetrieveAPIView):
+    queryset = SearchPageCSVDownloadRequest.objects.select_related("projects")
+    serializer_class = ProvInfaProjectCSVSnapshotSerializer
+    renderer_classes = (renderers.CSVRenderer,) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
+    lookup_field = "uuid"
+
+    def get(self, request, *args, **kwargs):
+        csv_download_request = self.get_object()
+        snapshots = [p.project_snapshots.latest() for p in csv_download_request.projects]
+        return Response(self.serializer_class(snapshots, many=True).data)
 
 class ProvInfraProjectSerializer(HaystackSerializer):
     class Meta:
@@ -164,3 +197,10 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
         "status_order",
         "estimated_completion_date",
     ]
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        csv_download_request =SearchPageCSVDownloadRequest.objects.create(projects=queryset)
+        response = super().list(request, *args, **kwargs)
+        resposne.data["download_url"] = ""
+        return reponse

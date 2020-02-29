@@ -9,6 +9,7 @@ from decimal import Decimal
 from itertools import groupby
 from pprint import pformat
 from urllib.parse import urljoin, quote
+from uuid import uuid4
 
 import requests
 from slugify import slugify
@@ -1879,6 +1880,20 @@ def irm_snapshot_file_path(instance, filename):
         extension,
     )
 
+class SearchPageCSVDownloadRequest(models.Model):
+    uuid = models.UUIDField(db_index=True, unique=True, default=uuid4)
+    projects = models.ManyToManyField("ProvInfraProjectSnapshot")
+
+    def __str__(self):
+        return "{class_name} - {uuid}".format(
+            class_name=self.__class__.__name__,
+            uuid=self.uuid
+        )
+
+    @property
+    def download_url(self):
+        return reverse("provincial-infrastructure-project-api-csv-download", kwargs={"uuid": self.uuid})
+
 
 class IRMSnapshot(models.Model):
     """This represents a particular snapshot from IRM"""
@@ -1930,6 +1945,10 @@ class ProvInfraProject(models.Model):
     def get_absolute_url(self):
         args = [self.pk, self.get_slug()]
         return reverse("provincial-infra-project-detail", args=args)
+
+    @property
+    def csv_download_url(self):
+        return reverse("provincial-infra-project-detail-csv-download", args=(self.id, self.get_slug()))
 
 
 class ProvInfraProjectSnapshot(models.Model):

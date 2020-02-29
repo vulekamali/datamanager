@@ -1,6 +1,6 @@
 [
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 1,
   "fields": {
     "financial_year": 1,
@@ -38,7 +38,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 2,
   "fields": {
     "financial_year": 1,
@@ -76,7 +76,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 3,
   "fields": {
     "financial_year": 1,
@@ -113,7 +113,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 4,
   "fields": {
     "financial_year": 1,
@@ -154,7 +154,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 5,
   "fields": {
     "financial_year": 1,
@@ -197,7 +197,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 6,
   "fields": {
     "financial_year": 1,
@@ -241,7 +241,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 7,
   "fields": {
     "financial_year": 1,
@@ -278,7 +278,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 8,
   "fields": {
     "financial_year": 1,
@@ -316,7 +316,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 9,
   "fields": {
     "financial_year": 1,
@@ -354,7 +354,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 10,
   "fields": {
     "financial_year": 1,
@@ -391,7 +391,7 @@
   }
 },
 {
-  "model": "budgetportal.provinfraproject",
+  "model": "budgetportal.provinfraprojectsnapshot",
   "pk": 11,
   "fields": {
     "financial_year": 1,
