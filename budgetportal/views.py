@@ -914,7 +914,7 @@ def dataset_page(request, category_slug, dataset_slug):
         "performance-resources",
         "procurement-portals-and-resources",
     ]
-    context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
+    context["guide"] = guide_data.get(category_guides.get(category_slug, None), None)
     context["external_resource_page"] = category_slug in external_resource_slugs
     context["comments_enabled"] = settings.COMMENTS_ENABLED
     return render(request, "government_dataset.html", context)
