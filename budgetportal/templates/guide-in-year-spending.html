@@ -1,0 +1,200 @@
+{% load static %}
+
+<h1 class="Page-mainHeading">Dataset Guide: In-year spending data</h1>
+
+<p>
+  The <a href="/datasets/in-year-spending">in-year spending dataset</a> provides monthly totals from the transactions of each department. This data is classified in fine detail by the department when recording their transactions.
+</p>
+
+<div class="BasicContent u-marginBottom15">
+  <a href="{% static 'images/in-year-higher-edu-example.png' %}">
+    <img src="{% static 'images/in-year-higher-edu-example.png' %}" alt="In-year higher-education transfers chart example"/>
+  </a>
+  <p>
+    Skip to <a href="#examples">examples</a>
+  </p>
+</div>
+
+<div class="BasicContent u-marginBottom15">
+  <h2 class="BasicContent-title">Dataset purpose</h2>
+  <p>
+    This dataset is particularly suited to two somewhat different uses:
+  </p>
+
+  <ul>
+    <li>
+      <b>Monitoring in-year spending</b> at department, programme or economic classification level and exploring in-year trends over time at these levels. Comparing this to budgets is informative.
+    </li>
+    <li>
+      <b>Exploring payments at very low levels of classification detail</b> and learning about the activities of a department for further exploration. <em>Be careful about drawing conclusions from low level payment data alone</em> - this usually requires a fair amount of contextual information which can be sought from
+
+      <ul>
+        <li>
+          Strategic Plan documents
+          <ul>
+            <li>Find this on the department's website (See link on their page on vulekamali) or by contacting to the department</li>
+        </li>
+
+        <li>
+          Budget documents, e.g. <a href="/2020-21/departments">ENE and EPRE publications</a>
+          <ul>
+            <li>Find the publication for the department needed at the top of the department’s page or in the <a href="https://data.vulekamali.gov.za/group/budget-vote-documents">full document list</a></li>
+          </ul>
+        </li>
+        <li>
+          Adjustment budget documents, e.g. <a href="/2020-21/departments">AENE, AEPRE</a>
+          <ul>
+            <li>Also on department pages, in Adjusted Budget section, or in the <a href="https://data.vulekamali.gov.za/group/budget-vote-documents">full document list</a></li>
+          </ul>
+        </li>
+        <li>
+          Annual Performance Plan documents
+          <ul>
+            <li>Available from each department's website (See link from their page on vulekamali) or by contacting to the department</li>
+          </ul>
+        </li>
+    </li>
+  </ul>
+</div>
+
+<div class="BasicContent u-marginBottom15">
+  <h2 class="BasicContent-title">Data provenance (where does it come from?)</h2>
+
+  <p>This dataset is a monthly aggregate of data in vulindlela. For most departments, that data comes from their accounting system via the centralised Basic Accounting System BAS) used to collect all government spending data. Departments that do not submit their data to BAS have their data uploaded to vulindlela in other ways.</p>
+</div>
+
+<div class="BasicContent u-marginBottom15">
+  <h2 class="BasicContent-title">How to use this data</h2>
+
+  <h3>Filter Fund_Level_2 for “DEPARTMENTAL APPROPRIATION”</h3>
+
+  <p>The Standard Chart of Accounts (SCoA) report tables separate Direct Charges from Appropriated Fund spending, and the same approach has been used here by filtering on FUND_LEVEL_2</p>
+
+  <h3>Debt Service Costs and National Revenue Fund payments</h3>
+
+  <p>Debt Service Costs and National Revenue Fund Payments (under National Treasury) are included at Economic Classification level since these payments are not made through the main government accounting system (BAS).</p>
+
+</div>
+
+<div class="BasicContent u-marginBottom15">
+  <h2 class="BasicContent-title">Field Definitions</h2>
+
+  <h3>Amounts</h3>
+  <p>Amounts in this dataset are in Thousands of Rands.</p>
+  <p>Amounts are given in period-specific columns.</p>
+
+  <h3>Department and Vote Number</h3>
+
+  <p>Vote refers to the budget vote in parliament when the budget is tabled. Vote number is the identifier given to a budget vote in that financial year. It might be different in other financial years. Most departments are voted on individually. Some departments’ budget are voted on as part of another department. <a href="/2020-21/departments">Learn more about departments and their mandates and purposes.</a></p>
+
+  <h3>Programme and Programme Number</h3>
+
+  <p>Programmes are the names given to the high level activities of a department. Programme Numbers are the identifiers used for specific programmes in a financial year. <a href="/2020-21/departments">Learn more about a specific programme in a national department’s ENE or a provincial department’s EPRE PDF.</a></p>
+
+  <h3>Subprogramme and Subprogramme number</h3>
+
+  <p>Subprogramme is a subdivision of a programme. <a href="/2020-21/departments">Learn more about a specific subprogramme in a national department’s ENE or a provincial department’s EPRE PDF.</a></p>
+
+  <h3>Economic Classification fields</h3>
+
+  <p>The Economic Classification is a categorisation of receipts and payments that identifies the nature and economic effect of government operations on the economy of the country. The Economic Reporting Format is the budget reporting format whose aim is to make government budget data more user-friendly through a simplified presentation of the economic classification of receipts and payments</p>
+
+  <p>Each level provides greater detail. It is derived from the Item, Project and Asset SCoA segments.</p>
+
+  <h3>Standard Chart of Accounts (SCoA) fields</h3>
+
+  <p>The <a href="scoa.treasury.gov.za/">SCoA</a> is the system by which financial transactions are recorded in BAS. The coding structure comprises seven segments. When recording a transaction, a selection must be made from each of the segments, meaning that all segments must be used for recording a single transaction. The segments are</p>
+
+  <ul>
+    <li>Item</li>
+    <li>Responsibility</li>
+    <li>Fund</li>
+    <li>Asset</li>
+    <li>Project</li>
+    <li>Objective</li>
+    <li>Regional</li>
+    <li>Infrastructure</li>
+  </ul>
+
+  <a href="{% static 'images/scoa-segments.png' %}">
+    <img src="{% static 'images/scoa-segments.png' %}" alt="Standard Chart of Accounts segments"/>
+  </a>
+
+  <p>For details of what these fields mean, see the following resources:</p>
+
+  <ul>
+    <li>
+      <a href="https://s3-eu-west-1.amazonaws.com/manual-uploads.vulekamali.gov.za/documents/Design+and+Structure+of+the+Standard+Chart+of+Accounts.pdf">Design and Structure of the Standard Chart of Accounts</a>
+      <ul>
+        <li>This is a PDF book chapter with very accessible explanations of how payments should be classified when entered in an accounting system.</li>
+      </ul>
+    </li>
+    <li>
+      <a href="http://scoa.treasury.gov.za/Pages/Charts.aspx">Standard Chart of Accounts</a>
+      <ul>
+        <li>Download the version that would have been published just before the date of the payments you are using, unzip the file, and open the Excel file that was unpacked.</li>
+        <li>Each worksheet describes one “segment” of classification, e.g. Item or Responsibility. Each level is in a column. Some segments, e.g. Item have detailed descriptions for almost every classification.</li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    This dataset includes a column with the suffix “Lowest Level” for each of these segments. This column contains the lowest level of classification that was available for that row in that segment. This is useful when a segment is not consistently used at the same depth - blanks in a low level of classification usually just mean that category does not need as detailed subdivision as others.
+  </p>
+
+  <h3>Financial Year</h3>
+
+  <p>The financial year 2019-20 refers to the period 1 April 2019 to 31 March 2020.</p>
+  <p>In national and provincial data, Financial Year 2019 refers to 2019-20.</p>
+
+  <h3>Quarter</h3>
+
+  <p>Quarter 1 refers to the 3-month period 1 April to 30 June.</p>
+  <p>Quarter 2 refers to the 3-month period 1 July to 30 August.</p>
+  etc.
+</div>
+
+<div class="BasicContent u-marginBottom15">
+  <h2 class="BasicContent-title">Department specifics</h2>
+
+  <ul>
+    <li>Police data is presented only at Economic Classification level as the department does not use the main government accounting system (BAS). Integration has a 6 weeks lag.</li>
+    <li>Defence data is presented at Economic Classification level as the department does not use the main government accounting system (BAS). Integration has a 6 weeks lag and only at the item level.</li>
+    <li>Parliament and some Provincial Legislatures are excluded from the dataset.</li>
+  </ul>
+
+</div>
+
+<div class="BasicContent u-marginBottom15">
+  <h2 id="examples" class="BasicContent-title">Examples</h2>
+
+  <h3>Asset spend by Economic Classification</h3>
+
+  <p>An easy way to start exploring the data is by creating a Pivot Table in Excel or LibreOffice.</p>
+
+  <p>In this example, we’re defining rows as unique combinations of Department, Assets Lowest Level and Economic Classification level 2.</p>
+
+  <p>We're adding Fund Level 2 as a filter field, and we'll have sum-aggregate columns from the Budget column, the Adjustment Budget column and the Quarter 1 column.</p>
+
+  <a href="{% static 'images/asset-lowest-by-econ-definition.png' %}">
+    <img src="{% static 'images/asset-lowest-by-econ-definition.png' %}" alt="Screenshot of how fields are arranged in a pivot table" />
+  </a>
+
+  <p>By browsing around the results a little, interesting items surface, like Correctional Services spend on animals.</p>
+
+  <a href="{% static 'images/asset-lowest-by-econ-summary.png' %}">
+    <img src="{% static 'images/asset-lowest-by-econ-summary.png' %}" alt="Pivot table summarising annual original budget, annual adjustment budget, and quarterly actual spend by department, SCOA Asset segment lowest level, and Economic Classification level 2" />
+  </a>
+
+  <p>Searching for relevant narrative in the <a href="https://vulekamali.gov.za/2019-20/national/departments/correctional-services/">Correctional Services department’s Estimates of National Expenditure ePublication</a>, we see mention of farms, which might be related:</p>
+
+  <a href="{% static 'images/correctional-services-farming.png' %}">
+    <img src="{% static 'images/correctional-services-farming.png' %}" alt="Correctional Services Estimates of National Expenditure (budget narrative) writing on farming">
+  </a>
+
+  <p>To explore further, we can replace the Economic Classification column with Responsibility Lowest Level which shows the organisational units responsible for this budget and spending:</p>
+
+  <a href="{% static 'images/asset-lowest-by-responsibility-summary.png' %}">
+    <img src="{% static 'images/asset-lowest-by-responsibility-summary.png' %}" alt="Pivot table summarising annual original budget, annual adjustment budget, and quarterly actual spend by department, SCOA Asset segment lowest level, and Responsibility segment lowest level." />
+  </a>
+
+</div>
