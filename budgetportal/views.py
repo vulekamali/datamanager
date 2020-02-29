@@ -867,7 +867,7 @@ def dataset_category_page(request, category_slug):
     context = dataset_category_context(category_slug)
     context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
-    context["guide"] = (guide_data.get(category_guides.get(category_slug, None), None),)
+    context["guide"] = guide_data.get(category_guides.get(category_slug, None), None)
     return render(request, "government_dataset_category.html", context)
 
 
