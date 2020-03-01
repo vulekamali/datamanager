@@ -109,6 +109,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
         # NOTE: Make sure you don't confuse these with model attributes. These
         # fields belong to the search index!
         fields = [
+            "id",
             "name",
             "province",
             "department",
@@ -200,7 +201,13 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        csv_download_request =SearchPageCSVDownloadRequest.objects.create(projects=queryset)
+        csv_download_request = self._create_csv_download_request(queryset)
         response = super().list(request, *args, **kwargs)
-        resposne.data["download_url"] = ""
-        return reponse
+        response.data["download_url"] = csv_download_request.download_url
+        return response
+
+    def _create_csv_download_request(self, queryset):
+        ids = queryset.values_list("id", flat=True)
+        csv_download_request = SearchPageCSVDownloadRequest.objects.create()
+        csv_download_request.projects.set(ProvInfraProjectSnapshot.objects.filter(id__in=ids))
+        return csv_download_request

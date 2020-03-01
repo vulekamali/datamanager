@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.urls import path
 from rest_framework import routers
 
 from . import views
@@ -28,8 +29,8 @@ urlpatterns = [
         name="provincial-infra-project-detail-csv-download",
     ),
     url(r"^api/v1/", include(router.urls)),
-    url(
-        r"^api/v1/infrastructure-projects/provincial/search/csv-download/<uuid:uuid>",
+    path(
+        r"api/v1/infrastructure-projects/provincial/search/csv-download/<uuid:uuid>",
         views.ProvInfraProjectSearchViewCSVDownload.as_view(),
         name="provincial-infrastructure-project-api-csv-download",
     )

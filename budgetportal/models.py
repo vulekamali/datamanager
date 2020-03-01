@@ -1892,7 +1892,7 @@ class SearchPageCSVDownloadRequest(models.Model):
 
     @property
     def download_url(self):
-        return reverse("provincial-infrastructure-project-api-csv-download", kwargs={"uuid": self.uuid})
+        return reverse("provincial-infrastructure-project-api-csv-download", args=(str(self.uuid),))
 
 
 class IRMSnapshot(models.Model):
