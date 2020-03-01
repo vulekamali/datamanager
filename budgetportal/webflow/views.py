@@ -83,6 +83,12 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView):
     renderer_classes = (renderers.CSVRenderer,) + tuple(
         api_settings.DEFAULT_RENDERER_CLASSES
     )
+    labels = {
+        "adjustment_appropriation_professional_fees": "adjusted_appropriation_professional_fees",
+        "adjustment_appropriation_construction_costs": "adjusted_appropriation_construction_costs",
+        "adjustment_appropriation_total": "adjusted_appropriation_total",
+        "total_project_cost": "estimated_total_project_cost"
+    }
 
     def get(self, request, *args, **kwargs):
         project = self.queryset.get(id=int(kwargs["id"]))
@@ -101,6 +107,13 @@ class ProvInfraProjectSearchViewCSVDownload(RetrieveAPIView):
         api_settings.DEFAULT_RENDERER_CLASSES
     )
     lookup_field = "uuid"
+
+    labels = {
+        "adjustment_appropriation_professional_fees": "adjusted_appropriation_professional_fees",
+        "adjustment_appropriation_construction_costs": "adjusted_appropriation_construction_costs",
+        "adjustment_appropriation_total": "adjusted_appropriation_total",
+        "total_project_cost": "estimated_total_project_cost"
+    }
 
     def get(self, request, *args, **kwargs):
         obj = self.get_object()
