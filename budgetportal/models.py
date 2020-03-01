@@ -1882,7 +1882,7 @@ def irm_snapshot_file_path(instance, filename):
 
 class SearchPageCSVDownloadRequest(models.Model):
     uuid = models.UUIDField(db_index=True, unique=True, default=uuid4)
-    projects = models.ManyToManyField("ProvInfraProjectSnapshot")
+    projects_snapshots = models.ManyToManyField("ProvInfraProjectSnapshot")
 
     def __str__(self):
         return "{class_name} - {uuid}".format(

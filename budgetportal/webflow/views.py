@@ -89,15 +89,16 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView):
 
 
 class ProvInfraProjectSearchViewCSVDownload(RetrieveAPIView):
-    queryset = SearchPageCSVDownloadRequest.objects.select_related("projects")
+    queryset = SearchPageCSVDownloadRequest.objects.prefetch_related("projects_snapshots")
     serializer_class = ProvInfaProjectCSVSnapshotSerializer
     renderer_classes = (renderers.CSVRenderer,) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
     lookup_field = "uuid"
 
     def get(self, request, *args, **kwargs):
-        csv_download_request = self.get_object()
-        snapshots = [p.project_snapshots.latest() for p in csv_download_request.projects]
-        return Response(self.serializer_class(snapshots, many=True).data)
+        obj = self.get_object()
+        serializer = self.serializer_class(obj.projects_snapshots.iterator(), many=True)
+        return Response(serializer.data)
+
 
 class ProvInfraProjectSerializer(HaystackSerializer):
     class Meta:
@@ -209,5 +210,5 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     def _create_csv_download_request(self, queryset):
         ids = queryset.values_list("id", flat=True)
         csv_download_request = SearchPageCSVDownloadRequest.objects.create()
-        csv_download_request.projects.set(ProvInfraProjectSnapshot.objects.filter(id__in=ids))
+        csv_download_request.projects_snapshots.set(ProvInfraProjectSnapshot.objects.filter(id__in=ids))
         return csv_download_request
