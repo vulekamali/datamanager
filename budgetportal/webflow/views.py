@@ -64,7 +64,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
         % (snapshot.name, snapshot.province),
         "page_description": "Provincial infrastructure project by the %s %s department."
         % (snapshot.province, snapshot.department),
-        "download_url": project.csv_download_url,
+        "csv_download_url": project.csv_download_url,
     }
     return render(
         request, "webflow/detail_provincial-infrastructure-projects.html", context
@@ -212,7 +212,7 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
         queryset = self.get_queryset()
         csv_download_request = self._create_csv_download_request(queryset)
         response = super().list(request, *args, **kwargs)
-        response.data["download_url"] = csv_download_request.download_url
+        response.data["csv_download_url"] = csv_download_request.csv_download_url
         return response
 
     def _create_csv_download_request(self, queryset):

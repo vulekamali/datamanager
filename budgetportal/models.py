@@ -1891,7 +1891,7 @@ class SearchPageCSVDownloadRequest(models.Model):
         )
 
     @property
-    def download_url(self):
+    def csv_download_url(self):
         return reverse(
             "provincial-infrastructure-project-api-csv-download", args=(str(self.uuid),)
         )
