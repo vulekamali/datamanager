@@ -64,7 +64,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
         % (snapshot.name, snapshot.province),
         "page_description": "Provincial infrastructure project by the %s %s department."
         % (snapshot.province, snapshot.department),
-        "download_url": project.csv_download_url
+        "download_url": project.csv_download_url,
     }
     return render(
         request, "webflow/detail_provincial-infrastructure-projects.html", context
@@ -80,18 +80,26 @@ class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
 class ProvInfaProjectCSVDownload(RetrieveAPIView):
     queryset = models.ProvInfraProject.objects.prefetch_related("project_snapshots")
     serializer_class = ProvInfaProjectCSVSnapshotSerializer
-    renderer_classes = (renderers.CSVRenderer,) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
+    renderer_classes = (renderers.CSVRenderer,) + tuple(
+        api_settings.DEFAULT_RENDERER_CLASSES
+    )
 
     def get(self, request, *args, **kwargs):
-        project = self.queryset.get(id=int(kwargs['id']))
-        serializer = self.serializer_class(project.project_snapshots.iterator(), many=True)
+        project = self.queryset.get(id=int(kwargs["id"]))
+        serializer = self.serializer_class(
+            project.project_snapshots.iterator(), many=True
+        )
         return Response(serializer.data)
 
 
 class ProvInfraProjectSearchViewCSVDownload(RetrieveAPIView):
-    queryset = SearchPageCSVDownloadRequest.objects.prefetch_related("projects_snapshots")
+    queryset = SearchPageCSVDownloadRequest.objects.prefetch_related(
+        "projects_snapshots"
+    )
     serializer_class = ProvInfaProjectCSVSnapshotSerializer
-    renderer_classes = (renderers.CSVRenderer,) + tuple(api_settings.DEFAULT_RENDERER_CLASSES)
+    renderer_classes = (renderers.CSVRenderer,) + tuple(
+        api_settings.DEFAULT_RENDERER_CLASSES
+    )
     lookup_field = "uuid"
 
     def get(self, request, *args, **kwargs):
@@ -210,5 +218,7 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     def _create_csv_download_request(self, queryset):
         ids = queryset.values_list("id", flat=True)
         csv_download_request = SearchPageCSVDownloadRequest.objects.create()
-        csv_download_request.projects_snapshots.set(ProvInfraProjectSnapshot.objects.filter(id__in=ids))
+        csv_download_request.projects_snapshots.set(
+            ProvInfraProjectSnapshot.objects.filter(id__in=ids)
+        )
         return csv_download_request

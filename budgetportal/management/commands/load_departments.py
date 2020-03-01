@@ -80,8 +80,8 @@ class Command(BaseCommand):
 
                 try:
                     exists = Department.objects.filter(
-                            government=government, name=row["department_name"]
-                        ).exists()
+                        government=government, name=row["department_name"]
+                    ).exists()
                     if update or exists:
                         department = Department.objects.get(
                             government=government, name=row["department_name"]

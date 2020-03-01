@@ -8,16 +8,27 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0042_auto_20200131_1500'),
+        ("budgetportal", "0042_auto_20200131_1500"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SearchPageCSVDownloadRequest',
+            name="SearchPageCSVDownloadRequest",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('uuid', models.UUIDField(db_index=True, unique=True)),
-                ('projects', models.ManyToManyField(to='budgetportal.ProvInfraProjectSnapshot')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("uuid", models.UUIDField(db_index=True, unique=True)),
+                (
+                    "projects",
+                    models.ManyToManyField(to="budgetportal.ProvInfraProjectSnapshot"),
+                ),
             ],
         ),
     ]

@@ -9,13 +9,13 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0043_auto_20200229_1600'),
+        ("budgetportal", "0043_auto_20200229_1600"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='searchpagecsvdownloadrequest',
-            old_name='projects',
-            new_name='projects_snapshots',
+            model_name="searchpagecsvdownloadrequest",
+            old_name="projects",
+            new_name="projects_snapshots",
         )
     ]

@@ -33,5 +33,5 @@ urlpatterns = [
         r"api/v1/infrastructure-projects/provincial/search/csv-download/<uuid:uuid>",
         views.ProvInfraProjectSearchViewCSVDownload.as_view(),
         name="provincial-infrastructure-project-api-csv-download",
-    )
+    ),
 ]
