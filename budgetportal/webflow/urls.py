@@ -12,24 +12,24 @@ router.register(
 )
 
 urlpatterns = [
-    url(
-        r"^infrastructure-projects/provincial/$",
+    path(
+        r"infrastructure-projects/provincial/",
         views.provincial_infrastructure_project_list,
         name="provincial-infra-project-list",
     ),
-    url(
-        r"^infrastructure-projects/provincial/(?P<id>\d+)-(?P<slug>[\w-]+)$",
+    path(
+        r"infrastructure-projects/provincial/<int:id>-<slug:slug>",
         views.provincial_infrastructure_project_detail,
         name="provincial-infra-project-detail",
     ),
-    url(
-        r"^infrastructure-projects/provincial/(?P<id>\d+)-(?P<slug>[\w-]+)/csv-download$",
+    path(
+        r"infrastructure-projects/provincial/<int:id>-<slug:slug>/csv-download",
         views.ProvInfaProjectCSVDownload.as_view(),
         name="provincial-infra-project-detail-csv-download",
     ),
-    url(r"^api/v1/", include(router.urls)),
+    path(r"api/v1/", include(router.urls)),
     path(
-        "infrastructure-projects/provincial/search/get-csv",
+        "infrastructure-projects/provincial/search/csv",
         views.ProvInfraProjectSearchView.as_view({"get": "get_csv"}),
         name="provincial-infrastructure-project-api-csv"
     )

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import json
+import urllib.parse
 
 from slugify import slugify
 
@@ -9,7 +10,6 @@ from budgetportal import models
 from budgetportal.json_encoder import JSONEncoder
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404, render
-from django.utils.http import urlencode
 from django.urls import reverse
 from drf_haystack.filters import (
     HaystackFacetFilter,
@@ -272,4 +272,4 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
         params = ""
         for param_name, param_value in csv_download_params.items():
             params += "{}={}".format(param_name, param_value)
-        return params
+        return urllib.parse.urlencode(params)
