@@ -1881,22 +1881,6 @@ def irm_snapshot_file_path(instance, filename):
     )
 
 
-class SearchPageCSVDownloadRequest(models.Model):
-    uuid = models.UUIDField(db_index=True, unique=True, default=uuid4)
-    projects_snapshots = models.ManyToManyField("ProvInfraProjectSnapshot")
-
-    def __str__(self):
-        return "{class_name} - {uuid}".format(
-            class_name=self.__class__.__name__, uuid=self.uuid
-        )
-
-    @property
-    def csv_download_url(self):
-        return reverse(
-            "provincial-infrastructure-project-api-csv-download", args=(str(self.uuid),)
-        )
-
-
 class IRMSnapshot(models.Model):
     """This represents a particular snapshot from IRM"""
 

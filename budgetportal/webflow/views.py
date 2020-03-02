@@ -79,7 +79,7 @@ class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
 
 class ProvInfaProjectCSVDownload(RetrieveAPIView):
     queryset = models.ProvInfraProject.objects.prefetch_related("project_snapshots")
-    serializer_class = ProvInfaProjectCSVSnapshotSerializer
+    serializer_class =
     renderer_classes = (renderers.CSVRenderer,) + tuple(
         api_settings.DEFAULT_RENDERER_CLASSES
     )
@@ -95,29 +95,6 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView):
         serializer = self.serializer_class(
             project.project_snapshots.iterator(), many=True
         )
-        return Response(serializer.data)
-
-
-class ProvInfraProjectSearchViewCSVDownload(RetrieveAPIView):
-    queryset = SearchPageCSVDownloadRequest.objects.prefetch_related(
-        "projects_snapshots"
-    )
-    serializer_class = ProvInfaProjectCSVSnapshotSerializer
-    renderer_classes = (renderers.CSVRenderer,) + tuple(
-        api_settings.DEFAULT_RENDERER_CLASSES
-    )
-    lookup_field = "uuid"
-
-    labels = {
-        "adjustment_appropriation_professional_fees": "adjusted_appropriation_professional_fees",
-        "adjustment_appropriation_construction_costs": "adjusted_appropriation_construction_costs",
-        "adjustment_appropriation_total": "adjusted_appropriation_total",
-        "total_project_cost": "estimated_total_project_cost"
-    }
-
-    def get(self, request, *args, **kwargs):
-        obj = self.get_object()
-        serializer = self.serializer_class(obj.projects_snapshots.iterator(), many=True)
         return Response(serializer.data)
 
 

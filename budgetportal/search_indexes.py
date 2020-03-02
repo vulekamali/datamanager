@@ -19,6 +19,39 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     longitude = indexes.CharField()
     url_path = indexes.CharField()
 
+    project_number = indexes.CharField()
+    local_municipality = indexes.CharField()
+    district_municipality = indexes.CharField()
+    budget_programme = indexes.CharField()
+    nature_of_investment = indexes.CharField()
+    funding_status = indexes.CharField()
+    program_implementing_agent = indexes.CharField()
+    principle_agent = indexes.CharField()
+    main_contractor = indexes.CharField()
+    other_parties = indexes.CharField()
+    start_date = indexes.DateField()
+    estimated_construction_start_date = indexes.DateField()
+    contracted_construction_end_date = indexes.DateField()
+    estimated_construction_end_date = indexes.DateField()
+
+    total_professional_fees = indexes.DecimalField()
+    total_construction_costs = indexes.DecimalField()
+    variation_orders = indexes.DecimalField()
+    expenditure_from_previous_years_professional_fees = indexes.DecimalField()
+    expenditure_from_previous_years_construction_costs = indexes.DecimalField()
+    expenditure_from_previous_years_total = indexes.DecimalField()
+    project_expenditure_total = indexes.DecimalField()
+    main_appropriation_professional_fees = indexes.DecimalField()
+    adjustment_appropriation_professional_fees = indexes.DecimalField()
+    main_appropriation_construction_costs = indexes.DecimalField()
+    adjustment_appropriation_construction_costs = indexes.DecimalField()
+    main_appropriation_total = indexes.DecimalField()
+    adjustment_appropriation_total = indexes.DecimalField()
+    actual_expenditure_q1 = indexes.DecimalField()
+    actual_expenditure_q2 = indexes.DecimalField()
+    actual_expenditure_q3 = indexes.DecimalField()
+    actual_expenditure_q4 = indexes.DecimalField()
+
     def get_model(self):
         return ProvInfraProject
 
@@ -59,6 +92,96 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_url_path(sef, object):
         return object.get_absolute_url()
+
+    def prepare_project_number(sef, object):
+        return object.project_snapshots.latest().project_number
+
+    def prepare_local_municipality(sef, object):
+        return object.project_snapshots.latest().local_municipality
+
+    def prepare_district_municipality(sef, object):
+        return object.project_snapshots.latest().district_municipality
+
+    def prepare_budget_programme(sef, object):
+        return object.project_snapshots.latest().budget_programme
+
+    def prepare_nature_of_investment(sef, object):
+        return object.project_snapshots.latest().nature_of_investment
+
+    def prepare_funding_status(sef, object):
+        return object.project_snapshots.latest().funding_status
+
+    def prepare_program_implementing_agent(sef, object):
+        return object.project_snapshots.latest().program_implementing_agent
+
+    def prepare_principle_agent(sef, object):
+        return object.project_snapshots.latest().principle_agent
+
+    def prepare_main_contractor(sef, object):
+        return object.project_snapshots.latest().main_contractor
+
+    def prepare_other_parties(sef, object):
+        return object.project_snapshots.latest().other_parties
+
+    def prepare_start_date(sef, object):
+        return object.project_snapshots.latest().start_date
+
+    def prepare_estimated_construction_start_date(sef, object):
+        return object.project_snapshots.latest().estimated_construction_start_date
+
+    def prepare_contracted_construction_end_date(sef, object):
+        return object.project_snapshots.latest().contracted_construction_end_date
+
+    def prepare_estimated_construction_end_date(sef, object):
+        return object.project_snapshots.latest().estimated_construction_end_date
+
+    def prepare_total_professional_fees(sef, object):
+        return object.project_snapshots.latest().total_professional_fees
+
+    def prepare_total_construction_costs(sef, object):
+        return object.project_snapshots.latest().total_construction_costs
+
+    def prepare_variation_orders(sef, object):
+        return object.project_snapshots.latest().variation_orders
+
+    def prepare_expenditure_from_previous_years_professional_fees(sef, object):
+        return object.project_snapshots.latest().expenditure_from_previous_years_professional_fees
+
+    def prepare_expenditure_from_previous_years_construction_costs(sef, object):
+        return object.project_snapshots.latest().expenditure_from_previous_years_construction_costs
+
+    def prepare_expenditure_from_previous_years_total(sef, object):
+        return object.project_snapshots.latest().expenditure_from_previous_years_total
+
+    def prepare_project_expenditure_total(sef, object):
+        return object.project_snapshots.latest().project_expenditure_total
+
+    def prepare_main_appropriation_professional_fees(sef, object):
+        return object.project_snapshots.latest().main_appropriation_professional_fees
+
+    def prepare_adjustment_appropriation_professional_fees(sef, object):
+        return object.project_snapshots.latest().adjustment_appropriation_professional_fees
+
+    def prepare_adjustment_appropriation_construction_costs(sef, object):
+        return object.project_snapshots.latest().adjustment_appropriation_construction_costs
+
+    def prepare_main_appropriation_total(sef, object):
+        return object.project_snapshots.latest().main_appropriation_total
+
+    def prepare_adjustment_appropriation_total(sef, object):
+        return object.project_snapshots.latest().adjustment_appropriation_total
+
+    def prepare_actual_expenditure_q1(sef, object):
+        return object.project_snapshots.latest().actual_expenditure_q1
+
+    def prepare_actual_expenditure_q2(sef, object):
+        return object.project_snapshots.latest().actual_expenditure_q2
+
+    def prepare_actual_expenditure_q3(sef, object):
+        return object.project_snapshots.latest().actual_expenditure_q3
+
+    def prepare_actual_expenditure_q4(sef, object):
+        return object.project_snapshots.latest().actual_expenditure_q4
 
     def should_update(self, instance, **kwargs):
         return instance.project_snapshots.count()
