@@ -7,7 +7,6 @@ import urllib.parse
 
 from copy import deepcopy
 from slugify import slugify
-
 from budgetportal import models
 from budgetportal.json_encoder import JSONEncoder
 from django.forms.models import model_to_dict
@@ -107,7 +106,7 @@ class ProvInfraProjectCSVGeneratorMixIn:
 class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProvInfraProjectSnapshot
-        fields = "__all__"
+        exclude = ["created_at", "updated_at", "id", "project", "irm_snapshot"]
 
 
 class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMixIn):
@@ -115,12 +114,12 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMi
     serializer_class = ProvInfaProjectCSVSnapshotSerializer
 
     def get(self, request, *args, **kwargs):
-        project = self.queryset.get(id=int(kwargs["id"]))
+        project = get_object_or_404(self.queryset, id=int(kwargs["id"]))
         serializer = self.serializer_class(
             project.project_snapshots.iterator(), many=True
         )
-        filename = "{}.csv".format(slugify(str(project)))
-        return self.generate_csv_response([serializer.data], filename=filename)
+        filename = "{}.csv".format(project.get_slug())
+        return self.generate_csv_response(serializer.data, filename=filename)
 
     def get_renderer_context(self):
         context = super().get_renderer_context()

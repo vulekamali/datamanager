@@ -4,7 +4,7 @@ import os
 import io
 import csv
 from datetime import date
-
+from slugify import slugify
 from budgetportal.models import (
     FinancialYear,
     IRMSnapshot,
@@ -1234,7 +1234,43 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         )
 
 
-class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(APITransactionTestCase):
+class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
+    def _test_csv_content_correctness(self, csv_reader, items_to_compare):
+        for index, row in enumerate(csv_reader):
+            self.assertListEqual(list(row.keys()), self._get_expected_headers())
+            self.assertEqual(items_to_compare[index].name, row["name"])
+            self.assertEqual(items_to_compare[index].province, row["province"])
+            self.assertEqual(
+                items_to_compare[index].estimated_completion_date.strftime("%Y-%m-%d"),
+                row["estimated_completion_date"],
+            )
+            self.assertEqual(
+                float(items_to_compare[index].adjustment_appropriation_professional_fees),
+                float(row["adjusted_appropriation_professional_fees"]),
+            )
+
+    def _test_response_correctness(self, response, filename="export.csv"):
+        self.assertEqual(response.status_code, 200)
+        self.assertEquals(
+            response.get("Content-Disposition"), 'attachment; filename="{}"'.format(filename)
+        )
+
+    def _get_expected_headers(self):
+        expected_headers = []
+        headers = ProvInfraProjectCSVSerializer.Meta.fields
+        headers_to_replace = ProvInfraProjectCSVGeneratorMixIn.labels
+        for i, header in enumerate(headers):
+            if header in headers_to_replace.keys():
+                expected_headers.append(headers_to_replace[header])
+            else:
+                expected_headers.append(header)
+        return expected_headers
+
+
+class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
+    APITransactionTestCase,
+    ProvInfraProjectIRMSnapshotCSVDownloadMixin
+):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file1 = open(EMPTY_FILE_PATH, "rb")
@@ -1322,33 +1358,66 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(APITransactionTestCase):
         items_to_compare = [self.project_snapshot_1]
         self._test_csv_content_correctness(csv_reader, items_to_compare)
 
-    def _test_csv_content_correctness(self, csv_reader, items_to_compare):
-        for index, row in enumerate(csv_reader):
-            self.assertListEqual(list(row.keys()), self._get_expected_headers())
-            self.assertEqual(items_to_compare[index].name, row["name"])
-            self.assertEqual(items_to_compare[index].province, row["province"])
-            self.assertEqual(
-                items_to_compare[index].estimated_completion_date.strftime("%Y-%m-%d"),
-                row["estimated_completion_date"],
-            )
-            self.assertEqual(
-                str(items_to_compare[index].adjustment_appropriation_professional_fees),
-                row["adjusted_appropriation_professional_fees"],
-            )
 
-    def _test_response_correctness(self, response):
-        self.assertEqual(response.status_code, 200)
-        self.assertEquals(
-            response.get("Content-Disposition"), 'attachment; filename="export.csv"'
+class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
+    APITransactionTestCase,
+    ProvInfraProjectIRMSnapshotCSVDownloadMixin
+):
+    def setUp(self):
+        call_command("clear_index", "--noinput")
+        self.file1 = open(EMPTY_FILE_PATH, "rb")
+        self.file2 = open(EMPTY_FILE_PATH, "rb")
+
+        irm_snapshot_1 = IRMSnapshot.objects.create(
+            financial_year=FinancialYear.objects.create(slug="2030-31"),
+            quarter=Quarter.objects.create(number=1),
+            date_taken=date(year=2050, month=1, day=1),
+            file=File(self.file1),
+        )
+        irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=FinancialYear.objects.create(slug="2030-32"),
+            quarter=Quarter.objects.create(number=2),
+            date_taken=date(year=2050, month=1, day=1),
+            file=File(self.file2),
+        )
+        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_1,
+            project=self.project,
+            name="Blue School",
+            province="Eastern Cape",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+            adjustment_appropriation_professional_fees=1.0,
+        )
+        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_2,
+            project=self.project,
+            name="Red School",
+            province="Limpopo",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+            adjustment_appropriation_professional_fees=2.0,
         )
 
-    def _get_expected_headers(self):
-        expected_headers = []
-        headers = ProvInfraProjectCSVSerializer.Meta.fields
-        headers_to_replace = ProvInfraProjectCSVGeneratorMixIn.labels
-        for i, header in enumerate(headers):
-            if header in headers_to_replace.keys():
-                expected_headers.append(headers_to_replace[header])
-            else:
-                expected_headers.append(header)
-        return expected_headers
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
+        self.file1.close()
+        self.file2.close()
+
+    def test_404_if_there_is_no_project(self):
+        data = {"id": 9999999, "slug": "slug"}
+        url = reverse("provincial-infra-project-detail-csv-download", kwargs=data)
+        response = self.client.get(url, data)
+        self.assertEqual(response.status_code, 404)
+
+    def test_csv_download(self):
+        data = {"id": self.project.id, "slug": self.project.get_slug()}
+        url = reverse("provincial-infra-project-detail-csv-download", kwargs=data)
+        response = self.client.get(url, data)
+        self._test_response_correctness(response, filename="{}.csv".format(self.project.get_slug()))
+
+        content = response.content.decode("utf-8")
+        csv_reader = csv.DictReader(io.StringIO(content))
+        items_to_compare = [self.project_snapshot_1, self.project_snapshot_2]
+        self._test_csv_content_correctness(csv_reader, items_to_compare)
