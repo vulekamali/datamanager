@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*
 import os
+import io
+import csv
 from datetime import date
 
 from budgetportal.models import (
@@ -20,6 +22,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from django.core.management import call_command
+
+from budgetportal.webflow.views import (
+    ProvInfraProjectCSVSerializer,
+    ProvInfraProjectCSVGeneratorMixIn,
+)
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
@@ -1225,3 +1232,123 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
             reverse("provincial-infrastructure-project-api-csv")
             + "?q=Eastern%20Cape%20School",
         )
+
+
+class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(APITransactionTestCase):
+    def setUp(self):
+        call_command("clear_index", "--noinput")
+        self.file1 = open(EMPTY_FILE_PATH, "rb")
+        self.file2 = open(EMPTY_FILE_PATH, "rb")
+        self.url = reverse("provincial-infrastructure-project-api-list")
+
+        irm_snapshot_1 = IRMSnapshot.objects.create(
+            financial_year=FinancialYear.objects.create(slug="2030-31"),
+            quarter=Quarter.objects.create(number=1),
+            date_taken=date(year=2050, month=1, day=1),
+            file=File(self.file1),
+        )
+        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_1,
+            project=ProvInfraProject.objects.create(IRM_project_id=1),
+            name="Blue School",
+            province="Eastern Cape",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+            adjustment_appropriation_professional_fees=1.0,
+        )
+
+        irm_snapshot_2 = IRMSnapshot.objects.create(
+            financial_year=FinancialYear.objects.create(slug="2030-32"),
+            quarter=Quarter.objects.create(number=2),
+            date_taken=date(year=2050, month=1, day=1),
+            file=File(self.file2),
+        )
+        project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
+        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_2,
+            project=project_2,
+            name="Red School",
+            province="Limpopo",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+            adjustment_appropriation_professional_fees=2.0,
+        )
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
+        self.file1.close()
+        self.file2.close()
+
+    def test_csv_download_empty_file(self):
+        data = {"q": "data that won't be found"}
+        response = self.client.get(self.url, data)
+        self.assertEqual(len(response.data["results"]), 0)
+
+        csv_download_url = response.data["csv_download_url"]
+        response = self.client.get(csv_download_url)
+        self._test_response_correctness(response)
+
+        content = response.content.decode("utf-8")
+        csv_reader = csv.reader(io.StringIO(content))
+        body = list(csv_reader)
+        self.assertEqual(len(body), 1)
+        headers = body[0]
+        self.assertListEqual(headers, self._get_expected_headers())
+
+    def test_csv_download_with_all_projects(self):
+        response = self.client.get(self.url)
+        self.assertEqual(len(response.data["results"]), 2)
+
+        csv_download_url = response.data["csv_download_url"]
+        response = self.client.get(csv_download_url)
+        self._test_response_correctness(response)
+
+        content = response.content.decode("utf-8")
+        csv_reader = csv.DictReader(io.StringIO(content))
+        items_to_compare = [self.project_snapshot_2, self.project_snapshot_1]
+        self._test_csv_content_correctness(csv_reader, items_to_compare)
+
+    def test_csv_download_with_found_project(self):
+        search = "Eastern Cape School"
+        data = {"q": search}
+        response = self.client.get(self.url, data)
+        self.assertEqual(len(response.data["results"]), 1)
+
+        csv_download_url = response.data["csv_download_url"]
+        response = self.client.get(csv_download_url)
+        self._test_response_correctness(response)
+
+        content = response.content.decode("utf-8")
+        csv_reader = csv.DictReader(io.StringIO(content))
+        items_to_compare = [self.project_snapshot_1]
+        self._test_csv_content_correctness(csv_reader, items_to_compare)
+
+    def _test_csv_content_correctness(self, csv_reader, items_to_compare):
+        for index, row in enumerate(csv_reader):
+            self.assertListEqual(list(row.keys()), self._get_expected_headers())
+            self.assertEqual(items_to_compare[index].name, row["name"])
+            self.assertEqual(items_to_compare[index].province, row["province"])
+            self.assertEqual(
+                items_to_compare[index].estimated_completion_date.strftime("%Y-%m-%d"),
+                row["estimated_completion_date"],
+            )
+            self.assertEqual(
+                str(items_to_compare[index].adjustment_appropriation_professional_fees),
+                row["adjusted_appropriation_professional_fees"],
+            )
+
+    def _test_response_correctness(self, response):
+        self.assertEqual(response.status_code, 200)
+        self.assertEquals(
+            response.get("Content-Disposition"), 'attachment; filename="export.csv"'
+        )
+
+    def _get_expected_headers(self):
+        expected_headers = []
+        headers = ProvInfraProjectCSVSerializer.Meta.fields
+        headers_to_replace = ProvInfraProjectCSVGeneratorMixIn.labels
+        for i, header in enumerate(headers):
+            if header in headers_to_replace.keys():
+                expected_headers.append(headers_to_replace[header])
+            else:
+                expected_headers.append(header)
+        return expected_headers
