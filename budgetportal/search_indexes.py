@@ -5,7 +5,6 @@ from .prov_infra_projects import status_order
 
 
 class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
-    id = indexes.IntegerField()
     text = indexes.CharField(document=True, use_template=True)
     name = indexes.CharField()
     province = indexes.CharField(faceted=True)
@@ -54,9 +53,6 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_model(self):
         return ProvInfraProject
-
-    def prepare_id(self, object):
-        return object.project_snapshots.latest().id
 
     def prepare_name(sef, object):
         return object.project_snapshots.latest().name
