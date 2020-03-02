@@ -1245,14 +1245,17 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
                 row["estimated_completion_date"],
             )
             self.assertEqual(
-                float(items_to_compare[index].adjustment_appropriation_professional_fees),
+                float(
+                    items_to_compare[index].adjustment_appropriation_professional_fees
+                ),
                 float(row["adjusted_appropriation_professional_fees"]),
             )
 
     def _test_response_correctness(self, response, filename="export.csv"):
         self.assertEqual(response.status_code, 200)
         self.assertEquals(
-            response.get("Content-Disposition"), 'attachment; filename="{}"'.format(filename)
+            response.get("Content-Disposition"),
+            'attachment; filename="{}"'.format(filename),
         )
 
     def _get_expected_headers(self):
@@ -1268,8 +1271,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
 
 
 class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
-    APITransactionTestCase,
-    ProvInfraProjectIRMSnapshotCSVDownloadMixin
+    APITransactionTestCase, ProvInfraProjectIRMSnapshotCSVDownloadMixin
 ):
     def setUp(self):
         call_command("clear_index", "--noinput")
@@ -1360,8 +1362,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
 
 class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
-    APITransactionTestCase,
-    ProvInfraProjectIRMSnapshotCSVDownloadMixin
+    APITransactionTestCase, ProvInfraProjectIRMSnapshotCSVDownloadMixin
 ):
     def setUp(self):
         call_command("clear_index", "--noinput")
@@ -1415,7 +1416,9 @@ class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
         data = {"id": self.project.id, "slug": self.project.get_slug()}
         url = reverse("provincial-infra-project-detail-csv-download", kwargs=data)
         response = self.client.get(url, data)
-        self._test_response_correctness(response, filename="{}.csv".format(self.project.get_slug()))
+        self._test_response_correctness(
+            response, filename="{}.csv".format(self.project.get_slug())
+        )
 
         content = response.content.decode("utf-8")
         csv_reader = csv.DictReader(io.StringIO(content))
