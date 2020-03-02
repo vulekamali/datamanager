@@ -36,8 +36,12 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     total_professional_fees = indexes.FloatField(indexed=False)
     total_construction_costs = indexes.FloatField(indexed=False)
     variation_orders = indexes.FloatField(indexed=False)
-    expenditure_from_previous_years_professional_fees = indexes.FloatField(indexed=False)
-    expenditure_from_previous_years_construction_costs = indexes.FloatField(indexed=False)
+    expenditure_from_previous_years_professional_fees = indexes.FloatField(
+        indexed=False
+    )
+    expenditure_from_previous_years_construction_costs = indexes.FloatField(
+        indexed=False
+    )
     expenditure_from_previous_years_total = indexes.FloatField(indexed=False)
     project_expenditure_total = indexes.FloatField(indexed=False)
     main_appropriation_professional_fees = indexes.FloatField(indexed=False)
@@ -141,10 +145,14 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
         return object.project_snapshots.latest().variation_orders
 
     def prepare_expenditure_from_previous_years_professional_fees(sef, object):
-        return object.project_snapshots.latest().expenditure_from_previous_years_professional_fees
+        return (
+            object.project_snapshots.latest().expenditure_from_previous_years_professional_fees
+        )
 
     def prepare_expenditure_from_previous_years_construction_costs(sef, object):
-        return object.project_snapshots.latest().expenditure_from_previous_years_construction_costs
+        return (
+            object.project_snapshots.latest().expenditure_from_previous_years_construction_costs
+        )
 
     def prepare_expenditure_from_previous_years_total(sef, object):
         return object.project_snapshots.latest().expenditure_from_previous_years_total
@@ -156,10 +164,14 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
         return object.project_snapshots.latest().main_appropriation_professional_fees
 
     def prepare_adjustment_appropriation_professional_fees(sef, object):
-        return object.project_snapshots.latest().adjustment_appropriation_professional_fees
+        return (
+            object.project_snapshots.latest().adjustment_appropriation_professional_fees
+        )
 
     def prepare_adjustment_appropriation_construction_costs(sef, object):
-        return object.project_snapshots.latest().adjustment_appropriation_construction_costs
+        return (
+            object.project_snapshots.latest().adjustment_appropriation_construction_costs
+        )
 
     def prepare_main_appropriation_total(sef, object):
         return object.project_snapshots.latest().main_appropriation_total

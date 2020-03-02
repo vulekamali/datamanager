@@ -90,7 +90,7 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView):
         "adjustment_appropriation_professional_fees": "adjusted_appropriation_professional_fees",
         "adjustment_appropriation_construction_costs": "adjusted_appropriation_construction_costs",
         "adjustment_appropriation_total": "adjusted_appropriation_total",
-        "total_project_cost": "estimated_total_project_cost"
+        "total_project_cost": "estimated_total_project_cost",
     }
 
     def get(self, request, *args, **kwargs):
@@ -123,7 +123,6 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             "latitude",
             "longitude",
         ]
-
 
     def __init__(self, *args, **kwargs):
         # https://www.django-rest-framework.org/api-guide/serializers/#example

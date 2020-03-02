@@ -31,6 +31,6 @@ urlpatterns = [
     path(
         "infrastructure-projects/provincial/search/csv",
         views.ProvInfraProjectSearchView.as_view({"get": "get_csv"}),
-        name="provincial-infrastructure-project-api-csv"
-    )
+        name="provincial-infrastructure-project-api-csv",
+    ),
 ]
