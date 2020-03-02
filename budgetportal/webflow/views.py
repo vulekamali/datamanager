@@ -100,6 +100,11 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView):
         )
         return Response(serializer.data)
 
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["labels"] = self.labels
+        return context
+
 
 class ProvInfraProjectSerializer(HaystackSerializer):
     class Meta:
@@ -250,18 +255,34 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
         "estimated_completion_date",
     ]
 
+    labels = {
+        "adjustment_appropriation_professional_fees": "adjusted_appropriation_professional_fees",
+        "adjustment_appropriation_construction_costs": "adjusted_appropriation_construction_costs",
+        "adjustment_appropriation_total": "adjusted_appropriation_total",
+        "total_project_cost": "estimated_total_project_cost",
+    }
+
     def list(self, request, *args, **kwargs):
         csv_download_params = self._get_csv_query_params(request.query_params)
         response = super().list(request, *args, **kwargs)
-        response.data["csv_download_url"] = "{}?{}".format(
-            reverse("provincial-infrastructure-project-api-csv"), csv_download_params
+        response.data["csv_download_url"] = reverse(
+            "provincial-infrastructure-project-api-csv"
         )
+        if csv_download_params:
+            response.data["csv_download_url"] += "?{}".format(csv_download_params)
         return response
 
     @action(detail=False, methods=["get"])
     def get_csv(self, request, *args, **kwargs):
         self.serializer_class = self.csv_serializer_class
-        return super().list(request, *args, **kwargs)
+        self.renderer_classes = [renderers.CSVRenderer] + self.renderer_classes
+        response = super().list(request, *args, **kwargs)
+        return Response(response.data["results"])
+
+    def get_renderer_context(self):
+        context = super().get_renderer_context()
+        context["labels"] = self.labels
+        return context
 
     def _get_csv_query_params(self, original_query_params):
         csv_download_params = original_query_params.copy()
@@ -270,5 +291,5 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
         csv_download_params.pop("limit", None)
         params = ""
         for param_name, param_value in csv_download_params.items():
-            params += "{}={}".format(param_name, param_value)
-        return urllib.parse.urlencode(params)
+            params += "{}={}&".format(param_name, urllib.parse.quote(param_value))
+        return params[:-1]

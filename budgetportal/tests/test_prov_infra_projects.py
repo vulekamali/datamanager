@@ -49,6 +49,10 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
         results = response.data["results"]
         num_of_results = len(results)
         self.assertEqual(num_of_results, 0)
+        self.assertEqual(
+            response.data["csv_download_url"],
+            reverse("provincial-infrastructure-project-api-csv"),
+        )
 
         IRMSnapshot.objects.create(
             financial_year=self.financial_year,
@@ -63,6 +67,10 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
         results = response.data["results"]
         num_of_results = len(results)
         self.assertEqual(num_of_results, 3)
+        self.assertEqual(
+            response.data["csv_download_url"],
+            reverse("provincial-infrastructure-project-api-csv"),
+        )
 
 
 class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
@@ -1212,3 +1220,8 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0]["name"], "Blue School")
         self.assertNotContains(response, "Red School")
+        self.assertEqual(
+            response.data["csv_download_url"],
+            reverse("provincial-infrastructure-project-api-csv")
+            + "?q=Eastern%20Cape%20School",
+        )
