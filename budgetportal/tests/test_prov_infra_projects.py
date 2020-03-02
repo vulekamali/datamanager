@@ -1342,7 +1342,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         content = response.content.decode("utf-8")
         csv_reader = csv.DictReader(io.StringIO(content))
-        items_to_compare = [self.project_snapshot_2, self.project_snapshot_1]
+        items_to_compare = [self.project_snapshot_1, self.project_snapshot_2]
         self._test_csv_content_correctness(csv_reader, items_to_compare)
 
     def test_csv_download_with_found_project(self):
