@@ -9,6 +9,8 @@ from budgetportal import models
 from budgetportal.json_encoder import JSONEncoder
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404, render
+from django.utils.http import urlencode
+from django.urls import reverse
 from drf_haystack.filters import (
     HaystackFacetFilter,
     HaystackFilter,
@@ -19,11 +21,12 @@ from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
 from drf_haystack.viewsets import HaystackViewSet
 from rest_framework import serializers
 from rest_framework.views import Response
+from rest_framework.decorators import action
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.settings import api_settings
 from rest_framework_csv import renderers
 
-from ..models import ProvInfraProjectSnapshot, SearchPageCSVDownloadRequest
+from ..models import ProvInfraProjectSnapshot
 from ..prov_infra_project.charts import time_series_data
 from ..search_indexes import ProvInfraProjectIndex
 
@@ -79,7 +82,7 @@ class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
 
 class ProvInfaProjectCSVDownload(RetrieveAPIView):
     queryset = models.ProvInfraProject.objects.prefetch_related("project_snapshots")
-    serializer_class =
+    serializer_class = ProvInfaProjectCSVSnapshotSerializer
     renderer_classes = (renderers.CSVRenderer,) + tuple(
         api_settings.DEFAULT_RENDERER_CLASSES
     )
@@ -121,6 +124,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             "longitude",
         ]
 
+
     def __init__(self, *args, **kwargs):
         # https://www.django-rest-framework.org/api-guide/serializers/#example
         # Instantiate the superclass normally
@@ -134,6 +138,55 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             existing = set(self.fields.keys())
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
+
+
+class ProvInfraProjectCSVSerializer(HaystackSerializer):
+    class Meta:
+        index_classes = [ProvInfraProjectIndex]
+        fields = [
+            "name",
+            "province",
+            "department",
+            "status",
+            "status_order",
+            "primary_funding_source",
+            "estimated_completion_date",
+            "total_project_cost",
+            "url_path",
+            "latitude",
+            "longitude",
+            "project_number",
+            "local_municipality",
+            "district_municipality",
+            "budget_programme",
+            "nature_of_investment",
+            "funding_status",
+            "program_implementing_agent",
+            "principle_agent",
+            "main_contractor",
+            "other_parties",
+            "start_date",
+            "estimated_construction_start_date",
+            "contracted_construction_end_date",
+            "estimated_construction_end_date",
+            "total_professional_fees",
+            "total_construction_costs",
+            "variation_orders",
+            "expenditure_from_previous_years_professional_fees",
+            "expenditure_from_previous_years_construction_costs",
+            "expenditure_from_previous_years_total",
+            "project_expenditure_total",
+            "main_appropriation_professional_fees",
+            "adjustment_appropriation_professional_fees",
+            "main_appropriation_construction_costs",
+            "adjustment_appropriation_construction_costs",
+            "main_appropriation_total",
+            "adjustment_appropriation_total",
+            "actual_expenditure_q1",
+            "actual_expenditure_q2",
+            "actual_expenditure_q3",
+            "actual_expenditure_q4",
+        ]
 
 
 class ProvInfraProjectFacetSerializer(HaystackFacetSerializer):
@@ -185,6 +238,7 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     # index_models = [Location]
 
     serializer_class = ProvInfraProjectSerializer
+    csv_serializer_class = ProvInfraProjectCSVSerializer
     filter_backends = [ProvInfraProjectFilter, HaystackOrderingFilter]
 
     facet_serializer_class = ProvInfraProjectFacetSerializer
@@ -198,16 +252,24 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     ]
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        csv_download_request = self._create_csv_download_request(queryset)
+        csv_download_params = self._get_csv_query_params(request.query_params)
         response = super().list(request, *args, **kwargs)
-        response.data["csv_download_url"] = csv_download_request.csv_download_url
+        response.data["csv_download_url"] = "{}?{}".format(
+            reverse("provincial-infrastructure-project-api-csv"), csv_download_params
+        )
         return response
 
-    def _create_csv_download_request(self, queryset):
-        ids = queryset.values_list("id", flat=True)
-        csv_download_request = SearchPageCSVDownloadRequest.objects.create()
-        csv_download_request.projects_snapshots.set(
-            ProvInfraProjectSnapshot.objects.filter(id__in=ids)
-        )
-        return csv_download_request
+    @action(detail=False, methods=["get"])
+    def get_csv(self, request, *args, **kwargs):
+        self.serializer_class = self.csv_serializer_class
+        return super().list(request, *args, **kwargs)
+
+    def _get_csv_query_params(self, original_query_params):
+        csv_download_params = original_query_params.copy()
+        csv_download_params.pop("fields", None)
+        csv_download_params.pop("ordering", None)
+        csv_download_params.pop("limit", None)
+        params = ""
+        for param_name, param_value in csv_download_params.items():
+            params += "{}={}".format(param_name, param_value)
+        return params
