@@ -1323,15 +1323,13 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
-            response, "provincial-infrastructure-projects.csv"
+            response,
+            "provincial-infrastructure-projects-q-data-that-won-t-be-found.csv",
         )
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
-        body = list(csv_reader)
-        self.assertEqual(len(body), 1)
-        headers = body[0]
-        self.assertListEqual(headers, self._get_expected_headers())
+        self.assertListEqual(csv_reader.fieldnames, self._get_expected_headers())
 
     def test_csv_download_with_all_projects(self):
         response = self.client.get(self.url)
