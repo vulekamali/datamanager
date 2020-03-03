@@ -4,7 +4,6 @@ import os
 import io
 import csv
 from datetime import date
-from slugify import slugify
 from budgetportal.models import (
     FinancialYear,
     IRMSnapshot,
