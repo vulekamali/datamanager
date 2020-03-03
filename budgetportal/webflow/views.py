@@ -8,9 +8,10 @@ import urllib.parse
 from copy import deepcopy
 from slugify import slugify
 from budgetportal import models
+from budgetportal.csv_gen import Echo
 from budgetportal.json_encoder import JSONEncoder
 from django.forms.models import model_to_dict
-from django.http.response import HttpResponse
+from django.http.response import StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from drf_haystack.filters import (
@@ -82,15 +83,21 @@ class ProvInfraProjectCSVGeneratorMixIn:
     }
 
     def generate_csv_response(self, response_results, filename="export.csv"):
-        response = HttpResponse(content_type="text/csv")
+        response = StreamingHttpResponse(
+            streaming_content=self._generate_rows(response_results),
+            content_type="text/csv"
+        )
         response["Content-Disposition"] = 'attachment; filename="{}"'.format(filename)
+        return response
+
+    def _generate_rows(self, response_results):
         headers = self._get_headers(ProvInfraProjectCSVSerializer.Meta.fields)
-        writer = csv.DictWriter(response, fieldnames=headers)
-        writer.writeheader()
+        writer = csv.DictWriter(Echo(), fieldnames=headers)
+        yield writer.writerow({h: h for h in headers})
+
         for row in response_results:
             prepared_row = self._prepare_row(row)
-            writer.writerow(prepared_row)
-        return response
+            yield writer.writerow(prepared_row)
 
     def _get_headers(self, headers):
         return [self.labels.get(header, header) for header in headers]
@@ -292,14 +299,22 @@ class ProvInfraProjectSearchView(
     def get_csv(self, request, *args, **kwargs):
         self.serializer_class = self.csv_serializer_class
         response = super().list(request, *args, **kwargs)
-        return self.generate_csv_response(response.data["results"])
+        return self.generate_csv_response(response.data["results"], filename=self._get_filename(request.query_params))
 
     def _get_csv_query_params(self, original_query_params):
         csv_download_params = original_query_params.copy()
         csv_download_params.pop("fields", None)
-        csv_download_params.pop("ordering", None)
         csv_download_params.pop("limit", None)
         params = ""
         for param_name, param_value in csv_download_params.items():
             params += "{}={}&".format(param_name, urllib.parse.quote(param_value))
         return params[:-1]
+
+    def _get_filename(self, query_params):
+        keys_to_check = ("province", "department", "status", "primary_founding_source", "q")
+        extension = "csv"
+        filename = "provincial-infrastructure-projects"
+        for key in keys_to_check:
+            if query_params.get(key):
+                filename += "-{}-{}".format(key, slugify(query_params[key]))
+        return "{}.{}".format(filename, extension)

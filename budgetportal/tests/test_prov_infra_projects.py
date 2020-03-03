@@ -1250,7 +1250,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
                 float(row["adjusted_appropriation_professional_fees"]),
             )
 
-    def _test_response_correctness(self, response, filename="export.csv"):
+    def _test_response_correctness(self, response, filename):
         self.assertEqual(response.status_code, 200)
         self.assertEquals(
             response.get("Content-Disposition"),
@@ -1322,10 +1322,10 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(response)
+        self._test_response_correctness(response, "provincial-infrastructure-projects.csv")
 
-        content = response.content.decode("utf-8")
-        csv_reader = csv.reader(io.StringIO(content))
+        content = b"".join(response.streaming_content)
+        csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         body = list(csv_reader)
         self.assertEqual(len(body), 1)
         headers = body[0]
@@ -1337,10 +1337,10 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(response)
+        self._test_response_correctness(response, "provincial-infrastructure-projects.csv")
 
-        content = response.content.decode("utf-8")
-        csv_reader = csv.DictReader(io.StringIO(content))
+        content = b"".join(response.streaming_content)
+        csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         items_to_compare = [self.project_snapshot_1, self.project_snapshot_2]
         self._test_csv_content_correctness(csv_reader, items_to_compare)
 
@@ -1352,10 +1352,10 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(response)
+        self._test_response_correctness(response, "provincial-infrastructure-projects-q-eastern-cape-school.csv")
 
-        content = response.content.decode("utf-8")
-        csv_reader = csv.DictReader(io.StringIO(content))
+        content = b"".join(response.streaming_content)
+        csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         items_to_compare = [self.project_snapshot_1]
         self._test_csv_content_correctness(csv_reader, items_to_compare)
 
@@ -1419,7 +1419,7 @@ class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
             response, filename="{}.csv".format(self.project.get_slug())
         )
 
-        content = response.content.decode("utf-8")
-        csv_reader = csv.DictReader(io.StringIO(content))
+        content = b"".join(response.streaming_content)
+        csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         items_to_compare = [self.project_snapshot_1, self.project_snapshot_2]
         self._test_csv_content_correctness(csv_reader, items_to_compare)
