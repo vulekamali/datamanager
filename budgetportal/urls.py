@@ -247,6 +247,8 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+
+    url("^procurement$", views.procurement),
     url("^", include(webflow_urls.urlpatterns)),
 ]
 

@@ -1059,6 +1059,15 @@ def robots(request):
     return response
 
 
+def procurement(request):
+    latest_year = FinancialYear.get_latest_year()
+    context = {
+        "navbar": nav_bar.get_items(latest_year.slug),
+        "latest_year": latest_year.slug,
+    }
+    return render(request, "procurement.html", context)
+
+
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
         return yaml.load(f, Loader=yaml.FullLoader)
