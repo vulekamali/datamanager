@@ -85,7 +85,7 @@ class ProvInfraProjectCSVGeneratorMixIn:
     def generate_csv_response(self, response_results, filename="export.csv"):
         response = StreamingHttpResponse(
             streaming_content=self._generate_rows(response_results),
-            content_type="text/csv"
+            content_type="text/csv",
         )
         response["Content-Disposition"] = 'attachment; filename="{}"'.format(filename)
         return response
@@ -299,7 +299,9 @@ class ProvInfraProjectSearchView(
     def get_csv(self, request, *args, **kwargs):
         self.serializer_class = self.csv_serializer_class
         response = super().list(request, *args, **kwargs)
-        return self.generate_csv_response(response.data["results"], filename=self._get_filename(request.query_params))
+        return self.generate_csv_response(
+            response.data["results"], filename=self._get_filename(request.query_params)
+        )
 
     def _get_csv_query_params(self, original_query_params):
         csv_download_params = original_query_params.copy()
@@ -311,7 +313,13 @@ class ProvInfraProjectSearchView(
         return params[:-1]
 
     def _get_filename(self, query_params):
-        keys_to_check = ("province", "department", "status", "primary_founding_source", "q")
+        keys_to_check = (
+            "province",
+            "department",
+            "status",
+            "primary_founding_source",
+            "q",
+        )
         extension = "csv"
         filename = "provincial-infrastructure-projects"
         for key in keys_to_check:

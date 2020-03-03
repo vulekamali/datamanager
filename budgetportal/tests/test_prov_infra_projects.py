@@ -1322,7 +1322,9 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(response, "provincial-infrastructure-projects.csv")
+        self._test_response_correctness(
+            response, "provincial-infrastructure-projects.csv"
+        )
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
@@ -1337,7 +1339,9 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(response, "provincial-infrastructure-projects.csv")
+        self._test_response_correctness(
+            response, "provincial-infrastructure-projects.csv"
+        )
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
@@ -1352,7 +1356,9 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(response, "provincial-infrastructure-projects-q-eastern-cape-school.csv")
+        self._test_response_correctness(
+            response, "provincial-infrastructure-projects-q-eastern-cape-school.csv"
+        )
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
