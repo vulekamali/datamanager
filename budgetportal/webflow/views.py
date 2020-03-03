@@ -93,7 +93,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
         # https://www.django-rest-framework.org/api-guide/serializers/#example
         # Instantiate the superclass normally
         super(ProvInfraProjectSerializer, self).__init__(*args, **kwargs)
-
+        print("i")
         fields = self.context["request"].query_params.get("fields")
         if fields:
             fields = fields.split(",")

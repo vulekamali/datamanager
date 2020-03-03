@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3b0b49dd-963c-43a4-8a05-4e16b2e0af8f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/budgetportal/webflow/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/budgetportal/webflow/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1YRMHCR5lsBwbsNev9qfyDJB5L2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.stylelint" value="true" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
+    <property name="node.js.selected.package.stylelint" value="$PROJECT_DIR$/node_modules/stylelint" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="datamanager" type="Python.DjangoServer" factoryName="Django server">
+      <module name="datamanager" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3b0b49dd-963c-43a4-8a05-4e16b2e0af8f" name="Default Changelist" comment="" />
+      <created>1582900864102</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582900864102</updated>
+      <workItem from="1582900876063" duration="1173000" />
+      <workItem from="1582902893572" duration="178000" />
+      <workItem from="1582988470282" duration="11763000" />
+      <workItem from="1583054200232" duration="5294000" />
+      <workItem from="1583067482711" duration="1143000" />
+      <workItem from="1583085665134" duration="904000" />
+      <workItem from="1583128989517" duration="5914000" />
+      <workItem from="1583150322349" duration="3498000" />
+      <workItem from="1583165959616" duration="1090000" />
+      <workItem from="1583172416592" duration="14853000" />
+      <workItem from="1583241906724" duration="2498000" />
+      <workItem from="1583244521306" duration="947000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="352" y="162" key="SettingsEditor" timestamp="1583153880146">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="352" y="162" key="SettingsEditor/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@0.23.1440.877" timestamp="1583153880146" />
+    <state x="1262" y="-890" key="SettingsEditor/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@793.-1057.1920.1057" timestamp="1582989075863" />
+    <state x="1446" y="-695" key="com.intellij.ide.util.TipDialog" timestamp="1583172433957">
+      <screen x="793" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="-474" y="-696" key="com.intellij.ide.util.TipDialog/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@-1127.-1057.1920.1057" timestamp="1582900928281" />
+    <state x="490" y="323" key="com.intellij.ide.util.TipDialog/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@0.23.1440.877" timestamp="1583128989511" />
+    <state x="1446" y="-695" key="com.intellij.ide.util.TipDialog/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@793.-1057.1920.1057" timestamp="1583172433957" />
+    <state x="490" y="323" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1583085665291" />
+    <state x="904" y="-1057" width="914" height="857" key="dock-window-1" timestamp="1583243750737">
+      <screen x="793" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="1368" y="-1035" width="914" height="857" key="dock-window-1/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@-1127.-1057.1920.1057" timestamp="1583243295615" />
+    <state x="1215" y="-1001" width="914" height="857" key="dock-window-1/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@0.23.1440.877" timestamp="1583243054784" />
+    <state x="904" y="-1057" width="914" height="857" key="dock-window-1/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@793.-1057.1920.1057" timestamp="1583243750737" />
+    <state x="-477" y="-1027" width="1116" height="857" key="dock-window-2" timestamp="1583150331399">
+      <screen x="-1127" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="-477" y="-1027" width="1116" height="857" key="dock-window-2/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@0.23.1440.877" timestamp="1583150331399" />
+    <state x="1433" y="-772" width="782" height="550" key="find.popup" timestamp="1583245213764">
+      <screen x="793" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="-487" y="-772" width="639" height="486" key="find.popup/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@-1127.-1057.1920.1057" timestamp="1582901449478" />
+    <state x="480" y="259" width="837" height="550" key="find.popup/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@0.23.1440.877" timestamp="1583242922603" />
+    <state x="1433" y="-772" width="782" height="550" key="find.popup/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@793.-1057.1920.1057" timestamp="1583245213764" />
+    <state x="480" y="259" width="837" height="550" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1583086724784" />
+    <state x="1418" y="-822" width="670" height="676" key="search.everywhere.popup" timestamp="1583245223209">
+      <screen x="793" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="-502" y="-822" width="670" height="676" key="search.everywhere.popup/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@-1127.-1057.1920.1057" timestamp="1582901239342" />
+    <state x="469" y="218" width="670" height="561" key="search.everywhere.popup/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@0.23.1440.877" timestamp="1583241979655" />
+    <state x="1418" y="-822" width="670" height="676" key="search.everywhere.popup/-1127.-1057.1920.1057/0.23.1440.877/793.-1057.1920.1057@793.-1057.1920.1057" timestamp="1583245223209" />
+  </component>
+</project>
