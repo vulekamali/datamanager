@@ -57,7 +57,7 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
         self.assertEqual(num_of_results, 0)
         self.assertEqual(
             response.data["csv_download_url"],
-            "infrastructure-projects/provincial/search/csv",
+            "/infrastructure-projects/provincial/search/csv",
         )
 
         IRMSnapshot.objects.create(
@@ -75,7 +75,7 @@ class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
         self.assertEqual(num_of_results, 3)
         self.assertEqual(
             response.data["csv_download_url"],
-            "infrastructure-projects/provincial/search/csv",
+            "/infrastructure-projects/provincial/search/csv",
         )
 
 
@@ -1228,7 +1228,7 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         self.assertNotContains(response, "Red School")
         self.assertEqual(
             response.data["csv_download_url"],
-            "infrastructure-projects/provincial/search/csv?q=Eastern%20Cape%20School",
+            "/infrastructure-projects/provincial/search/csv?q=Eastern%20Cape%20School",
         )
 
 

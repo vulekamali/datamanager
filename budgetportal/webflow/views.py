@@ -307,12 +307,7 @@ class ProvInfraProjectSearchView(
         csv_download_params = original_query_params.copy()
         csv_download_params.pop("fields", None)
         csv_download_params.pop("limit", None)
-        params = ""
-        for param_name, param_value in csv_download_params.items():
-            params += "{}={}&".format(
-                urllib.parse.quote(param_name), urllib.parse.quote(param_value)
-            )
-        return params[:-1]
+        return urllib.parse.urlencode(csv_download_params)
 
     def _get_filename(self, query_params):
         keys_to_check = (
