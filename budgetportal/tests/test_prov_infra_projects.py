@@ -1228,7 +1228,7 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         self.assertNotContains(response, "Red School")
         self.assertEqual(
             response.data["csv_download_url"],
-            "/infrastructure-projects/provincial/search/csv?q=Eastern%20Cape%20School",
+            "/infrastructure-projects/provincial/search/csv?q=Eastern+Cape+School",
         )
 
 
