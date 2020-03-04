@@ -477,7 +477,7 @@ def infrastructure_projects_overview(request):
     projects = []
     for project in infrastructure_projects:
         departments = Department.objects.filter(
-            slug=slugify(project.department), government__sphere__slug="national"
+            slug=slugify(project.government_institution), government__sphere__slug="national"
         )
         department_url = None
         if departments:
@@ -496,12 +496,13 @@ def infrastructure_projects_overview(request):
                 "detail": project.get_url_path(),
                 "slug": project.get_url_path(),
                 "page_title": "{} - vulekamali".format(project.project_name),
-                "department": {"name": project.department, "url": department_url},
+                "government_institution": {"name": project.government_institution, "url": department_url},
                 "nature_of_investment": project.nature_of_investment,
                 "infrastructure_type": project.infrastructure_type,
                 "expenditure": sorted(
                     project.build_complete_expenditure(), key=lambda e: e["year"]
                 ),
+                "administration_type": project.administration_type
             }
         )
     projects = sorted(projects, key=lambda p: p["name"])
@@ -544,7 +545,7 @@ def infrastructure_project_detail_data(project_slug):
         return HttpResponse(status=404)
 
     departments = Department.objects.filter(
-        slug=slugify(project.department), government__sphere__slug="national"
+        slug=slugify(project.government_institution), government__sphere__slug="national"
     )
     department_url = None
     if departments:
@@ -562,8 +563,8 @@ def infrastructure_project_detail_data(project_slug):
         "dataset_url": dataset.get_url_path(),
         "slug": project.get_url_path(),
         "page_title": "{} - vulekamali".format(project.project_name),
-        "department": {
-            "name": project.department,
+        "government_institution": {
+            "name": project.government_institution,
             "url": department_url,
             "budget_document": project.get_budget_document_url(),
         },
@@ -572,6 +573,7 @@ def infrastructure_project_detail_data(project_slug):
         "expenditure": sorted(
             project.build_complete_expenditure(), key=lambda e: e["year"]
         ),
+        "administration_type": project.administration_type
     }
     return {
         "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),

@@ -28,7 +28,8 @@ const datasetUrl = url => ({
 
 const parseProjects = (projects, dataset_url) => projects.map(project => ({
   id: project.slug,
-  subheading: project.department.name,
+  subheading: project.government_institution.name,
+  administrationType: project.administration_type,
   heading: project.name,
   points: project.coordinates.map(({ latitude: y, longitude: x }, id) => ({ id: id.toString(), x, y })),
   activeProvinces: project.provinces,
@@ -38,7 +39,7 @@ const parseProjects = (projects, dataset_url) => projects.map(project => ({
   description: project.description,
   link: project.slug,
   resources: [
-    buildEne(project.department.budget_document),
+    buildEne(project.government_institution.budget_document),
     datasetUrl(dataset_url),
   ].filter(({ link }) => !!link),
   chartData: project.expenditure.map(obj => ({
@@ -50,7 +51,7 @@ const parseProjects = (projects, dataset_url) => projects.map(project => ({
   sideInfo: {
     investment: project.nature_of_investment,
     infrastructure: project.infrastructure_type,
-    department: project.department,
+    department: project.government_institution,
   },
 }))
 

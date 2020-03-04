@@ -1,24 +1,21 @@
 import React from 'react';
 import posed, { PoseGroup } from 'react-pose';
-import trimValues from '../../helpers/trimValues';
 import styled from 'styled-components';
-import NationalMap from '../../components/NationalMap';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import ForwardArrow from '@material-ui/icons/ArrowForward';
 import { darken } from 'polished';
+import NationalMap from '../../components/NationalMap';
+import trimValues from '../../helpers/trimValues';
 import Progressbar from '../../components/Progressbar';
-
-
 
 const AnimationWrapper = posed.div({
   enter: {
     opacity: 1,
-
   },
   exit: {
     opacity: 0,
-  }
+  },
 });
 
 const Wrapper = styled.div`
@@ -39,7 +36,7 @@ const Wrapper = styled.div`
 
 const MapWrapper = styled.div`
   display: none;
-    max-width: 1000px;
+  max-width: 1000px;
 
   @media screen and (min-width: 950px) {
     width: 300px;
@@ -74,7 +71,7 @@ const DataGroup = styled.div`
 `;
 
 const SubHeading = styled.div`
-  color: #79B443;
+  color: #79b443;
   font-weight: 900;
   line-height: 16px;
   font-size: 10px;
@@ -196,7 +193,7 @@ const StyledButton = styled(Button)`
     min-width: 212px;
     border-radius: 30px;
     color: #fff;
-    background-color: #79B443;
+    background-color: #79b443;
     font-size: 16px;
     font-weight: 700;
     display: flex;
@@ -225,7 +222,7 @@ const SideWrapper = styled.div`
   // width: 1000px;
   // max-width: 270px;
   margin: 0 auto;
-  font-family: Lato; 
+  font-family: Lato;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -244,21 +241,21 @@ const SideWrapper = styled.div`
     ${'' /* align-items: flex-start; */}
     padding-left: 40px;
   }
-`; 
+`;
 
 const SideSection = styled.div`
-   padding-bottom: 25px;
+  padding-bottom: 25px;
 `;
 
 const SideTitle = styled.div`
-   font-weight: 900;
-   font-size: 10px;
-   line-height: 16px;
-   text-align: center;
-   letter-spacing: 0.5px;
-   text-transform: uppercase;
-   color: rgba(0, 0, 0, 0.5);
-   padding-bottom: 8px;
+  font-weight: 900;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+  padding-bottom: 8px;
 
   @media screen and (min-width: 650px) {
     text-align: left;
@@ -271,11 +268,11 @@ const SideTitle = styled.div`
 `;
 
 const SideType = styled.div`
-   line-height: 20px;
-   font-size: 14px;
-   text-align: center;
-   text-transform: Capitalize;
-   color: #000;
+  line-height: 20px;
+  font-size: 14px;
+  text-align: center;
+  text-transform: Capitalize;
+  color: #000;
 
   @media screen and (min-width: 650px) {
     text-align: left;
@@ -375,18 +372,13 @@ const SideButtonToMaps = styled(Button)`
     }
 
     @media screen and (min-width: 950px) {
-      width: 270px;;
+      width: 270px;
     }
   }
 `;
 
-
 const createSideRender = (id, props) => {
-  const {
-    investment,
-    infrastructure,
-    department,
-  } = props;
+  const { investment, infrastructure, department } = props;
 
   return (
     <SideWrapper key={id}>
@@ -418,9 +410,9 @@ const createSideRender = (id, props) => {
       </SideMapButtonWrapper> */}
     </SideWrapper>
   );
-}
+};
 
-const createItem = (props) => {
+const createItem = props => {
   const {
     subheading,
     heading,
@@ -430,19 +422,24 @@ const createItem = (props) => {
     description,
     id,
     link,
-    details
+    details,
+    administrationType,
   } = props;
 
 
   return (
     <AnimationWrapper key={id} style={{ width: '100%' }}>
       <DataGroup>
-        <SubHeading >{subheading}</SubHeading>
+        <SubHeading>{subheading}</SubHeading>
         <Heading>{heading}</Heading>
-        <Stage>Project stage: {stage}</Stage>
-          <ProgressBarContainer>
-            <Progressbar stage={stage} />
-          </ProgressBarContainer>
+        {administrationType !== 'PPP' && (
+          <>
+            <Stage>Project stage: {stage}</Stage>
+            <ProgressBarContainer>
+              <Progressbar stage={stage} />
+            </ProgressBarContainer>
+          </>
+        )}
         <BudgetGroup>
           <BudgetCashflow>
             <CashflowTitle>Total budget:</CashflowTitle>
@@ -465,26 +462,21 @@ const createItem = (props) => {
       </DataGroup>
     </AnimationWrapper>
   );
-}
+};
 
 const createMap = (props, selected) => {
-  const {
-    details,
-    points,
-    activeProvinces: rawProvinces,
-    id,
-  } = props;
+  const { details, points, activeProvinces: rawProvinces, id } = props;
 
   const all = [
-    "Eastern Cape",
-    "Free State",
-    "Gauteng",
-    "Limpopo",
-    "Mpumalanga",
-    "KwaZulu-Natal",
-    "Northern Cape",
-    "Western Cape",
-    "North West"
+    'Eastern Cape',
+    'Free State',
+    'Gauteng',
+    'Limpopo',
+    'Mpumalanga',
+    'KwaZulu-Natal',
+    'Northern Cape',
+    'Western Cape',
+    'North West',
   ];
 
   const activeProvinces = rawProvinces.length > 0 ? rawProvinces : all;
@@ -492,51 +484,44 @@ const createMap = (props, selected) => {
   return (
     <MapWrapper key={JSON.stringify(points)}>
       {/* <MapSubHeading>Select a project on the map</MapSubHeading> */}
-      <NationalMap size={!!details ? "medium" : "large"} {...{ points, activeProvinces }} selected={selected.points && selected.points[0].id} />
+      <NationalMap
+        size={details ? 'medium' : 'large'}
+        {...{ points, activeProvinces }}
+        selected={selected.points && selected.points[0].id}
+      />
     </MapWrapper>
   );
-}
+};
 
 const LeftWrap = styled.div`
-display: none;
-width: 100%;
+  display: none;
+  width: 100%;
 
-@media screen and (min-width: 1070px) {
-  display: block;
-  // padding-right: 30px;
-}
+  @media screen and (min-width: 1070px) {
+    display: block;
+    // padding-right: 30px;
+  }
 `;
-
 
 const RightWrap = styled.div`
-width: 100%;
-// display: none;
+  width: 100%;
+  // display: none;
 
-@media screen and (min-width: 950px) {
-  // padding-left: 60px;
-}
+  @media screen and (min-width: 950px) {
+    // padding-left: 60px;
+  }
 `;
 
-
-const Preview = (props) => {
-  const {
-    id,
-    sideInfo,
-    details,
-    selected,
-  } = props;
+const Preview = props => {
+  const { id, sideInfo, details, selected } = props;
 
   return (
     <Wrapper>
-      <LeftWrap>
-        {createMap(props, selected)}
-      </LeftWrap>
-      <PoseGroup style={{ width: '100%' }}>
-        {createItem(props)}
-      </PoseGroup>
-        {!!details && <RightWrap>{createSideRender(id, sideInfo)}</RightWrap>}
+      <LeftWrap>{createMap(props, selected)}</LeftWrap>
+      <PoseGroup style={{ width: '100%' }}>{createItem(props)}</PoseGroup>
+      {!!details && <RightWrap>{createSideRender(id, sideInfo)}</RightWrap>}
     </Wrapper>
   );
-}
+};
 
 export default Preview;
