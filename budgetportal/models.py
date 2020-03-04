@@ -1597,7 +1597,7 @@ class InfrastructureProjectPart(models.Model):
     project_slug = models.CharField(max_length=255)
     amount = models.BigIntegerField(default=0)
     financial_year = models.CharField(max_length=4)
-    total_project_cost = models.BigIntegerField(default=0)
+    estimated_total_project_cost = models.BigIntegerField(default=0)
     provinces = models.CharField(max_length=510, default="")
     gps_code = models.CharField(max_length=255, default="")
 
@@ -1986,7 +1986,7 @@ class ProvInfraProjectSnapshot(models.Model):
     variation_orders = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
-    total_project_cost = models.DecimalField(
+    estimated_total_project_cost = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     expenditure_from_previous_years_professional_fees = models.DecimalField(

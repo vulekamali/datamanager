@@ -117,7 +117,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             nature_of_investment="Upgrading and Additions",
             funding_status="Tabled",
             # Budget
-            total_project_cost=680000,
+            estimated_total_project_cost=680000,
             total_construction_costs=562000,
             total_professional_fees=118000,
             # Cost to date

@@ -138,8 +138,8 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
     variation_orders = Field(
         attribute="variation_orders", column_name="Variation Orders"
     )
-    total_project_cost = Field(
-        attribute="total_project_cost", column_name="Total Project Cost"
+    estimated_total_project_cost = Field(
+        attribute="estimated_total_project_cost", column_name="Total Project Cost"
     )
     expenditure_from_previous_years_professional_fees = Field(
         attribute="expenditure_from_previous_years_professional_fees",

@@ -76,7 +76,6 @@ def provincial_infrastructure_project_detail(request, id, slug):
 
 class ProvInfraProjectCSVGeneratorMixIn:
     labels = {
-        "total_project_cost": "estimated_total_project_cost",
     }
 
     def generate_csv_response(self, response_results, filename="export.csv"):
@@ -148,7 +147,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             "status_order",
             "primary_funding_source",
             "estimated_completion_date",
-            "total_project_cost",
+            "estimated_total_project_cost",
             "url_path",
             "latitude",
             "longitude",
@@ -180,7 +179,7 @@ class ProvInfraProjectCSVSerializer(HaystackSerializer):
             "status_order",
             "primary_funding_source",
             "estimated_completion_date",
-            "total_project_cost",
+            "estimated_total_project_cost",
             "url_path",
             "latitude",
             "longitude",
@@ -277,7 +276,7 @@ class ProvInfraProjectSearchView(
 
     ordering_fields = [
         "name",
-        "total_project_cost",
+        "estimated_total_project_cost",
         "status_order",
         "estimated_completion_date",
     ]

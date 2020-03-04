@@ -61,10 +61,10 @@ class TotalEstimatedProjectCostTestCase(TestCase):
         q2 = Quarter(number=2)
         irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
         self.project_snapshot = ProvInfraProjectSnapshot(
-            irm_snapshot=irm_snapshot, project=self.project, total_project_cost=100
+            irm_snapshot=irm_snapshot, project=self.project, estimated_total_project_cost=100
         )
 
-    def test_total_project_cost_is_null(self):
+    def test_estimated_total_project_cost_is_null(self):
         """Test that total project cost for Q1 (which created by Q2 snapshot) is Null"""
         snapshots_data = time_series_data([self.project_snapshot])
         snapshots_data = snapshots_data[u"snapshots"]
@@ -73,7 +73,7 @@ class TotalEstimatedProjectCostTestCase(TestCase):
         # Check Q1 values
         self.assertEqual(snapshots_data[0]["total_estimated_project_cost"], None)
 
-    def test_total_project_cost_assigned_correctly(self):
+    def test_estimated_total_project_cost_assigned_correctly(self):
         """Test that total project cost for Q2 is 100"""
         snapshots_data = time_series_data([self.project_snapshot])
         snapshots_data = snapshots_data[u"snapshots"]

@@ -28,7 +28,7 @@ class ProvInfraProjectSnapshotSerializer(ModelSerializer):
             "total_professional_fees",
             "total_construction_costs",
             "variation_orders",
-            "total_project_cost",
+            "estimated_total_project_cost",
             "expenditure_from_previous_years_professional_fees",
             "expenditure_from_previous_years_construction_costs",
             "expenditure_from_previous_years_total",

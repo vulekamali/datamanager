@@ -13,7 +13,7 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     status_order = indexes.IntegerField()
     primary_funding_source = indexes.CharField(faceted=True)
     estimated_completion_date = indexes.DateField()
-    total_project_cost = indexes.FloatField()
+    estimated_total_project_cost = indexes.FloatField()
     latitude = indexes.CharField()
     longitude = indexes.CharField()
     url_path = indexes.CharField()
@@ -76,8 +76,8 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_primary_funding_source(sef, object):
         return object.project_snapshots.latest().primary_funding_source
 
-    def prepare_total_project_cost(sef, object):
-        return object.project_snapshots.latest().total_project_cost
+    def prepare_estimated_total_project_cost(sef, object):
+        return object.project_snapshots.latest().estimated_total_project_cost
 
     def prepare_estimated_completion_date(sef, object):
         date = object.project_snapshots.latest().estimated_completion_date

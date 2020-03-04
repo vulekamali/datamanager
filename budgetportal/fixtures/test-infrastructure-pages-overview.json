@@ -18,7 +18,7 @@
       "project_slug": "health-standard-fake-project",
       "amount": 1368285000,
       "financial_year": 2015,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
@@ -42,7 +42,7 @@
       "project_slug": "health-standard-fake-project",
       "amount": 1049535000,
       "financial_year": 2016,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
@@ -66,7 +66,7 @@
       "project_slug": "health-standard-fake-project",
       "amount": 1617716000,
       "financial_year": 2017,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
@@ -90,7 +90,7 @@
       "project_slug": "health-standard-fake-project",
       "amount": 2121045000,
       "financial_year": 2018,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
@@ -114,7 +114,7 @@
       "project_slug": "health-standard-fake-project",
       "amount": 1869482000,
       "financial_year": 2019,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
@@ -138,7 +138,7 @@
       "project_slug": "health-standard-fake-project",
       "amount": 1628591000,
       "financial_year": 2020,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
@@ -162,7 +162,7 @@
       "project_slug": "health-standard-fake-project",
       "amount": 2190735000,
       "financial_year": 2021,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 1",
       "gps_code": "-31.45019, 29.45397"
     }
@@ -186,7 +186,7 @@
       "project_slug": "fake-project-2",
       "amount": 1368285000,
       "financial_year": 2015,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 2, Fake province 3",
       "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
     }
@@ -210,7 +210,7 @@
       "project_slug": "fake-project-2",
       "amount": 1049535000,
       "financial_year": 2016,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 2, Fake province 3",
       "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
     }
@@ -234,7 +234,7 @@
       "project_slug": "fake-project-2",
       "amount": 1617716000,
       "financial_year": 2017,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 2, Fake province 3",
       "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
     }
@@ -258,7 +258,7 @@
       "project_slug": "fake-project-2",
       "amount": 2121045000,
       "financial_year": 2018,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 2, Fake province 3",
       "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
     }
@@ -282,7 +282,7 @@
       "project_slug": "fake-project-2",
       "amount": 1869482000,
       "financial_year": 2019,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 2, Fake province 3",
       "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
     }
@@ -306,7 +306,7 @@
       "project_slug": "fake-project-2",
       "amount": 1628591000,
       "financial_year": 2020,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 2, Fake province 3",
       "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
     }
@@ -330,7 +330,7 @@
       "project_slug": "fake-project-2",
       "amount": 2190735000,
       "financial_year": 2021,
-      "total_project_cost": 9045389000,
+      "estimated_total_project_cost": 9045389000,
       "provinces": "Fake province 2, Fake province 3",
       "gps_code": "-33.399790,25.443304 and -30.399790,15.443304"
     }
