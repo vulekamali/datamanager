@@ -61,7 +61,9 @@ class TotalEstimatedProjectCostTestCase(TestCase):
         q2 = Quarter(number=2)
         irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
         self.project_snapshot = ProvInfraProjectSnapshot(
-            irm_snapshot=irm_snapshot, project=self.project, estimated_total_project_cost=100
+            irm_snapshot=irm_snapshot,
+            project=self.project,
+            estimated_total_project_cost=100,
         )
 
     def test_estimated_total_project_cost_is_null(self):

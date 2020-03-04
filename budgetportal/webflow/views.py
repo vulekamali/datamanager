@@ -75,8 +75,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
 
 
 class ProvInfraProjectCSVGeneratorMixIn:
-    labels = {
-    }
+    labels = {}
 
     def generate_csv_response(self, response_results, filename="export.csv"):
         response = StreamingHttpResponse(
