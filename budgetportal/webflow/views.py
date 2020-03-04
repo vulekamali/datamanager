@@ -45,6 +45,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
     page_data["project"]["irm_snapshot"] = str(snapshot.irm_snapshot)
+    page_data["project"]["csv_download_url"] = project.csv_download_url
     snapshot_list = list(project.project_snapshots.all())
     page_data["time_series_chart"] = time_series_data(snapshot_list)
     department = models.Department.get_in_latest_government(
@@ -67,7 +68,6 @@ def provincial_infrastructure_project_detail(request, id, slug):
         % (snapshot.name, snapshot.province),
         "page_description": "Provincial infrastructure project by the %s %s department."
         % (snapshot.province, snapshot.department),
-        "csv_download_url": project.csv_download_url,
     }
     return render(
         request, "webflow/detail_provincial-infrastructure-projects.html", context
@@ -265,9 +265,10 @@ class ProvInfraProjectSearchView(
     def list(self, request, *args, **kwargs):
         csv_download_params = self._get_csv_query_params(request.query_params)
         response = super().list(request, *args, **kwargs)
-        response.data["csv_download_url"] = reverse(
-            "provincial-infrastructure-project-api-csv"
-        )
+        if isinstance(response.data, dict):
+            response.data["csv_download_url"] = reverse(
+                "provincial-infrastructure-project-api-csv"
+            )
         if csv_download_params:
             response.data["csv_download_url"] += "?{}".format(csv_download_params)
         return response
@@ -275,15 +276,17 @@ class ProvInfraProjectSearchView(
     @action(detail=False, methods=["get"])
     def get_csv(self, request, *args, **kwargs):
         self.serializer_class = self.csv_serializer_class
+        self.pagination_class = None
         response = super().list(request, *args, **kwargs)
         return self.generate_csv_response(
-            response.data["results"], filename=self._get_filename(request.query_params)
+            response.data, filename=self._get_filename(request.query_params)
         )
 
     def _get_csv_query_params(self, original_query_params):
         csv_download_params = original_query_params.copy()
         csv_download_params.pop("fields", None)
         csv_download_params.pop("limit", None)
+        csv_download_params.pop("offset", None)
         return urllib.parse.urlencode(csv_download_params)
 
     def _get_filename(self, query_params):

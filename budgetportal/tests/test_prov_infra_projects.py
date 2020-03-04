@@ -13,6 +13,7 @@ from budgetportal.models import (
 )
 from budgetportal.search_indexes import ProvInfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
+from django.conf import settings
 from django.core.files import File
 from django.urls import reverse
 from rest_framework import status
@@ -22,10 +23,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from django.core.management import call_command
 
-from budgetportal.webflow.views import (
-    ProvInfraProjectCSVSerializer,
-    ProvInfraProjectCSVGeneratorMixIn,
-)
+from budgetportal.webflow.views import ProvInfraProjectCSVSerializer
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
@@ -1352,6 +1350,57 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         items_to_compare = [self.project_snapshot_1]
         self._test_csv_content_correctness(csv_reader, items_to_compare)
+
+
+class ProvInfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
+    APITransactionTestCase, ProvInfraProjectIRMSnapshotCSVDownloadMixin
+):
+    def setUp(self):
+        call_command("clear_index", "--noinput")
+        self.page_size = settings.REST_FRAMEWORK.get("PAGE_SIZE", 20)
+        self.number_of_projects = self.page_size * 2
+        self.file = open(EMPTY_FILE_PATH, "rb")
+        self.url = reverse("provincial-infrastructure-project-api-list")
+
+        for index in range(self.number_of_projects):
+            self.create_project(index)
+
+        ProvInfraProjectIndex().reindex()
+
+    def tearDown(self):
+        ProvInfraProjectIndex().clear()
+
+    def create_project(self, index):
+        file = open(EMPTY_FILE_PATH, "rb")
+        irm_snapshot = IRMSnapshot.objects.create(
+            financial_year=FinancialYear.objects.create(slug="2030-{}".format(index)),
+            quarter=Quarter.objects.get_or_create(number=1)[0],
+            date_taken=date(year=2050, month=1, day=1),
+            file=File(file),
+        )
+        ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot,
+            project=ProvInfraProject.objects.create(IRM_project_id=index),
+            name="Blue School",
+            province="Eastern Cape",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+            adjusted_appropriation_professional_fees=1.0,
+        )
+        file.close()
+
+    def test_csv_download_with_more_existing_objects_than_page_size(self):
+        response = self.client.get(self.url)
+        self.assertEqual(len(response.data["results"]), self.page_size)
+
+        csv_download_url = response.data["csv_download_url"]
+        response = self.client.get(csv_download_url)
+        self._test_response_correctness(
+            response, "provincial-infrastructure-projects.csv"
+        )
+
+        content = b"".join(response.streaming_content)
+        csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
+        self.assertEqual(len(list(csv_reader)), self.number_of_projects)
 
 
 class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
