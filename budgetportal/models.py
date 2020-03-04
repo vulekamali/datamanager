@@ -2004,7 +2004,7 @@ class ProvInfraProjectSnapshot(models.Model):
     main_appropriation_professional_fees = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
-    adjustment_appropriation_professional_fees = models.DecimalField(
+    adjusted_appropriation_professional_fees = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     main_appropriation_construction_costs = models.DecimalField(

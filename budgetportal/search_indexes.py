@@ -45,7 +45,7 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     expenditure_from_previous_years_total = indexes.FloatField(indexed=False)
     project_expenditure_total = indexes.FloatField(indexed=False)
     main_appropriation_professional_fees = indexes.FloatField(indexed=False)
-    adjustment_appropriation_professional_fees = indexes.FloatField(indexed=False)
+    adjusted_appropriation_professional_fees = indexes.FloatField(indexed=False)
     main_appropriation_construction_costs = indexes.FloatField(indexed=False)
     adjustment_appropriation_construction_costs = indexes.FloatField(indexed=False)
     main_appropriation_total = indexes.FloatField(indexed=False)
@@ -163,9 +163,9 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_main_appropriation_professional_fees(sef, object):
         return object.project_snapshots.latest().main_appropriation_professional_fees
 
-    def prepare_adjustment_appropriation_professional_fees(sef, object):
+    def prepare_adjusted_appropriation_professional_fees(sef, object):
         return (
-            object.project_snapshots.latest().adjustment_appropriation_professional_fees
+            object.project_snapshots.latest().adjusted_appropriation_professional_fees
         )
 
     def prepare_adjustment_appropriation_construction_costs(sef, object):

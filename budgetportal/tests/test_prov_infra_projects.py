@@ -132,7 +132,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             # Adjustment Budget FY
             adjustment_appropriation_total=1,
             adjustment_appropriation_construction_costs=2,
-            adjustment_appropriation_professional_fees=3,
+            adjusted_appropriation_professional_fees=3,
             # Overall timeline
             start_date=date(2016, 6, 13),
             estimated_completion_date=date(year=2021, month=6, day=30),
@@ -1244,7 +1244,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
             )
             self.assertEqual(
                 float(
-                    items_to_compare[index].adjustment_appropriation_professional_fees
+                    items_to_compare[index].adjusted_appropriation_professional_fees
                 ),
                 float(row["adjusted_appropriation_professional_fees"]),
             )
@@ -1289,7 +1289,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
             name="Blue School",
             province="Eastern Cape",
             estimated_completion_date=date(year=2020, month=1, day=1),
-            adjustment_appropriation_professional_fees=1.0,
+            adjusted_appropriation_professional_fees=1.0,
         )
 
         irm_snapshot_2 = IRMSnapshot.objects.create(
@@ -1305,7 +1305,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
             name="Red School",
             province="Limpopo",
             estimated_completion_date=date(year=2020, month=1, day=1),
-            adjustment_appropriation_professional_fees=2.0,
+            adjusted_appropriation_professional_fees=2.0,
         )
         ProvInfraProjectIndex().reindex()
 
@@ -1390,7 +1390,7 @@ class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
             name="Blue School",
             province="Eastern Cape",
             estimated_completion_date=date(year=2020, month=1, day=1),
-            adjustment_appropriation_professional_fees=1.0,
+            adjusted_appropriation_professional_fees=1.0,
         )
         self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
@@ -1398,7 +1398,7 @@ class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
             name="Red School",
             province="Limpopo",
             estimated_completion_date=date(year=2020, month=1, day=1),
-            adjustment_appropriation_professional_fees=2.0,
+            adjusted_appropriation_professional_fees=2.0,
         )
 
         ProvInfraProjectIndex().reindex()
