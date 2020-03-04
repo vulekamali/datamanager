@@ -75,8 +75,6 @@ def provincial_infrastructure_project_detail(request, id, slug):
 
 
 class ProvInfraProjectCSVGeneratorMixIn:
-    labels = {}
-
     def generate_csv_response(self, response_results, filename="export.csv"):
         response = StreamingHttpResponse(
             streaming_content=self._generate_rows(response_results),
@@ -86,23 +84,13 @@ class ProvInfraProjectCSVGeneratorMixIn:
         return response
 
     def _generate_rows(self, response_results):
-        headers = self._get_headers(ProvInfraProjectCSVSerializer.Meta.fields)
+        headers = ProvInfraProjectCSVSerializer.Meta.fields
         writer = csv.DictWriter(Echo(), fieldnames=headers)
         yield writer.writerow({h: h for h in headers})
 
         for row in response_results:
-            prepared_row = self._prepare_row(row)
-            yield writer.writerow(prepared_row)
+            yield writer.writerow(row)
 
-    def _get_headers(self, headers):
-        return [self.labels.get(header, header) for header in headers]
-
-    def _prepare_row(self, row):
-        prepared_row = deepcopy(row)
-        for old_key, new_key in self.labels.items():
-            prepared_row[new_key] = prepared_row[old_key]
-            del prepared_row[old_key]
-        return prepared_row
 
 
 class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
