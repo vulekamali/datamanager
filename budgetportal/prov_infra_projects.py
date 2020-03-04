@@ -168,8 +168,8 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
         attribute="main_appropriation_construction_costs",
         column_name="Main Budget Appropriation (Construction Costs)",
     )
-    adjustment_appropriation_construction_costs = Field(
-        attribute="adjustment_appropriation_construction_costs",
+    adjusted_appropriation_construction_costs = Field(
+        attribute="adjusted_appropriation_construction_costs",
         column_name="Adjustment Budget Appropriation (Construction Costs)",
     )
     main_appropriation_total = Field(

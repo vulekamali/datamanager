@@ -17,4 +17,9 @@ class Migration(migrations.Migration):
             old_name='adjustment_appropriation_professional_fees',
             new_name='adjusted_appropriation_professional_fees',
         ),
+        migrations.RenameField(
+            model_name='provinfraprojectsnapshot',
+            old_name='adjustment_appropriation_construction_costs',
+            new_name='adjusted_appropriation_construction_costs',
+        ),
     ]
