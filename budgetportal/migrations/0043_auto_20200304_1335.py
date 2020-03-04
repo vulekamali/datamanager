@@ -8,18 +8,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0042_auto_20200131_1500'),
+        ("budgetportal", "0042_auto_20200131_1500"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='provinfraprojectsnapshot',
-            old_name='adjustment_appropriation_professional_fees',
-            new_name='adjusted_appropriation_professional_fees',
+            model_name="provinfraprojectsnapshot",
+            old_name="adjustment_appropriation_professional_fees",
+            new_name="adjusted_appropriation_professional_fees",
         ),
         migrations.RenameField(
-            model_name='provinfraprojectsnapshot',
-            old_name='adjustment_appropriation_construction_costs',
-            new_name='adjusted_appropriation_construction_costs',
+            model_name="provinfraprojectsnapshot",
+            old_name="adjustment_appropriation_construction_costs",
+            new_name="adjusted_appropriation_construction_costs",
         ),
     ]

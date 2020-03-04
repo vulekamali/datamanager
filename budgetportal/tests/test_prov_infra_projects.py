@@ -1243,9 +1243,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
                 row["estimated_completion_date"],
             )
             self.assertEqual(
-                float(
-                    items_to_compare[index].adjusted_appropriation_professional_fees
-                ),
+                float(items_to_compare[index].adjusted_appropriation_professional_fees),
                 float(row["adjusted_appropriation_professional_fees"]),
             )
 
