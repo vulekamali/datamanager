@@ -1235,7 +1235,9 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
 class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
     def _test_csv_content_correctness(self, csv_reader, items_to_compare):
         for index, row in enumerate(csv_reader):
-            self.assertListEqual(list(row.keys()), self._get_expected_headers())
+            self.assertListEqual(
+                list(row.keys()), ProvInfraProjectCSVSerializer.Meta.fields
+            )
             self.assertEqual(items_to_compare[index].name, row["name"])
             self.assertEqual(items_to_compare[index].province, row["province"])
             self.assertEqual(
@@ -1253,17 +1255,6 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
             response.get("Content-Disposition"),
             'attachment; filename="{}"'.format(filename),
         )
-
-    def _get_expected_headers(self):
-        expected_headers = []
-        headers = ProvInfraProjectCSVSerializer.Meta.fields
-        headers_to_replace = ProvInfraProjectCSVGeneratorMixIn.labels
-        for i, header in enumerate(headers):
-            if header in headers_to_replace.keys():
-                expected_headers.append(headers_to_replace[header])
-            else:
-                expected_headers.append(header)
-        return expected_headers
 
 
 class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
@@ -1326,7 +1317,9 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
-        self.assertListEqual(csv_reader.fieldnames, self._get_expected_headers())
+        self.assertListEqual(
+            csv_reader.fieldnames, ProvInfraProjectCSVSerializer.Meta.fields
+        )
 
     def test_csv_download_with_all_projects(self):
         response = self.client.get(self.url)

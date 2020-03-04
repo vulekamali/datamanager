@@ -110,11 +110,6 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMi
         filename = "{}.csv".format(project.get_slug())
         return self.generate_csv_response(serializer.data, filename=filename)
 
-    def get_renderer_context(self):
-        context = super().get_renderer_context()
-        context["labels"] = self.labels
-        return context
-
 
 class ProvInfraProjectSerializer(HaystackSerializer):
     class Meta:
