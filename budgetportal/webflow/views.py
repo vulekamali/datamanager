@@ -93,9 +93,14 @@ class ProvInfraProjectCSVGeneratorMixIn:
 
 
 class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+
     class Meta:
         model = ProvInfraProjectSnapshot
         exclude = ["created_at", "updated_at", "id", "project", "irm_snapshot"]
+
+    def get_name(self, obj):
+        return str(obj.irm_snapshot) if obj.irm_snapshot else ""
 
 
 class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMixIn):
