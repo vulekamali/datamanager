@@ -130,7 +130,7 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             main_appropriation_construction_costs=276000,
             main_appropriation_professional_fees=61000,
             # Adjustment Budget FY
-            adjustment_appropriation_total=1,
+            adjusted_appropriation_total=1,
             adjusted_appropriation_construction_costs=2,
             adjusted_appropriation_professional_fees=3,
             # Overall timeline

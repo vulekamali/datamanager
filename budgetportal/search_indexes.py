@@ -49,7 +49,7 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     main_appropriation_construction_costs = indexes.FloatField(indexed=False)
     adjusted_appropriation_construction_costs = indexes.FloatField(indexed=False)
     main_appropriation_total = indexes.FloatField(indexed=False)
-    adjustment_appropriation_total = indexes.FloatField(indexed=False)
+    adjusted_appropriation_total = indexes.FloatField(indexed=False)
     actual_expenditure_q1 = indexes.FloatField(indexed=False)
     actual_expenditure_q2 = indexes.FloatField(indexed=False)
     actual_expenditure_q3 = indexes.FloatField(indexed=False)
@@ -176,8 +176,8 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_main_appropriation_total(sef, object):
         return object.project_snapshots.latest().main_appropriation_total
 
-    def prepare_adjustment_appropriation_total(sef, object):
-        return object.project_snapshots.latest().adjustment_appropriation_total
+    def prepare_adjusted_appropriation_total(sef, object):
+        return object.project_snapshots.latest().adjusted_appropriation_total
 
     def prepare_actual_expenditure_q1(sef, object):
         return object.project_snapshots.latest().actual_expenditure_q1

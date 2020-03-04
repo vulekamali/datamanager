@@ -38,7 +38,7 @@ class ProvInfraProjectSnapshotSerializer(ModelSerializer):
             "main_appropriation_construction_costs",
             "adjusted_appropriation_construction_costs",
             "main_appropriation_total",
-            "adjustment_appropriation_total",
+            "adjusted_appropriation_total",
             "actual_expenditure_q1",
             "actual_expenditure_q2",
             "actual_expenditure_q3",

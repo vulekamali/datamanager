@@ -176,8 +176,8 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
         attribute="main_appropriation_total",
         column_name="Main Budget Appropriation (TOTAL)",
     )
-    adjustment_appropriation_total = Field(
-        attribute="adjustment_appropriation_total",
+    adjusted_appropriation_total = Field(
+        attribute="adjusted_appropriation_total",
         column_name="Adjustment Budget Appropriation (TOTAL)",
     )
     actual_expenditure_q1 = Field(

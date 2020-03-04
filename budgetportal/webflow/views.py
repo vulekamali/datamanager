@@ -76,7 +76,6 @@ def provincial_infrastructure_project_detail(request, id, slug):
 
 class ProvInfraProjectCSVGeneratorMixIn:
     labels = {
-        "adjustment_appropriation_total": "adjusted_appropriation_total",
         "total_project_cost": "estimated_total_project_cost",
     }
 
@@ -211,7 +210,7 @@ class ProvInfraProjectCSVSerializer(HaystackSerializer):
             "main_appropriation_construction_costs",
             "adjusted_appropriation_construction_costs",
             "main_appropriation_total",
-            "adjustment_appropriation_total",
+            "adjusted_appropriation_total",
             "actual_expenditure_q1",
             "actual_expenditure_q2",
             "actual_expenditure_q3",

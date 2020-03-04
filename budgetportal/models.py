@@ -2016,7 +2016,7 @@ class ProvInfraProjectSnapshot(models.Model):
     main_appropriation_total = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
-    adjustment_appropriation_total = models.DecimalField(
+    adjusted_appropriation_total = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     actual_expenditure_q1 = models.DecimalField(
