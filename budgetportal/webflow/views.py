@@ -92,7 +92,6 @@ class ProvInfraProjectCSVGeneratorMixIn:
             yield writer.writerow(row)
 
 
-
 class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProvInfraProjectSnapshot
