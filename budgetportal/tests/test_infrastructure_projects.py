@@ -72,7 +72,7 @@ class ExpenditureTestCase(TestCase):
             expenditure_item,
             {
                 "year": self.project.financial_year,
-                "amount": self.project.amount,
+                "amount": self.project.amount_rands,
                 "budget_phase": self.project.budget_phase,
             },
         )
@@ -82,7 +82,7 @@ class ExpenditureTestCase(TestCase):
         self.assertIn(
             {
                 "year": self.project.financial_year,
-                "amount": self.project.amount,
+                "amount": self.project.amount_rands,
                 "budget_phase": self.project.budget_phase,
             },
             complete_expenditure,
@@ -309,4 +309,4 @@ class DetailIntegrationTest(LiveServerTestCase):
             "/infrastructure-projects/{}".format(self.project.project_slug),
         )
         self.assertEqual(content["stage"], self.project.current_project_stage)
-        self.assertEqual(content["total_budget"], self.project.total_project_cost)
+        self.assertEqual(content["total_budget"], self.project.project_value_rands)

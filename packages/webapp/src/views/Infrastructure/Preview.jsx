@@ -378,18 +378,47 @@ const SideButtonToMaps = styled(Button)`
 `;
 
 const createSideRender = (id, props) => {
-  const { investment, infrastructure, department } = props;
+  const {
+    investment,
+    infrastructure,
+    department,
+    administrationType,
+    partnershipType,
+    financingStructure,
+    formOfPayment,
+  } = props;
 
   return (
     <SideWrapper key={id}>
-      <SideSection>
-        <SideTitle>Nature of investment:</SideTitle>
-        <SideType>{investment}</SideType>
-      </SideSection>
-      <SideSection>
-        <SideTitle>Infrastructure type:</SideTitle>
-        <SideType>{infrastructure}</SideType>
-      </SideSection>
+      {administrationType !== 'PPP' && (
+        <>
+          <SideSection>
+            <SideTitle>Nature of investment:</SideTitle>
+            <SideType>{investment}</SideType>
+          </SideSection>
+          <SideSection>
+            <SideTitle>Infrastructure type:</SideTitle>
+            <SideType>{infrastructure}</SideType>
+          </SideSection>
+        </>
+      )}
+      {administrationType === 'PPP' && (
+        <>
+          <SideSection>
+            <SideTitle>Partnership type:</SideTitle>
+            <SideType>{partnershipType}</SideType>
+          </SideSection>
+          <SideSection>
+            <SideTitle>Financing structure:</SideTitle>
+            <SideType>{financingStructure}</SideType>
+          </SideSection>
+          <SideSection>
+            <SideTitle>Form of payment type:</SideTitle>
+            <SideType>{formOfPayment}</SideType>
+          </SideSection>
+        </>
+      )}
+
       <SideSection>
         <SideTitle>Department</SideTitle>
         <SideType>{department.name}</SideType>
@@ -424,8 +453,10 @@ const createItem = props => {
     link,
     details,
     administrationType,
+    duration,
+    dateOfClose,
+    projectValueRandMillion,
   } = props;
-
 
   return (
     <AnimationWrapper key={id} style={{ width: '100%' }}>
@@ -442,14 +473,44 @@ const createItem = props => {
         )}
         <BudgetGroup>
           <BudgetCashflow>
-            <CashflowTitle>Total budget:</CashflowTitle>
-            <Estimation>{`R${trimValues(totalBudget)}`}</Estimation>
+            <CashflowTitle style={{ width: '100%', textAlign: 'left' }}>
+              Total budget:
+            </CashflowTitle>
+            <Estimation style={{ width: '100%', textAlign: 'left' }}>
+              {administrationType === 'PPP'
+                ? `R${trimValues(
+                    projectValueRandMillion ? parseInt(projectValueRandMillion, 10) * 10 ** 6 : 0,
+                  )}`
+                : `R${trimValues(totalBudget)}`}
+            </Estimation>
           </BudgetCashflow>
           <BudgetCashflow>
-            <CashflowTitle>3 Years project budget:</CashflowTitle>
-            <Estimation>{`R${trimValues(projectedBudget)}`}</Estimation>
+            <CashflowTitle style={{ width: '100%', textAlign: 'right' }}>
+              3 Years project budget:
+            </CashflowTitle>
+            <Estimation style={{ width: '100%', textAlign: 'right' }}>
+              {`R${trimValues(projectedBudget)}`}
+            </Estimation>
           </BudgetCashflow>
         </BudgetGroup>
+        {administrationType === 'PPP' && (
+          <>
+            <BudgetGroup>
+              <BudgetCashflow>
+                <CashflowTitle style={{ width: '100%', textAlign: 'left' }}>
+                  Duration:
+                </CashflowTitle>
+                <Estimation style={{ width: '100%', textAlign: 'left' }}>{duration}</Estimation>
+              </BudgetCashflow>
+              <BudgetCashflow>
+                <CashflowTitle style={{ width: '100%', textAlign: 'right' }}>
+                  Date of close:
+                </CashflowTitle>
+                <Estimation style={{ width: '100%', textAlign: 'right' }}>{dateOfClose}</Estimation>
+              </BudgetCashflow>
+            </BudgetGroup>
+          </>
+        )}
         <Text>{description}</Text>
         {!details && (
           <StyledLink href={link}>
