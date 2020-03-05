@@ -1270,7 +1270,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         irm_snapshot_1 = IRMSnapshot.objects.create(
             financial_year=FinancialYear.objects.create(slug="2030-31"),
             quarter=Quarter.objects.create(number=1),
-            date_taken=date(year=2050, month=1, day=1),
+            date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1),
         )
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
@@ -1285,7 +1285,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         irm_snapshot_2 = IRMSnapshot.objects.create(
             financial_year=FinancialYear.objects.create(slug="2030-32"),
             quarter=Quarter.objects.create(number=2),
-            date_taken=date(year=2050, month=1, day=1),
+            date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file2),
         )
         project_2 = ProvInfraProject.objects.create(IRM_project_id=2)

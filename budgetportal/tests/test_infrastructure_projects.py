@@ -310,5 +310,5 @@ class DetailIntegrationTest(LiveServerTestCase):
         )
         self.assertEqual(content["stage"], self.project.current_project_stage)
         self.assertEqual(
-            content["total_budget"], self.project.estimated_total_project_cost
+            content["total_budget"], self.project.total_project_cost
         )
