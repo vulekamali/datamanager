@@ -44,7 +44,6 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
         indexed=False
     )
     expenditure_from_previous_years_total = indexes.FloatField(indexed=False)
-    project_expenditure_total = indexes.FloatField(indexed=False)
     main_appropriation_professional_fees = indexes.FloatField(indexed=False)
     adjusted_appropriation_professional_fees = indexes.FloatField(indexed=False)
     main_appropriation_construction_costs = indexes.FloatField(indexed=False)
