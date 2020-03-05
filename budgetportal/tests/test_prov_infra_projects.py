@@ -1231,18 +1231,15 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
 
 
 class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
-    def _test_csv_content_correctness(
-        self, csv_reader, items_to_compare, names_from_snapshot=False
-    ):
+    def _test_csv_content_correctness(self, csv_reader, items_to_compare):
         for index, row in enumerate(csv_reader):
             self.assertListEqual(
                 list(row.keys()), ProvInfraProjectCSVSerializer.Meta.fields
             )
-            if names_from_snapshot:
-                self.assertEqual(str(items_to_compare[index].irm_snapshot), row["name"])
-            else:
-                self.assertEqual(items_to_compare[index].name, row["name"])
-
+            self.assertEqual(items_to_compare[index].name, row["name"])
+            self.assertEqual(
+                str(items_to_compare[index].irm_snapshot), row["irm_snapshot"]
+            )
             self.assertEqual(items_to_compare[index].province, row["province"])
             self.assertEqual(
                 items_to_compare[index].estimated_completion_date.strftime("%Y-%m-%d"),
@@ -1471,6 +1468,4 @@ class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         items_to_compare = [self.project_snapshot_1, self.project_snapshot_2]
-        self._test_csv_content_correctness(
-            csv_reader, items_to_compare, names_from_snapshot=True
-        )
+        self._test_csv_content_correctness(csv_reader, items_to_compare)

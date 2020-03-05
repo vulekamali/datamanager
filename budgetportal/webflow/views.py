@@ -93,13 +93,13 @@ class ProvInfraProjectCSVGeneratorMixIn:
 
 
 class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
+    irm_snapshot = serializers.SerializerMethodField()
 
     class Meta:
         model = ProvInfraProjectSnapshot
         exclude = ["created_at", "updated_at", "id", "project", "irm_snapshot"]
 
-    def get_name(self, obj):
+    def get_irm_snapshot(self, obj):
         return str(obj.irm_snapshot) if obj.irm_snapshot else ""
 
 
@@ -159,6 +159,7 @@ class ProvInfraProjectCSVSerializer(HaystackSerializer):
         index_classes = [ProvInfraProjectIndex]
         fields = [
             "name",
+            "irm_snapshot",
             "province",
             "department",
             "status",

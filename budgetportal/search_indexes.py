@@ -18,6 +18,7 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     longitude = indexes.CharField()
     url_path = indexes.CharField()
 
+    irm_snapshot = indexes.CharField(indexed=False)
     project_number = indexes.CharField(indexed=False)
     local_municipality = indexes.CharField(indexed=False)
     district_municipality = indexes.CharField(indexed=False)
@@ -92,6 +93,9 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_url_path(sef, object):
         return object.get_absolute_url()
+
+    def prepare_irm_snapshot(self, object):
+        return str(object.project_snapshots.latest().irm_snapshot)
 
     def prepare_project_number(sef, object):
         return object.project_snapshots.latest().project_number
