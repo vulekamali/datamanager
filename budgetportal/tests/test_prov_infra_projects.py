@@ -1250,7 +1250,7 @@ class ProvInfraProjectSearchCSVTestCaseMixin:
             # Verify correctness of province field of project between CSV and model
             self.assertEqual(items_to_compare[index].province, row["province"])
 
-            # Verify correctness of province field of project between CSV and model
+            # Verify correctness of completion date field of project between CSV and model
             self.assertEqual(
                 items_to_compare[index].estimated_completion_date.strftime("%Y-%m-%d"),
                 row["estimated_completion_date"],
