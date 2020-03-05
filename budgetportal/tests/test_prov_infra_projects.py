@@ -23,7 +23,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from django.core.management import call_command
 
-from budgetportal.webflow.views import ProvInfraProjectCSVSerializer
+from budgetportal.webflow.serializers import ProvInfraProjectCSVSerializer
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"

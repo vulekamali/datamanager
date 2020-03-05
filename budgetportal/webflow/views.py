@@ -5,7 +5,6 @@ import csv
 import json
 import urllib.parse
 
-from copy import deepcopy
 from slugify import slugify
 from budgetportal import models
 from budgetportal.csv_gen import Echo
@@ -20,15 +19,17 @@ from drf_haystack.filters import (
     HaystackOrderingFilter,
 )
 from drf_haystack.mixins import FacetMixin
-from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
 from drf_haystack.viewsets import HaystackViewSet
-from rest_framework import serializers
 from rest_framework.decorators import action
 from rest_framework.generics import RetrieveAPIView
 
-from ..models import ProvInfraProjectSnapshot
 from ..prov_infra_project.charts import time_series_data
-from ..search_indexes import ProvInfraProjectIndex
+from .serializers import (
+    ProvInfraProjectCSVSerializer,
+    ProvInfaProjectCSVSnapshotSerializer,
+    ProvInfraProjectSerializer,
+    ProvInfraProjectFacetSerializer,
+)
 
 
 def provincial_infrastructure_project_list(request):
@@ -92,17 +93,6 @@ class ProvInfraProjectCSVGeneratorMixIn:
             yield writer.writerow(row)
 
 
-class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
-    irm_snapshot = serializers.SerializerMethodField()
-
-    class Meta:
-        model = ProvInfraProjectSnapshot
-        exclude = ["created_at", "updated_at", "id", "project"]
-
-    def get_irm_snapshot(self, obj):
-        return str(obj.irm_snapshot) if obj.irm_snapshot else ""
-
-
 class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMixIn):
     queryset = models.ProvInfraProject.objects.prefetch_related("project_snapshots")
     serializer_class = ProvInfaProjectCSVSnapshotSerializer
@@ -114,112 +104,6 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMi
         )
         filename = "{}.csv".format(project.get_slug())
         return self.generate_csv_response(serializer.data, filename=filename)
-
-
-class ProvInfraProjectSerializer(HaystackSerializer):
-    class Meta:
-        # The `index_classes` attribute is a list of which search indexes
-        # we want to include in the search.
-        index_classes = [ProvInfraProjectIndex]
-
-        # The `fields` contains all the fields we want to include.
-        # NOTE: Make sure you don't confuse these with model attributes. These
-        # fields belong to the search index!
-        fields = [
-            "name",
-            "province",
-            "department",
-            "status",
-            "status_order",
-            "primary_funding_source",
-            "estimated_completion_date",
-            "estimated_total_project_cost",
-            "url_path",
-            "latitude",
-            "longitude",
-        ]
-
-    def __init__(self, *args, **kwargs):
-        # https://www.django-rest-framework.org/api-guide/serializers/#example
-        # Instantiate the superclass normally
-        super(ProvInfraProjectSerializer, self).__init__(*args, **kwargs)
-
-        fields = self.context["request"].query_params.get("fields")
-        if fields:
-            fields = fields.split(",")
-            # Drop any fields that are not specified in the `fields` argument.
-            allowed = set(fields)
-            existing = set(self.fields.keys())
-            for field_name in existing - allowed:
-                self.fields.pop(field_name)
-
-
-class ProvInfraProjectCSVSerializer(HaystackSerializer):
-    class Meta:
-        index_classes = [ProvInfraProjectIndex]
-        fields = [
-            "name",
-            "irm_snapshot",
-            "province",
-            "department",
-            "status",
-            "status_order",
-            "primary_funding_source",
-            "estimated_completion_date",
-            "estimated_total_project_cost",
-            "url_path",
-            "latitude",
-            "longitude",
-            "project_number",
-            "local_municipality",
-            "district_municipality",
-            "budget_programme",
-            "nature_of_investment",
-            "funding_status",
-            "program_implementing_agent",
-            "principle_agent",
-            "main_contractor",
-            "other_parties",
-            "start_date",
-            "estimated_construction_start_date",
-            "contracted_construction_end_date",
-            "estimated_construction_end_date",
-            "total_professional_fees",
-            "total_construction_costs",
-            "variation_orders",
-            "expenditure_from_previous_years_professional_fees",
-            "expenditure_from_previous_years_construction_costs",
-            "expenditure_from_previous_years_total",
-            "project_expenditure_total",
-            "main_appropriation_professional_fees",
-            "adjusted_appropriation_professional_fees",
-            "main_appropriation_construction_costs",
-            "adjusted_appropriation_construction_costs",
-            "main_appropriation_total",
-            "adjusted_appropriation_total",
-            "actual_expenditure_q1",
-            "actual_expenditure_q2",
-            "actual_expenditure_q3",
-            "actual_expenditure_q4",
-        ]
-
-
-class ProvInfraProjectFacetSerializer(HaystackFacetSerializer):
-
-    serialize_objects = True  # Setting this to True will serialize the
-    # queryset into an `objects` list. This
-    # is useful if you need to display the faceted
-    # results. Defaults to False.
-
-    class Meta:
-        index_classes = [ProvInfraProjectIndex]
-        fields = ["province", "department", "status", "primary_funding_source"]
-        field_options = {
-            "province": {},
-            "department": {},
-            "status": {},
-            "primary_funding_source": {},
-        }
 
 
 class ProvInfraProjectFacetFilter(HaystackFacetFilter):
