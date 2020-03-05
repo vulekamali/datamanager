@@ -93,7 +93,7 @@ services:
     command: minio --compat server data
 
   solr:
-    build: "https://github.com/TomaszKolek/solr-dokku.git"
+    build: "https://github.com/vulekamali/solr-dokku.git"
     image: budgetportal-solr
     ports:
       - "8983:8983"
