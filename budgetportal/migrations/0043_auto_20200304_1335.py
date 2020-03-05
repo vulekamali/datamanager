@@ -23,11 +23,6 @@ class Migration(migrations.Migration):
             new_name="adjusted_appropriation_construction_costs",
         ),
         migrations.RenameField(
-            model_name="infrastructureprojectpart",
-            old_name="total_project_cost",
-            new_name="estimated_total_project_cost",
-        ),
-        migrations.RenameField(
             model_name="provinfraprojectsnapshot",
             old_name="adjustment_appropriation_total",
             new_name="adjusted_appropriation_total",

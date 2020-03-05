@@ -97,7 +97,7 @@ class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProvInfraProjectSnapshot
-        exclude = ["created_at", "updated_at", "id", "project", "irm_snapshot"]
+        exclude = ["created_at", "updated_at", "id", "project"]
 
     def get_irm_snapshot(self, obj):
         return str(obj.irm_snapshot) if obj.irm_snapshot else ""
