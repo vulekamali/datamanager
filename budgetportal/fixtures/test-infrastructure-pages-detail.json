@@ -18,7 +18,7 @@
       "project_slug": "basic-test-slug",
       "amount": 1368285000,
       "financial_year": 2015,
-      "estimated_total_project_cost": 9045389000,
+      "total_project_cost": 9045389000,
       "provinces": "",
       "gps_code": "Not specified"
     }
@@ -42,7 +42,7 @@
       "project_slug": "basic-test-slug",
       "amount": 1049535000,
       "financial_year": 2016,
-      "estimated_total_project_cost": 9045389000,
+      "total_project_cost": 9045389000,
       "provinces": "",
       "gps_code": "Not specified"
     }
@@ -66,7 +66,7 @@
       "project_slug": "basic-test-slug",
       "amount": 1617716000,
       "financial_year": 2017,
-      "estimated_total_project_cost": 9045389000,
+      "total_project_cost": 9045389000,
       "provinces": "",
       "gps_code": "Not specified"
     }
@@ -90,7 +90,7 @@
       "project_slug": "basic-test-slug",
       "amount": 2121045000,
       "financial_year": 2018,
-      "estimated_total_project_cost": 9045389000,
+      "total_project_cost": 9045389000,
       "provinces": "",
       "gps_code": "Not specified"
     }
@@ -114,7 +114,7 @@
       "project_slug": "basic-test-slug",
       "amount": 1869482000,
       "financial_year": 2019,
-      "estimated_total_project_cost": 9045389000,
+      "total_project_cost": 9045389000,
       "provinces": "",
       "gps_code": "Not specified"
     }
@@ -138,7 +138,7 @@
       "project_slug": "basic-test-slug",
       "amount": 1628591000,
       "financial_year": 2020,
-      "estimated_total_project_cost": 9045389000,
+      "total_project_cost": 9045389000,
       "provinces": "",
       "gps_code": "Not specified"
     }
@@ -162,7 +162,7 @@
       "project_slug": "basic-test-slug",
       "amount": 2190735000,
       "financial_year": 2021,
-      "estimated_total_project_cost": 9045389000,
+      "total_project_cost": 9045389000,
       "provinces": "",
       "gps_code": "Not specified"
     }
