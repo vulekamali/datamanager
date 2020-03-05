@@ -1232,19 +1232,31 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
 
 class ProvInfraProjectSearchCSVTestCaseMixin:
     def _test_csv_content_correctness(self, csv_reader, items_to_compare):
+        self.assertEqual(len(list(csv_reader)), len(items_to_compare))
         for index, row in enumerate(csv_reader):
+            # Verify all the serializer fields are present in the CSV
             self.assertListEqual(
                 list(row.keys()), ProvInfraProjectCSVSerializer.Meta.fields
             )
+
+            # Verify correctness of the name of project field between CSV and model
             self.assertEqual(items_to_compare[index].name, row["name"])
+
+            # Verify correctness of the string representation of irm_snapshot between CSV and model
             self.assertEqual(
                 str(items_to_compare[index].irm_snapshot), row["irm_snapshot"]
             )
+
+            # Verify correctness of province field of project between CSV and model
             self.assertEqual(items_to_compare[index].province, row["province"])
+
+            # Verify correctness of province field of project between CSV and model
             self.assertEqual(
                 items_to_compare[index].estimated_completion_date.strftime("%Y-%m-%d"),
                 row["estimated_completion_date"],
             )
+
+            # Verify correctness of adjusted_appropriation_professional_fees field of project between CSV and model
             self.assertEqual(
                 float(items_to_compare[index].adjusted_appropriation_professional_fees),
                 float(row["adjusted_appropriation_professional_fees"]),
@@ -1305,6 +1317,9 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         self.file2.close()
 
     def test_csv_download_empty_file(self):
+        """
+        Verifies 1) correct filename, 2) header but zero rows of data present
+        """
         data = {"q": "data that won't be found"}
         response = self.client.get(self.url, data)
         self.assertEqual(len(response.data["results"]), 0)
@@ -1321,8 +1336,12 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         self.assertListEqual(
             csv_reader.fieldnames, ProvInfraProjectCSVSerializer.Meta.fields
         )
+        self.assertEqual(len(list(csv_reader)), 0)
 
     def test_csv_download_with_all_projects(self):
+        """
+        Verifies that 1) correct filename, 2) correct header, number of rows for all projects
+        """
         response = self.client.get(self.url)
         self.assertEqual(len(response.data["results"]), 2)
 
