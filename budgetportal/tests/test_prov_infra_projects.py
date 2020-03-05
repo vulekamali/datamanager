@@ -1276,18 +1276,50 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file1 = open(EMPTY_FILE_PATH, "rb")
+        self.file1_1_older = open(EMPTY_FILE_PATH, "rb")
+        self.file1_2_older = open(EMPTY_FILE_PATH, "rb")
         self.file2 = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
 
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-31"),
-            quarter=Quarter.objects.create(number=1),
+            financial_year=FinancialYear.objects.create(slug="2030-1"),
+            quarter=Quarter.objects.create(number=3),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1),
         )
+        irm_snapshot_1_1_older = IRMSnapshot.objects.create(
+            financial_year=FinancialYear.objects.create(slug="2030-2"),
+            quarter=Quarter.objects.create(number=1),
+            date_taken=datetime(year=2050, month=1, day=1),
+            file=File(self.file1_1_older),
+        )
+        irm_snapshot_1_2_older = IRMSnapshot.objects.create(
+            financial_year=FinancialYear.objects.get(slug="2030-1"),
+            quarter=Quarter.objects.get(number=1),
+            date_taken=datetime(year=2050, month=1, day=1),
+            file=File(self.file1_2_older),
+        )
+        project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
         self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
-            project=ProvInfraProject.objects.create(IRM_project_id=1),
+            project=project_1,
+            name="Blue School",
+            province="Eastern Cape",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+            adjusted_appropriation_professional_fees=1.0,
+        )
+        self.project_snapshot_1_1_older = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_1_1_older,
+            project=project_1,
+            name="Blue School",
+            province="Eastern Cape",
+            estimated_completion_date=date(year=2020, month=1, day=1),
+            adjusted_appropriation_professional_fees=1.0,
+        )
+
+        self.project_snapshot_1_2_older = ProvInfraProjectSnapshot.objects.create(
+            irm_snapshot=irm_snapshot_1_2_older,
+            project=project_1,
             name="Blue School",
             province="Eastern Cape",
             estimated_completion_date=date(year=2020, month=1, day=1),
@@ -1315,6 +1347,8 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         ProvInfraProjectIndex().clear()
         self.file1.close()
         self.file2.close()
+        self.file1_1_older.close()
+        self.file1_2_older.close()
 
     def test_csv_download_empty_file(self):
         """
