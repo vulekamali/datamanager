@@ -1230,7 +1230,7 @@ class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
         )
 
 
-class ProvInfraProjectIRMSnapshotCSVDownloadMixin:
+class ProvInfraProjectSearchCSVTestCaseMixin:
     def _test_csv_content_correctness(self, csv_reader, items_to_compare):
         for index, row in enumerate(csv_reader):
             self.assertListEqual(
