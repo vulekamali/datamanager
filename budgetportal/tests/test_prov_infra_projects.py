@@ -1259,7 +1259,7 @@ class ProvInfraProjectSearchCSVTestCaseMixin:
 
 
 class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
-    APITransactionTestCase, ProvInfraProjectIRMSnapshotCSVDownloadMixin
+    APITransactionTestCase, ProvInfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         call_command("clear_index", "--noinput")
@@ -1356,7 +1356,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
 
 class ProvInfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
-    APITransactionTestCase, ProvInfraProjectIRMSnapshotCSVDownloadMixin
+    APITransactionTestCase, ProvInfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         call_command("clear_index", "--noinput")
@@ -1407,7 +1407,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
 
 
 class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
-    APITransactionTestCase, ProvInfraProjectIRMSnapshotCSVDownloadMixin
+    APITransactionTestCase, ProvInfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         call_command("clear_index", "--noinput")
