@@ -10,7 +10,7 @@ def time_series_data(project_snapshots):
         quarter_number = snapshot.irm_snapshot.quarter.number
         fin_year = snapshot.irm_snapshot.financial_year
 
-        total_estimated_project_cost = snapshot.total_project_cost
+        total_estimated_project_cost = snapshot.estimated_total_project_cost
         status = snapshot.status
         date, quarter_label, fin_year_label = extract_date_quarter_year(
             quarter_number, fin_year

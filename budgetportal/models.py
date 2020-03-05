@@ -9,6 +9,7 @@ from decimal import Decimal
 from itertools import groupby
 from pprint import pformat
 from urllib.parse import urljoin, quote
+from uuid import uuid4
 
 import requests
 from slugify import slugify
@@ -1931,6 +1932,13 @@ class ProvInfraProject(models.Model):
         args = [self.pk, self.get_slug()]
         return reverse("provincial-infra-project-detail", args=args)
 
+    @property
+    def csv_download_url(self):
+        return reverse(
+            "provincial-infra-project-detail-csv-download",
+            args=(self.id, self.get_slug()),
+        )
+
 
 class ProvInfraProjectSnapshot(models.Model):
     """This represents a snapshot of a project, as it occurred in an IRM snapshot"""
@@ -1978,7 +1986,7 @@ class ProvInfraProjectSnapshot(models.Model):
     variation_orders = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
-    total_project_cost = models.DecimalField(
+    estimated_total_project_cost = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     expenditure_from_previous_years_professional_fees = models.DecimalField(
@@ -1996,19 +2004,19 @@ class ProvInfraProjectSnapshot(models.Model):
     main_appropriation_professional_fees = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
-    adjustment_appropriation_professional_fees = models.DecimalField(
+    adjusted_appropriation_professional_fees = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     main_appropriation_construction_costs = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
-    adjustment_appropriation_construction_costs = models.DecimalField(
+    adjusted_appropriation_construction_costs = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     main_appropriation_total = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
-    adjustment_appropriation_total = models.DecimalField(
+    adjusted_appropriation_total = models.DecimalField(
         max_digits=20, decimal_places=2, blank=True, null=True
     )
     actual_expenditure_q1 = models.DecimalField(

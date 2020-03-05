@@ -138,8 +138,8 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
     variation_orders = Field(
         attribute="variation_orders", column_name="Variation Orders"
     )
-    total_project_cost = Field(
-        attribute="total_project_cost", column_name="Total Project Cost"
+    estimated_total_project_cost = Field(
+        attribute="estimated_total_project_cost", column_name="Total Project Cost"
     )
     expenditure_from_previous_years_professional_fees = Field(
         attribute="expenditure_from_previous_years_professional_fees",
@@ -160,24 +160,24 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
         attribute="main_appropriation_professional_fees",
         column_name="Main Budget Appropriation (Professional Fees)",
     )
-    adjustment_appropriation_professional_fees = Field(
-        attribute="adjustment_appropriation_professional_fees",
+    adjusted_appropriation_professional_fees = Field(
+        attribute="adjusted_appropriation_professional_fees",
         column_name="Adjustment Budget Appropriation (Professional Fees)",
     )
     main_appropriation_construction_costs = Field(
         attribute="main_appropriation_construction_costs",
         column_name="Main Budget Appropriation (Construction Costs)",
     )
-    adjustment_appropriation_construction_costs = Field(
-        attribute="adjustment_appropriation_construction_costs",
+    adjusted_appropriation_construction_costs = Field(
+        attribute="adjusted_appropriation_construction_costs",
         column_name="Adjustment Budget Appropriation (Construction Costs)",
     )
     main_appropriation_total = Field(
         attribute="main_appropriation_total",
         column_name="Main Budget Appropriation (TOTAL)",
     )
-    adjustment_appropriation_total = Field(
-        attribute="adjustment_appropriation_total",
+    adjusted_appropriation_total = Field(
+        attribute="adjusted_appropriation_total",
         column_name="Adjustment Budget Appropriation (TOTAL)",
     )
     actual_expenditure_q1 = Field(

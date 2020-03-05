@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import csv
 import json
+import urllib.parse
 
+from copy import deepcopy
 from slugify import slugify
-
 from budgetportal import models
+from budgetportal.csv_gen import Echo
 from budgetportal.json_encoder import JSONEncoder
 from django.forms.models import model_to_dict
+from django.http.response import StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
+from django.urls import reverse
 from drf_haystack.filters import (
     HaystackFacetFilter,
     HaystackFilter,
@@ -19,7 +22,11 @@ from drf_haystack.filters import (
 from drf_haystack.mixins import FacetMixin
 from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
 from drf_haystack.viewsets import HaystackViewSet
+from rest_framework import serializers
+from rest_framework.decorators import action
+from rest_framework.generics import RetrieveAPIView
 
+from ..models import ProvInfraProjectSnapshot
 from ..prov_infra_project.charts import time_series_data
 from ..search_indexes import ProvInfraProjectIndex
 
@@ -38,6 +45,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
     page_data["project"]["irm_snapshot"] = str(snapshot.irm_snapshot)
+    page_data["project"]["csv_download_url"] = project.csv_download_url
     snapshot_list = list(project.project_snapshots.all())
     page_data["time_series_chart"] = time_series_data(snapshot_list)
     department = models.Department.get_in_latest_government(
@@ -66,6 +74,48 @@ def provincial_infrastructure_project_detail(request, id, slug):
     )
 
 
+class ProvInfraProjectCSVGeneratorMixIn:
+    def generate_csv_response(self, response_results, filename="export.csv"):
+        response = StreamingHttpResponse(
+            streaming_content=self._generate_rows(response_results),
+            content_type="text/csv",
+        )
+        response["Content-Disposition"] = 'attachment; filename="{}"'.format(filename)
+        return response
+
+    def _generate_rows(self, response_results):
+        headers = ProvInfraProjectCSVSerializer.Meta.fields
+        writer = csv.DictWriter(Echo(), fieldnames=headers)
+        yield writer.writerow({h: h for h in headers})
+
+        for row in response_results:
+            yield writer.writerow(row)
+
+
+class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
+    irm_snapshot = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ProvInfraProjectSnapshot
+        exclude = ["created_at", "updated_at", "id", "project"]
+
+    def get_irm_snapshot(self, obj):
+        return str(obj.irm_snapshot) if obj.irm_snapshot else ""
+
+
+class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMixIn):
+    queryset = models.ProvInfraProject.objects.prefetch_related("project_snapshots")
+    serializer_class = ProvInfaProjectCSVSnapshotSerializer
+
+    def get(self, request, *args, **kwargs):
+        project = get_object_or_404(self.queryset, id=int(kwargs["id"]))
+        serializer = self.serializer_class(
+            project.project_snapshots.iterator(), many=True
+        )
+        filename = "{}.csv".format(project.get_slug())
+        return self.generate_csv_response(serializer.data, filename=filename)
+
+
 class ProvInfraProjectSerializer(HaystackSerializer):
     class Meta:
         # The `index_classes` attribute is a list of which search indexes
@@ -83,7 +133,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             "status_order",
             "primary_funding_source",
             "estimated_completion_date",
-            "total_project_cost",
+            "estimated_total_project_cost",
             "url_path",
             "latitude",
             "longitude",
@@ -102,6 +152,56 @@ class ProvInfraProjectSerializer(HaystackSerializer):
             existing = set(self.fields.keys())
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
+
+
+class ProvInfraProjectCSVSerializer(HaystackSerializer):
+    class Meta:
+        index_classes = [ProvInfraProjectIndex]
+        fields = [
+            "name",
+            "irm_snapshot",
+            "province",
+            "department",
+            "status",
+            "status_order",
+            "primary_funding_source",
+            "estimated_completion_date",
+            "estimated_total_project_cost",
+            "url_path",
+            "latitude",
+            "longitude",
+            "project_number",
+            "local_municipality",
+            "district_municipality",
+            "budget_programme",
+            "nature_of_investment",
+            "funding_status",
+            "program_implementing_agent",
+            "principle_agent",
+            "main_contractor",
+            "other_parties",
+            "start_date",
+            "estimated_construction_start_date",
+            "contracted_construction_end_date",
+            "estimated_construction_end_date",
+            "total_professional_fees",
+            "total_construction_costs",
+            "variation_orders",
+            "expenditure_from_previous_years_professional_fees",
+            "expenditure_from_previous_years_construction_costs",
+            "expenditure_from_previous_years_total",
+            "project_expenditure_total",
+            "main_appropriation_professional_fees",
+            "adjusted_appropriation_professional_fees",
+            "main_appropriation_construction_costs",
+            "adjusted_appropriation_construction_costs",
+            "main_appropriation_total",
+            "adjusted_appropriation_total",
+            "actual_expenditure_q1",
+            "actual_expenditure_q2",
+            "actual_expenditure_q3",
+            "actual_expenditure_q4",
+        ]
 
 
 class ProvInfraProjectFacetSerializer(HaystackFacetSerializer):
@@ -144,7 +244,9 @@ class ProvInfraProjectFilter(HaystackFilter):
         return queryset
 
 
-class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
+class ProvInfraProjectSearchView(
+    FacetMixin, HaystackViewSet, ProvInfraProjectCSVGeneratorMixIn
+):
 
     # `index_models` is an optional list of which models you would like to include
     # in the search result. You might have several models indexed, and this provides
@@ -153,6 +255,7 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
     # index_models = [Location]
 
     serializer_class = ProvInfraProjectSerializer
+    csv_serializer_class = ProvInfraProjectCSVSerializer
     filter_backends = [ProvInfraProjectFilter, HaystackOrderingFilter]
 
     facet_serializer_class = ProvInfraProjectFacetSerializer
@@ -160,7 +263,49 @@ class ProvInfraProjectSearchView(FacetMixin, HaystackViewSet):
 
     ordering_fields = [
         "name",
-        "total_project_cost",
+        "estimated_total_project_cost",
         "status_order",
         "estimated_completion_date",
     ]
+
+    def list(self, request, *args, **kwargs):
+        csv_download_params = self._get_csv_query_params(request.query_params)
+        response = super().list(request, *args, **kwargs)
+        if isinstance(response.data, dict):
+            response.data["csv_download_url"] = reverse(
+                "provincial-infrastructure-project-api-csv"
+            )
+        if csv_download_params:
+            response.data["csv_download_url"] += "?{}".format(csv_download_params)
+        return response
+
+    @action(detail=False, methods=["get"])
+    def get_csv(self, request, *args, **kwargs):
+        self.serializer_class = self.csv_serializer_class
+        self.pagination_class = None
+        response = super().list(request, *args, **kwargs)
+        return self.generate_csv_response(
+            response.data, filename=self._get_filename(request.query_params)
+        )
+
+    def _get_csv_query_params(self, original_query_params):
+        csv_download_params = original_query_params.copy()
+        csv_download_params.pop("fields", None)
+        csv_download_params.pop("limit", None)
+        csv_download_params.pop("offset", None)
+        return urllib.parse.urlencode(csv_download_params)
+
+    def _get_filename(self, query_params):
+        keys_to_check = (
+            "province",
+            "department",
+            "status",
+            "primary_founding_source",
+            "q",
+        )
+        extension = "csv"
+        filename = "provincial-infrastructure-projects"
+        for key in keys_to_check:
+            if query_params.get(key):
+                filename += "-{}-{}".format(key, slugify(query_params[key]))
+        return "{}.{}".format(filename, extension)
