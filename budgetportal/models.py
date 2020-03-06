@@ -1582,8 +1582,8 @@ class Programme(models.Model):
 
 
 class InfrastructureProjectPart(models.Model):
-    sphere = models.CharField(max_length=255)
-    department = models.CharField(max_length=255)
+    administration_type = models.CharField(max_length=255)
+    government_institution = models.CharField(max_length=255)
     sector = models.CharField(max_length=255)
     project_name = models.CharField(max_length=255)
     project_description = models.TextField()
@@ -1595,11 +1595,19 @@ class InfrastructureProjectPart(models.Model):
     featured = models.BooleanField()
     budget_phase = models.CharField(max_length=255)
     project_slug = models.CharField(max_length=255)
-    amount = models.BigIntegerField(default=0)
+    amount_rands = models.BigIntegerField(default=0)
     financial_year = models.CharField(max_length=4)
-    total_project_cost = models.BigIntegerField(default=0)
+    project_value_rands = models.BigIntegerField(default=0)
     provinces = models.CharField(max_length=510, default="")
     gps_code = models.CharField(max_length=255, default="")
+
+    # PPP fields
+    partnership_type = models.CharField(max_length=255, name='partnership_type', default='')
+    date_of_close = models.CharField(max_length=255, name='date_of_close', default='')
+    duration = models.CharField(max_length=255, name='duration', default='')
+    financing_structure = models.CharField(max_length=255, name='financing_structure', default='')
+    project_value_rand_million = models.CharField(max_length=255, name='project_value_rand_million', default='')
+    form_of_payment = models.CharField(max_length=255, name='form_of_payment', default='')
 
     class Meta:
         verbose_name = "National infrastructure project part"
@@ -1615,7 +1623,7 @@ class InfrastructureProjectPart(models.Model):
         if the latest department instance matches the project year
         """
         departments = Department.objects.filter(
-            slug=slugify(self.department), government__sphere__slug="national"
+            slug=slugify(self.government_institution), government__sphere__slug="national"
         )
         if departments:
             latest_dept = departments[0].get_latest_department_instance()
@@ -1645,7 +1653,7 @@ class InfrastructureProjectPart(models.Model):
         )
         projected_expenditure = 0
         for project in projected_records_for_project:
-            projected_expenditure += float(project.amount)
+            projected_expenditure += float(project.amount_rands)
         return projected_expenditure
 
     @staticmethod
@@ -1741,7 +1749,7 @@ class InfrastructureProjectPart(models.Model):
     def _build_expenditure_item(project):
         return {
             "year": project.financial_year,
-            "amount": project.amount,
+            "amount": project.amount_rands,
             "budget_phase": project.budget_phase,
         }
 

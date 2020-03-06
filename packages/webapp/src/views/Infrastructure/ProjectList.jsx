@@ -5,30 +5,37 @@ import CardContent from '@material-ui/core/Card';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/icons/ArrowDownward';
 import NationalMap from '../../components/NationalMap';
 import trimValues from '../../helpers/trimValues';
 import manAtLaptopImg from './man-at-laptop.jpg';
 import constructionWorkers from './construction-workers.jpg';
 import Progressbar from '../../components/Progressbar';
-import Icon from '@material-ui/icons/ArrowDownward';
 
-
-
-const calcShorthand = (name) => {
+const calcShorthand = name => {
   switch (name) {
-    case 'Eastern Cape': return 'EC';
-    case 'Free State': return 'FS';
-    case 'Gauteng': return 'GP';
-    case 'KwaZulu-Natal': return 'KZN';
-    case 'Limpopo': return 'LIM';
-    case 'Mpumalanga': return 'MP';
-    case 'Northern Cape': return 'NC';
-    case 'North West': return 'NW';
-    case 'Western Cape': return 'WC';
-    default: return null;
+    case 'Eastern Cape':
+      return 'EC';
+    case 'Free State':
+      return 'FS';
+    case 'Gauteng':
+      return 'GP';
+    case 'KwaZulu-Natal':
+      return 'KZN';
+    case 'Limpopo':
+      return 'LIM';
+    case 'Mpumalanga':
+      return 'MP';
+    case 'Northern Cape':
+      return 'NC';
+    case 'North West':
+      return 'NW';
+    case 'Western Cape':
+      return 'WC';
+    default:
+      return null;
   }
-}
-
+};
 
 const createCallToActions = (datasetUrl, budgetReviewUrl) => ({
   3: {
@@ -44,7 +51,7 @@ const createCallToActions = (datasetUrl, budgetReviewUrl) => ({
     button: 'Download the data',
     info: 'PDF',
     link: budgetReviewUrl,
-  }
+  },
 });
 
 const CardWrapper = styled.div`
@@ -58,7 +65,7 @@ const CardWrapper = styled.div`
   @media screen and (min-width: 900px) {
     width: ${100 / 3}%;
   }
-  
+
   @media screen and (min-width: 1024px) {
     width: 25%;
   }
@@ -71,19 +78,19 @@ const StyledCardActionArea = styled(CardActionArea)`
 `;
 
 const CardContainer = styled(Card)`
-   && {
-     height: 100%;
-     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-     transition: transform 500ms; 
-     &:hover {
+  && {
+    height: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: transform 500ms;
+    &:hover {
       box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05), 0px 10px 10px rgba(0, 0, 0, 0.2);
       transform: translate(-2px, -2px);
-     }
-   }
+    }
+  }
 `;
 
 const CardHeading = styled.div`
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
   width: 100%;
   height: 85px;
   position: relative;
@@ -102,34 +109,33 @@ const StyledCardContent = styled(CardContent)`
     flex-direction: column;
     border-radius: 0 0 4px 4px;
     height: 191px;
-    
+
     @media screen and (min-width: 1024px) {
       height: 201px;
       justify-content: space-between;
-    }   
+    }
   }
 `;
 
 const GreenCardContent = styled(StyledCardContent)`
   && {
-    background: #76B649;
+    background: #76b649;
     color: white;
     padding: 15px;
   }
 `;
 
-const TopContent = styled.div`
-`;
+const TopContent = styled.div``;
 
 const TopContentTitle = styled.div`
-    font-size: 14px;
-    margin-top: 2px;
-    line-height: 20px;
-    font-weight: normal;
-    font-family: Lato;
-    @media screen and (min-width: 1024px) {
-      font-size: 16px;
-    }
+  font-size: 14px;
+  margin-top: 2px;
+  line-height: 20px;
+  font-weight: normal;
+  font-family: Lato;
+  @media screen and (min-width: 1024px) {
+    font-size: 16px;
+  }
 `;
 
 const StyledButton = styled(Button)`
@@ -161,11 +167,11 @@ const StyledButton = styled(Button)`
 `;
 
 const DownloadInfo = styled.div`
-   color: rgba(255, 255, 255, 0.7);
-   font-size: 10px;
-   text-align: center;
-   font-weight: bold;
-   font-family: Lato;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-family: Lato;
 `;
 
 const MapPosition = styled.div`
@@ -186,78 +192,75 @@ const Tag = styled.div`
 `;
 
 const SubHeading = styled.div`
-    font-family: Lato;
-    font-style: normal;
-    font-weight: bold;
-    line-height: 16px;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #76B649;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 16px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #76b649;
 `;
 
 const Heading = styled.div`
-    &&&& {
-      font-family: Lato;
-      font-weight: 700;
-      font-size: 16px;
-      align: left;
-      color: #000000;
-      @media screen and (min-width: 1024px) {
-        font-size: 18px;
-      }
+  &&&& {
+    font-family: Lato;
+    font-weight: 700;
+    font-size: 16px;
+    align: left;
+    color: #000000;
+    @media screen and (min-width: 1024px) {
+      font-size: 18px;
     }
+  }
 `;
 
 const StageText = styled.div`
-      text-transform: uppercase;
-      margin-bottom: 5px;
-      font-size: 10px;
-      line-height: 16px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-      color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: rgba(0, 0, 0, 0.5);
 `;
 
 const TotalBudgetText = styled.div`
-      text-transform: uppercase;
-      font-size: 16px;
-      line-height: 16px;
-      font-size: 10px;
-      color: #757575;
-      margin-top: 15px;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 16px;
+  font-size: 10px;
+  color: #757575;
+  margin-top: 15px;
 `;
 const TotalAmount = styled.div`
-      font-weight: bold;
-      font-size: 16px;
+  font-weight: bold;
+  font-size: 16px;
 `;
 
 const ctaIndex = Object.keys(createCallToActions());
-const budgetReviewUrl = 'http://www.treasury.gov.za/documents/national%20budget/2019/review/FullBR.pdf';
+const budgetReviewUrl =
+  'http://www.treasury.gov.za/documents/national%20budget/2019/review/FullBR.pdf';
 
 const buildCta = (index, datasetUrl, Link = 'a') => {
   if (!datasetUrl || !budgetReviewUrl) {
     return null;
   }
 
-  const {
-    image,
-    title,
-    button,
-    info,
-    link,
-  } = createCallToActions(datasetUrl, budgetReviewUrl)[index];
-  
+  const { image, title, button, info, link } = createCallToActions(datasetUrl, budgetReviewUrl)[
+    index
+  ];
+
   return (
     <CardWrapper>
       <CardContainer>
         <CardHeading {...{ image }} />
         <GreenCardContent>
-        <CssBaseline />
+          <CssBaseline />
           <TopContent>
             <TopContentTitle>{title}</TopContentTitle>
           </TopContent>
-          <a 
+          <a
             style={{ textDecoration: 'none' }}
             href={link}
             target="_blank"
@@ -272,7 +275,7 @@ const buildCta = (index, datasetUrl, Link = 'a') => {
         </GreenCardContent>
       </CardContainer>
     </CardWrapper>
-  )
+  );
 };
 
 const createProjectCard = (datasetUrl, Link = 'a') => (props, index, selected) => {
@@ -285,6 +288,9 @@ const createProjectCard = (datasetUrl, Link = 'a') => (props, index, selected) =
     activeProvinces = [],
     link,
     points,
+    administrationType,
+    duration,
+    projectValueRandMillion,
   } = props;
 
   const isCtaIndex = ctaIndex.indexOf(index.toString()) !== -1;
@@ -293,7 +299,7 @@ const createProjectCard = (datasetUrl, Link = 'a') => (props, index, selected) =
     <Fragment key={id}>
       {isCtaIndex && buildCta(index, datasetUrl, Link)}
       <CardWrapper>
-        <Link 
+        <Link
           href={Link === 'a' && link}
           to={Link !== 'a' && link}
           style={{ textDecoration: 'none', color: 'black' }}
@@ -302,22 +308,50 @@ const createProjectCard = (datasetUrl, Link = 'a') => (props, index, selected) =
             <StyledCardActionArea>
               <CardHeading>
                 <MapPosition>
-                  <NationalMap size="small" active={activeProvinces.length < 1 && 'Multiple'} {...{ points, activeProvinces }} selected={selected.points && selected.points[0].id} />
+                  <NationalMap
+                    size="small"
+                    active={activeProvinces.length < 1 && 'Multiple'}
+                    {...{ points, activeProvinces }}
+                    selected={selected.points && selected.points[0].id}
+                  />
                 </MapPosition>
-                  <Tag province={activeProvinces.length < 1 && 'Multiple'}>
-                    {activeProvinces.length > 0 ? calcShorthand(activeProvinces[0]) : 'MULTIPLE'}
-                  </Tag>
+                <Tag province={activeProvinces.length < 1 && 'Multiple'}>
+                  {activeProvinces.length > 0 ? calcShorthand(activeProvinces[0]) : 'MULTIPLE'}
+                </Tag>
               </CardHeading>
               <StyledCardContent>
                 <TopContent>
-                  <SubHeading>{subheading.length > 20 ? `${subheading.substring(0, 20)}...` : subheading }</SubHeading>
-                  <Heading>{heading.length > 30 ? `${heading.substring(0, 30)}...` : heading }</Heading>
+                  <SubHeading>
+                    {subheading.length > 20 ? `${subheading.substring(0, 20)}...` : subheading}
+                  </SubHeading>
+                  <Heading>
+                    {heading.length > 30 ? `${heading.substring(0, 30)}...` : heading}
+                  </Heading>
                 </TopContent>
                 <div>
-                  <StageText>{`Stage: ${stage}`}</StageText>
-                  <Progressbar stage={stage} />
-                  <TotalBudgetText>Total budget:</TotalBudgetText>
-                  <TotalAmount>{`R${trimValues(totalBudget)}`}</TotalAmount>
+                  {administrationType !== 'PPP' && (
+                    <>
+                      <StageText>{`Stage: ${stage}`}</StageText>
+                      <Progressbar stage={stage} />
+                      <TotalBudgetText>Total budget:</TotalBudgetText>
+                      <TotalAmount>{`R${trimValues(totalBudget)}`}</TotalAmount>
+                    </>
+                  )}
+                  {administrationType === 'PPP' && (
+                    <>
+                      <StageText>Public Private Partnership</StageText>
+                      <TotalBudgetText style={{ marginTop: 0 }}>Duration:</TotalBudgetText>
+                      <TotalAmount>{duration}</TotalAmount>
+                      <TotalBudgetText style={{ marginTop: 0 }}>Total budget:</TotalBudgetText>
+                      <TotalAmount>
+                        {`R${trimValues(
+                          projectValueRandMillion
+                            ? parseInt(projectValueRandMillion, 10) * 10 ** 6
+                            : 0,
+                        )}`}
+                      </TotalAmount>
+                    </>
+                  )}
                 </div>
               </StyledCardContent>
             </StyledCardActionArea>
@@ -325,38 +359,38 @@ const createProjectCard = (datasetUrl, Link = 'a') => (props, index, selected) =
         </Link>
       </CardWrapper>
     </Fragment>
-  )
+  );
 };
 
 const Wrapper = styled.div`
   margin-top: 160px;
-  background: #EDEDED;
+  background: #ededed;
 `;
 
-const Content = styled.div` 
+const Content = styled.div`
   position: relative;
   top: -130px;
   max-width: 1000px;
-  
+
   margin: 0 auto;
   padding: 0 20px;
 `;
 
 const Title = styled.h2`
-   font-family: Lato;
-   font-size: 10px;
-   letter-spacing: 3px;
-   text-align: center;
-   text-transform: uppercase;
-   padding: 0 16px;
-   @media screen and (min-width: 768px) {
+  font-family: Lato;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0 16px;
+  @media screen and (min-width: 768px) {
     text-align: left;
     letter-spacing: 2px;
     font-size: 14px;
-   }
-   @media screen and (min-width: 1024px) {
+  }
+  @media screen and (min-width: 1024px) {
     padding: 0;
-   }
+  }
 `;
 
 const List = styled.div`
@@ -368,19 +402,15 @@ const List = styled.div`
   }
 `;
 
-
 const ProjectList = ({ projects, datasetUrl, budgetReviewUrl, Link }) => {
   return (
     <Wrapper>
       <Content>
         <Title>Project List</Title>
-        <List>
-          {projects.map(createProjectCard(datasetUrl, Link))}
-        </List>
+        <List>{projects.map(createProjectCard(datasetUrl, Link))}</List>
       </Content>
     </Wrapper>
-  )
+  );
 };
-
 
 export default ProjectList;
