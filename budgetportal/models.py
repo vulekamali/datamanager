@@ -2060,7 +2060,6 @@ def extras_set(extras, key, value):
     for extra in extras:
         if extra["key"] == key:
             extra["value"] = value
-            extra["value"] = value
             break
 
 
