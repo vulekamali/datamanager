@@ -14,9 +14,9 @@ from import_export.widgets import Widget
 logger = logging.getLogger(__name__)
 
 
-class CustomIsVotePrimaryWidget(Widget):
+class CustomBooleanWidget(Widget):
     """
-    Widget for converting is_vote_primary fields.
+    Widget for converting boolean fields.
     """
 
     def render(self, value, obj=None):
@@ -26,16 +26,12 @@ class CustomIsVotePrimaryWidget(Widget):
             return "False"
 
     def clean(self, value, row=None, *args, **kwargs):
-        if value is None or value == "" or value.upper() == "TRUE":
+        if isinstance(value, bool):
+            return value
+        elif value is None or value == "" or value.upper() == "TRUE" or value.upper() == "=TRUE()":
             return True
         else:
             return False
-
-
-class CustomFeaturedWidget(CustomIsVotePrimaryWidget):
-    """
-    Widget for converting featured field on the InfrastructureProjectPart model.
-    """
 
 
 class CustomProvinceWidget(Widget):
@@ -125,7 +121,7 @@ class DepartmentResource(resources.ModelResource):
     is_vote_primary = Field(
         attribute="is_vote_primary",
         column_name="is_vote_primary",
-        widget=CustomIsVotePrimaryWidget(),
+        widget=CustomBooleanWidget(),
     )
     name = Field(attribute="name", column_name="department_name")
     vote_number = Field(attribute="vote_number", column_name="vote_number")
@@ -205,7 +201,7 @@ class InfrastructureProjectResource(resources.ModelResource):
     """
 
     featured = Field(
-        attribute="featured", column_name="featured", widget=CustomFeaturedWidget()
+        attribute="featured", column_name="featured", widget=CustomBooleanWidget()
     )
     provinces = InfrastructureProjectProvinceField(
         attribute="provinces", column_name="provinces", widget=CustomProvinceWidget()
