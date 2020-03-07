@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Infrastructure from '../views/Infrastructure';
 import Loading from '../views/Loading';
 
-const isConnectionYear = year => year === '2017' || year === '2018' || year === '2019';
-
 const buildEne = url => ({
   heading: 'Read more in the Department Budget',
   format: 'PDF',
@@ -18,6 +16,48 @@ const datasetUrl = url => ({
   format: 'CSV',
   link: url,
 });
+
+const buildChartData = expenditure => {
+  let left;
+  let right;
+  let needRender = true;
+  let data = expenditure
+    .sort((a, b) => a.year > b.year)
+    .map(obj => {
+      const { amount, year } = obj;
+      const actual = obj.budget_phase === 'Audited Outcome' ? amount : null;
+      const projected = obj.budget_phase !== 'Audited Outcome' ? amount : null;
+      if (actual) {
+        left = year;
+      }
+      if (projected && !right) {
+        right = year;
+      }
+      if (!amount) {
+        needRender = false;
+      }
+      return {
+        name: year,
+        amount,
+        Actual: actual,
+        Projected: projected,
+        Connection: null,
+      };
+    });
+  if (!data.length) {
+    needRender = false;
+  }
+  if (left && right) {
+    data = data.map(obj => {
+      const o = { ...obj };
+      if (obj.name === left || obj.name === right) {
+        return { ...o, Connection: o.amount };
+      }
+      return o;
+    });
+  }
+  return { data, needRender };
+};
 
 const parseProjects = (projects, dataset_url) =>
   projects.map(project => ({
@@ -40,12 +80,7 @@ const parseProjects = (projects, dataset_url) =>
       buildEne(project.government_institution.budget_document),
       datasetUrl(dataset_url),
     ].filter(({ link }) => !!link),
-    chartData: project.expenditure.map(obj => ({
-      name: obj.year,
-      Actual: obj.budget_phase === 'Audited Outcome' ? obj.amount : null,
-      Projected: obj.budget_phase !== 'Audited Outcome' ? obj.amount : null,
-      Connection: isConnectionYear(obj.year) ? obj.amount : null,
-    })),
+    chartData: buildChartData(project.expenditure),
     sideInfo: {
       investment: project.nature_of_investment,
       infrastructure: project.infrastructure_type,
