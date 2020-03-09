@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+
+{% if self.get_ancestors|length > 1 %}
+<div class="Section is-invisible">
+  {% for page in self.get_ancestors %}
+  {% if page.is_root == False %}
+  <a href="{% pageurl page %}">{{ page.title }}</a> /
+  {% endif %}
+  {% endfor %}
+
+  {{ self.title }}
+</div>
+{% endif %}

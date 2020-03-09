@@ -28,6 +28,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=minio-secret-key
       - AWS_STORAGE_BUCKET_NAME=budgetportal-storage
       - AWS_S3_ENDPOINT_URL=http://minio:9000
+      - AWS_S3_SECURE_URLS=false
       - SOLR_URL=http://solr:8983/solr/budgetportal
       - DEBUG_CACHE=${DEBUG_CACHE}
     volumes:

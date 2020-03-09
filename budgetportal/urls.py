@@ -12,6 +12,12 @@ from .webflow import urls as webflow_urls
 
 from . import bulk_upload, views
 
+
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
+
+
 admin.site = AdminSitePlus()
 admin.autodiscover()
 
@@ -248,6 +254,10 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     url("^", include(webflow_urls.urlpatterns)),
+
+    url('cms/', include(wagtailadmin_urls)),
+    url('documents/', include(wagtaildocs_urls)),
+    url('/', include(wagtail_urls)),
 ]
 
 if settings.DEBUG_TOOLBAR:

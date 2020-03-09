@@ -89,6 +89,21 @@ INSTALLED_APPS = [
     "markdownify",
     "ckeditor",
     "haystack",
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.users",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.admin",
+    "wagtail.core",
+    # still wagtail
+    "modelcluster",
+    "taggit",
+    # end wagtail
 ]
 
 if DEBUG_TOOLBAR:
@@ -106,6 +121,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
+    "wagtail.core.middleware.SiteMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 if DEBUG_TOOLBAR:
@@ -134,6 +151,7 @@ AWS_BUCKET_ACL = "private"
 AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
+AWS_S3_SECURE_URLS = os.environ.get("AWS_S3_SECURE_URLS", "true").lower() == "true"
 
 SOLR_URL = os.environ["SOLR_URL"]
 
@@ -389,3 +407,5 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 20,
 }
+
+WAGTAIL_SITE_NAME = "vulekamali"
