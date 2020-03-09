@@ -1595,7 +1595,7 @@ class InfrastructureProjectPart(models.Model):
     featured = models.BooleanField()
     budget_phase = models.CharField(max_length=255)
     project_slug = models.CharField(max_length=255)
-    amount_rands = models.BigIntegerField(default=0)
+    amount_rands = models.BigIntegerField(blank=True,null=True,default=None)
     financial_year = models.CharField(max_length=4)
     project_value_rands = models.BigIntegerField(default=0)
     provinces = models.CharField(max_length=510, default="")
@@ -1653,7 +1653,7 @@ class InfrastructureProjectPart(models.Model):
         )
         projected_expenditure = 0
         for project in projected_records_for_project:
-            projected_expenditure += float(project.amount_rands)
+            projected_expenditure += float(project.amount_rands or 0.0)
         return projected_expenditure
 
     @staticmethod
