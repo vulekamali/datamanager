@@ -203,6 +203,8 @@ export function projectPage(pageData) {
   updateTextField("#actual-expenditure-q3-field", formatCurrency(project.actual_expenditure_q3));
   updateTextField("#actual-expenditure-q4-field", formatCurrency(project.actual_expenditure_q4));
 
+  $(".header__download").attr("href", project.csv_download_url);
+
   // Maps and visualisations
   $(".embed-container").css("background-color", "#e1e1e1");
 
