@@ -403,7 +403,7 @@ def get_department_project_summary(department):
     return (
         SearchQuerySet()
         .filter(province=department.government.name, department=department.name)
-        .order_by("-total_project_cost")[:10]
+        .order_by("-estimated_total_project_cost")[:10]
     )
 
 
