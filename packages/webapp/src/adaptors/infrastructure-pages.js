@@ -33,7 +33,7 @@ const buildChartData = expenditure => {
       if (projected && !right) {
         right = year;
       }
-      if (!amount) {
+      if (amount === null) {
         needRender = false;
       }
       return {

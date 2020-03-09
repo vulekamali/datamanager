@@ -103,19 +103,20 @@ const GreyButton = styled(Button)`
 const InfraChart = ({ data }) => {
   const renderActual = data
     .map(item => {
-      return item.Actual || 0;
+      return item.Actual !== null;
     })
-    .reduce((a, b) => a + b);
+    .reduce((a, b) => a || b);
   const renderConnection = data
     .map(item => {
-      return item.Connection || 0;
+      return item.Connection !== null;
     })
-    .reduce((a, b) => a + b);
+    .reduce((a, b) => a || b);
   const renderProjected = data
     .map(item => {
-      return item.Projected || 0;
+      return item.Projected !== null;
     })
-    .reduce((a, b) => a + b);
+    .reduce((a, b) => a || b);
+
   return (
     <Fragment>
       {/* {buttons} */}
