@@ -27,10 +27,10 @@ const buildChartData = expenditure => {
       const { amount, year } = obj;
       const actual = obj.budget_phase === 'Audited Outcome' ? amount : null;
       const projected = obj.budget_phase !== 'Audited Outcome' ? amount : null;
-      if (actual) {
+      if (actual != null) {
         left = year;
       }
-      if (projected && !right) {
+      if (projected != null && !right) {
         right = year;
       }
       if (amount === null) {
