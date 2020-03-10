@@ -2131,7 +2131,12 @@ class Page(WagtailPage):
     #     'budgetportal.PageCategory',
     #     on_delete=models.CASCADE,
     # )
-    body = RichTextField()
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+        ('html', blocks.RawHTMLBlock()),
+    ])
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     image = models.ForeignKey(
@@ -2143,7 +2148,7 @@ class Page(WagtailPage):
     )
 
     content_panels = WagtailPage.content_panels + [
-        FieldPanel("body", classname="full"),
+        StreamFieldPanel('body')
     ]
 
 

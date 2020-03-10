@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0043_auto_20200310_1720'),
-        ('budgetportal', '0043_auto_20200304_1335'),
+        ("budgetportal", "0043_auto_20200310_1720"),
+        ("budgetportal", "0043_auto_20200304_1335"),
     ]
 
-    operations = [
-    ]
+    operations = []
