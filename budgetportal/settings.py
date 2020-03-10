@@ -184,7 +184,7 @@ else:
 CACHE_MIDDLEWARE_SECONDS = 600
 
 
-CKAN_URL = os.environ.get("CKAN_URL", "https://treasurydata.openup.org.za")
+CKAN_URL = os.environ.get("CKAN_URL", "https://data.vulekamali.gov.za")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY", None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
 

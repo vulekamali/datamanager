@@ -140,27 +140,27 @@ urlpatterns = [
     # Budget Portal
     url(r"^about/?$", cache_page(CACHE_DAYS_SECS)(views.about), name="about"),
     url(r"^events/?$", cache_page(CACHE_MINUTES_SECS)(views.events), name="events"),
-    url(r"^videos/?$", cache_page(CACHE_MINUTES_SECS)(views.videos), name="videos"),
+    url(r"^learning-resources/?$", cache_page(CACHE_MINUTES_SECS)(views.videos), name="videos"),
     url(
         r"^terms-and-conditions/?$",
         cache_page(CACHE_DAYS_SECS)(views.terms_and_conditions),
         name="terms-and-conditions",
     ),
     url(
-        r"^resources/?$", cache_page(CACHE_DAYS_SECS)(views.resources), name="resources"
+        r"^learning-resources/resources/?$", cache_page(CACHE_DAYS_SECS)(views.resources), name="resources"
     ),
     url(
-        r"^glossary/?$", cache_page(CACHE_MINUTES_SECS)(views.glossary), name="glossary"
+        r"^learning-resources/glossary/?$", cache_page(CACHE_MINUTES_SECS)(views.glossary), name="glossary"
     ),
     url(r"^faq/?$", cache_page(CACHE_MINUTES_SECS)(views.faq), name="faq"),
     url(
-        r"^guides/?$",
+        r"^learning-resources/guides/?$",
         cache_page(CACHE_MINUTES_SECS)(views.guides),
         name="guides",
         kwargs={"slug": "index"},
     ),
     url(
-        r"^guides/(?P<slug>[-\w]+)/?$",
+        r"^learning-resources/guides/(?P<slug>[-\w]+)/?$",
         cache_page(CACHE_MINUTES_SECS)(views.guides),
         name="guide-list",
     ),
@@ -253,6 +253,8 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     url("^", include(webflow_urls.urlpatterns)),
+    url(r'^cms/', include(wagtailadmin_urls)),
+    url(r'^documents/', include(wagtaildocs_urls)),
     path(r"", include(wagtail_urls)),
 ]
 
