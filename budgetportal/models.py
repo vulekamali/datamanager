@@ -1,15 +1,11 @@
 import logging
 import re
-import string
-import urllib
 import uuid
 from collections import OrderedDict
 from datetime import datetime
 from decimal import Decimal
-from itertools import groupby
 from pprint import pformat
-from urllib.parse import urljoin, quote
-from uuid import uuid4
+from urllib.parse import quote
 
 import requests
 from slugify import slugify
@@ -17,13 +13,22 @@ from slugify import slugify
 from adminsortable.models import SortableMixin
 from autoslug import AutoSlugField
 from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
-from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.core.cache import cache
 from django.db import models
 from django.urls import reverse
 from partial_index import PartialIndex
+
+from wagtail.contrib.routable_page.models import RoutablePageMixin
+
+from wagtail.core import blocks
+from wagtail.core.models import Page as WagtailPage
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -2119,3 +2124,34 @@ def csv_url(aggregate_url):
             % URL_LENGTH_LIMIT
         )
     return csv_url
+
+
+class Page(WagtailPage):
+    # category = models.ForeignKey(
+    #     'budgetportal.PageCategory',
+    #     on_delete=models.CASCADE,
+    # )
+    body = RichTextField()
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    content_panels = WagtailPage.content_panels + [
+        FieldPanel("body", classname="full"),
+    ]
+
+
+# class PageCategory(models.Model):
+#     name = models.CharField(max_length=255)
+#
+#    def __str__(self):
+#         return self.name
+#
+#     class Meta:
+#         verbose_name_plural = 'page categories'

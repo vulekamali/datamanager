@@ -62,6 +62,19 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.users",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.admin",
+    "wagtail.core",
+    "taggit",
+    "modelcluster",
     "allauth_facebook",
     # before auth for LiveServerTestCase https://code.djangoproject.com/ticket/10827
     "django.contrib.contenttypes",
@@ -106,6 +119,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
+    "wagtail.core.middleware.SiteMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 if DEBUG_TOOLBAR:
