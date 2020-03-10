@@ -1,15 +1,5 @@
 jobs:
   include:
-
-    - stage: black
-      language: python
-      python:
-        - "3.6"
-      install:
-        - pip install black==19.10b0
-      script:
-        - "black --check --diff budgetportal manage.py discourse"
-
     - stage: test
       node_js:
       services:
@@ -31,5 +21,4 @@ jobs:
         - "docker-compose run --rm `bash <(curl -s https://codecov.io/env)` test codecov"
 
 stages:
-  - black
   - test
