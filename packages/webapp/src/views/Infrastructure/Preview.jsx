@@ -151,7 +151,8 @@ const CashflowTitle = styled.div`
   text-transform: Uppercase;
   color: #696969;
   padding-bottom: 8px;
-
+  width: 100%;
+  
   @media screen and (min-width: 650px) {
     text-align: left;
     font-weight: 900;
@@ -163,7 +164,8 @@ const Estimation = styled.div`
   line-height: normal;
   font-size: 18px;
   text-align: center;
-
+  width: 100%;
+  
   @media screen and (min-width: 650px) {
     font-size: 24px;
     text-align: left;
@@ -473,10 +475,10 @@ const createItem = props => {
         )}
         <BudgetGroup>
           <BudgetCashflow>
-            <CashflowTitle style={{ width: '100%', textAlign: 'left' }}>
+            <CashflowTitle style={{ textAlign: 'left' }}>
               Total budget:
             </CashflowTitle>
-            <Estimation style={{ width: '100%', textAlign: 'left' }}>
+            <Estimation style={{ textAlign: 'left' }}>
               {administrationType === 'PPP'
                 ? `R${trimValues(
                     projectValueRandMillion ? parseInt(projectValueRandMillion, 10) * 10 ** 6 : 0,
@@ -485,10 +487,10 @@ const createItem = props => {
             </Estimation>
           </BudgetCashflow>
           <BudgetCashflow>
-            <CashflowTitle style={{ width: '100%', textAlign: 'right' }}>
+            <CashflowTitle style={{ textAlign: 'right' }}>
               3 Years project budget:
             </CashflowTitle>
-            <Estimation style={{ width: '100%', textAlign: 'right' }}>
+            <Estimation style={{ textAlign: 'right' }}>
               {`R${trimValues(projectedBudget)}`}
             </Estimation>
           </BudgetCashflow>
@@ -497,16 +499,16 @@ const createItem = props => {
           <>
             <BudgetGroup>
               <BudgetCashflow>
-                <CashflowTitle style={{ width: '100%', textAlign: 'left' }}>
+                <CashflowTitle style={{ textAlign: 'left' }}>
                   Duration:
                 </CashflowTitle>
-                <Estimation style={{ width: '100%', textAlign: 'left' }}>{duration}</Estimation>
+                <Estimation style={{ textAlign: 'left' }}>{duration}</Estimation>
               </BudgetCashflow>
               <BudgetCashflow>
-                <CashflowTitle style={{ width: '100%', textAlign: 'right' }}>
+                <CashflowTitle style={{ textAlign: 'right' }}>
                   Date of close:
                 </CashflowTitle>
-                <Estimation style={{ width: '100%', textAlign: 'right' }}>{dateOfClose}</Estimation>
+                <Estimation style={{ textAlign: 'right' }}>{dateOfClose}</Estimation>
               </BudgetCashflow>
             </BudgetGroup>
           </>

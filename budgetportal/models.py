@@ -1602,12 +1602,12 @@ class InfrastructureProjectPart(models.Model):
     gps_code = models.CharField(max_length=255, default="")
 
     # PPP fields
-    partnership_type = models.CharField(max_length=255, name='partnership_type', default='')
-    date_of_close = models.CharField(max_length=255, name='date_of_close', default='')
-    duration = models.CharField(max_length=255, name='duration', default='')
-    financing_structure = models.CharField(max_length=255, name='financing_structure', default='')
-    project_value_rand_million = models.CharField(max_length=255, name='project_value_rand_million', default='')
-    form_of_payment = models.CharField(max_length=255, name='form_of_payment', default='')
+    partnership_type = models.CharField(max_length=255, null=True, blank=True)
+    date_of_close = models.CharField(max_length=255, null=True, blank=True)
+    duration = models.CharField(max_length=255, null=True, blank=True)
+    financing_structure = models.CharField(max_length=255, null=True, blank=True)
+    project_value_rand_million = models.CharField(max_length=255, null=True, blank=True)
+    form_of_payment = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         verbose_name = "National infrastructure project part"
