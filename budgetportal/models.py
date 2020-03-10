@@ -2126,15 +2126,26 @@ def csv_url(aggregate_url):
     return csv_url
 
 
+class SectionBlock(blocks.StructBlock):
+    presentation_class = blocks.ChoiceBlock(choices=[
+        ('is-default', 'Default'),
+        ('is-invisible', 'No background/border'),
+        ('is-bevel', 'Bevel'),
+    ])
+    heading = blocks.CharBlock()
+    content = blocks.RichTextBlock()
+
+    class Meta:
+        template = "budgetportal/blocks/section_block.html"
+
+
 class Page(WagtailPage):
     # category = models.ForeignKey(
     #     'budgetportal.PageCategory',
     #     on_delete=models.CASCADE,
     # )
     body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('section', SectionBlock()),
         ('html', blocks.RawHTMLBlock()),
     ])
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -2150,13 +2161,3 @@ class Page(WagtailPage):
     content_panels = WagtailPage.content_panels + [
         StreamFieldPanel('body')
     ]
-
-
-# class PageCategory(models.Model):
-#     name = models.CharField(max_length=255)
-#
-#    def __str__(self):
-#         return self.name
-#
-#     class Meta:
-#         verbose_name_plural = 'page categories'
