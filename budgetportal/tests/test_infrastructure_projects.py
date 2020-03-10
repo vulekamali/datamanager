@@ -4,7 +4,8 @@ from budgetportal.models import (
     MAPIT_POINT_API_URL,
     InfrastructureProjectPart,
 )
-from django.test import Client, LiveServerTestCase, TestCase
+from budgetportal.tests.helpers import CustomLiveServerTestCase
+from django.test import Client, TestCase
 
 
 class ProjectedExpenditureTestCase(TestCase):
@@ -154,7 +155,7 @@ class MockDataset(mock.Mock):
 empty_ckan_response = MockResponse({"result": {"records": []}}, 200)
 
 
-class OverviewIntegrationTest(LiveServerTestCase):
+class OverviewIntegrationTest(CustomLiveServerTestCase):
 
     fixtures = ["test-infrastructure-pages-overview"]
 
@@ -254,7 +255,7 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(len(second_test_project["provinces"]), 2)
 
 
-class DetailIntegrationTest(LiveServerTestCase):
+class DetailIntegrationTest(CustomLiveServerTestCase):
 
     fixtures = ["test-infrastructure-pages-detail"]
 
