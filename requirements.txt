@@ -65,6 +65,7 @@ sqlparse==0.3.0
 tablib==1.1.0
 Unidecode==1.1.1
 urllib3==1.25.8
+wagtail==2.8.0
 wcwidth==0.1.8
 Werkzeug==1.0.0
 whitenoise==5.0.1

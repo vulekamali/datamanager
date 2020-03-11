@@ -29,3 +29,4 @@ ghostdriver.log
 201*-*-*_*.png
 .idea/
 .DS_Store
+dbdump
