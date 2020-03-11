@@ -94,7 +94,7 @@ const parseProjects = (projects, dataset_url) =>
     dateOfClose: project.date_of_close,
     duration: project.duration,
 
-    projectValueRandMillion: project.project_value_rand_million,
+    projectValueRandMillion: project.project_value_rand_million.replace(/\s/g,''),
   }));
 
 class InfrastructurePages extends Component {

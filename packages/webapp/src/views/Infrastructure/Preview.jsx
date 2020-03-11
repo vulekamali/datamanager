@@ -408,7 +408,7 @@ const createSideRender = (id, props) => {
         <>
           <SideSection>
             <SideTitle>Partnership type:</SideTitle>
-            <SideType>{partnershipType}</SideType>
+            <SideType id="partnership-type">{partnershipType}</SideType>
           </SideSection>
           <SideSection>
             <SideTitle>Financing structure:</SideTitle>
@@ -464,10 +464,10 @@ const createItem = props => {
     <AnimationWrapper key={id} style={{ width: '100%' }}>
       <DataGroup>
         <SubHeading>{subheading}</SubHeading>
-        <Heading>{heading}</Heading>
+        <Heading id="project-title">{heading}</Heading>
         {administrationType !== 'PPP' && (
           <>
-            <Stage>Project stage: {stage}</Stage>
+            <Stage id="project-stage">Project stage: {stage}</Stage>
             <ProgressBarContainer>
               <Progressbar stage={stage} />
             </ProgressBarContainer>
@@ -478,10 +478,10 @@ const createItem = props => {
             <CashflowTitle style={{ textAlign: 'left' }}>
               Total budget:
             </CashflowTitle>
-            <Estimation style={{ textAlign: 'left' }}>
+            <Estimation style={{ textAlign: 'left' }} id="total-budget">
               {administrationType === 'PPP'
                 ? `R${trimValues(
-                    projectValueRandMillion ? parseInt(projectValueRandMillion, 10) * 10 ** 6 : 0,
+                    projectValueRandMillion ? parseFloat(projectValueRandMillion) * 10 ** 6 : 0,
                   )}`
                 : `R${trimValues(totalBudget)}`}
             </Estimation>

@@ -346,7 +346,7 @@ const createProjectCard = (datasetUrl, Link = 'a') => (props, index, selected) =
                       <TotalAmount>
                         {`R${trimValues(
                           projectValueRandMillion
-                            ? parseInt(projectValueRandMillion, 10) * 10 ** 6
+                            ? parseFloat(projectValueRandMillion) * 10 ** 6
                             : 0,
                         )}`}
                       </TotalAmount>
