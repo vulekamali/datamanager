@@ -1,0 +1,473 @@
+[
+{
+  "model": "wagtailcore.page",
+  "pk": 11,
+  "fields": {
+    "path": "000100010001",
+    "depth": 3,
+    "numchild": 1,
+    "title": "Learning Resources",
+    "draft_title": "Learning Resources",
+    "slug": "learning-resources",
+    "content_type": [
+      "budgetportal",
+      "learningindexpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/learning-resources/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:29:29.418Z",
+    "last_published_at": "2020-02-15T07:03:28.467Z",
+    "latest_revision_created_at": "2020-02-15T07:03:28.410Z",
+    "live_revision": 58
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 13,
+  "fields": {
+    "path": "000100010002",
+    "depth": 3,
+    "numchild": 2,
+    "title": "Posts",
+    "draft_title": "Posts",
+    "slug": "posts",
+    "content_type": [
+      "budgetportal",
+      "postindexpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/posts/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:32:17.937Z",
+    "last_published_at": "2020-02-14T15:32:17.937Z",
+    "latest_revision_created_at": "2020-02-14T15:32:17.908Z",
+    "live_revision": 49
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 14,
+  "fields": {
+    "path": "0001000100020001",
+    "depth": 4,
+    "numchild": 0,
+    "title": "Competition!",
+    "draft_title": "Competition!",
+    "slug": "competition",
+    "content_type": [
+      "budgetportal",
+      "postpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/posts/competition/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:52:07.076Z",
+    "last_published_at": "2020-02-14T15:52:07.076Z",
+    "latest_revision_created_at": "2020-02-14T15:52:07.052Z",
+    "live_revision": 51
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 15,
+  "fields": {
+    "path": "0001000100020002",
+    "depth": 4,
+    "numchild": 0,
+    "title": "Budget lockup",
+    "draft_title": "Budget lockup",
+    "slug": "budget-lockup",
+    "content_type": [
+      "budgetportal",
+      "postpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/posts/budget-lockup/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:52:49.754Z",
+    "last_published_at": "2020-02-14T15:52:49.754Z",
+    "latest_revision_created_at": "2020-02-14T15:52:49.727Z",
+    "live_revision": 53
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 16,
+  "fields": {
+    "path": "0001000100010001",
+    "depth": 4,
+    "numchild": 2,
+    "title": "Dataset Guides",
+    "draft_title": "Dataset Guides",
+    "slug": "guides",
+    "content_type": [
+      "budgetportal",
+      "guideindexpage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/learning-resources/guides/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:53:38.945Z",
+    "last_published_at": "2020-02-15T18:54:09.467Z",
+    "latest_revision_created_at": "2020-02-15T18:54:09.248Z",
+    "live_revision": 60
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 18,
+  "fields": {
+    "path": "00010001000100010002",
+    "depth": 5,
+    "numchild": 0,
+    "title": "Estimates of National Expenditure",
+    "draft_title": "Estimates of National Expenditure",
+    "slug": "estimates-of-national-expenditure",
+    "content_type": [
+      "budgetportal",
+      "guidepage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/learning-resources/guides/estimates-of-national-expenditure/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "The Estimates of National Expenditure (ENE) publications describe in detail the planned spending in all national government votes over the three-year medium-term expenditure framework (MTEF) period, government\u2019s expenditure planning window. An abridged publication is available together with more detailed e-publications.",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-14T15:54:55.668Z",
+    "last_published_at": "2020-02-15T19:23:16.760Z",
+    "latest_revision_created_at": "2020-02-15T19:23:16.480Z",
+    "live_revision": 61
+  }
+},
+{
+  "model": "wagtailcore.page",
+  "pk": 19,
+  "fields": {
+    "path": "00010001000100010003",
+    "depth": 5,
+    "numchild": 0,
+    "title": "Performance and Expenditure Reviews (PER)",
+    "draft_title": "Performance and Expenditure Reviews (PER)",
+    "slug": "performance-and-expenditure-reviews",
+    "content_type": [
+      "budgetportal",
+      "guidepage"
+    ],
+    "live": true,
+    "has_unpublished_changes": false,
+    "url_path": "/vulekamali/learning-resources/guides/performance-and-expenditure-reviews/",
+    "owner": null,
+    "seo_title": "",
+    "show_in_menus": false,
+    "search_description": "",
+    "go_live_at": null,
+    "expire_at": null,
+    "expired": false,
+    "locked": false,
+    "first_published_at": "2020-02-16T09:10:30.325Z",
+    "last_published_at": "2020-02-16T09:10:30.325Z",
+    "latest_revision_created_at": "2020-02-16T09:10:30.191Z",
+    "live_revision": 62
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 46,
+  "fields": {
+    "page": 2,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:28:38.462Z",
+    "user": null,
+    "content_json": "{\"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"vulekamali\", \"seo_title\": \"\", \"draft_title\": \"vulekamali\", \"live\": true, \"last_published_at\": null, \"has_unpublished_changes\": false, \"numchild\": 0, \"content_type\": 58, \"show_in_menus\": false, \"path\": \"00010001\", \"url_path\": \"/vulekamali/\", \"expired\": false, \"slug\": \"vulekamali\", \"locked\": false, \"pk\": 2, \"depth\": 2, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 47,
+  "fields": {
+    "page": 11,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:29:29.389Z",
+    "user": null,
+    "content_json": "{\"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Videos\", \"seo_title\": \"\", \"draft_title\": \"Videos\", \"live\": true, \"last_published_at\": null, \"has_unpublished_changes\": false, \"numchild\": 0, \"content_type\": 55, \"show_in_menus\": false, \"path\": \"000100010001\", \"url_path\": \"/vulekamali/videos/\", \"expired\": false, \"slug\": \"videos\", \"locked\": false, \"pk\": 11, \"depth\": 3, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 49,
+  "fields": {
+    "page": 13,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:32:17.908Z",
+    "user": null,
+    "content_json": "{\"search_description\": \"\", \"owner\": 1, \"intro\": \"\", \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Posts\", \"seo_title\": \"\", \"draft_title\": \"Posts\", \"live\": true, \"last_published_at\": null, \"has_unpublished_changes\": false, \"numchild\": 0, \"content_type\": 57, \"show_in_menus\": false, \"path\": \"000100010002\", \"url_path\": \"/vulekamali/posts/\", \"expired\": false, \"slug\": \"posts\", \"locked\": false, \"pk\": 13, \"depth\": 3, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 50,
+  "fields": {
+    "page": 11,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:33:55.755Z",
+    "user": null,
+    "content_json": "{\"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": \"2020-02-14T15:29:29.389Z\", \"go_live_at\": null, \"title\": \"Learning Resources\", \"seo_title\": \"\", \"draft_title\": \"Videos\", \"live\": true, \"last_published_at\": \"2020-02-14T15:29:29.418Z\", \"has_unpublished_changes\": false, \"numchild\": 0, \"content_type\": 55, \"show_in_menus\": false, \"path\": \"000100010001\", \"url_path\": \"/vulekamali/videos/\", \"expired\": false, \"slug\": \"videos\", \"locked\": false, \"pk\": 11, \"depth\": 3, \"first_published_at\": \"2020-02-14T15:29:29.418Z\", \"expire_at\": null, \"live_revision\": 47}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 51,
+  "fields": {
+    "page": 14,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:52:07.052Z",
+    "user": null,
+    "content_json": "{\"image\": null, \"updated_at\": \"2020-02-14T15:52:07.051Z\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Competition!\", \"seo_title\": \"\", \"draft_title\": \"Competition!\", \"live\": true, \"last_published_at\": null, \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"4cebeafa-de00-4908-b8a0-20a7250acacd\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>There's a comp coming<br/></p>\\\", \\\"heading\\\": \\\"It's coming!\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}]\", \"numchild\": 0, \"content_type\": 56, \"show_in_menus\": false, \"path\": \"0001000100020001\", \"url_path\": \"/vulekamali/posts/competition/\", \"expired\": false, \"slug\": \"competition\", \"locked\": false, \"pk\": 14, \"created_at\": \"2020-02-14T15:52:07.031Z\", \"depth\": 4, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 52,
+  "fields": {
+    "page": 15,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:52:45.174Z",
+    "user": null,
+    "content_json": "{\"image\": null, \"updated_at\": \"2020-02-14T15:52:45.172Z\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Budget lockup\", \"seo_title\": \"\", \"draft_title\": \"Budget lockup\", \"live\": false, \"last_published_at\": null, \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"fcf83ead-45ae-472b-8c97-66025c7fcb3e\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>Sign up here.<br/></p>\\\", \\\"heading\\\": \\\"Sign up\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}]\", \"numchild\": 0, \"content_type\": 56, \"show_in_menus\": false, \"path\": \"0001000100020002\", \"url_path\": \"/vulekamali/posts/budget-lockup/\", \"expired\": false, \"slug\": \"budget-lockup\", \"locked\": false, \"pk\": 15, \"created_at\": \"2020-02-14T15:52:45.154Z\", \"depth\": 4, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 53,
+  "fields": {
+    "page": 15,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:52:49.727Z",
+    "user": null,
+    "content_json": "{\"image\": null, \"updated_at\": \"2020-02-14T15:52:49.726Z\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": \"2020-02-14T15:52:45.174Z\", \"go_live_at\": null, \"title\": \"Budget lockup\", \"seo_title\": \"\", \"draft_title\": \"Budget lockup\", \"live\": false, \"last_published_at\": null, \"has_unpublished_changes\": true, \"body\": \"[{\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"fcf83ead-45ae-472b-8c97-66025c7fcb3e\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>Sign up here.<br/></p>\\\", \\\"heading\\\": \\\"Sign up\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}]\", \"numchild\": 0, \"content_type\": 56, \"show_in_menus\": false, \"path\": \"0001000100020002\", \"url_path\": \"/vulekamali/posts/budget-lockup/\", \"expired\": false, \"slug\": \"budget-lockup\", \"locked\": false, \"pk\": 15, \"created_at\": \"2020-02-14T15:52:45.154Z\", \"depth\": 4, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 54,
+  "fields": {
+    "page": 16,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:53:38.915Z",
+    "user": null,
+    "content_json": "{\"search_description\": \"\", \"owner\": 1, \"intro\": \"<p>Learn the specifics of the kinds of data on vulekamali.<br/></p>\", \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Dataset Guides\", \"seo_title\": \"\", \"draft_title\": \"Dataset Guides\", \"live\": true, \"last_published_at\": null, \"has_unpublished_changes\": false, \"numchild\": 0, \"content_type\": 59, \"show_in_menus\": false, \"path\": \"0001000100010001\", \"url_path\": \"/vulekamali/videos/dataset-guides/\", \"expired\": false, \"slug\": \"dataset-guides\", \"locked\": false, \"pk\": 16, \"depth\": 4, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 57,
+  "fields": {
+    "page": 18,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-14T15:54:55.635Z",
+    "user": null,
+    "content_json": "{\"image\": null, \"updated_at\": \"2020-02-14T15:54:55.635Z\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Another guide\", \"seo_title\": \"\", \"draft_title\": \"Another guide\", \"live\": true, \"last_published_at\": null, \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"b32e08cc-5a3e-4d45-b3d8-5f1b6121892f\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>la</p>\\\", \\\"heading\\\": \\\"Do that\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}]\", \"numchild\": 0, \"content_type\": 60, \"show_in_menus\": false, \"path\": \"00010001000100010002\", \"url_path\": \"/vulekamali/videos/dataset-guides/another-guide/\", \"expired\": false, \"slug\": \"another-guide\", \"locked\": false, \"pk\": 18, \"created_at\": \"2020-02-14T15:54:55.617Z\", \"depth\": 5, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 58,
+  "fields": {
+    "page": 11,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-15T07:03:28.410Z",
+    "user": null,
+    "content_json": "{\"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": \"2020-02-14T15:33:55.755Z\", \"go_live_at\": null, \"title\": \"Learning Resources\", \"seo_title\": \"\", \"draft_title\": \"Learning Resources\", \"live\": true, \"last_published_at\": \"2020-02-14T15:33:55.789Z\", \"has_unpublished_changes\": false, \"numchild\": 1, \"content_type\": 55, \"show_in_menus\": false, \"path\": \"000100010001\", \"url_path\": \"/vulekamali/videos/\", \"expired\": false, \"slug\": \"learning-resources\", \"locked\": false, \"pk\": 11, \"depth\": 3, \"first_published_at\": \"2020-02-14T15:29:29.418Z\", \"expire_at\": null, \"live_revision\": 50}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 59,
+  "fields": {
+    "page": 16,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-15T18:43:23.452Z",
+    "user": null,
+    "content_json": "{\"search_description\": \"\", \"owner\": 1, \"intro\": \"<p>Learn the specifics of the kinds of data on vulekamali.<br/></p>\", \"latest_revision_created_at\": \"2020-02-14T15:53:38.915Z\", \"go_live_at\": null, \"title\": \"Dataset Guides\", \"seo_title\": \"\", \"draft_title\": \"Dataset Guides\", \"live\": true, \"last_published_at\": \"2020-02-14T15:53:38.945Z\", \"has_unpublished_changes\": false, \"numchild\": 2, \"content_type\": 59, \"show_in_menus\": false, \"path\": \"0001000100010001\", \"url_path\": \"/vulekamali/learning-resources/dataset-guides/\", \"expired\": false, \"slug\": \"dataset-guides\", \"locked\": false, \"pk\": 16, \"depth\": 4, \"first_published_at\": \"2020-02-14T15:53:38.945Z\", \"expire_at\": null, \"live_revision\": 54}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 60,
+  "fields": {
+    "page": 16,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-15T18:54:09.248Z",
+    "user": null,
+    "content_json": "{\"search_description\": \"\", \"owner\": 1, \"intro\": \"<p>Learn the specifics of the kinds of data on vulekamali.<br/></p>\", \"latest_revision_created_at\": \"2020-02-15T18:43:23.452Z\", \"go_live_at\": null, \"title\": \"Dataset Guides\", \"seo_title\": \"\", \"draft_title\": \"Dataset Guides\", \"live\": true, \"last_published_at\": \"2020-02-15T18:43:23.488Z\", \"has_unpublished_changes\": false, \"numchild\": 2, \"content_type\": 59, \"show_in_menus\": false, \"path\": \"0001000100010001\", \"url_path\": \"/vulekamali/learning-resources/dataset-guides/\", \"expired\": false, \"slug\": \"guides\", \"locked\": false, \"pk\": 16, \"depth\": 4, \"first_published_at\": \"2020-02-14T15:53:38.945Z\", \"expire_at\": null, \"live_revision\": 59}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 61,
+  "fields": {
+    "page": 18,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-15T19:23:16.480Z",
+    "user": null,
+    "content_json": "{\"image\": null, \"updated_at\": \"2020-02-15T19:23:16.478Z\", \"search_description\": \"The Estimates of National Expenditure (ENE) publications describe in detail the planned spending in all national government votes over the three-year medium-term expenditure framework (MTEF) period, government\\u2019s expenditure planning window. An abridged publication is available together with more detailed e-publications.\", \"owner\": 1, \"latest_revision_created_at\": \"2020-02-14T15:54:55.635Z\", \"go_live_at\": null, \"title\": \"Estimates of National Expenditure\", \"seo_title\": \"\", \"draft_title\": \"Another guide\", \"live\": true, \"last_published_at\": \"2020-02-14T15:54:55.668Z\", \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"b32e08cc-5a3e-4d45-b3d8-5f1b6121892f\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>\\\\n    The Estimates of National Expenditure (ENE) publications describe in\\\\n detail the planned spending in all national government votes over the \\\\nthree-year medium-term expenditure framework (MTEF) period, government\\\\u2019s\\\\n expenditure planning window. An abridged publication is available \\\\ntogether with more detailed e-publications.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    The ENE abridged  publication is tabled in Parliament by the \\\\nMinister of Finance alongside the main budget. The publication is the \\\\nexplanatory memorandum to the Appropriation Bill. The executive tables \\\\nthe bill and accompanying publication seeking Parliament\\\\u2019s approval and \\\\nadoption of government\\\\u2019s spending plans for the first year of the MTEF \\\\nperiod.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    Generally, a vote specifies the total amount of money appropriated \\\\nto a national government department.  A national government vote is \\\\ngenerally synonymous with a national government department. However, in \\\\ncertain instances, a vote may contain more than one national government \\\\ndepartment. For instance, the Cooperative Governance and Traditional \\\\nAffairs vote contains two departments, the Department of Cooperative \\\\nGovernance and the Department of Traditional Affairs.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    The ENE publications include information on how government \\\\ninstitutions have spent their budgets in previous years, and how they \\\\nintend to use their allocations over the medium term to achieve their \\\\ngoals, including the outputs and outcomes spending is expected to lead \\\\nto.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    The publications include tables depicting non-financial performance \\\\nindicators and targets, departmental receipts, and detailed expenditure \\\\ntrends and estimates.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    A more in-depth narrative analyses the institution\\\\u2019s expected \\\\nexpenditure over the MTEF period. A summary table is included at the end\\\\n of the chapter for votes in which there is significant spending on \\\\ninfrastructure. In addition, the e-publications contain programme \\\\npersonnel data tables, a brief summary for all entities, as well as \\\\nadditional summary data tables on provincial and municipal conditional \\\\ngrants, public-private partnerships, donor funding, and expenditure at \\\\nthe level of service delivery, where applicable.\\\\n  </p>\\\", \\\"heading\\\": \\\"Overview\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}, {\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"e237ee3d-d60b-48da-9585-0f7b3a12aee7\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>\\\\n    The dataset emanates from the yearly national government budget \\\\nprocess. At the beginning of each budget process, the National Treasury \\\\npublishes guidelines depicting the information that governmental \\\\ninstitutions are expected to submit to the National Treasury in their \\\\nbudget submissions. A vital part of this process involves the large \\\\nnumber of public institutions planning, negotiating and deciding \\\\ncollectively how to spend public resources.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    As the budget process is focused on institutional performance in \\\\nrelation to government outcomes, it is organised by function of \\\\ngovernment. The trade-offs of financing different policy objectives \\\\nwithin the constraints of the expenditure ceiling are examined, \\\\nculminating in recommendations on how institutional policies and \\\\npractices, and arrangements, can be adapted to best achieve the \\\\nfunction\\\\u2019s outcomes.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    These function group discussions shape the allocations to specific \\\\ngovernment institutions. The recommendations from each function group \\\\nare then presented to the ministers\\\\u2019 committee on the budget technical \\\\ncommittee (MTEC), a committee comprising the directors-general of \\\\ncentral national government departments. Once this part of the process \\\\nhas been finalised, the recommendations endorsed by MTEC are taken to \\\\nthe ministers\\\\u2019 committee on the budget. This committee then reviews the \\\\nrecommendations put forward in respect of the different function groups \\\\nand ultimately considers the trade-offs and priorities for government as\\\\n a whole. The recommendations of the ministers\\\\u2019 committee on the budget \\\\nare then tabled in Cabinet.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    Once Cabinet has approved the recommendations, all institutions are \\\\ninformed of their budget allocations. Institutions then finalise their \\\\nbudgets accordingly and prepare and submit their data and narrative \\\\ninputs for the ENE publications to the National Treasury.  National \\\\nTreasury then verifies and edits these inputs to produce the ENE \\\\npublications. The ENE is published in a number of formats (including in \\\\nprint and as an Excel pivot table). The ENE is tabled in Parliament \\\\nannually as part of the national budget.\\\\n  </p>\\\", \\\"heading\\\": \\\"Where does the data come from?\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}, {\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"c7b933a0-184e-4ae0-b14f-f0023f32a28f\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>\\\\n    The ENE is released as part of the national budget information \\\\nreleases, at the end of February, before the start of the \\\\nnational/provincial budget cycle. The data and supporting documents are \\\\nuseful for:\\\\n  </p>\\\\n\\\\n  <ul><li>\\\\n      tracking how national government plans to spend its money over the medium- to long-term;\\\\n    </li><li>\\\\n      tracking institutional measures of achievement of main goals;\\\\n    </li><li>\\\\n      tracking whether historical performance has been in line with the achievement of main goals;\\\\n    </li><li>\\\\n      comparing spending across different departments (votes);\\\\n    </li><li>\\\\n      comparing past expenditure to planned expenditure; and\\\\n    </li><li>\\\\n      analysing the breakdown of spending across a department / vote (by\\\\n current payments versus payments for capital assets, transfers to other\\\\n spheres and departments, etc).\\\\n    </li></ul>\\\", \\\"heading\\\": \\\"What can I do with the data?\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}, {\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"c4479890-dcce-4137-9fd0-accab63e233f\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>\\\\n    Vulekamali has annual ENE information for all national departments. The following are available for each department:\\\\n  </p>\\\\n\\\\n  <ul><li>\\\\n      The department\\\\u2019s chapter in the ENE, in PDF format. This contains \\\\nprogramme personnel data tables and detailed information for all \\\\nentities, as well as additional summary data tables on provincial and \\\\nmunicipal conditional grants, public-private partnerships, donor \\\\nfunding, and expenditure at the level of site service delivery, where \\\\napplicable.\\\\n    </li><li>\\\\n      The formatted expenditure tables included in the ENE document, in Excel format.\\\\n    </li><li>\\\\n      The raw data used to produce the expenditure tables in the ENE and\\\\n Appropriation Bill, in CSV format and through the OpenSpending API \\\\n(application programme interface).\\\\n    </li></ul>\\\\n\\\\n  <p>\\\\n    The detail pages for a department can be found under the Department \\\\nBudgets link at the top of the website. You can also search vulekamali \\\\nto find a department.\\\\n  </p>\\\", \\\"heading\\\": \\\"What data is available from vulekamali.gov.za?\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}, {\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"34910e05-5649-4593-8e9e-37ec63eb0cf0\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>\\\\n    <strong>Note</strong>: The 2018 Budget vote for Basic Education \\\\n(Vote 14) is used as an illustrative example for this section. It can be\\\\n found by visiting the <a href=\\\\\\\"https://vulekamali.gov.za/2018-19/national/departments/basic-education\\\\\\\">Basic Education budget page for 2018</a>.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    All the ENE documents (PDF, Excel, and CSV) include expenditure data using the following classifications:\\\\n  </p>\\\\n\\\\n  <p>\\\\n    <strong>Expenditure over time</strong>: The budget data is presented\\\\n over a seven-year period: three years of past expenditure, the current \\\\nfinancial year and three years of projected expenditure. The three-year \\\\nfuture budget refers to the next three years and is known as the \\\\nmedium-term expenditure framework (MTEF).\\\\n  </p>\\\\n\\\\n  <p>\\\\n    For example, the 2018 ENE documents include the audited budget \\\\noutcomes for the 2014/15, 2015/16, and 2016/17 financial years, the \\\\nrevised estimates for the 2017/18 financial year, and initial estimates \\\\nfor the 2018/19, 2019/20, and 2020/21 financial years.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    <strong>Expenditure by economic classification</strong>: This refers\\\\n to the economic characteristics of the expenditure, including whether \\\\nthe expenditure happens directly in a national department, transferred \\\\nto another sphere of government or to another party.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    There are up to four levels of economic classification for each \\\\nexpenditure item (i.e. Levels 1 to 4), with higher levels representing \\\\ngreater degrees of granularity. The Excel and CSV documents include all \\\\nfour levels while the PDF documents display the first two levels.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    The level 1 economic classification divides all expenditure into \\\\nfour main economic sections: current payments (payments made for \\\\noperational requirements such as those for compensation of employees and\\\\n goods and services); transfers and subsidies; payments for capital \\\\nassets (assets that can be used for more than one year); and payments \\\\nfor financial assets (loans or equity investments in public \\\\ncorporations).\\\\n  </p>\\\\n\\\\n  <p>\\\\n    <strong>Expenditure by programme and sub-programme</strong>: This \\\\nrefers to expenditure by department programmes, which align spending to \\\\nactivities, performance indicators and outcomes. Each programme has a \\\\nparticular purpose and spending objectives. Spending can be tracked to \\\\nthe programme and sub-programme level.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    <strong>Expenditure by government function</strong>: This aligns \\\\nexpenditure to one of seven government function groups. These groups can\\\\n include spending across many government institutions, departments, and \\\\nspheres. The function groups are also allocated to sections of the \\\\nNational Development Plan and medium-term strategic framework (MTSF) \\\\noutcomes.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    For example, expenditure on Basic Education falls within the \\\\nLearning and Culture function group, Chapters 3 and 9 of the NDP, and \\\\nOutcome 5 of the MTSF. The Learning and Culture function group includes \\\\nthe Departments of Higher Education and Training, Sport and Recreation, \\\\nand Art and Culture. It also includes the SETAs, NSFAS, and the National\\\\n Skills Fund.\\\\n  </p>\\\\n\\\\n  <p>Estimates of National Expenditure PDF Documents</p>\\\\n\\\\n  <p>Each department\\\\u2019s PDF chapter can be found on Vulekamali on the \\\\ndepartment detail page. The PDF contains narrative information and \\\\nsummary tables of key expenditure items over the MTEF in the following \\\\nsections:</p>\\\\n\\\\n  <ul><li>A top-level summary of estimated expenditure over the MTEF by programme.</li><li>Selected Performance indicators linked to outcomes.</li><li>\\\\n      A narrative discussion outlining what an institution aims to \\\\nachieve over the medium term and how it plans to spend its budget in \\\\nsupport of this. For example, one performance indicator in the Education\\\\n Enrichment Services programme is the number of schools provided with \\\\nnutritious meals each school day. The expenditure analysis section \\\\nconfirms that the medium-term target is 19 800 schools and 9 million \\\\nlearners at a cost of R21.7-billion over the MTEF.\\\\n    </li><li>\\\\n      A section on expenditure trends which measures the historical and \\\\nprojected increases in spending by programme and by economic \\\\nclassification (Levels 1 and 2) over the seven-year period. The average \\\\nannual increase in expenditure is measured over the historical period \\\\n(financial years 2014 to 2017) and the MTEF (2017 to 2020).\\\\n    </li><li>\\\\n      This section also measures expenditure on significant spending \\\\nitems, goods and services (Economic Classification Level 2) and on \\\\ntransfers and subsidies (Economic Classification Level 3).\\\\n    </li><li>\\\\n      A section on departmental receipts, showing how the department \\\\ngenerates its own income through interest, sales of capital assets, \\\\nfinancial transactions, and other activities.\\\\n    </li><li>\\\\n      A description of each programme, including the programme\\\\u2019s \\\\npurpose, objectives, and sub-programmes. There is an analysis of each \\\\nprogramme\\\\u2019s expenditure trends in a series of tables, by economic \\\\nclassification (Levels 1 and 2), and by transfers and subsidies.\\\\n    </li></ul>\\\\n\\\\n  <p>\\\\n    Estimates of National Expenditure Excel Tables Document\\\\n  </p>\\\\n\\\\n  <p>\\\\n    Excel versions of the tables included in the ENE PDF document can be\\\\n found in Vulekamali\\\\u2019s department page for each department.\\\\n  </p>\\\\n\\\\n  <p>\\\\n    The Excel spreadsheets are not machine-readable as the columns have \\\\nnot been formatted for building pivot tables. They do however allow the \\\\nuser to further edit the data and to perform simple calculations. They \\\\nalso provide some additional detailed information that is not included \\\\nin either the PDF documents or the CSV data file.\\\\n  </p>\\\\n\\\\n  <p>The spreadsheets include the following tables from the PDF documents:</p>\\\\n\\\\n  <ul><li>\\\\n      A budget summary for the MTEF by programme\\\\n    </li><li>\\\\n      Historical expenditure trends by programme and economic classification (Level 2)\\\\n    </li><li>\\\\n      Projected expenditure estimates by programme and economic classification (Level 2)\\\\n    </li><li>\\\\n      Expenditure trends and estimates for significant spending items\\\\n    </li><li>\\\\n      Expenditure trends and estimates for goods and services (economic classification Level 2)\\\\n    </li><li>\\\\n      Expenditure trends and estimates for transfers and subsidies  (economic classification Level 3)\\\\n    </li><li>\\\\n      Personnel numbers and their costs by salary level and programme\\\\n    </li><li>\\\\n      Departmental receipts (economic classification Level 3)\\\\n    </li><li>\\\\n      Expenditure trends and estimates for each programme, by \\\\nsub-programme and economic classification (Level 2), and by transfers \\\\nand subsidies (Level 3)\\\\n    </li></ul>\\\\n\\\\n  <p>In addition, they include tables for the following:</p>\\\\n\\\\n  <ul><li>\\\\n      Expenditure trends and estimates for conditional grants to provinces and municipalities, by grant.\\\\n    </li><li>\\\\n      Expenditure trends and estimates for infrastructure spending, by \\\\nproject name and by transfer to other spheres, agencies, public-private \\\\npartnerships, donor funding, and expenditure at the level of service \\\\ndelivery.\\\\n    </li></ul>\\\\n\\\\n  <p>\\\\n    Estimates of National Expenditure CSV Data File\\\\n  </p>\\\\n\\\\n  <p>\\\\n    The CSV data file contains the raw data used to produce the ENE and \\\\nexpenditure tables and the Appropriation Bill. This file can imported \\\\ninto Excel or other analysis programmes for further analysis. The file \\\\ncontains the following fields\\\\n  </p>\\\\n\\\\n  <ul><li>\\\\n      <strong>Budget phase</strong>: This refers to which part of the \\\\nbudget cycle is referenced, whether it is an historical budget year or \\\\nan estimate of future expenditure. It is closely related to the <strong>Financial Year</strong> field.\\\\n    </li><li>\\\\n      <strong>Department</strong>: This refers to the government department where the expenditure occurs. It has a one-to-one (direct) relationship with the <strong>Vote Number</strong> field. There are 47 departments in the 2018 ENE.\\\\n    </li><li>\\\\n      <strong>Economic Classification Levels 1 to 4</strong>: These four\\\\n fields refer to the economic classification of the expenditure, with \\\\nhigher levels indicating a greater degree of disaggregation and \\\\ngranularity. The four main economic sections (Level 1) are current \\\\nspending, transfers and subsidies, payments for financial assets, and \\\\npayments for capital assets.\\\\n    </li><li>\\\\n      <strong>Financial Year</strong>: This refers to the national / \\\\nprovincial financial year which begins on April 1 and ends on March 31 \\\\nof the following calendar year. For example, the 2014 financial year \\\\nbegan on 1 April 2014 and ended on 31 March 2015.  This field is closely\\\\n related to the <strong>Budget Phase</strong> field.\\\\n    </li><li>\\\\n      <strong>Government Function</strong>: This refers to one of the \\\\nseven government function groups. It includes an eighth category for \\\\ndebt-service costs, which are an aggregate cost in the Department of \\\\nNational Treasury.\\\\n    </li><li>\\\\n      <strong>Programme</strong> (and <strong>Programme Number</strong>):\\\\n This refers to spending by government programme. Each department will \\\\nhave a number of programmes and sub-programmes that align the \\\\ndepartment\\\\u2019s objectives and performance indicators. The number of \\\\nprogrammes varies by department but most have between four and eight \\\\nprogrammes. <strong>Note</strong>: the <strong>Programme Number</strong>\\\\n field refers to the order of the programme in a specific department. \\\\nProgramme orders are arbitrary (i.e. not ranked by expenditure or \\\\nalphabetically) and are not consistent across departments.\\\\n    </li><li>\\\\n      <strong>Sub-programme</strong> (and <strong>Sub-programme Number</strong>): This refers to spending by sub-programme. The <strong>Sub-programme Number</strong> field is similar to the <strong>Programme Number</strong> field as the sub-programme ordering is also arbitrary.\\\\n    </li><li>\\\\n      <strong>Vote Number</strong>: This field refers to the ordering of Votes in the full ENE document. There is a one-to-one relationship with the <strong>Department</strong> field.\\\\n    </li></ul>\\\", \\\"heading\\\": \\\"What data is available from vulekamali.gov.za?\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}, {\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"d213b4e3-37f2-49b4-9331-79b74790bfae\\\", \\\"value\\\": {\\\"content\\\": \\\"<ul><li>\\\\n      Estimates of National Expenditure Overview guide - The \\\\nintroductory chapter of the abridged ENE is a useful guide to \\\\nunderstanding that year\\\\u2019s Budget and ENE process: <a href=\\\\\\\"http://www.treasury.gov.za/documents/national%20budget/2018/enebooklets/Overview.pdf\\\\\\\">http://www.treasury.gov.za/documents/national%20budget/2018/enebooklets/Overview.pdf</a>\\\\n    </li><li>\\\\n      National Treasury\\\\u2019s main page for national budget information: <a href=\\\\\\\"http://www.treasury.gov.za/documents/national%20budget/default.aspx\\\\\\\">http://www.treasury.gov.za/documents/national%20budget/default.aspx</a>\\\\n    </li></ul>\\\", \\\"heading\\\": \\\"Further reading and resources\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}]\", \"numchild\": 0, \"content_type\": 60, \"show_in_menus\": false, \"path\": \"00010001000100010002\", \"url_path\": \"/vulekamali/learning-resources/guides/another-guide/\", \"expired\": false, \"slug\": \"estimates-of-national-expenditure\", \"locked\": false, \"pk\": 18, \"created_at\": \"2020-02-14T15:54:55.617Z\", \"depth\": 5, \"first_published_at\": \"2020-02-14T15:54:55.668Z\", \"expire_at\": null, \"live_revision\": 57}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailcore.pagerevision",
+  "pk": 62,
+  "fields": {
+    "page": 19,
+    "submitted_for_moderation": false,
+    "created_at": "2020-02-16T09:10:30.191Z",
+    "user": null,
+    "content_json": "{\"image\": null, \"updated_at\": \"2020-02-16T09:10:30.190Z\", \"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": null, \"go_live_at\": null, \"title\": \"Performance and Expenditure Reviews (PER)\", \"seo_title\": \"\", \"draft_title\": \"Performance and Expenditure Reviews (PER)\", \"live\": true, \"last_published_at\": null, \"has_unpublished_changes\": false, \"body\": \"[{\\\"type\\\": \\\"section\\\", \\\"id\\\": \\\"ed1935b7-5214-45cb-b94f-f6fa651fd0c1\\\", \\\"value\\\": {\\\"content\\\": \\\"<p>\\\\n      A <a href=\\\\\\\"https://vulekamali.gov.za/datasets/performance-and-expenditure-reviews\\\\\\\">Performance and Expenditure Review (PER)</a> is a process of reviewing government spending on a particular service, and how effective this spending is.\\\\n    </p>\\\\n\\\\n    <p>\\\\n      In South Africa, National Treasury started performing Performance \\\\nand Expenditure Reviews in partnership with the Department of \\\\nPerformance Monitoring and Evaluation in the Presidency in 2013. PERs \\\\nare widely used internationally for quantifying, assessing and improving\\\\n the cost effectiveness of public policy - how government sets out to do\\\\n its work.\\\\n    </p>\\\\n\\\\n    <p>The outputs of a Performance and Expenditure Review often include</p>\\\\n    <ul><li>a one-page summary,</li><li>a technical report,</li><li>the framework in which decisions are made,</li><li>a model of the costs to provide this service, and</li><li>infographics presenting the findings.</li></ul>\\\", \\\"heading\\\": \\\"Introduction\\\", \\\"presentation_class\\\": \\\"is-default\\\"}}]\", \"numchild\": 0, \"content_type\": 60, \"show_in_menus\": false, \"path\": \"00010001000100010003\", \"url_path\": \"/vulekamali/learning-resources/guides/performance-and-expenditure-reviews/\", \"expired\": false, \"slug\": \"performance-and-expenditure-reviews\", \"locked\": false, \"pk\": 19, \"created_at\": \"2020-02-16T09:10:30.091Z\", \"depth\": 5, \"first_published_at\": null, \"expire_at\": null, \"live_revision\": null}",
+    "approved_go_live_at": null
+  }
+},
+{
+  "model": "wagtailredirects.redirect",
+  "pk": 3,
+  "fields": {
+    "old_path": "/guides",
+    "site": null,
+    "is_permanent": true,
+    "redirect_page": 16,
+    "redirect_link": ""
+  }
+},
+{
+  "model": "wagtailredirects.redirect",
+  "pk": 4,
+  "fields": {
+    "old_path": "/guides/estimates-of-national-expenditure",
+    "site": null,
+    "is_permanent": true,
+    "redirect_page": 18,
+    "redirect_link": ""
+  }
+},
+{
+  "model": "budgetportal.wagtailhomepage",
+  "pk": 10,
+  "fields": {}
+},
+{
+  "model": "budgetportal.learningindexpage",
+  "pk": 11,
+  "fields": {}
+},
+{
+  "model": "budgetportal.guideindexpage",
+  "pk": 16,
+  "fields": {
+    "intro": "<p>Learn the specifics of the kinds of data on vulekamali.<br/></p>"
+  }
+},
+{
+  "model": "budgetportal.guidepage",
+  "pk": 18,
+  "fields": {
+    "body": "[{\"type\": \"section\", \"id\": \"b32e08cc-5a3e-4d45-b3d8-5f1b6121892f\", \"value\": {\"content\": \"<p>\\n    The Estimates of National Expenditure (ENE) publications describe in\\n detail the planned spending in all national government votes over the \\nthree-year medium-term expenditure framework (MTEF) period, government\\u2019s\\n expenditure planning window. An abridged publication is available \\ntogether with more detailed e-publications.\\n  </p>\\n\\n  <p>\\n    The ENE abridged  publication is tabled in Parliament by the \\nMinister of Finance alongside the main budget. The publication is the \\nexplanatory memorandum to the Appropriation Bill. The executive tables \\nthe bill and accompanying publication seeking Parliament\\u2019s approval and \\nadoption of government\\u2019s spending plans for the first year of the MTEF \\nperiod.\\n  </p>\\n\\n  <p>\\n    Generally, a vote specifies the total amount of money appropriated \\nto a national government department.  A national government vote is \\ngenerally synonymous with a national government department. However, in \\ncertain instances, a vote may contain more than one national government \\ndepartment. For instance, the Cooperative Governance and Traditional \\nAffairs vote contains two departments, the Department of Cooperative \\nGovernance and the Department of Traditional Affairs.\\n  </p>\\n\\n  <p>\\n    The ENE publications include information on how government \\ninstitutions have spent their budgets in previous years, and how they \\nintend to use their allocations over the medium term to achieve their \\ngoals, including the outputs and outcomes spending is expected to lead \\nto.\\n  </p>\\n\\n  <p>\\n    The publications include tables depicting non-financial performance \\nindicators and targets, departmental receipts, and detailed expenditure \\ntrends and estimates.\\n  </p>\\n\\n  <p>\\n    A more in-depth narrative analyses the institution\\u2019s expected \\nexpenditure over the MTEF period. A summary table is included at the end\\n of the chapter for votes in which there is significant spending on \\ninfrastructure. In addition, the e-publications contain programme \\npersonnel data tables, a brief summary for all entities, as well as \\nadditional summary data tables on provincial and municipal conditional \\ngrants, public-private partnerships, donor funding, and expenditure at \\nthe level of service delivery, where applicable.\\n  </p>\", \"heading\": \"Overview\", \"presentation_class\": \"is-default\"}}, {\"type\": \"section\", \"id\": \"e237ee3d-d60b-48da-9585-0f7b3a12aee7\", \"value\": {\"content\": \"<p>\\n    The dataset emanates from the yearly national government budget \\nprocess. At the beginning of each budget process, the National Treasury \\npublishes guidelines depicting the information that governmental \\ninstitutions are expected to submit to the National Treasury in their \\nbudget submissions. A vital part of this process involves the large \\nnumber of public institutions planning, negotiating and deciding \\ncollectively how to spend public resources.\\n  </p>\\n\\n  <p>\\n    As the budget process is focused on institutional performance in \\nrelation to government outcomes, it is organised by function of \\ngovernment. The trade-offs of financing different policy objectives \\nwithin the constraints of the expenditure ceiling are examined, \\nculminating in recommendations on how institutional policies and \\npractices, and arrangements, can be adapted to best achieve the \\nfunction\\u2019s outcomes.\\n  </p>\\n\\n  <p>\\n    These function group discussions shape the allocations to specific \\ngovernment institutions. The recommendations from each function group \\nare then presented to the ministers\\u2019 committee on the budget technical \\ncommittee (MTEC), a committee comprising the directors-general of \\ncentral national government departments. Once this part of the process \\nhas been finalised, the recommendations endorsed by MTEC are taken to \\nthe ministers\\u2019 committee on the budget. This committee then reviews the \\nrecommendations put forward in respect of the different function groups \\nand ultimately considers the trade-offs and priorities for government as\\n a whole. The recommendations of the ministers\\u2019 committee on the budget \\nare then tabled in Cabinet.\\n  </p>\\n\\n  <p>\\n    Once Cabinet has approved the recommendations, all institutions are \\ninformed of their budget allocations. Institutions then finalise their \\nbudgets accordingly and prepare and submit their data and narrative \\ninputs for the ENE publications to the National Treasury.  National \\nTreasury then verifies and edits these inputs to produce the ENE \\npublications. The ENE is published in a number of formats (including in \\nprint and as an Excel pivot table). The ENE is tabled in Parliament \\nannually as part of the national budget.\\n  </p>\", \"heading\": \"Where does the data come from?\", \"presentation_class\": \"is-default\"}}, {\"type\": \"section\", \"id\": \"c7b933a0-184e-4ae0-b14f-f0023f32a28f\", \"value\": {\"content\": \"<p>\\n    The ENE is released as part of the national budget information \\nreleases, at the end of February, before the start of the \\nnational/provincial budget cycle. The data and supporting documents are \\nuseful for:\\n  </p>\\n\\n  <ul><li>\\n      tracking how national government plans to spend its money over the medium- to long-term;\\n    </li><li>\\n      tracking institutional measures of achievement of main goals;\\n    </li><li>\\n      tracking whether historical performance has been in line with the achievement of main goals;\\n    </li><li>\\n      comparing spending across different departments (votes);\\n    </li><li>\\n      comparing past expenditure to planned expenditure; and\\n    </li><li>\\n      analysing the breakdown of spending across a department / vote (by\\n current payments versus payments for capital assets, transfers to other\\n spheres and departments, etc).\\n    </li></ul>\", \"heading\": \"What can I do with the data?\", \"presentation_class\": \"is-default\"}}, {\"type\": \"section\", \"id\": \"c4479890-dcce-4137-9fd0-accab63e233f\", \"value\": {\"content\": \"<p>\\n    Vulekamali has annual ENE information for all national departments. The following are available for each department:\\n  </p>\\n\\n  <ul><li>\\n      The department\\u2019s chapter in the ENE, in PDF format. This contains \\nprogramme personnel data tables and detailed information for all \\nentities, as well as additional summary data tables on provincial and \\nmunicipal conditional grants, public-private partnerships, donor \\nfunding, and expenditure at the level of site service delivery, where \\napplicable.\\n    </li><li>\\n      The formatted expenditure tables included in the ENE document, in Excel format.\\n    </li><li>\\n      The raw data used to produce the expenditure tables in the ENE and\\n Appropriation Bill, in CSV format and through the OpenSpending API \\n(application programme interface).\\n    </li></ul>\\n\\n  <p>\\n    The detail pages for a department can be found under the Department \\nBudgets link at the top of the website. You can also search vulekamali \\nto find a department.\\n  </p>\", \"heading\": \"What data is available from vulekamali.gov.za?\", \"presentation_class\": \"is-default\"}}, {\"type\": \"section\", \"id\": \"34910e05-5649-4593-8e9e-37ec63eb0cf0\", \"value\": {\"content\": \"<p>\\n    <strong>Note</strong>: The 2018 Budget vote for Basic Education \\n(Vote 14) is used as an illustrative example for this section. It can be\\n found by visiting the <a href=\\\"https://vulekamali.gov.za/2018-19/national/departments/basic-education\\\">Basic Education budget page for 2018</a>.\\n  </p>\\n\\n  <p>\\n    All the ENE documents (PDF, Excel, and CSV) include expenditure data using the following classifications:\\n  </p>\\n\\n  <p>\\n    <strong>Expenditure over time</strong>: The budget data is presented\\n over a seven-year period: three years of past expenditure, the current \\nfinancial year and three years of projected expenditure. The three-year \\nfuture budget refers to the next three years and is known as the \\nmedium-term expenditure framework (MTEF).\\n  </p>\\n\\n  <p>\\n    For example, the 2018 ENE documents include the audited budget \\noutcomes for the 2014/15, 2015/16, and 2016/17 financial years, the \\nrevised estimates for the 2017/18 financial year, and initial estimates \\nfor the 2018/19, 2019/20, and 2020/21 financial years.\\n  </p>\\n\\n  <p>\\n    <strong>Expenditure by economic classification</strong>: This refers\\n to the economic characteristics of the expenditure, including whether \\nthe expenditure happens directly in a national department, transferred \\nto another sphere of government or to another party.\\n  </p>\\n\\n  <p>\\n    There are up to four levels of economic classification for each \\nexpenditure item (i.e. Levels 1 to 4), with higher levels representing \\ngreater degrees of granularity. The Excel and CSV documents include all \\nfour levels while the PDF documents display the first two levels.\\n  </p>\\n\\n  <p>\\n    The level 1 economic classification divides all expenditure into \\nfour main economic sections: current payments (payments made for \\noperational requirements such as those for compensation of employees and\\n goods and services); transfers and subsidies; payments for capital \\nassets (assets that can be used for more than one year); and payments \\nfor financial assets (loans or equity investments in public \\ncorporations).\\n  </p>\\n\\n  <p>\\n    <strong>Expenditure by programme and sub-programme</strong>: This \\nrefers to expenditure by department programmes, which align spending to \\nactivities, performance indicators and outcomes. Each programme has a \\nparticular purpose and spending objectives. Spending can be tracked to \\nthe programme and sub-programme level.\\n  </p>\\n\\n  <p>\\n    <strong>Expenditure by government function</strong>: This aligns \\nexpenditure to one of seven government function groups. These groups can\\n include spending across many government institutions, departments, and \\nspheres. The function groups are also allocated to sections of the \\nNational Development Plan and medium-term strategic framework (MTSF) \\noutcomes.\\n  </p>\\n\\n  <p>\\n    For example, expenditure on Basic Education falls within the \\nLearning and Culture function group, Chapters 3 and 9 of the NDP, and \\nOutcome 5 of the MTSF. The Learning and Culture function group includes \\nthe Departments of Higher Education and Training, Sport and Recreation, \\nand Art and Culture. It also includes the SETAs, NSFAS, and the National\\n Skills Fund.\\n  </p>\\n\\n  <p>Estimates of National Expenditure PDF Documents</p>\\n\\n  <p>Each department\\u2019s PDF chapter can be found on Vulekamali on the \\ndepartment detail page. The PDF contains narrative information and \\nsummary tables of key expenditure items over the MTEF in the following \\nsections:</p>\\n\\n  <ul><li>A top-level summary of estimated expenditure over the MTEF by programme.</li><li>Selected Performance indicators linked to outcomes.</li><li>\\n      A narrative discussion outlining what an institution aims to \\nachieve over the medium term and how it plans to spend its budget in \\nsupport of this. For example, one performance indicator in the Education\\n Enrichment Services programme is the number of schools provided with \\nnutritious meals each school day. The expenditure analysis section \\nconfirms that the medium-term target is 19 800 schools and 9 million \\nlearners at a cost of R21.7-billion over the MTEF.\\n    </li><li>\\n      A section on expenditure trends which measures the historical and \\nprojected increases in spending by programme and by economic \\nclassification (Levels 1 and 2) over the seven-year period. The average \\nannual increase in expenditure is measured over the historical period \\n(financial years 2014 to 2017) and the MTEF (2017 to 2020).\\n    </li><li>\\n      This section also measures expenditure on significant spending \\nitems, goods and services (Economic Classification Level 2) and on \\ntransfers and subsidies (Economic Classification Level 3).\\n    </li><li>\\n      A section on departmental receipts, showing how the department \\ngenerates its own income through interest, sales of capital assets, \\nfinancial transactions, and other activities.\\n    </li><li>\\n      A description of each programme, including the programme\\u2019s \\npurpose, objectives, and sub-programmes. There is an analysis of each \\nprogramme\\u2019s expenditure trends in a series of tables, by economic \\nclassification (Levels 1 and 2), and by transfers and subsidies.\\n    </li></ul>\\n\\n  <p>\\n    Estimates of National Expenditure Excel Tables Document\\n  </p>\\n\\n  <p>\\n    Excel versions of the tables included in the ENE PDF document can be\\n found in Vulekamali\\u2019s department page for each department.\\n  </p>\\n\\n  <p>\\n    The Excel spreadsheets are not machine-readable as the columns have \\nnot been formatted for building pivot tables. They do however allow the \\nuser to further edit the data and to perform simple calculations. They \\nalso provide some additional detailed information that is not included \\nin either the PDF documents or the CSV data file.\\n  </p>\\n\\n  <p>The spreadsheets include the following tables from the PDF documents:</p>\\n\\n  <ul><li>\\n      A budget summary for the MTEF by programme\\n    </li><li>\\n      Historical expenditure trends by programme and economic classification (Level 2)\\n    </li><li>\\n      Projected expenditure estimates by programme and economic classification (Level 2)\\n    </li><li>\\n      Expenditure trends and estimates for significant spending items\\n    </li><li>\\n      Expenditure trends and estimates for goods and services (economic classification Level 2)\\n    </li><li>\\n      Expenditure trends and estimates for transfers and subsidies  (economic classification Level 3)\\n    </li><li>\\n      Personnel numbers and their costs by salary level and programme\\n    </li><li>\\n      Departmental receipts (economic classification Level 3)\\n    </li><li>\\n      Expenditure trends and estimates for each programme, by \\nsub-programme and economic classification (Level 2), and by transfers \\nand subsidies (Level 3)\\n    </li></ul>\\n\\n  <p>In addition, they include tables for the following:</p>\\n\\n  <ul><li>\\n      Expenditure trends and estimates for conditional grants to provinces and municipalities, by grant.\\n    </li><li>\\n      Expenditure trends and estimates for infrastructure spending, by \\nproject name and by transfer to other spheres, agencies, public-private \\npartnerships, donor funding, and expenditure at the level of service \\ndelivery.\\n    </li></ul>\\n\\n  <p>\\n    Estimates of National Expenditure CSV Data File\\n  </p>\\n\\n  <p>\\n    The CSV data file contains the raw data used to produce the ENE and \\nexpenditure tables and the Appropriation Bill. This file can imported \\ninto Excel or other analysis programmes for further analysis. The file \\ncontains the following fields\\n  </p>\\n\\n  <ul><li>\\n      <strong>Budget phase</strong>: This refers to which part of the \\nbudget cycle is referenced, whether it is an historical budget year or \\nan estimate of future expenditure. It is closely related to the <strong>Financial Year</strong> field.\\n    </li><li>\\n      <strong>Department</strong>: This refers to the government department where the expenditure occurs. It has a one-to-one (direct) relationship with the <strong>Vote Number</strong> field. There are 47 departments in the 2018 ENE.\\n    </li><li>\\n      <strong>Economic Classification Levels 1 to 4</strong>: These four\\n fields refer to the economic classification of the expenditure, with \\nhigher levels indicating a greater degree of disaggregation and \\ngranularity. The four main economic sections (Level 1) are current \\nspending, transfers and subsidies, payments for financial assets, and \\npayments for capital assets.\\n    </li><li>\\n      <strong>Financial Year</strong>: This refers to the national / \\nprovincial financial year which begins on April 1 and ends on March 31 \\nof the following calendar year. For example, the 2014 financial year \\nbegan on 1 April 2014 and ended on 31 March 2015.  This field is closely\\n related to the <strong>Budget Phase</strong> field.\\n    </li><li>\\n      <strong>Government Function</strong>: This refers to one of the \\nseven government function groups. It includes an eighth category for \\ndebt-service costs, which are an aggregate cost in the Department of \\nNational Treasury.\\n    </li><li>\\n      <strong>Programme</strong> (and <strong>Programme Number</strong>):\\n This refers to spending by government programme. Each department will \\nhave a number of programmes and sub-programmes that align the \\ndepartment\\u2019s objectives and performance indicators. The number of \\nprogrammes varies by department but most have between four and eight \\nprogrammes. <strong>Note</strong>: the <strong>Programme Number</strong>\\n field refers to the order of the programme in a specific department. \\nProgramme orders are arbitrary (i.e. not ranked by expenditure or \\nalphabetically) and are not consistent across departments.\\n    </li><li>\\n      <strong>Sub-programme</strong> (and <strong>Sub-programme Number</strong>): This refers to spending by sub-programme. The <strong>Sub-programme Number</strong> field is similar to the <strong>Programme Number</strong> field as the sub-programme ordering is also arbitrary.\\n    </li><li>\\n      <strong>Vote Number</strong>: This field refers to the ordering of Votes in the full ENE document. There is a one-to-one relationship with the <strong>Department</strong> field.\\n    </li></ul>\", \"heading\": \"What data is available from vulekamali.gov.za?\", \"presentation_class\": \"is-default\"}}, {\"type\": \"section\", \"id\": \"d213b4e3-37f2-49b4-9331-79b74790bfae\", \"value\": {\"content\": \"<ul><li>\\n      Estimates of National Expenditure Overview guide - The \\nintroductory chapter of the abridged ENE is a useful guide to \\nunderstanding that year\\u2019s Budget and ENE process: <a href=\\\"http://www.treasury.gov.za/documents/national%20budget/2018/enebooklets/Overview.pdf\\\">http://www.treasury.gov.za/documents/national%20budget/2018/enebooklets/Overview.pdf</a>\\n    </li><li>\\n      National Treasury\\u2019s main page for national budget information: <a href=\\\"http://www.treasury.gov.za/documents/national%20budget/default.aspx\\\">http://www.treasury.gov.za/documents/national%20budget/default.aspx</a>\\n    </li></ul>\", \"heading\": \"Further reading and resources\", \"presentation_class\": \"is-default\"}}]",
+    "created_at": "2020-02-14T15:54:55.617Z",
+    "updated_at": "2020-02-15T19:23:16.864Z",
+    "image": null
+  }
+},
+{
+  "model": "budgetportal.guidepage",
+  "pk": 19,
+  "fields": {
+    "body": "[{\"type\": \"section\", \"id\": \"ed1935b7-5214-45cb-b94f-f6fa651fd0c1\", \"value\": {\"content\": \"<p>\\n      A <a href=\\\"https://vulekamali.gov.za/datasets/performance-and-expenditure-reviews\\\">Performance and Expenditure Review (PER)</a> is a process of reviewing government spending on a particular service, and how effective this spending is.\\n    </p>\\n\\n    <p>\\n      In South Africa, National Treasury started performing Performance \\nand Expenditure Reviews in partnership with the Department of \\nPerformance Monitoring and Evaluation in the Presidency in 2013. PERs \\nare widely used internationally for quantifying, assessing and improving\\n the cost effectiveness of public policy - how government sets out to do\\n its work.\\n    </p>\\n\\n    <p>The outputs of a Performance and Expenditure Review often include</p>\\n    <ul><li>a one-page summary,</li><li>a technical report,</li><li>the framework in which decisions are made,</li><li>a model of the costs to provide this service, and</li><li>infographics presenting the findings.</li></ul>\", \"heading\": \"Introduction\", \"presentation_class\": \"is-default\"}}]",
+    "created_at": "2020-02-16T09:10:30.091Z",
+    "updated_at": "2020-02-16T09:10:30.403Z",
+    "image": null
+  }
+},
+{
+  "model": "budgetportal.postindexpage",
+  "pk": 13,
+  "fields": {
+    "intro": ""
+  }
+},
+{
+  "model": "budgetportal.postpage",
+  "pk": 14,
+  "fields": {
+    "body": "[{\"type\": \"section\", \"id\": \"4cebeafa-de00-4908-b8a0-20a7250acacd\", \"value\": {\"content\": \"<p>There's a comp coming<br/></p>\", \"heading\": \"It's coming!\", \"presentation_class\": \"is-default\"}}]",
+    "created_at": "2020-02-14T15:52:07.031Z",
+    "updated_at": "2020-02-14T15:52:07.092Z",
+    "image": null
+  }
+},
+{
+  "model": "budgetportal.postpage",
+  "pk": 15,
+  "fields": {
+    "body": "[{\"type\": \"section\", \"id\": \"fcf83ead-45ae-472b-8c97-66025c7fcb3e\", \"value\": {\"content\": \"<p>Sign up here.<br/></p>\", \"heading\": \"Sign up\", \"presentation_class\": \"is-default\"}}]",
+    "created_at": "2020-02-14T15:52:45.154Z",
+    "updated_at": "2020-02-14T15:52:49.774Z",
+    "image": null
+  }
+}
+]

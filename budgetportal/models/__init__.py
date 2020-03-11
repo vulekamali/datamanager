@@ -17,6 +17,7 @@ from django.urls import reverse
 from wagtail.core.fields import RichTextField
 
 from .gov_structure import Department, FinancialYear
+from .pages import *
 
 MAPIT_POINT_API_URL = "https://mapit.code4sa.org/point/4326/{},{}"
 

@@ -148,8 +148,8 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
 AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
-AWS_DEFAULT_ACL = "private"
-AWS_BUCKET_ACL = "private"
+AWS_DEFAULT_ACL = "public-read"
+AWS_BUCKET_ACL = "public-read"
 AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
@@ -187,7 +187,7 @@ else:
 CACHE_MIDDLEWARE_SECONDS = 600
 
 
-CKAN_URL = os.environ.get("CKAN_URL", "https://treasurydata.openup.org.za")
+CKAN_URL = os.environ.get("CKAN_URL", "https://data.vulekamali.gov.za")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY", None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
 
