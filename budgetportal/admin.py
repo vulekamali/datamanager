@@ -2,6 +2,7 @@ import logging
 
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 from budgetportal import models
+from budgetportal.models import gov_structure
 from budgetportal.bulk_upload import bulk_upload_view
 from django.contrib import admin, messages
 from django.contrib.auth.decorators import login_required
@@ -220,13 +221,13 @@ except ProgrammingError as e:
     logging.error(e, exc_info=True)
 
 
-admin.site.register(models.FinancialYear, FinancialYearAdmin)
-admin.site.register(models.Sphere, SphereAdmin)
-admin.site.register(models.Government, GovernmentAdmin)
-admin.site.register(models.GovtFunction, GovtFunctionAdmin)
-admin.site.register(models.Department, DepartmentAdmin)
+admin.site.register(gov_structure.FinancialYear, FinancialYearAdmin)
+admin.site.register(gov_structure.Sphere, SphereAdmin)
+admin.site.register(gov_structure.Government, GovernmentAdmin)
+admin.site.register(gov_structure.GovtFunction, GovtFunctionAdmin)
+admin.site.register(gov_structure.Department, DepartmentAdmin)
 admin.site.register(models.InfrastructureProjectPart, InfrastructureProjectAdmin)
-admin.site.register(models.Programme, ProgrammeAdmin)
+admin.site.register(gov_structure.Programme, ProgrammeAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Site, SiteAdmin)
 admin.site.register(models.Video, VideoAdmin)

@@ -13,7 +13,7 @@ from openpyxl.writer.excel import save_virtual_workbook
 from slugify import slugify
 
 from .tasks import *
-from budgetportal.models import Department, Government, Sphere
+from budgetportal.models.gov_structure import Department, Government, Sphere
 from .datasets import (
     Category,
     Dataset,

@@ -5,7 +5,7 @@ Tests of budgetportal.summaries
 
 import json
 
-from budgetportal.models import Department, FinancialYear, Government, Sphere
+from budgetportal.models.gov_structure import Department, FinancialYear, Government, Sphere
 from budgetportal.openspending import BabbageFiscalDataset
 from budgetportal.summaries import (
     get_consolidated_expenditure_treemap,

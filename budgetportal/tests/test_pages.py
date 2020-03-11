@@ -1,6 +1,4 @@
-import json
-from budgetportal.models import Department, FinancialYear, Government, Sphere
-from django.conf import settings
+from budgetportal.models.gov_structure import Department, FinancialYear, Government, Sphere
 from django.test import Client, TestCase
 from mock import MagicMock, patch
 

@@ -1,7 +1,7 @@
 import os
 
 from allauth.account.models import EmailAddress
-from budgetportal.models import Department, FinancialYear, Government, Sphere
+from budgetportal.models.gov_structure import Department, FinancialYear, Government, Sphere
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 from ckanapi import NotFound
 from django.contrib.auth.models import User

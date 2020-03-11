@@ -1,7 +1,6 @@
 import json
 from budgetportal.models import FinancialYear
 from budgetportal.datasets import Dataset
-from django.conf import settings
 from django.test import Client, TestCase
 from mock import patch
 

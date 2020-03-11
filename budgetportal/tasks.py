@@ -8,7 +8,8 @@ import traceback
 
 from django_q.tasks import async_task
 from budgetportal import prov_infra_projects
-from budgetportal.models import Department, IRMSnapshot
+from budgetportal.models import IRMSnapshot
+from budgetportal.models.gov_structure import Department
 from django.conf import settings
 from django.core.management import call_command
 

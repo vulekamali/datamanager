@@ -4,7 +4,7 @@ import sys
 
 import yaml
 
-from budgetportal.models import Department, Programme
+from budgetportal.models.gov_structure import Department, Programme
 from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 

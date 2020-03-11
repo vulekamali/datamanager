@@ -20,7 +20,7 @@ Optional columns:
 """
 import csv
 
-from budgetportal.models import Department, Government
+from budgetportal.models.gov_structure import Department, Government
 from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 

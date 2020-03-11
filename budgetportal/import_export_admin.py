@@ -1,6 +1,7 @@
 import logging
 
 from budgetportal import models
+from budgetportal.models import gov_structure
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db.models import NOT_PROVIDED, Q
@@ -64,8 +65,8 @@ class CustomGovernmentWidget(Widget):
 
     def set_sphere(self, sphere):
         try:
-            self.sphere = models.Sphere.objects.get(id=sphere)
-        except models.Sphere.DoesNotExist:
+            self.sphere = gov_structure.Sphere.objects.get(id=sphere)
+        except gov_structure.Sphere.DoesNotExist:
             raise ValidationError("Sphere with id %s does not exist." % sphere)
 
     def render(self, value, obj=None):
@@ -73,10 +74,10 @@ class CustomGovernmentWidget(Widget):
 
     def clean(self, value, row=None, *args, **kwargs):
         try:
-            government = models.Government.objects.get(
+            government = gov_structure.Government.objects.get(
                 sphere=self.sphere, slug=slugify(value)
             )
-        except models.Government.DoesNotExist:
+        except gov_structure.Government.DoesNotExist:
             raise ValidationError(
                 "Government '%s' does not exist in sphere '%s'." % (value, self.sphere)
             )
@@ -110,8 +111,8 @@ class DepartmentInstanceLoader(ModelInstanceLoader):
             q |= Q(vote_number=vote_number, government=government)
 
         try:
-            return models.Department.objects.get(q)
-        except models.Department.DoesNotExist:
+            return gov_structure.Department.objects.get(q)
+        except gov_structure.Department.DoesNotExist:
             pass
 
         return None
@@ -137,7 +138,7 @@ class DepartmentResource(resources.ModelResource):
     )
 
     class Meta:
-        model = models.Department
+        model = gov_structure.Department
         fields = (
             "government",
             "name",
@@ -160,7 +161,7 @@ class DepartmentImportForm(ImportForm):
     Form class to use to upload a CSV file to import departments.
     """
 
-    sphere = forms.ModelChoiceField(queryset=models.Sphere.objects.all(), required=True)
+    sphere = forms.ModelChoiceField(queryset=gov_structure.Sphere.objects.all(), required=True)
 
 
 class InfrastructureProjectProvinceField(Field):

@@ -1,7 +1,7 @@
 import csv
 import re
 
-from budgetportal.models import GovtFunction, Programme
+from budgetportal.models.gov_structure import GovtFunction, Programme
 from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 

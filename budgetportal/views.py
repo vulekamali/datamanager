@@ -31,9 +31,9 @@ from .models import (
     Homepage,
     InfrastructureProjectPart,
     IRMSnapshot,
-    Sphere,
     Video,
 )
+from .models.gov_structure import Sphere
 from .summaries import (
     DepartmentProgrammesEcon4,
     DepartmentSubprogEcon4,
