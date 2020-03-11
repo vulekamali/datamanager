@@ -2,6 +2,8 @@ from adminplus.sites import AdminSitePlus
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import include, url
+from django.urls import path, include
+from django.shortcuts import redirect
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.core.exceptions import PermissionDenied
@@ -134,27 +136,32 @@ urlpatterns = [
     # Budget Portal
     url(r"^about/?$", cache_page(CACHE_DAYS_SECS)(views.about), name="about"),
     url(r"^events/?$", cache_page(CACHE_MINUTES_SECS)(views.events), name="events"),
-    url(r"^videos/?$", cache_page(CACHE_MINUTES_SECS)(views.videos), name="videos"),
+    url(
+        r"^learning-resources/?$",
+        lambda request: redirect("/learning-resources/videos/", permanent=True),
+        name="learning-resources",
+    ),
+    url(r"^learning-resources/videos/?$", cache_page(CACHE_MINUTES_SECS)(views.videos), name="videos"),
     url(
         r"^terms-and-conditions/?$",
         cache_page(CACHE_DAYS_SECS)(views.terms_and_conditions),
         name="terms-and-conditions",
     ),
     url(
-        r"^resources/?$", cache_page(CACHE_DAYS_SECS)(views.resources), name="resources"
+        r"^learning-resources/resources/?$", cache_page(CACHE_DAYS_SECS)(views.resources), name="resources"
     ),
     url(
-        r"^glossary/?$", cache_page(CACHE_MINUTES_SECS)(views.glossary), name="glossary"
+        r"^learning-resources/glossary/?$", cache_page(CACHE_MINUTES_SECS)(views.glossary), name="glossary"
     ),
     url(r"^faq/?$", cache_page(CACHE_MINUTES_SECS)(views.faq), name="faq"),
     url(
-        r"^guides/?$",
+        r"^learning-resources/guides/?$",
         cache_page(CACHE_MINUTES_SECS)(views.guides),
         name="guides",
         kwargs={"slug": "index"},
     ),
     url(
-        r"^guides/(?P<slug>[-\w]+)/?$",
+        r"^learning-resources/guides/(?P<slug>[-\w]+)/?$",
         cache_page(CACHE_MINUTES_SECS)(views.guides),
         name="guide-list",
     ),
