@@ -1,6 +1,5 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*
-from datetime import datetime
 
 from django.test import override_settings
 from selenium.webdriver.common.by import By
@@ -25,7 +24,6 @@ class PPPProjectTestCase(BaseSeleniumTestCase):
     def test_project_detail_page_fields(self):
         url = self.project.get_absolute_url()
         self.selenium.get("%s%s" % (self.live_server_url, url))
-        now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")
         selenium = self.selenium
         self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#partnership-type")))
         partnership_type = selenium.find_element_by_css_selector("#partnership-type").text
@@ -36,4 +34,3 @@ class PPPProjectTestCase(BaseSeleniumTestCase):
         self.assertEqual(project_title, u"School Infrastructure Backlogs Grant")
         self.assertEqual(budget, u"R4 billion")
         self.assertEqual(line.is_displayed(), True)
-        self.selenium.get_screenshot_as_file("%s.png" % now)

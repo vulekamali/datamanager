@@ -1,10 +1,17 @@
+import time
+from datetime import datetime
+
 import mock
 from budgetportal.models import (
     CKAN_DATASTORE_URL,
     MAPIT_POINT_API_URL,
     InfrastructureProjectPart,
-)
-from django.test import Client, LiveServerTestCase, TestCase
+    FinancialYear)
+from django.test import Client, LiveServerTestCase, TestCase, override_settings
+
+from budgetportal.tests.helpers import BaseSeleniumTestCase
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class ProjectedExpenditureTestCase(TestCase):
@@ -103,7 +110,6 @@ class MockResponse:
 
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
-
     if args[0] == MAPIT_POINT_API_URL.format(25.312526, -27.515232):
         return MockResponse({4288: {"name": "Fake Province 1"}}, 200)
     elif args[0] == MAPIT_POINT_API_URL.format(24.312526, -26.515232):
@@ -155,7 +161,6 @@ empty_ckan_response = MockResponse({"result": {"records": []}}, 200)
 
 
 class OverviewIntegrationTest(LiveServerTestCase):
-
     fixtures = ["test-infrastructure-pages-overview"]
 
     def setUp(self):
@@ -310,3 +315,41 @@ class DetailIntegrationTest(LiveServerTestCase):
         )
         self.assertEqual(content["stage"], self.project.current_project_stage)
         self.assertEqual(content["total_budget"], self.project.project_value_rands)
+
+
+@override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
+class GUITestCase(BaseSeleniumTestCase):
+    fixtures = ["test-infrastructure-pages-detail"]
+
+    def setUp(self):
+        super(GUITestCase, self).setUp()
+        FinancialYear.objects.create(slug="2019-20", published=True)
+        self.project = InfrastructureProjectPart.objects.filter(
+            pk=176
+        ).first()
+
+    def test_project_detail_page_fields(self):
+        url = self.project.get_absolute_url()
+        self.selenium.get("%s%s" % (self.live_server_url, url))
+        print(url)
+        now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")
+        selenium = self.selenium
+        time.sleep(5)
+        self.selenium.get_screenshot_as_file("%s.png" % now)
+        self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".recharts-line")))
+        project_title = selenium.find_element_by_css_selector("#project-title").text
+        budget = selenium.find_element_by_css_selector("#total-budget").text
+        line = selenium.find_element_by_css_selector(".recharts-line")
+        self.assertEqual(project_title, u"School Infrastructure Backlogs Grant")
+        self.assertEqual(budget, u"R4 billion")
+        self.assertEqual(line.is_displayed(), True)
+        self.selenium.get_screenshot_as_file("%s.png" % now)
+
+# I think it woud ber good to verify
+#
+#
+# a chart line is visible
+# project name is visible
+# for national
+# status is visible,
+# total budget is correct (77 million, not 77 thousand)
