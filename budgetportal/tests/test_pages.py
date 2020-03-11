@@ -52,7 +52,7 @@ class BasicPagesTestCase(TestCase):
         CKANMockClass.action.package_search.return_value = {"results": []}
         self.addCleanup(ckan_patch.stop)
 
-        ckan_patch = patch("budgetportal.models.gov_structure.ckan")
+        ckan_patch = patch("budgetportal.datasets.ckan")
         CKANMockClass = ckan_patch.start()
         CKANMockClass.action.package_search.return_value = {"results": []}
         # self.addCleanup(ckan_patch.stop)
@@ -156,7 +156,7 @@ class BasicPagesTestCase(TestCase):
     def test_videos_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
-        response = c.get("/learning-resources")
+        response = c.get("/learning-resources", follow=True)
 
         self.assertContains(
             response, "Learn more about the new Online Budget Data Portal"
