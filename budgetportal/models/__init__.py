@@ -18,6 +18,7 @@ from wagtail.core.models import Page as WagtailPage
 from wagtail.core.fields import RichTextField
 
 from .gov_structure import *
+from .pages import CategoryGuide
 
 MAPIT_POINT_API_URL = "https://mapit.code4sa.org/point/4326/{},{}"
 
