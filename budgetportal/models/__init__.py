@@ -14,7 +14,7 @@ from django.core.cache import cache
 from django.db import models
 from django.urls import reverse
 
-# from wagtail.core.fields import RichTextField
+from wagtail.core.fields import RichTextField
 
 from .gov_structure import Department, FinancialYear
 
@@ -319,7 +319,7 @@ class Video(SortableMixin):
 
 class FAQ(SortableMixin):
     title = models.CharField(max_length=1024)
-    # content = RichTextField()
+    content = RichTextField()
     the_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
     def __str__(self):
