@@ -17,7 +17,7 @@ from django.conf import settings
 from django.core.files import File
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITransactionTestCase
+from rest_framework.test import APITestCase
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -30,7 +30,7 @@ EMPTY_FILE_PATH = os.path.abspath(
 )
 
 
-class ProvInfraProjectIRMSnapshotTestCase(APITransactionTestCase):
+class ProvInfraProjectIRMSnapshotTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         file_path = os.path.abspath(
@@ -404,7 +404,7 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         )
 
 
-class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
+class ProvInfraProjectAPIDepartmentTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -484,7 +484,7 @@ class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
+class ProvInfraProjectAPIProvinceTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -594,7 +594,7 @@ class ProvInfraProjectAPIProvinceTestCase(APITransactionTestCase):
         self.assertEqual(department_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
+class ProvInfraProjectAPIStatusTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -674,7 +674,7 @@ class ProvInfraProjectAPIStatusTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
+class ProvInfraProjectAPIFundingSourceTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -754,7 +754,7 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
+class ProvInfraProjectAPIProjectNameTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -827,7 +827,7 @@ class ProvInfraProjectAPIProjectNameTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
+class ProvInfraProjectAPIMunicipalityTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -903,7 +903,7 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
+class ProvInfraProjectAPIContractorTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -979,7 +979,7 @@ class ProvInfraProjectAPIContractorTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
+class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -1037,7 +1037,7 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
         self.assertEqual(results[0]["name"], "Something School")
 
 
-class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
+class ProvInfraProjectAPIURLPathTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -1094,7 +1094,7 @@ class ProvInfraProjectAPIURLPathTestCase(APITransactionTestCase):
         self.assertContains(response, name)
 
 
-class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
+class ProvInfraProjectSnapshotTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
@@ -1151,7 +1151,7 @@ class ProvInfraProjectSnapshotTestCase(APITransactionTestCase):
         self.assertEqual(self.project_snapshot_2, latest)
 
 
-class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
+class ProvInfraProjectSnapshotDifferentYearsTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
@@ -1196,7 +1196,7 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         self.assertEqual(self.project_snapshot_2, latest)
 
 
-class ProvInfraProjectFullTextSearchTestCase(APITransactionTestCase):
+class ProvInfraProjectFullTextSearchTestCase(APITestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -1291,7 +1291,7 @@ class ProvInfraProjectSearchCSVTestCaseMixin:
 
 
 class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
-    APITransactionTestCase, ProvInfraProjectSearchCSVTestCaseMixin
+    APITestCase, ProvInfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         call_command("clear_index", "--noinput")
@@ -1429,7 +1429,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
 
 class ProvInfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
-    APITransactionTestCase, ProvInfraProjectSearchCSVTestCaseMixin
+    APITestCase, ProvInfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         call_command("clear_index", "--noinput")
@@ -1480,7 +1480,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
 
 
 class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
-    APITransactionTestCase, ProvInfraProjectSearchCSVTestCaseMixin
+    APITestCase, ProvInfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         call_command("clear_index", "--noinput")
