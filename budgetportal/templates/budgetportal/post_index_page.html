@@ -1,0 +1,41 @@
+{% extends 'budgetportal/page.html' %}
+{% load wagtailcore_tags %}
+
+
+{% block meta_title %}
+<title>{% firstof page.seo_title page.title %}</title>
+<meta name="twitter:title" content="{% firstof page.seo_title page.title %}">
+<meta property="og:title" content="{% firstof page.seo_title page.title %}" />
+{% endblock meta_title %}
+
+{% block meta_description %}
+{% with fallback_description="South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU." %}
+<meta name="description" content="{% firstof page.search_description fallback_description %}">
+<meta name="twitter:description" content="{% firstof page.search_description fallback_description %}">
+<meta property="og:description" content="{% firstof page.search_description fallback_description %}">
+{% endwith %}
+{% endblock meta_description %}
+
+
+{% block page_content %}
+
+<div class="Page-content">
+  <div class="Page-contentInner Page-contentInner--floatingLinks">
+
+    {% include 'budgetportal/breadcrumbs.html' %}
+
+    <h1 class="Page-mainHeading">{{ page.title }}</h1>
+
+    <div class="Section is-invisible u-fontSize18 u-paddingTop0">
+      {{ page.specific.intro|richtext }}
+    </div>
+
+    {% for post in page.get_children %}
+        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+        {{ post.specific.intro }}
+    {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}
