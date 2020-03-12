@@ -166,17 +166,6 @@ urlpatterns = [
         name="glossary",
     ),
     url(r"^faq/?$", cache_page(CACHE_MINUTES_SECS)(views.faq), name="faq"),
-    url(
-        r"^learning-resources/guides/?$",
-        cache_page(CACHE_MINUTES_SECS)(views.guides),
-        name="guides",
-        kwargs={"slug": "index"},
-    ),
-    url(
-        r"^learning-resources/guides/(?P<slug>[-\w]+)/?$",
-        cache_page(CACHE_MINUTES_SECS)(views.guides),
-        name="guide-list",
-    ),
     # Dataset category list
     url(
         r"^datasets/?$",

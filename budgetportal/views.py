@@ -820,24 +820,6 @@ def resources(request):
     return render(request, "resources.html", context)
 
 
-def guides(request, slug):
-    slug = "index"
-
-    context = guide_data[slug]
-    context.update(
-        {
-            "content_template": "guide-{}.html".format(slug),
-            "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
-            "guides": guide_data,
-            "latest_year": FinancialYear.get_latest_year().slug,
-            "selected_financial_year": None,
-            "financial_years": [],
-        }
-    )
-    template = "guides.html" if slug == "index" else "guide_item.html"
-    return render(request, template, context)
-
-
 def dataset_category_list_page(request):
     context = {
         "categories": [category_fields(c) for c in Category.get_all()],

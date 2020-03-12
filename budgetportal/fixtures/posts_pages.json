@@ -1,0 +1,18 @@
+[
+  {
+    "model": "wagtailcore.page",
+    "pk": 1,
+    "fields": {
+      "title": "Homepage",
+      "content_type": ["budgetportal", "postindexpage"],
+      "depth": 1
+    }
+  },
+  {
+    "model": "budgetportal.postindexpage",
+    "pk": 1,
+    "fields": {
+      "intro": "<p>Some intro we wanna introduce.</p>"
+    }
+  }
+]

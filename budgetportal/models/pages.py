@@ -9,30 +9,21 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 from wagtail.contrib.routable_page.models import RoutablePage, route
 
-
 from .gov_structure import FinancialYear
-
-
-class WagtailHomePage(RoutablePage):
-    max_count = 1
-
-
-class LearningIndexPage(RoutablePage):
-    max_count = 1
 
 
 class PostIndexPage(RoutablePage):
     max_count = 1
-    parent_page_types = []
+    subpage_types = ["budgetportal.PostPage"]
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
-    @route(r"^posts/")
-    def main(self, request):
-        from django.shortcuts import render
-
-        return render(request, self.get_template(request), self.get_context(request))
+    # @route(r"^posts/")
+    # def main(self, request):
+    #     from django.shortcuts import render
+    #
+    #     return render(request, self.get_template(request), self.get_context(request))
 
 
 class PostPage(RoutablePage):
@@ -53,6 +44,11 @@ class PostPage(RoutablePage):
     content_panels = Page.content_panels + [
         StreamFieldPanel("body"),
     ]
+
+
+class LearningIndexPage(RoutablePage):
+    max_count = 1
+    subpage_types = ["budgetportal.GuideIndexPage"]
 
 
 class GuideIndexPage(RoutablePage):
