@@ -167,10 +167,14 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         funding_status = selenium.find_element_by_css_selector(
             ".funding-status-field"
         ).text
+        csv_download_url = selenium.find_element_by_css_selector(
+            ".header__download"
+        ).get_attribute("href")
 
         self.assertEqual(source, u"Education Infrastructure Grant")
         self.assertEqual(investment, u"Upgrading and Additions")
         self.assertEqual(funding_status, u"Tabled")
+        self.assertIn(self.project.csv_download_url, csv_download_url)
 
         department = selenium.find_element_by_css_selector(".department-field").text
         budget_programme = selenium.find_element_by_css_selector(
@@ -382,6 +386,22 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         ).text
         filtered_num_of_projects = int(filtered_num_of_projects)
         self.assertEqual(filtered_num_of_projects, 5)
+
+    def test_csv_download_button_populating(self):
+        selenium = self.selenium
+        selenium.get("%s%s" % (self.live_server_url, self.url))
+        self.wait.until(
+            EC.text_to_be_present_in_element(
+                (By.CSS_SELECTOR, "#num-matching-projects-field"), u"11"
+            )
+        )
+        csv_download_url = selenium.find_element_by_css_selector(
+            "#search-results-download-button"
+        ).get_attribute("href")
+        self.assertIn(
+            "infrastructure-projects/provincial/search/csv?q=&ordering=status_order",
+            csv_download_url,
+        )
 
 
 class ProvInfraProjectAPIDepartmentTestCase(APITransactionTestCase):

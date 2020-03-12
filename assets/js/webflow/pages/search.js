@@ -183,6 +183,7 @@ function updateResultList(url) {
     pageState.listRequest.abort();
   pageState.listRequest = $.get(url)
     .done(function(response) {
+      populateDownloadCSVButton(response);
       addListResults(response);
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -255,6 +256,10 @@ function triggerSearch(pushHistory = true) {
   resetResultList();
   updateResultList(buildListSearchURL());
 };
+
+function populateDownloadCSVButton(response) {
+  $("#search-results-download-button").attr("href", response.csv_download_url);
+}
 
 function addListResults(response) {
   if (response.results.length) {
