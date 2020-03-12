@@ -40,17 +40,17 @@ const calcShorthand = name => {
 const createCallToActions = (datasetUrl, budgetReviewUrl) => ({
   3: {
     image: manAtLaptopImg,
-    title: 'Can’t find the national department project you are looking for?',
+    title: 'Can’t find the project you are looking for?',
     button: 'Download the data',
-    info: 'CSV',
+    info: 'CSV and XLSX',
     link: datasetUrl,
   },
   8: {
     image: constructionWorkers,
-    title: 'Read more about major infrastructure projects in the 2019 Budget Review',
+    title: 'Read more about major infrastructure projects in the Budget Review',
     button: 'Download the data',
     info: 'PDF',
-    link: budgetReviewUrl,
+    link: 'http://www.treasury.gov.za/documents/national%20budget/',
   },
 });
 
@@ -163,7 +163,7 @@ const StyledButton = styled(Button)`
       height: 40px;
       margin-top: 40px;
     }
-    
+
 `;
 
 const DownloadInfo = styled.div`

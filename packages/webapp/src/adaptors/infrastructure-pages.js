@@ -13,7 +13,7 @@ const buildEne = url => ({
 
 const datasetUrl = url => ({
   heading: 'Infrastructure Project Data',
-  format: 'CSV',
+  format: 'CSV and XLSX',
   link: url,
 });
 

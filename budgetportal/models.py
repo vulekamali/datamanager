@@ -1617,30 +1617,6 @@ class InfrastructureProjectPart(models.Model):
             self.project_slug, self.budget_phase, self.financial_year
         )
 
-    def get_budget_document_url(self, document_format="PDF"):
-        """
-        Returns budget-vote-document URL, for given format,
-        if the latest department instance matches the project year
-        """
-        departments = Department.objects.filter(
-            slug=slugify(self.government_institution),
-            government__sphere__slug="national",
-        )
-        if departments:
-            latest_dept = departments[0].get_latest_department_instance()
-            project_year = self.get_dataset().package["financial_year"][0]
-            if latest_dept.get_financial_year().slug == project_year:
-                budget_dataset = latest_dept.get_dataset(
-                    group_name="budget-vote-documents"
-                )
-                if budget_dataset:
-                    document_resource = budget_dataset.get_resource(
-                        format=document_format
-                    )
-                    if document_resource:
-                        return document_resource["url"]
-        return None
-
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(self.project_slug)
 
@@ -1762,27 +1738,6 @@ class InfrastructureProjectPart(models.Model):
         for project in projects:
             complete_expenditure.append(self._build_expenditure_item(project))
         return complete_expenditure
-
-    @classmethod
-    def get_dataset(cls):
-        """ Return the first dataset in the Infrastructure Projects group. """
-        query = {
-            "q": "",
-            "fq": (
-                '+organization:"national-treasury"'
-                '+vocab_spheres:"national"'
-                '+groups:"infrastructure-projects"'
-            ),
-            "rows": 1,
-        }
-        response = ckan.action.package_search(**query)
-        logger.info(
-            "query %s\nreturned %d results", pformat(query), len(response["results"])
-        )
-        if response["results"]:
-            return Dataset.from_package(response["results"][0])
-        else:
-            return None
 
 
 prov_keys = prov_abbrev.keys()

@@ -47,7 +47,7 @@ const WhiteButton = styled(Button)`
     ${({ text }) => (!!text ? 'padding-top: 4px ' : '')};
     ${({ text }) => (!!text ? 'padding-right: 25px' : '')};
     padding: 0;
-    
+
     &:hover {
       background: ${darken(0.1, 'white')};
     }
@@ -232,7 +232,7 @@ const buttonMarkup = (disabled, text, reverse, clickEvent) => (
 );
 
 const Markup = (props) => {
-  const { 
+  const {
     sharingOpen,
     modal,
     toggleSharingOpen,
@@ -247,8 +247,8 @@ const Markup = (props) => {
 
   const createWrapperForButtonAndSpeedDial = Link => details ? (
     <ButtonsOnTheLeft>
-      {!!details && 
-        <Link 
+      {!!details &&
+        <Link
           href="/infrastructure-projects"
           to="/infrastructure-projects"
           style={{ textDecoration: 'none', color: 'black' }}
@@ -268,7 +268,7 @@ const Markup = (props) => {
   const whiteTextRendering = details ? (
     <WhiteText>Project Information</WhiteText>
   ) : (
-    <WhiteText>{`${amount} national department infrastructure projects`}</WhiteText>
+    <WhiteText>{`${amount} featured major infrastructure projects`}</WhiteText>
   );
 
   return (

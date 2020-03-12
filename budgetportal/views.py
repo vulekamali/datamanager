@@ -517,7 +517,7 @@ def infrastructure_projects_overview(request):
         )
     projects = sorted(projects, key=lambda p: p["name"])
     return {
-        "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
+        "dataset_url": reverse("dataset-category", args=("infrastructure-projects",)),
         "projects": projects,
         "description": "National department Infrastructure projects in South Africa",
         "slug": "infrastructure-projects",
@@ -550,9 +550,6 @@ def infrastructure_project_detail_data(project_slug):
     ).first()
     if not project:
         return HttpResponse(status=404)
-    dataset = project.get_dataset()
-    if not dataset:
-        return HttpResponse(status=404)
 
     departments = Department.objects.filter(
         slug=slugify(project.government_institution),
@@ -561,6 +558,7 @@ def infrastructure_project_detail_data(project_slug):
     department_url = None
     if departments:
         department_url = departments[0].get_latest_department_instance().get_url_path()
+    dataset_url = reverse("dataset-category", args=("infrastructure-projects",))
 
     project_dict = {
         "name": project.project_name,
@@ -571,13 +569,12 @@ def infrastructure_project_detail_data(project_slug):
         "provinces": project.provinces.split(","),
         "total_budget": project.project_value_rands,
         "detail": project.get_url_path(),
-        "dataset_url": dataset.get_url_path(),
+        "dataset_url": dataset_url,
         "slug": project.get_url_path(),
         "page_title": "{} - vulekamali".format(project.project_name),
         "government_institution": {
             "name": project.government_institution,
             "url": department_url,
-            "budget_document": project.get_budget_document_url(),
         },
         "nature_of_investment": project.nature_of_investment,
         "infrastructure_type": project.infrastructure_type,
@@ -593,7 +590,7 @@ def infrastructure_project_detail_data(project_slug):
         "form_of_payment": project.form_of_payment,
     }
     return {
-        "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
+        "dataset_url": dataset_url,
         "projects": [project_dict],
         "description": project.project_description
         or "Infrastructure projects in South Africa",
