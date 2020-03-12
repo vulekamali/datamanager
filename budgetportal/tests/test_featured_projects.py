@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*
 import time
 
-from django.test import override_settings
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -10,9 +9,6 @@ from budgetportal.models import InfrastructureProjectPart, FinancialYear
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 
 
-@override_settings(
-    STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage"
-)
 class FeaturedProjectTestCase(BaseSeleniumTestCase):
     fixtures = ["test-infrastructure-pages-detail"]
 
