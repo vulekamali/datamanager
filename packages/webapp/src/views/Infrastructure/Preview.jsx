@@ -152,7 +152,7 @@ const CashflowTitle = styled.div`
   color: #696969;
   padding-bottom: 8px;
   width: 100%;
-  
+
   @media screen and (min-width: 650px) {
     text-align: left;
     font-weight: 900;
@@ -165,7 +165,7 @@ const Estimation = styled.div`
   font-size: 18px;
   text-align: center;
   width: 100%;
-  
+
   @media screen and (min-width: 650px) {
     font-size: 24px;
     text-align: left;
@@ -422,26 +422,34 @@ const createSideRender = (id, props) => {
       )}
 
       <SideSection>
-        <SideTitle>Department</SideTitle>
+        <SideTitle>Administering organ of state</SideTitle>
         <SideType>{department.name}</SideType>
       </SideSection>
-      <SideLink href={department.url} style={{ marginRight: '20px' }}>
-        <SideButton>
-          <span>Explore this department</span>
-          <ForwardArrow />
-        </SideButton>
-      </SideLink>
-      {/* <SideMapButtonWrapper>
-        <SideLink href='#'>
-          <SideButtonToMaps>
-            <span>View project on Google Maps</span>
+      {department.url &&
+       (<SideLink href={department.url} style={{ marginRight: '20px' }}>
+          <SideButton>
+            <span>Explore this department</span>
             <ForwardArrow />
-          </SideButtonToMaps>
-        </SideLink>
-      </SideMapButtonWrapper> */}
+          </SideButton>
+        </SideLink>)}
+
     </SideWrapper>
   );
 };
+
+const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short'});
+
+function formatDate(dateString) {
+  try {
+    const date = new Date(dateString);
+    const [{ value: month },,{ value: year }] = dateTimeFormat.formatToParts(date);
+    return `${month}-${year}`;
+  }
+  catch(error) {
+    console.debug(`Couldn't parse ${dateString} as a date. Using as is.`);
+    return dateString;
+  };
+}
 
 const createItem = props => {
   const {
@@ -459,6 +467,8 @@ const createItem = props => {
     dateOfClose,
     projectValueRandMillion,
   } = props;
+
+  const formattedDateOfClose = formatDate(dateOfClose);
 
   return (
     <AnimationWrapper key={id} style={{ width: '100%' }}>
@@ -508,7 +518,7 @@ const createItem = props => {
                 <CashflowTitle style={{ textAlign: 'right' }}>
                   Date of close:
                 </CashflowTitle>
-                <Estimation style={{ textAlign: 'right' }}>{dateOfClose}</Estimation>
+                <Estimation style={{ textAlign: 'right' }}>{formattedDateOfClose}</Estimation>
               </BudgetCashflow>
             </BudgetGroup>
           </>
