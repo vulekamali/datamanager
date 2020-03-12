@@ -17,6 +17,13 @@ const datasetUrl = url => ({
   link: url,
 });
 
+const replaceWhitespace = value => {
+    if (value != null) {
+        return value.replace(/\s/g,'')
+    }
+    return ""
+};
+
 const buildChartData = expenditure => {
   let left;
   let right;
@@ -94,7 +101,7 @@ const parseProjects = (projects, dataset_url) =>
     dateOfClose: project.date_of_close,
     duration: project.duration,
 
-    projectValueRandMillion: project.project_value_rand_million.replace(/\s/g,''),
+    projectValueRandMillion: replaceWhitespace(project.project_value_rand_million),
   }));
 
 class InfrastructurePages extends Component {

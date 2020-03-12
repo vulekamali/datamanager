@@ -3,6 +3,7 @@ from budgetportal.models import (
     CKAN_DATASTORE_URL,
     MAPIT_POINT_API_URL,
     InfrastructureProjectPart,
+    FinancialYear,
 )
 from django.test import Client, LiveServerTestCase, TestCase
 
@@ -103,7 +104,6 @@ class MockResponse:
 
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
-
     if args[0] == MAPIT_POINT_API_URL.format(25.312526, -27.515232):
         return MockResponse({4288: {"name": "Fake Province 1"}}, 200)
     elif args[0] == MAPIT_POINT_API_URL.format(24.312526, -26.515232):
@@ -155,7 +155,6 @@ empty_ckan_response = MockResponse({"result": {"records": []}}, 200)
 
 
 class OverviewIntegrationTest(LiveServerTestCase):
-
     fixtures = ["test-infrastructure-pages-overview"]
 
     def setUp(self):

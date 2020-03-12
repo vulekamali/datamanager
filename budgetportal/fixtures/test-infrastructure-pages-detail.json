@@ -20,7 +20,8 @@
       "financial_year": 2015,
       "project_value_rands": 9045389000,
       "provinces": "",
-      "gps_code": "Not specified"
+      "gps_code": "Not specified",
+      "project_value_rand_million": ""
     }
   },
   {
@@ -44,7 +45,8 @@
       "financial_year": 2016,
       "project_value_rands": 9045389000,
       "provinces": "",
-      "gps_code": "Not specified"
+      "gps_code": "Not specified",
+      "project_value_rand_million": ""
     }
   },
   {
@@ -68,7 +70,8 @@
       "financial_year": 2017,
       "project_value_rands": 9045389000,
       "provinces": "",
-      "gps_code": "Not specified"
+      "gps_code": "Not specified",
+      "project_value_rand_million": ""
     }
   },
   {
@@ -92,7 +95,8 @@
       "financial_year": 2018,
       "project_value_rands": 9045389000,
       "provinces": "",
-      "gps_code": "Not specified"
+      "gps_code": "Not specified",
+      "project_value_rand_million": ""
     }
   },
   {
@@ -116,7 +120,8 @@
       "financial_year": 2019,
       "project_value_rands": 9045389000,
       "provinces": "",
-      "gps_code": "Not specified"
+      "gps_code": "Not specified",
+      "project_value_rand_million": ""
     }
   },
   {
@@ -140,7 +145,8 @@
       "financial_year": 2020,
       "project_value_rands": 9045389000,
       "provinces": "",
-      "gps_code": "Not specified"
+      "gps_code": "Not specified",
+      "project_value_rand_million": ""
     }
   },
   {
@@ -164,7 +170,8 @@
       "financial_year": 2021,
       "project_value_rands": 9045389000,
       "provinces": "",
-      "gps_code": "Not specified"
+      "gps_code": "Not specified",
+      "project_value_rand_million": ""
     }
   },
   {
@@ -210,9 +217,9 @@
       "featured": true,
       "budget_phase": "MTEF",
       "project_slug": "ppp-basic-test-slug",
-      "amount_rands": 0,
-      "financial_year": 2021,
-      "project_value_rands": 0,
+      "amount_rands": 1368285000,
+      "financial_year": 2020,
+      "project_value_rands": 9045389000,
       "project_value_rand_million": "4000",
       "partnership_type": "Fake partnership",
       "provinces": "",

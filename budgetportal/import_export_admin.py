@@ -28,7 +28,12 @@ class CustomBooleanWidget(Widget):
     def clean(self, value, row=None, *args, **kwargs):
         if isinstance(value, bool):
             return value
-        elif value is None or value == "" or value.upper() == "TRUE" or value.upper() == "=TRUE()":
+        elif (
+            value is None
+            or value == ""
+            or value.upper() == "TRUE"
+            or value.upper() == "=TRUE()"
+        ):
             return True
         else:
             return False

@@ -1595,7 +1595,7 @@ class InfrastructureProjectPart(models.Model):
     featured = models.BooleanField()
     budget_phase = models.CharField(max_length=255)
     project_slug = models.CharField(max_length=255)
-    amount_rands = models.BigIntegerField(blank=True,null=True,default=None)
+    amount_rands = models.BigIntegerField(blank=True, null=True, default=None)
     financial_year = models.CharField(max_length=4)
     project_value_rands = models.BigIntegerField(default=0)
     provinces = models.CharField(max_length=510, default="")
@@ -1623,7 +1623,8 @@ class InfrastructureProjectPart(models.Model):
         if the latest department instance matches the project year
         """
         departments = Department.objects.filter(
-            slug=slugify(self.government_institution), government__sphere__slug="national"
+            slug=slugify(self.government_institution),
+            government__sphere__slug="national",
         )
         if departments:
             latest_dept = departments[0].get_latest_department_instance()
