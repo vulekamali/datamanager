@@ -161,7 +161,9 @@ class DepartmentImportForm(ImportForm):
     Form class to use to upload a CSV file to import departments.
     """
 
-    sphere = forms.ModelChoiceField(queryset=gov_structure.Sphere.objects.all(), required=True)
+    sphere = forms.ModelChoiceField(
+        queryset=gov_structure.Sphere.objects.all(), required=True
+    )
 
 
 class InfrastructureProjectProvinceField(Field):

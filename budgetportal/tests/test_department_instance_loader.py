@@ -2,7 +2,12 @@ from budgetportal.import_export_admin import (
     DepartmentInstanceLoader,
     DepartmentResource,
 )
-from budgetportal.models.gov_structure import Department, FinancialYear, Government, Sphere
+from budgetportal.models.gov_structure import (
+    Department,
+    FinancialYear,
+    Government,
+    Sphere,
+)
 from django.test import TestCase
 from tablib import Dataset
 

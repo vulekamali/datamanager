@@ -26,45 +26,41 @@ class PostIndexPage(RoutablePage):
     parent_page_types = []
     intro = RichTextField(blank=True)
 
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
+    content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
-    @route(r'^posts/')
+    @route(r"^posts/")
     def main(self, request):
         from django.shortcuts import render
+
         return render(request, self.get_template(request), self.get_context(request))
 
 
 class PostPage(RoutablePage):
-    parent_page_types = ['budgetportal.PostIndexPage']
-    body = StreamField([
-        ('section', SectionBlock()),
-        ('html', wagtail_blocks.RawHTMLBlock()),
-    ])
+    parent_page_types = ["budgetportal.PostIndexPage"]
+    body = StreamField(
+        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+    )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        StreamFieldPanel("body"),
     ]
 
 
 class GuideIndexPage(RoutablePage):
     max_count = 1
-    parent_page_types = ['budgetportal.LearningIndexPage']
+    parent_page_types = ["budgetportal.LearningIndexPage"]
     intro = RichTextField(blank=True)
 
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
+    content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
     # def get_context(self, request, *args, **kwargs):
     #     context = super().get_context(request, *args, **kwargs)
@@ -78,7 +74,7 @@ class GuideIndexPage(RoutablePage):
 class GuidePage(RoutablePage):
     parent_page_types = ["budgetportal.GuideIndexPage"]
     body = StreamField(
-        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()), ]
+        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
     )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)

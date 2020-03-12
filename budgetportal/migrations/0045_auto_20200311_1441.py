@@ -7,13 +7,11 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0044_auto_20200311_1417'),
+        ("budgetportal", "0044_auto_20200311_1417"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='faq',
-            name='content',
-            field=wagtail.core.fields.RichTextField(),
+            model_name="faq", name="content", field=wagtail.core.fields.RichTextField(),
         ),
     ]

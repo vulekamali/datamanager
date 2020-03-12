@@ -8,20 +8,28 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0045_assign_unlock_grouppagepermission'),
-        ('budgetportal', '0047_learningindexpage_postindexpage'),
+        ("wagtailcore", "0045_assign_unlock_grouppagepermission"),
+        ("budgetportal", "0047_learningindexpage_postindexpage"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='GuideIndexPage',
+            name="GuideIndexPage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('intro', wagtail.core.fields.RichTextField(blank=True)),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.Page",
+                    ),
+                ),
+                ("intro", wagtail.core.fields.RichTextField(blank=True)),
             ],
-            options={
-                'abstract': False,
-            },
-            bases=('wagtailcore.page',),
+            options={"abstract": False,},
+            bases=("wagtailcore.page",),
         ),
     ]

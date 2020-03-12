@@ -3,7 +3,13 @@ from tempfile import NamedTemporaryFile
 
 import yaml
 
-from budgetportal.models.gov_structure import Department, FinancialYear, Government, Programme, Sphere
+from budgetportal.models.gov_structure import (
+    Department,
+    FinancialYear,
+    Government,
+    Programme,
+    Sphere,
+)
 from django.core.management import call_command
 from django.test import TestCase
 

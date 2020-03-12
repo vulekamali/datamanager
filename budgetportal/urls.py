@@ -145,17 +145,25 @@ urlpatterns = [
         lambda request: redirect("/learning-resources/videos/", permanent=True),
         name="learning-resources",
     ),
-    url(r"^learning-resources/videos/?$", cache_page(CACHE_MINUTES_SECS)(views.videos), name="videos"),
+    url(
+        r"^learning-resources/videos/?$",
+        cache_page(CACHE_MINUTES_SECS)(views.videos),
+        name="videos",
+    ),
     url(
         r"^terms-and-conditions/?$",
         cache_page(CACHE_DAYS_SECS)(views.terms_and_conditions),
         name="terms-and-conditions",
     ),
     url(
-        r"^learning-resources/resources/?$", cache_page(CACHE_DAYS_SECS)(views.resources), name="resources"
+        r"^learning-resources/resources/?$",
+        cache_page(CACHE_DAYS_SECS)(views.resources),
+        name="resources",
     ),
     url(
-        r"^learning-resources/glossary/?$", cache_page(CACHE_MINUTES_SECS)(views.glossary), name="glossary"
+        r"^learning-resources/glossary/?$",
+        cache_page(CACHE_MINUTES_SECS)(views.glossary),
+        name="glossary",
     ),
     url(r"^faq/?$", cache_page(CACHE_MINUTES_SECS)(views.faq), name="faq"),
     url(
@@ -258,11 +266,10 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     url("^", include(webflow_urls.urlpatterns)),
-    re_path(r'^cms/', include(wagtailadmin_urls)),
-    re_path(r'^documents/', include(wagtaildocs_urls)),
-    re_path(r'^', include(wagtail_urls)),
-
-]+ static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    re_path(r"^cms/", include(wagtailadmin_urls)),
+    re_path(r"^documents/", include(wagtaildocs_urls)),
+    re_path(r"^", include(wagtail_urls)),
+] + static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar

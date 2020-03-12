@@ -7,16 +7,26 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0045_assign_unlock_grouppagepermission'),
-        ('budgetportal', '0045_auto_20200311_1441'),
+        ("wagtailcore", "0045_assign_unlock_grouppagepermission"),
+        ("budgetportal", "0045_auto_20200311_1441"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='WagtailHomePage',
+            name="WagtailHomePage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.Page",
+                    ),
+                ),
             ],
-            bases=('wagtailcore.page',),
+            bases=("wagtailcore.page",),
         ),
     ]
