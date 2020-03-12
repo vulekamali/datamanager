@@ -1,6 +1,5 @@
 import mock
 from budgetportal.models import (
-    CKAN_DATASTORE_URL,
     MAPIT_POINT_API_URL,
     InfrastructureProjectPart,
 )
@@ -72,7 +71,7 @@ class ExpenditureTestCase(TestCase):
             expenditure_item,
             {
                 "year": self.project.financial_year,
-                "amount": self.project.amount,
+                "amount": self.project.amount_rands,
                 "budget_phase": self.project.budget_phase,
             },
         )
@@ -82,7 +81,7 @@ class ExpenditureTestCase(TestCase):
         self.assertIn(
             {
                 "year": self.project.financial_year,
-                "amount": self.project.amount,
+                "amount": self.project.amount_rands,
                 "budget_phase": self.project.budget_phase,
             },
             complete_expenditure,
@@ -103,7 +102,6 @@ class MockResponse:
 
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
-
     if args[0] == MAPIT_POINT_API_URL.format(25.312526, -27.515232):
         return MockResponse({4288: {"name": "Fake Province 1"}}, 200)
     elif args[0] == MAPIT_POINT_API_URL.format(24.312526, -26.515232):
@@ -143,19 +141,10 @@ class ProvinceTestCase(TestCase):
         self.assertEqual(province, "Eastern Cape")
 
 
-class MockDataset(mock.Mock):
-    def get_resource(self, format):
-        return {"id": "fake id"}
-
-    def get_url_path(self):
-        return "fake path"
-
-
 empty_ckan_response = MockResponse({"result": {"records": []}}, 200)
 
 
 class OverviewIntegrationTest(LiveServerTestCase):
-
     fixtures = ["test-infrastructure-pages-overview"]
 
     def setUp(self):
@@ -163,12 +152,8 @@ class OverviewIntegrationTest(LiveServerTestCase):
             project_name="Standard fake project"
         ).first()
 
-    @mock.patch(
-        "budgetportal.models.InfrastructureProjectPart.get_dataset",
-        return_value=MockDataset(),
-    )
     @mock.patch("requests.get", return_value=empty_ckan_response)
-    def test_success_empty_projects(self, mock_dataset, mock_get):
+    def test_success_empty_projects(self, mock_get):
         """ Test that it exists and that the correct years are linked. """
         InfrastructureProjectPart.objects.all().delete()
         c = Client()
@@ -176,7 +161,7 @@ class OverviewIntegrationTest(LiveServerTestCase):
         content = response.json()
 
         self.assertEqual(content["projects"], [])
-        self.assertEqual(content["dataset_url"], "fake path")
+        self.assertEqual(content["dataset_url"], "/datasets/infrastructure-projects")
         self.assertEqual(
             content["description"],
             "National department Infrastructure projects in South Africa",
@@ -185,12 +170,8 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(content["slug"], "infrastructure-projects")
         self.assertEqual(content["title"], "Infrastructure Projects - vulekamali")
 
-    @mock.patch(
-        "budgetportal.models.InfrastructureProjectPart.get_dataset",
-        return_value=MockDataset(),
-    )
     @mock.patch("requests.get", side_effect=mocked_requests_get)
-    def test_success_with_projects(self, mock_dataset, mock_get):
+    def test_success_with_projects(self, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
         response = c.get("/json/infrastructure-projects.json")
@@ -261,22 +242,8 @@ class DetailIntegrationTest(LiveServerTestCase):
     def setUp(self):
         self.project = InfrastructureProjectPart.objects.all().first()
 
-    @mock.patch(
-        "budgetportal.models.InfrastructureProjectPart.get_dataset", return_value=None
-    )
-    def test_missing_dataset_returns_404(self, mock_dataset):
-        c = Client()
-        response = c.get(
-            "/infrastructure-projects/{}".format(self.project.project_slug)
-        )
-        self.assertEqual(response.status_code, 404)
-
-    @mock.patch(
-        "budgetportal.models.InfrastructureProjectPart.get_dataset",
-        return_value=MockDataset(),
-    )
     @mock.patch("requests.get", side_effect=mocked_requests_get)
-    def test_success_with_projects(self, mock_dataset, mock_get):
+    def test_success_with_projects(self, mock_get):
         """ Test that it exists and that the correct years are linked. """
         c = Client()
         response = c.get(
@@ -284,7 +251,7 @@ class DetailIntegrationTest(LiveServerTestCase):
         )
         content = response.json()["projects"][0]
 
-        self.assertEqual(content["dataset_url"], "fake path")
+        self.assertEqual(content["dataset_url"], "/datasets/infrastructure-projects")
         self.assertEqual(content["description"], self.project.project_description)
         self.assertEqual(
             content["infrastructure_type"], self.project.infrastructure_type
@@ -309,4 +276,4 @@ class DetailIntegrationTest(LiveServerTestCase):
             "/infrastructure-projects/{}".format(self.project.project_slug),
         )
         self.assertEqual(content["stage"], self.project.current_project_stage)
-        self.assertEqual(content["total_budget"], self.project.total_project_cost)
+        self.assertEqual(content["total_budget"], self.project.project_value_rands)

@@ -1,22 +1,24 @@
 from budgetportal.import_export_admin import (
     CustomGovernmentWidget,
-    CustomIsVotePrimaryWidget,
+    CustomBooleanWidget,
 )
-from budgetportal.models import Department, FinancialYear, Government, Sphere
+from budgetportal.models import FinancialYear, Government, Sphere
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 
 class CustomIsVotePrimaryWidgetTest(TestCase):
     def setUp(self):
-        self.widget = CustomIsVotePrimaryWidget()
+        self.widget = CustomBooleanWidget()
 
     def test_clean(self):
         self.assertTrue(self.widget.clean(""))
         self.assertTrue(self.widget.clean(None))
         self.assertTrue(self.widget.clean("true"))
         self.assertTrue(self.widget.clean("True"))
+        self.assertTrue(self.widget.clean("=TRUE()"))
         self.assertFalse(self.widget.clean("false"))
+        self.assertFalse(self.widget.clean("=FALSE()"))
         self.assertFalse(self.widget.clean("False"))
         self.assertFalse(self.widget.clean("0"))
         self.assertFalse(self.widget.clean("1"))

@@ -1,35 +1,29 @@
-jobs:
-  include:
+language: python
+python:
+  - "3.6"
 
-    - stage: black
-      language: python
-      python:
-        - "3.6"
-      install:
-        - pip install black==19.10b0
-      script:
-        - "black --check --diff budgetportal manage.py discourse"
+node_js:
 
-    - stage: test
-      node_js:
-      services:
-        - docker
-      install:
-        - nvm install
-        - nvm use
-        - npm install -g yarn@1.21.1
-        - yarn
-        - yarn build
-      script:
-        - docker-compose run --rm test python manage.py collectstatic --no-input
-        - docker-compose run --rm test
-      after_script:
-        # Log output in case issues occurred where this can help us debug quicly
-        - docker-compose logs db solr minio
+services:
+  - docker
 
-        # Run codecov passing appropriate codecov.io CI environment variables to container
-        - "docker-compose run --rm `bash <(curl -s https://codecov.io/env)` test codecov"
+install:
+  - pip install black==19.10b0
+  - nvm install
+  - nvm use
+  - npm install -g yarn@1.21.1
+  - yarn
+  - yarn build
 
-stages:
-  - black
-  - test
+script:
+  - docker-compose run --rm test python manage.py collectstatic --no-input
+  - docker-compose run --rm test
+
+after_script:
+  # Log output in case issues occurred where this can help us debug quicly
+  - docker-compose logs db solr minio
+
+  # Run codecov passing appropriate codecov.io CI environment variables to container
+  - "docker-compose run --rm `bash <(curl -s https://codecov.io/env)` test codecov"
+
+  - "black --check --diff budgetportal manage.py discourse"

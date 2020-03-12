@@ -477,7 +477,8 @@ def infrastructure_projects_overview(request):
     projects = []
     for project in infrastructure_projects:
         departments = Department.objects.filter(
-            slug=slugify(project.department), government__sphere__slug="national"
+            slug=slugify(project.government_institution),
+            government__sphere__slug="national",
         )
         department_url = None
         if departments:
@@ -492,21 +493,31 @@ def infrastructure_projects_overview(request):
                 "stage": project.current_project_stage,
                 "description": project.project_description,
                 "provinces": project.provinces.split(","),
-                "total_budget": project.total_project_cost,
+                "total_budget": project.project_value_rands,
                 "detail": project.get_url_path(),
                 "slug": project.get_url_path(),
                 "page_title": "{} - vulekamali".format(project.project_name),
-                "department": {"name": project.department, "url": department_url},
+                "government_institution": {
+                    "name": project.government_institution,
+                    "url": department_url,
+                },
                 "nature_of_investment": project.nature_of_investment,
                 "infrastructure_type": project.infrastructure_type,
                 "expenditure": sorted(
                     project.build_complete_expenditure(), key=lambda e: e["year"]
                 ),
+                "administration_type": project.administration_type,
+                "partnership_type": project.partnership_type,
+                "date_of_close": project.date_of_close,
+                "duration": project.duration,
+                "financing_structure": project.financing_structure,
+                "project_value_rand_million": project.project_value_rand_million,
+                "form_of_payment": project.form_of_payment,
             }
         )
     projects = sorted(projects, key=lambda p: p["name"])
     return {
-        "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
+        "dataset_url": reverse("dataset-category", args=("infrastructure-projects",)),
         "projects": projects,
         "description": "National department Infrastructure projects in South Africa",
         "slug": "infrastructure-projects",
@@ -539,16 +550,15 @@ def infrastructure_project_detail_data(project_slug):
     ).first()
     if not project:
         return HttpResponse(status=404)
-    dataset = project.get_dataset()
-    if not dataset:
-        return HttpResponse(status=404)
 
     departments = Department.objects.filter(
-        slug=slugify(project.department), government__sphere__slug="national"
+        slug=slugify(project.government_institution),
+        government__sphere__slug="national",
     )
     department_url = None
     if departments:
         department_url = departments[0].get_latest_department_instance().get_url_path()
+    dataset_url = reverse("dataset-category", args=("infrastructure-projects",))
 
     project_dict = {
         "name": project.project_name,
@@ -557,24 +567,30 @@ def infrastructure_project_detail_data(project_slug):
         "stage": project.current_project_stage,
         "description": project.project_description,
         "provinces": project.provinces.split(","),
-        "total_budget": project.total_project_cost,
+        "total_budget": project.project_value_rands,
         "detail": project.get_url_path(),
-        "dataset_url": dataset.get_url_path(),
+        "dataset_url": dataset_url,
         "slug": project.get_url_path(),
         "page_title": "{} - vulekamali".format(project.project_name),
-        "department": {
-            "name": project.department,
+        "government_institution": {
+            "name": project.government_institution,
             "url": department_url,
-            "budget_document": project.get_budget_document_url(),
         },
         "nature_of_investment": project.nature_of_investment,
         "infrastructure_type": project.infrastructure_type,
         "expenditure": sorted(
             project.build_complete_expenditure(), key=lambda e: e["year"]
         ),
+        "administration_type": project.administration_type,
+        "partnership_type": project.partnership_type,
+        "date_of_close": project.date_of_close,
+        "duration": project.duration,
+        "financing_structure": project.financing_structure,
+        "project_value_rand_million": project.project_value_rand_million,
+        "form_of_payment": project.form_of_payment,
     }
     return {
-        "dataset_url": InfrastructureProjectPart.get_dataset().get_url_path(),
+        "dataset_url": dataset_url,
         "projects": [project_dict],
         "description": project.project_description
         or "Infrastructure projects in South Africa",

@@ -2,7 +2,6 @@ from adminplus.sites import AdminSitePlus
 from discourse.views import sso
 from django.conf import settings
 from django.conf.urls import include, url
-from django.urls import path, include
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.core.exceptions import PermissionDenied

@@ -42,7 +42,7 @@ class GovtFunctionAdmin(admin.ModelAdmin):
 
 class InfrastructureProjectAdmin(ImportMixin, admin.ModelAdmin):
     resource_class = InfrastructureProjectResource
-    formats = [CSV]
+    formats = [XLSX, CSV]
 
 
 class DepartmentAdmin(ImportMixin, admin.ModelAdmin):

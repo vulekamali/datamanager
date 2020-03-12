@@ -6,7 +6,7 @@ import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { darken } from 'polished';
 import {
-  LineChart, 
+  LineChart,
   Line,
   XAxis,
   YAxis,
@@ -22,19 +22,16 @@ const xAxisStyles = {
   fontFamily: 'Lato',
   fontWeight: 700,
   fill: 'black',
-}
-
+};
 
 const yAxisStyles = {
   fontSize: '12px',
   fontFamily: 'Lato',
   fontWeight: 700,
   fill: 'black',
-}
-
+};
 
 const axisTrimValue = value => `R${trimValues(value, true)}`;
-
 
 const StyledTooltip = styled(Paper)`
   && {
@@ -45,55 +42,39 @@ const StyledTooltip = styled(Paper)`
     font-family: Lato;
     padding: 10px;
   }
-`
+`;
 
 const Content = ({ payload = [] }) => {
   const filtered = payload.filter(({ name }) => name !== 'Connection');
 
-  const { name, value } = filtered[0] || {}; 
+  const { name, value } = filtered[0] || {};
 
   return (
     <Fragment>
       <StyledTooltip>
         {name}: R{trimValues(value, true)}
-      </StyledTooltip> 
+      </StyledTooltip>
     </Fragment>
-  )
-}
+  );
+};
 
 const Dot = ({ cx, cy }) => {
-  if (!cx || !cy ) {
+  if (!cx || !cy) {
     return null;
   }
 
   const isMobile = window.innerWidth < 500;
 
-  return (
-    <circle 
-      {...{ cx, cy }}
-      fill={isMobile ? 'none' : '#76B649'}
-      stroke="none"
-      r="4"
-    />
-  )
-}
+  return <circle {...{ cx, cy }} fill={isMobile ? 'none' : '#76B649'} stroke="none" r="4" />;
+};
 
 const ActiveDot = ({ cx, cy }) => {
-  if (!cx || !cy ) {
+  if (!cx || !cy) {
     return null;
   }
 
-  return (
-    <circle 
-      {...{ cx, cy }}
-      fill="#76B649"
-      stroke="none"
-      r="7"
-    />
-  )
-}
-
-
+  return <circle {...{ cx, cy }} fill="#76B649" stroke="none" r="7" />;
+};
 
 const GreyButton = styled(Button)`
   &&& {
@@ -120,6 +101,22 @@ const GreyButton = styled(Button)`
 `;
 
 const InfraChart = ({ data }) => {
+  const renderActual = data
+    .map(item => {
+      return item.Actual !== null;
+    })
+    .reduce((a, b) => a || b);
+  const renderConnection = data
+    .map(item => {
+      return item.Connection !== null;
+    })
+    .reduce((a, b) => a || b);
+  const renderProjected = data
+    .map(item => {
+      return item.Projected !== null;
+    })
+    .reduce((a, b) => a || b);
+
   return (
     <Fragment>
       {/* {buttons} */}
@@ -129,7 +126,10 @@ const InfraChart = ({ data }) => {
           height={300}
           data={data}
           margin={{
-            top: 30, right: 60, left: 30, bottom: 30,
+            top: 30,
+            right: 60,
+            left: 30,
+            bottom: 30,
           }}
         >
           <CartesianGrid stroke="#E6E6E6" />
@@ -140,7 +140,7 @@ const InfraChart = ({ data }) => {
             style={xAxisStyles}
             axisLine={{
               stroke: 'black',
-              strokeWidth: 1
+              strokeWidth: 1,
             }}
           />
           <YAxis
@@ -153,33 +153,39 @@ const InfraChart = ({ data }) => {
               strokeWidth: 1,
             }}
           />
-          <Line 
-            dataKey="Actual"
-            stroke="#76B649"
-            strokeWidth={3}
-            dot={<Dot />}
-            activeDot={<ActiveDot />}
-            isAnimationActive={false}
-          />
-          <Line 
-            dataKey="Connection"
-            stroke="#76B649"
-            strokeWidth={3}
-            strokeDasharray="3 4"
-            dot={false}
-            activeDot={false}
-            isAnimationActive={false}
-          />
-          <Line
-            dataKey="Projected"
-            stroke="#76B649"
-            strokeWidth={3}
-            strokeDasharray="3 4"
-            dot={<Dot />}
-            activeDot={<ActiveDot />}
-            isAnimationActive={false}
+          {renderActual && (
+            <Line
+              dataKey="Actual"
+              stroke="#76B649"
+              strokeWidth={3}
+              dot={<Dot />}
+              activeDot={<ActiveDot />}
+              isAnimationActive={false}
             />
-          <Tooltip 
+          )}
+          {renderConnection && (
+            <Line
+              dataKey="Connection"
+              stroke="#76B649"
+              strokeWidth={3}
+              strokeDasharray="3 4"
+              dot={false}
+              activeDot={false}
+              isAnimationActive={false}
+            />
+          )}
+          {renderProjected && (
+            <Line
+              dataKey="Projected"
+              stroke="#76B649"
+              strokeWidth={3}
+              strokeDasharray="3 4"
+              dot={<Dot />}
+              activeDot={<ActiveDot />}
+              isAnimationActive={false}
+            />
+          )}
+          <Tooltip
             active={false}
             content={<Content />}
             isAnimationActive={false}
@@ -191,8 +197,7 @@ const InfraChart = ({ data }) => {
         </LineChart>
       </ResponsiveContainer>
     </Fragment>
-  )
-}
-
+  );
+};
 
 export default InfraChart;

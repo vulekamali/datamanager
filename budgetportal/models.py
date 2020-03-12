@@ -1582,8 +1582,8 @@ class Programme(models.Model):
 
 
 class InfrastructureProjectPart(models.Model):
-    sphere = models.CharField(max_length=255)
-    department = models.CharField(max_length=255)
+    administration_type = models.CharField(max_length=255)
+    government_institution = models.CharField(max_length=255)
     sector = models.CharField(max_length=255)
     project_name = models.CharField(max_length=255)
     project_description = models.TextField()
@@ -1595,11 +1595,19 @@ class InfrastructureProjectPart(models.Model):
     featured = models.BooleanField()
     budget_phase = models.CharField(max_length=255)
     project_slug = models.CharField(max_length=255)
-    amount = models.BigIntegerField(default=0)
+    amount_rands = models.BigIntegerField(blank=True, null=True, default=None)
     financial_year = models.CharField(max_length=4)
-    total_project_cost = models.BigIntegerField(default=0)
+    project_value_rands = models.BigIntegerField(default=0)
     provinces = models.CharField(max_length=510, default="")
     gps_code = models.CharField(max_length=255, default="")
+
+    # PPP fields
+    partnership_type = models.CharField(max_length=255, null=True, blank=True)
+    date_of_close = models.CharField(max_length=255, null=True, blank=True)
+    duration = models.CharField(max_length=255, null=True, blank=True)
+    financing_structure = models.CharField(max_length=255, null=True, blank=True)
+    project_value_rand_million = models.CharField(max_length=255, null=True, blank=True)
+    form_of_payment = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         verbose_name = "National infrastructure project part"
@@ -1608,29 +1616,6 @@ class InfrastructureProjectPart(models.Model):
         return "{} ({} {})".format(
             self.project_slug, self.budget_phase, self.financial_year
         )
-
-    def get_budget_document_url(self, document_format="PDF"):
-        """
-        Returns budget-vote-document URL, for given format,
-        if the latest department instance matches the project year
-        """
-        departments = Department.objects.filter(
-            slug=slugify(self.department), government__sphere__slug="national"
-        )
-        if departments:
-            latest_dept = departments[0].get_latest_department_instance()
-            project_year = self.get_dataset().package["financial_year"][0]
-            if latest_dept.get_financial_year().slug == project_year:
-                budget_dataset = latest_dept.get_dataset(
-                    group_name="budget-vote-documents"
-                )
-                if budget_dataset:
-                    document_resource = budget_dataset.get_resource(
-                        format=document_format
-                    )
-                    if document_resource:
-                        return document_resource["url"]
-        return None
 
     def get_url_path(self):
         return "/infrastructure-projects/{}".format(self.project_slug)
@@ -1645,7 +1630,7 @@ class InfrastructureProjectPart(models.Model):
         )
         projected_expenditure = 0
         for project in projected_records_for_project:
-            projected_expenditure += float(project.amount)
+            projected_expenditure += float(project.amount_rands or 0.0)
         return projected_expenditure
 
     @staticmethod
@@ -1741,7 +1726,7 @@ class InfrastructureProjectPart(models.Model):
     def _build_expenditure_item(project):
         return {
             "year": project.financial_year,
-            "amount": project.amount,
+            "amount": project.amount_rands,
             "budget_phase": project.budget_phase,
         }
 
@@ -1753,27 +1738,6 @@ class InfrastructureProjectPart(models.Model):
         for project in projects:
             complete_expenditure.append(self._build_expenditure_item(project))
         return complete_expenditure
-
-    @classmethod
-    def get_dataset(cls):
-        """ Return the first dataset in the Infrastructure Projects group. """
-        query = {
-            "q": "",
-            "fq": (
-                '+organization:"national-treasury"'
-                '+vocab_spheres:"national"'
-                '+groups:"infrastructure-projects"'
-            ),
-            "rows": 1,
-        }
-        response = ckan.action.package_search(**query)
-        logger.info(
-            "query %s\nreturned %d results", pformat(query), len(response["results"])
-        )
-        if response["results"]:
-            return Dataset.from_package(response["results"][0])
-        else:
-            return None
 
 
 prov_keys = prov_abbrev.keys()
