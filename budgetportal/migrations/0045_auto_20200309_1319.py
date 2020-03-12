@@ -8,13 +8,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0044_merge_20200306_0758'),
+        ("budgetportal", "0044_merge_20200306_0758"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='infrastructureprojectpart',
-            name='amount_rands',
-            field=models.BigIntegerField(blank=True, null=True,default=None),
+            model_name="infrastructureprojectpart",
+            name="amount_rands",
+            field=models.BigIntegerField(blank=True, null=True, default=None),
         ),
     ]

@@ -8,38 +8,38 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0045_auto_20200309_1319'),
+        ("budgetportal", "0045_auto_20200309_1319"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='infrastructureprojectpart',
-            name='date_of_close',
+            model_name="infrastructureprojectpart",
+            name="date_of_close",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='infrastructureprojectpart',
-            name='duration',
+            model_name="infrastructureprojectpart",
+            name="duration",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='infrastructureprojectpart',
-            name='financing_structure',
+            model_name="infrastructureprojectpart",
+            name="financing_structure",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='infrastructureprojectpart',
-            name='form_of_payment',
+            model_name="infrastructureprojectpart",
+            name="form_of_payment",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='infrastructureprojectpart',
-            name='partnership_type',
+            model_name="infrastructureprojectpart",
+            name="partnership_type",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='infrastructureprojectpart',
-            name='project_value_rand_million',
+            model_name="infrastructureprojectpart",
+            name="project_value_rand_million",
             field=models.CharField(blank=True, max_length=255, null=True),
-        )
+        ),
     ]

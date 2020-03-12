@@ -477,7 +477,8 @@ def infrastructure_projects_overview(request):
     projects = []
     for project in infrastructure_projects:
         departments = Department.objects.filter(
-            slug=slugify(project.government_institution), government__sphere__slug="national"
+            slug=slugify(project.government_institution),
+            government__sphere__slug="national",
         )
         department_url = None
         if departments:
@@ -496,7 +497,10 @@ def infrastructure_projects_overview(request):
                 "detail": project.get_url_path(),
                 "slug": project.get_url_path(),
                 "page_title": "{} - vulekamali".format(project.project_name),
-                "government_institution": {"name": project.government_institution, "url": department_url},
+                "government_institution": {
+                    "name": project.government_institution,
+                    "url": department_url,
+                },
                 "nature_of_investment": project.nature_of_investment,
                 "infrastructure_type": project.infrastructure_type,
                 "expenditure": sorted(
@@ -551,7 +555,8 @@ def infrastructure_project_detail_data(project_slug):
         return HttpResponse(status=404)
 
     departments = Department.objects.filter(
-        slug=slugify(project.government_institution), government__sphere__slug="national"
+        slug=slugify(project.government_institution),
+        government__sphere__slug="national",
     )
     department_url = None
     if departments:
