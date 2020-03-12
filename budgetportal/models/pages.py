@@ -7,19 +7,21 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.core import blocks as wagtail_blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
+from wagtail.contrib.routable_page.models import RoutablePage, route
+
 
 from .gov_structure import FinancialYear
 
 
-class WagtailHomePage(Page):
+class WagtailHomePage(RoutablePage):
     max_count = 1
 
 
-class LearningIndexPage(Page):
+class LearningIndexPage(RoutablePage):
     max_count = 1
 
 
-class PostIndexPage(Page):
+class PostIndexPage(RoutablePage):
     max_count = 1
     parent_page_types = []
     intro = RichTextField(blank=True)
@@ -28,8 +30,13 @@ class PostIndexPage(Page):
         FieldPanel('intro', classname="full")
     ]
 
+    @route(r'^posts/')
+    def main(self, request):
+        from django.shortcuts import render
+        return render(request, self.get_template(request), self.get_context(request))
 
-class PostPage(Page):
+
+class PostPage(RoutablePage):
     parent_page_types = ['budgetportal.PostIndexPage']
     body = StreamField([
         ('section', SectionBlock()),
@@ -50,7 +57,7 @@ class PostPage(Page):
     ]
 
 
-class GuideIndexPage(Page):
+class GuideIndexPage(RoutablePage):
     max_count = 1
     parent_page_types = ['budgetportal.LearningIndexPage']
     intro = RichTextField(blank=True)
@@ -68,7 +75,7 @@ class GuideIndexPage(Page):
     #     return context
 
 
-class GuidePage(Page):
+class GuidePage(RoutablePage):
     parent_page_types = ["budgetportal.GuideIndexPage"]
     body = StreamField(
         [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()), ]

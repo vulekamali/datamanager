@@ -54,10 +54,6 @@ department_urlpatterns = [
 ]
 
 urlpatterns = [
-    re_path(r'^cms/', include(wagtailadmin_urls)),
-    re_path(r'^documents/', include(wagtaildocs_urls)),
-    re_path(r'^pages/', include(wagtail_urls)),
-
     url("sentry-debug/", trigger_error),
     url(
         r"^(?P<financial_year_id>\d{4}-\d{2})" "/focus/(?P<focus_slug>[\w-]+)/?$",
@@ -262,6 +258,10 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     url("^", include(webflow_urls.urlpatterns)),
+    re_path(r'^cms/', include(wagtailadmin_urls)),
+    re_path(r'^documents/', include(wagtaildocs_urls)),
+    re_path(r'^', include(wagtail_urls)),
+
 ]+ static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG_TOOLBAR:
