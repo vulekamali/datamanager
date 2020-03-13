@@ -3,7 +3,8 @@ from budgetportal.models import (
     MAPIT_POINT_API_URL,
     InfrastructureProjectPart,
 )
-from django.test import Client, LiveServerTestCase, TestCase
+from budgetportal.tests.helpers import WagtailHackLiveServerTestCase
+from django.test import Client, TestCase
 
 
 class ProjectedExpenditureTestCase(TestCase):
@@ -144,7 +145,7 @@ class ProvinceTestCase(TestCase):
 empty_ckan_response = MockResponse({"result": {"records": []}}, 200)
 
 
-class OverviewIntegrationTest(LiveServerTestCase):
+class OverviewIntegrationTest(WagtailHackLiveServerTestCase):
     fixtures = ["test-infrastructure-pages-overview"]
 
     def setUp(self):
@@ -235,7 +236,7 @@ class OverviewIntegrationTest(LiveServerTestCase):
         self.assertEqual(len(second_test_project["provinces"]), 2)
 
 
-class DetailIntegrationTest(LiveServerTestCase):
+class DetailIntegrationTest(WagtailHackLiveServerTestCase):
 
     fixtures = ["test-infrastructure-pages-detail"]
 
