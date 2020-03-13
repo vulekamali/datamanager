@@ -62,6 +62,19 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.users",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
+    "wagtail.admin",
+    "wagtail.core",
+    "modelcluster",
+    "taggit",
     "allauth_facebook",
     # before auth for LiveServerTestCase https://code.djangoproject.com/ticket/10827
     "django.contrib.contenttypes",
@@ -106,6 +119,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
+    "wagtail.core.middleware.SiteMiddleware",
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 if DEBUG_TOOLBAR:
@@ -275,6 +290,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # the URL for assets
 STATIC_URL = "/static/"
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
@@ -389,3 +407,5 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 20,
 }
+
+WAGTAIL_SITE_NAME = "My Wagtail Site"
