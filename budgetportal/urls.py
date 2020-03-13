@@ -141,17 +141,25 @@ urlpatterns = [
         lambda request: redirect("/learning-resources/videos/", permanent=True),
         name="learning-resources",
     ),
-    url(r"^learning-resources/videos/?$", cache_page(CACHE_MINUTES_SECS)(views.videos), name="videos"),
+    url(
+        r"^learning-resources/videos/?$",
+        cache_page(CACHE_MINUTES_SECS)(views.videos),
+        name="videos",
+    ),
     url(
         r"^terms-and-conditions/?$",
         cache_page(CACHE_DAYS_SECS)(views.terms_and_conditions),
         name="terms-and-conditions",
     ),
     url(
-        r"^learning-resources/resources/?$", cache_page(CACHE_DAYS_SECS)(views.resources), name="resources"
+        r"^learning-resources/resources/?$",
+        cache_page(CACHE_DAYS_SECS)(views.resources),
+        name="resources",
     ),
     url(
-        r"^learning-resources/glossary/?$", cache_page(CACHE_MINUTES_SECS)(views.glossary), name="glossary"
+        r"^learning-resources/glossary/?$",
+        cache_page(CACHE_MINUTES_SECS)(views.glossary),
+        name="glossary",
     ),
     url(r"^faq/?$", cache_page(CACHE_MINUTES_SECS)(views.faq), name="faq"),
     url(
