@@ -76,7 +76,11 @@ class BaseSeleniumTestCase(LiveServerTestCase):
             )
 
 
-class CustomLiveServerTestCase(LiveServerTestCase):
+class WagtailHackLiveServerTestCase(LiveServerTestCase):
+    """
+    We need to overload the LiveServerTestCase class to resolve:
+    https://github.com/wagtail/wagtail/issues/1824
+    """
     def _fixture_teardown(self):
         # Allow TRUNCATE ... CASCADE and don't emit the post_migrate signal
         # when flushing only a subset of the apps

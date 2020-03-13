@@ -821,7 +821,8 @@ def resources(request):
 
 
 def guides(request, slug):
-    slug = "index"
+    if slug not in guide_data:
+        return HttpResponse(status=404)
 
     context = guide_data[slug]
     context.update(
