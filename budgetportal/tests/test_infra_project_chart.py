@@ -3,21 +3,23 @@ import json
 from budgetportal.json_encoder import JSONEncoder
 from budgetportal.models import (
     FinancialYear,
+    Sphere,
     IRMSnapshot,
     InfraProject,
     InfraProjectSnapshot,
     Quarter,
 )
-from budgetportal.prov_infra_project.charts import time_series_data
+from budgetportal.infra_projects.charts import time_series_data
 from django.test import TestCase
 
 
 class DateQuarterMatchTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2019-20")
+        fin_year = FinancialYear(slug="2019-20")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q4 = Quarter(number=4)
-        irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q4)
+        irm_snapshot = IRMSnapshot(sphere=self.sphere, quarter=q4)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot,
             project=self.project,
@@ -57,9 +59,10 @@ class DateQuarterMatchTestCase(TestCase):
 class TotalEstimatedProjectCostTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q2 = Quarter(number=2)
-        irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot,
             project=self.project,
@@ -88,9 +91,10 @@ class TotalEstimatedProjectCostTestCase(TestCase):
 class StatusTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q2 = Quarter(number=2)
-        irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot, project=self.project, status="Tender"
         )
@@ -117,9 +121,10 @@ class StatusTestCase(TestCase):
 class Q1UpdateTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q1 = Quarter(number=1)
-        irm_snapshot_1 = IRMSnapshot(financial_year=self.fin_year, quarter=q1)
+        irm_snapshot_1 = IRMSnapshot(sphere=self.sphere, quarter=q1)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_1,
             project=self.project,
@@ -139,7 +144,7 @@ class Q1UpdateTestCase(TestCase):
 
         # Create Q2 snapshot
         q2 = Quarter(number=2)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot_2 = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
@@ -162,9 +167,10 @@ class Q1UpdateTestCase(TestCase):
 class Q1Q2UpdateTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q1 = Quarter(number=1)
-        irm_snapshot_1 = IRMSnapshot(financial_year=self.fin_year, quarter=q1)
+        irm_snapshot_1 = IRMSnapshot(sphere=self.sphere, quarter=q1)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_1,
             project=self.project,
@@ -172,7 +178,7 @@ class Q1Q2UpdateTestCase(TestCase):
             expenditure_from_previous_years_total=200,
         )
         q2 = Quarter(number=2)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot_2 = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
@@ -199,7 +205,7 @@ class Q1Q2UpdateTestCase(TestCase):
 
         # Create Q3 snapshot
         q3 = Quarter(number=3)
-        irm_snapshot_3 = IRMSnapshot(financial_year=self.fin_year, quarter=q3)
+        irm_snapshot_3 = IRMSnapshot(sphere=self.sphere, quarter=q3)
         self.project_snapshot_3 = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_3,
             project=self.project,
@@ -227,9 +233,10 @@ class Q1Q2UpdateTestCase(TestCase):
 class NullQ2SubsequentNullSpendTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q3 = Quarter(number=3)
-        irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q3)
+        irm_snapshot = IRMSnapshot(sphere=self.sphere, quarter=q3)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot,
             project=self.project,
@@ -254,9 +261,10 @@ class NullQ2SubsequentNullSpendTestCase(TestCase):
 class LatestValueTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q1 = Quarter(number=1)
-        irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q1)
+        irm_snapshot = IRMSnapshot(sphere=self.sphere, quarter=q1)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot,
             project=self.project,
@@ -275,7 +283,7 @@ class LatestValueTestCase(TestCase):
 
         # Create Q2 Snapshot
         q2 = Quarter(number=2)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot_2 = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
@@ -298,9 +306,10 @@ class LatestValueTestCase(TestCase):
 class NullExpenditureFromPreviousFinYearsTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q2 = Quarter(number=2)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
@@ -324,9 +333,10 @@ class NullExpenditureFromPreviousFinYearsTestCase(TestCase):
 class EmitMissingQuartersTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q2 = Quarter(number=2)
-        irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot, project=self.project
         )
@@ -350,15 +360,17 @@ class EmitMissingQuartersTestCase(TestCase):
 class EmitMissingQuartersSecondTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year_1 = FinancialYear(slug="2018-19")
+        fin_year_1 = FinancialYear(slug="2018-19")
+        self.sphere_1 = Sphere(financial_year=fin_year_1, name="Provincial")
         q2 = Quarter(number=2)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year_1, quarter=q2)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere_1, quarter=q2)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2, project=self.project
         )
-        self.fin_year_2 = FinancialYear(slug="2019-20")
+        fin_year_2 = FinancialYear(slug="2019-20")
+        self.sphere_2 = Sphere(financial_year=fin_year_2, name="Provincial")
         q4 = Quarter(number=4)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year_2, quarter=q4)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere_2, quarter=q4)
         self.project_snapshot_2 = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2, project=self.project
         )
@@ -393,9 +405,10 @@ class EmitMissingQuartersSecondTestCase(TestCase):
 class ComputeTotalSpentIn2YearsTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year_1 = FinancialYear(slug="2018-19")
+        fin_year_1 = FinancialYear(slug="2018-19")
+        self.sphere_1 = Sphere(financial_year=fin_year_1, name="Provincial")
         q4 = Quarter(number=4)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year_1, quarter=q4)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere_1, quarter=q4)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
@@ -405,9 +418,10 @@ class ComputeTotalSpentIn2YearsTestCase(TestCase):
             actual_expenditure_q4=4,
             expenditure_from_previous_years_total=100,
         )
-        self.fin_year_2 = FinancialYear(slug="2019-20")
+        fin_year_2 = FinancialYear(slug="2019-20")
+        self.sphere_2 = Sphere(financial_year=fin_year_2, name="Provincial")
         q1 = Quarter(number=1)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year_2, quarter=q1)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere_2, quarter=q1)
         self.project_snapshot_2 = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
@@ -432,9 +446,10 @@ class ComputeTotalSpentIn2YearsTestCase(TestCase):
 class FinancialYearLabelTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q2 = Quarter(number=2)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2, project=self.project
         )
@@ -463,9 +478,10 @@ class FinancialYearLabelTestCase(TestCase):
 class QuarterLabelTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q4 = Quarter(number=4)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year, quarter=q4)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere, quarter=q4)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2, project=self.project
         )
@@ -486,9 +502,10 @@ class QuarterLabelTestCase(TestCase):
 class EventsTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q2 = Quarter(number=2)
-        irm_snapshot = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot,
             project=self.project,
@@ -519,7 +536,7 @@ class EventsTestCase(TestCase):
     def test_events_when_latest_snapshot_has_empty_dates(self):
         """Test that only not null values emitted to events"""
         q3 = Quarter(number=3)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year, quarter=q3)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere, quarter=q3)
         self.project_snapshot_2 = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2, project=self.project, start_date="2029-09-30"
         )
@@ -534,9 +551,10 @@ class EventsTestCase(TestCase):
 class SerializeChartDataResultTestCase(TestCase):
     def setUp(self):
         self.project = InfraProject(IRM_project_id=1)
-        self.fin_year = FinancialYear(slug="2030-31")
+        fin_year = FinancialYear(slug="2030-31")
+        self.sphere = Sphere(financial_year=fin_year, name="Provincial")
         q2 = Quarter(number=2)
-        irm_snapshot_2 = IRMSnapshot(financial_year=self.fin_year, quarter=q2)
+        irm_snapshot_2 = IRMSnapshot(sphere=self.sphere, quarter=q2)
         self.project_snapshot = InfraProjectSnapshot(
             irm_snapshot=irm_snapshot_2, project=self.project, status="Tender"
         )

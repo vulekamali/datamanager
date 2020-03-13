@@ -23,7 +23,7 @@ from drf_haystack.viewsets import HaystackViewSet
 from rest_framework.decorators import action
 from rest_framework.generics import RetrieveAPIView
 
-from ..prov_infra_project.charts import time_series_data
+from budgetportal.infra_projects.charts import time_series_data
 from .serializers import (
     InfraProjectCSVSerializer,
     ProvInfaProjectCSVSnapshotSerializer,
