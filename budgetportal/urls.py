@@ -1,8 +1,8 @@
 from adminplus.sites import AdminSitePlus
 from discourse.views import sso
 from django.conf import settings
-from django.conf.urls import include, url
-from django.urls import path, include
+from django.conf.urls import include, url, static
+from django.urls import path, include, re_path
 from django.shortcuts import redirect
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
@@ -10,6 +10,10 @@ from django.core.exceptions import PermissionDenied
 from django.views.decorators.cache import cache_page
 from .sitemaps import sitemaps
 from .webflow import urls as webflow_urls
+
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
 
 from . import bulk_upload, views
 
@@ -253,8 +257,12 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+    re_path(r'^cms/', include(wagtailadmin_urls)),
+    re_path(r'^documents/', include(wagtaildocs_urls)),
+    re_path(r'^', include(wagtail_urls)),
+
     url("^", include(webflow_urls.urlpatterns)),
-]
+]+ static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar
