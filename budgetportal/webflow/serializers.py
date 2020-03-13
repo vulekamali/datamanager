@@ -1,18 +1,18 @@
-from budgetportal.models import ProvInfraProjectSnapshot
+from budgetportal.models import InfraProjectSnapshot
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
-from ..search_indexes import ProvInfraProjectIndex
+from ..search_indexes import InfraProjectIndex
 from rest_framework import serializers
 
 
-class ProvInfraProjectSnapshotSerializer(ModelSerializer):
+class InfraProjectSnapshotSerializer(ModelSerializer):
     url_path = SerializerMethodField()
 
     def get_url_path(self, project):
         return project.get_absolute_url()
 
     class Meta:
-        model = ProvInfraProjectSnapshot
+        model = InfraProjectSnapshot
         fields = (
             "project_number",
             "name",
@@ -61,7 +61,7 @@ class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
     irm_snapshot = serializers.SerializerMethodField()
 
     class Meta:
-        model = ProvInfraProjectSnapshot
+        model = InfraProjectSnapshot
         exclude = [
             "created_at",
             "updated_at",
@@ -75,9 +75,9 @@ class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
         return str(obj.irm_snapshot) if obj.irm_snapshot else ""
 
 
-class ProvInfraProjectCSVSerializer(HaystackSerializer):
+class InfraProjectCSVSerializer(HaystackSerializer):
     class Meta:
-        index_classes = [ProvInfraProjectIndex]
+        index_classes = [InfraProjectIndex]
         fields = [
             "name",
             "irm_snapshot",
@@ -124,11 +124,11 @@ class ProvInfraProjectCSVSerializer(HaystackSerializer):
         ]
 
 
-class ProvInfraProjectSerializer(HaystackSerializer):
+class InfraProjectSerializer(HaystackSerializer):
     class Meta:
         # The `index_classes` attribute is a list of which search indexes
         # we want to include in the search.
-        index_classes = [ProvInfraProjectIndex]
+        index_classes = [InfraProjectIndex]
 
         # The `fields` contains all the fields we want to include.
         # NOTE: Make sure you don't confuse these with model attributes. These
@@ -150,7 +150,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
     def __init__(self, *args, **kwargs):
         # https://www.django-rest-framework.org/api-guide/serializers/#example
         # Instantiate the superclass normally
-        super(ProvInfraProjectSerializer, self).__init__(*args, **kwargs)
+        super(InfraProjectSerializer, self).__init__(*args, **kwargs)
 
         fields = self.context["request"].query_params.get("fields")
         if fields:
@@ -162,7 +162,7 @@ class ProvInfraProjectSerializer(HaystackSerializer):
                 self.fields.pop(field_name)
 
 
-class ProvInfraProjectFacetSerializer(HaystackFacetSerializer):
+class InfraProjectFacetSerializer(HaystackFacetSerializer):
 
     serialize_objects = True  # Setting this to True will serialize the
     # queryset into an `objects` list. This
@@ -170,7 +170,7 @@ class ProvInfraProjectFacetSerializer(HaystackFacetSerializer):
     # results. Defaults to False.
 
     class Meta:
-        index_classes = [ProvInfraProjectIndex]
+        index_classes = [InfraProjectIndex]
         fields = ["province", "department", "status", "primary_funding_source"]
         field_options = {
             "province": {},

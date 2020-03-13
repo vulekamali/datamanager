@@ -7,7 +7,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(
     "infrastructure-projects/provincial/search",
-    views.ProvInfraProjectSearchView,
+    views.InfraProjectSearchView,
     basename="provincial-infrastructure-project-api",
 )
 
@@ -30,7 +30,7 @@ urlpatterns = [
     path(r"api/v1/", include(router.urls)),
     path(
         "infrastructure-projects/provincial/search/csv",
-        views.ProvInfraProjectSearchView.as_view({"get": "get_csv"}),
+        views.InfraProjectSearchView.as_view({"get": "get_csv"}),
         name="provincial-infrastructure-project-api-csv",
     ),
 ]

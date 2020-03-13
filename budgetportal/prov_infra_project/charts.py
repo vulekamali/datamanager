@@ -3,7 +3,7 @@ def order_chart_data(snapshot_list):
 
 
 def time_series_data(project_snapshots):
-    """This function expects a list of ProvInfraProjectSnapshots of the same
+    """This function expects a list of InfraProjectSnapshots of the same
     project,in IRMSnapshot order."""
     chart_data = {"snapshots": [], "events": []}
     for snapshot in project_snapshots:

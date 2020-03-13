@@ -337,7 +337,7 @@ LOGGING = {
     },
     "handlers": {
         "console": {
-            "level": "INFO",
+            "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "simple",
         },
@@ -346,6 +346,7 @@ LOGGING = {
     "loggers": {
         "budgetportal": {"level": "DEBUG" if DEBUG else "INFO"},
         "django": {"level": "INFO"},
+        "django.db.backends": {"level": "DEBUG"},
     },
 }
 

@@ -1,10 +1,10 @@
-from budgetportal.models import ProvInfraProject
+from budgetportal.models import InfraProject
 from django.db.models import Count
 from haystack import indexes
 from .prov_infra_projects import status_order
 
 
-class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
+class InfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     name = indexes.CharField()
     province = indexes.CharField(faceted=True)
@@ -56,7 +56,7 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     actual_expenditure_q4 = indexes.FloatField(indexed=False)
 
     def get_model(self):
-        return ProvInfraProject
+        return InfraProject
 
     def prepare_name(sef, object):
         return object.project_snapshots.latest().name
@@ -198,6 +198,6 @@ class ProvInfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
         return instance.project_snapshots.count()
 
     def index_queryset(self, using=None):
-        return ProvInfraProject.objects.annotate(
+        return InfraProject.objects.annotate(
             project_snapshots_count=Count("project_snapshots")
         ).filter(project_snapshots_count__gte=1)

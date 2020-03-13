@@ -70,7 +70,7 @@ STATUS_ORDERING = [
 status_order = {status: index for index, status in enumerate(STATUS_ORDERING)}
 
 
-class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
+class InfraProjectSnapshotLoader(ModelInstanceLoader):
     def get_instance(self, row):
         """
         Gets a Provincial Infrastructure project instance by IRM_project_id.
@@ -79,20 +79,20 @@ class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
         irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
 
         try:
-            return models.ProvInfraProjectSnapshot.objects.get(
+            return models.InfraProjectSnapshot.objects.get(
                 project=project_id, irm_snapshot=irm_snapshot_id
             )
-        except models.ProvInfraProjectSnapshot.DoesNotExist:
+        except models.InfraProjectSnapshot.DoesNotExist:
             pass
 
         return None
 
 
-class ProvInfraProjectSnapshotResource(resources.ModelResource):
+class InfraProjectSnapshotResource(resources.ModelResource):
     IRM_project_id = Field(
         attribute="project",
         column_name="Project ID",
-        widget=ForeignKeyWidget(models.ProvInfraProject, "IRM_project_id"),
+        widget=ForeignKeyWidget(models.InfraProject, "IRM_project_id"),
     )
     irm_snapshot = Field(
         attribute="irm_snapshot",
@@ -210,12 +210,12 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
     other_parties = Field(attribute="other_parties", column_name="Other parties")
 
     class Meta:
-        model = models.ProvInfraProjectSnapshot
+        model = models.InfraProjectSnapshot
         skip_unchanged = True
         report_skipped = False
         exclude = ("id",)
         import_id_fields = ("IRM_project_id",)
-        instance_loader_class = ProvInfraProjectSnapshotLoader
+        instance_loader_class = InfraProjectSnapshotLoader
 
 
 def import_snapshot(file, irm_snapshot_id):
@@ -225,11 +225,11 @@ def import_snapshot(file, irm_snapshot_id):
     # Ensure projects exist
     for IRM_project_id in preprocessed_dataset["Project ID"]:
         if IRM_project_id:
-            models.ProvInfraProject.objects.get_or_create(IRM_project_id=IRM_project_id)
+            models.InfraProject.objects.get_or_create(IRM_project_id=IRM_project_id)
     if len(preprocessed_dataset) > 0:
         preprocessed_dataset.append_col(
             [irm_snapshot_id] * len(preprocessed_dataset), header="irm_snapshot"
         )
-    resource = ProvInfraProjectSnapshotResource()
+    resource = InfraProjectSnapshotResource()
     result = resource.import_data(preprocessed_dataset)
     return result

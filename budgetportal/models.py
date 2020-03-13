@@ -1,15 +1,11 @@
 import logging
 import re
-import string
-import urllib
 import uuid
 from collections import OrderedDict
 from datetime import datetime
 from decimal import Decimal
-from itertools import groupby
 from pprint import pformat
-from urllib.parse import urljoin, quote
-from uuid import uuid4
+from urllib.parse import quote
 
 import requests
 from slugify import slugify
@@ -1846,9 +1842,12 @@ def irm_snapshot_file_path(instance, filename):
 
 
 class IRMSnapshot(models.Model):
-    """This represents a particular snapshot from IRM"""
+    """
+    This represents a particular snapshot from the Infrastructure Reporting Model
+    (IRM) database
+    """
 
-    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
+    sphere = models.ForeignKey(Sphere, on_delete=models.CASCADE)
     quarter = models.ForeignKey(Quarter, on_delete=models.CASCADE)
     date_taken = models.DateTimeField()
     file = models.FileField(upload_to=irm_snapshot_file_path)
@@ -1856,19 +1855,20 @@ class IRMSnapshot(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        ordering = ["financial_year__slug", "quarter__number"]
+        ordering = ["sphere__financial_year__slug", "quarter__number"]
         verbose_name = "IRM Snapshot"
-        unique_together = ["financial_year", "quarter"]
+        unique_together = ["sphere", "quarter"]
 
     def __str__(self):
         return "%s Q%d taken %s" % (
-            self.financial_year.slug,
+            self.sphere.name,
+            self.sphere.financial_year.slug,
             self.quarter.number,
             self.date_taken.isoformat()[:18],
         )
 
 
-class ProvInfraProject(models.Model):
+class InfraProject(models.Model):
     """This represents a project, grouping its snapshots"""
 
     IRM_project_id = models.IntegerField(unique=True)
@@ -1876,7 +1876,7 @@ class ProvInfraProject(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Provincial infrastructure project"
+        verbose_name = "Infrastructure project"
 
     def __str__(self):
         if self.project_snapshots.count():
@@ -1904,14 +1904,14 @@ class ProvInfraProject(models.Model):
         )
 
 
-class ProvInfraProjectSnapshot(models.Model):
+class InfraProjectSnapshot(models.Model):
     """This represents a snapshot of a project, as it occurred in an IRM snapshot"""
 
     irm_snapshot = models.ForeignKey(
         IRMSnapshot, on_delete=models.CASCADE, related_name="project_snapshots"
     )
     project = models.ForeignKey(
-        ProvInfraProject, on_delete=models.CASCADE, related_name="project_snapshots"
+        InfraProject, on_delete=models.CASCADE, related_name="project_snapshots"
     )
     project_number = models.CharField(max_length=1024, blank=True, null=True)
     name = models.CharField(max_length=1024, blank=True, null=True)
@@ -2002,11 +2002,11 @@ class ProvInfraProjectSnapshot(models.Model):
 
     class Meta:
         ordering = [
-            "irm_snapshot__financial_year__slug",
+            "irm_snapshot__sphere__financial_year__slug",
             "irm_snapshot__quarter__number",
         ]
         get_latest_by = "irm_snapshot"
-        verbose_name = "Provincial infrastructure project snapshot"
+        verbose_name = "Infrastructure project snapshot"
         unique_together = ["irm_snapshot", "project"]
 
     def __str__(self):
