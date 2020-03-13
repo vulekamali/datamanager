@@ -39,7 +39,9 @@ class InfraProjectIRMSnapshotTestCase(APITransactionTestCase):
         )
         self.file = File(open(file_path, "rb"))
         financial_year = FinancialYear.objects.create(slug="2030-31")
-        self.sphere = Sphere.objects.create(financial_year=financial_year, name="Provincial")
+        self.sphere = Sphere.objects.create(
+            financial_year=financial_year, name="Provincial"
+        )
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.url = reverse("provincial-infrastructure-project-api-list")
@@ -1173,8 +1175,12 @@ class InfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         self.project = InfraProject.objects.create(IRM_project_id=1)
         fin_year_1 = FinancialYear.objects.create(slug="2030-31")
         fin_year_2 = FinancialYear.objects.create(slug="2031-32")
-        self.sphere_1 = Sphere.objects.create(financial_year=fin_year_1, name="Provincial")
-        self.sphere_2 = Sphere.objects.create(financial_year=fin_year_2, name="Provincial")
+        self.sphere_1 = Sphere.objects.create(
+            financial_year=fin_year_1, name="Provincial"
+        )
+        self.sphere_2 = Sphere.objects.create(
+            financial_year=fin_year_2, name="Provincial"
+        )
         self.quarter_1 = Quarter.objects.create(number=1)
         self.date_1 = date(year=2050, month=1, day=1)
         self.date_2 = date(year=2070, month=1, day=1)
@@ -1469,7 +1475,9 @@ class InfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
 
     def create_project(self, index):
         file = open(EMPTY_FILE_PATH, "rb")
-        financial_year = FinancialYear.objects.create(slug=FinancialYear.slug_from_year_start(str(2000+index)))
+        financial_year = FinancialYear.objects.create(
+            slug=FinancialYear.slug_from_year_start(str(2000 + index))
+        )
         sphere = Sphere.objects.create(financial_year=financial_year, name="Provincial")
         irm_snapshot = IRMSnapshot.objects.create(
             sphere=sphere,
@@ -1512,7 +1520,9 @@ class InfraProjectIRMSnapshotDetailCSVDownloadTestCase(
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         fin_year_2 = FinancialYear.objects.create(slug="2031-32")
-        self.sphere_2 = Sphere.objects.create(financial_year=fin_year_2, name="Provincial")
+        self.sphere_2 = Sphere.objects.create(
+            financial_year=fin_year_2, name="Provincial"
+        )
 
         irm_snapshot_1 = IRMSnapshot.objects.create(
             sphere=self.sphere,

@@ -1832,9 +1832,11 @@ class Quarter(models.Model):
 
 def irm_snapshot_file_path(instance, filename):
     extension = filename.split(".")[-1]
-    return (f"irm-snapshots/${uuid.uuid4()}/"
-            "${instance.sphere.financial_year.slug}-Q${instance.quarter.number}-"
-            "${instance.sphere.slug}-taken-${instance.date_taken.isoformat()[:18]}.${extension}")
+    return (
+        f"irm-snapshots/${uuid.uuid4()}/"
+        "${instance.sphere.financial_year.slug}-Q${instance.quarter.number}-"
+        "${instance.sphere.slug}-taken-${instance.date_taken.isoformat()[:18]}.${extension}"
+    )
 
 
 class IRMSnapshot(models.Model):
@@ -1856,9 +1858,11 @@ class IRMSnapshot(models.Model):
         unique_together = ["sphere", "quarter"]
 
     def __str__(self):
-        return (f"${self.sphere.name} "
-                "${self.sphere.financial_year.slug} Q${self.quarter.number} "
-                "taken ${self.date_taken.isoformat()[:18]}")
+        return (
+            f"${self.sphere.name} "
+            "${self.sphere.financial_year.slug} Q${self.quarter.number} "
+            "taken ${self.date_taken.isoformat()[:18]}"
+        )
 
 
 class InfraProject(models.Model):

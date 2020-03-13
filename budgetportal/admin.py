@@ -191,7 +191,11 @@ class InfraProjectAdmin(admin.ModelAdmin):
 class InfraProjectSnapshotAdmin(admin.ModelAdmin):
     list_display = ("name", "project_number", "province", "department", "irm_snapshot")
     list_display_links = ("name", "project_number")
-    list_filter = ("irm_snapshot__sphere__financial_year__slug", "province", "department")
+    list_filter = (
+        "irm_snapshot__sphere__financial_year__slug",
+        "province",
+        "department",
+    )
     search_fields = ("name", "project_number")
     list_per_page = 20
 
