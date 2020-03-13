@@ -62,19 +62,22 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
-    "wagtail.contrib.forms",
-    "wagtail.contrib.redirects",
-    "wagtail.embeds",
-    "wagtail.sites",
-    "wagtail.users",
-    "wagtail.snippets",
-    "wagtail.documents",
-    "wagtail.images",
-    "wagtail.search",
-    "wagtail.admin",
-    "wagtail.core",
-    "modelcluster",
-    "taggit",
+
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+
+    'modelcluster',
+    'taggit',
+
     "allauth_facebook",
     # before auth for LiveServerTestCase https://code.djangoproject.com/ticket/10827
     "django.contrib.contenttypes",
@@ -119,8 +122,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
-    "wagtail.core.middleware.SiteMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 if DEBUG_TOOLBAR:
@@ -144,8 +148,8 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
 AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
-AWS_DEFAULT_ACL = "private"
-AWS_BUCKET_ACL = "private"
+AWS_DEFAULT_ACL = "public-read"
+AWS_BUCKET_ACL = "public-read"
 AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
@@ -183,7 +187,7 @@ else:
 CACHE_MIDDLEWARE_SECONDS = 600
 
 
-CKAN_URL = os.environ.get("CKAN_URL", "https://treasurydata.openup.org.za")
+CKAN_URL = os.environ.get("CKAN_URL", "https://data.vulekamali.gov.za")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY", None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
 
@@ -290,8 +294,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # the URL for assets
 STATIC_URL = "/static/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -408,4 +412,4 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 20,
 }
 
-WAGTAIL_SITE_NAME = "My Wagtail Site"
+WAGTAIL_SITE_NAME = 'My Wagtail Site'
