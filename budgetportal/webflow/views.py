@@ -59,7 +59,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
     )
     page_data[
         "latest_snapshot_financial_year"
-    ] = snapshot.irm_snapshot.financial_year.slug
+    ] = snapshot.irm_snapshot.sphere.financial_year.slug
     context = {
         "project": project,
         "page_data_json": json.dumps(

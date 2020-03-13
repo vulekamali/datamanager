@@ -6,6 +6,7 @@ import csv
 from datetime import date, datetime
 from budgetportal.models import (
     FinancialYear,
+    Sphere,
     IRMSnapshot,
     InfraProject,
     InfraProjectSnapshot,
@@ -37,7 +38,8 @@ class InfraProjectIRMSnapshotTestCase(APITransactionTestCase):
             ("budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx")
         )
         self.file = File(open(file_path, "rb"))
-        self.financial_year = FinancialYear.objects.create(slug="2030-31")
+        financial_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=financial_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.url = reverse("provincial-infrastructure-project-api-list")
@@ -59,7 +61,7 @@ class InfraProjectIRMSnapshotTestCase(APITransactionTestCase):
         )
 
         IRMSnapshot.objects.create(
-            financial_year=self.financial_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=self.file,
@@ -82,11 +84,12 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         super(InfraProjectDetailPageTestCase, self).setUp()
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.fin_year = FinancialYear.objects.create(slug="2050-51", published=True)
+        fin_year = FinancialYear.objects.create(slug="2050-51", published=True)
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -293,11 +296,12 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infra-project-list")
         self.wait = WebDriverWait(self.selenium, 5)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(2050, 1, 1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -410,11 +414,12 @@ class InfraProjectAPIDepartmentTestCase(APITransactionTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -490,11 +495,12 @@ class InfraProjectAPIProvinceTestCase(APITransactionTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -600,11 +606,12 @@ class InfraProjectAPIStatusTestCase(APITransactionTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -680,11 +687,12 @@ class InfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -760,11 +768,12 @@ class InfraProjectAPIProjectNameTestCase(APITransactionTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -833,11 +842,12 @@ class InfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -909,11 +919,12 @@ class InfraProjectAPIContractorTestCase(APITransactionTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -985,11 +996,12 @@ class InfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
         self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -1041,11 +1053,12 @@ class InfraProjectAPIURLPathTestCase(APITransactionTestCase):
     def setUp(self):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
+        fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -1100,12 +1113,13 @@ class InfraProjectSnapshotTestCase(APITransactionTestCase):
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
         self.file_2 = open(EMPTY_FILE_PATH, "rb")
         self.project = InfraProject.objects.create(IRM_project_id=1)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
+        fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter_1 = Quarter.objects.create(number=1)
         self.quarter_2 = Quarter.objects.create(number=2)
         self.date_1 = date(year=2050, month=1, day=1)
         self.irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter_1,
             date_taken=self.date_1,
             file=File(self.file_1),
@@ -1120,7 +1134,7 @@ class InfraProjectSnapshotTestCase(APITransactionTestCase):
         )
 
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter_2,
             date_taken=self.date_1,
             file=File(self.file_2),
@@ -1157,13 +1171,15 @@ class InfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
         self.file_2 = open(EMPTY_FILE_PATH, "rb")
         self.project = InfraProject.objects.create(IRM_project_id=1)
-        self.fin_year_1 = FinancialYear.objects.create(slug="2030-31")
-        self.fin_year_2 = FinancialYear.objects.create(slug="2031-32")
+        fin_year_1 = FinancialYear.objects.create(slug="2030-31")
+        fin_year_2 = FinancialYear.objects.create(slug="2031-32")
+        self.sphere_1 = Sphere.objects.create(financial_year=fin_year_1, name="Provincial")
+        self.sphere_2 = Sphere.objects.create(financial_year=fin_year_2, name="Provincial")
         self.quarter_1 = Quarter.objects.create(number=1)
         self.date_1 = date(year=2050, month=1, day=1)
         self.date_2 = date(year=2070, month=1, day=1)
         self.irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year_1,
+            sphere=self.sphere_1,
             quarter=self.quarter_1,
             date_taken=self.date_1,
             file=File(self.file_1),
@@ -1175,7 +1191,7 @@ class InfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         )
 
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year_2,
+            sphere=self.sphere_2,
             quarter=self.quarter_1,
             date_taken=self.date_2,
             file=File(self.file_2),
@@ -1201,13 +1217,14 @@ class InfraProjectFullTextSearchTestCase(APITransactionTestCase):
         call_command("clear_index", "--noinput")
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.project_1 = InfraProject.objects.create(IRM_project_id=1)
 
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
@@ -1300,21 +1317,25 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
         self.file1_2_older = open(EMPTY_FILE_PATH, "rb")
         self.file2 = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("provincial-infrastructure-project-api-list")
+        fin_year_1 = FinancialYear.objects.create(slug="2030-31")
+        sphere_1 = Sphere.objects.create(financial_year=fin_year_1, name="Provincial")
+        fin_year_2 = FinancialYear.objects.create(slug="2031-32")
+        sphere_2 = Sphere.objects.create(financial_year=fin_year_2, name="Provincial")
 
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-1"),
+            sphere=sphere_1,
             quarter=Quarter.objects.create(number=3),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1),
         )
         irm_snapshot_1_1_older = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-2"),
+            sphere=sphere_2,
             quarter=Quarter.objects.create(number=1),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1_1_older),
         )
         irm_snapshot_1_2_older = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.get(slug="2030-1"),
+            sphere=sphere_1,
             quarter=Quarter.objects.get(number=1),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1_2_older),
@@ -1347,7 +1368,7 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
         )
 
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-32"),
+            sphere=sphere_2,
             quarter=Quarter.objects.create(number=2),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file2),
@@ -1448,8 +1469,10 @@ class InfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
 
     def create_project(self, index):
         file = open(EMPTY_FILE_PATH, "rb")
+        financial_year = FinancialYear.objects.create(slug=FinancialYear.slug_from_year_start(str(2000+index)))
+        sphere = Sphere.objects.create(financial_year=financial_year, name="Provincial")
         irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-{}".format(index)),
+            sphere=sphere,
             quarter=Quarter.objects.get_or_create(number=1)[0],
             date_taken=date(year=2050, month=1, day=1),
             file=File(file),
@@ -1486,15 +1509,19 @@ class InfraProjectIRMSnapshotDetailCSVDownloadTestCase(
         call_command("clear_index", "--noinput")
         self.file1 = open(EMPTY_FILE_PATH, "rb")
         self.file2 = open(EMPTY_FILE_PATH, "rb")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
+        fin_year_2 = FinancialYear.objects.create(slug="2031-32")
+        self.sphere_2 = Sphere.objects.create(financial_year=fin_year_2, name="Provincial")
 
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-31"),
+            sphere=self.sphere,
             quarter=Quarter.objects.create(number=1),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1),
         )
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-32"),
+            sphere=self.sphere_2,
             quarter=Quarter.objects.create(number=2),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file2),
