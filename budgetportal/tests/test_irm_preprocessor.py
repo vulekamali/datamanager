@@ -1,6 +1,6 @@
 import unittest
 
-from budgetportal.irm_preprocessor import (
+from budgetportal.infra_projects.irm_preprocessor import (
     BASE_HEADERS,
     REPEATED_IMPLEMENTOR_HEADER,
     InputException,
