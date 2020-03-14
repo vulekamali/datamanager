@@ -32,7 +32,7 @@ from .models import (
     IRMSnapshot,
     Sphere,
     Video,
-    CategoryGuide
+    CategoryGuide,
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
