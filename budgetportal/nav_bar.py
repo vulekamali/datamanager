@@ -37,7 +37,7 @@ def get_items(financial_year):
             "is_dropdown": True,
             "children": [
                 {
-                    "title": "Featured major projects",
+                    "title": "PPP & major national department projects",
                     "url": "infrastructure-projects/",
                     "id": "national",
                 },

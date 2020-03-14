@@ -268,7 +268,7 @@ const Markup = (props) => {
   const whiteTextRendering = details ? (
     <WhiteText>Project Information</WhiteText>
   ) : (
-    <WhiteText>{`${amount} featured major infrastructure projects`}</WhiteText>
+    <WhiteText>{`${amount} Public Private Partnership and major national department infrastructure projects`}</WhiteText>
   );
 
   return (
