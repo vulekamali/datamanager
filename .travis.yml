@@ -18,6 +18,7 @@ install:
 script:
   - docker-compose run --rm test python manage.py collectstatic --no-input
   - docker-compose run --rm test
+  - black --check --diff budgetportal manage.py discourse
 
 after_script:
   # Log output in case issues occurred where this can help us debug quicly
@@ -25,5 +26,3 @@ after_script:
 
   # Run codecov passing appropriate codecov.io CI environment variables to container
   - "docker-compose run --rm `bash <(curl -s https://codecov.io/env)` test codecov"
-
-  - "black --check --diff budgetportal manage.py discourse"
