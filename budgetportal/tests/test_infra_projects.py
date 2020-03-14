@@ -22,8 +22,13 @@ from rest_framework.test import APITestCase
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
+from budgetportal.infra_projects import irm_preprocessor
 from budgetportal.webflow.serializers import InfraProjectCSVSerializer
+from tablib import Dataset
+from django.test import TransactionTestCase
+from budgetportal.infra_projects import InfraProjectSnapshotResource
+from budgetportal.tests.helpers import WagtailHackMixin
+from budgetportal.tasks import format_error
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
@@ -84,21 +89,12 @@ class InfraProjectIRMSnapshotTestCase(APITestCase):
         )
 
 
-class NatProvSameIRMIDInfraProjectIRMSnapshotTestCase(APITestCase):
+class NatProvSameIRMIDInfraProjectIRMSnapshotTestCase(WagtailHackMixin, TransactionTestCase):
     """
     Test that importing a national and provincial project with the same
     IRM ID yields different project instances with different URLs
     """
     def setUp(self):
-        InfraProjectIndex().clear()
-        prov_file_path = os.path.abspath(
-            ("budgetportal/tests/test_data/test_import_prov_infra_project.xlsx")
-        )
-        self.prov_file = File(open(prov_file_path, "rb"))
-        nat_file_path = os.path.abspath(
-            ("budgetportal/tests/test_data/test_import_nat_infra_project.xlsx")
-        )
-        self.nat_file = File(open(nat_file_path, "rb"))
         financial_year = FinancialYear.objects.create(slug="2030-31")
         self.prov_sphere = Sphere.objects.create(
             financial_year=financial_year, name="Provincial"
@@ -108,32 +104,50 @@ class NatProvSameIRMIDInfraProjectIRMSnapshotTestCase(APITestCase):
         )
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
-        self.list_url = reverse("infrastructure-project-api-list")
-
-    def test(self):
-        self.assertEqual(0, len(self.client.get(self.list_url).data["results"]))
-        self.assertEqual(0, InfraProject.objects.count())
-
-        IRMSnapshot.objects.create(
+        prov_IRM_snapshot = IRMSnapshot.objects.create(
             sphere=self.prov_sphere,
             quarter=self.quarter,
             date_taken=self.date,
-            file=self.prov_file,
+            file=File(open(EMPTY_FILE_PATH, "rb")),
         )
-        IRMSnapshot.objects.create(
+        nat_IRM_snapshot = IRMSnapshot.objects.create(
             sphere=self.nat_sphere,
             quarter=self.quarter,
             date_taken=self.date,
-            file=self.nat_file,
+            file=File(open(EMPTY_FILE_PATH, "rb")),
         )
+        headers = irm_preprocessor.OUTPUT_HEADERS + ["irm_snapshot", "sphere_slug"]
+        self.prov_dataset = Dataset(headers=headers)
+        self.nat_dataset = Dataset(headers=headers)
+        num_columns = len(irm_preprocessor.OUTPUT_HEADERS)
+        prov_row = [12345, "proj-1", "A Prov Project"] + [None] * (num_columns-3) + [prov_IRM_snapshot.id, "provincial"]
+        self.prov_dataset.append(prov_row)
+        nat_row = [12345, "PROJ-1", "A Nat Project"] + [None] * (num_columns-3) + [nat_IRM_snapshot.id, "national"]
+        self.nat_dataset.append(nat_row)
+        InfraProject.objects.create(IRM_project_id=12345, sphere_slug="national")
+        InfraProject.objects.create(IRM_project_id=12345, sphere_slug="provincial")
 
-        self.assertEqual(2, len(self.client.get(self.list_url).data["results"]))
+    def test(self):
         self.assertEqual(2, InfraProject.objects.count())
+
+        resource = InfraProjectSnapshotResource()
+        prov_result = resource.import_data(self.prov_dataset)
+        for row_num, row_result in enumerate(prov_result.rows):
+            if row_result.errors:
+                print("\n".join([format_error(e) for e in row_result.errors]))
+
+        nat_result = resource.import_data(self.nat_dataset)
+        for row_num, row_result in enumerate(nat_result.rows):
+            if row_result.errors:
+                print("\n".join([format_error(e) for e in row_result.errors]))
+
         nat_project = InfraProject.objects.get(sphere_slug="national")
         prov_project = InfraProject.objects.get(sphere_slug="provincial")
-        self.assertEqual(30682, nat_project.IRM_project_id)
-        self.assertEqual(30682, prov_project.IRM_project_id)
+        self.assertEqual(12345, nat_project.IRM_project_id)
+        self.assertEqual(12345, prov_project.IRM_project_id)
         self.assertNotEqual(nat_project.id, prov_project.id)
+        self.assertEqual("A Nat Project", nat_project.project_snapshots.latest().name)
+        self.assertEqual("A Prov Project", prov_project.project_snapshots.latest().name)
 
 
 class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):

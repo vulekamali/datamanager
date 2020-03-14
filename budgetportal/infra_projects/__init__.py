@@ -83,20 +83,19 @@ class InfraProjectSnapshotLoader(ModelInstanceLoader):
         project_id = self.resource.fields["IRM_project_id"].clean(row)
         irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
 
-        1/0
         try:
             return models.InfraProjectSnapshot.objects.get(
                 project=project_id, irm_snapshot=irm_snapshot_id
             )
         except models.InfraProjectSnapshot.DoesNotExist:
-            pass
+            logger.info(f"Couldn't find InfraProjectSnapshot for {project_id} {irm_snapshot_id}")
 
         return None
 
 
 class InfraProjectForeignKeyWidget(ForeignKeyWidget):
     def get_queryset(self, value, row):
-        1/0§
+        1/0
         logger.info("InfraProjectForeignKeyWidget.get_queryset %r " % row)
         project_id_qs = self.model.objects.filter(
             IRM_project_id=row["Project ID"],
@@ -109,6 +108,7 @@ class InfraProjectForeignKeyWidget(ForeignKeyWidget):
 class InfraProjectSnapshotResource(resources.ModelResource):
     IRM_project_id = Field(
         attribute="project",
+        column_name="IRM_project_id",
         widget=InfraProjectForeignKeyWidget(models.InfraProject),
     )
     irm_snapshot = Field(
