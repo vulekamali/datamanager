@@ -31,6 +31,10 @@ EMPTY_FILE_PATH = os.path.abspath(
 
 
 class InfraProjectIRMSnapshotTestCase(APITestCase):
+    """
+    End-to-end test: Uploading a file changes state from nothing in search
+    results to the right projects in search results.
+    """
     def setUp(self):
         InfraProjectIndex().clear()
         file_path = os.path.abspath(
@@ -78,6 +82,58 @@ class InfraProjectIRMSnapshotTestCase(APITestCase):
             response.data["csv_download_url"],
             "/infrastructure-projects/full/search/csv",
         )
+
+
+class NatProvSameIRMIDInfraProjectIRMSnapshotTestCase(APITestCase):
+    """
+    Test that importing a national and provincial project with the same
+    IRM ID yields different project instances with different URLs
+    """
+    def setUp(self):
+        InfraProjectIndex().clear()
+        prov_file_path = os.path.abspath(
+            ("budgetportal/tests/test_data/test_import_prov_infra_project.xlsx")
+        )
+        self.prov_file = File(open(prov_file_path, "rb"))
+        nat_file_path = os.path.abspath(
+            ("budgetportal/tests/test_data/test_import_nat_infra_project.xlsx")
+        )
+        self.nat_file = File(open(nat_file_path, "rb"))
+        financial_year = FinancialYear.objects.create(slug="2030-31")
+        self.prov_sphere = Sphere.objects.create(
+            financial_year=financial_year, name="Provincial"
+        )
+        self.nat_sphere = Sphere.objects.create(
+            financial_year=financial_year, name="National"
+        )
+        self.quarter = Quarter.objects.create(number=1)
+        self.date = date(year=2050, month=1, day=1)
+        self.list_url = reverse("infrastructure-project-api-list")
+
+    def test(self):
+        self.assertEqual(0, len(self.client.get(self.list_url).data["results"]))
+        self.assertEqual(0, InfraProject.objects.count())
+
+        IRMSnapshot.objects.create(
+            sphere=self.prov_sphere,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=self.prov_file,
+        )
+        IRMSnapshot.objects.create(
+            sphere=self.nat_sphere,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=self.nat_file,
+        )
+
+        self.assertEqual(2, len(self.client.get(self.list_url).data["results"]))
+        self.assertEqual(2, InfraProject.objects.count())
+        nat_project = InfraProject.objects.get(sphere_slug="national")
+        prov_project = InfraProject.objects.get(sphere_slug="provincial")
+        self.assertEqual(30682, nat_project.IRM_project_id)
+        self.assertEqual(30682, prov_project.IRM_project_id)
+        self.assertNotEqual(nat_project.id, prov_project.id)
 
 
 class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):

@@ -5,6 +5,9 @@ from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import ForeignKeyWidget
 from .irm_preprocessor import preprocess
 from tablib import Databook
+import logging
+
+logger = logging.getLogger(__name__)
 
 BASE_HEADERS = [
     "Project ID",
@@ -76,9 +79,11 @@ class InfraProjectSnapshotLoader(ModelInstanceLoader):
         """
         Gets an infrastructure project instance by IRM_project_id.
         """
+        logger.info("InfraProjectSnapshotLoader.get_instance %r " % row)
         project_id = self.resource.fields["IRM_project_id"].clean(row)
         irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
 
+        1/0
         try:
             return models.InfraProjectSnapshot.objects.get(
                 project=project_id, irm_snapshot=irm_snapshot_id
@@ -89,16 +94,30 @@ class InfraProjectSnapshotLoader(ModelInstanceLoader):
         return None
 
 
+class InfraProjectForeignKeyWidget(ForeignKeyWidget):
+    def get_queryset(self, value, row):
+        1/0§
+        logger.info("InfraProjectForeignKeyWidget.get_queryset %r " % row)
+        project_id_qs = self.model.objects.filter(
+            IRM_project_id=row["Project ID"],
+            sphere_slug=row["sphere_slug"]
+        )
+        logger.info(project_id_qs)
+        return project_id_qs
+
+
 class InfraProjectSnapshotResource(resources.ModelResource):
     IRM_project_id = Field(
         attribute="project",
-        column_name="Project ID",
-        widget=ForeignKeyWidget(models.InfraProject, "IRM_project_id"),
+        widget=InfraProjectForeignKeyWidget(models.InfraProject),
     )
     irm_snapshot = Field(
         attribute="irm_snapshot",
         column_name="irm_snapshot",
         widget=ForeignKeyWidget(models.IRMSnapshot),
+    )
+    sphere_slug = Field(
+        column_name="sphere_slug",
     )
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
@@ -216,7 +235,7 @@ class InfraProjectSnapshotResource(resources.ModelResource):
         skip_unchanged = True
         report_skipped = False
         exclude = ("id",)
-        import_id_fields = ("IRM_project_id",)
+        import_id_fields = ("IRM_project_id", "sphere_slug",)
         instance_loader_class = InfraProjectSnapshotLoader
 
 
@@ -225,15 +244,20 @@ def import_snapshot(snapshot):
     data_book = Databook().load(file, "xlsx")
     dataset = data_book.sheets()[0]
     preprocessed_dataset = preprocess(dataset)
+
     # Ensure projects exist
     for IRM_project_id in preprocessed_dataset["Project ID"]:
         if IRM_project_id:
             models.InfraProject.objects.get_or_create(
                 IRM_project_id=IRM_project_id, sphere_slug=snapshot.sphere.slug
             )
+
     if len(preprocessed_dataset) > 0:
         preprocessed_dataset.append_col(
             [snapshot.id] * len(preprocessed_dataset), header="irm_snapshot"
+        )
+        preprocessed_dataset.append_col(
+            [snapshot.sphere.slug] * len(preprocessed_dataset), header="sphere_slug"
         )
     resource = InfraProjectSnapshotResource()
     result = resource.import_data(preprocessed_dataset)

@@ -57,6 +57,7 @@ class BaseSeleniumTestCase(LiveServerTestCase):
         )
 
     def _fixture_teardown(self):
+        print("\n\n\nFIXTURE TEARDOWN\n\n\n")
         # Allow TRUNCATE ... CASCADE and don't emit the post_migrate signal
         # when flushing only a subset of the apps
         for db_name in self._databases_names(include_mirrors=False):
