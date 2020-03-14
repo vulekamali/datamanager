@@ -1,7 +1,6 @@
 """
 Common test helpers.
 """
-import sys
 import warnings
 from datetime import datetime
 
@@ -15,7 +14,37 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class BaseSeleniumTestCase(LiveServerTestCase):
+class WagtailHackMixin:
+    """
+    We need to overload the LiveServerTestCase class to resolve:
+    https://github.com/wagtail/wagtail/issues/1824
+    """
+
+    def _fixture_teardown(self):
+        # Allow TRUNCATE ... CASCADE and don't emit the post_migrate signal
+        # when flushing only a subset of the apps
+        for db_name in self._databases_names(include_mirrors=False):
+            # Flush the database
+            inhibit_post_migrate = (
+                self.available_apps is not None
+                or (  # Inhibit the post_migrate signal when using serialized
+                    # rollback to avoid trying to recreate the serialized data.
+                    self.serialized_rollback
+                    and hasattr(connections[db_name], "_test_serialized_contents")
+                )
+            )
+            call_command(
+                "flush",
+                verbosity=0,
+                interactive=False,
+                database=db_name,
+                reset_sequences=False,
+                allow_cascade=True,
+                inhibit_post_migrate=inhibit_post_migrate,
+            )
+
+
+class BaseSeleniumTestCase(WagtailHackMixin, LiveServerTestCase):
     """
     Base class for Selenium tests.
 
@@ -56,86 +85,6 @@ class BaseSeleniumTestCase(LiveServerTestCase):
             EC.text_to_be_present_in_element((By.CSS_SELECTOR, selector), text)
         )
 
-    def _fixture_teardown(self):
-        print("\n\n\nFIXTURE TEARDOWN\n\n\n")
-        # Allow TRUNCATE ... CASCADE and don't emit the post_migrate signal
-        # when flushing only a subset of the apps
-        for db_name in self._databases_names(include_mirrors=False):
-            # Flush the database
-            inhibit_post_migrate = (
-                self.available_apps is not None
-                or (  # Inhibit the post_migrate signal when using serialized
-                    # rollback to avoid trying to recreate the serialized data.
-                    self.serialized_rollback
-                    and hasattr(connections[db_name], "_test_serialized_contents")
-                )
-            )
-            call_command(
-                "flush",
-                verbosity=0,
-                interactive=False,
-                database=db_name,
-                reset_sequences=False,
-                allow_cascade=True,
-                inhibit_post_migrate=inhibit_post_migrate,
-            )
 
-
-class WagtailHackLiveServerTestCase(LiveServerTestCase):
-    """
-    We need to overload the LiveServerTestCase class to resolve:
-    https://github.com/wagtail/wagtail/issues/1824
-    """
-
-    def _fixture_teardown(self):
-        # Allow TRUNCATE ... CASCADE and don't emit the post_migrate signal
-        # when flushing only a subset of the apps
-        for db_name in self._databases_names(include_mirrors=False):
-            # Flush the database
-            inhibit_post_migrate = (
-                self.available_apps is not None
-                or (  # Inhibit the post_migrate signal when using serialized
-                    # rollback to avoid trying to recreate the serialized data.
-                    self.serialized_rollback
-                    and hasattr(connections[db_name], "_test_serialized_contents")
-                )
-            )
-            call_command(
-                "flush",
-                verbosity=0,
-                interactive=False,
-                database=db_name,
-                reset_sequences=False,
-                allow_cascade=True,
-                inhibit_post_migrate=inhibit_post_migrate,
-            )
-
-
-class WagtailHackMixin():
-    """
-    We need to overload the LiveServerTestCase class to resolve:
-    https://github.com/wagtail/wagtail/issues/1824
-    """
-
-    def _fixture_teardown(self):
-        # Allow TRUNCATE ... CASCADE and don't emit the post_migrate signal
-        # when flushing only a subset of the apps
-        for db_name in self._databases_names(include_mirrors=False):
-            # Flush the database
-            inhibit_post_migrate = (
-                self.available_apps is not None
-                or (  # Inhibit the post_migrate signal when using serialized
-                    # rollback to avoid trying to recreate the serialized data.
-                    self.serialized_rollback
-                    and hasattr(connections[db_name], "_test_serialized_contents")
-                )
-            )
-            call_command(
-                "flush",
-                verbosity=0,
-                interactive=False,
-                database=db_name,
-                reset_sequences=False,
-                allow_cascade=True,
-                inhibit_post_migrate=inhibit_post_migrate,
-            )
+class WagtailHackLiveServerTestCase(WagtailHackMixin, LiveServerTestCase):
+    pass

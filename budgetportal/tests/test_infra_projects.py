@@ -40,6 +40,7 @@ class InfraProjectIRMSnapshotTestCase(APITestCase):
     End-to-end test: Uploading a file changes state from nothing in search
     results to the right projects in search results.
     """
+
     def setUp(self):
         InfraProjectIndex().clear()
         file_path = os.path.abspath(
@@ -89,11 +90,14 @@ class InfraProjectIRMSnapshotTestCase(APITestCase):
         )
 
 
-class NatProvSameIRMIDInfraProjectIRMSnapshotTestCase(WagtailHackMixin, TransactionTestCase):
+class NatProvSameIRMIDInfraProjectIRMSnapshotTestCase(
+    WagtailHackMixin, TransactionTestCase
+):
     """
     Test that importing a national and provincial project with the same
     IRM ID yields different project instances with different URLs
     """
+
     def setUp(self):
         financial_year = FinancialYear.objects.create(slug="2030-31")
         self.prov_sphere = Sphere.objects.create(
@@ -120,9 +124,17 @@ class NatProvSameIRMIDInfraProjectIRMSnapshotTestCase(WagtailHackMixin, Transact
         self.prov_dataset = Dataset(headers=headers)
         self.nat_dataset = Dataset(headers=headers)
         num_columns = len(irm_preprocessor.OUTPUT_HEADERS)
-        prov_row = [12345, "proj-1", "A Prov Project"] + [None] * (num_columns-3) + [prov_IRM_snapshot.id, "provincial"]
+        prov_row = (
+            [12345, "proj-1", "A Prov Project"]
+            + [None] * (num_columns - 3)
+            + [prov_IRM_snapshot.id, "provincial"]
+        )
         self.prov_dataset.append(prov_row)
-        nat_row = [12345, "PROJ-1", "A Nat Project"] + [None] * (num_columns-3) + [nat_IRM_snapshot.id, "national"]
+        nat_row = (
+            [12345, "PROJ-1", "A Nat Project"]
+            + [None] * (num_columns - 3)
+            + [nat_IRM_snapshot.id, "national"]
+        )
         self.nat_dataset.append(nat_row)
         InfraProject.objects.create(IRM_project_id=12345, sphere_slug="national")
         InfraProject.objects.create(IRM_project_id=12345, sphere_slug="provincial")

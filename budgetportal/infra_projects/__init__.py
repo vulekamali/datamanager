@@ -95,8 +95,7 @@ class InfraProjectSnapshotLoader(ModelInstanceLoader):
 class InfraProjectForeignKeyWidget(ForeignKeyWidget):
     def get_queryset(self, value, row):
         project_id_qs = self.model.objects.filter(
-            IRM_project_id=row["Project ID"],
-            sphere_slug=row["sphere_slug"]
+            IRM_project_id=row["Project ID"], sphere_slug=row["sphere_slug"]
         )
         return project_id_qs
 
@@ -104,7 +103,8 @@ class InfraProjectForeignKeyWidget(ForeignKeyWidget):
 class InfraProjectSnapshotResource(resources.ModelResource):
     IRM_project_id = Field(
         attribute="project",
-        column_name="Project ID", # we use two fields but it doesn't seem to run when I remove this
+        # we use two fields for this lookup but it doesn't seem to run when I remove this
+        column_name="Project ID",
         widget=InfraProjectForeignKeyWidget(models.InfraProject, "IRM_project_id"),
     )
     irm_snapshot = Field(
@@ -112,9 +112,7 @@ class InfraProjectSnapshotResource(resources.ModelResource):
         column_name="irm_snapshot",
         widget=ForeignKeyWidget(models.IRMSnapshot),
     )
-    sphere_slug = Field(
-        column_name="sphere_slug",
-    )
+    sphere_slug = Field(column_name="sphere_slug",)
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
     department = Field(attribute="department", column_name="Department")
@@ -231,7 +229,10 @@ class InfraProjectSnapshotResource(resources.ModelResource):
         skip_unchanged = True
         report_skipped = False
         exclude = ("id",)
-        import_id_fields = ("IRM_project_id", "sphere_slug",)
+        import_id_fields = (
+            "IRM_project_id",
+            "sphere_slug",
+        )
         instance_loader_class = InfraProjectSnapshotLoader
 
 
