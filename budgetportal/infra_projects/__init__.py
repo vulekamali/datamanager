@@ -12,6 +12,7 @@ BASE_HEADERS = [
     "Project Name",
     "Province",
     "Department",
+    "Sector",
     "Local Municipality",
     "District Municipality",
     "Latitude",
@@ -73,7 +74,7 @@ status_order = {status: index for index, status in enumerate(STATUS_ORDERING)}
 class InfraProjectSnapshotLoader(ModelInstanceLoader):
     def get_instance(self, row):
         """
-        Gets a Provincial Infrastructure project instance by IRM_project_id.
+        Gets an infrastructure project instance by IRM_project_id.
         """
         project_id = self.resource.fields["IRM_project_id"].clean(row)
         irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
@@ -101,8 +102,9 @@ class InfraProjectSnapshotResource(resources.ModelResource):
     )
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
-    province = Field(attribute="province", column_name="Province")
     department = Field(attribute="department", column_name="Department")
+    province = Field(attribute="province", column_name="Province")
+    sector = Field(attribute="sector", column_name="Sector")
     local_municipality = Field(
         attribute="local_municipality", column_name="Local Municipality"
     )

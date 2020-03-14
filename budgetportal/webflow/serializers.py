@@ -57,7 +57,7 @@ class InfraProjectSnapshotSerializer(ModelSerializer):
         )
 
 
-class ProvInfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
+class InfaProjectCSVSnapshotSerializer(serializers.ModelSerializer):
     irm_snapshot = serializers.SerializerMethodField()
 
     class Meta:

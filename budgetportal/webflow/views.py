@@ -26,22 +26,22 @@ from rest_framework.generics import RetrieveAPIView
 from budgetportal.infra_projects.charts import time_series_data
 from .serializers import (
     InfraProjectCSVSerializer,
-    ProvInfaProjectCSVSnapshotSerializer,
+    InfaProjectCSVSnapshotSerializer,
     InfraProjectSerializer,
     InfraProjectFacetSerializer,
 )
 
 
-def provincial_infrastructure_project_list(request):
+def infrastructure_project_list(request):
     context = {
-        "page_title": "Provincial infrastructure project search - vulekamali",
-        "page_description": "Find infrastructure projects by provincial departments.",
+        "page_title": "Infrastructure project search - vulekamali",
+        "page_description": "Find infrastructure projects run by national and provincial government.",
         "page_data_json": "null",
     }
     return render(request, "webflow/infrastructure-search-template.html", context)
 
 
-def provincial_infrastructure_project_detail(request, id, slug):
+def infrastructure_project_detail(request, id, slug):
     project = get_object_or_404(models.InfraProject, pk=int(id))
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
@@ -50,8 +50,9 @@ def provincial_infrastructure_project_detail(request, id, slug):
     snapshot_list = list(project.project_snapshots.all())
     page_data["time_series_chart"] = time_series_data(snapshot_list)
     department = models.Department.get_in_latest_government(
-        snapshot.department, snapshot.province
+        snapshot.department, snapshot.government
     )
+
     page_data["department_url"] = department.get_url_path() if department else None
     page_data["province_depts_url"] = (
         "/%s/departments?province=%s&sphere=provincial"
@@ -67,11 +68,11 @@ def provincial_infrastructure_project_detail(request, id, slug):
         ),
         "page_title": "%s, %s Infrastructure projects - vulekamali"
         % (snapshot.name, snapshot.province),
-        "page_description": "Provincial infrastructure project by the %s %s department."
-        % (snapshot.province, snapshot.department),
+        "page_description": "Infrastructure project by the %s %s department."
+        % (snapshot.government_label, snapshot.department),
     }
     return render(
-        request, "webflow/detail_provincial-infrastructure-projects.html", context
+        request, "webflow/detail_infrastructure-projects.html", context
     )
 
 
@@ -93,9 +94,9 @@ class InfraProjectCSVGeneratorMixIn:
             yield writer.writerow(row)
 
 
-class ProvInfaProjectCSVDownload(RetrieveAPIView, InfraProjectCSVGeneratorMixIn):
+class InfaProjectCSVDownload(RetrieveAPIView, InfraProjectCSVGeneratorMixIn):
     queryset = models.InfraProject.objects.prefetch_related("project_snapshots")
-    serializer_class = ProvInfaProjectCSVSnapshotSerializer
+    serializer_class = InfaProjectCSVSnapshotSerializer
 
     def get(self, request, *args, **kwargs):
         project = get_object_or_404(self.queryset, id=int(kwargs["id"]))
@@ -157,7 +158,7 @@ class InfraProjectSearchView(
         response = super().list(request, *args, **kwargs)
         if isinstance(response.data, dict):
             response.data["csv_download_url"] = reverse(
-                "provincial-infrastructure-project-api-csv"
+                "infrastructure-project-api-csv"
             )
         if csv_download_params:
             response.data["csv_download_url"] += "?{}".format(csv_download_params)
@@ -188,7 +189,7 @@ class InfraProjectSearchView(
             "q",
         )
         extension = "csv"
-        filename = "provincial-infrastructure-projects"
+        filename = "infrastructure-projects"
         for key in keys_to_check:
             if query_params.get(key):
                 filename += "-{}-{}".format(key, slugify(query_params[key]))

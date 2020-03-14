@@ -1912,8 +1912,9 @@ class InfraProjectSnapshot(models.Model):
     )
     project_number = models.CharField(max_length=1024, blank=True, null=True)
     name = models.CharField(max_length=1024, blank=True, null=True)
-    province = models.CharField(max_length=1024, blank=True, null=True)
     department = models.CharField(max_length=1024, blank=True, null=True)
+    sector = models.CharField(max_length=1024, blank=True, null=True)
+    province = models.CharField(max_length=1024, blank=True, null=True)
     local_municipality = models.CharField(max_length=1024, blank=True, null=True)
     district_municipality = models.CharField(max_length=1024, blank=True, null=True)
     latitude = models.CharField(max_length=20, blank=True, null=True)
@@ -2005,6 +2006,25 @@ class InfraProjectSnapshot(models.Model):
         get_latest_by = "irm_snapshot"
         verbose_name = "Infrastructure project snapshot"
         unique_together = ["irm_snapshot", "project"]
+
+    @property
+    def government(self):
+        if self.irm_snapshot.sphere.slug == "national":
+            return "South Africa"
+        elif self.irm_snapshot.sphere.slug == "provincial":
+            return self.province
+        else:
+            raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
+
+    @property
+    def government_label(self):
+        if self.irm_snapshot.sphere.slug == "national":
+            return "national"
+        elif self.irm_snapshot.sphere.slug == "provincial":
+            return self.province
+        else:
+            raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
+
 
     def __str__(self):
         return self.name
