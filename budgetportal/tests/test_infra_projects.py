@@ -1407,8 +1407,7 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
-            response,
-            "infrastructure-projects-q-data-that-won-t-be-found.csv",
+            response, "infrastructure-projects-q-data-that-won-t-be-found.csv",
         )
 
         content = b"".join(response.streaming_content)
@@ -1427,9 +1426,7 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(
-            response, "infrastructure-projects.csv"
-        )
+        self._test_response_correctness(response, "infrastructure-projects.csv")
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
@@ -1500,9 +1497,7 @@ class InfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(
-            response, "infrastructure-projects.csv"
-        )
+        self._test_response_correctness(response, "infrastructure-projects.csv")
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))

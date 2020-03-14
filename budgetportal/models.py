@@ -1906,8 +1906,7 @@ class InfraProject(models.Model):
     @property
     def csv_download_url(self):
         return reverse(
-            "infra-project-detail-csv-download",
-            args=(self.id, self.get_slug()),
+            "infra-project-detail-csv-download", args=(self.id, self.get_slug()),
         )
 
 
@@ -2034,7 +2033,6 @@ class InfraProjectSnapshot(models.Model):
             return self.province
         else:
             raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
-
 
     def __str__(self):
         return self.name

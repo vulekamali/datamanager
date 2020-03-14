@@ -44,7 +44,7 @@ class BaseSeleniumTestCase(LiveServerTestCase):
         for method, error in self._outcome.errors:
             if error:
                 print(f"### collecting data for {method} {error} {self.id()}")
-                for entry in self.selenium.get_log('browser'):
+                for entry in self.selenium.get_log("browser"):
                     print(entry)
 
                 now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")

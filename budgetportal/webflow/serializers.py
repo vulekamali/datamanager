@@ -180,7 +180,14 @@ class InfraProjectFacetSerializer(HaystackFacetSerializer):
 
     class Meta:
         index_classes = [InfraProjectIndex]
-        fields = ["sector", "government_label", "province", "department", "status", "primary_funding_source"]
+        fields = [
+            "sector",
+            "government_label",
+            "province",
+            "department",
+            "status",
+            "primary_funding_source",
+        ]
         field_options = {
             "sector": {},
             "government_label": {},

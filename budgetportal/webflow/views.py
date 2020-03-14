@@ -71,9 +71,7 @@ def infrastructure_project_detail(request, id, slug):
         "page_description": "Infrastructure project by the %s %s department."
         % (snapshot.government_label, snapshot.department),
     }
-    return render(
-        request, "webflow/detail_infrastructure-projects.html", context
-    )
+    return render(request, "webflow/detail_infrastructure-projects.html", context)
 
 
 class InfraProjectCSVGeneratorMixIn:

@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0048_merge_20200314_1035'),
+        ("budgetportal", "0048_merge_20200314_1035"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='infraprojectsnapshot',
-            name='sector',
+            model_name="infraprojectsnapshot",
+            name="sector",
             field=models.CharField(blank=True, max_length=1024, null=True),
         ),
     ]
