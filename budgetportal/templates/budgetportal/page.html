@@ -1,0 +1,43 @@
+{% extends 'page-shell.html' %}
+{% load wagtailcore_tags %}
+
+{% block meta_title %}
+<title>{% firstof page.seo_title page.title %}</title>
+<meta name="twitter:title" content="{% firstof page.seo_title page.title %}">
+<meta property="og:title" content="{% firstof page.seo_title page.title %}" />
+{% endblock meta_title %}
+
+{% block meta_description %}
+{% with fallback_description="South Africa's National and Provincial budget data from National Treasury in partnership with IMALI YETHU." %}
+<meta name="description" content="{% firstof page.search_description fallback_description %}">
+<meta name="twitter:description" content="{% firstof page.search_description fallback_description %}">
+<meta property="og:description" content="{% firstof page.search_description fallback_description %}">
+{% endwith %}
+{% endblock meta_description %}
+
+{% block page_content %}
+<article class="Page-content">
+  <div class="Page-contentInner">
+
+
+    {% if self.get_ancestors|length > 1 %}
+    <div class="Section is-invisible">
+      {% for page in self.get_ancestors %}
+      {% if page.is_root == False %}
+      <a href="{% pageurl page %}">{{ page.title }}</a> /
+      {% endif %}
+      {% endfor %}
+
+      {{ self.title }}
+    </div>
+    {% endif %}
+
+
+    <h2 class="Page-mainHeading">{{ page.title }}</h2>
+
+    {% for block in page.body %}
+        {% include_block block %}
+    {% endfor %}
+  </div>
+</article>
+{% endblock page_content %}
