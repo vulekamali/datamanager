@@ -16,6 +16,8 @@ class GuideIndexPageTestCase(TestCase):
         self.assertContains(response, self.guide_index_page.title)
         self.assertContains(response, self.guide_index_page.intro)
 
+        self.assertGreaterEqual(self.category_guides.count(), 1)
+
         for category_guide in self.category_guides:
             self.assertContains(response, category_guide.external_url_title)
             self.assertContains(response, category_guide.external_url_description)

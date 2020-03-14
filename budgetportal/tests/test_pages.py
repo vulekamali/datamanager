@@ -1,5 +1,11 @@
 import json
-from budgetportal.models import Department, FinancialYear, Government, Sphere, CategoryGuide
+from budgetportal.models import (
+    Department,
+    FinancialYear,
+    Government,
+    Sphere,
+    CategoryGuide,
+)
 from django.test import Client, TestCase
 from mock import MagicMock, patch
 
@@ -291,7 +297,7 @@ class BasicPagesTestCase(TestCase):
         self.assertContains(response, '<a href="/datasets/test-slug">test-slug</a>')
         self.assertContains(response, "Test 2018/19")
         self.assertContains(response, "Learn more")
-        self.assertContains(response, 'href="{}"'.format(category_guide.external_url ))
+        self.assertContains(response, 'href="{}"'.format(category_guide.external_url))
 
     def test_infrastructure_projects_list_page(self):
         """Test that it loads and that some text is present"""
