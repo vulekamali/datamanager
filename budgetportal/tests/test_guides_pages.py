@@ -3,7 +3,7 @@ from budgetportal.models import GuideIndexPage, GuidePage
 
 
 class GuideIndexPageTestCase(TestCase):
-    fixtures = ["guides"]
+    fixtures = ["test-guides-pages"]
 
     def setUp(self):
         self.guide_index_page = GuideIndexPage.objects.get(id=4)
@@ -16,7 +16,7 @@ class GuideIndexPageTestCase(TestCase):
 
 
 class GuidePagesTestCase(TestCase):
-    fixtures = ["guides"]
+    fixtures = ["test-guides-pages"]
 
     def setUp(self):
         self.guide_page = GuidePage.objects.get(id=5)

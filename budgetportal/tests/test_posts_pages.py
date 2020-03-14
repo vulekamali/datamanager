@@ -3,7 +3,7 @@ from budgetportal.models import PostIndexPage, PostPage
 
 
 class PostIndexPageTestCase(TestCase):
-    fixtures = ["posts"]
+    fixtures = ["test-posts-pages"]
 
     def setUp(self):
         self.post_index_page = PostIndexPage.objects.get(id=6)
@@ -18,7 +18,7 @@ class PostIndexPageTestCase(TestCase):
 
 
 class PostPagesTestCase(TestCase):
-    fixtures = ["posts"]
+    fixtures = ["test-posts-pages"]
 
     def setUp(self):
         self.post_page = PostPage.objects.get(id=7)
