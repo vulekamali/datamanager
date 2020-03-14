@@ -2099,10 +2099,12 @@ class WagtailHomePage(Page):
 
 class LearningIndexPage(Page):
     subpage_types = ["budgetportal.GuideIndexPage"]
+    max_count = 1
 
 
 class PostIndexPage(Page):
     subpage_types = ["budgetportal.PostPage"]
+    max_count = 1
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
