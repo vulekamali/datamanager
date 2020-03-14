@@ -79,7 +79,6 @@ class InfraProjectSnapshotLoader(ModelInstanceLoader):
         """
         Gets an infrastructure project instance by IRM_project_id.
         """
-        logger.info("InfraProjectSnapshotLoader.get_instance %r " % row)
         project_id = self.resource.fields["IRM_project_id"].clean(row)
         irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
 
@@ -88,28 +87,25 @@ class InfraProjectSnapshotLoader(ModelInstanceLoader):
                 project=project_id, irm_snapshot=irm_snapshot_id
             )
         except models.InfraProjectSnapshot.DoesNotExist:
-            logger.info(f"Couldn't find InfraProjectSnapshot for {project_id} {irm_snapshot_id}")
+            pass
 
         return None
 
 
 class InfraProjectForeignKeyWidget(ForeignKeyWidget):
     def get_queryset(self, value, row):
-        1/0
-        logger.info("InfraProjectForeignKeyWidget.get_queryset %r " % row)
         project_id_qs = self.model.objects.filter(
             IRM_project_id=row["Project ID"],
             sphere_slug=row["sphere_slug"]
         )
-        logger.info(project_id_qs)
         return project_id_qs
 
 
 class InfraProjectSnapshotResource(resources.ModelResource):
     IRM_project_id = Field(
         attribute="project",
-        column_name="IRM_project_id",
-        widget=InfraProjectForeignKeyWidget(models.InfraProject),
+        column_name="Project ID", # we use two fields but it doesn't seem to run when I remove this
+        widget=InfraProjectForeignKeyWidget(models.InfraProject, "IRM_project_id"),
     )
     irm_snapshot = Field(
         attribute="irm_snapshot",
