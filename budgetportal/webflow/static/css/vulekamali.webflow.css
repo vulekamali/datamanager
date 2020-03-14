@@ -5291,6 +5291,7 @@ li {
   z-index: 100;
   display: none;
   width: 300px;
+  height: auto;
   padding: 8px;
   border-radius: 3px;
   background-color: #f8f8f8;
@@ -5300,6 +5301,7 @@ li {
 .small-tooltip__text {
   position: static;
   z-index: auto;
+  display: block;
   float: none;
   clear: none;
   font-size: 12px;

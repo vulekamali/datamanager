@@ -85,7 +85,7 @@ class InfraProjectCSVSerializer(HaystackSerializer):
             "name",
             "irm_snapshot",
             "sphere",
-            "government_label"
+            "government_label",
             "province",
             "department",
             "sector",

@@ -24,6 +24,7 @@ class BaseSeleniumTestCase(LiveServerTestCase):
 
     def setUp(self):
         super(BaseSeleniumTestCase, self).setUp()
+
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("headless")
         chrome_options.add_argument("--no-sandbox")
@@ -35,17 +36,20 @@ class BaseSeleniumTestCase(LiveServerTestCase):
         self.selenium.implicitly_wait(10)
         self.wait = WebDriverWait(self.selenium, 5)
 
-    def tearDown(self):
-        super(BaseSeleniumTestCase, self).tearDown()
-        try:
-            # https://stackoverflow.com/questions/14991244/how-do-i-capture-a-screenshot-if-my-nosetests-fail
-            if sys.exc_info()[0]:  # Returns the info of exception being handled
-                now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")
-                if not self.selenium.get_screenshot_as_file("%s.png" % now):
-                    warnings.warn("Selenium screenshot failed (IOError?)", UserWarning)
+        self.addCleanup(self.log_failure_details)
+        self.addCleanup(self.selenium.quit)
 
-        finally:
-            self.selenium.quit()
+    def log_failure_details(self):
+        # https://stackoverflow.com/questions/14991244/how-do-i-capture-a-screenshot-if-my-nosetests-fail
+        for method, error in self._outcome.errors:
+            if error:
+                print(f"### collecting data for {method} {error} {self.id()}")
+                for entry in self.selenium.get_log('browser'):
+                    print(entry)
+
+                now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")
+                if not self.selenium.get_screenshot_as_file(f"{now}-{self.id()}.png"):
+                    warnings.warn("Selenium screenshot failed")
 
     def wait_until_text_in(self, selector, text):
         self.wait.until(

@@ -73,7 +73,7 @@ def import_irm_snapshot(snapshot_id):
         async_task(
             index_irm_projects,
             snapshot_id=snapshot_id,
-            task_name="Update infrastructure projects search index following snapshot deletion",
+            task_name="Update infrastructure projects search index following IRM snapshot import",
         )
         return {
             "totals": result.totals,

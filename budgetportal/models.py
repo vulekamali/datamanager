@@ -1866,7 +1866,17 @@ class IRMSnapshot(models.Model):
 
 
 class InfraProject(models.Model):
-    """This represents a project, grouping its snapshots"""
+    """
+    This represents a project, grouping its snapshots by project's ID in IRM.
+    This assumes the same project will have the same ID in IRM across financial years.
+
+    The internal ID of these instances is used as the ID in the URL, since we don't
+    want to expose IRM IDs publicly but we want to have a consistent URL for projects.
+
+    We don't delete these even when there's no snapshots associated with them
+    so that the URL based on this id remains consistent in case projects with this
+    IRM ID are uploaded after snapshots are deleted.
+    """
 
     IRM_project_id = models.IntegerField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
