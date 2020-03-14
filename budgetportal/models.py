@@ -1878,18 +1878,20 @@ class InfraProject(models.Model):
     IRM ID are uploaded after snapshots are deleted.
     """
 
-    IRM_project_id = models.IntegerField(unique=True)
+    IRM_project_id = models.IntegerField()
+    sphere_slug = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
         verbose_name = "Infrastructure project"
+        unique_together = ["sphere_slug", "IRM_project_id"]
 
     def __str__(self):
         if self.project_snapshots.count():
             return self.project_snapshots.latest().name
         else:
-            return "IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
+            return f"{self.sphere_slug} IRM project ID {self.IRM_project_id} (no snapshots loaded)"
 
     def get_slug(self):
         return slugify(
@@ -2028,7 +2030,7 @@ class InfraProjectSnapshot(models.Model):
     @property
     def government_label(self):
         if self.irm_snapshot.sphere.slug == "national":
-            return "national"
+            return "National"
         elif self.irm_snapshot.sphere.slug == "provincial":
             return self.province
         else:

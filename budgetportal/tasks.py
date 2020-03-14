@@ -66,7 +66,7 @@ def format_row(ordered_dict):
 def import_irm_snapshot(snapshot_id):
     try:
         snapshot = IRMSnapshot.objects.get(pk=snapshot_id)
-        result = infra_projects.import_snapshot(snapshot.file.read(), snapshot.id)
+        result = infra_projects.import_snapshot(snapshot)
         for row_num, row_result in enumerate(result.rows):
             if row_result.errors:
                 raise RowError("Error with row %d" % row_num, row_result, row_num)

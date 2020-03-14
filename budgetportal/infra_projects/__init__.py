@@ -220,17 +220,20 @@ class InfraProjectSnapshotResource(resources.ModelResource):
         instance_loader_class = InfraProjectSnapshotLoader
 
 
-def import_snapshot(file, irm_snapshot_id):
+def import_snapshot(snapshot):
+    file = snapshot.file.read()
     data_book = Databook().load(file, "xlsx")
     dataset = data_book.sheets()[0]
     preprocessed_dataset = preprocess(dataset)
     # Ensure projects exist
     for IRM_project_id in preprocessed_dataset["Project ID"]:
         if IRM_project_id:
-            models.InfraProject.objects.get_or_create(IRM_project_id=IRM_project_id)
+            models.InfraProject.objects.get_or_create(
+                IRM_project_id=IRM_project_id, sphere_slug=snapshot.sphere.slug
+            )
     if len(preprocessed_dataset) > 0:
         preprocessed_dataset.append_col(
-            [irm_snapshot_id] * len(preprocessed_dataset), header="irm_snapshot"
+            [snapshot.id] * len(preprocessed_dataset), header="irm_snapshot"
         )
     resource = InfraProjectSnapshotResource()
     result = resource.import_data(preprocessed_dataset)
