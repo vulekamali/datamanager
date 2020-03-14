@@ -2091,34 +2091,30 @@ def csv_url(aggregate_url):
 
 class WagtailHomePage(Page):
     parent_page_types = []
-    subpage_types = ['budgetportal.LearningIndexPage', 'budgetportal.PostIndexPage']
+    subpage_types = ["budgetportal.LearningIndexPage", "budgetportal.PostIndexPage"]
 
     class Meta:
-        app_label = 'budgetportal'
+        app_label = "budgetportal"
 
 
 class LearningIndexPage(Page):
-    subpage_types = ['budgetportal.GuideIndexPage']
+    subpage_types = ["budgetportal.GuideIndexPage"]
 
 
 class PostIndexPage(Page):
-    subpage_types = ['budgetportal.PostPage']
+    subpage_types = ["budgetportal.PostPage"]
     intro = RichTextField(blank=True)
 
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
+    content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
 
 class GuideIndexPage(Page):
     max_count = 1
-    parent_page_types = ['budgetportal.LearningIndexPage']
-    subpage_types = ['budgetportal.GuidePage']
+    parent_page_types = ["budgetportal.LearningIndexPage"]
+    subpage_types = ["budgetportal.GuidePage"]
     intro = RichTextField(blank=True)
 
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
+    content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
     # def get_context(self, request, *args, **kwargs):
     #     context = super().get_context(request, *args, **kwargs)
@@ -2132,7 +2128,7 @@ class GuideIndexPage(Page):
 class GuidePage(Page):
     parent_page_types = ["budgetportal.GuideIndexPage"]
     body = StreamField(
-        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()), ]
+        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
     )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -2164,7 +2160,7 @@ class CategoryGuide(models.Model):
         help_text=(
             "Only shown if External URL is used. This may be truncated so "
             "use a short description that will also be seen on the external page."
-        )
+        ),
     )
     external_url_description = models.TextField(
         null=True,
@@ -2172,11 +2168,13 @@ class CategoryGuide(models.Model):
         help_text=(
             "Only shown if External URL is used. This may be truncated so "
             "use a short description that will also be seen on the external page."
-        )
+        ),
     )
 
     def __str__(self):
-        return "{} - {}".format(self.category_slug, self.guide_page or self.external_url)
+        return "{} - {}".format(
+            self.category_slug, self.guide_page or self.external_url
+        )
 
     def clean(self):
         if self.external_url is None and self.guide_page is None:
@@ -2204,21 +2202,20 @@ class NavContextMixin:
 
 
 class PostPage(Page):
-    parent_page_types = ['budgetportal.PostIndexPage']
-    body = StreamField([
-        ('section', SectionBlock()),
-        ('html', wagtail_blocks.RawHTMLBlock()),
-    ])
+    parent_page_types = ["budgetportal.PostIndexPage"]
+    body = StreamField(
+        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+    )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        StreamFieldPanel("body"),
     ]

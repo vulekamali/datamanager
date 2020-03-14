@@ -9,93 +9,254 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailimages', '0001_squashed_0021'),
-        ('wagtailcore', '0041_group_collection_permissions_verbose_name_plural'),
-        ('budgetportal', '0047_auto_20200313_1911'),
+        ("wagtailimages", "0001_squashed_0021"),
+        ("wagtailcore", "0041_group_collection_permissions_verbose_name_plural"),
+        ("budgetportal", "0047_auto_20200313_1911"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='GuideIndexPage',
+            name="GuideIndexPage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('intro', wagtail.core.fields.RichTextField(blank=True)),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.Page",
+                    ),
+                ),
+                ("intro", wagtail.core.fields.RichTextField(blank=True)),
             ],
-            options={
-                'abstract': False,
-            },
-            bases=('wagtailcore.page',),
+            options={"abstract": False,},
+            bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
-            name='LearningIndexPage',
+            name="LearningIndexPage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.Page",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
-            bases=('wagtailcore.page',),
+            options={"abstract": False,},
+            bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
-            name='PostIndexPage',
+            name="PostIndexPage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('intro', wagtail.core.fields.RichTextField(blank=True)),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.Page",
+                    ),
+                ),
+                ("intro", wagtail.core.fields.RichTextField(blank=True)),
             ],
-            options={
-                'abstract': False,
-            },
-            bases=('wagtailcore.page',),
+            options={"abstract": False,},
+            bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
-            name='WagtailHomePage',
+            name="WagtailHomePage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.Page",
+                    ),
+                ),
             ],
-            bases=('wagtailcore.page',),
+            bases=("wagtailcore.page",),
         ),
         migrations.AlterField(
-            model_name='faq',
-            name='content',
-            field=wagtail.core.fields.RichTextField(),
+            model_name="faq", name="content", field=wagtail.core.fields.RichTextField(),
         ),
         migrations.CreateModel(
-            name='PostPage',
+            name="PostPage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('body', wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('presentation_class', wagtail.core.blocks.ChoiceBlock(choices=[('is-default', 'Default'), ('is-invisible', 'No background/border'), ('is-bevel', 'Bevel')])), ('heading', wagtail.core.blocks.CharBlock()), ('content', wagtail.core.blocks.RichTextBlock())])), ('html', wagtail.core.blocks.RawHTMLBlock())])),
-                ('created_at', models.DateTimeField(auto_now_add=True, null=True)),
-                ('updated_at', models.DateTimeField(auto_now=True, null=True)),
-                ('image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.Page",
+                    ),
+                ),
+                (
+                    "body",
+                    wagtail.core.fields.StreamField(
+                        [
+                            (
+                                "section",
+                                wagtail.core.blocks.StructBlock(
+                                    [
+                                        (
+                                            "presentation_class",
+                                            wagtail.core.blocks.ChoiceBlock(
+                                                choices=[
+                                                    ("is-default", "Default"),
+                                                    (
+                                                        "is-invisible",
+                                                        "No background/border",
+                                                    ),
+                                                    ("is-bevel", "Bevel"),
+                                                ]
+                                            ),
+                                        ),
+                                        ("heading", wagtail.core.blocks.CharBlock()),
+                                        (
+                                            "content",
+                                            wagtail.core.blocks.RichTextBlock(),
+                                        ),
+                                    ]
+                                ),
+                            ),
+                            ("html", wagtail.core.blocks.RawHTMLBlock()),
+                        ]
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, null=True)),
+                ("updated_at", models.DateTimeField(auto_now=True, null=True)),
+                (
+                    "image",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="+",
+                        to="wagtailimages.Image",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
-            bases=('wagtailcore.page',),
+            options={"abstract": False,},
+            bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
-            name='GuidePage',
+            name="GuidePage",
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('body', wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('presentation_class', wagtail.core.blocks.ChoiceBlock(choices=[('is-default', 'Default'), ('is-invisible', 'No background/border'), ('is-bevel', 'Bevel')])), ('heading', wagtail.core.blocks.CharBlock()), ('content', wagtail.core.blocks.RichTextBlock())])), ('html', wagtail.core.blocks.RawHTMLBlock())])),
-                ('created_at', models.DateTimeField(auto_now_add=True, null=True)),
-                ('updated_at', models.DateTimeField(auto_now=True, null=True)),
-                ('image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
+                (
+                    "page_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="wagtailcore.Page",
+                    ),
+                ),
+                (
+                    "body",
+                    wagtail.core.fields.StreamField(
+                        [
+                            (
+                                "section",
+                                wagtail.core.blocks.StructBlock(
+                                    [
+                                        (
+                                            "presentation_class",
+                                            wagtail.core.blocks.ChoiceBlock(
+                                                choices=[
+                                                    ("is-default", "Default"),
+                                                    (
+                                                        "is-invisible",
+                                                        "No background/border",
+                                                    ),
+                                                    ("is-bevel", "Bevel"),
+                                                ]
+                                            ),
+                                        ),
+                                        ("heading", wagtail.core.blocks.CharBlock()),
+                                        (
+                                            "content",
+                                            wagtail.core.blocks.RichTextBlock(),
+                                        ),
+                                    ]
+                                ),
+                            ),
+                            ("html", wagtail.core.blocks.RawHTMLBlock()),
+                        ]
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, null=True)),
+                ("updated_at", models.DateTimeField(auto_now=True, null=True)),
+                (
+                    "image",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="+",
+                        to="wagtailimages.Image",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
-            bases=('wagtailcore.page',),
+            options={"abstract": False,},
+            bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
-            name='CategoryGuide',
+            name="CategoryGuide",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('category_slug', models.SlugField(max_length=200, unique=True)),
-                ('external_url', models.URLField(blank=True, null=True)),
-                ('external_url_title', models.CharField(blank=True, help_text='Only shown if External URL is used. This may be truncated so use a short description that will also be seen on the external page.', max_length=200, null=True)),
-                ('external_url_description', models.TextField(blank=True, help_text='Only shown if External URL is used. This may be truncated so use a short description that will also be seen on the external page.', null=True)),
-                ('guide_page', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='budgetportal.GuidePage')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("category_slug", models.SlugField(max_length=200, unique=True)),
+                ("external_url", models.URLField(blank=True, null=True)),
+                (
+                    "external_url_title",
+                    models.CharField(
+                        blank=True,
+                        help_text="Only shown if External URL is used. This may be truncated so use a short description that will also be seen on the external page.",
+                        max_length=200,
+                        null=True,
+                    ),
+                ),
+                (
+                    "external_url_description",
+                    models.TextField(
+                        blank=True,
+                        help_text="Only shown if External URL is used. This may be truncated so use a short description that will also be seen on the external page.",
+                        null=True,
+                    ),
+                ),
+                (
+                    "guide_page",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="budgetportal.GuidePage",
+                    ),
+                ),
             ],
         ),
     ]
