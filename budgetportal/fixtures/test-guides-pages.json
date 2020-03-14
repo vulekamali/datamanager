@@ -253,5 +253,27 @@
     "model": "budgetportal.learningindexpage",
     "pk": 3,
     "fields": {}
+  },
+  {
+    "model": "budgetportal.categoryguide",
+    "pk": 1,
+    "fields": {
+      "category_slug": "frameworks-for-conditional-grants-to-provinces",
+      "guide_page": 5,
+      "external_url": null,
+      "external_url_title": null,
+      "external_url_description": ""
+    }
+  },
+  {
+    "model": "budgetportal.categoryguide",
+    "pk": 2,
+    "fields": {
+      "category_slug": "annual-reports",
+      "guide_page": null,
+      "external_url": "http://google.com",
+      "external_url_title": "google title",
+      "external_url_description": "google description"
+    }
   }
 ]

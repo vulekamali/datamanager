@@ -19,12 +19,18 @@
       {{ description|linebreaks }}
       </div>
 
-      {% if guide %}
+        {% if guide %}
 
-        <a href="{{ guide.url }}" class="Button is-inline u-marginTop25 u-marginBottom10">
-          Learn more about {{ name }}
-        </a>
-      {% endif %}
+            {% if guide.external_url %}
+                <a href="{{ guide.external_url }}" class="Button is-inline u-marginTop25 u-marginBottom10">
+                    Learn more about {{ name }}
+                </a>
+            {% else %}
+                <a href="{{ guide.guide_page.url }}" class="Button is-inline u-marginTop25 u-marginBottom10">
+                    Learn more about {{ name }}
+                </a>
+            {% endif %}
+        {% endif %}
 
     </div>
 
