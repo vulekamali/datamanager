@@ -28,10 +28,10 @@ in all these pages, which is the Javascript we use to insert page data into
 the correct fields.
 
 
-Provincial Infrastructure Project Search page
+Infrastructure Project Search page
 ----------------------------------
 
-- Route: `/infrastructure-projects/provincial`
+- Route: `/infrastructure-projects/full`
 - Webflow page name: `Infrastructure Search Template`
 - Template File name: `infrastructure-search-template.html`
 
@@ -48,7 +48,7 @@ Selectors for templating in data:
 - `#Infrastructure-Search-Input`
 - `#Search-Button`
 - `#clear-filters-button`
-- `#province-dropdown`
+- `#government-dropdown`
 - `#department-dropdown`
 - `#status-dropdown`
 - `#funding-source-dropdown`
@@ -70,13 +70,13 @@ Selectors for templating in data:
 Infrastructure Project Detail page
 ----------------------------------
 
-- Route: `/infrastructure-projects/provincial/<id>-<slug>-<province-slug>`
-- Webflow page name: `Provincial Infrastructure Project`
-- Template file name: `detail_provincial-infrastructure-projects.html`
+- Route: `/infrastructure-projects/full/<id>-<slug>-<government-slug>`
+- Webflow page name: `Infrastructure Project`
+- Template file name: `detail_infrastructure-projects.html`
 
 Selectors for templating in data:
 
-- `body.provincial-infrastructure-project-detail-page`
+- `body.infrastructure-project-detail-page`
 - `#project-location-map-container`
 - `#project-municipal-context-map-container`
 - Project definition
