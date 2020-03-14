@@ -2,7 +2,7 @@
 {% load json_script_escape %}
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Mar 04 2020 16:03:49 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Mar 14 2020 09:50:35 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="5db0b167ab837b6e6c7b114d" data-wf-site="5d660ef145315201ac996790">
 <head>
   <meta charset="utf-8">
@@ -270,256 +270,335 @@
         </div>
       </div>
       <div class="row">
-        <div class="col col-3 col-m-6 col-xs-12">
-          <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER BY province:</div>
-          <div class="dropdown_wrapper">
-            <div data-delay="0" id="province-dropdown" class="dropdown w-dropdown">
-              <div class="chart-dropdown_trigger w-dropdown-toggle">
-                <div class="text-block">Eastern Cape</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
-              <nav class="chart-dropdown_list w-dropdown-list">
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">All provinces</div>
-                  <div class="search-dropdown_value">(1204)</div>
-                </a>
-                <a href="#" class="dropdown-link selected w-inline-block">
-                  <div class="search-status active"></div>
-                  <div class="search-dropdown_label">Eastern Cape</div>
-                  <div class="search-dropdown_value">(205)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Free State</div>
-                  <div class="search-dropdown_value">(84)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Gauteng</div>
-                  <div class="search-dropdown_value">(187)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">KwaZulu-Natal</div>
-                  <div class="search-dropdown_value">(23)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Limpopo</div>
-                  <div class="search-dropdown_value">(145)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Mpumalanga</div>
-                  <div class="search-dropdown_value">(61)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Northern Cape</div>
-                  <div class="search-dropdown_value">(74)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">North West</div>
-                  <div class="search-dropdown_value">(45)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status active"></div>
-                  <div class="search-dropdown_label">Western Cape</div>
-                  <div class="search-dropdown_value">(115)</div>
-                </a>
-              </nav>
+        <div class="search-options__wrap">
+          <div class="search-fields__wrap">
+            <div class="col col-3 col-m-6 col-xs-12">
+              <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER BY government:</div>
+              <div class="dropdown_wrapper">
+                <div data-delay="0" id="government-dropdown" class="dropdown w-dropdown">
+                  <div class="chart-dropdown_trigger w-dropdown-toggle">
+                    <div class="text-block">All Governments</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
+                  <nav class="chart-dropdown_list w-dropdown-list">
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">All provinces</div>
+                      <div class="search-dropdown_value">(1204)</div>
+                    </a>
+                    <a href="#" class="dropdown-link selected w-inline-block">
+                      <div class="search-status active"></div>
+                      <div class="search-dropdown_label">Eastern Cape</div>
+                      <div class="search-dropdown_value">(205)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Free State</div>
+                      <div class="search-dropdown_value">(84)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Gauteng</div>
+                      <div class="search-dropdown_value">(187)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">KwaZulu-Natal</div>
+                      <div class="search-dropdown_value">(23)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Limpopo</div>
+                      <div class="search-dropdown_value">(145)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Mpumalanga</div>
+                      <div class="search-dropdown_value">(61)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Northern Cape</div>
+                      <div class="search-dropdown_value">(74)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">North West</div>
+                      <div class="search-dropdown_value">(45)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status active"></div>
+                      <div class="search-dropdown_label">Western Cape</div>
+                      <div class="search-dropdown_value">(115)</div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <div class="col col-3 col-m-6 col-xs-12">
+              <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by sector</div>
+              <div class="dropdown_wrapper">
+                <div data-delay="0" id="sector-dropdown" class="dropdown w-dropdown">
+                  <div class="chart-dropdown_trigger w-dropdown-toggle">
+                    <div class="text-block">All Sectors</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
+                  <nav class="chart-dropdown_list w-dropdown-list">
+                    <a href="#" class="dropdown-link selected w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">All Primary Funding Sources</div>
+                      <div class="search-dropdown_value">(1204)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status active"></div>
+                      <div class="search-dropdown_label">Eastern Cape</div>
+                      <div class="search-dropdown_value">(205)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Free State</div>
+                      <div class="search-dropdown_value">(84)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Gauteng</div>
+                      <div class="search-dropdown_value">(187)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">KwaZulu-Natal</div>
+                      <div class="search-dropdown_value">(23)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Limpopo</div>
+                      <div class="search-dropdown_value">(145)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Mpumalanga</div>
+                      <div class="search-dropdown_value">(61)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Northern Cape</div>
+                      <div class="search-dropdown_value">(74)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">North West</div>
+                      <div class="search-dropdown_value">(45)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status active"></div>
+                      <div class="search-dropdown_label">Western Cape</div>
+                      <div class="search-dropdown_value">(115)</div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <div class="col col-3 col-m-6 col-xs-12">
+              <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by department:</div>
+              <div class="dropdown_wrapper">
+                <div data-delay="0" id="department-dropdown" class="dropdown w-dropdown">
+                  <div class="chart-dropdown_trigger w-dropdown-toggle">
+                    <div class="text-block">All Departments</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
+                  <nav class="chart-dropdown_list w-dropdown-list">
+                    <a href="#" class="dropdown-link selected w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">All Departments</div>
+                      <div class="search-dropdown_value">(1204)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status active"></div>
+                      <div class="search-dropdown_label">Eastern Cape</div>
+                      <div class="search-dropdown_value">(205)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Free State</div>
+                      <div class="search-dropdown_value">(84)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Gauteng</div>
+                      <div class="search-dropdown_value">(187)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">KwaZulu-Natal</div>
+                      <div class="search-dropdown_value">(23)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Limpopo</div>
+                      <div class="search-dropdown_value">(145)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Mpumalanga</div>
+                      <div class="search-dropdown_value">(61)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Northern Cape</div>
+                      <div class="search-dropdown_value">(74)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">North West</div>
+                      <div class="search-dropdown_value">(45)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status active"></div>
+                      <div class="search-dropdown_label">Western Cape</div>
+                      <div class="search-dropdown_value">(115)</div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <div class="col col-3 col-m-6 col-xs-12">
+              <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by project Status:</div>
+              <div class="dropdown_wrapper">
+                <div data-delay="0" id="status-dropdown" class="dropdown w-dropdown">
+                  <div class="chart-dropdown_trigger w-dropdown-toggle">
+                    <div class="text-block">All Project Statuses</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
+                  <nav class="chart-dropdown_list w-dropdown-list">
+                    <a href="#" class="dropdown-link selected w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">All Project Statuses</div>
+                      <div class="search-dropdown_value">(1204)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status active"></div>
+                      <div class="search-dropdown_label">Eastern Cape</div>
+                      <div class="search-dropdown_value">(205)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Free State</div>
+                      <div class="search-dropdown_value">(84)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Gauteng</div>
+                      <div class="search-dropdown_value">(187)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">KwaZulu-Natal yiyasdiyy iya sidy iasyd iasyd</div>
+                      <div class="search-dropdown_value">(23)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Limpopo</div>
+                      <div class="search-dropdown_value">(145)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Mpumalanga</div>
+                      <div class="search-dropdown_value">(61)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">Northern Cape</div>
+                      <div class="search-dropdown_value">(74)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status"></div>
+                      <div class="search-dropdown_label">North West</div>
+                      <div class="search-dropdown_value">(45)</div>
+                    </a>
+                    <a href="#" class="dropdown-link w-inline-block">
+                      <div class="search-status active"></div>
+                      <div class="search-dropdown_label">Western Cape</div>
+                      <div class="search-dropdown_value">(115)</div>
+                    </a>
+                  </nav>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col col-3 col-m-6 col-xs-12">
-          <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by department:</div>
-          <div class="dropdown_wrapper">
-            <div data-delay="0" id="department-dropdown" class="dropdown w-dropdown">
-              <div class="chart-dropdown_trigger w-dropdown-toggle">
-                <div class="text-block">All Departments</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
-              <nav class="chart-dropdown_list w-dropdown-list">
-                <a href="#" class="dropdown-link selected w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">All Departments</div>
-                  <div class="search-dropdown_value">(1204)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status active"></div>
-                  <div class="search-dropdown_label">Eastern Cape</div>
-                  <div class="search-dropdown_value">(205)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Free State</div>
-                  <div class="search-dropdown_value">(84)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Gauteng</div>
-                  <div class="search-dropdown_value">(187)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">KwaZulu-Natal</div>
-                  <div class="search-dropdown_value">(23)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Limpopo</div>
-                  <div class="search-dropdown_value">(145)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Mpumalanga</div>
-                  <div class="search-dropdown_value">(61)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Northern Cape</div>
-                  <div class="search-dropdown_value">(74)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">North West</div>
-                  <div class="search-dropdown_value">(45)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status active"></div>
-                  <div class="search-dropdown_label">Western Cape</div>
-                  <div class="search-dropdown_value">(115)</div>
-                </a>
-              </nav>
-            </div>
-          </div>
-        </div>
-        <div class="col col-3 col-m-6 col-xs-12">
-          <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by project Status:</div>
-          <div class="dropdown_wrapper">
-            <div data-delay="0" id="status-dropdown" class="dropdown w-dropdown">
-              <div class="chart-dropdown_trigger w-dropdown-toggle">
-                <div class="text-block">All Project Statuses</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
-              <nav class="chart-dropdown_list w-dropdown-list">
-                <a href="#" class="dropdown-link selected w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">All Project Statuses</div>
-                  <div class="search-dropdown_value">(1204)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status active"></div>
-                  <div class="search-dropdown_label">Eastern Cape</div>
-                  <div class="search-dropdown_value">(205)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Free State</div>
-                  <div class="search-dropdown_value">(84)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Gauteng</div>
-                  <div class="search-dropdown_value">(187)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">KwaZulu-Natal yiyasdiyy iya sidy iasyd iasyd</div>
-                  <div class="search-dropdown_value">(23)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Limpopo</div>
-                  <div class="search-dropdown_value">(145)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Mpumalanga</div>
-                  <div class="search-dropdown_value">(61)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Northern Cape</div>
-                  <div class="search-dropdown_value">(74)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">North West</div>
-                  <div class="search-dropdown_value">(45)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status active"></div>
-                  <div class="search-dropdown_label">Western Cape</div>
-                  <div class="search-dropdown_value">(115)</div>
-                </a>
-              </nav>
-            </div>
-          </div>
-        </div>
-        <div class="col col-3 col-m-6 col-xs-12">
-          <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by PRIMARY FUNDING SOURCE:</div>
-          <div class="dropdown_wrapper">
-            <div data-delay="0" id="primary-funding-source-dropdown" class="dropdown w-dropdown">
-              <div class="chart-dropdown_trigger w-dropdown-toggle">
-                <div class="text-block">All Primary Funding Sources</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
-              <nav class="chart-dropdown_list w-dropdown-list">
-                <a href="#" class="dropdown-link selected w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">All Primary Funding Sources</div>
-                  <div class="search-dropdown_value">(1204)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status active"></div>
-                  <div class="search-dropdown_label">Eastern Cape</div>
-                  <div class="search-dropdown_value">(205)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Free State</div>
-                  <div class="search-dropdown_value">(84)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Gauteng</div>
-                  <div class="search-dropdown_value">(187)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">KwaZulu-Natal</div>
-                  <div class="search-dropdown_value">(23)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Limpopo</div>
-                  <div class="search-dropdown_value">(145)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Mpumalanga</div>
-                  <div class="search-dropdown_value">(61)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">Northern Cape</div>
-                  <div class="search-dropdown_value">(74)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status"></div>
-                  <div class="search-dropdown_label">North West</div>
-                  <div class="search-dropdown_value">(45)</div>
-                </a>
-                <a href="#" class="dropdown-link w-inline-block">
-                  <div class="search-status active"></div>
-                  <div class="search-dropdown_label">Western Cape</div>
-                  <div class="search-dropdown_value">(115)</div>
-                </a>
-              </nav>
+          <div style="height:0PX;opacity:0" class="advanced-search-fields__wrap">
+            <div class="advance-search">
+              <div class="col col-3 col-m-6 col-xs-12">
+                <div class="small-detail-heading cc-mb-4 cc-ml-4">FILTER by PRIMARY FUNDING SOURCE:</div>
+                <div class="dropdown_wrapper">
+                  <div data-delay="0" id="primary-funding-source-dropdown" class="dropdown w-dropdown">
+                    <div class="chart-dropdown_trigger w-dropdown-toggle">
+                      <div class="text-block">All Primary Funding Sources</div><img src="/static/images/arrow-dropdown-24px.svg" alt="" class="icon_16px"></div>
+                    <nav class="chart-dropdown_list w-dropdown-list">
+                      <a href="#" class="dropdown-link selected w-inline-block">
+                        <div class="search-status"></div>
+                        <div class="search-dropdown_label">All Primary Funding Sources</div>
+                        <div class="search-dropdown_value">(1204)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status active"></div>
+                        <div class="search-dropdown_label">Eastern Cape</div>
+                        <div class="search-dropdown_value">(205)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status"></div>
+                        <div class="search-dropdown_label">Free State</div>
+                        <div class="search-dropdown_value">(84)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status"></div>
+                        <div class="search-dropdown_label">Gauteng</div>
+                        <div class="search-dropdown_value">(187)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status"></div>
+                        <div class="search-dropdown_label">KwaZulu-Natal</div>
+                        <div class="search-dropdown_value">(23)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status"></div>
+                        <div class="search-dropdown_label">Limpopo</div>
+                        <div class="search-dropdown_value">(145)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status"></div>
+                        <div class="search-dropdown_label">Mpumalanga</div>
+                        <div class="search-dropdown_value">(61)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status"></div>
+                        <div class="search-dropdown_label">Northern Cape</div>
+                        <div class="search-dropdown_value">(74)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status"></div>
+                        <div class="search-dropdown_label">North West</div>
+                        <div class="search-dropdown_value">(45)</div>
+                      </a>
+                      <a href="#" class="dropdown-link w-inline-block">
+                        <div class="search-status active"></div>
+                        <div class="search-dropdown_label">Western Cape</div>
+                        <div class="search-dropdown_value">(115)</div>
+                      </a>
+                    </nav>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="row justify-end">
         <div class="col">
-          <div class="div-block-20">
+          <div class="search-settings__wrap">
+            <div data-w-id="dd97f026-4de6-3e25-76d9-1c78c31a16db" style="background-color:rgb(217,217,217);color:rgb(51,51,51)" class="advanced-search">
+              <div>Advanced search options</div>
+              <div class="advanced-search__icon">
+                <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0DEG) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0DEG) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0DEG) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0DEG) skew(0, 0)" class="icon--plus">
+                  <div class="svg-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
+<path d="M0 0h24v24H0z" fill="none"></path><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+</svg></div>
+                </div>
+              </div>
+            </div>
             <a id="clear-filters-button" href="#" class="clear-filters-button w-inline-block">
-              <div class="clear-filter__text">Clear all filters</div>
+              <div class="clear-filter__text">Clear filters</div>
             </a>
           </div>
         </div>
