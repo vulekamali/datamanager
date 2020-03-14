@@ -42,7 +42,7 @@ BASE_HEADERS = [
 ]
 REPEATED_IMPLEMENTOR_HEADER = u"Project Contractor"
 EXTRA_IMPLEMENTOR_HEADER = "Other parties"
-IMPLEMENTORS = [u"Program Implementing Agent", u"Principal Agent", u"Main Contractor"]
+IMPLEMENTORS = ["Program Implementing Agent", "Principal Agent", "Main Contractor"]
 IMPLEMENTOR_HEADERS = IMPLEMENTORS + [EXTRA_IMPLEMENTOR_HEADER]
 OUTPUT_HEADERS = BASE_HEADERS + IMPLEMENTOR_HEADERS
 
