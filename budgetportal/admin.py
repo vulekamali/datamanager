@@ -181,6 +181,7 @@ class InfraProjectAdmin(admin.ModelAdmin):
     inlines = [InfraProjectSnapshotInline]
     readonly_fields = ["IRM_project_id"]
     list_filter = (
+        "project_snapshots__irm_snapshot__sphere__slug",
         "project_snapshots__irm_snapshot",
         "project_snapshots__province",
         "project_snapshots__department",
@@ -193,6 +194,7 @@ class InfraProjectSnapshotAdmin(admin.ModelAdmin):
     list_display_links = ("name", "project_number")
     list_filter = (
         "irm_snapshot__sphere__financial_year__slug",
+        "irm_snapshot__sphere__slug",
         "province",
         "department",
     )

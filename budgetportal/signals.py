@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from haystack.signals import BaseSignalProcessor
+from .models import InfraProject
+from django.db.models import Count
 
 
 @receiver([post_save], sender=models.IRMSnapshot)
@@ -15,4 +17,5 @@ def handle_irm_snapshot_post_save(
 
 @receiver([post_delete], sender=models.IRMSnapshot)
 def handle_irm_snapshot_post_delete(sender, instance, using, **kwargs):
+    InfraProject.objects.annotate(num_snapshots=Count("project_snapshots")).filter(num_snapshots=0).delete()
     async_task(tasks.index_irm_projects, snapshot_id=instance.id)

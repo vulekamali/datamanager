@@ -1833,9 +1833,9 @@ class Quarter(models.Model):
 def irm_snapshot_file_path(instance, filename):
     extension = filename.split(".")[-1]
     return (
-        f"irm-snapshots/${uuid.uuid4()}/"
-        "${instance.sphere.financial_year.slug}-Q${instance.quarter.number}-"
-        "${instance.sphere.slug}-taken-${instance.date_taken.isoformat()[:18]}.${extension}"
+        f"irm-snapshots/{uuid.uuid4()}/"
+        f"{instance.sphere.financial_year.slug}-Q{instance.quarter.number}-"
+        f"{instance.sphere.slug}-taken-{instance.date_taken.isoformat()[:18]}.{extension}"
     )
 
 
@@ -1859,9 +1859,9 @@ class IRMSnapshot(models.Model):
 
     def __str__(self):
         return (
-            f"${self.sphere.name} "
-            "${self.sphere.financial_year.slug} Q${self.quarter.number} "
-            "taken ${self.date_taken.isoformat()[:18]}"
+            f"{self.sphere.name} "
+            f"{self.sphere.financial_year.slug} Q{self.quarter.number} "
+            f"taken {self.date_taken.isoformat()[:18]}"
         )
 
 
