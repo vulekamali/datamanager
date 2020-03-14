@@ -17,5 +17,7 @@ def handle_irm_snapshot_post_save(
 
 @receiver([post_delete], sender=models.IRMSnapshot)
 def handle_irm_snapshot_post_delete(sender, instance, using, **kwargs):
-    InfraProject.objects.annotate(num_snapshots=Count("project_snapshots")).filter(num_snapshots=0).delete()
+    InfraProject.objects.annotate(num_snapshots=Count("project_snapshots")).filter(
+        num_snapshots=0
+    ).delete()
     async_task(tasks.index_irm_projects, snapshot_id=instance.id)
