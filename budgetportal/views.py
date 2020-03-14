@@ -1,6 +1,5 @@
 import json
 import logging
-import urllib
 from urllib.parse import urlparse, unquote
 from csv import DictWriter
 from datetime import datetime
@@ -33,6 +32,7 @@ from .models import (
     IRMSnapshot,
     Sphere,
     Video,
+    CategoryGuide
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
@@ -883,7 +883,7 @@ def dataset_category_page(request, category_slug):
     context = dataset_category_context(category_slug)
     context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
     context["latest_year"] = FinancialYear.get_latest_year().slug
-    context["guide"] = guide_data.get(category_guides.get(category_slug, None), None)
+    context["guide"] = CategoryGuide.objects.filter(category_slug=category_slug).first()
     return render(request, "government_dataset_category.html", context)
 
 
@@ -930,7 +930,7 @@ def dataset_page(request, category_slug, dataset_slug):
         "performance-resources",
         "procurement-portals-and-resources",
     ]
-    context["guide"] = guide_data.get(category_guides.get(category_slug, None), None)
+    context["guide"] = CategoryGuide.objects.filter(category_slug=category_slug).first()
     context["external_resource_page"] = category_slug in external_resource_slugs
     context["comments_enabled"] = settings.COMMENTS_ENABLED
     return render(request, "government_dataset.html", context)

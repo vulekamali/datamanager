@@ -107,11 +107,18 @@
     {% if guide %}
       <div class="Section is-bevel">
         <div class="Section-card">
-          <h2 class="Section-title">{{ guide.name }}</h2>
-          <p>{{ guide.description }}</p>
-          <a href="{{ guide.url }}" class="Button">
-            Learn more about this resource
-          </a>
+          <h2 class="Section-title">Learn more</h2>
+          {% if guide.external_url %}
+            <p>{{ guide.external_url_description }}</p>
+            <a href="{{ guide.external_url }}" class="Button">
+              Dataset guide
+            </a>
+          {% else %}
+            <p>{{ guide.guide_page.search_description }}</p>
+            <a href="{{ guide.guide_page.url }}" class="Button">
+              Dataset guide
+            </a>
+          {% endif %}
         </div>
       </div>
     {% endif %}
