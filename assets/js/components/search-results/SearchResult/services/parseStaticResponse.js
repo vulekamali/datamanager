@@ -31,7 +31,7 @@ const buildResult = (phrase, videosResult, glossaryResult) => {
       count: array.length,
       title: wrapStringPhrases(array[0].title, phraseArray, wrapFn),
       description: wrapStringPhrases(array[0].description, phraseArray, wrapFn),
-      url: `/videos?phrase=${phrase}`,
+      url: `/learning-resources?phrase=${phrase}`,
       open: false,
       languages: array[0].languages,
       id: languages[(Object.keys(languages)[0])],

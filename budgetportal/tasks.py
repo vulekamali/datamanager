@@ -85,4 +85,4 @@ def import_irm_snapshot(snapshot_id):
 
 
 def index_irm_projects(snapshot_id):
-    return call_command("update_index", "-r")
+    return call_command("haystack_update_index", "-r")
