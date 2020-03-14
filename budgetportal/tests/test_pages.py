@@ -1,12 +1,11 @@
 import json
-from budgetportal.models import Department, FinancialYear, Government, Sphere
-from django.conf import settings
+from budgetportal.models import Department, FinancialYear, Government, Sphere, CategoryGuide
 from django.test import Client, TestCase
 from mock import MagicMock, patch
 
 
 class BasicPagesTestCase(TestCase):
-    fixtures = ["video-language", "faq", "homepage"]
+    fixtures = ["video-language", "faq", "homepage", "test-guides-pages"]
 
     def setUp(self):
         self.mock_openspending_api = MagicMock()
@@ -251,12 +250,48 @@ class BasicPagesTestCase(TestCase):
 
     def test_dataset_page(self):
         """Test that it loads and that some text is present"""
+        CategoryGuide.objects.all().delete()
         c = Client()
         response = c.get("/datasets/test-slug/test-2018-19")
 
         self.assertContains(response, "<title>Test 2018/19 - vulekamali</title>")
         self.assertContains(response, '<a href="/datasets/test-slug">test-slug</a>')
         self.assertContains(response, "Test 2018/19")
+        self.assertNotContains(response, "Learn more")
+
+    def test_dataset_page_when_category_guide_points_to_guide(self):
+        """Test that it loads and that some text is present"""
+        category_guide = CategoryGuide.objects.exclude(guide_page=None).first()
+        self.assertIsNotNone(category_guide)
+
+        category_guide.category_slug = "test-slug"
+        category_guide.save()
+
+        c = Client()
+        response = c.get("/datasets/test-slug/test-2018-19")
+
+        self.assertContains(response, "<title>Test 2018/19 - vulekamali</title>")
+        self.assertContains(response, '<a href="/datasets/test-slug">test-slug</a>')
+        self.assertContains(response, "Test 2018/19")
+        self.assertContains(response, "Learn more")
+        self.assertContains(response, 'href="{}"'.format(category_guide.guide_page.url))
+
+    def test_dataset_page_when_category_guide_points_to_external_url(self):
+        """Test that it loads and that some text is present"""
+        category_guide = CategoryGuide.objects.filter(guide_page=None).first()
+        self.assertIsNotNone(category_guide)
+
+        category_guide.category_slug = "test-slug"
+        category_guide.save()
+
+        c = Client()
+        response = c.get("/datasets/test-slug/test-2018-19")
+
+        self.assertContains(response, "<title>Test 2018/19 - vulekamali</title>")
+        self.assertContains(response, '<a href="/datasets/test-slug">test-slug</a>')
+        self.assertContains(response, "Test 2018/19")
+        self.assertContains(response, "Learn more")
+        self.assertContains(response, 'href="{}"'.format(category_guide.external_url ))
 
     def test_infrastructure_projects_list_page(self):
         """Test that it loads and that some text is present"""
