@@ -1,15 +1,10 @@
 import logging
 import re
-import string
-import urllib
 import uuid
-from collections import OrderedDict
 from datetime import datetime
 from decimal import Decimal
-from itertools import groupby
 from pprint import pformat
-from urllib.parse import urljoin, quote
-from uuid import uuid4
+from urllib.parse import quote
 
 import requests
 from slugify import slugify
@@ -17,11 +12,9 @@ from slugify import slugify
 from adminsortable.models import SortableMixin
 from autoslug import AutoSlugField
 from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
-from ckeditor.fields import RichTextField
 from django.conf import settings
-from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.core.exceptions import MultipleObjectsReturned
 from django.core.cache import cache
-from django.db import models
 from django.urls import reverse
 from partial_index import PartialIndex
 
@@ -2098,17 +2091,18 @@ def csv_url(aggregate_url):
 
 class WagtailHomePage(Page):
     parent_page_types = []
+    subpage_types = ['budgetportal.LearningIndexPage', 'budgetportal.PostIndexPage']
 
     class Meta:
         app_label = 'budgetportal'
 
 
 class LearningIndexPage(Page):
-    parent_page_types = []
+    subpage_types = ['budgetportal.GuideIndexPage']
 
 
 class PostIndexPage(Page):
-    parent_page_types = []
+    subpage_types = ['budgetportal.PostPage']
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
@@ -2119,25 +2113,26 @@ class PostIndexPage(Page):
 class GuideIndexPage(Page):
     max_count = 1
     parent_page_types = ['budgetportal.LearningIndexPage']
+    subpage_types = ['budgetportal.GuidePage']
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")
     ]
 
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        guides_ordering = OrderedDict([(p.title, p) for p in self.get_children()])
-        for external in CategoryGuide.objects.filter(external_url__isnull=False):
-            guides_ordering[external.external_url_title] = external
-            context["guides"] = guides_ordering.values()
-        return context
+    # def get_context(self, request, *args, **kwargs):
+    #     context = super().get_context(request, *args, **kwargs)
+    #     guides_ordering = OrderedDict([(p.title, p) for p in self.get_children()])
+    #     for external in CategoryGuide.objects.filter(external_url__isnull=False):
+    #         guides_ordering[external.external_url_title] = external
+    #         context["guides"] = guides_ordering.values()
+    #     return context
 
 
 class GuidePage(Page):
     parent_page_types = ["budgetportal.GuideIndexPage"]
     body = StreamField(
-        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()), ]
     )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -2152,6 +2147,7 @@ class GuidePage(Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel("body"),
     ]
+
 
 class CategoryGuide(models.Model):
     """Link GuidePages or external URLs to dataset category slugs"""
