@@ -12,7 +12,11 @@ from django.db.models import Count
 def handle_irm_snapshot_post_save(
     sender, instance, created, raw, using, update_fields, **kwargs
 ):
-    async_task(tasks.import_irm_snapshot, snapshot_id=instance.id)
+    async_task(
+        tasks.import_irm_snapshot,
+        snapshot_id=instance.id,
+        task_name="Import IRM Snappshot file of infrastructue projects",
+    )
 
 
 @receiver([post_delete], sender=models.IRMSnapshot)
@@ -20,4 +24,8 @@ def handle_irm_snapshot_post_delete(sender, instance, using, **kwargs):
     InfraProject.objects.annotate(num_snapshots=Count("project_snapshots")).filter(
         num_snapshots=0
     ).delete()
-    async_task(tasks.index_irm_projects, snapshot_id=instance.id)
+    async_task(
+        tasks.index_irm_projects,
+        snapshot_id=instance.id,
+        task_name="Update infrastructure projects search index following snapshot deletion",
+    )

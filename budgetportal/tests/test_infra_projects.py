@@ -22,7 +22,6 @@ from rest_framework.test import APITestCase
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from django.core.management import call_command
 
 from budgetportal.webflow.serializers import InfraProjectCSVSerializer
 
@@ -33,7 +32,7 @@ EMPTY_FILE_PATH = os.path.abspath(
 
 class InfraProjectIRMSnapshotTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         file_path = os.path.abspath(
             ("budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx")
         )
@@ -44,7 +43,7 @@ class InfraProjectIRMSnapshotTestCase(APITestCase):
         )
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
-        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.url = reverse("infrastructure-project-api-list")
 
     def tearDown(self):
         self.file.close()
@@ -59,7 +58,7 @@ class InfraProjectIRMSnapshotTestCase(APITestCase):
         self.assertEqual(num_of_results, 0)
         self.assertEqual(
             response.data["csv_download_url"],
-            "/infrastructure-projects/provincial/search/csv",
+            "/infrastructure-projects/full/search/csv",
         )
 
         IRMSnapshot.objects.create(
@@ -77,14 +76,14 @@ class InfraProjectIRMSnapshotTestCase(APITestCase):
         self.assertEqual(num_of_results, 3)
         self.assertEqual(
             response.data["csv_download_url"],
-            "/infrastructure-projects/provincial/search/csv",
+            "/infrastructure-projects/full/search/csv",
         )
 
 
 class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
         super(InfraProjectDetailPageTestCase, self).setUp()
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
         fin_year = FinancialYear.objects.create(slug="2050-51", published=True)
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
@@ -294,9 +293,9 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
 class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
         super(InfraProjectSearchPageTestCase, self).setUp()
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infra-project-list")
+        self.url = reverse("infra-project-list")
         self.wait = WebDriverWait(self.selenium, 5)
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
@@ -405,17 +404,17 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
             "#search-results-download-button"
         ).get_attribute("href")
         self.assertIn(
-            "infrastructure-projects/provincial/search/csv?q=&ordering=status_order",
+            "infrastructure-projects/full/search/csv?q=&ordering=status_order",
             csv_download_url,
         )
 
 
 class InfraProjectAPIDepartmentTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -493,10 +492,10 @@ class InfraProjectAPIDepartmentTestCase(APITestCase):
 
 class InfraProjectAPIProvinceTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -604,10 +603,10 @@ class InfraProjectAPIProvinceTestCase(APITestCase):
 
 class InfraProjectAPIStatusTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -685,10 +684,10 @@ class InfraProjectAPIStatusTestCase(APITestCase):
 
 class InfraProjectAPIFundingSourceTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -766,10 +765,10 @@ class InfraProjectAPIFundingSourceTestCase(APITestCase):
 
 class InfraProjectAPIProjectNameTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -840,10 +839,10 @@ class InfraProjectAPIProjectNameTestCase(APITestCase):
 
 class InfraProjectAPIMunicipalityTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -917,10 +916,10 @@ class InfraProjectAPIMunicipalityTestCase(APITestCase):
 
 class InfraProjectAPIContractorTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -994,10 +993,10 @@ class InfraProjectAPIContractorTestCase(APITestCase):
 
 class InfraProjectAPISearchMultipleFieldsTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -1053,7 +1052,7 @@ class InfraProjectAPISearchMultipleFieldsTestCase(APITestCase):
 
 class InfraProjectAPIURLPathTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
         fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
@@ -1065,8 +1064,8 @@ class InfraProjectAPIURLPathTestCase(APITestCase):
             date_taken=self.date,
             file=File(self.file),
         )
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
         self.project = InfraProject.objects.create(IRM_project_id=1)
         InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
@@ -1111,7 +1110,7 @@ class InfraProjectAPIURLPathTestCase(APITestCase):
 
 class InfraProjectSnapshotTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
         self.file_2 = open(EMPTY_FILE_PATH, "rb")
         self.project = InfraProject.objects.create(IRM_project_id=1)
@@ -1169,7 +1168,7 @@ class InfraProjectSnapshotTestCase(APITestCase):
 
 class InfraProjectSnapshotDifferentYearsTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
         self.file_2 = open(EMPTY_FILE_PATH, "rb")
         self.project = InfraProject.objects.create(IRM_project_id=1)
@@ -1220,9 +1219,9 @@ class InfraProjectSnapshotDifferentYearsTestCase(APITestCase):
 
 class InfraProjectFullTextSearchTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.url = reverse("infrastructure-project-api-list")
         fin_year = FinancialYear.objects.create(slug="2030-31")
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
@@ -1269,7 +1268,7 @@ class InfraProjectFullTextSearchTestCase(APITestCase):
         self.assertNotContains(response, "Red School")
         self.assertEqual(
             response.data["csv_download_url"],
-            "/infrastructure-projects/provincial/search/csv?q=Eastern+Cape+School",
+            "/infrastructure-projects/full/search/csv?q=Eastern+Cape+School",
         )
 
 
@@ -1317,12 +1316,12 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
     APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file1 = open(EMPTY_FILE_PATH, "rb")
         self.file1_1_older = open(EMPTY_FILE_PATH, "rb")
         self.file1_2_older = open(EMPTY_FILE_PATH, "rb")
         self.file2 = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.url = reverse("infrastructure-project-api-list")
         fin_year_1 = FinancialYear.objects.create(slug="2030-31")
         sphere_1 = Sphere.objects.create(financial_year=fin_year_1, name="Provincial")
         fin_year_2 = FinancialYear.objects.create(slug="2031-32")
@@ -1409,7 +1408,7 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
             response,
-            "provincial-infrastructure-projects-q-data-that-won-t-be-found.csv",
+            "infrastructure-projects-q-data-that-won-t-be-found.csv",
         )
 
         content = b"".join(response.streaming_content)
@@ -1429,7 +1428,7 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
-            response, "provincial-infrastructure-projects.csv"
+            response, "infrastructure-projects.csv"
         )
 
         content = b"".join(response.streaming_content)
@@ -1446,7 +1445,7 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
-            response, "provincial-infrastructure-projects-q-eastern-cape-school.csv"
+            response, "infrastructure-projects-q-eastern-cape-school.csv"
         )
 
         content = b"".join(response.streaming_content)
@@ -1459,11 +1458,11 @@ class InfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
     APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.page_size = settings.REST_FRAMEWORK.get("PAGE_SIZE", 20)
         self.number_of_projects = self.page_size * 2
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.url = reverse("infrastructure-project-api-list")
 
         for index in range(self.number_of_projects):
             self.create_project(index)
@@ -1502,7 +1501,7 @@ class InfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
-            response, "provincial-infrastructure-projects.csv"
+            response, "infrastructure-projects.csv"
         )
 
         content = b"".join(response.streaming_content)
@@ -1514,7 +1513,7 @@ class InfraProjectIRMSnapshotDetailCSVDownloadTestCase(
     APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file1 = open(EMPTY_FILE_PATH, "rb")
         self.file2 = open(EMPTY_FILE_PATH, "rb")
         fin_year = FinancialYear.objects.create(slug="2030-31")
@@ -1563,13 +1562,13 @@ class InfraProjectIRMSnapshotDetailCSVDownloadTestCase(
 
     def test_404_if_there_is_no_project(self):
         data = {"id": 9999999, "slug": "slug"}
-        url = reverse("provincial-infra-project-detail-csv-download", kwargs=data)
+        url = reverse("infra-project-detail-csv-download", kwargs=data)
         response = self.client.get(url, data)
         self.assertEqual(response.status_code, 404)
 
     def test_csv_download(self):
         data = {"id": self.project.id, "slug": self.project.get_slug()}
-        url = reverse("provincial-infra-project-detail-csv-download", kwargs=data)
+        url = reverse("infra-project-detail-csv-download", kwargs=data)
         response = self.client.get(url, data)
         self._test_response_correctness(
             response, filename="{}.csv".format(self.project.get_slug())

@@ -16,8 +16,11 @@ class InfraProjectSnapshotSerializer(ModelSerializer):
         fields = (
             "project_number",
             "name",
+            "sphere",
+            "government_label",
             "province",
             "department",
+            "sector",
             "local_municipality",
             "district_municipality",
             "latitude",
@@ -81,8 +84,11 @@ class InfraProjectCSVSerializer(HaystackSerializer):
         fields = [
             "name",
             "irm_snapshot",
+            "sphere",
+            "government_label"
             "province",
             "department",
+            "sector",
             "status",
             "status_order",
             "primary_funding_source",
@@ -135,8 +141,11 @@ class InfraProjectSerializer(HaystackSerializer):
         # fields belong to the search index!
         fields = [
             "name",
+            "sphere",
+            "government_label",
             "province",
             "department",
+            "sector",
             "status",
             "status_order",
             "primary_funding_source",
@@ -171,8 +180,10 @@ class InfraProjectFacetSerializer(HaystackFacetSerializer):
 
     class Meta:
         index_classes = [InfraProjectIndex]
-        fields = ["province", "department", "status", "primary_funding_source"]
+        fields = ["sector", "government_label", "province", "department", "status", "primary_funding_source"]
         field_options = {
+            "sector": {},
+            "government_label": {},
             "province": {},
             "department": {},
             "status": {},

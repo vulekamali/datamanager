@@ -182,6 +182,8 @@ class InfraProjectSearchView(
 
     def _get_filename(self, query_params):
         keys_to_check = (
+            "government_label",
+            "sector",
             "province",
             "department",
             "status",

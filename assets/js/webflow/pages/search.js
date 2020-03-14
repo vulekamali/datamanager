@@ -46,11 +46,12 @@ const pageState = {
   statusChart: null,
 };
 
-const baseLocation = "/api/v1/infrastructure-projects/provincial/search/";
-const facetsLocation = "/api/v1/infrastructure-projects/provincial/search/facets/";
+const baseLocation = "/api/v1/infrastructure-projects/full/search/";
+const facetsLocation = "/api/v1/infrastructure-projects/full/search/facets/";
 
 const facetPlurals = {
-  province: "provinces",
+  government_label: "governments",
+  sector: "sectors",
   department: "departments",
   status: "project statuses",
   primary_funding_source: "funding sources",
@@ -230,8 +231,9 @@ const getAllResultListItems = () => $("#result-list-container .narrow-card_wrapp
 
 function resetFacets() {
   $("#num-matching-projects-field").text("");
-  resetDropdown("#province-dropdown");
+  resetDropdown("#government-dropdown");
   resetDropdown("#department-dropdown");
+  resetDropdown("#sector-dropdown");
   resetDropdown("#status-dropdown");
   resetDropdown("#primary-funding-source-dropdown");
 }
@@ -290,8 +292,9 @@ function addListResults(response) {
 
 function showFacetResults(response) {
   $("#num-matching-projects-field").text(response.objects.count);
-  updateDropdown("#province-dropdown", response.fields["province"], "province");
+  updateDropdown("#government-dropdown", response.fields["government_label"], "government_label");
   updateDropdown("#department-dropdown", response.fields["department"], "department");
+  updateDropdown("#sector-dropdown", response.fields["sector"], "sector");
   updateDropdown("#primary-funding-source-dropdown", response.fields["primary_funding_source"], "primary_funding_source");
 
   const statusOptions = sortByOrderArray(statusOrder, "text", response.fields["status"]);
@@ -415,7 +418,7 @@ export function searchPage(pageData) {
   pageState.resultRowTemplate = $("#result-list-container .narrow-card_wrapper:first").clone();
   pageState.resultRowTemplate.find(".narrow-card_icon").remove();
 
-  pageState.dropdownItemTemplate = $("#province-dropdown * .dropdown-link:first");
+  pageState.dropdownItemTemplate = $("#government-dropdown * .dropdown-link:first");
   pageState.dropdownItemTemplate.find(".search-status").remove();
   pageState.dropdownItemTemplate.find(".search-dropdown_label").text("");
   pageState.dropdownItemTemplate.find(".search-dropdown_value").text("");

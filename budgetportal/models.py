@@ -1891,12 +1891,12 @@ class InfraProject(models.Model):
 
     def get_absolute_url(self):
         args = [self.pk, self.get_slug()]
-        return reverse("provincial-infra-project-detail", args=args)
+        return reverse("infra-project-detail", args=args)
 
     @property
     def csv_download_url(self):
         return reverse(
-            "provincial-infra-project-detail-csv-download",
+            "infra-project-detail-csv-download",
             args=(self.id, self.get_slug()),
         )
 

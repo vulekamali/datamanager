@@ -8,8 +8,10 @@ class InfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     name = indexes.CharField()
     province = indexes.CharField(faceted=True)
+    government_label = indexes.CharField(faceted=True)
     sphere = indexes.CharField(faceted=True)
     department = indexes.CharField(faceted=True)
+    sector = indexes.CharField(faceted=True)
     status = indexes.CharField(faceted=True)
     status_order = indexes.IntegerField()
     primary_funding_source = indexes.CharField(faceted=True)
@@ -68,6 +70,9 @@ class InfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_status_order(self, object):
         return status_order.get(object.project_snapshots.latest().status, 100)
 
+    def prepare_government_label(sef, object):
+        return object.project_snapshots.latest().government_label
+
     def prepare_province(sef, object):
         return object.project_snapshots.latest().province
 
@@ -76,6 +81,9 @@ class InfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_department(sef, object):
         return object.project_snapshots.latest().department
+
+    def prepare_sector(sef, object):
+        return object.project_snapshots.latest().sector
 
     def prepare_primary_funding_source(sef, object):
         return object.project_snapshots.latest().primary_funding_source

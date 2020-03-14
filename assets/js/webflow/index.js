@@ -6,7 +6,7 @@ import { projectPage } from './pages/project.js';
 $(document).ready(function() {
   const pageData = JSON.parse(document.getElementById('page-data').textContent);
 
-  if ($("body.provincial-infrastructure-project-detail-page").length) {
+  if ($("body.infrastructure-project-detail-page").length) {
     projectPage(pageData);
   };
 

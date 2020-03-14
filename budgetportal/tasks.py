@@ -70,7 +70,11 @@ def import_irm_snapshot(snapshot_id):
         for row_num, row_result in enumerate(result.rows):
             if row_result.errors:
                 raise RowError("Error with row %d" % row_num, row_result, row_num)
-        async_task(index_irm_projects, snapshot_id=snapshot_id)
+        async_task(
+            index_irm_projects,
+            snapshot_id=snapshot_id,
+            task_name="Update infrastructure projects search index following snapshot deletion",
+        )
         return {
             "totals": result.totals,
             "validation_errors": [row.validation_error for row in result.rows],
