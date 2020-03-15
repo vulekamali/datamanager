@@ -6,12 +6,13 @@ import csv
 from datetime import date, datetime
 from budgetportal.models import (
     FinancialYear,
+    Sphere,
     IRMSnapshot,
-    ProvInfraProject,
-    ProvInfraProjectSnapshot,
+    InfraProject,
+    InfraProjectSnapshot,
     Quarter,
 )
-from budgetportal.search_indexes import ProvInfraProjectIndex
+from budgetportal.search_indexes import InfraProjectIndex
 from budgetportal.tests.helpers import BaseSeleniumTestCase
 from django.conf import settings
 from django.core.files import File
@@ -21,26 +22,38 @@ from rest_framework.test import APITestCase
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from django.core.management import call_command
-
-from budgetportal.webflow.serializers import ProvInfraProjectCSVSerializer
+from budgetportal.infra_projects import irm_preprocessor
+from budgetportal.webflow.serializers import InfraProjectCSVSerializer
+from tablib import Dataset
+from django.test import TestCase, TransactionTestCase
+from budgetportal.infra_projects import InfraProjectSnapshotResource
+from budgetportal.tests.helpers import WagtailHackMixin
+from budgetportal.tasks import format_error
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
 )
 
 
-class ProvInfraProjectIRMSnapshotTestCase(APITestCase):
+class InfraProjectIRMSnapshotTestCase(APITestCase):
+    """
+    End-to-end test: Uploading a file changes state from nothing in search
+    results to the right projects in search results.
+    """
+
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         file_path = os.path.abspath(
             ("budgetportal/tests/test_data/test_import_prov_infra_projects-update.xlsx")
         )
         self.file = File(open(file_path, "rb"))
-        self.financial_year = FinancialYear.objects.create(slug="2030-31")
+        financial_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(
+            financial_year=financial_year, name="Provincial"
+        )
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
-        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.url = reverse("infrastructure-project-api-list")
 
     def tearDown(self):
         self.file.close()
@@ -55,11 +68,11 @@ class ProvInfraProjectIRMSnapshotTestCase(APITestCase):
         self.assertEqual(num_of_results, 0)
         self.assertEqual(
             response.data["csv_download_url"],
-            "/infrastructure-projects/provincial/search/csv",
+            "/infrastructure-projects/full/search/csv",
         )
 
         IRMSnapshot.objects.create(
-            financial_year=self.financial_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=self.file,
@@ -73,26 +86,99 @@ class ProvInfraProjectIRMSnapshotTestCase(APITestCase):
         self.assertEqual(num_of_results, 3)
         self.assertEqual(
             response.data["csv_download_url"],
-            "/infrastructure-projects/provincial/search/csv",
+            "/infrastructure-projects/full/search/csv",
         )
 
 
-class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
+class NatProvSameIRMIDInfraProjectIRMSnapshotTestCase(
+    WagtailHackMixin, TransactionTestCase
+):
+    """
+    Test that importing a national and provincial project with the same
+    IRM ID yields different project instances with different URLs
+    """
+
     def setUp(self):
-        super(ProvInfraProjectDetailPageTestCase, self).setUp()
-        call_command("clear_index", "--noinput")
+        financial_year = FinancialYear.objects.create(slug="2030-31")
+        self.prov_sphere = Sphere.objects.create(
+            financial_year=financial_year, name="Provincial"
+        )
+        self.nat_sphere = Sphere.objects.create(
+            financial_year=financial_year, name="National"
+        )
+        self.quarter = Quarter.objects.create(number=1)
+        self.date = date(year=2050, month=1, day=1)
+        prov_IRM_snapshot = IRMSnapshot.objects.create(
+            sphere=self.prov_sphere,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(open(EMPTY_FILE_PATH, "rb")),
+        )
+        nat_IRM_snapshot = IRMSnapshot.objects.create(
+            sphere=self.nat_sphere,
+            quarter=self.quarter,
+            date_taken=self.date,
+            file=File(open(EMPTY_FILE_PATH, "rb")),
+        )
+        headers = irm_preprocessor.OUTPUT_HEADERS + ["irm_snapshot", "sphere_slug"]
+        self.prov_dataset = Dataset(headers=headers)
+        self.nat_dataset = Dataset(headers=headers)
+        num_columns = len(irm_preprocessor.OUTPUT_HEADERS)
+        prov_row = (
+            [12345, "proj-1", "A Prov Project"]
+            + [None] * (num_columns - 3)
+            + [prov_IRM_snapshot.id, "provincial"]
+        )
+        self.prov_dataset.append(prov_row)
+        nat_row = (
+            [12345, "PROJ-1", "A Nat Project"]
+            + [None] * (num_columns - 3)
+            + [nat_IRM_snapshot.id, "national"]
+        )
+        self.nat_dataset.append(nat_row)
+        InfraProject.objects.create(IRM_project_id=12345, sphere_slug="national")
+        InfraProject.objects.create(IRM_project_id=12345, sphere_slug="provincial")
+
+    def test(self):
+        self.assertEqual(2, InfraProject.objects.count())
+
+        resource = InfraProjectSnapshotResource()
+        prov_result = resource.import_data(self.prov_dataset)
+        for row_num, row_result in enumerate(prov_result.rows):
+            if row_result.errors:
+                print("\n".join([format_error(e) for e in row_result.errors]))
+
+        nat_result = resource.import_data(self.nat_dataset)
+        for row_num, row_result in enumerate(nat_result.rows):
+            if row_result.errors:
+                print("\n".join([format_error(e) for e in row_result.errors]))
+
+        nat_project = InfraProject.objects.get(sphere_slug="national")
+        prov_project = InfraProject.objects.get(sphere_slug="provincial")
+        self.assertEqual(12345, nat_project.IRM_project_id)
+        self.assertEqual(12345, prov_project.IRM_project_id)
+        self.assertNotEqual(nat_project.id, prov_project.id)
+        self.assertEqual("A Nat Project", nat_project.project_snapshots.latest().name)
+        self.assertEqual("A Prov Project", prov_project.project_snapshots.latest().name)
+
+
+class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
+    def setUp(self):
+        super(InfraProjectDetailPageTestCase, self).setUp()
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.fin_year = FinancialYear.objects.create(slug="2050-51", published=True)
+        fin_year = FinancialYear.objects.create(slug="2050-51", published=True)
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
-        self.project_snapshot = ProvInfraProjectSnapshot.objects.create(
+        self.project = InfraProject.objects.create(IRM_project_id=123456)
+        self.project_snapshot = InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project,
             name="BLUE JUNIOR SECONDARY SCHOOL",
@@ -140,10 +226,10 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             contracted_construction_end_date=date(2021, 1, 1),
         )
 
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_project_detail_page_fields(self):
@@ -286,24 +372,25 @@ class ProvInfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         self.assertEqual(est__const_end_date, u"2020-12-31")
 
 
-class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
+class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
     def setUp(self):
-        super(ProvInfraProjectSearchPageTestCase, self).setUp()
-        call_command("clear_index", "--noinput")
+        super(InfraProjectSearchPageTestCase, self).setUp()
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infra-project-list")
+        self.url = reverse("infra-project-list")
         self.wait = WebDriverWait(self.selenium, 5)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=3)
         self.date = date(2050, 1, 1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project = ProvInfraProject.objects.create(IRM_project_id=123456)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project = InfraProject.objects.create(IRM_project_id=123456)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project,
             name="Project 123456",
@@ -320,18 +407,18 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
                 province = provinces[0]
             else:
                 province = provinces[1]
-            project = ProvInfraProject.objects.create(IRM_project_id=i)
-            ProvInfraProjectSnapshot.objects.create(
+            project = InfraProject.objects.create(IRM_project_id=i)
+            InfraProjectSnapshot.objects.create(
                 irm_snapshot=self.irm_snapshot,
                 project=project,
                 name="Project {}".format(i),
                 province=province,
                 estimated_completion_date=date(year=2020, month=1, day=1),
             )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_search_homepage_correct_numbers(self):
@@ -399,54 +486,55 @@ class ProvInfraProjectSearchPageTestCase(BaseSeleniumTestCase):
             "#search-results-download-button"
         ).get_attribute("href")
         self.assertIn(
-            "infrastructure-projects/provincial/search/csv?q=&ordering=status_order",
+            "infrastructure-projects/full/search/csv?q=&ordering=status_order",
             csv_download_url,
         )
 
 
-class ProvInfraProjectAPIDepartmentTestCase(APITestCase):
+class InfraProjectAPIDepartmentTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             department="Department 1",
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             department="Department 1",
             province="Free State",
             estimated_completion_date=self.date,
         )
-        self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_3 = InfraProject.objects.create(IRM_project_id=3)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_3,
             department="Department 2",
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_filter_by_department(self):
@@ -484,49 +572,50 @@ class ProvInfraProjectAPIDepartmentTestCase(APITestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIProvinceTestCase(APITestCase):
+class InfraProjectAPIProvinceTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             department="Department 1",
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             department="Department 1",
             province="Free State",
             estimated_completion_date=self.date,
         )
-        self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_3 = InfraProject.objects.create(IRM_project_id=3)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_3,
             department="Department 2",
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_filter_by_province(self):
@@ -594,49 +683,50 @@ class ProvInfraProjectAPIProvinceTestCase(APITestCase):
         self.assertEqual(department_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIStatusTestCase(APITestCase):
+class InfraProjectAPIStatusTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             province="Eastern Cape",
             status="Construction",
             estimated_completion_date=self.date,
         )
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             province="Free State",
             status="Construction",
             estimated_completion_date=self.date,
         )
-        self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_3 = InfraProject.objects.create(IRM_project_id=3)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_3,
             province="Eastern Cape",
             status="Completed",
             estimated_completion_date=self.date,
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_filter_by_status(self):
@@ -674,49 +764,50 @@ class ProvInfraProjectAPIStatusTestCase(APITestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIFundingSourceTestCase(APITestCase):
+class InfraProjectAPIFundingSourceTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             province="Eastern Cape",
             primary_funding_source="Community Library Service Grant",
             estimated_completion_date=self.date,
         )
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             province="Free State",
             primary_funding_source="Community Library Service Grant",
             estimated_completion_date=self.date,
         )
-        self.project_3 = ProvInfraProject.objects.create(IRM_project_id=3)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_3 = InfraProject.objects.create(IRM_project_id=3)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_3,
             province="Eastern Cape",
             primary_funding_source="Equitable Share",
             estimated_completion_date=self.date,
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_filter_by_funding_source(self):
@@ -754,41 +845,42 @@ class ProvInfraProjectAPIFundingSourceTestCase(APITestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIProjectNameTestCase(APITestCase):
+class InfraProjectAPIProjectNameTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             name="Project 1",
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             name="Project 2",
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_search_by_project_name(self):
@@ -827,23 +919,24 @@ class ProvInfraProjectAPIProjectNameTestCase(APITestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIMunicipalityTestCase(APITestCase):
+class InfraProjectAPIMunicipalityTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             name="Project 1",
@@ -851,8 +944,8 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITestCase):
             local_municipality="Local 1",
             estimated_completion_date=self.date,
         )
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             name="Project 2",
@@ -860,10 +953,10 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITestCase):
             local_municipality="Local 2",
             estimated_completion_date=self.date,
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_search_by_municipality(self):
@@ -903,23 +996,24 @@ class ProvInfraProjectAPIMunicipalityTestCase(APITestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPIContractorTestCase(APITestCase):
+class InfraProjectAPIContractorTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             name="Project 1",
@@ -927,8 +1021,8 @@ class ProvInfraProjectAPIContractorTestCase(APITestCase):
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             name="Project 2",
@@ -936,10 +1030,10 @@ class ProvInfraProjectAPIContractorTestCase(APITestCase):
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_search_by_contractor(self):
@@ -979,41 +1073,42 @@ class ProvInfraProjectAPIContractorTestCase(APITestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITestCase):
+class InfraProjectAPISearchMultipleFieldsTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             name="Something School",
             province="Eastern Cape",
             estimated_completion_date=date(year=2020, month=6, day=1),
         )
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             name="Project 2",
             province="Eastern Cape",
             estimated_completion_date=date(year=2020, month=6, day=1),
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_search_multiple_fields(self):
@@ -1037,23 +1132,24 @@ class ProvInfraProjectAPISearchMultipleFieldsTestCase(APITestCase):
         self.assertEqual(results[0]["name"], "Something School")
 
 
-class ProvInfraProjectAPIURLPathTestCase(APITestCase):
+class InfraProjectAPIURLPathTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
+        fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.facet_url = reverse("provincial-infrastructure-project-api-facets")
-        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        ProvInfraProjectSnapshot.objects.create(
+        self.url = reverse("infrastructure-project-api-list")
+        self.facet_url = reverse("infrastructure-project-api-facets")
+        self.project = InfraProject.objects.create(IRM_project_id=1)
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project,
             name="Project 1",
@@ -1062,10 +1158,10 @@ class ProvInfraProjectAPIURLPathTestCase(APITestCase):
             department="Fake dept",
         )
 
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_url_path(self):
@@ -1094,23 +1190,24 @@ class ProvInfraProjectAPIURLPathTestCase(APITestCase):
         self.assertContains(response, name)
 
 
-class ProvInfraProjectSnapshotTestCase(APITestCase):
+class InfraProjectSnapshotTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
         self.file_2 = open(EMPTY_FILE_PATH, "rb")
-        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
+        self.project = InfraProject.objects.create(IRM_project_id=1)
+        fin_year = FinancialYear.objects.create(slug="2030-31", published=True)
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter_1 = Quarter.objects.create(number=1)
         self.quarter_2 = Quarter.objects.create(number=2)
         self.date_1 = date(year=2050, month=1, day=1)
         self.irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter_1,
             date_taken=self.date_1,
             file=File(self.file_1),
         )
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        self.project_snapshot_1 = InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_1,
             project=self.project,
             local_municipality="MUNI A",
@@ -1120,12 +1217,12 @@ class ProvInfraProjectSnapshotTestCase(APITestCase):
         )
 
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter_2,
             date_taken=self.date_1,
             file=File(self.file_2),
         )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        self.project_snapshot_2 = InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_2,
             project=self.project,
             local_municipality="MUNI B",
@@ -1151,36 +1248,42 @@ class ProvInfraProjectSnapshotTestCase(APITestCase):
         self.assertEqual(self.project_snapshot_2, latest)
 
 
-class ProvInfraProjectSnapshotDifferentYearsTestCase(APITestCase):
+class InfraProjectSnapshotDifferentYearsTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
         self.file_2 = open(EMPTY_FILE_PATH, "rb")
-        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.fin_year_1 = FinancialYear.objects.create(slug="2030-31")
-        self.fin_year_2 = FinancialYear.objects.create(slug="2031-32")
+        self.project = InfraProject.objects.create(IRM_project_id=1)
+        fin_year_1 = FinancialYear.objects.create(slug="2030-31")
+        fin_year_2 = FinancialYear.objects.create(slug="2031-32")
+        self.sphere_1 = Sphere.objects.create(
+            financial_year=fin_year_1, name="Provincial"
+        )
+        self.sphere_2 = Sphere.objects.create(
+            financial_year=fin_year_2, name="Provincial"
+        )
         self.quarter_1 = Quarter.objects.create(number=1)
         self.date_1 = date(year=2050, month=1, day=1)
         self.date_2 = date(year=2070, month=1, day=1)
         self.irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year_1,
+            sphere=self.sphere_1,
             quarter=self.quarter_1,
             date_taken=self.date_1,
             file=File(self.file_1),
         )
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        self.project_snapshot_1 = InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_1,
             project=self.project,
             estimated_completion_date=date(year=2020, month=1, day=1),
         )
 
         self.irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=self.fin_year_2,
+            sphere=self.sphere_2,
             quarter=self.quarter_1,
             date_taken=self.date_2,
             file=File(self.file_2),
         )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        self.project_snapshot_2 = InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot_2,
             project=self.project,
             estimated_completion_date=date(year=2020, month=1, day=1),
@@ -1196,23 +1299,24 @@ class ProvInfraProjectSnapshotDifferentYearsTestCase(APITestCase):
         self.assertEqual(self.project_snapshot_2, latest)
 
 
-class ProvInfraProjectFullTextSearchTestCase(APITestCase):
+class InfraProjectFullTextSearchTestCase(APITestCase):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
-        self.fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.url = reverse("infrastructure-project-api-list")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
-        self.project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
+        self.project_1 = InfraProject.objects.create(IRM_project_id=1)
 
         self.irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=self.fin_year,
+            sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        self.project_snapshot_1 = InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_1,
             name="Blue School",
@@ -1220,18 +1324,18 @@ class ProvInfraProjectFullTextSearchTestCase(APITestCase):
             estimated_completion_date=date(year=2020, month=1, day=1),
         )
 
-        self.project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        self.project_2 = InfraProject.objects.create(IRM_project_id=2)
+        self.project_snapshot_2 = InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
             project=self.project_2,
             name="Red School",
             province="Limpopo",
             estimated_completion_date=date(year=2020, month=1, day=1),
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file.close()
 
     def test_correct_project_returned(self):
@@ -1246,17 +1350,17 @@ class ProvInfraProjectFullTextSearchTestCase(APITestCase):
         self.assertNotContains(response, "Red School")
         self.assertEqual(
             response.data["csv_download_url"],
-            "/infrastructure-projects/provincial/search/csv?q=Eastern+Cape+School",
+            "/infrastructure-projects/full/search/csv?q=Eastern+Cape+School",
         )
 
 
-class ProvInfraProjectSearchCSVTestCaseMixin:
+class InfraProjectSearchCSVTestCaseMixin:
     def _test_csv_content_correctness(self, csv_reader, items_to_compare):
         self.assertEqual(len(list(csv_reader)), len(items_to_compare))
         for index, row in enumerate(csv_reader):
             # Verify all the serializer fields are present in the CSV
             self.assertListEqual(
-                list(row.keys()), ProvInfraProjectCSVSerializer.Meta.fields
+                list(row.keys()), InfraProjectCSVSerializer.Meta.fields
             )
 
             # Verify correctness of the name of project field between CSV and model
@@ -1290,37 +1394,41 @@ class ProvInfraProjectSearchCSVTestCaseMixin:
         )
 
 
-class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
-    APITestCase, ProvInfraProjectSearchCSVTestCaseMixin
+class InfraProjectIRMSnapshotCSVDownloadTestCase(
+    APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file1 = open(EMPTY_FILE_PATH, "rb")
         self.file1_1_older = open(EMPTY_FILE_PATH, "rb")
         self.file1_2_older = open(EMPTY_FILE_PATH, "rb")
         self.file2 = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.url = reverse("infrastructure-project-api-list")
+        fin_year_1 = FinancialYear.objects.create(slug="2030-31")
+        sphere_1 = Sphere.objects.create(financial_year=fin_year_1, name="Provincial")
+        fin_year_2 = FinancialYear.objects.create(slug="2031-32")
+        sphere_2 = Sphere.objects.create(financial_year=fin_year_2, name="Provincial")
 
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-1"),
+            sphere=sphere_1,
             quarter=Quarter.objects.create(number=3),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1),
         )
         irm_snapshot_1_1_older = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-2"),
+            sphere=sphere_2,
             quarter=Quarter.objects.create(number=1),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1_1_older),
         )
         irm_snapshot_1_2_older = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.get(slug="2030-1"),
+            sphere=sphere_1,
             quarter=Quarter.objects.get(number=1),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1_2_older),
         )
-        project_1 = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        project_1 = InfraProject.objects.create(IRM_project_id=1)
+        self.project_snapshot_1 = InfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
             project=project_1,
             name="Blue School",
@@ -1328,7 +1436,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
             estimated_completion_date=date(year=2020, month=1, day=1),
             adjusted_appropriation_professional_fees=1.0,
         )
-        self.project_snapshot_1_1_older = ProvInfraProjectSnapshot.objects.create(
+        self.project_snapshot_1_1_older = InfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1_1_older,
             project=project_1,
             name="Blue School",
@@ -1337,7 +1445,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
             adjusted_appropriation_professional_fees=1.0,
         )
 
-        self.project_snapshot_1_2_older = ProvInfraProjectSnapshot.objects.create(
+        self.project_snapshot_1_2_older = InfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1_2_older,
             project=project_1,
             name="Blue School",
@@ -1347,13 +1455,13 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         )
 
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-32"),
+            sphere=sphere_2,
             quarter=Quarter.objects.create(number=2),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file2),
         )
-        project_2 = ProvInfraProject.objects.create(IRM_project_id=2)
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        project_2 = InfraProject.objects.create(IRM_project_id=2)
+        self.project_snapshot_2 = InfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
             project=project_2,
             name="Red School",
@@ -1361,10 +1469,10 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
             estimated_completion_date=date(year=2020, month=1, day=1),
             adjusted_appropriation_professional_fees=2.0,
         )
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file1.close()
         self.file2.close()
         self.file1_1_older.close()
@@ -1381,14 +1489,13 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
-            response,
-            "provincial-infrastructure-projects-q-data-that-won-t-be-found.csv",
+            response, "infrastructure-projects-q-data-that-won-t-be-found.csv",
         )
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         self.assertListEqual(
-            csv_reader.fieldnames, ProvInfraProjectCSVSerializer.Meta.fields
+            csv_reader.fieldnames, InfraProjectCSVSerializer.Meta.fields
         )
         self.assertEqual(len(list(csv_reader)), 0)
 
@@ -1401,9 +1508,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(
-            response, "provincial-infrastructure-projects.csv"
-        )
+        self._test_response_correctness(response, "infrastructure-projects.csv")
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
@@ -1419,7 +1524,7 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
-            response, "provincial-infrastructure-projects-q-eastern-cape-school.csv"
+            response, "infrastructure-projects-q-eastern-cape-school.csv"
         )
 
         content = b"".join(response.streaming_content)
@@ -1428,35 +1533,39 @@ class ProvInfraProjectIRMSnapshotCSVDownloadTestCase(
         self._test_csv_content_correctness(csv_reader, items_to_compare)
 
 
-class ProvInfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
-    APITestCase, ProvInfraProjectSearchCSVTestCaseMixin
+class InfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
+    APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.page_size = settings.REST_FRAMEWORK.get("PAGE_SIZE", 20)
         self.number_of_projects = self.page_size * 2
         self.file = open(EMPTY_FILE_PATH, "rb")
-        self.url = reverse("provincial-infrastructure-project-api-list")
+        self.url = reverse("infrastructure-project-api-list")
 
         for index in range(self.number_of_projects):
             self.create_project(index)
 
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
 
     def create_project(self, index):
         file = open(EMPTY_FILE_PATH, "rb")
+        financial_year = FinancialYear.objects.create(
+            slug=FinancialYear.slug_from_year_start(str(2000 + index))
+        )
+        sphere = Sphere.objects.create(financial_year=financial_year, name="Provincial")
         irm_snapshot = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-{}".format(index)),
+            sphere=sphere,
             quarter=Quarter.objects.get_or_create(number=1)[0],
             date_taken=date(year=2050, month=1, day=1),
             file=File(file),
         )
-        ProvInfraProjectSnapshot.objects.create(
+        InfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot,
-            project=ProvInfraProject.objects.create(IRM_project_id=index),
+            project=InfraProject.objects.create(IRM_project_id=index),
             name="Blue School",
             province="Eastern Cape",
             estimated_completion_date=date(year=2020, month=1, day=1),
@@ -1470,37 +1579,41 @@ class ProvInfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
 
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
-        self._test_response_correctness(
-            response, "provincial-infrastructure-projects.csv"
-        )
+        self._test_response_correctness(response, "infrastructure-projects.csv")
 
         content = b"".join(response.streaming_content)
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         self.assertEqual(len(list(csv_reader)), self.number_of_projects)
 
 
-class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
-    APITestCase, ProvInfraProjectSearchCSVTestCaseMixin
+class InfraProjectIRMSnapshotDetailCSVDownloadTestCase(
+    APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
-        call_command("clear_index", "--noinput")
+        InfraProjectIndex().clear()
         self.file1 = open(EMPTY_FILE_PATH, "rb")
         self.file2 = open(EMPTY_FILE_PATH, "rb")
+        fin_year = FinancialYear.objects.create(slug="2030-31")
+        self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
+        fin_year_2 = FinancialYear.objects.create(slug="2031-32")
+        self.sphere_2 = Sphere.objects.create(
+            financial_year=fin_year_2, name="Provincial"
+        )
 
         irm_snapshot_1 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-31"),
+            sphere=self.sphere,
             quarter=Quarter.objects.create(number=1),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file1),
         )
         irm_snapshot_2 = IRMSnapshot.objects.create(
-            financial_year=FinancialYear.objects.create(slug="2030-32"),
+            sphere=self.sphere_2,
             quarter=Quarter.objects.create(number=2),
             date_taken=datetime(year=2050, month=1, day=1),
             file=File(self.file2),
         )
-        self.project = ProvInfraProject.objects.create(IRM_project_id=1)
-        self.project_snapshot_1 = ProvInfraProjectSnapshot.objects.create(
+        self.project = InfraProject.objects.create(IRM_project_id=1)
+        self.project_snapshot_1 = InfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_1,
             project=self.project,
             name="Blue School",
@@ -1508,7 +1621,7 @@ class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
             estimated_completion_date=date(year=2020, month=1, day=1),
             adjusted_appropriation_professional_fees=1.0,
         )
-        self.project_snapshot_2 = ProvInfraProjectSnapshot.objects.create(
+        self.project_snapshot_2 = InfraProjectSnapshot.objects.create(
             irm_snapshot=irm_snapshot_2,
             project=self.project,
             name="Red School",
@@ -1517,22 +1630,22 @@ class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
             adjusted_appropriation_professional_fees=2.0,
         )
 
-        ProvInfraProjectIndex().reindex()
+        InfraProjectIndex().reindex()
 
     def tearDown(self):
-        ProvInfraProjectIndex().clear()
+        InfraProjectIndex().clear()
         self.file1.close()
         self.file2.close()
 
     def test_404_if_there_is_no_project(self):
         data = {"id": 9999999, "slug": "slug"}
-        url = reverse("provincial-infra-project-detail-csv-download", kwargs=data)
+        url = reverse("infra-project-detail-csv-download", kwargs=data)
         response = self.client.get(url, data)
         self.assertEqual(response.status_code, 404)
 
     def test_csv_download(self):
         data = {"id": self.project.id, "slug": self.project.get_slug()}
-        url = reverse("provincial-infra-project-detail-csv-download", kwargs=data)
+        url = reverse("infra-project-detail-csv-download", kwargs=data)
         response = self.client.get(url, data)
         self._test_response_correctness(
             response, filename="{}.csv".format(self.project.get_slug())
@@ -1542,3 +1655,38 @@ class ProvInfraProjectIRMSnapshotDetailCSVDownloadTestCase(
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         items_to_compare = [self.project_snapshot_1, self.project_snapshot_2]
         self._test_csv_content_correctness(csv_reader, items_to_compare)
+
+
+class RedirectTestCase(TestCase):
+    def test_search_page_redirect(self):
+        old_url = (
+            "/infrastructure-projects/provincial/"
+            "?q=&filter=department%3ATransport&filter=province%3AEastern%20Cape"
+        )
+        new_url = (
+            "/infrastructure-projects/full/"
+            "?q=&filter=department%3ATransport&filter=province%3AEastern%20Cape"
+        )
+        self.assertTrue(
+            old_url.startswith(reverse("redirect-old-prov-infra-project-list"))
+        )
+        self.assertTrue(new_url.startswith(reverse("infra-project-list")))
+        response = self.client.get(old_url)
+        self.assertRedirects(response, new_url, status_code=301)
+
+    def test_detail_page_redirect(self):
+        old_url = "/infrastructure-projects/provincial/123-project-slug"
+        new_url = "/infrastructure-projects/full/123-project-slug"
+        self.assertEqual(
+            old_url,
+            reverse(
+                "redirect-old-prov-infra-project-detail", args=(123, "project-slug")
+            ),
+        )
+        self.assertEqual(
+            new_url, reverse("infra-project-detail", args=(123, "project-slug"))
+        )
+        response = self.client.get(old_url)
+        self.assertRedirects(
+            response, new_url, status_code=301, fetch_redirect_response=False
+        )

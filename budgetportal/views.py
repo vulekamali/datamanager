@@ -328,9 +328,9 @@ def department_page(
     primary_department = department.get_primary_department()
 
     if department.government.sphere.slug == "national":
-        description_govt = "National"
+        govt_label = "National"
     elif department.government.sphere.slug == "provincial":
-        description_govt = department.government.name
+        govt_label = department.government.name
 
     context = {
         "comments_enabled": settings.COMMENTS_ENABLED,
@@ -354,15 +354,17 @@ def department_page(
         "financial_years": financial_years_context,
         "government": {
             "name": department.government.name,
+            "label": govt_label,
             "slug": str(department.government.slug),
         },
         "government_functions": [f.name for f in department.get_govt_functions()],
         "intro": department.intro,
-        "infra_enabled": department.government.sphere.slug == "provincial"
-        and IRMSnapshot.objects.count(),
+        "infra_enabled": IRMSnapshot.objects.filter(
+            sphere__slug=department.government.sphere.slug
+        ).count(),
         "is_vote_primary": department.is_vote_primary,
         "name": department.name,
-        "projects": get_department_project_summary(department),
+        "projects": get_department_project_summary(govt_label, department),
         "slug": str(department.slug),
         "sphere": {
             "name": department.government.sphere.name,
@@ -372,12 +374,7 @@ def department_page(
         "selected_tab": "departments",
         "title": "%s budget %s  - vulekamali" % (department.name, selected_year.slug),
         "description": "%s department: %s budget data for the %s financial year %s"
-        % (
-            description_govt,
-            department.name,
-            selected_year.slug,
-            COMMON_DESCRIPTION_ENDING,
-        ),
+        % (govt_label, department.name, selected_year.slug, COMMON_DESCRIPTION_ENDING,),
         "department_budget": department_budget,
         "department_adjusted_budget": department_adjusted_budget,
         "vote_number": department.vote_number,
@@ -399,10 +396,10 @@ def department_page(
     return render(request, "department.html", context)
 
 
-def get_department_project_summary(department):
+def get_department_project_summary(government_label, department):
     return (
         SearchQuerySet()
-        .filter(province=department.government.name, department=department.name)
+        .filter(government_label=government_label, department=department.name)
         .order_by("-estimated_total_project_cost")[:10]
     )
 

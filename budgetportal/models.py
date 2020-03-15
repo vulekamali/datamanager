@@ -1840,19 +1840,20 @@ class Quarter(models.Model):
 
 def irm_snapshot_file_path(instance, filename):
     extension = filename.split(".")[-1]
-    return "irm-snapshots/%s/%s-Q%d-taken-%s.%s" % (
-        uuid.uuid4(),
-        instance.financial_year.slug,
-        instance.quarter.number,
-        instance.date_taken.isoformat()[:18],
-        extension,
+    return (
+        f"irm-snapshots/{uuid.uuid4()}/"
+        f"{instance.sphere.financial_year.slug}-Q{instance.quarter.number}-"
+        f"{instance.sphere.slug}-taken-{instance.date_taken.isoformat()[:18]}.{extension}"
     )
 
 
 class IRMSnapshot(models.Model):
-    """This represents a particular snapshot from IRM"""
+    """
+    This represents a particular snapshot from the Infrastructure Reporting Model
+    (IRM) database
+    """
 
-    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
+    sphere = models.ForeignKey(Sphere, on_delete=models.CASCADE)
     quarter = models.ForeignKey(Quarter, on_delete=models.CASCADE)
     date_taken = models.DateTimeField()
     file = models.FileField(upload_to=irm_snapshot_file_path)
@@ -1860,33 +1861,45 @@ class IRMSnapshot(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        ordering = ["financial_year__slug", "quarter__number"]
+        ordering = ["sphere__financial_year__slug", "quarter__number"]
         verbose_name = "IRM Snapshot"
-        unique_together = ["financial_year", "quarter"]
+        unique_together = ["sphere", "quarter"]
 
     def __str__(self):
-        return "%s Q%d taken %s" % (
-            self.financial_year.slug,
-            self.quarter.number,
-            self.date_taken.isoformat()[:18],
+        return (
+            f"{self.sphere.name} "
+            f"{self.sphere.financial_year.slug} Q{self.quarter.number} "
+            f"taken {self.date_taken.isoformat()[:18]}"
         )
 
 
-class ProvInfraProject(models.Model):
-    """This represents a project, grouping its snapshots"""
+class InfraProject(models.Model):
+    """
+    This represents a project, grouping its snapshots by project's ID in IRM.
+    This assumes the same project will have the same ID in IRM across financial years.
 
-    IRM_project_id = models.IntegerField(unique=True)
+    The internal ID of these instances is used as the ID in the URL, since we don't
+    want to expose IRM IDs publicly but we want to have a consistent URL for projects.
+
+    We don't delete these even when there's no snapshots associated with them
+    so that the URL based on this id remains consistent in case projects with this
+    IRM ID are uploaded after snapshots are deleted.
+    """
+
+    IRM_project_id = models.IntegerField()
+    sphere_slug = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Provincial infrastructure project"
+        verbose_name = "Infrastructure project"
+        unique_together = ["sphere_slug", "IRM_project_id"]
 
     def __str__(self):
         if self.project_snapshots.count():
             return self.project_snapshots.latest().name
         else:
-            return "IRM project ID %d (no snapshots loaded)" % self.IRM_project_id
+            return f"{self.sphere_slug} IRM project ID {self.IRM_project_id} (no snapshots loaded)"
 
     def get_slug(self):
         return slugify(
@@ -1898,29 +1911,29 @@ class ProvInfraProject(models.Model):
 
     def get_absolute_url(self):
         args = [self.pk, self.get_slug()]
-        return reverse("provincial-infra-project-detail", args=args)
+        return reverse("infra-project-detail", args=args)
 
     @property
     def csv_download_url(self):
         return reverse(
-            "provincial-infra-project-detail-csv-download",
-            args=(self.id, self.get_slug()),
+            "infra-project-detail-csv-download", args=(self.id, self.get_slug()),
         )
 
 
-class ProvInfraProjectSnapshot(models.Model):
+class InfraProjectSnapshot(models.Model):
     """This represents a snapshot of a project, as it occurred in an IRM snapshot"""
 
     irm_snapshot = models.ForeignKey(
         IRMSnapshot, on_delete=models.CASCADE, related_name="project_snapshots"
     )
     project = models.ForeignKey(
-        ProvInfraProject, on_delete=models.CASCADE, related_name="project_snapshots"
+        InfraProject, on_delete=models.CASCADE, related_name="project_snapshots"
     )
     project_number = models.CharField(max_length=1024, blank=True, null=True)
     name = models.CharField(max_length=1024, blank=True, null=True)
-    province = models.CharField(max_length=1024, blank=True, null=True)
     department = models.CharField(max_length=1024, blank=True, null=True)
+    sector = models.CharField(max_length=1024, blank=True, null=True)
+    province = models.CharField(max_length=1024, blank=True, null=True)
     local_municipality = models.CharField(max_length=1024, blank=True, null=True)
     district_municipality = models.CharField(max_length=1024, blank=True, null=True)
     latitude = models.CharField(max_length=20, blank=True, null=True)
@@ -2006,12 +2019,30 @@ class ProvInfraProjectSnapshot(models.Model):
 
     class Meta:
         ordering = [
-            "irm_snapshot__financial_year__slug",
+            "irm_snapshot__sphere__financial_year__slug",
             "irm_snapshot__quarter__number",
         ]
         get_latest_by = "irm_snapshot"
-        verbose_name = "Provincial infrastructure project snapshot"
+        verbose_name = "Infrastructure project snapshot"
         unique_together = ["irm_snapshot", "project"]
+
+    @property
+    def government(self):
+        if self.irm_snapshot.sphere.slug == "national":
+            return "South Africa"
+        elif self.irm_snapshot.sphere.slug == "provincial":
+            return self.province
+        else:
+            raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
+
+    @property
+    def government_label(self):
+        if self.irm_snapshot.sphere.slug == "national":
+            return "National"
+        elif self.irm_snapshot.sphere.slug == "provincial":
+            return self.province
+        else:
+            raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
 
     def __str__(self):
         return self.name

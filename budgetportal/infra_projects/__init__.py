@@ -5,6 +5,9 @@ from import_export.instance_loaders import ModelInstanceLoader
 from import_export.widgets import ForeignKeyWidget
 from .irm_preprocessor import preprocess
 from tablib import Databook
+import logging
+
+logger = logging.getLogger(__name__)
 
 BASE_HEADERS = [
     "Project ID",
@@ -12,6 +15,7 @@ BASE_HEADERS = [
     "Project Name",
     "Province",
     "Department",
+    "Sector",
     "Local Municipality",
     "District Municipality",
     "Latitude",
@@ -70,39 +74,50 @@ STATUS_ORDERING = [
 status_order = {status: index for index, status in enumerate(STATUS_ORDERING)}
 
 
-class ProvInfraProjectSnapshotLoader(ModelInstanceLoader):
+class InfraProjectSnapshotLoader(ModelInstanceLoader):
     def get_instance(self, row):
         """
-        Gets a Provincial Infrastructure project instance by IRM_project_id.
+        Gets an infrastructure project instance by IRM_project_id.
         """
         project_id = self.resource.fields["IRM_project_id"].clean(row)
         irm_snapshot_id = self.resource.fields["irm_snapshot"].clean(row)
 
         try:
-            return models.ProvInfraProjectSnapshot.objects.get(
+            return models.InfraProjectSnapshot.objects.get(
                 project=project_id, irm_snapshot=irm_snapshot_id
             )
-        except models.ProvInfraProjectSnapshot.DoesNotExist:
+        except models.InfraProjectSnapshot.DoesNotExist:
             pass
 
         return None
 
 
-class ProvInfraProjectSnapshotResource(resources.ModelResource):
+class InfraProjectForeignKeyWidget(ForeignKeyWidget):
+    def get_queryset(self, value, row):
+        project_id_qs = self.model.objects.filter(
+            IRM_project_id=row["Project ID"], sphere_slug=row["sphere_slug"]
+        )
+        return project_id_qs
+
+
+class InfraProjectSnapshotResource(resources.ModelResource):
     IRM_project_id = Field(
         attribute="project",
+        # we use two fields for this lookup but it doesn't seem to run when I remove this
         column_name="Project ID",
-        widget=ForeignKeyWidget(models.ProvInfraProject, "IRM_project_id"),
+        widget=InfraProjectForeignKeyWidget(models.InfraProject, "IRM_project_id"),
     )
     irm_snapshot = Field(
         attribute="irm_snapshot",
         column_name="irm_snapshot",
         widget=ForeignKeyWidget(models.IRMSnapshot),
     )
+    sphere_slug = Field(column_name="sphere_slug",)
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
-    province = Field(attribute="province", column_name="Province")
     department = Field(attribute="department", column_name="Department")
+    province = Field(attribute="province", column_name="Province")
+    sector = Field(attribute="sector", column_name="Sector")
     local_municipality = Field(
         attribute="local_municipality", column_name="Local Municipality"
     )
@@ -210,26 +225,37 @@ class ProvInfraProjectSnapshotResource(resources.ModelResource):
     other_parties = Field(attribute="other_parties", column_name="Other parties")
 
     class Meta:
-        model = models.ProvInfraProjectSnapshot
+        model = models.InfraProjectSnapshot
         skip_unchanged = True
         report_skipped = False
         exclude = ("id",)
-        import_id_fields = ("IRM_project_id",)
-        instance_loader_class = ProvInfraProjectSnapshotLoader
+        import_id_fields = (
+            "IRM_project_id",
+            "sphere_slug",
+        )
+        instance_loader_class = InfraProjectSnapshotLoader
 
 
-def import_snapshot(file, irm_snapshot_id):
+def import_snapshot(snapshot):
+    file = snapshot.file.read()
     data_book = Databook().load(file, "xlsx")
     dataset = data_book.sheets()[0]
     preprocessed_dataset = preprocess(dataset)
+
     # Ensure projects exist
     for IRM_project_id in preprocessed_dataset["Project ID"]:
         if IRM_project_id:
-            models.ProvInfraProject.objects.get_or_create(IRM_project_id=IRM_project_id)
+            models.InfraProject.objects.get_or_create(
+                IRM_project_id=IRM_project_id, sphere_slug=snapshot.sphere.slug
+            )
+
     if len(preprocessed_dataset) > 0:
         preprocessed_dataset.append_col(
-            [irm_snapshot_id] * len(preprocessed_dataset), header="irm_snapshot"
+            [snapshot.id] * len(preprocessed_dataset), header="irm_snapshot"
         )
-    resource = ProvInfraProjectSnapshotResource()
+        preprocessed_dataset.append_col(
+            [snapshot.sphere.slug] * len(preprocessed_dataset), header="sphere_slug"
+        )
+    resource = InfraProjectSnapshotResource()
     result = resource.import_data(preprocessed_dataset)
     return result

@@ -1,6 +1,6 @@
 import unittest
 
-from budgetportal.irm_preprocessor import (
+from budgetportal.infra_projects.irm_preprocessor import (
     BASE_HEADERS,
     REPEATED_IMPLEMENTOR_HEADER,
     InputException,
@@ -28,7 +28,7 @@ class PreprocessHeaderTestCase(unittest.TestCase):
             headers = BASE_HEADERS + ["badheader"]
             preprocess(Dataset(headers=headers))
         expected_message = (
-            "Expected header Project Contractor in column 38 but got badheader"
+            "Expected header Project Contractor in column 39 but got badheader"
         )
         self.assertEqual(expected_message, str(context.exception))
 
@@ -37,7 +37,7 @@ class PreprocessHeaderTestCase(unittest.TestCase):
             headers = BASE_HEADERS + [REPEATED_IMPLEMENTOR_HEADER] * 3 + ["badheader"]
             preprocess(Dataset(headers=headers))
         expected_message = (
-            "Expected header Project Contractor in column 41 but got badheader"
+            "Expected header Project Contractor in column 42 but got badheader"
         )
         self.assertEqual(expected_message, str(context.exception))
 

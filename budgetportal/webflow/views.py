@@ -23,26 +23,26 @@ from drf_haystack.viewsets import HaystackViewSet
 from rest_framework.decorators import action
 from rest_framework.generics import RetrieveAPIView
 
-from ..prov_infra_project.charts import time_series_data
+from budgetportal.infra_projects.charts import time_series_data
 from .serializers import (
-    ProvInfraProjectCSVSerializer,
-    ProvInfaProjectCSVSnapshotSerializer,
-    ProvInfraProjectSerializer,
-    ProvInfraProjectFacetSerializer,
+    InfraProjectCSVSerializer,
+    InfaProjectCSVSnapshotSerializer,
+    InfraProjectSerializer,
+    InfraProjectFacetSerializer,
 )
 
 
-def provincial_infrastructure_project_list(request):
+def infrastructure_project_list(request):
     context = {
-        "page_title": "Provincial infrastructure project search - vulekamali",
-        "page_description": "Find infrastructure projects by provincial departments.",
+        "page_title": "Infrastructure project search - vulekamali",
+        "page_description": "Find infrastructure projects run by national and provincial government.",
         "page_data_json": "null",
     }
     return render(request, "webflow/infrastructure-search-template.html", context)
 
 
-def provincial_infrastructure_project_detail(request, id, slug):
-    project = get_object_or_404(models.ProvInfraProject, pk=int(id))
+def infrastructure_project_detail(request, id, slug):
+    project = get_object_or_404(models.InfraProject, pk=int(id))
     snapshot = project.project_snapshots.latest()
     page_data = {"project": model_to_dict(snapshot)}
     page_data["project"]["irm_snapshot"] = str(snapshot.irm_snapshot)
@@ -50,8 +50,9 @@ def provincial_infrastructure_project_detail(request, id, slug):
     snapshot_list = list(project.project_snapshots.all())
     page_data["time_series_chart"] = time_series_data(snapshot_list)
     department = models.Department.get_in_latest_government(
-        snapshot.department, snapshot.province
+        snapshot.department, snapshot.government
     )
+
     page_data["department_url"] = department.get_url_path() if department else None
     page_data["province_depts_url"] = (
         "/%s/departments?province=%s&sphere=provincial"
@@ -59,7 +60,7 @@ def provincial_infrastructure_project_detail(request, id, slug):
     )
     page_data[
         "latest_snapshot_financial_year"
-    ] = snapshot.irm_snapshot.financial_year.slug
+    ] = snapshot.irm_snapshot.sphere.financial_year.slug
     context = {
         "project": project,
         "page_data_json": json.dumps(
@@ -67,15 +68,13 @@ def provincial_infrastructure_project_detail(request, id, slug):
         ),
         "page_title": "%s, %s Infrastructure projects - vulekamali"
         % (snapshot.name, snapshot.province),
-        "page_description": "Provincial infrastructure project by the %s %s department."
-        % (snapshot.province, snapshot.department),
+        "page_description": "Infrastructure project by the %s %s department."
+        % (snapshot.government_label, snapshot.department),
     }
-    return render(
-        request, "webflow/detail_provincial-infrastructure-projects.html", context
-    )
+    return render(request, "webflow/detail_infrastructure-projects.html", context)
 
 
-class ProvInfraProjectCSVGeneratorMixIn:
+class InfraProjectCSVGeneratorMixIn:
     def generate_csv_response(self, response_results, filename="export.csv"):
         response = StreamingHttpResponse(
             streaming_content=self._generate_rows(response_results),
@@ -85,7 +84,7 @@ class ProvInfraProjectCSVGeneratorMixIn:
         return response
 
     def _generate_rows(self, response_results):
-        headers = ProvInfraProjectCSVSerializer.Meta.fields
+        headers = InfraProjectCSVSerializer.Meta.fields
         writer = csv.DictWriter(Echo(), fieldnames=headers)
         yield writer.writerow({h: h for h in headers})
 
@@ -93,9 +92,9 @@ class ProvInfraProjectCSVGeneratorMixIn:
             yield writer.writerow(row)
 
 
-class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMixIn):
-    queryset = models.ProvInfraProject.objects.prefetch_related("project_snapshots")
-    serializer_class = ProvInfaProjectCSVSnapshotSerializer
+class InfaProjectCSVDownload(RetrieveAPIView, InfraProjectCSVGeneratorMixIn):
+    queryset = models.InfraProject.objects.prefetch_related("project_snapshots")
+    serializer_class = InfaProjectCSVSnapshotSerializer
 
     def get(self, request, *args, **kwargs):
         project = get_object_or_404(self.queryset, id=int(kwargs["id"]))
@@ -106,9 +105,9 @@ class ProvInfaProjectCSVDownload(RetrieveAPIView, ProvInfraProjectCSVGeneratorMi
         return self.generate_csv_response(serializer.data, filename=filename)
 
 
-class ProvInfraProjectFacetFilter(HaystackFacetFilter):
+class InfraProjectFacetFilter(HaystackFacetFilter):
     def filter_queryset(self, request, queryset, view, *args, **kwargs):
-        queryset = super(ProvInfraProjectFacetFilter, self).filter_queryset(
+        queryset = super(InfraProjectFacetFilter, self).filter_queryset(
             request, queryset, view, *args, **kwargs
         )
         text_query = request.query_params.get("q", None)
@@ -117,9 +116,9 @@ class ProvInfraProjectFacetFilter(HaystackFacetFilter):
         return queryset
 
 
-class ProvInfraProjectFilter(HaystackFilter):
+class InfraProjectFilter(HaystackFilter):
     def filter_queryset(self, request, queryset, view, *args, **kwargs):
-        queryset = super(ProvInfraProjectFilter, self).filter_queryset(
+        queryset = super(InfraProjectFilter, self).filter_queryset(
             request, queryset, view, *args, **kwargs
         )
         text_query = request.query_params.get("q", None)
@@ -128,8 +127,8 @@ class ProvInfraProjectFilter(HaystackFilter):
         return queryset
 
 
-class ProvInfraProjectSearchView(
-    FacetMixin, HaystackViewSet, ProvInfraProjectCSVGeneratorMixIn
+class InfraProjectSearchView(
+    FacetMixin, HaystackViewSet, InfraProjectCSVGeneratorMixIn
 ):
 
     # `index_models` is an optional list of which models you would like to include
@@ -138,12 +137,12 @@ class ProvInfraProjectSearchView(
     # (Translates to `SearchQuerySet().models(*index_models)` behind the scenes.
     # index_models = [Location]
 
-    serializer_class = ProvInfraProjectSerializer
-    csv_serializer_class = ProvInfraProjectCSVSerializer
-    filter_backends = [ProvInfraProjectFilter, HaystackOrderingFilter]
+    serializer_class = InfraProjectSerializer
+    csv_serializer_class = InfraProjectCSVSerializer
+    filter_backends = [InfraProjectFilter, HaystackOrderingFilter]
 
-    facet_serializer_class = ProvInfraProjectFacetSerializer
-    facet_filter_backends = [ProvInfraProjectFacetFilter]
+    facet_serializer_class = InfraProjectFacetSerializer
+    facet_filter_backends = [InfraProjectFacetFilter]
 
     ordering_fields = [
         "name",
@@ -157,7 +156,7 @@ class ProvInfraProjectSearchView(
         response = super().list(request, *args, **kwargs)
         if isinstance(response.data, dict):
             response.data["csv_download_url"] = reverse(
-                "provincial-infrastructure-project-api-csv"
+                "infrastructure-project-api-csv"
             )
         if csv_download_params:
             response.data["csv_download_url"] += "?{}".format(csv_download_params)
@@ -181,6 +180,8 @@ class ProvInfraProjectSearchView(
 
     def _get_filename(self, query_params):
         keys_to_check = (
+            "government_label",
+            "sector",
             "province",
             "department",
             "status",
@@ -188,7 +189,7 @@ class ProvInfraProjectSearchView(
             "q",
         )
         extension = "csv"
-        filename = "provincial-infrastructure-projects"
+        filename = "infrastructure-projects"
         for key in keys_to_check:
             if query_params.get(key):
                 filename += "-{}-{}".format(key, slugify(query_params[key]))

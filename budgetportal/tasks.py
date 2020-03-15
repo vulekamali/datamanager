@@ -7,7 +7,7 @@ import logging
 import traceback
 
 from django_q.tasks import async_task
-from budgetportal import prov_infra_projects
+from budgetportal import infra_projects
 from budgetportal.models import Department, IRMSnapshot
 from django.conf import settings
 from django.core.management import call_command
@@ -66,11 +66,15 @@ def format_row(ordered_dict):
 def import_irm_snapshot(snapshot_id):
     try:
         snapshot = IRMSnapshot.objects.get(pk=snapshot_id)
-        result = prov_infra_projects.import_snapshot(snapshot.file.read(), snapshot.id)
+        result = infra_projects.import_snapshot(snapshot)
         for row_num, row_result in enumerate(result.rows):
             if row_result.errors:
                 raise RowError("Error with row %d" % row_num, row_result, row_num)
-        async_task(index_irm_projects, snapshot_id=snapshot_id)
+        async_task(
+            index_irm_projects,
+            snapshot_id=snapshot_id,
+            task_name="Update infrastructure projects search index following IRM snapshot import",
+        )
         return {
             "totals": result.totals,
             "validation_errors": [row.validation_error for row in result.rows],

@@ -170,17 +170,18 @@ class IRMSnapshotAdmin(admin.ModelAdmin):
     pass
 
 
-class ProvInfraProjectSnapshotInline(admin.TabularInline):
-    model = models.ProvInfraProjectSnapshot
+class InfraProjectSnapshotInline(admin.TabularInline):
+    model = models.InfraProjectSnapshot
     fields = ["name", "province", "department", "status", "irm_snapshot"]
     readonly_fields = fields
 
 
-class ProvInfraProjectAdmin(admin.ModelAdmin):
-    model = models.ProvInfraProject
-    inlines = [ProvInfraProjectSnapshotInline]
+class InfraProjectAdmin(admin.ModelAdmin):
+    model = models.InfraProject
+    inlines = [InfraProjectSnapshotInline]
     readonly_fields = ["IRM_project_id"]
     list_filter = (
+        "project_snapshots__irm_snapshot__sphere__slug",
         "project_snapshots__irm_snapshot",
         "project_snapshots__province",
         "project_snapshots__department",
@@ -188,10 +189,15 @@ class ProvInfraProjectAdmin(admin.ModelAdmin):
     search_fields = ("project_snapshots__name", "project_snapshots__project_number")
 
 
-class ProvInfraProjectSnapshotAdmin(admin.ModelAdmin):
+class InfraProjectSnapshotAdmin(admin.ModelAdmin):
     list_display = ("name", "project_number", "province", "department", "irm_snapshot")
     list_display_links = ("name", "project_number")
-    list_filter = ("irm_snapshot__financial_year__slug", "province", "department")
+    list_filter = (
+        "irm_snapshot__sphere__financial_year__slug",
+        "irm_snapshot__sphere__slug",
+        "province",
+        "department",
+    )
     search_fields = ("name", "project_number")
     list_per_page = 20
 
@@ -232,8 +238,8 @@ admin.site.register(Site, SiteAdmin)
 admin.site.register(models.Video, VideoAdmin)
 admin.site.register(models.Event)
 admin.site.register(models.FAQ, SortableAdmin)
-admin.site.register(models.ProvInfraProject, ProvInfraProjectAdmin)
-admin.site.register(models.ProvInfraProjectSnapshot, ProvInfraProjectSnapshotAdmin)
+admin.site.register(models.InfraProject, InfraProjectAdmin)
+admin.site.register(models.InfraProjectSnapshot, InfraProjectSnapshotAdmin)
 admin.site.register(models.IRMSnapshot, IRMSnapshotAdmin)
 admin.site.register(models.Homepage, admin.ModelAdmin)
 admin.site.register(models.CategoryGuide)
