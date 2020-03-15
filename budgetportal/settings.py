@@ -15,7 +15,6 @@ import os
 
 # THINK VERY CAREFULY before using the TEST variable.
 # Tests should aim to be as production-like as possible.
-import sys
 
 import boto3
 
@@ -26,6 +25,8 @@ import environ
 import sentry_sdk
 from ckanapi import RemoteCKAN
 from sentry_sdk.integrations.django import DjangoIntegration
+
+env = environ.Env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -102,6 +103,7 @@ INSTALLED_APPS = [
     "markdownify",
     "ckeditor",
     "haystack",
+    "storages",
 ]
 
 if DEBUG_TOOLBAR:
@@ -149,6 +151,8 @@ AWS_BUCKET_ACL = "public-read"
 AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
+AWS_S3_SECURE_URLS = env.bool("AWS_S3_SECURE_URLS", True)
+
 
 SOLR_URL = os.environ["SOLR_URL"]
 
