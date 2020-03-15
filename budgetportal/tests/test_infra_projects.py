@@ -25,7 +25,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from budgetportal.infra_projects import irm_preprocessor
 from budgetportal.webflow.serializers import InfraProjectCSVSerializer
 from tablib import Dataset
-from django.test import TransactionTestCase
+from django.test import TestCase, TransactionTestCase
 from budgetportal.infra_projects import InfraProjectSnapshotResource
 from budgetportal.tests.helpers import WagtailHackMixin
 from budgetportal.tasks import format_error
@@ -1655,3 +1655,23 @@ class InfraProjectIRMSnapshotDetailCSVDownloadTestCase(
         csv_reader = csv.DictReader(io.StringIO(content.decode("utf-8")))
         items_to_compare = [self.project_snapshot_1, self.project_snapshot_2]
         self._test_csv_content_correctness(csv_reader, items_to_compare)
+
+
+class RedirectTestCase(TestCase):
+    def test_search_page_redirect(self):
+        old_url = ("/infrastructure-projects/provincial/"
+                   "?q=&filter=department%3ATransport&filter=province%3AEastern%20Cape")
+        new_url = ("/infrastructure-projects/full/"
+                   "?q=&filter=department%3ATransport&filter=province%3AEastern%20Cape")
+        self.assertTrue(old_url.startswith(reverse("redirect-old-prov-infra-project-list")))
+        self.assertTrue(new_url.startswith(reverse("infra-project-list")))
+        response = self.client.get(old_url)
+        self.assertRedirects(response, new_url, status_code=301)
+
+    def test_detail_page_redirect(self):
+        old_url = "/infrastructure-projects/provincial/123-project-slug"
+        new_url = "/infrastructure-projects/full/123-project-slug"
+        self.assertEqual(old_url, reverse("redirect-old-prov-infra-project-detail", args=(123, "project-slug")))
+        self.assertEqual(new_url, reverse("infra-project-detail", args=(123, "project-slug")))
+        response = self.client.get(old_url)
+        self.assertRedirects(response, new_url, status_code=301, fetch_redirect_response=False)
