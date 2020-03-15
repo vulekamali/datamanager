@@ -70,14 +70,18 @@ urlpatterns = [
     path(
         "api/v1/infrastructure-projects/provincial/search/",
         RedirectView.as_view(
-            url="api/v1/infrastructure-projects/full/search/", query_string=True, permanent=True
+            url="api/v1/infrastructure-projects/full/search/",
+            query_string=True,
+            permanent=True,
         ),
         name="redirect-old-prov-infrastructure-project-api",
     ),
     path(
         "api/v1/infrastructure-projects/provincial/search/facets/",
         RedirectView.as_view(
-            url="api/v1/infrastructure-projects/full/search/facets/", query_string=True, permanent=True
+            url="api/v1/infrastructure-projects/full/search/facets/",
+            query_string=True,
+            permanent=True,
         ),
         name="redirect-old-prov-infrastructure-project-facet-api",
     ),
