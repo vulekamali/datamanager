@@ -328,9 +328,9 @@ def department_page(
     primary_department = department.get_primary_department()
 
     if department.government.sphere.slug == "national":
-        description_govt = "National"
+        govt_label = "National"
     elif department.government.sphere.slug == "provincial":
-        description_govt = department.government.name
+        govt_label = department.government.name
 
     context = {
         "comments_enabled": settings.COMMENTS_ENABLED,
@@ -354,6 +354,7 @@ def department_page(
         "financial_years": financial_years_context,
         "government": {
             "name": department.government.name,
+            "label": govt_label,
             "slug": str(department.government.slug),
         },
         "government_functions": [f.name for f in department.get_govt_functions()],
@@ -363,7 +364,7 @@ def department_page(
         ).count(),
         "is_vote_primary": department.is_vote_primary,
         "name": department.name,
-        "projects": get_department_project_summary(description_govt, department),
+        "projects": get_department_project_summary(govt_label, department),
         "slug": str(department.slug),
         "sphere": {
             "name": department.government.sphere.name,
@@ -373,12 +374,7 @@ def department_page(
         "selected_tab": "departments",
         "title": "%s budget %s  - vulekamali" % (department.name, selected_year.slug),
         "description": "%s department: %s budget data for the %s financial year %s"
-        % (
-            description_govt,
-            department.name,
-            selected_year.slug,
-            COMMON_DESCRIPTION_ENDING,
-        ),
+        % (govt_label, department.name, selected_year.slug, COMMON_DESCRIPTION_ENDING,),
         "department_budget": department_budget,
         "department_adjusted_budget": department_adjusted_budget,
         "vote_number": department.vote_number,

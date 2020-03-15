@@ -234,21 +234,9 @@
             </table>
           </div>
 
-          <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
-            <div class="Message-content">
-              {% include 'components/Icon/index.html' with  type="info" size="m" %}
-              <span class="Message-heading">
-                Please note
-              </span>
-            </div>
-            <div class="Message-text Message-text--secondary">
-              This is a preview of upcoming vulekamali functionality.
-            </div>
-          </div>
-
           <div class="u-textAlignRight">
             <a class="Button is-secondary is-inline u-marginTop20 u-textAlignRight"
-               href="/infrastructure-projects/provincial/?q=&filter=department%3A{{ name|iriencode }}&filter=government_label%3A{{ description_govt|iriencode }}">
+               href="/infrastructure-projects/provincial/?q=&filter=department%3A{{ name|iriencode }}&filter=government_label%3A{{ government.label|iriencode }}">
               View all projects
             </a>
           </div>
