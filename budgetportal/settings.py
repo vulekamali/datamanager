@@ -15,7 +15,6 @@ import os
 
 # THINK VERY CAREFULY before using the TEST variable.
 # Tests should aim to be as production-like as possible.
-import sys
 
 import boto3
 
@@ -26,6 +25,8 @@ import environ
 import sentry_sdk
 from ckanapi import RemoteCKAN
 from sentry_sdk.integrations.django import DjangoIntegration
+
+env = environ.Env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -150,14 +151,7 @@ AWS_BUCKET_ACL = "public-read"
 AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
-
-if DEBUG:
-    AWS_DOMAIN = "localhost:9000"
-    AWS_S3_CUSTOM_DOMAIN = '{}/{}'.format(AWS_DOMAIN, AWS_STORAGE_BUCKET_NAME)
-    AWS_S3_USE_SSL = False
-else:
-    AWS_DOMAIN = "s3.{}.amazonaws.com".format(AWS_S3_REGION_NAME)
-    AWS_S3_CUSTOM_DOMAIN = '{}.{}'.format(AWS_STORAGE_BUCKET_NAME, AWS_DOMAIN)
+AWS_S3_SECURE_URLS = env.bool("AWS_S3_SECURE_URLS", True)
 
 
 SOLR_URL = os.environ["SOLR_URL"]
@@ -301,7 +295,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "http://{}/".format(AWS_S3_CUSTOM_DOMAIN)
+MEDIA_URL = "/media/"
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
