@@ -233,13 +233,106 @@
     }
   },
   {
+    "model": "wagtailimages.rendition",
+    "pk": 5,
+    "fields": {
+      "filter_spec": "max-165x165",
+      "file": "images/photo.max-165x165.jpg",
+      "width": 165,
+      "height": 165,
+      "focal_point_key": "",
+      "image": 1
+    }
+  },
+  {
+    "model": "wagtailimages.rendition",
+    "pk": 15,
+    "fields": {
+      "filter_spec": "original",
+      "file": "images/photo.original.jpg",
+      "width": 720,
+      "height": 720,
+      "focal_point_key": "",
+      "image": 1
+    }
+  },
+  {
+    "model": "wagtailimages.rendition",
+    "pk": 16,
+    "fields": {
+      "filter_spec": "max-800x600",
+      "file": "images/photo.max-800x600.jpg",
+      "width": 600,
+      "height": 600,
+      "focal_point_key": "",
+      "image": 1
+    }
+  },
+  {
+    "model": "wagtailimages.image",
+    "pk": 1,
+    "fields": {
+      "collection": 1,
+      "title": "abc",
+      "file": "original_images/photo.jpg",
+      "width": 720,
+      "height": 720,
+      "created_at": "2020-03-15T07:54:47.605Z",
+      "uploaded_by_user": 1,
+      "focal_point_x": null,
+      "focal_point_y": null,
+      "focal_point_width": null,
+      "focal_point_height": null,
+      "file_size": 51498,
+      "file_hash": "d022de108f3a389aaa44b39772445b58d119db11"
+    }
+  },
+  {
+    "model": "wagtailimages.image",
+    "pk": 5,
+    "fields": {
+      "collection": 1,
+      "title": "photo.jpg",
+      "file": "original_images/photo.jpg",
+      "width": 720,
+      "height": 720,
+      "created_at": "2020-03-15T11:53:10.888Z",
+      "uploaded_by_user": 1,
+      "focal_point_x": null,
+      "focal_point_y": null,
+      "focal_point_width": null,
+      "focal_point_height": null,
+      "file_size": 51498,
+      "file_hash": "d022de108f3a389aaa44b39772445b58d119db11"
+    }
+  },
+  {
+    "model": "wagtailimages.image",
+    "pk": 6,
+    "fields": {
+      "collection": 1,
+      "title": "photo.jpg",
+      "file": "original_images/photo.jpg",
+      "width": 720,
+      "height": 720,
+      "created_at": "2020-03-15T14:06:17.450Z",
+      "uploaded_by_user": 1,
+      "focal_point_x": null,
+      "focal_point_y": null,
+      "focal_point_width": null,
+      "focal_point_height": null,
+      "file_size": 51498,
+      "file_hash": "d022de108f3a389aaa44b39772445b58d119db11"
+    }
+  },
+  {
     "model": "budgetportal.guidepage",
     "pk": 5,
     "fields": {
       "body": "[{\"type\": \"section\", \"value\": {\"presentation_class\": \"is-default\", \"heading\": \"guide\", \"content\": \"<p>guide</p>\"}, \"id\": \"8d2b7c06-48a4-45e9-862a-4ab8db10b89c\"}]",
       "created_at": "2020-03-14T08:39:39.289Z",
       "updated_at": "2020-03-14T08:39:39.451Z",
-      "image": null
+      "image": 1
     }
   },
   {
