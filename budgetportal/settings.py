@@ -102,6 +102,7 @@ INSTALLED_APPS = [
     "markdownify",
     "ckeditor",
     "haystack",
+    "storages",
 ]
 
 if DEBUG_TOOLBAR:
@@ -149,6 +150,15 @@ AWS_BUCKET_ACL = "public-read"
 AWS_AUTO_CREATE_BUCKET = True
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
+
+if DEBUG:
+    AWS_DOMAIN = "localhost:9000"
+    AWS_S3_CUSTOM_DOMAIN = '{}/{}'.format(AWS_DOMAIN, AWS_STORAGE_BUCKET_NAME)
+    AWS_S3_USE_SSL = False
+else:
+    AWS_DOMAIN = "s3.{}.amazonaws.com".format(AWS_S3_REGION_NAME)
+    AWS_S3_CUSTOM_DOMAIN = '{}.{}'.format(AWS_STORAGE_BUCKET_NAME, AWS_DOMAIN)
+
 
 SOLR_URL = os.environ["SOLR_URL"]
 
@@ -291,7 +301,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
+MEDIA_URL = "http://{}/".format(AWS_S3_CUSTOM_DOMAIN)
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
