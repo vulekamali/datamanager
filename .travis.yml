@@ -9,7 +9,7 @@ services:
 
 addons:
   hosts:
-    minio
+    - minio
 
 install:
   - pip install black==19.10b0
