@@ -24,6 +24,7 @@ from collections import OrderedDict
 from django.core.exceptions import ValidationError
 from django.db import models
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core import blocks as wagtail_blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
@@ -2175,6 +2176,7 @@ class GuidePage(Page):
 
     content_panels = Page.content_panels + [
         StreamFieldPanel("body"),
+        ImageChooserPanel("image"),
     ]
 
 

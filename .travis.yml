@@ -7,6 +7,10 @@ node_js:
 services:
   - docker
 
+addons:
+  hosts:
+    - minio
+
 install:
   - pip install black==19.10b0
   - nvm install

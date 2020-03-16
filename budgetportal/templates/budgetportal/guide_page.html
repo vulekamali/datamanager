@@ -1,1 +1,35 @@
 {% extends 'budgetportal/page.html' %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+{% block page_content %}
+<article class="Page-content">
+  <div class="Page-contentInner">
+
+
+    {% if self.get_ancestors|length > 1 %}
+    <div class="Section is-invisible">
+      {% for page in self.get_ancestors %}
+      {% if page.is_root == False %}
+      <a href="{% pageurl page %}">{{ page.title }}</a> /
+      {% endif %}
+      {% endfor %}
+
+      {{ self.title }}
+    </div>
+    {% endif %}
+
+
+    <h2 class="Page-mainHeading">{{ page.title }}</h2>
+
+    {% for block in page.body %}
+        {% include_block block %}
+    {% endfor %}
+
+    {% if page.image %}
+        {% image page.image max-320x200 %}
+    {% endif %}
+
+  </div>
+</article>
+{% endblock page_content %}
