@@ -33,6 +33,8 @@ from .models import (
     Sphere,
     Video,
     CategoryGuide,
+    GuideIndexPage,
+    GuidePage
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
@@ -818,6 +820,10 @@ def resources(request):
 
 
 def guides(request, slug):
+    if slug == "index":
+        guide_index = GuideIndexPage.objects.first()
+        return guide_index.serve(request)
+        
     if slug not in guide_data:
         return HttpResponse(status=404)
 
