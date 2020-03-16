@@ -1,9 +1,10 @@
 from django.core.files.images import ImageFile
-from django.test import Client, TestCase
+from django.test import Client
+from budgetportal.tests.helpers import WagtailPageTestCase
 from budgetportal.models import GuideIndexPage, GuidePage, CategoryGuide
 
 
-class GuideIndexPageTestCase(TestCase):
+class GuideIndexPageTestCase(WagtailPageTestCase):
     fixtures = ["test-guides-pages"]
 
     def setUp(self):
@@ -23,8 +24,10 @@ class GuideIndexPageTestCase(TestCase):
             self.assertContains(response, category_guide.external_url_title)
             self.assertContains(response, category_guide.external_url_description)
 
+        self.breadcrumbs_test(response, self.guide_index_page.get_ancestors())
 
-class GuidePagesTestCase(TestCase):
+
+class GuidePagesTestCase(WagtailPageTestCase):
     fixtures = ["test-guides-pages"]
 
     def setUp(self):
@@ -48,3 +51,5 @@ class GuidePagesTestCase(TestCase):
 
         for body_part in self.guide_page.body:
             self.assertContains(response, body_part)
+
+        self.breadcrumbs_test(response, self.guide_page.get_ancestors())
