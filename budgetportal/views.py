@@ -34,7 +34,7 @@ from .models import (
     Video,
     CategoryGuide,
     GuideIndexPage,
-    GuidePage
+    GuidePage,
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
