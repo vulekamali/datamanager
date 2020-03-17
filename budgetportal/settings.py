@@ -153,6 +153,9 @@ AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", None)
 AWS_S3_SECURE_URLS = env.bool("AWS_S3_SECURE_URLS", True)
 AWS_S3_CUSTOM_DOMAIN = env.str("AWS_S3_CUSTOM_DOMAIN", None)
+# "S3Boto3Storage does not correctly handle duplicate filenames in their default configuration."
+# https://docs.wagtail.io/en/v2.7.1/advanced_topics/deploying.html
+AWS_S3_FILE_OVERWRITE = False
 
 
 SOLR_URL = os.environ["SOLR_URL"]
