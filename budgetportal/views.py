@@ -991,6 +991,8 @@ def consolidated_treemap(financial_year_id):
     """ The data for the vulekamali home page treemaps """
     financial_year = FinancialYear.objects.get(slug=financial_year_id)
     page_data = get_consolidated_expenditure_treemap(financial_year)
+    if page_data is None:
+        raise Http404()
     return page_data
 
 
