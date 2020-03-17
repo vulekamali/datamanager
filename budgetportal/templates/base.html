@@ -59,11 +59,13 @@
           'unsafe-eval'
         {% endif %}
         ;
-        frame-src 'self'
-                  https://app.appzi.io
-                  https://www.youtube.com
-                  https://discussions.vulekamali.gov.za
-                  blob:;
+        frame-src
+        'self'
+          https://app.appzi.io
+          https://www.youtube.com
+          https://discussions.vulekamali.gov.za
+          https://app.powerbi.com
+          blob:;
         img-src
           'self'
           https://app.appzi.io
@@ -74,8 +76,9 @@
           https://www.google-analytics.com
           http://localhost
           http://minio:9000/
-          https://sandbox-media.vulekamali.gov.za.s3.amazon.com
-          https://media.vulekamali.gov.za.s3.amazon.com;
+          https://media.sandbox.vulekamali.gov.za
+          https://media.vulekamali.gov.za;
+        "
       />
 
     {% if not debug %}
