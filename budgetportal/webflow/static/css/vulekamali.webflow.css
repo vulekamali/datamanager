@@ -1657,7 +1657,6 @@ li {
 }
 
 .dropdown {
-  z-index: 999;
   width: 100%;
   margin-right: 8px;
   margin-left: 8px;
@@ -6702,11 +6701,11 @@ li {
 }
 
 .search-options__wrap {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  overflow: hidden;
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -6717,7 +6716,6 @@ li {
 }
 
 .advanced-search-fields__wrap {
-  overflow: hidden;
   width: 100%;
 }
 
@@ -6751,6 +6749,7 @@ li {
 }
 
 .search-fields__wrap {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
