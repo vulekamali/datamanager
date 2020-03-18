@@ -5,7 +5,6 @@ const autoprefixer = require('autoprefixer');
 const normalize = require('postcss-normalize');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-
 module.exports = {
   entry: {
     'frontend-v1': './assets/js/scripts.js',
