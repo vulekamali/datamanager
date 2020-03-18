@@ -18,7 +18,7 @@ from django.core.cache import cache
 from django.urls import reverse
 from partial_index import PartialIndex
 
-from blocks import SectionBlock
+from budgetportal.blocks import SectionBlock, DescriptionEmbedBlock
 from budgetportal import nav_bar
 from collections import OrderedDict
 from django.core.exceptions import ValidationError
@@ -2163,7 +2163,11 @@ class GuideIndexPage(Page):
 class GuidePage(Page):
     parent_page_types = ["budgetportal.GuideIndexPage"]
     body = StreamField(
-        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+        [
+            ("section", SectionBlock()),
+            ("html", wagtail_blocks.RawHTMLBlock()),
+            ("chart_embed", DescriptionEmbedBlock()),
+        ]
     )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)

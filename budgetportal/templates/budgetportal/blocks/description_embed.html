@@ -1,0 +1,22 @@
+{% load wagtailcore_tags %}
+
+<div class="u-marginBottom60">
+  <div class="DescriptionEmbedSection">
+    <h3 class="Title Title--section">{{ value.heading }}</h3>
+
+    <div class="DescriptionEmbedSection-container">
+      <div class="DescriptionEmbedSection-item">
+        {{ value.description | richtext }}
+      </div>
+
+
+      <div class="DescriptionEmbedSection-item DescriptionEmbedSection-item--right">
+        <div class="Section">
+          {{ value.embed_code }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
