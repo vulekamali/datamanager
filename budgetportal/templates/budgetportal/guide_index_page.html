@@ -30,12 +30,14 @@
       {{ page.specific.intro|richtext }}
     </div>
 
+    {% for guide in page.get_children %}
+        <h2><a href="{% pageurl guide %}">{{ guide.title }}</a></h2>
+    {% endfor %}
+
     <div class="Grid has-twoColumn">
       {% for category_guide in guides %}
         {% if category_guide.external_url %}
           {% include 'components/Preview/index.html' with title=category_guide.external_url_title excerpt=category_guide.external_url_description url=category_guide.external_url %}
-        {% else %}
-          {% include 'components/Preview/index.html' with title=category_guide.title excerpt=category_guide.search_description url=category_guide.guide_page.url %}
         {% endif %}
       {% endfor %}
     </div>
