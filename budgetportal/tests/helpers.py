@@ -7,6 +7,7 @@ from datetime import datetime
 from django.core.management import call_command
 from django.contrib.staticfiles.testing import LiveServerTestCase
 from django.db import connections
+from django.test import TestCase
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.by import By
@@ -88,3 +89,9 @@ class BaseSeleniumTestCase(WagtailHackMixin, LiveServerTestCase):
 
 class WagtailHackLiveServerTestCase(WagtailHackMixin, LiveServerTestCase):
     pass
+
+
+class WagtailPageTestCase(TestCase):
+    def breadcrumbs_test(self, response, ancestors):
+        for page in ancestors:
+            self.assertContains(response, page.url)
