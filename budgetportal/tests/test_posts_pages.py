@@ -16,7 +16,6 @@ class PostIndexPageTestCase(WagtailPageTestCase):
         self.assertContains(response, self.post_index_page.title)
         self.assertContains(response, self.post_index_page.intro)
         self.assertContains(response, self.post_page.title)
-        self.breadcrumbs_test(response, self.post_index_page.get_ancestors())
 
 
 class PostPagesTestCase(TestCase):
