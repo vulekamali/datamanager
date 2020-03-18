@@ -18,21 +18,19 @@ function initAllocationBySphere(sphereChartContainer) {
       console.log(datasets);
       const resource = getLatestAllocationsResource(datasets);
       if (resource) {
-        return getAllocationBySphere(ckanUrl);
+        return getAllocationBySphere(ckanUrl, resource.id);
       } else {
         throw "Data resource not found";
       }
     })
     .then(function(data) {
-      drawChart(data);
+      console.log(data);
+      drawChart(data.result.records);
     })
     .fail(function(jqXHR) {
       console.log("Error getting data for chart", jqXHR);
       sphereChartContainer.text("Error getting data for chart");
     });
-
-  const sqlQuery = `SELECT * from "${resourceId}" WHERE sphere = 'local'`;
-  const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql?sql=${sqlQuery}`;
 };
 
 function getDataset(ckanUrl) {
@@ -69,4 +67,15 @@ function sortDatasetsFinYear(datasets) {
     else
       return 1;
   });
+}
+
+function getAllocationBySphere(ckanUrl, resourceId) {
+  const sqlQuery = `\
+SELECT sum(amount_rand_thousand) as amount_rand_thousand, sphere \
+FROM "${resourceId}" \
+GROUP BY sphere \
+ORDER BY sphere`;
+  const data = {"sql": sqlQuery};
+  const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql`;
+  return $.get(queryUrl, data);
 }
