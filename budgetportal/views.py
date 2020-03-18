@@ -19,8 +19,6 @@ from django.http import Http404, HttpResponse
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from .guide_data import category_guides
-from .guide_data import guides as guide_data
 from haystack.query import SearchQuerySet
 from .models import (
     FAQ,
@@ -815,25 +813,6 @@ def resources(request):
         "selected_sidebar": "resources",
     }
     return render(request, "resources.html", context)
-
-
-def guides(request, slug):
-    if slug not in guide_data:
-        return HttpResponse(status=404)
-
-    context = guide_data[slug]
-    context.update(
-        {
-            "content_template": "guide-{}.html".format(slug),
-            "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
-            "guides": guide_data,
-            "latest_year": FinancialYear.get_latest_year().slug,
-            "selected_financial_year": None,
-            "financial_years": [],
-        }
-    )
-    template = "guides.html" if slug == "index" else "guide_item.html"
-    return render(request, template, context)
 
 
 def dataset_category_list_page(request):

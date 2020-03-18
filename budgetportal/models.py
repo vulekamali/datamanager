@@ -2152,10 +2152,11 @@ class GuideIndexPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        guides_ordering = OrderedDict([(p.title, p) for p in self.get_children()])
+        guides = {p.title: p for p in self.get_children()}
         for external in CategoryGuide.objects.filter(external_url__isnull=False):
-            guides_ordering[external.external_url_title] = external
-            context["guides"] = guides_ordering.values()
+            guides[external.external_url_title] = external
+
+        context["guides"] = OrderedDict(sorted(guides.items())).values()
         return context
 
 

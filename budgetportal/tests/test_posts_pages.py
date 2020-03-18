@@ -1,8 +1,9 @@
 from django.test import Client, TestCase
+from budgetportal.tests.helpers import WagtailPageTestCase
 from budgetportal.models import PostIndexPage, PostPage
 
 
-class PostIndexPageTestCase(TestCase):
+class PostIndexPageTestCase(WagtailPageTestCase):
     fixtures = ["test-posts-pages"]
 
     def setUp(self):
