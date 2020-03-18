@@ -17,11 +17,6 @@ class GuideIndexPageTestCase(WagtailPageTestCase):
         response = Client().get(self.guide_index_page.url_path)
         self._test_guide_page_index_content(response)
 
-    # def test_guide_index_page_url(self):
-    #     """Test if correct index page is tied to url"""
-    #     response = Client().get("/learning-resources/guides/")
-    #     self._test_guide_page_index_content(response)
-
     def _test_guide_page_index_content(self, response):
         self.assertContains(response, self.guide_index_page.title)
         self.assertContains(response, self.guide_index_page.intro)

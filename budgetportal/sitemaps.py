@@ -80,14 +80,6 @@ class FocusViewSitemap(sitemaps.Sitemap):
         return reverse("focus", args=[item["year"], item["focus"]])
 
 
-class GuidesViewSitemap(sitemaps.Sitemap):
-    def items(self):
-        return []
-
-    def location(self, item):
-        return ""
-
-
 class SearchResultViewSitemap(sitemaps.Sitemap):
     def items(self):
         years = []
@@ -127,6 +119,5 @@ sitemaps = {
     "department_preview": DepartmentPreviewSitemap,
     "infrastructure_projects": InfrastructureProjectPartViewSitemap,
     "focus": FocusViewSitemap,
-    "guides": GuidesViewSitemap,
     "search_results": SearchResultViewSitemap,
 }
