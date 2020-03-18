@@ -273,6 +273,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "budgetportal.context_processors.google_analytics",
                 "budgetportal.context_processors.debug",
+                "budgetportal.context_processors.ckan_url",
                 "django.template.context_processors.request",
                 "django.template.context_processors.static",
             ]

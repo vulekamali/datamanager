@@ -1,7 +1,4 @@
-import urllib
-
 from django.conf import settings
-from django.urls import reverse
 
 
 def google_analytics(request):
@@ -17,3 +14,7 @@ def google_analytics(request):
 
 def debug(request):
     return {"debug": settings.DEBUG}
+
+
+def ckan_url(request):
+    return {"CKAN_URL": settings.CKAN_URL}
