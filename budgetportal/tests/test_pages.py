@@ -200,16 +200,6 @@ class BasicPagesTestCase(TestCase):
             "A new budget is produced by government and added to the portal every financial year",
         )
 
-    def test_guide_page(self):
-        """Test that it loads and that some text is present"""
-        c = Client()
-        response = c.get("/learning-resources/guides/estimates-of-national-expenditure")
-
-        self.assertContains(
-            response,
-            "The Estimates of National Expenditure (ENE) publications describe in detail",
-        )
-
     def test_dataset_category_list_page(self):
         """Test that it loads and that some text is present"""
         c = Client()
