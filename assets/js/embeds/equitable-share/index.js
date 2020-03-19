@@ -2,6 +2,8 @@ import $ from 'jquery';
 import { HorizontalBarChart } from 'vulekamali-visualisations/src/charts/bar/horizontal-bar-chart/horizontal-bar-chart';
 
 const allocationBySphereId = "embed-allocation-of-equitable-share-by-sphere";
+const allocationToProvincesId = "embed-allocation-of-equitable-share-to-provinces";
+const allocationToMunicipalitiesId = "embed-allocation-of-equitable-share-to-municipalities";
 const sphereColor = {
   "national": "#377ac6",
   "provincial": "#aad029",
@@ -23,6 +25,14 @@ $(document).ready(function() {
   if (sphereChartContainer.length) {
     initAllocationBySphere(sphereChartContainer);
   }
+  const provinceChartContainer = $("#" + allocationToProvincesId);
+  if (provinceChartContainer.length) {
+    initAllocationsToProvinces(provinceChartContainer);
+  }
+  const municipalityChartContainer = $("#" + allocationToMunicipalitiesId);
+  if (municipalityChartContainer.length) {
+    initAllocationsToMunicipalities(municipalityChartContainer);
+  }
 });
 
 function initAllocationBySphere(sphereChartContainer) {
@@ -33,7 +43,6 @@ function initAllocationBySphere(sphereChartContainer) {
     .then(function(data) {
       const datasets = data.result.results;
       sortDatasetsFinYear(datasets);
-      console.log(datasets);
       const resource = getLatestAllocationsResource(datasets);
       if (resource !== null) {
         return getAllocationBySphere(ckanUrl, resource.id);
@@ -42,11 +51,10 @@ function initAllocationBySphere(sphereChartContainer) {
       }
     })
     .then(function(data) {
-      console.log(data);
-      drawAllocationByShareChart(data.result.records);
+      drawAllocationBySphereChart(data.result.records);
     })
     .fail(function(jqXHR) {
-      console.log("Error getting data for chart", jqXHR);
+      console.error("Error getting data for chart:", jqXHR);
       sphereChartContainer.text("Error getting data for chart");
     });
 };
@@ -98,7 +106,7 @@ ORDER BY sphere`;
   return $.get(queryUrl, data);
 }
 
-function drawAllocationByShareChart(items) {
+function drawAllocationBySphereChart(items) {
   const chartItems = items.map(item => (
     {
       "Sphere": sphereLabel[item.sphere],
@@ -117,4 +125,75 @@ function drawAllocationByShareChart(items) {
     .barUnit('B')
     .urlKey("url")
     .reDraw();
+}
+
+function initAllocationsToProvinces(container) {
+  container.text("Loading...");
+  const ckanUrl = $("body").data("ckan-url");
+
+  getDataset(ckanUrl)
+    .then(function(data) {
+      const datasets = data.result.results;
+      sortDatasetsFinYear(datasets);
+      const resource = getLatestAllocationsResource(datasets);
+      if (resource !== null) {
+        return getAllocationsToProvinces(ckanUrl, resource.id);
+      } else {
+        throw "Data resource not found";
+      }
+    })
+    .then(function(data) {
+      drawAllocationsToProvincesChart(data.result.records);
+    })
+    .fail(function(jqXHR) {
+      console.error("Error getting data for chart:", jqXHR);
+      container.text("Error getting data for chart");
+    });
+};
+
+function getAllocationsToProvinces(ckanUrl, resourceId) {
+  const sqlQuery = `\
+SELECT sum(amount_rand_thousand) as amount_rand_thousand, geo_code, geo_name \
+FROM "${resourceId}" \
+WHERE "sphere" = 'provincial' \
+GROUP BY geo_code, geo_name`;
+  const data = {"sql": sqlQuery};
+  const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql`;
+  return $.get(queryUrl, data);
+}
+
+function initAllocationsToMunicipalities(container) {
+  container.text("Loading...");
+  const ckanUrl = $("body").data("ckan-url");
+
+  getDataset(ckanUrl)
+    .then(function(data) {
+      const datasets = data.result.results;
+      sortDatasetsFinYear(datasets);
+      const resource = getLatestAllocationsResource(datasets);
+      if (resource !== null) {
+        return getAllocationsToMunicipalities(ckanUrl, resource.id);
+      } else {
+        throw "Data resource not found";
+      }
+    })
+    .then(function(data) {
+      drawAllocationsToMunicipalities(data.result.records);
+    })
+    .fail(function(jqXHR) {
+      console.error("Error getting data for chart:", jqXHR);
+      container.text("Error getting data for chart");
+    });
+};
+
+function getAllocationsToMunicipalities(ckanUrl, resourceId) {
+  const sqlQuery = `\
+SELECT sum(amount_rand_thousand) as amount_rand_thousand, geo_code, geo_name, \
+municipality_type, parent_name \
+FROM "${resourceId}" \
+WHERE "sphere" = 'local' \
+GROUP BY geo_code, geo_name, municipality_type, parent_name`;
+  const data = {"sql": sqlQuery};
+  const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql`;
+  return $.get(queryUrl, data);
 }
