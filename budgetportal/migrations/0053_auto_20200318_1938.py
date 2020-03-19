@@ -8,18 +8,74 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0052_merge_20200314_1756'),
+        ("budgetportal", "0052_merge_20200314_1756"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='guidepage',
-            name='body',
-            field=wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('presentation_class', wagtail.core.blocks.ChoiceBlock(choices=[('is-default', 'Default'), ('is-invisible', 'No background/border'), ('is-bevel', 'Bevel')])), ('heading', wagtail.core.blocks.CharBlock(blank=True)), ('content', wagtail.core.blocks.RichTextBlock())])), ('html', wagtail.core.blocks.RawHTMLBlock()), ('chart_embed', wagtail.core.blocks.StructBlock([('heading', wagtail.core.blocks.CharBlock(blank=True)), ('description', wagtail.core.blocks.RichTextBlock()), ('embed_code', wagtail.core.blocks.RawHTMLBlock())]))]),
+            model_name="guidepage",
+            name="body",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "section",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "presentation_class",
+                                    wagtail.core.blocks.ChoiceBlock(
+                                        choices=[
+                                            ("is-default", "Default"),
+                                            ("is-invisible", "No background/border"),
+                                            ("is-bevel", "Bevel"),
+                                        ]
+                                    ),
+                                ),
+                                ("heading", wagtail.core.blocks.CharBlock(blank=True)),
+                                ("content", wagtail.core.blocks.RichTextBlock()),
+                            ]
+                        ),
+                    ),
+                    ("html", wagtail.core.blocks.RawHTMLBlock()),
+                    (
+                        "chart_embed",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                ("heading", wagtail.core.blocks.CharBlock(blank=True)),
+                                ("description", wagtail.core.blocks.RichTextBlock()),
+                                ("embed_code", wagtail.core.blocks.RawHTMLBlock()),
+                            ]
+                        ),
+                    ),
+                ]
+            ),
         ),
         migrations.AlterField(
-            model_name='postpage',
-            name='body',
-            field=wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('presentation_class', wagtail.core.blocks.ChoiceBlock(choices=[('is-default', 'Default'), ('is-invisible', 'No background/border'), ('is-bevel', 'Bevel')])), ('heading', wagtail.core.blocks.CharBlock(blank=True)), ('content', wagtail.core.blocks.RichTextBlock())])), ('html', wagtail.core.blocks.RawHTMLBlock())]),
+            model_name="postpage",
+            name="body",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "section",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "presentation_class",
+                                    wagtail.core.blocks.ChoiceBlock(
+                                        choices=[
+                                            ("is-default", "Default"),
+                                            ("is-invisible", "No background/border"),
+                                            ("is-bevel", "Bevel"),
+                                        ]
+                                    ),
+                                ),
+                                ("heading", wagtail.core.blocks.CharBlock(blank=True)),
+                                ("content", wagtail.core.blocks.RichTextBlock()),
+                            ]
+                        ),
+                    ),
+                    ("html", wagtail.core.blocks.RawHTMLBlock()),
+                ]
+            ),
         ),
     ]

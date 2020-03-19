@@ -8,18 +8,71 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0053_auto_20200318_1938'),
+        ("budgetportal", "0053_auto_20200318_1938"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='guidepage',
-            name='body',
-            field=wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('presentation_class', wagtail.core.blocks.ChoiceBlock(choices=[('is-default', 'Default'), ('is-invisible', 'No background/border'), ('is-bevel', 'Bevel')])), ('content', wagtail.core.blocks.RichTextBlock())])), ('html', wagtail.core.blocks.RawHTMLBlock()), ('chart_embed', wagtail.core.blocks.StructBlock([('description', wagtail.core.blocks.RichTextBlock()), ('embed_code', wagtail.core.blocks.RawHTMLBlock())]))]),
+            model_name="guidepage",
+            name="body",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "section",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "presentation_class",
+                                    wagtail.core.blocks.ChoiceBlock(
+                                        choices=[
+                                            ("is-default", "Default"),
+                                            ("is-invisible", "No background/border"),
+                                            ("is-bevel", "Bevel"),
+                                        ]
+                                    ),
+                                ),
+                                ("content", wagtail.core.blocks.RichTextBlock()),
+                            ]
+                        ),
+                    ),
+                    ("html", wagtail.core.blocks.RawHTMLBlock()),
+                    (
+                        "chart_embed",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                ("description", wagtail.core.blocks.RichTextBlock()),
+                                ("embed_code", wagtail.core.blocks.RawHTMLBlock()),
+                            ]
+                        ),
+                    ),
+                ]
+            ),
         ),
         migrations.AlterField(
-            model_name='postpage',
-            name='body',
-            field=wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('presentation_class', wagtail.core.blocks.ChoiceBlock(choices=[('is-default', 'Default'), ('is-invisible', 'No background/border'), ('is-bevel', 'Bevel')])), ('content', wagtail.core.blocks.RichTextBlock())])), ('html', wagtail.core.blocks.RawHTMLBlock())]),
+            model_name="postpage",
+            name="body",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "section",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "presentation_class",
+                                    wagtail.core.blocks.ChoiceBlock(
+                                        choices=[
+                                            ("is-default", "Default"),
+                                            ("is-invisible", "No background/border"),
+                                            ("is-bevel", "Bevel"),
+                                        ]
+                                    ),
+                                ),
+                                ("content", wagtail.core.blocks.RichTextBlock()),
+                            ]
+                        ),
+                    ),
+                    ("html", wagtail.core.blocks.RawHTMLBlock()),
+                ]
+            ),
         ),
     ]
