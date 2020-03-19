@@ -2,6 +2,21 @@ import $ from 'jquery';
 import { HorizontalBarChart } from 'vulekamali-visualisations/src/charts/bar/horizontal-bar-chart/horizontal-bar-chart';
 
 const allocationBySphereId = "embed-allocation-of-equitable-share-by-sphere";
+const sphereColor = {
+  "national": "#377ac6",
+  "provincial": "#aad029",
+  "local": "#eb164d",
+};
+const sphereLabel = {
+  "national": "National",
+  "provincial": "Provincial",
+  "local": "Local",
+};
+const sphereUrl = {
+  "national": "/2020-21/departments",
+  "provincial": "#embed-allocation-of-equitable-share-to-provinces",
+  "local": "#embed-allocation-of-equitable-share-to-municipalities",
+};
 
 $(document).ready(function() {
   const sphereChartContainer = $("#" + allocationBySphereId);
@@ -86,8 +101,10 @@ ORDER BY sphere`;
 function drawAllocationByShareChart(items) {
   const chartItems = items.map(item => (
     {
-      "Sphere": item.sphere,
+      "Sphere": sphereLabel[item.sphere],
+      "color": sphereColor[item.sphere],
       "Allocation": parseFloat(item.amount_rand_thousand) * 1000,
+      "url": sphereUrl[item.sphere],
     }
   ));
 
@@ -98,5 +115,6 @@ function drawAllocationByShareChart(items) {
     .valueKey("Allocation")
     .xAxisUnit('B')
     .barUnit('B')
+    .urlKey("url")
     .reDraw();
 }
