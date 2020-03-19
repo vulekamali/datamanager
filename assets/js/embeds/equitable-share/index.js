@@ -1,7 +1,10 @@
 import $ from 'jquery';
+import { HorizontalBarChart } from 'vulekamali-visualisations/src/charts/bar/horizontal-bar-chart/horizontal-bar-chart';
+
+const allocationBySphereId = "embed-allocation-of-equitable-share-by-sphere";
 
 $(document).ready(function() {
-  const sphereChartContainer = $("#embed-allocation-of-equitable-share-by-sphere");
+  const sphereChartContainer = $("#" + allocationBySphereId);
   if (sphereChartContainer.length) {
     initAllocationBySphere(sphereChartContainer);
   }
@@ -17,7 +20,7 @@ function initAllocationBySphere(sphereChartContainer) {
       sortDatasetsFinYear(datasets);
       console.log(datasets);
       const resource = getLatestAllocationsResource(datasets);
-      if (resource) {
+      if (resource !== null) {
         return getAllocationBySphere(ckanUrl, resource.id);
       } else {
         throw "Data resource not found";
@@ -25,7 +28,7 @@ function initAllocationBySphere(sphereChartContainer) {
     })
     .then(function(data) {
       console.log(data);
-      drawChart(data.result.records);
+      drawAllocationByShareChart(data.result.records);
     })
     .fail(function(jqXHR) {
       console.log("Error getting data for chart", jqXHR);
@@ -58,8 +61,8 @@ function getLatestAllocationsResource(datasets) {
 
 function sortDatasetsFinYear(datasets) {
   datasets.sort((a, b) => {
-    const yearA = a.financial_year || null;
-    const yearB = b.financial_year || null;
+    const yearA = a.financial_year.length && a.financial_year[0] || null;
+    const yearB = b.financial_year.length && b.financial_year[0] || null;
     if (yearA < yearB)
       return -1;
     else if (yearA === yearB)
@@ -78,4 +81,22 @@ ORDER BY sphere`;
   const data = {"sql": sqlQuery};
   const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql`;
   return $.get(queryUrl, data);
+}
+
+function drawAllocationByShareChart(items) {
+  const chartItems = items.map(item => (
+    {
+      "Sphere": item.sphere,
+      "Allocation": parseFloat(item.amount_rand_thousand) * 1000,
+    }
+  ));
+
+  new HorizontalBarChart()
+    .select(allocationBySphereId)
+    .data(chartItems)
+    .nameKey("Sphere")
+    .valueKey("Allocation")
+    .xAxisUnit('B')
+    .barUnit('B')
+    .reDraw();
 }

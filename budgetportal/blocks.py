@@ -7,9 +7,10 @@ class SectionBlock(blocks.StructBlock):
             ("is-default", "Default"),
             ("is-invisible", "No background/border"),
             ("is-bevel", "Bevel"),
-        ]
+        ],
+        default="is-default",
     )
-    heading = blocks.CharBlock()
+    heading = blocks.CharBlock(required=False)
     content = blocks.RichTextBlock()
 
     class Meta:
@@ -17,7 +18,7 @@ class SectionBlock(blocks.StructBlock):
 
 
 class DescriptionEmbedBlock(blocks.StructBlock):
-    heading = blocks.CharBlock()
+    heading = blocks.CharBlock(required=False)
     description = blocks.RichTextBlock()
     embed_code = blocks.RawHTMLBlock()
 

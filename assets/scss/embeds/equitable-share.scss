@@ -1,0 +1,76 @@
+#embed-allocation-of-equitable-share-by-sphere * {
+    font-family: Robot, Sans-Serif;
+
+    .chart-header{
+        display: flex;
+        position: relative;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ddd;
+    }
+
+    .chart-header .filter-label{
+        position: absolute;
+        left: 5px;
+        font-size: 14px;
+    }
+
+    .chart-header .select-list{
+        position: absolute;
+        right: 0;
+        width: 40%;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .chart-content{
+        position: relative;
+        width: 100%;
+    }
+
+    .grid line {
+        stroke: lightgrey;
+        stroke-opacity: 0.6;
+    }
+
+    .grid path {
+        stroke-width: 1;
+    }
+
+    .grid text{
+        fill: black;
+    }
+
+    rect.bar:hover {
+        /*fill: cyan;*/
+        stroke: cyan;
+        cursor: pointer;
+    }
+}
+
+
+.toolTip {
+    position: absolute;
+    display: none;
+    padding: 4px;
+    min-width: 80px;
+    height: auto;
+    font-family: Roboto, Sans-Serif;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.toolTip:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+}

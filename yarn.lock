@@ -5728,7 +5728,7 @@ d3-scale@^2.1.0, d3-scale@^2.2.2:
     d3-time "1"
     d3-time-format "2"
 
-d3-selection@^1.1.0, d3-selection@^1.3.0, d3-selection@^1.4.1:
+d3-selection@^1.1.0, d3-selection@^1.3.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/d3-selection/-/d3-selection-1.4.1.tgz#98eedbbe085fbda5bafa2f9e3f3a2f4d7d622a98"
   integrity sha512-BTIbRjv/m5rcVTfBs4AMBLKs4x8XaaLkwm28KWu9S2vKNqXkXt2AH2Qf0sdPZHjFxcWg/YL53zcqAz+3g4/7PA==
@@ -15968,9 +15968,9 @@ vuex@^3.1.0:
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
   integrity sha512-ER5moSbLZuNSMBFnEBVGhQ1uCBNJslH9W/Dw2W7GZN23UQA69uapP5GTT9Vm8Trc0PzBSVt6LzF3hGjmv41xcg==
 
-"vulekamali-visualisations@https://github.com/vulekamali/data-visualisations.git#e00ed87a72e8ccc9d34aff86cc682784c48a7ef7":
+"vulekamali-visualisations@https://github.com/vulekamali/data-visualisations.git#27fe4c6feb9cca0b8ac987e69852649da3197f54":
   version "1.0.0"
-  resolved "https://github.com/vulekamali/data-visualisations.git#e00ed87a72e8ccc9d34aff86cc682784c48a7ef7"
+  resolved "https://github.com/vulekamali/data-visualisations.git#27fe4c6feb9cca0b8ac987e69852649da3197f54"
   dependencies:
     "@babel/polyfill" "^7.7.0"
     core-js "^3.4.1"
@@ -15981,7 +15981,7 @@ vuex@^3.1.0:
     d3-interpolate "^1.3.3"
     d3-scale "^2.2.2"
     d3-scale-chromatic "^1.5.0"
-    d3-selection "^1.4.1"
+    d3-selection "^1.3.0"
     d3-shape "^1.3.7"
     d3-time-format "^2.2.2"
     d3-tip "^0.9.1"
