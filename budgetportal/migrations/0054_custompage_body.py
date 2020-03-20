@@ -8,14 +8,38 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0053_custompage'),
+        ("budgetportal", "0053_custompage"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='custompage',
-            name='body',
-            field=wagtail.core.fields.StreamField([('section', wagtail.core.blocks.StructBlock([('presentation_class', wagtail.core.blocks.ChoiceBlock(choices=[('is-default', 'Default'), ('is-invisible', 'No background/border'), ('is-bevel', 'Bevel')])), ('heading', wagtail.core.blocks.CharBlock()), ('content', wagtail.core.blocks.RichTextBlock())])), ('html', wagtail.core.blocks.RawHTMLBlock())], default=None),
+            model_name="custompage",
+            name="body",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "section",
+                        wagtail.core.blocks.StructBlock(
+                            [
+                                (
+                                    "presentation_class",
+                                    wagtail.core.blocks.ChoiceBlock(
+                                        choices=[
+                                            ("is-default", "Default"),
+                                            ("is-invisible", "No background/border"),
+                                            ("is-bevel", "Bevel"),
+                                        ]
+                                    ),
+                                ),
+                                ("heading", wagtail.core.blocks.CharBlock()),
+                                ("content", wagtail.core.blocks.RichTextBlock()),
+                            ]
+                        ),
+                    ),
+                    ("html", wagtail.core.blocks.RawHTMLBlock()),
+                ],
+                default=None,
+            ),
             preserve_default=False,
         ),
     ]
