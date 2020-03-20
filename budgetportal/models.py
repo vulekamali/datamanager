@@ -2121,20 +2121,42 @@ def csv_url(aggregate_url):
     return csv_url
 
 
-class WagtailHomePage(Page):
-    parent_page_types = []
-    subpage_types = ["budgetportal.LearningIndexPage", "budgetportal.PostIndexPage"]
+class NavContextMixin:
+    def get_context(self, request):
+        context = super().get_context(request)
+        nav = nav_bar.get_items(FinancialYear.get_latest_year().slug)
 
-    class Meta:
-        app_label = "budgetportal"
+        context["navbar"] = nav
+
+        for item in nav:
+            if item["url"] and request.path.startswith(item["url"]):
+                context["selected_tab"] = item["id"]
+
+        return context
 
 
-class LearningIndexPage(Page):
+class WagtailHomePage(Page, NavContextMixin):
+    max_count = 1
+
+
+class CustomPage(Page, NavContextMixin):
+    body = StreamField(
+        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+    )
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel("body"),
+    ]
+
+
+class LearningIndexPage(Page, NavContextMixin):
+    parent_page_types = ["budgetportal.WagtailHomePage"]
     subpage_types = ["budgetportal.GuideIndexPage"]
     max_count = 1
 
 
-class PostIndexPage(Page):
+class PostIndexPage(Page, NavContextMixin):
+    parent_page_types = ["budgetportal.WagtailHomePage"]
     subpage_types = ["budgetportal.PostPage"]
     max_count = 1
     intro = RichTextField(blank=True)
@@ -2142,7 +2164,7 @@ class PostIndexPage(Page):
     content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
 
-class GuideIndexPage(Page):
+class GuideIndexPage(Page, NavContextMixin):
     max_count = 1
     parent_page_types = ["budgetportal.LearningIndexPage"]
     subpage_types = ["budgetportal.GuidePage"]
@@ -2160,7 +2182,7 @@ class GuideIndexPage(Page):
         return context
 
 
-class GuidePage(Page):
+class GuidePage(Page, NavContextMixin):
     parent_page_types = ["budgetportal.GuideIndexPage"]
     body = StreamField(
         [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
@@ -2221,20 +2243,6 @@ class CategoryGuide(models.Model):
             raise ValidationError("Title is required when using External URL.")
 
         return super().clean()
-
-
-class NavContextMixin:
-    def get_context(self, request):
-        context = super().get_context(request)
-        nav = nav_bar.get_items(FinancialYear.get_latest_year().slug)
-
-        context["navbar"] = nav
-
-        for item in nav:
-            if item["url"] and request.path.startswith(item["url"]):
-                context["selected_tab"] = item["id"]
-
-        return context
 
 
 class PostPage(Page):
