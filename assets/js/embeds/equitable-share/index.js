@@ -4,6 +4,7 @@ import { HorizontalBarChart } from 'vulekamali-visualisations/src/charts/bar/hor
 const allocationBySphereId = "embed-allocation-of-equitable-share-by-sphere";
 const allocationToProvincesId = "embed-allocation-of-equitable-share-to-provinces";
 const allocationToMunicipalitiesId = "embed-allocation-of-equitable-share-to-municipalities";
+
 const sphereColor = {
   "national": "#377ac6",
   "provincial": "#aad029",
@@ -18,6 +19,11 @@ const sphereUrl = {
   "national": "/2020-21/departments",
   "provincial": "#embed-allocation-of-equitable-share-to-provinces",
   "local": "#embed-allocation-of-equitable-share-to-municipalities",
+};
+const municipalityTypeLabel = {
+  "local": "Local municipalities",
+  "district": "District municipalities",
+  "metro": "Metropolitan municipalities",
 };
 
 $(document).ready(function() {
@@ -162,6 +168,27 @@ GROUP BY geo_code, geo_name`;
   return $.get(queryUrl, data);
 }
 
+function drawAllocationsToProvincesChart(items) {
+  const chartItems = items.map(item => (
+    {
+      "Province": item.geo_name,
+      "color": sphereColor["provincial"],
+      "Allocation": parseFloat(item.amount_rand_thousand) * 1000,
+      "url": "/2020-21/departments",
+    }
+  ));
+
+  new HorizontalBarChart()
+    .select(allocationToProvincesId)
+    .data(chartItems)
+    .nameKey("Province")
+    .valueKey("Allocation")
+    .xAxisUnit('B')
+    .barUnit('B')
+    .urlKey("url")
+    .reDraw();
+}
+
 function initAllocationsToMunicipalities(container) {
   container.text("Loading...");
   const ckanUrl = $("body").data("ckan-url");
@@ -178,7 +205,7 @@ function initAllocationsToMunicipalities(container) {
       }
     })
     .then(function(data) {
-      drawAllocationsToMunicipalities(data.result.records);
+      drawAllocationsToMunicipalitiesChart(data.result.records);
     })
     .fail(function(jqXHR) {
       console.error("Error getting data for chart:", jqXHR);
@@ -196,4 +223,39 @@ GROUP BY geo_code, geo_name, municipality_type, parent_name`;
   const data = {"sql": sqlQuery};
   const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql`;
   return $.get(queryUrl, data);
+}
+
+function drawAllocationsToMunicipalitiesChart(items) {
+  const chartItems = items.map(item => (
+    {
+      "Municipality type": municipalityTypeLabel[item.municipality_type],
+      "Municipality": item.geo_name,
+      "Province": item.parent_name,
+      "color": sphereColor["local"],
+      "Allocation": parseFloat(item.amount_rand_thousand) * 1000,
+      "url": muniUrl(item),
+    }
+  ));
+
+  new HorizontalBarChart()
+    .select(allocationToMunicipalitiesId)
+    .data(chartItems)
+    .nameKey("Municipality")
+    .valueKey("Allocation")
+    .filterKey("Province")
+    .groupKey("Municipality type")
+    .xAxisUnit('M')
+    .barUnit('M')
+    .urlKey("url")
+    .reDraw();
+}
+
+function muniUrl(item) {
+  let slug;
+  if (item.municipality_type === "district")
+    slug = `district-${item.geo_code}`;
+  else
+    slug = `municipality-${item.geo_code}`;
+  return `https://municipalmoney.gov.za/profiles/${slug}`;
+
 }
