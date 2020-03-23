@@ -2174,7 +2174,7 @@ class GuideIndexPage(Page, NavContextMixin):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        guides = {p.title: p for p in self.get_children()}
+        guides = {p.title: p for p in self.get_children().live()}
         for external in CategoryGuide.objects.filter(external_url__isnull=False):
             guides[external.external_url_title] = external
 
