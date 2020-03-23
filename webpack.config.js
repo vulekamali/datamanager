@@ -9,7 +9,6 @@ module.exports = {
   entry: {
     'frontend-v1': './assets/js/scripts.js',
     'vulekamali-webflow': './assets/js/webflow/index.js',
-    //'vulekamali-embeds': './assets/js/embeds/index.js',
   },
   output: {
     path: resolve(__dirname, 'assets/generated/'),
