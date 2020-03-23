@@ -17,8 +17,13 @@
     .item-label {
         pointer-events: none;
     }
+
     .label-bar {
         cursor: pointer;
+    }
+
+    .bar-label-percent {
+        fill: #979797;
     }
 
     .chart-header .filter-label{
