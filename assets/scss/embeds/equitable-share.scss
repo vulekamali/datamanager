@@ -1,5 +1,4 @@
-#embed-allocation-of-equitable-share-by-sphere * {
-    font-family: Robot, Sans-Serif;
+.embed-horizontal-bar-chart  {
 
     .chart-header{
         display: flex;
@@ -9,6 +8,17 @@
         height: 50px;
         margin-bottom: 20px;
         border-bottom: 2px solid #ddd;
+    }
+
+    .chart-background {
+        fill: white;
+    }
+
+    .item-label {
+        pointer-events: none;
+    }
+    .label-bar {
+        cursor: pointer;
     }
 
     .chart-header .filter-label{
