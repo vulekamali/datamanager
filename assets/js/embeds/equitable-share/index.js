@@ -49,15 +49,16 @@ function initAllocationBySphere(sphereChartContainer) {
     .then(function(data) {
       const datasets = data.result.results;
       sortDatasetsFinYear(datasets);
-      const resource = getLatestAllocationsResource(datasets);
-      if (resource !== null) {
-        return getAllocationBySphere(ckanUrl, resource.id);
+      const latestAllocations = getLatestAllocations(datasets);
+      if (latestAllocations !== null) {
+        return getAllocationBySpherePromise(ckanUrl, latestAllocations);
       } else {
         throw "Data resource not found";
       }
     })
     .then(function(data) {
       drawAllocationBySphereChart(data.result.records);
+      $(`#${allocationBySphereId}`).append(`Source: ${getSourceLink(this.dataset)}`);
     })
     .fail(function(jqXHR) {
       console.error("Error getting data for chart:", jqXHR);
@@ -75,17 +76,34 @@ function getDataset(ckanUrl) {
   return $.get(packageSearchUrl, searchParams);
 }
 
-function getLatestAllocationsResource(datasets) {
+function getSourceLink(dataset) {
+  const url = `/datasets/${dataset.groups[0].name}/${dataset.name}`;
+  return `<a href="${url}">${dataset.title}</a>`;
+}
+
+/**
+ * Returns {resource: ..., dataset: ...} or null if none found.
+ */
+function getLatestAllocations(datasets) {
   let allocationsResource = null;
+  let allocationsDataset = null;
   datasets.forEach(function (dataset) {
     dataset.resources.forEach(function (resource) {
       if (resource.name === "Allocation of Equitable Share") {
         allocationsResource = resource;
+        allocationsDataset = dataset;
       }
     });
   });
 
-  return allocationsResource;
+  if (allocationsResource) {
+    return {
+      dataset: allocationsDataset,
+      resource: allocationsResource,
+    };
+  } else {
+    return null;
+  }
 }
 
 function sortDatasetsFinYear(datasets) {
@@ -101,15 +119,15 @@ function sortDatasetsFinYear(datasets) {
   });
 }
 
-function getAllocationBySphere(ckanUrl, resourceId) {
+function getAllocationBySpherePromise(ckanUrl, allocations) {
   const sqlQuery = `\
 SELECT sum(amount_rand_thousand) as amount_rand_thousand, sphere \
-FROM "${resourceId}" \
+FROM "${allocations.resource.id}" \
 GROUP BY sphere \
 ORDER BY sphere`;
   const data = {"sql": sqlQuery};
   const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql`;
-  return $.get(queryUrl, data);
+  return $.get({url: queryUrl, data: data, context: allocations});
 }
 
 function drawAllocationBySphereChart(items) {
@@ -243,6 +261,7 @@ function drawAllocationsToMunicipalitiesChart(items) {
     .nameKey("Municipality")
     .valueKey("Allocation")
     .filterKey("Province")
+    .filterLabel("Select province:")
     .groupKey("Municipality type")
     .xAxisUnit('M')
     .barUnit('M')
