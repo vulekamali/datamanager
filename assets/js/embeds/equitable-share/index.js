@@ -159,15 +159,16 @@ function initAllocationsToProvinces(container) {
     .then(function(data) {
       const datasets = data.result.results;
       sortDatasetsFinYear(datasets);
-      const resource = getLatestAllocationsResource(datasets);
-      if (resource !== null) {
-        return getAllocationsToProvinces(ckanUrl, resource.id);
+      const latestAllocations = getLatestAllocations(datasets);
+      if (latestAllocations !== null) {
+        return getAllocationsToProvincesPromise(ckanUrl, latestAllocations);
       } else {
         throw "Data resource not found";
       }
     })
     .then(function(data) {
       drawAllocationsToProvincesChart(data.result.records);
+      $(`#${allocationToProvincesId}`).append(`Source: ${getSourceLink(this.dataset)}`);
     })
     .fail(function(jqXHR) {
       console.error("Error getting data for chart:", jqXHR);
@@ -175,15 +176,15 @@ function initAllocationsToProvinces(container) {
     });
 };
 
-function getAllocationsToProvinces(ckanUrl, resourceId) {
+function getAllocationsToProvincesPromise(ckanUrl, allocations) {
   const sqlQuery = `\
 SELECT sum(amount_rand_thousand) as amount_rand_thousand, geo_code, geo_name \
-FROM "${resourceId}" \
+FROM "${allocations.resource.id}" \
 WHERE "sphere" = 'provincial' \
 GROUP BY geo_code, geo_name`;
   const data = {"sql": sqlQuery};
   const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql`;
-  return $.get(queryUrl, data);
+  return $.get({url: queryUrl, data: data, context: allocations});
 }
 
 function drawAllocationsToProvincesChart(items) {
@@ -215,15 +216,16 @@ function initAllocationsToMunicipalities(container) {
     .then(function(data) {
       const datasets = data.result.results;
       sortDatasetsFinYear(datasets);
-      const resource = getLatestAllocationsResource(datasets);
-      if (resource !== null) {
-        return getAllocationsToMunicipalities(ckanUrl, resource.id);
+      const latestAllocations = getLatestAllocations(datasets);
+      if (latestAllocations !== null) {
+        return getAllocationsToMunicipalitiesPromise(ckanUrl, latestAllocations);
       } else {
         throw "Data resource not found";
       }
     })
     .then(function(data) {
       drawAllocationsToMunicipalitiesChart(data.result.records);
+      $(`#${allocationToMunicipalitiesId}`).append(`Source: ${getSourceLink(this.dataset)}`);
     })
     .fail(function(jqXHR) {
       console.error("Error getting data for chart:", jqXHR);
@@ -231,16 +233,16 @@ function initAllocationsToMunicipalities(container) {
     });
 };
 
-function getAllocationsToMunicipalities(ckanUrl, resourceId) {
+function getAllocationsToMunicipalitiesPromise(ckanUrl, allocations) {
   const sqlQuery = `\
 SELECT sum(amount_rand_thousand) as amount_rand_thousand, geo_code, geo_name, \
 municipality_type, parent_name \
-FROM "${resourceId}" \
+FROM "${allocations.resource.id}" \
 WHERE "sphere" = 'local' \
 GROUP BY geo_code, geo_name, municipality_type, parent_name`;
   const data = {"sql": sqlQuery};
   const queryUrl = `${ckanUrl}/api/3/action/datastore_search_sql`;
-  return $.get(queryUrl, data);
+  return $.get({url: queryUrl, data: data, context: allocations});
 }
 
 function drawAllocationsToMunicipalitiesChart(items) {
