@@ -2,13 +2,6 @@
 {% load define_action %}
 {% assign "infrastructure-projects" as hardcoded_infrastructure %}
 
-{% if debug %}
-    {% assign "" as production %}
-{% else %}
-    {% assign "data-production" as production %}
-{% endif %}
-
-
 <!DOCTYPE html>
 <html>
 
@@ -27,12 +20,11 @@
         default-src
           'self'
           https://vulekamali.gov.za
-          https://data.vulekamali.gov.za
+          {{ CKAN_URL }}
           https://discussions.vulekamali.gov.za;
         connect-src
           'self'
-          https://vulekamali.gov.za
-          https://data.vulekamali.gov.za
+          {{ CKAN_URL }}
           https://discussions.vulekamali.gov.za
           https://appzi-collector-b.azurewebsites.net
           https://openspending.vulekamali.gov.za
@@ -54,7 +46,8 @@
           https://d3js.org
           {% comment %} Google Tag Manager HEAD inline {% endcomment %}
           'sha256-v+9wGGBueHqSIuvMsUaFLaXTNw0D8igfDF+5k+9TVbE='
-        {% if debug %} {% comment %}for django-debug-toolbar{% endcomment %}
+        {% if debug %}
+          {% comment %}for django-debug-toolbar{% endcomment %}
           http://ajax.googleapis.com
           'unsafe-eval'
         {% endif %}
@@ -70,8 +63,7 @@
           'self'
           https://app.appzi.io
           http://s3-eu-west-1.amazonaws.com/
-          https://vulekamali.gov.za
-          https://data.vulekamali.gov.za
+          {{ CKAN_URL }}
           https://img.youtube.com
           https://www.google-analytics.com
           http://localhost
@@ -81,13 +73,13 @@
         "
       />
 
-    {% if not debug %}
+    {% if TAG_MANAGER_ID %}
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PLNL56L');</script>
+    })(window,document,'script','dataLayer','{{ TAG_MANAGER_ID }}');</script>
     <!-- End Google Tag Manager -->
     {% endif %}
 
@@ -133,14 +125,20 @@
     <!-- End Appzi -->
   </head>
 
-  <body {{ production }} data-spy="scroll" data-offset="200">
-    {% if production %}
+  <body
+    {{ production }}
+    data-spy="scroll"
+    data-offset="200"
+    data-ckan-url="{{ CKAN_URL }}"
+    >
+    {% if TAG_MANAGER_ID %}
     <!-- Google Tag Manager (noscript) -->
     <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLNL56L"
+      <iframe src="https://www.googletagmanager.com/ns.html?id={{ TAG_MANAGER_ID }}"
               height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
+
     {% endif %}
     {% block content %}
     {% endblock %}

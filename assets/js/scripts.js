@@ -45,3 +45,5 @@ import './scenes/department/AdjustedSection/components/ChangeIndicator/scripts.j
 import './scenes/department/ProgramEconSmallMultiples/programme-econ-small-muls.js';
 import './components/Share/scripts.js';
 import './scenes/homepage/Hero/scripts.js';
+
+import './embeds/equitable-share/index.js';

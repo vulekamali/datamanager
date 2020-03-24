@@ -32,6 +32,7 @@ services:
       - AWS_S3_CUSTOM_DOMAIN
       - SOLR_URL=http://solr:8983/solr/budgetportal
       - DEBUG_CACHE=${DEBUG_CACHE}
+      - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
     volumes:
       - .:/code
     ports:
