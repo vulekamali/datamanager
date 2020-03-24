@@ -2137,6 +2137,8 @@ class NavContextMixin:
 
 class WagtailHomePage(Page, NavContextMixin):
     max_count = 1
+    class Meta:
+        verbose_name = "Homepage"
 
 
 class CustomPage(Page, NavContextMixin):
@@ -2191,19 +2193,9 @@ class GuidePage(Page, NavContextMixin):
             ("chart_embed", DescriptionEmbedBlock()),
         ]
     )
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
-    image = models.ForeignKey(
-        "wagtailimages.Image",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-    )
 
     content_panels = Page.content_panels + [
         StreamFieldPanel("body"),
-        ImageChooserPanel("image"),
     ]
 
 
@@ -2253,15 +2245,6 @@ class PostPage(Page):
     parent_page_types = ["budgetportal.PostIndexPage"]
     body = StreamField(
         [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
-    )
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
-    image = models.ForeignKey(
-        "wagtailimages.Image",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
     )
 
     content_panels = Page.content_panels + [
