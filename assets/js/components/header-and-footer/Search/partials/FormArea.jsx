@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import Icon from './Icon.jsx';
 
 
-export default function FormArea({ setFocus, findSuggestions, currentKeywords, selectedYear }) {
+export default function FormArea({ setFocus, currentKeywords, selectedYear }) {
   const searchUrl = `/${selectedYear}/search-result`;
-  const updateKeyword = event => findSuggestions(event.target.value);
   const addFocus = () => setFocus(true);
 
   return (
@@ -18,7 +17,6 @@ export default function FormArea({ setFocus, findSuggestions, currentKeywords, s
         className="Search-keywords"
         name="search"
         onFocus={addFocus}
-        onInput={updateKeyword}
         placeholder="Search vulekamali"
         value={currentKeywords}
       />
@@ -35,7 +33,6 @@ export default function FormArea({ setFocus, findSuggestions, currentKeywords, s
 
 FormArea.propTypes = {
   currentKeywords: PropTypes.string.isRequired,
-  findSuggestions: PropTypes.func.isRequired,
   selectedYear: PropTypes.string.isRequired,
   setFocus: PropTypes.func.isRequired,
 };
