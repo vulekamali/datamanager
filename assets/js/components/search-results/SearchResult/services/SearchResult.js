@@ -2,6 +2,7 @@ import { createElement, Component } from 'preact';
 import getLandingResults from './getLandingResults.js';
 import getFacetResults from './getFacetResults.js';
 import SearchPage from './../presentation/SearchPage.jsx';
+import getCkanUrl from './../../../../utilities/config/siteConfig.js';
 
 
 export default class SearchPageContainer extends Component {
@@ -16,6 +17,7 @@ export default class SearchPageContainer extends Component {
       error: false,
       loadingPage: false,
       page: 1,
+      ckanUrl: getCkanUrl(),
     };
 
     this.static = {
@@ -37,11 +39,11 @@ export default class SearchPageContainer extends Component {
     });
 
     if (view === 'all') {
-      const callbackWrap = () => getLandingResults(phrase, year);
+      const callbackWrap = () => getLandingResults(this.state.ckanUrl, phrase, year);
       return this.getNewResults(phrase, view, callbackWrap);
     }
 
-    const callbackWrap = () => getFacetResults(phrase, view, 0, year);
+    const callbackWrap = () => getFacetResults(this.state.ckanUrl, phrase, view, 0, year);
     return this.getNewResults(phrase, view, callbackWrap);
   }
 
@@ -76,7 +78,7 @@ export default class SearchPageContainer extends Component {
       this.static.currentFetch.token.cancel();
     }
 
-    this.static.currentFetch = getFacetResults(phrase, tab, page * 5, year);
+    this.static.currentFetch = getFacetResults(this.state.ckanUrl, phrase, tab, page * 5, year);
 
     this.static.currentFetch.request
       .then((data) => {
@@ -123,11 +125,11 @@ export default class SearchPageContainer extends Component {
     history.replaceState({}, '', `/${year}/search-result?search=${encodeURI(phrase)}&view=${newTab}`);
 
     if (newTab === 'all') {
-      const callbackWrap = () => getLandingResults(phrase, year);
+      const callbackWrap = () => getLandingResults(this.state.ckanUrl, phrase, year);
       return this.getNewResults(phrase, newTab, callbackWrap);
     }
 
-    const callbackWrap = () => getFacetResults(phrase, newTab, 0, year);
+    const callbackWrap = () => getFacetResults(this.state.ckanUrl, phrase, newTab, 0, year);
     return this.getNewResults(phrase, newTab, callbackWrap);
   }
 
