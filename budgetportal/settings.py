@@ -113,14 +113,12 @@ MIDDLEWARE = [
     # Don't use StaticLiveServerTestCase with WhiteNoise. Use LiveServerTestCase
     # https://github.com/evansd/whitenoise/issues/206
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.middleware.cache.UpdateCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
     "wagtail.core.middleware.SiteMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
@@ -188,10 +186,6 @@ else:
             "LOCATION": "/var/tmp/django_cache",
         }
     }
-
-# 1 minute gives some relief if something goes viral and is less
-# likely to be an issue if someone is editing content and previewing changes.
-CACHE_MIDDLEWARE_SECONDS = 60
 
 
 CKAN_URL = os.environ.get("CKAN_URL", "https://data.vulekamali.gov.za")
