@@ -44,8 +44,7 @@
           https://i.ytimg.com
           https://app.appzi.io
           https://d3js.org
-          {% comment %} Google Tag Manager HEAD inline {% endcomment %}
-          'sha256-v+9wGGBueHqSIuvMsUaFLaXTNw0D8igfDF+5k+9TVbE='
+          'nonce-{{ TAG_MANAGER_SCRIPT_NONCE }}'
         {% if debug %}
           {% comment %}for django-debug-toolbar{% endcomment %}
           http://ajax.googleapis.com
@@ -75,7 +74,8 @@
 
     {% if TAG_MANAGER_ID %}
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script nonce="{{ TAG_MANAGER_SCRIPT_NONCE  }}">
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
