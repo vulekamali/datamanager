@@ -2135,11 +2135,11 @@ class NavContextMixin:
         return context
 
 
-class WagtailHomePage(Page, NavContextMixin):
+class WagtailHomePage(NavContextMixin, Page):
     max_count = 1
 
 
-class CustomPage(Page, NavContextMixin):
+class CustomPage(NavContextMixin, Page):
     body = StreamField(
         [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
     )
@@ -2149,13 +2149,13 @@ class CustomPage(Page, NavContextMixin):
     ]
 
 
-class LearningIndexPage(Page, NavContextMixin):
+class LearningIndexPage(NavContextMixin, Page):
     parent_page_types = ["budgetportal.WagtailHomePage"]
     subpage_types = ["budgetportal.GuideIndexPage"]
     max_count = 1
 
 
-class PostIndexPage(Page, NavContextMixin):
+class PostIndexPage(NavContextMixin, Page):
     parent_page_types = ["budgetportal.WagtailHomePage"]
     subpage_types = ["budgetportal.PostPage"]
     max_count = 1
@@ -2164,7 +2164,7 @@ class PostIndexPage(Page, NavContextMixin):
     content_panels = Page.content_panels + [FieldPanel("intro", classname="full")]
 
 
-class GuideIndexPage(Page, NavContextMixin):
+class GuideIndexPage(NavContextMixin, Page):
     max_count = 1
     parent_page_types = ["budgetportal.LearningIndexPage"]
     subpage_types = ["budgetportal.GuidePage"]
@@ -2182,7 +2182,7 @@ class GuideIndexPage(Page, NavContextMixin):
         return context
 
 
-class GuidePage(Page, NavContextMixin):
+class GuidePage(NavContextMixin, Page):
     parent_page_types = ["budgetportal.GuideIndexPage"]
     body = StreamField(
         [
@@ -2249,7 +2249,7 @@ class CategoryGuide(models.Model):
         return super().clean()
 
 
-class PostPage(Page):
+class PostPage(NavContextMixin, Page):
     parent_page_types = ["budgetportal.PostIndexPage"]
     body = StreamField(
         [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
