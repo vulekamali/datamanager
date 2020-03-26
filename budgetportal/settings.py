@@ -51,7 +51,7 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": "budgetportal.debug_toolbar_config.show_toolbar_check"
 }
 
-GOOGLE_ANALYTICS_ID = "UA-93649482-8"
+TAG_MANAGER_ID = env.str("TAG_MANAGER_ID", None)
 
 ALLOWED_HOSTS = ["*"]
 USE_X_FORWARDED_HOST = True
@@ -271,6 +271,7 @@ TEMPLATES = [
                 "budgetportal.context_processors.google_analytics",
                 "budgetportal.context_processors.debug",
                 "budgetportal.context_processors.ckan_url",
+                "budgetportal.context_processors.tag_manager_id",
                 "django.template.context_processors.request",
                 "django.template.context_processors.static",
             ]

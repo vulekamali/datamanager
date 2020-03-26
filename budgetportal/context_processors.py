@@ -1,4 +1,6 @@
 from django.conf import settings
+from random import randint
+from base64 import b64encode
 
 
 def google_analytics(request):
@@ -18,3 +20,12 @@ def debug(request):
 
 def ckan_url(request):
     return {"CKAN_URL": settings.CKAN_URL}
+
+
+def tag_manager_id(request):
+    return {
+        "TAG_MANAGER_ID": settings.TAG_MANAGER_ID,
+        "TAG_MANAGER_SCRIPT_NONCE": b64encode(
+            str(randint(10 ** 10, 10 ** 11)).encode()
+        ).decode(),
+    }
