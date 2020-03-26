@@ -1,12 +1,13 @@
 from django.test import Client, TestCase
 from budgetportal.tests.helpers import WagtailPageTestCase
-from budgetportal.models import PostIndexPage, PostPage
+from budgetportal.models import PostIndexPage, PostPage, FinancialYear
 
 
 class PostIndexPageTestCase(WagtailPageTestCase):
     fixtures = ["test-posts-pages"]
 
     def setUp(self):
+        FinancialYear.objects.create(slug="2019-20", published=True)
         self.post_index_page = PostIndexPage.objects.get(id=6)
         self.post_page = PostPage.objects.get(id=7)
 
@@ -22,6 +23,7 @@ class PostPagesTestCase(TestCase):
     fixtures = ["test-posts-pages"]
 
     def setUp(self):
+        FinancialYear.objects.create(slug="2019-20", published=True)
         self.post_page = PostPage.objects.get(id=7)
 
     def test_post_page(self):
