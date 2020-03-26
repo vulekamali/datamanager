@@ -1,13 +1,14 @@
 from django.core.files.images import ImageFile
 from django.test import Client
 from budgetportal.tests.helpers import WagtailPageTestCase
-from budgetportal.models import GuideIndexPage, GuidePage, CategoryGuide
+from budgetportal.models import GuideIndexPage, GuidePage, CategoryGuide, FinancialYear
 
 
 class GuideIndexPageTestCase(WagtailPageTestCase):
     fixtures = ["test-guides-pages"]
 
     def setUp(self):
+        FinancialYear.objects.create(slug="2019-20", published=True)
         self.guide_index_page = GuideIndexPage.objects.get(id=4)
         self.guide_page = GuidePage.objects.get(id=5)
         self.category_guides = CategoryGuide.objects.all()
@@ -37,6 +38,7 @@ class GuidePagesTestCase(WagtailPageTestCase):
     fixtures = ["test-guides-pages"]
 
     def setUp(self):
+        FinancialYear.objects.create(slug="2019-20", published=True)
         self.guide_page = GuidePage.objects.get(id=5)
 
     def test_guide_page(self):
