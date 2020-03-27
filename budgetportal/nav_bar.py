@@ -38,13 +38,13 @@ def get_items(financial_year):
             "children": [
                 {
                     "title": "PPP & major national department projects",
-                    "url": "infrastructure-projects/",
-                    "id": "national",
+                    "url": "/infrastructure-projects/",
+                    "id": "ppp",
                 },
                 {
                     "title": "Government department projects",
-                    "url": "infrastructure-projects/provincial/",
-                    "id": "provincial",
+                    "url": "/infrastructure-projects/full/",
+                    "id": "full",
                 },
             ],
         },

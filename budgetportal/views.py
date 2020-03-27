@@ -17,7 +17,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
 from django.db.models import Count
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from haystack.query import SearchQuerySet
 from .models import (
@@ -31,6 +31,7 @@ from .models import (
     Sphere,
     Video,
     CategoryGuide,
+    MainMenuItem,
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
@@ -73,7 +74,7 @@ def homepage(request):
         "title": "South African Government Budgets %s - vulekamali" % year.slug,
         "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "url_path": year.get_url_path(),
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "videos": videos,
         "latest_year": year.slug,
         "latest_provincial_year": latest_provincial_year
@@ -117,7 +118,7 @@ def search_result(request, financial_year_id):
                 },
             }
         )
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = MainMenuItem.objects.all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "search-result.html", context)
 
@@ -383,7 +384,7 @@ def department_page(
         },
         "website_url": department.get_latest_website_url(),
     }
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = MainMenuItem.objects.all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["global_values"] = read_object_from_yaml(
         str(settings.ROOT_DIR.path("_data/global_values.yaml"))
@@ -618,7 +619,7 @@ def infrastructure_project_detail(request, project_slug):
         "page": {"layout": "infrastructure_project", "data_key": "dataset"},
         "site": {
             "data": {
-                "navbar": nav_bar.get_items(latest_year_slug),
+                "navbar": MainMenuItem.objects.all(),
                 "dataset": dataset_response,
             },
             "latest_year": latest_year_slug,
@@ -708,7 +709,7 @@ def about(request):
         "selected_financial_year": None,
         "financial_years": [],
         "video": Video.objects.get(title_id="onlineBudgetPortal"),
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "about.html", context)
@@ -738,7 +739,7 @@ def events(request):
         "site": {
             "data": {
                 "events": {"upcoming": upcoming_events, "past": past_events},
-                "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+                "navbar": MainMenuItem.objects.all(),
             },
             "latest_year": FinancialYear.get_latest_year().slug,
         },
@@ -749,7 +750,7 @@ def events(request):
 
 def glossary(request):
     context = {
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "selected_tab": "learning-centre",
         "selected_sidebar": "glossary",
         "title": "Glossary - vulekamali",
@@ -764,7 +765,7 @@ def glossary(request):
 def faq(request):
     faq_list = FAQ.objects.all()
     context = {
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "title": "FAQ - vulekamali",
         "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
         "selected_tab": "faq",
@@ -783,7 +784,7 @@ def videos(request):
         "selected_tab": "learning-centre",
         "selected_sidebar": "videos",
         "videos": Video.objects.all(),
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "latest_year": FinancialYear.get_latest_year().slug,
         "admin_url": reverse("admin:budgetportal_video_changelist"),
     }
@@ -794,7 +795,7 @@ def terms_and_conditions(request):
     context = {
         "title": "Terms of use - vulekamali",
         "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "terms-and-conditions.html", context)
@@ -804,7 +805,7 @@ def resources(request):
     titles = {"theBudgetProcess", "participate"}
 
     context = {
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "videos": Video.objects.filter(title_id__in=titles),
         "latest_year": FinancialYear.get_latest_year().slug,
         "title": "Resources - vulekamali",
@@ -823,7 +824,7 @@ def dataset_category_list_page(request):
         "name": "Datasets and Analysis",
         "title": "Datasets and Analysis - vulekamali",
         "url_path": "/datasets",
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
 
@@ -857,7 +858,7 @@ def dataset_category_context(category_slug):
 
 def dataset_category_page(request, category_slug):
     context = dataset_category_context(category_slug)
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = MainMenuItem.objects.all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["guide"] = CategoryGuide.objects.filter(category_slug=category_slug).first()
     return render(request, "government_dataset_category.html", context)
@@ -865,7 +866,7 @@ def dataset_category_page(request, category_slug):
 
 def contributed_datasets_list(request):
     context = dataset_category_context("contributed")
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = MainMenuItem.objects.all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "contributed_data_category.html", context)
 
@@ -895,7 +896,7 @@ def dataset_context(category_slug, dataset_slug):
 
 def dataset_page(request, category_slug, dataset_slug):
     context = dataset_context(category_slug, dataset_slug)
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = MainMenuItem.objects.all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
     context["last_updated"] = datetime.strptime(
@@ -914,7 +915,7 @@ def dataset_page(request, category_slug, dataset_slug):
 
 def contributed_dataset(request, dataset_slug):
     context = dataset_context("contributed", dataset_slug)
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = MainMenuItem.objects.all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
     context["created"] = datetime.strptime(context["created"], "%Y-%m-%dT%H:%M:%S.%f")
     context["last_updated"] = datetime.strptime(
@@ -924,9 +925,14 @@ def contributed_dataset(request, dataset_slug):
     return render(request, "contributed_dataset.html", context)
 
 
+def latest_department_list(request):
+    url = reverse("department-list", args=(FinancialYear.get_latest_year().slug,))
+    return redirect(url, permanent=False)
+
+
 def department_list(request, financial_year_id):
     context = department_list_data(financial_year_id)
-    context["navbar"] = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+    context["navbar"] = MainMenuItem.objects.all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "department_list.html", context)
 
@@ -1008,7 +1014,7 @@ def focus_area_preview(request, financial_year_id, focus_slug):
         "focus_area_slug": focus_slug,
         "selected_financial_year": selected_financial_year.slug,
         "page": {"layout": "focus_page", "data_key": ""},
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "latest_year": FinancialYear.get_latest_year().slug,
     }
     return render(request, "focus_page.html", context)
@@ -1036,7 +1042,7 @@ def department_preview(
         "government_slug": government_slug,
         "selected_financial_year": selected_financial_year.slug,
         "page": {"layout": "department_preview", "data_key": ""},
-        "navbar": nav_bar.get_items(FinancialYear.get_latest_year().slug),
+        "navbar": MainMenuItem.objects.all(),
         "latest_year": FinancialYear.get_latest_year().slug,
         "debug": settings.DEBUG,
     }

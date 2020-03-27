@@ -2267,3 +2267,45 @@ class PostPage(NavContextMixin, Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel("body"),
     ]
+
+
+class MainMenuItem(SortableMixin):
+    name = models.CharField(max_length=100)
+    label = models.CharField(max_length=200)
+    url = models.CharField(
+        max_length=1000,
+        help_text="Use URLs relative to the site root (e.g. /about) for urls on this site.",
+        blank=True,
+        null=True,
+    )
+    align_right = models.BooleanField()
+    main_menu_item_order = models.PositiveIntegerField(
+        default=0, editable=False, db_index=True
+    )
+
+    class Meta:
+        ordering = ["main_menu_item_order"]
+
+    def __str__(self):
+        return f"{self.label} ({self.url}) ({self.children.count()} children)"
+
+
+class SubMenuItem(SortableMixin):
+    parent = models.ForeignKey(
+        MainMenuItem, on_delete=models.CASCADE, related_name="children"
+    )
+    name = models.CharField(max_length=100)
+    label = models.CharField(max_length=200)
+    url = models.CharField(
+        max_length=1000,
+        help_text="Use URLs relative to the site root (e.g. /about) for urls on this site.",
+    )
+    sub_menu_item_order = models.PositiveIntegerField(
+        default=0, editable=False, db_index=True
+    )
+
+    class Meta:
+        ordering = ["sub_menu_item_order"]
+
+    def __str__(self):
+        return f"{self.parent.label} > {self.label} ({self.url})"

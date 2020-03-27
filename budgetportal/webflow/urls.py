@@ -12,6 +12,10 @@ router.register(
     basename="infrastructure-project-api",
 )
 
+urlpatterns_api = [
+    path(r"api/v1/", include(router.urls)),
+]
+
 urlpatterns = [
     path(
         r"infrastructure-projects/full/",
@@ -28,12 +32,14 @@ urlpatterns = [
         views.InfaProjectCSVDownload.as_view(),
         name="infra-project-detail-csv-download",
     ),
-    path(r"api/v1/", include(router.urls)),
     path(
         "infrastructure-projects/full/search/csv",
         views.InfraProjectSearchView.as_view({"get": "get_csv"}),
         name="infrastructure-project-api-csv",
     ),
+]
+
+urlpatterns_legacy = [
     # Redirect provincial/ to full/
     path(
         r"infrastructure-projects/provincial/",

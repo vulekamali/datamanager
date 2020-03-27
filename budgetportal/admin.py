@@ -3,13 +3,11 @@ import logging
 from adminsortable.admin import SortableAdmin, SortableTabularInline
 from budgetportal import models
 from budgetportal.bulk_upload import bulk_upload_view
-from django.contrib import admin, messages
+from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.core.exceptions import ValidationError
 from django.db.utils import ProgrammingError
-from django.utils.text import slugify
 from django.views.generic import TemplateView
 from import_export.admin import ImportMixin
 from import_export.formats.base_formats import CSV, XLSX
@@ -226,6 +224,15 @@ except ProgrammingError as e:
     logging.error(e, exc_info=True)
 
 
+class SubMenuItemInline(SortableTabularInline):
+    model = models.SubMenuItem
+
+
+class MainMenuItemAdmin(SortableAdmin):
+    inlines = [SubMenuItemInline]
+    model = models.MainMenuItem
+
+
 admin.site.register(models.FinancialYear, FinancialYearAdmin)
 admin.site.register(models.Sphere, SphereAdmin)
 admin.site.register(models.Government, GovernmentAdmin)
@@ -243,3 +250,4 @@ admin.site.register(models.InfraProjectSnapshot, InfraProjectSnapshotAdmin)
 admin.site.register(models.IRMSnapshot, IRMSnapshotAdmin)
 admin.site.register(models.Homepage, admin.ModelAdmin)
 admin.site.register(models.CategoryGuide)
+admin.site.register(models.MainMenuItem, MainMenuItemAdmin)

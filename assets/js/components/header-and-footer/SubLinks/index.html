@@ -13,7 +13,7 @@
     {% for item in items %}
 
       {% comment %} Determine whether children should show in sidebar {% endcomment %}
-      {% if selected_sidebar and selected_sidebar == item.id %}
+      {% if selected_sidebar and selected_sidebar == item.name %}
         {% assign ' is-active' as activeClass %}
       {% else %}
         {% assign '' as activeClass %}
@@ -30,7 +30,7 @@
 
       <li class="SubLinks-subItem">
         <a class="SubLinks-subLink{{ activeClass }}{{ jsClass }}"{{ dataAttribute }} href="{{ item.url }}">
-          {{ item.title }}
+          {{ item.label }}
         </a>
       </li>
     {% endfor %}
