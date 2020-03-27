@@ -2124,7 +2124,7 @@ def csv_url(aggregate_url):
 class NavContextMixin:
     def get_context(self, request):
         context = super().get_context(request)
-        nav = MainMenuItem.objects.prefetch_related('children').all()
+        nav = MainMenuItem.objects.prefetch_related("children").all()
 
         context["navbar"] = nav
 

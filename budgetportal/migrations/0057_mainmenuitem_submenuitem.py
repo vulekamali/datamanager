@@ -7,34 +7,67 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0056_auto_20200324_1840'),
+        ("budgetportal", "0056_auto_20200324_1840"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='MainMenuItem',
+            name="MainMenuItem",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('label', models.CharField(max_length=200)),
-                ('url', models.CharField(blank=True, help_text='Use URLs relative to the site root (e.g. /about) for urls on this site.', max_length=1000, null=True)),
-                ('align_right', models.BooleanField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("label", models.CharField(max_length=200)),
+                (
+                    "url",
+                    models.CharField(
+                        blank=True,
+                        help_text="Use URLs relative to the site root (e.g. /about) for urls on this site.",
+                        max_length=1000,
+                        null=True,
+                    ),
+                ),
+                ("align_right", models.BooleanField()),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='SubMenuItem',
+            name="SubMenuItem",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('label', models.CharField(max_length=200)),
-                ('url', models.CharField(help_text='Use URLs relative to the site root (e.g. /about) for urls on this site.', max_length=1000)),
-                ('parent', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='children', to='budgetportal.MainMenuItem')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("label", models.CharField(max_length=200)),
+                (
+                    "url",
+                    models.CharField(
+                        help_text="Use URLs relative to the site root (e.g. /about) for urls on this site.",
+                        max_length=1000,
+                    ),
+                ),
+                (
+                    "parent",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="children",
+                        to="budgetportal.MainMenuItem",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
     ]

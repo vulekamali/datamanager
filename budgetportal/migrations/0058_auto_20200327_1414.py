@@ -6,26 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0057_mainmenuitem_submenuitem'),
+        ("budgetportal", "0057_mainmenuitem_submenuitem"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='mainmenuitem',
-            options={'ordering': ['main_menu_item_order']},
+            name="mainmenuitem", options={"ordering": ["main_menu_item_order"]},
         ),
         migrations.AlterModelOptions(
-            name='submenuitem',
-            options={'ordering': ['sub_menu_item_order']},
+            name="submenuitem", options={"ordering": ["sub_menu_item_order"]},
         ),
         migrations.AddField(
-            model_name='mainmenuitem',
-            name='main_menu_item_order',
+            model_name="mainmenuitem",
+            name="main_menu_item_order",
             field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
         ),
         migrations.AddField(
-            model_name='submenuitem',
-            name='sub_menu_item_order',
+            model_name="submenuitem",
+            name="sub_menu_item_order",
             field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
         ),
     ]
