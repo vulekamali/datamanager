@@ -13,15 +13,15 @@
     {% for item in items %}
 
       {% comment %} Determine whether children should show in sidebar {% endcomment %}
-      {% if selected_sidebar and selected_sidebar == item.id %}
+      {% if selected_sidebar and selected_sidebar == item.name %}
         {% assign ' is-active' as activeClass %}
       {% else %}
         {% assign '' as activeClass %}
       {% endif %}
 
       {% comment %} Determine whether link active state should be determined by JavaScript {% endcomment %}
-      {% if item.connected %}
-        {% assign ' data-connected-id='|add:item.connected as dataAttribute %}
+      {% if item.name %}
+        {% assign ' data-connected-id='|add:item.name as dataAttribute %}
         {% assign ' js-link' as jsClass %}
       {% else %}
         {% assign '' as dataAttribute %}
@@ -30,7 +30,7 @@
 
       <li class="SubLinks-subItem">
         <a class="SubLinks-subLink{{ activeClass }}{{ jsClass }}"{{ dataAttribute }} href="{{ item.url }}">
-          {{ item.title }}
+          {{ item.label }}
         </a>
       </li>
     {% endfor %}

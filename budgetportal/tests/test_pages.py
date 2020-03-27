@@ -11,7 +11,7 @@ from mock import MagicMock, patch
 
 
 class BasicPagesTestCase(TestCase):
-    fixtures = ["video-language", "faq", "homepage", "test-guides-pages"]
+    fixtures = ["video-language", "faq", "homepage", "menu", "test-guides-pages"]
 
     def setUp(self):
         self.mock_openspending_api = MagicMock()

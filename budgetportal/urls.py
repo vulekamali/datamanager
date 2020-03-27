@@ -220,6 +220,11 @@ urlpatterns = [
     ),
     # Department List
     url(
+        r"^latest/departments$",
+        views.latest_department_list,
+        name="latest-department-list",
+    ),
+    url(
         r"^(?P<financial_year_id>\d{4}-\d{2})/departments$",
         cache_page(CACHE_MINUTES_SECS)(views.department_list),
         name="department-list",

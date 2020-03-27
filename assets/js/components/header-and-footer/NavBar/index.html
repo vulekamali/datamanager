@@ -17,14 +17,14 @@
 
         {% for item in items %}
           {% comment %} Create alignment CSS class {% endcomment %}
-          {% if item.align == 'right' %}
+          {% if item.align_right %}
             {% assign ' is-right' as alignmentClass %}
           {% else %}
             {% assign '' as alignmentClass %}
           {% endif %}
 
           {% comment %} Create CSS class that highlights location {% endcomment %}
-          {% if item.id == selected_tab %}
+          {% if item.name == selected_tab %}
             {% assign  ' is-active' as activeClass %}
             {% assign 'true' as activeValue %}
           {% else %}
@@ -41,19 +41,19 @@
 
           <li class="NavBar-item{{ alignmentClass }}">
             {% if item.url %}
-            <a class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.is_dropdown %}dropdown{% endif %}" href="{{ item.url }}">
+            <a class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.children.all %}dropdown{% endif %}" href="{{ item.url }}">
             {% else %}
-            <span class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.is_dropdown %}dropdown{% endif %}">
+            <span class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.children.all %}dropdown{% endif %}">
             {% endif %}
 
 
-            {% if item.id == 'homepage' %}
+            {% if item.name == 'homepage' %}
             <span class="NavBar-iconWrap">
               {% include 'components/Icon/index.html' with type="home" %}
             </span>
             <span class="NavBar-text is-mobileOnly">Home</span>
             {% else %}
-            <span class="NavBar-text">{{ item.title }}</span>
+            <span class="NavBar-text">{{ item.label }}</span>
             {% endif %}
 
 
@@ -63,8 +63,8 @@
             </span>
             {% endif %}
 
-            {% if item.children %}
-              {% include 'components/header-and-footer/SubLinks/index.html' with items=item.children active=activeValue selected_sidebar=selected_sidebar %}
+            {% if item.children.all %}
+              {% include 'components/header-and-footer/SubLinks/index.html' with items=item.children.all active=activeValue selected_sidebar=selected_sidebar %}
             {% endif %}
           </li>
 
