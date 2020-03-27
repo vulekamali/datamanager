@@ -2124,13 +2124,13 @@ def csv_url(aggregate_url):
 class NavContextMixin:
     def get_context(self, request):
         context = super().get_context(request)
-        nav = nav_bar.get_items(FinancialYear.get_latest_year().slug)
+        nav = MainMenuItem.objects.prefetch_related('children').all()
 
         context["navbar"] = nav
 
         for item in nav:
-            if item["url"] and request.path.startswith(item["url"]):
-                context["selected_tab"] = item["id"]
+            if item.name and item.url and request.path.startswith(item.url):
+                context["selected_tab"] = item.name
 
         return context
 
