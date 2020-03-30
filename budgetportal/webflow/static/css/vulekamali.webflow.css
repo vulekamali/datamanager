@@ -2939,6 +2939,7 @@ li {
 }
 
 .clear-filters-button {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2964,6 +2965,7 @@ li {
 }
 
 .search-settings__wrap {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6658,6 +6660,7 @@ li {
 }
 
 .advanced-search {
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
