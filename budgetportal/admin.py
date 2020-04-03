@@ -7,7 +7,6 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.db.utils import ProgrammingError
 from django.views.generic import TemplateView
 from import_export.admin import ImportMixin
 from import_export.formats.base_formats import CSV, XLSX
@@ -209,19 +208,6 @@ class InfraProjectSnapshotAdmin(admin.ModelAdmin):
 
 
 admin.site.register_view("bulk_upload", "Bulk Upload", view=bulk_upload_view)
-
-
-try:
-    for financial_year in models.FinancialYear.objects.all():
-        for sphere in financial_year.spheres.all():
-            view = EntityDatasetsView.as_view(
-                financial_year_slug=financial_year.slug, sphere_slug=sphere.slug
-            )
-            path = "%s/%s/entity_datasets" % (financial_year.slug, sphere.slug)
-            label = "Entity Datasets - %s %s" % (financial_year.slug, sphere.name)
-            admin.site.register_view(path, label, view=view)
-except ProgrammingError as e:
-    logging.error(e, exc_info=True)
 
 
 class SubMenuItemInline(SortableTabularInline):
