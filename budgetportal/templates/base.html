@@ -138,8 +138,14 @@
               height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
-
     {% endif %}
+
+    {% for notice in site_notices %}
+    <div class="SiteNotice">
+      {{ notice.content | safe }}
+    </div>
+    {% endfor %}
+
     {% block content %}
     {% endblock %}
     {% include 'utilities/html/scripts.html' %}

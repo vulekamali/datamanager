@@ -17,9 +17,8 @@ from django.core.exceptions import MultipleObjectsReturned
 from django.core.cache import cache
 from django.urls import reverse
 from partial_index import PartialIndex
-
+import ckeditor.fields as ckeditor_fields
 from budgetportal.blocks import SectionBlock, DescriptionEmbedBlock
-from budgetportal import nav_bar
 from collections import OrderedDict
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -1817,7 +1816,7 @@ class Video(SortableMixin):
 
 class FAQ(SortableMixin):
     title = models.CharField(max_length=1024)
-    content = RichTextField()
+    content = ckeditor_fields.RichTextField()
     the_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
     def __str__(self):
@@ -2309,3 +2308,16 @@ class SubMenuItem(SortableMixin):
 
     def __str__(self):
         return f"{self.parent.label} > {self.label} ({self.url})"
+
+
+class Notice(SortableMixin):
+    description = models.CharField(max_length=1024)
+    content = ckeditor_fields.RichTextField()
+
+    notice_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    class Meta:
+        ordering = ["notice_order"]
+
+    def __str__(self):
+        return self.description

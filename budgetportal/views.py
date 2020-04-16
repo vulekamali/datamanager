@@ -10,7 +10,6 @@ from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-from budgetportal import nav_bar
 from .datasets import Category, Dataset
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder

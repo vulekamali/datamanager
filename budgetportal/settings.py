@@ -272,6 +272,7 @@ TEMPLATES = [
                 "budgetportal.context_processors.debug",
                 "budgetportal.context_processors.ckan_url",
                 "budgetportal.context_processors.tag_manager_id",
+                "budgetportal.context_processors.site_notices",
                 "django.template.context_processors.request",
                 "django.template.context_processors.static",
             ]

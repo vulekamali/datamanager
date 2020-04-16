@@ -1,10 +1,10 @@
-import json
 from budgetportal.models import (
     Department,
     FinancialYear,
     Government,
     Sphere,
     CategoryGuide,
+    Notice,
 )
 from django.test import Client, TestCase
 from mock import MagicMock, patch
@@ -110,6 +110,21 @@ class BasicPagesTestCase(TestCase):
             response,
             "Vulekamali is a project by the South African National Treasury and Imali Yethu",
         )
+        self.assertNotContains(response, "Important notice")
+
+    def test_homepage_with_notice(self):
+        """Test that it exists and that the correct years are linked"""
+        Notice.objects.create(description="test", content="Important notice")
+        c = Client()
+        response = c.get("/")
+
+        self.assertContains(response, 'class="NavBar-link is-active')
+        self.assertContains(response, "About Vulekamali")
+        self.assertContains(
+            response,
+            "Vulekamali is a project by the South African National Treasury and Imali Yethu",
+        )
+        self.assertContains(response, "Important notice")
 
     def test_departments_list_page(self):
         """Test that it loads and that some text is present"""
