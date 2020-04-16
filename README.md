@@ -141,7 +141,7 @@ yarn build:webapp
 
 ### Start development server
 
-Point the hostname `minio` at the host running the dev server, probably `127.0.0.1`, using thouse `hosts` file:
+Point the hostname `minio` at the host running the dev server, probably `127.0.0.1`, using your `hosts` file:
 
 ```
 127.0.0.1    localhost minio

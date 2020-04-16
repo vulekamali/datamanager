@@ -1,6 +1,7 @@
 from django.conf import settings
 from random import randint
 from base64 import b64encode
+from budgetportal import models
 
 
 def google_analytics(request):
@@ -29,3 +30,7 @@ def tag_manager_id(request):
             str(randint(10 ** 10, 10 ** 11)).encode()
         ).decode(),
     }
+
+
+def site_notices(request):
+    return {"site_notices": models.Notice.objects.all()}
