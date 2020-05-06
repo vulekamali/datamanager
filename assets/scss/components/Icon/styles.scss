@@ -4,7 +4,6 @@
   display: inline-block;
 
   @supports (display: flex) {
-    display: block;
     position: static;
   }
 

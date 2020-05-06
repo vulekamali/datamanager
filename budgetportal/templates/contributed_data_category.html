@@ -22,7 +22,11 @@
         <div class="Grid has-rightSidebar">
           <div>
             <div class="BasicContent-title">How can I contribute?</div>
-            <div>Do you have data or analysis related to the budget that you would like to contribute?</div>
+            <p>Do you have data or analysis related to the budget that you would like to contribute?</p>
+            <p>
+              {% include 'components/Icon/index.html' with type="help" size="s" %}
+              <a href="/learning-resources/guides/contributed-data-analysis/" target="_blank">&nbsp;Need help uploading?</a>
+            </p>
           </div>
           <div class="u-paddingTop15">
             <a class="Button" target="_blank" href="{{ CKAN_URL }}/user/login?came_from=/dataset/new">Log in and submit your data</a>
