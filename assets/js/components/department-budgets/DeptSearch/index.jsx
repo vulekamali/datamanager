@@ -32,7 +32,7 @@ const emptyNotification = (
 );
 
 
-const showResults = (results, emptyGroups) => {
+const showResults = (results) => {
   const hasItemsInDept = ({ departments }) => departments.length > 0;
 
   if (results.filter(hasItemsInDept).length < 1) {
@@ -41,7 +41,7 @@ const showResults = (results, emptyGroups) => {
 
   return results.map(
     ({ name, slug, departments }) => {
-      const empty = emptyGroups.indexOf(slug) > -1;
+      const empty = departments.length == 0;
       return makeGroup(slug, departments, name, empty);
     },
   );
@@ -49,7 +49,7 @@ const showResults = (results, emptyGroups) => {
 
 
 export default function DeptSearchMarkup({ state, eventHandlers }) {
-  const { results, emptyGroups } = state;
+  const { results } = state;
 
   return (
     <div className="DeptSearch">
@@ -71,7 +71,7 @@ export default function DeptSearchMarkup({ state, eventHandlers }) {
         </ul>
         <h3 className="u-sReadOnly">Results</h3>
         <div className="DeptSearch-results">
-          {showResults(results, emptyGroups)}
+          {showResults(results)}
         </div>
       </div>
     </div>

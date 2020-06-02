@@ -14,28 +14,10 @@ class DeptSearchContainer extends Component {
       province: this.props.province || 'all',
     };
 
-    const getEmptyGroups = (data) => {
-      return data.reduce(
-        (results, val) => {
-          if (val.departments.length <= 0) {
-
-            return [
-              ...results,
-              val.slug,
-            ];
-          }
-
-          return results;
-        },
-        [],
-      );
-    };
-
     this.state = {
       loading: false,
       open: null,
       results: filterResults(filters, this.props.spheres),
-      emptyGroups: getEmptyGroups(this.props.spheres),
       filters,
     };
 
@@ -82,7 +64,7 @@ class DeptSearchContainer extends Component {
   }
 
   render() {
-    return <DeptSearch state={this.state} eventHandlers={this.eventHandlers} epresData={this.props.epresData} />;
+    return <DeptSearch state={this.state} eventHandlers={this.eventHandlers} />;
   }
 }
 
