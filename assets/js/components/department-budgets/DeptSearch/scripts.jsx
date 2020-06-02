@@ -90,32 +90,30 @@ class DeptSearchContainer extends Component {
 function scripts() {
   const componentsList = document.getElementsByClassName('js-initDeptSearch');
 
-  if (componentsList.length > 0) {
-    for (let i = 0; i < componentsList.length; i++) {
-      const component = componentsList[i];
-      const nationalData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-national-json'))).data;
-      const rawProvincialData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-provincial-json'))).data;
-      const epresData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-epres-json'))).data; 
-      
-      const provincialData = rawProvincialData.sort((a, b) => {
-        return a.name.localeCompare(b.name);
-      });
+  for (let i = 0; i < componentsList.length; i++) {
+    const component = componentsList[i];
+    const nationalData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-national-json'))).data;
+    const rawProvincialData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-provincial-json'))).data;
+    const epresData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-epres-json'))).data;
 
-      const jsonData = [
-        {
-          ...nationalData,
-          name: 'National',
-        },
-        ...provincialData,
-      ];
+    const provincialData = rawProvincialData.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
 
-      const { sphere, province, phrase } = window.vulekamali.qs;
+    const jsonData = [
+      {
+        ...nationalData,
+        name: 'National',
+      },
+      ...provincialData,
+    ];
 
-      render(
-        <DeptSearchContainer {...{ jsonData, sphere, province, phrase, epresData }} />,
-        component,
-      );
-    }
+    const { sphere, province, phrase } = window.vulekamali.qs;
+
+    render(
+      <DeptSearchContainer {...{ jsonData, sphere, province, phrase, epresData }} />,
+      component,
+    );
   }
 }
 

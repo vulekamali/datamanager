@@ -1,5 +1,5 @@
 import { h } from 'preact';
-
+import GovernmentResources from './../../GovernmentResources/GovernmentResources.jsx';
 
 import Map from './partials/Map.jsx';
 
@@ -39,6 +39,9 @@ export default function DeptGroup({ map, linksArray, name: title, doubleRow, emp
       <div className="DeptGroup-map">
         {Map(map)}
       </div>
+      <div>{"hello there"}</div>
+      <GovernmentResources title/>
+      <div>{"bye now"}</div>
     </div>
   );
 }

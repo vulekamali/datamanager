@@ -39,7 +39,7 @@
          data-year="{{ latest_provincial_year }}">
     </div>
 
-    <div data-webapp="resources-homepage"></div>
+    {% include 'components/GovernmentResources/government-resources.html' %}
 
     {% with events_list=events.upcoming %}
 
