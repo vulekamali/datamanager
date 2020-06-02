@@ -3,7 +3,7 @@ import GovernmentResources from './../../GovernmentResources/GovernmentResources
 
 import Map from './partials/Map.jsx';
 
-export default function DeptGroup({ map, linksArray, name: title, doubleRow, empty, epre }) {
+export default function DeptGroup({ map, linksArray, name: title, doubleRow, empty }) {
 
   if (empty) {
     return (
@@ -11,7 +11,7 @@ export default function DeptGroup({ map, linksArray, name: title, doubleRow, emp
         <div className="DeptGroup-wrap">
           <h3 className="DeptGroup-title">{title} Department Budgets</h3>
           <p className="u-fontStyle u-fontStyle--italic">This data is not yet available. Provincial budgets are tabled after the national budget has been announced. This is because the national budget determines the amount of money each province receives. We expect to be able make provincial budget data available by April {(new Date()).getFullYear()}.</p>
-          { epre ? <a target="_blank" className="Button is-inline" href={epre}>Download the full EPRE PDF</a> : null }
+          <p>In the meantime you view previous financial years\' data by selecting a year at the top of your screen.</p>
         </div>
         <div className="DeptGroup-map">
           {Map(map)}

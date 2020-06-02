@@ -34,8 +34,8 @@ class DeptSearchContainer extends Component {
     this.state = {
       loading: false,
       open: null,
-      results: filterResults(filters, this.props.jsonData),
-      emptyGroups: getEmptyGroups(this.props.jsonData),
+      results: filterResults(filters, this.props.spheres),
+      emptyGroups: getEmptyGroups(this.props.spheres),
       filters,
     };
 
@@ -61,7 +61,7 @@ class DeptSearchContainer extends Component {
     };
 
     this.setState({ filters });
-    this.setState({ results: filterResults(filters, this.props.jsonData) });
+    this.setState({ results: filterResults(filters, this.props.spheres) });
   }
 
   updateDropdown(filter, value) {
@@ -78,7 +78,7 @@ class DeptSearchContainer extends Component {
     };
 
     this.setState({ filters });
-    return this.setState({ results: filterResults(filters, this.props.jsonData) });
+    return this.setState({ results: filterResults(filters, this.props.spheres) });
   }
 
   render() {
@@ -94,16 +94,19 @@ function scripts() {
     const component = componentsList[i];
     const nationalData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-national-json'))).data;
     const rawProvincialData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-provincial-json'))).data;
-    const epresData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-epres-json'))).data;
+    const financialYear = decodeHtmlEntities(component.getAttribute('data-year'));
 
     const provincialData = rawProvincialData.sort((a, b) => {
       return a.name.localeCompare(b.name);
     });
+    const labeledProvincialData = provincialData.map(p => {
+      p.label = p.name;
+    });
 
-    const jsonData = [
+    const spheres = [
       {
         ...nationalData,
-        name: 'National',
+        label: 'National',
       },
       ...provincialData,
     ];
@@ -111,7 +114,7 @@ function scripts() {
     const { sphere, province, phrase } = window.vulekamali.qs;
 
     render(
-      <DeptSearchContainer {...{ jsonData, sphere, province, phrase, epresData }} />,
+      <DeptSearchContainer {...{ spheres, financialYear, sphere, province, phrase }} />,
       component,
     );
   }

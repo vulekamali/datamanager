@@ -3,27 +3,14 @@ import DeptControl from './../DeptControl/index.jsx';
 import DeptGroup from './../DeptGroup/index.jsx';
 
 
-const onlyEpreView = (slug, name, epresData) => {
-  return (
-    <div className="DeptSearch-groupWrap">
-      <DeptGroup
-        empty
-        map={slug}
-        name={name}
-        epre={epresData && (epresData[slug] || null)}
-      />
-    </div>
-  );
-};
-
-
-const normalView = (slug, departments, name) => {
+const makeGroup = (slug, departments, name, empty) => {
   return (
     <div className="DeptSearch-groupWrap">
       <DeptGroup
         map={slug}
         linksArray={departments}
         name={name}
+        empty={empty}
         doubleRow={slug === 'south-africa'}
       />
     </div>
@@ -38,14 +25,14 @@ const emptyNotification = (
         No results found
       </div>
       <div>
-        Please try changing or broadening your search term
+        Please try changing or broadening your search terms
       </div>
     </div>
   </div>
 );
 
 
-const showResults = (results, emptyGroups, epresData) => {
+const showResults = (results, emptyGroups) => {
   const hasItemsInDept = ({ departments }) => departments.length > 0;
 
   if (results.filter(hasItemsInDept).length < 1) {
@@ -54,19 +41,14 @@ const showResults = (results, emptyGroups, epresData) => {
 
   return results.map(
     ({ name, slug, departments }) => {
-      if (emptyGroups.indexOf(slug) > -1) {
-        return onlyEpreView(slug, name, epresData);
-      } else if (departments.length > 0) {
-        return normalView(slug, departments, name);
-      }
-
-      return null;
+      const empty = emptyGroups.indexOf(slug) > -1;
+      return makeGroup(slug, departments, name, empty);
     },
   );
 };
 
 
-export default function DeptSearchMarkup({ state, eventHandlers, epresData }) {
+export default function DeptSearchMarkup({ state, eventHandlers }) {
   const { results, emptyGroups } = state;
 
   return (
@@ -89,7 +71,7 @@ export default function DeptSearchMarkup({ state, eventHandlers, epresData }) {
         </ul>
         <h3 className="u-sReadOnly">Results</h3>
         <div className="DeptSearch-results">
-          {showResults(results, emptyGroups, epresData)}
+          {showResults(results, emptyGroups)}
         </div>
       </div>
     </div>
