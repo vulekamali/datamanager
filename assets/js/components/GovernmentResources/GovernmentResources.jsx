@@ -43,7 +43,7 @@ export default class GovernmentResources extends Component {
       loading: false,
     };
 
-    console.log(`constructor ${props.title}`);
+    console.log(`constructor ${this.props.title}`);
   }
 
   componentDidMount() {

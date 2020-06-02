@@ -40,7 +40,7 @@ export default function DeptGroup({ map, linksArray, name: title, doubleRow, emp
         {Map(map)}
       </div>
       <div>{"hello there"}</div>
-      <GovernmentResources title/>
+      <GovernmentResources title={title} />
       <div>{"bye now"}</div>
     </div>
   );
