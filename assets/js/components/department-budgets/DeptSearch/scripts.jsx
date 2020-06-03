@@ -70,9 +70,32 @@ class DeptSearchContainer extends Component {
   requestResources() {
     const ckanUrl = this.props.ckanUrl;
     const financialYear = this.props.financialYear;
+    const originalBudgetGroups = [
+      'estimates-of-provincial-revenue-and-expenditure',
+      'people-s-guides',
+      'occasional-budget-documents',
+      'tax-pocket-guides',
+      'appropriation-bills',
+      'budget-highlights',
+      'budget-reviews',
+      'budget-speeches',
+      'division-of-revenue-bills',
+      'estimates-of-national-expenditure',
+    ];
+    const adjustedBudgetGroups = [
+      'adjusted-estimates-of-national-expenditure',
+      'adjusted-estimates-of-provincial-revenue-and-expenditure',
+      'division-of-revenue-amendment-bills',
+      'adjustments-appropriation-bills',
+      'medium-term-budget-policy-statements',
+    ];
+    const groupsClause = [...originalBudgetGroups, ...adjustedBudgetGroups]
+          .map(g => `groups:"${g}"`)
+          .join(' OR ')
     const fqParams = [
       'organization:"national-treasury"',
-      'groups:"division-of-revenue-bills"',
+      `(${groupsClause})`,
+      `vocab_financial_years:"${financialYear}"`,
     ].join('+');
     const searchParams = new URLSearchParams();
     searchParams.set('q', '');
