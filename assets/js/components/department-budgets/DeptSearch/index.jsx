@@ -3,12 +3,13 @@ import DeptControl from './../DeptControl/index.jsx';
 import DeptGroup from './../DeptGroup/index.jsx';
 
 
-const makeGroup = (slug, departments, name, empty) => {
+const makeGroup = (slug, departments, name, label, empty) => {
   return (
     <div className="DeptSearch-groupWrap">
       <DeptGroup
         map={slug}
         linksArray={departments}
+        label={label}
         name={name}
         empty={empty}
         doubleRow={slug === 'south-africa'}
@@ -40,9 +41,9 @@ const showResults = (results) => {
   }
 
   return results.map(
-    ({ name, slug, departments }) => {
+    ({ name, slug, departments, label }) => {
       const empty = departments.length == 0;
-      return makeGroup(slug, departments, name, empty);
+      return makeGroup(slug, departments, name, label, empty);
     },
   );
 };
