@@ -100,9 +100,13 @@ class DeptSearchContainer extends Component {
     const searchParams = new URLSearchParams();
     searchParams.set('q', '');
     searchParams.set('fq', fqParams);
+    searchParams.set('rows', '1000');
     const url = `${ckanUrl}/api/3/action/package_search?${searchParams.toString()}`
     fetchWrapper(url)
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response.result.results);
+        console.log(resultsToResources(response.result.results));
+      })
       .catch((errorResult) => console.warn(errorResult));
   }
 
@@ -111,6 +115,42 @@ class DeptSearchContainer extends Component {
   }
 }
 
+/**
+ * @param {array} results - CKAN package_search action results field: an array of packages.
+
+ * Returns an object keyed by government name, where the values are objects
+ * with that government's budgetResources and adjustedBudgetResources as keys.
+ */
+function resultsToResources(results) {
+  return results.reduce(datasetReducer, {});
+}
+
+function datasetReducer(governments, dataset) {
+  const governmentName = datasetGovernment(dataset);
+  if (!(governmentName in governments))
+    governments[governmentName] = {
+      "original": [],
+      "adjusted": [],
+    }
+  const government = governments[governmentName];
+  government.original.push(dataset);
+  return governments;
+}
+
+function datasetGovernment(dataset) {
+  if (dataset.sphere.length > 1) {
+    console.error("More than one sphere", dataset);
+    return null;
+  }
+  if (dataset.sphere[0] === "national")
+      return "South Africa";
+  if (dataset.sphere[0] === "provincial") {
+    if (dataset.province.length > 1)
+      console.error("More than one province", dataset);
+    return dataset.province[0];
+  }
+  return null;
+}
 
 function scripts() {
   const componentsList = document.getElementsByClassName('js-initDeptSearch');
