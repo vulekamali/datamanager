@@ -5,6 +5,26 @@ import { DeptSearch, makeGroups } from './index.jsx';
 import filterResults from './partials/filterResults.js';
 import fetchWrapper from './../../../utilities/js/helpers/fetchWrapper.js';
 
+const originalBudgetGroups = [
+  'estimates-of-provincial-revenue-and-expenditure',
+  'people-s-guides',
+  'occasional-budget-documents',
+  'tax-pocket-guides',
+  'appropriation-bills',
+  'budget-highlights',
+  'budget-reviews',
+  'budget-speeches',
+  'division-of-revenue-bills',
+  'estimates-of-national-expenditure',
+];
+const adjustedBudgetGroups = [
+  'adjusted-estimates-of-national-expenditure',
+  'adjusted-estimates-of-provincial-revenue-and-expenditure',
+  'division-of-revenue-amendment-bills',
+  'adjustments-appropriation-bills',
+  'medium-term-budget-policy-statements',
+];
+
 class DeptSearchContainer extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +67,6 @@ class DeptSearchContainer extends Component {
 
     this.setState({ filters });
     this.setState({ results: filterResults(filters, this.props.governments) });
-    console.log("governments", filterResults(filters, this.props.governments), this.props.governments);
   }
 
   updateDropdown(filter, value) {
@@ -70,25 +89,6 @@ class DeptSearchContainer extends Component {
   requestResources() {
     const ckanUrl = this.props.ckanUrl;
     const financialYear = this.props.financialYear;
-    const originalBudgetGroups = [
-      'estimates-of-provincial-revenue-and-expenditure',
-      'people-s-guides',
-      'occasional-budget-documents',
-      'tax-pocket-guides',
-      'appropriation-bills',
-      'budget-highlights',
-      'budget-reviews',
-      'budget-speeches',
-      'division-of-revenue-bills',
-      'estimates-of-national-expenditure',
-    ];
-    const adjustedBudgetGroups = [
-      'adjusted-estimates-of-national-expenditure',
-      'adjusted-estimates-of-provincial-revenue-and-expenditure',
-      'division-of-revenue-amendment-bills',
-      'adjustments-appropriation-bills',
-      'medium-term-budget-policy-statements',
-    ];
     const groupsClause = [...originalBudgetGroups, ...adjustedBudgetGroups]
           .map(g => `groups:"${g}"`)
           .join(' OR ')
@@ -104,8 +104,7 @@ class DeptSearchContainer extends Component {
     const url = `${ckanUrl}/api/3/action/package_search?${searchParams.toString()}`
     fetchWrapper(url)
       .then((response) => {
-        console.log(response.result.results);
-        console.log(resultsToResources(response.result.results));
+        this.setState({resources: resultsToResources(response.result.results)});
       })
       .catch((errorResult) => console.warn(errorResult));
   }
@@ -133,7 +132,10 @@ function datasetReducer(governments, dataset) {
       "adjusted": [],
     }
   const government = governments[governmentName];
-  government.original.push(dataset);
+  if (dataset.groups.some(group => originalBudgetGroups.includes(group.name)))
+      government.original.push(dataset);
+  if (dataset.groups.some(group => adjustedBudgetGroups.includes(group.name)))
+      government.adjusted.push(dataset);
   return governments;
 }
 

@@ -28,7 +28,7 @@ function departments(linksArray, doubleRow) {
   )
 }
 
-export default function DeptGroup({ map, linksArray, label, name, doubleRow, empty }) {
+export default function DeptGroup({ map, linksArray, label, name, doubleRow, empty, resources }) {
   return (
     <div>
       <div className="DeptGroup">
@@ -40,7 +40,7 @@ export default function DeptGroup({ map, linksArray, label, name, doubleRow, emp
             {Map(map)}
           </div>
           <div>{"hello there"}</div>
-          <GovernmentResources title={label} />
+          <GovernmentResources title={label} resources={resources} />
           <div>{"bye now"}</div>
       </div>
     </div>

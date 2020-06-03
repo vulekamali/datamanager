@@ -3,7 +3,7 @@ import DeptControl from './../DeptControl/index.jsx';
 import DeptGroup from './../DeptGroup/index.jsx';
 
 
-const makeGroup = (slug, departments, name, label, empty) => {
+const makeGroup = (slug, departments, name, label, empty, resources) => {
   return (
     <div className="DeptSearch-groupWrap">
       <DeptGroup
@@ -13,6 +13,7 @@ const makeGroup = (slug, departments, name, label, empty) => {
         name={name}
         empty={empty}
         doubleRow={slug === 'south-africa'}
+        resources={resources}
       />
     </div>
   );
@@ -33,7 +34,7 @@ const emptyNotification = (
 );
 
 
-const makeGroups = (governments) => {
+const makeGroups = (governments, resources) => {
   const hasItemsInDept = ({ departments }) => departments.length > 0;
 
   if (governments.filter(hasItemsInDept).length < 1) {
@@ -42,8 +43,9 @@ const makeGroups = (governments) => {
 
   return governments.map(
     ({ name, slug, departments, label }) => {
+      const govResources = name in resources ? resources[name] : null;
       const empty = departments.length == 0;
-      return makeGroup(slug, departments, name, label, empty);
+      return makeGroup(slug, departments, name, label, empty, govResources);
     },
   );
 };
@@ -71,7 +73,7 @@ function DeptSearch({ state, eventHandlers }) {
         </ul>
         <h3 className="u-sReadOnly">Results</h3>
         <div className="DeptSearch-results">
-          {makeGroups(state.results)}
+          {makeGroups(state.results, state.resources)}
         </div>
       </div>
     </div>
