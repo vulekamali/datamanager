@@ -1,9 +1,9 @@
 import { h, Component, render } from 'preact';
 import decodeHtmlEntities from './../../../utilities/js/helpers/decodeHtmlEntities.js';
 import updateQs from './../../../utilities/js/helpers/updateQs.js';
-import DeptSearch from './index.jsx';
+import { DeptSearch, makeGroups } from './index.jsx';
 import filterResults from './partials/filterResults.js';
-
+import fetchWrapper from './../../../utilities/js/helpers/fetchWrapper.js';
 
 class DeptSearchContainer extends Component {
   constructor(props) {
@@ -17,14 +17,17 @@ class DeptSearchContainer extends Component {
     this.state = {
       loading: false,
       open: null,
-      results: filterResults(filters, this.props.spheres),
+      results: filterResults(filters, this.props.governments),
       filters,
+      resources: {},
     };
 
     this.eventHandlers = {
       updateDropdown: this.updateDropdown.bind(this),
       updateKeywords: this.updateKeywords.bind(this),
     };
+
+    this.requestResources();
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -43,7 +46,8 @@ class DeptSearchContainer extends Component {
     };
 
     this.setState({ filters });
-    this.setState({ results: filterResults(filters, this.props.spheres) });
+    this.setState({ results: filterResults(filters, this.props.governments) });
+    console.log("governments", filterResults(filters, this.props.governments), this.props.governments);
   }
 
   updateDropdown(filter, value) {
@@ -60,7 +64,23 @@ class DeptSearchContainer extends Component {
     };
 
     this.setState({ filters });
-    return this.setState({ results: filterResults(filters, this.props.spheres) });
+    return this.setState({ results: filterResults(filters, this.props.governments) });
+  }
+
+  requestResources() {
+    const ckanUrl = this.props.ckanUrl;
+    const financialYear = this.props.financialYear;
+    const fqParams = [
+      'organization:"national-treasury"',
+      'groups:"division-of-revenue-bills"',
+    ].join('+');
+    const searchParams = new URLSearchParams();
+    searchParams.set('q', '');
+    searchParams.set('fq', fqParams);
+    const url = `${ckanUrl}/api/3/action/package_search?${searchParams.toString()}`
+    fetchWrapper(url)
+      .then((response) => console.log(response))
+      .catch((errorResult) => console.warn(errorResult));
   }
 
   render() {
@@ -71,6 +91,7 @@ class DeptSearchContainer extends Component {
 
 function scripts() {
   const componentsList = document.getElementsByClassName('js-initDeptSearch');
+  const ckanUrl = document.getElementsByTagName('body')[0].getAttribute('data-ckan-url');;
 
   for (let i = 0; i < componentsList.length; i++) {
     const component = componentsList[i];
@@ -81,11 +102,11 @@ function scripts() {
     const provincialData = rawProvincialData.sort((a, b) => {
       return a.name.localeCompare(b.name);
     });
-    const labeledProvincialData = provincialData.map(p => {
-      p.label = p.name;
+    provincialData.forEach(p => {
+      p.label = p.name
     });
 
-    const spheres = [
+    const governments = [
       {
         ...nationalData,
         label: 'National',
@@ -96,7 +117,7 @@ function scripts() {
     const { sphere, province, phrase } = window.vulekamali.qs;
 
     render(
-      <DeptSearchContainer {...{ spheres, financialYear, sphere, province, phrase }} />,
+      <DeptSearchContainer {...{ governments, ckanUrl, financialYear, sphere, province, phrase }} />,
       component,
     );
   }
