@@ -1,9 +1,10 @@
 import { h, Component, render } from 'preact';
 import decodeHtmlEntities from './../../../utilities/js/helpers/decodeHtmlEntities.js';
 import updateQs from './../../../utilities/js/helpers/updateQs.js';
-import DeptSearch from './index.jsx';
+import { DeptSearch, makeGroups } from './index.jsx';
 import filterResults from './partials/filterResults.js';
-
+import fetchWrapper from './../../../utilities/js/helpers/fetchWrapper.js';
+import { resourcesUrl, resultsToResources, initialResourceGroups } from './../../GovernmentResources/governmentResourcesData.js';
 
 class DeptSearchContainer extends Component {
   constructor(props) {
@@ -14,35 +15,20 @@ class DeptSearchContainer extends Component {
       province: this.props.province || 'all',
     };
 
-    const getEmptyGroups = (data) => {
-      return data.reduce(
-        (results, val) => {
-          if (val.departments.length <= 0) {
-
-            return [
-              ...results,
-              val.slug,
-            ];
-          }
-
-          return results;
-        },
-        [],
-      );
-    };
-
     this.state = {
       loading: false,
       open: null,
-      results: filterResults(filters, this.props.jsonData),
-      emptyGroups: getEmptyGroups(this.props.jsonData),
+      results: filterResults(filters, this.props.governments),
       filters,
+      resourceGroups: initialResourceGroups(),
     };
 
     this.eventHandlers = {
       updateDropdown: this.updateDropdown.bind(this),
       updateKeywords: this.updateKeywords.bind(this),
     };
+
+    this.requestResources();
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -61,7 +47,7 @@ class DeptSearchContainer extends Component {
     };
 
     this.setState({ filters });
-    this.setState({ results: filterResults(filters, this.props.jsonData) });
+    this.setState({ results: filterResults(filters, this.props.governments) });
   }
 
   updateDropdown(filter, value) {
@@ -78,44 +64,55 @@ class DeptSearchContainer extends Component {
     };
 
     this.setState({ filters });
-    return this.setState({ results: filterResults(filters, this.props.jsonData) });
+    return this.setState({ results: filterResults(filters, this.props.governments) });
+  }
+
+  requestResources() {
+    const url = resourcesUrl(this.props.ckanUrl, this.props.financialYear);
+    fetchWrapper(url)
+      .then((response) => {
+        this.setState({resourceGroups: resultsToResources(response.result.results)});
+      })
+      .catch((errorResult) => console.warn(errorResult));
   }
 
   render() {
-    return <DeptSearch state={this.state} eventHandlers={this.eventHandlers} epresData={this.props.epresData} />;
+    return <DeptSearch state={this.state} eventHandlers={this.eventHandlers} />;
   }
 }
 
 
 function scripts() {
   const componentsList = document.getElementsByClassName('js-initDeptSearch');
+  const ckanUrl = document.getElementsByTagName('body')[0].getAttribute('data-ckan-url');;
 
-  if (componentsList.length > 0) {
-    for (let i = 0; i < componentsList.length; i++) {
-      const component = componentsList[i];
-      const nationalData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-national-json'))).data;
-      const rawProvincialData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-provincial-json'))).data;
-      const epresData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-epres-json'))).data; 
-      
-      const provincialData = rawProvincialData.sort((a, b) => {
-        return a.name.localeCompare(b.name);
-      });
+  for (let i = 0; i < componentsList.length; i++) {
+    const component = componentsList[i];
+    const nationalData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-national-json'))).data;
+    const rawProvincialData = JSON.parse(decodeHtmlEntities(component.getAttribute('data-provincial-json'))).data;
+    const financialYear = decodeHtmlEntities(component.getAttribute('data-year'));
 
-      const jsonData = [
-        {
-          ...nationalData,
-          name: 'National',
-        },
-        ...provincialData,
-      ];
+    const provincialData = rawProvincialData.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+    provincialData.forEach(p => {
+      p.label = p.name
+    });
 
-      const { sphere, province, phrase } = window.vulekamali.qs;
+    const governments = [
+      {
+        ...nationalData,
+        label: 'National',
+      },
+      ...provincialData,
+    ];
 
-      render(
-        <DeptSearchContainer {...{ jsonData, sphere, province, phrase, epresData }} />,
-        component,
-      );
-    }
+    const { sphere, province, phrase } = window.vulekamali.qs;
+
+    render(
+      <DeptSearchContainer {...{ governments, ckanUrl, financialYear, sphere, province, phrase }} />,
+      component,
+    );
   }
 }
 

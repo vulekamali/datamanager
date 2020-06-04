@@ -3,6 +3,7 @@ import promisePolyfill from 'promise-polyfill';
 import every from 'array.prototype.every';
 import findIndex from 'array.prototype.findindex';
 import assign from 'object.assign';
+import './arrayIncludes';
 
 
 function polyfillOldFeatures() {

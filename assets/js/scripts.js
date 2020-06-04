@@ -2,6 +2,7 @@ import '../scss/styles.scss';
 
 import 'classlist-polyfill';
 import 'whatwg-fetch';
+import 'url-search-params-polyfill';
 import 'preact/devtools';
 
 import 'jquery';
