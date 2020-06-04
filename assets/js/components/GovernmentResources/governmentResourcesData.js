@@ -18,6 +18,19 @@ const adjustedBudgetGroups = [
   'medium-term-budget-policy-statements',
 ];
 
+const keyFormats = [
+  "", // looks like web pages without custom specified formats are emtpy string
+  "PDF",
+  "XLS",
+  "XLSX",
+  "XLSB",
+  "DOC",
+  "DOCX",
+  "Webcast",
+  "PPT",
+  "PPTX",
+];
+
 const governments = [
   "South Africa",
   "Eastern Cape",
@@ -78,9 +91,9 @@ function datasetReducer(governments, dataset) {
   }
   const government = governments[governmentName];
   if (dataset.groups.some(group => originalBudgetGroups.includes(group.name)))
-    government.original.push(...(dataset.resources));
+    government.original.push(...(filterKeyFormats(dataset.resources)));
   if (dataset.groups.some(group => adjustedBudgetGroups.includes(group.name)))
-    government.adjusted.push(...(dataset.resources));
+    government.adjusted.push(...(filterKeyFormats(dataset.resources)));
   return governments;
 }
 
@@ -97,6 +110,10 @@ function datasetGovernment(dataset) {
     return dataset.province[0];
   }
   return null;
+}
+
+function filterKeyFormats(resources) {
+  return resources.filter(r => keyFormats.includes(r.format));
 }
 
 export { resourcesUrl, resultsToResources, initialResourceGroups }
