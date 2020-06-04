@@ -2,8 +2,15 @@
     z-index: 10;
     position: relative;
 
+    .cards-container {
+        display: grid;
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+    }
+
     .item {
-        margin: 15px;
         display: inline-block;
 
         .title {
@@ -31,4 +38,16 @@
         }
 
     }
+}
+
+@media only screen and (min-width: 500px) {
+  .budget-documents .cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .budget-documents .cards-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

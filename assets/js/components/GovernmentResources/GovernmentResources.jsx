@@ -5,31 +5,27 @@ function skeleton() {
     <div className="budget-documents">
       <h4 className="section-heading">Original budget</h4>
 
-      <div className="item skeleton Card">
-        <div className="title skeleton"></div>
-        <a className="resource-link skeleton">
+      <div className="cards-container">
+        <div className="item skeleton Card">
+          <div className="title skeleton"></div>
           <span className="Button is-secondary skeleton">
             <span className="label skeleton"></span>
           </span>
-        </a>
-      </div>
+        </div>
 
-      <div className="item skeleton Card">
-        <div className="title skeleton"></div>
-        <a className="resource-link skeleton">
+        <div className="item skeleton Card">
+          <div className="title skeleton"></div>
           <span className="Button is-secondary skeleton">
             <span className="label skeleton"></span>
           </span>
-        </a>
-      </div>
+        </div>
 
-      <div className="item skeleton Card">
-        <div className="title skeleton"></div>
-        <a className="resource-link skeleton">
+        <div className="item skeleton Card">
+          <div className="title skeleton"></div>
           <span className="Button is-secondary skeleton">
             <span className="label skeleton"></span>
           </span>
-        </a>
+        </div>
       </div>
     </div>
   );
@@ -37,10 +33,9 @@ function skeleton() {
 
 function renderResources(resources) {
   const cards = resources.original.map((resource) => {
-    console.log(resource);
-    (
+    return (
       <div key={resource.id} className="item Card">
-        <div className="title">{ resource.title }</div>
+        <div className="title">{ resource.name }</div>
         <a className="resource-link" href={ resource.url }>
           <span className="Button is-secondary">
             <span className="label">View</span>
@@ -52,10 +47,13 @@ function renderResources(resources) {
   return (
     <div className="budget-documents">
       <h4 className="section-heading">Original budget</h4>
-      { cards }
+      <div className="cards-container">
+        { cards }
+      </div>
     </div>
   );
 };
+
 export default class GovernmentResources extends Component {
   constructor(props) {
     super(props);

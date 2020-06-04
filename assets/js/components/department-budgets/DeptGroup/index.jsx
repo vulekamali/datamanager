@@ -39,9 +39,7 @@ export default function DeptGroup({ map, linksArray, label, name, doubleRow, emp
           <div className="DeptGroup-map">
             {Map(map)}
           </div>
-          <div>{"hello there"}</div>
           <GovernmentResources title={label} resources={resources} />
-          <div>{"bye now"}</div>
       </div>
     </div>
   );

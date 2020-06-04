@@ -87,21 +87,7 @@ class DeptSearchContainer extends Component {
   }
 
   requestResources() {
-    const ckanUrl = this.props.ckanUrl;
-    const financialYear = this.props.financialYear;
-    const groupsClause = [...originalBudgetGroups, ...adjustedBudgetGroups]
-          .map(g => `groups:"${g}"`)
-          .join(' OR ')
-    const fqParams = [
-      'organization:"national-treasury"',
-      `(${groupsClause})`,
-      `vocab_financial_years:"${financialYear}"`,
-    ].join('+');
-    const searchParams = new URLSearchParams();
-    searchParams.set('q', '');
-    searchParams.set('fq', fqParams);
-    searchParams.set('rows', '1000');
-    const url = `${ckanUrl}/api/3/action/package_search?${searchParams.toString()}`
+    const url = resourcesUrl(this.props.ckanUrl, this.props.financialYear);
     fetchWrapper(url)
       .then((response) => {
         this.setState({resources: resultsToResources(response.result.results)});
@@ -112,6 +98,22 @@ class DeptSearchContainer extends Component {
   render() {
     return <DeptSearch state={this.state} eventHandlers={this.eventHandlers} />;
   }
+}
+
+function resourcesUrl(ckanUrl, financialYear) {
+  const groupsClause = [...originalBudgetGroups, ...adjustedBudgetGroups]
+        .map(g => `groups:"${g}"`)
+        .join(' OR ');
+  const fqParams = [
+    'organization:"national-treasury"',
+    `(${groupsClause})`,
+    `vocab_financial_years:"${financialYear}"`,
+  ].join('+');
+  const searchParams = new URLSearchParams();
+  searchParams.set('q', '');
+  searchParams.set('fq', fqParams);
+  searchParams.set('rows', '1000');
+  return `${ckanUrl}/api/3/action/package_search?${searchParams.toString()}`
 }
 
 /**
@@ -133,9 +135,9 @@ function datasetReducer(governments, dataset) {
     }
   const government = governments[governmentName];
   if (dataset.groups.some(group => originalBudgetGroups.includes(group.name)))
-      government.original.push(dataset);
+    government.original.push(...(dataset.resources));
   if (dataset.groups.some(group => adjustedBudgetGroups.includes(group.name)))
-      government.adjusted.push(dataset);
+    government.adjusted.push(...(dataset.resources));
   return governments;
 }
 
