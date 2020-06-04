@@ -80,23 +80,44 @@ function adjustedBudgetSection(resources) {
   } else { return null }
 }
 
+function isCollapsable(resources) {
+  if (resources === null)
+    return false;
+  else
+    return resources.length > 3;
+}
+
 export default class GovernmentResources extends Component {
   constructor(props) {
     super(props);
 
+    this.handleExpandClick = this.handleExpandClick.bind(this);
+
     this.state = {
-      loading: false,
+      hasExpanded: false,
     };
   }
 
   render() {
     const govResourceGroups = this.props.govResourceGroups;
+    const collapsed = !this.state.hasExpanded && isCollapsable(govResourceGroups.original);
     return (
-      <div className="budget-documents">
+      <div className={`budget-documents ${collapsed ? "collapsed" : ""}`}>
         <h3>Key budget documents</h3>
         { adjustedBudgetSection(govResourceGroups.adjusted) }
         { originalBudgetSection(govResourceGroups.original) }
+        {
+          collapsed ? (
+            <div className="expand-shim" onClick={this.handleExpandClick} >
+              <div className="Button is-secondary">See all</div>
+            </div>
+          ) : null
+        }
       </div>
     );
+  }
+
+  handleExpandClick() {
+    this.setState({hasExpanded: true});
   }
 }
