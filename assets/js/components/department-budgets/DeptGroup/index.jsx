@@ -28,18 +28,20 @@ function departments(linksArray, doubleRow) {
   )
 }
 
-export default function DeptGroup({ map, linksArray, label, name, doubleRow, empty, resources }) {
+export default function DeptGroup({ map, linksArray, label, name, doubleRow, empty, govResourceGroups }) {
   return (
     <div>
       <div className="DeptGroup">
-        <div className="DeptGroup-wrap">
-          <h3 className="DeptGroup-title">{label} Department Budgets</h3>
-          {empty ? notAvailableMessage() : departments(linksArray, doubleRow)}
-        </div>
+        <div className="DeptGroup-mapWrap">
+          <div className="DeptGroup-wrap">
+            <h3 className="DeptGroup-title">{label} Department Budgets</h3>
+            {empty ? notAvailableMessage() : departments(linksArray, doubleRow)}
+          </div>
           <div className="DeptGroup-map">
             {Map(map)}
           </div>
-          <GovernmentResources title={label} resources={resources} />
+        </div>
+        <GovernmentResources title={label} govResourceGroups={govResourceGroups} />
       </div>
     </div>
   );

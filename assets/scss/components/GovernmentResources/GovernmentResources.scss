@@ -14,7 +14,15 @@
         display: inline-block;
 
         .title {
-            margin-bottom: 15px;
+            margin-bottom: 5px;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .format {
+            font-size: 10px;
+            font-weight: 400;
+            margin-bottom: 10px;
         }
 
         .title.skeleton {
@@ -37,6 +45,9 @@
             border-color: #e8dada;
         }
 
+        a:link.resource-link {
+            text-decoration: none;
+        }
     }
 }
 

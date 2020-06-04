@@ -3,7 +3,7 @@ import DeptControl from './../DeptControl/index.jsx';
 import DeptGroup from './../DeptGroup/index.jsx';
 
 
-const makeGroup = (slug, departments, name, label, empty, resources) => {
+const makeGroup = (slug, departments, name, label, empty, govResourceGroups) => {
   return (
     <div className="DeptSearch-groupWrap">
       <DeptGroup
@@ -13,7 +13,7 @@ const makeGroup = (slug, departments, name, label, empty, resources) => {
         name={name}
         empty={empty}
         doubleRow={slug === 'south-africa'}
-        resources={resources}
+        govResourceGroups={govResourceGroups}
       />
     </div>
   );
@@ -34,7 +34,7 @@ const emptyNotification = (
 );
 
 
-const makeGroups = (governments, resources) => {
+const makeGroups = (governments, resourceGroups) => {
   const hasItemsInDept = ({ departments }) => departments.length > 0;
 
   if (governments.filter(hasItemsInDept).length < 1) {
@@ -43,9 +43,8 @@ const makeGroups = (governments, resources) => {
 
   return governments.map(
     ({ name, slug, departments, label }) => {
-      const govResources = name in resources ? resources[name] : null;
       const empty = departments.length == 0;
-      return makeGroup(slug, departments, name, label, empty, govResources);
+      return makeGroup(slug, departments, name, label, empty, resourceGroups[name]);
     },
   );
 };
@@ -73,7 +72,7 @@ function DeptSearch({ state, eventHandlers }) {
         </ul>
         <h3 className="u-sReadOnly">Results</h3>
         <div className="DeptSearch-results">
-          {makeGroups(state.results, state.resources)}
+          {makeGroups(state.results, state.resourceGroups)}
         </div>
       </div>
     </div>

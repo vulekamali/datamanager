@@ -25,6 +25,19 @@ const adjustedBudgetGroups = [
   'medium-term-budget-policy-statements',
 ];
 
+const governments = [
+  "South Africa",
+  "Eastern Cape",
+  "Free State",
+  "Gauteng",
+  "KwaZulu-Natal",
+  "Limpopo",
+  "Mpumalanga",
+  "North West",
+  "Northern Cape",
+  "Western Cape",
+];
+
 class DeptSearchContainer extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +52,7 @@ class DeptSearchContainer extends Component {
       open: null,
       results: filterResults(filters, this.props.governments),
       filters,
-      resources: {},
+      resourceGroups: initialResourceGroups(),
     };
 
     this.eventHandlers = {
@@ -100,6 +113,19 @@ class DeptSearchContainer extends Component {
   }
 }
 
+function initialResourceGroups() {
+  return initialiseResourceGroups(null);
+}
+function emptyResourceGroups() {
+  return initialiseResourceGroups([]);
+}
+function initialiseResourceGroups(value) {
+  return governments.reduce((groups, gov) => {
+    groups[gov] = {"original": value, "adjusted": value};
+    return groups;
+  }, {});
+}
+
 function resourcesUrl(ckanUrl, financialYear) {
   const groupsClause = [...originalBudgetGroups, ...adjustedBudgetGroups]
         .map(g => `groups:"${g}"`)
@@ -123,16 +149,11 @@ function resourcesUrl(ckanUrl, financialYear) {
  * with that government's budgetResources and adjustedBudgetResources as keys.
  */
 function resultsToResources(results) {
-  return results.reduce(datasetReducer, {});
+  return results.reduce(datasetReducer, emptyResourceGroups());
 }
 
 function datasetReducer(governments, dataset) {
   const governmentName = datasetGovernment(dataset);
-  if (!(governmentName in governments))
-    governments[governmentName] = {
-      "original": [],
-      "adjusted": [],
-    }
   const government = governments[governmentName];
   if (dataset.groups.some(group => originalBudgetGroups.includes(group.name)))
     government.original.push(...(dataset.resources));
