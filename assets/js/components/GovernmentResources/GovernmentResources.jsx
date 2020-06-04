@@ -46,6 +46,40 @@ function renderResources(resources) {
   });
 };
 
+function originalBudgetSection(resources) {
+  let content;
+
+  if (resources === null) {
+    content = (<div className="cards-container">{ skeletonResources() }</div>);
+  } else {
+    if (resources.length > 0) {
+      content = (<div className="cards-container">{ renderResources(resources) }</div>);
+    } else {
+      content = (<div>Budget documents not available on vulekamali yet.</div>);
+    }
+  }
+
+  return (
+    <div>
+      <h4 className="section-heading">Original budget</h4>
+      { content }
+    </div>
+  )
+}
+
+function adjustedBudgetSection(resources) {
+  if (resources !== null && resources.length > 0) {
+    return (
+      <div>
+        <h4 className="section-heading">Adjusted budget</h4>
+        <div className="cards-container">
+          { renderResources(resources) }
+        </div>
+      </div>
+    )
+  } else { return null }
+}
+
 export default class GovernmentResources extends Component {
   constructor(props) {
     super(props);
@@ -60,22 +94,9 @@ export default class GovernmentResources extends Component {
     return (
       <div className="budget-documents">
         <h3>Key budget documents</h3>
-        <h4 className="section-heading">Original budget</h4>
-        <div className="cards-container">
-          { govResourceGroups.original === null ? skeletonResources() : renderResources(govResourceGroups.original) }
-        </div>
-        {
-          govResourceGroups.adjusted ? (
-            <div>
-              <h4 className="section-heading">Adjusted budget</h4>
-              <div className="cards-container">
-                { renderResources(govResourceGroups.adjusted) }
-              </div>
-            </div>
-          ) : null
-        }
+        { adjustedBudgetSection(govResourceGroups.adjusted) }
+        { originalBudgetSection(govResourceGroups.original) }
       </div>
-
     );
   }
 }

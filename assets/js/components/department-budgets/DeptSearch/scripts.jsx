@@ -103,7 +103,7 @@ class DeptSearchContainer extends Component {
     const url = resourcesUrl(this.props.ckanUrl, this.props.financialYear);
     fetchWrapper(url)
       .then((response) => {
-        this.setState({resources: resultsToResources(response.result.results)});
+        this.setState({resourceGroups: resultsToResources(response.result.results)});
       })
       .catch((errorResult) => console.warn(errorResult));
   }
@@ -114,14 +114,14 @@ class DeptSearchContainer extends Component {
 }
 
 function initialResourceGroups() {
-  return initialiseResourceGroups(null);
+  return initialiseResourceGroups(() => null);
 }
 function emptyResourceGroups() {
-  return initialiseResourceGroups([]);
+  return initialiseResourceGroups(() => []);
 }
-function initialiseResourceGroups(value) {
+function initialiseResourceGroups(valueFunction) {
   return governments.reduce((groups, gov) => {
-    groups[gov] = {"original": value, "adjusted": value};
+    groups[gov] = {"original": valueFunction(), "adjusted": valueFunction()};
     return groups;
   }, {});
 }
@@ -154,6 +154,10 @@ function resultsToResources(results) {
 
 function datasetReducer(governments, dataset) {
   const governmentName = datasetGovernment(dataset);
+  if (governmentName === null) {
+    console.warn("Unknown government", dataset);
+    return governments;
+  }
   const government = governments[governmentName];
   if (dataset.groups.some(group => originalBudgetGroups.includes(group.name)))
     government.original.push(...(dataset.resources));
