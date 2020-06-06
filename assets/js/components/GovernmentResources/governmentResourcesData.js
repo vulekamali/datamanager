@@ -1,21 +1,26 @@
 const originalBudgetGroups = [
-  'estimates-of-provincial-revenue-and-expenditure',
-  'people-s-guides',
-  'occasional-budget-documents',
-  'tax-pocket-guides',
   'appropriation-bills',
   'budget-highlights',
   'budget-reviews',
   'budget-speeches',
   'division-of-revenue-bills',
   'estimates-of-national-expenditure',
+  'estimates-of-provincial-revenue-and-expenditure',
+  'provincial-allocations',
+  'occasional-budget-documents',
+  'people-s-guides',
+  'tax-pocket-guides',
 ];
 const adjustedBudgetGroups = [
   'adjusted-estimates-of-national-expenditure',
   'adjusted-estimates-of-provincial-revenue-and-expenditure',
-  'division-of-revenue-amendment-bills',
   'adjustments-appropriation-bills',
+  'division-of-revenue-amendment-bills',
   'medium-term-budget-policy-statements',
+  'medium-term-budget-policy-statement-speeches',
+  'rates-and-monetary-amounts-and-amendment-of-revenue-laws-bills',
+  'tax-administration-laws-amendment-bills',
+  'taxation-laws-amendment-bills',
 ];
 
 const keyFormats = [
