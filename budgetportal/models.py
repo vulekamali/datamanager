@@ -2139,7 +2139,11 @@ class WagtailHomePage(NavContextMixin, Page):
 
 class CustomPage(NavContextMixin, Page):
     body = StreamField(
-        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+        [
+            ("section", SectionBlock()),
+            ("html", wagtail_blocks.RawHTMLBlock()),
+            ("chart_embed", DescriptionEmbedBlock()),
+        ]
     )
 
     content_panels = Page.content_panels + [
