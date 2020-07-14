@@ -2203,6 +2203,62 @@ class GuidePage(NavContextMixin, Page):
         StreamFieldPanel("body"),
         ImageChooserPanel("image"),
     ]
+    api_fields = [
+        "title",
+        "body",
+        "created_at",
+        "updated_at",
+    ]
+
+
+class DeepGuidePage(NavContextMixin, Page):
+    parent_page_types = ["budgetportal.GuideIndexPage"]
+    title_short = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+        help_text=(
+            "Very short form of the guide title. If left blank, the main title will be used."
+        ),
+    )
+    intro = RichTextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    content_panels = Page.content_panels + [
+        FieldPanel("title_short", classname="full"),
+        FieldPanel("intro", classname="full"),
+    ]
+    api_fields = [
+        "title",
+        "title_short",
+        "created_at",
+        "updated_at",
+    ]
+
+
+class DeepGuideStagePage(NavContextMixin, Page):
+    parent_page_types = ["budgetportal.GuideIndexPage"]
+    title_short = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+        help_text=(
+            "Very short form of the guide title. If left blank, the main title will be used."
+        ),
+    )
+    intro = RichTextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    content_panels = Page.content_panels + [
+        FieldPanel("title_short", classname="full"),
+        FieldPanel("intro", classname="full"),
+    ]
+    api_fields = [
+        "title",
+        "title_short",
+        "created_at",
+        "updated_at",
+    ]
 
 
 class CategoryGuide(models.Model):

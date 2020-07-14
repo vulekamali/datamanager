@@ -15,6 +15,11 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from wagtail.api.v2.endpoints import PagesAPIEndpoint
+from wagtail.api.v2.router import WagtailAPIRouter
+from wagtail.images.api.v2.endpoints import ImagesAPIEndpoint
+from wagtail.documents.api.v2.endpoints import DocumentsAPIEndpoint
+
 from . import bulk_upload, views
 
 admin.site = AdminSitePlus()
@@ -22,6 +27,12 @@ admin.autodiscover()
 
 CACHE_MINUTES_SECS = 60 * 5  # minutes
 CACHE_DAYS_SECS = 60 * 60 * 24 * 5  # days
+
+
+wagtail_api_router = WagtailAPIRouter('wagtailapi')
+wagtail_api_router.register_endpoint('pages', PagesAPIEndpoint)
+wagtail_api_router.register_endpoint('images', ImagesAPIEndpoint)
+wagtail_api_router.register_endpoint('documents', DocumentsAPIEndpoint)
 
 
 def permission_denied(request):
@@ -260,6 +271,7 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     url("^", include(webflow_urls.urlpatterns)),
+    url(r'^wagtail-api/v2/', wagtail_api_router.urls),
     re_path(r"^cms/", include(wagtailadmin_urls)),
     re_path(r"^documents/", include(wagtaildocs_urls)),
     re_path(r"^", include(wagtail_urls)),
