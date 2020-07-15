@@ -11,6 +11,7 @@ import 'bootstrap/js/dist/scrollspy.js';
 import './utilities/js/modules/loadStringQueries.js';
 import './utilities/js/modules/createComponentInterfaces.js';
 import './utilities/js/modules/polyfillOldFeatures.js';
+import './utilities/js/embedding/datawrapper.js';
 
 import './components/search-results/SearchResult/scripts.js';
 
