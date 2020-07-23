@@ -16,10 +16,7 @@
 
     <h1 class="Page-mainHeading u-marginTop15">{{ name }}</h1>
 
-    {% if not external_resource_page %}
-      <main class="Page-main">
-    {% endif %}
-
+    <main class="Page-main">
       {% if intro %}
         <div class="BasicContent">
 
@@ -94,17 +91,15 @@
       </div>
       {% endif %}
 
-    {% if not external_resource_page %}
-      </main>
-      <aside class="Page-sidebar">
+    </main>
+    <aside class="Page-sidebar">
 
-        <div class="Section u-marginBottom20">
-          <h2 class="Section-title">Share this page:</h2>
-          <div data-component="Share"></div>
-        </div>
-    {% endif %}
+      <div class="Section u-marginBottom20">
+        <h2 class="Section-title">Share this page:</h2>
+        <div data-component="Share"></div>
+      </div>
 
-    {% if guide %}
+      {% if guide %}
       <div class="Section is-bevel">
         <div class="Section-card">
           <h2 class="Section-title">Learn more</h2>
@@ -121,11 +116,9 @@
           {% endif %}
         </div>
       </div>
-    {% endif %}
+      {% endif %}
 
-    {% if not external_resource_page %}
-      </aside>
-    {% endif %}
+    </aside>
   </div>
 </div>
 {% endblock %}
