@@ -2329,3 +2329,45 @@ class Notice(SortableMixin):
 
     def __str__(self):
         return self.description
+
+
+class ResourceLink(models.Model):
+    title = models.CharField(max_length=150)
+    url = models.URLField(null=True, blank=True)
+    description = models.CharField(max_length=300)
+
+    panels = [
+        FieldPanel("title"),
+        FieldPanel("url"),
+        FieldPanel("description"),
+    ]
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        abstract = True
+
+
+@register_snippet
+class ProcurementResourceLink(ResourceLink):
+
+    class Meta:
+        verbose_name = "Procurement resource link"
+        verbose_name_plural = "Procurement resource links"
+
+
+@register_snippet
+class PerformanceResourceLink(ResourceLink):
+
+    class Meta:
+        verbose_name = "Performance resource link"
+        verbose_name_plural = "Performance resource links"
+
+
+@register_snippet
+class InYearMonitoringResourceLink(ResourceLink):
+
+    class Meta:
+        verbose_name = "In-year monitoring resource link"
+        verbose_name_plural = "In-year monitoring resource links"

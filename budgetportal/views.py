@@ -28,8 +28,11 @@ from .models import (
     FinancialYear,
     Homepage,
     InfrastructureProjectPart,
+    InYearMonitoringResourceLink,
     IRMSnapshot,
     MainMenuItem,
+    PerformanceResourceLink,
+    ProcurementResourceLink,
     Sphere,
     Video,
 )
@@ -375,6 +378,9 @@ def department_page(
         % (govt_label, department.name, selected_year.slug, COMMON_DESCRIPTION_ENDING,),
         "department_budget": department_budget,
         "department_adjusted_budget": department_adjusted_budget,
+        "procurement_resource_links": ProcurementResourceLink.objects.all(),
+        "performance_resource_links": PerformanceResourceLink.objects.all(),
+        "in_year_monitoring_resource_links": InYearMonitoringResourceLink.objects.all(),
         "vote_number": department.vote_number,
         "vote_primary": {
             "url_path": primary_department.get_url_path(),
