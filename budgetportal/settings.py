@@ -415,4 +415,4 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 20,
 }
 
-WAGTAIL_SITE_NAME = "My Wagtail Site"
+WAGTAIL_SITE_NAME = "Vulekamali"
