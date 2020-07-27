@@ -1,6 +1,6 @@
-from django.test import Client, TestCase
+from budgetportal.models import FinancialYear, PostIndexPage, PostPage
 from budgetportal.tests.helpers import WagtailPageTestCase
-from budgetportal.models import PostIndexPage, PostPage, FinancialYear
+from django.test import Client, TestCase
 
 
 class PostIndexPageTestCase(WagtailPageTestCase):

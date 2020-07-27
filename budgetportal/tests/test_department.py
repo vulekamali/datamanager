@@ -4,9 +4,9 @@ Tests of models.Department
 import json
 
 import mock
-from budgetportal.tests import mock_data
 from budgetportal import models
 from budgetportal.models import Department, FinancialYear, Government, Sphere
+from budgetportal.tests import mock_data
 from django.test import TestCase
 from mock import Mock, patch
 

@@ -5,9 +5,9 @@ conventions of how we name fields in our Fiscal Data Packages.
 import logging
 import random
 import re
-from urllib.parse import urlencode
 from collections import OrderedDict
 from hashlib import sha1
+from urllib.parse import urlencode
 
 import requests
 

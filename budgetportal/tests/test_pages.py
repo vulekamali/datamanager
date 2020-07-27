@@ -1,10 +1,10 @@
 from budgetportal.models import (
+    CategoryGuide,
     Department,
     FinancialYear,
     Government,
-    Sphere,
-    CategoryGuide,
     Notice,
+    Sphere,
 )
 from django.test import Client, TestCase
 from mock import MagicMock, patch

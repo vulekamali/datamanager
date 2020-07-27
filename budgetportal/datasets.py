@@ -1,10 +1,10 @@
 import logging
 import os
 import shutil
-from urllib.parse import urlparse, unquote
-from urllib.request import urlretrieve
 from pprint import pformat
 from tempfile import mkdtemp
+from urllib.parse import unquote, urlparse
+from urllib.request import urlretrieve
 
 from budgetportal.openspending import (
     AdjustedEstimatesOfExpenditure,

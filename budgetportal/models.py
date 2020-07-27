@@ -1,6 +1,7 @@
 import logging
 import re
 import uuid
+from collections import OrderedDict
 from datetime import datetime
 from decimal import Decimal
 from pprint import pformat
@@ -9,25 +10,23 @@ from urllib.parse import quote
 import requests
 from slugify import slugify
 
+import ckeditor.fields as ckeditor_fields
 from adminsortable.models import SortableMixin
 from autoslug import AutoSlugField
+from budgetportal.blocks import DescriptionEmbedBlock, SectionBlock
 from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
 from django.conf import settings
-from django.core.exceptions import MultipleObjectsReturned
 from django.core.cache import cache
+from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.db import models
 from django.urls import reverse
 from partial_index import PartialIndex
-import ckeditor.fields as ckeditor_fields
-from budgetportal.blocks import SectionBlock, DescriptionEmbedBlock
-from collections import OrderedDict
-from django.core.exceptions import ValidationError
-from django.db import models
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core import blocks as wagtail_blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
-
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.models import register_snippet
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -2314,6 +2313,12 @@ class SubMenuItem(SortableMixin):
 
 
 class Notice(SortableMixin):
+    """
+    Any number of notices shown at the top of the site. Intended e.g. to configure
+    the staging site to make it clear to users that that instance is not necessarily
+    correct, but for testing only.
+    """
+
     description = models.CharField(max_length=1024)
     content = ckeditor_fields.RichTextField()
 

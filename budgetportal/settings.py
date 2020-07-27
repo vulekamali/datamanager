@@ -13,9 +13,6 @@ import logging
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-# THINK VERY CAREFULY before using the TEST variable.
-# Tests should aim to be as production-like as possible.
-
 import boto3
 
 # Database
@@ -25,6 +22,10 @@ import environ
 import sentry_sdk
 from ckanapi import RemoteCKAN
 from sentry_sdk.integrations.django import DjangoIntegration
+
+# THINK VERY CAREFULY before using the TEST variable.
+# Tests should aim to be as production-like as possible.
+
 
 env = environ.Env()
 

@@ -1,8 +1,8 @@
 import json
 import logging
-from urllib.parse import urlparse, unquote
 from csv import DictWriter
 from datetime import datetime
+from urllib.parse import unquote, urlparse
 
 import requests
 import yaml
@@ -10,27 +10,28 @@ from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-from .datasets import Category, Dataset
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import Count
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
-from django.db.models import Count
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from haystack.query import SearchQuerySet
+
+from .datasets import Category, Dataset
 from .models import (
     FAQ,
+    CategoryGuide,
     Department,
     Event,
     FinancialYear,
     Homepage,
     InfrastructureProjectPart,
     IRMSnapshot,
+    MainMenuItem,
     Sphere,
     Video,
-    CategoryGuide,
-    MainMenuItem,
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
@@ -40,7 +41,6 @@ from .summaries import (
     get_focus_area_preview,
     get_preview_page,
 )
-
 
 logger = logging.getLogger(__name__)
 

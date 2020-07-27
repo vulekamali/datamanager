@@ -6,11 +6,11 @@ Tasks MUST be idempotent.
 import logging
 import traceback
 
-from django_q.tasks import async_task
 from budgetportal import infra_projects
 from budgetportal.models import Department, IRMSnapshot
 from django.conf import settings
 from django.core.management import call_command
+from django_q.tasks import async_task
 
 ckan = settings.CKAN
 logger = logging.getLogger(__name__)

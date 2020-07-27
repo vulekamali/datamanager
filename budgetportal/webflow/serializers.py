@@ -1,8 +1,9 @@
 from budgetportal.models import InfraProjectSnapshot
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from drf_haystack.serializers import HaystackFacetSerializer, HaystackSerializer
-from ..search_indexes import InfraProjectIndex
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
+
+from ..search_indexes import InfraProjectIndex
 
 
 class InfraProjectSnapshotSerializer(ModelSerializer):
