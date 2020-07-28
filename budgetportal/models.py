@@ -21,7 +21,7 @@ from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.db import models
 from django.urls import reverse
 from partial_index import PartialIndex
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.core import blocks as wagtail_blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
@@ -75,6 +75,13 @@ EXPENDITURE_TIME_SERIES_PHASE_MAPPING = {
     "actual": "Audit Outcome",
 }
 
+NATIONAL_SLUG = "national"
+PROVINCIAL_SLUG = "provincial"
+SPHERE_SLUGS = (
+    NATIONAL_SLUG,
+    PROVINCIAL_SLUG,
+)
+
 
 class Homepage(models.Model):
     main_heading = models.CharField(max_length=1000, blank=True)
@@ -103,11 +110,11 @@ class FinancialYear(models.Model):
 
     @property
     def national(self):
-        return self.spheres.filter(slug="national")[0]
+        return self.spheres.filter(slug=NATIONAL_SLUG)[0]
 
     @property
     def provincial(self):
-        return self.spheres.filter(slug="provincial")[0]
+        return self.spheres.filter(slug=PROVINCIAL_SLUG)[0]
 
     def get_url_path(self):
         return "/%s" % self.slug
@@ -180,7 +187,7 @@ class Government(models.Model):
         unique_together = (("sphere", "slug"), ("sphere", "name"))
 
     def get_url_path(self):
-        if self.sphere.slug == "national":
+        if self.sphere.slug == NATIONAL_SLUG:
             return self.sphere.get_url_path()
         else:
             return "%s/%s" % (self.sphere.get_url_path(), self.slug)
@@ -285,7 +292,7 @@ class Department(models.Model):
                 "name": self.get_financial_year().slug,
             },
         ]
-        if self.government.sphere.slug == "provincial":
+        if self.government.sphere.slug == PROVINCIAL_SLUG:
             tags.append(
                 {"vocabulary_id": vocab_map["provinces"], "name": self.government.name}
             )
@@ -352,7 +359,7 @@ class Department(models.Model):
         return '+vocab_financial_years:"%s"' % self.get_financial_year().slug
 
     def _get_government_query(self):
-        if self.government.sphere.slug == "provincial":
+        if self.government.sphere.slug == PROVINCIAL_SLUG:
             return '+vocab_provinces:"%s"' % self.government.name
         else:
             return none_selected_query("vocab_provinces")
@@ -569,7 +576,7 @@ class Department(models.Model):
             return None
         openspending_api = dataset.get_openspending_api()
         cuts = []
-        if self.government.sphere.slug == "provincial":
+        if self.government.sphere.slug == PROVINCIAL_SLUG:
             cuts.append(openspending_api.get_geo_ref() + ':"%s"' % self.government.name)
         drilldowns = [
             openspending_api.get_financial_year_ref(),
@@ -1093,7 +1100,7 @@ class Department(models.Model):
         total_budget = 0
         filtered_result_cells = []
         national_depts = Department.objects.filter(
-            government__sphere__slug="national", is_vote_primary=True
+            government__sphere__slug=NATIONAL_SLUG, is_vote_primary=True
         )
 
         dept = None
@@ -1185,7 +1192,7 @@ class Department(models.Model):
         filtered_result_cells = []
         provincial_depts = Department.objects.filter(
             government__sphere__financial_year__slug=financial_year_id,
-            government__sphere__slug="provincial",
+            government__sphere__slug=PROVINCIAL_SLUG,
             is_vote_primary=True,
         )
 
@@ -2026,18 +2033,18 @@ class InfraProjectSnapshot(models.Model):
 
     @property
     def government(self):
-        if self.irm_snapshot.sphere.slug == "national":
+        if self.irm_snapshot.sphere.slug == NATIONAL_SLUG:
             return "South Africa"
-        elif self.irm_snapshot.sphere.slug == "provincial":
+        elif self.irm_snapshot.sphere.slug == PROVINCIAL_SLUG:
             return self.province
         else:
             raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
 
     @property
     def government_label(self):
-        if self.irm_snapshot.sphere.slug == "national":
+        if self.irm_snapshot.sphere.slug == NATIONAL_SLUG:
             return "National"
-        elif self.irm_snapshot.sphere.slug == "provincial":
+        elif self.irm_snapshot.sphere.slug == PROVINCIAL_SLUG:
             return self.province
         else:
             raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
@@ -2335,11 +2342,30 @@ class ResourceLink(models.Model):
     title = models.CharField(max_length=150)
     url = models.URLField(null=True, blank=True)
     description = models.CharField(max_length=300)
+    resource_link_order = models.PositiveIntegerField(
+        default=0, db_index=True, help_text="Links are shown in this order."
+    )
+    sphere_slug = models.CharField(
+        max_length=100,
+        choices=(
+            ("all", "all"),
+            (NATIONAL_SLUG, NATIONAL_SLUG,),
+            (PROVINCIAL_SLUG, PROVINCIAL_SLUG,),
+        ),
+        default="all",
+        verbose_name="Sphere",
+        help_text="Only show on pages for this sphere or all spheres.",
+    )
 
     panels = [
-        FieldPanel("title"),
-        FieldPanel("url"),
-        FieldPanel("description"),
+        MultiFieldPanel(
+            [FieldPanel("title"), FieldPanel("url"), FieldPanel("description"),],
+            heading="Content",
+        ),
+        MultiFieldPanel(
+            [FieldPanel("resource_link_order"), FieldPanel("sphere_slug"),],
+            heading="Display options",
+        ),
     ]
 
     def __str__(self):
@@ -2347,6 +2373,7 @@ class ResourceLink(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ["resource_link_order"]
 
 
 @register_snippet
