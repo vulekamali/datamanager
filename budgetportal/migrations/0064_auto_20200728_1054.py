@@ -6,23 +6,53 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0063_auto_20200728_1011'),
+        ("budgetportal", "0063_auto_20200728_1011"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='inyearmonitoringresourcelink',
-            name='sphere_slug',
-            field=models.CharField(choices=[('all', 'All'), ('national', 'National'), ('provincial', 'Provincial')], default='all', help_text='Only show on pages for this sphere or all spheres.', max_length=100, verbose_name='Sphere'),
+            model_name="inyearmonitoringresourcelink",
+            name="sphere_slug",
+            field=models.CharField(
+                choices=[
+                    ("all", "All"),
+                    ("national", "National"),
+                    ("provincial", "Provincial"),
+                ],
+                default="all",
+                help_text="Only show on pages for this sphere or all spheres.",
+                max_length=100,
+                verbose_name="Sphere",
+            ),
         ),
         migrations.AlterField(
-            model_name='performanceresourcelink',
-            name='sphere_slug',
-            field=models.CharField(choices=[('all', 'All'), ('national', 'National'), ('provincial', 'Provincial')], default='all', help_text='Only show on pages for this sphere or all spheres.', max_length=100, verbose_name='Sphere'),
+            model_name="performanceresourcelink",
+            name="sphere_slug",
+            field=models.CharField(
+                choices=[
+                    ("all", "All"),
+                    ("national", "National"),
+                    ("provincial", "Provincial"),
+                ],
+                default="all",
+                help_text="Only show on pages for this sphere or all spheres.",
+                max_length=100,
+                verbose_name="Sphere",
+            ),
         ),
         migrations.AlterField(
-            model_name='procurementresourcelink',
-            name='sphere_slug',
-            field=models.CharField(choices=[('all', 'All'), ('national', 'National'), ('provincial', 'Provincial')], default='all', help_text='Only show on pages for this sphere or all spheres.', max_length=100, verbose_name='Sphere'),
+            model_name="procurementresourcelink",
+            name="sphere_slug",
+            field=models.CharField(
+                choices=[
+                    ("all", "All"),
+                    ("national", "National"),
+                    ("provincial", "Provincial"),
+                ],
+                default="all",
+                help_text="Only show on pages for this sphere or all spheres.",
+                max_length=100,
+                verbose_name="Sphere",
+            ),
         ),
     ]

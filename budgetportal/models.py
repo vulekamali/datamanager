@@ -158,11 +158,7 @@ class FinancialYear(models.Model):
 class Sphere(models.Model):
     organisational_unit = "sphere"
     name = models.CharField(max_length=200)
-    slug = AutoSlugField(
-        populate_from="name",
-        max_length=200,
-        always_update=True,
-    )
+    slug = AutoSlugField(populate_from="name", max_length=200, always_update=True,)
     financial_year = models.ForeignKey(
         FinancialYear, on_delete=models.CASCADE, related_name="spheres"
     )
@@ -2351,9 +2347,7 @@ class ResourceLink(models.Model):
     )
     sphere_slug = models.CharField(
         max_length=100,
-        choices=[
-            ("all", "All"),
-        ] + SPHERE_SLUG_CHOICES,
+        choices=[("all", "All"),] + SPHERE_SLUG_CHOICES,
         default="all",
         verbose_name="Sphere",
         help_text="Only show on pages for this sphere or all spheres.",
