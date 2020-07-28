@@ -193,9 +193,11 @@
         </div>
     {% endif %}
 
+        {% if procurement_resource_links %}
         <div class="js-tooltips">
           {% include 'scenes/department/ResourceLinks/resource-links.html' with resource_links=procurement_resource_links section_title="Procurement resources" more_link="/datasets/procurement-portals-and-resources" %}
         </div>
+        {% endif %}
 
         <div class="u-marginTop100">
             <div class="DeptSectionHead DeptSectionHead--orange" id="section-implement">
