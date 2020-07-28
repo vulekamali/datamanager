@@ -1,7 +1,7 @@
+from budgetportal.infra_projects import status_order
 from budgetportal.models import InfraProject
 from django.db.models import Count
 from haystack import indexes
-from budgetportal.infra_projects import status_order
 
 
 class InfraProjectIndex(indexes.SearchIndex, indexes.Indexable):

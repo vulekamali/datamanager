@@ -1,8 +1,8 @@
 import json
 import logging
-from urllib.parse import urlparse, unquote
 from csv import DictWriter
 from datetime import datetime
+from urllib.parse import unquote, urlparse
 
 import requests
 import yaml
@@ -10,27 +10,31 @@ from slugify import slugify
 
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
-from .datasets import Category, Dataset
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import Count
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpResponse
-from django.db.models import Count
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from haystack.query import SearchQuerySet
+
+from .datasets import Category, Dataset
 from .models import (
     FAQ,
+    CategoryGuide,
     Department,
     Event,
     FinancialYear,
     Homepage,
     InfrastructureProjectPart,
+    InYearMonitoringResourceLink,
     IRMSnapshot,
+    MainMenuItem,
+    PerformanceResourceLink,
+    ProcurementResourceLink,
     Sphere,
     Video,
-    CategoryGuide,
-    MainMenuItem,
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
@@ -40,7 +44,6 @@ from .summaries import (
     get_focus_area_preview,
     get_preview_page,
 )
-
 
 logger = logging.getLogger(__name__)
 
@@ -375,6 +378,15 @@ def department_page(
         % (govt_label, department.name, selected_year.slug, COMMON_DESCRIPTION_ENDING,),
         "department_budget": department_budget,
         "department_adjusted_budget": department_adjusted_budget,
+        "procurement_resource_links": ProcurementResourceLink.objects.filter(
+            sphere_slug__in=("all", department.government.sphere.slug,)
+        ),
+        "performance_resource_links": PerformanceResourceLink.objects.filter(
+            sphere_slug__in=("all", department.government.sphere.slug,)
+        ),
+        "in_year_monitoring_resource_links": InYearMonitoringResourceLink.objects.filter(
+            sphere_slug__in=("all", department.government.sphere.slug,)
+        ),
         "vote_number": department.vote_number,
         "vote_primary": {
             "url_path": primary_department.get_url_path(),

@@ -1,21 +1,20 @@
 from adminplus.sites import AdminSitePlus
 from discourse.views import sso
 from django.conf import settings
-from django.conf.urls import include, url, static
-from django.urls import path, include, re_path
-from django.shortcuts import redirect
+from django.conf.urls import include, static, url
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemap_views
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
+from django.urls import include, path, re_path
 from django.views.decorators.cache import cache_page
-from .sitemaps import sitemaps
-from .webflow import urls as webflow_urls
-
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from . import bulk_upload, views
+from .sitemaps import sitemaps
+from .webflow import urls as webflow_urls
 
 admin.site = AdminSitePlus()
 admin.autodiscover()

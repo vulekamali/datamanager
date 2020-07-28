@@ -1,7 +1,4 @@
-from budgetportal.import_export_admin import (
-    CustomGovernmentWidget,
-    CustomBooleanWidget,
-)
+from budgetportal.import_export_admin import CustomBooleanWidget, CustomGovernmentWidget
 from budgetportal.models import FinancialYear, Government, Sphere
 from django.core.exceptions import ValidationError
 from django.test import TestCase

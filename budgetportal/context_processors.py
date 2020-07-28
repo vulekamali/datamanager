@@ -1,7 +1,8 @@
-from django.conf import settings
-from random import randint
 from base64 import b64encode
+from random import randint
+
 from budgetportal import models
+from django.conf import settings
 
 
 def google_analytics(request):

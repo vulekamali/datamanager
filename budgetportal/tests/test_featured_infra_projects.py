@@ -1,8 +1,5 @@
 import mock
-from budgetportal.models import (
-    MAPIT_POINT_API_URL,
-    InfrastructureProjectPart,
-)
+from budgetportal.models import MAPIT_POINT_API_URL, InfrastructureProjectPart
 from budgetportal.tests.helpers import WagtailHackLiveServerTestCase
 from django.test import Client, TestCase
 

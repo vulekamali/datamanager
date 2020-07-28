@@ -4,8 +4,8 @@ Common test helpers.
 import warnings
 from datetime import datetime
 
-from django.core.management import call_command
 from django.contrib.staticfiles.testing import LiveServerTestCase
+from django.core.management import call_command
 from django.db import connections
 from django.test import TestCase
 from selenium import webdriver

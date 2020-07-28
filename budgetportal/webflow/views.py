@@ -6,8 +6,10 @@ import json
 import urllib.parse
 
 from slugify import slugify
+
 from budgetportal import models
 from budgetportal.csv_gen import Echo
+from budgetportal.infra_projects.charts import time_series_data
 from budgetportal.json_encoder import JSONEncoder
 from django.forms.models import model_to_dict
 from django.http.response import StreamingHttpResponse
@@ -23,12 +25,11 @@ from drf_haystack.viewsets import HaystackViewSet
 from rest_framework.decorators import action
 from rest_framework.generics import RetrieveAPIView
 
-from budgetportal.infra_projects.charts import time_series_data
 from .serializers import (
-    InfraProjectCSVSerializer,
     InfaProjectCSVSnapshotSerializer,
-    InfraProjectSerializer,
+    InfraProjectCSVSerializer,
     InfraProjectFacetSerializer,
+    InfraProjectSerializer,
 )
 
 

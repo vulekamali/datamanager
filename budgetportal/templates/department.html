@@ -193,9 +193,11 @@
         </div>
     {% endif %}
 
+        {% if procurement_resource_links %}
         <div class="js-tooltips">
-          {% include 'scenes/department/ProcurementTeaser/procurement-teaser.html' %}
+          {% include 'scenes/department/ResourceLinks/resource-links.html' with resource_links=procurement_resource_links section_title="Procurement resources" more_link="/datasets/procurement-portals-and-resources" %}
         </div>
+        {% endif %}
 
         <div class="u-marginTop100">
             <div class="DeptSectionHead DeptSectionHead--orange" id="section-implement">
@@ -242,7 +244,21 @@
           </div>
 
         </div>
-        {% else %}
+        {% endif %}
+
+        {% if in_year_monitoring_resource_links %}
+        <div class="js-tooltips">
+          {% include 'scenes/department/ResourceLinks/resource-links.html' with resource_links=in_year_monitoring_resource_links section_title="In-year monitoring resources" %}
+        </div>
+        {% endif %}
+
+        {% if performance_resource_links %}
+        <div class="js-tooltips">
+          {% include 'scenes/department/ResourceLinks/resource-links.html' with resource_links=performance_resource_links section_title="Performance monitoring resources" %}
+        </div>
+        {% endif %}
+
+        {% if not infra_enabled and not in_year_monitoring_resource_links and not performance_resource_links %}
         <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
           <div class="Message-content">
             {% include 'components/Icon/index.html' with  type="info" size="l" %}

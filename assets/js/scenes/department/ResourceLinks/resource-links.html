@@ -1,0 +1,22 @@
+<h3 class="Title Title--section ">{{ section_title }}</h3>
+
+<div class="Grid has-threeColumn">
+
+  {% for resource_link in resource_links %}
+  <div class="Preview">
+    <a href="{{ resource_link.url }}">
+      <span class="Preview-heading Preview-heading--link">{{ resource_link.title }}</span>
+    </a>
+    <div class="Preview-content">
+      {{ resource_link.description }}
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+{% if more_link %}
+<div class="u-textAlignRight">
+  <a class="Button is-secondary is-inline u-marginTop20 u-textAlignRight" href="{{ more_link }}">View all resources</a>
+</div>
+{% endif %}

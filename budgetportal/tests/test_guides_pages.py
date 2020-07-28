@@ -1,7 +1,7 @@
+from budgetportal.models import CategoryGuide, FinancialYear, GuideIndexPage, GuidePage
+from budgetportal.tests.helpers import WagtailPageTestCase
 from django.core.files.images import ImageFile
 from django.test import Client
-from budgetportal.tests.helpers import WagtailPageTestCase
-from budgetportal.models import GuideIndexPage, GuidePage, CategoryGuide, FinancialYear
 
 
 class GuideIndexPageTestCase(WagtailPageTestCase):

@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.urls import path
-from rest_framework import routers
 from django.views.generic.base import RedirectView
+from rest_framework import routers
 
 from . import views
 

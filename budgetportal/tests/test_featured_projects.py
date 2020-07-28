@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*
 import time
 
+from budgetportal.models import FinancialYear, InfrastructureProjectPart
+from budgetportal.tests.helpers import BaseSeleniumTestCase
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
-from budgetportal.models import InfrastructureProjectPart, FinancialYear
-from budgetportal.tests.helpers import BaseSeleniumTestCase
 
 
 class FeaturedProjectTestCase(BaseSeleniumTestCase):

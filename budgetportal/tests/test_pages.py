@@ -1,10 +1,10 @@
 from budgetportal.models import (
+    CategoryGuide,
     Department,
     FinancialYear,
     Government,
-    Sphere,
-    CategoryGuide,
     Notice,
+    Sphere,
 )
 from django.test import Client, TestCase
 from mock import MagicMock, patch
@@ -52,24 +52,20 @@ class BasicPagesTestCase(TestCase):
             Department.objects.create(
                 government=fake_cape, name="Fake Health", vote_number=1, intro=""
             )
-        ckan_patch = patch("budgetportal.models.ckan")
-        CKANMockClass = ckan_patch.start()
-        CKANMockClass.action.package_search.return_value = {"results": []}
-        self.addCleanup(ckan_patch.stop)
+        models_ckan_patch = patch("budgetportal.models.ckan")
+        ModelsCKANMockClass = models_ckan_patch.start()
+        ModelsCKANMockClass.action.package_search.return_value = {"results": []}
+        self.addCleanup(models_ckan_patch.stop)
 
-        ckan_patch = patch("budgetportal.datasets.ckan")
-        CKANMockClass = ckan_patch.start()
-        CKANMockClass.action.package_search.return_value = {"results": []}
-        # self.addCleanup(ckan_patch.stop)
-
-        CKANMockClass.action.group_show.return_value = {
+        datasets_ckan_patch = patch("budgetportal.datasets.ckan")
+        DatasetsCKANMockClass = datasets_ckan_patch.start()
+        DatasetsCKANMockClass.action.package_search.return_value = {"results": []}
+        DatasetsCKANMockClass.action.group_show.return_value = {
             "name": "test",
             "description": "basic-test-description",
             "title": "test-slug",
         }
-        # self.addCleanup(ckan_patch.stop)
-
-        CKANMockClass.action.package_show.return_value = {
+        DatasetsCKANMockClass.action.package_show.return_value = {
             "state": "",
             "resources": [],
             "groups": [
@@ -90,7 +86,7 @@ class BasicPagesTestCase(TestCase):
             "license_url": "http://www.opendefinition.org/licenses/cc-by-sa",
             "organization": {"name": "basic-organization-slug"},
         }
-        self.addCleanup(ckan_patch.stop)
+        self.addCleanup(datasets_ckan_patch.stop)
 
         dataset_patch = patch(
             "budgetportal.datasets.Dataset.get_latest_cpi_resource",

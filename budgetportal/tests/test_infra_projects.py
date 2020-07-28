@@ -1,34 +1,33 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*
-import os
-import io
 import csv
+import io
+import os
 from datetime import date, datetime
+
+from budgetportal.infra_projects import InfraProjectSnapshotResource, irm_preprocessor
 from budgetportal.models import (
     FinancialYear,
-    Sphere,
-    IRMSnapshot,
     InfraProject,
     InfraProjectSnapshot,
+    IRMSnapshot,
     Quarter,
+    Sphere,
 )
 from budgetportal.search_indexes import InfraProjectIndex
-from budgetportal.tests.helpers import BaseSeleniumTestCase
+from budgetportal.tasks import format_error
+from budgetportal.tests.helpers import BaseSeleniumTestCase, WagtailHackMixin
+from budgetportal.webflow.serializers import InfraProjectCSVSerializer
 from django.conf import settings
 from django.core.files import File
+from django.test import TestCase, TransactionTestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from budgetportal.infra_projects import irm_preprocessor
-from budgetportal.webflow.serializers import InfraProjectCSVSerializer
 from tablib import Dataset
-from django.test import TestCase, TransactionTestCase
-from budgetportal.infra_projects import InfraProjectSnapshotResource
-from budgetportal.tests.helpers import WagtailHackMixin
-from budgetportal.tasks import format_error
 
 EMPTY_FILE_PATH = os.path.abspath(
     "budgetportal/tests/test_data/test_prov_infra_projects_empty_file.xlsx"
