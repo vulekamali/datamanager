@@ -6,47 +6,71 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0061_auto_20200714_1915'),
+        ("budgetportal", "0061_auto_20200714_1915"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='InYearMonitoringResourceLink',
+            name="InYearMonitoringResourceLink",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=150)),
-                ('url', models.URLField(blank=True, null=True)),
-                ('description', models.CharField(max_length=300)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=150)),
+                ("url", models.URLField(blank=True, null=True)),
+                ("description", models.CharField(max_length=300)),
             ],
             options={
-                'verbose_name': 'In-year monitoring resource link',
-                'verbose_name_plural': 'In-year monitoring resource links',
+                "verbose_name": "In-year monitoring resource link",
+                "verbose_name_plural": "In-year monitoring resource links",
             },
         ),
         migrations.CreateModel(
-            name='PerformanceResourceLink',
+            name="PerformanceResourceLink",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=150)),
-                ('url', models.URLField(blank=True, null=True)),
-                ('description', models.CharField(max_length=300)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=150)),
+                ("url", models.URLField(blank=True, null=True)),
+                ("description", models.CharField(max_length=300)),
             ],
             options={
-                'verbose_name': 'Performance resource link',
-                'verbose_name_plural': 'Performance resource links',
+                "verbose_name": "Performance resource link",
+                "verbose_name_plural": "Performance resource links",
             },
         ),
         migrations.CreateModel(
-            name='ProcurementResourceLink',
+            name="ProcurementResourceLink",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=150)),
-                ('url', models.URLField(blank=True, null=True)),
-                ('description', models.CharField(max_length=300)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=150)),
+                ("url", models.URLField(blank=True, null=True)),
+                ("description", models.CharField(max_length=300)),
             ],
             options={
-                'verbose_name': 'Procurement resource link',
-                'verbose_name_plural': 'Procurement resource links',
+                "verbose_name": "Procurement resource link",
+                "verbose_name_plural": "Procurement resource links",
             },
         ),
     ]

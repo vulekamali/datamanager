@@ -2351,7 +2351,6 @@ class ResourceLink(models.Model):
 
 @register_snippet
 class ProcurementResourceLink(ResourceLink):
-
     class Meta:
         verbose_name = "Procurement resource link"
         verbose_name_plural = "Procurement resource links"
@@ -2359,7 +2358,6 @@ class ProcurementResourceLink(ResourceLink):
 
 @register_snippet
 class PerformanceResourceLink(ResourceLink):
-
     class Meta:
         verbose_name = "Performance resource link"
         verbose_name_plural = "Performance resource links"
@@ -2367,7 +2365,6 @@ class PerformanceResourceLink(ResourceLink):
 
 @register_snippet
 class InYearMonitoringResourceLink(ResourceLink):
-
     class Meta:
         verbose_name = "In-year monitoring resource link"
         verbose_name_plural = "In-year monitoring resource links"
