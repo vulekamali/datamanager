@@ -857,6 +857,12 @@ def dataset_category_context(category_slug):
     for dataset in category.get_datasets():
         field_subset = dataset_fields(dataset)
         field_subset["description"] = field_subset.pop("intro")
+        field_subset["created"] = datetime.strptime(
+            field_subset["created"], "%Y-%m-%dT%H:%M:%S.%f"
+        )
+        field_subset["last_updated"] = datetime.strptime(
+            field_subset["last_updated"], "%Y-%m-%dT%H:%M:%S.%f"
+        )
         del field_subset["methodology"]
         del field_subset["key_points"]
         del field_subset["use_for"]
