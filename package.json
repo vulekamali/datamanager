@@ -55,6 +55,7 @@
     "html": "^1.0.0",
     "html-entities": "^1.2.1",
     "html-loader": "^0.5.5",
+    "import-webflow-export": "^0.0.1",
     "jest": "^24.8.0",
     "markdown-it": "^8.4.2",
     "markdown-it-highlightjs": "^3.0.0",
@@ -136,5 +137,16 @@
     "vulekamali-visualisations": "https://github.com/vulekamali/data-visualisations.git#2e861cce3a27bd1b6791bdd9f4fd1c4497bed1b7",
     "whatwg-fetch": "^2.0.3",
     "yarn": "^1.13.0"
+  },
+  "importWebflowExport": {
+    "copyTrees": {
+      "css": "budgetportal/webflow/static/css",
+      "js": "budgetportal/webflow/static/js",
+      "images": "budgetportal/webflow/static/images",
+      "fonts": "budgetportal/webflow/static/fonts"
+    },
+    "importHtml": [
+      {"glob": "*.html", "destDir": "budgetportal/webflow/templates/webflow", "transforms": "./assets/js/webflow/import.js"}
+    ]
   }
 }
