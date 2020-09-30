@@ -20,7 +20,7 @@ directory, where `~/Downloads/vulekamali.webflow(18).zip` is the path to the
 latest webflow code export.
 
 ```
-python bin/import_webflow_export.py ~/Downloads/vulekamali.webflow\(18\).zip budgetportal/webflow/
+yarn run import-webflow-export ~/Downloads/vulekamali.webflow\(18\).zip budgetportal/webflow/
 ```
 
 The import script inserts a Script tag to include `static/js/vulekamali-webflow.js`
