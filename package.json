@@ -55,7 +55,7 @@
     "html": "^1.0.0",
     "html-entities": "^1.2.1",
     "html-loader": "^0.5.5",
-    "import-webflow-export": "^0.0.1",
+    "import-webflow-export": "^0.0.3",
     "jest": "^24.8.0",
     "markdown-it": "^8.4.2",
     "markdown-it-highlightjs": "^3.0.0",
@@ -146,7 +146,11 @@
       "fonts": "budgetportal/webflow/static/fonts"
     },
     "importHtml": [
-      {"glob": "*.html", "destDir": "budgetportal/webflow/templates/webflow", "transforms": "./assets/js/webflow/import.js"}
+      {
+        "glob": "*.html",
+        "destDir": "budgetportal/webflow/templates/webflow",
+        "transforms": "./assets/js/webflow/import.js"
+      }
     ]
   }
 }
