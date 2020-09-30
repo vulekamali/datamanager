@@ -1,11 +1,27 @@
 exports.transformHTML = function(html) {
-  let newHtml = "{% load json_script_escape %}\n{% load static %}\n" + html;
+  let newHtml = "{% load static %}\n{% load json_script_escape %}\n" + html;
   newHtml = newHtml.replace(/"(js|css|images|fonts)\//g, "\"/static/$1/");
   return newHtml;
 };
 
 exports.transformDOM = function(window, $) {
+  $("title").text("{{ page_title }}");
+  $('meta[property="og:title"]').attr("content", "{{ page_title }}");
 
+  [
+    '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">',
+    '<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin="">',
+    '<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" crossorigin="">',
+    '<link rel="stylesheet" href="{% static \'css/vulekamali-webflow.css\' %}">',
+    '<meta name="description" content="{{ page_description }}">',
+    '<meta name="twitter:title" content="{{ page_title }}">',
+    '<meta name="twitter:description" content="{{ page_description }}">',
+    '<meta name="twitter:card" content="summary">',
+    '<meta name="twitter:site" content="@vulekamali">',
+    '<meta property="og:description" content="{{ page_description }}">',
+  ].forEach(html => $("head").append(html + "\n"));
+
+  // Body scripts
   addScriptToBody(window, {
     id: "page-data",
     type: "application/json"
