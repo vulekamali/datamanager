@@ -29,7 +29,7 @@ django-picklefield==2.1.1
 django-pipeline==1.7.0
 django-q==1.1.0
 django-recaptcha==2.0.6
-djangorestframework==3.11.0
+djangorestframework==3.10.0
 djangorestframework-csv==2.1.0
 django-storages==1.9.1
 docopt==0.6.2
