@@ -38,5 +38,4 @@ jobs:
     - name: Logging and code quality
       run: |
         docker-compose logs db solr minio
-        docker-compose run --rm `bash <(curl -s https://codecov.io/env)` test codecov
 
