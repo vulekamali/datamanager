@@ -29,7 +29,7 @@ jobs:
         npm install -g yarn@1.21.1
         yarn
         yarn build
-    - name: Docker image
+    - name: Run tests
       run: |
         docker-compose run --rm test python manage.py collectstatic --no-input
         docker-compose run --rm test
