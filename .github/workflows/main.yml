@@ -35,6 +35,6 @@ jobs:
         docker-compose run --rm test
         black --check --diff budgetportal manage.py discourse
       
-    - name: Logging and code quality
+    - name: Dump dependency logs for debugging
       run: |
         docker-compose logs db solr minio
