@@ -141,6 +141,7 @@ class BasicPagesTestCase(TestCase):
         self.assertContains(
             response, "The Presidency budget data for the 2019-20 financial year"
         )
+        self.assertContains(response, "Budget (Main appropriation) 2019-20")
 
     def test_department_preview_page(self):
         """Test that it loads and that some text is present"""
