@@ -59,7 +59,7 @@
     "jest": "^24.8.0",
     "markdown-it": "^8.4.2",
     "markdown-it-highlightjs": "^3.0.0",
-    "marked": "^0.3.16",
+    "marked": "^4.0.10",
     "marked-extras": "^0.2.4",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.13.1",
