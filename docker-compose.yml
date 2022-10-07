@@ -1,9 +1,3 @@
-##########################################################################################
-#
-# This is for DEVELOPMENT purposes. We deploy using similar configuration but using dokku.
-#
-##########################################################################################
-
 version: '3'
 
 services:
@@ -19,7 +13,9 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile-dev
+      args:
+        USER_ID: ${USER_ID:-1001}
+        GROUP_ID: ${GROUP_ID:-1001}
     command: python manage.py runserver_plus --nopin 0.0.0.0:8000
     environment:
       - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
@@ -33,6 +29,7 @@ services:
       - SOLR_URL=http://solr:8983/solr/budgetportal
       - DEBUG_CACHE
       - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
+      - PORT=8000
     volumes:
       - .:/code
     ports:
@@ -47,7 +44,9 @@ services:
   worker:
     build:
       context: .
-      dockerfile: Dockerfile-dev
+      args:
+        USER_ID: ${USER_ID:-1001}
+        GROUP_ID: ${GROUP_ID:-1001}
     command: python manage.py qcluster
     environment:
       - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
@@ -68,7 +67,9 @@ services:
   test:
     build:
       context: .
-      dockerfile: Dockerfile-test
+      args:
+        USER_ID: ${USER_ID:-1001}
+        GROUP_ID: ${GROUP_ID:-1001}
     command: bin/wait-for-db.sh coverage run --source='budgetportal' manage.py test
     environment:
       - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
