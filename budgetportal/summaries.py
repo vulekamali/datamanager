@@ -458,17 +458,23 @@ class DepartmentBudgetData(object):
         raise Exception("Not implemented")
 
     def get_aggregate_url(self):
-        openspending_api = self.get_openspending_api()
-        return openspending_api.aggregate_url(
+        if self.get_openspending_api is not None:
+            openspending_api = self.get_openspending_api()
+            return openspending_api.aggregate_url(
             cuts=self.get_aggregate_cuts(), drilldowns=self.get_aggregate_drilldowns()
-        )
+            )
+        else:
+            return None
 
     def get_detail_aggregate_url(self):
-        openspending_api = self.get_openspending_api()
-        return openspending_api.aggregate_url(
+        if self.get_openspending_api is not None:
+            openspending_api = self.get_openspending_api()
+            return openspending_api.aggregate_url(
             cuts=self.get_aggregate_cuts(),
             drilldowns=openspending_api.get_all_drilldowns(),
-        )
+            )
+        else:
+            return None    
 
     def get_detail_csv_url(self):
         return csv_url(self.get_detail_aggregate_url())
@@ -479,26 +485,32 @@ class DepartmentSubprogrammes(DepartmentBudgetData):
         return self.department.get_estimates_of_subprogramme_expenditure_dataset()
 
     def get_aggregate_cuts(self):
-        openspending_api = self.get_openspending_api()
-        financial_year_start = self.department.get_financial_year().get_starting_year()
-        cuts = [
-            openspending_api.get_financial_year_ref() + ":" + financial_year_start,
-            openspending_api.get_department_name_ref() + ":" + self.department.name,
-            openspending_api.get_phase_ref() + ":" + "Main appropriation",
-        ]
-        if self.department.government.sphere.slug == "provincial":
-            cuts.append(
-                openspending_api.get_geo_ref()
-                + ':"%s"' % self.department.government.name
-            )
-        return cuts
+        if self.get_openspending_api is not None:
+            openspending_api = self.get_openspending_api()
+            financial_year_start = self.department.get_financial_year().get_starting_year()
+            cuts = [
+                openspending_api.get_financial_year_ref() + ":" + financial_year_start,
+                openspending_api.get_department_name_ref() + ":" + self.department.name,
+                openspending_api.get_phase_ref() + ":" + "Main appropriation",
+            ]
+            if self.department.government.sphere.slug == "provincial":
+                cuts.append(
+                    openspending_api.get_geo_ref()
+                    + ':"%s"' % self.department.government.name
+                )
+            return cuts
+        else:
+            return None
 
     def get_aggregate_drilldowns(self):
-        openspending_api = self.get_openspending_api()
-        return [
-            openspending_api.get_programme_name_ref(),
-            openspending_api.get_subprogramme_name_ref(),
-        ]
+        if self.get_openspending_api is not None:
+            openspending_api = self.get_openspending_api()
+            return [
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_subprogramme_name_ref(),
+            ]
+        else:
+            return None
 
 
 class DepartmentSubprogEcon4(DepartmentBudgetData):
@@ -506,27 +518,34 @@ class DepartmentSubprogEcon4(DepartmentBudgetData):
         return self.department.get_estimates_of_econ_classes_expenditure_dataset(4)
 
     def get_aggregate_cuts(self):
-        openspending_api = self.get_openspending_api()
-        financial_year_start = self.department.get_financial_year().get_starting_year()
-        cuts = [
-            openspending_api.get_financial_year_ref() + ":" + financial_year_start,
-            openspending_api.get_department_name_ref() + ":" + self.department.name,
-            openspending_api.get_phase_ref() + ":" + "Main appropriation",
-        ]
-        if self.department.government.sphere.slug == "provincial":
-            cuts.append(
-                openspending_api.get_geo_ref()
-                + ':"%s"' % self.department.government.name
-            )
-        return cuts
+        if self.get_openspending_api is not None:
+            openspending_api = self.get_openspending_api()
+            financial_year_start = self.department.get_financial_year().get_starting_year()
+            cuts = [
+                openspending_api.get_financial_year_ref() + ":" + financial_year_start,
+                openspending_api.get_department_name_ref() + ":" + self.department.name,
+                openspending_api.get_phase_ref() + ":" + "Main appropriation",
+            ]
+            if self.department.government.sphere.slug == "provincial":
+                cuts.append(
+                    openspending_api.get_geo_ref()
+                    + ':"%s"' % self.department.government.name
+                )
+            return cuts
+        else:
+            return None
 
     def get_aggregate_drilldowns(self):
-        openspending_api = self.get_openspending_api()
-        return [
-            openspending_api.get_programme_name_ref(),
-            openspending_api.get_subprogramme_name_ref(),
-            openspending_api.get_econ_class_4_ref(),
-        ]
+        if self.get_openspending_api is not None:
+                   
+            openspending_api = self.get_openspending_api()
+            return [
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_subprogramme_name_ref(),
+                openspending_api.get_econ_class_4_ref(),
+            ]
+        else:
+            return None
 
 
 class DepartmentProgrammesEcon4(DepartmentBudgetData):
@@ -549,8 +568,11 @@ class DepartmentProgrammesEcon4(DepartmentBudgetData):
         return cuts
 
     def get_aggregate_drilldowns(self):
-        openspending_api = self.get_openspending_api()
-        return [
-            openspending_api.get_programme_name_ref(),
-            openspending_api.get_econ_class_4_ref(),
-        ]
+        if self.get_openspending_api is not None:
+            openspending_api = self.get_openspending_api()
+            return [
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_econ_class_4_ref(),
+            ]
+        else: 
+            return None
