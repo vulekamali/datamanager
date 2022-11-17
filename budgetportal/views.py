@@ -254,6 +254,8 @@ def department_page(
     department = None
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
+    print("\n\n\n\n###################\n\n\n\n")
+
     years = FinancialYear.get_available_years()
     for year in years:
         if year.slug == financial_year_id:

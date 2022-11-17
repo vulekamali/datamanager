@@ -12,7 +12,6 @@
 
 <div class="EconClassPackedCirclesSection" id="econ-classification">
     <h3 class="Title Title--section">Classification of spending items</h3>
-
     <div class="EconClassPackedCirclesSection-container">
         <div class="EconClassPackedCirclesSection-item">
             <div class="EconClassPackedCirclesSection-share u-marginTop10 u-marginBottom15">
@@ -26,13 +25,12 @@
             <p class="js-tooltips">This visualisation highlights how many categories of expenditure there are for this department at Economic Classification level 4, and which ones are the biggest.</p>
 
             <ul class="LinksList">
-                {% if prog_econ4_circles_data.get_dataset %}
+               <!-- {% if prog_econ4_circles_data.get_dataset %}
                 {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=prog_econ4_circles_data.get_dataset.get_url_path type="dataset" %}
                 {% endif %}
-
                 {% if prog_econ4_circles_data.get_dataset %}
                 {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=prog_econ4_circles_data.get_detail_csv_url type="download" %}
-                {% endif %}
+                {% endif %}-->
 
                 {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 
@@ -41,11 +39,13 @@
                 {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
             </ul>
         </div>
-
-        {% if prog_econ4_circles_data.get_dataset %}
+        <div class="Card">           
+        <li> No data available </li>
+    </div>
+        <!-- {% if prog_econ4_circles_data.get_dataset %}
         <div class="EconClassPackedCirclesSection-item EconClassPackedCirclesSection-item--right">
             <div class="Card">
-              <iframe src="{{ prog_econ4_circles_url }}"></iframe>
+              <iframe src="{{ prog_econ4_circles_url }}"></iframe>             
               <div class="legend"> Budget (Main appropriation) {{ selected_financial_year }}</div>
             </div>
         </div>
@@ -53,4 +53,4 @@
         <div class="Message Message--secondary Missing">Economic Classification level 4 data for this financial year is not available on vulekamali.</div>
         {% endif %}
     </div>
-</div>
+</div> -->
