@@ -18,33 +18,50 @@
             <div class="ProgrammesSection-share u-marginTop10 u-marginBottom15">
                 <div data-component="Share" data-anchor="programmes" data-color="{{ color }}"></div>
             </div>
+{% if subprogramme_viz_data.get_openspending_api == null %}
 
-            <p class="js-tooltips">A department&#x27;s programmes are the activities that it spends money on during the
-                financial year. Different programmes have different budgets, depending on their objectives and available budgets. More detail on the programmes is available in the
-                department's {{ source_type }} documents.</p>
+<p class="js-tooltips">A department&#x27;s programmes are the activities that it spends money on during the
+    financial year. Different programmes have different budgets, depending on their objectives and available budgets. More detail on the programmes is available in the
+    department's {{ source_type }} documents.</p>
 
-            <ul class="LinksList">
-               <!-- {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprogramme_viz_data.get_dataset.get_url_path type="dataset" %}
-                <li> Mahlatse was hereee , experimenting </li>-->
-                <!--{% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprogramme_viz_data.get_detail_csv_url type="download" %}-->
+<ul class="LinksList">
+    
+    {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 
-                {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+    {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
 
-                {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
-
-                {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
-            </ul>
-        </div>
-        
-            <!-- <div class="legend"> Budget (Main appropriation) {{ selected_financial_year }}</div>
-        </div>    -->
-       <!-- <div class="ProgrammesSection-item ProgrammesSection-item--right"> -->
-            <div class="Card">
-              <!-- <iframe src="{{ subprog_treemap_url }}"></iframe> -->
-              <li> No data available </li>
-              <!-- <div class="legend"> Budget (Main appropriation) {{ selected_financial_year }}</div> -->
-            </div>
-        </div>
-    </div>
-   <div class="legend"> Budget (Main appropriation) {{ selected_financial_year }}</div>
+    {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+</ul>
 </div>
+
+<div class="Card">           
+    <li> No data available </li>
+</div>
+           
+{% else %}
+<p class="js-tooltips">A department&#x27;s programmes are the activities that it spends money on during the
+    financial year. Different programmes have different budgets, depending on their objectives and available budgets. More detail on the programmes is available in the
+    department's {{ source_type }} documents.</p>
+
+<ul class="LinksList">
+    {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprogramme_viz_data.get_dataset.get_url_path type="dataset" %}
+
+    {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprogramme_viz_data.get_detail_csv_url type="download" %}
+
+    {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+
+    {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
+
+    {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+</ul>
+</div>
+
+<div class="ProgrammesSection-item ProgrammesSection-item--right">
+<div class="Card">
+  <iframe src="{{ subprog_treemap_url }}"></iframe>
+  <div class="legend"> Budget (Main appropriation) {{ selected_financial_year }}</div>
+</div>
+</div>
+</div>
+</div>
+{% endif %}

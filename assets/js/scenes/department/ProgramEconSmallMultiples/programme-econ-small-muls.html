@@ -18,21 +18,21 @@
             <div class="ProgramEconSmallMultiplesSection-share u-marginTop10 u-marginBottom15">
                 <div data-component="Share" data-anchor="econ-classification" data-color="{{ color }}"></div>
             </div>
-
+            {% if subprog_econ4_bars_data.get_dataset != none %}
             <p class="js-tooltips">Budget programmes will differ in composition of spending, from compensation of employees, transfers to other agencies and goods and services, depending on their objective.</p>
-            
+
             <p class="js-tooltips">Select an Economic Classification to filter the data in this chart and see how much programmes spend on that category.</p>
 
             <p class="js-tooltips"Only the categories that this department spends on are shown in the filter.</p>
 
             <ul class="LinksList">
-                <!--{% if subprog_econ4_bars_data.get_dataset %}
+                {% if subprog_econ4_bars_data.get_dataset %}
                 {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprog_econ4_bars_data.get_dataset.get_url_path type="dataset" %}
                 {% endif %}
-                <li> Mahlatse was hereee </li>
+
                 {% if subprog_econ4_bars_data.get_dataset %}
                 {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprog_econ4_bars_data.get_detail_csv_url type="download" %}
-                {% endif %}-->
+                {% endif %}
 
                 {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 
@@ -41,13 +41,10 @@
                 {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
             </ul>
         </div>
-        <div class="Card">
+
         {% if subprog_econ4_bars_data.get_dataset %}
-        <li> No data available </li>
-    </div>
-        <!-- <div class="ProgramEconSmallMultiplesSection-item ProgramEconSmallMultiplesSection-item--right">
+        <div class="ProgramEconSmallMultiplesSection-item ProgramEconSmallMultiplesSection-item--right">
             <div class="Card">
-                
               <div id="programme-econ-small-multiples" data-src="{{ subprog_econ4_bars_url }}"></div>
               <div class="legend"> Budget (Main appropriation) {{ selected_financial_year }}</div>
             </div>
@@ -56,4 +53,26 @@
         <div class="Message Message--secondary Missing">Economic Classification level 4 data for this financial year is not available on vulekamali.</div>
         {% endif %}
     </div>
-</div> -->
+</div>
+{% else %}
+<p class="js-tooltips">Budget programmes will differ in composition of spending, from compensation of employees, transfers to other agencies and goods and services, depending on their objective.</p>
+
+<p class="js-tooltips">Select an Economic Classification to filter the data in this chart and see how much programmes spend on that category.</p>
+
+<p class="js-tooltips"Only the categories that this department spends on are shown in the filter.</p>
+
+<ul class="LinksList">
+ 
+
+    {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
+
+    {% include 'components/LinksList/item.html' with text=pdf_text url=pdf type="download" %}
+
+    {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
+</ul>
+</div>s
+
+<div class="Card">           
+    <li> No data available </li>
+</div>
+{% endif %}
