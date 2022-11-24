@@ -44,8 +44,8 @@ USER containeruser
 
 WORKDIR /app
 
-#RUN set -ex; \
-#  yarn; \
-#  yarn build
-#
+RUN set -ex; \
+  yarn; \
+  yarn build
+
 CMD /app/bin/start.sh
