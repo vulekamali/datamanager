@@ -31,7 +31,7 @@ services:
       - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
       - PORT=8000
     volumes:
-      - .:/code
+      - .:/app
     ports:
       - "8000:8000"
     depends_on:
@@ -57,7 +57,7 @@ services:
       - AWS_S3_ENDPOINT_URL=http://minio:9000
       - SOLR_URL=http://solr:8983/solr/budgetportal
     volumes:
-      - .:/code
+      - .:/app
     depends_on:
       - db
       - solr
@@ -81,7 +81,7 @@ services:
       - SOLR_URL=http://solr:8983/solr/budgetportal-test
       - DJANGO_Q_SYNC=TRUE
     volumes:
-      - .:/code
+      - .:/app
     depends_on:
       - db
       - solr

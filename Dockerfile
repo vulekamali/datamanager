@@ -25,26 +25,26 @@ RUN pip install -U poetry
 
 # Copy, then install requirements before copying rest for a requirements cache layer.
 COPY pyproject.toml poetry.lock /tmp/
-RUN set -ex; \
-  cd /tmp; \
-  poetry install
-
-COPY . /app
-
-ARG USER_ID=1001
-ARG GROUP_ID=1001
-
-RUN set -ex; \
-  addgroup --gid $GROUP_ID --system containeruser; \
-  adduser --system --uid $USER_ID --gid $GROUP_ID containeruser; \
-  chown -R containeruser:containeruser /app
-
-USER containeruser
-
-WORKDIR /app
-
-#RUN set -ex; \
-#  yarn; \
-#  yarn build
+# RUN set -ex; \
+#   cd /tmp; \
+#   poetry install
 #
-CMD /app/bin/start.sh
+# COPY . /app
+#
+# ARG USER_ID=1001
+# ARG GROUP_ID=1001
+#
+# RUN set -ex; \
+#   addgroup --gid $GROUP_ID --system containeruser; \
+#   adduser --system --uid $USER_ID --gid $GROUP_ID containeruser; \
+#   chown -R containeruser:containeruser /app
+#
+# USER containeruser
+#
+# WORKDIR /app
+#
+# #RUN set -ex; \
+# #  yarn; \
+# #  yarn build
+# #
+# CMD /app/bin/start.sh
