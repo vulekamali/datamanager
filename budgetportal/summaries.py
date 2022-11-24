@@ -10,8 +10,8 @@ from .models import (
     EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
     Department,
     FinancialYear,
-    csv_url,
 )
+from .models.government import csv_url
 
 logger = logging.getLogger(__name__)
 
