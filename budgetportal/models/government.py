@@ -1,12 +1,18 @@
 from autoslug import AutoSlugField
+from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
+from collections import OrderedDict
+from decimal import Decimal
 from django.conf import settings
 from django.db import models
 from partial_index import PartialIndex
-from budgetportal.datasets import Dataset, get_expenditure_time_series_dataset
+from pprint import pformat
 from slugify import slugify
-from collections import OrderedDict
+from urllib.parse import quote
+import logging
+from django.urls import reverse
+import requests
 
-
+logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
 NATIONAL_SLUG = "national"
@@ -39,6 +45,12 @@ EXPENDITURE_TIME_SERIES_PHASE_MAPPING = {
     "adjusted": "Adjusted appropriation",
     "actual": "Audit Outcome",
 }
+
+DIRECT_CHARGE_NRF = "Direct charge against the National Revenue Fund"
+
+URL_LENGTH_LIMIT = 2000
+
+CKAN_DATASTORE_URL = settings.CKAN_URL + "/api/3/action" "/datastore_search_sql"
 
 
 class FinancialYear(models.Model):
@@ -1594,6 +1606,7 @@ def get_vocab_map():
 
 
 def csv_url(aggregate_url):
+    print(aggregate_url)
     querystring = "?api_url=" + quote(aggregate_url)
     csv_url = reverse("openspending_csv") + querystring
     if len(csv_url) > URL_LENGTH_LIMIT:

@@ -107,7 +107,7 @@ class AdjustedBudgetTestCase(TestCase):
         self.department._get_budget_virements = Mock(return_value=Mock())
         self.department._get_budget_special_appropriations = Mock(return_value=Mock())
         self.department._get_budget_direct_charges = Mock(return_value=Mock())
-        models.csv_url = Mock(return_value=Mock())
+        models.government.csv_url = Mock(return_value=Mock())
 
     def test_no_adjustment(self):
         self.department._get_total_budget_adjustment = Mock(return_value=(123, 0))

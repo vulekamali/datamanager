@@ -3,9 +3,6 @@ import re
 import uuid
 from collections import OrderedDict
 from datetime import datetime
-from decimal import Decimal
-from pprint import pformat
-from urllib.parse import quote
 
 import requests
 from slugify import slugify
@@ -42,13 +39,7 @@ from .government import (
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
-URL_LENGTH_LIMIT = 2000
-
-CKAN_DATASTORE_URL = settings.CKAN_URL + "/api/3/action" "/datastore_search_sql"
-
 MAPIT_POINT_API_URL = "https://mapit.code4sa.org/point/4326/{},{}"
-
-DIRECT_CHARGE_NRF = "Direct charge against the National Revenue Fund"
 
 prov_abbrev = {
     "Eastern Cape": "EC",
