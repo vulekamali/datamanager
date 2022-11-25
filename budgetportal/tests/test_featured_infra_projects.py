@@ -5,7 +5,7 @@ from django.test import Client, TestCase
 
 
 class ProjectedExpenditureTestCase(TestCase):
-    """ Unit tests for get_projected_expenditure function """
+    """Unit tests for get_projected_expenditure function"""
 
     fixtures = ["test-infrastructure-pages-detail"]
 
@@ -18,7 +18,7 @@ class ProjectedExpenditureTestCase(TestCase):
 
 
 class CoordinatesTestCase(TestCase):
-    """ Unit tests for parsing coordinates """
+    """Unit tests for parsing coordinates"""
 
     def test_success_simple_format(self):
         raw_coord_string = "-26.378582,27.654933"
@@ -54,7 +54,7 @@ class CoordinatesTestCase(TestCase):
 
 
 class ExpenditureTestCase(TestCase):
-    """ Unit tests for expenditure functions """
+    """Unit tests for expenditure functions"""
 
     fixtures = ["test-infrastructure-pages-detail"]
 
@@ -152,7 +152,7 @@ class OverviewIntegrationTest(WagtailHackLiveServerTestCase):
 
     @mock.patch("requests.get", return_value=empty_ckan_response)
     def test_success_empty_projects(self, mock_get):
-        """ Test that it exists and that the correct years are linked. """
+        """Test that it exists and that the correct years are linked."""
         InfrastructureProjectPart.objects.all().delete()
         c = Client()
         response = c.get("/json/infrastructure-projects.json")
@@ -170,7 +170,7 @@ class OverviewIntegrationTest(WagtailHackLiveServerTestCase):
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_success_with_projects(self, mock_get):
-        """ Test that it exists and that the correct years are linked. """
+        """Test that it exists and that the correct years are linked."""
         c = Client()
         response = c.get("/json/infrastructure-projects.json")
         content = response.json()
@@ -242,7 +242,7 @@ class DetailIntegrationTest(WagtailHackLiveServerTestCase):
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_success_with_projects(self, mock_get):
-        """ Test that it exists and that the correct years are linked. """
+        """Test that it exists and that the correct years are linked."""
         c = Client()
         response = c.get(
             "/json/infrastructure-projects/{}.json".format(self.project.project_slug)

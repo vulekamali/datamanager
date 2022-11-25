@@ -245,7 +245,10 @@ urlpatterns = [
         "/(?P<department_slug>[\w-]+)/",
         include((department_urlpatterns, "provincial"), namespace="provincial"),
     ),
-    url(r"^robots\.txt$", views.robots,),
+    url(
+        r"^robots\.txt$",
+        views.robots,
+    ),
     # Sitemap
     url(
         r"^sitemap\.xml$",

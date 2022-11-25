@@ -107,7 +107,7 @@ class AdjustedBudgetTestCase(TestCase):
         self.department._get_budget_virements = Mock(return_value=Mock())
         self.department._get_budget_special_appropriations = Mock(return_value=Mock())
         self.department._get_budget_direct_charges = Mock(return_value=Mock())
-        models.csv_url = Mock(return_value=Mock())
+        models.government.csv_url = Mock(return_value=Mock())
 
     def test_no_adjustment(self):
         self.department._get_total_budget_adjustment = Mock(return_value=(123, 0))
@@ -168,7 +168,7 @@ class BudgetedAndActualExpenditureProgrammeTestCase(TestCase):
             return_value=self.mock_openspending_api
         )
 
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
     def test_no_cells_null_response(self, mock_get_dataset):
         self.mock_openspending_api.filter_dept = Mock(return_value={"cells": []})
         mock_get_dataset.return_value = self.mock_dataset
@@ -176,16 +176,20 @@ class BudgetedAndActualExpenditureProgrammeTestCase(TestCase):
         result = self.department.get_expenditure_time_series_by_programme()
         self.assertEqual(result, None)
 
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
-    @mock.patch("budgetportal.models.get_cpi", return_value=mock_data.CPI_2019_20)
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
+    @mock.patch(
+        "budgetportal.models.government.get_cpi", return_value=mock_data.CPI_2019_20
+    )
     def test_complete_data_no_notices(self, mock_get_cpi, mock_get_dataset):
         mock_get_dataset.return_value = self.mock_dataset
 
         result = self.department.get_expenditure_time_series_by_programme()
         self.assertEqual(result["notices"], [])
 
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
-    @mock.patch("budgetportal.models.get_cpi", return_value=mock_data.CPI_2019_20)
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
+    @mock.patch(
+        "budgetportal.models.government.get_cpi", return_value=mock_data.CPI_2019_20
+    )
     def test_missing_data_prog_did_not_exist(self, mock_get_cpi, mock_get_dataset):
         """
         Here we feed an incomplete set of cells and expect it to tell us that
@@ -258,7 +262,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         dataset_patch.start()
         self.addCleanup(dataset_patch.stop)
 
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
     def test_no_cells_null_response(self, mock_get_dataset):
         self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
         mock_get_dataset.return_value = self.mock_dataset
@@ -266,8 +270,10 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result, None)
 
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
-    @mock.patch("budgetportal.models.get_cpi", return_value=mock_data.CPI_2019_20)
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
+    @mock.patch(
+        "budgetportal.models.government.get_cpi", return_value=mock_data.CPI_2019_20
+    )
     def test_complete_data_no_notices(self, mock_get_cpi, mock_get_dataset):
         mock_get_dataset.return_value = self.mock_dataset
         self.mock_openspending_api.aggregate_by_refs = Mock(
@@ -277,8 +283,10 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
         result = self.department.get_expenditure_time_series_summary()
         self.assertEqual(result["notices"], [])
 
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
-    @mock.patch("budgetportal.models.get_cpi", return_value=mock_data.CPI_2019_20)
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
+    @mock.patch(
+        "budgetportal.models.government.get_cpi", return_value=mock_data.CPI_2019_20
+    )
     def test_missing_data_not_published(self, mock_get_cpi, mock_get_dataset):
         """
         Here we feed an incomplete set of cells and expect it to tell us that
@@ -301,8 +309,10 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
             ],
         )
 
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
-    @mock.patch("budgetportal.models.get_cpi", return_value=mock_data.CPI_2019_20)
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
+    @mock.patch(
+        "budgetportal.models.government.get_cpi", return_value=mock_data.CPI_2019_20
+    )
     def test_missing_data_dept_did_not_exist(self, mock_get_cpi, mock_get_dataset):
         """
         Here we feed an incomplete set of cells and expect it to tell us
@@ -325,7 +335,7 @@ class BudgetedAndActualExpenditureSummaryTestCase(TestCase):
 
 
 class DepartmentWebsiteUrlTestCase(TestCase):
-    """ Integration test to verify that website urls are retrieved and output correctly """
+    """Integration test to verify that website urls are retrieved and output correctly"""
 
     def setUp(self):
         year_old = FinancialYear.objects.create(slug="2017-18")
@@ -356,8 +366,8 @@ class DepartmentWebsiteUrlTestCase(TestCase):
         )
 
     def test_website_url_always_returns_latest_department_year(self):
-        """ Make sure that any given department for any given year always returns the website url of the
-        latest department instance in that sphere, where it is not null """
+        """Make sure that any given department for any given year always returns the website url of the
+        latest department instance in that sphere, where it is not null"""
         self.assertEqual(
             self.department.get_latest_website_url(), "https://governmentwebsite.co.za"
         )
@@ -368,7 +378,7 @@ class DepartmentWebsiteUrlTestCase(TestCase):
 
 
 class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
-    """ Unit tests for the treemap expenditure by department function. """
+    """Unit tests for the treemap expenditure by department function."""
 
     def setUp(self):
         self.mock_data = TREEMAP_MOCK_DATA
@@ -422,7 +432,7 @@ class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
         "budgetportal.models.Department.get_all_budget_totals_by_year_and_phase",
         return_value=mock.MagicMock(),
     )
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
     def test_no_cells_null_response(self, mock_get_dataset, total_budgets_mock):
         self.mock_openspending_api.aggregate_by_refs = Mock(return_value=[])
         mock_get_dataset.return_value = self.mock_dataset
@@ -436,7 +446,7 @@ class NationalTreemapExpenditureByDepartmentTestCase(TestCase):
         "budgetportal.models.Department.get_all_budget_totals_by_year_and_phase",
         return_value=mock.MagicMock(),
     )
-    @mock.patch("budgetportal.models.get_expenditure_time_series_dataset")
+    @mock.patch("budgetportal.models.government.get_expenditure_time_series_dataset")
     def test_complete_data(self, mock_get_dataset, total_budgets_mock):
         self.mock_openspending_api.aggregate_by_refs = Mock(
             return_value=self.mock_data["complete"]

@@ -36,7 +36,9 @@ class Migration(migrations.Migration):
                 ),
                 ("align_right", models.BooleanField()),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
         ),
         migrations.CreateModel(
             name="SubMenuItem",
@@ -68,6 +70,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
         ),
     ]
