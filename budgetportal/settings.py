@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
+    "performance",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
