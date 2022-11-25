@@ -26,12 +26,17 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameModel(old_name="ProvInfraProject", new_name="InfraProject",),
         migrations.RenameModel(
-            old_name="ProvInfraProjectSnapshot", new_name="InfraProjectSnapshot",
+            old_name="ProvInfraProject",
+            new_name="InfraProject",
+        ),
+        migrations.RenameModel(
+            old_name="ProvInfraProjectSnapshot",
+            new_name="InfraProjectSnapshot",
         ),
         migrations.AlterModelOptions(
-            name="infraproject", options={"verbose_name": "Infrastructure project"},
+            name="infraproject",
+            options={"verbose_name": "Infrastructure project"},
         ),
         migrations.AlterModelOptions(
             name="infraprojectsnapshot",
@@ -69,7 +74,11 @@ class Migration(migrations.Migration):
             ),
         ),
         migrations.AlterUniqueTogether(
-            name="irmsnapshot", unique_together={("sphere", "quarter")},
+            name="irmsnapshot",
+            unique_together={("sphere", "quarter")},
         ),
-        migrations.RemoveField(model_name="irmsnapshot", name="financial_year",),
+        migrations.RemoveField(
+            model_name="irmsnapshot",
+            name="financial_year",
+        ),
     ]

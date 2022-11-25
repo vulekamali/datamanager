@@ -48,7 +48,7 @@ class FeaturedProjectTestCase(BaseSeleniumTestCase):
         project_title = selenium.find_element_by_css_selector("#project-title").text
         budget = selenium.find_element_by_css_selector("#total-budget").text
         line = selenium.find_element_by_css_selector(".recharts-line")
-        self.assertEqual(partnership_type, u"Fake Partnership")
-        self.assertEqual(project_title, u"School Infrastructure Backlogs Grant")
-        self.assertEqual(budget, u"R4 billion")
+        self.assertEqual(partnership_type, "Fake Partnership")
+        self.assertEqual(project_title, "School Infrastructure Backlogs Grant")
+        self.assertEqual(budget, "R4 billion")
         self.assertEqual(line.is_displayed(), True)

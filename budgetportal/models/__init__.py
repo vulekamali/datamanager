@@ -113,7 +113,7 @@ class InfrastructureProjectPart(models.Model):
         return reverse("infrastructure-projects", args=[self.project_slug])
 
     def calculate_projected_expenditure(self):
-        """ Calculate sum of predicted amounts from a list of records """
+        """Calculate sum of predicted amounts from a list of records"""
         projected_records_for_project = InfrastructureProjectPart.objects.filter(
             budget_phase="MTEF", project_slug=self.project_slug
         )
@@ -124,7 +124,7 @@ class InfrastructureProjectPart(models.Model):
 
     @staticmethod
     def _parse_coordinate(coordinate):
-        """ Expects a single set of coordinates (lat, long) split by a comma """
+        """Expects a single set of coordinates (lat, long) split by a comma"""
         if not isinstance(coordinate, str):
             raise TypeError("Invalid type for coordinate parsing")
         lat_long = [float(x) for x in coordinate.split(",")]
@@ -153,7 +153,7 @@ class InfrastructureProjectPart(models.Model):
 
     @staticmethod
     def _get_province_from_coord(coordinate):
-        """ Expects a cleaned coordinate """
+        """Expects a cleaned coordinate"""
         key = f"coordinate province {coordinate['latitude']}, {coordinate['longitude']}"
         province_name = cache.get(key, default="cache-miss")
         if province_name == "cache-miss":
@@ -179,7 +179,7 @@ class InfrastructureProjectPart(models.Model):
 
     @staticmethod
     def _get_province_from_project_name(project_name):
-        """ Searches name of project for province name or abbreviation """
+        """Searches name of project for province name or abbreviation"""
         project_name_slug = slugify(project_name)
         new_dict = {}
         for prov_name in prov_abbrev.keys():
@@ -191,7 +191,7 @@ class InfrastructureProjectPart(models.Model):
 
     @classmethod
     def get_provinces(cls, cleaned_coordinates=None, project_name=""):
-        """ Returns a list of provinces based on values in self.coordinates """
+        """Returns a list of provinces based on values in self.coordinates"""
         provinces = set()
         if cleaned_coordinates:
             for c in cleaned_coordinates:
@@ -401,7 +401,8 @@ class InfraProject(models.Model):
     @property
     def csv_download_url(self):
         return reverse(
-            "infra-project-detail-csv-download", args=(self.id, self.get_slug()),
+            "infra-project-detail-csv-download",
+            args=(self.id, self.get_slug()),
         )
 
 
@@ -668,7 +669,10 @@ class CategoryGuide(models.Model):
 class PostPage(NavContextMixin, Page):
     parent_page_types = ["budgetportal.PostIndexPage"]
     body = StreamField(
-        [("section", SectionBlock()), ("html", wagtail_blocks.RawHTMLBlock()),]
+        [
+            ("section", SectionBlock()),
+            ("html", wagtail_blocks.RawHTMLBlock()),
+        ]
     )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -755,7 +759,10 @@ class ResourceLink(models.Model):
     )
     sphere_slug = models.CharField(
         max_length=100,
-        choices=[("all", "All"),] + SPHERE_SLUG_CHOICES,
+        choices=[
+            ("all", "All"),
+        ]
+        + SPHERE_SLUG_CHOICES,
         default="all",
         verbose_name="Sphere",
         help_text="Only show on pages for this sphere or all spheres.",
@@ -763,11 +770,18 @@ class ResourceLink(models.Model):
 
     panels = [
         MultiFieldPanel(
-            [FieldPanel("title"), FieldPanel("url"), FieldPanel("description"),],
+            [
+                FieldPanel("title"),
+                FieldPanel("url"),
+                FieldPanel("description"),
+            ],
             heading="Content",
         ),
         MultiFieldPanel(
-            [FieldPanel("resource_link_order"), FieldPanel("sphere_slug"),],
+            [
+                FieldPanel("resource_link_order"),
+                FieldPanel("sphere_slug"),
+            ],
             heading="Display options",
         ),
     ]

@@ -18,8 +18,14 @@ ckan = settings.CKAN
 NATIONAL_SLUG = "national"
 PROVINCIAL_SLUG = "provincial"
 SPHERE_SLUG_CHOICES = [
-    (NATIONAL_SLUG, "National",),
-    (PROVINCIAL_SLUG, "Provincial",),
+    (
+        NATIONAL_SLUG,
+        "National",
+    ),
+    (
+        PROVINCIAL_SLUG,
+        "Provincial",
+    ),
 ]
 
 # Budget Phase IDs for the 7-year overview period
@@ -109,11 +115,14 @@ class FinancialYear(models.Model):
         return "<%s %s>" % (self.__class__.__name__, self.get_url_path())
 
 
-
 class Sphere(models.Model):
     organisational_unit = "sphere"
     name = models.CharField(max_length=200)
-    slug = AutoSlugField(populate_from="name", max_length=200, always_update=True,)
+    slug = AutoSlugField(
+        populate_from="name",
+        max_length=200,
+        always_update=True,
+    )
     financial_year = models.ForeignKey(
         FinancialYear, on_delete=models.CASCADE, related_name="spheres"
     )
@@ -272,7 +281,7 @@ class Department(models.Model):
         return Dataset.from_package(ckan.action.package_create(**dataset_fields))
 
     def get_latest_website_url(self):
-        """ Always return the latest available non-null URL, even for old departments. """
+        """Always return the latest available non-null URL, even for old departments."""
         newer_departments = Department.objects.filter(
             government__slug=self.government.slug,
             government__sphere__slug=self.government.sphere.slug,
@@ -282,11 +291,11 @@ class Department(models.Model):
         return newer_departments.first().website_url if newer_departments else None
 
     def get_url_path(self):
-        """ e.g. 2018-19/national/departments/military-veterans """
+        """e.g. 2018-19/national/departments/military-veterans"""
         return "%s/departments/%s" % (self.government.get_url_path(), self.slug)
 
     def get_preview_url_path(self):
-        """ e.g. 2018-19/previews/national/south-africa/agriculture-and-fisheries """
+        """e.g. 2018-19/previews/national/south-africa/agriculture-and-fisheries"""
         return "%s/previews/%s/%s/%s" % (
             self.government.sphere.financial_year.slug,
             self.government.sphere.slug,
@@ -301,8 +310,8 @@ class Department(models.Model):
         return self.government.sphere.financial_year
 
     def get_latest_department_instance(self):
-        """ Try to find the department in the most recent year with the same slug.
-        Continue traversing backwards in time until found, or until the original year has been reached. """
+        """Try to find the department in the most recent year with the same slug.
+        Continue traversing backwards in time until found, or until the original year has been reached."""
         newer_departments = Department.objects.filter(
             government__slug=self.government.slug,
             government__sphere__slug=self.government.sphere.slug,
@@ -961,7 +970,7 @@ class Department(models.Model):
         return subprog_dict.values() if subprog_dict else None
 
     def get_all_budget_totals_by_year_and_phase(self):
-        """ Returns the total for each year:phase combination from the expenditure time series dataset. """
+        """Returns the total for each year:phase combination from the expenditure time series dataset."""
         dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
             return None
@@ -1003,8 +1012,8 @@ class Department(models.Model):
         return total_budgets
 
     def get_national_expenditure_treemap(self, financial_year_id, budget_phase):
-        """ Returns a data object for each department, year and phase. Adds additional data required for the Treemap.
-         From the Expenditure Time Series dataset. """
+        """Returns a data object for each department, year and phase. Adds additional data required for the Treemap.
+        From the Expenditure Time Series dataset."""
         # Take budget sphere, year and phase as positional arguments from URL
         # Output expenditure specific to sphere:year:phase scope, simple list of objects
         try:
@@ -1112,7 +1121,7 @@ class Department(models.Model):
         )
 
     def get_provincial_expenditure_treemap(self, financial_year_id, budget_phase):
-        """ Returns a list of department objects nested in provinces. """
+        """Returns a list of department objects nested in provinces."""
         # Take budget sphere, year and phase as positional arguments from URL
         # Output expenditure specific to sphere:year:phase scope, simple list of objects
         try:
