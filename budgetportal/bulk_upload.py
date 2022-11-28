@@ -31,20 +31,38 @@ from .tasks import *
 logger = logging.getLogger(__name__)
 
 HEADINGS = [
-    {"label": "government", "comment": None,},
-    {"label": "group_id", "comment": None,},
-    {"label": "department_name", "comment": None,},
+    {
+        "label": "government",
+        "comment": None,
+    },
+    {
+        "label": "group_id",
+        "comment": None,
+    },
+    {
+        "label": "department_name",
+        "comment": None,
+    },
     {
         "label": "dataset_name",
         "comment": 'This will be "sluggified" and must then be unique to this dataset in the entire system. For example, Gauteng Provincial Legislature EPRE for 2017-19 is prov-dept-gt-gauteng-provincial-legislature-2017-18',
     },
-    {"label": "dataset_title", "comment": None,},
-    {"label": "resource_name", "comment": None,},
+    {
+        "label": "dataset_title",
+        "comment": None,
+    },
+    {
+        "label": "resource_name",
+        "comment": None,
+    },
     {
         "label": "resource_format",
         "comment": "You can usually make this the capitalised extension of the file. We use the combination of the format and resource title to ensure we do not duplicate resources. So we assume a file has only one resource with the same title and format combination.",
     },
-    {"label": "resource_url", "comment": None,},
+    {
+        "label": "resource_url",
+        "comment": None,
+    },
 ]
 
 
@@ -153,7 +171,7 @@ class Preview:
                             heading_index[cell.value] = i
                 else:
                     government_name = ws_row[heading_index["government"]].value
-                    department_name = ws_row[heading_index[u"department_name"]].value
+                    department_name = ws_row[heading_index["department_name"]].value
                     group_name = max_length_slugify(
                         ws_row[heading_index["group_id"]].value
                     )

@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterUniqueTogether(
-            name="irmsnapshot", unique_together=set([("financial_year", "quarter")]),
+            name="irmsnapshot",
+            unique_together=set([("financial_year", "quarter")]),
         ),
     ]

@@ -52,7 +52,7 @@ class BasicPagesTestCase(TestCase):
             Department.objects.create(
                 government=fake_cape, name="Fake Health", vote_number=1, intro=""
             )
-        models_ckan_patch = patch("budgetportal.models.ckan")
+        models_ckan_patch = patch("budgetportal.models.government.ckan")
         ModelsCKANMockClass = models_ckan_patch.start()
         ModelsCKANMockClass.action.package_search.return_value = {"results": []}
         self.addCleanup(models_ckan_patch.stop)

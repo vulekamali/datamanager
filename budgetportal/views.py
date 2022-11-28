@@ -377,17 +377,31 @@ def department_page(
         "selected_tab": "departments",
         "title": "%s budget %s  - vulekamali" % (department.name, selected_year.slug),
         "description": "%s department: %s budget data for the %s financial year %s"
-        % (govt_label, department.name, selected_year.slug, COMMON_DESCRIPTION_ENDING,),
+        % (
+            govt_label,
+            department.name,
+            selected_year.slug,
+            COMMON_DESCRIPTION_ENDING,
+        ),
         "department_budget": department_budget,
         "department_adjusted_budget": department_adjusted_budget,
         "procurement_resource_links": ProcurementResourceLink.objects.filter(
-            sphere_slug__in=("all", department.government.sphere.slug,)
+            sphere_slug__in=(
+                "all",
+                department.government.sphere.slug,
+            )
         ),
         "performance_resource_links": PerformanceResourceLink.objects.filter(
-            sphere_slug__in=("all", department.government.sphere.slug,)
+            sphere_slug__in=(
+                "all",
+                department.government.sphere.slug,
+            )
         ),
         "in_year_monitoring_resource_links": InYearMonitoringResourceLink.objects.filter(
-            sphere_slug__in=("all", department.government.sphere.slug,)
+            sphere_slug__in=(
+                "all",
+                department.government.sphere.slug,
+            )
         ),
         "vote_number": department.vote_number,
         "vote_primary": {
@@ -477,7 +491,7 @@ def department_viz_subprog_econ4_bars(
 
 
 def infrastructure_projects_overview(request):
-    """ Overview page to showcase all featured infrastructure projects """
+    """Overview page to showcase all featured infrastructure projects"""
     infrastructure_projects = InfrastructureProjectPart.objects.filter(
         featured=True
     ).distinct("project_slug")
@@ -968,7 +982,7 @@ def department_list_json(request, financial_year_id):
 
 
 def treemaps_data(financial_year_id, phase_slug, sphere_slug):
-    """ The data for the vulekamali home page treemaps """
+    """The data for the vulekamali home page treemaps"""
     dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
     if sphere_slug == "national":
         page_data = dept.get_national_expenditure_treemap(financial_year_id, phase_slug)
@@ -992,7 +1006,7 @@ def treemaps_json(request, financial_year_id, phase_slug, sphere_slug):
 
 
 def consolidated_treemap(financial_year_id):
-    """ The data for the vulekamali home page treemaps """
+    """The data for the vulekamali home page treemaps"""
     financial_year = FinancialYear.objects.get(slug=financial_year_id)
     page_data = get_consolidated_expenditure_treemap(financial_year)
     if page_data is None:
@@ -1011,7 +1025,7 @@ def consolidated_treemap_json(request, financial_year_id):
 
 
 def focus_preview_data(financial_year_id):
-    """ The data for the focus area preview pages for a specific year """
+    """The data for the focus area preview pages for a specific year"""
     financial_year = FinancialYear.objects.get(slug=financial_year_id)
     page_data = get_focus_area_preview(financial_year)
     return page_data
