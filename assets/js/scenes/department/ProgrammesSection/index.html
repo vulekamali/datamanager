@@ -24,11 +24,11 @@
                 department's {{ source_type }} documents.</p>
 
             <ul class="LinksList">
-                {% if subprogramme_viz_data.get_openspending_api %}
+                {% if subprogramme_viz_data.get_dataset %}
                 {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=subprogramme_viz_data.get_dataset.get_url_path type="dataset" %}
                 {% endif %}
 
-                {% if subprogramme_viz_data.get_openspending_api %}
+                {% if subprogramme_viz_data.get_dataset %}
                 {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=subprogramme_viz_data.get_detail_csv_url type="download" %}
                 {% endif %}
 
@@ -39,7 +39,7 @@
                 {% include 'components/LinksList/item.html' with text=excel_text url=excel type="download" %}
             </ul>
         </div>
-        {% if subprogramme_viz_data.get_openspending_api %}
+        {% if subprogramme_viz_data.get_dataset %}
         <div class="ProgrammesSection-item ProgrammesSection-item--right">
             <div class="Card">
               <iframe src="{{ subprog_treemap_url }}"></iframe>
@@ -47,7 +47,7 @@
             </div>
         </div>
         {% else %}
-        <div class="Message Message--secondary Missing">Economic Classification level 4 data for this financial year is not available on vulekamali.</div>
+        <div class="Message Message--secondary Missing">Data not available.</div>
         {% endif %}
     </div>
 </div>

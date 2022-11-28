@@ -445,12 +445,8 @@ class DepartmentBudgetData(object):
         raise Exception("Not implemented")
 
     def get_openspending_api(self):
-        if self.get_dataset is not None:
-            return self.get_dataset().get_openspending_api()
-
-        else:
-            return None 
-
+        return self.get_dataset().get_openspending_api()
+  
 
     def get_model(self):
         return self.get_openspending_api().model
