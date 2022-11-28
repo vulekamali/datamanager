@@ -485,7 +485,9 @@ class DepartmentSubprogrammes(DepartmentBudgetData):
         return self.department.get_estimates_of_subprogramme_expenditure_dataset()
 
     def get_aggregate_cuts(self):
-        if self.get_openspending_api is not None:
+        if self.get_openspending_api is None:
+            return None
+        else:
             openspending_api = self.get_openspending_api()
             financial_year_start = self.department.get_financial_year().get_starting_year()
             cuts = [
@@ -499,18 +501,18 @@ class DepartmentSubprogrammes(DepartmentBudgetData):
                     + ':"%s"' % self.department.government.name
                 )
             return cuts
-        else:
-            return None
+        
 
     def get_aggregate_drilldowns(self):
-        if self.get_openspending_api is not None:
+        if self.get_openspending_api is None:
+            return None
+        else: 
             openspending_api = self.get_openspending_api()
             return [
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_subprogramme_name_ref(),
             ]
-        else:
-            return None
+        
 
 
 class DepartmentSubprogEcon4(DepartmentBudgetData):
@@ -518,7 +520,9 @@ class DepartmentSubprogEcon4(DepartmentBudgetData):
         return self.department.get_estimates_of_econ_classes_expenditure_dataset(4)
 
     def get_aggregate_cuts(self):
-        if self.get_openspending_api is not None:
+        if self.get_openspending_api is None:
+            return None
+        else:
             openspending_api = self.get_openspending_api()
             financial_year_start = self.department.get_financial_year().get_starting_year()
             cuts = [
@@ -532,20 +536,19 @@ class DepartmentSubprogEcon4(DepartmentBudgetData):
                     + ':"%s"' % self.department.government.name
                 )
             return cuts
-        else:
-            return None
+       
 
     def get_aggregate_drilldowns(self):
-        if self.get_openspending_api is not None:
-                   
+        if self.get_openspending_api is None:
+            return None      
+        else:     
             openspending_api = self.get_openspending_api()
             return [
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_subprogramme_name_ref(),
                 openspending_api.get_econ_class_4_ref(),
             ]
-        else:
-            return None
+                    
 
 
 class DepartmentProgrammesEcon4(DepartmentBudgetData):
@@ -568,11 +571,12 @@ class DepartmentProgrammesEcon4(DepartmentBudgetData):
         return cuts
 
     def get_aggregate_drilldowns(self):
-        if self.get_openspending_api is not None:
+        if self.get_openspending_api is None:
+            return None
+        else:    
             openspending_api = self.get_openspending_api()
             return [
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_econ_class_4_ref(),
             ]
-        else: 
-            return None
+       

@@ -72,12 +72,9 @@ class DepartmentPageTestCase(TestCase):
         PerformanceResourceLink.objects.all().delete()
         InYearMonitoringResourceLink.objects.all().delete()
 
-        with patch(
-            "budgetportal.views.DepartmentSubprogrammes.get_openspending_api",
-            MagicMock(return_value=self.mock_openspending_api),
-        ):
-            c = Client()
-            response = c.get("/2018-19/national/departments/the-presidency/")
+    
+        c = Client()
+        response = c.get("/2018-19/national/departments/the-presidency/")
 
         self.assertContains(
             response, "The Presidency budget data for the 2018-19 financial year"
@@ -98,12 +95,8 @@ class DepartmentPageTestCase(TestCase):
             title="an in-year link", url="a.com", description="abc"
         )
 
-        with patch(
-            "budgetportal.views.DepartmentSubprogrammes.get_openspending_api",
-            MagicMock(return_value=self.mock_openspending_api),
-        ):
-            c = Client()
-            response = c.get("/2018-19/national/departments/the-presidency/")
+        c = Client()
+        response = c.get("/2018-19/national/departments/the-presidency/")
 
         self.assertContains(
             response, "The Presidency budget data for the 2018-19 financial year"
@@ -136,12 +129,9 @@ class DepartmentPageTestCase(TestCase):
             sphere_slug="all",
         )
 
-        with patch(
-            "budgetportal.views.DepartmentSubprogrammes.get_openspending_api",
-            MagicMock(return_value=self.mock_openspending_api),
-        ):
-            c = Client()
-            response = c.get("/2018-19/national/departments/the-presidency/")
+     
+        c = Client()
+        response = c.get("/2018-19/national/departments/the-presidency/")
 
         self.assertContains(
             response, "The Presidency budget data for the 2018-19 financial year"
