@@ -504,15 +504,15 @@ class DepartmentSubprogrammes(DepartmentBudgetData):
         
 
     def get_aggregate_drilldowns(self):
-        if self.get_openspending_api is None:
-            return None
-        else: 
+        if self.get_openspending_api is not None:
             openspending_api = self.get_openspending_api()
             return [
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_subprogramme_name_ref(),
             ]
-        
+        else:
+            return None
+
 
 
 class DepartmentSubprogEcon4(DepartmentBudgetData):
