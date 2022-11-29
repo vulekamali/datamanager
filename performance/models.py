@@ -48,7 +48,7 @@ class Indicator(models.Model):
     # treasury_comments is national only, headed "National Treasury Coordinator comments
 
     q1_target = models.TextField(blank=True)
-    q1_actual_outcome = models.TextField(blank=True)
+    q1_actual_output = models.TextField(blank=True)
     q1_deviation_reason = models.TextField(blank=True)
     q1_corrective_action = models.TextField(blank=True)
     q1_national_comments = models.TextField(blank=True)
@@ -57,7 +57,7 @@ class Indicator(models.Model):
     q1_treasury_comments = models.TextField(blank=True)
 
     q2_target = models.TextField(blank=True)
-    q2_actual_outcome = models.TextField(blank=True)
+    q2_actual_output = models.TextField(blank=True)
     q2_deviation_reason = models.TextField(blank=True)
     q2_corrective_action = models.TextField(blank=True)
     q2_national_comments = models.TextField(blank=True)
@@ -66,7 +66,7 @@ class Indicator(models.Model):
     q2_treasury_comments = models.TextField(blank=True)
 
     q3_target = models.TextField(blank=True)
-    q3_actual_outcome = models.TextField(blank=True)
+    q3_actual_output = models.TextField(blank=True)
     q3_deviation_reason = models.TextField(blank=True)
     q3_corrective_action = models.TextField(blank=True)
     q3_national_comments = models.TextField(blank=True)
@@ -75,13 +75,24 @@ class Indicator(models.Model):
     q3_treasury_comments = models.TextField(blank=True)
 
     q4_target = models.TextField(blank=True)
-    q4_actual_outcome = models.TextField(blank=True)
+    q4_actual_output = models.TextField(blank=True)
     q4_deviation_reason = models.TextField(blank=True)
     q4_corrective_action = models.TextField(blank=True)
     q4_national_comments = models.TextField(blank=True)
     q4_otp_comments = models.TextField(blank=True)
     q4_dpme_coordinator_comments = models.TextField(blank=True)
     q4_treasury_comments = models.TextField(blank=True)
+
+    annual_target = models.TextField(blank=True) # AnnualTarget_Summary2
+    annual_aggregate_output = models.TextField(blank=True) # Preliminary_Summary2
+    annual_pre_audit_output = models.TextField(blank=True) # PrelimaryAudited_Summary2
+    annual_deviation_reason = models.TextField(blank=True)
+    annual_corrective_action = models.TextField(blank=True)
+    annual_otp_comments = models.TextField(blank=True)
+    annual_national_comments = models.TextField(blank=True)
+    annual_dpme_coordincator_comments = models.TextField(blank=True)
+    annual_treasury_comments = models.TextField(blank=True)
+    annual_audited_output = models.TextField(blank=True) # ValidatedAuditedSummary2
 
     sector = models.TextField(blank=True)
     programme_name = models.TextField(blank=True)
@@ -90,6 +101,7 @@ class Indicator(models.Model):
     type = models.TextField(blank=True)
     subtype = models.TextField(blank=True)
     mtsf_outcome = models.TextField(blank=True)
+    cluster = models.TextField(blank=True)
     uid = models.TextField(blank=True)
 
     source = models.ForeignKey(EQPRSFileUpload, on_delete=models.CASCADE, related_name="indicator_values")
