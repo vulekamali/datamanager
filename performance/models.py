@@ -15,7 +15,6 @@ class EQPRSFileUpload(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     file = models.FileField(upload_to=eqprs_file_path)
-    file_validation_report = JSONField()
     # Plain text listing which departments could not be matched and were not imported
     import_report = models.TextField()
     num_imported = models.IntegerField(null=True) # number of rows we could import

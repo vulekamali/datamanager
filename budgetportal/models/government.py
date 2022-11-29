@@ -172,7 +172,19 @@ class Government(models.Model):
         return "<%s %s>" % (self.__class__.__name__, self.get_url_path())
 
 
+class DepartmentManager(models.Manager):
+    def get_by_natural_key(self, financial_year, sphere_slug, government_slug, department_slug):
+        return self.get(
+            slug=department_slug,
+            government__slug=government_slug,
+            government__sphere__slug=sphere_slug,
+            government__sphere__financial_year__slug=financial_year,
+        )
+
+
 class Department(models.Model):
+    objects = DepartmentManager()
+
     organisational_unit = "department"
     government = models.ForeignKey(
         Government, on_delete=models.CASCADE, related_name="departments"
