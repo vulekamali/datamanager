@@ -159,11 +159,5 @@ class DepartmentPageTestCase(TestCase):
         ):
             c = Client()
             response = c.get("/2018-19/national/departments/the-presidency/")
-        print("####################################")
-        print(response.content)
-        print ("***************************************")
-
-        self.assertNotContains(response, "Data not available")         
-           
-
+        self.assertNotContains(response, "Data not available")   
         self.assertContains(response,"/2018-19/national/departments/the-presidency/viz/subprog-treemap")
