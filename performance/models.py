@@ -7,18 +7,19 @@ from django.contrib.auth.models import User
 
 def eqprs_file_path(instance, filename):
     return (
-        f"eqprs_uploads/{uuid.uuid4()}/{filename}"
+        # f"eqprs_uploads/{uuid.uuid4()}/{filename}"
+        f"eqprs_uploads/{filename}"
     )
 
 
 class EQPRSFileUpload(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
     file = models.FileField(upload_to=eqprs_file_path)
     # Plain text listing which departments could not be matched and were not imported
     import_report = models.TextField()
-    num_imported = models.IntegerField(null=True) # number of rows we could import
-    num_not_imported = models.IntegerField(null=True) # number of rows we could not import
+    num_imported = models.IntegerField(null=True, verbose_name='Number of rows we could import')  # number of rows we could import
+    num_not_imported = models.IntegerField(null=True, verbose_name='Number of rows we could not import')  # number of rows we could not import
 
 
 class Frequency:
@@ -82,16 +83,16 @@ class Indicator(models.Model):
     q4_dpme_coordinator_comments = models.TextField(blank=True)
     q4_treasury_comments = models.TextField(blank=True)
 
-    annual_target = models.TextField(blank=True) # AnnualTarget_Summary2
-    annual_aggregate_output = models.TextField(blank=True) # Preliminary_Summary2
-    annual_pre_audit_output = models.TextField(blank=True) # PrelimaryAudited_Summary2
+    annual_target = models.TextField(blank=True)  # AnnualTarget_Summary2
+    annual_aggregate_output = models.TextField(blank=True)  # Preliminary_Summary2
+    annual_pre_audit_output = models.TextField(blank=True)  # PrelimaryAudited_Summary2
     annual_deviation_reason = models.TextField(blank=True)
     annual_corrective_action = models.TextField(blank=True)
     annual_otp_comments = models.TextField(blank=True)
     annual_national_comments = models.TextField(blank=True)
     annual_dpme_coordincator_comments = models.TextField(blank=True)
     annual_treasury_comments = models.TextField(blank=True)
-    annual_audited_output = models.TextField(blank=True) # ValidatedAuditedSummary2
+    annual_audited_output = models.TextField(blank=True)  # ValidatedAuditedSummary2
 
     sector = models.TextField(blank=True)
     programme_name = models.TextField(blank=True)
