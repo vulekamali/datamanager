@@ -14,10 +14,19 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         }),
     )
 
+    class Media:
+        js = ("js/eqprs-file-upload.js",)
+
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object
             return ('user', 'file',) + self.readonly_fields
         return self.readonly_fields
+
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        response = super(EQPRSFileUploadAdmin, self).render_change_form(request, context, add, change, form_url, obj)
+        response.context_data['title'] = 'EQPRS file upload' if response.context_data[
+            'object_id'] else 'Add EQPRS file upload'
+        return response
 
 
 class IndicatorAdmin(admin.ModelAdmin):
