@@ -20,6 +20,8 @@ class EQPRSFileUpload(models.Model):
     import_report = models.TextField()
     num_imported = models.IntegerField(null=True, verbose_name='Number of rows we could import')  # number of rows we could import
     num_not_imported = models.IntegerField(null=True, verbose_name='Number of rows we could not import')  # number of rows we could not import
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
 
 class Frequency:
@@ -105,3 +107,4 @@ class Indicator(models.Model):
     uid = models.TextField(blank=True)
 
     source = models.ForeignKey(EQPRSFileUpload, on_delete=models.CASCADE, related_name="indicator_values")
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
