@@ -12,7 +12,7 @@ def get_key_value_or_default(fields, key):
         return ""
 
 
-class EQPRSFileUploadAdmin(admin.ModelAdmin): 
+class EQPRSFileUploadAdmin(admin.ModelAdmin):
     exclude = ('num_imported', 'import_report', 'num_not_imported')
     readonly_fields = ('num_imported', 'import_report', 'num_not_imported')
     list_display = (
@@ -50,6 +50,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         data = obj.file.read()
         parsed_data = json.loads(data)
         report_departments = set([x['fields']['department'][3] for x in parsed_data])
+        num_imported = 0
 
         for department in report_departments:
             department_obj = models.Department.objects.filter(name=department).first()
@@ -122,13 +123,21 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
                 mtsf_outcome=get_key_value_or_default(fields, 'mtsf_outcome'),
                 cluster=get_key_value_or_default(fields, 'cluster'),
                 uid=get_key_value_or_default(fields, 'uid'),
-            ) 
+            )
+            num_imported = num_imported + 1
+ 
+        obj_to_update = models.EQPRSFileUpload.objects.get(id=obj.id)
+        obj_to_update.num_imported = num_imported
+        obj_to_update.save()
 
     def success(self, obj):
-        return obj.task.success
+        if obj.task:
+            return obj.task.success
+        else:
+            return True  # change this
 
     success.boolean = True
-    success.short_description = "Success" 
+    success.short_description = "Success"
 
 
 class IndicatorAdmin(admin.ModelAdmin):

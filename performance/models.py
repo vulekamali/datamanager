@@ -1,8 +1,9 @@
-from django.db import models
-from django.contrib.postgres.fields import JSONField
-from budgetportal.models.government import Department
-from django_q.tasks import Task
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
+from django.db import models
+from django_q.tasks import Task
+
+from budgetportal.models.government import Department
 
 
 def eqprs_file_path(instance, filename):
@@ -18,8 +19,10 @@ class EQPRSFileUpload(models.Model):
     file = models.FileField(upload_to=eqprs_file_path)
     # Plain text listing which departments could not be matched and were not imported
     import_report = models.TextField()
-    num_imported = models.IntegerField(null=True, verbose_name='Number of rows we could import')  # number of rows we could import
-    num_not_imported = models.IntegerField(null=True, verbose_name='Number of rows we could not import')  # number of rows we could not import
+    num_imported = models.IntegerField(null=True, default=0,
+                                       verbose_name='Number of rows we could import')  # number of rows we could import
+    num_not_imported = models.IntegerField(null=True, default=0,
+                                           verbose_name='Number of rows we could not import')  # number of rows we could not import
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
