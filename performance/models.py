@@ -3,6 +3,7 @@ from django.contrib.postgres.fields import JSONField
 from budgetportal.models.government import Department
 from django_q.tasks import Task
 from django.contrib.auth.models import User
+import uuid
 
 
 def eqprs_file_path(instance, filename):
