@@ -5,11 +5,12 @@ from django_q.tasks import Task
 
 from budgetportal.models.government import Department
 
+import uuid
+
 
 def eqprs_file_path(instance, filename):
     return (
-        # f"eqprs_uploads/{uuid.uuid4()}/{filename}"
-        f"eqprs_uploads/{filename}"
+        f"eqprs_uploads/{uuid.uuid4()}/{filename}"
     )
 
 

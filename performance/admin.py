@@ -51,6 +51,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         parsed_data = json.loads(data)
         report_departments = set([x['fields']['department'][3] for x in parsed_data])
         num_imported = 0
+        total_record_count = len(parsed_data)
 
         for department in report_departments:
             department_obj = models.Department.objects.filter(name=department).first()
@@ -128,6 +129,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
  
         obj_to_update = models.EQPRSFileUpload.objects.get(id=obj.id)
         obj_to_update.num_imported = num_imported
+        obj_to_update.num_not_imported = total_record_count - num_imported
         obj_to_update.save()
 
     def success(self, obj):
