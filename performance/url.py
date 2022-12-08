@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from performance import views
-from rest_framework.router import routers
-from django.urls import include
+from rest_framework.routers import routers
+from django.urls import path, include
 from .views import IndicatorViewSet
 
 app_name = 'performance'
