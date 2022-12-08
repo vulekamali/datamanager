@@ -1,8 +1,11 @@
 from django.contrib import admin
 from io import BytesIO
 from performance import models
+from django_q.tasks import async_task
 
+import os
 import json
+import threading
 
 
 def get_key_value_or_default(fields, key):
@@ -12,60 +15,35 @@ def get_key_value_or_default(fields, key):
         return ""
 
 
-class EQPRSFileUploadAdmin(admin.ModelAdmin):
-    exclude = ('num_imported', 'import_report', 'num_not_imported')
-    readonly_fields = ('num_imported', 'import_report', 'num_not_imported')
-    list_display = (
-        "created_at",
-        "user",
-        "num_imported",
-        "num_not_imported",
-        "success",
-        "updated_at",
-    )
-    fieldsets = (
-        ("", {
-            "fields": (
-                'user', 'file', 'import_report', 'num_imported', 'num_not_imported'
-            )
-        }),
-    )
+def generate_import_report(not_matching_departments):
+    report = ""
+    if len(not_matching_departments) > 0:
+        report += "Department names that could not be matched on import : " + os.linesep
+        for department in not_matching_departments:
+            report += f"* {department} {os.linesep}"
+    return report
 
-    class Media:
-        js = ("js/eqprs-file-upload.js",)
 
-    def get_readonly_fields(self, request, obj=None):
-        if obj:  # editing an existing object
-            return ('user', 'file',) + self.readonly_fields
-        return self.readonly_fields
+def save_imported_indicators(parsed_data, obj_id):
+    report_departments = set([x['fields']['department'][3] for x in parsed_data])
+    num_imported = 0
+    total_record_count = len(parsed_data)
+    not_matching_departments = []
 
-    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
-        response = super(EQPRSFileUploadAdmin, self).render_change_form(request, context, add, change, form_url, obj)
-        response.context_data['title'] = 'EQPRS file upload' if response.context_data[
-            'object_id'] else 'Add EQPRS file upload'
-        return response
+    for department in report_departments:
+        department_obj = models.Department.objects.filter(name=department).first()
+        models.Indicator.objects.filter(department=department_obj).delete()
 
-    def save_model(self, request, obj, form, change):
-        super().save_model(request, obj, form, change)
-        data = obj.file.read()
-        parsed_data = json.loads(data)
-        report_departments = set([x['fields']['department'][3] for x in parsed_data])
-        num_imported = 0
-        total_record_count = len(parsed_data)
+    for indicator_data in parsed_data:
+        fields = indicator_data['fields']
+        department_name = fields['department'][3]
+        department_obj = models.Department.objects.filter(name=department_name).first()
 
-        for department in report_departments:
-            department_obj = models.Department.objects.filter(name=department).first()
-            models.Indicator.objects.filter(department=department_obj).delete()
-
-        for indicator_data in parsed_data:
-            fields = indicator_data['fields']
-            department_name = fields['department'][3]
-            department_obj = models.Department.objects.filter(name=department_name).first()
-
+        if department_obj:
             models.Indicator.objects.create(
                 indicator_name=fields['indicator_name'],
                 department=department_obj,
-                source_id=obj.id,
+                source_id=obj_id,
 
                 q1_target=get_key_value_or_default(fields, 'q1_target'),
                 q1_actual_output=get_key_value_or_default(fields, 'q1_actual_output'),
@@ -126,11 +104,55 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
                 uid=get_key_value_or_default(fields, 'uid'),
             )
             num_imported = num_imported + 1
- 
-        obj_to_update = models.EQPRSFileUpload.objects.get(id=obj.id)
-        obj_to_update.num_imported = num_imported
-        obj_to_update.num_not_imported = total_record_count - num_imported
-        obj_to_update.save()
+        else:
+            not_matching_departments.append(department_name)
+
+    obj_to_update = models.EQPRSFileUpload.objects.get(id=obj_id)
+
+    obj_to_update.num_imported = num_imported
+    obj_to_update.num_not_imported = total_record_count - num_imported
+    obj_to_update.import_report = generate_import_report(not_matching_departments)
+    obj_to_update.save()
+
+
+class EQPRSFileUploadAdmin(admin.ModelAdmin):
+    exclude = ('num_imported', 'import_report', 'num_not_imported')
+    readonly_fields = ('num_imported', 'import_report', 'num_not_imported')
+    list_display = (
+        "created_at",
+        "user",
+        "num_imported",
+        "num_not_imported",
+        "success",
+        "updated_at",
+    )
+    fieldsets = (
+        ("", {
+            "fields": (
+                'user', 'file', 'import_report', 'num_imported', 'num_not_imported'
+            )
+        }),
+    )
+
+    class Media:
+        js = ("js/eqprs-file-upload.js",)
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return ('user', 'file',) + self.readonly_fields
+        return self.readonly_fields
+
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        response = super(EQPRSFileUploadAdmin, self).render_change_form(request, context, add, change, form_url, obj)
+        response.context_data['title'] = 'EQPRS file upload' if response.context_data[
+            'object_id'] else 'Add EQPRS file upload'
+        return response
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        data = obj.file.read()
+        parsed_data = json.loads(data)
+        threading.Thread(target=save_imported_indicators, args=(parsed_data, obj.id)).start()
 
     def success(self, obj):
         if obj.task:
