@@ -267,6 +267,10 @@ urlpatterns = [
     re_path(r"^", include(wagtail_urls)),
 ] + static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('performance.urls'))
+]
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar
 
