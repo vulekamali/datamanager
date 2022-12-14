@@ -12,7 +12,8 @@ router.register('/indicator', IndicatorViewSet)
 urlpatterns =[
 
     path('admin/', admin.site.urls),
-    path('api/v1/eqprs',include(router.urls))   
+    path('api/v1/eqprs',include(router.urls)),
+    url('', include(router.urls))  
 ]
 
 
