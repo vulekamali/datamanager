@@ -72,7 +72,6 @@ class DepartmentPageTestCase(TestCase):
         PerformanceResourceLink.objects.all().delete()
         InYearMonitoringResourceLink.objects.all().delete()
 
-    
         c = Client()
         response = c.get("/2018-19/national/departments/the-presidency/")
 
@@ -129,7 +128,6 @@ class DepartmentPageTestCase(TestCase):
             sphere_slug="all",
         )
 
-     
         c = Client()
         response = c.get("/2018-19/national/departments/the-presidency/")
 
@@ -144,20 +142,19 @@ class DepartmentPageTestCase(TestCase):
         c = Client()
         response = c.get("/2018-19/national/departments/the-presidency/")
 
-        self.assertContains(
-            response, "Data not available"
-
-        )  
+        self.assertContains(response, "Data not available")
 
     def test_budget_dataset_available(self):
-        #mock get dataset to return mock dataset which includes opn_spending _api mocks
+        # mock get dataset to return mock dataset which includes opn_spending _api mocks
         mock_dataset = MagicMock()
-        mock_dataset.get_openspending_api.return_value= self.mock_openspending_api
+        mock_dataset.get_openspending_api.return_value = self.mock_openspending_api
         with patch(
             "budgetportal.views.DepartmentSubprogrammes.get_dataset",
-            MagicMock(return_value= mock_dataset),
+            MagicMock(return_value=mock_dataset),
         ):
             c = Client()
             response = c.get("/2018-19/national/departments/the-presidency/")
-        self.assertNotContains(response, "Data not available")   
-        self.assertContains(response,"/2018-19/national/departments/the-presidency/viz/subprog-treemap")
+        self.assertNotContains(response, "Data not available")
+        self.assertContains(
+            response, "/2018-19/national/departments/the-presidency/viz/subprog-treemap"
+        )
