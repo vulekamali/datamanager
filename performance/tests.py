@@ -21,7 +21,7 @@ class indicator_API_Test(APITestCase):
         response = self.client.post(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)    
 
-    def create(self):
+    def update(self):
         response = self.client.patch(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)     
 
