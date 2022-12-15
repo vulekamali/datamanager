@@ -6,9 +6,10 @@ from rest_framework import viewsets
 
 # Create your views here.
 
-class IndicatorViewSet(viewsets.ReadOnlyModelViewSet):
+class IndicatorReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = IndicatorSerializer
     queryset = Indicator.objects.all()
+    http_method_names = ['get', 'put', 'head']
     
 
 

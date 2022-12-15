@@ -2,17 +2,17 @@ from django.contrib import admin
 from django.conf.urls import url
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from .views import IndicatorViewSet
+from performance import views
 
 
 router = DefaultRouter()
-router.register('/indicator', IndicatorViewSet)
+router.register('api/v1/eqprs', views.IndicatorReadOnlyModelViewSet)
 #urlpatterns = router.urls
 
 urlpatterns =[
 
-    path('admin/', admin.site.urls),
-    path('api/v1/eqprs',include(router.urls)),
+
+   # path('api/v1/eqprs',include(router.urls)),
     url('', include(router.urls))  
 ]
 
