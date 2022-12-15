@@ -248,8 +248,7 @@ urlpatterns = [
     url(
         r"^robots\.txt$",
         views.robots,
-    ),
-    
+    ),    
     path('', include('performance.urls')
     ),
     # Sitemap
