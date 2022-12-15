@@ -3,7 +3,7 @@ import json
 from django.urls import reverse
 from rest_framework.test import APITestCase,APIRequestFactory
 from rest_framework import status
-from .views import IndicatorViewSet
+from performance.views import IndicatorReadOnlyModelViewSet
 from performance.serializer import IndicatorSerializer
 from performance.models import Indicator
 # Create your tests here.
@@ -18,9 +18,16 @@ class indicator_API_Test(APITestCase):
 
     def test_200(self):
         fixture = ['test_api.json']
-        result = list(fixture[0].items())
-        self.response = self.client.post('api/v1/eqprs/indicator', result)
-        self.assertEqual(self.response.status_code, "200")    
+        parsed = json.loads(fixture)
+       
+        self.response = self.client.get('api/v1/eqprs/indicator', parsed)
+        self.assertEqual(self.response.status_code, "200")
+
+
+
+    
+
+
 
 
         
