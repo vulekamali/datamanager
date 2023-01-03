@@ -44,7 +44,7 @@ class BulkUploadTestCase(BaseSeleniumTestCase):
         self.CKANMockClass.action.group_show.side_effect = NotFound()
         self.addCleanup(self.ckan_patch.stop)
 
-        self.ckan_patch2 = patch("budgetportal.models.ckan")
+        self.ckan_patch2 = patch("budgetportal.models.government.ckan")
         self.CKANMockClass2 = self.ckan_patch2.start()
         self.CKANMockClass2.action.package_search.return_value = {"results": []}
         self.CKANMockClass2.action.package_show.side_effect = NotFound()

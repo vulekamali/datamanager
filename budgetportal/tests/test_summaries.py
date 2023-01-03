@@ -41,7 +41,7 @@ with open(
 
 
 class ConsolidatedTreemapTestCase(TestCase):
-    """ Unit tests for the consolidated treemap function(s) """
+    """Unit tests for the consolidated treemap function(s)"""
 
     def setUp(self):
         self.year = FinancialYear.objects.create(slug="2019-20")
@@ -86,7 +86,7 @@ class ConsolidatedTreemapTestCase(TestCase):
 
 
 class FocusAreaPagesTestCase(TestCase):
-    """ Integration test focus area page data generation """
+    """Integration test focus area page data generation"""
 
     def setUp(self):
         self.year = FinancialYear.objects.create(slug="2019-20")
@@ -184,7 +184,7 @@ class FocusAreaPagesTestCase(TestCase):
 
 
 class NationalDepartmentPreviewTestCase(TestCase):
-    """ Unit tests for the national department preview department function. """
+    """Unit tests for the national department preview department function."""
 
     def setUp(self):
         self.mock_data = NATIONAL_DEPARTMENT_PREVIEW_MOCK_DATA

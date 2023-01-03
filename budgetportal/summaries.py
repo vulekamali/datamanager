@@ -10,8 +10,8 @@ from .models import (
     EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
     Department,
     FinancialYear,
-    csv_url,
 )
+from .models.government import csv_url
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ PROV_EQ_SHARE_SUBPROG = "Provincial Equitable Share"
 
 
 def get_focus_area_preview(financial_year):
-    """ Returns data for the focus area preview pages. """
+    """Returns data for the focus area preview pages."""
 
     national_expenditure_results, national_os_api = get_focus_area_data(
         financial_year, "national"
@@ -234,7 +234,7 @@ def get_focus_area_url_path(financial_year_slug, name):
 
 
 def get_consolidated_expenditure_treemap(financial_year):
-    """ Returns a data object for each function group for a specific year. Used by the consolidated treemap. """
+    """Returns a data object for each function group for a specific year. Used by the consolidated treemap."""
 
     expenditure = []
     dataset = get_consolidated_expenditure_budget_dataset(financial_year)
@@ -336,15 +336,19 @@ def get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug
     ]
 
     # Used to determine programmes for departments
-    expenditure_results_filter_government_programme_breakdown = openspending_api.aggregate_by_refs(
-        [department_ref, geo_ref, programme_ref],
-        expenditure_results_filter_government_complete_breakdown,
+    expenditure_results_filter_government_programme_breakdown = (
+        openspending_api.aggregate_by_refs(
+            [department_ref, geo_ref, programme_ref],
+            expenditure_results_filter_government_complete_breakdown,
+        )
     )
 
     # Used to iterate over unique departments and build department objects
-    expenditure_results_filter_government_department_breakdown = openspending_api.aggregate_by_refs(
-        [department_ref, geo_ref],
-        expenditure_results_filter_government_complete_breakdown,
+    expenditure_results_filter_government_department_breakdown = (
+        openspending_api.aggregate_by_refs(
+            [department_ref, geo_ref],
+            expenditure_results_filter_government_complete_breakdown,
+        )
     )
 
     total_budget = 0

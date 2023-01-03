@@ -32,6 +32,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"ordering": ["notice_order"],},
+            options={
+                "ordering": ["notice_order"],
+            },
         ),
     ]
