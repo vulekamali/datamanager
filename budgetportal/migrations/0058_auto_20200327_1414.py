@@ -11,10 +11,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name="mainmenuitem", options={"ordering": ["main_menu_item_order"]},
+            name="mainmenuitem",
+            options={"ordering": ["main_menu_item_order"]},
         ),
         migrations.AlterModelOptions(
-            name="submenuitem", options={"ordering": ["sub_menu_item_order"]},
+            name="submenuitem",
+            options={"ordering": ["sub_menu_item_order"]},
         ),
         migrations.AddField(
             model_name="mainmenuitem",
