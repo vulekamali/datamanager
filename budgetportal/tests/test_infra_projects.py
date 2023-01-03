@@ -237,11 +237,11 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         selenium = self.selenium
         self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, ".page-heading"), u"BLUE JUNIOR SECONDARY SCHOOL"
+                (By.CSS_SELECTOR, ".page-heading"), "BLUE JUNIOR SECONDARY SCHOOL"
             )
         )
         title = selenium.find_element_by_css_selector(".page-heading").text
-        self.assertEqual(title, u"BLUE JUNIOR SECONDARY SCHOOL")
+        self.assertEqual(title, "BLUE JUNIOR SECONDARY SCHOOL")
 
         source = selenium.find_element_by_css_selector(
             ".primary-funding-source-field"
@@ -256,9 +256,9 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             ".header__download"
         ).get_attribute("href")
 
-        self.assertEqual(source, u"Education Infrastructure Grant")
-        self.assertEqual(investment, u"Upgrading and Additions")
-        self.assertEqual(funding_status, u"Tabled")
+        self.assertEqual(source, "Education Infrastructure Grant")
+        self.assertEqual(investment, "Upgrading and Additions")
+        self.assertEqual(funding_status, "Tabled")
         self.assertIn(self.project.csv_download_url, csv_download_url)
 
         department = selenium.find_element_by_css_selector(".department-field").text
@@ -270,12 +270,12 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             ".project-number-field"
         ).text
 
-        self.assertEqual(department, u"Education")
+        self.assertEqual(department, "Education")
         self.assertEqual(
-            budget_programme, u"Programme 2 - Public Ordinary School Education"
+            budget_programme, "Programme 2 - Public Ordinary School Education"
         )
-        self.assertEqual(project_status, u"Construction")
-        self.assertEqual(project_number, u"W/50042423/WS")
+        self.assertEqual(project_status, "Construction")
+        self.assertEqual(project_number, "W/50042423/WS")
 
         province = selenium.find_element_by_css_selector(".province-field").text
         local_muni = selenium.find_element_by_css_selector(
@@ -286,10 +286,10 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
         ).text
         gps_location = selenium.find_element_by_css_selector(".coordinates-field").text
 
-        self.assertEqual(province, u"KwaZulu-Natal")
-        self.assertEqual(local_muni, u"Dr Nkosazana Dlamini Zuma")
-        self.assertEqual(district_muni, u"Harry Gwala")
-        self.assertEqual(gps_location, u"Not available")
+        self.assertEqual(province, "KwaZulu-Natal")
+        self.assertEqual(local_muni, "Dr Nkosazana Dlamini Zuma")
+        self.assertEqual(district_muni, "Harry Gwala")
+        self.assertEqual(gps_location, "Not available")
 
         implementing_agent = selenium.find_element_by_css_selector(
             ".program-implementing-agent-field"
@@ -304,17 +304,17 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             ".other-service-providers-field"
         ).text
 
-        self.assertEqual(implementing_agent, u"DOPW")
-        self.assertEqual(principle_agent, u"PRINCIPLE AGENT")
-        self.assertEqual(main_contractor, u"MAIN CONTRACTOR")
-        self.assertEqual(others, u"OTHERS")
+        self.assertEqual(implementing_agent, "DOPW")
+        self.assertEqual(principle_agent, "PRINCIPLE AGENT")
+        self.assertEqual(main_contractor, "MAIN CONTRACTOR")
+        self.assertEqual(others, "OTHERS")
 
         professional_fees = selenium.find_element_by_css_selector(
             "#total-professional-fees-field"
         ).text
 
-        self.wait_until_text_in("#total-construction-costs-field", u"R 562,000")
-        self.assertEqual(professional_fees, u"R 118,000")
+        self.wait_until_text_in("#total-construction-costs-field", "R 562,000")
+        self.assertEqual(professional_fees, "R 118,000")
 
         expenditure_from_prev = selenium.find_element_by_css_selector(
             ".expenditure-from-previous-years-total-field"
@@ -329,10 +329,10 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             ".variation-orders-field"
         ).text
 
-        self.assertEqual(expenditure_from_prev, u"R 556,479")
-        self.assertEqual(const_cost_from_prev, u"R 0")
-        self.assertEqual(prof_cost_from_prev, u"R 118,000")
-        self.assertEqual(variation_order, u"R 0")
+        self.assertEqual(expenditure_from_prev, "R 556,479")
+        self.assertEqual(const_cost_from_prev, "R 0")
+        self.assertEqual(prof_cost_from_prev, "R 118,000")
+        self.assertEqual(variation_order, "R 0")
 
         total_main_approp = selenium.find_element_by_css_selector(
             ".main-appropriation-total-field"
@@ -344,17 +344,17 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             ".main-appropriation-professional-fees-field"
         ).text
 
-        self.assertEqual(total_main_approp, u"R 337,000")
-        self.assertEqual(const_cost_main_approp, u"R 276,000")
-        self.assertEqual(prof_fees_main_approp, u"R 61,000")
+        self.assertEqual(total_main_approp, "R 337,000")
+        self.assertEqual(const_cost_main_approp, "R 276,000")
+        self.assertEqual(prof_fees_main_approp, "R 61,000")
 
         start_date = selenium.find_element_by_css_selector(".start-date-field").text
         estimated_completion = selenium.find_element_by_css_selector(
             ".estimated-completion-date-field"
         ).text
 
-        self.assertEqual(start_date, u"2016-06-13")
-        self.assertEqual(estimated_completion, u"2021-06-30")
+        self.assertEqual(start_date, "2016-06-13")
+        self.assertEqual(estimated_completion, "2021-06-30")
 
         est_const_start_date = selenium.find_element_by_css_selector(
             ".estimated-construction-start-date-field"
@@ -366,9 +366,9 @@ class InfraProjectDetailPageTestCase(BaseSeleniumTestCase):
             ".estimated-construction-end-date-field"
         ).text
 
-        self.assertEqual(est_const_start_date, u"2017-02-01")
-        self.assertEqual(contracted_const_end_date, u"2021-01-01")
-        self.assertEqual(est__const_end_date, u"2020-12-31")
+        self.assertEqual(est_const_start_date, "2017-02-01")
+        self.assertEqual(contracted_const_end_date, "2021-01-01")
+        self.assertEqual(est__const_end_date, "2020-12-31")
 
 
 class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
@@ -425,7 +425,7 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         selenium.get("%s%s" % (self.live_server_url, self.url))
         self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, "#num-matching-projects-field"), u"11"
+                (By.CSS_SELECTOR, "#num-matching-projects-field"), "11"
             )
         )
         num_of_projects = selenium.find_element_by_css_selector(
@@ -447,7 +447,7 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         selenium.get("%s%s" % (self.live_server_url, self.url))
         self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, "#num-matching-projects-field"), u"11"
+                (By.CSS_SELECTOR, "#num-matching-projects-field"), "11"
             )
         )
         num_of_projects = selenium.find_element_by_css_selector(
@@ -464,7 +464,7 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         search_button.click()
         self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, "#num-matching-projects-field"), u"5"
+                (By.CSS_SELECTOR, "#num-matching-projects-field"), "5"
             )
         )
         filtered_num_of_projects = selenium.find_element_by_css_selector(
@@ -478,7 +478,7 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         selenium.get("%s%s" % (self.live_server_url, self.url))
         self.wait.until(
             EC.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, "#num-matching-projects-field"), u"11"
+                (By.CSS_SELECTOR, "#num-matching-projects-field"), "11"
             )
         )
         csv_download_url = selenium.find_element_by_css_selector(
@@ -1488,7 +1488,8 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
         csv_download_url = response.data["csv_download_url"]
         response = self.client.get(csv_download_url)
         self._test_response_correctness(
-            response, "infrastructure-projects-q-data-that-won-t-be-found.csv",
+            response,
+            "infrastructure-projects-q-data-that-won-t-be-found.csv",
         )
 
         content = b"".join(response.streaming_content)

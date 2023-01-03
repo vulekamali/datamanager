@@ -55,9 +55,11 @@ def infrastructure_project_detail(request, id, slug):
     )
 
     page_data["department_url"] = department.get_url_path() if department else None
-    page_data["province_depts_url"] = (
-        "/%s/departments?province=%s&sphere=provincial"
-        % (models.FinancialYear.get_latest_year().slug, slugify(snapshot.province),)
+    page_data[
+        "province_depts_url"
+    ] = "/%s/departments?province=%s&sphere=provincial" % (
+        models.FinancialYear.get_latest_year().slug,
+        slugify(snapshot.province),
     )
     page_data[
         "latest_snapshot_financial_year"

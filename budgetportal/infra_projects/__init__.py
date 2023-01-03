@@ -114,7 +114,9 @@ class InfraProjectSnapshotResource(resources.ModelResource):
         column_name="irm_snapshot",
         widget=ForeignKeyWidget(models.IRMSnapshot),
     )
-    sphere_slug = Field(column_name="sphere_slug",)
+    sphere_slug = Field(
+        column_name="sphere_slug",
+    )
     project_number = Field(attribute="project_number", column_name="Project No")
     name = Field(attribute="name", column_name="Project Name")
     department = Field(attribute="department", column_name="Department")

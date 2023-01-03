@@ -13,19 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.6
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.6
-        
+
     - uses: actions/setup-node@v2
       with:
         node-version: "13.14.0"
-          
-    - name: Install test dependencies
+
+    - name: Build frontend assets
       run: |
-        python -m pip install --upgrade pip
-        pip install black==19.10b0
         npm install -g yarn@1.21.1
         yarn
         yarn build
@@ -40,8 +34,8 @@ jobs:
       run: |
         docker-compose run --rm test python manage.py collectstatic --no-input
         docker-compose run --rm test
-        black --check --diff budgetportal manage.py discourse
-      
+        docker-compose run --rm app black --check --diff budgetportal manage.py discourse
+
     - name: Dump dependency logs for debugging
       run: |
         docker-compose logs db solr minio

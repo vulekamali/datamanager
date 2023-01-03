@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
             field=models.IntegerField(),
         ),
         migrations.AlterUniqueTogether(
-            name="infraproject", unique_together={("sphere_slug", "IRM_project_id")},
+            name="infraproject",
+            unique_together={("sphere_slug", "IRM_project_id")},
         ),
     ]

@@ -30,7 +30,7 @@ class DateQuarterMatchTestCase(TestCase):
     def test_dates_are_end_of_quarters(self):
         """Test that all dates are end day of a quarter"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 4)
 
         # Q1->06-30, Q2->09-30, Q3->12-31, Q4->03-31
@@ -42,7 +42,7 @@ class DateQuarterMatchTestCase(TestCase):
     def test_dates_match_with_quarters(self):
         """Test that dates and quarter_labels match"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 4)
 
         # Q1->06-30, Q2->09-30, Q3->12-31, Q4->03-31
@@ -72,7 +72,7 @@ class TotalEstimatedProjectCostTestCase(TestCase):
     def test_estimated_total_project_cost_is_null(self):
         """Test that total project cost for Q1 (which created by Q2 snapshot) is Null"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q1 values
@@ -81,7 +81,7 @@ class TotalEstimatedProjectCostTestCase(TestCase):
     def test_estimated_total_project_cost_assigned_correctly(self):
         """Test that total project cost for Q2 is 100"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q2 values
@@ -102,7 +102,7 @@ class StatusTestCase(TestCase):
     def test_status_is_null(self):
         """Test that status for Q1 (which created by Q2 snapshot) is Null"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q1 values
@@ -111,7 +111,7 @@ class StatusTestCase(TestCase):
     def test_status_assigned_correctly(self):
         """Test that status for Q2 is Tender"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q2 values
@@ -135,7 +135,7 @@ class Q1UpdateTestCase(TestCase):
     def test_q1_updated_after_q2_snapshot_inserted(self):
         """Test that Q1 values are updated correctly when Q2 snapshot is added"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 1)
 
         # Check Q1 values
@@ -156,7 +156,7 @@ class Q1UpdateTestCase(TestCase):
         snapshots_data = time_series_data(
             [self.project_snapshot, self.project_snapshot_2]
         )
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q1 values
@@ -192,7 +192,7 @@ class Q1Q2UpdateTestCase(TestCase):
         snapshots_data = time_series_data(
             [self.project_snapshot, self.project_snapshot_2]
         )
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q1 values
@@ -218,7 +218,7 @@ class Q1Q2UpdateTestCase(TestCase):
         snapshots_data = time_series_data(
             [self.project_snapshot, self.project_snapshot_2, self.project_snapshot_3]
         )
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 3)
 
         # Check Q1 values
@@ -249,7 +249,7 @@ class NullQ2SubsequentNullSpendTestCase(TestCase):
     def test_total_spends_are_correct(self):
         """Test that total spends are none because of actual_expenditure_q1"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 3)
 
         # Check total_spent_to_date values for Q1, Q2 and Q3
@@ -277,7 +277,7 @@ class LatestValueTestCase(TestCase):
         Q2 snapshot's expenditure_from_previous_years_total updates total_spent of Q1 chart item.
         """
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 1)
         self.assertEqual(snapshots_data[0]["total_spent_to_date"], 110)
 
@@ -295,7 +295,7 @@ class LatestValueTestCase(TestCase):
         snapshots_data = time_series_data(
             [self.project_snapshot, self.project_snapshot_2]
         )
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check total_spent_to_date values for Q1 and Q2
@@ -322,7 +322,7 @@ class NullExpenditureFromPreviousFinYearsTestCase(TestCase):
         """Test that Q1 and Q2 total_spent values when expenditure_
         from_previous_years_total is empty."""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check total_spent_to_date values for Q1 and Q2
@@ -344,7 +344,7 @@ class EmitMissingQuartersTestCase(TestCase):
     def test_two_snapshots_emitted(self):
         """Test that if the first snapshot is Q2, items are created for Q1 and Q2 but nothing later than Q2."""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q1 values
@@ -380,7 +380,7 @@ class EmitMissingQuartersSecondTestCase(TestCase):
         snapshots_data = time_series_data(
             [self.project_snapshot, self.project_snapshot_2]
         )
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 6)
 
         # Check 2018's Q1 and Q2 in a row
@@ -435,7 +435,7 @@ class ComputeTotalSpentIn2YearsTestCase(TestCase):
         snapshots_data = time_series_data(
             [self.project_snapshot, self.project_snapshot_2]
         )
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 5)
 
         # Check that 2019 Q1 Snapshot's total_spent_to_date is correct
@@ -457,7 +457,7 @@ class FinancialYearLabelTestCase(TestCase):
     def test_label_is_assigned_to_q1(self):
         """Test that financial year label is correctly assigned for Q1"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q1 values
@@ -467,7 +467,7 @@ class FinancialYearLabelTestCase(TestCase):
     def test_label_is_empty_for_q2(self):
         """Test that financial year label is empty for quarters except Q1"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 2)
 
         # Check Q2 values
@@ -489,7 +489,7 @@ class QuarterLabelTestCase(TestCase):
     def test_label_is_correct(self):
         """Test that quarter labels start with 'END Q' and ends with (1,2,3,4)"""
         snapshots_data = time_series_data([self.project_snapshot])
-        snapshots_data = snapshots_data[u"snapshots"]
+        snapshots_data = snapshots_data["snapshots"]
         self.assertEqual(len(snapshots_data), 4)
 
         # Check quarter label texts for all quarters
@@ -519,7 +519,7 @@ class EventsTestCase(TestCase):
     def test_events_assigned_correctly(self):
         """Test that all dates are assigned correctly"""
         events_data = time_series_data([self.project_snapshot])
-        events_data = events_data[u"events"]
+        events_data = events_data["events"]
         self.assertEqual(len(events_data), 5)
 
         # Project Start Date
@@ -541,7 +541,7 @@ class EventsTestCase(TestCase):
             irm_snapshot=irm_snapshot_2, project=self.project, start_date="2029-09-30"
         )
         events_data = time_series_data([self.project_snapshot, self.project_snapshot_2])
-        events_data = events_data[u"events"]
+        events_data = events_data["events"]
         self.assertEqual(len(events_data), 1)
 
         # Project Start Date
