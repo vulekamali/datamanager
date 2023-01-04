@@ -207,7 +207,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
             frictionless_validated = validate_frictionless(parsed_data, obj.id)
             if frictionless_validated:
                 del parsed_data[0]  # delete header row
-                threading.Thread(target=save_imported_indicators, args=(parsed_data, obj.id)).start()
+                task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj.id)
 
     def success(self, obj):
         if obj.task:

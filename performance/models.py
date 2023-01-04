@@ -40,6 +40,8 @@ FREQUENCIES = (
 
 
 class Indicator(models.Model):
+    """The indicator values available for a indicator in a department in a financial year"""
+
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="indicator_values")
     indicator_name = models.TextField()
 

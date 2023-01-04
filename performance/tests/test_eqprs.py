@@ -5,6 +5,7 @@ from django.contrib.admin.sites import AdminSite
 from django.contrib import admin
 from performance.models import EQPRSFileUpload
 from django.test import RequestFactory
+from django.urls import reverse
 
 USERNAME = "testuser"
 EMAIL = "testuser@domain.com"
@@ -37,9 +38,9 @@ class EQPRSFileUploadTestCase(TestCase):
         self.assertEqual(default_user, self.superuser)
 
     def test_saving_without_file(self):
-        ea = EQPRSFileUploadAdmin(EQPRSFileUpload, AdminSite())
-        form = ea.get_form(self.mocked_request)
         print('========= aaa =========')
-        errors = form.errors
-        print(errors['user'].data[0].message)
+        self.client.force_login(user=self.superuser)
+        url = reverse('admin:performance_eqprsfileupload_add')
+        #res = self.client.get('/admin/performance/', {}, follow=True)
+        print(url)
         print('========= bbb =========')
