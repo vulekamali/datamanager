@@ -156,6 +156,8 @@ class DepartmentPageTestCase(TestCase):
             c = Client()
             response = c.get("/2018-19/national/departments/the-presidency/")
 
-        self.assertContains(response, "Budget (Main appropriation) 2018-19")    
+        self.assertContains(response, "Budget (Main appropriation) 2018-19")
         self.assertNotContains(response, "Data not available")
-        self.assertContains(response, "/2018-19/national/departments/the-presidency/viz/subprog-treemap")
+        self.assertContains(
+            response, "/2018-19/national/departments/the-presidency/viz/subprog-treemap"
+        )
