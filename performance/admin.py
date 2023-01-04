@@ -1,5 +1,4 @@
 from django.contrib import admin
-from io import BytesIO
 from io import StringIO
 from performance import models
 from django_q.tasks import async_task
@@ -7,8 +6,6 @@ from django_q.tasks import async_task
 from frictionless import validate
 
 import os
-import json
-import threading
 import csv
 
 
