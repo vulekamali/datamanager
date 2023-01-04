@@ -143,6 +143,7 @@ class DepartmentPageTestCase(TestCase):
         response = c.get("/2018-19/national/departments/the-presidency/")
 
         self.assertContains(response, "Data not available")
+        self.assertNotContains(response, "Budget (Main appropriation) 2019-20")
 
     def test_budget_dataset_available(self):
         # mock get dataset to return mock dataset which includes opn_spending _api mocks
@@ -154,7 +155,7 @@ class DepartmentPageTestCase(TestCase):
         ):
             c = Client()
             response = c.get("/2018-19/national/departments/the-presidency/")
+
+        self.assertContains(response, "Budget (Main appropriation) 2018-19")    
         self.assertNotContains(response, "Data not available")
-        self.assertContains(
-            response, "/2018-19/national/departments/the-presidency/viz/subprog-treemap"
-        )
+        self.assertContains(response, "/2018-19/national/departments/the-presidency/viz/subprog-treemap")
