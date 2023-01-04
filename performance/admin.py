@@ -191,6 +191,8 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         return response
 
     def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.user = request.user
         super().save_model(request, obj, form, change)
         full_text = obj.file.read().decode('utf-8')
         report_type_validated = validate_report_type(full_text, obj.id)
