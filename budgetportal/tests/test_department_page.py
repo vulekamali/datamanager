@@ -13,7 +13,9 @@ from django.test import Client, TestCase
 from mock import MagicMock, patch
 
 
+
 class DepartmentPageTestCase(TestCase):
+    dataset_year_note = "Budget (Main appropriation) 2018-19"
     def setUp(self):
         self.mock_openspending_api = MagicMock()
         self.mock_openspending_api.get_adjustment_kind_ref.return_value = (
@@ -143,7 +145,7 @@ class DepartmentPageTestCase(TestCase):
         response = c.get("/2018-19/national/departments/the-presidency/")
 
         self.assertContains(response, "Data not available")
-        self.assertNotContains(response, "Budget (Main appropriation) 2019-20")
+        self.assertNotContains(response, self.dataset_year_note)
 
     def test_budget_dataset_available(self):
         # mock get dataset to return mock dataset which includes opn_spending _api mocks
@@ -156,7 +158,7 @@ class DepartmentPageTestCase(TestCase):
             c = Client()
             response = c.get("/2018-19/national/departments/the-presidency/")
 
-        self.assertContains(response, "Budget (Main appropriation) 2018-19")
+        self.assertContains(response, self.dataset_year_note)
         self.assertNotContains(response, "Data not available")
         self.assertContains(
             response, "/2018-19/national/departments/the-presidency/viz/subprog-treemap"
