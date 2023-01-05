@@ -13,9 +13,9 @@ from django.test import Client, TestCase
 from mock import MagicMock, patch
 
 
-
 class DepartmentPageTestCase(TestCase):
     dataset_year_note = "Budget (Main appropriation) 2018-19"
+
     def setUp(self):
         self.mock_openspending_api = MagicMock()
         self.mock_openspending_api.get_adjustment_kind_ref.return_value = (
