@@ -173,7 +173,9 @@ class Government(models.Model):
 
 
 class DepartmentManager(models.Manager):
-    def get_by_natural_key(self, financial_year, sphere_slug, government_slug, department_slug):
+    def get_by_natural_key(
+        self, financial_year, sphere_slug, government_slug, department_slug
+    ):
         return self.get(
             slug=department_slug,
             government__slug=government_slug,
