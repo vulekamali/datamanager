@@ -3,7 +3,7 @@ from io import StringIO
 from performance import models
 from django_q.tasks import async_task
 
-from frictionless import validate
+from frictionless import validate, extract
 
 import os
 import csv
@@ -41,7 +41,7 @@ def generate_import_report(report_type_validated, frictionless_report, not_match
 
 
 def save_imported_indicators(parsed_data, obj_id):
-    report_departments = set([x[1] for x in parsed_data])
+    report_departments = set([x['Institution'] for x in parsed_data])
     num_imported = 0
     total_record_count = len(parsed_data)
     not_matching_departments = []
@@ -51,71 +51,71 @@ def save_imported_indicators(parsed_data, obj_id):
         models.Indicator.objects.filter(department=department_obj).delete()
 
     for indicator_data in parsed_data:
-        department_name = indicator_data[1]
+        department_name = indicator_data['Institution']
         department_obj = models.Department.objects.filter(name=department_name).first()
 
         if department_obj:
             models.Indicator.objects.create(
-                indicator_name=indicator_data[6],
+                indicator_name=indicator_data['Indicator'],
                 department=department_obj,
                 source_id=obj_id,
 
-                q1_target=indicator_data[11],
-                q1_actual_output=indicator_data[12],
-                q1_deviation_reason=indicator_data[13],
-                q1_corrective_action=indicator_data[14],
-                q1_national_comments=indicator_data[16],
-                q1_otp_comments=indicator_data[15],
+                q1_target=indicator_data['Target_Q1'],
+                q1_actual_output=indicator_data['ActualOutput_Q1'],
+                q1_deviation_reason=indicator_data['ReasonforDeviation_Q1'],
+                q1_corrective_action=indicator_data['CorrectiveAction_Q1'],
+                q1_national_comments=indicator_data['National_Q1'],
+                q1_otp_comments=indicator_data['OTP_Q1'],
                 q1_dpme_coordinator_comments='',
                 q1_treasury_comments='',
 
-                q2_target=indicator_data[17],
-                q2_actual_output=indicator_data[18],
-                q2_deviation_reason=indicator_data[19],
-                q2_corrective_action=indicator_data[20],
-                q2_national_comments=indicator_data[22],
-                q2_otp_comments=indicator_data[21],
+                q2_target=indicator_data['Target_Q2'],
+                q2_actual_output=indicator_data['ActualOutput_Q2'],
+                q2_deviation_reason=indicator_data['ReasonforDeviation_Q2'],
+                q2_corrective_action=indicator_data['CorrectiveAction_Q2'],
+                q2_national_comments=indicator_data['National_Q2'],
+                q2_otp_comments=indicator_data['OTP_Q2'],
                 q2_dpme_coordinator_comments='',
                 q2_treasury_comments='',
 
-                q3_target=indicator_data[23],
-                q3_actual_output=indicator_data[24],
-                q3_deviation_reason=indicator_data[25],
-                q3_corrective_action=indicator_data[26],
-                q3_national_comments=indicator_data[28],
-                q3_otp_comments=indicator_data[27],
+                q3_target=indicator_data['Target_Q3'],
+                q3_actual_output=indicator_data['ActualOutput_Q3'],
+                q3_deviation_reason=indicator_data['ReasonforDeviation_Q3'],
+                q3_corrective_action=indicator_data['CorrectiveAction_Q3'],
+                q3_national_comments=indicator_data['National_Q3'],
+                q3_otp_comments=indicator_data['OTP_Q3'],
                 q3_dpme_coordinator_comments='',
                 q3_treasury_comments='',
 
-                q4_target=indicator_data[29],
-                q4_actual_output=indicator_data[30],
-                q4_deviation_reason=indicator_data[31],
-                q4_corrective_action=indicator_data[32],
-                q4_national_comments=indicator_data[34],
-                q4_otp_comments=indicator_data[33],
+                q4_target=indicator_data['Target_Q4'],
+                q4_actual_output=indicator_data['ActualOutput_Q4'],
+                q4_deviation_reason=indicator_data['ReasonforDeviation_Q4'],
+                q4_corrective_action=indicator_data['CorrectiveAction_Q4'],
+                q4_national_comments=indicator_data['National_Q4'],
+                q4_otp_comments=indicator_data['OTP_Q4'],
                 q4_dpme_coordinator_comments='',
                 q4_treasury_comments='',
 
-                annual_target=indicator_data[35],
+                annual_target=indicator_data['AnnualTarget_Summary2'],
                 annual_aggregate_output='',
-                annual_pre_audit_output=indicator_data[37],
-                annual_deviation_reason=indicator_data[38],
-                annual_corrective_action=indicator_data[39],
-                annual_otp_comments=indicator_data[40],
-                annual_national_comments=indicator_data[41],
+                annual_pre_audit_output=indicator_data['PrelimaryAudited_Summary2'],
+                annual_deviation_reason=indicator_data['ReasonforDeviation_Summary'],
+                annual_corrective_action=indicator_data['CorrectiveAction_Summary'],
+                annual_otp_comments=indicator_data['OTP_Summary'],
+                annual_national_comments=indicator_data['National_Summary'],
                 annual_dpme_coordincator_comments='',
                 annual_treasury_comments='',
-                annual_audited_output=indicator_data[42],
+                annual_audited_output=indicator_data['ValidatedAudited_Summary2'],
 
-                sector=indicator_data[0],
-                programme_name=indicator_data[2],
-                subprogramme_name=indicator_data[3],
-                frequency=indicator_data[5],
-                type=indicator_data[7],
-                subtype=indicator_data[8],
-                mtsf_outcome=indicator_data[9],
-                cluster=indicator_data[10],
-                uid=indicator_data[43],
+                sector=indicator_data['Sector'],
+                programme_name=indicator_data['Programme'],
+                subprogramme_name=indicator_data['SubProgramme'],
+                frequency=indicator_data['Frequency'],
+                type=indicator_data['Type'],
+                subtype=indicator_data['SubType'],
+                mtsf_outcome=indicator_data['Outcome'],
+                cluster=indicator_data['Cluster'],
+                uid=indicator_data['UID'],
             )
             num_imported = num_imported + 1
         elif department_name not in not_matching_departments:
@@ -194,22 +194,13 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         full_text = obj.file.read().decode('utf-8')
         report_type_validated = validate_report_type(full_text, obj.id)
         if report_type_validated:
-            f = StringIO(full_text)
-            reader = csv.reader(f, delimiter=',')
-            print('============ aaa ============')
-            test = csv.DictReader(f)
-            for item in test:
-                # print(dict(item))
-                print(item['ReportTitle'])
-            print('============ bbb ============')
-            parsed_data = [tuple(row) for row in reader]
-            parsed_data = [x for x in parsed_data if x]
-            del parsed_data[0:2]  # delete first 3 rows
-
+            clean_text = full_text.split('\n', 3)[3]
+            f = StringIO(clean_text)
+            reader = csv.DictReader(f)
+            parsed_data = list(reader)
             frictionless_validated = validate_frictionless(parsed_data, obj.id)
-            return
+
             if frictionless_validated:
-                del parsed_data[0]  # delete header row
                 task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj.id)
 
     def success(self, obj):
