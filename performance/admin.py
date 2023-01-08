@@ -159,7 +159,7 @@ def validate_frictionless(data, obj_id):
 
 class EQPRSFileUploadAdmin(admin.ModelAdmin):
     exclude = ('num_imported', 'import_report', 'num_not_imported')
-    readonly_fields = ('num_imported', 'import_report', 'num_not_imported')
+    readonly_fields = ('num_imported', 'import_report', 'num_not_imported', 'user')
     list_display = (
         "created_at",
         "user",
@@ -175,9 +175,6 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
             )
         }),
     )
-
-    class Media:
-        js = ("js/eqprs-file-upload.js",)
 
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object
@@ -199,11 +196,18 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         if report_type_validated:
             f = StringIO(full_text)
             reader = csv.reader(f, delimiter=',')
+            print('============ aaa ============')
+            test = csv.DictReader(f)
+            for item in test:
+                # print(dict(item))
+                print(item['ReportTitle'])
+            print('============ bbb ============')
             parsed_data = [tuple(row) for row in reader]
             parsed_data = [x for x in parsed_data if x]
             del parsed_data[0:2]  # delete first 3 rows
 
             frictionless_validated = validate_frictionless(parsed_data, obj.id)
+            return
             if frictionless_validated:
                 del parsed_data[0]  # delete header row
                 task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj.id)
