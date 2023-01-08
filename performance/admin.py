@@ -3,7 +3,7 @@ from io import StringIO
 from performance import models
 from django_q.tasks import async_task
 
-from frictionless import validate, extract
+from frictionless import validate
 
 import os
 import csv
@@ -198,10 +198,8 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
             f = StringIO(clean_text)
             reader = csv.DictReader(f)
             parsed_data = list(reader)
-            frictionless_validated = validate_frictionless(parsed_data, obj.id)
 
-            if frictionless_validated:
-                task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj.id)
+            task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj.id)
 
     def success(self, obj):
         if obj.task:
