@@ -8,14 +8,6 @@ from frictionless import validate
 import os
 import csv
 
-
-def get_key_value_or_default(fields, key):
-    if key in fields:
-        return fields[key]
-    else:
-        return ""
-
-
 VALID_REPORT_TYPES = ['Provincial Institutions Oversight Performance  Report',
                       'National Institutions Oversight Performance  Report']
 
@@ -157,6 +149,17 @@ def validate_frictionless(data, obj_id):
     return validated
 
 
+def parse_and_process_csv(full_text, obj_id):
+    report_type_validated = validate_report_type(full_text, obj_id)
+    if report_type_validated:
+        clean_text = full_text.split('\n', 3)[3]
+        f = StringIO(clean_text)
+        reader = csv.DictReader(f)
+        parsed_data = list(reader)
+
+        task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj_id)
+
+
 class EQPRSFileUploadAdmin(admin.ModelAdmin):
     exclude = ('num_imported', 'import_report', 'num_not_imported')
     readonly_fields = ('num_imported', 'import_report', 'num_not_imported', 'user')
@@ -192,14 +195,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
             obj.user = request.user
         super().save_model(request, obj, form, change)
         full_text = obj.file.read().decode('utf-8')
-        report_type_validated = validate_report_type(full_text, obj.id)
-        if report_type_validated:
-            clean_text = full_text.split('\n', 3)[3]
-            f = StringIO(clean_text)
-            reader = csv.DictReader(f)
-            parsed_data = list(reader)
-
-            task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj.id)
+        parse_and_process_csv(full_text, obj.id)
 
     def success(self, obj):
         if obj.task:
