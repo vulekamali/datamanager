@@ -33,6 +33,7 @@ services:
       - SOLR_URL=http://solr:8983/solr/budgetportal
       - DEBUG_CACHE
       - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
+      - CKAN_URL
     volumes:
       - .:/code
     ports:
@@ -57,6 +58,7 @@ services:
       - AWS_STORAGE_BUCKET_NAME=budgetportal-storage
       - AWS_S3_ENDPOINT_URL=http://minio:9000
       - SOLR_URL=http://solr:8983/solr/budgetportal
+      - CKAN_URL
     volumes:
       - .:/code
     depends_on:
