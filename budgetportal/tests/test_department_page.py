@@ -14,6 +14,8 @@ from mock import MagicMock, patch
 
 
 class DepartmentPageTestCase(TestCase):
+    dataset_year_note = "Budget (Main appropriation) 2018-19"
+
     def setUp(self):
         self.mock_openspending_api = MagicMock()
         self.mock_openspending_api.get_adjustment_kind_ref.return_value = (
@@ -72,12 +74,8 @@ class DepartmentPageTestCase(TestCase):
         PerformanceResourceLink.objects.all().delete()
         InYearMonitoringResourceLink.objects.all().delete()
 
-        with patch(
-            "budgetportal.views.DepartmentSubprogrammes.get_openspending_api",
-            MagicMock(return_value=self.mock_openspending_api),
-        ):
-            c = Client()
-            response = c.get("/2018-19/national/departments/the-presidency/")
+        c = Client()
+        response = c.get("/2018-19/national/departments/the-presidency/")
 
         self.assertContains(
             response, "The Presidency budget data for the 2018-19 financial year"
@@ -98,12 +96,8 @@ class DepartmentPageTestCase(TestCase):
             title="an in-year link", url="a.com", description="abc"
         )
 
-        with patch(
-            "budgetportal.views.DepartmentSubprogrammes.get_openspending_api",
-            MagicMock(return_value=self.mock_openspending_api),
-        ):
-            c = Client()
-            response = c.get("/2018-19/national/departments/the-presidency/")
+        c = Client()
+        response = c.get("/2018-19/national/departments/the-presidency/")
 
         self.assertContains(
             response, "The Presidency budget data for the 2018-19 financial year"
@@ -136,12 +130,8 @@ class DepartmentPageTestCase(TestCase):
             sphere_slug="all",
         )
 
-        with patch(
-            "budgetportal.views.DepartmentSubprogrammes.get_openspending_api",
-            MagicMock(return_value=self.mock_openspending_api),
-        ):
-            c = Client()
-            response = c.get("/2018-19/national/departments/the-presidency/")
+        c = Client()
+        response = c.get("/2018-19/national/departments/the-presidency/")
 
         self.assertContains(
             response, "The Presidency budget data for the 2018-19 financial year"
@@ -149,3 +139,27 @@ class DepartmentPageTestCase(TestCase):
         self.assertContains(response, "a national link")
         self.assertNotContains(response, "a provincial link")
         self.assertContains(response, "an all-sphere link")
+
+    def test_missing_budget_dataset(self):
+        c = Client()
+        response = c.get("/2018-19/national/departments/the-presidency/")
+
+        self.assertContains(response, "Data not available")
+        self.assertNotContains(response, self.dataset_year_note)
+
+    def test_budget_dataset_available(self):
+        # mock get dataset to return mock dataset which includes opn_spending _api mocks
+        mock_dataset = MagicMock()
+        mock_dataset.get_openspending_api.return_value = self.mock_openspending_api
+        with patch(
+            "budgetportal.views.DepartmentSubprogrammes.get_dataset",
+            MagicMock(return_value=mock_dataset),
+        ):
+            c = Client()
+            response = c.get("/2018-19/national/departments/the-presidency/")
+
+        self.assertContains(response, self.dataset_year_note)
+        self.assertNotContains(response, "Data not available")
+        self.assertContains(
+            response, "/2018-19/national/departments/the-presidency/viz/subprog-treemap"
+        )
