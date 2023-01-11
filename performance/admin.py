@@ -33,7 +33,25 @@ def generate_import_report(report_type_validated, frictionless_report, not_match
     return report
 
 
-def save_imported_indicators(parsed_data, obj_id, financial_year, sphere):
+def save_imported_indicators(obj_id):
+    # read file
+    obj_to_update = models.EQPRSFileUpload.objects.get(id=obj_id)
+    full_text = obj_to_update.file.read().decode('utf-8')
+
+    # validate report type
+    report_type_validated = validate_report_type(full_text, obj_id)
+    if not report_type_validated:
+        return
+
+    # clean the csv & extract data
+    financial_year = get_financial_year(full_text)
+    sphere = get_sphere(full_text)
+    clean_text = full_text.split('\n', 3)[3]
+    f = StringIO(clean_text)
+    reader = csv.DictReader(f)
+    parsed_data = list(reader)
+
+    # find the objects
     report_departments = set([x['Institution'] for x in parsed_data])
     report_programmes = set([x['Programme'] for x in parsed_data])
     num_imported = 0
@@ -42,6 +60,7 @@ def save_imported_indicators(parsed_data, obj_id, financial_year, sphere):
     fy_obj = budgetportal.models.FinancialYear.objects.filter(slug=financial_year).first()
     sphere_obj = budgetportal.models.Sphere.objects.filter(name=sphere, financial_year=fy_obj).first()
 
+    # clear department indicators
     for department in report_departments:
         for programme in report_programmes:
             government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
@@ -49,6 +68,7 @@ def save_imported_indicators(parsed_data, obj_id, financial_year, sphere):
             department_obj = models.Department.objects.filter(name=department, government=government_obj).first()
             models.Indicator.objects.filter(department=department_obj).delete()
 
+    # create new indicators
     for indicator_data in parsed_data:
         programme = indicator_data['Programme']
         department_name = indicator_data['Institution']
@@ -68,7 +88,7 @@ def save_imported_indicators(parsed_data, obj_id, financial_year, sphere):
                 q1_national_comments=indicator_data['National_Q1'],
                 q1_otp_comments=indicator_data['OTP_Q1'],
                 q1_dpme_coordinator_comments='',
-                q1_treasury_comments='',
+                q1_treasury_comments=indicator_data.get('Treasury_Q1', ''),
 
                 q2_target=indicator_data['Target_Q2'],
                 q2_actual_output=indicator_data['ActualOutput_Q2'],
@@ -122,8 +142,7 @@ def save_imported_indicators(parsed_data, obj_id, financial_year, sphere):
         elif department_name not in not_matching_departments:
             not_matching_departments.append(department_name)
 
-    obj_to_update = models.EQPRSFileUpload.objects.get(id=obj_id)
-
+    # update object
     obj_to_update.num_imported = num_imported
     obj_to_update.num_not_imported = total_record_count - num_imported
     obj_to_update.import_report = generate_import_report(True, None, not_matching_departments)
@@ -177,20 +196,6 @@ def get_sphere(full_text):
     return sphere
 
 
-def parse_and_process_csv(full_text, obj_id):
-    report_type_validated = validate_report_type(full_text, obj_id)
-    if report_type_validated:
-        financial_year = get_financial_year(full_text)
-        sphere = get_sphere(full_text)
-        clean_text = full_text.split('\n', 3)[3]
-        f = StringIO(clean_text)
-        reader = csv.DictReader(f)
-        parsed_data = list(reader)
-
-        task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj_id,
-                         financial_year=financial_year, sphere=sphere)
-
-
 class EQPRSFileUploadAdmin(admin.ModelAdmin):
     exclude = ('num_imported', 'import_report', 'num_not_imported')
     readonly_fields = ('num_imported', 'import_report', 'num_not_imported', 'user')
@@ -225,8 +230,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         if not obj.pk:
             obj.user = request.user
         super().save_model(request, obj, form, change)
-        full_text = obj.file.read().decode('utf-8')
-        parse_and_process_csv(full_text, obj.id)
+        task = async_task(func=save_imported_indicators, obj_id=obj.id)
 
     def success(self, obj):
         if obj.task:
