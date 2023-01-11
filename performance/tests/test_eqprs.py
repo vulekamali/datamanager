@@ -51,7 +51,7 @@ The Task Team has produced a draft HRH 2030 Plan by the end of the 4th quarter.
         )
         performance.admin.parse_and_process_csv('', test_element.id)
         test_element.refresh_from_db()
-        assert test_element.import_report == """Report preamble must be for one of 
+        assert test_element.import_report == """Report type must be for one of 
 * Provincial Institutions Oversight Performance  Report 
 * National Institutions Oversight Performance  Report 
 """
@@ -68,8 +68,8 @@ The Task Team has produced a draft HRH 2030 Plan by the end of the 4th quarter.
 
     def test_with_correct_csv(self):
         fy = FinancialYear.objects.create(slug="2021-22")
-        sphere = Sphere.objects.create(name="Test Sphere", financial_year=fy)
-        government = Government.objects.create(name="Test Government", sphere=sphere)
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+        government = Government.objects.create(name="Eastern Cape", sphere=sphere)
         department = Department.objects.create(name="Health", government=government, vote_number=1)
 
         test_element = EQPRSFileUpload.objects.create(

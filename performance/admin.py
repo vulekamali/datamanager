@@ -7,6 +7,7 @@ from frictionless import validate
 
 import os
 import csv
+import budgetportal
 
 VALID_REPORT_TYPES = ['Provincial Institutions Oversight Performance  Report',
                       'National Institutions Oversight Performance  Report']
@@ -15,7 +16,7 @@ VALID_REPORT_TYPES = ['Provincial Institutions Oversight Performance  Report',
 def generate_import_report(report_type_validated, frictionless_report, not_matching_departments):
     report = ""
     if not report_type_validated:
-        report += "Report preamble must be for one of " + os.linesep
+        report += "Report type must be for one of " + os.linesep
         for report_type in VALID_REPORT_TYPES:
             report += f"* {report_type} {os.linesep}"
 
@@ -32,19 +33,27 @@ def generate_import_report(report_type_validated, frictionless_report, not_match
     return report
 
 
-def save_imported_indicators(parsed_data, obj_id):
+def save_imported_indicators(parsed_data, obj_id, financial_year, sphere):
     report_departments = set([x['Institution'] for x in parsed_data])
+    report_programmes = set([x['Programme'] for x in parsed_data])
     num_imported = 0
     total_record_count = len(parsed_data)
     not_matching_departments = []
+    fy_obj = budgetportal.models.FinancialYear.objects.filter(slug=financial_year).first()
+    sphere_obj = budgetportal.models.Sphere.objects.filter(name=sphere, financial_year=fy_obj).first()
 
     for department in report_departments:
-        department_obj = models.Department.objects.filter(name=department).first()
-        models.Indicator.objects.filter(department=department_obj).delete()
+        for programme in report_programmes:
+            government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
+
+            department_obj = models.Department.objects.filter(name=department, government=government_obj).first()
+            models.Indicator.objects.filter(department=department_obj).delete()
 
     for indicator_data in parsed_data:
+        programme = indicator_data['Programme']
         department_name = indicator_data['Institution']
-        department_obj = models.Department.objects.filter(name=department_name).first()
+        government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
+        department_obj = models.Department.objects.filter(name=department_name, government=government_obj).first()
 
         if department_obj:
             models.Indicator.objects.create(
@@ -149,15 +158,37 @@ def validate_frictionless(data, obj_id):
     return validated
 
 
+def get_financial_year(full_text):
+    financial_year = full_text.split('\n', 1)[1]
+    financial_year = financial_year.replace('QPR for FY ', '')
+    financial_year = financial_year[:financial_year.index(' ')]
+    financial_year = financial_year.strip()
+
+    return financial_year
+
+
+def get_sphere(full_text):
+    line = full_text.split('\n', 2)[1]
+    if 'Provincial' in line:
+        sphere = 'Provincial'
+    else:
+        sphere = 'National'
+
+    return sphere
+
+
 def parse_and_process_csv(full_text, obj_id):
     report_type_validated = validate_report_type(full_text, obj_id)
     if report_type_validated:
+        financial_year = get_financial_year(full_text)
+        sphere = get_sphere(full_text)
         clean_text = full_text.split('\n', 3)[3]
         f = StringIO(clean_text)
         reader = csv.DictReader(f)
         parsed_data = list(reader)
 
-        task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj_id)
+        task = async_task(func=save_imported_indicators, parsed_data=parsed_data, obj_id=obj_id,
+                         financial_year=financial_year, sphere=sphere)
 
 
 class EQPRSFileUploadAdmin(admin.ModelAdmin):
@@ -187,7 +218,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         response = super(EQPRSFileUploadAdmin, self).render_change_form(request, context, add, change, form_url, obj)
         response.context_data['title'] = 'EQPRS file upload' if response.context_data[
-            'object_id'] else 'Add EQPRS file upload'
+            'object_id'] else 'Upload EQPRS file'
         return response
 
     def save_model(self, request, obj, form, change):
@@ -201,7 +232,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         if obj.task:
             return obj.task.success
         else:
-            return True  # change this
+            return None
 
     success.boolean = True
     success.short_description = "Success"
