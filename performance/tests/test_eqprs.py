@@ -8,6 +8,7 @@ from budgetportal.models.government import Department, Government, Sphere, Finan
 from django.test import RequestFactory
 from django.urls import reverse
 from performance import models
+from django.core.files import File
 
 import performance.admin
 import os
@@ -34,22 +35,26 @@ class EQPRSFileUploadTestCase(TestCase):
             is_superuser=True,
             is_active=True,
         )
-        location = os.path.realpath(
-            os.path.join(os.getcwd(), os.path.dirname('performance'))
+        file_path = os.path.abspath(
+            ("performance/static/correct_data.csv")
         )
-        full_path = os.path.join(location, 'static', 'correct_data.csv')
-        print('========= aaa =========')
-        print(full_path)
-        self.csv_file = open('../static/correct_data.csv', 'rb')
-        print('========= bbb =========')
-        self.correct_csv = """"""
+        wrong_report_type_file_path = os.path.abspath(
+            ("performance/static/wrong_report_type.csv")
+        )
+        self.csv_file = File(open(file_path, "rb"))
+        self.wrong_report_type_file = File(open(wrong_report_type_file_path, "rb"))
         self.mocked_request = get_mocked_request(self.superuser)
+
+    def tearDown(self):
+        self.csv_file.close()
+        self.wrong_report_type_file.close()
 
     def test_report_name_validation(self):
         test_element = EQPRSFileUpload.objects.create(
             user=self.superuser,
+            file=self.wrong_report_type_file
         )
-        performance.admin.parse_and_process_csv('', test_element.id)
+        performance.admin.save_imported_indicators(test_element.id)
         test_element.refresh_from_db()
         assert test_element.import_report == """Report type must be for one of 
 * Provincial Institutions Oversight Performance  Report 
@@ -59,8 +64,9 @@ class EQPRSFileUploadTestCase(TestCase):
     def test_with_missing_department(self):
         test_element = EQPRSFileUpload.objects.create(
             user=self.superuser,
+            file=self.csv_file
         )
-        performance.admin.parse_and_process_csv(self.correct_csv, test_element.id)
+        performance.admin.save_imported_indicators(test_element.id)
         test_element.refresh_from_db()
         assert test_element.import_report == """Department names that could not be matched on import : 
 * Health 
@@ -74,8 +80,9 @@ class EQPRSFileUploadTestCase(TestCase):
 
         test_element = EQPRSFileUpload.objects.create(
             user=self.superuser,
+            file=self.csv_file
         )
-        performance.admin.parse_and_process_csv(self.correct_csv, test_element.id)
+        performance.admin.save_imported_indicators(test_element.id)
         assert Indicator.objects.all().count() == 2
 
         indicator = models.Indicator.objects.filter(id=1).first()
