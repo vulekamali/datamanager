@@ -226,6 +226,12 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
             'object_id'] else 'Upload EQPRS file'
         return response
 
+    def has_change_permission(self, request, obj=None):
+        super(EQPRSFileUploadAdmin, self).has_change_permission(request, obj)
+
+    def has_delete_permission(self, request, obj=None):
+        super(EQPRSFileUploadAdmin, self).has_delete_permission(request, obj)
+
     def save_model(self, request, obj, form, change):
         if not obj.pk:
             obj.user = request.user
