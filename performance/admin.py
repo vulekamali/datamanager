@@ -68,8 +68,10 @@ def save_imported_indicators(obj_id):
             department_obj = models.Department.objects.filter(name=department, government=government_obj).first()
             models.Indicator.objects.filter(department=department_obj).delete()
 
+
     # create new indicators
     for indicator_data in parsed_data:
+        frequency = indicator_data['Frequency']
         programme = indicator_data['Programme']
         department_name = indicator_data['Institution']
         government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
@@ -87,8 +89,8 @@ def save_imported_indicators(obj_id):
                 q1_corrective_action=indicator_data['CorrectiveAction_Q1'],
                 q1_national_comments=indicator_data['National_Q1'],
                 q1_otp_comments=indicator_data['OTP_Q1'],
-                q1_dpme_coordinator_comments='',
-                q1_treasury_comments=indicator_data.get('Treasury_Q1', ''),
+                q1_dpme_coordinator_comments=indicator_data['OTP_Q1'],
+                q1_treasury_comments=indicator_data['National_Q1'],
 
                 q2_target=indicator_data['Target_Q2'],
                 q2_actual_output=indicator_data['ActualOutput_Q2'],
@@ -96,8 +98,8 @@ def save_imported_indicators(obj_id):
                 q2_corrective_action=indicator_data['CorrectiveAction_Q2'],
                 q2_national_comments=indicator_data['National_Q2'],
                 q2_otp_comments=indicator_data['OTP_Q2'],
-                q2_dpme_coordinator_comments='',
-                q2_treasury_comments='',
+                q2_dpme_coordinator_comments=indicator_data['OTP_Q2'],
+                q2_treasury_comments=indicator_data['National_Q2'],
 
                 q3_target=indicator_data['Target_Q3'],
                 q3_actual_output=indicator_data['ActualOutput_Q3'],
@@ -105,8 +107,8 @@ def save_imported_indicators(obj_id):
                 q3_corrective_action=indicator_data['CorrectiveAction_Q3'],
                 q3_national_comments=indicator_data['National_Q3'],
                 q3_otp_comments=indicator_data['OTP_Q3'],
-                q3_dpme_coordinator_comments='',
-                q3_treasury_comments='',
+                q3_dpme_coordinator_comments=indicator_data['OTP_Q3'],
+                q3_treasury_comments=indicator_data['National_Q3'],
 
                 q4_target=indicator_data['Target_Q4'],
                 q4_actual_output=indicator_data['ActualOutput_Q4'],
@@ -114,8 +116,8 @@ def save_imported_indicators(obj_id):
                 q4_corrective_action=indicator_data['CorrectiveAction_Q4'],
                 q4_national_comments=indicator_data['National_Q4'],
                 q4_otp_comments=indicator_data['OTP_Q4'],
-                q4_dpme_coordinator_comments='',
-                q4_treasury_comments='',
+                q4_dpme_coordinator_comments=indicator_data['OTP_Q4'],
+                q4_treasury_comments=indicator_data['National_Q4'],
 
                 annual_target=indicator_data['AnnualTarget_Summary2'],
                 annual_aggregate_output='',
@@ -124,14 +126,14 @@ def save_imported_indicators(obj_id):
                 annual_corrective_action=indicator_data['CorrectiveAction_Summary'],
                 annual_otp_comments=indicator_data['OTP_Summary'],
                 annual_national_comments=indicator_data['National_Summary'],
-                annual_dpme_coordincator_comments='',
-                annual_treasury_comments='',
+                annual_dpme_coordincator_comments=indicator_data['OTP_Summary'],
+                annual_treasury_comments=indicator_data['National_Summary'],
                 annual_audited_output=indicator_data['ValidatedAudited_Summary2'],
 
                 sector=indicator_data['Sector'],
-                programme_name=indicator_data['Programme'],
-                subprogramme_name=indicator_data['SubProgramme'],
-                frequency=indicator_data['Frequency'],
+                programme_name=indicator_data['SubProgramme'],
+                subprogramme_name=indicator_data['Location'],
+                frequency=[i[0] for i in models.FREQUENCIES if i[1] == frequency][0],
                 type=indicator_data['Type'],
                 subtype=indicator_data['SubType'],
                 mtsf_outcome=indicator_data['Outcome'],
