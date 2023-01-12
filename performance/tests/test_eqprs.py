@@ -83,7 +83,10 @@ class EQPRSFileUploadTestCase(TestCase):
             file=self.csv_file
         )
         performance.admin.save_imported_indicators(test_element.id)
+        test_element.refresh_from_db()
         assert Indicator.objects.all().count() == 2
 
         indicator = models.Indicator.objects.filter(id=1).first()
         assert indicator.indicator_name == "9.1.2 Number of statutory documents tabled at Legislature"
+        assert test_element.import_report == ""
+        assert test_element.num_imported == 2
