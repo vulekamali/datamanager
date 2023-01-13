@@ -60,7 +60,7 @@ def save_imported_indicators(obj_id):
     num_imported = 0
     total_record_count = len(parsed_data)
     not_matching_departments = []
-    fy_obj = budgetportal.models.FinancialYear.objects.filter(slug=financial_year).first()
+    fy_obj = budgetportal.models.FinancialYear.objects.filter(slug=financial_year).get()
     sphere_obj = budgetportal.models.Sphere.objects.filter(name=sphere, financial_year=fy_obj).first()
 
     # clear department indicators
