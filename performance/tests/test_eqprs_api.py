@@ -1,4 +1,3 @@
-#from django.test import TestCase
 import json
 from django.urls import reverse
 from rest_framework.test import APITestCase,APIRequestFactory
@@ -6,8 +5,6 @@ from rest_framework import status
 from performance.views import IndicatorReadOnlyModelViewSet
 from performance.serializer import IndicatorSerializer
 from performance.models import Indicator
-# Create your tests here.
-
 
 class indicator_API_Test(APITestCase):
     list_url = reverse("indicator-list")
