@@ -10,7 +10,7 @@ router.register('eqprs', views.IndicatorReadOnlyModelViewSet)
 #urlpatterns = router.urls
 
 urlpatterns =[
-    url('', include(router.urls))  
+    url('api/v1', include(router.urls))  
 ]
 
 
