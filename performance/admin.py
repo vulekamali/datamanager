@@ -1,7 +1,7 @@
 from django.contrib import admin
 from io import StringIO
 from performance import models
-from django_q.tasks import async_task
+from django_q.tasks import async_task, fetch
 
 from frictionless import validate
 
@@ -56,7 +56,7 @@ def save_imported_indicators(obj_id):
     report_government_names = set([x['Programme'] for x in parsed_data])  # Programme column in CSV is mislabeled
     if "National" in report_government_names:
         report_government_names.remove("National")
-        report_government_names.append("South Africa")
+        report_government_names.add("South Africa")
     num_imported = 0
     total_record_count = len(parsed_data)
     not_matching_departments = []
@@ -65,7 +65,7 @@ def save_imported_indicators(obj_id):
 
     # clear department indicators
     for department in report_departments:
-        for programme in report_programmes:
+        for programme in report_government_names:
             government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
 
             department_obj = models.Department.objects.filter(name=department, government=government_obj).first()
@@ -205,7 +205,7 @@ def get_sphere(full_text):
 
 class EQPRSFileUploadAdmin(admin.ModelAdmin):
     exclude = ('num_imported', 'import_report', 'num_not_imported')
-    readonly_fields = ('num_imported', 'import_report', 'num_not_imported', 'user')
+    readonly_fields = ('num_imported', 'import_report', 'num_not_imported', 'user',)
     list_display = (
         "created_at",
         "user",
@@ -243,13 +243,16 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         if not obj.pk:
             obj.user = request.user
         super().save_model(request, obj, form, change)
-        task = async_task(func=save_imported_indicators, obj_id=obj.id)
+        # It looks like the task isn't saved synchronously, so we can't set the
+        # task as a related object synchronously. We have to fetch it by its ID
+        # when we want to see if it's available yet.
+        obj.task_id = async_task(func=save_imported_indicators, obj_id=obj.id)
+        obj.save()
 
     def success(self, obj):
-        if obj.task:
-            return obj.task.success
-        else:
-            return None
+        task = fetch(obj.task_id)
+        if task:
+            return task.success
 
     success.boolean = True
     success.short_description = "Success"
