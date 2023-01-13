@@ -34,7 +34,7 @@ jobs:
       run: |
         docker-compose run --rm test python manage.py collectstatic --no-input
         docker-compose run --rm test
-        docker-compose run --rm app black --check --diff budgetportal manage.py discourse
+        docker-compose run --rm app black --check --diff budgetportal manage.py discourse performance
 
     - name: Dump dependency logs for debugging
       run: |

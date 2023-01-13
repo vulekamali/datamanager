@@ -9,9 +9,7 @@ import uuid
 
 
 def eqprs_file_path(instance, filename):
-    return (
-        f"eqprs_uploads/{uuid.uuid4()}/{filename}"
-    )
+    return f"eqprs_uploads/{uuid.uuid4()}/{filename}"
 
 
 class EQPRSFileUpload(models.Model):
@@ -20,10 +18,12 @@ class EQPRSFileUpload(models.Model):
     file = models.FileField(upload_to=eqprs_file_path)
     # Plain text listing which departments could not be matched and were not imported
     import_report = models.TextField()
-    num_imported = models.IntegerField(null=True, default=0,
-                                       verbose_name='Number of rows we could import')  # number of rows we could import
-    num_not_imported = models.IntegerField(null=True, default=0,
-                                           verbose_name='Number of rows we could not import')  # number of rows we could not import
+    num_imported = models.IntegerField(
+        null=True, default=0, verbose_name="Number of rows we could import"
+    )  # number of rows we could import
+    num_not_imported = models.IntegerField(
+        null=True, default=0, verbose_name="Number of rows we could not import"
+    )  # number of rows we could not import
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
@@ -42,7 +42,9 @@ FREQUENCIES = (
 class Indicator(models.Model):
     """The indicator values available for a indicator in a department in a financial year"""
 
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="indicator_values")
+    department = models.ForeignKey(
+        Department, on_delete=models.CASCADE, related_name="indicator_values"
+    )
     indicator_name = models.TextField()
 
     # OTP stands for Office of the Premier
@@ -107,5 +109,7 @@ class Indicator(models.Model):
     cluster = models.TextField(blank=True)
     uid = models.TextField(blank=True)
 
-    source = models.ForeignKey(EQPRSFileUpload, on_delete=models.CASCADE, related_name="indicator_values")
+    source = models.ForeignKey(
+        EQPRSFileUpload, on_delete=models.CASCADE, related_name="indicator_values"
+    )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)

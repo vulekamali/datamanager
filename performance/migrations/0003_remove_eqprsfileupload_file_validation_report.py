@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('performance', '0002_auto_20221129_0819'),
+        ("performance", "0002_auto_20221129_0819"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='eqprsfileupload',
-            name='file_validation_report',
+            model_name="eqprsfileupload",
+            name="file_validation_report",
         ),
     ]
