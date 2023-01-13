@@ -79,7 +79,7 @@ def save_imported_indicators(obj_id):
         if government_name == "National":
             government_name = "South Africa"
         department_name = indicator_data['Institution']
-        government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
+        government_obj = budgetportal.models.Government.objects.filter(name=government_name, sphere=sphere_obj).first()
         department_obj = models.Department.objects.filter(name=department_name, government=government_obj).first()
 
         if department_obj:
