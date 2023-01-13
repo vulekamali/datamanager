@@ -53,7 +53,10 @@ def save_imported_indicators(obj_id):
 
     # find the objects
     report_departments = set([x['Institution'] for x in parsed_data])
-    report_programmes = set([x['Programme'] for x in parsed_data])
+    report_government_names = set([x['Programme'] for x in parsed_data])  # Programme column in CSV is mislabeled
+    if "National" in report_government_names:
+        report_government_names.remove("National")
+        report_government_names.append("South Africa")
     num_imported = 0
     total_record_count = len(parsed_data)
     not_matching_departments = []
