@@ -71,3 +71,4 @@ Werkzeug==1.0.0
 whitenoise==5.0.1
 xlrd==1.2.0
 xlwt==1.3.0
+frictionless[json]==4.40.8

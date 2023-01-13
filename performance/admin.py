@@ -1,9 +1,211 @@
 from django.contrib import admin
-
+from io import StringIO
 from performance import models
+from django_q.tasks import async_task, fetch
+
+from frictionless import validate
+
+import os
+import csv
+import budgetportal
+
+VALID_REPORT_TYPES = ['Provincial Institutions Oversight Performance  Report',
+                      'National Institutions Oversight Performance  Report']
+
+
+def generate_import_report(report_type_validated, frictionless_report, not_matching_departments):
+    report = ""
+    if not report_type_validated:
+        report += "Report type must be for one of " + os.linesep
+        for report_type in VALID_REPORT_TYPES:
+            report += f"* {report_type} {os.linesep}"
+
+    if frictionless_report:
+        if not frictionless_report.valid:
+            for error in frictionless_report.tasks[0].errors:
+                report += f"* {error.message} {os.linesep}"
+
+    if len(not_matching_departments) > 0:
+        report += "Department names that could not be matched on import : " + os.linesep
+        for department in not_matching_departments:
+            report += f"* {department} {os.linesep}"
+
+    return report
+
+
+def save_imported_indicators(obj_id):
+    # read file
+    obj_to_update = models.EQPRSFileUpload.objects.get(id=obj_id)
+    full_text = obj_to_update.file.read().decode('utf-8')
+
+    # validate report type
+    report_type_validated = validate_report_type(full_text, obj_id)
+    if not report_type_validated:
+        return
+
+    # clean the csv & extract data
+    financial_year = get_financial_year(full_text)
+    sphere = get_sphere(full_text)
+    clean_text = full_text.split('\n', 3)[3]
+    f = StringIO(clean_text)
+    reader = csv.DictReader(f)
+    parsed_data = list(reader)
+
+    # find the objects
+    report_departments = set([x['Institution'] for x in parsed_data])
+    report_government_names = set([x['Programme'] for x in parsed_data])  # Programme column in CSV is mislabeled
+    if "National" in report_government_names:
+        report_government_names.remove("National")
+        report_government_names.add("South Africa")
+    num_imported = 0
+    total_record_count = len(parsed_data)
+    not_matching_departments = []
+    fy_obj = budgetportal.models.FinancialYear.objects.filter(slug=financial_year).get()
+    sphere_obj = budgetportal.models.Sphere.objects.filter(name=sphere, financial_year=fy_obj).first()
+
+    # clear department indicators
+    for department in report_departments:
+        for programme in report_government_names:
+            government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
+
+            department_obj = models.Department.objects.filter(name=department, government=government_obj).first()
+            models.Indicator.objects.filter(department=department_obj).delete()
+
+
+    # create new indicators
+    for indicator_data in parsed_data:
+        frequency = indicator_data['Frequency']
+        government_name = indicator_data['Programme']
+        if government_name == "National":
+            government_name = "South Africa"
+        department_name = indicator_data['Institution']
+        government_obj = budgetportal.models.Government.objects.filter(name=government_name, sphere=sphere_obj).first()
+        department_obj = models.Department.objects.filter(name=department_name, government=government_obj).first()
+
+        if department_obj:
+            models.Indicator.objects.create(
+                indicator_name=indicator_data['Indicator'],
+                department=department_obj,
+                source_id=obj_id,
+
+                q1_target=indicator_data['Target_Q1'],
+                q1_actual_output=indicator_data['ActualOutput_Q1'],
+                q1_deviation_reason=indicator_data['ReasonforDeviation_Q1'],
+                q1_corrective_action=indicator_data['CorrectiveAction_Q1'],
+                q1_national_comments=indicator_data['National_Q1'],
+                q1_otp_comments=indicator_data['OTP_Q1'],
+                q1_dpme_coordinator_comments=indicator_data['OTP_Q1'],
+                q1_treasury_comments=indicator_data['National_Q1'],
+
+                q2_target=indicator_data['Target_Q2'],
+                q2_actual_output=indicator_data['ActualOutput_Q2'],
+                q2_deviation_reason=indicator_data['ReasonforDeviation_Q2'],
+                q2_corrective_action=indicator_data['CorrectiveAction_Q2'],
+                q2_national_comments=indicator_data['National_Q2'],
+                q2_otp_comments=indicator_data['OTP_Q2'],
+                q2_dpme_coordinator_comments=indicator_data['OTP_Q2'],
+                q2_treasury_comments=indicator_data['National_Q2'],
+
+                q3_target=indicator_data['Target_Q3'],
+                q3_actual_output=indicator_data['ActualOutput_Q3'],
+                q3_deviation_reason=indicator_data['ReasonforDeviation_Q3'],
+                q3_corrective_action=indicator_data['CorrectiveAction_Q3'],
+                q3_national_comments=indicator_data['National_Q3'],
+                q3_otp_comments=indicator_data['OTP_Q3'],
+                q3_dpme_coordinator_comments=indicator_data['OTP_Q3'],
+                q3_treasury_comments=indicator_data['National_Q3'],
+
+                q4_target=indicator_data['Target_Q4'],
+                q4_actual_output=indicator_data['ActualOutput_Q4'],
+                q4_deviation_reason=indicator_data['ReasonforDeviation_Q4'],
+                q4_corrective_action=indicator_data['CorrectiveAction_Q4'],
+                q4_national_comments=indicator_data['National_Q4'],
+                q4_otp_comments=indicator_data['OTP_Q4'],
+                q4_dpme_coordinator_comments=indicator_data['OTP_Q4'],
+                q4_treasury_comments=indicator_data['National_Q4'],
+
+                annual_target=indicator_data['AnnualTarget_Summary2'],
+                annual_aggregate_output='',
+                annual_pre_audit_output=indicator_data['PrelimaryAudited_Summary2'],
+                annual_deviation_reason=indicator_data['ReasonforDeviation_Summary'],
+                annual_corrective_action=indicator_data['CorrectiveAction_Summary'],
+                annual_otp_comments=indicator_data['OTP_Summary'],
+                annual_national_comments=indicator_data['National_Summary'],
+                annual_dpme_coordincator_comments=indicator_data['OTP_Summary'],
+                annual_treasury_comments=indicator_data['National_Summary'],
+                annual_audited_output=indicator_data['ValidatedAudited_Summary2'],
+
+                sector=indicator_data['Sector'],
+                programme_name=indicator_data['SubProgramme'],
+                subprogramme_name=indicator_data['Location'],
+                frequency=[i[0] for i in models.FREQUENCIES if i[1] == frequency][0],
+                type=indicator_data['Type'],
+                subtype=indicator_data['SubType'],
+                mtsf_outcome=indicator_data['Outcome'],
+                cluster=indicator_data['Cluster'],
+                uid=indicator_data['UID'],
+            )
+            num_imported = num_imported + 1
+        elif department_name not in not_matching_departments:
+            not_matching_departments.append(department_name)
+
+    # update object
+    obj_to_update.num_imported = num_imported
+    obj_to_update.num_not_imported = total_record_count - num_imported
+    obj_to_update.import_report = generate_import_report(True, None, not_matching_departments)
+    obj_to_update.save()
+
+
+def validate_report_type(full_text, obj_id):
+    validated = False
+    for report_type in VALID_REPORT_TYPES:
+        validated = validated or (report_type in full_text)
+
+    if not validated:
+        obj_to_update = models.EQPRSFileUpload.objects.get(id=obj_id)
+        obj_to_update.num_imported = None
+        obj_to_update.num_not_imported = None
+        obj_to_update.import_report = generate_import_report(False, None, [])
+        obj_to_update.save()
+
+    return validated
+
+
+def validate_frictionless(data, obj_id):
+    report = validate(data)
+    validated = report.valid
+    if not validated:
+        obj_to_update = models.EQPRSFileUpload.objects.get(id=obj_id)
+        obj_to_update.num_imported = None
+        obj_to_update.num_not_imported = None
+        obj_to_update.import_report = generate_import_report(True, report, [])
+        obj_to_update.save()
+
+    return validated
+
+
+def get_financial_year(full_text):
+    financial_year = full_text.split('\n', 1)[1]
+    financial_year = financial_year.replace('QPR for FY ', '')
+    financial_year = financial_year[:financial_year.index(' ')]
+    financial_year = financial_year.strip()
+
+    return financial_year
+
+
+def get_sphere(full_text):
+    line = full_text.split('\n', 2)[1]
+    if 'Provincial' in line:
+        sphere = 'Provincial'
+    else:
+        sphere = 'National'
+
+    return sphere
 
 
 class EQPRSFileUploadAdmin(admin.ModelAdmin):
+    exclude = ('num_imported', 'import_report', 'num_not_imported')
+    readonly_fields = ('num_imported', 'import_report', 'num_not_imported', 'user',)
     list_display = (
         "created_at",
         "user",
@@ -12,17 +214,45 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         "success",
         "updated_at",
     )
-    readonly_fields = (
-        "user",
-        "num_imported",
-        "num_not_imported",
-        "success",
-        "import_report",
+    fieldsets = (
+        ("", {
+            "fields": (
+                'user', 'file', 'import_report', 'num_imported', 'num_not_imported'
+            )
+        }),
     )
-    exclude = ("task",)
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return ('user', 'file',) + self.readonly_fields
+        return self.readonly_fields
+
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        response = super(EQPRSFileUploadAdmin, self).render_change_form(request, context, add, change, form_url, obj)
+        response.context_data['title'] = 'EQPRS file upload' if response.context_data[
+            'object_id'] else 'Upload EQPRS file'
+        return response
+
+    def has_change_permission(self, request, obj=None):
+        super(EQPRSFileUploadAdmin, self).has_change_permission(request, obj)
+
+    def has_delete_permission(self, request, obj=None):
+        super(EQPRSFileUploadAdmin, self).has_delete_permission(request, obj)
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
+        # It looks like the task isn't saved synchronously, so we can't set the
+        # task as a related object synchronously. We have to fetch it by its ID
+        # when we want to see if it's available yet.
+        obj.task_id = async_task(func=save_imported_indicators, obj_id=obj.id)
+        obj.save()
 
     def success(self, obj):
-        return obj.task.success
+        task = fetch(obj.task_id)
+        if task:
+            return task.success
 
     success.boolean = True
     success.short_description = "Success"
