@@ -7,7 +7,6 @@ from performance import views
 
 router = DefaultRouter()
 router.register('eqprs', views.IndicatorReadOnlyModelViewSet)
-#urlpatterns = router.urls
 
 urlpatterns =[
     url('api/v1', include(router.urls))  

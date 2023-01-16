@@ -7,7 +7,7 @@ from performance.serializer import IndicatorSerializer
 from performance.models import Indicator
 
 class indicator_API_Test(APITestCase):
-    list_url = reverse("indicator-list")
+    list_url = '/performance/api/v1/eqprs'
     fixture = ['test_api.json']
     
     def test_api(self):
