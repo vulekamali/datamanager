@@ -250,6 +250,12 @@ urlpatterns = [
         views.robots,
     ),
     path("", include("performance.urls")),
+    # Performance
+    url(
+        "performance",
+        views.performance_tabular_view,
+        name="performance",
+    ),
     # Sitemap
     url(
         r"^sitemap\.xml$",

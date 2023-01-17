@@ -955,6 +955,11 @@ def contributed_dataset(request, dataset_slug):
     context["comments_enabled"] = settings.COMMENTS_ENABLED
     return render(request, "contributed_dataset.html", context)
 
+def performance_tabular_view(request):
+    context = {
+        "navbar": MainMenuItem.objects.prefetch_related("children").all()
+    }
+    return render(request, "performance.html", context)
 
 def latest_department_list(request):
     url = reverse("department-list", args=(FinancialYear.get_latest_year().slug,))

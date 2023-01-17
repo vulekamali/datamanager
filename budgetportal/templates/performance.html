@@ -1,0 +1,11 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% block page_content %}
+
+<div class="Page-content Page-content--dynamicYears">
+    <main class="Page-contentInner">
+        <h1 class="Page-mainHeading">Explore performance indicators</h1>
+        {% include 'components/performance/Table/index.html' %}
+    </main>
+</div>
+{% endblock %}
