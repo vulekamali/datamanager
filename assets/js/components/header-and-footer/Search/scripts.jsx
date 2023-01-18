@@ -1,5 +1,5 @@
 import { ga } from 'react-ga';
-import { h, render, Component } from 'preact';
+import { render, Component } from 'react-dom';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import Search from './index.jsx';

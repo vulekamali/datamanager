@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import PropTypes from 'prop-types';
 import FormArea from './partials/FormArea.jsx';
 import ResultsArea from './partials/ResultsArea.jsx';
