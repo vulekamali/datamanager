@@ -53,4 +53,11 @@ module.exports = {
   plugins: [
      new MiniCssExtractPlugin({filename: 'styles.bundle.css'}),
   ],
+  resolve: {
+    "alias": {
+      "react": "preact/compat",
+      "react-dom": "preact/compat",     // Must be below test-utils
+      "react/jsx-runtime": "preact/jsx-runtime"
+    },
+  }
 };
