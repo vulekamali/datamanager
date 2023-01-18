@@ -27,7 +27,9 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        query: { compact: false },
+        options: {
+          presets: ['react']
+        }
       },
 
       {
@@ -53,4 +55,9 @@ module.exports = {
   plugins: [
      new MiniCssExtractPlugin({filename: 'styles.bundle.css'}),
   ],
+  resolve: {
+    alias: {
+      "preact": "react"
+    }
+  }
 };
