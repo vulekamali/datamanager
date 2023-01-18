@@ -6,13 +6,11 @@ from performance import views
 
 
 router = DefaultRouter()
-router.register(r'api/v1/', views.IndicatorReadOnlyModelViewSet)
+router.register('api/v1/eqprs', views.IndicatorReadOnlyModelViewSet)
 
 urlpatterns =[
-    
-    path('', include(router.urls)),
-    path('/eqprs', include('rest_framework.urls', namespace='rest_framework'))
-   
+
+    path('', include(router.urls))
 ]
 
 

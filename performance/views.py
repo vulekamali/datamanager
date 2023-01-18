@@ -5,7 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import viewsets
 from django_filters import rest_framework as filters
 from rest_framework.filters import SearchFilter, OrderingFilter
-
+import django_filters
 # class IndicatorFilter(filters.FilterSet):
 
 #     department_name = filters.CharFilter(lookup_expr= 'icontains')
@@ -21,7 +21,7 @@ class IndicatorReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     http_method_names = ['get','head']
     filter_backends = (SearchFilter, OrderingFilter)
     search_field = ['department_name', 'financial_year','government_name', 'sphere_name','frequency']
-
+    filter_fields = ['department_name', 'financial_year','government_name', 'sphere_name','frequency']
 
 
 
