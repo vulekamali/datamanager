@@ -17,7 +17,8 @@
     "build:webapp": "cd ./packages/webapp && node ./scripts/build",
     "build:root": "webpack --display errors-only --progress -p",
     "build:dev": "webpack --progress --watch --mode=development",
-    "build": "yarn build:webapp && yarn build:root"
+    "build": "yarn build:webapp && yarn build:root",
+    "start-test": "react-app-rewired --progress --watch --mode=development"
   },
   "devDependencies": {
     "app-root-dir": "^1.0.2",

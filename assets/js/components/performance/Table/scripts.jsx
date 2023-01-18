@@ -1,5 +1,6 @@
 import {Component, render, h} from "preact";
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,20 +9,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-class TabularView extends Component {
-    constructor(props) {
-        super(props);
-    }
+function scripts() {
+    const parent = document.getElementsByClassName('js-initTabularView')[0];
 
-    render() {
-        const rows = [
-            {name: 'Frozen yoghurt', calories: 159, fat: 6.0, carbs: 24, protein: 4.0},
-            {name: 'Frozen yoghurt', calories: 159, fat: 6.0, carbs: 24, protein: 4.0},
-            {name: 'Frozen yoghurt', calories: 159, fat: 6.0, carbs: 24, protein: 4.0},
-            {name: 'Frozen yoghurt', calories: 159, fat: 6.0, carbs: 24, protein: 4.0}
-        ];
-
-        return (
+    /*
+    render(
+        <TabularView/>,
+        parent
+    );
+    */
+    ReactDOM.render(
+        <React.StrictMode>
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
@@ -51,16 +49,8 @@ class TabularView extends Component {
                     </TableBody>
                 </Table>
             </TableContainer>
-        )
-    }
-}
-
-function scripts() {
-    const parent = document.getElementsByClassName('js-initTabularView')[0];
-
-    render(
-        <TabularView/>,
-        parent
+        </React.StrictMode>,
+        document.getElementById('root'),
     );
 }
 
