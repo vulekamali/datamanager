@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import ResponsiveChart from './../../universal/ResponsiveChart/index.jsx';
 import ValueBlocks from './../ValueBlocks/index.jsx';
 

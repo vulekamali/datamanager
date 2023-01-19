@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import breakIntoWrap from './../partials/breakIntoWrap.js';
 
 export default function Heading({ heading, subHeading, type, left }) {

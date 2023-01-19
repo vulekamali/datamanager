@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import Box from './partials/Box.jsx';
 
 

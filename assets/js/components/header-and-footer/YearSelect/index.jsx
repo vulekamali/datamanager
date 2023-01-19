@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import queryString from 'query-string';
 import Tooltip from './../../universal/Tooltip/index.jsx';
 

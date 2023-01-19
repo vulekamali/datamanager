@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import TooltipGroup from './TooltipGroup.jsx';
 
 

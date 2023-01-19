@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import ValueBlocks from './../ValueBlocks/index.jsx';
 
 

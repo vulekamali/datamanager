@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import tabOptions from './../data/tabOptions.json';
 import StaticContent from './StaticContent.jsx';
 

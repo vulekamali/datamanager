@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import BreakpointItem from './BreakpointItem.jsx';
 
 

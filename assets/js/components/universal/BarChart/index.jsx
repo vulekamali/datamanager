@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import calcMaxValue from './partials/calcMaxValue.js';
 import buildGroupSpaceArray from './partials/buildGroupSpaceArray.js';
 import breakIntoWrap from './partials/breakIntoWrap.js';

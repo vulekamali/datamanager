@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import Close from './partials/Close.jsx';
 import Download from './partials/Download.jsx';
 import Facebook from './partials/Facebook.jsx';

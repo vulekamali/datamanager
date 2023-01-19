@@ -1,4 +1,3 @@
-import { h } from 'preact';
 
 
 export default function Grid({ styling, totalGroupSpace }) {

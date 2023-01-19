@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import Controls from './partials/Controls.jsx';
 import List from './partials/List.jsx';
 

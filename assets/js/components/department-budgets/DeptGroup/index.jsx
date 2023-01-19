@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import GovernmentResources from './../../GovernmentResources/GovernmentResources.jsx';
 
 import Map from './partials/Map.jsx';

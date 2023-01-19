@@ -1,4 +1,3 @@
-import { h } from 'preact';
 
 import { jsConnect as connect } from '../../../utilities/js/helpers/connector.js';
 import VideoEmbed from '../../../components/universal/VideoEmbed/index.jsx';

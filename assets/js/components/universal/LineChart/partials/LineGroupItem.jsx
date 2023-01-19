@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { relative } from 'path';
 
 const colours = [

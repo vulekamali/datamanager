@@ -1,4 +1,3 @@
-import { h } from 'preact';
 
 
 export default function TabSelection({ tab, updateTab, tabOptions }) {

@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import CloseIcon from './CloseIcon.jsx';
 
 
