@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import TooltipItem from './TooltipItem.jsx';
 
 const colours = [

@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import Links from './Links.jsx';
 
 

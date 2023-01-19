@@ -1,3 +1,4 @@
+import { h } from 'preact';
 
 
 export default function IntroSection({ innerHtml, open, setOpen, parentAction, triggered }) {

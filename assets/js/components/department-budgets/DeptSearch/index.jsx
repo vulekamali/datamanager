@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import DeptControl from './../DeptControl/index.jsx';
 import DeptGroup from './../DeptGroup/index.jsx';
 

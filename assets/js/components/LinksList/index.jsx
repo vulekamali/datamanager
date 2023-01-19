@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import PropTypes from 'prop-types';
 
 import Icon from '../Icon/index.jsx';

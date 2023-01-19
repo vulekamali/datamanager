@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import TooltipItem from './TooltipItem.jsx';
 import breakIntoWrap from './breakIntoWrap.js';
 

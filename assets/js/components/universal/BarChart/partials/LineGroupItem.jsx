@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import breakIntoWrap from './breakIntoWrap.js';
 
 const colours = [

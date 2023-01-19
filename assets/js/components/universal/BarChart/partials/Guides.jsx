@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import GuideItem from './GuideItem.jsx';
 
 

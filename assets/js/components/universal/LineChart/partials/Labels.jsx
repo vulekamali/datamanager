@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import LabelItem from './LabelItem.jsx';
 
 

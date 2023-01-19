@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import BarChart from './../../BarChart/index.jsx';
 import LineChart from './../../LineChart/index.jsx';
 

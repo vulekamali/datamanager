@@ -1,3 +1,4 @@
+import { h } from 'preact';
 
 
 export default function LabelItem({ totalGroupSpace, groupSpaceArray, rank, title, styling }) {
