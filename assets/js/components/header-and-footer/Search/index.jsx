@@ -60,7 +60,6 @@ export default function SearchMarkup(props) {
 }
 
 SearchMarkup.propTypes = {
-  count: PropTypes.string.isRequired,
   currentKeywords: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   focus: PropTypes.bool.isRequired,

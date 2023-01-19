@@ -27,7 +27,7 @@ export default function Modal({ markup, title, closeModal }) {
 
   return (
     <div className="Modals">
-      buildModal()
+      {buildModal()}
     </div>
   );
 }

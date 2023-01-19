@@ -18,7 +18,7 @@ export default function FormArea({ setFocus, currentKeywords, selectedYear }) {
         name="search"
         onFocus={addFocus}
         placeholder="Search vulekamali"
-        value={currentKeywords}
+        defaultValue={currentKeywords}
       />
 
       <div className="Search-action">
