@@ -1,5 +1,5 @@
 import { ga } from 'react-ga';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
@@ -95,7 +95,7 @@ function scripts() {
       }
 
       // Initialise Search Preact App
-      render(
+      ReactDOM.render(
         <SearchContainer {...{ requestOverride, selectedYear, searchParam }} />,
         component,
       );

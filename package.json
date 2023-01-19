@@ -102,10 +102,6 @@
     ]
   },
   "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.8.5",
     "array.from": "^1.0.3",
     "array.prototype.every": "^1.0.0",
     "array.prototype.findindex": "^2.0.2",
