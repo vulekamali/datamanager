@@ -1,12 +1,13 @@
 import { ga } from 'react-ga';
-import { render, Component } from 'react-dom';
+import { render } from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import Search from './index.jsx';
 import removePunctuation from '../../../utilities/js/helpers/removePunctuation.js';
 
 
-class SearchContainer extends Component {
+class SearchContainer extends React.Component {
   constructor(props) {
     super(props);
 

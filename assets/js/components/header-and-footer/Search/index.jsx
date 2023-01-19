@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import FormArea from './partials/FormArea.jsx';
 import ResultsArea from './partials/ResultsArea.jsx';
-
+import React from 'react';
 
 export default function SearchMarkup(props) {
   const {

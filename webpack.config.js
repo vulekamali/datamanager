@@ -54,10 +54,5 @@ module.exports = {
 
   plugins: [
      new MiniCssExtractPlugin({filename: 'styles.bundle.css'}),
-  ],
-  resolve: {
-    alias: {
-      "preact": "react"
-    }
-  }
+  ]
 };
