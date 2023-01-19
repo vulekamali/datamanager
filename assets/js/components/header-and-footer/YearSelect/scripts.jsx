@@ -103,7 +103,6 @@ function scripts() {
 
       ReactDOM.render(
         <YearSelectContainer {...{ jsonData }} />,
-        nodes[i].parentNode,
         nodes[i],
       );
     });

@@ -112,9 +112,12 @@ const createOtherYears = (otherYears, color) => {
           <div className={`Section-title${color}`}>See more results</div>
         </div>
         {
-          otherYears.map(({ name, url, count: innerCount }) => {
+          otherYears.map(({ name, url, count: innerCount }, index) => {
             return (
-              <div className="SearchResult-buttonItem">
+              <div
+                  className="SearchResult-buttonItem"
+                  key={index}
+              >
                 <a href={url} className="Button is-secondary is-inline">
                   <span>{name}</span>
                   <span className="u-fontWeightNormal">&nbsp;({innerCount} results)</span>
@@ -139,8 +142,11 @@ function Section({ type, items, tab, otherYears, error }) {
         <div className="Grid has-standardTrigger u-marginBottom30">
           <div className="Grid-inner">
             {
-              items.map(({ title, url, snippet, source, contributor }) => {
-                return <div className="Grid-item is-1of3"><ItemPreview paddingOverride {...{ source, tab, url, contributor, title, snippet }} /></div>;
+              items.map(({ title, url, snippet, source, contributor }, index) => {
+                return <div
+                    className="Grid-item is-1of3"
+                    key={index}
+                ><ItemPreview paddingOverride {...{ source, tab, url, contributor, title, snippet }} /></div>;
               })
             }
           </div>
