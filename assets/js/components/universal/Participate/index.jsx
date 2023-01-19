@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import returnHtml from './partials/returnHtml.js';
 import PseudoSelect from './../../universal/PseudoSelect/index.jsx';
 import createTooltips from './../../universal/Tooltip/index.js';

@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import React from 'react';
 import { ga } from 'react-ga';
 import PropTypes from 'prop-types';
 
@@ -87,7 +87,7 @@ Markup.defaultProps = {
 };
 
 
-class Share extends Component {
+class Share extends React.Component {
   constructor(props) {
     super(props);
 

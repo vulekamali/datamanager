@@ -1,10 +1,11 @@
-import { h, render, Component } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import DebounceFunction from './../../../utilities/js/helpers/DebounceFunction.js';
 import getProp from './../../../utilities/js/helpers/getProp.js';
 import HomeChart from './index.jsx';
 
 
-class HomeChartContainer extends Component {
+class HomeChartContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -111,7 +112,7 @@ function scripts() {
     const hasNull = type === 'revenue' ? false : calcIfHasNullTotalBudget(rawValues.data);
     const items = Object.assign(...normaliseData(rawValues.data, hasNull, type, yearString));
 
-    render(
+    ReactDOM.render(
       <HomeChartContainer {...{ hasNull, items }} />,
       node,
     );

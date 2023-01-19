@@ -1,9 +1,10 @@
-import { h, Component, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import Participate from './index.jsx';
 import DebounceFunction from './../../../utilities/js/helpers/DebounceFunction.js';
 
 
-class ParticipateContainer extends Component {
+class ParticipateContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -87,7 +88,7 @@ for (let i = 0; i < nodes.length; i++) {
 
   const currentMonthIndex = new Date().getMonth();
 
-  render(
+  ReactDOM.render(
     <ParticipateContainer {...{ currentMonthIndex }} />,
     node,
   );

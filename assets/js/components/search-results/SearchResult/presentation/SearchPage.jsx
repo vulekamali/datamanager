@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import PropTypes from 'prop-types';
 import TabSelection from './TabSelection.jsx';
 import LandingLayout from './LandingLayout.jsx';

@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import React from 'react';
 import Chart from 'chart.js';
 import PropTypes from 'prop-types';
 
@@ -37,7 +37,7 @@ Markup.propTypes = {
 };
 
 
-class BarChart extends Component {
+class BarChart extends React.Component {
   constructor(...props) {
     super(...props);
     const { items, color, rotated, viewportWidth, barTypes } = this.props;

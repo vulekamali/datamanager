@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 
 import { preactConnect as connect } from '../../utilities/js/helpers/connector.js';
 import normaliseProgrammes from './services/normaliseProgrammes/index.js';

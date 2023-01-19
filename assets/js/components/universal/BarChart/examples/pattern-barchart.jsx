@@ -1,4 +1,5 @@
-import { h, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import BarChart from './../index.jsx';
 
 
@@ -9,7 +10,7 @@ function pattern() {
   const no = document.getElementById('pattern-barchart-no');
 
   if (basic) {
-    render(
+    ReactDOM.render(
       <BarChart
         items={{ 'Test 1': [10], 'Test 2': [30], 'Test 3': [20] }}
         width={300}
@@ -21,7 +22,7 @@ function pattern() {
   }
 
   if (multiple) {
-    render(
+    ReactDOM.render(
       <BarChart
         items={{ 'Test 1': [10, 50, 0], 'Test 2': [30, 10, 40], 'Test 3': [20, 0, 10] }}
         width={600}
@@ -33,7 +34,7 @@ function pattern() {
   }
 
   if (no) {
-    render(
+    ReactDOM.render(
       <BarChart
         items={{ 'Test 1': [10], 'Test 2': [30], 'Test 3': [20] }}
         width={700}
@@ -43,7 +44,7 @@ function pattern() {
   }
 
   if (download) {
-    render(
+    ReactDOM.render(
       <BarChart
         items={{ 'Test 1': [10], 'Test 2': [30], 'Test 3': [20] }}
         width={600}

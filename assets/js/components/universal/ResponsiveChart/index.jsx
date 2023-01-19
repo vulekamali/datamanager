@@ -1,10 +1,10 @@
-import { h, Component } from 'preact';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Markup from './partials/Markup.jsx';
 import DebounceFunction from './../../../utilities/js/helpers/DebounceFunction.js';
 
 
-export default class ResponsiveChart extends Component {
+export default class ResponsiveChart extends React.Component {
   constructor(props) {
     super(props);
     const { minWidth } = this.props;

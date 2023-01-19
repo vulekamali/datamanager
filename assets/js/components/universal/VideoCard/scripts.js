@@ -1,5 +1,5 @@
 import { zipObject } from 'lodash';
-import { h } from 'preact';
+import React from 'react';
 import PropTypes, { checkPropTypes } from 'prop-types';
 import { jsConnect } from './../../../utilities/js/helpers/connector';
 import { createModal } from './../../header-and-footer/Modals/redux.js';

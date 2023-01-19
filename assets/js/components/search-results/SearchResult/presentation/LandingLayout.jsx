@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import tabOptions from './../data/tabOptions.json';
 import StaticContent from './StaticContent.jsx';
 

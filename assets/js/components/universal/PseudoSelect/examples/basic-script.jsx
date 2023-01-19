@@ -1,9 +1,10 @@
-import { h, Component, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import PseudoSelect from './../index.jsx';
 
 
 function basicScript() {
-  class PseudoSelectBasicExample extends Component {
+  class PseudoSelectBasicExample extends React.Component {
     constructor(props) {
       super(props);
 
@@ -40,7 +41,7 @@ function basicScript() {
 
 
   const node = document.getElementById('example-pseudoselect-basic-07-03');
-  render(
+  ReactDOM.render(
     <PseudoSelectBasicExample />,
     node,
   );
