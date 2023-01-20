@@ -4,6 +4,7 @@ from .models import Indicator
 
 
 class IndicatorSerializer(ModelSerializer):
+    model = Indicator
     department_name = serializers.SerializerMethodField('get_department_name')
     financial_year = serializers.SerializerMethodField('get_financialYear')
     government_name = serializers.SerializerMethodField('get_government_name')
