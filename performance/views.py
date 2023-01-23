@@ -5,6 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import viewsets
 from django_filters import rest_framework as filters
 
+<<<<<<< HEAD
 
 class IndicatorFilter(filters.FilterSet):
     model = Indicator
@@ -19,10 +20,13 @@ class IndicatorFilter(filters.FilterSet):
         model = Indicator
         filter_fields = ('department_name','financial_year', 'government_name','sphere_name','frequency', 'mtsf_outcome','sector')
 
+=======
+>>>>>>> eqprs-api
 class IndicatorReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = IndicatorSerializer
     filterset_class = IndicatorFilter
     queryset = Indicator.objects.all()
+<<<<<<< HEAD
     http_method_names = ['get','head']
 
 
@@ -32,3 +36,6 @@ class IndicatorReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     
 
 
+=======
+    http_method_names = ['get','head']
+>>>>>>> eqprs-api
