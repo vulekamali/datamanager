@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from .models import Indicator
 from .serializer import IndicatorSerializer
-from rest_framework.viewsets import ModelViewSet
-from rest_framework import viewsets
+from rest_framework import generics
 
-class IndicatorReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
+class IndicatorListView(generics.ListAPIView):
     serializer_class = IndicatorSerializer
     queryset = Indicator.objects.all()
-    http_method_names = ['get','head']
