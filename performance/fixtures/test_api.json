@@ -1,4 +1,58 @@
-[
+[{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+      "password": "pbkdf2_sha256$36000$0lM3TbZBY94V$xirXvIgKYBggcH0tMDjE6GTjoS6KYuim4sl7UbpYsrA=",
+      "last_login": "2019-04-16T05:45:02Z",
+      "is_superuser": true,
+      "username": "admin@localhost",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@localhost",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2019-04-15T20:06:18Z",
+      "groups": [],
+      "user_permissions": []
+  }
+},
+{
+  "model": "budgetportal.financialyear",
+  "pk": 1,
+  "fields": {
+      "slug": "2015-16",
+      "published": false
+  }
+},
+{
+  "model": "budgetportal.sphere",
+  "pk": 1,
+  "fields": {
+      "name": "National",
+      "slug": "national",
+      "financial_year": 1
+  }
+},
+{
+  "model": "budgetportal.government",
+  "pk": 1,
+  "fields": {
+      "sphere": 1,
+      "name": "South Africa",
+      "slug": "south-africa"
+  }
+},
+{
+  "model": "budgetportal.department",
+  "pk": 1,
+  "fields": {
+      "government": 1,
+      "name": "Agriculture Forestry and Fisheries",
+      "vote_number": 1,
+      "intro": " ",  
+      "slug": "agriculture-forestry-and-fisheries"
+  }
+},
     {
       "pk": 1,
       "model": "performance.eqprsfileupload",
@@ -27,7 +81,7 @@
     "model": "performance.indicator",
     "fields": {
       "sector": "",
-      "department": ["2019-20", "national", "south-africa", "agriculture-forestry-and-fisheries"],
+      "department": 1,
       "programme_name": "Programme 1: Administration",
       "subprogramme_name": "Financial Management Services",
       "frequency": "Annually",
@@ -77,7 +131,7 @@
     "model": "performance.indicator",
     "fields": {
       "sector": "",
-      "department": ["2019-20", "national", "south-africa", "agriculture-forestry-and-fisheries"],
+      "department": 1,
       "programme_name": "Programme 1: Administration",
       "subprogramme_name": "Financial Management Services",
       "frequency": "Quarterly",
