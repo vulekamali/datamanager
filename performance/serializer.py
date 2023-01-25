@@ -1,14 +1,13 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import Indicator
-import django_filters
-#from .views import IndicatorFilter
+from .filters import IndicatorFilter
 
 
 class IndicatorSerializer(ModelSerializer):        
     class Meta:
         model = Indicator
-      # filterset_class = IndicatorFilter
+        filterset_class = IndicatorFilter
         fields = '__all__'
         extra_fields = ['department_name', 'financial_year','government_name', 'sphere_name','frequency']
 
