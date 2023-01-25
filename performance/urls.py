@@ -5,24 +5,8 @@ from django.urls import path, include
 from performance import views
 
 
-router = DefaultRouter()
-router.register('api/v1/eqprs', views.IndicatorReadOnlyModelViewSet)
-#urlpatterns = router.urls
-
 urlpatterns =[
-    url('', include(router.urls))  
+    # Performance
+    path('', views.performance_tabular_view, name="performance"),
+    path(r'api/v1/eqprs/', views.IndicatorListView.as_view()),
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-

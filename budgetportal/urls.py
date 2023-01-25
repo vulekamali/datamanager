@@ -249,13 +249,10 @@ urlpatterns = [
         r"^robots\.txt$",
         views.robots,
     ),
-    path("", include("performance.urls")),
-    # Performance
-    url(
-        "performance",
-        views.performance_tabular_view,
-        name="performance",
-    ),
+
+    # Performance app
+    path("performance/", include("performance.urls")),
+
     # Sitemap
     url(
         r"^sitemap\.xml$",
