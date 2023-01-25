@@ -29,10 +29,13 @@ class IndicatorFilter(filters.FilterSet):
 >>>>>>> eqprs-api
 class IndicatorReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = IndicatorSerializer
+    filterset_class = IndicatorFilter
     queryset = Indicator.objects.all()
 <<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
+    indicatorfilter = IndicatorFilter
+>>>>>>> Stashed changes
     indicatorfilter = IndicatorFilter
 >>>>>>> Stashed changes
     http_method_names = ['get','head']
