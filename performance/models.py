@@ -16,7 +16,7 @@ def eqprs_file_path(instance, filename):
 
 class EQPRSFileUpload(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING, blank=True)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
+    task_id = models.TextField()
     file = models.FileField(upload_to=eqprs_file_path)
     # Plain text listing which departments could not be matched and were not imported
     import_report = models.TextField()

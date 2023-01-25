@@ -1,7 +1,7 @@
 from django.contrib import admin
 from io import StringIO
 from performance import models
-from django_q.tasks import async_task
+from django_q.tasks import async_task, fetch
 
 from frictionless import validate
 
@@ -53,16 +53,19 @@ def save_imported_indicators(obj_id):
 
     # find the objects
     report_departments = set([x['Institution'] for x in parsed_data])
-    report_programmes = set([x['Programme'] for x in parsed_data])
+    report_government_names = set([x['Programme'] for x in parsed_data])  # Programme column in CSV is mislabeled
+    if "National" in report_government_names:
+        report_government_names.remove("National")
+        report_government_names.add("South Africa")
     num_imported = 0
     total_record_count = len(parsed_data)
     not_matching_departments = []
-    fy_obj = budgetportal.models.FinancialYear.objects.filter(slug=financial_year).first()
+    fy_obj = budgetportal.models.FinancialYear.objects.filter(slug=financial_year).get()
     sphere_obj = budgetportal.models.Sphere.objects.filter(name=sphere, financial_year=fy_obj).first()
 
     # clear department indicators
     for department in report_departments:
-        for programme in report_programmes:
+        for programme in report_government_names:
             government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
 
             department_obj = models.Department.objects.filter(name=department, government=government_obj).first()
@@ -70,9 +73,12 @@ def save_imported_indicators(obj_id):
 
     # create new indicators
     for indicator_data in parsed_data:
-        programme = indicator_data['Programme']
+        frequency = indicator_data['Frequency']
+        government_name = indicator_data['Programme']
+        if government_name == "National":
+            government_name = "South Africa"
         department_name = indicator_data['Institution']
-        government_obj = budgetportal.models.Government.objects.filter(name=programme, sphere=sphere_obj).first()
+        government_obj = budgetportal.models.Government.objects.filter(name=government_name, sphere=sphere_obj).first()
         department_obj = models.Department.objects.filter(name=department_name, government=government_obj).first()
 
         if department_obj:
@@ -87,8 +93,8 @@ def save_imported_indicators(obj_id):
                 q1_corrective_action=indicator_data['CorrectiveAction_Q1'],
                 q1_national_comments=indicator_data['National_Q1'],
                 q1_otp_comments=indicator_data['OTP_Q1'],
-                q1_dpme_coordinator_comments='',
-                q1_treasury_comments=indicator_data.get('Treasury_Q1', ''),
+                q1_dpme_coordinator_comments=indicator_data['OTP_Q1'],
+                q1_treasury_comments=indicator_data['National_Q1'],
 
                 q2_target=indicator_data['Target_Q2'],
                 q2_actual_output=indicator_data['ActualOutput_Q2'],
@@ -96,8 +102,8 @@ def save_imported_indicators(obj_id):
                 q2_corrective_action=indicator_data['CorrectiveAction_Q2'],
                 q2_national_comments=indicator_data['National_Q2'],
                 q2_otp_comments=indicator_data['OTP_Q2'],
-                q2_dpme_coordinator_comments='',
-                q2_treasury_comments='',
+                q2_dpme_coordinator_comments=indicator_data['OTP_Q2'],
+                q2_treasury_comments=indicator_data['National_Q2'],
 
                 q3_target=indicator_data['Target_Q3'],
                 q3_actual_output=indicator_data['ActualOutput_Q3'],
@@ -105,8 +111,8 @@ def save_imported_indicators(obj_id):
                 q3_corrective_action=indicator_data['CorrectiveAction_Q3'],
                 q3_national_comments=indicator_data['National_Q3'],
                 q3_otp_comments=indicator_data['OTP_Q3'],
-                q3_dpme_coordinator_comments='',
-                q3_treasury_comments='',
+                q3_dpme_coordinator_comments=indicator_data['OTP_Q3'],
+                q3_treasury_comments=indicator_data['National_Q3'],
 
                 q4_target=indicator_data['Target_Q4'],
                 q4_actual_output=indicator_data['ActualOutput_Q4'],
@@ -114,8 +120,8 @@ def save_imported_indicators(obj_id):
                 q4_corrective_action=indicator_data['CorrectiveAction_Q4'],
                 q4_national_comments=indicator_data['National_Q4'],
                 q4_otp_comments=indicator_data['OTP_Q4'],
-                q4_dpme_coordinator_comments='',
-                q4_treasury_comments='',
+                q4_dpme_coordinator_comments=indicator_data['OTP_Q4'],
+                q4_treasury_comments=indicator_data['National_Q4'],
 
                 annual_target=indicator_data['AnnualTarget_Summary2'],
                 annual_aggregate_output='',
@@ -124,14 +130,14 @@ def save_imported_indicators(obj_id):
                 annual_corrective_action=indicator_data['CorrectiveAction_Summary'],
                 annual_otp_comments=indicator_data['OTP_Summary'],
                 annual_national_comments=indicator_data['National_Summary'],
-                annual_dpme_coordincator_comments='',
-                annual_treasury_comments='',
+                annual_dpme_coordincator_comments=indicator_data['OTP_Summary'],
+                annual_treasury_comments=indicator_data['National_Summary'],
                 annual_audited_output=indicator_data['ValidatedAudited_Summary2'],
 
                 sector=indicator_data['Sector'],
-                programme_name=indicator_data['Programme'],
-                subprogramme_name=indicator_data['SubProgramme'],
-                frequency=indicator_data['Frequency'],
+                programme_name=indicator_data['SubProgramme'],
+                subprogramme_name=indicator_data['Location'],
+                frequency=[i[0] for i in models.FREQUENCIES if i[1] == frequency][0],
                 type=indicator_data['Type'],
                 subtype=indicator_data['SubType'],
                 mtsf_outcome=indicator_data['Outcome'],
@@ -198,7 +204,7 @@ def get_sphere(full_text):
 
 class EQPRSFileUploadAdmin(admin.ModelAdmin):
     exclude = ('num_imported', 'import_report', 'num_not_imported')
-    readonly_fields = ('num_imported', 'import_report', 'num_not_imported', 'user')
+    readonly_fields = ('num_imported', 'import_report', 'num_not_imported', 'user',)
     list_display = (
         "created_at",
         "user",
@@ -226,17 +232,26 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
             'object_id'] else 'Upload EQPRS file'
         return response
 
+    def has_change_permission(self, request, obj=None):
+        super(EQPRSFileUploadAdmin, self).has_change_permission(request, obj)
+
+    def has_delete_permission(self, request, obj=None):
+        super(EQPRSFileUploadAdmin, self).has_delete_permission(request, obj)
+
     def save_model(self, request, obj, form, change):
         if not obj.pk:
             obj.user = request.user
         super().save_model(request, obj, form, change)
-        task = async_task(func=save_imported_indicators, obj_id=obj.id)
+        # It looks like the task isn't saved synchronously, so we can't set the
+        # task as a related object synchronously. We have to fetch it by its ID
+        # when we want to see if it's available yet.
+        obj.task_id = async_task(func=save_imported_indicators, obj_id=obj.id)
+        obj.save()
 
     def success(self, obj):
-        if obj.task:
-            return obj.task.success
-        else:
-            return None
+        task = fetch(obj.task_id)
+        if task:
+            return task.success
 
     success.boolean = True
     success.short_description = "Success"
