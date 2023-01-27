@@ -5,8 +5,8 @@ from django.urls import path, include
 from performance import views
 
 
-urlpatterns =[
+urlpatterns = [
     # Performance
-    path('', views.performance_tabular_view, name="performance"),
-    path(r'api/v1/eqprs/', views.IndicatorListView.as_view()),
+    path("", views.performance_tabular_view, name="performance"),
+    path(r"api/v1/eqprs/", views.IndicatorListView.as_view()),
 ]

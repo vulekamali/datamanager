@@ -249,10 +249,8 @@ urlpatterns = [
         r"^robots\.txt$",
         views.robots,
     ),
-
     # Performance app
     path("performance/", include("performance.urls")),
-
     # Sitemap
     url(
         r"^sitemap\.xml$",

@@ -6,10 +6,9 @@ from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from budgetportal.models import MainMenuItem
 
+
 def performance_tabular_view(request):
-    context = {
-        "navbar": MainMenuItem.objects.prefetch_related("children").all()
-    }
+    context = {"navbar": MainMenuItem.objects.prefetch_related("children").all()}
     return render(request, "performance/performance.html", context)
 
 
@@ -60,7 +59,9 @@ class IndicatorListView(generics.ListAPIView):
 
         return {
             "department_name": facet_query("department__name"),
-            "financial_year_slug": facet_query("department__government__sphere__financial_year__slug"),
+            "financial_year_slug": facet_query(
+                "department__government__sphere__financial_year__slug"
+            ),
             "government_name": facet_query("department__government__name"),
             "sphere_name": facet_query("department__government__sphere__name"),
             "frequency": facet_query("frequency"),
