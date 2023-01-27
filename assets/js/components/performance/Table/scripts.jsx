@@ -72,10 +72,12 @@ class TabularView extends Component {
         return (
             <TableRow>
                 {Object.keys(this.state.rows[0]).map((key, index) => {
-                    return (<TableCell
-                        key={index}
-                        style={{borderRight: '1px solid #c6c6c6'}}
-                    ><b>{key}</b></TableCell>)
+                    if (key !== 'id') {
+                        return (<TableCell
+                            key={index}
+                            style={{borderRight: '1px solid #c6c6c6'}}
+                        ><b>{key}</b></TableCell>)
+                    }
                 })}
             </TableRow>
         )
@@ -89,20 +91,22 @@ class TabularView extends Component {
             >
                 {
                     Object.keys(row).map((key, i) => {
-                        return (
-                            <TableCell
-                                key={`${index}_${i}`}
-                                style={{
-                                    maxWidth: 150,
-                                    overflow: "hidden",
-                                    textOverflow: "ellipsis",
-                                    whiteSpace: "nowrap",
-                                    backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc',
-                                    borderRight: '1px solid #c6c6c6'
-                                }}
-                                title={row[key]}
-                            >{row[key]}</TableCell>
-                        )
+                        if (key !== 'id') {
+                            return (
+                                <TableCell
+                                    key={`${index}_${i}`}
+                                    style={{
+                                        maxWidth: key === 'indicator_name' ? 250 : 150,
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                        whiteSpace: "nowrap",
+                                        backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc',
+                                        borderRight: '1px solid #c6c6c6'
+                                    }}
+                                    title={row[key]}
+                                >{row[key]}</TableCell>
+                            )
+                        }
                     })
                 }
             </TableRow>
@@ -161,6 +165,7 @@ class TabularView extends Component {
 
         this.setState({
             ...this.state,
+            currentPage: 0,
             selectedFilters: selectedFilters
         }, () => {
             this.fetchAPIData();
