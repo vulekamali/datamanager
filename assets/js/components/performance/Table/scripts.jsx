@@ -8,8 +8,8 @@ import {
     Table,
     TableBody,
     TableCell,
-    TableContainer,
-    TableHead,
+    TableContainer, TableFooter,
+    TableHead, TablePagination,
     TableRow
 } from "@material-ui/core";
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
@@ -27,6 +27,9 @@ class TabularView extends Component {
             mtsfOutcomes: null,
             sectors: null,
             spheres: null,
+            totalCount: 0,
+            rowsPerPage: 0,
+            currentPage: 0,
             selectedFilters: {}
         }
     }
@@ -36,16 +39,13 @@ class TabularView extends Component {
     }
 
     fetchAPIData() {
-        let url = 'api/v1/eqprs/';
+        let url = `api/v1/eqprs/?page=${this.state.currentPage + 1}`;
 
         // append filters
-        let firstParam = true;
         Object.keys(this.state.selectedFilters).forEach((key) => {
             let value = this.state.selectedFilters[key];
             if (value !== '') {
-                url += firstParam ? '?' : '&';
-                firstParam = false;
-                url += `${key}=${encodeURI(value)}`;
+                url += `&${key}=${encodeURI(value)}`;
             }
         })
 
@@ -61,6 +61,8 @@ class TabularView extends Component {
                     mtsfOutcomes: response.results.facets['mtsf_outcome'],
                     sectors: response.results.facets['sector'],
                     spheres: response.results.facets['sphere_name'],
+                    totalCount: response.count,
+                    rowsPerPage: response.results.items.length
                 });
             })
             .catch((errorResult) => console.warn(errorResult));
@@ -107,22 +109,45 @@ class TabularView extends Component {
         )
     }
 
+    handlePageChange(event, newPage) {
+        this.setState({
+            ...this.state,
+            currentPage: newPage
+        }, () => {
+            this.fetchAPIData();
+        })
+    }
+
     renderTable() {
         if (this.state.rows === null) {
             // todo : return loading state
             return <div></div>
         } else {
             return (
-                <TableContainer component={Paper} style={{maxHeight: 440}}>
-                    <Table stickyHeader aria-label="simple table" size={'small'}>
-                        <TableHead>
-                            {this.renderTableHead()}
-                        </TableHead>
-                        <TableBody>
-                            {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <Paper>
+                    <TableContainer style={{maxHeight: 440}}>
+                        <Table stickyHeader aria-label="simple table" size={'small'}>
+                            <TableHead>
+                                {this.renderTableHead()}
+                            </TableHead>
+                            <TableBody>
+                                {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        colSpan={3}
+                        count={this.state.totalCount}
+                        rowsPerPage={this.state.rowsPerPage}
+                        rowsPerPageOptions={[]}
+                        page={this.state.currentPage}
+                        onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
+                        SelectProps={{
+                            inputProps: {'aria-label': 'rows per page'},
+                            native: true,
+                        }}
+                    />
+                </Paper>
             )
         }
     }
@@ -137,9 +162,9 @@ class TabularView extends Component {
         this.setState({
             ...this.state,
             selectedFilters: selectedFilters
+        }, () => {
+            this.fetchAPIData();
         })
-
-        this.fetchAPIData();
     }
 
     renderDepartmentFilter() {
