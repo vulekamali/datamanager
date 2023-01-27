@@ -177,7 +177,8 @@ class TabularView extends Component {
             return <div></div>
         } else {
             return (
-                <FormControl variant={'outlined'} size={'small'} style={{minWidth: '150px', fontSize: '8px'}}>
+                <FormControl variant={'outlined'} size={'small'}
+                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-department'}>department</InputLabel>
                     <Select
                         native
@@ -213,7 +214,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', marginLeft: '20px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-financialYears'}>financial year</InputLabel>
                     <Select
                         native
@@ -249,7 +250,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '160px', marginLeft: '20px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-frequency'}>frequency</InputLabel>
                     <Select
                         native
@@ -285,7 +286,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '160px', marginLeft: '20px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-government'}>government</InputLabel>
                     <Select
                         native
@@ -321,7 +322,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '160px', marginTop: '20px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-mtsfOutcome'}>mtsf outcome</InputLabel>
                     <Select
                         native
@@ -357,7 +358,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '160px', marginLeft: '20px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-sector'}>sector</InputLabel>
                     <Select
                         native
@@ -393,7 +394,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', marginLeft: '20px', marginTop: '20px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-sphere'}>sphere</InputLabel>
                     <Select
                         native
