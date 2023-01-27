@@ -249,6 +249,7 @@ urlpatterns = [
         r"^robots\.txt$",
         views.robots,
     ),
+    path("performance/", include("performance.urls")),
     # Sitemap
     url(
         r"^sitemap\.xml$",
@@ -266,6 +267,7 @@ urlpatterns = [
     re_path(r"^documents/", include(wagtaildocs_urls)),
     re_path(r"^", include(wagtail_urls)),
 ] + static.static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 if settings.DEBUG_TOOLBAR:
     import debug_toolbar
