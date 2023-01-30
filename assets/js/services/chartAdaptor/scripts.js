@@ -43,7 +43,7 @@ const ChartAdaptor = (props) => {
   };
 
   const styling = { scale, color, rotated };
-  return h(ChartSourceController, { items, toggle, barTypes, styling, downloadText });
+  return React.createElement(ChartSourceController, { items, toggle, barTypes, styling, downloadText });
 };
 
 
@@ -61,4 +61,3 @@ const query = {
 
 
 export default connect(ChartAdaptor, 'ChartAdaptor', query);
-

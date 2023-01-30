@@ -26,7 +26,7 @@ const videoConfig = {
 const Hero = ({ node, image, button }) => {
   const playVideo = () => createModal(
     videoConfig.title,
-    h(VideoEmbed, videoConfig, null),
+    React.createElement(VideoEmbed, videoConfig, null),
   );
 
   button.addEventListener('click', playVideo);

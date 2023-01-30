@@ -450,11 +450,12 @@ class TabularView extends Component {
 
 function scripts() {
     const parent = document.getElementById('js-initTabularView');
-
-    ReactDOM.render(
-        <TabularView
-        />, parent
-    )
+    if (parent) {
+      ReactDOM.render(
+          <TabularView
+          />, parent
+      )
+    }
 }
 
 

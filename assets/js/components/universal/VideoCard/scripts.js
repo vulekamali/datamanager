@@ -36,7 +36,7 @@ const query = {
 const updateModalState = (title, selected, languages) => {
   return createModal(
     title,
-    h(VideoEmbed, { title, languages, initialSelected: selected }),
+    React.createElement(VideoEmbed, { title, languages, initialSelected: selected }),
   );
 };
 
