@@ -59,12 +59,11 @@ function scripts() {
 
     ReactDOM.render(
       <IntroSectionContainer {...{ innerHtml }} />,
-      node.parentNode,
       node,
     );
   }
+
 }
 
 
 export default scripts();
-
