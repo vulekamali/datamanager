@@ -17,13 +17,13 @@ export default function PseudoSelect(props) {
     const id = `pseudo-select-${name}-${index}`;
 
     return (
-      <li className={`PseudoSelect-item${selected === items[key] ? ' is-active' : ''}`}>
+      <li key={index} className={`PseudoSelect-item${selected === items[key] ? ' is-active' : ''}`}>
         <label className="PseudoSelect-label" htmlFor={id}>
           <input
             {...{ id, name }}
             value={items[key]}
             type="radio"
-            checked={selected === items[key]}
+            defaultChecked={selected === items[key]}
             onClick={radioChange}
             className="PseudoSelect-radio"
           />
