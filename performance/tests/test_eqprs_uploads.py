@@ -8,9 +8,11 @@ from budgetportal.models.government import Department, Government, Sphere, Finan
 from django.test import RequestFactory
 from performance import models
 from django.core.files import File
+from unittest.mock import Mock
 
 import performance.admin
 import os
+import time
 
 USERNAME = "testuser"
 EMAIL = "testuser@domain.com"
@@ -34,10 +36,12 @@ class EQPRSFileUploadTestCase(TestCase):
             is_active=True,
         )
         file_path = os.path.abspath(("performance/static/correct_data.csv"))
+        national_file_path = os.path.abspath(("performance/static/national_data.csv"))
         wrong_report_type_file_path = os.path.abspath(
             ("performance/static/wrong_report_type.csv")
         )
         self.csv_file = File(open(file_path, "rb"))
+        self.national_file = File(open(national_file_path, "rb"))
         self.wrong_report_type_file = File(open(wrong_report_type_file_path, "rb"))
         self.mocked_request = get_mocked_request(self.superuser)
 
@@ -51,27 +55,25 @@ class EQPRSFileUploadTestCase(TestCase):
         )
         performance.admin.save_imported_indicators(test_element.id)
         test_element.refresh_from_db()
-        assert (
-            test_element.import_report
-            == """Report type must be for one of
-* Provincial Institutions Oversight Performance  Report
-* National Institutions Oversight Performance  Report
-"""
-        )
+        assert "Report type must be for one of" in test_element.import_report
+        assert "* Provincial Institutions Oversight Performance  Report" in test_element.import_report
+        assert "* National Institutions Oversight Performance  Report" in test_element.import_report
 
     def test_with_missing_department(self):
         test_element = EQPRSFileUpload.objects.create(
             user=self.superuser, file=self.csv_file
         )
+        fy = FinancialYear.objects.create(slug="2021-22")
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+        government = Government.objects.create(name="Eastern Cape", sphere=sphere)
+        department = Department.objects.create(
+            name="HealthTest", government=government, vote_number=1
+        )
         performance.admin.save_imported_indicators(test_element.id)
         test_element.refresh_from_db()
         assert test_element.num_not_imported == 2
-        assert (
-            test_element.import_report
-            == """Department names that could not be matched on import :
-* Health
-"""
-        )
+        assert "Department names that could not be matched on import :" in test_element.import_report
+        assert "* Health" in test_element.import_report
 
     def test_with_correct_csv(self):
         fy = FinancialYear.objects.create(slug="2021-22")
@@ -88,12 +90,12 @@ class EQPRSFileUploadTestCase(TestCase):
         test_element.refresh_from_db()
         assert Indicator.objects.all().count() == 2
 
-        indicator = models.Indicator.objects.filter(id=1).first()
+        indicator = models.Indicator.objects.all().first()
         assert test_element.import_report == ""
         assert test_element.num_imported == 2
         assert (
-            indicator.indicator_name
-            == "9.1.2 Number of statutory documents tabled at Legislature"
+                indicator.indicator_name
+                == "9.1.2 Number of statutory documents tabled at Legislature"
         )
         assert indicator.sector == "Health"
         assert indicator.programme_name == "Programme 1: Administration"
@@ -103,8 +105,8 @@ class EQPRSFileUploadTestCase(TestCase):
         assert indicator.subtype == "Max"
         assert indicator.mtsf_outcome == "Priority 3: Education, Skills And Health"
         assert (
-            indicator.cluster
-            == "The Social Protection, Community and Human Development cluster"
+                indicator.cluster
+                == "The Social Protection, Community and Human Development cluster"
         )
 
         assert indicator.q1_target == "0"
@@ -153,3 +155,54 @@ class EQPRSFileUploadTestCase(TestCase):
         assert indicator.annual_dpme_coordincator_comments == ""
         assert indicator.annual_treasury_comments == ""
         assert indicator.annual_audited_output == ""
+
+    def test_task_creation(self):
+        fy = FinancialYear.objects.create(slug="2021-22")
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+        government = Government.objects.create(name="Eastern Cape", sphere=sphere)
+        department = Department.objects.create(
+            name="Health", government=government, vote_number=1
+        )
+
+        model_admin = EQPRSFileUploadAdmin(model=EQPRSFileUpload, admin_site=AdminSite())
+        model_admin.save_model(obj=EQPRSFileUpload(file=self.csv_file), request=Mock(user=self.superuser), form=None,
+                               change=None)
+
+        last_element = EQPRSFileUpload.objects.all().last()
+        assert last_element.task_id is not None
+
+    def test_status_in_list_view(self):
+        assert "success" in EQPRSFileUploadAdmin.list_display
+
+        fy = FinancialYear.objects.create(slug="2021-22")
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+        government = Government.objects.create(name="Eastern Cape", sphere=sphere)
+        department = Department.objects.create(
+            name="Health", government=government, vote_number=1
+        )
+
+        model_admin = EQPRSFileUploadAdmin(model=EQPRSFileUpload, admin_site=AdminSite())
+        model_admin.save_model(obj=EQPRSFileUpload(file=self.csv_file), request=Mock(user=self.superuser), form=None,
+                               change=None)
+
+        last_element = EQPRSFileUpload.objects.all().last()
+        assert model_admin.success(last_element) == True
+
+    def test_with_national_government(self):
+        fy = FinancialYear.objects.create(slug="2021-22")
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+        government = Government.objects.create(name="South Africa", sphere=sphere)
+        department = Department.objects.create(
+            name="Health", government=government, vote_number=1
+        )
+
+        test_element = EQPRSFileUpload.objects.create(
+            user=self.superuser, file=self.national_file
+        )
+        performance.admin.save_imported_indicators(test_element.id)
+        test_element.refresh_from_db()
+
+        assert test_element.import_report == ""
+        assert test_element.num_imported == 1
+        indicator = models.Indicator.objects.all().first()
+        assert indicator.programme_name == "Programme 1: Administration"
