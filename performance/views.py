@@ -5,6 +5,7 @@ from rest_framework import generics
 from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from budgetportal.models import MainMenuItem
+from django.contrib.postgres.search import SearchQuery
 
 
 def performance_tabular_view(request):
@@ -31,7 +32,7 @@ class IndicatorListView(generics.ListAPIView):
         search_query = request.GET.get("q", "")
 
         queryset = self.get_queryset()
-
+        queryset = self.text_search(queryset, search_query)
         queryset = self.add_filters(queryset, request.GET, self.fieldmap)
 
         facets = self.get_facets(queryset)
@@ -44,6 +45,12 @@ class IndicatorListView(generics.ListAPIView):
             "facets": facets,
         }
         return self.get_paginated_response(data)
+
+    def text_search(self, qs, text):
+        if len(text) == 0:
+            return qs
+
+        return qs.filter(content_search=SearchQuery(text))
 
     def add_filters(self, qs, params, filter_map):
         query_dict = {}

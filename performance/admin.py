@@ -357,7 +357,7 @@ class IndicatorAdmin(admin.ModelAdmin):
         "annual_corrective_action",
         "annual_otp_comments",
         "annual_national_comments",
-        "annual_dpme_coordincator_comments",
+        "annual_dpme_coordinator_comments",
         "annual_treasury_comments",
         "annual_audited_output",
         "sector",
