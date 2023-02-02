@@ -16,7 +16,7 @@ VALID_REPORT_TYPES = [
 
 
 def generate_import_report(
-    report_type_validated, frictionless_report, not_matching_departments
+        report_type_validated, frictionless_report, not_matching_departments
 ):
     report = ""
     if not report_type_validated:
@@ -83,6 +83,7 @@ def save_imported_indicators(obj_id):
             ).first()
             models.Indicator.objects.filter(department=department_obj).delete()
 
+
     # create new indicators
     for indicator_data in parsed_data:
         frequency = indicator_data["Frequency"]
@@ -106,43 +107,43 @@ def save_imported_indicators(obj_id):
                 q1_actual_output=indicator_data["ActualOutput_Q1"],
                 q1_deviation_reason=indicator_data["ReasonforDeviation_Q1"],
                 q1_corrective_action=indicator_data["CorrectiveAction_Q1"],
-                q1_national_comments=indicator_data["National_Q1"],
-                q1_otp_comments=indicator_data["OTP_Q1"],
-                q1_dpme_coordinator_comments=indicator_data["OTP_Q1"],
-                q1_treasury_comments=indicator_data["National_Q1"],
+                q1_national_comments=indicator_data.get("National_Q1", ""),
+                q1_otp_comments=indicator_data.get("OTP_Q1", ""),
+                q1_dpme_coordinator_comments=indicator_data.get("OTP_Q1", ""),
+                q1_treasury_comments=indicator_data.get("National_Q1", ""),
                 q2_target=indicator_data["Target_Q2"],
                 q2_actual_output=indicator_data["ActualOutput_Q2"],
                 q2_deviation_reason=indicator_data["ReasonforDeviation_Q2"],
                 q2_corrective_action=indicator_data["CorrectiveAction_Q2"],
-                q2_national_comments=indicator_data["National_Q2"],
-                q2_otp_comments=indicator_data["OTP_Q2"],
-                q2_dpme_coordinator_comments=indicator_data["OTP_Q2"],
-                q2_treasury_comments=indicator_data["National_Q2"],
+                q2_national_comments=indicator_data.get("National_Q2", ""),
+                q2_otp_comments=indicator_data.get("OTP_Q2", ""),
+                q2_dpme_coordinator_comments=indicator_data.get("OTP_Q2", ""),
+                q2_treasury_comments=indicator_data.get("National_Q2", ""),
                 q3_target=indicator_data["Target_Q3"],
                 q3_actual_output=indicator_data["ActualOutput_Q3"],
                 q3_deviation_reason=indicator_data["ReasonforDeviation_Q3"],
                 q3_corrective_action=indicator_data["CorrectiveAction_Q3"],
-                q3_national_comments=indicator_data["National_Q3"],
-                q3_otp_comments=indicator_data["OTP_Q3"],
-                q3_dpme_coordinator_comments=indicator_data["OTP_Q3"],
-                q3_treasury_comments=indicator_data["National_Q3"],
+                q3_national_comments=indicator_data.get("National_Q3", ""),
+                q3_otp_comments=indicator_data.get("OTP_Q3", ""),
+                q3_dpme_coordinator_comments=indicator_data.get("OTP_Q3", ""),
+                q3_treasury_comments=indicator_data.get("National_Q3", ""),
                 q4_target=indicator_data["Target_Q4"],
                 q4_actual_output=indicator_data["ActualOutput_Q4"],
                 q4_deviation_reason=indicator_data["ReasonforDeviation_Q4"],
                 q4_corrective_action=indicator_data["CorrectiveAction_Q4"],
-                q4_national_comments=indicator_data["National_Q4"],
-                q4_otp_comments=indicator_data["OTP_Q4"],
-                q4_dpme_coordinator_comments=indicator_data["OTP_Q4"],
-                q4_treasury_comments=indicator_data["National_Q4"],
+                q4_national_comments=indicator_data.get("National_Q4", ""),
+                q4_otp_comments=indicator_data.get("OTP_Q4", ""),
+                q4_dpme_coordinator_comments=indicator_data.get("OTP_Q4", ""),
+                q4_treasury_comments=indicator_data.get("National_Q4", ""),
                 annual_target=indicator_data["AnnualTarget_Summary2"],
                 annual_aggregate_output="",
                 annual_pre_audit_output=indicator_data["PrelimaryAudited_Summary2"],
                 annual_deviation_reason=indicator_data["ReasonforDeviation_Summary"],
                 annual_corrective_action=indicator_data["CorrectiveAction_Summary"],
-                annual_otp_comments=indicator_data["OTP_Summary"],
-                annual_national_comments=indicator_data["National_Summary"],
-                annual_dpme_coordincator_comments=indicator_data["OTP_Summary"],
-                annual_treasury_comments=indicator_data["National_Summary"],
+                annual_otp_comments=indicator_data.get("OTP_Summary", ""),
+                annual_national_comments=indicator_data.get("National_Summary", ""),
+                annual_dpme_coordinator_comments=indicator_data.get("OTP_Summary", ""),
+                annual_treasury_comments=indicator_data.get("National_Summary", ""),
                 annual_audited_output=indicator_data["ValidatedAudited_Summary2"],
                 sector=indicator_data["Sector"],
                 programme_name=indicator_data["SubProgramme"],
@@ -248,13 +249,13 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object
             return (
-                "user",
-                "file",
-            ) + self.readonly_fields
+                       "user",
+                       "file",
+                   ) + self.readonly_fields
         return self.readonly_fields
 
     def render_change_form(
-        self, request, context, add=False, change=False, form_url="", obj=None
+            self, request, context, add=False, change=False, form_url="", obj=None
     ):
         response = super(EQPRSFileUploadAdmin, self).render_change_form(
             request, context, add, change, form_url, obj
@@ -357,7 +358,7 @@ class IndicatorAdmin(admin.ModelAdmin):
         "annual_corrective_action",
         "annual_otp_comments",
         "annual_national_comments",
-        "annual_dpme_coordincator_comments",
+        "annual_dpme_coordinator_comments",
         "annual_treasury_comments",
         "annual_audited_output",
         "sector",
@@ -461,7 +462,7 @@ class IndicatorAdmin(admin.ModelAdmin):
                     "annual_corrective_action",
                     "annual_otp_comments",
                     "annual_national_comments",
-                    "annual_dpme_coordincator_comments",
+                    "annual_dpme_coordinator_comments",
                     "annual_treasury_comments",
                     "annual_audited_output",
                 ),

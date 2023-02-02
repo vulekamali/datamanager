@@ -95,7 +95,7 @@ class Indicator(models.Model):
     annual_corrective_action = models.TextField(blank=True)
     annual_otp_comments = models.TextField(blank=True)
     annual_national_comments = models.TextField(blank=True)
-    annual_dpme_coordincator_comments = models.TextField(blank=True)
+    annual_dpme_coordinator_comments = models.TextField(blank=True)
     annual_treasury_comments = models.TextField(blank=True)
     annual_audited_output = models.TextField(blank=True)  # ValidatedAuditedSummary2
 
