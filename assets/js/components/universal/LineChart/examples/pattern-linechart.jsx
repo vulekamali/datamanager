@@ -1,4 +1,5 @@
-import { h, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import LineChart from './../index.jsx';
 
 
@@ -20,7 +21,7 @@ function pattern() {
   }
 
   if (multiple) {
-    render(
+    ReactDOM.render(
       <LineChart
         items={{ 'Test 1': [10, 50, 0], 'Test 2': [30, 10, 40], 'Test 3': [20, 0, 10] }}
         width={600}
@@ -32,7 +33,7 @@ function pattern() {
   }
 
   if (no) {
-    render(
+    ReactDOM.render(
       <LineChart
         items={{ 'Test 1': [10], 'Test 2': [30], 'Test 3': [20] }}
         width={700}

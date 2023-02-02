@@ -5,5 +5,4 @@ from .models import Indicator
 class IndicatorSerializer(ModelSerializer):
     class Meta:
         model = Indicator
-        fields = '__all__'
-    
+        fields = "__all__"

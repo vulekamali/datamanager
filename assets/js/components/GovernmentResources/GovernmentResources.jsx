@@ -1,4 +1,4 @@
-import { h, Component, render } from 'preact';
+import React from 'react';
 
 function skeletonResources() {
   return (
@@ -87,7 +87,7 @@ function isCollapsable(resources) {
     return resources.length > 3;
 }
 
-export default class GovernmentResources extends Component {
+export default class GovernmentResources extends React.Component {
   constructor(props) {
     super(props);
 

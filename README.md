@@ -234,7 +234,7 @@ docker-compose run --rm app python manage.py makemigrations
 * Get better debugging with ``python manage.py runserver_plus``
 * Format your code using Black (See version in github actions):
 
-    docker-compose run --rm app black budgetportal manage.py discourse
+    docker-compose run --rm app black budgetportal manage.py discourse performance
 
 
 #### React stuff (package.json and packages/webapp/package.json)

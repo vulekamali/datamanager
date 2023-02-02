@@ -1,11 +1,11 @@
-import { createElement, Component } from 'preact';
+import React from 'react';
 import getLandingResults from './getLandingResults.js';
 import getFacetResults from './getFacetResults.js';
 import SearchPage from './../presentation/SearchPage.jsx';
 import getCkanUrl from './../../../../utilities/config/siteConfig.js';
 
 
-export default class SearchPageContainer extends Component {
+export default class SearchPageContainer extends React.Component {
   constructor(props) {
     super(props);
     const { view } = this.props;
@@ -140,7 +140,7 @@ export default class SearchPageContainer extends Component {
 
     const { updateTab, addPage } = this.events;
 
-    return createElement(
+    return React.createElement(
       SearchPage,
       {
         phrase,

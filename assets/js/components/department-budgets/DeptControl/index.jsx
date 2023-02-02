@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import PseudoSelect from './../../universal/PseudoSelect/index.jsx';
 import provinces from './partials/provinces.json';
 import spheres from './partials/spheres.json';

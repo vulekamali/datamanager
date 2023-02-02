@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 
 
 export default function GuideItem({ styling, totalGroupSpace, rank }) {

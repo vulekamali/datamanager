@@ -1,8 +1,9 @@
-import { h, render, Component } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import IntroSection from './index.jsx';
 
 
-class IntroSectionContainer extends Component {
+class IntroSectionContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -56,14 +57,13 @@ function scripts() {
     const node = nodes[i];
     const innerHtml = node.getElementsByClassName('js-content')[0].innerHTML;
 
-    render(
+    ReactDOM.render(
       <IntroSectionContainer {...{ innerHtml }} />,
-      node.parentNode,
       node,
     );
   }
+
 }
 
 
 export default scripts();
-

@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('performance', '0004_auto_20221205_1147'),
+        ("performance", "0004_auto_20221205_1147"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='indicator',
-            name='created_at',
+            model_name="indicator",
+            name="created_at",
             field=models.DateTimeField(auto_now_add=True, null=True),
         ),
     ]

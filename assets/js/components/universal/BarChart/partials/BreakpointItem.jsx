@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import trimValues from './../../../../utilities/js/helpers/trimValues.js';
 
 

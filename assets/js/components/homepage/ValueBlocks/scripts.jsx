@@ -1,4 +1,5 @@
-import { h, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import ValueBlocks from './index.jsx';
 import decodeHtmlEntities from './../../../utilities/js/helpers/decodeHtmlEntities.js';
 
@@ -10,7 +11,7 @@ function scripts() {
     const component = componentList[i];
     const items = JSON.parse(decodeHtmlEntities(component.getAttribute('data-values')));
 
-    render(
+    ReactDOM.render(
       <ValueBlocks {...{ items }} />,
       component,
     );

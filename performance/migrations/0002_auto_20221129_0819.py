@@ -6,83 +6,83 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('performance', '0001_initial'),
+        ("performance", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='indicator',
-            old_name='q1_actual_outcome',
-            new_name='q1_actual_output',
+            model_name="indicator",
+            old_name="q1_actual_outcome",
+            new_name="q1_actual_output",
         ),
         migrations.RenameField(
-            model_name='indicator',
-            old_name='q2_actual_outcome',
-            new_name='q2_actual_output',
+            model_name="indicator",
+            old_name="q2_actual_outcome",
+            new_name="q2_actual_output",
         ),
         migrations.RenameField(
-            model_name='indicator',
-            old_name='q3_actual_outcome',
-            new_name='q3_actual_output',
+            model_name="indicator",
+            old_name="q3_actual_outcome",
+            new_name="q3_actual_output",
         ),
         migrations.RenameField(
-            model_name='indicator',
-            old_name='q4_actual_outcome',
-            new_name='q4_actual_output',
+            model_name="indicator",
+            old_name="q4_actual_outcome",
+            new_name="q4_actual_output",
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_aggregate_output',
+            model_name="indicator",
+            name="annual_aggregate_output",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_audited_output',
+            model_name="indicator",
+            name="annual_audited_output",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_corrective_action',
+            model_name="indicator",
+            name="annual_corrective_action",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_deviation_reason',
+            model_name="indicator",
+            name="annual_deviation_reason",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_dpme_coordincator_comments',
+            model_name="indicator",
+            name="annual_dpme_coordincator_comments",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_national_comments',
+            model_name="indicator",
+            name="annual_national_comments",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_otp_comments',
+            model_name="indicator",
+            name="annual_otp_comments",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_pre_audit_output',
+            model_name="indicator",
+            name="annual_pre_audit_output",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_target',
+            model_name="indicator",
+            name="annual_target",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='annual_treasury_comments',
+            model_name="indicator",
+            name="annual_treasury_comments",
             field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name='indicator',
-            name='cluster',
+            model_name="indicator",
+            name="cluster",
             field=models.TextField(blank=True),
         ),
     ]

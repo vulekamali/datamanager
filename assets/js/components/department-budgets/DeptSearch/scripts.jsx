@@ -1,4 +1,5 @@
-import { h, Component, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import decodeHtmlEntities from './../../../utilities/js/helpers/decodeHtmlEntities.js';
 import updateQs from './../../../utilities/js/helpers/updateQs.js';
 import { DeptSearch, makeGroups } from './index.jsx';
@@ -6,7 +7,7 @@ import filterResults from './partials/filterResults.js';
 import fetchWrapper from './../../../utilities/js/helpers/fetchWrapper.js';
 import { resourcesUrl, resultsToResources, initialResourceGroups } from './../../GovernmentResources/governmentResourcesData.js';
 
-class DeptSearchContainer extends Component {
+class DeptSearchContainer extends React.Component {
   constructor(props) {
     super(props);
     const filters = {
@@ -109,7 +110,7 @@ function scripts() {
 
     const { sphere, province, phrase } = window.vulekamali.qs;
 
-    render(
+    ReactDOM.render(
       <DeptSearchContainer {...{ governments, ckanUrl, financialYear, sphere, province, phrase }} />,
       component,
     );

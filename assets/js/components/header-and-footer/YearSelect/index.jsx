@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import queryString from 'query-string';
 import Tooltip from './../../universal/Tooltip/index.jsx';
 
@@ -10,7 +10,7 @@ const navToYearPage = (event, page) => {
 
 export default function YearSelectMarkup({ sticky, jsonData, updateNode, tooltip, open, updateItem, search, loading, year, newYear }) {
 
-  const items = jsonData.map((data) => {
+  const items = jsonData.map((data, index) => {
     const Tag = data.active || data.direct === false ? 'span' : 'a';
     const toggleOpen = () => updateItem('open', !open);
 
@@ -19,6 +19,7 @@ export default function YearSelectMarkup({ sticky, jsonData, updateNode, tooltip
         <li
           className={`YearSelect-item${ data.active ? ' is-active' : '' }`}
           onClick={ data.active ? toggleOpen : null }
+          key={index}
         >
           <Tooltip
             block
@@ -53,6 +54,7 @@ export default function YearSelectMarkup({ sticky, jsonData, updateNode, tooltip
       <li
         className={`YearSelect-item${ data.active ? ' is-active' : '' }`}
         onClick={ data.active ? toggleOpen : null }
+        key={index}
         >
         <Tag
           href={data.active || data.direct === false ? null : data.url}

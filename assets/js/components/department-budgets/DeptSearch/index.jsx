@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import DeptControl from './../DeptControl/index.jsx';
 import DeptGroup from './../DeptGroup/index.jsx';
 

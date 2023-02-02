@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import React from 'react';
 import uuid from 'uuid/v4';
 import BarChart from './components/BarChart/index.jsx';
 
@@ -49,7 +49,7 @@ const Markup = ({ items, toggle, styling, changeSource, source, downloadText, ba
 };
 
 
-class ChartSourceController extends Component {
+class ChartSourceController extends React.Component {
   constructor(...props) {
     super(...props);
 

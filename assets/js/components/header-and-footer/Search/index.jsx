@@ -1,8 +1,7 @@
-import { h } from 'preact';
 import PropTypes from 'prop-types';
 import FormArea from './partials/FormArea.jsx';
 import ResultsArea from './partials/ResultsArea.jsx';
-
+import React from 'react';
 
 export default function SearchMarkup(props) {
   const {
@@ -61,7 +60,6 @@ export default function SearchMarkup(props) {
 }
 
 SearchMarkup.propTypes = {
-  count: PropTypes.string.isRequired,
   currentKeywords: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
   focus: PropTypes.bool.isRequired,

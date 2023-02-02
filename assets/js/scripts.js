@@ -3,7 +3,6 @@ import '../scss/styles.scss';
 import 'classlist-polyfill';
 import 'whatwg-fetch';
 import 'url-search-params-polyfill';
-import 'preact/devtools';
 
 import 'jquery';
 import 'bootstrap/js/dist/scrollspy.js';
@@ -31,6 +30,8 @@ import './components/header-and-footer/Modals/scripts.jsx';
 import './components/department-budgets/DeptSearch/scripts.jsx';
 import './components/department-budgets/IntroSection/scripts.jsx';
 import './components/department-budgets/ArrowButtons/scripts.js';
+
+import './components/performance/Table/scripts.jsx';
 
 import './components/contributed-data/CsoMeta/scripts.js';
 

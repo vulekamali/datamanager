@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('performance', '0009_auto_20230113_1028'),
+        ("performance", "0009_auto_20230113_1028"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='eqprsfileupload',
-            name='task_id',
+            model_name="eqprsfileupload",
+            name="task_id",
             field=models.TextField(default="WASN'T SET WHEN FIELD WAS ADDED"),
             preserve_default=False,
         ),

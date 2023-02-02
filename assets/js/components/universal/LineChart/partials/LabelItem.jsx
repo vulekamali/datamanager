@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 
 
 export default function LabelItem({ totalGroupSpace, groupSpaceArray, rank, title, styling }) {

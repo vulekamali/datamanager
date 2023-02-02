@@ -1,4 +1,5 @@
-import { h, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import Revenue from './index.jsx';
 import decodeHtmlEntities from './../../../utilities/js/helpers/decodeHtmlEntities.js';
 
@@ -12,7 +13,7 @@ function scripts() {
     const values = JSON.parse(decodeHtmlEntities(component.getAttribute('data-values')));
     const year = component.getAttribute('data-year');
 
-    render(
+    ReactDOM.render(
       <Revenue {...{ values, year }} />,
       component,
     );

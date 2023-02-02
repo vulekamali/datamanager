@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 
 import { preactConnect as connect } from '../../utilities/js/helpers/connector.js';
 import normaliseProgrammes from './services/normaliseProgrammes/index.js';
@@ -43,7 +43,7 @@ const ChartAdaptor = (props) => {
   };
 
   const styling = { scale, color, rotated };
-  return h(ChartSourceController, { items, toggle, barTypes, styling, downloadText });
+  return React.createElement(ChartSourceController, { items, toggle, barTypes, styling, downloadText });
 };
 
 
@@ -61,4 +61,3 @@ const query = {
 
 
 export default connect(ChartAdaptor, 'ChartAdaptor', query);
-
