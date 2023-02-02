@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.search import SearchVectorField
+from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 from django_q.tasks import Task
 
@@ -113,3 +115,8 @@ class Indicator(models.Model):
         EQPRSFileUpload, on_delete=models.CASCADE, related_name="indicator_values"
     )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    content_search = SearchVectorField(null=True)
+
+    class Meta:
+        indexes = [GinIndex(fields=["content_search"])]
