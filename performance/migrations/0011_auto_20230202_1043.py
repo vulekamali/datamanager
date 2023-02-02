@@ -8,17 +8,19 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('performance', '0010_eqprsfileupload_task_id'),
+        ("performance", "0010_eqprsfileupload_task_id"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='indicator',
-            name='content_search',
+            model_name="indicator",
+            name="content_search",
             field=django.contrib.postgres.search.SearchVectorField(null=True),
         ),
         migrations.AddIndex(
-            model_name='indicator',
-            index=django.contrib.postgres.indexes.GinIndex(fields=['content_search'], name='performance_content_b5accd_gin'),
+            model_name="indicator",
+            index=django.contrib.postgres.indexes.GinIndex(
+                fields=["content_search"], name="performance_content_b5accd_gin"
+            ),
         ),
     ]

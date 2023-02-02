@@ -6,10 +6,10 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('performance', '0012_auto_20230202_1121'),
+        ("performance", "0012_auto_20230202_1121"),
     ]
 
-    migration = '''
+    migration = """
         CREATE TRIGGER content_search_update BEFORE INSERT OR UPDATE
         ON performance_indicator FOR EACH ROW EXECUTE PROCEDURE
         tsvector_update_trigger(
@@ -40,12 +40,10 @@ class Migration(migrations.Migration):
     );
         -- Force triggers to run and populate the content_search column.
         UPDATE performance_indicator set ID = ID;
-    '''
+    """
 
-    reverse_migration = '''
+    reverse_migration = """
         DROP TRIGGER content_search_update ON performance_indicator;
-    '''
+    """
 
-    operations = [
-        migrations.RunSQL(migration, reverse_migration)
-    ]
+    operations = [migrations.RunSQL(migration, reverse_migration)]
