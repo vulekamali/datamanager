@@ -35,10 +35,10 @@ class EQPRSFileUploadTestCase(TestCase):
             is_superuser=True,
             is_active=True,
         )
-        file_path = os.path.abspath(("performance/static/correct_data.csv"))
-        national_file_path = os.path.abspath(("performance/static/national_data.csv"))
+        file_path = os.path.abspath(("performance/tests/static/correct_data.csv"))
+        national_file_path = os.path.abspath(("performance/tests/static/national_data.csv"))
         wrong_report_type_file_path = os.path.abspath(
-            ("performance/static/wrong_report_type.csv")
+            ("performance/tests/static/wrong_report_type.csv")
         )
         self.csv_file = File(open(file_path, "rb"))
         self.national_file = File(open(national_file_path, "rb"))
@@ -152,7 +152,7 @@ class EQPRSFileUploadTestCase(TestCase):
         assert indicator.annual_corrective_action == ""
         assert indicator.annual_otp_comments == ""
         assert indicator.annual_national_comments == ""
-        assert indicator.annual_dpme_coordincator_comments == ""
+        assert indicator.annual_dpme_coordinator_comments == ""
         assert indicator.annual_treasury_comments == ""
         assert indicator.annual_audited_output == ""
 
