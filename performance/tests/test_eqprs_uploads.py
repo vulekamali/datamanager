@@ -150,6 +150,6 @@ class EQPRSFileUploadTestCase(TestCase):
         assert indicator.annual_corrective_action == ""
         assert indicator.annual_otp_comments == ""
         assert indicator.annual_national_comments == ""
-        assert indicator.annual_dpme_coordincator_comments == ""
+        assert indicator.annual_dpme_coordinator_comments == ""
         assert indicator.annual_treasury_comments == ""
         assert indicator.annual_audited_output == ""
