@@ -227,7 +227,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         "user",
         "num_imported",
         "num_not_imported",
-        "success",
+        "processing_completed",
         "updated_at",
     )
     fieldsets = (
@@ -282,13 +282,13 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         obj.task_id = async_task(func=save_imported_indicators, obj_id=obj.id)
         obj.save()
 
-    def success(self, obj):
+    def processing_completed(self, obj):
         task = fetch(obj.task_id)
         if task:
             return task.success
 
-    success.boolean = True
-    success.short_description = "Success"
+    processing_completed.boolean = True
+    processing_completed.short_description = "Processing completed"
 
 
 class IndicatorAdmin(admin.ModelAdmin):
