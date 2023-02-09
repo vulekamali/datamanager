@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useCallback} from 'react';
 import ReactDOM from 'react-dom';
 import {
     FormControl,
@@ -14,6 +14,7 @@ import {
     TableRow
 } from "@material-ui/core";
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
+import debounce from "lodash.debounce";
 
 class TabularView extends Component {
     constructor(props) {
@@ -178,6 +179,13 @@ class TabularView extends Component {
     }
 
     renderSearchField() {
+        const debouncedHandleFilterChange = debounce((event) => this.handleFilterChange(event), 300);
+        const persistedEventDeboundedHandler = (event) => {
+            // https://reactjs.org/docs/legacy-event-pooling.html
+            event.persist();
+            debouncedHandleFilterChange(event);
+        };
+
         return (
             <FormControl variant={'outlined'}
                          size={'small'}
@@ -191,7 +199,7 @@ class TabularView extends Component {
                              id: "frm-textSearch",
                              name: "q"
                          }}
-                         onChange={(event) => this.handleFilterChange(event)}/>
+                         onChange={persistedEventDeboundedHandler}/>
             </FormControl>
         )
     }
