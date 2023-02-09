@@ -184,13 +184,13 @@ class TabularView extends Component {
                                      marginRight: '10px',
                                      marginTop: '15px',
                                      fontSize: '8px'}}>
-                    <InputLabel htmlFor={`frm-{id}`} shrink>{ fieldLabel }</InputLabel>
+                    <InputLabel htmlFor={`frm-${id}`} shrink>{ fieldLabel }</InputLabel>
                     <Select
                         native
                         notched
                         label={fieldLabel}
                         inputProps={{
-                            id: `frm-{id}`,
+                            id: `frm-${id}`,
                             name: apiField
                         }}
                         value={this.state.selectedFilters[apiField]}
