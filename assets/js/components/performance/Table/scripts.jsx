@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component, useCallback} from 'react';
 import ReactDOM from 'react-dom';
 import {
     FormControl,
-    Grid, InputLabel, MenuItem, NativeSelect,
+    Grid, InputLabel, MenuItem,
+    TextField,
     Paper,
     Select,
     Table,
@@ -13,6 +14,7 @@ import {
     TableRow
 } from "@material-ui/core";
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
+import debounce from "lodash.debounce";
 
 class TabularView extends Component {
     constructor(props) {
@@ -69,18 +71,22 @@ class TabularView extends Component {
     }
 
     renderTableHead() {
-        return (
-            <TableRow>
-                {Object.keys(this.state.rows[0]).map((key, index) => {
-                    if (key !== 'id') {
-                        return (<TableCell
-                            key={index}
-                            style={{borderRight: '1px solid #c6c6c6'}}
-                        ><b>{key}</b></TableCell>)
-                    }
-                })}
-            </TableRow>
-        )
+        if (this.state.rows.length > 0) {
+            return (
+                <TableRow>
+                  {Object.keys(this.state.rows[0]).map((key, index) => {
+                      if (key !== 'id') {
+                          return (<TableCell
+                                    key={index}
+                                    style={{borderRight: '1px solid #c6c6c6'}}
+                                  ><b>{key}</b></TableCell>)
+                      }
+                  })}
+                </TableRow>
+            )
+        } else {
+            return <div>No matching indicators found.</div>;
+        }
     }
 
     renderTableCells(row, index) {
@@ -172,6 +178,32 @@ class TabularView extends Component {
         })
     }
 
+    renderSearchField() {
+        const debouncedHandleFilterChange = debounce((event) => this.handleFilterChange(event), 300);
+        const persistedEventDeboundedHandler = (event) => {
+            // https://reactjs.org/docs/legacy-event-pooling.html
+            event.persist();
+            debouncedHandleFilterChange(event);
+        };
+
+        return (
+            <FormControl variant={'outlined'}
+                         size={'small'}
+                         style={{marginRight: '10px',
+                                 marginTop: '15px',
+                                 fontSize: '8px'}}>
+              <TextField variant="outlined"
+                         size="small"
+                         label="Search indicators"
+                         inputProps={{
+                             id: "frm-textSearch",
+                             name: "q"
+                         }}
+                         onChange={persistedEventDeboundedHandler}/>
+            </FormControl>
+        )
+    }
+
     renderFilter(id, apiField, stateField, fieldLabel, blankLabel) {
         if (this.state[stateField] === null) {
             return <div></div>
@@ -217,6 +249,7 @@ class TabularView extends Component {
     renderFilters() {
         return (
             <Grid container style={{marginBottom: '40px'}}>
+                {this.renderSearchField()}
                 {this.renderFilter('financialYears',
                                    'department__government__sphere__financial_year__slug',
                                    'financialYears',
