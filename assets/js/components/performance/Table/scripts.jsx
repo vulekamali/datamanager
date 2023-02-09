@@ -13,6 +13,8 @@ import {
     TableHead, TablePagination,
     TableRow
 } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
+import { createTheme } from '@material-ui/core/styles';
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import debounce from "lodash.debounce";
 
@@ -128,37 +130,63 @@ class TabularView extends Component {
         })
     }
 
+    renderPagination() {
+        return (
+            <TablePagination
+              colSpan={3}
+              count={this.state.totalCount}
+              rowsPerPage={this.state.rowsPerPage}
+              rowsPerPageOptions={[]}
+              page={this.state.currentPage}
+              onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
+              SelectProps={{
+                  inputProps: {'aria-label': 'rows per page'},
+                  native: true,
+              }}
+              component="div"
+            />
+        );
+    }
+
     renderTable() {
         if (this.state.rows === null) {
             // todo : return loading state
             return <div></div>
         } else {
+            const tableTheme = createTheme({
+                overrides: {
+                    MuiTablePagination: {
+                        spacer: {
+                            flex: 'none'
+                        },
+                        toolbar: {
+                            "padding-left": "16px"
+                        }
+                    }
+                }
+            });
             return (
-                <Paper>
-                    <TableContainer style={{maxHeight: 440}}>
-                        <Table stickyHeader aria-label="simple table" size={'small'}>
-                            <TableHead>
-                                {this.renderTableHead()}
-                            </TableHead>
-                            <TableBody>
-                                {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
-                            </TableBody>
-                        </Table>
+                <ThemeProvider theme={tableTheme}>
+                  {this.renderPagination()}
+                  <Paper>
+                    <TableContainer>
+                      <Table stickyHeader aria-label="simple table" size={'small'}>
+                        <TableHead>
+                          {this.renderTableHead()}
+                        </TableHead>
+                        <TableBody>
+                          {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
+                        </TableBody>
+                        <TableFooter>
+                          <TableRow>
+                          </TableRow>
+                        </TableFooter>
+                      </Table>
                     </TableContainer>
-                    <TablePagination
-                        colSpan={3}
-                        count={this.state.totalCount}
-                        rowsPerPage={this.state.rowsPerPage}
-                        rowsPerPageOptions={[]}
-                        page={this.state.currentPage}
-                        onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
-                        SelectProps={{
-                            inputProps: {'aria-label': 'rows per page'},
-                            native: true,
-                        }}
-                    />
-                </Paper>
-            )
+                  </Paper>
+                  {this.renderPagination()}
+                </ThemeProvider>
+            );
         }
     }
 
@@ -248,7 +276,7 @@ class TabularView extends Component {
 
     renderFilters() {
         return (
-            <Grid container style={{marginBottom: '40px'}}>
+            <Grid container>
                 {this.renderSearchField()}
                 {this.renderFilter('financialYears',
                                    'department__government__sphere__financial_year__slug',
