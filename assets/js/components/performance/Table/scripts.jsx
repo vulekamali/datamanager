@@ -178,7 +178,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginRight: '10px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-department'}>department</InputLabel>
                     <Select
                         native
@@ -214,7 +214,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginRight: '10px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-financialYears'}>financial year</InputLabel>
                     <Select
                         native
@@ -250,7 +250,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginRight: '10px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-frequency'}>frequency</InputLabel>
                     <Select
                         native
@@ -286,7 +286,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginRight: '10px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-government'}>government</InputLabel>
                     <Select
                         native
@@ -322,7 +322,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginRight: '10px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-mtsfOutcome'}>mtsf outcome</InputLabel>
                     <Select
                         native
@@ -358,7 +358,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginRight: '10px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-sector'}>sector</InputLabel>
                     <Select
                         native
@@ -394,7 +394,7 @@ class TabularView extends Component {
         } else {
             return (
                 <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
+                             style={{minWidth: '150px', maxWidth: '250px', marginRight: '10px', marginTop: '10px', fontSize: '8px'}}>
                     <InputLabel htmlFor={'frm-sphere'}>sphere</InputLabel>
                     <Select
                         native
@@ -427,13 +427,13 @@ class TabularView extends Component {
     renderFilters() {
         return (
             <Grid container style={{marginBottom: '40px'}}>
-                {this.renderDepartmentFilter()}
                 {this.renderFinancialYearFilter()}
-                {this.renderFrequencyFilter()}
+                {this.renderSphereFilter()}
                 {this.renderGovernmentFilter()}
+                {this.renderDepartmentFilter()}
+                {this.renderFrequencyFilter()}
                 {this.renderSectorFilter()}
                 {this.renderMtsfFilter()}
-                {this.renderSphereFilter()}
             </Grid>
         )
     }
