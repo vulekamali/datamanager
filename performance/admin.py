@@ -141,7 +141,7 @@ def save_imported_indicators(obj_id):
                 annual_corrective_action=indicator_data["CorrectiveAction_Summary"],
                 annual_otp_comments=indicator_data["OTP_Summary"],
                 annual_national_comments=indicator_data["National_Summary"],
-                annual_dpme_coordincator_comments=indicator_data["OTP_Summary"],
+                annual_dpme_coordinator_comments=indicator_data["OTP_Summary"],
                 annual_treasury_comments=indicator_data["National_Summary"],
                 annual_audited_output=indicator_data["ValidatedAudited_Summary2"],
                 sector=indicator_data["Sector"],
@@ -227,7 +227,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         "user",
         "num_imported",
         "num_not_imported",
-        "success",
+        "processing_completed",
         "updated_at",
     )
     fieldsets = (
@@ -282,13 +282,13 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         obj.task_id = async_task(func=save_imported_indicators, obj_id=obj.id)
         obj.save()
 
-    def success(self, obj):
+    def processing_completed(self, obj):
         task = fetch(obj.task_id)
         if task:
             return task.success
 
-    success.boolean = True
-    success.short_description = "Success"
+    processing_completed.boolean = True
+    processing_completed.short_description = "Processing completed"
 
 
 class IndicatorAdmin(admin.ModelAdmin):
@@ -461,7 +461,7 @@ class IndicatorAdmin(admin.ModelAdmin):
                     "annual_corrective_action",
                     "annual_otp_comments",
                     "annual_national_comments",
-                    "annual_dpme_coordincator_comments",
+                    "annual_dpme_coordinator_comments",
                     "annual_treasury_comments",
                     "annual_audited_output",
                 ),
