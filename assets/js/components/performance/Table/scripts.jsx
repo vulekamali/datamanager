@@ -179,9 +179,10 @@ class TabularView extends Component {
             return (
                 <FormControl variant={'outlined'} size={'small'}
                              style={{minWidth: '150px', maxWidth: '250px', marginRight: '10px', marginTop: '10px', fontSize: '8px'}}>
-                    <InputLabel htmlFor={'frm-department'}>department</InputLabel>
+                    <InputLabel htmlFor={'frm-department'} shrink>department</InputLabel>
                     <Select
                         native
+                        notched
                         label={'department'}
                         inputProps={{
                             id: 'frm-department',
@@ -190,7 +191,7 @@ class TabularView extends Component {
                         value={this.state.selectedFilters['department__name']}
                         onChange={(event) => this.handleFilterChange(event)}
                     >
-                        <option aria-label={'None'} value={''}/>
+                        <option aria-label={'All Departments'} value={''}>All departments</option>
                         {
                             this.state.departments.map((department, index) => {
                                 return (
