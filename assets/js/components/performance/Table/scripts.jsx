@@ -172,252 +172,42 @@ class TabularView extends Component {
         })
     }
 
-    renderDepartmentFilter() {
-        if (this.state.departments === null) {
+    renderFilter(id, apiField, stateField, fieldLabel, blankLabel) {
+        if (this.state[stateField] === null) {
             return <div></div>
         } else {
             return (
-                <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
-                    <InputLabel htmlFor={'frm-department'}>department</InputLabel>
+                <FormControl variant={'outlined'}
+                             size={'small'}
+                             style={{minWidth: '150px',
+                                     maxWidth: '250px',
+                                     marginRight: '10px',
+                                     marginTop: '15px',
+                                     fontSize: '8px'}}>
+                    <InputLabel htmlFor={`frm-${id}`} shrink>{ fieldLabel }</InputLabel>
                     <Select
                         native
-                        label={'department'}
+                        notched
+                        label={fieldLabel}
                         inputProps={{
-                            id: 'frm-department',
-                            name: 'department__name'
+                            id: `frm-${id}`,
+                            name: apiField
                         }}
-                        value={this.state.selectedFilters['department__name']}
+                        value={this.state.selectedFilters[apiField]}
                         onChange={(event) => this.handleFilterChange(event)}
                     >
-                        <option aria-label={'None'} value={''}/>
-                        {
-                            this.state.departments.map((department, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        value={department['department__name']}>
-                                        {`${department['department__name']} (${department['count']})`}
-                                    </option>
-                                )
-                            })
-                        }
-                    </Select>
-                </FormControl>
-            )
-        }
-    }
-
-    renderFinancialYearFilter() {
-        if (this.state.financialYears === null) {
-            return <div></div>
-        } else {
-            return (
-                <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
-                    <InputLabel htmlFor={'frm-financialYears'}>financial year</InputLabel>
-                    <Select
-                        native
-                        label={'financial year'}
-                        inputProps={{
-                            id: 'frm-financialYears',
-                            name: 'department__government__sphere__financial_year__slug'
-                        }}
-                        value={this.state.selectedFilters['department__government__sphere__financial_year__slug']}
-                        onChange={(event) => this.handleFilterChange(event)}
-                    >
-                        <option aria-label={'None'} value={''}/>
-                        {
-                            this.state.financialYears.map((fy, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        value={fy['department__government__sphere__financial_year__slug']}>
-                                        {`${fy['department__government__sphere__financial_year__slug']} (${fy['count']})`}
-                                    </option>
-                                )
-                            })
-                        }
-                    </Select>
-                </FormControl>
-            )
-        }
-    }
-
-    renderFrequencyFilter() {
-        if (this.state.frequencies === null) {
-            return <div></div>
-        } else {
-            return (
-                <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
-                    <InputLabel htmlFor={'frm-frequency'}>frequency</InputLabel>
-                    <Select
-                        native
-                        label={'frequency'}
-                        inputProps={{
-                            id: 'frm-frequency',
-                            name: 'frequency'
-                        }}
-                        value={this.state.selectedFilters['frequency']}
-                        onChange={(event) => this.handleFilterChange(event)}
-                    >
-                        <option aria-label={'None'} value={''}/>
-                        {
-                            this.state.frequencies.map((frequency, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        value={frequency['frequency']}>
-                                        {`${frequency['frequency']} (${frequency['count']})`}
-                                    </option>
-                                )
-                            })
-                        }
-                    </Select>
-                </FormControl>
-            )
-        }
-    }
-
-    renderGovernmentFilter() {
-        if (this.state.governments === null) {
-            return <div></div>
-        } else {
-            return (
-                <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
-                    <InputLabel htmlFor={'frm-government'}>government</InputLabel>
-                    <Select
-                        native
-                        label={'government'}
-                        inputProps={{
-                            id: 'frm-government',
-                            name: 'department__government__name'
-                        }}
-                        value={this.state.selectedFilters['department__government__name']}
-                        onChange={(event) => this.handleFilterChange(event)}
-                    >
-                        <option aria-label={'None'} value={''}/>
-                        {
-                            this.state.governments.map((government, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        value={government['department__government__name']}>
-                                        {`${government['department__government__name']} (${government['count']})`}
-                                    </option>
-                                )
-                            })
-                        }
-                    </Select>
-                </FormControl>
-            )
-        }
-    }
-
-    renderMtsfFilter() {
-        if (this.state.mtsfOutcomes === null) {
-            return <div></div>
-        } else {
-            return (
-                <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
-                    <InputLabel htmlFor={'frm-mtsfOutcome'}>mtsf outcome</InputLabel>
-                    <Select
-                        native
-                        label={'mtsf outcome'}
-                        inputProps={{
-                            id: 'frm-mtsfOutcome',
-                            name: 'mtsf_outcome'
-                        }}
-                        value={this.state.selectedFilters['mtsf_outcome']}
-                        onChange={(event) => this.handleFilterChange(event)}
-                    >
-                        <option aria-label={'None'} value={''}/>
-                        {
-                            this.state.mtsfOutcomes.map((mtsfOutcome, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        value={mtsfOutcome['mtsf_outcome']}>
-                                        {`${mtsfOutcome['mtsf_outcome']} (${mtsfOutcome['count']})`}
-                                    </option>
-                                )
-                            })
-                        }
-                    </Select>
-                </FormControl>
-            )
-        }
-    }
-
-    renderSectorFilter() {
-        if (this.state.sectors === null) {
-            return <div></div>
-        } else {
-            return (
-                <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
-                    <InputLabel htmlFor={'frm-sector'}>sector</InputLabel>
-                    <Select
-                        native
-                        label={'sector'}
-                        inputProps={{
-                            id: 'frm-sector',
-                            name: 'sector'
-                        }}
-                        value={this.state.selectedFilters['sector']}
-                        onChange={(event) => this.handleFilterChange(event)}
-                    >
-                        <option aria-label={'None'} value={''}/>
-                        {
-                            this.state.sectors.map((sector, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        value={sector['sector']}>
-                                        {`${sector['sector']} (${sector['count']})`}
-                                    </option>
-                                )
-                            })
-                        }
-                    </Select>
-                </FormControl>
-            )
-        }
-    }
-
-    renderSphereFilter() {
-        if (this.state.spheres === null) {
-            return <div></div>
-        } else {
-            return (
-                <FormControl variant={'outlined'} size={'small'}
-                             style={{minWidth: '150px', maxWidth: '250px', marginLeft: '20px', marginTop: '10px', fontSize: '8px'}}>
-                    <InputLabel htmlFor={'frm-sphere'}>sphere</InputLabel>
-                    <Select
-                        native
-                        label={'sphere'}
-                        inputProps={{
-                            id: 'frm-sphere',
-                            name: 'department__government__sphere__name'
-                        }}
-                        value={this.state.selectedFilters['department__government__sphere__name']}
-                        onChange={(event) => this.handleFilterChange(event)}
-                    >
-                        <option aria-label={'None'} value={''}/>
-                        {
-                            this.state.spheres.map((sphere, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        value={sphere['department__government__sphere__name']}>
-                                        {`${sphere['department__government__sphere__name']} (${sphere['count']})`}
-                                    </option>
-                                )
-                            })
-                        }
+                      <option aria-label={blankLabel} value={''}>{blankLabel}</option>
+                      {
+                          this.state[stateField].map((option, index) => {
+                              return (
+                                  <option
+                                    key={index}
+                                    value={option[apiField]}>
+                                    {`${option[apiField]} (${option['count']})`}
+                                  </option>
+                              )
+                          })
+                      }
                     </Select>
                 </FormControl>
             )
@@ -427,13 +217,41 @@ class TabularView extends Component {
     renderFilters() {
         return (
             <Grid container style={{marginBottom: '40px'}}>
-                {this.renderDepartmentFilter()}
-                {this.renderFinancialYearFilter()}
-                {this.renderFrequencyFilter()}
-                {this.renderGovernmentFilter()}
-                {this.renderSectorFilter()}
-                {this.renderMtsfFilter()}
-                {this.renderSphereFilter()}
+                {this.renderFilter('financialYears',
+                                   'department__government__sphere__financial_year__slug',
+                                   'financialYears',
+                                   'Financial year',
+                                   'All financial years')}
+                {this.renderFilter('sphere',
+                                   'department__government__sphere__name',
+                                   'spheres',
+                                   'Sphere',
+                                   'All spheres')}
+                {this.renderFilter('government',
+                                   'department__government__name',
+                                   'governments',
+                                   'Government',
+                                   'All governments')}
+                {this.renderFilter('department',
+                                   'department__name',
+                                   'departments',
+                                   'Department',
+                                   'All departments')}
+                {this.renderFilter('frequency',
+                                   'frequency',
+                                   'frequencies',
+                                   'Frequency',
+                                   'All frequencies')}
+                {this.renderFilter('sector',
+                                   'sector',
+                                   'sectors',
+                                   'Sectors',
+                                   'All sectors')}
+                {this.renderFilter('mtsfOutcome',
+                                   'mtsf_outcome',
+                                   'mtsfOutcomes',
+                                   'MTSF Outcome',
+                                   'All outcomes')}
             </Grid>
         )
     }
