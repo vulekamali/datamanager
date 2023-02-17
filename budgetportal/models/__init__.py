@@ -760,9 +760,9 @@ class ResourceLink(models.Model):
     sphere_slug = models.CharField(
         max_length=100,
         choices=[
-            ("all", "All"),
-        ]
-        + SPHERE_SLUG_CHOICES,
+                    ("all", "All"),
+                ]
+                + SPHERE_SLUG_CHOICES,
         default="all",
         verbose_name="Sphere",
         help_text="Only show on pages for this sphere or all spheres.",
@@ -792,6 +792,25 @@ class ResourceLink(models.Model):
     class Meta:
         abstract = True
         ordering = ["resource_link_order"]
+
+
+def showcase_item_file_path(instance, filename):
+    extension = filename.split(".")[-1]
+    return (
+        f"showcase-items/{uuid.uuid4()}.{extension}"
+    )
+
+
+class ShowcaseItem(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=400)
+    button_text_1 = models.CharField(max_length=200)
+    button_link_1 = models.URLField(null=True, blank=True)
+    button_text_2 = models.CharField(max_length=200)
+    button_link_2 = models.URLField(null=True, blank=True)
+    file = models.FileField(upload_to=showcase_item_file_path)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
 
 @register_snippet
