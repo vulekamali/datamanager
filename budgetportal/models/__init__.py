@@ -804,10 +804,18 @@ def showcase_item_file_path(instance, filename):
 class ShowcaseItem(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=400)
-    button_text_1 = models.CharField(max_length=200)
-    button_link_1 = models.URLField(null=True, blank=True)
-    button_text_2 = models.CharField(max_length=200)
-    button_link_2 = models.URLField(null=True, blank=True)
+    cta_text_1 = models.CharField(max_length=200, verbose_name="Call to action text 1")
+    cta_link_1 = models.URLField(null=True, blank=True, verbose_name="Call to action link 1")
+    cta_text_2 = models.CharField(max_length=200, verbose_name="Call to action text 2")
+    cta_link_2 = models.URLField(null=True, blank=True, verbose_name="Call to action link 2")
+    second_cta_type = models.CharField(
+        max_length=255,
+        choices=(
+            ("primary", "Primary"),
+            ("secondary", "Secondary")
+        ),
+        verbose_name="Second call to action type"
+    )
     file = models.FileField(upload_to=showcase_item_file_path)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)

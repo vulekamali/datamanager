@@ -1,0 +1,10 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% block page_content %}
+
+<div class="Page-content Page-content--dynamicYears">
+    <main class="Page-contentInner is-full">
+        {% include 'components/budget-summary/index.html' %}
+    </main>
+</div>
+{% endblock %}

@@ -95,7 +95,6 @@ def homepage(request):
         "call_to_action_heading": page_data.call_to_action_heading,
         "call_to_action_link_label": page_data.call_to_action_link_label,
         "call_to_action_link_url": page_data.call_to_action_link_url,
-        # "showcase_items": json.dumps(list(showcase_items), default=lambda x: x.encode(), indent=4)
         "showcase_items": serialize('json', showcase_items)
     }
 
@@ -1099,3 +1098,7 @@ def robots(request):
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
         return yaml.load(f, Loader=yaml.FullLoader)
+
+def budget_summary_view(request):
+    context = {"navbar": MainMenuItem.objects.prefetch_related("children").all()}
+    return render(request, "budget-summary.html", context)
