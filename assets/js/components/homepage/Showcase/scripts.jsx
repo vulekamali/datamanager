@@ -68,7 +68,7 @@ class Showcase extends Component {
                         >
                             <CardMedia
                                 image={feature.fields.file}
-                                style={{minWidth: '220px', height: '0', paddingTop: '31%'}}
+                                style={{minWidth: '220px', height: '0', paddingTop: '36%'}}
                             />
                             <CardContent>
                                 <b>{feature.fields.name}</b>
