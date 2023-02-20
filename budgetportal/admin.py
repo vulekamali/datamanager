@@ -219,7 +219,7 @@ class MainMenuItemAdmin(SortableAdmin):
     model = models.MainMenuItem
 
 
-class ShowcaseItemAdmin(admin.ModelAdmin):
+class ShowcaseItemAdmin(SortableAdmin):
     list_display = ("name", "description", "created_at")
     model = models.ShowcaseItem
 

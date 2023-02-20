@@ -801,7 +801,7 @@ def showcase_item_file_path(instance, filename):
     )
 
 
-class ShowcaseItem(models.Model):
+class ShowcaseItem(SortableMixin):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=400)
     cta_text_1 = models.CharField(max_length=200, verbose_name="Call to action text 1")
@@ -819,6 +819,13 @@ class ShowcaseItem(models.Model):
     file = models.FileField(upload_to=showcase_item_file_path)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    item_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
+
+    class Meta:
+        ordering = ["item_order"]
+
+    def __str__(self):
+        return self.name
 
 
 @register_snippet
