@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0067_auto_20230219_1148'),
+        ("budgetportal", "0067_auto_20230219_1148"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='showcaseitem',
-            options={'ordering': ['item_order']},
+            name="showcaseitem",
+            options={"ordering": ["item_order"]},
         ),
         migrations.AddField(
-            model_name='showcaseitem',
-            name='item_order',
+            model_name="showcaseitem",
+            name="item_order",
             field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
         ),
     ]

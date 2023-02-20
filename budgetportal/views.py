@@ -36,7 +36,7 @@ from .models import (
     ProcurementResourceLink,
     Sphere,
     Video,
-    ShowcaseItem
+    ShowcaseItem,
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
@@ -65,9 +65,9 @@ def homepage(request):
     page_data = Homepage.objects.first()
     latest_provincial_year = (
         FinancialYear.objects.filter(spheres__slug="provincial")
-            .annotate(num_depts=Count("spheres__governments__departments"))
-            .filter(num_depts__gt=0)
-            .first()
+        .annotate(num_depts=Count("spheres__governments__departments"))
+        .filter(num_depts__gt=0)
+        .first()
     )
 
     showcase_items = ShowcaseItem.objects.all()
@@ -84,7 +84,7 @@ def homepage(request):
         "videos": videos,
         "latest_year": year.slug,
         "latest_provincial_year": latest_provincial_year
-                                  and latest_provincial_year.slug,
+        and latest_provincial_year.slug,
         "main_heading": page_data.main_heading,
         "sub_heading": page_data.sub_heading,
         "primary_button_label": page_data.primary_button_label,
@@ -95,7 +95,7 @@ def homepage(request):
         "call_to_action_heading": page_data.call_to_action_heading,
         "call_to_action_link_label": page_data.call_to_action_link_label,
         "call_to_action_link_url": page_data.call_to_action_link_url,
-        "showcase_items": serialize('json', showcase_items)
+        "showcase_items": serialize("json", showcase_items),
     }
 
     return render(request, "homepage.html", context)
@@ -183,7 +183,7 @@ def department_list_csv(request, financial_year_id, spheres=["national", "provin
 
     for sphere_name in spheres:
         for government in (
-                selected_year.spheres.filter(slug=sphere_name).first().governments.all()
+            selected_year.spheres.filter(slug=sphere_name).first().governments.all()
         ):
             for department in government.departments.all():
                 writer.writerow(
@@ -209,7 +209,7 @@ def department_list_data(financial_year_id):
         "slug": "departments",
         "title": "Department Budgets for %s - vulekamali" % selected_year.slug,
         "description": "Department budgets for the %s financial year %s"
-                       % (selected_year.slug, COMMON_DESCRIPTION_ENDING),
+        % (selected_year.slug, COMMON_DESCRIPTION_ENDING),
     }
 
     for year in FinancialYear.get_available_years():
@@ -228,7 +228,7 @@ def department_list_data(financial_year_id):
     for sphere_name in ("national", "provincial"):
         page_data[sphere_name] = []
         for government in (
-                selected_year.spheres.filter(slug=sphere_name).first().governments.all()
+            selected_year.spheres.filter(slug=sphere_name).first().governments.all()
         ):
             departments = []
             for department in government.departments.all():
@@ -254,7 +254,7 @@ def department_list_data(financial_year_id):
 
 
 def department_page(
-        request, financial_year_id, sphere_slug, government_slug, department_slug
+    request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
     department = None
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
@@ -380,12 +380,12 @@ def department_page(
         "selected_tab": "departments",
         "title": "%s budget %s  - vulekamali" % (department.name, selected_year.slug),
         "description": "%s department: %s budget data for the %s financial year %s"
-                       % (
-                           govt_label,
-                           department.name,
-                           selected_year.slug,
-                           COMMON_DESCRIPTION_ENDING,
-                       ),
+        % (
+            govt_label,
+            department.name,
+            selected_year.slug,
+            COMMON_DESCRIPTION_ENDING,
+        ),
         "department_budget": department_budget,
         "department_adjusted_budget": department_adjusted_budget,
         "procurement_resource_links": ProcurementResourceLink.objects.filter(
@@ -428,8 +428,8 @@ def department_page(
 def get_department_project_summary(government_label, department):
     return (
         SearchQuerySet()
-            .filter(government_label=government_label, department=department.name)
-            .order_by("-estimated_total_project_cost")[:10]
+        .filter(government_label=government_label, department=department.name)
+        .order_by("-estimated_total_project_cost")[:10]
     )
 
 
@@ -452,7 +452,7 @@ def get_viz_url(department, url_name_suffix):
 
 
 def get_department_by_slugs(
-        financial_year_id, sphere_slug, government_slug, department_slug
+    financial_year_id, sphere_slug, government_slug, department_slug
 ):
     return get_object_or_404(
         Department,
@@ -464,7 +464,7 @@ def get_department_by_slugs(
 
 
 def department_viz_subprog_treemap(
-        request, financial_year_id, sphere_slug, government_slug, department_slug
+    request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
     department = get_department_by_slugs(
         financial_year_id, sphere_slug, government_slug, department_slug
@@ -474,7 +474,7 @@ def department_viz_subprog_treemap(
 
 
 def department_viz_subprog_econ4_circles(
-        request, financial_year_id, sphere_slug, government_slug, department_slug
+    request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
     department = get_department_by_slugs(
         financial_year_id, sphere_slug, government_slug, department_slug
@@ -484,7 +484,7 @@ def department_viz_subprog_econ4_circles(
 
 
 def department_viz_subprog_econ4_bars(
-        request, financial_year_id, sphere_slug, government_slug, department_slug
+    request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
     department = get_department_by_slugs(
         financial_year_id, sphere_slug, government_slug, department_slug
@@ -619,7 +619,7 @@ def infrastructure_project_detail_data(project_slug):
         "dataset_url": dataset_url,
         "projects": [project_dict],
         "description": project.project_description
-                       or "Infrastructure projects in South Africa",
+        or "Infrastructure projects in South Africa",
         "slug": "infrastructure-projects",
         "selected_tab": "infrastructure-projects",
         "title": f"{project.project_name} - Infrastructure Projects - vulekamali",
@@ -913,10 +913,10 @@ def dataset_context(category_slug, dataset_slug):
 
     if category_slug == "contributed":
         description = (
-                          "Data and/or documentation related to South African"
-                          " government budgets contributed by %s and hosted"
-                          " by National Treasury in partnership with IMALI YETHU"
-                      ) % dataset.get_organization()["name"]
+            "Data and/or documentation related to South African"
+            " government budgets contributed by %s and hosted"
+            " by National Treasury in partnership with IMALI YETHU"
+        ) % dataset.get_organization()["name"]
     else:
         description = dataset.intro
 
@@ -1057,7 +1057,7 @@ def focus_area_preview(request, financial_year_id, focus_slug):
 
 
 def department_preview_json(
-        request, financial_year_id, sphere_slug, government_slug, phase_slug
+    request, financial_year_id, sphere_slug, government_slug, phase_slug
 ):
     response_json = json.dumps(
         get_preview_page(financial_year_id, phase_slug, government_slug, sphere_slug),
@@ -1069,7 +1069,7 @@ def department_preview_json(
 
 
 def department_preview(
-        request, financial_year_id, sphere_slug, government_slug, department_slug
+    request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
     selected_financial_year = get_object_or_404(FinancialYear, slug=financial_year_id)
     context = {
@@ -1098,6 +1098,7 @@ def robots(request):
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
         return yaml.load(f, Loader=yaml.FullLoader)
+
 
 def budget_summary_view(request):
     context = {"navbar": MainMenuItem.objects.prefetch_related("children").all()}

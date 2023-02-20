@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0065_showcaseitem'),
+        ("budgetportal", "0065_showcaseitem"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='showcaseitem',
-            name='file',
-            field=models.FileField(upload_to=budgetportal.models.showcase_item_file_path),
+            model_name="showcaseitem",
+            name="file",
+            field=models.FileField(
+                upload_to=budgetportal.models.showcase_item_file_path
+            ),
         ),
     ]
