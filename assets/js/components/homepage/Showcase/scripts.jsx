@@ -62,7 +62,7 @@ class Showcase extends Component {
         >
             {this.state.features.map((feature, index) => {
                 return (
-                    <Grid item xs={6} key={index}>
+                    <Grid item xs={12} sm={6} key={index}>
                         <Card
                             style={{display: 'flex'}}
                         >
