@@ -39,5 +39,5 @@
 
         {% endwith %}
     </div>
-    <script id="page-data" type="application/json">{{ showcase_items|json_script_escape:True }}</script>
+    <script id="showcase-items-data" type="application/json">{{ showcase_items_json|json_script_escape:True }}</script>
 {% endblock %}

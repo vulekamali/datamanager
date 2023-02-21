@@ -46,12 +46,28 @@ from .summaries import (
     get_focus_area_preview,
     get_preview_page,
 )
+from .json_encoder import JSONEncoder
 
 logger = logging.getLogger(__name__)
 
 COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
 
+
+def serialize_showcase(showcase_items):
+    showcase_items_dicts = [{
+        "name": i.name,
+        "description": i.description,
+        "cta_text_1": i.cta_text_1,
+        "cta_link_1": i.cta_link_1,
+        "cta_text_2": i.cta_text_2,
+        "cta_link_2": i.cta_link_2,
+        "second_cta_type": i.second_cta_type,
+        "thumbnail_url": i.file.url
+    } for i in showcase_items]
+    return json.dumps(
+        showcase_items_dicts, cls=DjangoJSONEncoder, sort_keys=True, indent=4
+    )
 
 def homepage(request):
     year = FinancialYear.get_latest_year()
@@ -95,7 +111,7 @@ def homepage(request):
         "call_to_action_heading": page_data.call_to_action_heading,
         "call_to_action_link_label": page_data.call_to_action_link_label,
         "call_to_action_link_url": page_data.call_to_action_link_url,
-        "showcase_items": serialize("json", showcase_items),
+        "showcase_items_json": serialize_showcase(showcase_items),
     }
 
     return render(request, "homepage.html", context)

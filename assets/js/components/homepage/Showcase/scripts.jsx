@@ -8,7 +8,7 @@ class Showcase extends Component {
         super(props);
 
         this.state = {
-            features: JSON.parse(document.getElementById('page-data').textContent)
+            features: JSON.parse(document.getElementById('showcase-items-data').textContent)
         }
     }
 
@@ -60,21 +60,21 @@ class Showcase extends Component {
             container
             spacing={3}
         >
-            {this.state.features.map(feature => {
+            {this.state.features.map((feature, index) => {
                 return (
-                    <Grid item xs={6} key={feature.pk}>
+                    <Grid item xs={6} key={index}>
                         <Card
                             style={{display: 'flex'}}
                         >
                             <CardMedia
-                                image={feature.fields.file}
+                                image={feature.thumbnail_url}
                                 style={{minWidth: '220px', height: '0', paddingTop: '36%'}}
                             />
                             <CardContent>
-                                <b>{feature.fields.name}</b>
-                                <p>{feature.fields.description}</p>
-                                {this.renderCTA('primary', feature.fields.cta_text_1, feature.fields.cta_link_1)}
-                                {this.renderCTA(feature.fields.second_cta_type, feature.fields.cta_text_2, feature.fields.cta_link_2)}
+                                <b>{feature.name}</b>
+                                <p>{feature.description}</p>
+                                {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1)}
+                                {this.renderCTA(feature.second_cta_type, feature.cta_text_2, feature.cta_link_2)}
                             </CardContent>
                         </Card>
                     </Grid>
