@@ -1117,5 +1117,16 @@ def read_object_from_yaml(path_file):
 
 
 def budget_summary_view(request):
-    context = {"navbar": MainMenuItem.objects.prefetch_related("children").all()}
+    latest_provincial_year = (
+        FinancialYear.objects.filter(spheres__slug="provincial")
+        .annotate(num_depts=Count("spheres__governments__departments"))
+        .filter(num_depts__gt=0)
+        .first()
+    )
+    context = {
+        "navbar": MainMenuItem.objects.prefetch_related("children").all(),
+        "latest_year": FinancialYear.get_latest_year().slug,
+        "latest_provincial_year": latest_provincial_year
+        and latest_provincial_year.slug,
+    }
     return render(request, "budget-summary.html", context)
