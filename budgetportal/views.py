@@ -11,6 +11,7 @@ from slugify import slugify
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
 from django.conf import settings
+from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Count
 from django.forms.models import model_to_dict
@@ -35,6 +36,7 @@ from .models import (
     ProcurementResourceLink,
     Sphere,
     Video,
+    ShowcaseItem,
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
@@ -44,11 +46,31 @@ from .summaries import (
     get_focus_area_preview,
     get_preview_page,
 )
+from .json_encoder import JSONEncoder
 
 logger = logging.getLogger(__name__)
 
 COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
+
+
+def serialize_showcase(showcase_items):
+    showcase_items_dicts = [
+        {
+            "name": i.name,
+            "description": i.description,
+            "cta_text_1": i.cta_text_1,
+            "cta_link_1": i.cta_link_1,
+            "cta_text_2": i.cta_text_2,
+            "cta_link_2": i.cta_link_2,
+            "second_cta_type": i.second_cta_type,
+            "thumbnail_url": i.file.url,
+        }
+        for i in showcase_items
+    ]
+    return json.dumps(
+        showcase_items_dicts, cls=DjangoJSONEncoder, sort_keys=True, indent=4
+    )
 
 
 def homepage(request):
@@ -67,6 +89,8 @@ def homepage(request):
         .filter(num_depts__gt=0)
         .first()
     )
+
+    showcase_items = ShowcaseItem.objects.all()
 
     context = {
         "selected_financial_year": None,
@@ -91,6 +115,7 @@ def homepage(request):
         "call_to_action_heading": page_data.call_to_action_heading,
         "call_to_action_link_label": page_data.call_to_action_link_label,
         "call_to_action_link_url": page_data.call_to_action_link_url,
+        "showcase_items_json": serialize_showcase(showcase_items),
     }
 
     return render(request, "homepage.html", context)
@@ -1093,3 +1118,19 @@ def robots(request):
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
         return yaml.load(f, Loader=yaml.FullLoader)
+
+
+def budget_summary_view(request):
+    latest_provincial_year = (
+        FinancialYear.objects.filter(spheres__slug="provincial")
+        .annotate(num_depts=Count("spheres__governments__departments"))
+        .filter(num_depts__gt=0)
+        .first()
+    )
+    context = {
+        "navbar": MainMenuItem.objects.prefetch_related("children").all(),
+        "latest_year": FinancialYear.get_latest_year().slug,
+        "latest_provincial_year": latest_provincial_year
+        and latest_provincial_year.slug,
+    }
+    return render(request, "budget-summary.html", context)

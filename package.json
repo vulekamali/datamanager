@@ -101,6 +101,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
     "array.from": "^1.0.3",
     "array.prototype.every": "^1.0.0",
     "array.prototype.findindex": "^2.0.2",

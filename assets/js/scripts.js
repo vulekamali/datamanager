@@ -19,6 +19,7 @@ import './components/learning-centre/Glossary/scripts.jsx';
 import './components/homepage/ValueBlocks/scripts.jsx';
 import './components/homepage/Revenue/scripts.jsx';
 import './components/homepage/HomeChart/scripts.jsx';
+import './components/homepage/Showcase/scripts.jsx';
 
 import './components/header-and-footer/Search/scripts.jsx';
 import './components/header-and-footer/Search/index.jsx';

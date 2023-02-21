@@ -65,7 +65,6 @@ services:
       - db
       - solr
       - minio
-    restart: on-failure
 
   test:
     build:

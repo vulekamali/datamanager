@@ -1,0 +1,100 @@
+import ReactDOM from "react-dom";
+import React, {Component} from "react";
+import {Card, CardContent, CardMedia, Grid} from "@material-ui/core";
+import ForwardArrow from "@material-ui/icons/ArrowForward";
+
+class Showcase extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            features: JSON.parse(document.getElementById('showcase-items-data').textContent)
+        }
+    }
+
+    renderCTA(type, text, link) {
+        if (type === "primary") {
+            return (
+                <a
+                    href={link}
+                    style={{
+                        backgroundColor: '#70b352',
+                        color: '#fff',
+                        width: '100%',
+                        textDecoration: 'none',
+                        display: 'block',
+                        padding: '6px 16px',
+                        borderRadius: '4px',
+                        fontWeight: '700',
+                        marginBottom: '12px'
+                    }}
+                    target={'_blank'}
+                >
+                    <Grid container>
+                        <Grid
+                            item xs={9}
+                            style={{height: '25px', lineHeight: '25px'}}
+                        >{text}</Grid>
+                        <Grid
+                            item xs={3}
+                            style={{height: '25px', lineHeight: '25px', textAlign: 'right'}}
+                        >
+                            <ForwardArrow/>
+                        </Grid>
+                    </Grid>
+                </a>
+            )
+        } else if (type === "secondary") {
+            return (
+                <a
+                    href={link}
+                    target={'_blank'}
+                >{text}</a>
+            )
+        }
+    }
+
+    render() {
+        return (<Grid
+            style={{maxWidth: '1300px', margin: 'auto', width: '100%'}}
+            container
+            spacing={3}
+        >
+            {this.state.features.map((feature, index) => {
+                return (
+                    <Grid item xs={12} sm={6} key={index}>
+                        <Card
+                            style={{display: 'flex', height: '100%'}}
+                        >
+                            <Grid container>
+                                <Grid xs={12} sm={5}>
+                                    <CardMedia
+                                        image={feature.thumbnail_url}
+                                        style={{width: '100%', height: '100%', minHeight: '110px'}}
+                                    />
+                                </Grid>
+                                <Grid xs={12} sm={7}>
+                                    <CardContent>
+                                        <b>{feature.name}</b>
+                                        <p>{feature.description}</p>
+                                        {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1)}
+                                        {this.renderCTA(feature.second_cta_type, feature.cta_text_2, feature.cta_link_2)}
+                                    </CardContent>
+                                </Grid>
+                            </Grid>
+                        </Card>
+                    </Grid>
+                )
+            })}
+        </Grid>)
+    }
+}
+
+function scripts() {
+    const parent = document.getElementById('js-initShowcase');
+    if (parent) {
+        ReactDOM.render(<Showcase/>, parent)
+    }
+}
+
+export default scripts();
