@@ -64,18 +64,24 @@ class Showcase extends Component {
                 return (
                     <Grid item xs={12} sm={6} key={index}>
                         <Card
-                            style={{display: 'flex'}}
+                            style={{display: 'flex', height: '100%'}}
                         >
-                            <CardMedia
-                                image={feature.thumbnail_url}
-                                style={{minWidth: '220px', height: '0', paddingTop: '36%'}}
-                            />
-                            <CardContent>
-                                <b>{feature.name}</b>
-                                <p>{feature.description}</p>
-                                {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1)}
-                                {this.renderCTA(feature.second_cta_type, feature.cta_text_2, feature.cta_link_2)}
-                            </CardContent>
+                            <Grid container>
+                                <Grid xs={12} sm={5}>
+                                    <CardMedia
+                                        image={feature.thumbnail_url}
+                                        style={{width: '100%', height: '100%', minHeight: '110px'}}
+                                    />
+                                </Grid>
+                                <Grid xs={12} sm={7}>
+                                    <CardContent>
+                                        <b>{feature.name}</b>
+                                        <p>{feature.description}</p>
+                                        {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1)}
+                                        {this.renderCTA(feature.second_cta_type, feature.cta_text_2, feature.cta_link_2)}
+                                    </CardContent>
+                                </Grid>
+                            </Grid>
                         </Card>
                     </Grid>
                 )
