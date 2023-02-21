@@ -56,7 +56,7 @@ class Showcase extends Component {
 
     render() {
         return (<Grid
-            style={{maxWidth: '1300px', margin: 'auto'}}
+            style={{maxWidth: '1300px', margin: 'auto', width: '100%'}}
             container
             spacing={3}
         >
