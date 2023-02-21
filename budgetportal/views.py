@@ -55,19 +55,23 @@ COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YE
 
 
 def serialize_showcase(showcase_items):
-    showcase_items_dicts = [{
-        "name": i.name,
-        "description": i.description,
-        "cta_text_1": i.cta_text_1,
-        "cta_link_1": i.cta_link_1,
-        "cta_text_2": i.cta_text_2,
-        "cta_link_2": i.cta_link_2,
-        "second_cta_type": i.second_cta_type,
-        "thumbnail_url": i.file.url
-    } for i in showcase_items]
+    showcase_items_dicts = [
+        {
+            "name": i.name,
+            "description": i.description,
+            "cta_text_1": i.cta_text_1,
+            "cta_link_1": i.cta_link_1,
+            "cta_text_2": i.cta_text_2,
+            "cta_link_2": i.cta_link_2,
+            "second_cta_type": i.second_cta_type,
+            "thumbnail_url": i.file.url,
+        }
+        for i in showcase_items
+    ]
     return json.dumps(
         showcase_items_dicts, cls=DjangoJSONEncoder, sort_keys=True, indent=4
     )
+
 
 def homepage(request):
     year = FinancialYear.get_latest_year()
