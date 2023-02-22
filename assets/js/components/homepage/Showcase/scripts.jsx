@@ -12,7 +12,11 @@ class Showcase extends Component {
         }
     }
 
-    renderCTA(type, text, link) {
+    renderCTA(type, text, link, enabled) {
+        if (!enabled) {
+            return;
+        }
+
         if (type === "primary") {
             return (
                 <a
@@ -28,7 +32,6 @@ class Showcase extends Component {
                         fontWeight: '700',
                         marginBottom: '12px'
                     }}
-                    target={'_blank'}
                 >
                     <Grid container>
                         <Grid
@@ -48,7 +51,6 @@ class Showcase extends Component {
             return (
                 <a
                     href={link}
-                    target={'_blank'}
                 >{text}</a>
             )
         }
@@ -67,18 +69,18 @@ class Showcase extends Component {
                             style={{display: 'flex', height: '100%'}}
                         >
                             <Grid container>
-                                <Grid xs={12} sm={5}>
+                                <Grid item xs={12} sm={5}>
                                     <CardMedia
                                         image={feature.thumbnail_url}
-                                        style={{width: '100%', height: '100%', minHeight: '110px'}}
+                                        style={{width: '100%', height: '100%', minHeight: '250px'}}
                                     />
                                 </Grid>
-                                <Grid xs={12} sm={7}>
+                                <Grid item xs={12} sm={7}>
                                     <CardContent>
                                         <b>{feature.name}</b>
                                         <p>{feature.description}</p>
-                                        {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1)}
-                                        {this.renderCTA(feature.second_cta_type, feature.cta_text_2, feature.cta_link_2)}
+                                        {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1, true)}
+                                        {this.renderCTA(feature.second_cta_type, feature.cta_text_2, feature.cta_link_2, feature.cta_enabled_2)}
                                     </CardContent>
                                 </Grid>
                             </Grid>
