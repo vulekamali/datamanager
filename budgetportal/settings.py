@@ -47,7 +47,7 @@ else:
     SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 DEBUG_TOOLBAR = os.environ.get("DJANGO_DEBUG_TOOLBAR", "false").lower() == "true"
-print("Django Debug Toolbar %s." % "enabled" if DEBUG_TOOLBAR else "disabled")
+print("Django Debug Toolbar %s." % ("enabled" if DEBUG_TOOLBAR else "disabled"))
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": "budgetportal.debug_toolbar_config.show_toolbar_check"
 }
