@@ -94,6 +94,12 @@ def save_imported_indicators(obj_id):
         assert department_matches.count() <= 1
         department_obj = department_matches.first()
 
+        if not department_obj:
+            alias_matches = models.EQPRSDepartmentAlias.objects.filter(alias=department_name)
+            assert alias_matches.count() <= 1
+            if len(alias_matches) > 0:
+                department_obj = alias_matches.first().department
+
         if department_obj:
             models.Indicator.objects.create(
                 indicator_name=indicator_data["Indicator"],
@@ -276,7 +282,6 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         # It looks like the task isn't saved synchronously, so we can't set the
         # task as a related object synchronously. We have to fetch it by its ID
         # when we want to see if it's available yet.
-        
         obj.task_id = async_task(func=save_imported_indicators, obj_id=obj.id)
         obj.save()
 
@@ -483,7 +488,7 @@ class IndicatorAdmin(admin.ModelAdmin):
 
 
 class EQPRSDepartmentAliasAdmin(admin.ModelAdmin):
-    list_display=(
+    list_display = (
         "department",
         "alias"
     )
