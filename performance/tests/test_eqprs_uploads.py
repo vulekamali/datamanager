@@ -3,7 +3,7 @@ from performance.admin import EQPRSFileUploadAdmin
 from django.contrib.auth.models import User
 from django.contrib.admin.sites import AdminSite
 from django.contrib import admin
-from performance.models import EQPRSFileUpload, Indicator
+from performance.models import EQPRSFileUpload, Indicator, EQPRSDepartmentAlias
 from budgetportal.models.government import Department, Government, Sphere, FinancialYear
 from django.test import RequestFactory
 from performance import models
@@ -172,7 +172,7 @@ class EQPRSFileUploadTestCase(TestCase):
         assert last_element.task_id is not None
 
     def test_status_in_list_view(self):
-        assert "success" in EQPRSFileUploadAdmin.list_display
+        assert "processing_completed" in EQPRSFileUploadAdmin.list_display
 
         fy = FinancialYear.objects.create(slug="2021-22")
         sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
@@ -186,7 +186,7 @@ class EQPRSFileUploadTestCase(TestCase):
                                change=None)
 
         last_element = EQPRSFileUpload.objects.all().last()
-        assert model_admin.success(last_element) == True
+        assert model_admin.processing_completed(last_element) == True
 
     def test_with_national_government(self):
         fy = FinancialYear.objects.create(slug="2021-22")
@@ -206,3 +206,26 @@ class EQPRSFileUploadTestCase(TestCase):
         assert test_element.num_imported == 1
         indicator = models.Indicator.objects.all().first()
         assert indicator.programme_name == "Programme 1: Administration"
+
+    def test_with_alias(self):
+        fy = FinancialYear.objects.create(slug="2021-22")
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+        government = Government.objects.create(name="South Africa", sphere=sphere)
+        department = Department.objects.create(
+            name="Department to be found by its alias", government=government, vote_number=1
+        )
+        EQPRSDepartmentAlias.objects.create(
+            department=department, alias="Health"
+        )
+
+        test_element = EQPRSFileUpload.objects.create(
+            user=self.superuser, file=self.national_file
+        )
+        performance.admin.save_imported_indicators(test_element.id)
+        test_element.refresh_from_db()
+
+        assert test_element.import_report == ""
+        assert test_element.num_imported == 1
+        indicator = models.Indicator.objects.all().first()
+        assert indicator.programme_name == "Programme 1: Administration"
+        assert indicator.department.name == "Department to be found by its alias"
