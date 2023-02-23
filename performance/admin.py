@@ -70,12 +70,20 @@ def save_imported_indicators(obj_id):
     # clear department indicators
     for department in report_departments:
         for government_name in report_government_names:
+            # clear by department
             models.Indicator.objects.filter(
                 department__name=department,
                 department__government__name=government_name,
                 department__government__sphere__name=sphere,
                 department__government__sphere__financial_year__slug=financial_year
             ).delete()
+
+            # clear by alias
+            alias_obj = models.EQPRSDepartmentAlias.objects.filter(alias=department).first()
+            if alias_obj:
+                models.Indicator.objects.filter(
+                    department=alias_obj.department
+                ).delete()
 
     # create new indicators
     for indicator_data in parsed_data:
@@ -282,6 +290,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         # It looks like the task isn't saved synchronously, so we can't set the
         # task as a related object synchronously. We have to fetch it by its ID
         # when we want to see if it's available yet.
+
         obj.task_id = async_task(func=save_imported_indicators, obj_id=obj.id)
         obj.save()
 
