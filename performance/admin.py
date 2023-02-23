@@ -16,7 +16,7 @@ VALID_REPORT_TYPES = [
 
 
 def generate_import_report(
-    report_type_validated, frictionless_report, not_matching_departments
+        report_type_validated, frictionless_report, not_matching_departments
 ):
     report = ""
     if not report_type_validated:
@@ -248,13 +248,13 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object
             return (
-                "user",
-                "file",
-            ) + self.readonly_fields
+                       "user",
+                       "file",
+                   ) + self.readonly_fields
         return self.readonly_fields
 
     def render_change_form(
-        self, request, context, add=False, change=False, form_url="", obj=None
+            self, request, context, add=False, change=False, form_url="", obj=None
     ):
         response = super(EQPRSFileUploadAdmin, self).render_change_form(
             request, context, add, change, form_url, obj
@@ -484,5 +484,13 @@ class IndicatorAdmin(admin.ModelAdmin):
         return obj.department.government.sphere.financial_year.slug
 
 
+class EQPRSDepartmentAliasAdmin(admin.ModelAdmin):
+    list_display=(
+        "department",
+        "alias"
+    )
+
+
 admin.site.register(models.EQPRSFileUpload, EQPRSFileUploadAdmin)
 admin.site.register(models.Indicator, IndicatorAdmin)
+admin.site.register(models.EQPRSDepartmentAlias, EQPRSDepartmentAliasAdmin)
