@@ -501,6 +501,13 @@ class EQPRSDepartmentAliasAdmin(admin.ModelAdmin):
         "department",
         "alias"
     )
+    search_fields = (
+        "department__government__sphere__financial_year__slug",
+        "department__government__sphere__name",
+        "department__government__name",
+        "department__name",
+        "alias",
+    )
 
 
 admin.site.register(models.EQPRSFileUpload, EQPRSFileUploadAdmin)
