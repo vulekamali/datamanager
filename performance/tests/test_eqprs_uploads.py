@@ -36,7 +36,9 @@ class EQPRSFileUploadTestCase(TestCase):
             is_active=True,
         )
         file_path = os.path.abspath(("performance/tests/static/correct_data.csv"))
-        national_file_path = os.path.abspath(("performance/tests/static/national_data.csv"))
+        national_file_path = os.path.abspath(
+            ("performance/tests/static/national_data.csv")
+        )
         wrong_report_type_file_path = os.path.abspath(
             ("performance/tests/static/wrong_report_type.csv")
         )
@@ -56,8 +58,14 @@ class EQPRSFileUploadTestCase(TestCase):
         performance.admin.save_imported_indicators(test_element.id)
         test_element.refresh_from_db()
         assert "Report type must be for one of" in test_element.import_report
-        assert "* Provincial Institutions Oversight Performance  Report" in test_element.import_report
-        assert "* National Institutions Oversight Performance  Report" in test_element.import_report
+        assert (
+            "* Provincial Institutions Oversight Performance  Report"
+            in test_element.import_report
+        )
+        assert (
+            "* National Institutions Oversight Performance  Report"
+            in test_element.import_report
+        )
 
     def test_with_missing_department(self):
         test_element = EQPRSFileUpload.objects.create(
@@ -72,7 +80,10 @@ class EQPRSFileUploadTestCase(TestCase):
         performance.admin.save_imported_indicators(test_element.id)
         test_element.refresh_from_db()
         assert test_element.num_not_imported == 2
-        assert "Department names that could not be matched on import :" in test_element.import_report
+        assert (
+            "Department names that could not be matched on import :"
+            in test_element.import_report
+        )
         assert "* Health" in test_element.import_report
 
     def test_with_correct_csv(self):
@@ -94,8 +105,8 @@ class EQPRSFileUploadTestCase(TestCase):
         assert test_element.import_report == ""
         assert test_element.num_imported == 2
         assert (
-                indicator.indicator_name
-                == "9.1.2 Number of statutory documents tabled at Legislature"
+            indicator.indicator_name
+            == "9.1.2 Number of statutory documents tabled at Legislature"
         )
         assert indicator.sector == "Health"
         assert indicator.programme_name == "Programme 1: Administration"
@@ -105,8 +116,8 @@ class EQPRSFileUploadTestCase(TestCase):
         assert indicator.subtype == "Max"
         assert indicator.mtsf_outcome == "Priority 3: Education, Skills And Health"
         assert (
-                indicator.cluster
-                == "The Social Protection, Community and Human Development cluster"
+            indicator.cluster
+            == "The Social Protection, Community and Human Development cluster"
         )
 
         assert indicator.q1_target == "0"
@@ -164,9 +175,15 @@ class EQPRSFileUploadTestCase(TestCase):
             name="Health", government=government, vote_number=1
         )
 
-        model_admin = EQPRSFileUploadAdmin(model=EQPRSFileUpload, admin_site=AdminSite())
-        model_admin.save_model(obj=EQPRSFileUpload(file=self.csv_file), request=Mock(user=self.superuser), form=None,
-                               change=None)
+        model_admin = EQPRSFileUploadAdmin(
+            model=EQPRSFileUpload, admin_site=AdminSite()
+        )
+        model_admin.save_model(
+            obj=EQPRSFileUpload(file=self.csv_file),
+            request=Mock(user=self.superuser),
+            form=None,
+            change=None,
+        )
 
         last_element = EQPRSFileUpload.objects.all().last()
         assert last_element.task_id is not None
@@ -181,9 +198,15 @@ class EQPRSFileUploadTestCase(TestCase):
             name="Health", government=government, vote_number=1
         )
 
-        model_admin = EQPRSFileUploadAdmin(model=EQPRSFileUpload, admin_site=AdminSite())
-        model_admin.save_model(obj=EQPRSFileUpload(file=self.csv_file), request=Mock(user=self.superuser), form=None,
-                               change=None)
+        model_admin = EQPRSFileUploadAdmin(
+            model=EQPRSFileUpload, admin_site=AdminSite()
+        )
+        model_admin.save_model(
+            obj=EQPRSFileUpload(file=self.csv_file),
+            request=Mock(user=self.superuser),
+            form=None,
+            change=None,
+        )
 
         last_element = EQPRSFileUpload.objects.all().last()
         assert model_admin.success(last_element) == True

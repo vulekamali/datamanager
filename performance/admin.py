@@ -16,7 +16,7 @@ VALID_REPORT_TYPES = [
 
 
 def generate_import_report(
-        report_type_validated, frictionless_report, not_matching_departments
+    report_type_validated, frictionless_report, not_matching_departments
 ):
     report = ""
     if not report_type_validated:
@@ -74,7 +74,7 @@ def save_imported_indicators(obj_id):
                 department__name=department,
                 department__government__name=government_name,
                 department__government__sphere__name=sphere,
-                department__government__sphere__financial_year__slug=financial_year
+                department__government__sphere__financial_year__slug=financial_year,
             ).delete()
 
     # create new indicators
@@ -88,7 +88,7 @@ def save_imported_indicators(obj_id):
             name=department_name,
             government__name=government_name,
             government__sphere__name=sphere,
-            government__sphere__financial_year__slug=financial_year
+            government__sphere__financial_year__slug=financial_year,
         )
 
         assert department_matches.count() <= 1
@@ -142,8 +142,12 @@ def save_imported_indicators(obj_id):
                 annual_treasury_comments=indicator_data["National_Summary"],
                 annual_audited_output=indicator_data["ValidatedAudited_Summary2"],
                 sector=indicator_data["Sector"],
-                programme_name=indicator_data["SubProgramme"],  # SubProgramme column in CSV is mislabeled
-                subprogramme_name=indicator_data["Location"],  # Location column in CSV is mislabeled
+                programme_name=indicator_data[
+                    "SubProgramme"
+                ],  # SubProgramme column in CSV is mislabeled
+                subprogramme_name=indicator_data[
+                    "Location"
+                ],  # Location column in CSV is mislabeled
                 frequency=[i[0] for i in models.FREQUENCIES if i[1] == frequency][0],
                 type=indicator_data["Type"],
                 subtype=indicator_data["SubType"],
@@ -245,13 +249,13 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object
             return (
-                       "user",
-                       "file",
-                   ) + self.readonly_fields
+                "user",
+                "file",
+            ) + self.readonly_fields
         return self.readonly_fields
 
     def render_change_form(
-            self, request, context, add=False, change=False, form_url="", obj=None
+        self, request, context, add=False, change=False, form_url="", obj=None
     ):
         response = super(EQPRSFileUploadAdmin, self).render_change_form(
             request, context, add, change, form_url, obj
