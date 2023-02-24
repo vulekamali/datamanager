@@ -1,0 +1,22 @@
+{% load define_action %}
+<div
+        id="js-initBudgetSummary"
+>
+    <div id="national-treemap"
+         class="national-treemap"
+         data-webapp="consolidated-treemap"
+         data-year="{{ latest_year }}">
+    </div>
+
+    <div id="national-treemap"
+         class="national-treemap"
+         data-webapp="national-treemap"
+         data-year="{{ latest_year }}">
+    </div>
+
+    <div id="provincial-treemap"
+         class="national-treemap"
+         data-webapp="provincial-treemap"
+         data-year="{{ latest_provincial_year }}">
+    </div>
+</div>

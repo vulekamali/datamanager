@@ -22,6 +22,7 @@ services:
       dockerfile: Dockerfile-dev
     command: python manage.py runserver_plus --nopin 0.0.0.0:8000
     environment:
+      - TAG_MANAGER_ID
       - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
       - DJANGO_DEBUG_TOOLBAR
       - AWS_ACCESS_KEY_ID=minio-access-key
@@ -65,7 +66,6 @@ services:
       - db
       - solr
       - minio
-    restart: on-failure
 
   test:
     build:

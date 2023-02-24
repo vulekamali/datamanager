@@ -136,10 +136,10 @@ def save_imported_indicators(obj_id):
                 annual_pre_audit_output=indicator_data["PrelimaryAudited_Summary2"],
                 annual_deviation_reason=indicator_data["ReasonforDeviation_Summary"],
                 annual_corrective_action=indicator_data["CorrectiveAction_Summary"],
-                annual_otp_comments=indicator_data.get("OTP_Summary", ""),
-                annual_national_comments=indicator_data.get("National_Summary", ""),
-                annual_dpme_coordinator_comments=indicator_data.get("OTP_Summary", ""),
-                annual_treasury_comments=indicator_data.get("National_Summary", ""),
+                annual_otp_comments=indicator_data["OTP_Summary"],
+                annual_national_comments=indicator_data["National_Summary"],
+                annual_dpme_coordinator_comments=indicator_data["OTP_Summary"],
+                annual_treasury_comments=indicator_data["National_Summary"],
                 annual_audited_output=indicator_data["ValidatedAudited_Summary2"],
                 sector=indicator_data["Sector"],
                 programme_name=indicator_data["SubProgramme"],  # SubProgramme column in CSV is mislabeled
@@ -224,7 +224,7 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         "user",
         "num_imported",
         "num_not_imported",
-        "success",
+        "processing_completed",
         "updated_at",
     )
     fieldsets = (
@@ -276,17 +276,17 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
         # It looks like the task isn't saved synchronously, so we can't set the
         # task as a related object synchronously. We have to fetch it by its ID
         # when we want to see if it's available yet.
-        
+
         obj.task_id = async_task(func=save_imported_indicators, obj_id=obj.id)
         obj.save()
 
-    def success(self, obj):
+    def processing_completed(self, obj):
         task = fetch(obj.task_id)
         if task:
             return task.success
 
-    success.boolean = True
-    success.short_description = "Success"
+    processing_completed.boolean = True
+    processing_completed.short_description = "Processing completed"
 
 
 class IndicatorAdmin(admin.ModelAdmin):

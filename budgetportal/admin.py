@@ -219,6 +219,11 @@ class MainMenuItemAdmin(SortableAdmin):
     model = models.MainMenuItem
 
 
+class ShowcaseItemAdmin(SortableAdmin):
+    list_display = ("name", "description", "created_at")
+    model = models.ShowcaseItem
+
+
 admin.site.register(models.FinancialYear, FinancialYearAdmin)
 admin.site.register(models.Sphere, SphereAdmin)
 admin.site.register(models.Government, GovernmentAdmin)
@@ -238,3 +243,4 @@ admin.site.register(models.Homepage, admin.ModelAdmin)
 admin.site.register(models.CategoryGuide)
 admin.site.register(models.MainMenuItem, MainMenuItemAdmin)
 admin.site.register(models.Notice, SortableAdmin)
+admin.site.register(models.ShowcaseItem, ShowcaseItemAdmin)

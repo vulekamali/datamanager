@@ -251,6 +251,12 @@ urlpatterns = [
     ),
     # Performance app
     path("performance/", include("performance.urls")),
+    # Budget summary
+    url(
+        r"^budget-summary/?$",
+        cache_page(CACHE_MINUTES_SECS)(views.budget_summary_view),
+        name="budget-summary",
+    ),
     # Sitemap
     url(
         r"^sitemap\.xml$",
