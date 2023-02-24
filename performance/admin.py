@@ -56,34 +56,33 @@ def save_imported_indicators(obj_id):
     parsed_data = list(reader)
 
     # find the objects
-    report_departments = set([x["Institution"] for x in parsed_data])
-    report_government_names = set(
-        [x["Programme"] for x in parsed_data]
-    )  # Programme column in CSV is mislabeled
-    if "National" in report_government_names:
-        report_government_names.remove("National")
-        report_government_names.add("South Africa")
+    department_government_pairs = set([(x["Institution"], x["Programme"]) for x in parsed_data])  # Programme column in CSV is mislabeled
     num_imported = 0
     total_record_count = len(parsed_data)
     not_matching_departments = set()
 
-    # clear department indicators
-    for department in report_departments:
-        for government_name in report_government_names:
-            # clear by department
-            models.Indicator.objects.filter(
-                department__name=department,
-                department__government__name=government_name,
-                department__government__sphere__name=sphere,
-                department__government__sphere__financial_year__slug=financial_year
-            ).delete()
+    for department, government_name in department_government_pairs:
+        if government_name == "National":
+            government_name = "South Africa"
+            
+        # clear by department
+        models.Indicator.objects.filter(
+            department__name=department,
+            department__government__name=government_name,
+            department__government__sphere__name=sphere,
+            department__government__sphere__financial_year__slug=financial_year
+        ).delete()
 
-            # clear by alias
-            alias_obj = models.EQPRSDepartmentAlias.objects.filter(alias=department).first()
-            if alias_obj:
-                models.Indicator.objects.filter(
-                    department=alias_obj.department
-                ).delete()
+        # clear by alias
+        alias_obj = models.EQPRSDepartmentAlias.objects.filter(
+            alias=department,
+            department__government__name=government_name,
+            department__government__sphere__name=sphere,
+            department__government__sphere__financial_year__slug=financial_year).first()
+        if alias_obj:
+            models.Indicator.objects.filter(
+                department=alias_obj.department
+            ).delete()
 
     # create new indicators
     for indicator_data in parsed_data:
@@ -103,7 +102,11 @@ def save_imported_indicators(obj_id):
         department_obj = department_matches.first()
 
         if not department_obj:
-            alias_matches = models.EQPRSDepartmentAlias.objects.filter(alias=department_name)
+            alias_matches = models.EQPRSDepartmentAlias.objects.filter(
+                alias=department_name,
+                department__government__name=government_name,
+                department__government__sphere__name=sphere,
+                department__government__sphere__financial_year__slug=financial_year)
             assert alias_matches.count() <= 1
             if len(alias_matches) > 0:
                 department_obj = alias_matches.first().department
