@@ -229,7 +229,7 @@ class EQPRSFileUploadTestCase(TestCase):
         assert test_element.num_imported == 1
         indicator = models.Indicator.objects.all().first()
         assert indicator.programme_name == "Programme 1: Administration"
-
+        
     def test_with_alias(self):
         fy = FinancialYear.objects.create(slug="2021-22")
         sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
