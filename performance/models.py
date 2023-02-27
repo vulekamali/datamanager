@@ -123,12 +123,8 @@ class Indicator(models.Model):
 
 
 class EQPRSDepartmentAlias(models.Model):
-    department = models.ForeignKey(
-        Department, on_delete=models.CASCADE
-    )
-    alias = models.CharField(
-        max_length=200
-    )
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    alias = models.CharField(max_length=200)
 
     class Meta:
         verbose_name_plural = "Eqprs department aliases"

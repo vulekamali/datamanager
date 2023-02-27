@@ -7,17 +7,31 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0068_auto_20230220_0910'),
-        ('performance', '0013__add_full_text_index_triggers'),
+        ("budgetportal", "0068_auto_20230220_0910"),
+        ("performance", "0013__add_full_text_index_triggers"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='EQPRSDepartmentAlias',
+            name="EQPRSDepartmentAlias",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('alias', models.TextField()),
-                ('department', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='budgetportal.Department')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("alias", models.TextField()),
+                (
+                    "department",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="budgetportal.Department",
+                    ),
+                ),
             ],
         ),
     ]

@@ -16,7 +16,7 @@ VALID_REPORT_TYPES = [
 
 
 def generate_import_report(
-        report_type_validated, frictionless_report, not_matching_departments
+    report_type_validated, frictionless_report, not_matching_departments
 ):
     report = ""
     if not report_type_validated:
@@ -56,7 +56,9 @@ def save_imported_indicators(obj_id):
     parsed_data = list(reader)
 
     # find the objects
-    department_government_pairs = set([(x["Institution"], x["Programme"]) for x in parsed_data])  # Programme column in CSV is mislabeled
+    department_government_pairs = set(
+        [(x["Institution"], x["Programme"]) for x in parsed_data]
+    )  # Programme column in CSV is mislabeled
     num_imported = 0
     total_record_count = len(parsed_data)
     not_matching_departments = set()
@@ -64,13 +66,13 @@ def save_imported_indicators(obj_id):
     for department, government_name in department_government_pairs:
         if government_name == "National":
             government_name = "South Africa"
-            
+
         # clear by department
         models.Indicator.objects.filter(
             department__name=department,
             department__government__name=government_name,
             department__government__sphere__name=sphere,
-            department__government__sphere__financial_year__slug=financial_year
+            department__government__sphere__financial_year__slug=financial_year,
         ).delete()
 
         # clear by alias
@@ -78,11 +80,10 @@ def save_imported_indicators(obj_id):
             alias=department,
             department__government__name=government_name,
             department__government__sphere__name=sphere,
-            department__government__sphere__financial_year__slug=financial_year).first()
+            department__government__sphere__financial_year__slug=financial_year,
+        ).first()
         if alias_obj:
-            models.Indicator.objects.filter(
-                department=alias_obj.department
-            ).delete()
+            models.Indicator.objects.filter(department=alias_obj.department).delete()
 
     # create new indicators
     for indicator_data in parsed_data:
@@ -95,7 +96,7 @@ def save_imported_indicators(obj_id):
             name=department_name,
             government__name=government_name,
             government__sphere__name=sphere,
-            government__sphere__financial_year__slug=financial_year
+            government__sphere__financial_year__slug=financial_year,
         )
 
         assert department_matches.count() <= 1
@@ -106,7 +107,8 @@ def save_imported_indicators(obj_id):
                 alias=department_name,
                 department__government__name=government_name,
                 department__government__sphere__name=sphere,
-                department__government__sphere__financial_year__slug=financial_year)
+                department__government__sphere__financial_year__slug=financial_year,
+            )
             assert alias_matches.count() <= 1
             if len(alias_matches) > 0:
                 department_obj = alias_matches.first().department
@@ -159,8 +161,12 @@ def save_imported_indicators(obj_id):
                 annual_treasury_comments=indicator_data.get("National_Summary", ""),
                 annual_audited_output=indicator_data["ValidatedAudited_Summary2"],
                 sector=indicator_data["Sector"],
-                programme_name=indicator_data["SubProgramme"],  # SubProgramme column in CSV is mislabeled
-                subprogramme_name=indicator_data["Location"],  # Location column in CSV is mislabeled
+                programme_name=indicator_data[
+                    "SubProgramme"
+                ],  # SubProgramme column in CSV is mislabeled
+                subprogramme_name=indicator_data[
+                    "Location"
+                ],  # Location column in CSV is mislabeled
                 frequency=[i[0] for i in models.FREQUENCIES if i[1] == frequency][0],
                 type=indicator_data["Type"],
                 subtype=indicator_data["SubType"],
@@ -262,13 +268,13 @@ class EQPRSFileUploadAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object
             return (
-                       "user",
-                       "file",
-                   ) + self.readonly_fields
+                "user",
+                "file",
+            ) + self.readonly_fields
         return self.readonly_fields
 
     def render_change_form(
-            self, request, context, add=False, change=False, form_url="", obj=None
+        self, request, context, add=False, change=False, form_url="", obj=None
     ):
         response = super(EQPRSFileUploadAdmin, self).render_change_form(
             request, context, add, change, form_url, obj
@@ -500,10 +506,7 @@ class IndicatorAdmin(admin.ModelAdmin):
 
 
 class EQPRSDepartmentAliasAdmin(admin.ModelAdmin):
-    list_display = (
-        "department",
-        "alias"
-    )
+    list_display = ("department", "alias")
     search_fields = (
         "department__government__sphere__financial_year__slug",
         "department__government__sphere__name",
