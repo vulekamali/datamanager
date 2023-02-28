@@ -20,7 +20,6 @@ admin.site = AdminSitePlus()
 admin.autodiscover()
 
 CACHE_MINUTES_SECS = 60 * 5  # minutes
-CACHE_DAYS_SECS = 60 * 60 * 24 * 5  # days
 
 
 def permission_denied(request):
@@ -37,17 +36,17 @@ department_urlpatterns = [
     ),
     url(
         r"^viz/subprog-treemap$",
-        cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_treemap),
+        cache_page(CACHE_MINUTES_SECS)(views.department_viz_subprog_treemap),
         name="department-viz-subprog-treemap",
     ),
     url(
         r"^viz/subprog-econ4-circles$",
-        cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_econ4_circles),
+        cache_page(CACHE_MINUTES_SECS)(views.department_viz_subprog_econ4_circles),
         name="department-viz-subprog-econ4-circles",
     ),
     url(
         r"^viz/subprog-econ4-bars$",
-        cache_page(CACHE_DAYS_SECS)(views.department_viz_subprog_econ4_bars),
+        cache_page(CACHE_MINUTES_SECS)(views.department_viz_subprog_econ4_bars),
         name="department-viz-subprog-econ4-bars",
     ),
 ]
@@ -61,7 +60,7 @@ urlpatterns = [
     ),
     url(
         r"^json/(?P<financial_year_id>\d{4}-\d{2})" "/focus.json",
-        cache_page(CACHE_DAYS_SECS)(views.focus_preview_json),
+        cache_page(CACHE_MINUTES_SECS)(views.focus_preview_json),
         name="focus-json",
     ),
     # National and provincial treemap data
@@ -69,7 +68,7 @@ urlpatterns = [
         r"^json/(?P<financial_year_id>\d{4}-\d{2})"
         "/(?P<sphere_slug>[\w-]+)"
         "/(?P<phase_slug>[\w-]+).json",
-        cache_page(CACHE_DAYS_SECS)(views.treemaps_json),
+        cache_page(CACHE_MINUTES_SECS)(views.treemaps_json),
     ),
     # Preview pages
     url(
@@ -87,13 +86,13 @@ urlpatterns = [
         "/(?P<sphere_slug>[\w-]+)"
         "/(?P<government_slug>[\w-]+)"
         "/(?P<phase_slug>[\w-]+).json",
-        cache_page(CACHE_DAYS_SECS)(views.department_preview_json),
+        cache_page(CACHE_MINUTES_SECS)(views.department_preview_json),
         name="department-preview-json",
     ),
     # Consolidated
     url(
         r"^json/(?P<financial_year_id>\d{4}-\d{2})" "/consolidated.json",
-        cache_page(CACHE_DAYS_SECS)(views.consolidated_treemap_json),
+        cache_page(CACHE_MINUTES_SECS)(views.consolidated_treemap_json),
         name="consolidated-json",
     ),
     # Homepage
@@ -101,7 +100,7 @@ urlpatterns = [
     # Search results
     url(
         r"^json/static-search.json",
-        cache_page(CACHE_DAYS_SECS)(views.static_search_data),
+        cache_page(CACHE_MINUTES_SECS)(views.static_search_data),
     ),
     # Department list as CSV
     url(
@@ -130,14 +129,14 @@ urlpatterns = [
     # CSV
     url(
         r"^csv/$",
-        cache_page(CACHE_DAYS_SECS)(views.openspending_csv),
+        cache_page(CACHE_MINUTES_SECS)(views.openspending_csv),
         name="openspending_csv",
     ),
     # Admin
     url(r"^admin/", admin.site.urls),
     url(r"^admin/bulk_upload/template", bulk_upload.template_view),
     # Budget Portal
-    url(r"^about/?$", cache_page(CACHE_DAYS_SECS)(views.about), name="about"),
+    url(r"^about/?$", cache_page(CACHE_MINUTES_SECS)(views.about), name="about"),
     url(r"^events/?$", cache_page(CACHE_MINUTES_SECS)(views.events), name="events"),
     url(
         r"^learning-resources/?$",
@@ -151,12 +150,12 @@ urlpatterns = [
     ),
     url(
         r"^terms-and-conditions/?$",
-        cache_page(CACHE_DAYS_SECS)(views.terms_and_conditions),
+        cache_page(CACHE_MINUTES_SECS)(views.terms_and_conditions),
         name="terms-and-conditions",
     ),
     url(
         r"^learning-resources/resources/?$",
-        cache_page(CACHE_DAYS_SECS)(views.resources),
+        cache_page(CACHE_MINUTES_SECS)(views.resources),
         name="resources",
     ),
     url(
@@ -260,12 +259,12 @@ urlpatterns = [
     # Sitemap
     url(
         r"^sitemap\.xml$",
-        cache_page(CACHE_DAYS_SECS)(sitemap_views.index),
+        cache_page(CACHE_MINUTES_SECS)(sitemap_views.index),
         {"sitemaps": sitemaps},
     ),
     url(
         r"^sitemap-(?P<section>.+)\.xml$",
-        cache_page(CACHE_DAYS_SECS)(sitemap_views.sitemap),
+        cache_page(CACHE_MINUTES_SECS)(sitemap_views.sitemap),
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
