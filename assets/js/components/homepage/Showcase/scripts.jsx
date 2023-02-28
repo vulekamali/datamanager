@@ -80,7 +80,10 @@ class Showcase extends Component {
                                         <b>{feature.name}</b>
                                         <p>{feature.description}</p>
                                         {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1, true)}
-                                        {this.renderCTA(feature.second_cta_type, feature.cta_text_2, feature.cta_link_2, feature.cta_enabled_2)}
+                                        {this.renderCTA(feature.second_cta_type,
+                                            feature.cta_text_2,
+                                            feature.cta_link_2,
+                                            (feature.cta_text_2 != null && feature.cta_text_2.trim() != ""))}
                                     </CardContent>
                                 </Grid>
                             </Grid>

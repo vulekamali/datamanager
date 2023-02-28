@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0068_auto_20230220_0910'),
+        ("budgetportal", "0068_auto_20230220_0910"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='showcaseitem',
-            name='cta_enabled_2',
-            field=models.BooleanField(default=True, verbose_name='Enable call to action 2'),
+            model_name="showcaseitem",
+            name="cta_enabled_2",
+            field=models.BooleanField(
+                default=True, verbose_name="Enable call to action 2"
+            ),
             preserve_default=False,
         ),
     ]
