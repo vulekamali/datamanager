@@ -48,7 +48,9 @@ class EQPRSFileUploadTestCase(TestCase):
         self.csv_file = File(open(file_path, "rb"))
         self.national_file = File(open(national_file_path, "rb"))
         self.wrong_report_type_file = File(open(wrong_report_type_file_path, "rb"))
-        self.data_for_deleting_indicators_file = File(open(data_for_deleting_indicators_path, "rb"))
+        self.data_for_deleting_indicators_file = File(
+            open(data_for_deleting_indicators_path, "rb")
+        )
         self.mocked_request = get_mocked_request(self.superuser)
 
     def tearDown(self):
@@ -65,12 +67,12 @@ class EQPRSFileUploadTestCase(TestCase):
         test_element.refresh_from_db()
         assert "Report type must be for one of" in test_element.import_report
         assert (
-                "* Provincial Institutions Oversight Performance  Report"
-                in test_element.import_report
+            "* Provincial Institutions Oversight Performance  Report"
+            in test_element.import_report
         )
         assert (
-                "* National Institutions Oversight Performance  Report"
-                in test_element.import_report
+            "* National Institutions Oversight Performance  Report"
+            in test_element.import_report
         )
 
     def test_with_missing_department(self):
@@ -87,8 +89,8 @@ class EQPRSFileUploadTestCase(TestCase):
         test_element.refresh_from_db()
         assert test_element.num_not_imported == 2
         assert (
-                "Department names that could not be matched on import :"
-                in test_element.import_report
+            "Department names that could not be matched on import :"
+            in test_element.import_report
         )
         assert "* Health" in test_element.import_report
 
@@ -111,8 +113,8 @@ class EQPRSFileUploadTestCase(TestCase):
         assert test_element.import_report == ""
         assert test_element.num_imported == 2
         assert (
-                indicator.indicator_name
-                == "9.1.2 Number of statutory documents tabled at Legislature"
+            indicator.indicator_name
+            == "9.1.2 Number of statutory documents tabled at Legislature"
         )
         assert indicator.sector == "Health"
         assert indicator.programme_name == "Programme 1: Administration"
@@ -122,8 +124,8 @@ class EQPRSFileUploadTestCase(TestCase):
         assert indicator.subtype == "Max"
         assert indicator.mtsf_outcome == "Priority 3: Education, Skills And Health"
         assert (
-                indicator.cluster
-                == "The Social Protection, Community and Human Development cluster"
+            indicator.cluster
+            == "The Social Protection, Community and Human Development cluster"
         )
 
         assert indicator.q1_target == "0"
@@ -272,9 +274,7 @@ class EQPRSFileUploadTestCase(TestCase):
         Indicator.objects.create(
             indicator_name="Test Indicator 1",
             department=department_1,
-            source=EQPRSFileUpload.objects.create(
-                user=self.superuser, file=None
-            )
+            source=EQPRSFileUpload.objects.create(user=self.superuser, file=None),
         )
 
         government_2 = Government.objects.create(name="Western Cape", sphere=sphere)
@@ -286,9 +286,7 @@ class EQPRSFileUploadTestCase(TestCase):
         Indicator.objects.create(
             indicator_name="Test Indicator 2",
             department=department_2,
-            source=EQPRSFileUpload.objects.create(
-                user=self.superuser, file=None
-            )
+            source=EQPRSFileUpload.objects.create(user=self.superuser, file=None),
         )
 
         department_3 = Department.objects.create(
@@ -299,9 +297,7 @@ class EQPRSFileUploadTestCase(TestCase):
         Indicator.objects.create(
             indicator_name="Test Indicator 3",
             department=department_3,
-            source=EQPRSFileUpload.objects.create(
-                user=self.superuser, file=None
-            )
+            source=EQPRSFileUpload.objects.create(user=self.superuser, file=None),
         )
 
         assert Indicator.objects.all().count() == 3
@@ -324,13 +320,19 @@ class EQPRSFileUploadTestCase(TestCase):
 
         # new objects(with id 4 & 5) are created
         indicator_4 = Indicator.objects.get(id=4)
-        assert indicator_4.indicator_name == "9.1.2 Number of statutory documents tabled at Legislature"
+        assert (
+            indicator_4.indicator_name
+            == "9.1.2 Number of statutory documents tabled at Legislature"
+        )
         assert indicator_4.department.name == "Health"
         assert indicator_4.department.government.name == "Eastern Cape"
         assert indicator_4.department.government.sphere.financial_year.slug == "2017-18"
 
         indicator_5 = Indicator.objects.get(id=5)
-        assert indicator_5.indicator_name == "6.4.1 Holistic Human  Resources for Health (HRH) strategy  approved "
+        assert (
+            indicator_5.indicator_name
+            == "6.4.1 Holistic Human  Resources for Health (HRH) strategy  approved "
+        )
         assert indicator_5.department.name == "Education"
         assert indicator_5.department.government.name == "Western Cape"
         assert indicator_5.department.government.sphere.financial_year.slug == "2017-18"
