@@ -67,6 +67,9 @@ def save_imported_indicators(obj_id):
         if government_name == "National":
             government_name = "South Africa"
 
+        if department.startswith(f"{government_name}: "):
+            department = department.replace(f"{government_name}: ", "")
+
         # clear by department
         models.Indicator.objects.filter(
             department__name=department,
@@ -92,6 +95,9 @@ def save_imported_indicators(obj_id):
         if government_name == "National":
             government_name = "South Africa"
         department_name = indicator_data["Institution"]
+        if department_name.startswith(f"{government_name}: "):
+            department_name = department_name.replace(f"{government_name}: ", "")
+
         department_matches = models.Department.objects.filter(
             name=department_name,
             government__name=government_name,
