@@ -3,7 +3,7 @@ from performance.admin import EQPRSFileUploadAdmin
 from django.contrib.auth.models import User
 from django.contrib.admin.sites import AdminSite
 from django.contrib import admin
-from performance.models import EQPRSFileUpload, Indicator
+from performance.models import EQPRSFileUpload, Indicator, EQPRSDepartmentAlias
 from budgetportal.models.government import Department, Government, Sphere, FinancialYear
 from django.test import RequestFactory
 from performance import models
@@ -42,14 +42,22 @@ class EQPRSFileUploadTestCase(TestCase):
         wrong_report_type_file_path = os.path.abspath(
             ("performance/tests/static/wrong_report_type.csv")
         )
+        data_for_deleting_indicators_path = os.path.abspath(
+            ("performance/tests/static/data_for_deleting_indicators.csv")
+        )
         self.csv_file = File(open(file_path, "rb"))
         self.national_file = File(open(national_file_path, "rb"))
         self.wrong_report_type_file = File(open(wrong_report_type_file_path, "rb"))
+        self.data_for_deleting_indicators_file = File(
+            open(data_for_deleting_indicators_path, "rb")
+        )
         self.mocked_request = get_mocked_request(self.superuser)
 
     def tearDown(self):
         self.csv_file.close()
+        self.national_file.close()
         self.wrong_report_type_file.close()
+        self.data_for_deleting_indicators_file.close()
 
     def test_report_name_validation(self):
         test_element = EQPRSFileUpload.objects.create(
@@ -189,7 +197,7 @@ class EQPRSFileUploadTestCase(TestCase):
         assert last_element.task_id is not None
 
     def test_status_in_list_view(self):
-        assert "success" in EQPRSFileUploadAdmin.list_display
+        assert "processing_completed" in EQPRSFileUploadAdmin.list_display
 
         fy = FinancialYear.objects.create(slug="2021-22")
         sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
@@ -209,7 +217,7 @@ class EQPRSFileUploadTestCase(TestCase):
         )
 
         last_element = EQPRSFileUpload.objects.all().last()
-        assert model_admin.success(last_element) == True
+        assert model_admin.processing_completed(last_element) == True
 
     def test_with_national_government(self):
         fy = FinancialYear.objects.create(slug="2021-22")
@@ -229,3 +237,102 @@ class EQPRSFileUploadTestCase(TestCase):
         assert test_element.num_imported == 1
         indicator = models.Indicator.objects.all().first()
         assert indicator.programme_name == "Programme 1: Administration"
+
+    def test_with_alias(self):
+        fy = FinancialYear.objects.create(slug="2021-22")
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+        government = Government.objects.create(name="South Africa", sphere=sphere)
+        department = Department.objects.create(
+            name="Department to be found by its alias",
+            government=government,
+            vote_number=1,
+        )
+        EQPRSDepartmentAlias.objects.create(department=department, alias="Health")
+
+        test_element = EQPRSFileUpload.objects.create(
+            user=self.superuser, file=self.national_file
+        )
+        performance.admin.save_imported_indicators(test_element.id)
+        test_element.refresh_from_db()
+
+        assert test_element.import_report == ""
+        assert test_element.num_imported == 1
+        indicator = models.Indicator.objects.all().first()
+        assert indicator.programme_name == "Programme 1: Administration"
+        assert indicator.department.name == "Department to be found by its alias"
+
+    def test_deleting_old_indicators(self):
+        fy = FinancialYear.objects.create(slug="2017-18")
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+
+        government_1 = Government.objects.create(name="Eastern Cape", sphere=sphere)
+        department_1 = Department.objects.create(
+            name="Health",
+            government=government_1,
+            vote_number=1,
+        )
+        Indicator.objects.create(
+            indicator_name="Test Indicator 1",
+            department=department_1,
+            source=EQPRSFileUpload.objects.create(user=self.superuser, file=None),
+        )
+
+        government_2 = Government.objects.create(name="Western Cape", sphere=sphere)
+        department_2 = Department.objects.create(
+            name="Education",
+            government=government_2,
+            vote_number=1,
+        )
+        Indicator.objects.create(
+            indicator_name="Test Indicator 2",
+            department=department_2,
+            source=EQPRSFileUpload.objects.create(user=self.superuser, file=None),
+        )
+
+        department_3 = Department.objects.create(
+            name="Health",
+            government=government_2,
+            vote_number=2,
+        )
+        Indicator.objects.create(
+            indicator_name="Test Indicator 3",
+            department=department_3,
+            source=EQPRSFileUpload.objects.create(user=self.superuser, file=None),
+        )
+
+        assert Indicator.objects.all().count() == 3
+
+        test_element = EQPRSFileUpload.objects.create(
+            user=self.superuser, file=self.data_for_deleting_indicators_file
+        )
+        performance.admin.save_imported_indicators(test_element.id)
+        test_element.refresh_from_db()
+
+        # ids 1 & 2 are deleted
+        assert Indicator.objects.all().count() == 3
+
+        # id 3 is remaining
+        indicator_3 = Indicator.objects.get(id=3)
+        assert indicator_3.indicator_name == "Test Indicator 3"
+        assert indicator_3.department.name == "Health"
+        assert indicator_3.department.government.name == "Western Cape"
+        assert indicator_3.department.government.sphere.financial_year.slug == "2017-18"
+
+        # new objects(with id 4 & 5) are created
+        indicator_4 = Indicator.objects.get(id=4)
+        assert (
+            indicator_4.indicator_name
+            == "9.1.2 Number of statutory documents tabled at Legislature"
+        )
+        assert indicator_4.department.name == "Health"
+        assert indicator_4.department.government.name == "Eastern Cape"
+        assert indicator_4.department.government.sphere.financial_year.slug == "2017-18"
+
+        indicator_5 = Indicator.objects.get(id=5)
+        assert (
+            indicator_5.indicator_name
+            == "6.4.1 Holistic Human  Resources for Health (HRH) strategy  approved "
+        )
+        assert indicator_5.department.name == "Education"
+        assert indicator_5.department.government.name == "Western Cape"
+        assert indicator_5.department.government.sphere.financial_year.slug == "2017-18"
