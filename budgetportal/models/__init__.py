@@ -806,7 +806,9 @@ class ShowcaseItem(SortableMixin):
     cta_link_1 = models.URLField(
         null=True, blank=True, verbose_name="Call to action link 1"
     )
-    cta_text_2 = models.CharField(max_length=200, verbose_name="Call to action text 2")
+    cta_text_2 = models.CharField(
+        max_length=200, verbose_name="Call to action text 2", null=True, blank=True
+    )
     cta_link_2 = models.URLField(
         null=True, blank=True, verbose_name="Call to action link 2"
     )

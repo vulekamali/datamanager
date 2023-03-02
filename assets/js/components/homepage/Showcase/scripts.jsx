@@ -12,10 +12,14 @@ class Showcase extends Component {
         }
     }
 
-    renderCTA(type, text, link) {
+    renderCTA(type, text, link, enabled) {
+        if (!enabled) {
+            return;
+        }
+
         if (type === "primary") {
             return (
-                <a
+                <p><a
                     href={link}
                     style={{
                         backgroundColor: '#70b352',
@@ -25,10 +29,8 @@ class Showcase extends Component {
                         display: 'block',
                         padding: '6px 16px',
                         borderRadius: '4px',
-                        fontWeight: '700',
-                        marginBottom: '12px'
+                        fontWeight: '700'
                     }}
-                    target={'_blank'}
                 >
                     <Grid container>
                         <Grid
@@ -42,14 +44,13 @@ class Showcase extends Component {
                             <ForwardArrow/>
                         </Grid>
                     </Grid>
-                </a>
+                </a></p>
             )
         } else if (type === "secondary") {
             return (
-                <a
+                <p><a
                     href={link}
-                    target={'_blank'}
-                >{text}</a>
+                >{text}</a></p>
             )
         }
     }
@@ -67,18 +68,21 @@ class Showcase extends Component {
                             style={{display: 'flex', height: '100%'}}
                         >
                             <Grid container>
-                                <Grid xs={12} sm={5}>
+                                <Grid item xs={12} sm={5}>
                                     <CardMedia
                                         image={feature.thumbnail_url}
                                         style={{width: '100%', height: '100%', minHeight: '110px'}}
                                     />
                                 </Grid>
-                                <Grid xs={12} sm={7}>
+                                <Grid item xs={12} sm={7} style={{margin: 'auto 0'}}>
                                     <CardContent>
                                         <b>{feature.name}</b>
                                         <p>{feature.description}</p>
-                                        {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1)}
-                                        {this.renderCTA(feature.second_cta_type, feature.cta_text_2, feature.cta_link_2)}
+                                        {this.renderCTA('primary', feature.cta_text_1, feature.cta_link_1, true)}
+                                        {this.renderCTA(feature.second_cta_type,
+                                            feature.cta_text_2,
+                                            feature.cta_link_2,
+                                            (feature.cta_text_2 != null && feature.cta_text_2.trim() != ""))}
                                     </CardContent>
                                 </Grid>
                             </Grid>
