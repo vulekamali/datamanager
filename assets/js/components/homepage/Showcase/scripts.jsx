@@ -19,7 +19,7 @@ class Showcase extends Component {
 
         if (type === "primary") {
             return (
-                <a
+                <p><a
                     href={link}
                     style={{
                         backgroundColor: '#70b352',
@@ -29,8 +29,7 @@ class Showcase extends Component {
                         display: 'block',
                         padding: '6px 16px',
                         borderRadius: '4px',
-                        fontWeight: '700',
-                        marginBottom: '12px'
+                        fontWeight: '700'
                     }}
                 >
                     <Grid container>
@@ -45,13 +44,13 @@ class Showcase extends Component {
                             <ForwardArrow/>
                         </Grid>
                     </Grid>
-                </a>
+                </a></p>
             )
         } else if (type === "secondary") {
             return (
-                <a
+                <p><a
                     href={link}
-                >{text}</a>
+                >{text}</a></p>
             )
         }
     }
@@ -72,10 +71,10 @@ class Showcase extends Component {
                                 <Grid item xs={12} sm={5}>
                                     <CardMedia
                                         image={feature.thumbnail_url}
-                                        style={{width: '100%', height: '100%', minHeight: '250px'}}
+                                        style={{width: '100%', height: '100%', minHeight: '110px'}}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={7}>
+                                <Grid item xs={12} sm={7} style={{margin: 'auto 0'}}>
                                     <CardContent>
                                         <b>{feature.name}</b>
                                         <p>{feature.description}</p>
