@@ -45,11 +45,17 @@ class EQPRSFileUploadTestCase(TestCase):
         data_for_deleting_indicators_path = os.path.abspath(
             ("performance/tests/static/data_for_deleting_indicators.csv")
         )
+        department_name_containing_government_path = os.path.abspath(
+            ("performance/tests/static/department_name_containing_government.csv")
+        )
         self.csv_file = File(open(file_path, "rb"))
         self.national_file = File(open(national_file_path, "rb"))
         self.wrong_report_type_file = File(open(wrong_report_type_file_path, "rb"))
         self.data_for_deleting_indicators_file = File(
             open(data_for_deleting_indicators_path, "rb")
+        )
+        self.department_name_containing_government_file = File(
+            open(department_name_containing_government_path, "rb")
         )
         self.mocked_request = get_mocked_request(self.superuser)
 
@@ -336,3 +342,18 @@ class EQPRSFileUploadTestCase(TestCase):
         assert indicator_5.department.name == "Education"
         assert indicator_5.department.government.name == "Western Cape"
         assert indicator_5.department.government.sphere.financial_year.slug == "2017-18"
+
+    def test_department_name_containing_government(self):
+        fy = FinancialYear.objects.create(slug="2021-22")
+        sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
+        government = Government.objects.create(name="Eastern Cape", sphere=sphere)
+        department = Department.objects.create(
+            name="Health", government=government, vote_number=1
+        )
+
+        test_element = EQPRSFileUpload.objects.create(
+            user=self.superuser, file=self.department_name_containing_government_file
+        )
+        performance.admin.save_imported_indicators(test_element.id)
+        test_element.refresh_from_db()
+        assert Indicator.objects.all().count() == 2
