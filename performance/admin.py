@@ -512,14 +512,18 @@ class IndicatorAdmin(admin.ModelAdmin):
 
 
 class EQPRSDepartmentAliasAdmin(admin.ModelAdmin):
-    list_display = ("department", "alias")
-    search_fields = (
+    list_display = ("alias", "department")
+    list_filter = (
         "department__government__sphere__financial_year__slug",
         "department__government__sphere__name",
         "department__government__name",
+    )
+    search_fields = (
         "department__name",
         "alias",
     )
+
+    autocomplete_fields = ("department",)
 
 
 admin.site.register(models.EQPRSFileUpload, EQPRSFileUploadAdmin)

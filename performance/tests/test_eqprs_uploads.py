@@ -268,6 +268,14 @@ class EQPRSFileUploadTestCase(TestCase):
         assert indicator.department.name == "Department to be found by its alias"
 
     def test_deleting_old_indicators(self):
+        """
+        test that
+          - if gov A and dept A is in the data, its old indicators for that
+            financial year are deleted. Any other financial years remain
+          - if Gov A, B and dept A, B is in the data, old indicators for Gov A
+            DeptA are deleted but Gov A dept B are not deleted
+        """
+
         fy = FinancialYear.objects.create(slug="2017-18")
         sphere = Sphere.objects.create(name="Provincial", financial_year=fy)
 
