@@ -32,4 +32,4 @@ ghostdriver.log
 dbdump
 
 .env
-*.csv
+/*.csv
