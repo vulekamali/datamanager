@@ -13,8 +13,8 @@ import {
     TableHead, TablePagination,
     TableRow
 } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/styles";
-import { createTheme } from '@material-ui/core/styles';
+import {ThemeProvider} from "@material-ui/styles";
+import {createTheme} from '@material-ui/core/styles';
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import debounce from "lodash.debounce";
 
@@ -34,7 +34,8 @@ class TabularView extends Component {
             totalCount: 0,
             rowsPerPage: 0,
             currentPage: 0,
-            selectedFilters: {}
+            selectedFilters: {},
+            excludeColumns: ['id', 'department']
         }
     }
 
@@ -73,17 +74,24 @@ class TabularView extends Component {
     }
 
     renderTableHead() {
+        const includeColumns = ["financial_year", "department_name", "government_name", "sphere_name"];
         if (this.state.rows.length > 0) {
             return (
                 <TableRow>
-                  {Object.keys(this.state.rows[0]).map((key, index) => {
-                      if (key !== 'id') {
-                          return (<TableCell
-                                    key={index}
-                                    style={{borderRight: '1px solid #c6c6c6'}}
-                                  ><b>{key}</b></TableCell>)
-                      }
-                  })}
+                    {Object.keys(this.state.rows[0]).map((key, index) => {
+                        if (this.state.excludeColumns.indexOf(key) < 0) {
+                            return (<TableCell
+                                key={index}
+                                style={{borderRight: '1px solid #c6c6c6'}}
+                            ><b>{key}</b></TableCell>)
+                        }
+                    })}
+                    {includeColumns.map((key, index) => {
+                        return (<TableCell
+                            key={index}
+                            style={{borderRight: '1px solid #c6c6c6'}}
+                        ><b>{key}</b></TableCell>)
+                    })}
                 </TableRow>
             )
         } else {
@@ -92,6 +100,7 @@ class TabularView extends Component {
     }
 
     renderTableCells(row, index) {
+        const includeColumns = [row.department.government.sphere.financial_year.slug, row.department.name, row.department.government.name, row.department.government.sphere.name];
         const isAlternating = index % 2 !== 0;
         return (
             <TableRow
@@ -99,7 +108,7 @@ class TabularView extends Component {
             >
                 {
                     Object.keys(row).map((key, i) => {
-                        if (key !== 'id') {
+                        if (this.state.excludeColumns.indexOf(key) < 0) {
                             return (
                                 <TableCell
                                     key={`${index}_${i}`}
@@ -115,6 +124,24 @@ class TabularView extends Component {
                                 >{row[key]}</TableCell>
                             )
                         }
+                    })
+                }
+                {
+                    includeColumns.map((value, i) => {
+                        return (
+                            <TableCell
+                                key={i}
+                                style={{
+                                    maxWidth: 150,
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    whiteSpace: "nowrap",
+                                    backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc',
+                                    borderRight: '1px solid #c6c6c6'
+                                }}
+                                title={value}
+                            >{value}</TableCell>
+                        )
                     })
                 }
             </TableRow>
@@ -133,17 +160,17 @@ class TabularView extends Component {
     renderPagination() {
         return (
             <TablePagination
-              colSpan={3}
-              count={this.state.totalCount}
-              rowsPerPage={this.state.rowsPerPage}
-              rowsPerPageOptions={[]}
-              page={this.state.currentPage}
-              onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
-              SelectProps={{
-                  inputProps: {'aria-label': 'rows per page'},
-                  native: true,
-              }}
-              component="div"
+                colSpan={3}
+                count={this.state.totalCount}
+                rowsPerPage={this.state.rowsPerPage}
+                rowsPerPageOptions={[]}
+                page={this.state.currentPage}
+                onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
+                SelectProps={{
+                    inputProps: {'aria-label': 'rows per page'},
+                    native: true,
+                }}
+                component="div"
             />
         );
     }
@@ -167,24 +194,24 @@ class TabularView extends Component {
             });
             return (
                 <ThemeProvider theme={tableTheme}>
-                  {this.renderPagination()}
-                  <Paper>
-                    <TableContainer>
-                      <Table stickyHeader aria-label="simple table" size={'small'}>
-                        <TableHead>
-                          {this.renderTableHead()}
-                        </TableHead>
-                        <TableBody>
-                          {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
-                        </TableBody>
-                        <TableFooter>
-                          <TableRow>
-                          </TableRow>
-                        </TableFooter>
-                      </Table>
-                    </TableContainer>
-                  </Paper>
-                  {this.renderPagination()}
+                    {this.renderPagination()}
+                    <Paper>
+                        <TableContainer>
+                            <Table stickyHeader aria-label="simple table" size={'small'}>
+                                <TableHead>
+                                    {this.renderTableHead()}
+                                </TableHead>
+                                <TableBody>
+                                    {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
+                                </TableBody>
+                                <TableFooter>
+                                    <TableRow>
+                                    </TableRow>
+                                </TableFooter>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
+                    {this.renderPagination()}
                 </ThemeProvider>
             );
         }
@@ -217,17 +244,19 @@ class TabularView extends Component {
         return (
             <FormControl variant={'outlined'}
                          size={'small'}
-                         style={{marginRight: '10px',
-                                 marginTop: '15px',
-                                 fontSize: '8px'}}>
-              <TextField variant="outlined"
-                         size="small"
-                         label="Search indicators"
-                         inputProps={{
-                             id: "frm-textSearch",
-                             name: "q"
-                         }}
-                         onChange={persistedEventDeboundedHandler}/>
+                         style={{
+                             marginRight: '10px',
+                             marginTop: '15px',
+                             fontSize: '8px'
+                         }}>
+                <TextField variant="outlined"
+                           size="small"
+                           label="Search indicators"
+                           inputProps={{
+                               id: "frm-textSearch",
+                               name: "q"
+                           }}
+                           onChange={persistedEventDeboundedHandler}/>
             </FormControl>
         )
     }
@@ -239,12 +268,14 @@ class TabularView extends Component {
             return (
                 <FormControl variant={'outlined'}
                              size={'small'}
-                             style={{minWidth: '150px',
-                                     maxWidth: '250px',
-                                     marginRight: '10px',
-                                     marginTop: '15px',
-                                     fontSize: '8px'}}>
-                    <InputLabel htmlFor={`frm-${id}`} shrink>{ fieldLabel }</InputLabel>
+                             style={{
+                                 minWidth: '150px',
+                                 maxWidth: '250px',
+                                 marginRight: '10px',
+                                 marginTop: '15px',
+                                 fontSize: '8px'
+                             }}>
+                    <InputLabel htmlFor={`frm-${id}`} shrink>{fieldLabel}</InputLabel>
                     <Select
                         native
                         notched
@@ -256,18 +287,18 @@ class TabularView extends Component {
                         value={this.state.selectedFilters[apiField]}
                         onChange={(event) => this.handleFilterChange(event)}
                     >
-                      <option aria-label={blankLabel} value={''}>{blankLabel}</option>
-                      {
-                          this.state[stateField].map((option, index) => {
-                              return (
-                                  <option
-                                    key={index}
-                                    value={option[apiField]}>
-                                    {`${option[apiField]} (${option['count']})`}
-                                  </option>
-                              )
-                          })
-                      }
+                        <option aria-label={blankLabel} value={''}>{blankLabel}</option>
+                        {
+                            this.state[stateField].map((option, index) => {
+                                return (
+                                    <option
+                                        key={index}
+                                        value={option[apiField]}>
+                                        {`${option[apiField]} (${option['count']})`}
+                                    </option>
+                                )
+                            })
+                        }
                     </Select>
                 </FormControl>
             )
@@ -279,40 +310,40 @@ class TabularView extends Component {
             <Grid container>
                 {this.renderSearchField()}
                 {this.renderFilter('financialYears',
-                                   'department__government__sphere__financial_year__slug',
-                                   'financialYears',
-                                   'Financial year',
-                                   'All financial years')}
+                    'department__government__sphere__financial_year__slug',
+                    'financialYears',
+                    'Financial year',
+                    'All financial years')}
                 {this.renderFilter('sphere',
-                                   'department__government__sphere__name',
-                                   'spheres',
-                                   'Sphere',
-                                   'All spheres')}
+                    'department__government__sphere__name',
+                    'spheres',
+                    'Sphere',
+                    'All spheres')}
                 {this.renderFilter('government',
-                                   'department__government__name',
-                                   'governments',
-                                   'Government',
-                                   'All governments')}
+                    'department__government__name',
+                    'governments',
+                    'Government',
+                    'All governments')}
                 {this.renderFilter('department',
-                                   'department__name',
-                                   'departments',
-                                   'Department',
-                                   'All departments')}
+                    'department__name',
+                    'departments',
+                    'Department',
+                    'All departments')}
                 {this.renderFilter('frequency',
-                                   'frequency',
-                                   'frequencies',
-                                   'Frequency',
-                                   'All frequencies')}
+                    'frequency',
+                    'frequencies',
+                    'Frequency',
+                    'All frequencies')}
                 {this.renderFilter('sector',
-                                   'sector',
-                                   'sectors',
-                                   'Sectors',
-                                   'All sectors')}
+                    'sector',
+                    'sectors',
+                    'Sectors',
+                    'All sectors')}
                 {this.renderFilter('mtsfOutcome',
-                                   'mtsf_outcome',
-                                   'mtsfOutcomes',
-                                   'MTSF Outcome',
-                                   'All outcomes')}
+                    'mtsf_outcome',
+                    'mtsfOutcomes',
+                    'MTSF Outcome',
+                    'All outcomes')}
             </Grid>
         )
     }
@@ -330,10 +361,10 @@ class TabularView extends Component {
 function scripts() {
     const parent = document.getElementById('js-initTabularView');
     if (parent) {
-      ReactDOM.render(
-          <TabularView
-          />, parent
-      )
+        ReactDOM.render(
+            <TabularView
+            />, parent
+        )
     }
 }
 
