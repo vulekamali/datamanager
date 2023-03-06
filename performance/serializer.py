@@ -14,7 +14,10 @@ class SphereSerializer(ModelSerializer):
 
     class Meta:
         model = Sphere
-        fields = ("financial_year", "name",)
+        fields = (
+            "financial_year",
+            "name",
+        )
 
 
 class GovernmentSerializer(ModelSerializer):
@@ -22,7 +25,10 @@ class GovernmentSerializer(ModelSerializer):
 
     class Meta:
         model = Government
-        fields = ("sphere", "name",)
+        fields = (
+            "sphere",
+            "name",
+        )
 
 
 class DepartmentSerializer(ModelSerializer):
@@ -30,7 +36,10 @@ class DepartmentSerializer(ModelSerializer):
 
     class Meta:
         model = Department
-        fields = ("government", "name",)
+        fields = (
+            "government",
+            "name",
+        )
 
 
 class IndicatorSerializer(ModelSerializer):
@@ -39,9 +48,29 @@ class IndicatorSerializer(ModelSerializer):
     class Meta:
         model = Indicator
         exclude = (
-            "source", "content_search", "uid", "created_at", "id", "annual_otp_comments", "annual_national_comments",
-            "annual_dpme_coordinator_comments", "annual_treasury_comments", "q1_national_comments", "q1_otp_comments",
-            "q1_dpme_coordinator_comments", "q1_treasury_comments", "q2_national_comments", "q2_otp_comments",
-            "q2_dpme_coordinator_comments", "q2_treasury_comments", "q3_national_comments", "q3_otp_comments",
-            "q3_dpme_coordinator_comments", "q3_treasury_comments", "q4_national_comments", "q4_otp_comments",
-            "q4_dpme_coordinator_comments", "q4_treasury_comments",)
+            "source",
+            "content_search",
+            "uid",
+            "created_at",
+            "id",
+            "annual_otp_comments",
+            "annual_national_comments",
+            "annual_dpme_coordinator_comments",
+            "annual_treasury_comments",
+            "q1_national_comments",
+            "q1_otp_comments",
+            "q1_dpme_coordinator_comments",
+            "q1_treasury_comments",
+            "q2_national_comments",
+            "q2_otp_comments",
+            "q2_dpme_coordinator_comments",
+            "q2_treasury_comments",
+            "q3_national_comments",
+            "q3_otp_comments",
+            "q3_dpme_coordinator_comments",
+            "q3_treasury_comments",
+            "q4_national_comments",
+            "q4_otp_comments",
+            "q4_dpme_coordinator_comments",
+            "q4_treasury_comments",
+        )
