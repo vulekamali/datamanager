@@ -74,7 +74,7 @@ class TabularView extends Component {
     }
 
     renderTableHead() {
-        const includeColumns = ["financial_year", "department_name", "government_name", "sphere_name"];
+        const includeColumns = new Set(["financial_year", "department_name", "government_name", "sphere_name"]);
         if (this.state.rows.length > 0) {
             return (
                 <TableRow>
@@ -86,7 +86,7 @@ class TabularView extends Component {
                             ><b>{key}</b></TableCell>)
                         }
                     })}
-                    {includeColumns.map((key, index) => {
+                    {[...includeColumns].map((key, index) => {
                         return (<TableCell
                             key={index}
                             style={{borderRight: '1px solid #c6c6c6'}}
@@ -100,7 +100,7 @@ class TabularView extends Component {
     }
 
     renderTableCells(row, index) {
-        const includeColumns = [row.department.government.sphere.financial_year.slug, row.department.name, row.department.government.name, row.department.government.sphere.name];
+        const includeColumns = new Set([row.department.government.sphere.financial_year.slug, row.department.name, row.department.government.name, row.department.government.sphere.name]);
         const isAlternating = index % 2 !== 0;
         return (
             <TableRow
@@ -127,7 +127,7 @@ class TabularView extends Component {
                     })
                 }
                 {
-                    includeColumns.map((value, i) => {
+                    [...includeColumns].map((value, i) => {
                         return (
                             <TableCell
                                 key={i}
@@ -309,41 +309,55 @@ class TabularView extends Component {
         return (
             <Grid container>
                 {this.renderSearchField()}
-                {this.renderFilter('financialYears',
+                {this.renderFilter(
+                    'financialYears',
                     'department__government__sphere__financial_year__slug',
                     'financialYears',
                     'Financial year',
-                    'All financial years')}
-                {this.renderFilter('sphere',
+                    'All financial years'
+                )}
+                {this.renderFilter(
+                    'sphere',
                     'department__government__sphere__name',
                     'spheres',
                     'Sphere',
-                    'All spheres')}
-                {this.renderFilter('government',
+                    'All spheres'
+                )}
+                {this.renderFilter(
+                    'government',
                     'department__government__name',
                     'governments',
                     'Government',
-                    'All governments')}
-                {this.renderFilter('department',
+                    'All governments'
+                )}
+                {this.renderFilter(
+                    'department',
                     'department__name',
                     'departments',
                     'Department',
-                    'All departments')}
-                {this.renderFilter('frequency',
+                    'All departments'
+                )}
+                {this.renderFilter(
+                    'frequency',
                     'frequency',
                     'frequencies',
                     'Frequency',
-                    'All frequencies')}
-                {this.renderFilter('sector',
+                    'All frequencies'
+                )}
+                {this.renderFilter(
+                    'sector',
                     'sector',
                     'sectors',
                     'Sectors',
-                    'All sectors')}
-                {this.renderFilter('mtsfOutcome',
+                    'All sectors'
+                )}
+                {this.renderFilter(
+                    'mtsfOutcome',
                     'mtsf_outcome',
                     'mtsfOutcomes',
                     'MTSF Outcome',
-                    'All outcomes')}
+                    'All outcomes'
+                )}
             </Grid>
         )
     }
