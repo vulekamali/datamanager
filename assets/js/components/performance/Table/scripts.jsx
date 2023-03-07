@@ -35,7 +35,44 @@ class TabularView extends Component {
             rowsPerPage: 0,
             currentPage: 0,
             selectedFilters: {},
-            excludeColumns: new Set(['id', 'department'])
+            excludeColumns: new Set(['id', 'department']),
+            titleMappings: {
+                'indicator_name': 'Indicator name',
+                'q1_target': 'Quarter 1 target',
+                'q1_actual_output': 'Quarter 1 actual output',
+                'q1_deviation_reason': 'Quarter 1 deviation reason',
+                'q1_corrective_action': 'Quarter 1 corrective action',
+                'q2_target': 'Quarter 2 target',
+                'q2_actual_output': 'Quarter 2 actual output',
+                'q2_deviation_reason': 'Quarter 2 deviation reason',
+                'q2_corrective_action': 'Quarter 2 corrective action',
+                'q3_target': 'Quarter 3 target',
+                'q3_actual_output': 'Quarter 3 actual output',
+                'q3_deviation_reason': 'Quarter 3 deviation reason',
+                'q3_corrective_action': 'Quarter 3 corrective action',
+                'q4_target': 'Quarter 4 target',
+                'q4_actual_output': 'Quarter 4 actual output',
+                'q4_deviation_reason': 'Quarter 4 deviation reason',
+                'q4_corrective_action': 'Quarter 4 corrective action',
+                'annual_target': 'Annual target',
+                'annual_aggregate_output': 'Annual aggregate output',
+                'annual_pre_audit_output': 'Annual pre-audit output',
+                'annual_deviation_reason': 'Annual deviation reason',
+                'annual_corrective_action': 'Annual corrective action',
+                'annual_audited_output': 'Annual audited output',
+                'sector': 'Sector',
+                'programme_name': 'Programme name',
+                'subprogramme_name': 'Subprogramme name',
+                'frequency': 'Frequency',
+                'type': 'Type',
+                'subtype': 'Subtype',
+                'mtsf_outcome': 'Mtsf outcome',
+                'cluster': 'Cluster',
+                'financial_year': 'Financial year',
+                'department_name': 'Department name',
+                'government_name': 'Government name',
+                'sphere_name': 'Sphere name'
+            }
         }
     }
 
@@ -83,20 +120,26 @@ class TabularView extends Component {
                             return (<TableCell
                                 key={index}
                                 style={{borderRight: '1px solid #c6c6c6'}}
-                            ><b>{key}</b></TableCell>)
+                            ><b>{this.getTitleMapping(key)}</b></TableCell>)
                         }
                     })}
                     {includeColumns.map((key, index) => {
                         return (<TableCell
                             key={index}
                             style={{borderRight: '1px solid #c6c6c6'}}
-                        ><b>{key}</b></TableCell>)
+                        ><b>{this.getTitleMapping(key)}</b></TableCell>)
                     })}
                 </TableRow>
             )
         } else {
             return <div>No matching indicators found.</div>;
         }
+    }
+
+    getTitleMapping(key) {
+        const mapping = this.state.titleMappings[key];
+
+        return mapping === undefined ? key : mapping;
     }
 
     renderTableCells(row, index) {
