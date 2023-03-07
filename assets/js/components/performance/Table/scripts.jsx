@@ -35,7 +35,7 @@ class TabularView extends Component {
             rowsPerPage: 0,
             currentPage: 0,
             selectedFilters: {},
-            excludeColumns: ['id', 'department']
+            excludeColumns: new Set(['id', 'department'])
         }
     }
 
@@ -74,19 +74,19 @@ class TabularView extends Component {
     }
 
     renderTableHead() {
-        const includeColumns = new Set(["financial_year", "department_name", "government_name", "sphere_name"]);
+        const includeColumns = ["financial_year", "department_name", "government_name", "sphere_name"];
         if (this.state.rows.length > 0) {
             return (
                 <TableRow>
                     {Object.keys(this.state.rows[0]).map((key, index) => {
-                        if (this.state.excludeColumns.indexOf(key) < 0) {
+                        if (!this.state.excludeColumns.has(key)) {
                             return (<TableCell
                                 key={index}
                                 style={{borderRight: '1px solid #c6c6c6'}}
                             ><b>{key}</b></TableCell>)
                         }
                     })}
-                    {[...includeColumns].map((key, index) => {
+                    {includeColumns.map((key, index) => {
                         return (<TableCell
                             key={index}
                             style={{borderRight: '1px solid #c6c6c6'}}
@@ -100,7 +100,7 @@ class TabularView extends Component {
     }
 
     renderTableCells(row, index) {
-        const includeColumns = new Set([row.department.government.sphere.financial_year.slug, row.department.name, row.department.government.name, row.department.government.sphere.name]);
+        const includeColumns = [row.department.government.sphere.financial_year.slug, row.department.name, row.department.government.name, row.department.government.sphere.name];
         const isAlternating = index % 2 !== 0;
         return (
             <TableRow
@@ -108,7 +108,7 @@ class TabularView extends Component {
             >
                 {
                     Object.keys(row).map((key, i) => {
-                        if (this.state.excludeColumns.indexOf(key) < 0) {
+                        if (!this.state.excludeColumns.has(key)) {
                             return (
                                 <TableCell
                                     key={`${index}_${i}`}
@@ -127,7 +127,7 @@ class TabularView extends Component {
                     })
                 }
                 {
-                    [...includeColumns].map((value, i) => {
+                    includeColumns.map((value, i) => {
                         return (
                             <TableCell
                                 key={i}
