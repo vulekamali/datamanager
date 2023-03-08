@@ -115,7 +115,6 @@ class TabularView extends Component {
     }
 
     renderTableHead() {
-        const includeColumns = ["financial_year", "department_name", "government_name", "sphere_name"];
         if (this.state.rows.length > 0) {
             return (<TableRow>
                 {Object.keys(this.state.rows[0]).map((key, index) => {
@@ -133,19 +132,6 @@ class TabularView extends Component {
                         >{this.getTitleMapping(key)}</TableCell>)
                     }
                 })}
-                {includeColumns.map((key, index) => {
-                    return (<TableCell
-                        key={index}
-                        size={'small'}
-                        style={{
-                            backgroundColor: '#f7f7f7',
-                            borderRadius: '5px',
-                            borderBottom: 'none',
-                            borderRight: '10px solid #ffff',
-                            fontWeight: '700'
-                        }}
-                    >{this.getTitleMapping(key)}</TableCell>)
-                })}
             </TableRow>)
         } else {
             return <div>No matching indicators found.</div>;
@@ -153,8 +139,7 @@ class TabularView extends Component {
     }
 
     renderTableCells(row, index) {
-        const includeColumns = [row.department.government.sphere.financial_year.slug, row.department.name, row.department.government.name, row.department.government.sphere.name];
-        const isAlternating = index % 2 !== 0;
+       const isAlternating = index % 2 !== 0;
         return (<TableRow
             key={index}
         >
@@ -187,20 +172,6 @@ class TabularView extends Component {
                         >{row[key]}</TableCell>)
                     }
                 }
-            })}
-            {includeColumns.map((value, i) => {
-                return (<TableCell
-                    key={i}
-                    style={{
-                        maxWidth: 150,
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        borderBottom: 'none',
-                        whiteSpace: "nowrap",
-                        backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc'
-                    }}
-                    title={value}
-                >{value}</TableCell>)
             })}
         </TableRow>)
     }
