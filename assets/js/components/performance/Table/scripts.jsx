@@ -35,7 +35,7 @@ class TabularView extends Component {
             rowsPerPage: 0,
             currentPage: 0,
             selectedFilters: {},
-            excludeColumns: ['id', 'department']
+            excludeColumns: new Set(['id', 'department'])
         }
     }
 
@@ -79,7 +79,7 @@ class TabularView extends Component {
             return (
                 <TableRow>
                     {Object.keys(this.state.rows[0]).map((key, index) => {
-                        if (this.state.excludeColumns.indexOf(key) < 0) {
+                        if (!this.state.excludeColumns.has(key)) {
                             return (<TableCell
                                 key={index}
                                 style={{borderRight: '1px solid #c6c6c6'}}
@@ -108,7 +108,7 @@ class TabularView extends Component {
             >
                 {
                     Object.keys(row).map((key, i) => {
-                        if (this.state.excludeColumns.indexOf(key) < 0) {
+                        if (!this.state.excludeColumns.has(key)) {
                             return (
                                 <TableCell
                                     key={`${index}_${i}`}
@@ -309,41 +309,55 @@ class TabularView extends Component {
         return (
             <Grid container>
                 {this.renderSearchField()}
-                {this.renderFilter('financialYears',
+                {this.renderFilter(
+                    'financialYears',
                     'department__government__sphere__financial_year__slug',
                     'financialYears',
                     'Financial year',
-                    'All financial years')}
-                {this.renderFilter('sphere',
+                    'All financial years'
+                )}
+                {this.renderFilter(
+                    'sphere',
                     'department__government__sphere__name',
                     'spheres',
                     'Sphere',
-                    'All spheres')}
-                {this.renderFilter('government',
+                    'All spheres'
+                )}
+                {this.renderFilter(
+                    'government',
                     'department__government__name',
                     'governments',
                     'Government',
-                    'All governments')}
-                {this.renderFilter('department',
+                    'All governments'
+                )}
+                {this.renderFilter(
+                    'department',
                     'department__name',
                     'departments',
                     'Department',
-                    'All departments')}
-                {this.renderFilter('frequency',
+                    'All departments'
+                )}
+                {this.renderFilter(
+                    'frequency',
                     'frequency',
                     'frequencies',
                     'Frequency',
-                    'All frequencies')}
-                {this.renderFilter('sector',
+                    'All frequencies'
+                )}
+                {this.renderFilter(
+                    'sector',
                     'sector',
                     'sectors',
                     'Sectors',
-                    'All sectors')}
-                {this.renderFilter('mtsfOutcome',
+                    'All sectors'
+                )}
+                {this.renderFilter(
+                    'mtsfOutcome',
                     'mtsf_outcome',
                     'mtsfOutcomes',
                     'MTSF Outcome',
-                    'All outcomes')}
+                    'All outcomes'
+                )}
             </Grid>
         )
     }
