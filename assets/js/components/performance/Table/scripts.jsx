@@ -2,15 +2,19 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {
     FormControl,
-    Grid, InputLabel, MenuItem,
+    Grid,
+    InputLabel,
+    MenuItem,
     TextField,
     Paper,
     Select,
     Table,
     TableBody,
     TableCell,
-    TableContainer, TableFooter,
-    TableHead, TablePagination,
+    TableContainer,
+    TableFooter,
+    TableHead,
+    TablePagination,
     TableRow
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
@@ -113,27 +117,92 @@ class TabularView extends Component {
     renderTableHead() {
         const includeColumns = ["financial_year", "department_name", "government_name", "sphere_name"];
         if (this.state.rows.length > 0) {
-            return (
-                <TableRow>
-                    {Object.keys(this.state.rows[0]).map((key, index) => {
-                        if (!this.state.excludeColumns.has(key)) {
-                            return (<TableCell
-                                key={index}
-                                style={{borderRight: '1px solid #c6c6c6'}}
-                            ><b>{this.getTitleMapping(key)}</b></TableCell>)
-                        }
-                    })}
-                    {includeColumns.map((key, index) => {
+            return (<TableRow>
+                {Object.keys(this.state.rows[0]).map((key, index) => {
+                    if (!this.state.excludeColumns.has(key)) {
                         return (<TableCell
                             key={index}
-                            style={{borderRight: '1px solid #c6c6c6'}}
-                        ><b>{this.getTitleMapping(key)}</b></TableCell>)
-                    })}
-                </TableRow>
-            )
+                            size={'small'}
+                            style={{
+                                backgroundColor: '#f7f7f7',
+                                borderRadius: '5px',
+                                borderBottom: 'none',
+                                borderRight: '10px solid #ffff',
+                                fontWeight: '700'
+                            }}
+                        >{this.getTitleMapping(key)}</TableCell>)
+                    }
+                })}
+                {includeColumns.map((key, index) => {
+                    return (<TableCell
+                        key={index}
+                        size={'small'}
+                        style={{
+                            backgroundColor: '#f7f7f7',
+                            borderRadius: '5px',
+                            borderBottom: 'none',
+                            borderRight: '10px solid #ffff',
+                            fontWeight: '700'
+                        }}
+                    >{this.getTitleMapping(key)}</TableCell>)
+                })}
+            </TableRow>)
         } else {
             return <div>No matching indicators found.</div>;
         }
+    }
+
+    renderTableCells(row, index) {
+        const includeColumns = [row.department.government.sphere.financial_year.slug, row.department.name, row.department.government.name, row.department.government.sphere.name];
+        const isAlternating = index % 2 !== 0;
+        return (<TableRow
+            key={index}
+        >
+            {Object.keys(row).map((key, i) => {
+                if (!this.state.excludeColumns.has(key)) {
+                    if (key === 'indicator_name') {
+                        return (<TableCell
+                            key={`${index}_${0}`}
+                            style={{
+                                fontWeight: '700',
+                                overflow: "hidden",
+                                borderBottom: 'none',
+                                whiteSpace: "nowrap",
+                                backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc'
+                            }}
+                            title={row[key]}
+                        >{this.renderIndicatorColumn(row)}</TableCell>)
+                    } else {
+                        return (<TableCell
+                            key={`${index}_${i}`}
+                            style={{
+                                maxWidth: 150,
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                borderBottom: 'none',
+                                whiteSpace: "nowrap",
+                                backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc'
+                            }}
+                            title={row[key]}
+                        >{row[key]}</TableCell>)
+                    }
+                }
+            })}
+            {includeColumns.map((value, i) => {
+                return (<TableCell
+                    key={i}
+                    style={{
+                        maxWidth: 150,
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        borderBottom: 'none',
+                        whiteSpace: "nowrap",
+                        backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc'
+                    }}
+                    title={value}
+                >{value}</TableCell>)
+            })}
+        </TableRow>)
     }
 
     getTitleMapping(key) {
@@ -142,80 +211,61 @@ class TabularView extends Component {
         return mapping === undefined ? key : mapping;
     }
 
-    renderTableCells(row, index) {
-        const includeColumns = [row.department.government.sphere.financial_year.slug, row.department.name, row.department.government.name, row.department.government.sphere.name];
-        const isAlternating = index % 2 !== 0;
+    renderIndicatorColumn(row) {
+        const chips = [{
+            key: "financial_year",
+            value: row.department.government.sphere.financial_year.slug
+        }, {
+            key: "government_name",
+            value: row.department.government.name
+        }, {
+            key: "department_name",
+            value: row.department.name
+        }];
         return (
-            <TableRow
-                key={index}
-            >
+            <div>
+                <div>{row['indicator_name']}</div>
                 {
-                    Object.keys(row).map((key, i) => {
-                        if (!this.state.excludeColumns.has(key)) {
-                            return (
-                                <TableCell
-                                    key={`${index}_${i}`}
-                                    style={{
-                                        maxWidth: key === 'indicator_name' ? 250 : 150,
-                                        overflow: "hidden",
-                                        textOverflow: "ellipsis",
-                                        whiteSpace: "nowrap",
-                                        backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc',
-                                        borderRight: '1px solid #c6c6c6'
-                                    }}
-                                    title={row[key]}
-                                >{row[key]}</TableCell>
-                            )
-                        }
-                    })
-                }
-                {
-                    includeColumns.map((value, i) => {
+                    chips.map((chip, index) => {
                         return (
-                            <TableCell
-                                key={i}
+                            <span
+                                key={index}
                                 style={{
-                                    maxWidth: 150,
-                                    overflow: "hidden",
-                                    textOverflow: "ellipsis",
-                                    whiteSpace: "nowrap",
-                                    backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc',
-                                    borderRight: '1px solid #c6c6c6'
+                                    display: 'inline-block',
+                                    padding: '4px',
+                                    backgroundColor: '#dedede',
+                                    borderRadius: '4px',
+                                    marginRight: '5px'
                                 }}
-                                title={value}
-                            >{value}</TableCell>
+                            >{chip.value}</span>
                         )
                     })
                 }
-            </TableRow>
+            </div>
         )
     }
 
     handlePageChange(event, newPage) {
         this.setState({
-            ...this.state,
-            currentPage: newPage
+            ...this.state, currentPage: newPage
         }, () => {
             this.fetchAPIData();
         })
     }
 
     renderPagination() {
-        return (
-            <TablePagination
-                colSpan={3}
-                count={this.state.totalCount}
-                rowsPerPage={this.state.rowsPerPage}
-                rowsPerPageOptions={[]}
-                page={this.state.currentPage}
-                onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
-                SelectProps={{
-                    inputProps: {'aria-label': 'rows per page'},
-                    native: true,
-                }}
-                component="div"
-            />
-        );
+        return (<TablePagination
+            colSpan={3}
+            count={this.state.totalCount}
+            rowsPerPage={this.state.rowsPerPage}
+            rowsPerPageOptions={[]}
+            page={this.state.currentPage}
+            onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
+            SelectProps={{
+                inputProps: {'aria-label': 'rows per page'}, native: true,
+            }}
+            component="div"
+        />);
     }
 
     renderTable() {
@@ -228,35 +278,40 @@ class TabularView extends Component {
                     MuiTablePagination: {
                         spacer: {
                             flex: 'none'
-                        },
-                        toolbar: {
+                        }, toolbar: {
                             "padding-left": "16px"
                         }
                     }
                 }
             });
-            return (
-                <ThemeProvider theme={tableTheme}>
-                    {this.renderPagination()}
-                    <Paper>
-                        <TableContainer>
-                            <Table stickyHeader aria-label="simple table" size={'small'}>
-                                <TableHead>
-                                    {this.renderTableHead()}
-                                </TableHead>
-                                <TableBody>
-                                    {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
-                                </TableBody>
-                                <TableFooter>
-                                    <TableRow>
-                                    </TableRow>
-                                </TableFooter>
-                            </Table>
-                        </TableContainer>
-                    </Paper>
-                    {this.renderPagination()}
-                </ThemeProvider>
-            );
+            return (<ThemeProvider theme={tableTheme}>
+                {this.renderPagination()}
+                <Paper
+                    style={{
+                        padding: '10px'
+                    }}
+                >
+                    <TableContainer>
+                        <Table stickyHeader aria-label="simple table" size={'medium'}>
+                            <TableHead
+                                style={{
+                                    whiteSpace: "nowrap"
+                                }}
+                            >
+                                {this.renderTableHead()}
+                            </TableHead>
+                            <TableBody>
+                                {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
+                            </TableBody>
+                            <TableFooter>
+                                <TableRow>
+                                </TableRow>
+                            </TableFooter>
+                        </Table>
+                    </TableContainer>
+                </Paper>
+                {this.renderPagination()}
+            </ThemeProvider>);
         }
     }
 
@@ -268,9 +323,7 @@ class TabularView extends Component {
         selectedFilters[name] = value;
 
         this.setState({
-            ...this.state,
-            currentPage: 0,
-            selectedFilters: selectedFilters
+            ...this.state, currentPage: 0, selectedFilters: selectedFilters
         }, () => {
             this.fetchAPIData();
         })
@@ -284,144 +337,84 @@ class TabularView extends Component {
             debouncedHandleFilterChange(event);
         };
 
-        return (
-            <FormControl variant={'outlined'}
-                         size={'small'}
-                         style={{
-                             marginRight: '10px',
-                             marginTop: '15px',
-                             fontSize: '8px'
-                         }}>
-                <TextField variant="outlined"
-                           size="small"
-                           label="Search indicators"
-                           inputProps={{
-                               id: "frm-textSearch",
-                               name: "q"
-                           }}
-                           onChange={persistedEventDeboundedHandler}/>
-            </FormControl>
-        )
+        return (<FormControl variant={'outlined'}
+                             size={'small'}
+                             style={{
+                                 marginRight: '10px', marginTop: '15px', fontSize: '8px'
+                             }}>
+            <TextField variant="outlined"
+                       size="small"
+                       label="Search indicators"
+                       inputProps={{
+                           id: "frm-textSearch", name: "q"
+                       }}
+                       onChange={persistedEventDeboundedHandler}/>
+        </FormControl>)
     }
 
     renderFilter(id, apiField, stateField, fieldLabel, blankLabel) {
         if (this.state[stateField] === null) {
             return <div></div>
         } else {
-            return (
-                <FormControl variant={'outlined'}
-                             size={'small'}
-                             style={{
-                                 minWidth: '150px',
-                                 maxWidth: '250px',
-                                 marginRight: '10px',
-                                 marginTop: '15px',
-                                 fontSize: '8px'
-                             }}>
-                    <InputLabel htmlFor={`frm-${id}`} shrink>{fieldLabel}</InputLabel>
-                    <Select
-                        native
-                        notched
-                        label={fieldLabel}
-                        inputProps={{
-                            id: `frm-${id}`,
-                            name: apiField
-                        }}
-                        value={this.state.selectedFilters[apiField]}
-                        onChange={(event) => this.handleFilterChange(event)}
-                    >
-                        <option aria-label={blankLabel} value={''}>{blankLabel}</option>
-                        {
-                            this.state[stateField].map((option, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        value={option[apiField]}>
-                                        {`${option[apiField]} (${option['count']})`}
-                                    </option>
-                                )
-                            })
-                        }
-                    </Select>
-                </FormControl>
-            )
+            return (<FormControl variant={'outlined'}
+                                 size={'small'}
+                                 style={{
+                                     minWidth: '150px',
+                                     maxWidth: '250px',
+                                     marginRight: '10px',
+                                     marginTop: '15px',
+                                     fontSize: '8px'
+                                 }}>
+                <InputLabel htmlFor={`frm-${id}`} shrink>{fieldLabel}</InputLabel>
+                <Select
+                    native
+                    notched
+                    label={fieldLabel}
+                    inputProps={{
+                        id: `frm-${id}`, name: apiField
+                    }}
+                    value={this.state.selectedFilters[apiField]}
+                    onChange={(event) => this.handleFilterChange(event)}
+                >
+                    <option aria-label={blankLabel} value={''}>{blankLabel}</option>
+                    {this.state[stateField].map((option, index) => {
+                        return (<option
+                            key={index}
+                            value={option[apiField]}>
+                            {`${option[apiField]} (${option['count']})`}
+                        </option>)
+                    })}
+                </Select>
+            </FormControl>)
         }
     }
 
     renderFilters() {
-        return (
-            <Grid container>
-                {this.renderSearchField()}
-                {this.renderFilter(
-                    'financialYears',
-                    'department__government__sphere__financial_year__slug',
-                    'financialYears',
-                    'Financial year',
-                    'All financial years'
-                )}
-                {this.renderFilter(
-                    'sphere',
-                    'department__government__sphere__name',
-                    'spheres',
-                    'Sphere',
-                    'All spheres'
-                )}
-                {this.renderFilter(
-                    'government',
-                    'department__government__name',
-                    'governments',
-                    'Government',
-                    'All governments'
-                )}
-                {this.renderFilter(
-                    'department',
-                    'department__name',
-                    'departments',
-                    'Department',
-                    'All departments'
-                )}
-                {this.renderFilter(
-                    'frequency',
-                    'frequency',
-                    'frequencies',
-                    'Frequency',
-                    'All frequencies'
-                )}
-                {this.renderFilter(
-                    'sector',
-                    'sector',
-                    'sectors',
-                    'Sectors',
-                    'All sectors'
-                )}
-                {this.renderFilter(
-                    'mtsfOutcome',
-                    'mtsf_outcome',
-                    'mtsfOutcomes',
-                    'MTSF Outcome',
-                    'All outcomes'
-                )}
-            </Grid>
-        )
+        return (<Grid container>
+            {this.renderSearchField()}
+            {this.renderFilter('financialYears', 'department__government__sphere__financial_year__slug', 'financialYears', 'Financial year', 'All financial years')}
+            {this.renderFilter('sphere', 'department__government__sphere__name', 'spheres', 'Sphere', 'All spheres')}
+            {this.renderFilter('government', 'department__government__name', 'governments', 'Government', 'All governments')}
+            {this.renderFilter('department', 'department__name', 'departments', 'Department', 'All departments')}
+            {this.renderFilter('frequency', 'frequency', 'frequencies', 'Frequency', 'All frequencies')}
+            {this.renderFilter('sector', 'sector', 'sectors', 'Sectors', 'All sectors')}
+            {this.renderFilter('mtsfOutcome', 'mtsf_outcome', 'mtsfOutcomes', 'MTSF Outcome', 'All outcomes')}
+        </Grid>)
     }
 
     render() {
-        return (
-            <div>
-                {this.renderFilters()}
-                {this.renderTable()}
-            </div>
-        );
+        return (<div>
+            {this.renderFilters()}
+            {this.renderTable()}
+        </div>);
     }
 }
 
 function scripts() {
     const parent = document.getElementById('js-initTabularView');
     if (parent) {
-        ReactDOM.render(
-            <TabularView
-            />, parent
-        )
+        ReactDOM.render(<TabularView
+        />, parent)
     }
 }
 
