@@ -13749,6 +13749,11 @@ react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-lines-ellipsis@^0.15.3:
+  version "0.15.3"
+  resolved "https://registry.yarnpkg.com/react-lines-ellipsis/-/react-lines-ellipsis-0.15.3.tgz#eb081c12e58170b09c5bd9db2fdbde9b5a3ea6c0"
+  integrity sha512-+kIcUZJPI3QqazZbO0eeEUmfRjmYKjCRzSmXQL4otrJzwOU9MjvASGQd4SELOOBSy6oiygjfDuCocGMssX0oUQ==
+
 react-markdown@^4.0.6:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-4.0.8.tgz#e3621b5becaac82a651008d7bc8390d3e4e438c0"

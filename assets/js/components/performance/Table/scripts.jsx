@@ -21,6 +21,7 @@ import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import debounce from "lodash.debounce";
+import LinesEllipsis from "react-lines-ellipsis";
 
 class TabularView extends Component {
     constructor(props) {
@@ -137,7 +138,7 @@ class TabularView extends Component {
     }
 
     renderTableCells(row, index) {
-       const isAlternating = index % 2 !== 0;
+        const isAlternating = index % 2 !== 0;
         return (<TableRow
             key={index}
         >
@@ -160,13 +161,24 @@ class TabularView extends Component {
                             title={row[key]}
                         >
                             <div className={'cell-content'}>
-                                {row[key]}
+                                <LinesEllipsis
+                                    text={row[key]}
+                                    maxLine={'4'}
+                                    ellipsis={'...'}
+                                    onReflow={this.handleReflow}
+                                    trimRight
+                                    basedOn={'letters'}
+                                ></LinesEllipsis>
                             </div>
                         </TableCell>)
                     }
                 }
             })}
         </TableRow>)
+    }
+
+    handleReflow(test) {
+        console.log({test})
     }
 
     getTitleMapping(key) {
@@ -188,7 +200,7 @@ class TabularView extends Component {
         }];
         return (
             <div>
-                <div>{row['indicator_name']}</div>
+                <div className={'indicator-name'}>{row['indicator_name']}</div>
                 {
                     chips.map((chip, index) => {
                         return (
@@ -247,7 +259,9 @@ class TabularView extends Component {
                 <Paper
                     className={'performance-table-paper'}
                 >
-                    <TableContainer>
+                    <TableContainer
+                        className={'performance-table-container'}
+                    >
                         <Table
                             stickyHeader
                             aria-label={'simple table'}
