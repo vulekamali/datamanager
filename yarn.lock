@@ -13817,6 +13817,13 @@ react-pose@^4.0.7:
     popmotion-pose "^3.4.0"
     tslib "^1.9.1"
 
+react-read-more@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-read-more/-/react-read-more-1.0.0.tgz#86a9e8ac14fa37863d99187d8d500457ce32b840"
+  integrity sha512-EzJ0E+TPxZYMxz171CqAKAiWzRKNFerTaggweaNgR434P5UUypAFYKj53hVcmtFS11e6NFABMVfCvNktyY9H0w==
+  dependencies:
+    rimraf "^2.5.4"
+
 react-resize-detector@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-resize-detector/-/react-resize-detector-2.3.0.tgz#57bad1ae26a28a62a2ddb678ba6ffdf8fa2b599c"

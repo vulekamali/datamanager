@@ -4,7 +4,6 @@ import {
     FormControl,
     Grid,
     InputLabel,
-    MenuItem,
     TextField,
     Paper,
     Select,
@@ -160,15 +159,16 @@ class TabularView extends Component {
                             className={isAlternating ? 'performance-table-cell alternate' : 'performance-table-cell'}
                             title={row[key]}
                         >
-                            <div className={'cell-content'}>
+                            <div
+                                className={'cell-content'}
+                                id={`cell_${index}_${i}`}
+                                onClick={(e) => this.handleReadMoreClick(e, i, index, row[key])}
+                            >
                                 <LinesEllipsis
                                     text={row[key]}
                                     maxLine={'4'}
-                                    ellipsis={'...'}
-                                    onReflow={this.handleReflow}
-                                    trimRight
-                                    basedOn={'letters'}
-                                ></LinesEllipsis>
+                                    onReflow={(rleState) => this.handleReflow(rleState, i, index)}
+                                />
                             </div>
                         </TableCell>)
                     }
@@ -177,8 +177,23 @@ class TabularView extends Component {
         </TableRow>)
     }
 
-    handleReflow(test) {
-        console.log({test})
+    handleReflow(rleState, i, index) {
+        if (rleState.clamped) {
+            const cellId = `cell_${index}_${i}`;
+
+            let button = '<span class="link-button">Read more</span>';
+            let element = document.getElementById(cellId);
+            element.innerHTML = element.innerHTML + button;
+        }
+    }
+
+    handleReadMoreClick(e, i, index, text) {
+        if (e.target.className === 'link-button') {
+            const cellId = `cell_${index}_${i}`;
+            let element = document.getElementById(cellId);
+
+            element.innerText = text;
+        }
     }
 
     getTitleMapping(key) {
