@@ -122,14 +122,12 @@ class TabularView extends Component {
                         return (<TableCell
                             key={index}
                             size={'small'}
-                            style={{
-                                backgroundColor: '#f7f7f7',
-                                borderRadius: '5px',
-                                borderBottom: 'none',
-                                borderRight: '10px solid #ffff',
-                                fontWeight: '700'
-                            }}
-                        >{this.getTitleMapping(key)}</TableCell>)
+                            className={'performance-table-head-cell'}
+                        >
+                            <div className={'cell-content'}>
+                                {this.getTitleMapping(key)}
+                            </div>
+                        </TableCell>)
                     }
                 })}
             </TableRow>)
@@ -148,28 +146,23 @@ class TabularView extends Component {
                     if (key === 'indicator_name') {
                         return (<TableCell
                             key={`${index}_${0}`}
-                            style={{
-                                fontWeight: '700',
-                                overflow: "hidden",
-                                borderBottom: 'none',
-                                whiteSpace: "nowrap",
-                                backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc'
-                            }}
+                            className={isAlternating ? 'performance-indicator-cell alternate' : 'performance-indicator-cell'}
                             title={row[key]}
-                        >{this.renderIndicatorColumn(row)}</TableCell>)
+                        >
+                            <div className={'cell-content'}>
+                                {this.renderIndicatorColumn(row)}
+                            </div>
+                        </TableCell>)
                     } else {
                         return (<TableCell
                             key={`${index}_${i}`}
-                            style={{
-                                maxWidth: 150,
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                borderBottom: 'none',
-                                whiteSpace: "nowrap",
-                                backgroundColor: isAlternating ? '#f7f7f7' : '#fcfcfc'
-                            }}
+                            className={isAlternating ? 'performance-table-cell alternate' : 'performance-table-cell'}
                             title={row[key]}
-                        >{row[key]}</TableCell>)
+                        >
+                            <div className={'cell-content'}>
+                                {row[key]}
+                            </div>
+                        </TableCell>)
                     }
                 }
             })}
@@ -201,13 +194,7 @@ class TabularView extends Component {
                         return (
                             <span
                                 key={index}
-                                style={{
-                                    display: 'inline-block',
-                                    padding: '4px',
-                                    backgroundColor: '#dedede',
-                                    borderRadius: '4px',
-                                    marginRight: '5px'
-                                }}
+                                className={'indicator-detail-chip'}
                             >{chip.value}</span>
                         )
                     })
@@ -258,16 +245,17 @@ class TabularView extends Component {
             return (<ThemeProvider theme={tableTheme}>
                 {this.renderPagination()}
                 <Paper
-                    style={{
-                        padding: '10px'
-                    }}
+                    className={'performance-table-paper'}
                 >
                     <TableContainer>
-                        <Table stickyHeader aria-label="simple table" size={'medium'}>
+                        <Table
+                            stickyHeader
+                            aria-label={'simple table'}
+                            size={'medium'}
+                            className={'performance-table'}
+                        >
                             <TableHead
-                                style={{
-                                    whiteSpace: "nowrap"
-                                }}
+                                className={'performance-table-head'}
                             >
                                 {this.renderTableHead()}
                             </TableHead>
