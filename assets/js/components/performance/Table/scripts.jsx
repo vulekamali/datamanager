@@ -223,11 +223,7 @@ class TabularView extends Component {
         return (
             <div>
                 <div className={'indicator-name'}>
-                    <LinesEllipsis
-                        text={row['indicator_name']}
-                        maxLine={'4'}
-                        onReflow={(rleState) => this.handleReflow(rleState, 0, index, row['indicator_name'])}
-                    />
+                    {row['indicator_name']}
                 </div>
                 {
                     chips.map((chip, index) => {
