@@ -183,11 +183,13 @@ class TabularView extends Component {
 
             let button = '<span class="link-button">Read more</span>';
             let element = document.getElementById(cellId);
-            element.removeAttribute('onclick');
-            element.onclick = (e) => this.handleReadMoreClick(e, i, index, text);
-            let oldButton = element.getElementsByClassName('link-button');
-            if (oldButton.length <= 0) {
-                element.innerHTML = element.innerHTML + button;
+            if (element != null) {
+                element.removeAttribute('onclick');
+                element.onclick = (e) => this.handleReadMoreClick(e, i, index, text);
+                let oldButton = element.getElementsByClassName('link-button');
+                if (oldButton.length <= 0) {
+                    element.innerHTML = element.innerHTML + button;
+                }
             }
         }
     }
