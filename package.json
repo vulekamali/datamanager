@@ -124,6 +124,7 @@
     "react-dom": "^16.8.1",
     "react-ga": "^2.5.3",
     "react-html-connector": "^0.2.6",
+    "react-lines-ellipsis": "^0.15.3",
     "redux": "^4.0.1",
     "save-svg-as-png": "^1.4.6",
     "url-search-params-polyfill": "^8.1.0",
