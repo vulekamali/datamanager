@@ -81,11 +81,11 @@ class TabularView extends Component {
     }
 
     componentDidMount() {
-        this.fetchAPIData();
+        this.fetchAPIData(0);
     }
 
-    fetchAPIData() {
-        let url = `api/v1/eqprs/?page=${this.state.currentPage + 1}`;
+    fetchAPIData(pageToCall) {
+        let url = `api/v1/eqprs/?page=${pageToCall + 1}`;
 
         // append filters
         Object.keys(this.state.selectedFilters).forEach((key) => {
@@ -99,6 +99,7 @@ class TabularView extends Component {
             .then((response) => {
                 this.setState({
                     ...this.state,
+                    currentPage: pageToCall,
                     rows: response.results.items,
                     departments: response.results.facets['department_name'],
                     financialYears: response.results.facets['financial_year_slug'],
@@ -137,15 +138,16 @@ class TabularView extends Component {
     }
 
     renderTableCells(row, index) {
+        console.log('renderTableCells')
         const isAlternating = index % 2 !== 0;
         return (<TableRow
-            key={index}
+            key={`${this.state.currentPage}_${index}`}
         >
             {Object.keys(row).map((key, i) => {
                 if (!this.state.excludeColumns.has(key)) {
                     if (key === 'indicator_name') {
                         return (<TableCell
-                            key={`${index}_${0}`}
+                            key={`${this.state.currentPage}_${index}_${0}`}
                             className={isAlternating ? 'performance-indicator-cell alternate' : 'performance-indicator-cell'}
                             title={row[key]}
                         >
@@ -155,19 +157,18 @@ class TabularView extends Component {
                         </TableCell>)
                     } else {
                         return (<TableCell
-                            key={`${index}_${i}`}
+                            key={`${this.state.currentPage}_${index}_${i}`}
                             className={isAlternating ? 'performance-table-cell alternate' : 'performance-table-cell'}
                             title={row[key]}
                         >
                             <div
                                 className={'cell-content'}
-                                id={`cell_${index}_${i}`}
-                                onClick={(e) => this.handleReadMoreClick(e, i, index, row[key])}
+                                id={`cell_${this.state.currentPage}_${index}_${i}`}
                             >
                                 <LinesEllipsis
                                     text={row[key]}
                                     maxLine={'4'}
-                                    onReflow={(rleState) => this.handleReflow(rleState, i, index)}
+                                    onReflow={(rleState) => this.handleReflow(rleState, i, index, row[key])}
                                 />
                             </div>
                         </TableCell>)
@@ -177,19 +178,27 @@ class TabularView extends Component {
         </TableRow>)
     }
 
-    handleReflow(rleState, i, index) {
+    handleReflow(rleState, i, index, text) {
+        if (`cell_${this.state.currentPage}_${index}_${i}` === 'cell_7_0_4') {
+            console.log({rleState, i, index, text})
+        }
         if (rleState.clamped) {
-            const cellId = `cell_${index}_${i}`;
+            const cellId = `cell_${this.state.currentPage}_${index}_${i}`;
 
             let button = '<span class="link-button">Read more</span>';
             let element = document.getElementById(cellId);
-            element.innerHTML = element.innerHTML + button;
+            element.removeAttribute('onclick');
+            element.onclick = (e) => this.handleReadMoreClick(e, i, index, text);
+            let oldButton = element.getElementsByClassName('link-button');
+            if (oldButton.length <= 0) {
+                element.innerHTML = element.innerHTML + button;
+            }
         }
     }
 
     handleReadMoreClick(e, i, index, text) {
         if (e.target.className === 'link-button') {
-            const cellId = `cell_${index}_${i}`;
+            const cellId = `cell_${this.state.currentPage}_${index}_${i}`;
             let element = document.getElementById(cellId);
 
             element.innerText = text;
@@ -231,11 +240,7 @@ class TabularView extends Component {
     }
 
     handlePageChange(event, newPage) {
-        this.setState({
-            ...this.state, currentPage: newPage
-        }, () => {
-            this.fetchAPIData();
-        })
+        this.fetchAPIData(newPage);
     }
 
     renderPagination() {
@@ -311,9 +316,9 @@ class TabularView extends Component {
         selectedFilters[name] = value;
 
         this.setState({
-            ...this.state, currentPage: 0, selectedFilters: selectedFilters
+            ...this.state,  selectedFilters: selectedFilters
         }, () => {
-            this.fetchAPIData();
+            this.fetchAPIData(0);
         })
     }
 
