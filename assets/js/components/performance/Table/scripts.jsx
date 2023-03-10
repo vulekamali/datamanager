@@ -138,7 +138,6 @@ class TabularView extends Component {
     }
 
     renderTableCells(row, index) {
-        console.log('renderTableCells')
         const isAlternating = index % 2 !== 0;
         return (<TableRow
             key={`${this.state.currentPage}_${index}`}
@@ -152,7 +151,7 @@ class TabularView extends Component {
                             title={row[key]}
                         >
                             <div className={'cell-content'}>
-                                {this.renderIndicatorColumn(row)}
+                                {this.renderIndicatorColumn(row, index)}
                             </div>
                         </TableCell>)
                     } else {
@@ -179,9 +178,6 @@ class TabularView extends Component {
     }
 
     handleReflow(rleState, i, index, text) {
-        if (`cell_${this.state.currentPage}_${index}_${i}` === 'cell_7_0_4') {
-            console.log({rleState, i, index, text})
-        }
         if (rleState.clamped) {
             const cellId = `cell_${this.state.currentPage}_${index}_${i}`;
 
@@ -211,7 +207,7 @@ class TabularView extends Component {
         return mapping === undefined ? key : mapping;
     }
 
-    renderIndicatorColumn(row) {
+    renderIndicatorColumn(row, index) {
         const chips = [{
             key: "financial_year",
             value: row.department.government.sphere.financial_year.slug
@@ -224,7 +220,13 @@ class TabularView extends Component {
         }];
         return (
             <div>
-                <div className={'indicator-name'}>{row['indicator_name']}</div>
+                <div className={'indicator-name'}>
+                    <LinesEllipsis
+                        text={row['indicator_name']}
+                        maxLine={'4'}
+                        onReflow={(rleState) => this.handleReflow(rleState, 0, index, row['indicator_name'])}
+                    />
+                </div>
                 {
                     chips.map((chip, index) => {
                         return (
@@ -316,7 +318,7 @@ class TabularView extends Component {
         selectedFilters[name] = value;
 
         this.setState({
-            ...this.state,  selectedFilters: selectedFilters
+            ...this.state, selectedFilters: selectedFilters
         }, () => {
             this.fetchAPIData(0);
         })

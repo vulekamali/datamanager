@@ -49,10 +49,7 @@
   font-weight: 700;
   margin-right: 5px;
   margin-left: 5px;
-  max-width: 25vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  width: 25vw;
 }
 
 .performance-table .performance-table-cell .cell-content, .performance-table .performance-indicator-cell .cell-content {
@@ -99,6 +96,6 @@
 
 @media (max-width: 480px) {
   .performance-table .performance-indicator-cell .cell-content {
-    max-width: 80vw;
+    width: 80vw;
   }
 }
