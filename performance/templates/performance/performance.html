@@ -1,7 +1,20 @@
 {% extends 'page-shell.html' %}
 {% load define_action %}
-{% block page_content %}
+{% block meta_title %}
+<title>{{ title }}</title>
+<meta name="twitter:title" content="{{ title }}">
+<meta property="og:title" content="{{ title }}" />
+{% endblock meta_title %}
 
+{% block meta_description %}
+{% with fallback_description="{{ description }}" %}
+<meta name="description" content="{{ description }}">
+<meta name="twitter:description" content="{{ description }}">
+<meta property="og:description" content="{{ description }}">
+{% endwith %}
+{% endblock meta_description %}
+
+{% block page_content %}
 <div class="Page-content Page-content--dynamicYears">
     <main class="Page-contentInner is-full">
         <h1 class="Page-mainHeading">Explore performance indicators</h1>

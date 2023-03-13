@@ -9,7 +9,11 @@ from django.contrib.postgres.search import SearchQuery
 
 
 def performance_tabular_view(request):
-    context = {"navbar": MainMenuItem.objects.prefetch_related("children").all()}
+    context = {
+        "navbar": MainMenuItem.objects.prefetch_related("children").all(),
+        "title": "Quarterly performance reporting (QPR) indicators",
+        "description": "Find the latest quarterly performance monitoring indicators, results, and explanations from national and provincial departments. How is performance measured in government? Quarterly and audited annual indicators is one of the tools to monitor implementation of department mandates.",
+    }
     return render(request, "performance/performance.html", context)
 
 
