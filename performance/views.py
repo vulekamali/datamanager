@@ -31,7 +31,12 @@ class IndicatorListView(generics.ListAPIView):
     def list(self, request):
         search_query = request.GET.get("q", "")
 
-        queryset = self.get_queryset()
+        queryset = self.get_queryset().select_related(
+            "department",
+            "department__government",
+            "department__government__sphere",
+            "department__government__sphere__financial_year",
+        )
         queryset = self.text_search(queryset, search_query)
         queryset = self.add_filters(queryset, request.GET, self.fieldmap)
 
