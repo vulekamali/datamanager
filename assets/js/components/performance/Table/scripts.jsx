@@ -20,7 +20,6 @@ import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import debounce from "lodash.debounce";
-import LinesEllipsis from "react-lines-ellipsis";
 
 class TabularView extends Component {
     constructor(props) {
