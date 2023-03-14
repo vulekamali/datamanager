@@ -112,6 +112,9 @@ class TabularView extends Component {
                     rowsPerPage: response.results.items.length
                 });
             })
+            .then(() => {
+                this.handleObservers();
+            })
             .catch((errorResult) => console.warn(errorResult));
     }
 
@@ -164,34 +167,18 @@ class TabularView extends Component {
                                 className={'cell-content'}
                                 id={`cell_${this.state.currentPage}_${index}_${i}`}
                             >
-                                <LinesEllipsis
-                                    text={row[key]}
-                                    maxLine={'4'}
-                                    onReflow={(rleState) => this.handleReflow(rleState, i, index, row[key])}
-                                />
+                                <input type="checkbox" id={`expanded_${this.state.currentPage}_${index}_${i}`}/>
+                                <span>{row[key]}</span>
+                                <label
+                                    htmlFor={`expanded_${this.state.currentPage}_${index}_${i}`}
+                                    role={'button'}
+                                >Read more</label>
                             </div>
                         </TableCell>)
                     }
                 }
             })}
         </TableRow>)
-    }
-
-    handleReflow(rleState, i, index, text) {
-        if (rleState.clamped) {
-            const cellId = `cell_${this.state.currentPage}_${index}_${i}`;
-
-            let button = '<span class="link-button">Read more</span>';
-            let element = document.getElementById(cellId);
-            if (element != null) {
-                element.removeAttribute('onclick');
-                element.onclick = (e) => this.handleReadMoreClick(e, i, index, text);
-                let oldButton = element.getElementsByClassName('link-button');
-                if (oldButton.length <= 0) {
-                    element.innerHTML = element.innerHTML + button;
-                }
-            }
-        }
     }
 
     handleReadMoreClick(e, i, index, text) {
@@ -306,6 +293,19 @@ class TabularView extends Component {
                 {this.renderPagination()}
             </ThemeProvider>);
         }
+    }
+
+    handleObservers() {
+        const ps = document.querySelectorAll('.performance-table-cell span');
+        const observer = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                entry.target.classList[entry.target.scrollHeight * 0.95 > entry.contentRect.height ? 'add' : 'remove']('truncated');
+            }
+        })
+
+        ps.forEach(p => {
+            observer.observe(p);
+        })
     }
 
     handleFilterChange(event) {
