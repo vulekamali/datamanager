@@ -87,6 +87,8 @@ class TabularView extends Component {
     }
 
     fetchAPIData(pageToCall) {
+        this.unobserveElements();
+
         let url = `api/v1/eqprs/?page=${pageToCall + 1}`;
 
         // append filters
@@ -305,17 +307,23 @@ class TabularView extends Component {
                     entry.target.classList[entry.target.scrollHeight * 0.95 > entry.contentRect.height ? 'add' : 'remove']('truncated');
                 }
             })
-        } else {
-            this.observedElements.forEach(ele => {
-                this.resizeObserver.unobserve(ele);
-            })
-            this.observedElements = [];
         }
 
         ps.forEach(p => {
             this.observedElements.push(p);
             this.resizeObserver.observe(p);
         })
+    }
+
+    unobserveElements() {
+        if (this.resizeObserver === null) {
+            return;
+        }
+
+        this.observedElements.forEach(ele => {
+            this.resizeObserver.unobserve(ele);
+        })
+        this.observedElements = [];
     }
 
     handleFilterChange(event) {
