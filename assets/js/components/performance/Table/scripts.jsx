@@ -25,6 +25,9 @@ class TabularView extends Component {
     constructor(props) {
         super(props);
 
+        this.resizeObserver = null;
+        this.observedElements = [];
+
         this.state = {
             rows: null,
             departments: null,
@@ -296,14 +299,22 @@ class TabularView extends Component {
 
     handleObservers() {
         const ps = document.querySelectorAll('.performance-table-cell span');
-        const observer = new ResizeObserver(entries => {
-            for (let entry of entries) {
-                entry.target.classList[entry.target.scrollHeight * 0.95 > entry.contentRect.height ? 'add' : 'remove']('truncated');
-            }
-        })
+        if (this.resizeObserver === null) {
+            this.resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    entry.target.classList[entry.target.scrollHeight * 0.95 > entry.contentRect.height ? 'add' : 'remove']('truncated');
+                }
+            })
+        } else {
+            this.observedElements.forEach(ele => {
+                this.resizeObserver.unobserve(ele);
+            })
+            this.observedElements = [];
+        }
 
         ps.forEach(p => {
-            observer.observe(p);
+            this.observedElements.push(p);
+            this.resizeObserver.observe(p);
         })
     }
 
