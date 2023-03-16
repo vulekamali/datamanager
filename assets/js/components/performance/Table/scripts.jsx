@@ -14,7 +14,7 @@ import {
     TableFooter,
     TableHead,
     TablePagination,
-    TableRow
+    TableRow, Chip
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -219,12 +219,15 @@ class TabularView extends Component {
                     {row['indicator_name']}
                 </div>
                 {
-                    chips.map((chip, index) => {
+                    chips.map((chip, i) => {
                         return (
-                            <span
-                                key={index}
+                            <Chip
+                                key={`chip_${index}_${i}`}
+                                label={chip.value}
+                                title={chip.value}
                                 className={'indicator-detail-chip'}
-                            >{chip.value}</span>
+                                size={'small'}
+                            />
                         )
                     })
                 }
