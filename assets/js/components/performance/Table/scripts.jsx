@@ -172,7 +172,9 @@ class TabularView extends Component {
                                 id={`cell_${this.state.currentPage}_${index}_${i}`}
                             >
                                 <input type="checkbox" id={`expanded_${this.state.currentPage}_${index}_${i}`}/>
-                                <span>{row[key]}</span>
+                                <span style={{
+                                    webkitBoxOrient: 'vertical'
+                                }}>{row[key]}</span>
                                 <label
                                     htmlFor={`expanded_${this.state.currentPage}_${index}_${i}`}
                                     role={'button'}
