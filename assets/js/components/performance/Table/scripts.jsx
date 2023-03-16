@@ -20,11 +20,13 @@ import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import debounce from "lodash.debounce";
-import LinesEllipsis from "react-lines-ellipsis";
 
 class TabularView extends Component {
     constructor(props) {
         super(props);
+
+        this.resizeObserver = null;
+        this.observedElements = [];
 
         this.state = {
             rows: null,
@@ -85,6 +87,8 @@ class TabularView extends Component {
     }
 
     fetchAPIData(pageToCall) {
+        this.unobserveElements();
+
         let url = `api/v1/eqprs/?page=${pageToCall + 1}`;
 
         // append filters
@@ -111,6 +115,9 @@ class TabularView extends Component {
                     totalCount: response.count,
                     rowsPerPage: response.results.items.length
                 });
+            })
+            .then(() => {
+                this.handleObservers();
             })
             .catch((errorResult) => console.warn(errorResult));
     }
@@ -164,34 +171,18 @@ class TabularView extends Component {
                                 className={'cell-content'}
                                 id={`cell_${this.state.currentPage}_${index}_${i}`}
                             >
-                                <LinesEllipsis
-                                    text={row[key]}
-                                    maxLine={'4'}
-                                    onReflow={(rleState) => this.handleReflow(rleState, i, index, row[key])}
-                                />
+                                <input type="checkbox" id={`expanded_${this.state.currentPage}_${index}_${i}`}/>
+                                <span>{row[key]}</span>
+                                <label
+                                    htmlFor={`expanded_${this.state.currentPage}_${index}_${i}`}
+                                    role={'button'}
+                                >Read more</label>
                             </div>
                         </TableCell>)
                     }
                 }
             })}
         </TableRow>)
-    }
-
-    handleReflow(rleState, i, index, text) {
-        if (rleState.clamped) {
-            const cellId = `cell_${this.state.currentPage}_${index}_${i}`;
-
-            let button = '<span class="link-button">Read more</span>';
-            let element = document.getElementById(cellId);
-            if (element != null) {
-                element.removeAttribute('onclick');
-                element.onclick = (e) => this.handleReadMoreClick(e, i, index, text);
-                let oldButton = element.getElementsByClassName('link-button');
-                if (oldButton.length <= 0) {
-                    element.innerHTML = element.innerHTML + button;
-                }
-            }
-        }
     }
 
     handleReadMoreClick(e, i, index, text) {
@@ -306,6 +297,33 @@ class TabularView extends Component {
                 {this.renderPagination()}
             </ThemeProvider>);
         }
+    }
+
+    handleObservers() {
+        const ps = document.querySelectorAll('.performance-table-cell span');
+        if (this.resizeObserver === null) {
+            this.resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    entry.target.classList[entry.target.scrollHeight * 0.95 > entry.contentRect.height ? 'add' : 'remove']('truncated');
+                }
+            })
+        }
+
+        ps.forEach(p => {
+            this.observedElements.push(p);
+            this.resizeObserver.observe(p);
+        })
+    }
+
+    unobserveElements() {
+        if (this.resizeObserver === null) {
+            return;
+        }
+
+        this.observedElements.forEach(ele => {
+            this.resizeObserver.unobserve(ele);
+        })
+        this.observedElements = [];
     }
 
     handleFilterChange(event) {

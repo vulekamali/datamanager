@@ -43,6 +43,7 @@
 
 .performance-table .performance-table-cell .cell-content {
   max-width: 200px;
+  position: relative;
 }
 
 .performance-table .performance-indicator-cell .cell-content {
@@ -89,10 +90,46 @@
   margin-bottom: 5px;
 }
 
-.performance-table .link-button{
+.performance-table .link-button {
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* read more */
+.performance-table-cell {
+  input {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  span {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /* autoprefixer: off */
+  }
+
+  label {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  input:focus ~ label {
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+
+  input:checked + span {
+    -webkit-line-clamp: unset;
+  }
+
+  input:checked ~ label, span:not(.truncated) ~ label {
+    display: none;
+  }
+}
+
+/* read more */
 
 @media (max-width: 480px) {
   .performance-table .performance-indicator-cell .cell-content {
