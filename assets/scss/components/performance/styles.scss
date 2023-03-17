@@ -22,11 +22,22 @@
 
 .performance-table .indicator-detail-chip {
   display: inline-block;
-  padding: 6px 4px;
-  background-color: #dedede;
+  padding: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   margin-right: 5px;
-  font-weight: normal;
+  font-weight: 400;
+  font-size: 12px;
+  height: unset;
+  margin-bottom: 5px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+}
+
+.performance-table .indicator-detail-chip span {
+  padding: 0;
 }
 
 .performance-table .performance-table-cell {
@@ -82,6 +93,11 @@
   margin-right: 5px;
   margin-left: 5px;
   min-width: 150px;
+}
+
+.performance-table .performance-table-head-cell.indicator-column-head .cell-content {
+  width: 25vw;
+  min-width: unset;
 }
 
 .performance-table .performance-indicator-cell .cell-content .indicator-name {
