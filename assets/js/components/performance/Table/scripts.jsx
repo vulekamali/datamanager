@@ -127,15 +127,27 @@ class TabularView extends Component {
             return (<TableRow>
                 {Object.keys(this.state.rows[0]).map((key, index) => {
                     if (!this.state.excludeColumns.has(key)) {
-                        return (<TableCell
-                            key={index}
-                            size={'small'}
-                            className={'performance-table-head-cell'}
-                        >
-                            <div className={'cell-content'}>
-                                {this.getTitleMapping(key)}
-                            </div>
-                        </TableCell>)
+                        if (key === 'indicator_name') {
+                            return (<TableCell
+                                key={index}
+                                size={'small'}
+                                className={'performance-table-head-cell indicator-column-head'}
+                            >
+                                <div className={'cell-content'}>
+                                    {this.getTitleMapping(key)}
+                                </div>
+                            </TableCell>)
+                        } else {
+                            return (<TableCell
+                                key={index}
+                                size={'small'}
+                                className={'performance-table-head-cell'}
+                            >
+                                <div className={'cell-content'}>
+                                    {this.getTitleMapping(key)}
+                                </div>
+                            </TableCell>)
+                        }
                     }
                 })}
             </TableRow>)
@@ -173,7 +185,7 @@ class TabularView extends Component {
                             >
                                 <input type="checkbox" id={`expanded_${this.state.currentPage}_${index}_${i}`}/>
                                 <span style={{
-                                    webkitBoxOrient: 'vertical'
+                                    WebkitBoxOrient: 'vertical'
                                 }}>{row[key]}</span>
                                 <label
                                     htmlFor={`expanded_${this.state.currentPage}_${index}_${i}`}

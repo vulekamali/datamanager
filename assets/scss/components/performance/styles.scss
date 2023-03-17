@@ -33,6 +33,7 @@
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1;
 }
 
 .performance-table .indicator-detail-chip span {
@@ -92,6 +93,11 @@
   margin-right: 5px;
   margin-left: 5px;
   min-width: 150px;
+}
+
+.performance-table .performance-table-head-cell.indicator-column-head .cell-content {
+  width: 25vw;
+  min-width: unset;
 }
 
 .performance-table .performance-indicator-cell .cell-content .indicator-name {
