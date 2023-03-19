@@ -408,16 +408,27 @@ class TabularView extends Component {
                         value={this.state.selectedFilters[apiField] === undefined ? '' : this.state.selectedFilters[apiField]}
                         onChange={(event) => this.handleFilterChange(event)}
                     >
-                        <MenuItem value={''}>{blankLabel}</MenuItem>
+                        <MenuItem
+                            value={''}
+                            className={'filter-menu-item'}
+                        >
+                            <span className={'option-text blank-label'}>
+                                {blankLabel}
+                            </span>
+                        </MenuItem>
                         {this.state[stateField].map((option, index) => {
                             return (
                                 <MenuItem
                                     key={index}
                                     value={option[apiField]}
+                                    className={'filter-menu-item'}
                                 >
-                                    {option[apiField]}
+                                    <span className={'option-text'}>
+                                        {option[apiField]}
+                                    </span>
                                     <Chip
                                         label={option['count']}
+                                        className={'option-facet'}
                                     />
                                 </MenuItem>
                             )
