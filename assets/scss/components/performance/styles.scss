@@ -159,6 +159,8 @@
 .filter-menu-item .option-text {
   font-family: Lato, sans-serif !important;
   width: 100%;
+  max-width: 150px;
+  white-space: break-spaces;
 }
 
 .filter-menu-item .option-text.blank-label {
@@ -170,10 +172,15 @@
   font-family: Lato, sans-serif !important;
   padding: 6px;
   height: unset;
+  margin: auto;
 }
 
 .filter-menu-item .option-facet span {
   padding: 0px;
+}
+
+.filter-search .option-facet {
+  display: none;
 }
 
 @media (max-width: 480px) {
