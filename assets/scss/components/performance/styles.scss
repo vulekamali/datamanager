@@ -16,6 +16,10 @@
   height: 1px; /* ignored but needed */
 }
 
+.performance-table tbody {
+  position: relative;
+}
+
 .performance-table .performance-table-head {
   white-space: nowrap;
 }
@@ -109,6 +113,16 @@
 .performance-table .link-button {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.table-loading-state {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9;
 }
 
 /* read more */

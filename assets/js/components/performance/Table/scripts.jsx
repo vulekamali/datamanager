@@ -14,7 +14,9 @@ import {
     TableFooter,
     TableHead,
     TablePagination,
-    TableRow, Chip
+    TableRow,
+    Chip,
+    CircularProgress
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -41,6 +43,7 @@ class TabularView extends Component {
             rowsPerPage: 0,
             currentPage: 0,
             selectedFilters: {},
+            isLoading: false,
             excludeColumns: new Set(['id', 'department']),
             titleMappings: {
                 'indicator_name': 'Indicator name',
@@ -87,6 +90,11 @@ class TabularView extends Component {
     }
 
     fetchAPIData(pageToCall) {
+        this.setState({
+            ...this.state,
+            isLoading: true
+        })
+
         this.unobserveElements();
 
         let url = `api/v1/eqprs/?page=${pageToCall + 1}`;
@@ -113,7 +121,8 @@ class TabularView extends Component {
                     sectors: response.results.facets['sector'],
                     spheres: response.results.facets['sphere_name'],
                     totalCount: response.count,
-                    rowsPerPage: response.results.items.length
+                    rowsPerPage: response.results.items.length,
+                    isLoading: false
                 });
             })
             .then(() => {
@@ -282,38 +291,51 @@ class TabularView extends Component {
                     }
                 }
             });
-            return (<ThemeProvider theme={tableTheme}>
-                {this.renderPagination()}
-                <Paper
-                    className={'performance-table-paper'}
-                >
-                    <TableContainer
-                        className={'performance-table-container'}
+            return (
+                <ThemeProvider theme={tableTheme}>
+                    {this.renderPagination()}
+                    <Paper
+                        className={'performance-table-paper'}
                     >
-                        <Table
-                            stickyHeader
-                            aria-label={'simple table'}
-                            size={'medium'}
-                            className={'performance-table'}
+                        <TableContainer
+                            className={'performance-table-container'}
                         >
-                            <TableHead
-                                className={'performance-table-head'}
+                            <Table
+                                stickyHeader
+                                aria-label={'simple table'}
+                                size={'medium'}
+                                className={'performance-table'}
                             >
-                                {this.renderTableHead()}
-                            </TableHead>
-                            <TableBody>
-                                {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
-                            </TableBody>
-                            <TableFooter>
-                                <TableRow>
-                                </TableRow>
-                            </TableFooter>
-                        </Table>
-                    </TableContainer>
-                </Paper>
-                {this.renderPagination()}
-            </ThemeProvider>);
+                                <TableHead
+                                    className={'performance-table-head'}
+                                >
+                                    {this.renderTableHead()}
+                                </TableHead>
+                                <TableBody>
+                                    {this.renderLoadingState()}
+                                    {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
+                                </TableBody>
+                                <TableFooter>
+                                    <TableRow>
+                                    </TableRow>
+                                </TableFooter>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
+                    {this.renderPagination()}
+                </ThemeProvider>
+            );
         }
+    }
+
+    renderLoadingState() {
+
+
+        return (
+            <div className={'table-loading-state'}>
+                <CircularProgress/>
+            </div>
+        )
     }
 
     handleObservers() {
