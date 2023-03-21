@@ -123,6 +123,17 @@
   right: 0;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 9;
+
+  .table-circular-progress {
+    $page_height: 100vh;
+    $pagination_row: 50px;
+    $pagination_row_bottom: 50px;
+    $padding_top: 12px;
+    $padding_bottom: 12px;
+    $thead_height: 35px;
+    $gif_height: 40px;
+    margin-top: calc((#{$page_height} - #{$pagination_row } - #{ $pagination_row_bottom } - #{$padding_top} - #{ $padding_bottom} - #{ $thead_height} - #{ $gif_height}) / 2);
+  }
 }
 
 /* read more */

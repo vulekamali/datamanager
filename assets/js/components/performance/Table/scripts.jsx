@@ -312,8 +312,8 @@ class TabularView extends Component {
                                     {this.renderTableHead()}
                                 </TableHead>
                                 <TableBody>
-                                    {this.renderLoadingState()}
                                     {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
+                                    {this.renderLoadingState()}
                                 </TableBody>
                                 <TableFooter>
                                     <TableRow>
@@ -329,11 +329,20 @@ class TabularView extends Component {
     }
 
     renderLoadingState() {
+        if (!this.state.isLoading) {
+            return;
+        }
 
+        const tableContainer = document.getElementById('js-initTabularView');
+        const gifWidth = 40;
+        const marginLeftVal = (tableContainer.clientWidth - gifWidth) / 2;
 
         return (
             <div className={'table-loading-state'}>
-                <CircularProgress/>
+                <CircularProgress
+                    className={'table-circular-progress'}
+                    style={{marginLeft: marginLeftVal}}
+                />
             </div>
         )
     }
