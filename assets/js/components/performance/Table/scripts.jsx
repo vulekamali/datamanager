@@ -94,7 +94,7 @@ class TabularView extends Component {
         // append filters
         Object.keys(this.state.selectedFilters).forEach((key) => {
             let value = this.state.selectedFilters[key];
-            if (value !== '') {
+            if (value !== null) {
                 url += `&${key}=${encodeURI(value)}`;
             }
         })
@@ -405,11 +405,11 @@ class TabularView extends Component {
                             id: `frm-${id}`, name: apiField
                         }}
                         displayEmpty={true}
-                        value={this.state.selectedFilters[apiField] === undefined ? '' : this.state.selectedFilters[apiField]}
+                        value={this.state.selectedFilters[apiField] === undefined ? null : this.state.selectedFilters[apiField]}
                         onChange={(event) => this.handleFilterChange(event)}
                     >
                         <MenuItem
-                            value={''}
+                            value={null}
                             className={'filter-menu-item'}
                         >
                             <span className={'option-text blank-label'}>
@@ -423,9 +423,7 @@ class TabularView extends Component {
                                     value={option[apiField]}
                                     className={'filter-menu-item'}
                                 >
-                                    <span className={'option-text'}>
-                                        {option[apiField]}
-                                    </span>
+                                    {this.renderMenuItemText(option[apiField])}
                                     <Chip
                                         label={option['count']}
                                         className={'option-facet'}
@@ -435,6 +433,26 @@ class TabularView extends Component {
                         })}
                     </Select>
                 </FormControl>
+            )
+        }
+    }
+
+    renderMenuItemText(text) {
+        if (text == null || text.trim() === '') {
+            return (
+                <span
+                    className={'option-text'}
+                >
+                    <i>Blank</i>
+                </span>
+            )
+        } else {
+            return (
+                <span
+                    className={'option-text'}
+                >
+                    {text}
+                </span>
             )
         }
     }
