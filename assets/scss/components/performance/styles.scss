@@ -1,6 +1,7 @@
 .performance-table-paper {
   padding: 20px;
   border-radius: 20px !important;
+  position: relative;
 }
 
 .performance-table-container {
@@ -14,10 +15,6 @@
 
 .performance-table {
   height: 1px; /* ignored but needed */
-}
-
-.performance-table tbody {
-  position: relative;
 }
 
 .performance-table .performance-table-head {
@@ -130,9 +127,8 @@
     $pagination_row_bottom: 50px;
     $padding_top: 12px;
     $padding_bottom: 12px;
-    $thead_height: 35px;
     $gif_height: 40px;
-    margin-top: calc((#{$page_height} - #{$pagination_row } - #{ $pagination_row_bottom } - #{$padding_top} - #{ $padding_bottom} - #{ $thead_height} - #{ $gif_height}) / 2);
+    margin-top: calc((#{$page_height} - #{$pagination_row } - #{ $pagination_row_bottom } - #{$padding_top} - #{ $padding_bottom} - #{ $gif_height}) / 2);
   }
 }
 

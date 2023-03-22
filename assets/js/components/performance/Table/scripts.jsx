@@ -297,6 +297,7 @@ class TabularView extends Component {
                     <Paper
                         className={'performance-table-paper'}
                     >
+                        {this.renderLoadingState()}
                         <TableContainer
                             className={'performance-table-container'}
                         >
@@ -313,7 +314,6 @@ class TabularView extends Component {
                                 </TableHead>
                                 <TableBody>
                                     {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
-                                    {this.renderLoadingState()}
                                 </TableBody>
                                 <TableFooter>
                                     <TableRow>
