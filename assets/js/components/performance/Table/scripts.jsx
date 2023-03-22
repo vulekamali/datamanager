@@ -261,71 +261,83 @@ class TabularView extends Component {
     }
 
     renderPagination() {
-        return (<TablePagination
-            colSpan={3}
-            count={this.state.totalCount}
-            rowsPerPage={this.state.rowsPerPage}
-            rowsPerPageOptions={[]}
-            page={this.state.currentPage}
-            onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
-            SelectProps={{
-                inputProps: {'aria-label': 'rows per page'}, native: true,
-            }}
-            component="div"
-        />);
+        if (this.state.rows === null) {
+            // empty pagination row
+            return <div style={{height: '52px'}}></div>
+        }
+
+        return (
+            <TablePagination
+                colSpan={3}
+                count={this.state.totalCount}
+                rowsPerPage={this.state.rowsPerPage}
+                rowsPerPageOptions={[]}
+                page={this.state.currentPage}
+                onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
+                SelectProps={{
+                    inputProps: {'aria-label': 'rows per page'}, native: true,
+                }}
+                component="div"
+            />
+        );
+    }
+
+    renderTableContainer() {
+        if (this.state.rows === null) {
+            return <div></div>
+        }
+
+        return (
+            <TableContainer
+                className={'performance-table-container'}
+            >
+                <Table
+                    stickyHeader
+                    aria-label={'simple table'}
+                    size={'medium'}
+                    className={'performance-table'}
+                >
+                    <TableHead
+                        className={'performance-table-head'}
+                    >
+                        {this.renderTableHead()}
+                    </TableHead>
+                    <TableBody>
+                        {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </TableContainer>
+        )
     }
 
     renderTable() {
-        if (this.state.rows === null) {
-            // todo : return loading state
-            return <div></div>
-        } else {
-            const tableTheme = createTheme({
-                overrides: {
-                    MuiTablePagination: {
-                        spacer: {
-                            flex: 'none'
-                        }, toolbar: {
-                            "padding-left": "16px"
-                        }
+        const tableTheme = createTheme({
+            overrides: {
+                MuiTablePagination: {
+                    spacer: {
+                        flex: 'none'
+                    }, toolbar: {
+                        "padding-left": "16px"
                     }
                 }
-            });
-            return (
-                <ThemeProvider theme={tableTheme}>
-                    {this.renderPagination()}
-                    <Paper
-                        className={'performance-table-paper'}
-                    >
-                        {this.renderLoadingState()}
-                        <TableContainer
-                            className={'performance-table-container'}
-                        >
-                            <Table
-                                stickyHeader
-                                aria-label={'simple table'}
-                                size={'medium'}
-                                className={'performance-table'}
-                            >
-                                <TableHead
-                                    className={'performance-table-head'}
-                                >
-                                    {this.renderTableHead()}
-                                </TableHead>
-                                <TableBody>
-                                    {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
-                                </TableBody>
-                                <TableFooter>
-                                    <TableRow>
-                                    </TableRow>
-                                </TableFooter>
-                            </Table>
-                        </TableContainer>
-                    </Paper>
-                    {this.renderPagination()}
-                </ThemeProvider>
-            );
-        }
+            }
+        });
+        return (
+            <ThemeProvider theme={tableTheme}>
+                {this.renderPagination()}
+                <Paper
+                    className={'performance-table-paper'}
+                >
+                    {this.renderLoadingState()}
+                    {this.renderTableContainer()}
+                </Paper>
+                {this.renderPagination()}
+            </ThemeProvider>
+        );
     }
 
     renderLoadingState() {
