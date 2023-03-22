@@ -145,6 +145,44 @@
 
 /* read more */
 
+.filter-search, .filter-search label, .filter-search select, .filter-search option, .filter-search .filter-menu-item, .filter-search ul li {
+  font-family: Lato, sans-serif;
+}
+
+.filter-menu-item {
+  font-size: 14px !important;
+  font-family: Lato, sans-serif !important;
+  padding-left: 12px !important;
+  line-height: 1 !important;
+}
+
+.filter-menu-item .option-text {
+  font-family: Lato, sans-serif !important;
+  width: 100%;
+  margin-right: 16px;
+  white-space: break-spaces;
+}
+
+.filter-menu-item .option-text.blank-label {
+  padding-bottom: 5.5px;
+  padding-top: 5.5px;
+}
+
+.filter-menu-item .option-facet {
+  font-family: Lato, sans-serif !important;
+  padding: 6px;
+  height: unset;
+  margin: auto;
+}
+
+.filter-menu-item .option-facet span {
+  padding: 0px;
+}
+
+.filter-search .option-facet {
+  display: none;
+}
+
 @media (max-width: 480px) {
   .performance-table .performance-indicator-cell .cell-content {
     width: 80vw;

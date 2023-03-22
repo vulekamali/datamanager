@@ -14,7 +14,7 @@ import {
     TableFooter,
     TableHead,
     TablePagination,
-    TableRow, Chip
+    TableRow, Chip, MenuItem
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -94,7 +94,7 @@ class TabularView extends Component {
         // append filters
         Object.keys(this.state.selectedFilters).forEach((key) => {
             let value = this.state.selectedFilters[key];
-            if (value !== '') {
+            if (value !== null) {
                 url += `&${key}=${encodeURI(value)}`;
             }
         })
@@ -384,36 +384,76 @@ class TabularView extends Component {
         if (this.state[stateField] === null) {
             return <div></div>
         } else {
-            return (<FormControl variant={'outlined'}
-                                 size={'small'}
-                                 style={{
-                                     minWidth: '150px',
-                                     maxWidth: '250px',
-                                     marginRight: '10px',
-                                     marginTop: '15px',
-                                     fontSize: '8px'
-                                 }}>
-                <InputLabel htmlFor={`frm-${id}`} shrink>{fieldLabel}</InputLabel>
-                <Select
-                    native
-                    notched
-                    label={fieldLabel}
-                    inputProps={{
-                        id: `frm-${id}`, name: apiField
+            return (
+                <FormControl
+                    variant={'outlined'}
+                    size={'small'}
+                    style={{
+                        minWidth: '150px',
+                        maxWidth: '250px',
+                        marginRight: '10px',
+                        marginTop: '15px',
+                        fontSize: '8px'
                     }}
-                    value={this.state.selectedFilters[apiField]}
-                    onChange={(event) => this.handleFilterChange(event)}
+                    className={'filter-search'}
                 >
-                    <option aria-label={blankLabel} value={''}>{blankLabel}</option>
-                    {this.state[stateField].map((option, index) => {
-                        return (<option
-                            key={index}
-                            value={option[apiField]}>
-                            {`${option[apiField]} (${option['count']})`}
-                        </option>)
-                    })}
-                </Select>
-            </FormControl>)
+                    <InputLabel htmlFor={`frm-${id}`} shrink>{fieldLabel}</InputLabel>
+                    <Select
+                        notched
+                        label={fieldLabel}
+                        inputProps={{
+                            id: `frm-${id}`, name: apiField
+                        }}
+                        displayEmpty={true}
+                        value={this.state.selectedFilters[apiField] === undefined ? null : this.state.selectedFilters[apiField]}
+                        onChange={(event) => this.handleFilterChange(event)}
+                    >
+                        <MenuItem
+                            value={null}
+                            className={'filter-menu-item'}
+                        >
+                            <span className={'option-text blank-label'}>
+                                {blankLabel}
+                            </span>
+                        </MenuItem>
+                        {this.state[stateField].map((option, index) => {
+                            return (
+                                <MenuItem
+                                    key={index}
+                                    value={option[apiField]}
+                                    className={'filter-menu-item'}
+                                >
+                                    {this.renderMenuItemText(option[apiField])}
+                                    <Chip
+                                        label={option['count']}
+                                        className={'option-facet'}
+                                    />
+                                </MenuItem>
+                            )
+                        })}
+                    </Select>
+                </FormControl>
+            )
+        }
+    }
+
+    renderMenuItemText(text) {
+        if (text == null || text.trim() === '') {
+            return (
+                <span
+                    className={'option-text'}
+                >
+                    <i>Blank</i>
+                </span>
+            )
+        } else {
+            return (
+                <span
+                    className={'option-text'}
+                >
+                    {text}
+                </span>
+            )
         }
     }
 
