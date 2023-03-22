@@ -1,6 +1,12 @@
 .performance-table-paper {
   padding: 20px;
   border-radius: 20px !important;
+  position: relative;
+
+  $page_height: 100vh;
+  $padding_top: 12px;
+  $padding_bottom: 12px;
+  height: calc(#{$page_height} - #{$padding_top} - #{ $padding_bottom});
 }
 
 .performance-table-container {
@@ -109,6 +115,26 @@
 .performance-table .link-button {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.table-loading-state {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9;
+
+  .table-circular-progress {
+    $page_height: 100vh;
+    $pagination_row: 50px;
+    $pagination_row_bottom: 50px;
+    $padding_top: 12px;
+    $padding_bottom: 12px;
+    $gif_height: 40px;
+    margin-top: calc((#{$page_height} - #{$pagination_row } - #{ $pagination_row_bottom } - #{$padding_top} - #{ $padding_bottom} - #{ $gif_height}) / 2);
+  }
 }
 
 /* read more */

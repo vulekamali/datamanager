@@ -14,7 +14,10 @@ import {
     TableFooter,
     TableHead,
     TablePagination,
-    TableRow, Chip, MenuItem
+    TableRow,
+    Chip,
+    CircularProgress,
+    MenuItem,
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -27,6 +30,7 @@ class TabularView extends Component {
 
         this.resizeObserver = null;
         this.observedElements = [];
+        this.abortController = null;
 
         this.state = {
             rows: null,
@@ -41,6 +45,7 @@ class TabularView extends Component {
             rowsPerPage: 0,
             currentPage: 0,
             selectedFilters: {},
+            isLoading: false,
             excludeColumns: new Set(['id', 'department']),
             titleMappings: {
                 'indicator_name': 'Indicator name',
@@ -86,7 +91,37 @@ class TabularView extends Component {
         this.fetchAPIData(0);
     }
 
+    handleFilterChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        let selectedFilters = this.state.selectedFilters;
+        selectedFilters[name] = value;
+
+        this.setState({
+            ...this.state, selectedFilters: selectedFilters
+        }, () => {
+            this.fetchAPIData(0);
+        })
+    }
+
+    cancelAndInitAbortController() {
+        if (this.abortController !== null) {
+            // this.abortController is null on the first request
+            this.abortController.abort();
+        }
+        this.abortController = new AbortController();
+
+    }
+
     fetchAPIData(pageToCall) {
+        this.setState({
+            ...this.state,
+            isLoading: true
+        })
+
+        this.cancelAndInitAbortController();
+
         this.unobserveElements();
 
         let url = `api/v1/eqprs/?page=${pageToCall + 1}`;
@@ -99,7 +134,7 @@ class TabularView extends Component {
             }
         })
 
-        fetchWrapper(url)
+        fetchWrapper(url, this.abortController)
             .then((response) => {
                 this.setState({
                     ...this.state,
@@ -113,7 +148,8 @@ class TabularView extends Component {
                     sectors: response.results.facets['sector'],
                     spheres: response.results.facets['sphere_name'],
                     totalCount: response.count,
-                    rowsPerPage: response.results.items.length
+                    rowsPerPage: response.results.items.length,
+                    isLoading: false
                 });
             })
             .then(() => {
@@ -252,68 +288,102 @@ class TabularView extends Component {
     }
 
     renderPagination() {
-        return (<TablePagination
-            colSpan={3}
-            count={this.state.totalCount}
-            rowsPerPage={this.state.rowsPerPage}
-            rowsPerPageOptions={[]}
-            page={this.state.currentPage}
-            onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
-            SelectProps={{
-                inputProps: {'aria-label': 'rows per page'}, native: true,
-            }}
-            component="div"
-        />);
+        if (this.state.rows === null) {
+            // empty pagination row
+            return <div style={{height: '52px'}}></div>
+        }
+
+        return (
+            <TablePagination
+                colSpan={3}
+                count={this.state.totalCount}
+                rowsPerPage={this.state.rowsPerPage}
+                rowsPerPageOptions={[]}
+                page={this.state.currentPage}
+                onPageChange={(event, newPage) => this.handlePageChange(event, newPage)}
+                SelectProps={{
+                    inputProps: {'aria-label': 'rows per page'}, native: true,
+                }}
+                component="div"
+            />
+        );
+    }
+
+    renderTableContainer() {
+        if (this.state.rows === null) {
+            return <div></div>
+        }
+
+        return (
+            <TableContainer
+                className={'performance-table-container'}
+            >
+                <Table
+                    stickyHeader
+                    aria-label={'simple table'}
+                    size={'medium'}
+                    className={'performance-table'}
+                >
+                    <TableHead
+                        className={'performance-table-head'}
+                    >
+                        {this.renderTableHead()}
+                    </TableHead>
+                    <TableBody>
+                        {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </TableContainer>
+        )
     }
 
     renderTable() {
-        if (this.state.rows === null) {
-            // todo : return loading state
-            return <div></div>
-        } else {
-            const tableTheme = createTheme({
-                overrides: {
-                    MuiTablePagination: {
-                        spacer: {
-                            flex: 'none'
-                        }, toolbar: {
-                            "padding-left": "16px"
-                        }
+        const tableTheme = createTheme({
+            overrides: {
+                MuiTablePagination: {
+                    spacer: {
+                        flex: 'none'
+                    }, toolbar: {
+                        "padding-left": "16px"
                     }
                 }
-            });
-            return (<ThemeProvider theme={tableTheme}>
+            }
+        });
+        return (
+            <ThemeProvider theme={tableTheme}>
                 {this.renderPagination()}
                 <Paper
                     className={'performance-table-paper'}
                 >
-                    <TableContainer
-                        className={'performance-table-container'}
-                    >
-                        <Table
-                            stickyHeader
-                            aria-label={'simple table'}
-                            size={'medium'}
-                            className={'performance-table'}
-                        >
-                            <TableHead
-                                className={'performance-table-head'}
-                            >
-                                {this.renderTableHead()}
-                            </TableHead>
-                            <TableBody>
-                                {this.state.rows.map((row, index) => this.renderTableCells(row, index))}
-                            </TableBody>
-                            <TableFooter>
-                                <TableRow>
-                                </TableRow>
-                            </TableFooter>
-                        </Table>
-                    </TableContainer>
+                    {this.renderLoadingState()}
+                    {this.renderTableContainer()}
                 </Paper>
                 {this.renderPagination()}
-            </ThemeProvider>);
+            </ThemeProvider>
+        );
+    }
+
+    renderLoadingState() {
+        if (!this.state.isLoading) {
+            return;
         }
+
+        const tableContainer = document.getElementById('js-initTabularView');
+        const gifWidth = 40;
+        const marginLeftVal = (tableContainer.clientWidth - gifWidth) / 2;
+
+        return (
+            <div className={'table-loading-state'}>
+                <CircularProgress
+                    className={'table-circular-progress'}
+                    style={{marginLeft: marginLeftVal}}
+                />
+            </div>
+        )
     }
 
     handleObservers() {
@@ -341,20 +411,6 @@ class TabularView extends Component {
             this.resizeObserver.unobserve(ele);
         })
         this.observedElements = [];
-    }
-
-    handleFilterChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-
-        let selectedFilters = this.state.selectedFilters;
-        selectedFilters[name] = value;
-
-        this.setState({
-            ...this.state, selectedFilters: selectedFilters
-        }, () => {
-            this.fetchAPIData(0);
-        })
     }
 
     renderSearchField() {
