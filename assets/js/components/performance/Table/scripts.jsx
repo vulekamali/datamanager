@@ -29,6 +29,7 @@ class TabularView extends Component {
 
         this.resizeObserver = null;
         this.observedElements = [];
+        this.abortController = null;
 
         this.state = {
             rows: null,
@@ -89,11 +90,36 @@ class TabularView extends Component {
         this.fetchAPIData(0);
     }
 
+    handleFilterChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        let selectedFilters = this.state.selectedFilters;
+        selectedFilters[name] = value;
+
+        this.setState({
+            ...this.state, selectedFilters: selectedFilters
+        }, () => {
+            this.fetchAPIData(0);
+        })
+    }
+
+    cancelAndInitAbortController() {
+        if (this.abortController !== null) {
+            // this.abortController is null on the first request
+            this.abortController.abort();
+        }
+        this.abortController = new AbortController();
+
+    }
+
     fetchAPIData(pageToCall) {
         this.setState({
             ...this.state,
             isLoading: true
         })
+
+        this.cancelAndInitAbortController();
 
         this.unobserveElements();
 
@@ -107,7 +133,7 @@ class TabularView extends Component {
             }
         })
 
-        fetchWrapper(url)
+        fetchWrapper(url, this.abortController)
             .then((response) => {
                 this.setState({
                     ...this.state,
@@ -384,20 +410,6 @@ class TabularView extends Component {
             this.resizeObserver.unobserve(ele);
         })
         this.observedElements = [];
-    }
-
-    handleFilterChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-
-        let selectedFilters = this.state.selectedFilters;
-        selectedFilters[name] = value;
-
-        this.setState({
-            ...this.state, selectedFilters: selectedFilters
-        }, () => {
-            this.fetchAPIData(0);
-        })
     }
 
     renderSearchField() {

@@ -1,6 +1,8 @@
-export default function fetchWrapper(url) {
+export default function fetchWrapper(url,abortController=null) {
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(url, {
+            signal: abortController === null ? null : abortController.signal
+        })
       .then((response) => {
         if (!response.ok) {
           reject(response);
