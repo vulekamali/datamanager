@@ -88,7 +88,25 @@ class TabularView extends Component {
     }
 
     componentDidMount() {
-        this.fetchAPIData(0);
+        window.addEventListener('popstate', (event) => {
+            this.setSelectedFiltersAndFetchAPIData();
+        })
+
+        this.setSelectedFiltersAndFetchAPIData();
+    }
+
+    setSelectedFiltersAndFetchAPIData() {
+        let selectedFilters = {};
+        let params = new URLSearchParams(window.location.search);
+        for (const key of params.keys()) {
+            selectedFilters[key] = params.get(key);
+        }
+
+        this.setState({
+            ...this.state, selectedFilters: selectedFilters
+        }, () => {
+            this.fetchAPIData(0);
+        })
     }
 
     handleFilterChange(event) {
@@ -97,6 +115,16 @@ class TabularView extends Component {
 
         let selectedFilters = this.state.selectedFilters;
         selectedFilters[name] = value;
+
+        let url = '';
+        Object.keys(selectedFilters)
+            .filter(key => selectedFilters[key] !== null)
+            .forEach((key, i) => {
+                const value = selectedFilters[key];
+                url += `${i === 0 ? '?' : '&'}${key}=${encodeURI(value)}`;
+            })
+
+        history.pushState(null, '', url === '' ? location.pathname : url)
 
         this.setState({
             ...this.state, selectedFilters: selectedFilters
