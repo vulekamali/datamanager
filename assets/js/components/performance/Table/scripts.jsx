@@ -102,6 +102,8 @@ class TabularView extends Component {
             selectedFilters[key] = params.get(key);
         }
 
+        document.getElementById('frm-textSearch').value = selectedFilters['q'] === undefined ? '' : selectedFilters['q'];
+
         this.setState({
             ...this.state, selectedFilters: selectedFilters
         }, () => {
