@@ -110,7 +110,7 @@
     "canvg-browser": "^1.0.0",
     "chart.js": "^2.7.3",
     "color-string": "^1.5.3",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "js-yaml": "^3.11.0",
     "lodash": "^4.17.11",
     "lodash.debounce": "^4.0.8",
