@@ -9,4 +9,5 @@ urlpatterns = [
     # Performance
     path("", views.performance_tabular_view, name="performance"),
     path(r"api/v1/eqprs/", views.IndicatorListView.as_view()),
+    path(r"performance-indicators.xlsx", views.IndicatorXLSXListView.as_view(), name="performance-indicators-xlsx"),
 ]

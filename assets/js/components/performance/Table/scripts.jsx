@@ -333,6 +333,7 @@ class TabularView extends Component {
                     <Button
                         variant={'outlined'}
                         className={'download-btn'}
+                        href={'performance-indicators.xlsx'}
                     >
                         Download as .xlsx
                     </Button>

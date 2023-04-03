@@ -6,6 +6,7 @@ from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
 from budgetportal.models import MainMenuItem
 from django.contrib.postgres.search import SearchQuery
+from drf_excel.mixins import XLSXFileMixin
 
 
 def performance_tabular_view(request):
@@ -84,3 +85,11 @@ class IndicatorListView(generics.ListAPIView):
             "mtsf_outcome": facet_query("mtsf_outcome"),
             "sector": facet_query("sector"),
         }
+
+
+class IndicatorXLSXListView(XLSXFileMixin, generics.ListAPIView):
+    pagination_class = None
+    serializer_class = IndicatorSerializer
+    template_filename = "template.xlsx"
+    filename = "purchase-records.xlsx"
+    queryset = Indicator.objects.all()
