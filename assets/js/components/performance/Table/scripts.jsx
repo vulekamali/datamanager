@@ -46,6 +46,7 @@ class TabularView extends Component {
             currentPage: 0,
             selectedFilters: {},
             isLoading: false,
+            downloadUrl: '',
             excludeColumns: new Set(['id', 'department']),
             titleMappings: {
                 'indicator_name': 'Indicator name',
@@ -150,6 +151,7 @@ class TabularView extends Component {
             isLoading: true
         })
 
+        this.setDownloadUrl();
         this.cancelAndInitAbortController();
 
         this.unobserveElements();
@@ -186,6 +188,24 @@ class TabularView extends Component {
                 this.handleObservers();
             })
             .catch((errorResult) => console.warn(errorResult));
+    }
+
+    setDownloadUrl() {
+        let url = 'performance-indicators.xlsx/';
+
+        // append filters
+        Object.keys(this.state.selectedFilters).forEach((key, index) => {
+            let value = this.state.selectedFilters[key];
+            if (value !== null) {
+                let prefix = index === 0 ? '?' : '&';
+                url += `${prefix}${key}=${encodeURI(value)}`;
+            }
+        })
+
+        this.setState({
+            ...this.state,
+            downloadUrl: url
+        });
     }
 
     renderTableHead() {
@@ -333,7 +353,7 @@ class TabularView extends Component {
                     <Button
                         variant={'outlined'}
                         className={'download-btn'}
-                        href={'performance-indicators.xlsx'}
+                        href={this.state.downloadUrl}
                     >
                         Download as .xlsx
                     </Button>

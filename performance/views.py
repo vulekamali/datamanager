@@ -7,6 +7,19 @@ from rest_framework.pagination import PageNumberPagination
 from budgetportal.models import MainMenuItem
 from django.contrib.postgres.search import SearchQuery
 from drf_excel.mixins import XLSXFileMixin
+from django.http import StreamingHttpResponse
+
+import xlsx_streaming
+
+FIELD_MAP = {
+    "department_name": "department__name",
+    "financial_year_slug": "department__government__sphere__financial_year__slug",
+    "government_name": "department__government__name",
+    "sphere_name": "department__government__sphere__name",
+    "frequency": "frequency",
+    "mtsf_outcome": "mtsf_outcome",
+    "sector": "sector",
+}
 
 
 def performance_tabular_view(request):
@@ -18,20 +31,26 @@ def performance_tabular_view(request):
     return render(request, "performance/performance.html", context)
 
 
+def text_search(qs, text):
+    if len(text) == 0:
+        return qs
+
+    return qs.filter(content_search=SearchQuery(text))
+
+
+def add_filters(qs, params):
+    query_dict = {}
+    for k, v in FIELD_MAP.items():
+        if v in params:
+            query_dict[v] = params[v]
+
+    return qs.filter(**query_dict).distinct()
+
+
 class IndicatorListView(generics.ListAPIView):
     serializer_class = IndicatorSerializer
     queryset = Indicator.objects.all()
     pagination_class = PageNumberPagination
-
-    fieldmap = {
-        "department_name": "department__name",
-        "financial_year_slug": "department__government__sphere__financial_year__slug",
-        "government_name": "department__government__name",
-        "sphere_name": "department__government__sphere__name",
-        "frequency": "frequency",
-        "mtsf_outcome": "mtsf_outcome",
-        "sector": "sector",
-    }
 
     def list(self, request):
         search_query = request.GET.get("q", "")
@@ -42,8 +61,8 @@ class IndicatorListView(generics.ListAPIView):
             "department__government__sphere",
             "department__government__sphere__financial_year",
         )
-        queryset = self.text_search(queryset, search_query)
-        queryset = self.add_filters(queryset, request.GET, self.fieldmap)
+        queryset = text_search(queryset, search_query)
+        queryset = add_filters(queryset, request.GET)
 
         facets = self.get_facets(queryset)
 
@@ -55,20 +74,6 @@ class IndicatorListView(generics.ListAPIView):
             "facets": facets,
         }
         return self.get_paginated_response(data)
-
-    def text_search(self, qs, text):
-        if len(text) == 0:
-            return qs
-
-        return qs.filter(content_search=SearchQuery(text))
-
-    def add_filters(self, qs, params, filter_map):
-        query_dict = {}
-        for k, v in filter_map.items():
-            if v in params:
-                query_dict[v] = params[v]
-
-        return qs.filter(**query_dict).distinct()
 
     def get_facets(self, qs):
         def facet_query(field):
@@ -89,7 +94,33 @@ class IndicatorListView(generics.ListAPIView):
 
 class IndicatorXLSXListView(XLSXFileMixin, generics.ListAPIView):
     pagination_class = None
-    serializer_class = IndicatorSerializer
-    template_filename = "template.xlsx"
+    template_filename = "performance/template.xlsx"
     filename = "purchase-records.xlsx"
     queryset = Indicator.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        search_query = request.GET.get("q", "")
+
+        excel_data = self.get_queryset().select_related(
+            "department",
+            "department__government",
+            "department__government__sphere",
+            "department__government__sphere__financial_year",
+        )
+        excel_data = text_search(excel_data, search_query)
+        excel_data = add_filters(excel_data, request.GET)
+
+        with open(self.template_filename, "rb") as template:
+            stream = xlsx_streaming.stream_queryset_as_xlsx(
+                self.filter_queryset(excel_data).values_list(
+                    *[field.name for field in Indicator._meta.get_fields()]
+                ),
+                xlsx_template=template,
+                batch_size=50,
+            )
+        response = StreamingHttpResponse(
+            stream,
+            content_type="application/vnd.xlsxformats-officedocument.spreadsheetml.sheet",
+        )
+        response["Content-Disposition"] = f"attachment; filename={self.filename}"
+        return response
