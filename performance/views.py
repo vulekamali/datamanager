@@ -21,6 +21,44 @@ FIELD_MAP = {
     "sector": "sector",
 }
 
+XLSX_COLUMNS = [
+    "department__government__sphere__financial_year__slug",
+    "department__government__sphere__name",
+    "department__government__name",
+    "department__name",
+    "programme_name",
+    "subprogramme_name",
+    "indicator_name",
+    "frequency",
+    "q1_target",
+    "q1_actual_output",
+    "q1_deviation_reason",
+    "q1_corrective_action",
+    "q2_target",
+    "q2_actual_output",
+    "q2_deviation_reason",
+    "q2_corrective_action",
+    "q3_target",
+    "q3_actual_output",
+    "q3_deviation_reason",
+    "q3_corrective_action",
+    "q4_target",
+    "q4_actual_output",
+    "q4_deviation_reason",
+    "q4_corrective_action",
+    "annual_target",
+    "annual_aggregate_output",
+    "annual_pre_audit_output",
+    "annual_deviation_reason",
+    "annual_corrective_action",
+    "annual_audited_output",
+    "sector",
+    "type",
+    "subtype",
+    "mtsf_outcome",
+    "cluster"
+]
+
 
 def performance_tabular_view(request):
     context = {
@@ -95,7 +133,7 @@ class IndicatorListView(generics.ListAPIView):
 class IndicatorXLSXListView(XLSXFileMixin, generics.ListAPIView):
     pagination_class = None
     template_filename = "performance/template.xlsx"
-    filename = "purchase-records.xlsx"
+    filename = "eqprs-indicators.xlsx"
     queryset = Indicator.objects.all()
 
     def list(self, request, *args, **kwargs):
@@ -113,7 +151,7 @@ class IndicatorXLSXListView(XLSXFileMixin, generics.ListAPIView):
         with open(self.template_filename, "rb") as template:
             stream = xlsx_streaming.stream_queryset_as_xlsx(
                 self.filter_queryset(excel_data).values_list(
-                    *[field.name for field in Indicator._meta.get_fields()]
+                    *XLSX_COLUMNS
                 ),
                 xlsx_template=template,
                 batch_size=50,
