@@ -33,3 +33,11 @@ class indicator_API_Test(APITestCase):
     def test_update(self):
         response = self.client.patch(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_text_search(self):
+        print('============ aaa ============')
+        filter_url = self.list_url + '?page=1&q=Unqualified'
+        response_payload = self.client.get(filter_url).json()
+        print(filter_url)
+        print(len(response_payload["results"]))
+        print('============ bbb ============')

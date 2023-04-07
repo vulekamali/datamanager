@@ -73,6 +73,9 @@ def text_search(qs, text):
     if len(text) == 0:
         return qs
 
+    print(qs)
+    print(text)
+
     return qs.filter(content_search=SearchQuery(text))
 
 
@@ -85,22 +88,28 @@ def add_filters(qs, params):
     return qs.filter(**query_dict).distinct()
 
 
+def get_filtered_queryset(queryset, request):
+    search_query = request.GET.get("q", "")
+
+    filtered_queryset = queryset.select_related(
+        "department",
+        "department__government",
+        "department__government__sphere",
+        "department__government__sphere__financial_year",
+    )
+    filtered_queryset = text_search(filtered_queryset, search_query)
+    filtered_queryset = add_filters(filtered_queryset, request.GET)
+
+    return filtered_queryset
+
+
 class IndicatorListView(generics.ListAPIView):
     serializer_class = IndicatorSerializer
     queryset = Indicator.objects.all()
     pagination_class = PageNumberPagination
 
     def list(self, request):
-        search_query = request.GET.get("q", "")
-
-        queryset = self.get_queryset().select_related(
-            "department",
-            "department__government",
-            "department__government__sphere",
-            "department__government__sphere__financial_year",
-        )
-        queryset = text_search(queryset, search_query)
-        queryset = add_filters(queryset, request.GET)
+        queryset = get_filtered_queryset(self.get_queryset(), request)
 
         facets = self.get_facets(queryset)
 
@@ -137,16 +146,7 @@ class IndicatorXLSXListView(XLSXFileMixin, generics.ListAPIView):
     queryset = Indicator.objects.all()
 
     def list(self, request, *args, **kwargs):
-        search_query = request.GET.get("q", "")
-
-        excel_data = self.get_queryset().select_related(
-            "department",
-            "department__government",
-            "department__government__sphere",
-            "department__government__sphere__financial_year",
-        )
-        excel_data = text_search(excel_data, search_query)
-        excel_data = add_filters(excel_data, request.GET)
+        excel_data = get_filtered_queryset(self.get_queryset(), request)
 
         with open(self.template_filename, "rb") as template:
             stream = xlsx_streaming.stream_queryset_as_xlsx(
