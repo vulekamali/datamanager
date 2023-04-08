@@ -35,11 +35,11 @@ class indicator_API_Test(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_text_search(self):
-        filter_url = self.list_url + '?page=1&q=Unqualified%20audit%20opinion'
+        filter_url = self.list_url + "?page=1&q=Unqualified%20audit%20opinion"
         response_payload = self.client.get(filter_url).json()
         self.assertEqual(len(response_payload["results"]["items"]), 1)
 
     def test_frequency_search(self):
-        filter_url = self.list_url + '?page=1&frequency=Annually'
+        filter_url = self.list_url + "?page=1&frequency=Annually"
         response_payload = self.client.get(filter_url).json()
         self.assertEqual(len(response_payload["results"]["items"]), 1)

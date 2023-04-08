@@ -56,7 +56,7 @@ XLSX_COLUMNS = [
     "type",
     "subtype",
     "mtsf_outcome",
-    "cluster"
+    "cluster",
 ]
 
 
@@ -147,9 +147,7 @@ class IndicatorXLSXListView(XLSXFileMixin, generics.ListAPIView):
 
         with open(self.template_filename, "rb") as template:
             stream = xlsx_streaming.stream_queryset_as_xlsx(
-                self.filter_queryset(excel_data).values_list(
-                    *XLSX_COLUMNS
-                ),
+                self.filter_queryset(excel_data).values_list(*XLSX_COLUMNS),
                 xlsx_template=template,
                 batch_size=50,
             )
