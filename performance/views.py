@@ -73,9 +73,6 @@ def text_search(qs, text):
     if len(text) == 0:
         return qs
 
-    print(qs)
-    print(text)
-
     return qs.filter(content_search=SearchQuery(text))
 
 

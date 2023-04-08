@@ -18,8 +18,8 @@ class indicator_API_Test(APITestCase):
         message1 = "1.2.1 Percentage of valid invoices paid within 30 days upon receipt by the department"
         message2 = "1.1.1 Unqualified audit opinion"
         if (
-            response_payload["results"][0]["indicator_name"] == message2
-            or response_payload["results"][1]["indicator_name"] == message1
+            response_payload["results"]["items"][0]["indicator_name"] == message2
+            or response_payload["results"]["items"][1]["indicator_name"] == message1
         ):
             found = True
 
@@ -35,9 +35,11 @@ class indicator_API_Test(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_text_search(self):
-        print('============ aaa ============')
-        filter_url = self.list_url + '?page=1&q=Unqualified'
+        filter_url = self.list_url + '?page=1&q=Unqualified%20audit%20opinion'
         response_payload = self.client.get(filter_url).json()
-        print(filter_url)
-        print(len(response_payload["results"]))
-        print('============ bbb ============')
+        self.assertEqual(len(response_payload["results"]["items"]), 1)
+
+    def test_frequency_search(self):
+        filter_url = self.list_url + '?page=1&frequency=Annually'
+        response_payload = self.client.get(filter_url).json()
+        self.assertEqual(len(response_payload["results"]["items"]), 1)
