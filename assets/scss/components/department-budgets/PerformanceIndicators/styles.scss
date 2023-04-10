@@ -1,0 +1,56 @@
+.performance-indicators-container {
+  font-size: 16px;
+  line-height: 18px;
+  background-color: #e2e3e5 !important;
+  border-radius: 20px !important;
+  font-family: Lato, sans-serif !important;
+  padding: 30px;
+
+  .programme-name {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 120%;
+  }
+
+  .programme-card {
+    padding: 30px;
+    border-radius: 20px !important;
+
+    .indicator-type {
+      font-family: Roboto, sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #3F3F3F;
+      opacity: 0.5;
+      margin: 0 0 5px;
+    }
+
+    .indicator-name {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 120%;
+      color: #3F3F3F;
+      margin: 0;
+    }
+
+    .quarter-selection-container {
+      margin-top: 15px;
+
+      .quarter-selection {
+        background-color: rgba(63, 63, 63, 0.05);
+        border-radius: 100px;
+        padding: 9px 12px;
+        box-shadow: none;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 100%;
+        color: #3F3F3F;
+        margin-right: 5px;
+        min-width: unset;
+      }
+    }
+  }
+}
