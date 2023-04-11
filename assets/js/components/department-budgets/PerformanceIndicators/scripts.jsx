@@ -60,6 +60,27 @@ class PerformanceIndicators extends Component {
                             <Button variant={'contained'} className={'quarter-selection'}>Q3</Button>
                             <Button variant={'contained'} className={'quarter-selection'}>Q4</Button>
                         </Grid>
+                        <Grid className={'indicator-section'}>
+                            <p className={'section-head'}>QUARTER 3 TARGET:</p>
+                            <p
+                                className={'section-text'}
+                                style={{
+                                    webkitBoxOrient: 'vertical'
+                                }}
+                            >95</p>
+                        </Grid>
+                        <Grid className={'indicator-section'}>
+                            <p className={'section-head'}>QUARTER 3 ACTUAL OUTPUT:</p>
+                            <p
+                                className={'section-text'}
+                                style={{
+                                    webkitBoxOrient: 'vertical'
+                                }}
+                            >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Pellentesque non diam sit amet arcu malesuada rhoncus vel sit amet sem. Morbi quis
+                                purus
+                                vitae velit pulvinar imperdiet.</p>
+                        </Grid>
                     </Card>
                 </Grid>
             )

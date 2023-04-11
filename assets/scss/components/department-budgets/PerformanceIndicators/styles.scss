@@ -38,6 +38,8 @@
 
     .quarter-selection-container {
       margin-top: 15px;
+      border-bottom: 1px solid #f2f2f2;
+      padding-bottom: 15px;
 
       .quarter-selection {
         background-color: rgba(63, 63, 63, 0.05);
@@ -50,6 +52,33 @@
         color: #3F3F3F;
         margin-right: 5px;
         min-width: unset;
+      }
+    }
+
+    .indicator-section {
+      p.section-head {
+        font-family: Roboto, sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #3f3f3f;
+      }
+
+      p.section-text {
+        border-radius: 16px;
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 12px;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        overflow: hidden;
+        font-family: Roboto, sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 145%;
+        color: #333;
       }
     }
   }
