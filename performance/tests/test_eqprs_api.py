@@ -20,8 +20,8 @@ class indicator_API_Test(APITestCase):
         message1 = "1.2.1 Percentage of valid invoices paid within 30 days upon receipt by the department"
         message2 = "1.1.1 Unqualified audit opinion"
         if (
-                response_payload["results"]["items"][0]["indicator_name"] == message2
-                or response_payload["results"]["items"][1]["indicator_name"] == message1
+            response_payload["results"]["items"][0]["indicator_name"] == message2
+            or response_payload["results"]["items"][1]["indicator_name"] == message1
         ):
             found = True
 
@@ -52,12 +52,12 @@ class indicator_API_Test(APITestCase):
         file_content = response.getvalue()
         file_obj = io.BytesIO(file_content)
         wb = load_workbook(file_obj)
-        sh = wb['Sheet1']
+        sh = wb["Sheet1"]
 
-        self.assertEqual(sh['A1'].value, 'Financial year')
-        self.assertEqual(sh['A2'].value, '2015-16')
-        self.assertEqual(sh['H3'].value, 'Quarterly')
-        self.assertEqual(sh['A4'].value, None)
+        self.assertEqual(sh["A1"].value, "Financial year")
+        self.assertEqual(sh["A2"].value, "2015-16")
+        self.assertEqual(sh["H3"].value, "Quarterly")
+        self.assertEqual(sh["A4"].value, None)
 
     def test_downloaded_file_with_filter(self):
         file_url = "/performance/performance-indicators.xlsx/?frequency=Annually"
@@ -65,8 +65,8 @@ class indicator_API_Test(APITestCase):
         file_content = response.getvalue()
         file_obj = io.BytesIO(file_content)
         wb = load_workbook(file_obj)
-        sh = wb['Sheet1']
+        sh = wb["Sheet1"]
 
-        self.assertEqual(sh['A1'].value, 'Financial year')
-        self.assertEqual(sh['H2'].value, 'Annually')
-        self.assertEqual(sh['A3'].value, None)
+        self.assertEqual(sh["A1"].value, "Financial year")
+        self.assertEqual(sh["H2"].value, "Annually")
+        self.assertEqual(sh["A3"].value, None)
