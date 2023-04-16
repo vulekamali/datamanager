@@ -69,7 +69,6 @@
       p.section-text {
         border-radius: 16px;
         background-color: rgba(0, 0, 0, 0.05);
-        padding: 12px;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         display: -webkit-box;
@@ -79,6 +78,7 @@
         font-size: 14px;
         line-height: 145%;
         color: #333;
+        padding: 12px 12px 4px;
       }
     }
   }
