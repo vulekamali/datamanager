@@ -82,7 +82,7 @@ def add_filters(qs, params):
         if v in params:
             query_dict[v] = params[v]
 
-    return qs.filter(**query_dict).distinct()
+    return qs.filter(**query_dict)
 
 
 def get_filtered_queryset(queryset, request):

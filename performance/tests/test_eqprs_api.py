@@ -56,7 +56,7 @@ class indicator_API_Test(APITestCase):
 
         self.assertEqual(sh["A1"].value, "Financial year")
         self.assertEqual(sh["A2"].value, "2015-16")
-        self.assertEqual(sh["H3"].value, "Quarterly")
+        self.assertEqual(sh["H3"].value, "Annually")
         self.assertEqual(sh["A4"].value, None)
 
     def test_downloaded_file_with_filter(self):
@@ -70,3 +70,24 @@ class indicator_API_Test(APITestCase):
         self.assertEqual(sh["A1"].value, "Financial year")
         self.assertEqual(sh["H2"].value, "Annually")
         self.assertEqual(sh["A3"].value, None)
+
+class repetitive_API_Test(APITestCase):
+    list_url = "/performance/api/v1/eqprs/"
+    file_url = "/performance/performance-indicators.xlsx/"
+    fixtures = ["test_repetitive_data.json"]
+
+    def test_response_with_repetitive_data(self):
+        api_response_payload = self.client.get(self.list_url).json()
+
+        file_response = self.client.get(self.file_url, stream=True)
+        file_content = file_response.getvalue()
+        file_obj = io.BytesIO(file_content)
+        wb = load_workbook(file_obj)
+
+        sh = wb["Sheet1"]
+
+        api_result_length = len(api_response_payload["results"]["items"])
+        file_result_length = sh.max_row
+        header_row_count = 1
+
+        self.assertEqual(file_result_length - header_row_count, api_result_length)
