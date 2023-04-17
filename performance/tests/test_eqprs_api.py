@@ -71,6 +71,7 @@ class indicator_API_Test(APITestCase):
         self.assertEqual(sh["H2"].value, "Annually")
         self.assertEqual(sh["A3"].value, None)
 
+
 class repetitive_API_Test(APITestCase):
     list_url = "/performance/api/v1/eqprs/"
     file_url = "/performance/performance-indicators.xlsx/"
