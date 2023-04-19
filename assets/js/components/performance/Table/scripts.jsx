@@ -17,7 +17,7 @@ import {
     TableRow,
     Chip,
     CircularProgress,
-    MenuItem,
+    MenuItem, Button,
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -46,6 +46,7 @@ class TabularView extends Component {
             currentPage: 0,
             selectedFilters: {},
             isLoading: false,
+            downloadUrl: '',
             excludeColumns: new Set(['id', 'department']),
             titleMappings: {
                 'indicator_name': 'Indicator name',
@@ -150,6 +151,7 @@ class TabularView extends Component {
             isLoading: true
         })
 
+        this.setDownloadUrl();
         this.cancelAndInitAbortController();
 
         this.unobserveElements();
@@ -186,6 +188,24 @@ class TabularView extends Component {
                 this.handleObservers();
             })
             .catch((errorResult) => console.warn(errorResult));
+    }
+
+    setDownloadUrl() {
+        let url = 'performance-indicators.xlsx/';
+
+        // append filters
+        Object.keys(this.state.selectedFilters).forEach((key, index) => {
+            let value = this.state.selectedFilters[key];
+            if (value !== null) {
+                let prefix = index === 0 ? '?' : '&';
+                url += `${prefix}${key}=${encodeURI(value)}`;
+            }
+        })
+
+        this.setState({
+            ...this.state,
+            downloadUrl: url
+        });
     }
 
     renderTableHead() {
@@ -317,6 +337,31 @@ class TabularView extends Component {
         this.fetchAPIData(newPage);
     }
 
+    renderPaginationAndTools() {
+        return (
+            <Grid container>
+                <Grid item xs={6}>
+                    {this.renderPagination()}
+                </Grid>
+                <Grid
+                    item
+                    container
+                    xs={6}
+                    justifyContent={'flex-end'}
+                    style={{height: '40px'}}
+                >
+                    <Button
+                        variant={'outlined'}
+                        className={'download-btn'}
+                        href={this.state.downloadUrl}
+                    >
+                        Download as .xlsx
+                    </Button>
+                </Grid>
+            </Grid>
+        );
+    }
+
     renderPagination() {
         if (this.state.rows === null) {
             // empty pagination row
@@ -385,7 +430,7 @@ class TabularView extends Component {
         });
         return (
             <ThemeProvider theme={tableTheme}>
-                {this.renderPagination()}
+                {this.renderPaginationAndTools()}
                 <Paper
                     className={'performance-table-paper'}
                 >
@@ -557,10 +602,12 @@ class TabularView extends Component {
     }
 
     render() {
-        return (<div>
-            {this.renderFilters()}
-            {this.renderTable()}
-        </div>);
+        return (
+            <div>
+                {this.renderFilters()}
+                {this.renderTable()}
+            </div>
+        );
     }
 }
 

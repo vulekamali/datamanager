@@ -35,6 +35,7 @@ djangorestframework-csv==2.1.0
 django-storages==1.9.1
 docopt==0.6.2
 drf-haystack==1.8.9
+drf-excel==1.0.0
 et-xmlfile==1.0.1
 frictionless[json]==4.40.8
 futures==3.1.1
@@ -71,4 +72,5 @@ wcwidth==0.1.8
 Werkzeug==1.0.0
 whitenoise==5.0.1
 xlrd==1.2.0
+xlsx-streaming==1.1.0
 xlwt==1.3.0
