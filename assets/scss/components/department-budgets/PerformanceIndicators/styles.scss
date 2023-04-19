@@ -105,6 +105,24 @@
           align-self: center;
           text-align: center;
           display: none;
+          cursor: pointer;
+          border: none;
+
+          svg {
+            pointer-events: none;
+          }
+        }
+      }
+
+      .output-chart-container {
+        border-radius: 16px;
+        background-color: rgba(0, 0, 0, 0.05);
+        display: flex;
+        width: 100%;
+
+        .bar-text {
+          text-align: center;
+          font-size: 12px;
         }
       }
 
