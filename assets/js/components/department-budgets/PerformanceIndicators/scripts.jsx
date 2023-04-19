@@ -62,24 +62,54 @@ class PerformanceIndicators extends Component {
                         </Grid>
                         <Grid className={'indicator-section'}>
                             <p className={'section-head'}>QUARTER 3 TARGET:</p>
-                            <p
-                                className={'section-text'}
-                                style={{
-                                    webkitBoxOrient: 'vertical'
-                                }}
-                            >95</p>
+                            <div
+                                className={'output-text-container'}
+                            >
+                                <div
+                                    className={'output-text'}
+                                    style={{
+                                        WebkitBoxOrient: 'vertical'
+                                    }}
+                                >
+                                    95
+                                </div>
+                                <div
+                                    className={'read-more-output'}
+                                >
+                                    <svg width="9" height="7" viewBox="0 0 9 7" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4.60604 6.07609L0.512102 0.711957L8.69998 0.711958L4.60604 6.07609Z"
+                                              fill="#3F3F3F"/>
+                                    </svg>
+                                </div>
+                            </div>
                         </Grid>
                         <Grid className={'indicator-section'}>
                             <p className={'section-head'}>QUARTER 3 ACTUAL OUTPUT:</p>
-                            <p
-                                className={'section-text'}
-                                style={{
-                                    webkitBoxOrient: 'vertical'
-                                }}
-                            >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Pellentesque non diam sit amet arcu malesuada rhoncus vel sit amet sem. Morbi quis
-                                purus
-                                vitae velit pulvinar imperdiet.</p>
+                            <div
+                                className={'output-text-container read-more-visible'}
+                            >
+                                <div
+                                    className={'output-text'}
+                                    style={{
+                                        WebkitBoxOrient: 'vertical'
+                                    }}
+                                >
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Pellentesque non diam sit amet arcu malesuada rhoncus vel sit amet sem. Morbi quis
+                                    purus
+                                    vitae velit pulvinar imperdiet.
+                                </div>
+                                <div
+                                    className={'read-more-output'}
+                                >
+                                    <svg width="9" height="7" viewBox="0 0 9 7" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4.60604 6.07609L0.512102 0.711957L8.69998 0.711958L4.60604 6.07609Z"
+                                              fill="#3F3F3F"/>
+                                    </svg>
+                                </div>
+                            </div>
                         </Grid>
                     </Card>
                 </Grid>

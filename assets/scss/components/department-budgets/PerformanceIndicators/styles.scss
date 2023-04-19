@@ -80,6 +80,43 @@
         color: #333;
         padding: 12px 12px 4px;
       }
+
+      .output-text-container {
+        border-radius: 16px;
+        background-color: rgba(0, 0, 0, 0.05);
+        display: flex;
+        width: 100%;
+
+        .output-text {
+          width: 90%;
+          -webkit-line-clamp: 2;
+          display: -webkit-box;
+          overflow: hidden;
+          font-family: Roboto, sans-serif;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 145%;
+          color: #333;
+          padding: 12px 12px;
+        }
+
+        .read-more-output {
+          width: 10%;
+          align-self: center;
+          text-align: center;
+          display: none;
+        }
+      }
+
+      .output-text-container.read-more-visible {
+        .read-more-output {
+          display: block;
+        }
+
+        .output-text {
+          padding: 12px 12px 4px;
+        }
+      }
     }
   }
 }
