@@ -6,6 +6,8 @@ class PerformanceIndicators extends Component {
     constructor(props) {
         super(props);
 
+        this.resizeObserver = null;
+
         this.state = {
             open: false, triggered: false, programmes: [{
                 name: 'Programme 2: Social Assistance',
@@ -23,8 +25,11 @@ class PerformanceIndicators extends Component {
         };
     }
 
+    componentDidMount() {
+        this.handleObservers();
+    }
+
     setOpen() {
-        console.log({'open': this})
         this.setState({
             ...this.state, open: !this.state.open
         });
@@ -43,6 +48,21 @@ class PerformanceIndicators extends Component {
                 </button>
             </div>
         </div>)
+    }
+
+    handleObservers() {
+        const ps = document.querySelectorAll('.output-text-container .output-text');
+        if (this.resizeObserver === null) {
+            this.resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    entry.target.parentElement.classList[entry.target.scrollHeight * 0.95 > entry.contentRect.height ? 'add' : 'remove']('read-more-visible');
+                }
+            })
+        }
+
+        ps.forEach(p => {
+            this.resizeObserver.observe(p);
+        })
     }
 
     renderIndicatorCards(programme) {
