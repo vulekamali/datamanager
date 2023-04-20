@@ -5,6 +5,8 @@
   border-radius: 20px !important;
   font-family: Lato, sans-serif !important;
   padding: 30px;
+  box-shadow: none !important;
+  margin-bottom: 30px;
 
   .programme-name {
     font-size: 20px;
@@ -53,6 +55,11 @@
         margin-right: 5px;
         min-width: unset;
       }
+
+      .quarter-selection.selected {
+        background-color: #3F3F3F;
+        color: #fff;
+      }
     }
 
     .indicator-section {
@@ -86,6 +93,7 @@
         background-color: rgba(0, 0, 0, 0.05);
         display: flex;
         width: 100%;
+        min-height: 44px;
 
         .output-text {
           width: 90%;
@@ -119,6 +127,7 @@
         background-color: rgba(0, 0, 0, 0.05);
         display: flex;
         width: 100%;
+        padding: 12px;
 
         .bar-text {
           text-align: center;

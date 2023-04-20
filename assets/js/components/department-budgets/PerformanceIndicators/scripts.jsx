@@ -1,26 +1,43 @@
 import ReactDOM from "react-dom";
 import React, {Component} from "react";
 import Programme from "./programme";
+import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 
 class PerformanceIndicators extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            programmes: [{
-                name: 'Programme 2: Social Assistance',
-                indicators: [{
-                    name: 'Number of SSPs capacitated on psycho-social support guidelines',
-                    type: 'STANDARDISED INDICATOR'
-                }, {
-                    name: 'Monthly payment of social grant beneficiaries as administered and paid by SASSA on behalf of DSD',
-                    type: 'STANDARDISED INDICATOR'
-                }, {
-                    name: 'Number of SSPs capacitated on Social and Behaviour Change (SBC) programmes',
-                    type: 'STANDARDISED INDICATOR'
-                }]
-            }]
+            department: props.department,
+            programmes: []
         };
+    }
+
+    componentDidMount() {
+        this.fetchAPIData();
+    }
+
+    fetchAPIData() {
+        let url = `../../../../performance/api/v1/eqprs/?page=1&department__name=` + encodeURI(this.state.department);
+
+        fetchWrapper(url)
+            .then((response) => {
+                let programmes = [...new Set(response.results.items.map(x => x.programme_name))];
+                let data = [];
+                programmes.forEach(p => {
+                    data.push({
+                        name: p,
+                        indicators: response.results.items.filter(x => x.programme_name === p).slice(0, 3)
+                    })
+                })
+                this.setState({
+                    ...this.state,
+                    programmes: data
+                });
+
+                console.log({data})
+            })
+            .catch((errorResult) => console.warn(errorResult));
     }
 
     renderProgrammes() {
@@ -41,12 +58,18 @@ class PerformanceIndicators extends Component {
 class PerformanceIndicatorsContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            department: props.department
+        }
     }
 
     render() {
         return (<div>
             <h3 className="Title Title--section">Indicators of performance</h3>
-            <PerformanceIndicators/>
+            <PerformanceIndicators
+                department={this.state.department}
+            />
         </div>);
     }
 }
@@ -54,7 +77,9 @@ class PerformanceIndicatorsContainer extends Component {
 function scripts() {
     const parent = document.getElementById('js-initPerformanceIndicators');
     if (parent) {
+        const departmentName = parent.getAttribute('data-department');
         ReactDOM.render(<PerformanceIndicatorsContainer
+            department={departmentName}
         />, parent)
     }
 }
