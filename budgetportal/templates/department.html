@@ -243,7 +243,6 @@
             </a>
           </div>
 
-          <div id="js-initPerformanceIndicators" data-department="{{ name }}"></div>
         </div>
         {% endif %}
 
@@ -258,6 +257,8 @@
           {% include 'scenes/department/ResourceLinks/resource-links.html' with resource_links=performance_resource_links section_title="Performance monitoring resources" %}
         </div>
         {% endif %}
+
+        <div id="js-initPerformanceIndicators" data-department="{{ name }}"></div>
 
         {% if not infra_enabled and not in_year_monitoring_resource_links and not performance_resource_links %}
         <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
