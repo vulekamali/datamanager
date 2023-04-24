@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button, Card, Grid} from "@material-ui/core";
-import Chart from "chart.js";
+import * as d3 from "d3";
 import trimValues from "../../../utilities/js/helpers/trimValues";
 
 class IndicatorCard extends Component {
@@ -85,6 +85,43 @@ class IndicatorCard extends Component {
         return !isNaN(str) && !isNaN(parseFloat(str));
     }
 
+    BarChart(data) {
+        const width = 400;
+        const height = 100;
+        const margin = {top: 5, right: 5, bottom: 5, left: 5};
+
+        const x = d3
+            .scaleBand()
+            .domain(data.map((d) => d.date))
+            .rangeRound([margin.left, width - margin.right])
+            .padding(0);
+
+        const y = d3
+            .scaleLinear()
+            .domain([0, d3.max(data, (d) => d.count)])
+            .range([height - margin.bottom, margin.top]);
+
+        const parseTime = d3.timeParse("%b %d %Y");
+
+        const svg = d3.create("svg").attr("viewBox", [0, 0, width, height]);
+
+        svg
+            .append("g")
+            .attr("fill", "#fd4d61")
+            .selectAll("rect")
+            .data(data)
+            .join("rect")
+            .attr("x", (d) => x(d.date))
+            .attr("y", (d) => y(d.count))
+            .attr("height", (d) => y(0) - y(d.count))
+            .attr("width", x.bandwidth());
+
+        //svg.append('g').call(xAxis);
+        //svg.append('g').call(yAxis);
+
+        return svg.node();
+    }
+
     handleChart(quarter) {
         const ctx = document.getElementById(`chart-${this.state.indicator.id}-${quarter}`);
         const target = this.state.indicator[`q${quarter}_target`].replace('%', '').trim();
@@ -92,52 +129,33 @@ class IndicatorCard extends Component {
         const bothNumeric = this.isNumeric(target) && this.isNumeric(actual)
         let values = bothNumeric ? [parseFloat(target), parseFloat(actual)] : [0, 0];
 
-        console.log({'id': this.state.indicator.id, quarter, target, actual, values})
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Target', 'Actual'],
-                datasets: [{
-                    data: values,
-                    backgroundColor: ['#3f3f3f', '#f59e46'],
-                    minBarLength: 5
-                }],
-            },
-            options: {
-                maintainAspectRatio: false,
-                legend: {
-                    display: false,
-                },
-                scales: {
-                    xAxes: [{
-                        display: false
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                        },
-                        display: false
-                    }]
-                }
-            }
-        });
+        let alphabet = [
+            {date: "Mar 5 2017", count: 32}
+        ]
+
+
+        const chart = this.BarChart(alphabet)
+        ctx.appendChild(chart)
+
+        console.log({chart})
     }
 
     handleAllCharts() {
         this.handleChart(1);
+        /*
         this.handleChart(2);
         this.handleChart(3);
         this.handleChart(4);
+         */
     }
 
     renderChartContainers() {
         return (
             <Grid container spacing={2}>
                 <Grid item xs={3}>
-                    <canvas
+                    <div
                         style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        height={'100'}
                         id={`chart-${this.state.indicator.id}-1`}
                     />
                 </Grid>
@@ -162,16 +180,16 @@ class IndicatorCard extends Component {
                         id={`chart-${this.state.indicator.id}-4`}
                     />
                 </Grid>
-                <Grid item xs={3} className={'bar-text'} style={{paddingTop:'0px'}}>
+                <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
                     Q1
                 </Grid>
-                <Grid item xs={3} className={'bar-text'} style={{paddingTop:'0px'}}>
+                <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
                     Q2
                 </Grid>
-                <Grid item xs={3} className={'bar-text'} style={{paddingTop:'0px'}}>
+                <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
                     Q3
                 </Grid>
-                <Grid item xs={3} className={'bar-text'} style={{paddingTop:'0px'}}>
+                <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
                     Q4
                 </Grid>
             </Grid>
