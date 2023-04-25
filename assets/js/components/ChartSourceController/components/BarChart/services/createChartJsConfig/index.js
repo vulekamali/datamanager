@@ -135,8 +135,6 @@ const createChartJsConfig = ({ items, rotated, color, viewportWidth, barTypes })
   const rotateLabels = viewportWidth && viewportWidth < 600 && rotated;
   const datasets = buildDatasets(barTypes, values, color);
 
-  console.log({labels, datasets})
-
   return {
     type: rotated ? 'bar' : 'horizontalBar',
     data: {

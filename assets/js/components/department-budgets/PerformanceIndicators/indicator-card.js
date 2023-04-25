@@ -77,6 +77,50 @@ class IndicatorCard extends Component {
         )
     }
 
+    BarChart(data, indicatorMax) {
+        const width = 400;
+        const height = 400;
+        const margin = {top: 0, right: 0, bottom: 0, left: 0};
+
+        const x = d3
+            .scaleBand()
+            .domain(data.map((d) => d.quarter))
+            .rangeRound([margin.left, width - margin.right])
+            .padding(0);
+
+        const y = d3
+            .scaleLinear()
+            .domain([0, indicatorMax])  //max value
+            .range([height - margin.bottom, margin.top]);
+
+        const svg = d3.create("svg").attr("viewBox", [0, 0, width, height]);
+
+        // bar
+        svg
+            .append("g")
+            .attr("fill", "#f59e46")
+            .selectAll("rect")
+            .data(data)
+            .join("rect")
+            .attr("x", (d) => x(d.quarter))
+            .attr("y", (d) => y(d.actual))
+            .attr("height", (d) => y(0) - y(d.actual))
+            .attr("width", x.bandwidth());
+
+        // dashed line
+        svg.append('line')
+            .data(data)
+            .attr('x1', margin.left)
+            .attr('x2', width)
+            .attr('y1', (d) => y(d.target))
+            .attr('y2', (d) => y(d.target))
+            .attr('stroke-width', 10)
+            .style('stroke-dasharray', '8')
+            .style('stroke', 'rgba(0, 0, 0, 0.7)')
+
+        return svg.node();
+    }
+
     isNumeric(str) {
         if (typeof str != 'string') {
             return false
@@ -85,69 +129,45 @@ class IndicatorCard extends Component {
         return !isNaN(str) && !isNaN(parseFloat(str));
     }
 
-    BarChart(data) {
-        const width = 400;
-        const height = 100;
-        const margin = {top: 5, right: 5, bottom: 5, left: 5};
+    getIndicatorMax() {
+        let valuesArr = [];
+        for (let i = 1; i <= 4; i++) {
+            const {target, actual} = this.getQuarterValues(i);
+            valuesArr.push(target);
+            valuesArr.push(actual);
+        }
 
-        const x = d3
-            .scaleBand()
-            .domain(data.map((d) => d.date))
-            .rangeRound([margin.left, width - margin.right])
-            .padding(0);
+        return Math.max(...valuesArr);
+    }
 
-        const y = d3
-            .scaleLinear()
-            .domain([0, d3.max(data, (d) => d.count)])
-            .range([height - margin.bottom, margin.top]);
+    getQuarterValues(quarter) {
+        const target = this.state.indicator[`q${quarter}_target`].replace('%', '').trim();
+        const actual = this.state.indicator[`q${quarter}_actual_output`].replace('%', '').trim();
 
-        const parseTime = d3.timeParse("%b %d %Y");
-
-        const svg = d3.create("svg").attr("viewBox", [0, 0, width, height]);
-
-        svg
-            .append("g")
-            .attr("fill", "#fd4d61")
-            .selectAll("rect")
-            .data(data)
-            .join("rect")
-            .attr("x", (d) => x(d.date))
-            .attr("y", (d) => y(d.count))
-            .attr("height", (d) => y(0) - y(d.count))
-            .attr("width", x.bandwidth());
-
-        //svg.append('g').call(xAxis);
-        //svg.append('g').call(yAxis);
-
-        return svg.node();
+        return {target, actual};
     }
 
     handleChart(quarter) {
         const ctx = document.getElementById(`chart-${this.state.indicator.id}-${quarter}`);
-        const target = this.state.indicator[`q${quarter}_target`].replace('%', '').trim();
-        const actual = this.state.indicator[`q${quarter}_actual_output`].replace('%', '').trim();
-        const bothNumeric = this.isNumeric(target) && this.isNumeric(actual)
-        let values = bothNumeric ? [parseFloat(target), parseFloat(actual)] : [0, 0];
+        const {target, actual} = this.getQuarterValues(quarter);
+        const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
 
+        let values = bothNumeric ? [{
+            quarter: `Q${quarter}`,
+            actual: parseFloat(actual),
+            target: parseFloat(target)
+        }] : [{quarter: `Q${quarter}`, actual: 0, target: 0}]
+        let indicatorMax = this.getIndicatorMax();
 
-        let alphabet = [
-            {date: "Mar 5 2017", count: 32}
-        ]
-
-
-        const chart = this.BarChart(alphabet)
+        const chart = this.BarChart(values, indicatorMax);
         ctx.appendChild(chart)
-
-        console.log({chart})
     }
 
     handleAllCharts() {
         this.handleChart(1);
-        /*
         this.handleChart(2);
         this.handleChart(3);
         this.handleChart(4);
-         */
     }
 
     renderChartContainers() {
@@ -160,22 +180,19 @@ class IndicatorCard extends Component {
                     />
                 </Grid>
                 <Grid item xs={3}>
-                    <canvas
-                        height={'100'}
+                    <div
                         style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
                         id={`chart-${this.state.indicator.id}-2`}
                     />
                 </Grid>
                 <Grid item xs={3}>
-                    <canvas
-                        height={'100'}
+                    <div
                         style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
                         id={`chart-${this.state.indicator.id}-3`}
                     />
                 </Grid>
                 <Grid item xs={3}>
-                    <canvas
-                        height={'100'}
+                    <div
                         style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
                         id={`chart-${this.state.indicator.id}-4`}
                     />

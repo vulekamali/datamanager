@@ -34,8 +34,6 @@ class PerformanceIndicators extends Component {
                     ...this.state,
                     programmes: data
                 });
-
-                console.log({data})
             })
             .catch((errorResult) => console.warn(errorResult));
     }
