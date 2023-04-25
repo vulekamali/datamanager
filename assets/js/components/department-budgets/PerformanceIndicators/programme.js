@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Grid, Paper} from "@material-ui/core";
+import {Button, Grid, Paper} from "@material-ui/core";
 import IndicatorCard from "./indicator-card";
 
 class Programme extends Component {
@@ -20,7 +20,7 @@ class Programme extends Component {
     }
 
     renderIndicatorCards(programme) {
-        return programme.indicators.map((indicator) => {
+        return programme.visibleIndicators.map((indicator) => {
             return (
                 <IndicatorCard
                     data={indicator}
@@ -55,6 +55,18 @@ class Programme extends Component {
                         <p className={'programme-name'}>{this.state.programme.name}</p>
                         <Grid container spacing={3}>
                             {this.renderIndicatorCards(this.state.programme)}
+                        </Grid>
+                        <Grid
+                            container
+                            justifyContent={'flex-end'}
+                        >
+                            <Button
+                                variant={'outlined'}
+                                className={'programme-btn'}
+                                onClick={() => this.props.showMore()}
+                            >
+                                Show more items
+                            </Button>
                         </Grid>
                     </div>
                     {this.renderReadMoreButton()}

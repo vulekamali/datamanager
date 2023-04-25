@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Button, Card, Grid} from "@material-ui/core";
 import * as d3 from "d3";
-import trimValues from "../../../utilities/js/helpers/trimValues";
 
 class IndicatorCard extends Component {
     constructor(props) {
@@ -77,7 +76,7 @@ class IndicatorCard extends Component {
         )
     }
 
-    BarChart(data, indicatorMax) {
+    createChart(data, indicatorMax) {
         const width = 400;
         const height = 400;
         const margin = {top: 0, right: 0, bottom: 0, left: 0};
@@ -133,8 +132,8 @@ class IndicatorCard extends Component {
         let valuesArr = [];
         for (let i = 1; i <= 4; i++) {
             const {target, actual} = this.getQuarterValues(i);
-            valuesArr.push(target);
-            valuesArr.push(actual);
+            valuesArr.push(this.isNumeric(target) ? parseFloat(target) : 0);
+            valuesArr.push(this.isNumeric(actual) ? parseFloat(actual) : 0);
         }
 
         return Math.max(...valuesArr);
@@ -159,15 +158,14 @@ class IndicatorCard extends Component {
         }] : [{quarter: `Q${quarter}`, actual: 0, target: 0}]
         let indicatorMax = this.getIndicatorMax();
 
-        const chart = this.BarChart(values, indicatorMax);
+        const chart = this.createChart(values, indicatorMax);
         ctx.appendChild(chart)
     }
 
     handleAllCharts() {
-        this.handleChart(1);
-        this.handleChart(2);
-        this.handleChart(3);
-        this.handleChart(4);
+        for (let i = 1; i <= 4; i++) {
+            this.handleChart(i);
+        }
     }
 
     renderChartContainers() {

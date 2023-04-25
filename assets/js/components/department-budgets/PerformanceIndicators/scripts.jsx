@@ -25,9 +25,11 @@ class PerformanceIndicators extends Component {
                 let programmes = [...new Set(response.results.items.map(x => x.programme_name))];
                 let data = [];
                 programmes.forEach(p => {
+                    const allIndicators = response.results.items.filter(x => x.programme_name === p);
                     data.push({
                         name: p,
-                        indicators: response.results.items.filter(x => x.programme_name === p).slice(0, 3)
+                        visibleIndicators: allIndicators.slice(0, 3),
+                        allIndicators: allIndicators
                     })
                 })
                 this.setState({
@@ -38,11 +40,16 @@ class PerformanceIndicators extends Component {
             .catch((errorResult) => console.warn(errorResult));
     }
 
+    handleShowMore(programme) {
+        console.log({'show more': programme})
+    }
+
     renderProgrammes() {
         return this.state.programmes.map((programme) => {
             return (
                 <Programme
                     data={programme}
+                    showMore={() => this.handleShowMore(programme)}
                 />
             )
         })
