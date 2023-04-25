@@ -59,11 +59,13 @@ class Programme extends Component {
                         <Grid
                             container
                             justifyContent={'flex-end'}
+                            style={{marginTop: '20px'}}
                         >
                             <Button
                                 variant={'outlined'}
                                 className={'programme-btn'}
                                 onClick={() => this.props.showMore()}
+                                disabled={this.state.programme.visibleIndicators.length >= this.state.programme.allIndicators.length}
                             >
                                 Show more items
                             </Button>

@@ -9,7 +9,8 @@ class PerformanceIndicators extends Component {
 
         this.state = {
             department: props.department,
-            programmes: []
+            programmes: [],
+            pageCount: 3
         };
     }
 
@@ -18,17 +19,16 @@ class PerformanceIndicators extends Component {
     }
 
     fetchAPIData() {
-        let url = `../../../../performance/api/v1/eqprs/?page=1&department__name=` + encodeURI(this.state.department);
-
-        fetchWrapper(url)
-            .then((response) => {
-                let programmes = [...new Set(response.results.items.map(x => x.programme_name))];
+        this.fetchAPIDataRecursive(1, [])
+            .then((items) => {
+                console.log({items})
+                let programmes = [...new Set(items.map(x => x.programme_name))];
                 let data = [];
                 programmes.forEach(p => {
-                    const allIndicators = response.results.items.filter(x => x.programme_name === p);
+                    const allIndicators = items.filter(x => x.programme_name === p);
                     data.push({
                         name: p,
-                        visibleIndicators: allIndicators.slice(0, 3),
+                        visibleIndicators: allIndicators.slice(0, this.state.pageCount),
                         allIndicators: allIndicators
                     })
                 })
@@ -37,11 +37,40 @@ class PerformanceIndicators extends Component {
                     programmes: data
                 });
             })
-            .catch((errorResult) => console.warn(errorResult));
     }
 
-    handleShowMore(programme) {
-        console.log({'show more': programme})
+    fetchAPIDataRecursive(page = 1, allItems = []) {
+        return new Promise((resolve, reject) => {
+            let url = `../../../../performance/api/v1/eqprs/?page=${page}&department__name=` + encodeURI(this.state.department);
+
+            fetchWrapper(url)
+                .then((response) => {
+                    let newArr = allItems.concat(response.results.items);
+                    if (response.next === null) {
+                        resolve(newArr);
+                    } else {
+                        this.fetchAPIDataRecursive(page + 1, newArr)
+                            .then((items) => {
+                                resolve(items);
+                            });
+                    }
+                })
+                .catch((errorResult) => console.warn(errorResult));
+        })
+    }
+
+    handleShowMore(currentProgramme) {
+        let programmes = this.state.programmes.map(programme => {
+            if (programme.name === currentProgramme.name) {
+                programme.visibleIndicators = programme.allIndicators.slice(0, programme.visibleIndicators.length + this.state.pageCount);
+            }
+            return programme;
+        })
+
+        this.setState({
+            ...this.state,
+            programmes: programmes
+        })
     }
 
     renderProgrammes() {
