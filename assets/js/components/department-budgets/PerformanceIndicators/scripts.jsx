@@ -21,7 +21,6 @@ class PerformanceIndicators extends Component {
     fetchAPIData() {
         this.fetchAPIDataRecursive(1, [])
             .then((items) => {
-                console.log({items})
                 let programmes = [...new Set(items.map(x => x.programme_name))];
                 let data = [];
                 programmes.forEach(p => {

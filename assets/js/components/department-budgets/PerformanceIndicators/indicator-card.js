@@ -10,13 +10,25 @@ class IndicatorCard extends Component {
 
         this.state = {
             indicator: props.data,
-            selectedQuarter: 1
+            selectedQuarter: this.findLatestQuarter(props.data)
         }
     }
 
     componentDidMount() {
         this.handleObservers();
         this.handleAllCharts();
+    }
+
+    findLatestQuarter(data) {
+        if (data['q4_actual_output'].trim() !== '') {
+            return 4;
+        } else if (data['q3_actual_output'].trim() !== '') {
+            return 3;
+        } else if (data['q2_actual_output'].trim() !== '') {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 
     handleObservers() {
@@ -72,6 +84,11 @@ class IndicatorCard extends Component {
                     variant={'contained'}
                     className={`quarter-selection ${this.state.selectedQuarter === 4 ? 'selected' : ''}`}
                 >Q4</Button>
+                <Button
+                    onClick={() => this.handleQuarterSelection('Annual')}
+                    variant={'contained'}
+                    className={`quarter-selection ${this.state.selectedQuarter === 'Annual' ? 'selected' : ''}`}
+                >Full year</Button>
             </Grid>
         )
     }
