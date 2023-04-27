@@ -9,7 +9,18 @@ class Programme extends Component {
         this.state = {
             open: false,
             triggered: false,
-            programme: props.data
+            programme: props.data,
+            previousYearsProgrammes: props.previousYearsProgrammes,
+            financialYear: props.financialYear
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.previousYearsProgrammes !== this.state.previousYearsProgrammes) {
+            this.setState({
+                ...this.state,
+                previousYearsProgrammes: this.props.previousYearsProgrammes
+            });
         }
     }
 
@@ -21,11 +32,21 @@ class Programme extends Component {
 
     renderIndicatorCards(programme) {
         return programme.visibleIndicators.map((indicator) => {
-            return (
-                <IndicatorCard
-                    data={indicator}
-                />
-            )
+            let prevArr = this.state.previousYearsProgrammes.map(item => {
+                {
+                    return {
+                        financialYear: item.financialYear,
+                        indicator: item.programme.allIndicators.filter(p => p.id === indicator.id)[0]
+                    };
+                }
+            })
+
+            return (<IndicatorCard
+                key={indicator.id}
+                data={indicator}
+                previousYearsIndicators={prevArr}
+                financialYear={this.state.financialYear}
+            />)
         })
     }
 
@@ -45,36 +66,34 @@ class Programme extends Component {
     }
 
     renderProgramme() {
-        return (
-            <Paper
-                className={'performance-indicators-container'}>
-                <div className={`IntroSection-text is-initialised ${this.state.open ? 'is-open' : ''}`}>
-                    <div
-                        className="IntroSection-content"
+        return (<Paper
+            className={'performance-indicators-container'}>
+            <div className={`IntroSection-text is-initialised ${this.state.open ? 'is-open' : ''}`}>
+                <div
+                    className="IntroSection-content"
+                >
+                    <p className={'programme-name'}>{this.state.programme.name}</p>
+                    <Grid container spacing={3}>
+                        {this.renderIndicatorCards(this.state.programme)}
+                    </Grid>
+                    <Grid
+                        container
+                        justifyContent={'flex-end'}
+                        style={{marginTop: '20px'}}
                     >
-                        <p className={'programme-name'}>{this.state.programme.name}</p>
-                        <Grid container spacing={3}>
-                            {this.renderIndicatorCards(this.state.programme)}
-                        </Grid>
-                        <Grid
-                            container
-                            justifyContent={'flex-end'}
-                            style={{marginTop: '20px'}}
+                        <Button
+                            variant={'outlined'}
+                            className={'programme-btn'}
+                            onClick={() => this.props.showMore()}
+                            disabled={this.state.programme.visibleIndicators.length >= this.state.programme.allIndicators.length}
                         >
-                            <Button
-                                variant={'outlined'}
-                                className={'programme-btn'}
-                                onClick={() => this.props.showMore()}
-                                disabled={this.state.programme.visibleIndicators.length >= this.state.programme.allIndicators.length}
-                            >
-                                Show more items
-                            </Button>
-                        </Grid>
-                    </div>
-                    {this.renderReadMoreButton()}
+                            Show more items
+                        </Button>
+                    </Grid>
                 </div>
-            </Paper>
-        )
+                {this.renderReadMoreButton()}
+            </div>
+        </Paper>)
     }
 
     render() {

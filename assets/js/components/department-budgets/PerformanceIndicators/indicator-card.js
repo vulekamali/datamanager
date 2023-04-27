@@ -10,13 +10,29 @@ class IndicatorCard extends Component {
 
         this.state = {
             indicator: props.data,
-            selectedQuarter: this.findLatestQuarter(props.data)
+            selectedQuarter: this.findLatestQuarter(props.data),
+            previousYearsIndicators: props.previousYearsIndicators,
+            financialYear: props.financialYear
         }
     }
 
     componentDidMount() {
         this.handleObservers();
-        this.handleAllCharts();
+        this.handleQuarterlyCharts();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if ((prevState.selectedQuarter === 'annual' && this.state.selectedQuarter !== 'annual')
+            || (prevState.selectedQuarter !== 'annual' && this.state.selectedQuarter === 'annual')) {
+            this.handleChartChange();
+        }
+
+        if (this.props.previousYearsIndicators !== this.state.previousYearsIndicators) {
+            this.setState({
+                ...this.state,
+                previousYearsIndicators: this.props.previousYearsIndicators
+            });
+        }
     }
 
     findLatestQuarter(data) {
@@ -85,9 +101,9 @@ class IndicatorCard extends Component {
                     className={`quarter-selection ${this.state.selectedQuarter === 4 ? 'selected' : ''}`}
                 >Q4</Button>
                 <Button
-                    onClick={() => this.handleQuarterSelection('Annual')}
+                    onClick={() => this.handleQuarterSelection('annual')}
                     variant={'contained'}
-                    className={`quarter-selection ${this.state.selectedQuarter === 'Annual' ? 'selected' : ''}`}
+                    className={`quarter-selection float-right ${this.state.selectedQuarter === 'annual' ? 'selected' : ''}`}
                 >Full year</Button>
             </Grid>
         )
@@ -137,35 +153,16 @@ class IndicatorCard extends Component {
         return svg.node();
     }
 
-    isNumeric(str) {
-        if (typeof str != 'string') {
-            return false
-        }
-
-        return !isNaN(str) && !isNaN(parseFloat(str));
-    }
-
-    getIndicatorMax() {
-        let valuesArr = [];
-        for (let i = 1; i <= 4; i++) {
-            const {target, actual} = this.getQuarterValues(i);
-            valuesArr.push(this.isNumeric(target) ? parseFloat(target) : 0);
-            valuesArr.push(this.isNumeric(actual) ? parseFloat(actual) : 0);
-        }
-
-        return Math.max(...valuesArr);
-    }
-
-    getQuarterValues(quarter) {
-        const target = this.state.indicator[`q${quarter}_target`].replace('%', '').trim();
-        const actual = this.state.indicator[`q${quarter}_actual_output`].replace('%', '').trim();
+    getQuarterTargetAndActual(quarter) {
+        const target = this.getQuarterKeyValue('target', 'target', quarter).replace('%', '').trim();
+        const actual = this.getQuarterKeyValue('actual_output', 'audited_output', quarter).replace('%', '').trim();
 
         return {target, actual};
     }
 
-    handleChart(quarter) {
+    handleQuarterChart(quarter) {
         const ctx = document.getElementById(`chart-${this.state.indicator.id}-${quarter}`);
-        const {target, actual} = this.getQuarterValues(quarter);
+        const {target, actual} = this.getQuarterTargetAndActual(quarter);
         const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
 
         let values = bothNumeric ? [{
@@ -179,53 +176,157 @@ class IndicatorCard extends Component {
         ctx.appendChild(chart)
     }
 
-    handleAllCharts() {
+    handleAnnualCharts() {
+        this.state.previousYearsIndicators.forEach((pyi) => {
+            const ctx = document.getElementById(`chart-${this.state.indicator.id}-${pyi.financialYear}`);
+
+            let values =  [{quarter: `Q2`, actual: 20, target: 24}]
+            let indicatorMax = this.getIndicatorMax();
+
+            const chart = this.createChart(values, indicatorMax);
+            ctx.appendChild(chart)
+        })
+    }
+
+    handleQuarterlyCharts() {
         for (let i = 1; i <= 4; i++) {
-            this.handleChart(i);
+            this.handleQuarterChart(i);
+        }
+    }
+
+    removeAllCharts() {
+        for (let i = 1; i <= 4; i++) {
+            let elem = document.querySelector(`#chart-${this.state.indicator.id}-${i} svg`);
+            if (elem != null) {
+                elem.parentNode.removeChild(elem);
+            }
+        }
+    }
+
+    handleChartChange() {
+        this.removeAllCharts();
+        if (this.state.selectedQuarter === 'annual') {
+            this.handleAnnualCharts();
+        } else {
+            this.handleQuarterlyCharts();
         }
     }
 
     renderChartContainers() {
-        return (
-            <Grid container spacing={2}>
-                <Grid item xs={3}>
-                    <div
-                        style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        id={`chart-${this.state.indicator.id}-1`}
-                    />
+        if (this.state.selectedQuarter === 'annual') {
+            return (
+                <Grid container spacing={2}>
+                    <Grid item xs={3}>
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-${this.state.previousYearsIndicators[2].financialYear}`}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-${this.state.previousYearsIndicators[1].financialYear}`}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-${this.state.previousYearsIndicators[0].financialYear}`}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-${this.state.financialYear}`}
+                        />
+                    </Grid>
+                    <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
+                        {this.state.previousYearsIndicators[2].financialYear}
+                    </Grid>
+                    <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
+                        {this.state.previousYearsIndicators[1].financialYear}
+                    </Grid>
+                    <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
+                        {this.state.previousYearsIndicators[0].financialYear}
+                    </Grid>
+                    <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
+                        {this.state.financialYear}
+                    </Grid>
                 </Grid>
-                <Grid item xs={3}>
-                    <div
-                        style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        id={`chart-${this.state.indicator.id}-2`}
-                    />
+            )
+        } else {
+            return (
+                <Grid container spacing={2}>
+                    <Grid item xs={3}>
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-1`}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-2`}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-3`}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-4`}
+                        />
+                    </Grid>
+                    <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
+                        Q1
+                    </Grid>
+                    <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
+                        Q2
+                    </Grid>
+                    <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
+                        Q3
+                    </Grid>
+                    <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
+                        Q4
+                    </Grid>
                 </Grid>
-                <Grid item xs={3}>
-                    <div
-                        style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        id={`chart-${this.state.indicator.id}-3`}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <div
-                        style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        id={`chart-${this.state.indicator.id}-4`}
-                    />
-                </Grid>
-                <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    Q1
-                </Grid>
-                <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    Q2
-                </Grid>
-                <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    Q3
-                </Grid>
-                <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    Q4
-                </Grid>
-            </Grid>
-        )
+            )
+        }
+    }
+
+    isNumeric(str) {
+        if (typeof str != 'string') {
+            return false
+        }
+
+        return !isNaN(str) && !isNaN(parseFloat(str));
+    }
+
+    getIndicatorMax() {
+        let valuesArr = [];
+        for (let i = 1; i <= 4; i++) {
+            const {target, actual} = this.getQuarterTargetAndActual(i);
+            valuesArr.push(this.isNumeric(target) ? parseFloat(target) : 0);
+            valuesArr.push(this.isNumeric(actual) ? parseFloat(actual) : 0);
+        }
+
+        return Math.max(...valuesArr);
+    }
+
+    getQuarterKeyValue(appix, annualAppix, quarter = this.state.selectedQuarter) {
+        const prefix = quarter === 'annual' ? '' : 'q';
+        const finalAppix = quarter === 'annual' ? annualAppix : appix;
+        return this.state.indicator[`${prefix}${quarter}_${finalAppix}`]
+    }
+
+    getQuarterKeyText(appix, annualAppix) {
+        const prefix = this.state.selectedQuarter === 'annual' ? '' : 'QUARTER';
+        const finalAppix = this.state.selectedQuarter === 'annual' ? annualAppix : appix;
+        return `${prefix} ${this.state.selectedQuarter} ${finalAppix}`;
     }
 
     renderCard() {
@@ -238,7 +339,7 @@ class IndicatorCard extends Component {
                     <p className={'indicator-name'}>{this.state.indicator.indicator_name}</p>
                     {this.renderQuarterSelection()}
                     <Grid className={'indicator-section'}>
-                        <p className={'section-head'}>QUARTER {this.state.selectedQuarter} TARGET:</p>
+                        <p className={'section-head'}>{this.getQuarterKeyText('TARGET', 'TARGET')}:</p>
                         <div
                             className={'output-text-container'}
                         >
@@ -248,7 +349,7 @@ class IndicatorCard extends Component {
                                     WebkitBoxOrient: 'vertical'
                                 }}
                             >
-                                {this.state.indicator[`q${this.state.selectedQuarter}_target`]}
+                                {this.getQuarterKeyValue('target', 'target')}
                             </div>
                             <div
                                 className={'read-more-output'}
@@ -262,7 +363,7 @@ class IndicatorCard extends Component {
                         </div>
                     </Grid>
                     <Grid className={'indicator-section'}>
-                        <p className={'section-head'}>QUARTER {this.state.selectedQuarter} ACTUAL OUTPUT:</p>
+                        <p className={'section-head'}>{this.getQuarterKeyText('ACTUAL OUTPUT', 'AUDITED PERFORMANCE')}:</p>
                         <div
                             className={'output-text-container read-more-visible'}
                         >
@@ -272,7 +373,7 @@ class IndicatorCard extends Component {
                                     WebkitBoxOrient: 'vertical'
                                 }}
                             >
-                                {this.state.indicator[`q${this.state.selectedQuarter}_actual_output`]}
+                                {this.getQuarterKeyValue('actual_output', 'audited_output')}
                             </div>
                             <button
                                 className={'read-more-output'}
@@ -287,7 +388,7 @@ class IndicatorCard extends Component {
                         </div>
                     </Grid>
                     <Grid className={'indicator-section'}>
-                        <p className={'section-head'}>QUARTER {this.state.selectedQuarter} PERFORMANCE:</p>
+                        <p className={'section-head'}>{this.getQuarterKeyText('PERFORMANCE', 'PERFORMANCE')}:</p>
                         <div
                             className={'output-chart-container'}
                         >

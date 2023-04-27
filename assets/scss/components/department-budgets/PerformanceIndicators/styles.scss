@@ -54,6 +54,7 @@
         color: #3F3F3F;
         margin-right: 5px;
         min-width: unset;
+        text-transform: none;
       }
 
       .quarter-selection.selected {
@@ -159,5 +160,9 @@
     padding: 9px 12px !important;
     letter-spacing: unset !important;
     font-stretch: normal !important;
+  }
+
+  .float-right {
+    float: right;
   }
 }
