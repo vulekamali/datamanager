@@ -108,12 +108,10 @@ class PerformanceIndicators extends Component {
     renderProgrammes() {
         return this.state.programmes.map((programme, index) => {
             let prevArr = this.state.previousYearsProgrammes.map(item => {
-                {
-                    return {
-                        financialYear: item.financialYear,
-                        programme: item.programmes.filter(p => p.name === programme.name)[0]
-                    };
-                }
+                return {
+                    financialYear: item.financialYear,
+                    programme: item.programmes.filter(p => p.name === programme.name)[0]
+                };
             })
 
             return (
@@ -165,8 +163,7 @@ function scripts() {
         const jsonData = JSON.parse(decodeHtmlEntities(nodes[0].getAttribute('data-json'))).data;
         jsonData.forEach((d) => {
             if (!d.is_selected) {
-                //previousYears.push(d.id)
-                previousYears.push('2019-20')
+                previousYears.push(d.id)
             }
         })
     }

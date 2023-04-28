@@ -33,12 +33,10 @@ class Programme extends Component {
     renderIndicatorCards(programme) {
         return programme.visibleIndicators.map((indicator) => {
             let prevArr = this.state.previousYearsProgrammes.map(item => {
-                {
-                    return {
-                        financialYear: item.financialYear,
-                        indicator: item.programme.allIndicators.filter(p => p.id === indicator.id)[0]
-                    };
-                }
+                return {
+                    financialYear: item.financialYear,
+                    indicator: item.programme == null ? null : item.programme.allIndicators.filter(p => p.id === indicator.id)[0]
+                };
             })
 
             return (<IndicatorCard
