@@ -130,6 +130,11 @@
         width: 100%;
         padding: 12px;
 
+        .active-chart {
+          border: 1px solid #3f3f3f;
+          border-radius: 6px;
+        }
+
         .bar-text {
           text-align: center;
           font-size: 12px;

@@ -278,33 +278,39 @@ class IndicatorCard extends Component {
         }
     }
 
+    renderChartContainerColumns() {
+        return (
+            [1, 2, 3, 4].map(q => {
+                return (
+                    <Grid
+                        key={`chart-container-${this.state.indicator.id}-${q}`}
+                        item
+                        xs={3}
+                        style={{
+                            cursor:'pointer'
+                        }}
+                        className={this.state.selectedQuarter === q ? 'active-chart' : ''}
+                        onClick={() => {
+                            this.setState({
+                                ...this.state,
+                                selectedQuarter: q
+                            })
+                        }}
+                    >
+                        <div
+                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                            id={`chart-${this.state.indicator.id}-${q}`}
+                        />
+                    </Grid>
+                )
+            })
+        )
+    }
+
     renderChartContainers() {
         return (
             <Grid container spacing={2}>
-                <Grid item xs={3}>
-                    <div
-                        style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        id={`chart-${this.state.indicator.id}-1`}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <div
-                        style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        id={`chart-${this.state.indicator.id}-2`}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <div
-                        style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        id={`chart-${this.state.indicator.id}-3`}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <div
-                        style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                        id={`chart-${this.state.indicator.id}-4`}
-                    />
-                </Grid>
+                {this.renderChartContainerColumns()}
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
                     {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[2].financialYear : 'Q1'}
                 </Grid>
