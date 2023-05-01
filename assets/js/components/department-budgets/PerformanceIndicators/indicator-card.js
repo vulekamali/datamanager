@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import React, {Component} from "react";
-import {Button, Card, Grid} from "@material-ui/core";
+import {Button, Card, Grid, Tooltip} from "@material-ui/core";
 import * as d3 from "d3";
 
 class IndicatorCard extends Component {
@@ -146,6 +146,14 @@ class IndicatorCard extends Component {
         return this.state.indicator[`${prefix}${quarter}_${finalAppix}`]
     }
 
+    renderQuarterKeyValue(appix, annualAppix, quarter = this.state.selectedQuarter) {
+        const val = this.getQuarterKeyValue(appix, annualAppix, quarter);
+        const elem = (val == null || val.trim() === '') ?
+            <span className={'data-not-available'}>Data not yet available</span> : <span>{val}</span>
+
+        return elem;
+    }
+
     getQuarterKeyText(appix, annualAppix) {
         const prefix = this.state.selectedQuarter === 'annual' ? '' : 'QUARTER';
         const finalAppix = this.state.selectedQuarter === 'annual' ? annualAppix : appix;
@@ -196,15 +204,24 @@ class IndicatorCard extends Component {
         return svg.node();
     }
 
-    createUnavailableChartIndicator(){
+    createUnavailableChartIndicator(quarter, nonNumeric) {
         const svgElement = <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                <circle cx="17.7084" cy="17.5" r="17.5" fill="#B9B9B9"/>
-                <path d="M16.6527 12.2227V9.68359H19.3969V12.2227H16.6527ZM16.6527 24V13.6289H19.3969V24H16.6527Z"
-                      fill="#3F3F3F"/>
-            </svg>
-        return(
-            <div>{svgElement}</div>
+                                xmlns="http://www.w3.org/2000/svg">
+            <circle cx="17.7084" cy="17.5" r="17.5" fill="#B9B9B9"/>
+            <path d="M16.6527 12.2227V9.68359H19.3969V12.2227H16.6527ZM16.6527 24V13.6289H19.3969V24H16.6527Z"
+                  fill="#3F3F3F"/>
+        </svg>
+        return (
+            <div
+                className={'unavailable-chart-indicator'}
+            >
+                <Tooltip
+                    title={`${quarter} ${nonNumeric} is qualitative. See value above by selecting appropriate period.`}
+                    placement={'top'}
+                >
+                    {svgElement}
+                </Tooltip>
+            </div>
         )
     }
 
@@ -233,7 +250,8 @@ class IndicatorCard extends Component {
             ctx.appendChild(chart)
         } else {
             // chart is not available
-            const parentDiv = this.createUnavailableChartIndicator();
+            const nonNumeric = !this.isNumeric(actual) ? 'actual output' : 'target';
+            const parentDiv = this.createUnavailableChartIndicator(`Q${quarter}`, nonNumeric);
 
             ReactDOM.render(parentDiv, ctx);
         }
@@ -258,20 +276,25 @@ class IndicatorCard extends Component {
             const {target, actual} = this.getAnnualTargetAndActual(i - 1, currentYear);
             const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
 
-            let values = bothNumeric ? [{
-                quarter: (currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear),
-                actual: parseFloat(actual),
-                target: parseFloat(target)
-            }] : [{
-                quarter: (currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear),
-                actual: 0,
-                target: 0
-            }];
+            if (bothNumeric) {
+                // show chart
+                let values = [{
+                    quarter: (currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear),
+                    actual: parseFloat(actual),
+                    target: parseFloat(target)
+                }]
 
-            let indicatorMax = this.getIndicatorAnnualMax();
+                let indicatorMax = this.getIndicatorAnnualMax();
 
-            const chart = this.createChart(values, indicatorMax);
-            ctx.appendChild(chart)
+                const chart = this.createChart(values, indicatorMax);
+                ctx.appendChild(chart)
+            } else {
+                // chart is not available
+                const nonNumeric = !this.isNumeric(actual) ? 'actual output' : 'target';
+                const parentDiv = this.createUnavailableChartIndicator(currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear, nonNumeric);
+
+                ReactDOM.render(parentDiv, ctx);
+            }
         }
     }
 
@@ -283,9 +306,14 @@ class IndicatorCard extends Component {
 
     removeAllCharts() {
         for (let i = 1; i <= 4; i++) {
-            let elem = document.querySelector(`#chart-${this.state.indicator.id}-${i} svg`);
+            let elem = document.querySelector(`#chart-${this.state.indicator.id}-${i} .unavailable-chart-indicator`);
             if (elem != null) {
                 elem.parentNode.removeChild(elem);
+            }
+
+            let svgElem = document.querySelector(`#chart-${this.state.indicator.id}-${i} svg`);
+            if (svgElem != null) {
+                svgElem.parentNode.removeChild(svgElem);
             }
         }
     }
@@ -333,16 +361,16 @@ class IndicatorCard extends Component {
             <Grid container spacing={2}>
                 {this.renderChartContainerColumns()}
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[2].financialYear : 'Q1'}
+                    {this.state.selectedQuarter === 'annual' ? this.state.financialYear : 'Q1'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[1].financialYear : 'Q2'}
+                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[0].financialYear : 'Q2'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[0].financialYear : 'Q3'}
+                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[1].financialYear : 'Q3'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedQuarter === 'annual' ? this.state.financialYear : 'Q4'}
+                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[2].financialYear : 'Q4'}
                 </Grid>
             </Grid>
         )
@@ -350,7 +378,7 @@ class IndicatorCard extends Component {
 
     renderCard() {
         return (
-            <Grid item xs={4}>
+            <Grid item sm={4} xs={12}>
                 <Card
                     className={'programme-card'}
                 >
@@ -368,7 +396,7 @@ class IndicatorCard extends Component {
                                     WebkitBoxOrient: 'vertical'
                                 }}
                             >
-                                {this.getQuarterKeyValue('target', 'target')}
+                                {this.renderQuarterKeyValue('target', 'target')}
                             </div>
                             <div
                                 className={'read-more-output'}
@@ -392,7 +420,7 @@ class IndicatorCard extends Component {
                                     WebkitBoxOrient: 'vertical'
                                 }}
                             >
-                                {this.getQuarterKeyValue('actual_output', 'audited_output')}
+                                {this.renderQuarterKeyValue('actual_output', 'audited_output')}
                             </div>
                             <button
                                 className={'read-more-output'}
@@ -407,7 +435,27 @@ class IndicatorCard extends Component {
                         </div>
                     </Grid>
                     <Grid className={'indicator-section'}>
-                        <p className={'section-head'}>{this.getQuarterKeyText('PERFORMANCE', 'PERFORMANCE')}:</p>
+                        <p className={'section-head'}>
+                            <span>{this.getQuarterKeyText('PERFORMANCE', 'PERFORMANCE')}:</span>
+                            <span className={'chart-legend'}>
+                                <span>
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+<rect x="0.666718" y="0.5" width="15" height="15" rx="2" fill="#F59E46
+"/>
+</svg>
+                                </span>
+                                <span style={{marginRight: '10px', marginLeft: '5px'}}>Actual</span>
+                                <span>
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+<rect x="0.666718" y="0.5" width="15" height="15" rx="2" fill="black" fillOpacity="0.06"/>
+<line x1="1.66672" y1="7.5" x2="14.6667" y2="7.5" stroke="black" strokeOpacity="0.7" strokeDasharray="2 2"/>
+</svg>
+                                </span>
+                                <span style={{marginLeft: '5px'}}>Target</span>
+                            </span>
+                        </p>
                         <div
                             className={'output-chart-container'}
                         >
