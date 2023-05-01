@@ -1,3 +1,4 @@
+import ReactDOM from "react-dom";
 import React, {Component} from "react";
 import {Button, Card, Grid} from "@material-ui/core";
 import * as d3 from "d3";
@@ -195,6 +196,18 @@ class IndicatorCard extends Component {
         return svg.node();
     }
 
+    createUnavailableChartIndicator(){
+        const svgElement = <svg width="36" height="35" viewBox="0 0 36 35" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                <circle cx="17.7084" cy="17.5" r="17.5" fill="#B9B9B9"/>
+                <path d="M16.6527 12.2227V9.68359H19.3969V12.2227H16.6527ZM16.6527 24V13.6289H19.3969V24H16.6527Z"
+                      fill="#3F3F3F"/>
+            </svg>
+        return(
+            <div>{svgElement}</div>
+        )
+    }
+
     getQuarterTargetAndActual(quarter) {
         const target = this.getQuarterKeyValue('target', 'target', quarter).replace('%', '').trim();
         const actual = this.getQuarterKeyValue('actual_output', 'audited_output', quarter).replace('%', '').trim();
@@ -207,15 +220,23 @@ class IndicatorCard extends Component {
         const {target, actual} = this.getQuarterTargetAndActual(quarter);
         const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
 
-        let values = bothNumeric ? [{
-            quarter: `Q${quarter}`,
-            actual: parseFloat(actual),
-            target: parseFloat(target)
-        }] : [{quarter: `Q${quarter}`, actual: 0, target: 0}]
-        let indicatorMax = this.getIndicatorQuarterMax();
+        if (bothNumeric) {
+            // show chart
+            let values = [{
+                quarter: `Q${quarter}`,
+                actual: parseFloat(actual),
+                target: parseFloat(target)
+            }];
+            let indicatorMax = this.getIndicatorQuarterMax();
 
-        const chart = this.createChart(values, indicatorMax);
-        ctx.appendChild(chart)
+            const chart = this.createChart(values, indicatorMax);
+            ctx.appendChild(chart)
+        } else {
+            // chart is not available
+            const parentDiv = this.createUnavailableChartIndicator();
+
+            ReactDOM.render(parentDiv, ctx);
+        }
     }
 
     getAnnualTargetAndActual(index, currentYear) {
@@ -287,7 +308,7 @@ class IndicatorCard extends Component {
                         item
                         xs={3}
                         style={{
-                            cursor:'pointer'
+                            cursor: 'pointer'
                         }}
                         className={this.state.selectedQuarter === q ? 'active-chart' : ''}
                         onClick={() => {
