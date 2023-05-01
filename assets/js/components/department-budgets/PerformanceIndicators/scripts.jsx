@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Programme from "./programme";
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import decodeHtmlEntities from "../../../utilities/js/helpers/decodeHtmlEntities";
+import {Button, Grid} from "@material-ui/core";
 
 class PerformanceIndicators extends Component {
     constructor(props) {
@@ -127,7 +128,9 @@ class PerformanceIndicators extends Component {
     }
 
     render() {
-        return (<div>{this.renderProgrammes()}</div>);
+        return (<div>
+            {this.renderProgrammes()}
+        </div>);
     }
 }
 
@@ -142,6 +145,29 @@ class PerformanceIndicatorsContainer extends Component {
         }
     }
 
+    renderNavigateButtons() {
+        const baseUrl = '../../../../performance';
+        return (
+            <Grid>
+                <Button
+                    variant={'outlined'}
+                    className={'programme-btn'}
+                    href={`${baseUrl}/?department__government__sphere__financial_year__slug=${this.state.year}&department__name=${this.state.department}`}
+                >
+                    Search all performance indicators
+                </Button>
+                <Button
+                    variant={'outlined'}
+                    className={'programme-btn'}
+                    style={{marginLeft: '20px'}}
+                    href={'https://performance.vulekamali.gov.za/stages/implementation-monitoring#3.2'}
+                >
+                    Learn more about quarterly performance reporting
+                </Button>
+            </Grid>
+        )
+    }
+
     render() {
         return (<div>
             <h3 className="Title Title--section">Indicators of performance</h3>
@@ -150,6 +176,7 @@ class PerformanceIndicatorsContainer extends Component {
                 year={this.state.year}
                 previousYears={this.state.previousYears}
             />
+            {this.renderNavigateButtons()}
         </div>);
     }
 }
