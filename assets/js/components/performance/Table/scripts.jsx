@@ -42,7 +42,7 @@ class TabularView extends Component {
             sectors: null,
             spheres: null,
             totalCount: 0,
-            rowsPerPage: 0,
+            rowsPerPage: 20,
             currentPage: 0,
             selectedFilters: {},
             isLoading: false,
@@ -149,45 +149,44 @@ class TabularView extends Component {
         this.setState({
             ...this.state,
             isLoading: true
-        })
+        }, () => {
+            this.setDownloadUrl();
+            this.cancelAndInitAbortController();
 
-        this.setDownloadUrl();
-        this.cancelAndInitAbortController();
+            this.unobserveElements();
 
-        this.unobserveElements();
+            let url = `api/v1/eqprs/?page=${pageToCall + 1}`;
 
-        let url = `api/v1/eqprs/?page=${pageToCall + 1}`;
-
-        // append filters
-        Object.keys(this.state.selectedFilters).forEach((key) => {
-            let value = this.state.selectedFilters[key];
-            if (value !== null) {
-                url += `&${key}=${encodeURI(value)}`;
-            }
-        })
-
-        fetchWrapper(url, this.abortController)
-            .then((response) => {
-                this.setState({
-                    ...this.state,
-                    currentPage: pageToCall,
-                    rows: response.results.items,
-                    departments: response.results.facets['department_name'],
-                    financialYears: response.results.facets['financial_year_slug'],
-                    frequencies: response.results.facets['frequency'],
-                    governments: response.results.facets['government_name'],
-                    mtsfOutcomes: response.results.facets['mtsf_outcome'],
-                    sectors: response.results.facets['sector'],
-                    spheres: response.results.facets['sphere_name'],
-                    totalCount: response.count,
-                    rowsPerPage: response.results.items.length,
-                    isLoading: false
-                });
+            // append filters
+            Object.keys(this.state.selectedFilters).forEach((key) => {
+                let value = this.state.selectedFilters[key];
+                if (value !== null) {
+                    url += `&${key}=${encodeURI(value)}`;
+                }
             })
-            .then(() => {
-                this.handleObservers();
-            })
-            .catch((errorResult) => console.warn(errorResult));
+
+            fetchWrapper(url, this.abortController)
+                .then((response) => {
+                    this.setState({
+                        ...this.state,
+                        currentPage: pageToCall,
+                        rows: response.results.items,
+                        departments: response.results.facets['department_name'],
+                        financialYears: response.results.facets['financial_year_slug'],
+                        frequencies: response.results.facets['frequency'],
+                        governments: response.results.facets['government_name'],
+                        mtsfOutcomes: response.results.facets['mtsf_outcome'],
+                        sectors: response.results.facets['sector'],
+                        spheres: response.results.facets['sphere_name'],
+                        totalCount: response.count,
+                        isLoading: false
+                    });
+                })
+                .then(() => {
+                    this.handleObservers();
+                })
+                .catch((errorResult) => console.warn(errorResult));
+        })
     }
 
     setDownloadUrl() {
