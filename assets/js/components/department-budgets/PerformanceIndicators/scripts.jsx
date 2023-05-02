@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import Programme from "./programme";
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import decodeHtmlEntities from "../../../utilities/js/helpers/decodeHtmlEntities";
-import {Button, Grid} from "@material-ui/core";
+import {Button, CircularProgress, Grid} from "@material-ui/core";
 
 class PerformanceIndicators extends Component {
     constructor(props) {
@@ -15,7 +15,8 @@ class PerformanceIndicators extends Component {
             previousYears: props.previousYears,
             programmes: [],
             previousYearsProgrammes: [],
-            pageCount: 3
+            pageCount: 3,
+            isLoading: true
         };
     }
 
@@ -46,6 +47,7 @@ class PerformanceIndicators extends Component {
             .then((items) => {
                 this.setState({
                     ...this.state,
+                    isLoading: false,
                     programmes: this.extractProgrammeData(items)
                 });
 
@@ -127,9 +129,30 @@ class PerformanceIndicators extends Component {
         })
     }
 
+    renderLoadingState() {
+        if (!this.state.isLoading) {
+            return
+        }
+        const tableContainer = document.getElementsByClassName('js-initYearSelect')[0];
+        const gifWidth = 40;
+        const marginLeftVal = (tableContainer.clientWidth - gifWidth) / 2;
+
+        return (
+            <div className={'table-loading-state'} style={{height: '100px'}}>
+                <CircularProgress
+                    className={'table-circular-progress'}
+                    style={{marginLeft: marginLeftVal, marginTop: '30px'}}
+                />
+            </div>
+        )
+    }
+
     render() {
-        return (<div>
+        return (<div
+            style={{position: 'relative'}}
+        >
             {this.renderProgrammes()}
+            {this.renderLoadingState()}
         </div>);
     }
 }
