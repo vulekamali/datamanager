@@ -53,19 +53,23 @@ class Programme extends Component {
             return;
         }
 
-        return (<div>
-            <div className="IntroSection-fade"/>
-            <div className="IntroSection-button">
-                <button className="Button is-secondary is-inline" onClick={() => this.setOpen()}>Read
-                    More
-                </button>
+        return (
+            <div>
+                <div
+                    className="IntroSection-fade"/>
+                <div className="IntroSection-button">
+                    <button className="Button is-secondary is-inline" onClick={() => this.setOpen()}>Click to explore these indicators
+                    </button>
+                </div>
             </div>
-        </div>)
+        )
     }
 
     renderProgramme() {
         return (<Paper
-            className={'performance-indicators-container'}>
+            className={'performance-indicators-container'}
+            style={{paddingBottom: this.state.open ? '30px' : '0px'}}
+        >
             <div className={`IntroSection-text is-initialised ${this.state.open ? 'is-open' : ''}`}>
                 <div
                     className="IntroSection-content"

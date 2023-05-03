@@ -12,6 +12,7 @@
     font-size: 20px;
     font-weight: 800;
     line-height: 120%;
+    margin-top: 0px;
   }
 
   .programme-card {
@@ -179,6 +180,14 @@
 
   .float-right {
     float: right;
+  }
+
+  .IntroSection-fade {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.34) 100%);
+  }
+
+  .IntroSection-button button {
+    border: none;
   }
 }
 
