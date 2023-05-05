@@ -382,7 +382,7 @@ class IndicatorCard extends Component {
                 <Card
                     className={'programme-card'}
                 >
-                    <p className={'indicator-type'}>{this.state.indicator.type}</p>
+                    <p className={'indicator-type'}>TYPE: {this.state.indicator.type}</p>
                     <p className={'indicator-name'}>{this.state.indicator.indicator_name}</p>
                     {this.renderQuarterSelection()}
                     <Grid className={'indicator-section'}>

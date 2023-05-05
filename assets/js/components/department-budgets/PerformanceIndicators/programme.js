@@ -58,7 +58,8 @@ class Programme extends Component {
                 <div
                     className="IntroSection-fade"/>
                 <div className="IntroSection-button">
-                    <button className="Button is-secondary is-inline" onClick={() => this.setOpen()}>Click to explore these indicators
+                    <button className="Button is-secondary is-inline" onClick={() => this.setOpen()}>Click to explore
+                        these indicators
                     </button>
                 </div>
             </div>
@@ -67,34 +68,31 @@ class Programme extends Component {
 
     renderProgramme() {
         return (<Paper
-            className={'performance-indicators-container'}
-            style={{paddingBottom: this.state.open ? '30px' : '0px'}}
+            className={`performance-indicators-container ${this.state.open ? 'is-open' : ''}`}
         >
-            <div className={`IntroSection-text is-initialised ${this.state.open ? 'is-open' : ''}`}>
-                <div
-                    className="IntroSection-content"
+            <div
+                className="IntroSection-content"
+            >
+                <p className={'programme-name'}>{this.state.programme.name}</p>
+                <Grid container spacing={3}>
+                    {this.renderIndicatorCards(this.state.programme)}
+                </Grid>
+                <Grid
+                    container
+                    justifyContent={'flex-end'}
+                    style={{marginTop: '20px'}}
                 >
-                    <p className={'programme-name'}>{this.state.programme.name}</p>
-                    <Grid container spacing={3}>
-                        {this.renderIndicatorCards(this.state.programme)}
-                    </Grid>
-                    <Grid
-                        container
-                        justifyContent={'flex-end'}
-                        style={{marginTop: '20px'}}
+                    <Button
+                        variant={'outlined'}
+                        className={'programme-btn'}
+                        onClick={() => this.props.showMore()}
+                        disabled={this.state.programme.visibleIndicators.length >= this.state.programme.allIndicators.length}
                     >
-                        <Button
-                            variant={'outlined'}
-                            className={'programme-btn'}
-                            onClick={() => this.props.showMore()}
-                            disabled={this.state.programme.visibleIndicators.length >= this.state.programme.allIndicators.length}
-                        >
-                            Show more items
-                        </Button>
-                    </Grid>
-                </div>
-                {this.renderReadMoreButton()}
+                        Show more items
+                    </Button>
+                </Grid>
             </div>
+            {this.renderReadMoreButton()}
         </Paper>)
     }
 
