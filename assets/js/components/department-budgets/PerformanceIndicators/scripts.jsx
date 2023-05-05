@@ -12,6 +12,8 @@ class PerformanceIndicators extends Component {
         this.state = {
             department: props.department,
             financialYear: props.year,
+            sphere: props.sphere,
+            government: props.government,
             previousYears: props.previousYears,
             programmes: [],
             previousYearsProgrammes: [],
@@ -164,18 +166,24 @@ class PerformanceIndicatorsContainer extends Component {
         this.state = {
             department: props.department,
             year: props.year,
+            sphere: props.sphere,
+            government: props.government,
             previousYears: props.previousYears
         }
     }
 
     renderNavigateButtons() {
         const baseUrl = '../../../../performance';
+        const sphereQuery = `department__government__sphere__name=${encodeURI(this.state.sphere)}`;
+        const governmentQuery = `department__government__name=${encodeURI(this.state.government)}`;
+        const yearQuery = `department__government__sphere__financial_year__slug=${this.state.year}`;
+        const departmentQuery = `department__name=${this.state.department}`;
         return (
             <Grid>
                 <Button
                     variant={'outlined'}
                     className={'programme-btn'}
-                    href={`${baseUrl}/?department__government__sphere__financial_year__slug=${this.state.year}&department__name=${this.state.department}`}
+                    href={`${baseUrl}/?${yearQuery}&${departmentQuery}&${sphereQuery}&${governmentQuery}`}
                 >
                     Search all performance indicators
                 </Button>
@@ -197,6 +205,8 @@ class PerformanceIndicatorsContainer extends Component {
             <PerformanceIndicators
                 department={this.state.department}
                 year={this.state.year}
+                government={this.state.government}
+                sphere={this.state.sphere}
                 previousYears={this.state.previousYears}
             />
             {this.renderNavigateButtons()}
@@ -222,10 +232,14 @@ function scripts() {
     if (parent) {
         const departmentName = parent.getAttribute('data-department');
         const financialYear = parent.getAttribute('data-year');
+        const sphere = parent.getAttribute('data-sphere');
+        const government = parent.getAttribute('data-government');
         ReactDOM.render(<PerformanceIndicatorsContainer
             department={departmentName}
             year={financialYear}
             previousYears={previousYears}
+            government={government}
+            sphere={sphere}
         />, parent)
     }
 }

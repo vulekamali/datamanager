@@ -265,6 +265,8 @@
                     id="js-initPerformanceIndicators"
                     data-department="{{ name }}"
                     data-year="{{ selected_financial_year }}"
+                    data-government="{{ government.slug }}"
+                    data-sphere="{{ sphere.slug }}"
             ></div>
 
             {% if not infra_enabled and not in_year_monitoring_resource_links and not performance_resource_links %}
