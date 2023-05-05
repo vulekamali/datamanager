@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Indicator
 from .serializer import IndicatorSerializer
 from rest_framework import generics
-from django.db.models import Count
+from django.db.models import Count, Q
 from rest_framework.pagination import PageNumberPagination
 from budgetportal.models import MainMenuItem
 from django.contrib.postgres.search import SearchQuery
@@ -73,7 +73,12 @@ def text_search(qs, text):
     if len(text) == 0:
         return qs
 
-    return qs.filter(content_search=SearchQuery(text))
+    query_text = SearchQuery(text)
+    print('============ aaa ============')
+    print(text)
+    print('============ bbb ============')
+
+    return qs.filter(Q(content_search=SearchQuery(text)) | Q(indicator_name__contains=text))
 
 
 def add_filters(qs, params):
