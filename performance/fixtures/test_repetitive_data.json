@@ -1,0 +1,180 @@
+[{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+      "password": "pbkdf2_sha256$36000$0lM3TbZBY94V$xirXvIgKYBggcH0tMDjE6GTjoS6KYuim4sl7UbpYsrA=",
+      "last_login": "2019-04-16T05:45:02Z",
+      "is_superuser": true,
+      "username": "admin@localhost",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@localhost",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2019-04-15T20:06:18Z",
+      "groups": [],
+      "user_permissions": []
+  }
+},
+{
+  "model": "budgetportal.financialyear",
+  "pk": 1,
+  "fields": {
+      "slug": "2015-16",
+      "published": false
+  }
+},
+{
+  "model": "budgetportal.sphere",
+  "pk": 1,
+  "fields": {
+      "name": "National",
+      "slug": "national",
+      "financial_year": 1
+  }
+},
+{
+  "model": "budgetportal.government",
+  "pk": 1,
+  "fields": {
+      "sphere": 1,
+      "name": "South Africa",
+      "slug": "south-africa"
+  }
+},
+{
+  "model": "budgetportal.department",
+  "pk": 1,
+  "fields": {
+      "government": 1,
+      "name": "Agriculture Forestry and Fisheries",
+      "vote_number": 1,
+      "intro": " ",
+      "slug": "agriculture-forestry-and-fisheries"
+  }
+},
+    {
+      "pk": 1,
+      "model": "performance.eqprsfileupload",
+      "fields": {
+        "user": 1,
+        "task_id": "43553e179fab466aaeb967dda549bf7c",
+        "import_report": "Everything was good.\n\nJust look at the data!",
+        "num_imported": 123,
+        "num_not_imported": 0
+      }
+    },
+
+    {
+        "pk": 1,
+        "model": "django_q.task",
+        "fields": {
+          "id": "43553e179fab466aaeb967dda549bf7c",
+          "func": "somefunc",
+          "started": "2022-11-29T14:16:55Z",
+          "stopped": "2022-11-29T14:16:56Z"
+        }
+      },
+
+  {
+    "pk": 1,
+    "model": "performance.indicator",
+    "fields": {
+      "sector": "",
+      "department": 1,
+      "programme_name": "Programme 1: Administration",
+      "subprogramme_name": "Financial Management Services",
+      "frequency": "Annually",
+      "indicator_name": "1.1.1 Unqualified audit opinion",
+      "type": "Non-Standardized",
+      "subtype": "Not  Applicable",
+      "mtsf_outcome": "Priority 1: A Capable, Ethical and Developmental State",
+      "cluster": "Governance and Administration cluster",
+      "q1_target": "",
+      "q1_actual_output": "",
+      "q1_deviation_reason": "",
+      "q1_corrective_action": "",
+      "q1_otp_comments": "",
+      "q1_national_comments": "",
+      "q2_target": "",
+      "q2_actual_output": "",
+      "q2_deviation_reason": "",
+      "q2_corrective_action": "",
+      "q2_otp_comments": "",
+      "q2_national_comments": "",
+      "q3_target": "",
+      "q3_actual_output": "",
+      "q3_deviation_reason": "",
+      "q3_corrective_action": "",
+      "q3_otp_comments": "",
+      "q3_national_comments": "",
+      "q4_target": "",
+      "q4_actual_output": "",
+      "q4_deviation_reason": "",
+      "q4_corrective_action": "",
+      "q4_otp_comments": "",
+      "q4_national_comments": "",
+      "annual_target": "Unqualified audit opinion on 2020/21 annual financial statements",
+      "annual_aggregate_output": "-",
+      "annual_pre_audit_output": "Unqualified audit opinion on 2020/21 annual financial statements",
+      "annual_deviation_reason": "",
+      "annual_corrective_action": "",
+      "annual_otp_comments": "",
+      "annual_national_comments": "",
+      "annual_audited_output": "Unqualified audit opinion on 2020/21 annual financial statements",
+      "uid": 50,
+      "source_id": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "performance.indicator",
+    "fields": {
+      "sector": "",
+      "department": 1,
+      "programme_name": "Programme 1: Administration",
+      "subprogramme_name": "Financial Management Services",
+      "frequency": "Annually",
+      "indicator_name": "1.1.1 Unqualified audit opinion",
+      "type": "Non-Standardized",
+      "subtype": "Not  Applicable",
+      "mtsf_outcome": "Priority 1: A Capable, Ethical and Developmental State",
+      "cluster": "Governance and Administration cluster",
+      "q1_target": "",
+      "q1_actual_output": "",
+      "q1_deviation_reason": "",
+      "q1_corrective_action": "",
+      "q1_otp_comments": "",
+      "q1_national_comments": "",
+      "q2_target": "",
+      "q2_actual_output": "",
+      "q2_deviation_reason": "",
+      "q2_corrective_action": "",
+      "q2_otp_comments": "",
+      "q2_national_comments": "",
+      "q3_target": "",
+      "q3_actual_output": "",
+      "q3_deviation_reason": "",
+      "q3_corrective_action": "",
+      "q3_otp_comments": "",
+      "q3_national_comments": "",
+      "q4_target": "",
+      "q4_actual_output": "",
+      "q4_deviation_reason": "",
+      "q4_corrective_action": "",
+      "q4_otp_comments": "",
+      "q4_national_comments": "",
+      "annual_target": "Unqualified audit opinion on 2020/21 annual financial statements",
+      "annual_aggregate_output": "-",
+      "annual_pre_audit_output": "Unqualified audit opinion on 2020/21 annual financial statements",
+      "annual_deviation_reason": "",
+      "annual_corrective_action": "",
+      "annual_otp_comments": "",
+      "annual_national_comments": "",
+      "annual_audited_output": "Unqualified audit opinion on 2020/21 annual financial statements",
+      "uid": 51,
+      "source_id": 1
+    }
+  }
+
+  ]
