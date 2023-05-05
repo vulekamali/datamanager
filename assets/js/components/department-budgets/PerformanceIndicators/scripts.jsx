@@ -77,7 +77,7 @@ class PerformanceIndicators extends Component {
             const pageQuery = `page=${page}`;
             const departmentQuery = `department__name=${encodeURI(this.state.department)}`;
             const financialYearQuery = `department__government__sphere__financial_year__slug=${financialYear}`;
-            const baseUrl = `../../../../performance/api/v1/eqprs/`;
+            const baseUrl = `../../../../../performance/api/v1/eqprs/`;
             let url = `${baseUrl}?${pageQuery}&${departmentQuery}&${financialYearQuery}`;
 
             fetchWrapper(url)
@@ -173,7 +173,7 @@ class PerformanceIndicatorsContainer extends Component {
     }
 
     renderNavigateButtons() {
-        const baseUrl = '../../../../performance';
+        const baseUrl = '../../../../../performance';
         const sphereQuery = `department__government__sphere__name=${encodeURI(this.state.sphere)}`;
         const governmentQuery = `department__government__name=${encodeURI(this.state.government)}`;
         const yearQuery = `department__government__sphere__financial_year__slug=${this.state.year}`;
