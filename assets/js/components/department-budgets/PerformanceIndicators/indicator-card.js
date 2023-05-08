@@ -12,6 +12,8 @@ class IndicatorCard extends Component {
         this.state = {
             indicator: props.data,
             selectedQuarter: this.findLatestQuarter(props.data),
+            selectedPeriodType: 'quarter',
+            selectedYear: props.financialYear,   // current year in default
             previousYearsIndicators: props.previousYearsIndicators,
             financialYear: props.financialYear
         }
@@ -19,13 +21,13 @@ class IndicatorCard extends Component {
 
     componentDidMount() {
         this.handleObservers();
+
         this.handleQuarterlyCharts();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if ((prevState.selectedQuarter === 'annual' && this.state.selectedQuarter !== 'annual')
-            || (prevState.selectedQuarter !== 'annual' && this.state.selectedQuarter === 'annual')) {
-            this.handleChartChange();
+        if (prevState.selectedPeriodType !== this.state.selectedPeriodType) {
+            this.handleAnnualCharts();
         }
 
         if (this.props.previousYearsIndicators !== this.state.previousYearsIndicators) {
@@ -74,7 +76,15 @@ class IndicatorCard extends Component {
     handleQuarterSelection(newVal) {
         this.setState({
             ...this.state,
-            selectedQuarter: newVal
+            selectedQuarter: newVal,
+            selectedPeriodType: 'quarter'
+        });
+    }
+
+    handlePeriodTypeSelection(newVal) {
+        this.setState({
+            ...this.state,
+            selectedPeriodType: newVal
         });
     }
 
@@ -84,27 +94,27 @@ class IndicatorCard extends Component {
                 <Button
                     onClick={() => this.handleQuarterSelection(1)}
                     variant={'contained'}
-                    className={`quarter-selection ${this.state.selectedQuarter === 1 ? 'selected' : ''}`}
+                    className={`quarter-selection ${this.state.selectedQuarter === 1 && this.state.selectedPeriodType === 'quarter' ? 'selected' : ''}`}
                 >Q1</Button>
                 <Button
                     onClick={() => this.handleQuarterSelection(2)}
                     variant={'contained'}
-                    className={`quarter-selection ${this.state.selectedQuarter === 2 ? 'selected' : ''}`}
+                    className={`quarter-selection ${this.state.selectedQuarter === 2 && this.state.selectedPeriodType === 'quarter' ? 'selected' : ''}`}
                 >Q2</Button>
                 <Button
                     onClick={() => this.handleQuarterSelection(3)}
                     variant={'contained'}
-                    className={`quarter-selection ${this.state.selectedQuarter === 3 ? 'selected' : ''}`}
+                    className={`quarter-selection ${this.state.selectedQuarter === 3 && this.state.selectedPeriodType === 'quarter' ? 'selected' : ''}`}
                 >Q3</Button>
                 <Button
                     onClick={() => this.handleQuarterSelection(4)}
                     variant={'contained'}
-                    className={`quarter-selection ${this.state.selectedQuarter === 4 ? 'selected' : ''}`}
+                    className={`quarter-selection ${this.state.selectedQuarter === 4 && this.state.selectedPeriodType === 'quarter' ? 'selected' : ''}`}
                 >Q4</Button>
                 <Button
-                    onClick={() => this.handleQuarterSelection('annual')}
+                    onClick={() => this.handlePeriodTypeSelection('annual')}
                     variant={'contained'}
-                    className={`quarter-selection float-right ${this.state.selectedQuarter === 'annual' ? 'selected' : ''}`}
+                    className={`quarter-selection float-right ${this.state.selectedPeriodType === 'annual' ? 'selected' : ''}`}
                 >Full year</Button>
             </Grid>
         )
@@ -155,9 +165,10 @@ class IndicatorCard extends Component {
     }
 
     getQuarterKeyText(appix, annualAppix) {
-        const prefix = this.state.selectedQuarter === 'annual' ? '' : 'QUARTER';
-        const finalAppix = this.state.selectedQuarter === 'annual' ? annualAppix : appix;
-        return `${prefix} ${this.state.selectedQuarter} ${finalAppix}`;
+        const prefix = this.state.selectedPeriodType === 'annual' ? `${this.state.selectedYear} ANNUAL` : 'QUARTER';
+        const finalAppix = this.state.selectedPeriodType === 'annual' ? annualAppix : appix;
+        const quarter = this.state.selectedPeriodType === 'annual' ? '' : this.state.selectedQuarter;
+        return `${prefix} ${quarter} ${finalAppix}`;
     }
 
     createChart(data, indicatorMax) {
@@ -233,7 +244,7 @@ class IndicatorCard extends Component {
     }
 
     handleQuarterChart(quarter) {
-        const ctx = document.getElementById(`chart-${this.state.indicator.id}-${quarter}`);
+        const ctx = document.getElementById(`chart-quarter-${this.state.indicator.id}-${quarter}`);
         const {target, actual} = this.getQuarterTargetAndActual(quarter);
         const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
 
@@ -270,9 +281,9 @@ class IndicatorCard extends Component {
     }
 
     handleAnnualCharts() {
-        for (let i = 3; i >= 0; i--) {
-            const currentYear = i === 0;
-            const ctx = document.getElementById(`chart-${this.state.indicator.id}-${i + 1}`);
+        for (let i = 1; i <= 4; i++) {
+            const currentYear = i === 4;
+            const ctx = document.getElementById(`chart-quarter-${this.state.indicator.id}-${i}`);
             const {target, actual} = this.getAnnualTargetAndActual(i - 1, currentYear);
             const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
 
@@ -304,54 +315,65 @@ class IndicatorCard extends Component {
         }
     }
 
-    removeAllCharts() {
-        for (let i = 1; i <= 4; i++) {
-            let elem = document.querySelector(`#chart-${this.state.indicator.id}-${i} .unavailable-chart-indicator`);
-            if (elem != null) {
-                elem.parentNode.removeChild(elem);
-            }
-
-            let svgElem = document.querySelector(`#chart-${this.state.indicator.id}-${i} svg`);
-            if (svgElem != null) {
-                svgElem.parentNode.removeChild(svgElem);
-            }
-        }
+    getQuarterChartContainer(q) {
+        return (
+            <Grid
+                key={`chart-quarter-container-${this.state.indicator.id}-${q}`}
+                item
+                xs={3}
+                style={{
+                    cursor: 'pointer',
+                    display: this.state.selectedPeriodType === 'annual' ? 'none' : 'block'
+                }}
+                className={this.state.selectedQuarter === q ? 'active-chart' : ''}
+                onClick={() => {
+                    this.setState({
+                        ...this.state,
+                        selectedQuarter: q
+                    })
+                }}
+            >
+                <div
+                    style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                    id={`chart-quarter-${this.state.indicator.id}-${q}`}
+                />
+            </Grid>
+        )
     }
 
-    handleChartChange() {
-        this.removeAllCharts();
-        if (this.state.selectedQuarter === 'annual') {
-            this.handleAnnualCharts();
-        } else {
-            this.handleQuarterlyCharts();
-        }
+    getAnnualChartContainer(q) {
+        return (
+            <Grid
+                key={`chart-annual-container-${this.state.indicator.id}-${q}`}
+                item
+                xs={3}
+                style={{
+                    cursor: 'pointer',
+                    display: this.state.selectedPeriodType === 'annual' ? 'block' : 'none'
+                }}
+                className={this.state.selectedQuarter === q ? 'active-chart' : ''}
+                onClick={() => {
+                    this.setState({
+                        ...this.state,
+                        selectedQuarter: q
+                    })
+                }}
+            >
+                <div
+                    style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
+                    id={`chart-annual-${this.state.indicator.id}-${q}`}
+                />
+            </Grid>
+        )
     }
 
     renderChartContainerColumns() {
         return (
             [1, 2, 3, 4].map(q => {
-                return (
-                    <Grid
-                        key={`chart-container-${this.state.indicator.id}-${q}`}
-                        item
-                        xs={3}
-                        style={{
-                            cursor: 'pointer'
-                        }}
-                        className={this.state.selectedQuarter === q ? 'active-chart' : ''}
-                        onClick={() => {
-                            this.setState({
-                                ...this.state,
-                                selectedQuarter: q
-                            })
-                        }}
-                    >
-                        <div
-                            style={{backgroundColor: 'rgba(63, 63, 63, 0.08)', borderRadius: '2px'}}
-                            id={`chart-${this.state.indicator.id}-${q}`}
-                        />
-                    </Grid>
-                )
+                return ([
+                    this.getQuarterChartContainer(q),
+                    this.getAnnualChartContainer(q)
+                ])
             })
         )
     }
@@ -361,16 +383,16 @@ class IndicatorCard extends Component {
             <Grid container spacing={2}>
                 {this.renderChartContainerColumns()}
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedQuarter === 'annual' ? this.state.financialYear : 'Q1'}
+                    {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[0].financialYear : 'Q1'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[0].financialYear : 'Q2'}
+                    {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[1].financialYear : 'Q2'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[1].financialYear : 'Q3'}
+                    {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[2].financialYear : 'Q3'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedQuarter === 'annual' ? this.state.previousYearsIndicators[2].financialYear : 'Q4'}
+                    {this.state.selectedPeriodType === 'annual' ? this.state.financialYear : 'Q4'}
                 </Grid>
             </Grid>
         )
