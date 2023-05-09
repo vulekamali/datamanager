@@ -73,12 +73,11 @@ def text_search(qs, text):
     if len(text) == 0:
         return qs
 
-    query_text = SearchQuery(text)
-    print('============ aaa ============')
-    print(text)
-    print('============ bbb ============')
-
-    return qs.filter(Q(content_search=SearchQuery(text)) | Q(indicator_name__contains=text))
+    return qs.filter(
+        Q(content_search=SearchQuery(text))
+        | Q(content_search__icontains=text)
+        | Q(indicator_name__icontains=text)
+    )
 
 
 def add_filters(qs, params):
