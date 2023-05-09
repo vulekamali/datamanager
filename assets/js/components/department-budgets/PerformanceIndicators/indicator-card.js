@@ -26,7 +26,7 @@ class IndicatorCard extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.selectedPeriodType !== this.state.selectedPeriodType) {
+        if (prevState.selectedPeriodType !== this.state.selectedPeriodType && this.state.selectedPeriodType === 'annual') {
             this.handleAnnualCharts();
         }
 
@@ -150,10 +150,16 @@ class IndicatorCard extends Component {
         return Math.max(...valuesArr);
     }
 
-    getQuarterKeyValue(appix, annualAppix, quarter = this.state.selectedQuarter) {
-        const prefix = quarter === 'annual' ? '' : 'q';
-        const finalAppix = quarter === 'annual' ? annualAppix : appix;
-        return this.state.indicator[`${prefix}${quarter}_${finalAppix}`]
+    getQuarterKeyValue(appix, annualAppix, quarter) {
+        const prefix = this.state.selectedPeriodType === 'annual' ? '' : 'q';
+        const finalAppix = this.state.selectedPeriodType === 'annual' ? annualAppix : appix;
+        const key = `${prefix}${quarter}_${finalAppix}`;
+        if (this.state.selectedPeriodType === 'annual' && this.state.selectedYear !== this.state.financialYear) {
+            const indicator = this.state.previousYearsIndicators.filter(x => x.financialYear === this.state.selectedYear)[0].indicator;
+            return indicator === null ? null : indicator[key];
+        } else {
+            return this.state.indicator[key];
+        }
     }
 
     renderQuarterKeyValue(appix, annualAppix, quarter = this.state.selectedQuarter) {
@@ -283,28 +289,30 @@ class IndicatorCard extends Component {
     handleAnnualCharts() {
         for (let i = 1; i <= 4; i++) {
             const currentYear = i === 4;
-            const ctx = document.getElementById(`chart-quarter-${this.state.indicator.id}-${i}`);
-            const {target, actual} = this.getAnnualTargetAndActual(i - 1, currentYear);
-            const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
+            const ctx = document.getElementById(`chart-annual-${this.state.indicator.id}-${i}`);
+            if (!ctx.hasChildNodes()) {
+                const {target, actual} = this.getAnnualTargetAndActual(i - 1, currentYear);
+                const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
 
-            if (bothNumeric) {
-                // show chart
-                let values = [{
-                    quarter: (currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear),
-                    actual: parseFloat(actual),
-                    target: parseFloat(target)
-                }]
+                if (bothNumeric) {
+                    // show chart
+                    let values = [{
+                        quarter: (currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear),
+                        actual: parseFloat(actual),
+                        target: parseFloat(target)
+                    }]
 
-                let indicatorMax = this.getIndicatorAnnualMax();
+                    let indicatorMax = this.getIndicatorAnnualMax();
 
-                const chart = this.createChart(values, indicatorMax);
-                ctx.appendChild(chart)
-            } else {
-                // chart is not available
-                const nonNumeric = !this.isNumeric(actual) ? 'actual output' : 'target';
-                const parentDiv = this.createUnavailableChartIndicator(currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear, nonNumeric);
+                    const chart = this.createChart(values, indicatorMax);
+                    ctx.appendChild(chart)
+                } else {
+                    // chart is not available
+                    const nonNumeric = !this.isNumeric(actual) ? 'actual output' : 'target';
+                    const parentDiv = this.createUnavailableChartIndicator(currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear, nonNumeric);
 
-                ReactDOM.render(parentDiv, ctx);
+                    ReactDOM.render(parentDiv, ctx);
+                }
             }
         }
     }
@@ -342,6 +350,12 @@ class IndicatorCard extends Component {
     }
 
     getAnnualChartContainer(q) {
+        const isCurrentYear = q === 4;
+        if (this.state.previousYearsIndicators.length <= q - 1 && !isCurrentYear) {
+            return;
+        }
+
+        const selectedYear = isCurrentYear ? this.state.financialYear : this.state.previousYearsIndicators[q - 1].financialYear;
         return (
             <Grid
                 key={`chart-annual-container-${this.state.indicator.id}-${q}`}
@@ -351,11 +365,11 @@ class IndicatorCard extends Component {
                     cursor: 'pointer',
                     display: this.state.selectedPeriodType === 'annual' ? 'block' : 'none'
                 }}
-                className={this.state.selectedQuarter === q ? 'active-chart' : ''}
+                className={this.state.selectedYear === selectedYear ? 'active-chart' : ''}
                 onClick={() => {
                     this.setState({
                         ...this.state,
-                        selectedQuarter: q
+                        selectedYear: selectedYear
                     })
                 }}
             >
@@ -418,7 +432,7 @@ class IndicatorCard extends Component {
                                     WebkitBoxOrient: 'vertical'
                                 }}
                             >
-                                {this.renderQuarterKeyValue('target', 'target')}
+                                {this.renderQuarterKeyValue('target', 'target', this.state.selectedPeriodType === 'annual' ? 'annual' : this.state.selectedQuarter)}
                             </div>
                             <div
                                 className={'read-more-output'}
@@ -442,7 +456,7 @@ class IndicatorCard extends Component {
                                     WebkitBoxOrient: 'vertical'
                                 }}
                             >
-                                {this.renderQuarterKeyValue('actual_output', 'audited_output')}
+                                {this.renderQuarterKeyValue('actual_output', 'audited_output', this.state.selectedPeriodType === 'annual' ? 'annual' : this.state.selectedQuarter)}
                             </div>
                             <button
                                 className={'read-more-output'}
