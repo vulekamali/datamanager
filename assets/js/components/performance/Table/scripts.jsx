@@ -17,7 +17,7 @@ import {
     TableRow,
     Chip,
     CircularProgress,
-    MenuItem,
+    MenuItem, Modal,
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -33,6 +33,7 @@ class TabularView extends Component {
         this.abortController = null;
 
         this.state = {
+            modalOpen: false,
             rows: null,
             departments: null,
             financialYears: null,
@@ -526,8 +527,65 @@ class TabularView extends Component {
         </Grid>)
     }
 
+    handleModalState(open) {
+        this.setState({
+            ...this.state,
+            modalOpen: open
+        })
+    }
+
+    renderLearnMore() {
+        return (
+            <Grid>
+                <button
+                    type={'button'}
+                    className={'Button is-inline u-marginBottom10'}
+                    onClick={() => this.handleModalState(true)}
+                >
+                    Learn more about Quarterly Performance Reporting
+                </button>
+                <Modal
+                    open={this.state.modalOpen}
+                    onClose={() => this.handleModalState(false)}
+                >
+                    <Paper
+                        className={'performance-modal'}
+                    >
+                        <Grid
+                            className={'performance-modal-title'}
+                        >
+                            Data disclaimer
+                        </Grid>
+                        <Grid
+                            className={'performance-modal-content'}
+                        >
+                            The Quarterly Performance Reporting (QPR) data (other than the Annual audited output field)
+                            is pre-audited non financial data. This data is approved by the accounting officer of the
+                            relevant organ of state before publication.
+                        </Grid>
+                        <Grid
+                            className={'performance-modal-link'}
+                        >
+                            <a href="">Learn more about these performance indicators.</a>
+                        </Grid>
+                        <Grid>
+                            <a
+                                className={'Button is-inline u-marginBottom10 performance-modal-button'}
+                                target={'_blank'}
+                                href={''}
+                            >
+                                Acknowledge and continue
+                            </a>
+                        </Grid>
+                    </Paper>
+                </Modal>
+            </Grid>
+        )
+    }
+
     render() {
         return (<div>
+            {this.renderLearnMore()}
             {this.renderFilters()}
             {this.renderTable()}
         </div>);
