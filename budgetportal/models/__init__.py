@@ -818,9 +818,14 @@ class ShowcaseItem(SortableMixin):
         choices=(("primary", "Primary"), ("secondary", "Secondary")),
         verbose_name="Second call to action type",
     )
-    file = models.FileField(upload_to=showcase_item_file_path, help_text=mark_safe("<ul><li style='list-style:square'>1.91:1 aspect ratio</li>"
-                                                                                   "<li style='list-style:square'>Recommended px resolution is 1200px x 630px</li>"
-                                                                                   "<li style='list-style:square'>Main focus of image should be centered</li></ul>"))
+    file = models.FileField(
+        upload_to=showcase_item_file_path,
+        help_text=mark_safe(
+            "<ul><li style='list-style:square'>1.91:1 aspect ratio</li>"
+            "<li style='list-style:square'>Recommended px resolution is 1200px x 630px</li>"
+            "<li style='list-style:square'>Main focus of image should be centered</li></ul>"
+        ),
+    )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     item_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
