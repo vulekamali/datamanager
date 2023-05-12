@@ -574,7 +574,7 @@ class TabularView extends Component {
                                 target={'_blank'}
                                 href={''}
                             >
-                                Acknowledge and continue
+                                Acknowledge and continue 
                             </a>
                         </Grid>
                     </Paper>
