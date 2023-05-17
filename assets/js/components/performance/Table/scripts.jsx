@@ -17,7 +17,9 @@ import {
     TableRow,
     Chip,
     CircularProgress,
-    MenuItem, Button,
+    MenuItem,
+    Button,
+    Modal
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -33,6 +35,8 @@ class TabularView extends Component {
         this.abortController = null;
 
         this.state = {
+            dataDisclaimerAcknowledged: false,
+            modalOpen: false,
             rows: null,
             departments: null,
             financialYears: null,
@@ -94,6 +98,15 @@ class TabularView extends Component {
         })
 
         this.setSelectedFiltersAndFetchAPIData();
+        this.checkForLocalStorage();
+    }
+
+    checkForLocalStorage() {
+        const ack = localStorage.getItem('data-disclaimer-acknowledged');
+        this.setState({
+            ...this.state,
+            dataDisclaimerAcknowledged: ack === 'true'
+        })
     }
 
     setSelectedFiltersAndFetchAPIData() {
@@ -600,13 +613,103 @@ class TabularView extends Component {
         </Grid>)
     }
 
-    render() {
+    handleStorage() {
+        localStorage.setItem('data-disclaimer-acknowledged', 'true');
+        this.setState({
+            ...this.state,
+            dataDisclaimerAcknowledged: true,
+            modalOpen: false
+        })
+    }
+
+    handleModalState(open) {
+        this.setState({
+            ...this.state,
+            modalOpen: open
+        })
+    }
+
+    renderLearnMoreButton() {
+        if (this.state.dataDisclaimerAcknowledged) {
+            return (
+                <a
+                    className={'Button is-inline u-marginBottom10 performance-modal-button'}
+                    href={'https://performance.vulekamali.gov.za/stages/implementation-monitoring#3.2'}
+                    target={'_blank'}
+                >
+                    Learn more about Quarterly Performance Reporting
+                </a>
+            )
+        } else {
+            return (
+                <button
+                    type={'button'}
+                    className={'Button is-inline u-marginBottom10 performance-modal-button'}
+                    onClick={() => this.handleModalState(true)}
+                >
+                    Learn more about Quarterly Performance Reporting
+                </button>
+            )
+        }
+    }
+
+    renderLearnMoreModal() {
         return (
-            <div>
-                {this.renderFilters()}
-                {this.renderTable()}
-            </div>
-        );
+            <Modal
+                open={this.state.modalOpen}
+                onClose={() => this.handleModalState(false)}
+            >
+                <Paper
+                    className={'performance-modal'}
+                >
+                    <Grid
+                        className={'performance-modal-title'}
+                    >
+                        Data disclaimer
+                    </Grid>
+                    <Grid
+                        className={'performance-modal-content'}
+                    >
+                        The Quarterly Performance Reporting (QPR) data (other than the Annual audited output field)
+                        is pre-audited non financial data. This data is approved by the accounting officer of the
+                        relevant organ of state before publication.
+                    </Grid>
+                    <Grid
+                        className={'performance-modal-link'}
+                    >
+                        <a
+                            href="https://performance.vulekamali.gov.za/stages/implementation-monitoring#3.2"
+                            target={'_blank'}
+                        >Learn more about these performance indicators.</a>
+                    </Grid>
+                    <Grid>
+                        <button
+                            className={'Button is-inline u-marginBottom10 performance-modal-full performance-modal-button'}
+                            onClick={() => this.handleStorage()}
+                        >
+                            Acknowledge and continue
+                        </button>
+                    </Grid>
+                </Paper>
+            </Modal>
+        )
+    }
+
+    renderLearnMore() {
+        return (
+            <Grid>
+                {this.renderLearnMoreButton()}
+                {this.renderLearnMoreModal()}
+            </Grid>
+        )
+    }
+
+    render() {
+        return (<div>
+            {this.renderLearnMore()}
+            {this.renderFilters()}
+            {this.renderTable()}
+        </div>);
     }
 }
 

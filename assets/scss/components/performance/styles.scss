@@ -223,8 +223,61 @@
   font-stretch: normal !important;
 }
 
+.performance-modal {
+  width: 27%;
+  margin: 0 auto;
+  position: relative;
+  top: 25%;
+  padding: 20px;
+  border-radius: 20px !important;
+
+  .performance-modal-title {
+    font-family: Lato, sans-serif !important;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 145%;
+    color: #000;
+  }
+
+  .performance-modal-content {
+    font-family: Lato, sans-serif !important;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 145%;
+    color: #000;
+    margin-top: 15px;
+  }
+
+  .performance-modal-link {
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    a {
+      font-family: Lato, sans-serif !important;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 145%;
+      color: #000;
+    }
+  }
+
+  .performance-modal-full {
+    width: 100%;
+  }
+}
+
+.performance-modal-button {
+  font-family: Lato, sans-serif !important;
+  line-height: 100%;
+  font-size: 16px;
+}
+
 @media (max-width: 480px) {
   .performance-table .performance-indicator-cell .cell-content {
     width: 80vw;
+  }
+
+  .performance-modal {
+    width: 87%;
   }
 }
