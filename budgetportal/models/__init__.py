@@ -821,9 +821,9 @@ class ShowcaseItem(SortableMixin):
     file = models.FileField(
         upload_to=showcase_item_file_path,
         help_text=mark_safe(
-            "<ul><li style='list-style:square'>1.91:1 aspect ratio</li>"
-            "<li style='list-style:square'>Recommended px resolution is 1200px x 630px</li>"
-            "<li style='list-style:square'>Main focus of image should be centered</li></ul>"
+            "<ul><li style='list-style:square'>Thumbnail aspect ratio should be 1.91:1.</li>"
+            "<li style='list-style:square'>Recommended resolution is 1200 x 630 px.</li>"
+            "<li style='list-style:square'>Main focus of image should be centered occupying 630 x 630 px in the middle of the image.</li></ul>"
         ),
     )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
