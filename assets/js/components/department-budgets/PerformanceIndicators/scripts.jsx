@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import Programme from "./programme";
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import decodeHtmlEntities from "../../../utilities/js/helpers/decodeHtmlEntities";
-import {Button, CircularProgress, Grid} from "@material-ui/core";
+import {Button, CircularProgress, Dialog, Grid} from "@material-ui/core";
 
 class PerformanceIndicators extends Component {
     constructor(props) {
@@ -164,12 +164,36 @@ class PerformanceIndicatorsContainer extends Component {
         super(props);
 
         this.state = {
+            dataDisclaimerAcknowledged: false,
+            modalOpen: false,
             department: props.department,
             year: props.year,
             sphere: props.sphere,
             government: props.government,
             previousYears: props.previousYears
         }
+    }
+
+    componentDidMount() {
+        this.checkForLocalStorage();
+    }
+
+    checkForLocalStorage() {
+        const ack = localStorage.getItem('data-disclaimer-acknowledged');
+        this.setState({
+            ...this.state,
+            dataDisclaimerAcknowledged: ack === 'true',
+            modalOpen: ack !== 'true'
+        })
+    }
+
+    handleStorage() {
+        localStorage.setItem('data-disclaimer-acknowledged', 'true');
+        this.setState({
+            ...this.state,
+            dataDisclaimerAcknowledged: true,
+            modalOpen: false
+        })
     }
 
     renderNavigateButtons() {
@@ -199,6 +223,51 @@ class PerformanceIndicatorsContainer extends Component {
         )
     }
 
+    renderModal() {
+        return (
+            <Dialog
+                open={this.state.modalOpen}
+                container={() => document.getElementById('js-initPerformanceIndicators')}
+                style={{position: 'absolute'}}
+                BackdropProps={{
+                    style: {position: 'absolute'}
+                }}
+                disableAutoFocus={true}
+                disableEnforceFocus={true}
+                className={'performance-modal'}
+            >
+                <Grid
+                    className={'performance-modal-title'}
+                >
+                    Data disclaimer
+                </Grid>
+                <Grid
+                    className={'performance-modal-content'}
+                >
+                    The Quarterly Performance Reporting (QPR) data (other than the Annual audited output field)
+                    is pre-audited non financial data. This data is approved by the accounting officer of the
+                    relevant organ of state before publication.
+                </Grid>
+                <Grid
+                    className={'performance-modal-link'}
+                >
+                    <a
+                        href="https://performance.vulekamali.gov.za/stages/implementation-monitoring#3.2"
+                        target={'_blank'}
+                    >Learn more about these performance indicators.</a>
+                </Grid>
+                <Grid>
+                    <button
+                        className={'Button is-inline u-marginBottom10 performance-modal-full performance-modal-button'}
+                        onClick={() => this.handleStorage()}
+                    >
+                        Acknowledge and continue
+                    </button>
+                </Grid>
+            </Dialog>
+        )
+    }
+
     render() {
         return (<div>
             <h3 className="Title Title--section">Indicators of performance</h3>
@@ -210,6 +279,7 @@ class PerformanceIndicatorsContainer extends Component {
                 previousYears={this.state.previousYears}
             />
             {this.renderNavigateButtons()}
+            {this.renderModal()}
         </div>);
     }
 }
