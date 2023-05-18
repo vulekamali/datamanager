@@ -105,7 +105,8 @@ class TabularView extends Component {
         const ack = localStorage.getItem('data-disclaimer-acknowledged');
         this.setState({
             ...this.state,
-            dataDisclaimerAcknowledged: ack === 'true'
+            dataDisclaimerAcknowledged: ack === 'true',
+            modalOpen: ack !== 'true'
         })
     }
 
@@ -630,34 +631,22 @@ class TabularView extends Component {
     }
 
     renderLearnMoreButton() {
-        if (this.state.dataDisclaimerAcknowledged) {
-            return (
-                <a
-                    className={'Button is-inline u-marginBottom10 performance-modal-button'}
-                    href={'https://performance.vulekamali.gov.za/stages/implementation-monitoring#3.2'}
-                    target={'_blank'}
-                >
-                    Learn more about Quarterly Performance Reporting
-                </a>
-            )
-        } else {
-            return (
-                <button
-                    type={'button'}
-                    className={'Button is-inline u-marginBottom10 performance-modal-button'}
-                    onClick={() => this.handleModalState(true)}
-                >
-                    Learn more about Quarterly Performance Reporting
-                </button>
-            )
-        }
+        return (
+            <a
+                className={'Button is-inline u-marginBottom10 performance-modal-button'}
+                href={'https://performance.vulekamali.gov.za/stages/implementation-monitoring#3.2'}
+                target={'_blank'}
+            >
+                Learn more about Quarterly Performance Reporting
+            </a>
+        )
     }
 
     renderLearnMoreModal() {
         return (
             <Modal
                 open={this.state.modalOpen}
-                onClose={() => this.handleModalState(false)}
+                // onClose={() => this.handleModalState(false)}
             >
                 <Paper
                     className={'performance-modal'}
