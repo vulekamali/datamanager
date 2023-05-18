@@ -17,7 +17,8 @@ import {
     TableRow,
     Chip,
     CircularProgress,
-    MenuItem, Modal,
+    MenuItem,
+    Dialog,
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -569,43 +570,46 @@ class TabularView extends Component {
 
     renderLearnMoreModal() {
         return (
-            <Modal
+            <Dialog
                 open={this.state.modalOpen}
-                // onClose={() => this.handleModalState(false)}
+                container={() => document.getElementById('performance-table-container')}
+                style={{position: 'absolute'}}
+                BackdropProps={{
+                    style: {position: 'absolute'}
+                }}
+                disableAutoFocus={true}
+                disableEnforceFocus={true}
+                className={'performance-modal'}
             >
-                <Paper
-                    className={'performance-modal'}
+                <Grid
+                    className={'performance-modal-title'}
                 >
-                    <Grid
-                        className={'performance-modal-title'}
+                    Data disclaimer
+                </Grid>
+                <Grid
+                    className={'performance-modal-content'}
+                >
+                    The Quarterly Performance Reporting (QPR) data (other than the Annual audited output field)
+                    is pre-audited non financial data. This data is approved by the accounting officer of the
+                    relevant organ of state before publication.
+                </Grid>
+                <Grid
+                    className={'performance-modal-link'}
+                >
+                    <a
+                        href="https://performance.vulekamali.gov.za/stages/implementation-monitoring#3.2"
+                        target={'_blank'}
+                    >Learn more about these performance indicators.</a>
+                </Grid>
+                <Grid>
+                    <button
+                        className={'Button is-inline u-marginBottom10 performance-modal-full performance-modal-button'}
+                        onClick={() => this.handleStorage()}
                     >
-                        Data disclaimer
-                    </Grid>
-                    <Grid
-                        className={'performance-modal-content'}
-                    >
-                        The Quarterly Performance Reporting (QPR) data (other than the Annual audited output field)
-                        is pre-audited non financial data. This data is approved by the accounting officer of the
-                        relevant organ of state before publication.
-                    </Grid>
-                    <Grid
-                        className={'performance-modal-link'}
-                    >
-                        <a
-                            href="https://performance.vulekamali.gov.za/stages/implementation-monitoring#3.2"
-                            target={'_blank'}
-                        >Learn more about these performance indicators.</a>
-                    </Grid>
-                    <Grid>
-                        <button
-                            className={'Button is-inline u-marginBottom10 performance-modal-full performance-modal-button'}
-                            onClick={() => this.handleStorage()}
-                        >
-                            Acknowledge and continue
-                        </button>
-                    </Grid>
-                </Paper>
-            </Modal>
+                        Acknowledge and continue
+                    </button>
+                </Grid>
+            </Dialog>
         )
     }
 

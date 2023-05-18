@@ -209,11 +209,9 @@
   display: none;
 }
 
-.performance-modal {
-  width: 27%;
+.performance-modal .MuiDialog-paper {
   margin: 0 auto;
   position: relative;
-  top: 25%;
   padding: 20px;
   border-radius: 20px !important;
 
@@ -258,12 +256,20 @@
   font-size: 16px;
 }
 
+#performance-table-container {
+  position: relative;
+}
+
+.Page-head {
+  z-index: 9999;
+}
+
 @media (max-width: 480px) {
   .performance-table .performance-indicator-cell .cell-content {
     width: 80vw;
   }
 
-  .performance-modal {
+  .performance-modal .MuiDialog-paper {
     width: 87%;
   }
 }
