@@ -24,7 +24,7 @@ import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import debounce from "lodash.debounce";
-
+  
 class TabularView extends Component {
     constructor(props) {
         super(props);
@@ -568,7 +568,8 @@ class TabularView extends Component {
         )
     }
 
-    renderLearnMoreModal() {
+    renderDataSourceModal() {
+
         return (
             <Dialog
                 open={this.state.modalOpen}
@@ -617,7 +618,7 @@ class TabularView extends Component {
         return (
             <Grid>
                 {this.renderLearnMoreButton()}
-                {this.renderLearnMoreModal()}
+                {this.renderDataSourceModal()}
             </Grid>
         )
     }

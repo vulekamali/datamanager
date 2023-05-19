@@ -211,7 +211,8 @@
 
 .performance-modal .MuiDialog-paper {
   margin: 0 auto;
-  position: relative;
+  position: absolute;
+  top: 200px;
   padding: 20px;
   border-radius: 20px !important;
 
