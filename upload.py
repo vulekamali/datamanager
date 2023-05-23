@@ -42,7 +42,9 @@ print(info_result)
 # Payload {"metadata":{"owner":"b9d2af843f3a7ca223eea07fb608e62a","name":"test-2023","author":"test-2023"},"filedata":{"fiscaltest2.csv":{"md5":"NvO8/F0aNOxhc5Z2a9MH1w==","name":"fiscaltest2.csv","length":94,"type":"application/octet-stream"}}}
 # Response {"filedata": {"fiscaltest2.csv": {"md5": "NvO8/F0aNOxhc5Z2a9MH1w==", "name": "fiscaltest2.csv", "length": 94, "upload_url": "https://s3.eu-west-1.amazonaws.com:443/openspending-vulekamali/b9d2af843f3a7ca223eea07fb608e62a/test-2023/fiscaltest2.csv", "upload_query": {"Signature": ["u/mE1gPw12YoyYVov..."], "Expires": ["1685026446"], "AWSAccessKeyId": ["AKIA3LMODSMQDUVA32EH"]}, "type": "application/octet-stream"}}}
 
-with open(f"datapackage/myfilename.csv", 'rb') as csv_file:
+csv_path = "datapackage/myfilename.csv"
+csv_filename = "myfilename.csv"
+with open(csv_path, 'rb') as csv_file:
     csv_bytes = csv_file.read()
     csv_md5 = hashlib.md5(csv_bytes)
     csv_md5_b64 = base64.b64encode(csv_md5.digest())
@@ -55,9 +57,9 @@ authorize_csv_upload_payload = {
         "author": "auto-upload-test",
     },
     "filedata": {
-        "myfilename.csv": {
+        csv_filename: {
             "md5": csv_md5_b64,
-            "name": "myfilename.csv",
+            "name": csv_filename,
             "length": len(csv_bytes),
             "type": "application/octet-stream"
         }
@@ -76,6 +78,15 @@ print("authorize_csv_upload_result", authorize_csv_upload_result)
 
 # PUT https://s3.eu-west-1.amazonaws.com/openspending-vulekamali/b9d2af843f3a7ca223eea07fb608e62a/test-2023/fiscaltest2.csv?Signature=u%2FmE1gPw12YoyYV...Expires=1685026446&AWSAccessKeyId=AKIA3LMODSMQDUVA32EH
 # Content-Type: application/octet-stream
+csv_upload_query = {k: v[0] for k, v in authorize_csv_upload_result['filedata'][csv_filename]["upload_query"].items()}
+csv_upload_url = f"{ authorize_csv_upload_result['filedata'][csv_filename]['upload_url'] }?{ urlencode(csv_upload_query) }"
+csv_upload_headers = {
+    "content-type": "application/octet-stream",
+    "Content-MD5": csv_md5_b64
+}
+with open(csv_path, 'rb') as csv_file:
+    r = requests.put(csv_upload_url, data=csv_file, headers=csv_upload_headers)
+r.raise_for_status()
 
 # POST https://openspending-dedicated.vulekamali.gov.za/datastore/
 # auth-token: eyJ0eXAiOiJKV1QiLCJhbG...gchTaijz-7DQ
