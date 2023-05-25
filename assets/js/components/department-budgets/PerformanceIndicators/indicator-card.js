@@ -288,7 +288,7 @@ class IndicatorCard extends Component {
 
     handleAnnualCharts() {
         for (let i = 1; i <= 4; i++) {
-            const currentYear = i === 4;
+            const currentYear = this.state.previousYearsIndicators[i - 1].financialYear === this.state.financialYear;
             const ctx = document.getElementById(`chart-annual-${this.state.indicator.id}-${i}`);
             if (!ctx.hasChildNodes()) {
                 const {target, actual} = this.getAnnualTargetAndActual(i - 1, currentYear);
@@ -350,12 +350,16 @@ class IndicatorCard extends Component {
     }
 
     getAnnualChartContainer(q) {
-        const isCurrentYear = q === 4;
+        if (this.state.previousYearsIndicators.length <= q - 1) {
+            return;
+        }
+
+        const isCurrentYear = this.state.previousYearsIndicators[q - 1].financialYear === this.state.financialYear;
         if (this.state.previousYearsIndicators.length <= q - 1 && !isCurrentYear) {
             return;
         }
 
-        const selectedYear = isCurrentYear ? this.state.financialYear : this.state.previousYearsIndicators[q - 1].financialYear;
+        const selectedYear = this.state.previousYearsIndicators[q - 1].financialYear;
         return (
             <Grid
                 key={`chart-annual-container-${this.state.indicator.id}-${q}`}
