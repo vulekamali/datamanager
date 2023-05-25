@@ -25,7 +25,7 @@ import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
 import fetchWrapper from "../../../utilities/js/helpers/fetchWrapper";
 import debounce from "lodash.debounce";
-  
+
 class TabularView extends Component {
     constructor(props) {
         super(props);
@@ -94,23 +94,22 @@ class TabularView extends Component {
 
     componentDidMount() {
         this.fetchAPIData(0);
-        this.checkForLocalStorage();
         window.addEventListener('popstate', (event) => {
             this.setSelectedFiltersAndFetchAPIData();
         })
 
         this.setSelectedFiltersAndFetchAPIData();
+        this.checkForLocalStorage();
     }
 
     checkForLocalStorage() {
         const ack = localStorage.getItem('data-disclaimer-acknowledged');
         this.setState({
-            ...this.state,
             dataDisclaimerAcknowledged: ack === 'true',
             modalOpen: ack !== 'true'
         })
     }
-        
+
 
     setSelectedFiltersAndFetchAPIData() {
         let selectedFilters = {};
@@ -625,13 +624,6 @@ class TabularView extends Component {
         })
     }
 
-    handleModalState(open) {
-        this.setState({
-            ...this.state,
-            modalOpen: open
-        })
-    }
-
     renderLearnMoreButton() {
         return (
             <a
@@ -645,7 +637,6 @@ class TabularView extends Component {
     }
 
     renderDataSourceModal() {
-
         return (
             <Dialog
                 open={this.state.modalOpen}
