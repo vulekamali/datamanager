@@ -292,9 +292,7 @@ function scripts() {
     if (nodesArray.length > 0) {
         const jsonData = JSON.parse(decodeHtmlEntities(nodes[0].getAttribute('data-json'))).data;
         jsonData.forEach((d) => {
-            if (!d.is_selected) {
-                previousYears.push(d.id)
-            }
+            previousYears.push(d.id)
         })
     }
 

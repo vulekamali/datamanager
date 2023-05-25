@@ -406,7 +406,7 @@ class IndicatorCard extends Component {
                     {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[2].financialYear : 'Q3'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedPeriodType === 'annual' ? this.state.financialYear : 'Q4'}
+                    {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[3].financialYear : 'Q4'}
                 </Grid>
             </Grid>
         )
