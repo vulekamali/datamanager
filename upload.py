@@ -54,8 +54,8 @@ def authorise_upload(path, filename):
     authorize_upload_payload = {
         "metadata": {
             "owner": userid,
-            "name": "auto-upload-test",
-            "author": "auto-upload-test",
+            "name": "auto-upload-test2",
+            "author": "auto-upload-test2",
         },
         "filedata": {
             filename: {
@@ -135,13 +135,17 @@ status = r.json()["status"]
 # Response {progress: 1, status: "done"}
 
 #TODO: when this is an async task, make sure it actually exits when there's a problem
-while status != "done":
-    time.sleep(10)
+while status not in ["done", "fail"]:
+    time.sleep(5)
     status_query = {
         "datapackage": datapackage_url,
     }
     status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{ urlencode(status_query) }"
     r = requests.get(status_url)
     r.raise_for_status()
-    print(r.json())
-    status = r.json()["status"]
+    status_result = r.json()
+    print(status_result)
+    status = status_result["status"]
+
+    if status == "fail":
+        print(status_result["error"])
