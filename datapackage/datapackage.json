@@ -1,0 +1,97 @@
+{
+  "model": {
+    "dimensions": {
+      "date": {
+        "dimensionType": "datetime",
+        "primaryKey": [
+          "year"
+        ],
+        "attributes": {
+          "year": {
+            "source": "year",
+            "title": "year"
+          }
+        }
+      },
+      "administrative-classification": {
+        "dimensionType": "classification",
+        "primaryKey": [
+          "something"
+        ],
+        "attributes": {
+          "something": {
+            "source": "something",
+            "title": "something"
+          }
+        },
+        "classificationType": "foobar-classification"
+      }
+    },
+    "measures": {
+      "amount": {
+        "source": "amount",
+        "title": "amount",
+        "currency": "USD"
+      }
+    }
+  },
+  "promise": {},
+  "title": "auto-upload-test2",
+  "name": "auto-upload-test2",
+  "resources": [
+    {
+      "name": "myfilename",
+      "format": "csv",
+      "path": "myfilename.csv",
+      "mediatype": "text/csv",
+      "bytes": 94,
+      "dialect": {
+        "csvddfVersion": 1,
+        "delimiter": ",",
+        "lineTerminator": "\n"
+      },
+      "encoding": "utf-8",
+      "schema": {
+        "fields": [
+          {
+            "title": "year",
+            "name": "year",
+            "slug": "year",
+            "type": "integer",
+            "format": "default",
+            "columnType": "date:fiscal-year",
+            "conceptType": "date"
+          },
+          {
+            "title": "something",
+            "name": "something",
+            "slug": "something",
+            "type": "string",
+            "format": "default",
+            "columnType": "foobar-classification:generic:level1:code",
+            "conceptType": "foobar"
+          },
+          {
+            "title": "amount",
+            "name": "amount",
+            "slug": "amount",
+            "type": "number",
+            "format": "default",
+            "columnType": "value",
+            "conceptType": "value",
+            "decimalChar": ".",
+            "groupChar": ","
+          }
+        ],
+        "primaryKey": [
+          "year",
+          "something"
+        ]
+      }
+    }
+  ],
+  "@context": "http://schemas.frictionlessdata.io/fiscal-data-package.jsonld",
+  "owner": "b9d2af843f3a7ca223eea07fb608e62a",
+  "author": "vulekamali South African Budget Portal",
+  "count_of_rows": 8
+}
