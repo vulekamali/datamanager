@@ -1,31 +1,88 @@
 {
   "model": {
     "dimensions": {
-      "date": {
-        "dimensionType": "datetime",
-        "primaryKey": [
-          "year"
-        ],
-        "attributes": {
-          "year": {
-            "source": "year",
-            "title": "year"
-          }
-        }
-      },
       "administrative-classification": {
         "dimensionType": "classification",
         "primaryKey": [
-          "something"
+          "VoteNumber"
         ],
         "attributes": {
-          "something": {
-            "source": "something",
-            "title": "something"
+          "VoteNumber": {
+            "source": "VoteNumber",
+            "title": "VoteNumber"
+          },
+          "Department": {
+            "source": "Department",
+            "title": "Department",
+            "labelfor": "VoteNumber"
           }
         },
-        "classificationType": "foobar-classification"
-      }
+        "classificationType": "administrative"
+      },"activity": {
+        "dimensionType": "activity",
+        "primaryKey": [
+          "ProgNumber",
+          "SubprogNumber"
+        ],
+        "attributes": {
+          "ProgNumber": {
+            "source": "ProgNumber",
+            "title": "ProgNumber"
+          },
+          "Programme": {
+            "source": "Programme",
+            "title": "Programme",
+            "labelfor": "ProgNumber"
+          },
+          "SubprogNumber": {
+            "source": "SubprogNumber",
+            "title": "SubprogNumber",
+            "parent": "ProgNumber"
+          },
+          "Subprogramme": {
+            "source": "Subprogramme",
+            "title": "Subprogramme",
+            "labelfor": "SubprogNumber"
+          }
+        }
+      },
+      "economic-classification": {
+        "dimensionType": "classification",
+        "primaryKey": [
+          "EconomicClassification1",
+          "EconomicClassification2",
+          "EconomicClassification3",
+          "EconomicClassification4",
+          "EconomicClassification5"
+        ],
+        "attributes": {
+          "EconomicClassification1": {
+            "source": "EconomicClassification1",
+            "title": "EconomicClassification1"
+          },
+          "EconomicClassification2": {
+            "source": "EconomicClassification2",
+            "title": "EconomicClassification2",
+            "parent": "EconomicClassification1"
+          },
+          "EconomicClassification3": {
+            "source": "EconomicClassification3",
+            "title": "EconomicClassification3",
+            "parent": "EconomicClassification2"
+          },
+          "EconomicClassification4": {
+            "source": "EconomicClassification4",
+            "title": "EconomicClassification4",
+            "parent": "EconomicClassification3"
+          },
+          "EconomicClassification5": {
+            "source": "EconomicClassification5",
+            "title": "EconomicClassification5",
+            "parent": "EconomicClassification4"
+          }
+        },
+        "classificationType": "economic"
+      },
     },
     "measures": {
       "amount": {
@@ -69,7 +126,7 @@
             "type": "string",
             "format": "default",
             "columnType": "foobar-classification:generic:level1:code",
-            "conceptType": "foobar"
+            "conceptType": "foobar-classification"
           },
           {
             "title": "amount",
