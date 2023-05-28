@@ -40,6 +40,8 @@ class PerformanceIndicators extends Component {
                         ...this.state,
                         previousYearsProgrammes: arr
                     });
+
+                    console.log({arr})
                 })
         })
     }
@@ -299,7 +301,7 @@ function scripts() {
     const parent = document.getElementById('js-initPerformanceIndicators');
     if (parent) {
         const departmentName = parent.getAttribute('data-department');
-        const financialYear = parent.getAttribute('data-year');
+        const financialYear = '2017-18'//parent.getAttribute('data-year');
         const sphere = parent.getAttribute('data-sphere');
         const government = parent.getAttribute('data-government');
         ReactDOM.render(<PerformanceIndicatorsContainer

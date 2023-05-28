@@ -35,7 +35,7 @@ class Programme extends Component {
             let prevArr = this.state.previousYearsProgrammes.map(item => {
                 return {
                     financialYear: item.financialYear,
-                    indicator: item.programme == null ? null : item.programme.allIndicators.filter(p => p.id === indicator.id)[0]
+                    indicator: item.programme == null ? null : item.programme.allIndicators.filter(p => p.indicator_name === indicator.indicator_name)[0]
                 };
             })
 

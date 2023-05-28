@@ -274,30 +274,27 @@ class IndicatorCard extends Component {
         }
     }
 
-    getAnnualTargetAndActual(index, currentYear) {
-        if (currentYear) {
-            return this.getQuarterTargetAndActual('annual');
-        } else {
-            const indicator = this.state.previousYearsIndicators[index].indicator;
-            const target = indicator == null ? 0 : indicator['annual_target'].replace('%', '').trim();
-            const actual = indicator == null ? 0 : indicator['annual_audited_output'].replace('%', '').trim();
+    getAnnualTargetAndActual(financialYear) {
+        const indicator = this.state.previousYearsIndicators.filter(x => x.financialYear === financialYear)[0].indicator;
+        const target = indicator == null ? 0 : indicator['annual_target'].replace('%', '').trim();
+        const actual = indicator == null ? 0 : indicator['annual_audited_output'].replace('%', '').trim();
 
-            return {target, actual};
-        }
+        return {target, actual};
     }
 
     handleAnnualCharts() {
         for (let i = 1; i <= 4; i++) {
-            const currentYear = this.state.previousYearsIndicators[i - 1].financialYear === this.state.financialYear;
+            debugger;
+            const financialYear = this.state.previousYearsIndicators[i - 1].financialYear;
             const ctx = document.getElementById(`chart-annual-${this.state.indicator.id}-${i}`);
             if (!ctx.hasChildNodes()) {
-                const {target, actual} = this.getAnnualTargetAndActual(i - 1, currentYear);
+                const {target, actual} = this.getAnnualTargetAndActual(financialYear);
                 const bothNumeric = this.isNumeric(target) && this.isNumeric(actual);
 
                 if (bothNumeric) {
                     // show chart
                     let values = [{
-                        quarter: (currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear),
+                        quarter: financialYear,
                         actual: parseFloat(actual),
                         target: parseFloat(target)
                     }]
@@ -309,7 +306,7 @@ class IndicatorCard extends Component {
                 } else {
                     // chart is not available
                     const nonNumeric = !this.isNumeric(actual) ? 'actual output' : 'target';
-                    const parentDiv = this.createUnavailableChartIndicator(currentYear ? this.state.financialYear : this.state.previousYearsIndicators[i - 1].financialYear, nonNumeric);
+                    const parentDiv = this.createUnavailableChartIndicator(financialYear, nonNumeric);
 
                     ReactDOM.render(parentDiv, ctx);
                 }
