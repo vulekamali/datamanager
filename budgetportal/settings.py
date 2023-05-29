@@ -110,10 +110,10 @@ INSTALLED_APPS = [
     "storages",
 ]
 
-CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 
 CONSTANCE_CONFIG = {
-    'EQPRS_Data_Enabled': (False, 'enabling / disabling summary on department page')
+    "EQPRS_Data_Enabled": (False, "enabling / disabling summary on department page")
 }
 
 if DEBUG_TOOLBAR:
@@ -208,7 +208,7 @@ DISCOURSE_SSO_SECRET = os.environ.get("DISCOURSE_SSO_SECRET", None)
 COMMENTS_ENABLED = os.environ.get("COMMENTS_ENABLED", "false").lower() == "true"
 
 BUST_OPENSPENDING_CACHE = (
-        os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
+    os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
 )
 OPENSPENDING_HOST = os.environ.get("OPENSPENDING_HOST", "https://openspending.org")
 
