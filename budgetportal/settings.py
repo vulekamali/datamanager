@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
+    "constance",
+    "constance.backends.database",
     "performance",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -108,6 +110,12 @@ INSTALLED_APPS = [
     "storages",
 ]
 
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
+CONSTANCE_CONFIG = {
+    'EQPRS_Data_Enabled': (False, 'enabling / disabling summary on department page')
+}
+
 if DEBUG_TOOLBAR:
     INSTALLED_APPS.append("debug_toolbar")
 
@@ -136,7 +144,6 @@ WSGI_APPLICATION = "budgetportal.wsgi.application"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
-
 db_config = dj_database_url.config()
 db_config["ATOMIC_REQUESTS"] = True
 
@@ -157,7 +164,6 @@ AWS_S3_CUSTOM_DOMAIN = env.str("AWS_S3_CUSTOM_DOMAIN", None)
 # https://docs.wagtail.io/en/v2.7.1/advanced_topics/deploying.html
 AWS_S3_FILE_OVERWRITE = False
 
-
 SOLR_URL = os.environ["SOLR_URL"]
 
 HAYSTACK_CONNECTIONS = {
@@ -167,7 +173,6 @@ HAYSTACK_CONNECTIONS = {
         "ADMIN_URL": "",
     }
 }
-
 
 # Caches
 if DEBUG:
@@ -189,7 +194,6 @@ else:
         }
     }
 
-
 CKAN_URL = os.environ.get("CKAN_URL", "https://data.vulekamali.gov.za")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY", None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
@@ -204,7 +208,7 @@ DISCOURSE_SSO_SECRET = os.environ.get("DISCOURSE_SSO_SECRET", None)
 COMMENTS_ENABLED = os.environ.get("COMMENTS_ENABLED", "false").lower() == "true"
 
 BUST_OPENSPENDING_CACHE = (
-    os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
+        os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
 )
 OPENSPENDING_HOST = os.environ.get("OPENSPENDING_HOST", "https://openspending.org")
 

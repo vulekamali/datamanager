@@ -17,6 +17,7 @@ django-adminplus==0.5
 django-allauth==0.41.0
 django-autoslug==1.9.6
 django-ckeditor==5.9.0
+django-constance==2.9.1
 django-debug-toolbar==2.2
 django-extensions==2.2.8
 django-environ==0.4.5
