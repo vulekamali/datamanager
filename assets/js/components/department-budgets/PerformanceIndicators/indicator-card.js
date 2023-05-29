@@ -139,10 +139,10 @@ class IndicatorCard extends Component {
         return Math.max(...valuesArr);
     }
 
-    getIndicatorAnnualMax() {
+    getIndicatorAnnualMax(financialYear) {
         let valuesArr = [];
         for (let i = 3; i >= 0; i--) {
-            const {target, actual} = this.getAnnualTargetAndActual(i - 1, i === 0);
+            const {target, actual} = this.getAnnualTargetAndActual(financialYear);
             valuesArr.push(this.isNumeric(target) ? parseFloat(target) : 0);
             valuesArr.push(this.isNumeric(actual) ? parseFloat(actual) : 0);
         }
@@ -284,7 +284,6 @@ class IndicatorCard extends Component {
 
     handleAnnualCharts() {
         for (let i = 1; i <= 4; i++) {
-            debugger;
             const financialYear = this.state.previousYearsIndicators[i - 1].financialYear;
             const ctx = document.getElementById(`chart-annual-${this.state.indicator.id}-${i}`);
             if (!ctx.hasChildNodes()) {
@@ -299,7 +298,7 @@ class IndicatorCard extends Component {
                         target: parseFloat(target)
                     }]
 
-                    let indicatorMax = this.getIndicatorAnnualMax();
+                    let indicatorMax = this.getIndicatorAnnualMax(financialYear);
 
                     const chart = this.createChart(values, indicatorMax);
                     ctx.appendChild(chart)
@@ -347,12 +346,7 @@ class IndicatorCard extends Component {
     }
 
     getAnnualChartContainer(q) {
-        if (this.state.previousYearsIndicators.length <= q - 1) {
-            return;
-        }
-
-        const isCurrentYear = this.state.previousYearsIndicators[q - 1].financialYear === this.state.financialYear;
-        if (this.state.previousYearsIndicators.length <= q - 1 && !isCurrentYear) {
+        if (this.state.previousYearsIndicators.length <= q - 1 || this.state.previousYearsIndicators[q - 1] == null) {
             return;
         }
 

@@ -27,21 +27,19 @@ class PerformanceIndicators extends Component {
     }
 
     fetchPreviousYearsAPIData() {
-        this.state.previousYears.forEach((fy) => {
+        this.state.previousYears.forEach((fy, index) => {
             this.fetchAPIDataRecursive(1, [], fy)
                 .then((items) => {
                     let arr = this.state.previousYearsProgrammes;
-                    arr.push({
+                    arr[index] = {
                         financialYear: fy,
                         programmes: this.extractProgrammeData(items)
-                    })
+                    }
 
                     this.setState({
                         ...this.state,
                         previousYearsProgrammes: arr
                     });
-
-                    console.log({arr})
                 })
         })
     }
@@ -301,7 +299,7 @@ function scripts() {
     const parent = document.getElementById('js-initPerformanceIndicators');
     if (parent) {
         const departmentName = parent.getAttribute('data-department');
-        const financialYear = '2017-18'//parent.getAttribute('data-year');
+        const financialYear = parent.getAttribute('data-year');
         const sphere = parent.getAttribute('data-sphere');
         const government = parent.getAttribute('data-government');
         ReactDOM.render(<PerformanceIndicatorsContainer
