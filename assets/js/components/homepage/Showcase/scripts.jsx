@@ -71,7 +71,7 @@ class Showcase extends Component {
                                 <Grid item xs={12} sm={5}>
                                     <CardMedia
                                         image={feature.thumbnail_url}
-                                        style={{width: '100%', height: '100%', minHeight: '110px'}}
+                                        style={{width: '100%', height: '100%', minHeight: '160px'}}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={7} style={{margin: 'auto 0'}}>

@@ -17,9 +17,9 @@ import {
     TableRow,
     Chip,
     CircularProgress,
+    Dialog,
     MenuItem,
     Button,
-    Dialog,
 } from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import {createTheme} from '@material-ui/core/styles';
@@ -93,6 +93,7 @@ class TabularView extends Component {
     }
 
     componentDidMount() {
+        this.fetchAPIData(0);
         window.addEventListener('popstate', (event) => {
             this.setSelectedFiltersAndFetchAPIData();
         })
@@ -104,11 +105,11 @@ class TabularView extends Component {
     checkForLocalStorage() {
         const ack = localStorage.getItem('data-disclaimer-acknowledged');
         this.setState({
-            ...this.state,
             dataDisclaimerAcknowledged: ack === 'true',
             modalOpen: ack !== 'true'
         })
     }
+
 
     setSelectedFiltersAndFetchAPIData() {
         let selectedFilters = {};
@@ -623,13 +624,6 @@ class TabularView extends Component {
         })
     }
 
-    handleModalState(open) {
-        this.setState({
-            ...this.state,
-            modalOpen: open
-        })
-    }
-
     renderLearnMoreButton() {
         return (
             <a
@@ -642,7 +636,7 @@ class TabularView extends Component {
         )
     }
 
-    renderLearnMoreModal() {
+    renderDataSourceModal() {
         return (
             <Dialog
                 open={this.state.modalOpen}
@@ -691,7 +685,7 @@ class TabularView extends Component {
         return (
             <Grid>
                 {this.renderLearnMoreButton()}
-                {this.renderLearnMoreModal()}
+                {this.renderDataSourceModal()}
             </Grid>
         )
     }

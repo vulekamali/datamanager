@@ -16,6 +16,7 @@ from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.db import models
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.core import blocks as wagtail_blocks
 from wagtail.core.fields import RichTextField, StreamField
@@ -817,7 +818,14 @@ class ShowcaseItem(SortableMixin):
         choices=(("primary", "Primary"), ("secondary", "Secondary")),
         verbose_name="Second call to action type",
     )
-    file = models.FileField(upload_to=showcase_item_file_path)
+    file = models.FileField(
+        upload_to=showcase_item_file_path,
+        help_text=mark_safe(
+            "<ul><li style='list-style:square'>Thumbnail aspect ratio should be 1.91:1.</li>"
+            "<li style='list-style:square'>Recommended resolution is 1200 x 630 px.</li>"
+            "<li style='list-style:square'>Main focus of image should be centered occupying 630 x 630 px in the middle of the image.</li></ul>"
+        ),
+    )
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     item_order = models.PositiveIntegerField(default=0, editable=False, db_index=True)
