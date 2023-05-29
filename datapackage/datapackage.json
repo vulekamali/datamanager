@@ -1,97 +1,4 @@
 {
-  "model": {
-    "dimensions": {
-      "administrative-classification": {
-        "dimensionType": "classification",
-        "primaryKey": [
-          "VoteNumber"
-        ],
-        "attributes": {
-          "VoteNumber": {
-            "source": "VoteNumber",
-            "title": "VoteNumber"
-          },
-          "Department": {
-            "source": "Department",
-            "title": "Department",
-            "labelfor": "VoteNumber"
-          }
-        },
-        "classificationType": "administrative"
-      },"activity": {
-        "dimensionType": "activity",
-        "primaryKey": [
-          "ProgNumber",
-          "SubprogNumber"
-        ],
-        "attributes": {
-          "ProgNumber": {
-            "source": "ProgNumber",
-            "title": "ProgNumber"
-          },
-          "Programme": {
-            "source": "Programme",
-            "title": "Programme",
-            "labelfor": "ProgNumber"
-          },
-          "SubprogNumber": {
-            "source": "SubprogNumber",
-            "title": "SubprogNumber",
-            "parent": "ProgNumber"
-          },
-          "Subprogramme": {
-            "source": "Subprogramme",
-            "title": "Subprogramme",
-            "labelfor": "SubprogNumber"
-          }
-        }
-      },
-      "economic-classification": {
-        "dimensionType": "classification",
-        "primaryKey": [
-          "EconomicClassification1",
-          "EconomicClassification2",
-          "EconomicClassification3",
-          "EconomicClassification4",
-          "EconomicClassification5"
-        ],
-        "attributes": {
-          "EconomicClassification1": {
-            "source": "EconomicClassification1",
-            "title": "EconomicClassification1"
-          },
-          "EconomicClassification2": {
-            "source": "EconomicClassification2",
-            "title": "EconomicClassification2",
-            "parent": "EconomicClassification1"
-          },
-          "EconomicClassification3": {
-            "source": "EconomicClassification3",
-            "title": "EconomicClassification3",
-            "parent": "EconomicClassification2"
-          },
-          "EconomicClassification4": {
-            "source": "EconomicClassification4",
-            "title": "EconomicClassification4",
-            "parent": "EconomicClassification3"
-          },
-          "EconomicClassification5": {
-            "source": "EconomicClassification5",
-            "title": "EconomicClassification5",
-            "parent": "EconomicClassification4"
-          }
-        },
-        "classificationType": "economic"
-      },
-    },
-    "measures": {
-      "amount": {
-        "source": "amount",
-        "title": "amount",
-        "currency": "USD"
-      }
-    }
-  },
   "promise": {},
   "title": "auto-upload-test2",
   "name": "auto-upload-test2",
@@ -110,6 +17,269 @@
       "encoding": "utf-8",
       "schema": {
         "fields": [
+          {
+            "title": "VoteNumber",
+            "name": "Vote No#",
+            "slug": "VoteNumber",
+            "type": "string",
+            "format": "default",
+            "columnType": "administrative-classification:generic:code",
+            "conceptType": "administrative-classification"
+          },
+          {
+            "title": "Department",
+            "name": "Department",
+            "slug": "Department",
+            "type": "string",
+            "format": "default",
+            "columnType": "administrative-classification:generic:label",
+            "conceptType": "administrative-classification"
+          },
+          {
+            "title": "ProgNumber",
+            "name": "Programme No#",
+            "slug": "ProgNumber",
+            "type": "string",
+            "format": "default",
+            "columnType": "activity:generic:program:code",
+            "conceptType": "activity"
+          },
+          {
+            "title": "Programme",
+            "name": "Programme",
+            "slug": "Programme",
+            "type": "string",
+            "format": "default",
+            "columnType": "activity:generic:program:label",
+            "conceptType": "activity"
+          },
+          {
+            "title": "SubprogNumber",
+            "name": "Subprogramme No#",
+            "slug": "SubprogNumber",
+            "type": "string",
+            "format": "default",
+            "columnType": "activity:generic:subprogram:code",
+            "conceptType": "activity"
+          },
+          {
+            "title": "Subprogramme",
+            "name": "Subprogramme",
+            "slug": "Subprogramme",
+            "type": "string",
+            "format": "default",
+            "columnType": "activity:generic:subprogram:label",
+            "conceptType": "activity"
+          },
+   
+          {
+            "title": "EconomicClassification1",
+            "name": "econClass_L1",
+            "slug": "EconomicClassification1",
+            "type": "string",
+            "format": "default",
+            "columnType": "economic-classification:generic:level1:code",
+            "conceptType": "economic-classification"
+          },
+          {
+            "title": "EconomicClassification2",
+            "name": "econClass_L2",
+            "slug": "EconomicClassification2",
+            "type": "string",
+            "format": "default",
+            "columnType": "economic-classification:generic:level2:code",
+            "conceptType": "economic-classification"
+          },
+          {
+            "title": "EconomicClassification3",
+            "name": "econClass_L3",
+            "slug": "EconomicClassification3",
+            "type": "string",
+            "format": "default",
+            "columnType": "economic-classification:generic:level3:code",
+            "conceptType": "economic-classification"
+          },
+          {
+            "title": "EconomicClassification4",
+            "name": "econClass_L4",
+            "slug": "EconomicClassification4",
+            "type": "string",
+            "format": "default",
+            "columnType": "economic-classification:generic:level4:code",
+            "conceptType": "economic-classification"
+          },
+          {
+            "title": "EconomicClassification5",
+            "name": "econClass_L5",
+            "slug": "EconomicClassification5",
+            "type": "string",
+            "format": "default",
+            "columnType": "economic-classification:generic:level5:code",
+            "conceptType": "economic-classification"
+          },
+          {
+            "title": "EconomicClassificationLowest",
+            "name": "IYM_econLowestLevel",
+            "slug": "EconomicClassificationLowest",
+            "type": "string",
+            "format": "default",
+            "columnType": "economic-classification:generic:level6:code",
+            "conceptType": "economic-classification"
+          },
+
+
+          {
+            "title": "AssetClassification1",
+            "name": "Assets_Level_1",
+            "slug": "AssetClassification1",
+            "type": "string",
+            "format": "default",
+            "columnType": "asset:generic:level1:code",
+            "conceptType": "asset"
+          },
+          {
+            "title": "AssetClassification2",
+            "name": "Assets_Level_2",
+            "slug": "AssetClassification2",
+            "type": "string",
+            "format": "default",
+            "columnType": "asset:generic:level2:code",
+            "conceptType": "asset"
+          },
+          {
+            "title": "AssetClassification3",
+            "name": "Assets_Level_3",
+            "slug": "AssetClassification3",
+            "type": "string",
+            "format": "default",
+            "columnType": "asset:generic:level3:code",
+            "conceptType": "asset"
+          },
+          {
+            "title": "AssetClassification4",
+            "name": "Assets_Level_4",
+            "slug": "AssetClassification4",
+            "type": "string",
+            "format": "default",
+            "columnType": "asset:generic:level4:code",
+            "conceptType": "asset"
+          },
+          {
+            "title": "AssetClassification5",
+            "name": "Assets_Level_5",
+            "slug": "AssetClassification5",
+            "type": "string",
+            "format": "default",
+            "columnType": "asset:generic:level5:code",
+            "conceptType": "asset"
+          },
+          {
+            "title": "AssetClassification6",
+            "name": "IYM_econLowestLevel",
+            "slug": "AssetClassification6",
+            "type": "string",
+            "format": "default",
+            "columnType": "asset:generic:level6:code",
+            "conceptType": "asset"
+          },
+          {
+            "title": "AssetClassificationLowest",
+            "name": "Assets_Lowest_Level",
+            "slug": "AssetClassificationLowest",
+            "type": "string",
+            "format": "default",
+            "columnType": "asset:generic:level7:code",
+            "conceptType": "asset"
+          },
+
+
+         21: Project_Level_1
+         22: Project_Level_2
+         23: Project_Level_3
+         24: Project_Level_4
+         25: Project_Level_5
+         26: Project_Level_6
+         27: Project_Level_7
+         28: Project_Level_8
+         29: Project_Level_9
+         30: Project_Level_10
+         31: Project_Level_11
+         32: Project_Lowest_Level
+
+         33: Responsibility_Level_2
+         34: Responsibility_Level_3
+         35: Responsibility_Level_4
+         36: Responsibility_Level_5
+         37: Responsibility_Level_6
+         38: Responsibility_Level_7
+         39: Responsibility_Level_8
+         40: Responsibility_Level_9
+         41: Responsibility_Level_10
+         42: Responsibility_Level_11
+         43: Responsibility_Level_12
+         44: Responsibility_Level_13
+         45: Responsibility_Level_14
+         46: Responsibility_Level_15
+         47: Responsibility_Lowest_Level
+
+         48: Fund_Level_1
+         49: Fund_Level_2
+         50: Fund_Level_3
+         51: Fund_Level_4
+         52: Fund_Level_5
+         53: Fund_Level_6
+         54: Fund_Level_7
+         55: Fund_Level_8
+         56: Fund_Lowest_Level
+
+         57: Infrastructure_Level_1
+         58: Infrastructure_Level_2
+         59: Infrastructure_Level_3
+         60: Infrastructure_Level_4
+         61: Infrastructure_Level_5
+         62: Infrastructure_Level_6
+         63: Infrastructure_Lowest_Level
+
+         64: Item_Level_1
+         65: Item_Level_2
+         66: Item_Level_3
+         67: Item_Level_4
+         68: Item_Level_5
+         69: Item_Level_6
+         70: Item_Level_7
+         71: Item_Level_8
+         13: Item_Lowest_Level
+
+         72: Regional_ID_Level_1
+         73: Regional_ID_Level_2
+         74: Regional_ID_Level_3
+         75: Regional_ID_Level_4
+         76: Regional_ID_Level_5
+         77: Regional_ID_Level_6
+         78: Regional_ID_Level_7
+         79: Regional_ID_Level_8
+         80: Regional_ID_Lowest_Level
+
+         81: Budget
+         82: AdjustmentBudget
+         83: April
+         84: May
+         85: June
+         86: July
+         87: August
+         88: September
+         89: October
+         90: November
+         91: December
+         92: January
+         93: February
+         94: March
+         95: Q1
+         96: Q2
+         97: Q3
+         98: Q4
+         99: Financial_Year
+        
           {
             "title": "year",
             "name": "year",
