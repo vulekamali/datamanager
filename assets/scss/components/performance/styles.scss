@@ -212,9 +212,9 @@
 .performance-modal .MuiDialog-paper {
   margin: 0 auto;
   position: absolute;
-  top: 200px;
   padding: 20px;
   border-radius: 20px !important;
+  min-height: 248px;
 
   .performance-modal-title {
     font-family: Lato, sans-serif !important;
