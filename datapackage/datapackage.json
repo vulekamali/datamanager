@@ -1,14 +1,9 @@
 {
   "promise": {},
-  "title": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend",
-  "name": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend",
   "resources": [
     {
-      "name": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend",
       "format": "csv",
-      "path": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend.csv",
       "mediatype": "text/csv",
-      "bytes": 2448440,
       "dialect": {
         "csvddfVersion": 1,
         "delimiter": ",",
