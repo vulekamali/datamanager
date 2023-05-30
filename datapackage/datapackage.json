@@ -1,12 +1,12 @@
 {
   "promise": {},
-  "title": "vulindleladata_202122_ytd_quarter4-some-rows-with-spend",
-  "name": "vulindleladata_202122_ytd_quarter4-some-rows-with-spend",
+  "title": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend",
+  "name": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend",
   "resources": [
     {
-      "name": "vulindleladata_202122_ytd_quarter4-some-rows-with-spend",
+      "name": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend",
       "format": "csv",
-      "path": "vulindleladata_202122_ytd_quarter4-some-rows-with-spend.csv",
+      "path": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend.csv",
       "mediatype": "text/csv",
       "bytes": 2448440,
       "dialect": {
@@ -33,15 +33,6 @@
             "type": "string",
             "format": "default",
             "columnType": "administrative-classification:generic:level1:label",
-            "conceptType": "administrative-classification"
-          },
-          {
-            "title": "VoteNumber",
-            "name": "Vote No#",
-            "slug": "VoteNumber",
-            "type": "string",
-            "format": "default",
-            "columnType": "administrative-classification:generic:level1:code",
             "conceptType": "administrative-classification"
           },
           {
@@ -319,7 +310,7 @@
           },
           {
             "title": "AssetClassification6",
-            "name": "IYM_econLowestLevel",
+            "name": "Assets_Level_6",
             "slug": "AssetClassification6",
             "type": "string",
             "format": "default",
@@ -329,7 +320,7 @@
           {
             "title": "AssetClassificationLowestLevel",
             "name": "Assets_Lowest_Level",
-            "slug": "AssetClassificationLowestLEvel",
+            "slug": "AssetClassificationLowestLevel",
             "type": "string",
             "format": "default",
             "columnType": "asset:generic:level7:code",

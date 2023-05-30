@@ -4,6 +4,10 @@ from urllib.parse import urlencode
 import hashlib
 import base64
 import time
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 datapackage_path = sys.argv[2]
 base_token = sys.argv[1]
@@ -24,8 +28,6 @@ r.raise_for_status()
 authorize_result = r.json()
 datastore_token = authorize_result["token"]
 
-print(authorize_result)
-
 # token from authoriza
 # GET https://openspending-dedicated.vulekamali.gov.za/datastore/info?jwt=eyJ0eXAiOiJKV1Qi...A_mgchTaijz-7DQ
 # Response {"prefixes": ["http://s3.eu-west-1.amazonaws.com:80/openspending-vulekamali/b9d2af843f3a7ca223eea07fb608e62a", "http://s3.eu-west-1.amazonaws.com/openspending-vulekamali/b9d2af843f3a7ca223eea07fb608e62a", "http://openspending-vulekamali:80/b9d2af843f3a7ca223eea07fb608e62a", "http://openspending-vulekamali/b9d2af843f3a7ca223eea07fb608e62a", "https://s3.eu-west-1.amazonaws.com:443/openspending-vulekamali/b9d2af843f3a7ca223eea07fb608e62a", "https://s3.eu-west-1.amazonaws.com/openspending-vulekamali/b9d2af843f3a7ca223eea07fb608e62a", "https://openspending-vulekamali:443/b9d2af843f3a7ca223eea07fb608e62a", "https://openspending-vulekamali/b9d2af843f3a7ca223eea07fb608e62a"]}
@@ -35,8 +37,6 @@ datastore_info_url = f"https://openspending-dedicated.vulekamali.gov.za/datastor
 r = requests.get(datastore_info_url)
 r.raise_for_status()
 info_result = r.json()
-
-print(info_result)
 
 # POST https://openspending-dedicated.vulekamali.gov.za/datastore/
 # auth-token: eyJ0eXAiOiJKV1QiLCJhbG...gchTaijz-7DQ
@@ -54,8 +54,8 @@ def authorise_upload(path, filename):
     authorize_upload_payload = {
         "metadata": {
             "owner": userid,
-            "name": "auto-upload-test2",
-            "author": "auto-upload-test2",
+            "name": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend",
+            "author": "vulindleladata-202122-ytd-quarter4-some-rows-with-spend",
         },
         "filedata": {
             filename: {
@@ -102,8 +102,8 @@ def upload(path, authorisation):
 # Content-Type: application/octet-stream
 # Payload see datapackage.json
 
-csv_path = "datapackage/myfilename.csv"
-csv_filename = "myfilename.csv"
+csv_path = "datapackage/vulindleladata-202122-ytd-quarter4-some-rows-with-spend.csv"
+csv_filename = "vulindleladata-202122-ytd-quarter4-some-rows-with-spend.csv"
 authorise_csv_upload_result = authorise_upload(csv_path, csv_filename)
 upload(csv_path, authorise_csv_upload_result['filedata'][csv_filename])
 
@@ -112,7 +112,7 @@ datapackage_filename = "datapackage.json"
 authorise_datapackage_upload_result = authorise_upload(datapackage_path, datapackage_filename)
 datapackage_upload_authorisation = authorise_datapackage_upload_result['filedata'][datapackage_filename]
 upload(datapackage_path, datapackage_upload_authorisation)
-
+print(f'Datapackage url: {datapackage_upload_authorisation["upload_url"]}')
 
 # POST https://openspending-dedicated.vulekamali.gov.za/package/upload?datapackage=https%3A%2F%2Fs3.eu-west-1.amazonaws.com%3A443%2Fopenspending-vulekamali%2Fb9d2af843f3a7ca223eea07fb608e62a%2Ftest-2023%2Fdatapackage.json&jwt=
 # Response {"progress": 0, "status": "queued"}
@@ -134,7 +134,6 @@ status = r.json()["status"]
 # Response {progress: 0.09090909090909091, status: "loading-data"}
 # Response {progress: 1, status: "done"}
 
-#TODO: when this is an async task, make sure it actually exits when there's a problem
 while status not in ["done", "fail"]:
     time.sleep(5)
     status_query = {
