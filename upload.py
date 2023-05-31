@@ -137,16 +137,16 @@ if __name__ == '__main__':
         authorise_csv_upload_result = authorise_upload(csv_path, csv_filename)
         upload(csv_path, authorise_csv_upload_result['filedata'][csv_filename])
 
-    ##===============================================
-    print("Creating and uploading datapackage.json")
-    with open(datapackage_template_path) as datapackage_file:
-        datapackage = json.load(datapackage_file)
+        ##===============================================
+        print("Creating and uploading datapackage.json")
+        with open(datapackage_template_path) as datapackage_file:
+            datapackage = json.load(datapackage_file)
 
-    datapackage["title"] = datapackage_title
-    datapackage["name"] = datapackage_name
-    datapackage["resources"][0]["name"] = os.path.splitext(csv_filename)[0]
-    datapackage["resources"][0]["path"] = csv_filename
-    datapackage["resources"][0]["bytes"] = os.path.getsize(csv_path) 
+        datapackage["title"] = datapackage_title
+        datapackage["name"] = datapackage_name
+        datapackage["resources"][0]["name"] = os.path.splitext(csv_filename)[0]
+        datapackage["resources"][0]["path"] = csv_filename
+        datapackage["resources"][0]["bytes"] = os.path.getsize(csv_path) 
 
     with tempfile.NamedTemporaryFile(mode="w", delete=True) as datapackage_file:
         json.dump(datapackage, datapackage_file)
