@@ -9,9 +9,11 @@ import base64
 import time
 import os
 import tempfile 
-from csv import DictReader, DictWriter
+import csv
 import re
 import json
+import petl as etl
+from decimal import Decimal
 
 RE_END_YEAR = re.compile(r"/\d+")
 
@@ -81,13 +83,6 @@ def upload(path, authorisation):
         r = requests.put(upload_url, data=file, headers=upload_headers)
     r.raise_for_status()
 
-
-def clean_row(row: dict) -> None:
-    for key in MEASURES:
-        row[key] = row[key].replace(",", "")
-    row["Financial_Year"] = RE_END_YEAR.sub("", row["Financial_Year"])
-
-
 if __name__ == '__main__':
     datapackage_template_path = "datapackage/datapackage.json"
     userid = sys.argv[1] # vulekamali is "b9d2af843f3a7ca223eea07fb608e62a"
@@ -103,37 +98,59 @@ if __name__ == '__main__':
     csv_filename = os.path.basename(original_csv_path)
 
     print("Cleaning CSV")
-    tempdir = tempfile.TemporaryDirectory()
-    csv_path = os.path.join(tempdir.name, csv_filename)
-    with open(csv_path, "w") as csv_file:
-        original_csv_file = open(original_csv_path)
-        reader = DictReader(original_csv_file)
+
+    # Get all the headers to come up with the composite key
+    with open(original_csv_path) as original_csv_file:
+        reader = csv.DictReader(original_csv_file)
         first_row = next(reader)
-        writer = DictWriter(csv_file, fieldnames=first_row.keys())
-        writer.writeheader()
-        clean_row(first_row)
-        writer.writerow(first_row)
-        for row in reader:
-            clean_row(row)
-            writer.writerow(row)
-        original_csv_file.close()
+        fields = first_row.keys()
+        composite_key = list(set(fields) - set(MEASURES))
 
 
-    print("Getting authorisation for datastore")
-    authorize_query = {
-        "jwt": base_token,
-        "service": "os.datastore",
-        "userid": userid,
-    }
-    authorize_url = f"https://openspending-dedicated.vulekamali.gov.za/user/authorize?{ urlencode(authorize_query) }"
-    r = requests.get(authorize_url)
-    r.raise_for_status()
-    authorize_result = r.json()
-    datastore_token = authorize_result["token"]
+    table1 = etl.fromcsv(original_csv_path)
+    table2 = etl.convert(table1, MEASURES, lambda v: v.replace(",", ""))
+    table3 = etl.convert(table2, "Financial_Year", lambda v: RE_END_YEAR.sub("", v))
+    table4 = etl.convert(table3, MEASURES, Decimal)
 
-    print("Uploading CSV")
-    authorise_csv_upload_result = authorise_upload(csv_path, csv_filename)
-    upload(csv_path, authorise_csv_upload_result['filedata'][csv_filename])
+    def my_sum(*vals):
+        vals_list = []
+        try:
+            result = 0
+            for val in vals:
+                vals_list.append(val)
+                if type(val) == Decimal:
+                    result += val
+                #else:
+                #    print(f"Dodgy value {vals_list}")
+            return result
+        except Exception as e:
+            print(vals_list)
+            raise e
+
+    aggregation = {f"sum{measure}": (measure, my_sum) for measure in MEASURES}
+
+    # Roll up rows with the same composite key into one, summing values together
+    table5 = etl.aggregate(table4, composite_key, aggregation)
+
+    with tempfile.NamedTemporaryFile(mode="w", delete=False) as csv_file:
+        csv_path = csv_file.name
+        etl.tocsv(table5, csv_path)
+
+        print("Getting authorisation for datastore")
+        authorize_query = {
+            "jwt": base_token,
+            "service": "os.datastore",
+            "userid": userid,
+        }
+        authorize_url = f"https://openspending-dedicated.vulekamali.gov.za/user/authorize?{ urlencode(authorize_query) }"
+        r = requests.get(authorize_url)
+        r.raise_for_status()
+        authorize_result = r.json()
+        datastore_token = authorize_result["token"]
+
+        print(f"Uploading CSV {csv_path}")
+        authorise_csv_upload_result = authorise_upload(csv_path, csv_filename)
+        upload(csv_path, authorise_csv_upload_result['filedata'][csv_filename])
 
     ##===============================================
     print("Creating and uploading datapackage.json")
@@ -169,13 +186,14 @@ if __name__ == '__main__':
     status = r.json()["status"]
 
     ##===============================================
-    print("Monitoring status until completion:")
+
+    status_query = {
+        "datapackage": datapackage_url,
+    }
+    status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{ urlencode(status_query) }"
+    print(f"Monitoring status until completion ({status_url}):")
     while status not in ["done", "fail"]:
         time.sleep(5)
-        status_query = {
-            "datapackage": datapackage_url,
-        }
-        status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{ urlencode(status_query) }"
         r = requests.get(status_url)
         r.raise_for_status()
         status_result = r.json()
