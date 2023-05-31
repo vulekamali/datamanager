@@ -108,31 +108,16 @@ if __name__ == '__main__':
 
 
     table1 = etl.fromcsv(original_csv_path)
-    table2 = etl.convert(table1, MEASURES, lambda v: v.replace(",", ""))
+    table2 = etl.convert(table1, MEASURES, lambda v: v.replace(",", "."))
     table3 = etl.convert(table2, "Financial_Year", lambda v: RE_END_YEAR.sub("", v))
     table4 = etl.convert(table3, MEASURES, Decimal)
 
-    def my_sum(vals):
-        vals_list = []
-        try:
-            result = 0
-            for val in vals:
-                vals_list.append(val)
-                if type(val) == Decimal:
-                    result += val
-                #else:
-                #    print(f"Dodgy value {vals_list}")
-            return result
-        except Exception as e:
-            print(vals_list)
-            raise e
-
-    aggregation = {f"sum{measure}": (measure, my_sum) for measure in MEASURES}
+    aggregation = {f"sum{measure}": (measure, sum) for measure in MEASURES}
 
     # Roll up rows with the same composite key into one, summing values together
     table5 = etl.aggregate(table4, composite_key, aggregation)
 
-    with tempfile.NamedTemporaryFile(mode="w", delete=False) as csv_file:
+    with tempfile.NamedTemporaryFile(mode="w", delete=True) as csv_file:
         csv_path = csv_file.name
         etl.tocsv(table5, csv_path)
 
