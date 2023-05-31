@@ -112,7 +112,7 @@ if __name__ == '__main__':
     table3 = etl.convert(table2, "Financial_Year", lambda v: RE_END_YEAR.sub("", v))
     table4 = etl.convert(table3, MEASURES, Decimal)
 
-    def my_sum(*vals):
+    def my_sum(vals):
         vals_list = []
         try:
             result = 0
