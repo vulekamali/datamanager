@@ -112,14 +112,19 @@ if __name__ == '__main__':
     table3 = etl.convert(table2, "Financial_Year", lambda v: RE_END_YEAR.sub("", v))
     table4 = etl.convert(table3, MEASURES, Decimal)
 
-    aggregation = {f"sum{measure}": (measure, sum) for measure in MEASURES}
-
     # Roll up rows with the same composite key into one, summing values together
+    # Prefixing each new measure header with "sum" because petl seems to need
+    # different headers for aggregation output
+    aggregation = {f"sum{measure}": (measure, sum) for measure in MEASURES}
     table5 = etl.aggregate(table4, composite_key, aggregation)
 
-    with tempfile.NamedTemporaryFile(mode="w", delete=True) as csv_file:
+    # Strip sum prefix from aggregation results
+    measure_rename = {key: key[3:] for key in aggregation}
+    table6 = etl.rename(table5, measure_rename)
+
+    with tempfile.NamedTemporaryFile(mode="w", delete=False) as csv_file:
         csv_path = csv_file.name
-        etl.tocsv(table5, csv_path)
+        etl.tocsv(table6, csv_path)
 
         print("Getting authorisation for datastore")
         authorize_query = {
