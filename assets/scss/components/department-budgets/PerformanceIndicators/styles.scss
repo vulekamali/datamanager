@@ -15,7 +15,7 @@
   overflow: hidden;
   position: relative;
   @media screen and (max-width: 400px) {
-    padding: 15px 0 0;
+    padding: 20px 10px 10px;
   }
 
   .programme-name {
@@ -245,4 +245,11 @@
   border-radius: 20px !important;
   white-space: nowrap;
   max-width: unset !important;
+}
+
+.Page-contentInner--department {
+  @media screen and (max-width: 400px) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 }
