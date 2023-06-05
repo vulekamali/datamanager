@@ -250,6 +250,8 @@ urlpatterns = [
     ),
     # Performance app
     path("performance/", include("performance.urls")),
+    # IYM app
+    path("iym/", include("iym.urls")),
     # Budget summary
     url(
         r"^budget-summary/?$",

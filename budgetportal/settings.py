@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
     "performance",
+    "iym",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
