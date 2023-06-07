@@ -37,5 +37,6 @@ jobs:
         docker-compose run --rm app black --check --diff budgetportal manage.py discourse performance
 
     - name: Dump dependency logs for debugging
+      if: ${{ failure() }}
       run: |
         docker-compose logs db solr minio
