@@ -23,6 +23,19 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
             },
         ),
     )
+    list_display = (
+        "created_at",
+        "user",
+        "financial_year",
+        "latest_quarter",
+        "process_completed",
+        "updated_at",
+    )
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
 
 
 admin.site.register(models.IYMFileUpload, IYMFileUploadAdmin)
