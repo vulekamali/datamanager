@@ -2,6 +2,16 @@ from django.contrib import admin
 from iym import models
 
 
+def process_uploaded_file(obj_id):
+    # read file
+    obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
+    full_text = obj_to_update.file.read().decode("utf-8")
+
+    print('============ aaa ============')
+    print(obj_to_update.file.__dict__)
+    print('============ bbb ============')
+
+
 class IYMFileUploadAdmin(admin.ModelAdmin):
     readonly_fields = (
         "import_report",
@@ -36,6 +46,8 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
         if not obj.pk:
             obj.user = request.user
         super().save_model(request, obj, form, change)
+
+        process_uploaded_file(obj.id)
 
 
 admin.site.register(models.IYMFileUpload, IYMFileUploadAdmin)
