@@ -4,6 +4,7 @@ from io import StringIO
 import petl as etl
 from decimal import Decimal
 from urllib.parse import urlencode
+from slugify import slugify
 
 import os
 import csv
@@ -13,6 +14,9 @@ import hashlib
 import base64
 import json
 import time
+import re
+
+RE_END_YEAR = re.compile(r"/\d+")
 
 MEASURES = [
     "Budget",
@@ -116,6 +120,10 @@ def process_uploaded_file(obj_id):
     table3 = etl.convert(table2, "Financial_Year", lambda v: RE_END_YEAR.sub("", v))
     table4 = etl.convert(table3, MEASURES, Decimal)
 
+    print('============ ccc ============')
+    print(financial_year)
+    print('============ ddd ============')
+
     # Roll up rows with the same composite key into one, summing values together
     # Prefixing each new measure header with "sum" because petl seems to need
     # different headers for aggregation output
@@ -149,12 +157,9 @@ def process_uploaded_file(obj_id):
         with open(datapackage_template_path) as datapackage_file:
             datapackage = json.load(datapackage_file)
 
-        print('============ ccc ============')
-        print(os.path.splitext(csv_filename)[0])
-        print('============ ddd ============')
         datapackage["title"] = datapackage_title
         datapackage["name"] = datapackage_name
-        datapackage["resources"][0]["name"] = os.path.splitext(csv_filename)[0]
+        datapackage["resources"][0]["name"] = slugify(os.path.splitext(csv_filename)[0])
         datapackage["resources"][0]["path"] = csv_filename
         datapackage["resources"][0]["bytes"] = os.path.getsize(csv_path)
 
