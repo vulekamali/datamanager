@@ -62,10 +62,10 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
-    "budgetportal.apps.BudgetPortalConfig",
-    "budgetportal.webflow",
     "constance",
     "constance.backends.database",
+    "budgetportal.apps.BudgetPortalConfig",
+    "budgetportal.webflow",
     "performance",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
