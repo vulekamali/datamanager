@@ -443,7 +443,7 @@ def department_page(
     context["admin_url"] = reverse(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
-    context["EQPRS_Data_Enabled"] = config.EQPRS_Data_Enabled
+    context["EQPRS_DATA_ENABLED"] = config.EQPRS_DATA_ENABLED
 
     return render(request, "department.html", context)
 
