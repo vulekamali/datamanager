@@ -4,7 +4,7 @@ Common test helpers.
 import warnings
 from datetime import datetime
 
-from django.contrib.staticfiles.testing import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 from django.db import connections
 from django.test import TestCase
@@ -45,7 +45,7 @@ class WagtailHackMixin:
             )
 
 
-class BaseSeleniumTestCase(WagtailHackMixin, LiveServerTestCase):
+class BaseSeleniumTestCase(WagtailHackMixin, StaticLiveServerTestCase):
     """
     Base class for Selenium tests.
 
@@ -58,10 +58,12 @@ class BaseSeleniumTestCase(WagtailHackMixin, LiveServerTestCase):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("headless")
         chrome_options.add_argument("--no-sandbox")
-        d = DesiredCapabilities.CHROME
+        d = chrome_options.to_capabilities()
         d["loggingPrefs"] = {"browser": "ALL"}
-        self.selenium = webdriver.Chrome(
-            chrome_options=chrome_options, desired_capabilities=d
+        self.selenium = webdriver.Remote(
+            command_executor='http://selenium:4444/wd/hub',
+            chrome_options=chrome_options,
+            desired_capabilities=d
         )
         self.selenium.implicitly_wait(10)
         self.wait = WebDriverWait(self.selenium, 5)
@@ -87,7 +89,7 @@ class BaseSeleniumTestCase(WagtailHackMixin, LiveServerTestCase):
         )
 
 
-class WagtailHackLiveServerTestCase(WagtailHackMixin, LiveServerTestCase):
+class WagtailHackLiveServerTestCase(WagtailHackMixin, StaticLiveServerTestCase):
     pass
 
 

@@ -32,8 +32,8 @@ jobs:
 
     - name: Run tests
       run: |
-        docker-compose run --rm test python manage.py collectstatic --no-input
-        docker-compose run --rm test
+        docker-compose run --rm app python manage.py collectstatic --no-input
+        DJANGO_QUEUE_SYNC=TRUE docker-compose run --rm app python manage.py test
         docker-compose run --rm app black --check --diff budgetportal manage.py discourse performance
 
     - name: Dump dependency logs for debugging
