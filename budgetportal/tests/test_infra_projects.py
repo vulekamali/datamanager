@@ -440,9 +440,6 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
             )
         )
         self.assertEqual(num_of_projects, num_of_items)
-        print("\n\n\n printing js logs if any")
-        for entry in self.selenium.get_log("browser"):
-            print(entry)
 
     def test_number_updated_after_search(self):
         province = "Eastern Cape"
