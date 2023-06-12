@@ -5,6 +5,7 @@ import petl as etl
 from decimal import Decimal
 from urllib.parse import urlencode
 from slugify import slugify
+from zipfile import ZipFile
 
 import os
 import csv
@@ -89,7 +90,10 @@ def upload(path, authorisation):
 def process_uploaded_file(obj_id):
     # read file
     obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
-    selected_file = obj_to_update.file
+    zip_file = obj_to_update.file
+
+    with ZipFile(zip_file, 'r') as zip:
+        selected_file = zip.open(zip.namelist()[0])
 
     # ======================== copy start ========================
 
@@ -115,14 +119,14 @@ def process_uploaded_file(obj_id):
     fields = first_row.keys()
     composite_key = list(set(fields) - set(MEASURES))
 
+    print('================ aaa ================')
+    print(etl.fromcsv(selected_file.read()))
+    print('================ bbb ================')
+
     table1 = etl.fromcsv(selected_file)
     table2 = etl.convert(table1, MEASURES, lambda v: v.replace(",", "."))
     table3 = etl.convert(table2, "Financial_Year", lambda v: RE_END_YEAR.sub("", v))
     table4 = etl.convert(table3, MEASURES, Decimal)
-
-    print('============ ccc ============')
-    print(financial_year)
-    print('============ ddd ============')
 
     # Roll up rows with the same composite key into one, summing values together
     # Prefixing each new measure header with "sum" because petl seems to need
