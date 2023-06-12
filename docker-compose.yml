@@ -35,6 +35,7 @@ services:
       - DEBUG_CACHE
       - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
       - CKAN_URL
+      - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
     volumes:
       - .:/code
     ports:

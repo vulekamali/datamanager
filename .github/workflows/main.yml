@@ -33,10 +33,10 @@ jobs:
     - name: Run tests
       run: |
         docker-compose run --rm app python manage.py collectstatic --no-input
-        docker-compose run --rm -e DJANGO_QUEUE_SYNC=TRUE app python manage.py test
+        docker-compose run --rm -e DJANGO_Q_SYNC=TRUE app python manage.py test
         docker-compose run --rm app black --check --diff budgetportal manage.py discourse performance
 
     - name: Dump dependency logs for debugging
       if: ${{ failure() }}
       run: |
-        docker-compose logs db solr minio
+        docker-compose logs db solr minio selenium
