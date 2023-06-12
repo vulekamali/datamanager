@@ -113,7 +113,11 @@ INSTALLED_APPS = [
 CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 
 CONSTANCE_CONFIG = {
-    "EQPRS_DATA_ENABLED": (False, "enabling / disabling summary on department page", bool)
+    "EQPRS_DATA_ENABLED": (
+        False,
+        "enabling / disabling summary on department page",
+        bool,
+    )
 }
 
 if DEBUG_TOOLBAR:

@@ -1,7 +1,8 @@
 import ReactDOM from "react-dom";
 import React, {Component} from "react";
 import {Button, Card, Grid, Tooltip} from "@material-ui/core";
-import * as d3 from "d3";
+import {scaleLinear, scaleBand} from "d3-scale";
+import {create} from "d3-selection";
 
 class IndicatorCard extends Component {
     constructor(props) {
@@ -182,18 +183,16 @@ class IndicatorCard extends Component {
         const height = 400;
         const margin = {top: 0, right: 0, bottom: 0, left: 0};
 
-        const x = d3
-            .scaleBand()
+        const x = scaleBand()
             .domain(data.map((d) => d.quarter))
             .rangeRound([margin.left, width - margin.right])
             .padding(0);
 
-        const y = d3
-            .scaleLinear()
+        const y = scaleLinear()
             .domain([0, indicatorMax])  //max value
             .range([height - margin.bottom, margin.top]);
 
-        const svg = d3.create("svg").attr("viewBox", [0, 0, width, height]);
+        const svg = create("svg").attr("viewBox", [0, 0, width, height]);
 
         // bar
         svg
