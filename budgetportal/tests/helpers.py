@@ -62,11 +62,10 @@ class BaseSeleniumTestCase(WagtailHackMixin, StaticLiveServerTestCase):
         cls.host = socket.gethostbyname(socket.gethostname())
 
         chrome_options = webdriver.ChromeOptions()
-        #chrome_options.add_argument("headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument('disable-dev-shm-usage')
         d = chrome_options.to_capabilities()
-        #d["loggingPrefs"] = {"browser": "ALL"}
+        d["loggingPrefs"] = {"browser": "ALL"}
         cls.selenium = webdriver.Remote(
             command_executor='http://selenium:4444/wd/hub',
             desired_capabilities=d
