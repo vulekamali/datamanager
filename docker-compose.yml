@@ -44,6 +44,9 @@ services:
       - solr
       - minio-client
       - minio
+    links:
+      - selenium
+
 
   # Should be same as app except for command and ports
   worker:
@@ -107,10 +110,12 @@ services:
         hard: 65536
 
   selenium:
-    image: selenium/standalone-chrome-debug:3.7.1
+    image: selenium/standalone-chrome:3.141
     ports:
       - 4444:4444
       - 5900:5900
+      - 7900:7900
+    shm_size: '2gb'
 
 
 
