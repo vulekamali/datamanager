@@ -19,6 +19,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from haystack.query import SearchQuerySet
+from constance import config
 
 from .datasets import Category, Dataset
 from .models import (
@@ -442,6 +443,8 @@ def department_page(
     context["admin_url"] = reverse(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
+    context["EQPRS_DATA_ENABLED"] = config.EQPRS_DATA_ENABLED
+
     return render(request, "department.html", context)
 
 

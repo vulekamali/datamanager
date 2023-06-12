@@ -52,7 +52,6 @@ class IndicatorSerializer(ModelSerializer):
             "content_search",
             "uid",
             "created_at",
-            "id",
             "annual_otp_comments",
             "annual_national_comments",
             "annual_dpme_coordinator_comments",
