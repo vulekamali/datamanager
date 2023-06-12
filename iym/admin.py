@@ -6,6 +6,7 @@ from decimal import Decimal
 from urllib.parse import urlencode
 from slugify import slugify
 from zipfile import ZipFile
+from django.conf import settings
 
 import os
 import csv
@@ -16,6 +17,7 @@ import base64
 import json
 import time
 import re
+import iym
 
 RE_END_YEAR = re.compile(r"/\d+")
 
@@ -91,16 +93,19 @@ def process_uploaded_file(obj_id):
     # read file
     obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
     zip_file = obj_to_update.file
+    relative_path = 'iym/tempfiles/'
 
     with ZipFile(zip_file, 'r') as zip:
-        selected_file = zip.open(zip.namelist()[0])
+        file_name = zip.namelist()[0]
+        zip.extractall(path=relative_path)
+
+    original_csv_path = os.path.join(settings.BASE_DIR, relative_path, file_name)
 
     # ======================== copy start ========================
 
     datapackage_template_path = "iym/datapackage/datapackage.json"
     userid = "616cdf6f2657070da7d2fa056df55206"
     base_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiI2MTZjZGY2ZjI2NTcwNzBkYTdkMmZhMDU2ZGY1NTIwNiIsImV4cCI6MTY4NzQxNDkxOX0._EaRN2Izns3gaKzN4jiVmC1RWic70AaTktcGt6F__Hk"
-    original_csv_path = selected_file.name
     financial_year = obj_to_update.financial_year.slug
 
     datapackage_title = f"National in-year spending {financial_year}"
@@ -111,19 +116,13 @@ def process_uploaded_file(obj_id):
     csv_filename = os.path.basename(original_csv_path)
 
     # Get all the headers to come up with the composite key
-    full_text = selected_file.read().decode("utf-8")
-    f = StringIO(full_text)
-    reader = csv.DictReader(f)
+    with open(original_csv_path) as original_csv_file:
+        reader = csv.DictReader(original_csv_file)
+        first_row = next(reader)
+        fields = first_row.keys()
+        composite_key = list(set(fields) - set(MEASURES))
 
-    first_row = next(reader)
-    fields = first_row.keys()
-    composite_key = list(set(fields) - set(MEASURES))
-
-    print('================ aaa ================')
-    print(etl.fromcsv(selected_file.read()))
-    print('================ bbb ================')
-
-    table1 = etl.fromcsv(selected_file)
+    table1 = etl.fromcsv(original_csv_path)
     table2 = etl.convert(table1, MEASURES, lambda v: v.replace(",", "."))
     table3 = etl.convert(table2, "Financial_Year", lambda v: RE_END_YEAR.sub("", v))
     table4 = etl.convert(table3, MEASURES, Decimal)
@@ -195,19 +194,19 @@ def process_uploaded_file(obj_id):
     status_query = {
         "datapackage": datapackage_url,
     }
-    status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{ urlencode(status_query) }"
+    status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{urlencode(status_query)}"
     while status not in ["done", "fail"]:
         time.sleep(5)
         r = requests.get(status_url)
         r.raise_for_status()
         status_result = r.json()
-        print('============ aaa ============')
         print(status_result)
-        print('============ bbb ============')
         status = status_result["status"]
 
         if status == "fail":
             print(status_result["error"])
+
+    os.remove(original_csv_path)
 
     # ======================== copy end ========================
 
