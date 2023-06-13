@@ -43,7 +43,7 @@ MEASURES = [
 ]
 
 
-def authorise_upload(path, filename, userid, datapackage_name, datastore_token):
+def authorise_upload(path, filename, userid, data_package_name, datastore_token):
     # TODO: get length and md5 without reading the whole thing into memory
     with open(path, 'rb') as fh:
         bytes = fh.read()
@@ -54,7 +54,7 @@ def authorise_upload(path, filename, userid, datapackage_name, datastore_token):
     authorize_upload_payload = {
         "metadata": {
             "owner": userid,
-            "name": datapackage_name,
+            "name": data_package_name,
             "author": "Vulekamali",
         },
         "filedata": {
@@ -89,11 +89,9 @@ def upload(path, authorisation):
     r.raise_for_status()
 
 
-def process_uploaded_file(obj_id):
-    # read file
-    obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
+def unzip_uploaded_file(obj_to_update):
+    relative_path = 'iym/temp_files/'
     zip_file = obj_to_update.file
-    relative_path = 'iym/tempfiles/'
 
     with ZipFile(zip_file, 'r') as zip:
         file_name = zip.namelist()[0]
@@ -101,20 +99,10 @@ def process_uploaded_file(obj_id):
 
     original_csv_path = os.path.join(settings.BASE_DIR, relative_path, file_name)
 
-    # ======================== copy start ========================
+    return original_csv_path
 
-    datapackage_template_path = "iym/datapackage/datapackage.json"
-    userid = "616cdf6f2657070da7d2fa056df55206"
-    base_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiI2MTZjZGY2ZjI2NTcwNzBkYTdkMmZhMDU2ZGY1NTIwNiIsImV4cCI6MTY4NzQxNDkxOX0._EaRN2Izns3gaKzN4jiVmC1RWic70AaTktcGt6F__Hk"
-    financial_year = obj_to_update.financial_year.slug
 
-    datapackage_title = f"National in-year spending {financial_year}"
-    datapackage_name = f"national-in-year-spending-{financial_year}"
-
-    # rewrite the data with without commas, and with only the starting year
-
-    csv_filename = os.path.basename(original_csv_path)
-
+def create_composite_key_using_csv_headers(original_csv_path):
     # Get all the headers to come up with the composite key
     with open(original_csv_path) as original_csv_file:
         reader = csv.DictReader(original_csv_file)
@@ -122,6 +110,10 @@ def process_uploaded_file(obj_id):
         fields = first_row.keys()
         composite_key = list(set(fields) - set(MEASURES))
 
+    return composite_key
+
+
+def tidy_csv_table(original_csv_path, composite_key):
     table1 = etl.fromcsv(original_csv_path)
     table2 = etl.convert(table1, MEASURES, lambda v: v.replace(",", "."))
     table3 = etl.convert(table2, "Financial_Year", lambda v: RE_END_YEAR.sub("", v))
@@ -137,9 +129,21 @@ def process_uploaded_file(obj_id):
     measure_rename = {key: key[3:] for key in aggregation}
     table6 = etl.rename(table5, measure_rename)
 
+    return table6
+
+
+def create_data_package(obj_to_update, csv_filename, csv_table):
+    userid = "616cdf6f2657070da7d2fa056df55206"
+    financial_year = obj_to_update.financial_year.slug
+
+    data_package_title = f"National in-year spending {financial_year}"
+    data_package_name = f"national-in-year-spending-{financial_year}"
+    data_package_template_path = "iym/data_package/data_package.json"
+    base_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiI2MTZjZGY2ZjI2NTcwNzBkYTdkMmZhMDU2ZGY1NTIwNiIsImV4cCI6MTY4NzQxNDkxOX0._EaRN2Izns3gaKzN4jiVmC1RWic70AaTktcGt6F__Hk"
+
     with tempfile.NamedTemporaryFile(mode="w", delete=False) as csv_file:
         csv_path = csv_file.name
-        etl.tocsv(table6, csv_path)
+        etl.tocsv(csv_table, csv_path)
 
         authorize_query = {
             "jwt": base_token,
@@ -147,40 +151,50 @@ def process_uploaded_file(obj_id):
             "userid": userid,
         }
         authorize_url = f"https://openspending-dedicated.vulekamali.gov.za/user/authorize?{urlencode(authorize_query)}"
+        print('============ aaa ============')
+        print(authorize_url)
+        print('============ bbb ============')
         r = requests.get(authorize_url)
+        print('============ ccc ============')
+        print(r)
+        print('============ ddd ============')
         r.raise_for_status()
         authorize_result = r.json()
         datastore_token = authorize_result["token"]
 
-        authorise_csv_upload_result = authorise_upload(csv_path, csv_filename, userid, datapackage_name,
+        authorise_csv_upload_result = authorise_upload(csv_path, csv_filename, userid, data_package_name,
                                                        datastore_token)
         upload(csv_path, authorise_csv_upload_result['filedata'][csv_filename])
 
         ##===============================================
-        with open(datapackage_template_path) as datapackage_file:
-            datapackage = json.load(datapackage_file)
+        with open(data_package_template_path) as data_package_file:
+            data_package = json.load(data_package_file)
 
-        datapackage["title"] = datapackage_title
-        datapackage["name"] = datapackage_name
-        datapackage["resources"][0]["name"] = slugify(os.path.splitext(csv_filename)[0])
-        datapackage["resources"][0]["path"] = csv_filename
-        datapackage["resources"][0]["bytes"] = os.path.getsize(csv_path)
+        data_package["title"] = data_package_title
+        data_package["name"] = data_package_name
+        data_package["resources"][0]["name"] = slugify(os.path.splitext(csv_filename)[0])
+        data_package["resources"][0]["path"] = csv_filename
+        data_package["resources"][0]["bytes"] = os.path.getsize(csv_path)
 
-    with tempfile.NamedTemporaryFile(mode="w", delete=True) as datapackage_file:
-        json.dump(datapackage, datapackage_file)
-        datapackage_file.flush()
-        datapackage_path = datapackage_file.name
-        authorise_datapackage_upload_result = authorise_upload(datapackage_path, "datapackage.json", userid,
-                                                               datapackage_name, datastore_token)
-        datapackage_upload_authorisation = authorise_datapackage_upload_result['filedata']["datapackage.json"]
-        upload(datapackage_path, datapackage_upload_authorisation)
-        print(f'Datapackage url: {datapackage_upload_authorisation["upload_url"]}')
+    return data_package
 
-    ##===============================================
-    # Starting import of uploaded datapackage
-    datapackage_url = datapackage_upload_authorisation["upload_url"]
+
+def upload_data_package(data_package):
+    with tempfile.NamedTemporaryFile(mode="w", delete=True) as data_package_file:
+        json.dump(data_package, data_package_file)
+        data_package_file.flush()
+        data_package_path = data_package_file.name
+        authorise_data_package_upload_result = authorise_upload(data_package_path, "data_package.json", userid,
+                                                                data_package_name, datastore_token)
+        data_package_upload_authorisation = authorise_data_package_upload_result['filedata']["data_package.json"]
+        upload(data_package_path, data_package_upload_authorisation)
+
+    return data_package_upload_authorisation
+
+
+def import_uploaded_package(data_package_url):
     import_query = {
-        "datapackage": datapackage_url,
+        "data_package": data_package_url,
         "jwt": datastore_token
     }
     import_url = f"https://openspending-dedicated.vulekamali.gov.za/package/upload?{urlencode(import_query)}"
@@ -189,10 +203,12 @@ def process_uploaded_file(obj_id):
     r.raise_for_status()
     status = r.json()["status"]
 
-    ##===============================================
+    return status
 
+
+def check_and_update_status(status, data_package_url):
     status_query = {
-        "datapackage": datapackage_url,
+        "data_package": data_package_url,
     }
     status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{urlencode(status_query)}"
     while status not in ["done", "fail"]:
@@ -206,9 +222,33 @@ def process_uploaded_file(obj_id):
         if status == "fail":
             print(status_result["error"])
 
-    os.remove(original_csv_path)
 
-    # ======================== copy end ========================
+def process_uploaded_file(obj_id):
+    # read file
+    obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
+
+    original_csv_path = unzip_uploaded_file(obj_to_update)
+
+    csv_filename = os.path.basename(original_csv_path)
+
+    composite_key = create_composite_key_using_csv_headers(original_csv_path)
+
+    csv_table = tidy_csv_table(original_csv_path, composite_key)
+
+    data_package = create_data_package(obj_to_update, csv_filename, csv_table)
+
+    data_package_upload_authorisation = upload_data_package(data_package)
+
+    ##===============================================
+    # Starting import of uploaded data_package
+    data_package_url = data_package_upload_authorisation["upload_url"]
+    status = import_uploaded_package(data_package_url)
+
+    ##===============================================
+
+    check_and_update_status(status, data_package_url)
+
+    os.remove(original_csv_path)
 
 
 class IYMFileUploadAdmin(admin.ModelAdmin):
