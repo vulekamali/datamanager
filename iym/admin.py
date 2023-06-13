@@ -132,12 +132,7 @@ def tidy_csv_table(original_csv_path, composite_key):
     return table6
 
 
-def create_data_package(obj_to_update, csv_filename, csv_table):
-    userid = "616cdf6f2657070da7d2fa056df55206"
-    financial_year = obj_to_update.financial_year.slug
-
-    data_package_title = f"National in-year spending {financial_year}"
-    data_package_name = f"national-in-year-spending-{financial_year}"
+def create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title):
     data_package_template_path = "iym/data_package/data_package.json"
     base_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiI2MTZjZGY2ZjI2NTcwNzBkYTdkMmZhMDU2ZGY1NTIwNiIsImV4cCI6MTY4NzQxNDkxOX0._EaRN2Izns3gaKzN4jiVmC1RWic70AaTktcGt6F__Hk"
 
@@ -151,13 +146,7 @@ def create_data_package(obj_to_update, csv_filename, csv_table):
             "userid": userid,
         }
         authorize_url = f"https://openspending-dedicated.vulekamali.gov.za/user/authorize?{urlencode(authorize_query)}"
-        print('============ aaa ============')
-        print(authorize_url)
-        print('============ bbb ============')
         r = requests.get(authorize_url)
-        print('============ ccc ============')
-        print(r)
-        print('============ ddd ============')
         r.raise_for_status()
         authorize_result = r.json()
         datastore_token = authorize_result["token"]
@@ -176,10 +165,16 @@ def create_data_package(obj_to_update, csv_filename, csv_table):
         data_package["resources"][0]["path"] = csv_filename
         data_package["resources"][0]["bytes"] = os.path.getsize(csv_path)
 
-    return data_package
+    print('============ aaa ============')
+    print(data_package)
+    print('============ bbb ============')
+    return {
+        'data_package': data_package,
+        'datastore_token': datastore_token
+    }
 
 
-def upload_data_package(data_package):
+def upload_data_package(data_package, userid, data_package_name, datastore_token):
     with tempfile.NamedTemporaryFile(mode="w", delete=True) as data_package_file:
         json.dump(data_package, data_package_file)
         data_package_file.flush()
@@ -192,9 +187,9 @@ def upload_data_package(data_package):
     return data_package_upload_authorisation
 
 
-def import_uploaded_package(data_package_url):
+def import_uploaded_package(data_package_url, datastore_token):
     import_query = {
-        "data_package": data_package_url,
+        "datapackage": data_package_url,
         "jwt": datastore_token
     }
     import_url = f"https://openspending-dedicated.vulekamali.gov.za/package/upload?{urlencode(import_query)}"
@@ -208,7 +203,7 @@ def import_uploaded_package(data_package_url):
 
 def check_and_update_status(status, data_package_url):
     status_query = {
-        "data_package": data_package_url,
+        "datapackage": data_package_url,
     }
     status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{urlencode(status_query)}"
     while status not in ["done", "fail"]:
@@ -226,6 +221,10 @@ def check_and_update_status(status, data_package_url):
 def process_uploaded_file(obj_id):
     # read file
     obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
+    financial_year = obj_to_update.financial_year.slug
+    userid = "616cdf6f2657070da7d2fa056df55206"
+    data_package_name = f"national-in-year-spending-{financial_year}"
+    data_package_title = f"National in-year spending {financial_year}"
 
     original_csv_path = unzip_uploaded_file(obj_to_update)
 
@@ -235,14 +234,16 @@ def process_uploaded_file(obj_id):
 
     csv_table = tidy_csv_table(original_csv_path, composite_key)
 
-    data_package = create_data_package(obj_to_update, csv_filename, csv_table)
+    func_result = create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title)
+    data_package = func_result['data_package']
+    datastore_token = func_result['datastore_token']
 
-    data_package_upload_authorisation = upload_data_package(data_package)
+    data_package_upload_authorisation = upload_data_package(data_package, userid, data_package_name, datastore_token)
 
     ##===============================================
     # Starting import of uploaded data_package
     data_package_url = data_package_upload_authorisation["upload_url"]
-    status = import_uploaded_package(data_package_url)
+    status = import_uploaded_package(data_package_url, datastore_token)
 
     ##===============================================
 
