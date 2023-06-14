@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 from slugify import slugify
 from zipfile import ZipFile
 from django.conf import settings
+from django_q.tasks import async_task
 
 import os
 import csv
@@ -18,6 +19,7 @@ import json
 import time
 import re
 import iym
+import datetime
 
 RE_END_YEAR = re.compile(r"/\d+")
 
@@ -132,13 +134,14 @@ def tidy_csv_table(original_csv_path, composite_key):
     return table6
 
 
-def create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title):
+def create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title, obj_to_update):
     data_package_template_path = "iym/data_package/data_package.json"
     base_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiI2MTZjZGY2ZjI2NTcwNzBkYTdkMmZhMDU2ZGY1NTIwNiIsImV4cCI6MTY4NzQxNDkxOX0._EaRN2Izns3gaKzN4jiVmC1RWic70AaTktcGt6F__Hk"
 
     with tempfile.NamedTemporaryFile(mode="w", delete=False) as csv_file:
         csv_path = csv_file.name
         etl.tocsv(csv_table, csv_path)
+        update_import_report(obj_to_update, "Getting authorisation for datastore")
 
         authorize_query = {
             "jwt": base_token,
@@ -151,11 +154,14 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
         authorize_result = r.json()
         datastore_token = authorize_result["token"]
 
+        update_import_report(obj_to_update, f"Uploading CSV {csv_path}")
+
         authorise_csv_upload_result = authorise_upload(csv_path, csv_filename, userid, data_package_name,
                                                        datastore_token)
         upload(csv_path, authorise_csv_upload_result['filedata'][csv_filename])
 
         ##===============================================
+        update_import_report(obj_to_update, "Creating and uploading datapackage.json")
         with open(data_package_template_path) as data_package_file:
             data_package = json.load(data_package_file)
 
@@ -165,16 +171,13 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
         data_package["resources"][0]["path"] = csv_filename
         data_package["resources"][0]["bytes"] = os.path.getsize(csv_path)
 
-    print('============ aaa ============')
-    print(data_package)
-    print('============ bbb ============')
     return {
         'data_package': data_package,
         'datastore_token': datastore_token
     }
 
 
-def upload_data_package(data_package, userid, data_package_name, datastore_token):
+def upload_data_package(data_package, userid, data_package_name, datastore_token, obj_to_update):
     with tempfile.NamedTemporaryFile(mode="w", delete=True) as data_package_file:
         json.dump(data_package, data_package_file)
         data_package_file.flush()
@@ -183,17 +186,19 @@ def upload_data_package(data_package, userid, data_package_name, datastore_token
                                                                 data_package_name, datastore_token)
         data_package_upload_authorisation = authorise_data_package_upload_result['filedata']["data_package.json"]
         upload(data_package_path, data_package_upload_authorisation)
+        update_import_report(obj_to_update, f'Datapackage url: {datapackage_upload_authorisation["upload_url"]}')
 
     return data_package_upload_authorisation
 
 
-def import_uploaded_package(data_package_url, datastore_token):
+def import_uploaded_package(data_package_url, datastore_token, obj_to_update):
     import_query = {
         "datapackage": data_package_url,
         "jwt": datastore_token
     }
     import_url = f"https://openspending-dedicated.vulekamali.gov.za/package/upload?{urlencode(import_query)}"
     r = requests.post(import_url)
+    update_import_report(obj_to_update, f"Initial status: {r.text}")
 
     r.raise_for_status()
     status = r.json()["status"]
@@ -201,26 +206,43 @@ def import_uploaded_package(data_package_url, datastore_token):
     return status
 
 
-def check_and_update_status(status, data_package_url):
+def check_and_update_status(status, data_package_url, obj_to_update):
     status_query = {
         "datapackage": data_package_url,
     }
     status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{urlencode(status_query)}"
+    update_import_report(obj_to_update, f"Monitoring status until completion ({status_url}):")
     while status not in ["done", "fail"]:
         time.sleep(5)
         r = requests.get(status_url)
         r.raise_for_status()
         status_result = r.json()
-        print(status_result)
+        update_status(obj_to_update, f"loading data ({status_result['progress']}%)")
         status = status_result["status"]
 
         if status == "fail":
             print(status_result["error"])
 
+    update_status(obj_to_update, status)
+
+
+def update_status(obj_to_update, status):
+    obj_to_update.status = status
+    obj_to_update.save()
+
+
+def update_import_report(obj_to_update, message):
+    now = datetime.datetime.now().strftime("%H:%M:%S")
+    obj_to_update.import_report += f"{now} - {message}" + os.linesep
+    obj_to_update.save()
+
 
 def process_uploaded_file(obj_id):
     # read file
     obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
+    update_status(obj_to_update, "process started")
+    update_import_report(obj_to_update, "Cleaning CSV")
+
     financial_year = obj_to_update.financial_year.slug
     userid = "616cdf6f2657070da7d2fa056df55206"
     data_package_name = f"national-in-year-spending-{financial_year}"
@@ -228,26 +250,33 @@ def process_uploaded_file(obj_id):
 
     original_csv_path = unzip_uploaded_file(obj_to_update)
 
+    update_status(obj_to_update, "cleaning data")
+
     csv_filename = os.path.basename(original_csv_path)
 
     composite_key = create_composite_key_using_csv_headers(original_csv_path)
 
     csv_table = tidy_csv_table(original_csv_path, composite_key)
 
-    func_result = create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title)
+    update_status(obj_to_update, "uploading data")
+    func_result = create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title,
+                                      obj_to_update)
     data_package = func_result['data_package']
     datastore_token = func_result['datastore_token']
 
-    data_package_upload_authorisation = upload_data_package(data_package, userid, data_package_name, datastore_token)
+    data_package_upload_authorisation = upload_data_package(data_package, userid, data_package_name, datastore_token,
+                                                            obj_to_update)
 
     ##===============================================
     # Starting import of uploaded data_package
+    update_status(obj_to_update, "import queued")
+    update_import_report(obj_to_update, "Starting import of uploaded datapackage.")
     data_package_url = data_package_upload_authorisation["upload_url"]
-    status = import_uploaded_package(data_package_url, datastore_token)
+    status = import_uploaded_package(data_package_url, datastore_token, obj_to_update)
 
     ##===============================================
 
-    check_and_update_status(status, data_package_url)
+    check_and_update_status(status, data_package_url, obj_to_update)
 
     os.remove(original_csv_path)
 
@@ -256,7 +285,8 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
     readonly_fields = (
         "import_report",
         "user",
-        "process_completed"
+        "process_completed",
+        "status"
     )
     fieldsets = (
         (
@@ -268,6 +298,7 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
                     "latest_quarter",
                     "file",
                     "import_report",
+                    "status",
                     "process_completed",
                 )
             },
@@ -278,6 +309,7 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
         "user",
         "financial_year",
         "latest_quarter",
+        "status",
         "process_completed",
         "updated_at",
     )
@@ -287,7 +319,7 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
             obj.user = request.user
         super().save_model(request, obj, form, change)
 
-        process_uploaded_file(obj.id)
+        async_task(func=process_uploaded_file, obj_id=obj.id)
 
 
 admin.site.register(models.IYMFileUpload, IYMFileUploadAdmin)

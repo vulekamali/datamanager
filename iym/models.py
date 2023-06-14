@@ -23,6 +23,7 @@ class IYMFileUpload(models.Model):
     latest_quarter = models.CharField(max_length=2, choices=QUARTERS)
     process_completed = models.BooleanField(default=False)
     import_report = models.TextField()
+    status = models.TextField()
     file = models.FileField(upload_to=iym_file_path)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
