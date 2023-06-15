@@ -75,6 +75,10 @@ def authorise_upload(path, filename, userid, data_package_name, datastore_token)
         headers=authorize_upload_headers,
     )
 
+    print('============ aaa ============')
+    print(r.json())
+    print('============ bbb ============')
+
     r.raise_for_status()
     return r.json()
 
@@ -151,6 +155,12 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
         }
         authorize_url = f"https://openspending-dedicated.vulekamali.gov.za/user/authorize?{urlencode(authorize_query)}"
         r = requests.get(authorize_url)
+
+
+        print('============ fff ============')
+        print(r.json())
+        print('============ ggg ============')
+
         r.raise_for_status()
         authorize_result = r.json()
         datastore_token = authorize_result["token"]
@@ -263,8 +273,13 @@ def process_uploaded_file(obj_id):
         csv_table = tidy_csv_table(original_csv_path, composite_key)
 
         update_status(obj_to_update, "uploading data")
+
+        print('============ 222.2 ============')
         func_result = create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title,
                                           obj_to_update)
+
+        print('============ 333 ============')
+
         data_package = func_result['data_package']
         datastore_token = func_result['datastore_token']
 
@@ -287,7 +302,8 @@ def process_uploaded_file(obj_id):
 
         obj_to_update.process_completed = True
         obj_to_update.save()
-    except:
+    except Exception as e:
+        update_import_report(obj_to_update, str(e))
         update_status(obj_to_update, "fail")
 
 
