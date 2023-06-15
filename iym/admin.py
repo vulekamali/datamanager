@@ -74,6 +74,7 @@ def authorise_upload(path, filename, userid, data_package_name, datastore_token)
         json=authorize_upload_payload,
         headers=authorize_upload_headers,
     )
+
     r.raise_for_status()
     return r.json()
 
@@ -186,7 +187,7 @@ def upload_data_package(data_package, userid, data_package_name, datastore_token
                                                                 data_package_name, datastore_token)
         data_package_upload_authorisation = authorise_data_package_upload_result['filedata']["data_package.json"]
         upload(data_package_path, data_package_upload_authorisation)
-        update_import_report(obj_to_update, f'Datapackage url: {datapackage_upload_authorisation["upload_url"]}')
+        update_import_report(obj_to_update, f'Datapackage url: {data_package_upload_authorisation["upload_url"]}')
 
     return data_package_upload_authorisation
 
@@ -217,7 +218,7 @@ def check_and_update_status(status, data_package_url, obj_to_update):
         r = requests.get(status_url)
         r.raise_for_status()
         status_result = r.json()
-        update_status(obj_to_update, f"loading data ({status_result['progress']}%)")
+        update_status(obj_to_update, f"loading data ({int(float(status_result['progress']) * 100)}%)")
         status = status_result["status"]
 
         if status == "fail":
@@ -240,45 +241,54 @@ def update_import_report(obj_to_update, message):
 def process_uploaded_file(obj_id):
     # read file
     obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
-    update_status(obj_to_update, "process started")
-    update_import_report(obj_to_update, "Cleaning CSV")
+    if obj_to_update.process_completed:
+        return
+    try:
+        update_status(obj_to_update, "process started")
+        update_import_report(obj_to_update, "Cleaning CSV")
 
-    financial_year = obj_to_update.financial_year.slug
-    userid = "616cdf6f2657070da7d2fa056df55206"
-    data_package_name = f"national-in-year-spending-{financial_year}"
-    data_package_title = f"National in-year spending {financial_year}"
+        financial_year = obj_to_update.financial_year.slug
+        userid = "616cdf6f2657070da7d2fa056df55206"
+        data_package_name = f"national-in-year-spending-{financial_year}"
+        data_package_title = f"National in-year spending {financial_year}"
 
-    original_csv_path = unzip_uploaded_file(obj_to_update)
+        original_csv_path = unzip_uploaded_file(obj_to_update)
 
-    update_status(obj_to_update, "cleaning data")
+        update_status(obj_to_update, "cleaning data")
 
-    csv_filename = os.path.basename(original_csv_path)
+        csv_filename = os.path.basename(original_csv_path)
 
-    composite_key = create_composite_key_using_csv_headers(original_csv_path)
+        composite_key = create_composite_key_using_csv_headers(original_csv_path)
 
-    csv_table = tidy_csv_table(original_csv_path, composite_key)
+        csv_table = tidy_csv_table(original_csv_path, composite_key)
 
-    update_status(obj_to_update, "uploading data")
-    func_result = create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title,
-                                      obj_to_update)
-    data_package = func_result['data_package']
-    datastore_token = func_result['datastore_token']
+        update_status(obj_to_update, "uploading data")
+        func_result = create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title,
+                                          obj_to_update)
+        data_package = func_result['data_package']
+        datastore_token = func_result['datastore_token']
 
-    data_package_upload_authorisation = upload_data_package(data_package, userid, data_package_name, datastore_token,
-                                                            obj_to_update)
+        data_package_upload_authorisation = upload_data_package(data_package, userid, data_package_name,
+                                                                datastore_token,
+                                                                obj_to_update)
 
-    ##===============================================
-    # Starting import of uploaded data_package
-    update_status(obj_to_update, "import queued")
-    update_import_report(obj_to_update, "Starting import of uploaded datapackage.")
-    data_package_url = data_package_upload_authorisation["upload_url"]
-    status = import_uploaded_package(data_package_url, datastore_token, obj_to_update)
+        ##===============================================
+        # Starting import of uploaded data_package
+        update_status(obj_to_update, "import queued")
+        update_import_report(obj_to_update, "Starting import of uploaded datapackage.")
+        data_package_url = data_package_upload_authorisation["upload_url"]
+        status = import_uploaded_package(data_package_url, datastore_token, obj_to_update)
 
-    ##===============================================
+        ##===============================================
 
-    check_and_update_status(status, data_package_url, obj_to_update)
+        check_and_update_status(status, data_package_url, obj_to_update)
 
-    os.remove(original_csv_path)
+        os.remove(original_csv_path)
+
+        obj_to_update.process_completed = True
+        obj_to_update.save()
+    except:
+        update_status(obj_to_update, "fail")
 
 
 class IYMFileUploadAdmin(admin.ModelAdmin):
