@@ -75,9 +75,9 @@ def authorise_upload(path, filename, userid, data_package_name, datastore_token)
         headers=authorize_upload_headers,
     )
 
-    print('============ aaa ============')
+    print('============ ggg ============')
     print(r.json())
-    print('============ bbb ============')
+    print('============ hhh ============')
 
     r.raise_for_status()
     return r.json()
@@ -157,9 +157,9 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
         r = requests.get(authorize_url)
 
 
-        print('============ fff ============')
+        print('============ aaa ============')
         print(r.json())
-        print('============ ggg ============')
+        print('============ bbb ============')
 
         r.raise_for_status()
         authorize_result = r.json()
@@ -211,6 +211,10 @@ def import_uploaded_package(data_package_url, datastore_token, obj_to_update):
     r = requests.post(import_url)
     update_import_report(obj_to_update, f"Initial status: {r.text}")
 
+    print('============ ccc ============')
+    print(r.json())
+    print('============ ddd ============')
+
     r.raise_for_status()
     status = r.json()["status"]
 
@@ -226,6 +230,10 @@ def check_and_update_status(status, data_package_url, obj_to_update):
     while status not in ["done", "fail"]:
         time.sleep(5)
         r = requests.get(status_url)
+
+        print('============ eee ============')
+        print(r.json())
+        print('============ fff ============')
         r.raise_for_status()
         status_result = r.json()
         update_status(obj_to_update, f"loading data ({int(float(status_result['progress']) * 100)}%)")
@@ -274,11 +282,8 @@ def process_uploaded_file(obj_id):
 
         update_status(obj_to_update, "uploading data")
 
-        print('============ 222.2 ============')
         func_result = create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title,
                                           obj_to_update)
-
-        print('============ 333 ============')
 
         data_package = func_result['data_package']
         datastore_token = func_result['datastore_token']

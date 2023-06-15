@@ -24,15 +24,22 @@ class MockResponse:
     def raise_for_status(self):
         return None
 
+
 def mocked_requests_get(*args, **kwargs):
-    if args[0] == "https://openspending-dedicated.vulekamali.gov.za/datastore/":
+    if "https://openspending-dedicated.vulekamali.gov.za/datastore/" in args[0]:
         return MockResponse({
             'test': 'emre'
         }, 200)
-    elif args[0] == "https://openspending-dedicated.vulekamali.gov.za/user/authorize?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiI2MTZjZGY2ZjI2NTcwNzBkYTdkMmZhMDU2ZGY1NTIwNiIsImV4cCI6MTY4NzQxNDkxOX0._EaRN2Izns3gaKzN4jiVmC1RWic70AaTktcGt6F__Hk&service=os.datastore&userid=616cdf6f2657070da7d2fa056df55206":
+    elif "https://openspending-dedicated.vulekamali.gov.za/user/authorize" in args[0]:
         return MockResponse({
-            'test': 'emre2'
+            'token': 'this is the test token'
         }, 200)
+    elif "https://openspending-dedicated.vulekamali.gov.za/package/upload?" in args[0]:
+        return MockResponse({
+            'test': 'emre3'
+        }, 200)
+
+    return MockResponse(None, 404)
 
 
 class IYMFileUploadTestCase(TestCase):
@@ -49,7 +56,6 @@ class IYMFileUploadTestCase(TestCase):
 
     def tearDown(self):
         self.zip_file.close()
-
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_initial(self, mock_get):
