@@ -26,17 +26,41 @@ class MockResponse:
 
 
 def mocked_requests_get(*args, **kwargs):
-    if "https://openspending-dedicated.vulekamali.gov.za/datastore/" in args[0]:
-        return MockResponse({
-            'test': 'emre'
-        }, 200)
-    elif "https://openspending-dedicated.vulekamali.gov.za/user/authorize" in args[0]:
+    print('============ ooo ============')
+    print(args)
+    print('============ ppp ============')
+    if "https://openspending-dedicated.vulekamali.gov.za/user/authorize" in args[0]:
         return MockResponse({
             'token': 'this is the test token'
         }, 200)
-    elif "https://openspending-dedicated.vulekamali.gov.za/package/upload?" in args[0]:
+    elif "https://openspending-dedicated.vulekamali.gov.za/datastore/" in args[0]:
         return MockResponse({
-            'test': 'emre3'
+            'filedata': {
+                'test_data.csv': {
+                    'md5': 'LTP9Xtp/f8n2DrFWG2/h1g==',
+                    'name': 'test_data.csv',
+                    'length': 2354098,
+                    'upload_url': 'https://test-upload-url.com/test_data.csv',
+                    'upload_query': {},
+                    'type': 'application/octet-stream'
+                },
+                'data_package.json':
+                    {
+                        'md5': 'T57ewjs7A5m0f0fJfCW2Iw==', 'name': 'data_package.json',
+                        'length': 21510,
+                        'upload_url': 'ttps://test-upload-url.com/data_package.json',
+                        'upload_query': {},
+                        'type': 'application/octet-stream'
+                    }
+            }
+        }, 200)
+    elif "https://test-upload-url.com/test_data.csv" in args[0]:
+        return MockResponse({
+            'test': 'file'
+        }, 200)
+    elif"https://openspending-dedicated.vulekamali.gov.za/package/upload?" in args[0]:
+        return MockResponse({
+            'text': 'import started'
         }, 200)
 
     return MockResponse(None, 404)
@@ -58,7 +82,9 @@ class IYMFileUploadTestCase(TestCase):
         self.zip_file.close()
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
-    def test_initial(self, mock_get):
+    @mock.patch("requests.post", side_effect=mocked_requests_get)
+    @mock.patch("requests.put", side_effect=mocked_requests_get)
+    def test_initial(self, mock_get, mock_get_2, mock_get_3):
         financial_year = FinancialYear.objects.create(slug="2021-22")
         test_element = IYMFileUpload.objects.create(
             user=self.superuser, file=self.zip_file, financial_year=financial_year, latest_quarter='Q1'

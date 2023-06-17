@@ -75,10 +75,6 @@ def authorise_upload(path, filename, userid, data_package_name, datastore_token)
         headers=authorize_upload_headers,
     )
 
-    print('============ ggg ============')
-    print(r.json())
-    print('============ hhh ============')
-
     r.raise_for_status()
     return r.json()
 
@@ -156,11 +152,6 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
         authorize_url = f"https://openspending-dedicated.vulekamali.gov.za/user/authorize?{urlencode(authorize_query)}"
         r = requests.get(authorize_url)
 
-
-        print('============ aaa ============')
-        print(r.json())
-        print('============ bbb ============')
-
         r.raise_for_status()
         authorize_result = r.json()
         datastore_token = authorize_result["token"]
@@ -169,6 +160,8 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
 
         authorise_csv_upload_result = authorise_upload(csv_path, csv_filename, userid, data_package_name,
                                                        datastore_token)
+
+
         upload(csv_path, authorise_csv_upload_result['filedata'][csv_filename])
 
         ##===============================================
@@ -195,6 +188,7 @@ def upload_data_package(data_package, userid, data_package_name, datastore_token
         data_package_path = data_package_file.name
         authorise_data_package_upload_result = authorise_upload(data_package_path, "data_package.json", userid,
                                                                 data_package_name, datastore_token)
+
         data_package_upload_authorisation = authorise_data_package_upload_result['filedata']["data_package.json"]
         upload(data_package_path, data_package_upload_authorisation)
         update_import_report(obj_to_update, f'Datapackage url: {data_package_upload_authorisation["upload_url"]}')
@@ -209,11 +203,10 @@ def import_uploaded_package(data_package_url, datastore_token, obj_to_update):
     }
     import_url = f"https://openspending-dedicated.vulekamali.gov.za/package/upload?{urlencode(import_query)}"
     r = requests.post(import_url)
+    print('============ aaa ============')
+    print(r.text)
+    print('============ bbb ============')
     update_import_report(obj_to_update, f"Initial status: {r.text}")
-
-    print('============ ccc ============')
-    print(r.json())
-    print('============ ddd ============')
 
     r.raise_for_status()
     status = r.json()["status"]
@@ -230,10 +223,6 @@ def check_and_update_status(status, data_package_url, obj_to_update):
     while status not in ["done", "fail"]:
         time.sleep(5)
         r = requests.get(status_url)
-
-        print('============ eee ============')
-        print(r.json())
-        print('============ fff ============')
         r.raise_for_status()
         status_result = r.json()
         update_status(obj_to_update, f"loading data ({int(float(status_result['progress']) * 100)}%)")
@@ -350,7 +339,8 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
             obj.user = request.user
         super().save_model(request, obj, form, change)
 
-        async_task(func=process_uploaded_file, obj_id=obj.id)
+        # async_task(func=process_uploaded_file, obj_id=obj.id)
+        process_uploaded_file(obj.id)
 
 
 admin.site.register(models.IYMFileUpload, IYMFileUploadAdmin)
