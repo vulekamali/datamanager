@@ -203,9 +203,6 @@ def import_uploaded_package(data_package_url, datastore_token, obj_to_update):
     }
     import_url = f"https://openspending-dedicated.vulekamali.gov.za/package/upload?{urlencode(import_query)}"
     r = requests.post(import_url)
-    print('============ aaa ============')
-    print(r.text)
-    print('============ bbb ============')
     update_import_report(obj_to_update, f"Initial status: {r.text}")
 
     r.raise_for_status()
@@ -339,8 +336,7 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
             obj.user = request.user
         super().save_model(request, obj, form, change)
 
-        # async_task(func=process_uploaded_file, obj_id=obj.id)
-        process_uploaded_file(obj.id)
+        async_task(func=process_uploaded_file, obj_id=obj.id)
 
 
 admin.site.register(models.IYMFileUpload, IYMFileUploadAdmin)
