@@ -180,6 +180,9 @@
           min-height: 100px;
           align-items: center;
           display: flex;
+          @media screen and (max-width: 400px) {
+            min-height: 50px;
+          }
 
           svg {
             margin: 0 auto;
