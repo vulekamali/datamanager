@@ -15,6 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 import socket
 
+
 class WagtailHackMixin:
     """
     We need to overload the LiveServerTestCase class to resolve:
@@ -63,12 +64,11 @@ class BaseSeleniumTestCase(WagtailHackMixin, StaticLiveServerTestCase):
 
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument('disable-dev-shm-usage')
+        chrome_options.add_argument("disable-dev-shm-usage")
         d = chrome_options.to_capabilities()
         d["loggingPrefs"] = {"browser": "ALL"}
         cls.selenium = webdriver.Remote(
-            command_executor='http://selenium:4444/wd/hub',
-            desired_capabilities=d
+            command_executor="http://selenium:4444/wd/hub", desired_capabilities=d
         )
         cls.selenium.implicitly_wait(10)
         cls.wait = WebDriverWait(cls.selenium, 5)
