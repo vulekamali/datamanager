@@ -137,7 +137,7 @@ def tidy_csv_table(original_csv_path, composite_key):
 
 def create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title, obj_to_update):
     data_package_template_path = "iym/data_package/data_package.json"
-    base_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiI2MTZjZGY2ZjI2NTcwNzBkYTdkMmZhMDU2ZGY1NTIwNiIsImV4cCI6MTY4NzQxNDkxOX0._EaRN2Izns3gaKzN4jiVmC1RWic70AaTktcGt6F__Hk"
+    base_token = settings.OPEN_SPENDING_BASE_TOKEN
 
     with tempfile.NamedTemporaryFile(mode="w", delete=False) as csv_file:
         csv_path = csv_file.name
@@ -150,9 +150,14 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
             "userid": userid,
         }
         authorize_url = f"https://openspending-dedicated.vulekamali.gov.za/user/authorize?{urlencode(authorize_query)}"
+        print('============ aaa ============')
         r = requests.get(authorize_url)
 
         r.raise_for_status()
+
+        print('============ bbb ============')
+        print(r.json())
+        print('============ ccc ============')
         authorize_result = r.json()
         datastore_token = authorize_result["token"]
 
@@ -252,7 +257,7 @@ def process_uploaded_file(obj_id):
         update_import_report(obj_to_update, "Cleaning CSV")
 
         financial_year = obj_to_update.financial_year.slug
-        userid = "616cdf6f2657070da7d2fa056df55206"
+        userid = settings.OPEN_SPENDING_USER_ID
         data_package_name = f"national-in-year-spending-{financial_year}"
         data_package_title = f"National in-year spending {financial_year}"
 
@@ -336,7 +341,8 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
             obj.user = request.user
         super().save_model(request, obj, form, change)
 
-        async_task(func=process_uploaded_file, obj_id=obj.id)
+        # async_task(func=process_uploaded_file, obj_id=obj.id)
+        process_uploaded_file(obj.id)
 
 
 admin.site.register(models.IYMFileUpload, IYMFileUploadAdmin)
