@@ -136,10 +136,10 @@ def tidy_csv_table(original_csv_path, composite_key):
 
 
 def create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title, obj_to_update):
-    data_package_template_path = "iym/data_package/data_package.json"
+    data_package_template_path = "iym/data_package/data_package_template.json"
     base_token = settings.OPEN_SPENDING_BASE_TOKEN
 
-    with tempfile.NamedTemporaryFile(mode="w", delete=False) as csv_file:
+    with tempfile.NamedTemporaryFile(mode="w", delete=True) as csv_file:
         csv_path = csv_file.name
         etl.tocsv(csv_table, csv_path)
         update_import_report(obj_to_update, "Getting authorisation for datastore")
