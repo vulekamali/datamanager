@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('iym', '0002_iymfileupload_status'),
+        ("iym", "0002_iymfileupload_status"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='iymfileupload',
-            name='task_id',
-            field=models.TextField(default=''),
+            model_name="iymfileupload",
+            name="task_id",
+            field=models.TextField(default=""),
             preserve_default=False,
         ),
     ]

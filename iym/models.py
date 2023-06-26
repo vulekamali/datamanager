@@ -17,9 +17,7 @@ def iym_file_path(instance, filename):
 
 class IYMFileUpload(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING, blank=True)
-    financial_year = models.ForeignKey(
-        FinancialYear, on_delete=models.CASCADE
-    )
+    financial_year = models.ForeignKey(FinancialYear, on_delete=models.CASCADE)
     latest_quarter = models.CharField(max_length=2, choices=QUARTERS)
     process_completed = models.BooleanField(default=False)
     import_report = models.TextField()

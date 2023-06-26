@@ -52,10 +52,10 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object
             return (
-                       "financial_year",
-                       "latest_quarter",
-                       "file",
-                   ) + self.readonly_fields
+                "financial_year",
+                "latest_quarter",
+                "file",
+            ) + self.readonly_fields
         return self.readonly_fields
 
     def has_change_permission(self, request, obj=None):

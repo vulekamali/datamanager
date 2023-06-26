@@ -47,7 +47,7 @@ MEASURES = [
 
 def authorise_upload(path, filename, userid, data_package_name, datastore_token):
     # TODO: get length and md5 without reading the whole thing into memory
-    with open(path, 'rb') as fh:
+    with open(path, "rb") as fh:
         bytes = fh.read()
         md5 = hashlib.md5(bytes)
         md5_b64 = base64.b64encode(md5.digest())
@@ -64,9 +64,9 @@ def authorise_upload(path, filename, userid, data_package_name, datastore_token)
                 "md5": md5_b64,
                 "name": filename,
                 "length": len(bytes),
-                "type": "application/octet-stream"
+                "type": "application/octet-stream",
             }
-        }
+        },
     }
     authorize_upload_headers = {"auth-token": datastore_token}
     r = requests.post(
@@ -85,18 +85,18 @@ def upload(path, authorisation):
     upload_url = f"{authorisation['upload_url']}?{urlencode(upload_query)}"
     upload_headers = {
         "content-type": "application/octet-stream",
-        "Content-MD5": authorisation["md5"]
+        "Content-MD5": authorisation["md5"],
     }
-    with open(path, 'rb') as file:
+    with open(path, "rb") as file:
         r = requests.put(upload_url, data=file, headers=upload_headers)
     r.raise_for_status()
 
 
 def unzip_uploaded_file(obj_to_update):
-    relative_path = 'iym/temp_files/'
+    relative_path = "iym/temp_files/"
     zip_file = obj_to_update.file
 
-    with ZipFile(zip_file, 'r') as zip:
+    with ZipFile(zip_file, "r") as zip:
         file_name = zip.namelist()[0]
         zip.extractall(path=relative_path)
 
@@ -135,7 +135,14 @@ def tidy_csv_table(original_csv_path, composite_key):
     return table6
 
 
-def create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title, obj_to_update):
+def create_data_package(
+    csv_filename,
+    csv_table,
+    userid,
+    data_package_name,
+    data_package_title,
+    obj_to_update,
+):
     data_package_template_path = "iym/data_package/data_package_template.json"
     base_token = settings.OPEN_SPENDING_BASE_TOKEN
 
@@ -153,15 +160,20 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
         r = requests.get(authorize_url)
 
         r.raise_for_status()
+
         authorize_result = r.json()
+        if "token" not in authorize_result:
+            raise Exception("JWT token is invalid")
+
         datastore_token = authorize_result["token"]
 
         update_import_report(obj_to_update, f"Uploading CSV {csv_path}")
 
-        authorise_csv_upload_result = authorise_upload(csv_path, csv_filename, userid, data_package_name,
-                                                       datastore_token)
+        authorise_csv_upload_result = authorise_upload(
+            csv_path, csv_filename, userid, data_package_name, datastore_token
+        )
 
-        upload(csv_path, authorise_csv_upload_result['filedata'][csv_filename])
+        upload(csv_path, authorise_csv_upload_result["filedata"][csv_filename])
 
         ##===============================================
         update_import_report(obj_to_update, "Creating and uploading datapackage.json")
@@ -170,36 +182,44 @@ def create_data_package(csv_filename, csv_table, userid, data_package_name, data
 
         data_package["title"] = data_package_title
         data_package["name"] = data_package_name
-        data_package["resources"][0]["name"] = slugify(os.path.splitext(csv_filename)[0])
+        data_package["resources"][0]["name"] = slugify(
+            os.path.splitext(csv_filename)[0]
+        )
         data_package["resources"][0]["path"] = csv_filename
         data_package["resources"][0]["bytes"] = os.path.getsize(csv_path)
 
-    return {
-        'data_package': data_package,
-        'datastore_token': datastore_token
-    }
+    return {"data_package": data_package, "datastore_token": datastore_token}
 
 
-def upload_data_package(data_package, userid, data_package_name, datastore_token, obj_to_update):
+def upload_data_package(
+    data_package, userid, data_package_name, datastore_token, obj_to_update
+):
     with tempfile.NamedTemporaryFile(mode="w", delete=True) as data_package_file:
         json.dump(data_package, data_package_file)
         data_package_file.flush()
         data_package_path = data_package_file.name
-        authorise_data_package_upload_result = authorise_upload(data_package_path, "data_package.json", userid,
-                                                                data_package_name, datastore_token)
+        authorise_data_package_upload_result = authorise_upload(
+            data_package_path,
+            "data_package.json",
+            userid,
+            data_package_name,
+            datastore_token,
+        )
 
-        data_package_upload_authorisation = authorise_data_package_upload_result['filedata']["data_package.json"]
+        data_package_upload_authorisation = authorise_data_package_upload_result[
+            "filedata"
+        ]["data_package.json"]
         upload(data_package_path, data_package_upload_authorisation)
-        update_import_report(obj_to_update, f'Datapackage url: {data_package_upload_authorisation["upload_url"]}')
+        update_import_report(
+            obj_to_update,
+            f'Datapackage url: {data_package_upload_authorisation["upload_url"]}',
+        )
 
     return data_package_upload_authorisation
 
 
 def import_uploaded_package(data_package_url, datastore_token, obj_to_update):
-    import_query = {
-        "datapackage": data_package_url,
-        "jwt": datastore_token
-    }
+    import_query = {"datapackage": data_package_url, "jwt": datastore_token}
     import_url = f"https://openspending-dedicated.vulekamali.gov.za/package/upload?{urlencode(import_query)}"
     r = requests.post(import_url)
     update_import_report(obj_to_update, f"Initial status: {r.text}")
@@ -221,13 +241,18 @@ def check_and_update_status(status, data_package_url, obj_to_update):
         "datapackage": data_package_url,
     }
     status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{urlencode(status_query)}"
-    update_import_report(obj_to_update, f"Monitoring status until completion ({status_url}):")
+    update_import_report(
+        obj_to_update, f"Monitoring status until completion ({status_url}):"
+    )
     while status not in ["done", "fail"]:
         time.sleep(5)
         r = requests.get(status_url)
         r.raise_for_status()
         status_result = r.json()
-        update_status(obj_to_update, f"loading data ({int(float(status_result['progress']) * 100)}%)")
+        update_status(
+            obj_to_update,
+            f"loading data ({int(float(status_result['progress']) * 100)}%)",
+        )
         status = status_result["status"]
 
         if status == "fail":
@@ -267,22 +292,30 @@ def process_uploaded_file(obj_id):
 
         update_status(obj_to_update, "uploading data")
 
-        func_result = create_data_package(csv_filename, csv_table, userid, data_package_name, data_package_title,
-                                          obj_to_update)
+        func_result = create_data_package(
+            csv_filename,
+            csv_table,
+            userid,
+            data_package_name,
+            data_package_title,
+            obj_to_update,
+        )
 
-        data_package = func_result['data_package']
-        datastore_token = func_result['datastore_token']
+        data_package = func_result["data_package"]
+        datastore_token = func_result["datastore_token"]
 
-        data_package_upload_authorisation = upload_data_package(data_package, userid, data_package_name,
-                                                                datastore_token,
-                                                                obj_to_update)
+        data_package_upload_authorisation = upload_data_package(
+            data_package, userid, data_package_name, datastore_token, obj_to_update
+        )
 
         ##===============================================
         # Starting import of uploaded data_package
         update_status(obj_to_update, "import queued")
         update_import_report(obj_to_update, "Starting import of uploaded datapackage.")
         data_package_url = data_package_upload_authorisation["upload_url"]
-        status = import_uploaded_package(data_package_url, datastore_token, obj_to_update)
+        status = import_uploaded_package(
+            data_package_url, datastore_token, obj_to_update
+        )
 
         ##===============================================
 

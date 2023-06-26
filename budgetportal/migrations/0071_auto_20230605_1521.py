@@ -7,13 +7,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgetportal', '0070_auto_20230228_0756'),
+        ("budgetportal", "0070_auto_20230228_0756"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='showcaseitem',
-            name='file',
-            field=models.FileField(help_text="<ul><li style='list-style:square'>Thumbnail aspect ratio should be 1.91:1.</li><li style='list-style:square'>Recommended resolution is 1200 x 630 px.</li><li style='list-style:square'>Main focus of image should be centered occupying 630 x 630 px in the middle of the image.</li></ul>", upload_to=budgetportal.models.showcase_item_file_path),
+            model_name="showcaseitem",
+            name="file",
+            field=models.FileField(
+                help_text="<ul><li style='list-style:square'>Thumbnail aspect ratio should be 1.91:1.</li><li style='list-style:square'>Recommended resolution is 1200 x 630 px.</li><li style='list-style:square'>Main focus of image should be centered occupying 630 x 630 px in the middle of the image.</li></ul>",
+                upload_to=budgetportal.models.showcase_item_file_path,
+            ),
         ),
     ]

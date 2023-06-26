@@ -11,23 +11,55 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('budgetportal', '0071_auto_20230605_1521'),
+        ("budgetportal", "0071_auto_20230605_1521"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='IYMFileUpload',
+            name="IYMFileUpload",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('latest_quarter', models.CharField(choices=[('Q1', 'Q1'), ('Q2', 'Q2'), ('Q3', 'Q3'), ('Q4', 'Q4')], max_length=2)),
-                ('process_completed', models.BooleanField(default=False)),
-                ('import_report', models.TextField()),
-                ('file', models.FileField(upload_to=iym.models.iym_file_path)),
-                ('created_at', models.DateTimeField(auto_now_add=True, null=True)),
-                ('updated_at', models.DateTimeField(auto_now=True, null=True)),
-                ('financial_year', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='budgetportal.FinancialYear')),
-                ('user', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "latest_quarter",
+                    models.CharField(
+                        choices=[
+                            ("Q1", "Q1"),
+                            ("Q2", "Q2"),
+                            ("Q3", "Q3"),
+                            ("Q4", "Q4"),
+                        ],
+                        max_length=2,
+                    ),
+                ),
+                ("process_completed", models.BooleanField(default=False)),
+                ("import_report", models.TextField()),
+                ("file", models.FileField(upload_to=iym.models.iym_file_path)),
+                ("created_at", models.DateTimeField(auto_now_add=True, null=True)),
+                ("updated_at", models.DateTimeField(auto_now=True, null=True)),
+                (
+                    "financial_year",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="budgetportal.FinancialYear",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        blank=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
