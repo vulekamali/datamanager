@@ -25,5 +25,6 @@ class IYMFileUpload(models.Model):
     import_report = models.TextField()
     status = models.TextField()
     file = models.FileField(upload_to=iym_file_path)
+    task_id = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
