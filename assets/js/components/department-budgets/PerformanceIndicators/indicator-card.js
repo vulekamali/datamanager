@@ -157,7 +157,7 @@ class IndicatorCard extends Component {
         const key = `${prefix}${quarter}_${finalAppix}`;
         if (this.state.selectedPeriodType === 'annual' && this.state.selectedYear !== this.state.financialYear) {
             const indicator = this.state.previousYearsIndicators.filter(x => x.financialYear === this.state.selectedYear)[0].indicator;
-            return indicator === null ? null : indicator[key];
+            return indicator == null ? null : indicator[key];
         } else {
             return this.state.indicator[key];
         }
@@ -391,16 +391,16 @@ class IndicatorCard extends Component {
             <Grid container spacing={2}>
                 {this.renderChartContainerColumns()}
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[0].financialYear : 'Q1'}
+                    {this.state.selectedPeriodType === 'annual' && this.state.previousYearsIndicators[0] !== undefined ? this.state.previousYearsIndicators[0].financialYear : 'Q1'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[1].financialYear : 'Q2'}
+                    {this.state.selectedPeriodType === 'annual' && this.state.previousYearsIndicators[1] !== undefined ? this.state.previousYearsIndicators[1].financialYear : 'Q2'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[2].financialYear : 'Q3'}
+                    {this.state.selectedPeriodType === 'annual' && this.state.previousYearsIndicators[2] !== undefined ? this.state.previousYearsIndicators[2].financialYear : 'Q3'}
                 </Grid>
                 <Grid item xs={3} className={'bar-text'} style={{paddingTop: '0px'}}>
-                    {this.state.selectedPeriodType === 'annual' ? this.state.previousYearsIndicators[3].financialYear : 'Q4'}
+                    {this.state.selectedPeriodType === 'annual' && this.state.previousYearsIndicators[3] !== undefined ? this.state.previousYearsIndicators[3].financialYear : 'Q4'}
                 </Grid>
             </Grid>
         )
