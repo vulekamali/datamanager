@@ -310,13 +310,13 @@ Running tests
 All tests
 
 ```
-docker-compose run --rm test
+docker-compose run --rm app python manage.py test
 ```
 
 Specific tests, e.g.
 
 ```
-docker-compose run --rm test python manage.py test budgetportal.tests.test_bulk_upload.BulkUploadTestCase
+docker-compose run --rm app python manage.py test budgetportal.tests.test_bulk_upload.BulkUploadTestCase
 ```
 
 Production deployment
