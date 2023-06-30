@@ -62,6 +62,8 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
+    "constance",
+    "constance.backends.database",
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
     "performance",
@@ -109,6 +111,16 @@ INSTALLED_APPS = [
     "storages",
 ]
 
+CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
+
+CONSTANCE_CONFIG = {
+    "EQPRS_DATA_ENABLED": (
+        False,
+        "enabling / disabling summary on department page",
+        bool,
+    )
+}
+
 if DEBUG_TOOLBAR:
     INSTALLED_APPS.append("debug_toolbar")
 
@@ -137,7 +149,6 @@ WSGI_APPLICATION = "budgetportal.wsgi.application"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
-
 db_config = dj_database_url.config()
 db_config["ATOMIC_REQUESTS"] = True
 
@@ -158,7 +169,6 @@ AWS_S3_CUSTOM_DOMAIN = env.str("AWS_S3_CUSTOM_DOMAIN", None)
 # https://docs.wagtail.io/en/v2.7.1/advanced_topics/deploying.html
 AWS_S3_FILE_OVERWRITE = False
 
-
 SOLR_URL = os.environ["SOLR_URL"]
 
 HAYSTACK_CONNECTIONS = {
@@ -168,7 +178,6 @@ HAYSTACK_CONNECTIONS = {
         "ADMIN_URL": "",
     }
 }
-
 
 # Caches
 if DEBUG:
@@ -189,7 +198,6 @@ else:
             "LOCATION": "/var/tmp/django_cache",
         }
     }
-
 
 CKAN_URL = os.environ.get("CKAN_URL", "https://data.vulekamali.gov.za")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY", None)

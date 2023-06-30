@@ -31,6 +31,7 @@ import './components/header-and-footer/Modals/scripts.jsx';
 import './components/department-budgets/DeptSearch/scripts.jsx';
 import './components/department-budgets/IntroSection/scripts.jsx';
 import './components/department-budgets/ArrowButtons/scripts.js';
+import './components/department-budgets/PerformanceIndicators/scripts.jsx';
 
 import './components/performance/Table/scripts.jsx';
 

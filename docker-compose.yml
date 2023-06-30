@@ -37,6 +37,7 @@ services:
       - CKAN_URL
       - OPEN_SPENDING_USER_ID
       - OPEN_SPENDING_BASE_TOKEN
+      - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
     volumes:
       - .:/code
     ports:
@@ -46,6 +47,9 @@ services:
       - solr
       - minio-client
       - minio
+    links:
+      - selenium
+
 
   # Should be same as app except for command and ports
   worker:
@@ -85,6 +89,7 @@ services:
       - AWS_S3_SECURE_URLS=True
       - SOLR_URL=http://solr:8983/solr/budgetportal-test
       - DJANGO_Q_SYNC=TRUE
+      - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
     volumes:
       - .:/code
     depends_on:
@@ -129,6 +134,14 @@ services:
       nofile:
         soft: 65536
         hard: 65536
+
+  selenium:
+    image: selenium/standalone-chrome:3.141
+    ports:
+      - 4444:4444
+      - 5900:5900
+      - 7900:7900
+    shm_size: '2gb'
 
 
 
