@@ -46,11 +46,20 @@ MEASURES = [
 
 
 def authorise_upload(path, filename, userid, data_package_name, datastore_token):
-    # TODO: get length and md5 without reading the whole thing into memory
+    md5 = hashlib.md5()
     with open(path, "rb") as fh:
-        bytes = fh.read()
-        md5 = hashlib.md5(bytes)
-        md5_b64 = base64.b64encode(md5.digest())
+        while True:
+            bytes = fh.read(1000)
+            if not bytes:
+                break
+            else:
+                md5.update(bytes)
+                md5_b64 = base64.b64encode(md5.digest())
+
+
+    print('================ aaa ================')
+    print(md5_b64)
+    print('================ bbb ================')
 
     authorize_upload_url = "https://openspending-dedicated.vulekamali.gov.za/datastore/"
     authorize_upload_payload = {
