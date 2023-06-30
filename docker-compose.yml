@@ -38,6 +38,7 @@ services:
       - OPEN_SPENDING_USER_ID
       - OPEN_SPENDING_BASE_TOKEN
       - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
+      - CKAN_API_KEY
     volumes:
       - .:/code
     ports:
@@ -68,6 +69,7 @@ services:
       - CKAN_URL
       - OPEN_SPENDING_USER_ID
       - OPEN_SPENDING_BASE_TOKEN
+      - CKAN_API_KEY
     volumes:
       - .:/code
     depends_on:

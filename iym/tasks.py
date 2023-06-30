@@ -142,12 +142,12 @@ def tidy_csv_table(original_csv_path, composite_key):
 
 
 def create_data_package(
-    csv_filename,
-    csv_table,
-    userid,
-    data_package_name,
-    data_package_title,
-    obj_to_update,
+        csv_filename,
+        csv_table,
+        userid,
+        data_package_name,
+        data_package_title,
+        obj_to_update,
 ):
     data_package_template_path = "iym/data_package/data_package_template.json"
     base_token = settings.OPEN_SPENDING_BASE_TOKEN
@@ -198,7 +198,7 @@ def create_data_package(
 
 
 def upload_data_package(
-    data_package, userid, data_package_name, datastore_token, obj_to_update
+        data_package, userid, data_package_name, datastore_token, obj_to_update
 ):
     with tempfile.NamedTemporaryFile(mode="w", delete=True) as data_package_file:
         json.dump(data_package, data_package_file)
@@ -276,7 +276,6 @@ def process_uploaded_file(obj_id):
     create_dataset()
     return
 
-
     # read file
     obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
     if obj_to_update.process_completed:
@@ -344,7 +343,8 @@ def process_uploaded_file(obj_id):
 
 def create_dataset():
     dataset_fields = {
-        "title":"emre test"
+        "title": "emre test",
+        "name": "emre_test_name"
     }
     print('================ aaa ================')
     test = ckan.action.package_create(**dataset_fields)
