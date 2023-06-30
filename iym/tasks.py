@@ -21,6 +21,8 @@ import re
 import iym
 import datetime
 
+ckan = settings.CKAN
+
 RE_END_YEAR = re.compile(r"/\d+")
 
 MEASURES = [
@@ -271,6 +273,10 @@ def update_status(obj_to_update, status):
 
 
 def process_uploaded_file(obj_id):
+    create_dataset()
+    return
+
+
     # read file
     obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
     if obj_to_update.process_completed:
@@ -329,6 +335,11 @@ def process_uploaded_file(obj_id):
 
         obj_to_update.process_completed = True
         obj_to_update.save()
+
+        create_dataset()
     except Exception as e:
         update_import_report(obj_to_update, str(e))
         update_status(obj_to_update, "fail")
+
+
+def create_dataset():
