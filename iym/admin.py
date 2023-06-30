@@ -46,16 +46,17 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
             obj.user = request.user
         super().save_model(request, obj, form, change)
 
-        obj.task_id = async_task(func=process_uploaded_file, obj_id=obj.id)
-        obj.save()
+        # obj.task_id = async_task(func=process_uploaded_file, obj_id=obj.id)
+        # obj.save()
+        process_uploaded_file(obj.id)
 
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object
             return (
-                "financial_year",
-                "latest_quarter",
-                "file",
-            ) + self.readonly_fields
+                       "financial_year",
+                       "latest_quarter",
+                       "file",
+                   ) + self.readonly_fields
         return self.readonly_fields
 
     def has_change_permission(self, request, obj=None):

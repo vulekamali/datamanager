@@ -343,3 +343,10 @@ def process_uploaded_file(obj_id):
 
 
 def create_dataset():
+    dataset_fields = {
+        "title":"emre test"
+    }
+    print('================ aaa ================')
+    test = ckan.action.package_create(**dataset_fields)
+    print(test)
+    print('================ bbb ================')
