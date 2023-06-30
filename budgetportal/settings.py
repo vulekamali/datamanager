@@ -213,7 +213,7 @@ DISCOURSE_SSO_SECRET = os.environ.get("DISCOURSE_SSO_SECRET", None)
 COMMENTS_ENABLED = os.environ.get("COMMENTS_ENABLED", "false").lower() == "true"
 
 BUST_OPENSPENDING_CACHE = (
-    os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
+        os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
 )
 OPENSPENDING_HOST = os.environ.get("OPENSPENDING_HOST", "https://openspending.org")
 
@@ -428,5 +428,5 @@ REST_FRAMEWORK = {
 
 WAGTAIL_SITE_NAME = "Vulekamali"
 
-OPEN_SPENDING_USER_ID = os.environ["OPEN_SPENDING_USER_ID"]
-OPEN_SPENDING_BASE_TOKEN = os.environ["OPEN_SPENDING_BASE_TOKEN"]
+OPEN_SPENDING_USER_ID = os.environ.get("OPEN_SPENDING_USER_ID", "")
+OPEN_SPENDING_BASE_TOKEN = os.environ.get("OPEN_SPENDING_BASE_TOKEN", "")
