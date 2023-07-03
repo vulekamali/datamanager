@@ -1,6 +1,6 @@
 from django.contrib import admin
 from iym import models
-from django_q.tasks import async_task
+from django_q.tasks import async_task, fetch
 
 import iym
 from iym.tasks import process_uploaded_file
@@ -10,7 +10,7 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
     readonly_fields = (
         "import_report",
         "user",
-        "process_completed",
+        "processing_completed",
         "status",
         "task_id",
     )
@@ -26,7 +26,7 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
                     "task_id",
                     "import_report",
                     "status",
-                    "process_completed",
+                    "processing_completed",
                 )
             },
         ),
@@ -37,7 +37,7 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
         "financial_year",
         "latest_quarter",
         "status",
-        "process_completed",
+        "processing_completed",
         "updated_at",
     )
 
@@ -63,6 +63,14 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         super(IYMFileUploadAdmin, self).has_delete_permission(request, obj)
+
+    def processing_completed(self, obj):
+        task = fetch(obj.task_id)
+        if task:
+            return task.success
+
+    processing_completed.boolean = True
+    processing_completed.short_description = "Processing completed"
 
 
 admin.site.register(models.IYMFileUpload, IYMFileUploadAdmin)

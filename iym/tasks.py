@@ -246,6 +246,7 @@ def update_import_report(obj_to_update, message):
 
 
 def check_and_update_status(status, data_package_url, obj_to_update):
+    last_logged_progress = -1
     status_query = {
         "datapackage": data_package_url,
     }
@@ -260,10 +261,17 @@ def check_and_update_status(status, data_package_url, obj_to_update):
         r = requests.get(status_url)
         r.raise_for_status()
         status_result = r.json()
-        update_status(
-            obj_to_update,
-            f"loading data ({int(float(status_result['progress']) * 100)}%)",
-        )
+        new_progress = int(float(status_result["progress"]) * 100)
+        if new_progress != last_logged_progress:
+            update_status(
+                obj_to_update,
+                f"loading data ({new_progress}%)",
+            )
+            update_import_report(
+                obj_to_update,
+                f"loading data ({new_progress}%)",
+            )
+            last_logged_progress = new_progress
         status = status_result["status"]
 
         if status == "fail":
