@@ -6,7 +6,7 @@ from budgetportal.models.government import FinancialYear
 from django.conf import settings
 
 import os
-import iym.admin
+import iym.tasks
 import mock
 
 USERNAME = "testuser"
@@ -119,7 +119,7 @@ class IYMFileUploadTestCase(TestCase):
             latest_quarter="Q1",
         )
 
-        iym.admin.process_uploaded_file(test_element.id)
+        iym.tasks.process_uploaded_file(test_element.id)
         test_element.refresh_from_db()
 
         import_report_lines = test_element.import_report.split("\n")
@@ -151,7 +151,7 @@ class IYMFileUploadTestCase(TestCase):
             latest_quarter="Q1",
         )
 
-        iym.admin.process_uploaded_file(test_element.id)
+        iym.tasks.process_uploaded_file(test_element.id)
         test_element.refresh_from_db()
 
         import_report_lines = test_element.import_report.split("\n")

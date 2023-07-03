@@ -161,7 +161,9 @@ def create_data_package(
             "service": "os.datastore",
             "userid": userid,
         }
-        authorize_url = f"{settings.OPENSPENDING_HOST}/user/authorize?{urlencode(authorize_query)}"
+        authorize_url = (
+            f"{settings.OPENSPENDING_HOST}/user/authorize?{urlencode(authorize_query)}"
+        )
         r = requests.get(authorize_url)
 
         r.raise_for_status()
@@ -225,7 +227,9 @@ def upload_data_package(
 
 def import_uploaded_package(data_package_url, datastore_token, obj_to_update):
     import_query = {"datapackage": data_package_url, "jwt": datastore_token}
-    import_url = f"{settings.OPENSPENDING_HOST}/package/upload?{urlencode(import_query)}"
+    import_url = (
+        f"{settings.OPENSPENDING_HOST}/package/upload?{urlencode(import_query)}"
+    )
     r = requests.post(import_url)
     update_import_report(obj_to_update, f"Initial status: {r.text}")
 
@@ -245,7 +249,9 @@ def check_and_update_status(status, data_package_url, obj_to_update):
     status_query = {
         "datapackage": data_package_url,
     }
-    status_url = f"{settings.OPENSPENDING_HOST}/package/status?{urlencode(status_query)}"
+    status_url = (
+        f"{settings.OPENSPENDING_HOST}/package/status?{urlencode(status_query)}"
+    )
     update_import_report(
         obj_to_update, f"Monitoring status until completion ({status_url}):"
     )
