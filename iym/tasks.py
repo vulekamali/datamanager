@@ -54,9 +54,10 @@ def authorise_upload(path, filename, userid, data_package_name, datastore_token)
                 break
             else:
                 md5.update(bytes)
-                md5_b64 = base64.b64encode(md5.digest())
 
-    authorize_upload_url = "https://openspending-dedicated.vulekamali.gov.za/datastore/"
+    md5_b64 = base64.b64encode(md5.digest())
+
+    authorize_upload_url = f"{settings.OPENSPENDING_HOST}/datastore/"
     authorize_upload_payload = {
         "metadata": {
             "owner": userid,
@@ -160,7 +161,7 @@ def create_data_package(
             "service": "os.datastore",
             "userid": userid,
         }
-        authorize_url = f"https://openspending-dedicated.vulekamali.gov.za/user/authorize?{urlencode(authorize_query)}"
+        authorize_url = f"{settings.OPENSPENDING_HOST}/user/authorize?{urlencode(authorize_query)}"
         r = requests.get(authorize_url)
 
         r.raise_for_status()
@@ -224,7 +225,7 @@ def upload_data_package(
 
 def import_uploaded_package(data_package_url, datastore_token, obj_to_update):
     import_query = {"datapackage": data_package_url, "jwt": datastore_token}
-    import_url = f"https://openspending-dedicated.vulekamali.gov.za/package/upload?{urlencode(import_query)}"
+    import_url = f"{settings.OPENSPENDING_HOST}/package/upload?{urlencode(import_query)}"
     r = requests.post(import_url)
     update_import_report(obj_to_update, f"Initial status: {r.text}")
 
@@ -244,7 +245,7 @@ def check_and_update_status(status, data_package_url, obj_to_update):
     status_query = {
         "datapackage": data_package_url,
     }
-    status_url = f"https://openspending-dedicated.vulekamali.gov.za/package/status?{urlencode(status_query)}"
+    status_url = f"{settings.OPENSPENDING_HOST}/package/status?{urlencode(status_query)}"
     update_import_report(
         obj_to_update, f"Monitoring status until completion ({status_url}):"
     )
