@@ -3,9 +3,10 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from iym.models import IYMFileUpload
 from budgetportal.models.government import FinancialYear
+from django.conf import settings
 
 import os
-import iym.admin
+import iym.tasks
 import mock
 
 USERNAME = "testuser"
@@ -27,9 +28,9 @@ class MockResponse:
 
 
 def mocked_requests_get(*args, **kwargs):
-    if "https://openspending-dedicated.vulekamali.gov.za/user/authorize" in args[0]:
+    if f"{settings.OPENSPENDING_HOST}/user/authorize" in args[0]:
         return MockResponse({"token": "test token"}, 200, "")
-    elif "https://openspending-dedicated.vulekamali.gov.za/package/status?" in args[0]:
+    elif f"{settings.OPENSPENDING_HOST}/package/status?" in args[0]:
         return MockResponse({"progress": 1, "status": "done"}, 200, "")
 
     return MockResponse(None, 404, "")
@@ -37,7 +38,7 @@ def mocked_requests_get(*args, **kwargs):
 
 def mocked_requests_put(*args, **kwargs):
     if (
-        "https://openspending-dedicated.vulekamali.gov.za/package/upload?datapackage=https%3A%2F%2Ftest-upload-url.com%2Fdata_package.json&jwt=test+token"
+        f"{settings.OPENSPENDING_HOST}/package/upload?datapackage=https%3A%2F%2Ftest-upload-url.com%2Fdata_package.json&jwt=test+token"
         in args[0]
     ):
         return MockResponse({"status": "0.0"}, 200, "initial status")
@@ -48,7 +49,7 @@ def mocked_requests_put(*args, **kwargs):
 
 
 def mocked_requests_post(*args, **kwargs):
-    if "https://openspending-dedicated.vulekamali.gov.za/datastore/" in args[0]:
+    if f"{settings.OPENSPENDING_HOST}/datastore/" in args[0]:
         return MockResponse(
             {
                 "filedata": {
@@ -74,7 +75,7 @@ def mocked_requests_post(*args, **kwargs):
             "",
         )
     elif (
-        "https://openspending-dedicated.vulekamali.gov.za/package/upload?datapackage=https%3A%2F%2Ftest-upload-url.com%2Fdata_package.json&jwt=test+token"
+        f"{settings.OPENSPENDING_HOST}/package/upload?datapackage=https%3A%2F%2Ftest-upload-url.com%2Fdata_package.json&jwt=test+token"
         in args[0]
     ):
         return MockResponse({"status": "0.0"}, 200, "initial status")
@@ -83,9 +84,9 @@ def mocked_requests_post(*args, **kwargs):
 
 
 def mocked_wrong_requests_get(*args, **kwargs):
-    if "https://openspending-dedicated.vulekamali.gov.za/user/authorize" in args[0]:
+    if f"{settings.OPENSPENDING_HOST}/user/authorize" in args[0]:
         return MockResponse({"token": "wrong token"}, 200, "")
-    elif "https://openspending-dedicated.vulekamali.gov.za/package/status?" in args[0]:
+    elif f"{settings.OPENSPENDING_HOST}/package/status?" in args[0]:
         return MockResponse({"progress": 1, "status": "done"}, 200, "")
 
     return MockResponse(None, 404, "")
@@ -118,7 +119,7 @@ class IYMFileUploadTestCase(TestCase):
             latest_quarter="Q1",
         )
 
-        iym.admin.process_uploaded_file(test_element.id)
+        iym.tasks.process_uploaded_file(test_element.id)
         test_element.refresh_from_db()
 
         import_report_lines = test_element.import_report.split("\n")
@@ -133,7 +134,7 @@ class IYMFileUploadTestCase(TestCase):
         assert " - Starting import of uploaded datapackage." in import_report_lines[5]
         assert " - Initial status: initial status" in import_report_lines[6]
         assert (
-            " - Monitoring status until completion (https://openspending-dedicated.vulekamali.gov.za/package/status?datapackage=https%3A%2F%2Ftest-upload-url.com%2Fdata_package.json):"
+            f" - Monitoring status until completion ({settings.OPENSPENDING_HOST}/package/status?datapackage=https%3A%2F%2Ftest-upload-url.com%2Fdata_package.json):"
             in import_report_lines[7]
         )
         assert test_element.status == "done"
@@ -150,7 +151,7 @@ class IYMFileUploadTestCase(TestCase):
             latest_quarter="Q1",
         )
 
-        iym.admin.process_uploaded_file(test_element.id)
+        iym.tasks.process_uploaded_file(test_element.id)
         test_element.refresh_from_db()
 
         import_report_lines = test_element.import_report.split("\n")
