@@ -308,7 +308,7 @@ def process_uploaded_file(obj_id):
         csv_filename = os.path.basename(original_csv_path)
 
         # ====== delete ======
-        create_or_update_dataset(financial_year, original_csv_path, csv_filename)
+        create_or_update_dataset(financial_year, userid, data_package_name)
         return
         # ====== delete ======
 
@@ -358,11 +358,24 @@ def process_uploaded_file(obj_id):
         update_status(obj_to_update, "fail")
 
 
-def create_or_update_dataset(financial_year, original_csv_path, csv_filename):
+def create_or_update_dataset(financial_year, userid, data_package_name):
+    vocab_map = get_vocab_map()
+    tags = [
+        {
+            "vocabulary_id": vocab_map["financial_years"],
+            "name": financial_year
+        },
+        {
+            "vocabulary_id": vocab_map["spheres"],
+            "name": "national"
+        }
+    ]
+
     dataset_fields = {
         "title": f"National in-year spending {financial_year}",
         "name": f"national_in_year_spending_{financial_year}",
-        "owner_org": "national-treasury"
+        "owner_org": "national-treasury",
+        "tags": tags
     }
 
     query = {
@@ -372,25 +385,32 @@ def create_or_update_dataset(financial_year, original_csv_path, csv_filename):
     }
     response = ckan.action.package_search(**query)
 
-    print('================ aaa ================')
-    print(response)
-    print('================ bbb ================')
-
     if response["count"] == 0:
         create_dataset(dataset_fields)
     else:
-        update_dataset(dataset_fields, original_csv_path, csv_filename)
+        update_dataset(dataset_fields, userid, data_package_name)
 
 
 def create_dataset(dataset_fields):
     response = ckan.action.package_create(**dataset_fields)
 
 
-def update_dataset(dataset_fields, original_csv_path, csv_filename):
+def update_dataset(dataset_fields, userid, data_package_name):
+    add_resource_to_dataset(dataset_fields, userid, data_package_name)
+
+def add_resource_to_dataset(dataset_fields, userid, data_package_name):
+    url = f"{settings.OPENSPENDING_HOST}/api/3/cubes/{userid}:{data_package_name}/model/"
     resource_fields = {
         "package_id": dataset_fields['name'],
-        "name": csv_filename,
-        "upload": open(original_csv_path, "rb"),
-        "format": "CSV"
+        "name": data_package_name,
+        "url": url,
+        "format": "OpenSpending API"
     }
-    # result = ckan.action.resource_create(**resource_fields)
+    result = ckan.action.resource_create(**resource_fields)
+
+def get_vocab_map():
+    vocab_map = {}
+    for vocab in ckan.action.vocabulary_list():
+        vocab_map[vocab["name"]] = vocab["id"]
+
+    return vocab_map
