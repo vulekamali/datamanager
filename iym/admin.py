@@ -46,6 +46,7 @@ class IYMFileUploadAdmin(admin.ModelAdmin):
             obj.user = request.user
         super().save_model(request, obj, form, change)
 
+        # todo: dont forget this
         # obj.task_id = async_task(func=process_uploaded_file, obj_id=obj.id)
         # obj.save()
         process_uploaded_file(obj.id)

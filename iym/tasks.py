@@ -288,9 +288,6 @@ def update_status(obj_to_update, status):
 
 
 def process_uploaded_file(obj_id):
-    create_dataset()
-    return
-
     # read file
     obj_to_update = models.IYMFileUpload.objects.get(id=obj_id)
     if obj_to_update.process_completed:
@@ -309,6 +306,11 @@ def process_uploaded_file(obj_id):
         update_status(obj_to_update, "cleaning data")
 
         csv_filename = os.path.basename(original_csv_path)
+
+        # ====== delete ======
+        create_or_update_dataset(financial_year, original_csv_path, csv_filename)
+        return
+        # ====== delete ======
 
         composite_key = create_composite_key_using_csv_headers(original_csv_path)
 
@@ -350,18 +352,44 @@ def process_uploaded_file(obj_id):
         obj_to_update.process_completed = True
         obj_to_update.save()
 
-        create_dataset()
+        create_or_update_dataset()
     except Exception as e:
         update_import_report(obj_to_update, str(e))
         update_status(obj_to_update, "fail")
 
 
-def create_dataset():
+def create_or_update_dataset(financial_year, original_csv_path, csv_filename):
     dataset_fields = {
-        "title": "emre test",
-        "name": "emre_test_name"
+        "title": f"IYM {financial_year}",
+        "name": f"iym_{financial_year}",
+        "owner_org": "national-treasury"
     }
+
+    query = {
+        "fq": (
+            f"+name:{dataset_fields['name']}"
+        )
+    }
+    response = ckan.action.package_search(**query)
+    if response["count"] == 0:
+        create_dataset(dataset_fields)
+    else:
+        update_dataset(dataset_fields, original_csv_path, csv_filename)
+
+
+def create_dataset(dataset_fields):
+    response = ckan.action.package_create(**dataset_fields)
+
+
+def update_dataset(dataset_fields, original_csv_path, csv_filename):
+    resource_fields = {
+        "package_id": dataset_fields['name'],
+        "name": csv_filename,
+        "upload": open(original_csv_path, "rb"),
+        "format": "CSV"
+    }
+
     print('================ aaa ================')
-    test = ckan.action.package_create(**dataset_fields)
-    print(test)
+    result = ckan.action.resource_create(**resource_fields)
+    print(result)
     print('================ bbb ================')
