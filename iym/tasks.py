@@ -360,8 +360,8 @@ def process_uploaded_file(obj_id):
 
 def create_or_update_dataset(financial_year, original_csv_path, csv_filename):
     dataset_fields = {
-        "title": f"IYM {financial_year}",
-        "name": f"iym_{financial_year}",
+        "title": f"National in-year spending {financial_year}",
+        "name": f"national_in_year_spending_{financial_year}",
         "owner_org": "national-treasury"
     }
 
@@ -371,6 +371,11 @@ def create_or_update_dataset(financial_year, original_csv_path, csv_filename):
         )
     }
     response = ckan.action.package_search(**query)
+
+    print('================ aaa ================')
+    print(response)
+    print('================ bbb ================')
+
     if response["count"] == 0:
         create_dataset(dataset_fields)
     else:
@@ -388,8 +393,4 @@ def update_dataset(dataset_fields, original_csv_path, csv_filename):
         "upload": open(original_csv_path, "rb"),
         "format": "CSV"
     }
-
-    print('================ aaa ================')
-    result = ckan.action.resource_create(**resource_fields)
-    print(result)
-    print('================ bbb ================')
+    # result = ckan.action.resource_create(**resource_fields)
