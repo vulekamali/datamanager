@@ -386,17 +386,29 @@ def create_or_update_dataset(financial_year, userid, data_package_name):
     response = ckan.action.package_search(**query)
 
     if response["count"] == 0:
-        create_dataset(dataset_fields)
-    else:
-        update_dataset(dataset_fields, userid, data_package_name)
+        response = create_dataset(dataset_fields, userid, data_package_name)
+
+    add_or_update_resource(response, dataset_fields, userid, data_package_name)
 
 
-def create_dataset(dataset_fields):
+def add_or_update_resource(response, dataset_fields, userid, data_package_name):
+    query = {
+        "id": response['results'][0]['id']
+    }
+    dataset_data = ckan.action.package_show(**query)
+    for resource in dataset_data['resources']:
+        if resource['format'] == 'OpenSpending API':
+            # resource is added - update it
+            update_resource()
+        else:
+            # add resource
+            add_resource_to_dataset(dataset_fields, userid, data_package_name)
+
+
+def create_dataset(dataset_fields, userid, data_package_name):
     response = ckan.action.package_create(**dataset_fields)
+    return response
 
-
-def update_dataset(dataset_fields, userid, data_package_name):
-    add_resource_to_dataset(dataset_fields, userid, data_package_name)
 
 def add_resource_to_dataset(dataset_fields, userid, data_package_name):
     url = f"{settings.OPENSPENDING_HOST}/api/3/cubes/{userid}:{data_package_name}/model/"
@@ -407,6 +419,11 @@ def add_resource_to_dataset(dataset_fields, userid, data_package_name):
         "format": "OpenSpending API"
     }
     result = ckan.action.resource_create(**resource_fields)
+
+
+def update_resource():
+    return
+
 
 def get_vocab_map():
     vocab_map = {}
