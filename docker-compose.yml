@@ -39,6 +39,7 @@ services:
       - OPEN_SPENDING_BASE_TOKEN
       - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
       - OPENSPENDING_HOST
+      - OPEN_SPENDING_DATASET_CREATE_SUFFIX=-dev
     volumes:
       - .:/code
     ports:
@@ -70,6 +71,7 @@ services:
       - OPEN_SPENDING_USER_ID
       - OPEN_SPENDING_BASE_TOKEN
       - OPENSPENDING_HOST
+      - OPEN_SPENDING_DATASET_CREATE_SUFFIX=-dev
     volumes:
       - .:/code
     depends_on:
