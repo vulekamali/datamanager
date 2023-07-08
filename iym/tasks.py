@@ -59,6 +59,10 @@ def authorise_upload(path, filename, userid, data_package_name, datastore_token)
 
     md5_b64 = base64.b64encode(md5.digest())
 
+    print("============ aaa ============")
+    print(os.stat(path).st_size)
+    print("============ bbb ============")
+
     authorize_upload_url = f"{settings.OPENSPENDING_HOST}/datastore/"
     authorize_upload_payload = {
         "metadata": {
@@ -70,7 +74,7 @@ def authorise_upload(path, filename, userid, data_package_name, datastore_token)
             filename: {
                 "md5": md5_b64,
                 "name": filename,
-                "length": len(bytes),
+                "length": os.stat(path).st_size,
                 "type": "application/octet-stream",
             }
         },
@@ -298,8 +302,8 @@ def process_uploaded_file(obj_id):
 
         financial_year = obj_to_update.financial_year.slug
         userid = settings.OPEN_SPENDING_USER_ID
-        data_package_name = f"national-in-year-spending-{financial_year}"
-        data_package_title = f"National in-year spending {financial_year}"
+        data_package_name = f"national-in-year-spending-{financial_year}{settings.OPEN_SPENDING_DATASET_CREATE_SUFFIX}"
+        data_package_title = f"National in-year spending {financial_year}{settings.OPEN_SPENDING_DATASET_CREATE_SUFFIX}"
 
         original_csv_path = unzip_uploaded_file(obj_to_update)
 
