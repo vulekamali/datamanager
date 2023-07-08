@@ -308,7 +308,7 @@ def process_uploaded_file(obj_id):
         csv_filename = os.path.basename(original_csv_path)
 
         # ====== delete ======
-        create_or_update_dataset(financial_year, userid, data_package_name)
+        create_or_update_dataset(financial_year, userid, data_package_name, obj_to_update.latest_quarter)
         return
         # ====== delete ======
 
@@ -358,7 +358,7 @@ def process_uploaded_file(obj_id):
         update_status(obj_to_update, "fail")
 
 
-def create_or_update_dataset(financial_year, userid, data_package_name):
+def create_or_update_dataset(financial_year, userid, data_package_name, latest_quarter):
     vocab_map = get_vocab_map()
     tags = [
         {
@@ -375,7 +375,10 @@ def create_or_update_dataset(financial_year, userid, data_package_name):
         "title": f"National in-year spending {financial_year}",
         "name": f"national_in_year_spending_{financial_year}",
         "owner_org": "national-treasury",
-        "tags": tags
+        "tags": tags,
+        "extras": [
+            {"key": "latest_quarter", "value": latest_quarter}
+        ]
     }
 
     query = {
@@ -384,25 +387,30 @@ def create_or_update_dataset(financial_year, userid, data_package_name):
         )
     }
     response = ckan.action.package_search(**query)
+    is_new_dataset = False
 
     if response["count"] == 0:
+        is_new_dataset = True
         response = create_dataset(dataset_fields, userid, data_package_name)
 
-    add_or_update_resource(response, dataset_fields, userid, data_package_name)
+    add_or_update_resource(response, dataset_fields, userid, data_package_name, is_new_dataset)
 
 
-def add_or_update_resource(response, dataset_fields, userid, data_package_name):
+def add_or_update_resource(response, dataset_fields, userid, data_package_name, is_new_dataset):
     query = {
-        "id": response['results'][0]['id']
+        "id": response['id'] if is_new_dataset else response['results'][0]['id']
     }
+
     dataset_data = ckan.action.package_show(**query)
-    for resource in dataset_data['resources']:
-        if resource['format'] == 'OpenSpending API':
-            # resource is added - update it
-            update_resource()
-        else:
-            # add resource
-            add_resource_to_dataset(dataset_fields, userid, data_package_name)
+
+    if len(dataset_data['resources']) == 0:
+        # add resource
+        add_resource_to_dataset(dataset_fields, userid, data_package_name)
+    else:
+        for resource in dataset_data['resources']:
+            if resource['format'] == 'OpenSpending API':
+                # resource is added - update it
+                update_resource(dataset_fields, resource)
 
 
 def create_dataset(dataset_fields, userid, data_package_name):
@@ -421,8 +429,14 @@ def add_resource_to_dataset(dataset_fields, userid, data_package_name):
     result = ckan.action.resource_create(**resource_fields)
 
 
-def update_resource():
-    return
+def update_resource(dataset_fields, resource):
+    url = f"updated"
+    resource_fields = {
+        "id": resource['id'],
+        "package_id": dataset_fields['name'],
+        "url": url
+    }
+    result = ckan.action.resource_create(**resource_fields)
 
 
 def get_vocab_map():
