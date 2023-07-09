@@ -143,12 +143,12 @@ def tidy_csv_table(original_csv_path, composite_key):
 
 
 def create_data_package(
-        csv_filename,
-        csv_table,
-        userid,
-        data_package_name,
-        data_package_title,
-        obj_to_update,
+    csv_filename,
+    csv_table,
+    userid,
+    data_package_name,
+    data_package_title,
+    obj_to_update,
 ):
     data_package_template_path = "iym/data_package/data_package_template.json"
     base_token = settings.OPEN_SPENDING_BASE_TOKEN
@@ -201,7 +201,7 @@ def create_data_package(
 
 
 def upload_data_package(
-        data_package, userid, data_package_name, datastore_token, obj_to_update
+    data_package, userid, data_package_name, datastore_token, obj_to_update
 ):
     with tempfile.NamedTemporaryFile(mode="w", delete=True) as data_package_file:
         json.dump(data_package, data_package_file)
@@ -307,11 +307,6 @@ def process_uploaded_file(obj_id):
 
         csv_filename = os.path.basename(original_csv_path)
 
-        # ====== delete ======
-        create_or_update_dataset(financial_year, userid, data_package_name, obj_to_update.latest_quarter)
-        return
-        # ====== delete ======
-
         composite_key = create_composite_key_using_csv_headers(original_csv_path)
 
         csv_table = tidy_csv_table(original_csv_path, composite_key)
@@ -349,26 +344,29 @@ def process_uploaded_file(obj_id):
 
         os.remove(original_csv_path)
 
+        create_or_update_dataset(
+            obj_to_update,
+            financial_year,
+            userid,
+            data_package_name,
+            obj_to_update.latest_quarter,
+        )
+
         obj_to_update.process_completed = True
         obj_to_update.save()
-
-        create_or_update_dataset()
     except Exception as e:
         update_import_report(obj_to_update, str(e))
         update_status(obj_to_update, "fail")
 
 
-def create_or_update_dataset(financial_year, userid, data_package_name, latest_quarter):
+def create_or_update_dataset(
+    obj_to_update, financial_year, userid, data_package_name, latest_quarter
+):
+    update_import_report(obj_to_update, "CKAN process started")
     vocab_map = get_vocab_map()
     tags = [
-        {
-            "vocabulary_id": vocab_map["financial_years"],
-            "name": financial_year
-        },
-        {
-            "vocabulary_id": vocab_map["spheres"],
-            "name": "national"
-        }
+        {"vocabulary_id": vocab_map["financial_years"], "name": financial_year},
+        {"vocabulary_id": vocab_map["spheres"], "name": "national"},
     ]
 
     dataset_fields = {
@@ -376,41 +374,42 @@ def create_or_update_dataset(financial_year, userid, data_package_name, latest_q
         "name": f"national_in_year_spending_{financial_year}",
         "owner_org": "national-treasury",
         "tags": tags,
-        "extras": [
-            {"key": "latest_quarter", "value": latest_quarter}
-        ]
+        "extras": [{"key": "latest_quarter", "value": latest_quarter}],
     }
 
-    query = {
-        "fq": (
-            f"+name:{dataset_fields['name']}"
-        )
-    }
+    query = {"fq": (f"+name:{dataset_fields['name']}")}
     response = ckan.action.package_search(**query)
-    is_new_dataset = False
 
     if response["count"] == 0:
-        is_new_dataset = True
+        # create dataset and add resource
+        update_import_report(obj_to_update, "Creating a new dataset in CKAN")
         response = create_dataset(dataset_fields, userid, data_package_name)
+        add_resource(response, dataset_fields, userid, data_package_name)
+    else:
+        # update dataset
+        update_import_report(obj_to_update, "Updating the dataset in CKAN")
+        response = update_dataset(dataset_fields, userid, data_package_name)
+        # resource is removed when the dataset is updated
+        add_resource(response, dataset_fields, userid, data_package_name)
 
-    add_or_update_resource(response, dataset_fields, userid, data_package_name, is_new_dataset)
 
-
-def add_or_update_resource(response, dataset_fields, userid, data_package_name, is_new_dataset):
-    query = {
-        "id": response['id'] if is_new_dataset else response['results'][0]['id']
-    }
+def add_resource(response, dataset_fields, userid, data_package_name):
+    query = {"id": response["id"]}
 
     dataset_data = ckan.action.package_show(**query)
 
-    if len(dataset_data['resources']) == 0:
+    if len(dataset_data["resources"]) == 0:
         # add resource
-        add_resource_to_dataset(dataset_fields, userid, data_package_name)
+        should_add_resource = True
     else:
-        for resource in dataset_data['resources']:
-            if resource['format'] == 'OpenSpending API':
+        should_add_resource = True
+        for resource in dataset_data["resources"]:
+            if resource["format"] == "OpenSpending API":
                 # resource is added - update it
-                update_resource(dataset_fields, resource)
+                should_add_resource = False
+
+    if should_add_resource:
+        add_resource_to_dataset(dataset_fields, userid, data_package_name)
 
 
 def create_dataset(dataset_fields, userid, data_package_name):
@@ -418,23 +417,20 @@ def create_dataset(dataset_fields, userid, data_package_name):
     return response
 
 
+def update_dataset(dataset_fields, userid, data_package_name):
+    response = ckan.action.package_update(**dataset_fields)
+    return response
+
+
 def add_resource_to_dataset(dataset_fields, userid, data_package_name):
-    url = f"{settings.OPENSPENDING_HOST}/api/3/cubes/{userid}:{data_package_name}/model/"
+    url = (
+        f"{settings.OPENSPENDING_HOST}/api/3/cubes/{userid}:{data_package_name}/model/"
+    )
     resource_fields = {
-        "package_id": dataset_fields['name'],
+        "package_id": dataset_fields["name"],
         "name": data_package_name,
         "url": url,
-        "format": "OpenSpending API"
-    }
-    result = ckan.action.resource_create(**resource_fields)
-
-
-def update_resource(dataset_fields, resource):
-    url = f"updated"
-    resource_fields = {
-        "id": resource['id'],
-        "package_id": dataset_fields['name'],
-        "url": url
+        "format": "OpenSpending API",
     }
     result = ckan.action.resource_create(**resource_fields)
 
