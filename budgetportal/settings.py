@@ -395,8 +395,9 @@ DJANGO_Q_SYNC = os.environ.get("DJANGO_Q_SYNC", "false").lower() == "true"
 Q_CLUSTER = {
     "name": "Something",
     "workers": 1,
-    "timeout": 30 * 60,  # Timeout a task after this many seconds
-    "retry": 5,
+    "max_attempts": 1,
+    "timeout": 60 * 60 * 3,  # 2 hours - Timeout a task after this many seconds
+    "retry": 60 * 60 * 3 + 1,  # 2 hours - Seconds to wait before retrying a task
     "queue_limit": 1,
     "bulk": 1,
     "orm": "default",  # Use Django ORM as storage backend
