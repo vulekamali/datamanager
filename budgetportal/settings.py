@@ -432,4 +432,3 @@ REST_FRAMEWORK = {
 }
 
 WAGTAIL_SITE_NAME = "Vulekamali"
-
