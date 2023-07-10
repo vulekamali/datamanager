@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
     "performance",
+    "iym",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -426,3 +427,9 @@ REST_FRAMEWORK = {
 }
 
 WAGTAIL_SITE_NAME = "Vulekamali"
+
+OPEN_SPENDING_USER_ID = os.environ.get("OPEN_SPENDING_USER_ID", "")
+OPEN_SPENDING_BASE_TOKEN = os.environ.get("OPEN_SPENDING_BASE_TOKEN", "")
+OPEN_SPENDING_DATASET_CREATE_SUFFIX = os.environ.get(
+    "OPEN_SPENDING_DATASET_CREATE_SUFFIX", ""
+)
