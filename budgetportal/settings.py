@@ -216,6 +216,11 @@ BUST_OPENSPENDING_CACHE = (
     os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
 )
 OPENSPENDING_HOST = os.environ.get("OPENSPENDING_HOST", "https://openspending.org")
+OPENSPENDING_USER_ID = os.environ.get("OPENSPENDING_USER_ID", "")
+OPENSPENDING_BASE_TOKEN = os.environ.get("OPENSPENDING_BASE_TOKEN", "")
+OPENSPENDING_DATASET_CREATE_SUFFIX = os.environ.get(
+    "OPENSPENDING_DATASET_CREATE_SUFFIX", ""
+)
 
 # http://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = "budgetportal.allauthadapters.AccountAdapter"
@@ -428,8 +433,3 @@ REST_FRAMEWORK = {
 
 WAGTAIL_SITE_NAME = "Vulekamali"
 
-OPEN_SPENDING_USER_ID = os.environ.get("OPEN_SPENDING_USER_ID", "")
-OPEN_SPENDING_BASE_TOKEN = os.environ.get("OPEN_SPENDING_BASE_TOKEN", "")
-OPEN_SPENDING_DATASET_CREATE_SUFFIX = os.environ.get(
-    "OPEN_SPENDING_DATASET_CREATE_SUFFIX", ""
-)

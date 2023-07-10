@@ -149,7 +149,7 @@ def create_data_package(
     obj_to_update,
 ):
     data_package_template_path = "iym/data_package/data_package_template.json"
-    base_token = settings.OPEN_SPENDING_BASE_TOKEN
+    base_token = settings.OPENSPENDING_BASE_TOKEN
 
     with tempfile.NamedTemporaryFile(mode="w", delete=True) as csv_file:
         csv_path = csv_file.name
@@ -295,9 +295,9 @@ def process_uploaded_file(obj_id):
         update_import_report(obj_to_update, "Cleaning CSV")
 
         financial_year = obj_to_update.financial_year.slug
-        userid = settings.OPEN_SPENDING_USER_ID
-        data_package_name = f"national-in-year-spending-{financial_year}{settings.OPEN_SPENDING_DATASET_CREATE_SUFFIX}"
-        data_package_title = f"National in-year spending {financial_year}{settings.OPEN_SPENDING_DATASET_CREATE_SUFFIX}"
+        userid = settings.OPENSPENDING_USER_ID
+        data_package_name = f"national-in-year-spending-{financial_year}{settings.OPENSPENDING_DATASET_CREATE_SUFFIX}"
+        data_package_title = f"National in-year spending {financial_year}{settings.OPENSPENDING_DATASET_CREATE_SUFFIX}"
 
         original_csv_path = unzip_uploaded_file(obj_to_update)
 
