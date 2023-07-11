@@ -396,8 +396,8 @@ Q_CLUSTER = {
     "name": "Something",
     "workers": 1,
     "max_attempts": 1,
-    "timeout": 60 * 60 * 3,  # 2 hours - Timeout a task after this many seconds
-    "retry": 60 * 60 * 3 + 1,  # 2 hours - Seconds to wait before retrying a task
+    "timeout": 60 * 60 * 6,  # 6 hours - Timeout a task after this many seconds
+    "retry": 60 * 60 * 6 + 1,  # 6 hours - Seconds to wait before retrying a task
     "queue_limit": 1,
     "bulk": 1,
     "orm": "default",  # Use Django ORM as storage backend
