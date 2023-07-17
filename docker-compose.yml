@@ -35,12 +35,12 @@ services:
       - DEBUG_CACHE
       - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
       - CKAN_URL
-      - OPEN_SPENDING_USER_ID
-      - OPEN_SPENDING_BASE_TOKEN
       - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
       - CKAN_API_KEY
+      - OPENSPENDING_USER_ID
+      - OPENSPENDING_BASE_TOKEN
       - OPENSPENDING_HOST
-      - OPEN_SPENDING_DATASET_CREATE_SUFFIX=-dev
+      - OPENSPENDING_DATASET_CREATE_SUFFIX=-dev
     volumes:
       - .:/code
     ports:
@@ -69,33 +69,11 @@ services:
       - AWS_S3_ENDPOINT_URL=http://minio:9000
       - SOLR_URL=http://solr:8983/solr/budgetportal
       - CKAN_URL
-      - OPEN_SPENDING_USER_ID
-      - OPEN_SPENDING_BASE_TOKEN
       - CKAN_API_KEY
+      - OPENSPENDING_USER_ID
+      - OPENSPENDING_BASE_TOKEN
       - OPENSPENDING_HOST
-      - OPEN_SPENDING_DATASET_CREATE_SUFFIX=-dev
-    volumes:
-      - .:/code
-    depends_on:
-      - db
-      - solr
-      - minio
-
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile-test
-    command: bin/wait-for-db.sh python manage.py test
-    environment:
-      - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
-      - AWS_ACCESS_KEY_ID=minio-access-key
-      - AWS_SECRET_ACCESS_KEY=minio-secret-key
-      - AWS_STORAGE_BUCKET_NAME=budgetportal-storage
-      - AWS_S3_ENDPOINT_URL=http://minio:9000
-      - AWS_S3_SECURE_URLS=True
-      - SOLR_URL=http://solr:8983/solr/budgetportal-test
-      - DJANGO_Q_SYNC=TRUE
-      - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
+      - OPENSPENDING_DATASET_CREATE_SUFFIX=-dev
     volumes:
       - .:/code
     depends_on:

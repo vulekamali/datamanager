@@ -216,6 +216,11 @@ BUST_OPENSPENDING_CACHE = (
     os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
 )
 OPENSPENDING_HOST = os.environ.get("OPENSPENDING_HOST", "https://openspending.org")
+OPENSPENDING_USER_ID = os.environ.get("OPENSPENDING_USER_ID", "")
+OPENSPENDING_BASE_TOKEN = os.environ.get("OPENSPENDING_BASE_TOKEN", "")
+OPENSPENDING_DATASET_CREATE_SUFFIX = os.environ.get(
+    "OPENSPENDING_DATASET_CREATE_SUFFIX", ""
+)
 
 # http://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = "budgetportal.allauthadapters.AccountAdapter"
@@ -390,8 +395,9 @@ DJANGO_Q_SYNC = os.environ.get("DJANGO_Q_SYNC", "false").lower() == "true"
 Q_CLUSTER = {
     "name": "Something",
     "workers": 1,
-    "timeout": 30 * 60,  # Timeout a task after this many seconds
-    "retry": 5,
+    "max_attempts": 1,
+    "timeout": 60 * 60 * 6,  # 6 hours - Timeout a task after this many seconds
+    "retry": 60 * 60 * 6 + 1,  # 6 hours - Seconds to wait before retrying a task
     "queue_limit": 1,
     "bulk": 1,
     "orm": "default",  # Use Django ORM as storage backend
@@ -427,9 +433,3 @@ REST_FRAMEWORK = {
 }
 
 WAGTAIL_SITE_NAME = "Vulekamali"
-
-OPEN_SPENDING_USER_ID = os.environ.get("OPEN_SPENDING_USER_ID", "")
-OPEN_SPENDING_BASE_TOKEN = os.environ.get("OPEN_SPENDING_BASE_TOKEN", "")
-OPEN_SPENDING_DATASET_CREATE_SUFFIX = os.environ.get(
-    "OPEN_SPENDING_DATASET_CREATE_SUFFIX", ""
-)
