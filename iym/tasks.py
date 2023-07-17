@@ -373,6 +373,7 @@ def create_or_update_dataset(
         "title": f"National in-year spending {financial_year}",
         "name": f"national_in_year_spending_{financial_year}",
         "owner_org": "national-treasury",
+        "groups": [{"name": "in-year-spending"}],
         "tags": tags,
         "extras": [{"key": "latest_quarter", "value": latest_quarter}],
     }
