@@ -390,8 +390,6 @@ def create_or_update_dataset(
         # update dataset
         update_import_report(obj_to_update, "Updating the dataset in CKAN")
         response = update_dataset(dataset_fields, userid, data_package_name)
-        # resource is removed when the dataset is updated
-        add_resource(response, dataset_fields, userid, data_package_name)
 
 
 def add_resource(response, dataset_fields, userid, data_package_name):
