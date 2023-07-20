@@ -379,17 +379,18 @@ def create_or_update_dataset(
     }
 
     query = {"fq": (f"+name:{dataset_fields['name']}")}
-    response = ckan.action.package_search(**query)
+    search_response = ckan.action.package_search(**query)
 
-    if response["count"] == 0:
+    if search_response["count"] == 0:
         # create dataset and add resource
         update_import_report(obj_to_update, "Creating a new dataset in CKAN")
-        response = create_dataset(dataset_fields, userid, data_package_name)
+        response = create_dataset(dataset_fields)
         add_resource(response, dataset_fields, userid, data_package_name)
     else:
         # update dataset
+        dataset_fields["id"] = search_response["results"][0]["id"]
         update_import_report(obj_to_update, "Updating the dataset in CKAN")
-        response = update_dataset(dataset_fields, userid, data_package_name)
+        response = update_dataset(dataset_fields)
 
 
 def add_resource(response, dataset_fields, userid, data_package_name):
@@ -411,13 +412,13 @@ def add_resource(response, dataset_fields, userid, data_package_name):
         add_resource_to_dataset(dataset_fields, userid, data_package_name)
 
 
-def create_dataset(dataset_fields, userid, data_package_name):
+def create_dataset(dataset_fields):
     response = ckan.action.package_create(**dataset_fields)
     return response
 
 
-def update_dataset(dataset_fields, userid, data_package_name):
-    response = ckan.action.package_update(**dataset_fields)
+def update_dataset(dataset_fields):
+    response = ckan.action.package_patch(**dataset_fields)
     return response
 
 
