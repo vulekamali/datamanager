@@ -53,11 +53,14 @@ class ChartSourceController extends React.Component {
     constructor(...props) {
         super(...props);
 
+        console.log({'props':this.props})
+
         const {initial, items} = this.props;
+        const source = initial || Object.keys(items)[0];
 
         this.state = {
-            source: initial || Object.keys(items)[0],
-            barItems: {}
+            source: source,
+            barItems: this.props.items[source]
         };
 
         this.events = {
@@ -74,10 +77,6 @@ class ChartSourceController extends React.Component {
         const {source} = this.state;
         const {changeSource} = this.events;
         const items = rawItems[source];
-        this.setState({
-            ...this.state,
-            barItems: items
-        })
 
         return <Markup {...{
             'items': this.state.barItems,
