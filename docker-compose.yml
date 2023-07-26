@@ -36,6 +36,7 @@ services:
       - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
       - CKAN_URL
       - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
+      - CKAN_API_KEY
       - OPENSPENDING_USER_ID
       - OPENSPENDING_BASE_TOKEN
       - OPENSPENDING_HOST
@@ -68,6 +69,7 @@ services:
       - AWS_S3_ENDPOINT_URL=http://minio:9000
       - SOLR_URL=http://solr:8983/solr/budgetportal
       - CKAN_URL
+      - CKAN_API_KEY
       - OPENSPENDING_USER_ID
       - OPENSPENDING_BASE_TOKEN
       - OPENSPENDING_HOST

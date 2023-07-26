@@ -21,6 +21,8 @@ import re
 import iym
 import datetime
 
+ckan = settings.CKAN
+
 RE_END_YEAR = re.compile(r"/\d+")
 
 MEASURES = [
@@ -342,8 +344,100 @@ def process_uploaded_file(obj_id):
 
         os.remove(original_csv_path)
 
+        create_or_update_dataset(
+            obj_to_update,
+            financial_year,
+            userid,
+            data_package_name,
+            obj_to_update.latest_quarter,
+        )
+
         obj_to_update.process_completed = True
         obj_to_update.save()
     except Exception as e:
         update_import_report(obj_to_update, str(e))
         update_status(obj_to_update, "fail")
+
+
+def create_or_update_dataset(
+    obj_to_update, financial_year, userid, data_package_name, latest_quarter
+):
+    update_import_report(obj_to_update, "CKAN process started")
+    vocab_map = get_vocab_map()
+    tags = [
+        {"vocabulary_id": vocab_map["financial_years"], "name": financial_year},
+        {"vocabulary_id": vocab_map["spheres"], "name": "national"},
+    ]
+
+    dataset_fields = {
+        "title": f"National in-year spending {financial_year}",
+        "name": f"national_in_year_spending_{financial_year}",
+        "owner_org": "national-treasury",
+        "groups": [{"name": "in-year-spending"}],
+        "tags": tags,
+        "extras": [{"key": "latest_quarter", "value": latest_quarter}],
+    }
+
+    query = {"fq": (f"+name:{dataset_fields['name']}")}
+    search_response = ckan.action.package_search(**query)
+
+    if search_response["count"] == 0:
+        # create dataset and add resource
+        update_import_report(obj_to_update, "Creating a new dataset in CKAN")
+        response = create_dataset(dataset_fields)
+        add_resource(response, dataset_fields, userid, data_package_name)
+    else:
+        # update dataset
+        dataset_fields["id"] = search_response["results"][0]["id"]
+        update_import_report(obj_to_update, "Updating the dataset in CKAN")
+        response = update_dataset(dataset_fields)
+
+
+def add_resource(response, dataset_fields, userid, data_package_name):
+    query = {"id": response["id"]}
+
+    dataset_data = ckan.action.package_show(**query)
+
+    if len(dataset_data["resources"]) == 0:
+        # add resource
+        should_add_resource = True
+    else:
+        should_add_resource = True
+        for resource in dataset_data["resources"]:
+            if resource["format"] == "OpenSpending API":
+                # resource is added - update it
+                should_add_resource = False
+
+    if should_add_resource:
+        add_resource_to_dataset(dataset_fields, userid, data_package_name)
+
+
+def create_dataset(dataset_fields):
+    response = ckan.action.package_create(**dataset_fields)
+    return response
+
+
+def update_dataset(dataset_fields):
+    response = ckan.action.package_patch(**dataset_fields)
+    return response
+
+
+def add_resource_to_dataset(dataset_fields, userid, data_package_name):
+    url = (
+        f"{settings.OPENSPENDING_HOST}/api/3/cubes/{userid}:{data_package_name}/model/"
+    )
+    resource_fields = {
+        "package_id": dataset_fields["name"],
+        "name": data_package_name,
+        "url": url,
+        "format": "OpenSpending API",
+    }
+    result = ckan.action.resource_create(**resource_fields)
+
+
+def get_vocab_map():
+    vocab_map = {}
+    for vocab in ckan.action.vocabulary_list():
+        vocab_map[vocab["name"]] = vocab["id"]
+
+    return vocab_map
