@@ -8,6 +8,7 @@ from slugify import slugify
 from zipfile import ZipFile
 from django.conf import settings
 from django_q.tasks import async_task
+import logging
 
 import os
 import csv
@@ -21,6 +22,7 @@ import re
 import iym
 import datetime
 
+logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
 RE_END_YEAR = re.compile(r"/\d+")
@@ -142,6 +144,16 @@ def tidy_csv_table(original_csv_path, composite_key):
     return table6
 
 
+def authenticate_openspending():
+    headers = {"x-api-key": settings.OPENSPENDING_API_KEY}
+    url = (
+        f"{settings.OPENSPENDING_HOST}/user/authenticate_api_key"
+    )
+    r = requests.get(url)
+    r.raise_for_status()
+    return r.json()["token"]
+
+
 def create_data_package(
     csv_filename,
     csv_table,
@@ -151,7 +163,7 @@ def create_data_package(
     obj_to_update,
 ):
     data_package_template_path = "iym/data_package/data_package_template.json"
-    base_token = settings.OPENSPENDING_BASE_TOKEN
+    base_token = authenticate_openspending()
 
     with tempfile.NamedTemporaryFile(mode="w", delete=True) as csv_file:
         csv_path = csv_file.name
@@ -355,6 +367,7 @@ def process_uploaded_file(obj_id):
         obj_to_update.process_completed = True
         obj_to_update.save()
     except Exception as e:
+        logger.exception("Error processing file")
         update_import_report(obj_to_update, str(e))
         update_status(obj_to_update, "fail")
 

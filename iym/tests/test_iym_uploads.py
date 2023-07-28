@@ -49,7 +49,16 @@ def mocked_requests_put(*args, **kwargs):
 
 
 def mocked_requests_post(*args, **kwargs):
-    if f"{settings.OPENSPENDING_HOST}/datastore/" in args[0]:
+    if"{settings.OPENSPENDING_HOST}/user/authenticate_api_key" in args[0]:
+        assert "x-api-key" in kwargs["headers"]
+        return MockResponse(
+            {
+                "token": "fake.jwt.blah"
+            },
+            200,
+            ""
+        )
+    elif f"{settings.OPENSPENDING_HOST}/datastore/" in args[0]:
         return MockResponse(
             {
                 "filedata": {
@@ -156,7 +165,7 @@ class IYMFileUploadTestCase(TestCase):
 
         import_report_lines = test_element.import_report.split("\n")
         assert " - Cleaning CSV" in import_report_lines[0]
-        assert " - Getting authorisation for datastore" in import_report_lines[1]
+        assert " - Getting authorisation for datastore" in import_report_lines[1], import_report_lines
         assert " - Uploading CSV /tmp/" in import_report_lines[2]
         assert " - 'NoneType' object is not subscriptable" in import_report_lines[3]
         assert test_element.status == "fail"
