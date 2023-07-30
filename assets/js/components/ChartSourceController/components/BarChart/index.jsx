@@ -44,7 +44,6 @@ class BarChart extends React.Component {
 
         const calcHeight = (scale) => {
             const config = createChartJsConfig({items, color, rotated, viewportWidth, barTypes});
-            console.log({config, items});
             if (config.data.datasets.length > 0) {
                 return (config.data.datasets[0].data.length * (25 * scale)) + 55;
             } else {
@@ -76,7 +75,6 @@ class BarChart extends React.Component {
         const viewportWidth = window.innerWidth;
         const config = createChartJsConfig({items, color, rotated, viewportWidth, barTypes});
 
-        console.log({'config.data': config.data, 'chartInstance.data': chartInstance.data})
         if (chartInstance.data.datasets.length > 0) {
             config.data.datasets.forEach(({data}, index) => {
                 chartInstance.data.datasets[index].data = data;

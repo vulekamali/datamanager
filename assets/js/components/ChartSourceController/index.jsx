@@ -53,15 +53,30 @@ class ChartSourceController extends React.Component {
     constructor(...props) {
         super(...props);
 
-        console.log({'props':this.props})
-
         const {initial, items} = this.props;
         const source = initial || Object.keys(items)[0];
+        
+        let tempObj = this.props.items[source];
+            tempObj['2016-17'].push(null);
+            tempObj['2017-18'].push(null);
+            tempObj['2018-19'].push(null);
+            tempObj['2019-20'].push(null); 
 
         this.state = {
             source: source,
-            barItems: this.props.items[source]
+            barItems: tempObj
         };
+            
+        setTimeout(() => {
+            let tempObj = this.state.barItems;
+            tempObj['2019-20'][4] = 103091084000;
+            this.setState({
+                ...this.state,
+                barItems: tempObj
+            }, () => {
+                console.log({'timeout': this.state.barItems});
+            })
+        }, 30000)
 
         this.events = {
             changeSource: this.changeSource.bind(this),
