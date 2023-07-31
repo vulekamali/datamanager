@@ -54,10 +54,8 @@ class ChartSourceController extends React.Component {
     constructor(...props) {
         super(...props);
 
-        const {initial, items} = this.props;
+        const {initial, items, type} = this.props;
         const source = initial || Object.keys(items)[0];
-        
-        console.log({initial, items, source})
         
         let tempObj = this.props.items[source];
             tempObj['2016-17'].push(null);
@@ -70,7 +68,7 @@ class ChartSourceController extends React.Component {
             barItems: tempObj
         };
             
-        this.fetchAndSetActualExpenditure(props.type);
+        this.fetchAndSetActualExpenditure(type);
 
         this.events = {
             changeSource: this.changeSource.bind(this),
@@ -78,12 +76,19 @@ class ChartSourceController extends React.Component {
     }
 
     fetchAndSetActualExpenditure(type) {
-    	console.log({'type': type});
+    	if(type !== 'expenditurePhase'){
+    	    return;
+    	}
     
 	 let url = '../../actual-expenditure/';
 	 fetchWrapper(url)
 	 	.then((response) => {
-	 		console.log({response});
+	 		let tempObj = this.state.barItems;
+	 		tempObj['2019-20'][4] = response['value'];
+	 		this.setState({
+	 			...this.state,
+	 			barItems: tempObj
+	 		});
 	 	})
 	 	.catch((err) => console.warn(err));
     }
