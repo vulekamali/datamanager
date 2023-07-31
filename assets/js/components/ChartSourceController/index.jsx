@@ -1,6 +1,7 @@
 import React from 'react';
 import uuid from 'uuid/v4';
 import BarChart from './components/BarChart/index.jsx';
+import fetchWrapper from '../../utilities/js/helpers/fetchWrapper';
 
 
 const buildToggle = ({toggle, changeSource, source}) => {
@@ -56,6 +57,8 @@ class ChartSourceController extends React.Component {
         const {initial, items} = this.props;
         const source = initial || Object.keys(items)[0];
         
+        console.log({initial, items, source})
+        
         let tempObj = this.props.items[source];
             tempObj['2016-17'].push(null);
             tempObj['2017-18'].push(null);
@@ -67,20 +70,22 @@ class ChartSourceController extends React.Component {
             barItems: tempObj
         };
             
-        setTimeout(() => {
-            let tempObj = this.state.barItems;
-            tempObj['2019-20'][4] = 103091084000;
-            this.setState({
-                ...this.state,
-                barItems: tempObj
-            }, () => {
-                console.log({'timeout': this.state.barItems});
-            })
-        }, 30000)
+        this.fetchAndSetActualExpenditure(props.type);
 
         this.events = {
             changeSource: this.changeSource.bind(this),
         };
+    }
+
+    fetchAndSetActualExpenditure(type) {
+    	console.log({'type': type});
+    
+	 let url = '../../actual-expenditure/';
+	 fetchWrapper(url)
+	 	.then((response) => {
+	 		console.log({response});
+	 	})
+	 	.catch((err) => console.warn(err));
     }
 
     changeSource(source) {

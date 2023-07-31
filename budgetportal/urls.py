@@ -258,6 +258,12 @@ urlpatterns = [
         cache_page(CACHE_MINUTES_SECS)(views.budget_summary_view),
         name="budget-summary",
     ),
+    # Budget comparison
+    url(
+        r"actual-expenditure/",
+        views.actual_expenditure_json,
+        name="actual-expenditure",
+    ),
     # Sitemap
     url(
         r"^sitemap\.xml$",

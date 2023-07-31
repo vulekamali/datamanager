@@ -1108,6 +1108,20 @@ def department_preview(
     return render(request, "department_preview.html", context)
 
 
+def actual_expenditure_json(
+    request
+):
+    response_json = json.dumps(
+        {
+        	"value" : 103091084000
+        },
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
+
+
 def robots(request):
     if settings.ROBOTS_DENY_ALL:
         text = "User-agent: *\nDisallow: /"

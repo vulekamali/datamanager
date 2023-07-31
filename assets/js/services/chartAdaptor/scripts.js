@@ -43,7 +43,7 @@ const ChartAdaptor = (props) => {
   };
 
   const styling = { scale, color, rotated };
-  return React.createElement(ChartSourceController, { items, toggle, barTypes, styling, downloadText });
+  return React.createElement(ChartSourceController, { items, toggle, barTypes, styling, downloadText, type });
 };
 
 
