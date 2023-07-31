@@ -149,7 +149,7 @@ def authenticate_openspending():
     url = (
         f"{settings.OPENSPENDING_HOST}/user/authenticate_api_key"
     )
-    r = requests.get(url)
+    r = requests.post(url, headers=headers)
     r.raise_for_status()
     return r.json()["token"]
 

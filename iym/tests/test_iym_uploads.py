@@ -49,7 +49,7 @@ def mocked_requests_put(*args, **kwargs):
 
 
 def mocked_requests_post(*args, **kwargs):
-    if"{settings.OPENSPENDING_HOST}/user/authenticate_api_key" in args[0]:
+    if f"{settings.OPENSPENDING_HOST}/user/authenticate_api_key" in args[0]:
         assert "x-api-key" in kwargs["headers"]
         return MockResponse(
             {
@@ -89,7 +89,7 @@ def mocked_requests_post(*args, **kwargs):
     ):
         return MockResponse({"status": "0.0"}, 200, "initial status")
 
-    return MockResponse(None, 404, "")
+    raise Exception(f"Unmocked POST request {args}")
 
 
 def mocked_wrong_requests_get(*args, **kwargs):
