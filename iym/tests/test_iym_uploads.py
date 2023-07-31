@@ -55,13 +55,7 @@ def mocked_requests_put(*args, **kwargs):
 def mocked_requests_post(*args, **kwargs):
     if f"{settings.OPENSPENDING_HOST}/user/authenticate_api_key" in args[0]:
         assert "x-api-key" in kwargs["headers"]
-        return MockResponse(
-            {
-                "token": "fake.jwt.blah"
-            },
-            200,
-            ""
-        )
+        return MockResponse({"token": "fake.jwt.blah"}, 200, "")
     elif f"{settings.OPENSPENDING_HOST}/datastore/" in args[0]:
         return MockResponse(
             {
@@ -178,6 +172,10 @@ class IYMFileUploadTestCase(TestCase):
 
         import_report_lines = test_element.import_report.split("\n")
         assert " - Cleaning CSV" in import_report_lines[0]
-        assert " - Getting authorisation for datastore" in import_report_lines[1], import_report_lines
-        assert " - Authorization with OpenSpending failed." in import_report_lines[2], import_report_lines
+        assert (
+            " - Getting authorisation for datastore" in import_report_lines[1]
+        ), import_report_lines
+        assert (
+            " - Authorization with OpenSpending failed." in import_report_lines[2]
+        ), import_report_lines
         assert test_element.status == "fail"

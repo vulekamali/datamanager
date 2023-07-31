@@ -146,9 +146,7 @@ def tidy_csv_table(original_csv_path, composite_key):
 
 def authenticate_openspending():
     headers = {"x-api-key": settings.OPENSPENDING_API_KEY}
-    url = (
-        f"{settings.OPENSPENDING_HOST}/user/authenticate_api_key"
-    )
+    url = f"{settings.OPENSPENDING_HOST}/user/authenticate_api_key"
     r = requests.post(url, headers=headers)
     r.raise_for_status()
     return r.json()["token"]
