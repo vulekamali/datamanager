@@ -184,7 +184,7 @@ def create_data_package(
 
         authorize_result = r.json()
         if "token" not in authorize_result:
-            raise Exception("JWT token is invalid")
+            raise Exception("Authorization with OpenSpending failed.")
 
         datastore_token = authorize_result["token"]
 
