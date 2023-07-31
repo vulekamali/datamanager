@@ -32,8 +32,10 @@ def mocked_requests_get(*args, **kwargs):
         return MockResponse({"token": "test token"}, 200, "")
     elif f"{settings.OPENSPENDING_HOST}/package/status?" in args[0]:
         return MockResponse({"progress": 1, "status": "done"}, 200, "")
+    elif args[0] == "https://test-upload-url.com/data_package.json?":
+        return MockResponse({"name": "mock datapackage"}, 200, "")
 
-    return MockResponse(None, 404, "")
+    raise Exception(f"Unmocked GET request {args}")
 
 
 def mocked_requests_put(*args, **kwargs):
@@ -44,12 +46,17 @@ def mocked_requests_put(*args, **kwargs):
         return MockResponse({"status": "0.0"}, 200, "initial status")
     elif "https://test-upload-url.com/test_data.csv" in args[0]:
         return MockResponse({"test": "file"}, 200, "")
+    elif args[0] == "https://test-upload-url.com/data_package.json?":
+        return MockResponse({"name": "mock datapackage"}, 200, "")
 
-    return MockResponse(None, 404, "")
+    raise Exception(f"Unmocked PUT request {args}")
 
 
 def mocked_requests_post(*args, **kwargs):
-    if f"{settings.OPENSPENDING_HOST}/datastore/" in args[0]:
+    if f"{settings.OPENSPENDING_HOST}/user/authenticate_api_key" in args[0]:
+        assert "x-api-key" in kwargs["headers"]
+        return MockResponse({"token": "fake.jwt.blah"}, 200, "")
+    elif f"{settings.OPENSPENDING_HOST}/datastore/" in args[0]:
         return MockResponse(
             {
                 "filedata": {
@@ -80,16 +87,14 @@ def mocked_requests_post(*args, **kwargs):
     ):
         return MockResponse({"status": "0.0"}, 200, "initial status")
 
-    return MockResponse(None, 404, "")
+    raise Exception(f"Unmocked POST request {args}")
 
 
 def mocked_wrong_requests_get(*args, **kwargs):
     if f"{settings.OPENSPENDING_HOST}/user/authorize" in args[0]:
-        return MockResponse({"token": "wrong token"}, 200, "")
-    elif f"{settings.OPENSPENDING_HOST}/package/status?" in args[0]:
-        return MockResponse({"progress": 1, "status": "done"}, 200, "")
+        return MockResponse({"permissions": {}}, 200, "")
 
-    return MockResponse(None, 404, "")
+    raise Exception(f"Unmocked GET request {args}")
 
 
 class IYMFileUploadTestCase(TestCase):
@@ -104,13 +109,24 @@ class IYMFileUploadTestCase(TestCase):
         test_file_path = os.path.abspath(("iym/tests/static/test_data.zip"))
         self.zip_file = File(open(test_file_path, "rb"))
 
+        self.ckan_patch = mock.patch("iym.tasks.ckan")
+        self.CKANMockClass = self.ckan_patch.start()
+        self.CKANMockClass.action.package_search.return_value = {"count": 0}
+        self.CKANMockClass.action.package_create.return_value = {"id": "whatever"}
+        self.CKANMockClass.action.resource_create.return_value = {}
+        self.CKANMockClass.action.vocabulary_list.return_value = [
+            {"name": "financial_years", "id": "a"},
+            {"name": "spheres", "id": "b"},
+        ]
+        self.addCleanup(self.ckan_patch.stop)
+
     def tearDown(self):
         self.zip_file.close()
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
     @mock.patch("requests.post", side_effect=mocked_requests_post)
     @mock.patch("requests.put", side_effect=mocked_requests_put)
-    def test_uploading(self, mock_get, mock_get_2, mock_get_3):
+    def test_uploading(self, mock_get, mock_post, mock_put):
         financial_year = FinancialYear.objects.create(slug="2021-22")
         test_element = IYMFileUpload.objects.create(
             user=self.superuser,
@@ -140,9 +156,9 @@ class IYMFileUploadTestCase(TestCase):
         assert test_element.status == "done"
 
     @mock.patch("requests.get", side_effect=mocked_wrong_requests_get)
-    @mock.patch("requests.post", side_effect=mocked_requests_get)
-    @mock.patch("requests.put", side_effect=mocked_requests_get)
-    def test_uploading_with_wrong_token(self, mock_get, mock_get_2, mock_get_3):
+    @mock.patch("requests.post", side_effect=mocked_requests_post)
+    @mock.patch("requests.put", side_effect=mocked_requests_put)
+    def test_uploading_with_wrong_token(self, mock_get, mock_post, mock_put):
         financial_year = FinancialYear.objects.create(slug="2021-22")
         test_element = IYMFileUpload.objects.create(
             user=self.superuser,
@@ -156,7 +172,10 @@ class IYMFileUploadTestCase(TestCase):
 
         import_report_lines = test_element.import_report.split("\n")
         assert " - Cleaning CSV" in import_report_lines[0]
-        assert " - Getting authorisation for datastore" in import_report_lines[1]
-        assert " - Uploading CSV /tmp/" in import_report_lines[2]
-        assert " - 'NoneType' object is not subscriptable" in import_report_lines[3]
+        assert (
+            " - Getting authorisation for datastore" in import_report_lines[1]
+        ), import_report_lines
+        assert (
+            " - Authorization with OpenSpending failed." in import_report_lines[2]
+        ), import_report_lines
         assert test_element.status == "fail"
