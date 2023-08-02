@@ -49,6 +49,8 @@ from .summaries import (
 )
 from .json_encoder import JSONEncoder
 
+ckan = settings.CKAN
+
 logger = logging.getLogger(__name__)
 
 COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
@@ -1111,9 +1113,34 @@ def department_preview(
 def actual_expenditure_json(
     request
 ):
+    query = {"fq": (
+    	'+groups: "in-year-spending"'
+    	'+vocab_spheres: "national"'
+    )}
+    search_response = ckan.action.package_search(**query)
+    
+    return_obj = {}
+    if search_response["results"]:
+	    for dataset_package in search_response["results"]:
+	    	dataset_obj = Dataset.from_package(dataset_package)
+	    	print('============ aaa ============')
+	    	openspending_api = dataset_obj.get_openspending_api()
+    		year_ref = openspending_api.get_financial_year_ref()
+    		phase_ref = openspending_api.get_phase_ref()
+	    	cuts = [
+			year_ref + ":" + "{}".format("2019-20"),
+			phase_ref + ":" + "{}".format("Main appropriation"),
+		    ]
+	    	print(openspending_api)
+	    	print('============ bbb ============')
+	    	return_obj[dataset_package["financial_year"][0]] = {
+	    		"url": openspending_api.aggregate(cuts=cuts)
+	    	}
     response_json = json.dumps(
         {
-        	"value" : 103091084000
+        	"value": 103091084000,
+        	"search_response": search_response,
+        	"return_obj": return_obj
         },
         sort_keys=True,
         indent=4,
