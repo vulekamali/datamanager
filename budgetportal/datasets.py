@@ -10,6 +10,7 @@ from budgetportal.openspending import (
     AdjustedEstimatesOfExpenditure,
     EstimatesOfExpenditure,
     ExpenditureTimeSeries,
+    BudgetedAndActualExpenditure,
 )
 from ckanapi import NotFound
 from django.conf import settings
@@ -199,7 +200,7 @@ class Dataset:
             "budgeted-and-actual-national-expenditure": ExpenditureTimeSeries,
             "budgeted-and-actual-provincial-expenditure": ExpenditureTimeSeries,
             "consolidated-expenditure-budget": ExpenditureTimeSeries,
-            "in-year-spending": EstimatesOfExpenditure,
+            "in-year-spending": BudgetedAndActualExpenditure,
         }
         api_class = api_class_mapping[self.category.slug]
         self._openspending_api = api_class(api_resource["url"])

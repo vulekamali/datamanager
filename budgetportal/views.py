@@ -1124,19 +1124,15 @@ def actual_expenditure_json(
 	    for dataset_package in search_response["results"]:
 	    	dataset_obj = Dataset.from_package(dataset_package)
 	    	openspending_api = dataset_obj.get_openspending_api()
-	    	print('============ aaa ============')
 	    	print(openspending_api)
 	    	if openspending_api is not None:
 		    	print(openspending_api)
-		    	print('============ bbb ============')
 	    		year_ref = openspending_api.get_financial_year_ref()
-		    	print(year_ref)
-		    	print('============ ccc ============')
+	    		department_ref = openspending_api.get_department_name_ref()
 		    	cuts = [
-				year_ref + ":" + "{}".format("2019-20"),
+				year_ref + ":" + "{}".format("2019"),	# todo: get real value
+				department_ref + ":" + "{}".format("Health"),	# todo: get real value
 			    ]
-		    	print(openspending_api)
-		    	print('============ ddd ============')
 		    	return_obj[dataset_package["financial_year"][0]] = {
 		    		"url": openspending_api.aggregate_url(cuts=cuts)
 		    	}

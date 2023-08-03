@@ -230,6 +230,20 @@ class AdjustedEstimatesOfExpenditure(EstimatesOfExpenditure):
         return self.get_ref(self.get_adjustment_kind_dimension(), "label")
 
 
+class BudgetedAndActualExpenditure(BabbageFiscalDataset):
+    def get_financial_year_ref(self):
+        return self.get_ref(self.get_financial_year_dimension(), "label")
+
+    def get_financial_year_dimension(self):
+        return self.get_dimension("date")
+
+    def get_department_name_ref(self):
+        return self.get_ref(self.get_department_dimension(), "label")
+
+    def get_department_dimension(self):
+        return self.get_dimension("administrative_classification")
+
+
 class ExpenditureTimeSeries(AdjustedEstimatesOfExpenditure):
     pass
 
