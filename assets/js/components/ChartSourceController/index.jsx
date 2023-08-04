@@ -68,14 +68,14 @@ class ChartSourceController extends React.Component {
             barItems: tempObj
         };
             
-        this.fetchAndSetActualExpenditure(type);
+        this.fetchActualExpenditureUrls(type);
 
         this.events = {
             changeSource: this.changeSource.bind(this),
         };
     }
 
-    fetchAndSetActualExpenditure(type) {
+    fetchActualExpenditureUrls(type) {
     	if(type !== 'expenditurePhase'){
     	    return;
     	}
@@ -83,12 +83,19 @@ class ChartSourceController extends React.Component {
 	 let url = '../../actual-expenditure/';
 	 fetchWrapper(url)
 	 	.then((response) => {
-	 		let tempObj = this.state.barItems;
-	 		tempObj['2019-20'][4] = response['value'];
-	 		this.setState({
-	 			...this.state,
-	 			barItems: tempObj
-	 		});
+	 		for(const year in response){
+	 			console.log({year, 'val':  response[year]})
+	 			this.fetchAndSetActualExpenditure(year, response[year]);
+	 		}
+	 	})
+	 	.catch((err) => console.warn(err));
+    }
+    
+    fetchAndSetActualExpenditure(year, obj){
+    	let url = obj.url;
+	fetchWrapper(url)
+	 	.then((response) => {
+	 		console.log({response})
 	 	})
 	 	.catch((err) => console.warn(err));
     }

@@ -1130,18 +1130,14 @@ def actual_expenditure_json(
 	    		year_ref = openspending_api.get_financial_year_ref()
 	    		department_ref = openspending_api.get_department_name_ref()
 		    	cuts = [
-				year_ref + ":" + "{}".format("2019"),	# todo: get real value
+				# year_ref + ":" + "{}".format("2019"),	# todo: get real value
 				department_ref + ":" + "{}".format("Health"),	# todo: get real value
 			    ]
 		    	return_obj[dataset_package["financial_year"][0]] = {
 		    		"url": openspending_api.aggregate_url(cuts=cuts)
 		    	}
     response_json = json.dumps(
-        {
-        	"value": 103091084000,
-        	"search_response": search_response,
-        	"return_obj": return_obj
-        },
+        return_obj,
         sort_keys=True,
         indent=4,
         separators=(",", ": "),
