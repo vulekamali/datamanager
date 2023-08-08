@@ -56,18 +56,13 @@ class ChartSourceController extends React.Component {
 
         const {initial, items, type} = this.props;
         const source = initial || Object.keys(items)[0];
-        
-        let tempObj = this.props.items[source];
-            tempObj['2016-17'].push(null);
-            tempObj['2017-18'].push(null);
-            tempObj['2018-19'].push(null);
-            tempObj['2019-20'].push(null); 
 
+        const barItems = this.getBarItems(this.props.items[source]);
         this.state = {
             source: source,
-            barItems: tempObj
+            barItems: barItems,
+            barTypes: this.props.barTypes
         };
-            
         this.fetchActualExpenditureUrls(type);
 
         this.events = {
@@ -75,34 +70,51 @@ class ChartSourceController extends React.Component {
         };
     }
 
-    fetchActualExpenditureUrls(type) {
-    	if(type !== 'expenditurePhase'){
-    	    return;
-    	}
-    
-	 let url = '../../actual-expenditure/';
-	 fetchWrapper(url)
-	 	.then((response) => {
-	 		for(const year in response){
-	 			console.log({year, 'val':  response[year]})
-	 			this.fetchAndSetActualExpenditure(year, response[year]);
-	 		}
-	 	})
-	 	.catch((err) => console.warn(err));
+    getBarItems(barItems) {
+        let tempItems = barItems;
+        Object.keys(tempItems).forEach((key) => {
+            for (let i = 0; i < 4; i++) {
+                // each quarter is null initially
+                tempItems[key].push(null);
+            }
+        })
+
+        return tempItems;
     }
-    
-    fetchAndSetActualExpenditure(year, obj){
-    	let url = obj.url;
-	fetchWrapper(url)
-	 	.then((response) => {
-	 		let tempObj = this.state.barItems;
-	 		tempObj[year][4] = 103091084000;
-	 		this.setState({
-	 			...this.state,
-	 			barItems: tempObj
-	 		})
-	 	})
-	 	.catch((err) => console.warn(err));
+
+    fetchActualExpenditureUrls(type) {
+        if (type !== 'expenditurePhase') {
+            return;
+        }
+
+        const department_name = document.querySelector('h1.Page-mainHeading').innerText;
+        let url = `../../actual-expenditure/?department_name=${encodeURI(department_name)}`;
+        fetchWrapper(url)
+            .then((response) => {
+                for (const year in response) {
+                    this.fetchAndSetActualExpenditure(year, response[year]);
+                }
+            })
+            .catch((err) => console.warn(err));
+    }
+
+    fetchAndSetActualExpenditure(year, obj) {
+        let url = obj.url;
+        fetchWrapper(url)
+            .then((response) => {
+                let barItems = this.state.barItems;
+                //one for each quarter
+                barItems[year][4] = response.summary['q1.sum'];    //q1
+                barItems[year][5] = response.summary['q2.sum'];    //q2
+                barItems[year][6] = response.summary['q3.sum'];    //q3
+                barItems[year][7] = response.summary['q4.sum'];    //q4
+
+                this.setState({
+                    ...this.state,
+                    barItems: barItems
+                })
+            })
+            .catch((err) => console.warn(err));
     }
 
     changeSource(source) {
@@ -110,7 +122,7 @@ class ChartSourceController extends React.Component {
     }
 
     render() {
-        const {items: rawItems, toggle, styling, downloadText, barTypes} = this.props;
+        const {items: rawItems, toggle, styling, downloadText} = this.props;
         const {source} = this.state;
         const {changeSource} = this.events;
         const items = rawItems[source];
@@ -122,7 +134,7 @@ class ChartSourceController extends React.Component {
             source,
             changeSource,
             downloadText,
-            barTypes
+            'barTypes': this.state.barTypes
         }} />;
     }
 }
