@@ -119,7 +119,7 @@ const buildDatasets = (barTypes, values, color) => {
     return [
       {
         data: values,
-        backgroundColor: color,
+        backgroundColor: color
       },
     ];
   }
@@ -131,9 +131,32 @@ const buildDatasets = (barTypes, values, color) => {
 
 
 const createChartJsConfig = ({ items, rotated, color, viewportWidth, barTypes }) => {
-  const { labels, values } = flattenNesting(items);
+  let { labels, values } = flattenNesting(items);
   const rotateLabels = viewportWidth && viewportWidth < 600 && rotated;
-  const datasets = buildDatasets(barTypes, values, color);
+  console.log({labels, values, items})
+  let datasets = buildDatasets(barTypes, values, color);
+  if(barTypes.length === 11){
+  	//todo: remove
+  	labels =  ['2016-17', '2017-18', '2018-19', '2018-19', '2019-20']
+  	values = [[10], [15], [20, 12], [12], [18]]
+  	datasets = [{
+  		data: [10, 12, 14, 16, 18],
+  		backgroundColor: 'red',
+  		stack: 'Stack 0'
+  	},{
+  		data: [20, 22, 24, 26, 28],
+  		backgroundColor: 'blue',
+  		stack: 'Stack 1'
+  	},{
+  		data: [null, 2, null, 6, null],
+  		backgroundColor: 'black',
+  		stack: 'Stack 1'
+  	}]
+  }
+  if(barTypes.length === 5){
+  	//todo: remove
+  	console.log({datasets})
+  }
 
   return {
     type: rotated ? 'bar' : 'horizontalBar',
@@ -195,6 +218,7 @@ const createChartJsConfig = ({ items, rotated, color, viewportWidth, barTypes })
         }],
         xAxes: [{
           barPercentage: 1,
+          stacked: true, 
           categoryPercentage: 0.6,
           ticks: {
             beginAtZero: true,

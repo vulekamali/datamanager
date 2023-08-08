@@ -95,7 +95,12 @@ class ChartSourceController extends React.Component {
     	let url = obj.url;
 	fetchWrapper(url)
 	 	.then((response) => {
-	 		console.log({response})
+	 		let tempObj = this.state.barItems;
+	 		tempObj[year][4] = 103091084000;
+	 		this.setState({
+	 			...this.state,
+	 			barItems: tempObj
+	 		})
 	 	})
 	 	.catch((err) => console.warn(err));
     }
