@@ -9,7 +9,7 @@ import normaliseAdjusted from './services/normaliseAdjusted/index.js';
 import normaliseExpenditureMultiples from './services/normaliseExpenditureMultiples/index.js';
 
 import ChartSourceController from '../../components/ChartSourceController/index.jsx';
-import { toggleValues } from './data.json';
+
 
 
 const normaliseData = ({ type, rawItems }) => {
@@ -34,6 +34,19 @@ const ChartAdaptor = (props) => {
   const needToggle = type === 'expenditurePhase' || type === 'expenditure';
   const items = normaliseData({ type, rawItems, rotated });
   const color = expenditure ? '#ad3c64' : '#73b23e';
+
+  const toggleValues = {
+    "nominal": {
+      "title": "Not adjusted for inflation"
+    },
+    "real": {
+      "title": "Adjusted for inflation",
+      "description": `The Rand values in this chart are adjusted for CPI inflation and are the effective \
+      value in ${rawItems.base_financial_year.slice(0, 4)} Rands. CPI is used as the deflator, with the ${rawItems.base_financial_year} \
+      financial year as the base.`
+    }
+  }
+  
   const toggle = needToggle ? toggleValues : null;
 
   const downloadText = {
