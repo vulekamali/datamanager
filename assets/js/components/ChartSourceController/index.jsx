@@ -54,10 +54,12 @@ class ChartSourceController extends React.Component {
     constructor(...props) {
         super(...props);
 
+        console.log({props})
+
         const {initial, items, type} = this.props;
         const source = initial || Object.keys(items)[0];
 
-        const barItems = this.getBarItems(this.props.items[source]);
+        const barItems = this.getBarItems(this.props.items[source], type);
         this.state = {
             source: source,
             barItems: barItems,
@@ -70,8 +72,12 @@ class ChartSourceController extends React.Component {
         };
     }
 
-    getBarItems(barItems) {
+    getBarItems(barItems, type) {
         let tempItems = barItems;
+        if (type !== 'expenditurePhase') {
+            return tempItems;
+        }
+
         Object.keys(tempItems).forEach((key) => {
             for (let i = 0; i < 4; i++) {
                 // each quarter is null initially
