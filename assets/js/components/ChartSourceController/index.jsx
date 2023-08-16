@@ -54,8 +54,6 @@ class ChartSourceController extends React.Component {
     constructor(...props) {
         super(...props);
 
-        console.log({props})
-
         const {initial, items, type} = this.props;
         const source = initial || Object.keys(items)[0];
 
@@ -106,14 +104,15 @@ class ChartSourceController extends React.Component {
 
     fetchAndSetActualExpenditure(year, obj) {
         let url = obj.url;
+        const multiplier = 1000;
         fetchWrapper(url)
             .then((response) => {
                 let barItems = this.state.barItems;
                 //one for each quarter
-                barItems[year][4] = response.summary['q1.sum'];    //q1
-                barItems[year][5] = response.summary['q2.sum'];    //q2
-                barItems[year][6] = response.summary['q3.sum'];    //q3
-                barItems[year][7] = response.summary['q4.sum'];    //q4
+                barItems[year][4] = response.summary['q1.sum'] > 0 ? response.summary['q1.sum'] * multiplier : null;    //q1
+                barItems[year][5] = response.summary['q2.sum'] > 0 ? response.summary['q2.sum'] * multiplier : null;    //q2
+                barItems[year][6] = response.summary['q3.sum'] > 0 ? response.summary['q3.sum'] * multiplier : null;    //q3
+                barItems[year][7] = response.summary['q4.sum'] > 0 ? response.summary['q4.sum'] * multiplier : null;    //q4
 
                 this.setState({
                     ...this.state,

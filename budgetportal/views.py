@@ -1119,6 +1119,7 @@ def actual_expenditure_json(request):
     if search_response["results"]:
         for dataset_package in search_response["results"]:
             dataset_obj = Dataset.from_package(dataset_package)
+
             openspending_api = dataset_obj.get_openspending_api()
             if openspending_api is not None:
                 department_ref = openspending_api.get_department_name_ref()
