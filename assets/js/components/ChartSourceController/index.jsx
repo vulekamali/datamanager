@@ -57,8 +57,7 @@ class ChartSourceController extends React.Component {
         const {initial, items, type} = this.props;
         const source = initial || Object.keys(items)[0];
 
-        const barItems = this.getBarItems(this.props.items[source], type);
-        console.log({props})
+        const barItems = this.getBarItems(this.props.items, source, type);
         this.state = {
             source: source,
             barItems: barItems,
@@ -71,20 +70,22 @@ class ChartSourceController extends React.Component {
         };
     }
 
-    getBarItems(barItems, type) {
-        let tempItems = barItems;
+    getBarItems(barItems, source, type) {
         if (type !== 'expenditurePhase') {
-            return tempItems;
+            return barItems[source];
         }
 
-        Object.keys(tempItems).forEach((key) => {
-            for (let i = 0; i < 4; i++) {
-                // each quarter is null initially
-                tempItems[key].push(null);
-            }
+        Object.keys(barItems).forEach((sourceType) => {
+            let tempItems = barItems[sourceType];
+            Object.keys(tempItems).forEach((key) => {
+                for (let i = 0; i < 4; i++) {
+                    // each quarter is null initially
+                    tempItems[key].push(null);
+                }
+            })
         })
 
-        return tempItems;
+        return barItems[source];
     }
 
     fetchActualExpenditureUrls(type) {
@@ -124,14 +125,30 @@ class ChartSourceController extends React.Component {
     }
 
     changeSource(source) {
-        this.setState({source});
+        this.setState({
+            source,
+            barItems: this.props.items[source]
+        });
+    }
+
+    getToggle(toggle, type) {
+        if (type !== 'expenditurePhase') {
+            return toggle;
+        }
+        const extraText = ' Actual expenditure is not currently available on the inflation-adjusted view';
+        if (toggle['real']['description'].indexOf(extraText) >= 0) {
+            return toggle;
+        }
+        toggle['real']['description'] += extraText
+
+        return toggle;
     }
 
     render() {
-        const {items: rawItems, toggle, styling, downloadText} = this.props;
+        const {styling, downloadText} = this.props;
         const {source} = this.state;
         const {changeSource} = this.events;
-        const items = rawItems[source];
+        let toggle = this.getToggle(this.props.toggle, this.props.type);
 
         return <Markup {...{
             'items': this.state.barItems,
