@@ -167,11 +167,15 @@ const createChartJsConfig = ({items, rotated, color, viewportWidth, barTypes}) =
 
                         return `${prefix}R${trimValues(data[index])}`;
                     },
-                    title: (data) => {
+                    title: (data, a, b) => {
                         if (data.length <= 0) {
                             return;
                         }
-                        return `${data[0].label} Q${data[0].datasetIndex - 3}`
+                        if (data[0].datasetIndex <= 3) {
+                            return `${data[0].label}`
+                        } else {
+                            return `${data[0].label} Q${data[0].datasetIndex - 3}`
+                        }
                     }
                 },
             },
