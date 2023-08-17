@@ -58,6 +58,7 @@ class ChartSourceController extends React.Component {
         const source = initial || Object.keys(items)[0];
 
         const barItems = this.getBarItems(this.props.items[source], type);
+        console.log({props})
         this.state = {
             source: source,
             barItems: barItems,
