@@ -101,7 +101,6 @@ const dynamicLabelPlugin = ({chart}) => {
     });
 };
 
-
 const formatDataset = ({color, barTypes}) => (data, index) => {
     const [r, g, b] = colorString.get.rgb(color);
     const backgroundColor = `rgba(${r}, ${g}, ${b}, 0.${(index + 1) * 20})`;
@@ -168,29 +167,16 @@ const createChartJsConfig = ({items, rotated, color, viewportWidth, barTypes}) =
 
                         return `${prefix}R${trimValues(data[index])}`;
                     },
+                    title: (data) => {
+                        if (data.length <= 0) {
+                            return;
+                        }
+                        return `${data[0].label} Q${data[0].datasetIndex - 3}`
+                    }
                 },
             },
             animation: {
                 duration: 0,
-                onComplete: (chart) => {
-                    let chartInstance = chart.chartInstance;
-                    let ctx = chartInstance.ctx;
-
-                    ctx.textAlign = 'center';
-                    ctx.fillStyle = '#fff';
-                    ctx.font = "10px \"Helvetica Neue\", Helvetica, Arial, sans-serif"
-
-                    datasets.forEach(function (dataset, i) {
-                        if (dataset.stack !== 'Actual Expenditure') {
-                            return
-                        }
-                        let meta = chartInstance.controller.getDatasetMeta(i);
-                        meta.data.forEach(function (bar, index) {
-                            const y = bar._model.y + ((bar._model.base - bar._model.y) / 2) + 5;
-                            ctx.fillText(`Q${i - 3}`, bar._model.x, y);
-                        });
-                    });
-                }
             },
             layout: {
                 padding: {
@@ -241,7 +227,24 @@ const createChartJsConfig = ({items, rotated, color, viewportWidth, barTypes}) =
         },
         plugins: [
             {
-                afterDatasetsDraw: rotated || dynamicLabelPlugin,
+                afterDatasetsDraw: rotated ? function (chart, options) {
+                    let ctx = chart.chart.ctx;
+
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = '#fff';
+                    ctx.font = "10px \"Helvetica Neue\", Helvetica, Arial, sans-serif";
+
+                    datasets.forEach(function (dataset, i) {
+                        if (dataset.stack !== 'Actual Expenditure') {
+                            return
+                        }
+                        let meta = chart.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            const y = bar._model.y + ((bar._model.base - bar._model.y) / 2) + 5;
+                            ctx.fillText(`Q${i - 3}`, bar._model.x, y);
+                        });
+                    });
+                } : dynamicLabelPlugin
             },
         ],
     };
