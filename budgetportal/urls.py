@@ -261,7 +261,7 @@ urlpatterns = [
     # Budget comparison
     url(
         r"actual-expenditure/",
-        views.actual_expenditure_json,
+        views.iym_datasets_json,
         name="actual-expenditure",
     ),
     # Sitemap

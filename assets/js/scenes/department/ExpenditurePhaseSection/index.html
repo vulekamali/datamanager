@@ -72,9 +72,11 @@
                     {% include 'components/ChartLabel/index.html' with index="3" label="Audited outcome" %}
                 </div>
 
-                <div class="ExpenditurePhaseSection-labelItem">
-                    {% include 'components/ChartLabel/index.html' with index="4" label="Actual expenditure" %}
-                </div>
+                {% if sphere.slug == "national" %}
+                    <div class="ExpenditurePhaseSection-labelItem">
+                        {% include 'components/ChartLabel/index.html' with index="4" label="Actual expenditure" %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="Card">

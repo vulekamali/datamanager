@@ -1110,7 +1110,7 @@ def department_preview(
     return render(request, "department_preview.html", context)
 
 
-def actual_expenditure_json(request):
+def iym_datasets_json(request):
     query = {"fq": ('+groups: "in-year-spending"' '+vocab_spheres: "national"')}
     search_response = ckan.action.package_search(**query)
     department_name = request.GET.get("department_name", "")
