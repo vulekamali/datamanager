@@ -47,7 +47,7 @@ else:
     SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 DEBUG_TOOLBAR = os.environ.get("DJANGO_DEBUG_TOOLBAR", "false").lower() == "true"
-print("Django Debug Toolbar %s." % "enabled" if DEBUG_TOOLBAR else "disabled")
+print("Django Debug Toolbar %s." % ("enabled" if DEBUG_TOOLBAR else "disabled"))
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": "budgetportal.debug_toolbar_config.show_toolbar_check"
 }
@@ -62,8 +62,12 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
+    "constance",
+    "constance.backends.database",
     "budgetportal.apps.BudgetPortalConfig",
     "budgetportal.webflow",
+    "performance",
+    "iym",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -107,6 +111,16 @@ INSTALLED_APPS = [
     "storages",
 ]
 
+CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
+
+CONSTANCE_CONFIG = {
+    "EQPRS_DATA_ENABLED": (
+        False,
+        "enabling / disabling summary on department page",
+        bool,
+    )
+}
+
 if DEBUG_TOOLBAR:
     INSTALLED_APPS.append("debug_toolbar")
 
@@ -135,7 +149,6 @@ WSGI_APPLICATION = "budgetportal.wsgi.application"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
-
 db_config = dj_database_url.config()
 db_config["ATOMIC_REQUESTS"] = True
 
@@ -156,7 +169,6 @@ AWS_S3_CUSTOM_DOMAIN = env.str("AWS_S3_CUSTOM_DOMAIN", None)
 # https://docs.wagtail.io/en/v2.7.1/advanced_topics/deploying.html
 AWS_S3_FILE_OVERWRITE = False
 
-
 SOLR_URL = os.environ["SOLR_URL"]
 
 HAYSTACK_CONNECTIONS = {
@@ -166,7 +178,6 @@ HAYSTACK_CONNECTIONS = {
         "ADMIN_URL": "",
     }
 }
-
 
 # Caches
 if DEBUG:
@@ -188,7 +199,6 @@ else:
         }
     }
 
-
 CKAN_URL = os.environ.get("CKAN_URL", "https://data.vulekamali.gov.za")
 CKAN_API_KEY = os.environ.get("CKAN_API_KEY", None)
 CKAN = RemoteCKAN(CKAN_URL, apikey=CKAN_API_KEY)
@@ -206,6 +216,11 @@ BUST_OPENSPENDING_CACHE = (
     os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
 )
 OPENSPENDING_HOST = os.environ.get("OPENSPENDING_HOST", "https://openspending.org")
+OPENSPENDING_USER_ID = os.environ.get("OPENSPENDING_USER_ID", "")
+OPENSPENDING_API_KEY = os.environ.get("OPENSPENDING_API_KEY", "")
+OPENSPENDING_DATASET_CREATE_SUFFIX = os.environ.get(
+    "OPENSPENDING_DATASET_CREATE_SUFFIX", ""
+)
 
 # http://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = "budgetportal.allauthadapters.AccountAdapter"
@@ -380,8 +395,9 @@ DJANGO_Q_SYNC = os.environ.get("DJANGO_Q_SYNC", "false").lower() == "true"
 Q_CLUSTER = {
     "name": "Something",
     "workers": 1,
-    "timeout": 30 * 60,  # Timeout a task after this many seconds
-    "retry": 5,
+    "max_attempts": 1,
+    "timeout": 60 * 60 * 6,  # 6 hours - Timeout a task after this many seconds
+    "retry": 60 * 60 * 6 + 1,  # 6 hours - Seconds to wait before retrying a task
     "queue_limit": 1,
     "bulk": 1,
     "orm": "default",  # Use Django ORM as storage backend

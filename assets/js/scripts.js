@@ -3,7 +3,6 @@ import '../scss/styles.scss';
 import 'classlist-polyfill';
 import 'whatwg-fetch';
 import 'url-search-params-polyfill';
-import 'preact/devtools';
 
 import 'jquery';
 import 'bootstrap/js/dist/scrollspy.js';
@@ -20,6 +19,7 @@ import './components/learning-centre/Glossary/scripts.jsx';
 import './components/homepage/ValueBlocks/scripts.jsx';
 import './components/homepage/Revenue/scripts.jsx';
 import './components/homepage/HomeChart/scripts.jsx';
+import './components/homepage/Showcase/scripts.jsx';
 
 import './components/header-and-footer/Search/scripts.jsx';
 import './components/header-and-footer/Search/index.jsx';
@@ -31,6 +31,9 @@ import './components/header-and-footer/Modals/scripts.jsx';
 import './components/department-budgets/DeptSearch/scripts.jsx';
 import './components/department-budgets/IntroSection/scripts.jsx';
 import './components/department-budgets/ArrowButtons/scripts.js';
+import './components/department-budgets/PerformanceIndicators/scripts.jsx';
+
+import './components/performance/Table/scripts.jsx';
 
 import './components/contributed-data/CsoMeta/scripts.js';
 

@@ -30,3 +30,6 @@ ghostdriver.log
 .idea/
 .DS_Store
 dbdump
+
+.env
+/*.csv

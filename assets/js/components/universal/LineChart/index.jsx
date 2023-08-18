@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import calcMaxValue from './partials/calcMaxValue.js';
 import buildGroupSpaceArray from './partials/buildGroupSpaceArray.js';
 

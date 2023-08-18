@@ -1,4 +1,5 @@
-import { h, render, Component } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { parse } from 'query-string';
 import Glossary from './index.jsx';
 import glossary from './../../../../../_data/glossary.json';
@@ -10,7 +11,7 @@ import wrapStringPhrases from './../../../utilities/js/helpers/wrapStringPhrases
 const { items: glossaryObject } = glossary;
 
 
-class GlossaryContainer extends Component {
+class GlossaryContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -100,7 +101,7 @@ function scripts() {
 
   if (nodes.length > 0) {
     for (let i = 0; i < nodes.length; i++) {
-      render(<GlossaryContainer glossaryObject={glossaryGroupedObject} {...{ phrase }} />, nodes[i]);
+      ReactDOM.render(<GlossaryContainer glossaryObject={glossaryGroupedObject} {...{ phrase }} />, nodes[i]);
     }
   }
 }

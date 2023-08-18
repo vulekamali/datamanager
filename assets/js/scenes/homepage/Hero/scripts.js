@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 
 import { jsConnect as connect } from '../../../utilities/js/helpers/connector.js';
 import VideoEmbed from '../../../components/universal/VideoEmbed/index.jsx';
@@ -26,7 +26,7 @@ const videoConfig = {
 const Hero = ({ node, image, button }) => {
   const playVideo = () => createModal(
     videoConfig.title,
-    h(VideoEmbed, videoConfig, null),
+    React.createElement(VideoEmbed, videoConfig, null),
   );
 
   button.addEventListener('click', playVideo);

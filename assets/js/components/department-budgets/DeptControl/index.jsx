@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import PseudoSelect from './../../universal/PseudoSelect/index.jsx';
 import provinces from './partials/provinces.json';
 import spheres from './partials/spheres.json';
@@ -16,7 +16,7 @@ export default function DeptGroup({ changeKeywords, updateFilter, keywords, open
           <input
             className="Input"
             placeholder="Start typing to find a department budget"
-            value={keywords}
+            defaultValue={keywords}
             onInput={triggerKeyword}
           />
         </div>

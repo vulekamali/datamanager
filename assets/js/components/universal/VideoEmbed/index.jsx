@@ -1,5 +1,5 @@
 import { ga } from 'react-ga';
-import { h, Component } from 'preact';
+import React from 'react';
 
 
 const Dropdown = ({ selected, setSelected, languages }) => {
@@ -31,7 +31,7 @@ const Markup = ({ title, languages, selected, setSelected }) => {
 }
 
 
-export default class VideoEmbed extends Component {
+export default class VideoEmbed extends React.Component {
   constructor(props) {
     super(props);
     const { initialSelected, languages } = this.props;

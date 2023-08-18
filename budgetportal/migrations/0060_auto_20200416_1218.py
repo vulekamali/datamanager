@@ -12,9 +12,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="faq", name="content", field=ckeditor.fields.RichTextField(),
+            model_name="faq",
+            name="content",
+            field=ckeditor.fields.RichTextField(),
         ),
         migrations.AlterField(
-            model_name="notice", name="content", field=ckeditor.fields.RichTextField(),
+            model_name="notice",
+            name="content",
+            field=ckeditor.fields.RichTextField(),
         ),
     ]

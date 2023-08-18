@@ -1,12 +1,13 @@
 import { ga } from 'react-ga';
-import { h, render, Component } from 'preact';
+import ReactDOM from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import Search from './index.jsx';
 import removePunctuation from '../../../utilities/js/helpers/removePunctuation.js';
 
 
-class SearchContainer extends Component {
+class SearchContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -94,7 +95,7 @@ function scripts() {
       }
 
       // Initialise Search Preact App
-      render(
+      ReactDOM.render(
         <SearchContainer {...{ requestOverride, selectedYear, searchParam }} />,
         component,
       );

@@ -1,10 +1,11 @@
-import { h, Component, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import YearSelect from './index.jsx';
 import decodeHtmlEntities from './../../../utilities/js/helpers/decodeHtmlEntities.js';
 import DebounceFunction from './../../../utilities/js/helpers/DebounceFunction.js';
 
 
-class YearSelectContainer extends Component {
+class YearSelectContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,9 +101,8 @@ function scripts() {
     nodesArray.forEach((node, i) => {
       const jsonData = JSON.parse(decodeHtmlEntities(nodes[i].getAttribute('data-json'))).data;
 
-      render(
+      ReactDOM.render(
         <YearSelectContainer {...{ jsonData }} />,
-        nodes[i].parentNode,
         nodes[i],
       );
     });

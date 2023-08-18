@@ -1,10 +1,11 @@
-import { h, render, Component } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { getState, subscribe } from './../../../reduxStore.js';
 import Modals from './index.jsx';
 import createComponents from './../../../utilities/js/helpers/createComponents.js';
 
 
-class ModalsContainer extends Component {
+class ModalsContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -60,7 +61,7 @@ class ModalsContainer extends Component {
 
 
 function scripts() {
-  const createInstance = node => render(<ModalsContainer />, node);
+  const createInstance = node => ReactDOM.render(<ModalsContainer />, node);
   createComponents('Modals', createInstance);
 }
 

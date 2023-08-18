@@ -33,6 +33,9 @@
 
 .ExpenditureMultiplesSection-label {
   display: flex;
+  @media screen and (max-width: 400px) {
+    display: block;
+  }
 }
 
 .ExpenditureMultiplesSection-labelItem {

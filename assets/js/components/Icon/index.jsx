@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import Close from './partials/Close.jsx';
 import Download from './partials/Download.jsx';
 import Facebook from './partials/Facebook.jsx';

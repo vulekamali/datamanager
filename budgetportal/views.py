@@ -11,6 +11,7 @@ from slugify import slugify
 from budgetportal.csv_gen import generate_csv_response
 from budgetportal.openspending import PAGE_SIZE
 from django.conf import settings
+from django.core.serializers import serialize
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Count
 from django.forms.models import model_to_dict
@@ -18,6 +19,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from haystack.query import SearchQuerySet
+from constance import config
 
 from .datasets import Category, Dataset
 from .models import (
@@ -35,6 +37,7 @@ from .models import (
     ProcurementResourceLink,
     Sphere,
     Video,
+    ShowcaseItem,
 )
 from .summaries import (
     DepartmentProgrammesEcon4,
@@ -44,11 +47,31 @@ from .summaries import (
     get_focus_area_preview,
     get_preview_page,
 )
+from .json_encoder import JSONEncoder
 
 logger = logging.getLogger(__name__)
 
 COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
 COMMON_DESCRIPTION_ENDING = "from National Treasury in partnership with IMALI YETHU."
+
+
+def serialize_showcase(showcase_items):
+    showcase_items_dicts = [
+        {
+            "name": i.name,
+            "description": i.description,
+            "cta_text_1": i.cta_text_1,
+            "cta_link_1": i.cta_link_1,
+            "cta_text_2": i.cta_text_2,
+            "cta_link_2": i.cta_link_2,
+            "second_cta_type": i.second_cta_type,
+            "thumbnail_url": i.file.url,
+        }
+        for i in showcase_items
+    ]
+    return json.dumps(
+        showcase_items_dicts, cls=DjangoJSONEncoder, sort_keys=True, indent=4
+    )
 
 
 def homepage(request):
@@ -67,6 +90,8 @@ def homepage(request):
         .filter(num_depts__gt=0)
         .first()
     )
+
+    showcase_items = ShowcaseItem.objects.all()
 
     context = {
         "selected_financial_year": None,
@@ -91,6 +116,7 @@ def homepage(request):
         "call_to_action_heading": page_data.call_to_action_heading,
         "call_to_action_link_label": page_data.call_to_action_link_label,
         "call_to_action_link_url": page_data.call_to_action_link_url,
+        "showcase_items_json": serialize_showcase(showcase_items),
     }
 
     return render(request, "homepage.html", context)
@@ -375,17 +401,31 @@ def department_page(
         "selected_tab": "departments",
         "title": "%s budget %s  - vulekamali" % (department.name, selected_year.slug),
         "description": "%s department: %s budget data for the %s financial year %s"
-        % (govt_label, department.name, selected_year.slug, COMMON_DESCRIPTION_ENDING,),
+        % (
+            govt_label,
+            department.name,
+            selected_year.slug,
+            COMMON_DESCRIPTION_ENDING,
+        ),
         "department_budget": department_budget,
         "department_adjusted_budget": department_adjusted_budget,
         "procurement_resource_links": ProcurementResourceLink.objects.filter(
-            sphere_slug__in=("all", department.government.sphere.slug,)
+            sphere_slug__in=(
+                "all",
+                department.government.sphere.slug,
+            )
         ),
         "performance_resource_links": PerformanceResourceLink.objects.filter(
-            sphere_slug__in=("all", department.government.sphere.slug,)
+            sphere_slug__in=(
+                "all",
+                department.government.sphere.slug,
+            )
         ),
         "in_year_monitoring_resource_links": InYearMonitoringResourceLink.objects.filter(
-            sphere_slug__in=("all", department.government.sphere.slug,)
+            sphere_slug__in=(
+                "all",
+                department.government.sphere.slug,
+            )
         ),
         "vote_number": department.vote_number,
         "vote_primary": {
@@ -403,6 +443,8 @@ def department_page(
     context["admin_url"] = reverse(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
+    context["EQPRS_DATA_ENABLED"] = config.EQPRS_DATA_ENABLED
+
     return render(request, "department.html", context)
 
 
@@ -475,7 +517,7 @@ def department_viz_subprog_econ4_bars(
 
 
 def infrastructure_projects_overview(request):
-    """ Overview page to showcase all featured infrastructure projects """
+    """Overview page to showcase all featured infrastructure projects"""
     infrastructure_projects = InfrastructureProjectPart.objects.filter(
         featured=True
     ).distinct("project_slug")
@@ -966,7 +1008,7 @@ def department_list_json(request, financial_year_id):
 
 
 def treemaps_data(financial_year_id, phase_slug, sphere_slug):
-    """ The data for the vulekamali home page treemaps """
+    """The data for the vulekamali home page treemaps"""
     dept = Department.objects.filter(government__sphere__slug=sphere_slug)[0]
     if sphere_slug == "national":
         page_data = dept.get_national_expenditure_treemap(financial_year_id, phase_slug)
@@ -990,7 +1032,7 @@ def treemaps_json(request, financial_year_id, phase_slug, sphere_slug):
 
 
 def consolidated_treemap(financial_year_id):
-    """ The data for the vulekamali home page treemaps """
+    """The data for the vulekamali home page treemaps"""
     financial_year = FinancialYear.objects.get(slug=financial_year_id)
     page_data = get_consolidated_expenditure_treemap(financial_year)
     if page_data is None:
@@ -1009,7 +1051,7 @@ def consolidated_treemap_json(request, financial_year_id):
 
 
 def focus_preview_data(financial_year_id):
-    """ The data for the focus area preview pages for a specific year """
+    """The data for the focus area preview pages for a specific year"""
     financial_year = FinancialYear.objects.get(slug=financial_year_id)
     page_data = get_focus_area_preview(financial_year)
     return page_data
@@ -1079,3 +1121,19 @@ def robots(request):
 def read_object_from_yaml(path_file):
     with open(path_file, "r") as f:
         return yaml.load(f, Loader=yaml.FullLoader)
+
+
+def budget_summary_view(request):
+    latest_provincial_year = (
+        FinancialYear.objects.filter(spheres__slug="provincial")
+        .annotate(num_depts=Count("spheres__governments__departments"))
+        .filter(num_depts__gt=0)
+        .first()
+    )
+    context = {
+        "navbar": MainMenuItem.objects.prefetch_related("children").all(),
+        "latest_year": FinancialYear.get_latest_year().slug,
+        "latest_provincial_year": latest_provincial_year
+        and latest_provincial_year.slug,
+    }
+    return render(request, "budget-summary.html", context)

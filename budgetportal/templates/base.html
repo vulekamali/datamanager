@@ -26,25 +26,36 @@
           'self'
           {{ CKAN_URL }}
           https://discussions.vulekamali.gov.za
-          https://api.appzi.io/api/v2/probe/Dzqo1
+          https://api.appzi.io/api/
+          https://clouderrorreporting.googleapis.com/v1beta1/projects/appzi-prod/
           https://openspending.vulekamali.gov.za
-          https://openspending.org;
+          https://openspending.org
+          https://*.google-analytics.com
+          https://*.analytics.google.com
+          https://*.g.doubleclick.net
+          https://*.googletagmanager.com
+          https://*.google.com
+          https://*.google.co.za;
         font-src
-          https://fonts.gstatic.com/;
+          https://w.appzi.io
+          https://fonts.gstatic.com;
         style-src
           'self'
           'unsafe-inline'
+          https://www.googletagmanager.com
           https://fonts.googleapis.com
           https://tagmanager.google.com;
         script-src
           'self'
-          https://www.googletagmanager.com
+          https://*.googletagmanager.com
           https://discussions.vulekamali.gov.za
           https://www.google-analytics.com
-          https://w.appzi.io/v1-v2-compat.js
+          https://ssl.google-analytics.com
+          https://w.appzi.io
+          https://app.appzi.io
+          https://api.appzi.io/api/tele/
           https://www.youtube.com
           https://i.ytimg.com
-          https://app.appzi.io
           https://d3js.org
           'nonce-{{ TAG_MANAGER_SCRIPT_NONCE }}'
         {% if debug %}
@@ -72,12 +83,15 @@
           http://s3-eu-west-1.amazonaws.com/
           {{ CKAN_URL }}
           https://img.youtube.com
-          https://www.google-analytics.com
+          https://*.google-analytics.com
+          https://*.analytics.google.com
+          https://*.googletagmanager.com
+          https://*.g.doubleclick.net
+          https://*.google.com
           http://localhost
           http://minio:9000/
           https://media.sandbox.vulekamali.gov.za
           https://media.vulekamali.gov.za
-          https://stats.g.doubleclick.net
           https://ssl.gstatic.com
           https://www.gstatic.com;
         "

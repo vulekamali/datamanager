@@ -1,4 +1,5 @@
-import { h, render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import ResponsiveChart from './index.jsx';
 import getProps from './../../../utilities/js/helpers/getProp.js';
 
@@ -15,7 +16,7 @@ function scripts() {
     const downloadHasProps = !!(rawDownload && rawDownload.heading && rawDownload.subHeading && rawDownload.type);
     const download = downloadHasProps ? rawDownload : null;
 
-    render(
+    ReactDOM.render(
       <ResponsiveChart {...{ items, download, type }} />,
       node,
     );

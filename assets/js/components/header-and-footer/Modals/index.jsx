@@ -1,5 +1,4 @@
-import { h } from 'preact';
-import CssTransitionGroup from 'preact-css-transition-group';
+import React from 'react';
 import Icon from './../../Icon/index.jsx';
 
 
@@ -28,13 +27,7 @@ export default function Modal({ markup, title, closeModal }) {
 
   return (
     <div className="Modals">
-      <CssTransitionGroup
-        transitionName="is"
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300}
-      >
-        {buildModal()}
-      </CssTransitionGroup>
+      {buildModal()}
     </div>
   );
 }

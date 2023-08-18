@@ -1,11 +1,14 @@
-import { h } from 'preact';
+import React from 'react';
 import DeptControl from './../DeptControl/index.jsx';
 import DeptGroup from './../DeptGroup/index.jsx';
 
 
-const makeGroup = (slug, departments, name, label, empty, govResourceGroups) => {
+const makeGroup = (slug, departments, name, label, empty, govResourceGroups, index) => {
   return (
-    <div className="DeptSearch-groupWrap">
+    <div
+        className="DeptSearch-groupWrap"
+        key={index}
+    >
       <DeptGroup
         map={slug}
         linksArray={departments}
@@ -42,9 +45,9 @@ const makeGroups = (governments, resourceGroups) => {
   }
 
   return governments.map(
-    ({ name, slug, departments, label }) => {
+    ({ name, slug, departments, label }, index) => {
       const empty = departments.length == 0;
-      return makeGroup(slug, departments, name, label, empty, resourceGroups[name]);
+      return makeGroup(slug, departments, name, label, empty, resourceGroups[name], index);
     },
   );
 };

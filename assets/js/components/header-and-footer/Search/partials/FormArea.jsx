@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from './Icon.jsx';
 
@@ -18,7 +18,7 @@ export default function FormArea({ setFocus, currentKeywords, selectedYear }) {
         name="search"
         onFocus={addFocus}
         placeholder="Search vulekamali"
-        value={currentKeywords}
+        defaultValue={currentKeywords}
       />
 
       <div className="Search-action">

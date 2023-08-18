@@ -90,7 +90,10 @@
       "title": "Root",
       "draft_title": "Root",
       "slug": "root",
-      "content_type": 1,
+      "content_type": [
+        "wagtailcore",
+        "page"
+      ],
       "live": true,
       "has_unpublished_changes": false,
       "url_path": "/",
@@ -118,7 +121,10 @@
       "title": "Welcome to your new Wagtail site!",
       "draft_title": "Welcome to your new Wagtail site!",
       "slug": "home",
-      "content_type": 1,
+      "content_type": [
+        "wagtailcore",
+        "page"
+      ],
       "live": true,
       "has_unpublished_changes": false,
       "url_path": "/home/",
@@ -146,7 +152,10 @@
       "title": "Post Index Page",
       "draft_title": "Post Index Page",
       "slug": "post-index-page",
-      "content_type": 23,
+      "content_type": [
+        "budgetportal",
+        "postindexpage"
+      ],
       "live": true,
       "has_unpublished_changes": false,
       "url_path": "/post-index-page/",
@@ -174,7 +183,10 @@
       "title": "Post page",
       "draft_title": "Post page",
       "slug": "post-page",
-      "content_type": 25,
+      "content_type": [
+        "budgetportal",
+        "postpage"
+      ],
       "live": true,
       "has_unpublished_changes": false,
       "url_path": "/post-index-page/post-page/",

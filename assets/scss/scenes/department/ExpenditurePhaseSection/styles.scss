@@ -29,9 +29,13 @@
 
 .ExpenditurePhaseSection-label {
   display: flex;
+  @media screen and (max-width: 400px) {
+    display: block;
+  }
 }
 
 .ExpenditurePhaseSection-labelItem {
   margin-top: 1rem;
   margin-right: 3rem;
 }
+

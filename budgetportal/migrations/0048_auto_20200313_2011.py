@@ -31,7 +31,9 @@ class Migration(migrations.Migration):
                 ),
                 ("intro", wagtail.core.fields.RichTextField(blank=True)),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
             bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
@@ -49,7 +51,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
             bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
@@ -68,7 +72,9 @@ class Migration(migrations.Migration):
                 ),
                 ("intro", wagtail.core.fields.RichTextField(blank=True)),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
             bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
@@ -89,7 +95,9 @@ class Migration(migrations.Migration):
             bases=("wagtailcore.page",),
         ),
         migrations.AlterField(
-            model_name="faq", name="content", field=wagtail.core.fields.RichTextField(),
+            model_name="faq",
+            name="content",
+            field=wagtail.core.fields.RichTextField(),
         ),
         migrations.CreateModel(
             name="PostPage",
@@ -151,7 +159,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
             bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
@@ -214,7 +224,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
             bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(

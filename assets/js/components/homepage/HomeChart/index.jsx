@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import React from 'react';
 import ResponsiveChart from './../../universal/ResponsiveChart/index.jsx';
 import ValueBlocks from './../ValueBlocks/index.jsx';
 

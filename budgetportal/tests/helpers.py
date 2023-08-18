@@ -4,7 +4,7 @@ Common test helpers.
 import warnings
 from datetime import datetime
 
-from django.contrib.staticfiles.testing import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 from django.db import connections
 from django.test import TestCase
@@ -13,6 +13,7 @@ from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+import socket
 
 
 class WagtailHackMixin:
@@ -45,29 +46,40 @@ class WagtailHackMixin:
             )
 
 
-class BaseSeleniumTestCase(WagtailHackMixin, LiveServerTestCase):
+class BaseSeleniumTestCase(WagtailHackMixin, StaticLiveServerTestCase):
     """
     Base class for Selenium tests.
 
     This saves a screenshot to the current directory on test failure.
+
+    Much learned from https://github.com/marcgibbons/django-selenium-docker
     """
 
-    def setUp(self):
-        super(BaseSeleniumTestCase, self).setUp()
+    host = "0.0.0.0"  # Bind to 0.0.0.0 to allow external access
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.host = socket.gethostbyname(socket.gethostname())
 
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("headless")
         chrome_options.add_argument("--no-sandbox")
-        d = DesiredCapabilities.CHROME
+        chrome_options.add_argument("disable-dev-shm-usage")
+        d = chrome_options.to_capabilities()
         d["loggingPrefs"] = {"browser": "ALL"}
-        self.selenium = webdriver.Chrome(
-            chrome_options=chrome_options, desired_capabilities=d
+        cls.selenium = webdriver.Remote(
+            command_executor="http://selenium:4444/wd/hub", desired_capabilities=d
         )
-        self.selenium.implicitly_wait(10)
-        self.wait = WebDriverWait(self.selenium, 5)
+        cls.selenium.implicitly_wait(10)
+        cls.wait = WebDriverWait(cls.selenium, 5)
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()
+
+    def setUp(self):
         self.addCleanup(self.log_failure_details)
-        self.addCleanup(self.selenium.quit)
 
     def log_failure_details(self):
         # https://stackoverflow.com/questions/14991244/how-do-i-capture-a-screenshot-if-my-nosetests-fail
@@ -87,7 +99,7 @@ class BaseSeleniumTestCase(WagtailHackMixin, LiveServerTestCase):
         )
 
 
-class WagtailHackLiveServerTestCase(WagtailHackMixin, LiveServerTestCase):
+class WagtailHackLiveServerTestCase(WagtailHackMixin, StaticLiveServerTestCase):
     pass
 
 

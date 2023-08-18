@@ -232,7 +232,10 @@ docker-compose run --rm app python manage.py makemigrations
 #### Python/Django
 
 * Get better debugging with ``python manage.py runserver_plus``
-* Format your code using Black: `budgetportal manage.py discours --exclude budgetportal/bulk_upload.py`
+* Format your code using Black (See version in github actions):
+
+    docker-compose run --rm app black budgetportal manage.py discourse performance
+
 
 #### React stuff (package.json and packages/webapp/package.json)
 
@@ -307,13 +310,13 @@ Running tests
 All tests
 
 ```
-docker-compose run --rm test
+docker-compose run --rm app python manage.py test
 ```
 
 Specific tests, e.g.
 
 ```
-docker-compose run --rm test python manage.py test budgetportal.tests.test_bulk_upload.BulkUploadTestCase
+docker-compose run --rm app python manage.py test budgetportal.tests.test_bulk_upload.BulkUploadTestCase
 ```
 
 Production deployment
