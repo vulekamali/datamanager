@@ -93,8 +93,10 @@ class ChartSourceController extends React.Component {
             return;
         }
 
+        const sphere = document.getElementById('sphere-slug').value;
+
         const department_name = document.querySelector('h1.Page-mainHeading').innerText;
-        let url = `../../actual-expenditure/?department_name=${encodeURI(department_name)}`;
+        let url = `../../actual-expenditure/?department_name=${encodeURI(department_name)}&sphere=${sphere}`;
         fetchWrapper(url)
             .then((response) => {
                 for (const year in response) {

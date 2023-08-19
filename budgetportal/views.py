@@ -1111,7 +1111,8 @@ def department_preview(
 
 
 def iym_datasets_json(request):
-    query = {"fq": ('+groups: "in-year-spending"' '+vocab_spheres: "national"')}
+    sphere = request.GET.get("sphere", "")
+    query = {"fq": ('+groups: "in-year-spending"' '+vocab_spheres: "' + sphere + '"')}
     search_response = ckan.action.package_search(**query)
     department_name = request.GET.get("department_name", "")
 
