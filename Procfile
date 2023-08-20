@@ -1,2 +1,2 @@
-web: gunicorn $GUNICORN_WORKERS_ARG --worker-class gevent budgetportal.wsgi:application --log-file -
+web: /app/bin/start.sh
 worker: python manage.py qcluster
