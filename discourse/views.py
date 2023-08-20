@@ -29,7 +29,7 @@ def sso(request, client_id):
 
     try:
         payload_bytes = urllib.parse.unquote(payload).encode()
-        decoded = base64.decodestring(payload_bytes)
+        decoded = base64.decodebytes(payload_bytes)
         assert b"nonce" in decoded
         assert len(payload_bytes) > 0
     except AssertionError:
