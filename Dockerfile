@@ -1,4 +1,4 @@
-FROM openup/docker-python-nodejs:python3.9-nodejs12
+FROM python:3.9-bullseye
 
 ENV POETRY_VIRTUALENVS_CREATE false
 ENV PIP_NO_CACHE_DIR off
@@ -7,10 +7,15 @@ ENV PYTHONUNBUFFERED 1
 ENV NODE_ENV production
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE DontWarn
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-
+# from https://github.com/nikolaik/docker-python-nodejs/blob/main/Dockerfile
 RUN set -ex; \
-  apt-get update; \
+  echo "deb https://deb.nodesource.com/node_14.x bullseye main" > /etc/apt/sources.list.d/nodesource.list && \
+  wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+  wget -qO- https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  apt-get update && \
+  apt-get upgrade -yqq && \
+  apt-get install -yqq nodejs yarn && \
   # dependencies for building Python packages \
   apt-get install -y build-essential; \
   # psycopg2 dependencies \
@@ -22,7 +27,6 @@ RUN set -ex; \
   rm -rf /var/lib/apt/lists/*
 
 RUN pip install -U poetry
-
 
 # Copy, then install requirements before copying rest for a requirements cache layer.
 COPY pyproject.toml poetry.lock /tmp/
@@ -45,7 +49,7 @@ USER containeruser
 WORKDIR /app
 
 RUN set -ex; \
-  yarn; \
-  yarn build
+   NODE_ENV=development yarn; \
+   yarn build
 
 CMD /app/bin/start.sh
