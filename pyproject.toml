@@ -68,6 +68,7 @@ xlsx-streaming = "==1.1.0"
 petl = "==1.7.13"
 frictionless = {extras = ["json"], version = "==4.40.8"}
 drf-excel = "==1.0.0"
+selenium = "==3.141.0"
 
 
 [build-system]
