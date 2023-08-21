@@ -16,7 +16,7 @@ jobs:
 
     - uses: actions/setup-node@v2
       with:
-        node-version: "13.14.0"
+        node-version: "14.21.3"
 
     - name: Build frontend assets
       run: |
@@ -29,6 +29,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build images
+      run: |
+        docker-compose build
 
     - name: Run tests
       run: |
