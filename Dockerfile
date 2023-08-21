@@ -45,6 +45,8 @@ RUN set -ex; \
   adduser --system --uid $USER_ID --gid $GROUP_ID containeruser; \
   chown -R containeruser:containeruser /app
 
+USER containeruser
+
 # Copy, then install requirements before copying rest for a requirements cache layer.
 # Install node deps after setting ownership otherwise setting ownership takes for ever
 RUN set -ex; \
@@ -56,7 +58,5 @@ WORKDIR /app
 
 RUN set -ex; \
    yarn build
-
-USER containeruser
 
 CMD /app/bin/start.sh
