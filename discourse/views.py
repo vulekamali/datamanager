@@ -29,7 +29,7 @@ def sso(request, client_id):
 
     try:
         payload_bytes = urllib.parse.unquote(payload).encode()
-        decoded = base64.decodestring(payload_bytes)
+        decoded = base64.decodebytes(payload_bytes)
         assert b"nonce" in decoded
         assert len(payload_bytes) > 0
     except AssertionError:
@@ -57,7 +57,7 @@ def sso(request, client_id):
         "name": request.user.get_full_name(),
     }
     payload_string = urllib.parse.urlencode(params)
-    return_payload = base64.encodestring(payload_string.encode())
+    return_payload = base64.encodebytes(payload_string.encode())
     h = hmac.new(key.encode(), return_payload, digestmod=hashlib.sha256)
     query_string = urllib.parse.urlencode({"sso": return_payload, "sig": h.hexdigest()})
 
