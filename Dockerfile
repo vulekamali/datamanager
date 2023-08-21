@@ -34,6 +34,13 @@ RUN set -ex; \
   cd /tmp; \
   poetry install
 
+COPY package.json yarn.lock /app/
+COPY packages/webapp/package.json /app/packages/webapp/
+RUN set -ex; \
+  cd /app; \
+  NODE_ENV=development yarn
+
+
 COPY . /app
 
 ARG USER_ID=1001
@@ -49,7 +56,6 @@ USER containeruser
 WORKDIR /app
 
 RUN set -ex; \
-   NODE_ENV=development yarn; \
    yarn build
 
 CMD /app/bin/start.sh
