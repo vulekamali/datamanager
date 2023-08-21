@@ -36,12 +36,6 @@ RUN set -ex; \
 
 COPY package.json yarn.lock /app/
 COPY packages/webapp/package.json /app/packages/webapp/
-RUN set -ex; \
-  cd /app; \
-  NODE_ENV=development yarn
-
-
-COPY . /app
 
 ARG USER_ID=1001
 ARG GROUP_ID=1001
@@ -51,11 +45,18 @@ RUN set -ex; \
   adduser --system --uid $USER_ID --gid $GROUP_ID containeruser; \
   chown -R containeruser:containeruser /app
 
-USER containeruser
+# Copy, then install requirements before copying rest for a requirements cache layer.
+# Install node deps after setting ownership otherwise setting ownership takes for ever
+RUN set -ex; \
+  cd /app; \
+  NODE_ENV=development yarn
 
+COPY . /app
 WORKDIR /app
 
 RUN set -ex; \
    yarn build
+
+USER containeruser
 
 CMD /app/bin/start.sh
