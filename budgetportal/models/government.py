@@ -1328,13 +1328,15 @@ class Department(models.Model):
                             else:
                                 missing_phases_count[fiscal_year] += 1
 
-            expenditure.update({
-                "base_financial_year": FinancialYear.slug_from_year_start(
-                    str(base_year)
-                ),
-                "in_year_spending_enabled": config.IN_YEAR_SPENDING_ENABLED,
-                "department_name": self.name,
-            })
+            expenditure.update(
+                {
+                    "base_financial_year": FinancialYear.slug_from_year_start(
+                        str(base_year)
+                    ),
+                    "in_year_spending_enabled": config.IN_YEAR_SPENDING_ENABLED,
+                    "department_name": self.name,
+                }
+            )
 
             # Generate notices if applicable
             no_data_for_years = []
