@@ -116,9 +116,14 @@ CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 CONSTANCE_CONFIG = {
     "EQPRS_DATA_ENABLED": (
         False,
-        "enabling / disabling summary on department page",
+        "enabling / disabling performance data summary on department page",
         bool,
-    )
+    ),
+    "IN_YEAR_SPENDING_ENABLED": (
+        False,
+        "enabling / disabling presenting in-year spending on department page",
+        bool,
+    ),
 }
 
 if DEBUG_TOOLBAR:

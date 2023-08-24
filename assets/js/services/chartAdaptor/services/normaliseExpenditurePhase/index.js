@@ -53,7 +53,10 @@ const normalise = (itemsArray) => {
 
 
 const normaliseExpenditurePhase = (data) => {
-  const { nominal: nominalRaw, real: realRaw } = data;
+  const {
+    nominal: nominalRaw,
+    real: realRaw,
+  } = data;
 
   const nominal = normalise(nominalRaw);
   const real = normalise(realRaw);
