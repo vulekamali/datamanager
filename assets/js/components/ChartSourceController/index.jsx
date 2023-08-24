@@ -54,7 +54,7 @@ class ChartSourceController extends React.Component {
     constructor(...props) {
         super(...props);
 
-        const {initial, items, type} = this.props;
+        const {initial, items, type, inYearEnabled, departmentName} = this.props;
         const source = initial || Object.keys(items)[0];
 
         const barItems = this.getBarItems(this.props.items, source, type);
@@ -63,7 +63,11 @@ class ChartSourceController extends React.Component {
             barItems: barItems,
             barTypes: this.props.barTypes
         };
-        this.fetchActualExpenditureUrls(type);
+        const sphere = document.getElementById('sphere-slug').value;
+        console.log(type, inYearEnabled, sphere, departmentName);
+
+        if (type == "expenditurePhase" && inYearEnabled && sphere == "national")
+          this.fetchActualExpenditureUrls(departmentName);
 
         this.events = {
             changeSource: this.changeSource.bind(this),
@@ -88,15 +92,9 @@ class ChartSourceController extends React.Component {
         return barItems[source];
     }
 
-    fetchActualExpenditureUrls(type) {
-        if (type !== 'expenditurePhase') {
-            return;
-        }
-
-        const sphere = document.getElementById('sphere-slug').value;
-
-        const department_name = document.querySelector('h1.Page-mainHeading').innerText;
-        let url = `../../actual-expenditure/?department_name=${encodeURI(department_name)}&sphere=${sphere}`;
+    fetchActualExpenditureUrls(departmentName) {
+      console.log(departmentName);
+        let url = `../../actual-expenditure/?department_name=${encodeURI(departmentName)}`;
         fetchWrapper(url)
             .then((response) => {
                 for (const year in response) {

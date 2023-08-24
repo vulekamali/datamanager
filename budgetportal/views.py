@@ -445,7 +445,8 @@ def department_page(
     context["admin_url"] = reverse(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
-    context["EQPRS_DATA_ENABLED"] = config.EQPRS_DATA_ENABLED
+    context["eqprs_data_enabled"] = config.EQPRS_DATA_ENABLED
+    context["in_year_spending_enabled"] = config.IN_YEAR_SPENDING_ENABLED
 
     return render(request, "department.html", context)
 
@@ -1111,7 +1112,7 @@ def department_preview(
 
 
 def iym_datasets_json(request):
-    sphere = request.GET.get("sphere", "")
+    sphere = "national"
     query = {"fq": ('+groups: "in-year-spending"' '+vocab_spheres: "' + sphere + '"')}
     search_response = ckan.action.package_search(**query)
     department_name = request.GET.get("department_name", "")
