@@ -64,7 +64,6 @@ class ChartSourceController extends React.Component {
             barTypes: this.props.barTypes
         };
         const sphere = document.getElementById('sphere-slug').value;
-        console.log(type, inYearEnabled, sphere, departmentName);
 
         if (type == "expenditurePhase" && inYearEnabled && sphere == "national")
           this.fetchActualExpenditureUrls(departmentName);
@@ -93,7 +92,6 @@ class ChartSourceController extends React.Component {
     }
 
     fetchActualExpenditureUrls(departmentName) {
-      console.log(departmentName);
         let url = `../../actual-expenditure/?department_name=${encodeURI(departmentName)}`;
         fetchWrapper(url)
             .then((response) => {
