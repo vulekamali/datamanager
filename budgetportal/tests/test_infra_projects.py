@@ -1049,8 +1049,9 @@ class InfraProjectAPIContractorTestCase(APITestCase):
     def test_facet_search_by_contractor(self):
         contractor = "Contractor 1"
         province = "Eastern Cape"
-
+        print("test_facet_search_by_contractor 1")
         response = self.client.get(self.facet_url)
+        print("test_facet_search_by_contractor 2")
         province_facets = response.data["fields"]["province"]
         province_projects_before_filtering = 0
         for value in province_facets:
@@ -1060,7 +1061,9 @@ class InfraProjectAPIContractorTestCase(APITestCase):
         self.assertEqual(province_projects_before_filtering, 2)
 
         data = {"q": contractor}
+        print("test_facet_search_by_contractor 3")
         response = self.client.get(self.facet_url, data)
+        print("test_facet_search_by_contractor 4")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         province_facets = response.data["fields"]["province"]
