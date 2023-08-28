@@ -37,7 +37,7 @@ jobs:
     - name: Run tests
       run: |
         docker-compose run --rm app python manage.py collectstatic --no-input
-        docker-compose run --rm -e DJANGO_Q_SYNC=TRUE app python manage.py test budgetportal.tests.test_infra_projects budgetportal.tests.test_irm_preprocessor 
+        docker-compose run --rm -e DJANGO_Q_SYNC=TRUE app python manage.py test budgetportal.tests.test_admin_departments_upload  budgetportal.tests.test_department_instance_loader  budgetportal.tests.test_featured_projects  budgetportal.tests.test_management_commands  budgetportal.tests.test_summaries  budgetportal.tests.test_datasets  budgetportal.tests.test_department_page  budgetportal.tests.test_guides_pages budgetportal.tests.test_pages  budgetportal.tests.test_bulk_upload  budgetportal.tests.test_department  budgetportal.tests.test_featured_infra_projects  budgetportal.tests.test_import_export_widgets budgetportal.tests.test_posts_pages
         docker-compose run --rm app black --check --diff budgetportal manage.py discourse performance iym
 
     - name: Dump dependency logs for debugging
