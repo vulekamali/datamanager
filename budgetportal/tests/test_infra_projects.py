@@ -997,7 +997,9 @@ class InfraProjectAPIMunicipalityTestCase(APITestCase):
 
 class InfraProjectAPIContractorTestCase(APITestCase):
     def setUp(self):
+        print("InfraProjectAPIContractorTestCase 1")
         InfraProjectIndex().clear()
+        print("InfraProjectAPIContractorTestCase 2")
         self.file = open(EMPTY_FILE_PATH, "rb")
         self.url = reverse("infrastructure-project-api-list")
         self.facet_url = reverse("infrastructure-project-api-facets")
@@ -1005,12 +1007,14 @@ class InfraProjectAPIContractorTestCase(APITestCase):
         self.sphere = Sphere.objects.create(financial_year=fin_year, name="Provincial")
         self.quarter = Quarter.objects.create(number=1)
         self.date = date(year=2050, month=1, day=1)
+        print("InfraProjectAPIContractorTestCase 3")
         self.irm_snapshot = IRMSnapshot.objects.create(
             sphere=self.sphere,
             quarter=self.quarter,
             date_taken=self.date,
             file=File(self.file),
         )
+        print("InfraProjectAPIContractorTestCase 4")
         self.project_1 = InfraProject.objects.create(IRM_project_id=1)
         InfraProjectSnapshot.objects.create(
             irm_snapshot=self.irm_snapshot,
@@ -1029,7 +1033,9 @@ class InfraProjectAPIContractorTestCase(APITestCase):
             province="Eastern Cape",
             estimated_completion_date=self.date,
         )
+        print("InfraProjectAPIContractorTestCase 5")
         InfraProjectIndex().reindex()
+        print("InfraProjectAPIContractorTestCase 6")
 
     def tearDown(self):
         InfraProjectIndex().clear()
