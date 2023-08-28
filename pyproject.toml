@@ -69,6 +69,7 @@ petl = "==1.7.13"
 frictionless = {extras = ["json"], version = "==4.40.8"}
 drf-excel = "==1.0.0"
 selenium = "==4.1.2"
+psycogreen = "1.0.2"
 
 
 [build-system]
