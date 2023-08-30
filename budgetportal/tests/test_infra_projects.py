@@ -23,7 +23,7 @@ from django.core.files import File
 from django.test import TestCase, TransactionTestCase
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITransactionTestCase
+from rest_framework.test import APITestCase
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -34,7 +34,7 @@ EMPTY_FILE_PATH = os.path.abspath(
 )
 
 
-class InfraProjectIRMSnapshotTestCase(APITransactionTestCase):
+class InfraProjectIRMSnapshotTestCase(APITestCase):
     """
     End-to-end test: Uploading a file changes state from nothing in search
     results to the right projects in search results.
@@ -490,7 +490,7 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
         )
 
 
-class InfraProjectAPIDepartmentTestCase(APITransactionTestCase):
+class InfraProjectAPIDepartmentTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -571,7 +571,7 @@ class InfraProjectAPIDepartmentTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class InfraProjectAPIProvinceTestCase(APITransactionTestCase):
+class InfraProjectAPIProvinceTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -682,7 +682,7 @@ class InfraProjectAPIProvinceTestCase(APITransactionTestCase):
         self.assertEqual(department_projects_after_filtering, 1)
 
 
-class InfraProjectAPIStatusTestCase(APITransactionTestCase):
+class InfraProjectAPIStatusTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -763,7 +763,7 @@ class InfraProjectAPIStatusTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class InfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
+class InfraProjectAPIFundingSourceTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -844,7 +844,7 @@ class InfraProjectAPIFundingSourceTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class InfraProjectAPIProjectNameTestCase(APITransactionTestCase):
+class InfraProjectAPIProjectNameTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -918,7 +918,7 @@ class InfraProjectAPIProjectNameTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class InfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
+class InfraProjectAPIMunicipalityTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -995,7 +995,7 @@ class InfraProjectAPIMunicipalityTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class InfraProjectAPIContractorTestCase(APITransactionTestCase):
+class InfraProjectAPIContractorTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -1072,7 +1072,7 @@ class InfraProjectAPIContractorTestCase(APITransactionTestCase):
         self.assertEqual(province_projects_after_filtering, 1)
 
 
-class InfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
+class InfraProjectAPISearchMultipleFieldsTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -1131,7 +1131,7 @@ class InfraProjectAPISearchMultipleFieldsTestCase(APITransactionTestCase):
         self.assertEqual(results[0]["name"], "Something School")
 
 
-class InfraProjectAPIURLPathTestCase(APITransactionTestCase):
+class InfraProjectAPIURLPathTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -1189,7 +1189,7 @@ class InfraProjectAPIURLPathTestCase(APITransactionTestCase):
         self.assertContains(response, name)
 
 
-class InfraProjectSnapshotTestCase(APITransactionTestCase):
+class InfraProjectSnapshotTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
@@ -1247,7 +1247,7 @@ class InfraProjectSnapshotTestCase(APITransactionTestCase):
         self.assertEqual(self.project_snapshot_2, latest)
 
 
-class InfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
+class InfraProjectSnapshotDifferentYearsTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file_1 = open(EMPTY_FILE_PATH, "rb")
@@ -1298,7 +1298,7 @@ class InfraProjectSnapshotDifferentYearsTestCase(APITransactionTestCase):
         self.assertEqual(self.project_snapshot_2, latest)
 
 
-class InfraProjectFullTextSearchTestCase(APITransactionTestCase):
+class InfraProjectFullTextSearchTestCase(APITestCase):
     def setUp(self):
         InfraProjectIndex().clear()
         self.file = open(EMPTY_FILE_PATH, "rb")
@@ -1394,7 +1394,7 @@ class InfraProjectSearchCSVTestCaseMixin:
 
 
 class InfraProjectIRMSnapshotCSVDownloadTestCase(
-    APITransactionTestCase, InfraProjectSearchCSVTestCaseMixin
+    APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         InfraProjectIndex().clear()
@@ -1534,7 +1534,7 @@ class InfraProjectIRMSnapshotCSVDownloadTestCase(
 
 
 class InfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
-    APITransactionTestCase, InfraProjectSearchCSVTestCaseMixin
+    APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         InfraProjectIndex().clear()
@@ -1587,7 +1587,7 @@ class InfraProjectIRMSnapshotCSVDownloadMoreThanPageSizeTestCase(
 
 
 class InfraProjectIRMSnapshotDetailCSVDownloadTestCase(
-    APITransactionTestCase, InfraProjectSearchCSVTestCaseMixin
+    APITestCase, InfraProjectSearchCSVTestCaseMixin
 ):
     def setUp(self):
         InfraProjectIndex().clear()
