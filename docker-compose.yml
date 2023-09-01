@@ -1,9 +1,3 @@
-##########################################################################################
-#
-# This is for DEVELOPMENT purposes. We deploy using similar configuration but using dokku.
-#
-##########################################################################################
-
 version: '3'
 
 services:
@@ -19,7 +13,9 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile-dev
+      args:
+        USER_ID: ${USER_ID:-1001}
+        GROUP_ID: ${GROUP_ID:-1001}
     command: python manage.py runserver_plus --nopin 0.0.0.0:8000
     environment:
       - TAG_MANAGER_ID
@@ -34,6 +30,7 @@ services:
       - SOLR_URL=http://solr:8983/solr/budgetportal
       - DEBUG_CACHE
       - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
+      - PORT=8000
       - CKAN_URL
       - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
       - CKAN_API_KEY
@@ -42,7 +39,7 @@ services:
       - OPENSPENDING_HOST
       - OPENSPENDING_DATASET_CREATE_SUFFIX=-dev
     volumes:
-      - .:/code
+      - .:/app
     ports:
       - "8000:8000"
     depends_on:
@@ -53,12 +50,13 @@ services:
     links:
       - selenium
 
-
   # Should be same as app except for command and ports
   worker:
     build:
       context: .
-      dockerfile: Dockerfile-dev
+      args:
+        USER_ID: ${USER_ID:-1001}
+        GROUP_ID: ${GROUP_ID:-1001}
     command: python manage.py qcluster
     environment:
       - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
@@ -75,7 +73,7 @@ services:
       - OPENSPENDING_HOST
       - OPENSPENDING_DATASET_CREATE_SUFFIX=-dev
     volumes:
-      - .:/code
+      - .:/app
     depends_on:
       - db
       - solr
@@ -126,8 +124,6 @@ services:
       - 5900:5900
       - 7900:7900
     shm_size: '2gb'
-
-
 
 volumes:
   db-data:

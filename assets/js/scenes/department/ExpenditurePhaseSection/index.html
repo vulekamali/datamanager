@@ -71,7 +71,15 @@
                 <div class="ExpenditurePhaseSection-labelItem">
                     {% include 'components/ChartLabel/index.html' with index="3" label="Audited outcome" %}
                 </div>
+
+                {% if in_year_spending_enabled and sphere.slug == "national" %}
+                    <div class="ExpenditurePhaseSection-labelItem">
+                        {% include 'components/ChartLabel/index.html' with index="4" label="Actual expenditure" %}
+                    </div>
+                {% endif %}
             </div>
+
+            <input type="hidden" id="sphere-slug" value="{{ sphere.slug }}">
 
             <div class="Card">
                 <div
@@ -83,7 +91,7 @@
                         data-title="{{ title | truncatechars:45 }}"
                         data-subtitle="{{ subtitle }}"
                         data-description="{{ description }}"
-                        data-barTypes="[&quot;Main Appropriation&quot;, &quot;Adjusted Appropriation&quot;, &quot;Final Appropriation&quot;, &quot;Audited Outcome&quot;]"
+                        data-barTypes="[&quot;Main Appropriation&quot;, &quot;Adjusted Appropriation&quot;, &quot;Final Appropriation&quot;, &quot;Audited Outcome&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;]"
                         data-rotated
                 >
                 </div>

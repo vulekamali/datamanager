@@ -49,6 +49,8 @@ from .summaries import (
 )
 from .json_encoder import JSONEncoder
 
+ckan = settings.CKAN
+
 logger = logging.getLogger(__name__)
 
 COMMON_DESCRIPTION = "South Africa's National and Provincial budget data "
@@ -443,7 +445,8 @@ def department_page(
     context["admin_url"] = reverse(
         "admin:budgetportal_department_change", args=(department.pk,)
     )
-    context["EQPRS_DATA_ENABLED"] = config.EQPRS_DATA_ENABLED
+    context["eqprs_data_enabled"] = config.EQPRS_DATA_ENABLED
+    context["in_year_spending_enabled"] = config.IN_YEAR_SPENDING_ENABLED
 
     return render(request, "department.html", context)
 
@@ -1106,6 +1109,35 @@ def department_preview(
         "debug": settings.DEBUG,
     }
     return render(request, "department_preview.html", context)
+
+
+def iym_datasets_json(request):
+    sphere = "national"
+    query = {"fq": ('+groups: "in-year-spending"' '+vocab_spheres: "' + sphere + '"')}
+    search_response = ckan.action.package_search(**query)
+    department_name = request.GET.get("department_name", "")
+
+    return_obj = {}
+    if search_response["results"]:
+        for dataset_package in search_response["results"]:
+            dataset_obj = Dataset.from_package(dataset_package)
+
+            openspending_api = dataset_obj.get_openspending_api()
+            if openspending_api is not None:
+                department_ref = openspending_api.get_department_name_ref()
+                cuts = [
+                    department_ref + ":" + "{}".format(department_name),
+                ]
+                return_obj[dataset_package["financial_year"][0]] = {
+                    "url": openspending_api.aggregate_url(cuts=cuts)
+                }
+    response_json = json.dumps(
+        return_obj,
+        sort_keys=True,
+        indent=4,
+        separators=(",", ": "),
+    )
+    return HttpResponse(response_json, content_type="application/json")
 
 
 def robots(request):

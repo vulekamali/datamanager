@@ -1,7 +1,7 @@
 {
   "private": true,
   "engines": {
-    "node": ">=12.14 <14",
+    "node": "==14",
     "npm": ">=6.13.x <7",
     "yarn": ">=1.21.x <=1.22.x"
   },
@@ -63,7 +63,7 @@
     "marked": "^0.3.16",
     "marked-extras": "^0.2.4",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "opn": "^5.4.0",
     "postcss-loader": "^2.1.6",
     "postcss-normalize": "^4.0.0",
