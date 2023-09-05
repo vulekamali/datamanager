@@ -12,6 +12,13 @@
   fill: grey;
   text-decoration: none;
 
+  &.no-line{
+
+    .LinksList-title{
+      text-decoration: none !important;
+    }
+  }
+
   &--clickable {
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
@@ -27,4 +34,19 @@
 .LinksList-title {
   flex-grow: 1;
   text-decoration: underline;
+}
+
+ul.InlineLinksList {
+  list-style: none;
+
+  li {
+    display: inline;
+    a{
+      padding-left: 0;
+    }
+
+    .LinksList-icon {
+      display: none;
+    }
+  }
 }

@@ -445,7 +445,11 @@ class DepartmentBudgetData(object):
         raise Exception("Not implemented")
 
     def get_openspending_api(self):
-        return self.get_dataset().get_openspending_api()
+        dataset = self.get_dataset()
+        if dataset is not None:
+            return dataset.get_openspending_api()
+        else:
+            return None
 
     def get_model(self):
         return self.get_openspending_api().model
@@ -554,8 +558,12 @@ class DepartmentProgrammesEcon4(DepartmentBudgetData):
             openspending_api.get_econ_class_4_ref(),
         ]
 class BudgetedAndActualComparison(DepartmentBudgetData):
+    def __init__(self, department):
+        super().__init__(department)
+        self.financial_year = None
+
     def get_dataset(self):
-        return self.department.get_budgeted_and_actual_comparison_dataset()
+        return self.department.get_budgeted_and_actual_comparison_dataset(self.financial_year)
     def get_detail_aggregate_url(self):
         openspending_api = self.get_openspending_api()
         department_name = self.department.slug
@@ -567,6 +575,16 @@ class BudgetedAndActualComparison(DepartmentBudgetData):
             aggregate_url = openspending_api.aggregate_url(cuts=cuts)
 
             return aggregate_url
+        else:
+            return None
 
-    def get_detail_csv_url(self):
-        return csv_url(self.get_detail_aggregate_url())
+    def get_detail_csv_urls(self):
+        urls = {}
+        for fy in FinancialYear.get_available_years():
+            self.financial_year = fy.slug
+            aggr_url = self.get_detail_aggregate_url()
+            if aggr_url is not None:
+                url = csv_url(aggr_url)
+                urls[fy.slug] = url
+
+        return urls

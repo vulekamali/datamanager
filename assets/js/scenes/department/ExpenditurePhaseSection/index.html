@@ -3,6 +3,7 @@
 {% assign "Learn more about the MTEF in the "|add:source_type|add:" as PDF" as pdf_text %}
 {% assign "Learn more about the MTEF in the "|add:source_type|add:" as Excel" as excel_text %}
 {% assign "Dataset Guide for "|add:source_type as guide_text %}
+{% assign budgeted_and_actual_comparison.get_detail_csv_urls as csv_urls %}
 
 <div class="ExpenditurePhaseSection" id="expenditure">
     <h3 class="Title Title--section">Budgeted and actual expenditure comparison</h3>
@@ -26,12 +27,30 @@
                 website.</a></p>
             {% endif %}
 
-            <input type="hidden" class="emre-test" value="{{budgeted_and_actual_comparison.get_detail_csv_url}}">
+
+            <input type="hidden" class="emre-test" data-key="{{csv_urls['2021-22']}}">
+
 
             <ul class="LinksList">
                 {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=dataset type="dataset" %}
 
-                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=budgeted_and_actual_comparison.get_detail_csv_url type="download" %}
+                {% include 'components/LinksList/item.html' with text="" type="dataset" %}
+                <li>
+                    <a href="javascript:;" class="LinksList-link no-line">
+                        <span class="LinksList-icon">{% include 'components/Icon/index.html' with type="download" size="s" %}</span>
+                        <div>
+                          <span class="LinksList-title">
+                            Download this data for analysis (CSV)
+                          </span>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <ul class="InlineLinksList">
+
+                    </ul>
+                </li>
 
                 {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 

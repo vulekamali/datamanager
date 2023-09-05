@@ -477,27 +477,20 @@ class Department(models.Model):
         else:
             return None
 
-    def get_budgeted_and_actual_comparison_dataset(self):
+    def get_budgeted_and_actual_comparison_dataset(self, financial_year):
+
         sphere = "national"
         query = {"fq": "".join(
             [
                 '+groups: "in-year-spending"',
                 '+vocab_spheres: "' + sphere + '"',
-                '+vocab_financial_years:"%s"' % '2021-22',
+                '+vocab_financial_years:"%s"' % financial_year,
+                f"+name:national_in_year_spending_{financial_year}"
             ]
         )}
         response = ckan.action.package_search(**query)
 
-        # remove
-        for dataset_package in response["results"]:
-            dataset_obj = Dataset.from_package(dataset_package)
-            print('============ ccc ============')
-            print(dataset_package["financial_year"])
-            print('============ ddd ============')
-        # remove
-
         if response["results"]:
-            # assert len(response["results"]) == 1  todo:uncomment this
             return Dataset.from_package(response["results"][0])
 
     def get_adjusted_estimates_expenditure_dataset(self):
