@@ -22,14 +22,16 @@
             <p class="js-tooltips">Note: Direct charges against the National Revenue Fund are excluded.</p>
 
             {% if website_url %}
-                <p>Read more in the Annual Report on <a href="http://{{ website_url }}">the department's
-                    website.</a></p>
+            <p>Read more in the Annual Report on <a href="http://{{ website_url }}">the department's
+                website.</a></p>
             {% endif %}
+
+            <input type="hidden" class="emre-test" value="{{budgeted_and_actual_comparison.get_detail_csv_url}}">
 
             <ul class="LinksList">
                 {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=dataset type="dataset" %}
 
-                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=csv type="download" %}
+                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=budgeted_and_actual_comparison.get_detail_csv_url type="download" %}
 
                 {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 
@@ -39,18 +41,18 @@
             </ul>
 
             {% if notices %}
-                {% for notice in notices %}
-                    <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
-                        <div class="Message-content">
+            {% for notice in notices %}
+            <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
+                <div class="Message-content">
               <span class="Message-heading">
                 Please note
               </span>
-                        </div>
-                        <div class="Message-text Message-text--secondary">
-                            {{ notice }}
-                        </div>
-                    </div>
-                {% endfor %}
+                </div>
+                <div class="Message-text Message-text--secondary">
+                    {{ notice }}
+                </div>
+            </div>
+            {% endfor %}
             {% endif %}
         </div>
 
@@ -73,9 +75,9 @@
                 </div>
 
                 {% if in_year_spending_enabled and sphere.slug == "national" %}
-                    <div class="ExpenditurePhaseSection-labelItem">
-                        {% include 'components/ChartLabel/index.html' with index="4" label="Actual expenditure" %}
-                    </div>
+                <div class="ExpenditurePhaseSection-labelItem">
+                    {% include 'components/ChartLabel/index.html' with index="4" label="Actual expenditure" %}
+                </div>
                 {% endif %}
             </div>
 

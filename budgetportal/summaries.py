@@ -553,3 +553,20 @@ class DepartmentProgrammesEcon4(DepartmentBudgetData):
             openspending_api.get_programme_name_ref(),
             openspending_api.get_econ_class_4_ref(),
         ]
+class BudgetedAndActualComparison(DepartmentBudgetData):
+    def get_dataset(self):
+        return self.department.get_budgeted_and_actual_comparison_dataset()
+    def get_detail_aggregate_url(self):
+        openspending_api = self.get_openspending_api()
+        department_name = self.department.slug
+        if openspending_api is not None:
+            department_ref = openspending_api.get_department_name_ref()
+            cuts = [
+                department_ref + ":" + "{}".format(department_name),
+            ]
+            aggregate_url = openspending_api.aggregate_url(cuts=cuts)
+
+            return aggregate_url
+
+    def get_detail_csv_url(self):
+        return csv_url(self.get_detail_aggregate_url())
