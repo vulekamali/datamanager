@@ -320,8 +320,8 @@ class PackageWithoutGroupException(Exception):
 
 def package_is_contributed(package):
     return (
-            len(package["groups"]) == 0
-            and package["organization"]["name"] != "national-treasury"
+        len(package["groups"]) == 0
+        and package["organization"]["name"] != "national-treasury"
     )
 
 

@@ -175,7 +175,7 @@ class Government(models.Model):
 
 class DepartmentManager(models.Manager):
     def get_by_natural_key(
-            self, financial_year, sphere_slug, government_slug, department_slug
+        self, financial_year, sphere_slug, government_slug, department_slug
     ):
         return self.get(
             slug=department_slug,
@@ -195,9 +195,9 @@ class Department(models.Model):
     name = models.CharField(
         max_length=200,
         help_text="The department name must precisely match the text used in the Appropriation "
-                  "Bill. All datasets must be normalised to match this name. Beware that changing "
-                  "this name might cause a mismatch with already-published datasets which might "
-                  "need to be update to match this.",
+        "Bill. All datasets must be normalised to match this name. Beware that changing "
+        "this name might cause a mismatch with already-published datasets which might "
+        "need to be update to match this.",
     )
     slug = AutoSlugField(
         populate_from="name", max_length=200, always_update=True, editable=True
@@ -236,9 +236,9 @@ class Department(models.Model):
             government=self.government, vote_number=self.vote_number
         )
         if (
-                self.is_vote_primary
-                and existing_vote_primary
-                and existing_vote_primary.first() != self
+            self.is_vote_primary
+            and existing_vote_primary
+            and existing_vote_primary.first() != self
         ):
             raise ValidationError(
                 "There is already a primary department for "
@@ -372,20 +372,20 @@ class Department(models.Model):
         query = {
             "q": "",
             "fq": (
-                      '+organization:"national-treasury"'
-                      '+vocab_financial_years:"%s"'
-                      '+vocab_spheres:"%s"'
-                      '+extras_s_geographic_region_slug:"%s"'
-                      '+extras_s_department_name_slug:"%s"'
-                      '+groups:"%s"'
-                  )
-                  % (
-                      self.government.sphere.financial_year.slug,
-                      self.government.sphere.slug,
-                      self.government.slug,
-                      self.get_primary_department().slug,
-                      group_name,
-                  ),
+                '+organization:"national-treasury"'
+                '+vocab_financial_years:"%s"'
+                '+vocab_spheres:"%s"'
+                '+extras_s_geographic_region_slug:"%s"'
+                '+extras_s_department_name_slug:"%s"'
+                '+groups:"%s"'
+            )
+            % (
+                self.government.sphere.financial_year.slug,
+                self.government.sphere.slug,
+                self.government.slug,
+                self.get_primary_department().slug,
+                group_name,
+            ),
             "rows": 1,
         }
         if name:
@@ -446,8 +446,8 @@ class Department(models.Model):
 
     def get_estimates_of_econ_classes_expenditure_dataset(self, level=3):
         if (
-                self._estimates_of_econ_classes_expenditure_dataset.get(level, None)
-                is not None
+            self._estimates_of_econ_classes_expenditure_dataset.get(level, None)
+            is not None
         ):
             return self._estimates_of_econ_classes_expenditure_dataset[level]
         query = {
@@ -480,14 +480,16 @@ class Department(models.Model):
     def get_budgeted_and_actual_comparison_dataset(self, financial_year):
 
         sphere = "national"
-        query = {"fq": "".join(
-            [
-                '+groups: "in-year-spending"',
-                '+vocab_spheres: "' + sphere + '"',
-                '+vocab_financial_years:"%s"' % financial_year,
-                f"+name:national_in_year_spending_{financial_year}"
-            ]
-        )}
+        query = {
+            "fq": "".join(
+                [
+                    '+groups: "in-year-spending"',
+                    '+vocab_spheres: "' + sphere + '"',
+                    '+vocab_financial_years:"%s"' % financial_year,
+                    f"+name:national_in_year_spending_{financial_year}",
+                ]
+            )
+        }
         response = ckan.action.package_search(**query)
 
         if response["results"]:
@@ -589,8 +591,8 @@ class Department(models.Model):
                     c
                     for c in result["cells"]
                     if c[openspending_api.get_financial_year_ref()]
-                       == int(financial_year_start)
-                       and c[openspending_api.get_phase_ref()] == phase
+                    == int(financial_year_start)
+                    and c[openspending_api.get_phase_ref()] == phase
                 ][0]
                 nominal = cell["value.sum"]
                 expenditure["nominal"].append(
@@ -838,7 +840,7 @@ class Department(models.Model):
         # sort by name
         name_func = lambda x: x["name"]
         for econ_2_name in list(
-                econ_classes.keys()
+            econ_classes.keys()
         ):  # Copy keys because we're updating dict
             econ_classes[econ_2_name]["items"] = sorted(
                 econ_classes[econ_2_name]["items"], key=name_func
@@ -856,13 +858,13 @@ class Department(models.Model):
 
         for cell in cells:
             if (
-                    cell[phase_ref] == "Adjusted appropriation"
-                    and cell[descript_ref] == "Adjustments - Total adjustments"
+                cell[phase_ref] == "Adjusted appropriation"
+                and cell[descript_ref] == "Adjustments - Total adjustments"
             ):
                 total_adjusted = cell["value.sum"]
             if (
-                    cell[phase_ref] == "Voted (Main appropriation)"
-                    and cell[descript_ref] == "Total"
+                cell[phase_ref] == "Voted (Main appropriation)"
+                and cell[descript_ref] == "Total"
             ):
                 total_voted = cell["value.sum"]
 
@@ -922,8 +924,8 @@ class Department(models.Model):
                 "label": "Value of virements and shifts due to savings",
                 "amount": int(total_positive_virement_change),
                 "percentage": 100
-                              * float(total_positive_virement_change)
-                              / float(total_voted),
+                * float(total_positive_virement_change)
+                / float(total_voted),
             }
         return virements if virements else None
 
@@ -952,7 +954,7 @@ class Department(models.Model):
             return {
                 "amount": total_special_appropriations,
                 "percentage": (float(total_special_appropriations) / float(total_voted))
-                              * 100,
+                * 100,
             }
         else:
             return None
@@ -994,9 +996,9 @@ class Department(models.Model):
                 if cell[subprog_ref] == subprog:
                     if cell[phase_ref] == "Voted (Main appropriation)":
                         subprog_dict[subprog]["percentage"] = (
-                                                                      float(subprog_dict[subprog]["amount"])
-                                                                      / float(cell["value.sum"])
-                                                              ) * 100
+                            float(subprog_dict[subprog]["amount"])
+                            / float(cell["value.sum"])
+                        ) * 100
 
         return subprog_dict.values() if subprog_dict else None
 
@@ -1282,8 +1284,8 @@ class Department(models.Model):
                         c
                         for c in result_cells
                         if c[openspending_api.get_financial_year_ref()]
-                           == int(financial_year_start)
-                           and c[openspending_api.get_phase_ref()] == phase
+                        == int(financial_year_start)
+                        and c[openspending_api.get_phase_ref()] == phase
                     ]
                     if cells:
                         cell = cells[0]
@@ -1304,8 +1306,8 @@ class Department(models.Model):
                                 ),
                                 "amount": int(
                                     (
-                                            Decimal(nominal)
-                                            / cpi[financial_year_start]["index"]
+                                        Decimal(nominal)
+                                        / cpi[financial_year_start]["index"]
                                     )
                                     * 100
                                 ),
@@ -1321,9 +1323,9 @@ class Department(models.Model):
                         for item in expenditure[fiscal_type]:
                             found = False
                             if (
-                                    item["financial_year"]
-                                    == FinancialYear.slug_from_year_start(fiscal_year)
-                                    and item["phase"] == fiscal_phase
+                                item["financial_year"]
+                                == FinancialYear.slug_from_year_start(fiscal_year)
+                                and item["phase"] == fiscal_phase
                             ):
                                 found = True
                                 break
@@ -1451,10 +1453,10 @@ class Department(models.Model):
                             c
                             for c in result["cells"]
                             if c[openspending_api.get_financial_year_ref()]
-                               == int(financial_year_start)
-                               and c[openspending_api.get_phase_ref()] == phase
-                               and c[openspending_api.get_programme_name_ref()]
-                               == prog_name
+                            == int(financial_year_start)
+                            and c[openspending_api.get_phase_ref()] == phase
+                            and c[openspending_api.get_programme_name_ref()]
+                            == prog_name
                         ]
                         if cells:
                             cell = cells[0]
@@ -1481,9 +1483,9 @@ class Department(models.Model):
                         for item in programmes[program]["items"]:
                             found = False
                             if (
-                                    item["financial_year"]
-                                    == FinancialYear.slug_from_year_start(fiscal_year)
-                                    and item["phase"] == fiscal_phase
+                                item["financial_year"]
+                                == FinancialYear.slug_from_year_start(fiscal_year)
+                                and item["phase"] == fiscal_phase
                             ):
                                 found = True
                                 break
@@ -1501,8 +1503,8 @@ class Department(models.Model):
                                 missing_phases_count[fiscal_year] = {program: 1}
                             else:
                                 if (
-                                        program
-                                        not in missing_phases_count[fiscal_year].keys()
+                                    program
+                                    not in missing_phases_count[fiscal_year].keys()
                                 ):
                                     missing_phases_count[fiscal_year][program] = 1
                                 else:

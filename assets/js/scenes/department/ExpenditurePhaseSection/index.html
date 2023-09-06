@@ -28,7 +28,9 @@
             {% endif %}
 
 
-            <input type="hidden" class="emre-test" data-key="{{csv_urls['2021-22']}}">
+            {% for key, value in csv_urls.items %}
+                <input type="hidden" class="emre-test" data-key="{{key}}" data-value="{{value}}">
+            {% endfor %}
 
 
             <ul class="LinksList">
@@ -48,7 +50,9 @@
 
                 <li>
                     <ul class="InlineLinksList">
-
+                        {% for year, url in csv_urls.items %}
+                            {% include 'components/LinksList/item.html' with text=year url=url type="download" %}
+                        {% endfor %}
                     </ul>
                 </li>
 

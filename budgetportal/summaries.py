@@ -557,16 +557,21 @@ class DepartmentProgrammesEcon4(DepartmentBudgetData):
             openspending_api.get_programme_name_ref(),
             openspending_api.get_econ_class_4_ref(),
         ]
+
+
 class BudgetedAndActualComparison(DepartmentBudgetData):
     def __init__(self, department):
         super().__init__(department)
         self.financial_year = None
 
     def get_dataset(self):
-        return self.department.get_budgeted_and_actual_comparison_dataset(self.financial_year)
+        return self.department.get_budgeted_and_actual_comparison_dataset(
+            self.financial_year
+        )
+
     def get_detail_aggregate_url(self):
         openspending_api = self.get_openspending_api()
-        department_name = self.department.slug
+        department_name = self.department.name
         if openspending_api is not None:
             department_ref = openspending_api.get_department_name_ref()
             cuts = [
