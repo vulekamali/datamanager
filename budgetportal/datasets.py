@@ -369,3 +369,20 @@ def get_consolidated_expenditure_budget_dataset(financial_year):
         return Dataset.from_package(package)
     else:
         return None
+
+def get_budgeted_and_actual_comparison_dataset(financial_year):
+    sphere = "national"
+    query = {
+        "fq": "".join(
+            [
+                '+groups: "in-year-spending"',
+                '+vocab_spheres: "' + sphere + '"',
+                '+vocab_financial_years:"%s"' % financial_year,
+                f"+name:national_in_year_spending_{financial_year}",
+            ]
+        )
+    }
+    response = ckan.action.package_search(**query)
+
+    if response["results"]:
+        return Dataset.from_package(response["results"][0])

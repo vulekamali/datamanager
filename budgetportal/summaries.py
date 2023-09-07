@@ -5,6 +5,7 @@ from slugify import slugify
 from .datasets import (
     get_consolidated_expenditure_budget_dataset,
     get_expenditure_time_series_dataset,
+    get_budgeted_and_actual_comparison_dataset
 )
 from .models import (
     EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
@@ -14,7 +15,6 @@ from .models import (
 from .models.government import csv_url
 
 logger = logging.getLogger(__name__)
-
 
 PROV_EQ_SHARE_DEPT = "National Treasury"
 PROV_EQ_SHARE_SUBPROG = "Provincial Equitable Share"
@@ -121,7 +121,7 @@ def get_prov_eq_share(financial_year):
 
 
 def national_summary_for_function(
-    financial_year, function, openspending_api, expenditure_results
+        financial_year, function, openspending_api, expenditure_results
 ):
     eq_share_function, eq_share_amount = get_prov_eq_share(financial_year)
 
@@ -140,8 +140,8 @@ def national_summary_for_function(
     )
     for cell in function_cells:
         if (
-            cell[function_ref] == eq_share_function
-            and cell[dept_ref] == PROV_EQ_SHARE_DEPT
+                cell[function_ref] == eq_share_function
+                and cell[dept_ref] == PROV_EQ_SHARE_DEPT
         ):
             amount = cell["value.sum"] - eq_share_amount
             national["footnotes"].append(
@@ -172,7 +172,7 @@ def national_summary_for_function(
 
 
 def provincial_summary_for_function(
-    financial_year, function, openspending_api, expenditure_results
+        financial_year, function, openspending_api, expenditure_results
 ):
     dept_ref = openspending_api.get_department_name_ref()
     function_ref = openspending_api.get_function_ref()
@@ -560,36 +560,53 @@ class DepartmentProgrammesEcon4(DepartmentBudgetData):
 
 
 class BudgetedAndActualComparison(DepartmentBudgetData):
-    def __init__(self, department):
+    def __init__(self, department, financial_year):
         super().__init__(department)
-        self.financial_year = None
+        self.financial_year = financial_year
 
     def get_dataset(self):
-        return self.department.get_budgeted_and_actual_comparison_dataset(
+        return get_budgeted_and_actual_comparison_dataset(
             self.financial_year
         )
 
-    def get_detail_aggregate_url(self):
+    def get_aggregate_cuts(self):
+        cuts = []
         openspending_api = self.get_openspending_api()
-        department_name = self.department.name
         if openspending_api is not None:
             department_ref = openspending_api.get_department_name_ref()
             cuts = [
-                department_ref + ":" + "{}".format(department_name),
+                department_ref + ":" + "{}".format(self.department.name),
             ]
-            aggregate_url = openspending_api.aggregate_url(cuts=cuts)
+        return cuts
 
-            return aggregate_url
+    def get_aggregate_drilldowns(self):
+        openspending_api = self.get_openspending_api()
+        if openspending_api is not None:
+            return [
+                openspending_api.get_programme_name_ref(),
+                openspending_api.get_department_name_ref(),
+                openspending_api.get_subprogramme_name_ref(),
+                openspending_api.get_econ_class_1_ref(),
+                openspending_api.get_econ_class_2_ref(),
+                openspending_api.get_econ_class_3_ref(),
+                openspending_api.get_econ_class_4_ref(),
+            ]
         else:
             return None
 
-    def get_detail_csv_urls(self):
-        urls = {}
-        for fy in FinancialYear.get_available_years():
-            self.financial_year = fy.slug
-            aggr_url = self.get_detail_aggregate_url()
-            if aggr_url is not None:
-                url = csv_url(aggr_url)
-                urls[fy.slug] = url
+    def get_aggregate_url(self):
+        openspending_api = self.get_openspending_api()
+        if openspending_api is not None:
+            return openspending_api.aggregate_url(
+                cuts=self.get_aggregate_cuts(), drilldowns=self.get_aggregate_drilldowns()
+            )
+        else:
+            return None
 
-        return urls
+    def get_detail_csv_url(self):
+        url = None
+        aggr_url = self.get_aggregate_url()
+        if aggr_url is not None:
+            url = csv_url(aggr_url)
+
+        return url
