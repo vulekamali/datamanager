@@ -5,7 +5,7 @@ from slugify import slugify
 from .datasets import (
     get_consolidated_expenditure_budget_dataset,
     get_expenditure_time_series_dataset,
-    get_budgeted_and_actual_comparison_dataset
+    get_budgeted_and_actual_comparison_dataset,
 )
 from .models import (
     EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
@@ -121,7 +121,7 @@ def get_prov_eq_share(financial_year):
 
 
 def national_summary_for_function(
-        financial_year, function, openspending_api, expenditure_results
+    financial_year, function, openspending_api, expenditure_results
 ):
     eq_share_function, eq_share_amount = get_prov_eq_share(financial_year)
 
@@ -140,8 +140,8 @@ def national_summary_for_function(
     )
     for cell in function_cells:
         if (
-                cell[function_ref] == eq_share_function
-                and cell[dept_ref] == PROV_EQ_SHARE_DEPT
+            cell[function_ref] == eq_share_function
+            and cell[dept_ref] == PROV_EQ_SHARE_DEPT
         ):
             amount = cell["value.sum"] - eq_share_amount
             national["footnotes"].append(
@@ -172,7 +172,7 @@ def national_summary_for_function(
 
 
 def provincial_summary_for_function(
-        financial_year, function, openspending_api, expenditure_results
+    financial_year, function, openspending_api, expenditure_results
 ):
     dept_ref = openspending_api.get_department_name_ref()
     function_ref = openspending_api.get_function_ref()
@@ -565,9 +565,7 @@ class BudgetedAndActualComparison(DepartmentBudgetData):
         self.financial_year = financial_year
 
     def get_dataset(self):
-        return get_budgeted_and_actual_comparison_dataset(
-            self.financial_year
-        )
+        return get_budgeted_and_actual_comparison_dataset(self.financial_year)
 
     def get_aggregate_cuts(self):
         cuts = []
@@ -598,7 +596,8 @@ class BudgetedAndActualComparison(DepartmentBudgetData):
         openspending_api = self.get_openspending_api()
         if openspending_api is not None:
             return openspending_api.aggregate_url(
-                cuts=self.get_aggregate_cuts(), drilldowns=self.get_aggregate_drilldowns()
+                cuts=self.get_aggregate_cuts(),
+                drilldowns=self.get_aggregate_drilldowns(),
             )
         else:
             return None

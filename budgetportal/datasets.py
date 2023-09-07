@@ -370,6 +370,7 @@ def get_consolidated_expenditure_budget_dataset(financial_year):
     else:
         return None
 
+
 def get_budgeted_and_actual_comparison_dataset(financial_year):
     sphere = "national"
     query = {
