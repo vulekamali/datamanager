@@ -1126,35 +1126,6 @@ def department_preview(
     return render(request, "department_preview.html", context)
 
 
-def iym_datasets_json_remove(request):
-    sphere = "national"
-    query = {"fq": ('+groups: "in-year-spending"' '+vocab_spheres: "' + sphere + '"')}
-    search_response = ckan.action.package_search(**query)
-    department_name = request.GET.get("department_name", "")
-
-    return_obj = {}
-    if search_response["results"]:
-        for dataset_package in search_response["results"]:
-            dataset_obj = Dataset.from_package(dataset_package)
-
-            openspending_api = dataset_obj.get_openspending_api()
-            if openspending_api is not None:
-                department_ref = openspending_api.get_department_name_ref()
-                cuts = [
-                    department_ref + ":" + "{}".format(department_name),
-                ]
-                return_obj[dataset_package["financial_year"][0]] = {
-                    "url": openspending_api.aggregate_url(cuts=cuts)
-                }
-    response_json = json.dumps(
-        return_obj,
-        sort_keys=True,
-        indent=4,
-        separators=(",", ": "),
-    )
-    return HttpResponse(response_json, content_type="application/json")
-
-
 def iym_datasets_json(request):
     department_name = request.GET.get("department_name", "")
     financial_year_id = request.GET.get("selected_year", "")
