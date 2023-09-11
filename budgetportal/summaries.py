@@ -5,7 +5,7 @@ from slugify import slugify
 from .datasets import (
     get_consolidated_expenditure_budget_dataset,
     get_expenditure_time_series_dataset,
-    get_budgeted_and_actual_comparison_dataset,
+    get_in_year_spending_dataset,
 )
 from .models import (
     EXPENDITURE_TIME_SERIES_PHASE_MAPPING,
@@ -559,13 +559,11 @@ class DepartmentProgrammesEcon4(DepartmentBudgetData):
         ]
 
 
-class BudgetedAndActualComparison(DepartmentBudgetData):
-    def __init__(self, department, financial_year):
-        super().__init__(department)
-        self.financial_year = financial_year
-
+class InYearSpending(DepartmentBudgetData):
     def get_dataset(self):
-        return get_budgeted_and_actual_comparison_dataset(self.financial_year)
+        return get_in_year_spending_dataset(
+            self.department.government.sphere.financial_year.slug
+        )
 
     def get_aggregate_cuts(self):
         cuts = []

@@ -12,9 +12,9 @@
   fill: grey;
   text-decoration: none;
 
-  &.no-line{
+  &.no-line {
 
-    .LinksList-title{
+    .LinksList-title {
       text-decoration: none !important;
     }
   }
@@ -23,6 +23,10 @@
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
     }
+  }
+
+  &.no-pointer {
+    cursor: text;
   }
 }
 
@@ -41,7 +45,8 @@ ul.InlineLinksList {
 
   li {
     display: inline;
-    a{
+
+    a {
       padding-left: 0;
     }
 
@@ -49,4 +54,8 @@ ul.InlineLinksList {
       display: none;
     }
   }
+}
+
+li.link-inline-text{
+  padding-left: 36px;
 }

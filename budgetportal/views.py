@@ -40,7 +40,7 @@ from .models import (
     ShowcaseItem,
 )
 from .summaries import (
-    BudgetedAndActualComparison,
+    InYearSpending,
     DepartmentProgrammesEcon4,
     DepartmentSubprogEcon4,
     DepartmentSubprogrammes,
@@ -448,19 +448,24 @@ def department_page(
     )
     context["eqprs_data_enabled"] = config.EQPRS_DATA_ENABLED
     context["in_year_spending_enabled"] = config.IN_YEAR_SPENDING_ENABLED
-    context["budgeted_and_actual_comparison"] = get_budgeted_and_actual_comparison_urls(
+    context["budgeted_and_actual_comparison"] = get_in_year_spending_urls(
         department, financial_years_context
     )
 
     return render(request, "department.html", context)
 
 
-def get_budgeted_and_actual_comparison_urls(department, financial_years):
+def get_in_year_spending_urls(department, financial_years):
     urls = {}
 
     for fy in financial_years:
+        department_obj = Department.objects.filter(
+            name=department.name,
+            government__sphere__slug="national",
+            government__sphere__financial_year__slug=fy["id"],
+        ).first()
         year = fy["id"]
-        comparison_obj = BudgetedAndActualComparison(department, year)
+        comparison_obj = InYearSpending(department_obj)
         urls[year] = comparison_obj.get_detail_csv_url()
 
     return urls
@@ -1141,7 +1146,7 @@ def iym_datasets_json(request):
             government__sphere__slug="national",
             government__sphere__financial_year__slug=year.slug,
         ).first()
-        comparison_obj = BudgetedAndActualComparison(department_obj, year.slug)
+        comparison_obj = InYearSpending(department_obj)
         url = comparison_obj.get_aggregate_url()
         return_obj[year.slug] = {"url": url}
 

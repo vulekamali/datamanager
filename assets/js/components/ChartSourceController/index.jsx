@@ -92,7 +92,7 @@ class ChartSourceController extends React.Component {
     }
 
     fetchActualExpenditureUrls(departmentName) {
-        let selectedYear = document.querySelector('.YearSelect-item.is-active .YearSelect-link').innerText;
+        let selectedYear = document.querySelector('#selected-year').value;
         let url = `../../actual-expenditure/?department_name=${encodeURI(departmentName)}&selected_year=${selectedYear}`;
         fetchWrapper(url)
             .then((response) => {

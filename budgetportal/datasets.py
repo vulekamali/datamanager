@@ -371,7 +371,7 @@ def get_consolidated_expenditure_budget_dataset(financial_year):
         return None
 
 
-def get_budgeted_and_actual_comparison_dataset(financial_year):
+def get_in_year_spending_dataset(financial_year):
     sphere = "national"
     query = {
         "fq": "".join(
