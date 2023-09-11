@@ -217,12 +217,34 @@ Finally load the 2019-20 featured national infrastructure projects on the Infras
 
 ------
 
-Create and run database migrations with
+### Create and run database migrations
+
+When modifying Django models, make migrations with 
 
 ```
 docker-compose run --rm app python manage.py makemigrations
 
 ```
+
+### Maintaining Python depdendencies
+
+If you're running your development environment in docker, a good way to maintain python dependencies is
+
+1. Make the changes you'd like in pyproject.toml
+2. Update dependencies in a container running as root to have permission to change site-wide packages. This will update poetry.lock.
+
+    # On a shell in your host machine
+    docker-compose run --rm -u0 app bash
+    # On the root bash shell in the container:
+    poetry update
+
+3. Now rebuild the container with the new poetry.lock file
+
+    # On a shell in your host machine
+    docker-compose build app worker
+
+4.  Remember to re-create your development containers and commit the pyproject.toml and poetry.lock changes to git if you're happy with them.
+
 
 ### Development best practises
 
