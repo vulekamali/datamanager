@@ -154,7 +154,7 @@ WSGI_APPLICATION = "budgetportal.wsgi.application"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
-db_config = dj_database_url.config()
+db_config = dj_database_url.config(conn_max_age=600)
 db_config["ATOMIC_REQUESTS"] = True
 
 DATABASES = {"default": db_config}
