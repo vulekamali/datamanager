@@ -371,10 +371,11 @@ SENTRY_PERF_SAMPLE_RATE = env.float("SENTRY_PERF_SAMPLE_RATE", 0.1)
 
 if SENTRY_DSN:
     sentry_sdk.init(
-        dsn=SENTRY_DSN, 
+        dsn=SENTRY_DSN,
         integrations=[DjangoIntegration()],
         traces_sample_rate=SENTRY_PERF_SAMPLE_RATE,
-        profiles_sample_rate=SENTRY_PERF_SAMPLE_RATE)
+        profiles_sample_rate=SENTRY_PERF_SAMPLE_RATE,
+    )
 
 boto3.set_stream_logger("boto3.resources", logging.INFO)
 
