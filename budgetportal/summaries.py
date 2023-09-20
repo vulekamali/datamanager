@@ -576,9 +576,14 @@ class InYearSpending(DepartmentBudgetData):
         return cuts
 
     def get_aggregate_drilldowns(self):
+        return None
+
+    def get_detail_aggregate_url(self):
         openspending_api = self.get_openspending_api()
-        if openspending_api is not None:
-            return [
+        if openspending_api is None:
+            return None
+        else:
+            drilldowns = [
                 openspending_api.get_programme_name_ref(),
                 openspending_api.get_department_name_ref(),
                 openspending_api.get_subprogramme_name_ref(),
@@ -587,8 +592,10 @@ class InYearSpending(DepartmentBudgetData):
                 openspending_api.get_econ_class_3_ref(),
                 openspending_api.get_econ_class_4_ref(),
             ]
-        else:
-            return None
+            return openspending_api.aggregate_url(
+                cuts=self.get_aggregate_cuts(),
+                drilldowns=drilldowns,
+            )
 
     def get_aggregate_url(self):
         openspending_api = self.get_openspending_api()
@@ -602,7 +609,7 @@ class InYearSpending(DepartmentBudgetData):
 
     def get_detail_csv_url(self):
         url = None
-        aggr_url = self.get_aggregate_url()
+        aggr_url = self.get_detail_aggregate_url()
         if aggr_url is not None:
             url = csv_url(aggr_url)
 
