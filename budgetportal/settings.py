@@ -367,8 +367,15 @@ ROBOTS_DENY_ALL = os.environ.get("ROBOTS_DENY_ALL", "false").lower() == "true"
 
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN", None)
+SENTRY_PERF_SAMPLE_RATE = env.float("SENTRY_PERF_SAMPLE_RATE", 0.1)
+
 if SENTRY_DSN:
-    sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()],
+        traces_sample_rate=SENTRY_PERF_SAMPLE_RATE,
+        profiles_sample_rate=SENTRY_PERF_SAMPLE_RATE,
+    )
 
 boto3.set_stream_logger("boto3.resources", logging.INFO)
 

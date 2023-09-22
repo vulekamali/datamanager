@@ -132,8 +132,7 @@
     "url-search-params-polyfill": "^8.1.0",
     "uuid": "^3.3.2",
     "vulekamali-visualisations": "https://github.com/vulekamali/data-visualisations.git#2e861cce3a27bd1b6791bdd9f4fd1c4497bed1b7",
-    "whatwg-fetch": "^2.0.3",
-    "yarn": "^1.13.0"
+    "whatwg-fetch": "^2.0.3"
   },
   "importWebflowExport": {
     "copyTrees": {
