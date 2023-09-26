@@ -6,7 +6,7 @@ export default function List({ currentPhrase, currentItems }) {
   const buildItems = (letterArrayFn) => {
     return letterArrayFn.map((item) => {
       return (
-        <div className="Glossary-item">
+        <div className="Glossary-item" key={item.phrase}>
           <div className="Glossary-title" dangerouslySetInnerHTML={{ __html: item.phrase }} />
           <div className="Glossary-text" dangerouslySetInnerHTML={{ __html: item.description }} />
         </div>
@@ -21,7 +21,7 @@ export default function List({ currentPhrase, currentItems }) {
 
       if (letterArray.length > 0) {
         return (
-          <div className="Glossary-section" id={`glossary-item-${letter}`}>
+          <div className="Glossary-section" id={`glossary-item-${letter}`} key={letter}>
             <div className="Glossary-heading">
               {letter.toUpperCase()}
             </div>

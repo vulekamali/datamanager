@@ -10,6 +10,7 @@ export default function Controls({ currentPhrase, currentItems, changePhrase }) 
         <a
           href={`#glossary-item-${letter}`}
           className={`Glossary-letter${hasItems ? ' is-valid' : ''}`}
+          key={letter}
         >
           {letter.toUpperCase()}
         </a>
