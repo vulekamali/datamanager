@@ -55,9 +55,17 @@ reading some HTML files. We decided to leave Django template include files in
 
 #### Webflow
 
-We are using for new content and are potentially replacing the current frontend
-with one built using webflow. Webflow is a web design tool, which provides hosting
-and integrates with their own content management system. We don't use their hosting
+We tried using Webflow for developing the user interface for the IRM infrastructure
+project pages. It offered the potential for rapid prototyping which could then be
+integrated in the django project later. It turned out that frontends built using webflow
+are a challenge to maintain in a normal software project like this because you can't
+create branches of work and later merge them. It's also difficult to fork and maintain
+as open source software. For the moment, only those pages are maintained from Wefblow.
+
+Edit the infrastructure project UI by accessing the https://webflow.com/design/vulekamali
+project in Webflow.
+
+We don't use their hosting
 or CMS for production pages of vulekamali.gov.za, but rather export the HTML,
 CSS and Javascript and use that for those content areas on this site. Page data
 is either provided to the client via JSON embedded in the page, or via AJAX
