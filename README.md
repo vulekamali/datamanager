@@ -63,7 +63,7 @@ create branches of work and later merge them. It's also difficult to fork and ma
 as open source software. For the moment, only those pages are maintained from Wefblow.
 
 Edit the infrastructure project UI by accessing the https://webflow.com/design/vulekamali
-project in Webflow.
+project in Webflow and see how to import those changes using the link below.
 
 We don't use their hosting
 or CMS for production pages of vulekamali.gov.za, but rather export the HTML,
