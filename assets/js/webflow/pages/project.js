@@ -107,6 +107,10 @@ function initTimeSeriesChart(chartData) {
   });
   container.call(chart.data(snapshots));
 
+  container.select('.legend').remove();
+
+  console.log({'chart': container.select('.legend')})
+
   return chart;
 }
 
