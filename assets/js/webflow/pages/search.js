@@ -55,6 +55,7 @@ const facetPlurals = {
     department: "departments",
     status: "project statuses",
     primary_funding_source: "funding sources",
+    financial_year: "financial years"
 };
 
 function onPopstate(event) {
@@ -113,7 +114,6 @@ function buildFacetSearchURL() {
         var paramValue = fieldName + "_exact:" + pageState.filters[fieldName];
         params.append("selected_facets", paramValue);
     }
-    console.log({'q': facetsLocation + "?" + params.toString()})
 
     return facetsLocation + "?" + params.toString();
 }
@@ -136,7 +136,6 @@ function buildListSearchURL() {
         params.set(fieldName, pageState.filters[fieldName]);
     }
     params.set("fields", "url_path,name,status,estimated_completion_date");
-    params.set("ordering", pageState.sortField);
     params.set("limit", "20");
     return baseLocation + "?" + params.toString();
 }
@@ -301,7 +300,7 @@ function showFacetResults(response) {
     updateDropdown("#primary-funding-source-dropdown", response.fields["primary_funding_source"], "primary_funding_source");
 
     const statusOptions = sortByOrderArray(statusOrder, "text", response.fields["status"]);
-    updateDropdown("#status-dropdown", statusOptions, "status");
+    updateDropdown("#status-dropdown", response.fields["financial_year"], "financial_year");
     updateStatusChart(statusOptions);
 }
 
