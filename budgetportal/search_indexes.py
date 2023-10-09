@@ -81,7 +81,7 @@ class InfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
         return object.project_snapshots.latest().irm_snapshot.sphere.slug
 
     def prepare_financial_year(sef, object):
-        return object.project_snapshots.latest().government_label
+        return object.project_snapshots.latest().irm_snapshot.sphere.financial_year.slug
 
     def prepare_department(sef, object):
         return object.project_snapshots.latest().department
