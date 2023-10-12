@@ -442,6 +442,23 @@ e.g. for provincial
  |------------|-----------------|-------------|-----------------|-------|-------------|
 | Eastern Cape | Health | 3 | TRUE | ## Vision<br/><br/>A quality health service to the people of the ... <br/></br> ## Mission<br/><br/>To provide and ensure accessible comprehensive integrated ... <br/><br/> ## Core functions and responsibilities<br/><br/>The strategic objectives are in line with the implementation | |
 
+Updating Solr Schema
+--------------------
+
+If you add a field to `datamanager/budgetportal/search_indexes.py` then you need to update the Solr schema for it to be available. In dev these commands will update it:
+
+```
+docker compose run app python manage.py build_solr_schema --filename schema.xml
+docker cp schema.xml datamanager-solr-1:/opt/solr/server/solr/budgetportal/conf/schema.xml
+```
+
+You will need to update the `vulekamali/solr-dokku` repo with the updated `schema.xml` too.
+
+```
+cores/budgetportal/conf/schema.xml
+```
+
+You can verify the updated schema using the Solr Admin e.g. http://localhost:8983/solr/#/budgetportal/schema?field=NEW_FIELD_NAME
 
 License
 -------
