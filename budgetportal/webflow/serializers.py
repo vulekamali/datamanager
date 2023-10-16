@@ -174,6 +174,10 @@ class InfraProjectSerializer(HaystackSerializer):
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
 
+        print('================ aaa ================')
+        print(self.fields)
+        print('================ bbb ================')
+
 
 class InfraProjectFacetSerializer(HaystackFacetSerializer):
     serialize_objects = True  # Setting this to True will serialize the

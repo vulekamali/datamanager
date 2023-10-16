@@ -135,7 +135,7 @@ function buildListSearchURL() {
     for (let fieldName in pageState.filters) {
         params.set(fieldName, pageState.filters[fieldName]);
     }
-    params.set("fields", "url_path,name,status,estimated_completion_date");
+    params.set("fields", "url_path,name,status,estimated_completion_date,financial_year");
     params.set("limit", "20");
     return baseLocation + "?" + params.toString();
 }
