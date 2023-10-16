@@ -529,7 +529,7 @@ class InfraProjectSnapshot(models.Model):
         elif self.irm_snapshot.sphere.slug == PROVINCIAL_SLUG:
             return self.province
         else:
-            raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
+            raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}") 
 
     @property
     def financial_year(self):
