@@ -94,6 +94,9 @@ function updateTextField(selector, text) {
 }
 
 function initTimeSeriesChart(chartData) {
+  chartData.snapshots.forEach((x) => {
+      x.quarter_label = x.quarter_label.replace('END ', '');
+  })
   const container = select("#time-series-chart-container");
   const boundingRect = container.node().getBoundingClientRect();
 
