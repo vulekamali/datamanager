@@ -233,15 +233,19 @@ If you're running your development environment in docker, a good way to maintain
 1. Make the changes you'd like in pyproject.toml
 2. Update dependencies in a container running as root to have permission to change site-wide packages. This will update poetry.lock.
 
-    # On a shell in your host machine
-    docker-compose run --rm -u0 app bash
-    # On the root bash shell in the container:
-    poetry update
+```
+# On a shell in your host machine
+docker-compose run --rm -u0 app bash
+# On the root bash shell in the container:
+poetry update
+```
 
 3. Now rebuild the container with the new poetry.lock file
 
-    # On a shell in your host machine
-    docker-compose build app worker
+```
+# On a shell in your host machine
+docker-compose build app worker
+```
 
 4.  Remember to re-create your development containers and commit the pyproject.toml and poetry.lock changes to git if you're happy with them.
 

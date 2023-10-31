@@ -61,11 +61,11 @@
                 </div>
 
                 <div class="ExpenditurePhaseSection-labelItem">
-                    {% include 'components/ChartLabel/index.html' with index="1" label="Adjusted appropriation" %}
+                    {% include 'components/ChartLabel/index.html' with index="1" label="Mid-year adjusted appropriation" %}
                 </div>
 
                 <div class="ExpenditurePhaseSection-labelItem">
-                    {% include 'components/ChartLabel/index.html' with index="2" label="Final appropriation" %}
+                    {% include 'components/ChartLabel/index.html' with index="2" label="Final adjusted appropriation" %}
                 </div>
 
                 <div class="ExpenditurePhaseSection-labelItem">
@@ -91,7 +91,7 @@
                         data-title="{{ title | truncatechars:45 }}"
                         data-subtitle="{{ subtitle }}"
                         data-description="{{ description }}"
-                        data-barTypes="[&quot;Main Appropriation&quot;, &quot;Adjusted Appropriation&quot;, &quot;Final Appropriation&quot;, &quot;Audited Outcome&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;]"
+                        data-barTypes="[&quot;Main Appropriation&quot;, &quot;Mid-year Adjusted Appropriation&quot;, &quot;Final Adjusted Appropriation&quot;, &quot;Audited Outcome&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;, &quot;Actual Expenditure&quot;]"
                         data-rotated
                 >
                 </div>
