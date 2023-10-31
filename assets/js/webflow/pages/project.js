@@ -112,8 +112,6 @@ function initTimeSeriesChart(chartData) {
 
   container.select('.legend').remove();
 
-  console.log({'chart': container.select('.legend')})
-
   return chart;
 }
 
