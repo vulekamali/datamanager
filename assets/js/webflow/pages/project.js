@@ -110,6 +110,8 @@ function initTimeSeriesChart(chartData) {
   });
   container.call(chart.data(snapshots));
 
+  container.select('.legend').remove();
+
   return chart;
 }
 
