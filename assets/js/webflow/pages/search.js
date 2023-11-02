@@ -317,7 +317,6 @@ function getSelectedOption(fieldName) {
 }
 
 function updateDropdown(selector, options, fieldName) {
-    console.log({selector, options, fieldName})
     if (options == null){
         return;
     }
