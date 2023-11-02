@@ -292,7 +292,6 @@ function addListResults(response) {
 }
 
 function showFacetResults(response) {
-    console.log({response})
     $("#num-matching-projects-field").text(response.objects.count);
     updateDropdown("#government-dropdown", response.fields["government_label"], "government_label");
     updateDropdown("#department-dropdown", response.fields["department"], "department");
@@ -318,6 +317,10 @@ function getSelectedOption(fieldName) {
 }
 
 function updateDropdown(selector, options, fieldName) {
+    console.log({selector, options, fieldName})
+    if (options == null){
+        return;
+    }
     const container = $(selector);
     const trigger = container.find(".chart-dropdown_trigger");
     const optionContainer = container.find(".chart-dropdown_list");
