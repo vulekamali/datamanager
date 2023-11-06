@@ -14,7 +14,6 @@ const createBlock = (fills, changeSelectedHandler, selected, zoom, icons) => pro
   if (calcIfForeignObjectIsSupported()) {
     return <Block {...passedProps} />;
   } else {
-    console.log("Using non-foreignObject treemap");
     return <IEBlock {...passedProps} />;
   }
 };

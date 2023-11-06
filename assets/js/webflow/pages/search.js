@@ -204,13 +204,11 @@ function addMapPoints(response) {
 
         var latitude = parseFloat(project.latitude);
         if (latitude < -34.5916 || latitude > -21.783733) {
-            console.log("Ignoring latitude " + latitude);
             return;
         }
 
         var longitude = parseFloat(project.longitude);
         if (longitude < 14.206737 || longitude > 33.074960) {
-            console.log("Ignoring longitude " + longitude);
             return;
         }
 

@@ -179,7 +179,6 @@ export default function polyfillHTMLElementDataset() {
             (!Object.getOwnPropertyDescriptor(Element.prototype, 'dataset')  ||
             !Object.getOwnPropertyDescriptor(Element.prototype, 'dataset').get)
        ) {
-        console.log("polyfilling HTMLElement.dataset");
         var propDescriptor = {
             enumerable: true,
             get: function () {

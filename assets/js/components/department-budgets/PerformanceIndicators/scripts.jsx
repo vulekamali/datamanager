@@ -104,7 +104,6 @@ class PerformanceIndicators extends Component {
     }
 
     renderProgrammes() {
-        console.log({'programmes': this.state.programmes})
         if (this.state.programmes.length > 0) {
             return this.state.programmes.map((programme, index) => {
                 let prevArr = this.state.previousYearsProgrammes.map(item => {
