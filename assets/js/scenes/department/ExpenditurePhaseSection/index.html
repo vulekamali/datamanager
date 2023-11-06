@@ -3,6 +3,7 @@
 {% assign "Learn more about the MTEF in the "|add:source_type|add:" as PDF" as pdf_text %}
 {% assign "Learn more about the MTEF in the "|add:source_type|add:" as Excel" as excel_text %}
 {% assign "Dataset Guide for "|add:source_type as guide_text %}
+{% assign budgeted_and_actual_comparison as csv_urls %}
 
 <div class="ExpenditurePhaseSection" id="expenditure">
     <h3 class="Title Title--section">Budgeted and actual expenditure comparison</h3>
@@ -22,14 +23,50 @@
             <p class="js-tooltips">Note: Direct charges against the National Revenue Fund are excluded.</p>
 
             {% if website_url %}
-                <p>Read more in the Annual Report on <a href="http://{{ website_url }}">the department's
-                    website.</a></p>
+            <p>Read more in the Annual Report on <a href="http://{{ website_url }}">the department's
+                website.</a></p>
             {% endif %}
+
+            <input type="hidden" id="selected-year" value="{{selected_financial_year}}">
 
             <ul class="LinksList">
                 {% include 'components/LinksList/item.html' with prefix="Source" text=source_text url=dataset type="dataset" %}
 
-                {% include 'components/LinksList/item.html' with text="Download this data for analysis (CSV)" url=csv type="download" %}
+                {% include 'components/LinksList/item.html' with text="" type="dataset" %}
+
+                {% if in_year_spending_enabled and sphere.slug == "national" %}
+                    <li>
+                        <a href="javascript:;" class="LinksList-link no-line no-pointer">
+                            <span class="LinksList-icon">{% include 'components/Icon/index.html' with type="download" size="s" %}</span>
+                            <div>
+                              <span class="LinksList-title">
+                                Download this data for analysis (CSV)
+                              </span>
+                            </div>
+                        </a>
+                    </li>
+                    {% if csv_urls.items %}
+                        <li class="link-inline-text">
+                            In-year spending data:
+                        </li>
+
+                        <li>
+                            <ul class="InlineLinksList">
+                                {% for year, url in csv_urls.items %}
+                                    {% include 'components/LinksList/item.html' with text=year url=url type="download" %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        <li class="link-inline-text">
+                            Note: In-year spending data download is in Thousands of Rands.
+                        </li>
+                    {% else %}
+                        <li class="link-inline-text">
+                            No in-year spending data available for this department.
+                        </li>
+                    {% endif %}
+                {% endif %}
 
                 {% include 'components/LinksList/item.html' with text=guide_text url=guide type="guide" %}
 
@@ -39,18 +76,18 @@
             </ul>
 
             {% if notices %}
-                {% for notice in notices %}
-                    <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
-                        <div class="Message-content">
+            {% for notice in notices %}
+            <div class="Message Message--secondary u-marginBottom20 u-marginTop25">
+                <div class="Message-content">
               <span class="Message-heading">
                 Please note
               </span>
-                        </div>
-                        <div class="Message-text Message-text--secondary">
-                            {{ notice }}
-                        </div>
-                    </div>
-                {% endfor %}
+                </div>
+                <div class="Message-text Message-text--secondary">
+                    {{ notice }}
+                </div>
+            </div>
+            {% endfor %}
             {% endif %}
         </div>
 
@@ -73,9 +110,9 @@
                 </div>
 
                 {% if in_year_spending_enabled and sphere.slug == "national" %}
-                    <div class="ExpenditurePhaseSection-labelItem">
-                        {% include 'components/ChartLabel/index.html' with index="4" label="Actual expenditure" %}
-                    </div>
+                <div class="ExpenditurePhaseSection-labelItem">
+                    {% include 'components/ChartLabel/index.html' with index="4" label="Actual expenditure" %}
+                </div>
                 {% endif %}
             </div>
 

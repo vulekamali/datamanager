@@ -92,7 +92,8 @@ class ChartSourceController extends React.Component {
     }
 
     fetchActualExpenditureUrls(departmentName) {
-        let url = `../../actual-expenditure/?department_name=${encodeURI(departmentName)}`;
+        let selectedYear = document.querySelector('#selected-year').value;
+        let url = `../../actual-expenditure/?department_name=${encodeURI(departmentName)}&selected_year=${selectedYear}`;
         fetchWrapper(url)
             .then((response) => {
                 for (const year in response) {
@@ -104,6 +105,9 @@ class ChartSourceController extends React.Component {
 
     fetchAndSetActualExpenditure(year, obj) {
         let url = obj.url;
+        if (url == null){
+            return
+        }
         const multiplier = 1000;
         fetchWrapper(url)
             .then((response) => {

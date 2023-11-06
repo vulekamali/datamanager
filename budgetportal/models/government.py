@@ -13,7 +13,6 @@ from django.urls import reverse
 import requests
 from constance import config
 
-
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
 
@@ -1106,7 +1105,6 @@ class Department(models.Model):
             filtered_result_cells.append(cell)
 
         for cell in filtered_result_cells:
-
             percentage_of_total = (
                 float(cell["value.sum"]) / total_budget * 100
                 if cell["value.sum"]

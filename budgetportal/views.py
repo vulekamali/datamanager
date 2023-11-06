@@ -40,6 +40,7 @@ from .models import (
     ShowcaseItem,
 )
 from .summaries import (
+    InYearSpending,
     DepartmentProgrammesEcon4,
     DepartmentSubprogEcon4,
     DepartmentSubprogrammes,
@@ -447,8 +448,27 @@ def department_page(
     )
     context["eqprs_data_enabled"] = config.EQPRS_DATA_ENABLED
     context["in_year_spending_enabled"] = config.IN_YEAR_SPENDING_ENABLED
+    context["budgeted_and_actual_comparison"] = get_in_year_spending_urls(
+        department, financial_years_context
+    )
 
     return render(request, "department.html", context)
+
+
+def get_in_year_spending_urls(department, financial_years):
+    urls = {}
+
+    for fy in financial_years:
+        department_obj = Department.objects.filter(
+            name=department.name,
+            government__sphere__slug="national",
+            government__sphere__financial_year__slug=fy["id"],
+        ).first()
+        year = fy["id"]
+        comparison_obj = InYearSpending(department_obj)
+        urls[year] = comparison_obj.get_detail_csv_url()
+
+    return urls
 
 
 def get_department_project_summary(government_label, department):
@@ -1112,25 +1132,24 @@ def department_preview(
 
 
 def iym_datasets_json(request):
-    sphere = "national"
-    query = {"fq": ('+groups: "in-year-spending"' '+vocab_spheres: "' + sphere + '"')}
-    search_response = ckan.action.package_search(**query)
     department_name = request.GET.get("department_name", "")
+    financial_year_id = request.GET.get("selected_year", "")
+
+    get_object_or_404(FinancialYear, slug=financial_year_id)
+    years = FinancialYear.get_available_years()
 
     return_obj = {}
-    if search_response["results"]:
-        for dataset_package in search_response["results"]:
-            dataset_obj = Dataset.from_package(dataset_package)
 
-            openspending_api = dataset_obj.get_openspending_api()
-            if openspending_api is not None:
-                department_ref = openspending_api.get_department_name_ref()
-                cuts = [
-                    department_ref + ":" + "{}".format(department_name),
-                ]
-                return_obj[dataset_package["financial_year"][0]] = {
-                    "url": openspending_api.aggregate_url(cuts=cuts)
-                }
+    for year in years:
+        department_obj = Department.objects.filter(
+            name=department_name,
+            government__sphere__slug="national",
+            government__sphere__financial_year__slug=year.slug,
+        ).first()
+        comparison_obj = InYearSpending(department_obj)
+        url = comparison_obj.get_aggregate_url()
+        return_obj[year.slug] = {"url": url}
+
     response_json = json.dumps(
         return_obj,
         sort_keys=True,

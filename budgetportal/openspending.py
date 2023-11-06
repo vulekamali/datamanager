@@ -243,6 +243,42 @@ class InYearExpenditure(BabbageFiscalDataset):
     def get_department_dimension(self):
         return self.get_dimension("administrative_classification")
 
+    def get_programme_name_ref(self):
+        return self.get_ref(self.get_programme_dimension(), "label")
+
+    def get_programme_dimension(self):
+        return self.get_dimension("activity")
+
+    def get_subprogramme_name_ref(self):
+        return self.get_ref(self.get_subprogramme_dimension(), "label")
+
+    def get_subprogramme_dimension(self):
+        return self.get_dimension("activity", 1)
+
+    def get_econ_class_1_ref(self):
+        return self.get_ref(self.get_econ_class_1_dimension(), "key")
+
+    def get_econ_class_1_dimension(self):
+        return self.get_dimension("economic_classification")
+
+    def get_econ_class_2_ref(self):
+        return self.get_ref(self.get_econ_class_2_dimension(), "key")
+
+    def get_econ_class_2_dimension(self):
+        return self.get_dimension("economic_classification", level=1)
+
+    def get_econ_class_3_ref(self):
+        return self.get_ref(self.get_econ_class_3_dimension(), "key")
+
+    def get_econ_class_3_dimension(self):
+        return self.get_dimension("economic_classification", level=2)
+
+    def get_econ_class_4_ref(self):
+        return self.get_ref(self.get_econ_class_4_dimension(), "key")
+
+    def get_econ_class_4_dimension(self):
+        return self.get_dimension("economic_classification", level=3)
+
 
 class ExpenditureTimeSeries(AdjustedEstimatesOfExpenditure):
     pass
