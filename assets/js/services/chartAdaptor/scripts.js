@@ -9,7 +9,7 @@ import normaliseAdjusted from './services/normaliseAdjusted/index.js';
 import normaliseExpenditureMultiples from './services/normaliseExpenditureMultiples/index.js';
 
 import ChartSourceController from '../../components/ChartSourceController/index.jsx';
-import { toggleValues } from './data.json';
+
 
 
 const normaliseData = ({ type, rawItems }) => {
@@ -26,15 +26,33 @@ const normaliseData = ({ type, rawItems }) => {
 
 
 const ChartAdaptor = (props) => {
-  const { scale, type, items: rawItems, title, subtitle, description, rotated, barTypes } = props;
+  const {
+    scale, type, items: rawItems, title, subtitle, description, rotated, barTypes,
+  } = props;
   const expenditure = type === 'expenditure'
-  || type === 'expenditureMultiples'
-  || type === 'expenditurePhase';
+    || type === 'expenditureMultiples'
+    || type === 'expenditurePhase';
 
   const needToggle = type === 'expenditurePhase' || type === 'expenditure';
   const items = normaliseData({ type, rawItems, rotated });
   const color = expenditure ? '#ad3c64' : '#73b23e';
-  const toggle = needToggle ? toggleValues : null;
+
+  let toggle;
+  if (needToggle) {
+    toggle = {
+      "nominal": {
+        "title": "Not adjusted for inflation"
+      },
+      "real": {
+        "title": "Adjusted for inflation",
+        "description": `The Rand values in this chart are adjusted for CPI inflation and are the effective \
+      value in ${rawItems.base_financial_year.slice(0, 4)} Rands. CPI is used as the deflator, with the ${rawItems.base_financial_year} \
+      financial year as the base.`
+      }
+    }
+  } else {
+    toggle = null;
+  }
 
   const downloadText = {
     title,
@@ -43,7 +61,11 @@ const ChartAdaptor = (props) => {
   };
 
   const styling = { scale, color, rotated };
-  return React.createElement(ChartSourceController, { items, toggle, barTypes, styling, downloadText });
+  return React.createElement(ChartSourceController, {
+    items, toggle, barTypes, styling, downloadText, type,
+    inYearEnabled: rawItems.in_year_spending_enabled,
+    departmentName: rawItems.department_name
+  });
 };
 
 

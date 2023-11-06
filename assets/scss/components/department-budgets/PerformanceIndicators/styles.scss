@@ -1,4 +1,4 @@
-#js-initPerformanceIndicators{
+#js-initPerformanceIndicators {
   position: relative;
 }
 
@@ -15,20 +15,27 @@
   overflow: hidden;
   position: relative;
   @media screen and (max-width: 400px) {
-    padding: 15px 0 0;
+    padding: 20px 10px 10px;
   }
 
   .programme-name {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     line-height: 120%;
     margin-top: 0px;
     color: #3f3f3f;
+    @media screen and (max-width: 400px) {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
   }
 
   .programme-card {
     padding: 30px;
     border-radius: 20px !important;
+    @media screen and (max-width: 400px) {
+      padding: 20px;
+    }
 
     .indicator-type {
       font-family: Roboto, sans-serif;
@@ -75,6 +82,10 @@
       .quarter-selection.selected {
         background-color: #3F3F3F;
         color: #fff;
+      }
+
+      .hidden-quarter {
+        visibility: hidden;
       }
     }
 
@@ -173,6 +184,9 @@
           min-height: 100px;
           align-items: center;
           display: flex;
+          @media screen and (max-width: 400px) {
+            min-height: 50px;
+          }
 
           svg {
             margin: 0 auto;
@@ -238,4 +252,11 @@
   border-radius: 20px !important;
   white-space: nowrap;
   max-width: unset !important;
+}
+
+.Page-contentInner--department {
+  @media screen and (max-width: 400px) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 }

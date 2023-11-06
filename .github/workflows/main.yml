@@ -16,7 +16,7 @@ jobs:
 
     - uses: actions/setup-node@v2
       with:
-        node-version: "13.14.0"
+        node-version: "14.21.3"
 
     - name: Build frontend assets
       run: |
@@ -30,12 +30,17 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    - name: Build images
+      run: |
+        docker-compose build
+
     - name: Run tests
       run: |
-        docker-compose run --rm test python manage.py collectstatic --no-input
-        docker-compose run --rm test
-        docker-compose run --rm app black --check --diff budgetportal manage.py discourse performance
+        docker-compose run --rm app python manage.py collectstatic --no-input
+        docker-compose run --rm -e DJANGO_Q_SYNC=TRUE app python manage.py test
+        docker-compose run --rm app black --check --diff budgetportal manage.py discourse performance iym
 
     - name: Dump dependency logs for debugging
+      if: ${{ failure() }}
       run: |
-        docker-compose logs db solr minio
+        docker-compose logs db solr minio selenium

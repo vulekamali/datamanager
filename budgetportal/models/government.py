@@ -11,6 +11,8 @@ from urllib.parse import quote
 import logging
 from django.urls import reverse
 import requests
+from constance import config
+
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -1221,7 +1223,10 @@ class Department(models.Model):
             for y in range(financial_year_start_int - 3, financial_year_start_int + 1)
         ]
 
-        expenditure = {"nominal": [], "real": []}
+        expenditure = {
+            "nominal": [],
+            "real": [],
+        }
 
         dataset = get_expenditure_time_series_dataset(self.government.sphere.slug)
         if not dataset:
@@ -1323,8 +1328,14 @@ class Department(models.Model):
                             else:
                                 missing_phases_count[fiscal_year] += 1
 
-            expenditure["base_financial_year"] = FinancialYear.slug_from_year_start(
-                str(base_year)
+            expenditure.update(
+                {
+                    "base_financial_year": FinancialYear.slug_from_year_start(
+                        str(base_year)
+                    ),
+                    "in_year_spending_enabled": config.IN_YEAR_SPENDING_ENABLED,
+                    "department_name": self.name,
+                }
             )
 
             # Generate notices if applicable

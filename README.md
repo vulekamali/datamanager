@@ -55,9 +55,17 @@ reading some HTML files. We decided to leave Django template include files in
 
 #### Webflow
 
-We are using for new content and are potentially replacing the current frontend
-with one built using webflow. Webflow is a web design tool, which provides hosting
-and integrates with their own content management system. We don't use their hosting
+We tried using Webflow for developing the user interface for the IRM infrastructure
+project pages. It offered the potential for rapid prototyping which could then be
+integrated in the django project later. It turned out that frontends built using webflow
+are a challenge to maintain in a normal software project like this because you can't
+create branches of work and later merge them. It's also difficult to fork and maintain
+as open source software. For the moment, only those pages are maintained from Wefblow.
+
+Edit the infrastructure project UI by accessing the https://webflow.com/design/vulekamali
+project in Webflow and see how to import those changes using the link below.
+
+We don't use their hosting
 or CMS for production pages of vulekamali.gov.za, but rather export the HTML,
 CSS and Javascript and use that for those content areas on this site. Page data
 is either provided to the client via JSON embedded in the page, or via AJAX
@@ -217,12 +225,38 @@ Finally load the 2019-20 featured national infrastructure projects on the Infras
 
 ------
 
-Create and run database migrations with
+### Create and run database migrations
+
+When modifying Django models, make migrations with 
 
 ```
 docker-compose run --rm app python manage.py makemigrations
 
 ```
+
+### Maintaining Python depdendencies
+
+If you're running your development environment in docker, a good way to maintain python dependencies is
+
+1. Make the changes you'd like in pyproject.toml
+2. Update dependencies in a container running as root to have permission to change site-wide packages. This will update poetry.lock.
+
+```
+# On a shell in your host machine
+docker-compose run --rm -u0 app bash
+# On the root bash shell in the container:
+poetry update
+```
+
+3. Now rebuild the container with the new poetry.lock file
+
+```
+# On a shell in your host machine
+docker-compose build app worker
+```
+
+4.  Remember to re-create your development containers and commit the pyproject.toml and poetry.lock changes to git if you're happy with them.
+
 
 ### Development best practises
 
@@ -310,13 +344,13 @@ Running tests
 All tests
 
 ```
-docker-compose run --rm test
+docker-compose run --rm app python manage.py test
 ```
 
 Specific tests, e.g.
 
 ```
-docker-compose run --rm test python manage.py test budgetportal.tests.test_bulk_upload.BulkUploadTestCase
+docker-compose run --rm app python manage.py test budgetportal.tests.test_bulk_upload.BulkUploadTestCase
 ```
 
 Production deployment

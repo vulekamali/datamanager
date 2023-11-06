@@ -8,7 +8,10 @@ Webflow frontend in this Django app
 edits will be overridden on the next import from Webflow.
 
 For this site, we build pages in Webflow, export the HTML, CSS, Javascript and
-images, download them as a zip file, and import them into this django app.
+images, download them as a zip file, and import them into this django app using 
+the [import-webflow-export](https://www.npmjs.com/package/import-webflow-export)
+utility.
+
 The HTML is copied into the `templates` directory, with any changes needed to
 request site-specific dependencies and add data to the page. These are then used
 as django templates referred to by views. The assets are copied into the `static`
@@ -20,7 +23,7 @@ directory, where `~/Downloads/vulekamali.webflow(18).zip` is the path to the
 latest webflow code export.
 
 ```
-yarn run import-webflow-export ~/Downloads/vulekamali.webflow\(18\).zip budgetportal/webflow/
+yarn run import-webflow ~/Downloads/vulekamali.webflow\(18\).zip budgetportal/webflow/
 ```
 
 The import script inserts a Script tag to include `static/js/vulekamali-webflow.js`

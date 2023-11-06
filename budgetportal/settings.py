@@ -62,11 +62,12 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
-    "budgetportal.apps.BudgetPortalConfig",
-    "budgetportal.webflow",
     "constance",
     "constance.backends.database",
+    "budgetportal.apps.BudgetPortalConfig",
+    "budgetportal.webflow",
     "performance",
+    "iym",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -113,7 +114,16 @@ INSTALLED_APPS = [
 CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 
 CONSTANCE_CONFIG = {
-    "EQPRS_Data_Enabled": (False, "enabling / disabling summary on department page")
+    "EQPRS_DATA_ENABLED": (
+        False,
+        "enabling / disabling performance data summary on department page",
+        bool,
+    ),
+    "IN_YEAR_SPENDING_ENABLED": (
+        False,
+        "enabling / disabling presenting in-year spending on department page",
+        bool,
+    ),
 }
 
 if DEBUG_TOOLBAR:
@@ -211,6 +221,11 @@ BUST_OPENSPENDING_CACHE = (
     os.environ.get("BUST_OPENSPENDING_CACHE", "false").lower() == "true"
 )
 OPENSPENDING_HOST = os.environ.get("OPENSPENDING_HOST", "https://openspending.org")
+OPENSPENDING_USER_ID = os.environ.get("OPENSPENDING_USER_ID", "")
+OPENSPENDING_API_KEY = os.environ.get("OPENSPENDING_API_KEY", "")
+OPENSPENDING_DATASET_CREATE_SUFFIX = os.environ.get(
+    "OPENSPENDING_DATASET_CREATE_SUFFIX", ""
+)
 
 # http://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = "budgetportal.allauthadapters.AccountAdapter"
@@ -352,8 +367,15 @@ ROBOTS_DENY_ALL = os.environ.get("ROBOTS_DENY_ALL", "false").lower() == "true"
 
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN", None)
+SENTRY_PERF_SAMPLE_RATE = env.float("SENTRY_PERF_SAMPLE_RATE", 0.1)
+
 if SENTRY_DSN:
-    sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()],
+        traces_sample_rate=SENTRY_PERF_SAMPLE_RATE,
+        profiles_sample_rate=SENTRY_PERF_SAMPLE_RATE,
+    )
 
 boto3.set_stream_logger("boto3.resources", logging.INFO)
 
@@ -385,8 +407,9 @@ DJANGO_Q_SYNC = os.environ.get("DJANGO_Q_SYNC", "false").lower() == "true"
 Q_CLUSTER = {
     "name": "Something",
     "workers": 1,
-    "timeout": 30 * 60,  # Timeout a task after this many seconds
-    "retry": 5,
+    "max_attempts": 1,
+    "timeout": 60 * 60 * 6,  # 6 hours - Timeout a task after this many seconds
+    "retry": 60 * 60 * 6 + 1,  # 6 hours - Seconds to wait before retrying a task
     "queue_limit": 1,
     "bulk": 1,
     "orm": "default",  # Use Django ORM as storage backend

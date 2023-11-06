@@ -250,11 +250,19 @@ urlpatterns = [
     ),
     # Performance app
     path("performance/", include("performance.urls")),
+    # IYM app
+    path("iym/", include("iym.urls")),
     # Budget summary
     url(
         r"^budget-summary/?$",
         cache_page(CACHE_MINUTES_SECS)(views.budget_summary_view),
         name="budget-summary",
+    ),
+    # Budget comparison
+    url(
+        r"actual-expenditure/",
+        views.iym_datasets_json,
+        name="actual-expenditure",
     ),
     # Sitemap
     url(
