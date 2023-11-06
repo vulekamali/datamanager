@@ -19,6 +19,7 @@ class InfraProjectSnapshotSerializer(ModelSerializer):
             "name",
             "sphere",
             "government_label",
+            "financial_year",
             "province",
             "department",
             "sector",
@@ -87,6 +88,7 @@ class InfraProjectCSVSerializer(HaystackSerializer):
             "irm_snapshot",
             "sphere",
             "government_label",
+            "financial_year",
             "province",
             "department",
             "sector",
@@ -155,6 +157,7 @@ class InfraProjectSerializer(HaystackSerializer):
             "url_path",
             "latitude",
             "longitude",
+            "financial_year",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -173,8 +176,8 @@ class InfraProjectSerializer(HaystackSerializer):
 
 
 class InfraProjectFacetSerializer(HaystackFacetSerializer):
-
     serialize_objects = True  # Setting this to True will serialize the
+
     # queryset into an `objects` list. This
     # is useful if you need to display the faceted
     # results. Defaults to False.
@@ -188,6 +191,7 @@ class InfraProjectFacetSerializer(HaystackFacetSerializer):
             "department",
             "status",
             "primary_funding_source",
+            "financial_year",
         ]
         field_options = {
             "sector": {},

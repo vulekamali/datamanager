@@ -531,6 +531,10 @@ class InfraProjectSnapshot(models.Model):
         else:
             raise Exception(f"Unexpected sphere {self.irm_snapshot.sphere}")
 
+    @property
+    def financial_year(self):
+        return self.irm_snapshot.sphere.financial_year.slug
+
     def __str__(self):
         return self.name
 

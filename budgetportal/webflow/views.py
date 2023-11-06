@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import csv
 import json
+import pdb
 import urllib.parse
 
 from slugify import slugify
@@ -156,6 +157,7 @@ class InfraProjectSearchView(
 
     def list(self, request, *args, **kwargs):
         csv_download_params = self._get_csv_query_params(request.query_params)
+
         response = super().list(request, *args, **kwargs)
         if isinstance(response.data, dict):
             response.data["csv_download_url"] = reverse(
@@ -163,6 +165,7 @@ class InfraProjectSearchView(
             )
         if csv_download_params:
             response.data["csv_download_url"] += "?{}".format(csv_download_params)
+
         return response
 
     @action(detail=False, methods=["get"])
@@ -184,6 +187,7 @@ class InfraProjectSearchView(
     def _get_filename(self, query_params):
         keys_to_check = (
             "government_label",
+            "financial_year",
             "sector",
             "province",
             "department",

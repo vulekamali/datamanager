@@ -9,6 +9,7 @@ class InfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
     name = indexes.CharField()
     province = indexes.CharField(faceted=True)
     government_label = indexes.CharField(faceted=True)
+    financial_year = indexes.CharField(faceted=True)
     sphere = indexes.CharField(faceted=True)
     department = indexes.CharField(faceted=True)
     sector = indexes.CharField(faceted=True)
@@ -78,6 +79,9 @@ class InfraProjectIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_sphere(sef, object):
         return object.project_snapshots.latest().irm_snapshot.sphere.slug
+
+    def prepare_financial_year(sef, object):
+        return object.project_snapshots.latest().irm_snapshot.sphere.financial_year.slug
 
     def prepare_department(sef, object):
         return object.project_snapshots.latest().department
