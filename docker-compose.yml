@@ -16,7 +16,7 @@ services:
       args:
         USER_ID: ${USER_ID:-1001}
         GROUP_ID: ${GROUP_ID:-1001}
-    command: python manage.py runserver_plus --nopin 0.0.0.0:8000
+    command: python manage.py runserver_plus --keep-meta-shutdown --nopin 0.0.0.0:8000
     environment:
       - TAG_MANAGER_ID
       - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
