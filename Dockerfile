@@ -26,7 +26,9 @@ RUN set -ex; \
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
   rm -rf /var/lib/apt/lists/*
 
-RUN pip install -U poetry==1.5.1
+RUN pip install --upgrade pip
+RUN pip install -U poetry==1.7.1
+RUN poetry config installer.max-workers 1
 
 # Copy, then install requirements before copying rest for a requirements cache layer.
 COPY pyproject.toml poetry.lock /tmp/
