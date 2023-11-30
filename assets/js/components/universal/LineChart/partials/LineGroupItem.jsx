@@ -1,5 +1,4 @@
 import React from 'react';
-import { relative } from 'path';
 
 const colours = [
   '#79b43c',
