@@ -15,19 +15,30 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-
-  &:not(.VideoCard-container--compact) {
-    @media screen and (min-width: 768px) {
-      &--fullPage {
-        flex-direction: row;
-        height: 250px;
-      }
-    }
-
-    @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 768px) {
+    &--fullPage {
       flex-direction: row;
       height: 250px;
     }
+  }
+
+  @media screen and (min-width: 1200px) {
+    flex-direction: row;
+    height: 250px;
+  }
+}
+
+.VideoCard-container--compact {
+  @media screen and (min-width: 768px) {
+    &--fullPage {
+      flex-direction: unset;
+      height: unset;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    flex-direction: unset;
+    height: unset;
   }
 }
 
