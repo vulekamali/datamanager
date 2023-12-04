@@ -51,8 +51,7 @@ USER containeruser
 WORKDIR /app
 
 RUN set -ex; \
-   NODE_ENV=development yarn
-   #; \
-   #yarn build
+   NODE_ENV=development yarn; \
+   yarn build
 
 CMD /app/bin/start.sh
