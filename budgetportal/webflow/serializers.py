@@ -200,4 +200,5 @@ class InfraProjectFacetSerializer(HaystackFacetSerializer):
             "department": {},
             "status": {},
             "primary_funding_source": {},
+            "financial_year": {},
         }
