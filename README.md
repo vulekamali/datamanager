@@ -460,6 +460,11 @@ cores/budgetportal/conf/schema.xml
 
 You can verify the updated schema using the Solr Admin e.g. http://localhost:8983/solr/#/budgetportal/schema?field=NEW_FIELD_NAME
 
+You can use Haystack to rebuild the index:
+`docker compose run app python manage.py haystack_update_index -b 10`
+
+https://django-haystack.readthedocs.io/en/latest/management_commands.html#rebuild-index
+
 License
 -------
 
