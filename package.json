@@ -1,7 +1,7 @@
 {
   "private": true,
   "engines": {
-    "node": "==16",
+    "node": "==18",
     "npm": ">=6.13.x <7",
     "yarn": ">=1.21.x <=1.22.x"
   },
@@ -14,9 +14,9 @@
   "name": "static-budget-portal",
   "version": "1.0.0",
   "scripts": {
-    "build:webapp": "cd ./packages/webapp && node ./scripts/build",
-    "build:root": "webpack --display errors-only --progress -p",
-    "build:dev": "webpack --progress --watch --mode=development",
+    "build:webapp": "cd ./packages/webapp && NODE_OPTIONS=--openssl-legacy-provider node ./scripts/build",
+    "build:root": "NODE_OPTIONS=--openssl-legacy-provider webpack --display errors-only --progress -p",
+    "build:dev": "NODE_OPTIONS=--openssl-legacy-provider webpack --progress --watch --mode=development",
     "build": "yarn build:webapp && yarn build:root",
     "start-test": "react-app-rewired --progress --watch --mode=development"
   },

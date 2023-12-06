@@ -9,7 +9,7 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE DontWarn
 
 # from https://github.com/nikolaik/docker-python-nodejs/blob/main/Dockerfile
 RUN set -ex; \
-  echo "deb https://deb.nodesource.com/node_16.x bullseye main" > /etc/apt/sources.list.d/nodesource.list && \
+  echo "deb https://deb.nodesource.com/node_18.x bullseye main" > /etc/apt/sources.list.d/nodesource.list && \
   wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
   wget -qO- https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -51,7 +51,6 @@ USER containeruser
 WORKDIR /app
 
 RUN set -ex; \
-   NODE_ENV=development yarn; \
-   yarn build
+   NODE_ENV=development yarn;
 
 CMD /app/bin/start.sh

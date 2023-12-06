@@ -32,7 +32,7 @@ services:
       - DJANGO_WHITENOISE_AUTOREFRESH=TRUE
       - PORT=8000
       - CKAN_URL
-      - DJANGO_Q_SYNC=${DJANGO_Q_SYNC}
+      - DJANGO_Q_SYNC=${DJANGO_Q_SYNC:-True}
       - CKAN_API_KEY
       - OPENSPENDING_USER_ID
       - OPENSPENDING_API_KEY
@@ -60,7 +60,7 @@ services:
     command: python manage.py qcluster
     environment:
       - DATABASE_URL=postgresql://budgetportal:devpassword@db/budgetportal
-      - DJANGO_DEBUG_TOOLBAR=${DJANGO_DEBUG_TOOLBAR}
+      - DJANGO_DEBUG_TOOLBAR=${DJANGO_DEBUG_TOOLBAR:-False}
       - AWS_ACCESS_KEY_ID=minio-access-key
       - AWS_SECRET_ACCESS_KEY=minio-secret-key
       - AWS_STORAGE_BUCKET_NAME=budgetportal-storage
