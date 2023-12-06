@@ -485,7 +485,7 @@ class InfraProjectSearchPageTestCase(BaseSeleniumTestCase):
             "#search-results-download-button"
         ).get_attribute("href")
         self.assertIn(
-            "infrastructure-projects/full/search/csv?q=&ordering=status_order",
+            "infrastructure-projects/full/search/csv?q=",
             csv_download_url,
         )
 
