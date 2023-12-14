@@ -9,9 +9,6 @@
                 {% include 'components/header-and-footer/HeaderBar/index.html' %}
             {% endwith %}
 
-            {% if financial_years and selected_financial_year %}
-                {% include 'components/header-and-footer/YearSelect/index.html' with years=financial_years %}
-            {% endif %}
         </header>
         <div class="Page-contentWrap">
             {% block page_content %}

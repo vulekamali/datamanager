@@ -1188,3 +1188,13 @@ def budget_summary_view(request):
         and latest_provincial_year.slug,
     }
     return render(request, "budget-summary.html", context)
+
+
+def public_entities_list(request):
+    context = {
+        "title": "Public Entities - vulekamali",
+        "description": COMMON_DESCRIPTION + COMMON_DESCRIPTION_ENDING,
+        "selected_tab": "public-entities",
+        "navbar": MainMenuItem.objects.prefetch_related("children").all(),
+    }
+    return render(request, "public-entities_list.html", context)

@@ -276,6 +276,12 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+    # Public Entities List
+    url(
+        r"^public-entities$",
+        views.public_entities_list,
+        name="public-entities-list",
+    ),
     url("^", include(webflow_urls.urlpatterns)),
     re_path(r"^cms/", include(wagtailadmin_urls)),
     re_path(r"^documents/", include(wagtaildocs_urls)),
