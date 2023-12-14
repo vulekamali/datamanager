@@ -707,6 +707,9 @@ class MainMenuItem(SortableMixin):
     main_menu_item_order = models.PositiveIntegerField(
         default=0, editable=False, db_index=True
     )
+    highlight_as_new = models.BooleanField(
+        default=False,
+    )
 
     class Meta:
         ordering = ["main_menu_item_order"]

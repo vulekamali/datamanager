@@ -46,16 +46,20 @@
             <span class="NavBar-link{{ activeClass }}{{ subLinkClass }} {% if item.children.all %}dropdown{% endif %}">
             {% endif %}
 
-
             {% if item.name == 'homepage' %}
             <span class="NavBar-iconWrap">
               {% include 'components/Icon/index.html' with type="home" %}
             </span>
             <span class="NavBar-text is-mobileOnly">Home</span>
             {% else %}
-            <span class="NavBar-text">{{ item.label }}</span>
+            <span class="NavBar-text">{{ item.label }}
+              {% if item.highlight_as_new %}
+              <span class="Navbar-Tag-new">New</span>
+              {% endif %}
+            </span>
             {% endif %}
 
+            
 
             {% if item.url %}
             </a>
