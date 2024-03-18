@@ -39,6 +39,7 @@ from .models import (
     Video,
     ShowcaseItem,
 )
+from .models.government import PublicEntity
 from .summaries import (
     InYearSpending,
     DepartmentProgrammesEcon4,
@@ -505,6 +506,16 @@ def department_page(
     context["budgeted_and_actual_comparison"] = get_in_year_spending_urls(
         department, financial_years_context
     )
+
+    context["public_entities"] = []
+
+    for public_entity in PublicEntity.objects.filter(department__slug=department_slug):
+        context["public_entities"].append(
+            {
+                "name": public_entity.name,
+                "url_path": public_entity.get_url_path(),
+            }
+        )
 
     return render(request, "department.html", context)
 
