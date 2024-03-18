@@ -1,0 +1,38 @@
+{% load define_action %}
+
+{% if datasets|length > 0 %}
+  {% assign '' as padding %}
+{% else %}
+  {% assign ' u-paddingBottom0' as padding %}
+{% endif %}
+
+
+<div class="Section is-bevel" id="contributed-data">
+  <div class="Section-card is-invisible {{ padding }}">
+    <div class="Section-title">Contributed data</div>
+  </div>
+
+  {% if datasets|length > 0 %}
+    {% for item in datasets %}
+
+      <div class="Section-card u-marginBottom10">
+        <div class="ContributedItem">
+          <div class="ContributedItem-info">
+            <div class="u-fontWeightBold">{{ item.name }}</div>
+            <div class="u-marginTop5">Data by {{ item.contributor }}</div>
+          </div>
+          <div class="ContributedItem-button">
+            <a class="Button is-inline" href="{{ item.url_path }}">View Dataset</a>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+  {% endif %}
+
+  <div class="Section-card is-invisible u-marginTop15">
+    <h3>How can I contribute?</h3>
+    <div>Do you have data related to this department that you would like to contribute?</div>
+    <a class="Button is-secondary u-marginTop15" href="{{ CKAN_URL }}/user/login?came_from=/dataset/new" target="_blank">Log in and submit your data</a>
+  </div>
+</div>

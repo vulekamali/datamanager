@@ -1,0 +1,21 @@
+
+.PublicEntitySectionHead {
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  background-color: grey;
+  border-radius: 15px 15px 0 0;
+  padding: 10px 20px;
+
+  &--green {
+    background-color: #7bb344;
+  }
+
+  &--orange {
+    background-color: #ee9f31;
+  }
+
+  &--purple {
+    background-color: #ad3c64;
+  }
+}

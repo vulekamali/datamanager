@@ -131,6 +131,16 @@ $mobile-break: 900px;
   }
 }
 
+.Navbar-Tag-new {
+  border-radius: 6px;
+  background-color: #76B643;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16.8px;
+  padding: 2px 4px;
+}
+
 .NavBar-link {
   display: block;
   border-bottom: solid 1px #b9b9b9;
@@ -141,7 +151,7 @@ $mobile-break: 900px;
 
   @media screen and (min-width: $mobile-break) {
     border-radius: 18px 18px 0 0;
-    padding: 6px 10px;
+    padding: 6px 6px;
     fill: #4a4a4a;
     user-select: none;
     font-weight: bold;
@@ -190,7 +200,6 @@ $mobile-break: 900px;
   padding-left: 36px;
   text-decoration: none;
   color: #4a4a4a;
-
 
   @media screen and (min-width: $mobile-break) {
     display: inline-block;
@@ -294,7 +303,7 @@ $mobile-break: 900px;
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     width: 0;
     height: 0;

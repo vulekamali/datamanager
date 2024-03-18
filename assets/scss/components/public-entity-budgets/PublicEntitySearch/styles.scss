@@ -1,0 +1,166 @@
+.PublicEntitySearch-keywords {
+  border: solid 1px #9b9b9b;
+  border-radius: 3px;
+  padding: 9px 13px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 300px;
+  display: inline-block;
+
+  &.is-loading {
+    height: 36px;
+  }
+}
+
+.PublicEntitySearch-groupWrap {
+  padding-bottom: 20px;
+}
+
+.PublicEntitySearch-select {
+  border-radius: 3px;
+  border: solid 1px #9b9b9b;
+  padding-left: 0;
+  display: table;
+  min-width: 170px;
+  margin: 0;
+  background-color: white;
+}
+
+.PublicEntitySearch-filter {
+  display: inline-block;
+  vertical-align: top;
+  max-height: 36px;
+}
+
+.PublicEntitySearch-label {
+  cursor: pointer;
+  padding: 9px 13px;
+  font-size: 14px;
+  display: block;
+  user-select: none;
+
+  &:hover {
+    background-color: darken(white, 15%);
+  }
+
+  .PublicEntitySearch-select.is-open .PublicEntitySearch-item.is-active & {
+    border-bottom: 1px solid #4a4a4a;
+  }
+
+  .PublicEntitySearch-item.is-active &::after {
+    content: '';
+    display: inline-block;
+    float: right;
+    width: 0;
+    height: 0;
+    position: relative;
+    border: 5px solid transparent;
+    border-top: 5px solid #4a4a4a;
+    margin-left: 10px;
+    top: 5px;
+    transform: rotate(360deg);
+    transition: transform 0.3s, top 0.3s;
+
+    .PublicEntitySearch-select.is-open & {
+      top: 2px;
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.PublicEntitySearch-item {
+  background: white;
+  cursor: pointer;
+  list-style: none;
+  display: none;
+
+  .PublicEntitySearch-select.is-open & {
+    z-index: z-index('PublicEntitySearch-select');
+    display: table-row;
+  }
+
+  &.is-active {
+    display: table-header-group !important;
+  }
+}
+
+.PublicEntitySearch-radio {
+  display: none;
+}
+
+.PublicEntitySearch-divider {
+  padding: 10px 10px 10px 0;
+  display: inline-block;
+  font-size: 14px;
+
+  @media screen and (min-width: 800px) {
+    padding-left: 20px;
+  }
+}
+
+.PublicEntitySearch-group {
+  padding-top: 30px;
+  line-height: 1.5;
+  @include clearfix;
+
+  &--blank {
+    opacity: 0.3;
+  }
+}
+
+.PublicEntitySearch-title {
+  padding: 0 7px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.PublicEntitySearch-link {
+  font-size: 14px;
+  color: #4a4a4a;
+  text-decoration: none;
+  border-radius: 3px;
+  padding: 0 7px;
+  display: block;
+
+  &:hover {
+    background-color: darken(white, 5%);
+  }
+}
+
+.PublicEntitySearch-list {
+  list-style: none;
+  padding-left: 5px;
+}
+
+.PublicEntitySearch-results {
+  padding-left: 0;
+  list-style: none;
+}
+
+.PublicEntitySearch-nestedResults {
+  padding-left: 0;
+  list-style: none;
+
+  @media screen and (min-width: 900px) {
+    column-count: 2; /* stylelint-disable-line plugin/no-unsupported-browser-features */ // Is visual enhancement
+  }
+}
+
+.PublicEntitySearch-items {
+  padding-left: 0;
+  list-style: none;
+}
+
+.PublicEntitySearch-filterGroup {
+  padding-top: 15px;
+  vertical-align: top;
+
+  @media screen and (min-width: 800px) {
+    display: inline-block;
+    padding: 0;
+  }
+}
+
+.PublicEntitySearch-filter {
+  min-width: 150px;
+}

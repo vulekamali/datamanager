@@ -39,6 +39,7 @@ from .models import (
     Video,
     ShowcaseItem,
 )
+from .models.government import PublicEntity
 from .summaries import (
     InYearSpending,
     DepartmentProgrammesEcon4,
@@ -277,6 +278,60 @@ def department_list_data(financial_year_id):
     return page_data
 
 
+def public_entity_list_data(financial_year_id):
+    selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
+    page_data = {
+        "financial_years": [],
+        "selected_financial_year": selected_year.slug,
+        "selected_tab": "public_entities",
+        "slug": "public-entities",
+        "title": "Public Entities Budgets for %s - vulekamali" % selected_year.slug,
+        "public_entities": [],
+        "description": "Public Entities budgets for the %s financial year %s"
+        % (selected_year.slug, COMMON_DESCRIPTION_ENDING),
+    }
+
+    for year in FinancialYear.get_available_years():
+        is_selected = year.slug == financial_year_id
+        page_data["financial_years"].append(
+            {
+                "id": year.slug,
+                "is_selected": is_selected,
+                "closest_match": {
+                    "is_exact_match": True,
+                    "url_path": "/%s/public-entities" % year.slug,
+                },
+            }
+        )
+
+    for government in (
+        selected_year.spheres.filter(slug="national").first().governments.all()
+    ):
+        public_entities = []
+        for public_entity in government.public_entities.all():
+            public_entities.append(
+                {
+                    "name": public_entity.name,
+                    "url_path": public_entity.get_url_path(),
+                    "department": public_entity.department.name,
+                    "department_slug": public_entity.department.slug,
+                    "department_sphere": public_entity.department.government.sphere.slug,
+                    "functiongroup1": public_entity.functiongroup1,
+                    "selected_year_slug": selected_year.slug,
+                    "pfma": public_entity.pfma,
+                    "amount": int(public_entity.amount),
+                }
+            )
+        public_entities = sorted(public_entities, key=lambda d: d["name"])
+        page_data["public_entities"].append(public_entities)
+
+    page_data["public_entities"] = [
+        item for sublist in page_data["public_entities"] for item in sublist
+    ]
+
+    return page_data
+
+
 def department_page(
     request, financial_year_id, sphere_slug, government_slug, department_slug
 ):
@@ -452,7 +507,88 @@ def department_page(
         department, financial_years_context
     )
 
+    context["public_entities"] = []
+
+    for public_entity in PublicEntity.objects.filter(department__slug=department_slug):
+        context["public_entities"].append(
+            {
+                "name": public_entity.name,
+                "url_path": public_entity.get_url_path(),
+            }
+        )
+
     return render(request, "department.html", context)
+
+
+def public_entity_page(
+    request, financial_year_id, sphere_slug, government_slug, public_entity_slug
+):
+    public_entity = None
+    selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
+
+    years = FinancialYear.get_available_years()
+    for year in years:
+        if year.slug == financial_year_id:
+            selected_year = year
+            sphere = selected_year.spheres.filter(slug=sphere_slug).first()
+            government = sphere.governments.filter(slug=government_slug).first()
+            public_entity = government.public_entities.filter(
+                slug=public_entity_slug
+            ).first()
+
+    financial_years_context = []
+    for year in years:
+        closest_match, closest_is_exact = year.get_closest_match(public_entity)
+        financial_years_context.append(
+            {
+                "id": year.slug,
+                "is_selected": year.slug == financial_year_id,
+                "closest_match": {
+                    "url_path": closest_match.get_url_path(),
+                    "is_exact_match": closest_is_exact,
+                },
+            }
+        )
+
+    govt_label = "National"
+
+    context = {
+        "comments_enabled": settings.COMMENTS_ENABLED,
+        "financial_years": financial_years_context,
+        "government": {
+            "name": public_entity.government.name,
+            "label": govt_label,
+            "slug": str(public_entity.government.slug),
+        },
+        "intro": public_entity.intro,
+        "name": public_entity.name,
+        "slug": str(public_entity.slug),
+        "sphere": {
+            "name": public_entity.government.sphere.name,
+            "slug": public_entity.government.sphere.slug,
+        },
+        "selected_financial_year": financial_year_id,
+        "selected_tab": "public_entities",
+        "title": "%s budget %s  - vulekamali"
+        % (public_entity.name, selected_year.slug),
+        "description": "%s public entity: %s budget data for the %s financial year %s"
+        % (
+            govt_label,
+            public_entity.name,
+            selected_year.slug,
+            COMMON_DESCRIPTION_ENDING,
+        ),
+    }
+    context["navbar"] = MainMenuItem.objects.prefetch_related("children").all()
+    context["latest_year"] = FinancialYear.get_latest_year().slug
+    context["global_values"] = read_object_from_yaml(
+        str(settings.ROOT_DIR.path("_data/global_values.yaml"))
+    )
+    context["admin_url"] = reverse(
+        "admin:budgetportal_department_change", args=(public_entity.pk,)
+    )
+
+    return render(request, "public_entity.html", context)
 
 
 def get_in_year_spending_urls(department, financial_years):
@@ -1017,6 +1153,20 @@ def department_list(request, financial_year_id):
     context["navbar"] = MainMenuItem.objects.prefetch_related("children").all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
     return render(request, "department_list.html", context)
+
+
+def latest_public_entity_list(request):
+    department = request.GET.get('department', None)
+    url = reverse("public-entity-list", args=(FinancialYear.get_latest_year().slug,))
+    url = f"{url}?department={department}" if department else url
+    return redirect(url, permanent=False)
+
+
+def public_entity_list(request, financial_year_id):
+    context = public_entity_list_data(financial_year_id)
+    context["navbar"] = MainMenuItem.objects.prefetch_related("children").all()
+    context["latest_year"] = FinancialYear.get_latest_year().slug
+    return render(request, "public_entity_list.html", context)
 
 
 def department_list_json(request, financial_year_id):
