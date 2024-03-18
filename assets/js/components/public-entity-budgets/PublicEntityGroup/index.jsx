@@ -27,7 +27,7 @@ function public_entities(linksArray) {
           <th>Entity name</th>
           <th>Relevant department</th>
           <th>PFMA</th>
-          <th>Expenditure {}</th>
+          <th>Expenditure ({linksArray[0].selected_year_slug})</th>
         </tr>
       </thead>
       <tbody>
@@ -36,11 +36,11 @@ function public_entities(linksArray) {
             {
               name,
               url_path: url,
-              functiongroup1,
               department,
               department_slug,
               department_sphere,
               selected_year_slug,
+              pfma
             },
             index
           ) => {
@@ -66,7 +66,7 @@ function public_entities(linksArray) {
                     {department}
                   </a>
                 </td>
-                <td>{functiongroup1}</td>
+                <td>{pfma}</td>
                 <td>
                   <div className="PublicEntityGroup-expenditure-outer">
                     <div

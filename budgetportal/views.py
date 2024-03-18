@@ -318,6 +318,7 @@ def public_entity_list_data(financial_year_id):
                     "department_sphere": public_entity.department.government.sphere.slug,
                     "functiongroup1": public_entity.functiongroup1,
                     "selected_year_slug": selected_year.slug,
+                    "pfma": public_entity.pfma,
                 }
             )
         public_entities = sorted(public_entities, key=lambda d: d["name"])
