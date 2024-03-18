@@ -3,7 +3,6 @@ import wrapStringPhrases from './../../../../utilities/js/helpers/wrapStringPhra
 
 
 export default function filterKeywords(keywords, results) {
-  console.log({results});
   return results.map((group) => {
     const filteredItems = lunrSearchWrapper(
       results,

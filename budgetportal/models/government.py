@@ -12,6 +12,7 @@ import logging
 from django.urls import reverse
 import requests
 from constance import config
+from django.core.exceptions import MultipleObjectsReturned, ValidationError
 
 logger = logging.getLogger(__name__)
 ckan = settings.CKAN
@@ -489,9 +490,9 @@ class Department(models.Model):
         )
         if response["results"]:
             package = response["results"][0]
-            self._estimates_of_econ_classes_expenditure_dataset[
-                level
-            ] = Dataset.from_package(package)
+            self._estimates_of_econ_classes_expenditure_dataset[level] = (
+                Dataset.from_package(package)
+            )
             return self._estimates_of_econ_classes_expenditure_dataset[level]
         else:
             return None
@@ -1701,10 +1702,14 @@ class PublicEntity(models.Model):
     )
     intro = models.TextField(default="A description of this public entity.")
 
-    pfma = models.CharField(max_length=2, blank=False, null=False, choices=PFMA_CHOICES)
-    functiongroup1 = models.CharField(
-        max_length=3, blank=True, null=True, choices=FUNCTIONGROUP1_CHOICES
+    pfma = models.CharField(
+        max_length=10, blank=False, null=False, choices=PFMA_CHOICES
     )
+    functiongroup1 = models.CharField(
+        max_length=200, blank=True, null=True, choices=FUNCTIONGROUP1_CHOICES
+    )
+
+    amount = models.DecimalField(max_digits=20, decimal_places=0, default=0)
 
     class Meta:
         unique_together = (("government", "slug"), ("government", "name"))
@@ -1751,3 +1756,25 @@ class PublicEntity(models.Model):
 
     def __str__(self):
         return "<%s %s>" % (self.__class__.__name__, self.get_url_path())
+
+
+class PublicEntityExpenditure(models.Model):
+    public_entity = models.ForeignKey(PublicEntity, on_delete=models.CASCADE)
+
+    functiongroup2 = models.CharField(
+        max_length=200, blank=True, null=True, choices=FUNCTIONGROUP1_CHOICES
+    )
+
+    expenditure_type = models.CharField(max_length=200, blank=True, null=True)
+
+    consol_indi = models.CharField(max_length=10, blank=True, null=True)
+
+    economic_classification1 = models.CharField(max_length=200, blank=True, null=True)
+    economic_classification2 = models.CharField(max_length=200, blank=True, null=True)
+    economic_classification3 = models.CharField(max_length=200, blank=True, null=True)
+    economic_classification4 = models.CharField(max_length=200, blank=True, null=True)
+    economic_classification5 = models.CharField(max_length=200, blank=True, null=True)
+    economic_classification6 = models.CharField(max_length=200, blank=True, null=True)
+    budget_phase = models.CharField(max_length=200, blank=True, null=True)
+
+    amount = models.DecimalField(max_digits=20, decimal_places=0)

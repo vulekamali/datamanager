@@ -10,6 +10,7 @@ from django.contrib.sites.models import Site
 from django.views.generic import TemplateView
 from import_export.admin import ImportMixin
 from import_export.formats.base_formats import CSV, XLSX
+from budgetportal.models.government import PublicEntityExpenditure
 
 from .import_export_admin import (
     DepartmentImportForm,
@@ -101,15 +102,6 @@ class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
 class PublicEntityAdmin(ImportMixin, admin.ModelAdmin):
     # Resource class to be used by the django-import-export package
     resource_class = PublicEntityResource
-    # File formats that can be used to import public entities
-    formats = [CSV]
-
-    def get_import_form(self):
-        """
-        Get the import form to use by the django-import-export package
-        to import public entities.
-        """
-        return PublicEntityImportForm
 
     def get_resource_kwargs(self, request, *args, **kwargs):
         """
@@ -126,7 +118,7 @@ class PublicEntityAdmin(ImportMixin, admin.ModelAdmin):
         "department",
         "get_financial_year",
     )
-    list_display_links = ("name")
+    list_display_links = "name"
     list_filter = (
         "government__sphere__financial_year__slug",
         "government__sphere__name",
@@ -279,6 +271,23 @@ class ShowcaseItemAdmin(SortableAdmin):
     model = models.ShowcaseItem
 
 
+class PublicEntityExpenditureAdmin(admin.ModelAdmin):
+    list_display = (
+        "public_entity",
+        "amount",
+        "budget_phase",
+        "expenditure_type",
+        "economic_classification1",
+        "economic_classification2",
+        "economic_classification3",
+        "economic_classification4",
+        "economic_classification5",
+        "economic_classification6",
+        "consol_indi",
+    )
+
+
+admin.site.register(PublicEntityExpenditure, PublicEntityExpenditureAdmin)
 admin.site.register(models.FinancialYear, FinancialYearAdmin)
 admin.site.register(models.Sphere, SphereAdmin)
 admin.site.register(models.Government, GovernmentAdmin)

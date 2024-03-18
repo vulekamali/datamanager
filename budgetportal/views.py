@@ -312,7 +312,6 @@ def public_entity_list_data(financial_year_id):
             public_entities.append(
                 {
                     "name": public_entity.name,
-                    "slug": str(public_entity.slug),
                     "url_path": public_entity.get_url_path(),
                     "department": public_entity.department.name,
                     "department_slug": public_entity.department.slug,
@@ -320,6 +319,7 @@ def public_entity_list_data(financial_year_id):
                     "functiongroup1": public_entity.functiongroup1,
                     "selected_year_slug": selected_year.slug,
                     "pfma": public_entity.pfma,
+                    "amount": int(public_entity.amount),
                 }
             )
         public_entities = sorted(public_entities, key=lambda d: d["name"])
@@ -1156,7 +1156,9 @@ def department_list(request, financial_year_id):
 
 
 def latest_public_entity_list(request):
+    department = request.GET.get('department', None)
     url = reverse("public-entity-list", args=(FinancialYear.get_latest_year().slug,))
+    url = f"{url}?department={department}" if department else url
     return redirect(url, permanent=False)
 
 

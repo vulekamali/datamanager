@@ -20,11 +20,13 @@ function notAvailableMessage() {
 }
 
 function public_entities(linksArray) {
+  linksArray.sort((a, b) => {return parseInt(b.amount) - parseInt(a.amount)});
+  const totalAmount = linksArray.reduce((acc, curr) => acc + parseInt(curr.amount), 0);
   return (
     <table className="PublicEntitySearch-table">
       <thead>
         <tr>
-          <th>Entity name</th>
+          <th width="30%">Entity name</th>
           <th>Relevant department</th>
           <th>PFMA</th>
           <th>Expenditure ({linksArray[0].selected_year_slug})</th>
@@ -40,7 +42,8 @@ function public_entities(linksArray) {
               department_slug,
               department_sphere,
               selected_year_slug,
-              pfma
+              pfma,
+              amount,
             },
             index
           ) => {
@@ -72,13 +75,11 @@ function public_entities(linksArray) {
                     <div
                       className="PublicEntityGroup-expenditure-inner"
                       style={{
-                        width: Math.floor(Math.random() * 100) + 1 + "%",
+                        width: (amount / totalAmount) * 100 + "%",
                       }}
                     >
                       <label>
-                        {Math.floor(
-                          Math.random() * 207973832360
-                        ).toLocaleString("en-ZA", {
+                        {parseInt(amount).toLocaleString("en-ZA", {
                           style: "currency",
                           currency: "ZAR",
                         })}
