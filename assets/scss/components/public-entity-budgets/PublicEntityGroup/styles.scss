@@ -1,0 +1,106 @@
+.PublicEntityGroup {
+  border-radius: 20px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+  background-color: white;
+  padding: 23px 21px;
+  position: relative;
+  overflow: hidden;
+}
+
+.PublicEntityGroup-title {
+  font-weight: bold;
+  font-weight: 900;
+  font-size: 18px;
+  padding-bottom: 23px;
+  margin: 0;
+}
+
+.PublicEntityGroup-item {
+  font-size: 14px;
+}
+
+.PublicEntityGroup-mapWrap {
+  position: relative;
+}
+
+.PublicEntityGroup-map {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: right;
+  padding: 5px;
+  fill: #f5f5f5;
+}
+
+.PublicEntityGroup-svg {
+  height: 100%;
+  width: auto;
+}
+
+.PublicEntityGroup-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+
+  &--doubleRow {
+    @media screen and (min-width: 750px) {
+      column-count: 2;
+    }
+  }
+}
+
+.PublicEntitySearch-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    th {
+      text-align: left;
+      padding: 10px 6px;
+      border-bottom: 1px solid #f2f2f2;
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        padding: 10px 6px;
+      }
+
+      &:hover {
+        td {
+          background-color: #f5f5f5;
+        }
+      }
+    }
+  }
+}
+
+.PublicEntityGroup-wrap {
+  position: relative;
+  z-index: 10;
+}
+
+.PublicEntityGroup-link {
+  text-decoration: underline;
+  color: #3f3f3f;
+
+  &:hover {
+    color: #1f1f1f;
+  }
+}
+
+.PublicEntityGroup-expenditure-outer {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+
+  .PublicEntityGroup-expenditure-inner {
+    background-color: #79b43c;
+    padding: 4px 6px;
+    font-size: smaller;
+    border-radius: 5px;
+  }
+}

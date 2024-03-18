@@ -14,6 +14,8 @@ from import_export.formats.base_formats import CSV, XLSX
 from .import_export_admin import (
     DepartmentImportForm,
     DepartmentResource,
+    PublicEntityImportForm,
+    PublicEntityResource,
     InfrastructureProjectResource,
 )
 
@@ -72,6 +74,59 @@ class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
         "get_financial_year",
     )
     list_display_links = ("vote_number", "name")
+    list_filter = (
+        "government__sphere__financial_year__slug",
+        "government__sphere__name",
+        "government__name",
+    )
+    search_fields = (
+        "government__sphere__financial_year__slug",
+        "government__sphere__name",
+        "government__name",
+        "name",
+    )
+    readonly_fields = ("slug",)
+    list_per_page = 20
+
+    def get_government(self, obj):
+        return obj.government.name
+
+    def get_sphere(self, obj):
+        return obj.government.sphere.name
+
+    def get_financial_year(self, obj):
+        return obj.government.sphere.financial_year.slug
+
+
+class PublicEntityAdmin(ImportMixin, admin.ModelAdmin):
+    # Resource class to be used by the django-import-export package
+    resource_class = PublicEntityResource
+    # File formats that can be used to import public entities
+    formats = [CSV]
+
+    def get_import_form(self):
+        """
+        Get the import form to use by the django-import-export package
+        to import public entities.
+        """
+        return PublicEntityImportForm
+
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        """
+        Get the kwargs to send on to the public entity resource when
+        we import public entities.
+        """
+        if "sphere" in request.POST:
+            return {"sphere": request.POST["sphere"]}
+        return {}
+
+    list_display = (
+        "name",
+        "functiongroup1",
+        "department",
+        "get_financial_year",
+    )
+    list_display_links = ("name")
     list_filter = (
         "government__sphere__financial_year__slug",
         "government__sphere__name",
@@ -229,6 +284,7 @@ admin.site.register(models.Sphere, SphereAdmin)
 admin.site.register(models.Government, GovernmentAdmin)
 admin.site.register(models.GovtFunction, GovtFunctionAdmin)
 admin.site.register(models.Department, DepartmentAdmin)
+admin.site.register(models.PublicEntity, PublicEntityAdmin)
 admin.site.register(models.InfrastructureProjectPart, InfrastructureProjectAdmin)
 admin.site.register(models.Programme, ProgrammeAdmin)
 admin.site.register(User, UserAdmin)

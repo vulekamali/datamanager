@@ -49,6 +49,7 @@
   font-size: 14px;
   display: block;
   user-select: none;
+  
   @include clearfix;
 
   &:hover {
@@ -82,4 +83,8 @@
 
 .PseudoSelect-text {
   display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 330px;
 }

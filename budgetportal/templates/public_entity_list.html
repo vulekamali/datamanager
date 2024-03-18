@@ -1,0 +1,19 @@
+{% extends 'page-shell.html' %}
+{% load define_action %}
+{% block page_content %}
+
+<div class="Page-content Page-content--dynamicYears">
+  <main class="Page-contentInner">
+    <h1 class="Page-mainHeading">Public Entities Expenditure for {{ selected_financial_year }}</h1>
+    <p>
+      Public entities in South Africa are state-owned companies or
+      institutions that provide goods or services to the public. They are
+      accountable to the government departments that falls under the same
+      ministerial portfolio. The relationship between public entities and
+      their partner departments is governed by
+      <a href="">legislation, policy, and memoranda of understanding</a>.
+    </p>
+    {% include 'components/public-entity-budgets/PublicEntitySearch/index.html' with national=national.0  %}
+  </main>
+</div>
+{% endblock %}

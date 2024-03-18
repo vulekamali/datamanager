@@ -30,6 +30,7 @@ from .government import (
     Government,
     GovtFunction,
     Department,
+    PublicEntity,
     Programme,
     SPHERE_SLUG_CHOICES,
     NATIONAL_SLUG,
