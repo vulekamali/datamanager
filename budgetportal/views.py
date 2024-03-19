@@ -509,7 +509,7 @@ def department_page(
 
     context["public_entities"] = []
 
-    for public_entity in PublicEntity.objects.filter(department__slug=department_slug):
+    for public_entity in PublicEntity.objects.filter(department__slug=department_slug, government=department.government):
         context["public_entities"].append(
             {
                 "name": public_entity.name,
@@ -523,6 +523,7 @@ def department_page(
 def public_entity_page(
     request, financial_year_id, sphere_slug, government_slug, public_entity_slug
 ):
+    raise()
     public_entity = None
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
