@@ -71,7 +71,7 @@
     "fields": {
       "name": "public-entities",
       "label": "Public Entities",
-      "url": "/public-entities",
+      "url": "/latest/public-entities",
       "align_right": false,
       "main_menu_item_order": 4
     }
