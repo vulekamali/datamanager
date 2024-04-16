@@ -6,4 +6,4 @@ set -o nounset
 
 yarn build
 python manage.py collectstatic --noinput
-gunicorn $GUNICORN_WORKERS_ARG --config gunicorn.config.py budgetportal.wsgi:application --log-file - --bind 0.0.0.0:$PORT
+gunicorn --workers $GUNICORN_WORKERS_ARG --config gunicorn.config.py budgetportal.wsgi:application --log-file - --bind 0.0.0.0:$PORT
