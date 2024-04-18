@@ -118,7 +118,7 @@ class PublicEntityAdmin(ImportMixin, admin.ModelAdmin):
         "department",
         "get_financial_year",
     )
-    list_display_links = "name"
+    list_display_links = ("name")
     list_filter = (
         "government__sphere__financial_year__slug",
         "government__sphere__name",
