@@ -1,3 +1,4 @@
+import simplejson
 import json
 import logging
 from csv import DictWriter
@@ -39,7 +40,7 @@ from .models import (
     Video,
     ShowcaseItem,
 )
-from .models.government import PublicEntity
+from .models.government import PublicEntity, PublicEntityExpenditure
 from .summaries import (
     InYearSpending,
     DepartmentProgrammesEcon4,
@@ -509,7 +510,9 @@ def department_page(
 
     context["public_entities"] = []
 
-    for public_entity in PublicEntity.objects.filter(department__slug=department_slug, government=department.government):
+    for public_entity in PublicEntity.objects.filter(
+        department__slug=department_slug, government=department.government
+    ):
         context["public_entities"].append(
             {
                 "name": public_entity.name,
@@ -523,62 +526,79 @@ def department_page(
 def public_entity_page(
     request, financial_year_id, sphere_slug, government_slug, public_entity_slug
 ):
-    raise()
-    public_entity = None
+    # Get public entity by public_entity_slug
+    selected_public_entity = PublicEntity.objects.filter(
+        slug=public_entity_slug
+    ).first()
     selected_year = get_object_or_404(FinancialYear, slug=financial_year_id)
 
-    years = FinancialYear.get_available_years()
-    for year in years:
-        if year.slug == financial_year_id:
-            selected_year = year
-            sphere = selected_year.spheres.filter(slug=sphere_slug).first()
-            government = sphere.governments.filter(slug=government_slug).first()
-            public_entity = government.public_entities.filter(
-                slug=public_entity_slug
-            ).first()
+    # Total up public entityies amount
+    total_amount = 0
+    for government in (
+        selected_year.spheres.filter(slug="national").first().governments.all()
+    ):
+        for public_entity in government.public_entities.all():
+            total_amount += public_entity.amount
 
-    financial_years_context = []
-    for year in years:
-        closest_match, closest_is_exact = year.get_closest_match(public_entity)
-        financial_years_context.append(
-            {
-                "id": year.slug,
-                "is_selected": year.slug == financial_year_id,
-                "closest_match": {
-                    "url_path": closest_match.get_url_path(),
-                    "is_exact_match": closest_is_exact,
-                },
-            }
+    # Total up public entities in same department
+    total_department_amount = 0
+    department_public_entities = []
+    chart_data = []
+    for department_public_entity in PublicEntity.objects.filter(
+        department=selected_public_entity.department
+    ):
+        total_department_amount += department_public_entity.amount
+        department_public_entities.append(department_public_entity)
+        # if department_public_entity is selected_public_entity then color_group = 2 else 1
+        colour_group = 2 if department_public_entity == selected_public_entity else 1
+        chart_data.append(
+            [
+                colour_group,
+                simplejson.dumps(department_public_entity.amount, use_decimal=True),
+                department_public_entity.name,
+                simplejson.dumps(department_public_entity.id),
+                department_public_entity.slug,
+            ]
         )
 
-    govt_label = "National"
+    # Get public entity expenditure
+    public_entity_expenditure = PublicEntityExpenditure.objects.filter(
+        public_entity=selected_public_entity
+    )
+
+    # Public entity amount percentage of total department amount
+    percentage_of_total_department_amount = (
+        selected_public_entity.amount / total_department_amount
+    ) * 100
+
+    # Public entity amount percentage of total amount
+    percentage_of_total_amount = (selected_public_entity.amount / total_amount) * 100
 
     context = {
-        "comments_enabled": settings.COMMENTS_ENABLED,
-        "financial_years": financial_years_context,
-        "government": {
-            "name": public_entity.government.name,
-            "label": govt_label,
-            "slug": str(public_entity.government.slug),
-        },
-        "intro": public_entity.intro,
-        "name": public_entity.name,
-        "slug": str(public_entity.slug),
-        "sphere": {
-            "name": public_entity.government.sphere.name,
-            "slug": public_entity.government.sphere.slug,
-        },
+        "public_entity_id": selected_public_entity.id,
+        "intro": selected_public_entity.intro,
+        "name": selected_public_entity.name,
+        "department": selected_public_entity.department.name,
+        "department_slug": selected_public_entity.department.slug,
+        "slug": str(selected_public_entity.slug),
         "selected_financial_year": financial_year_id,
         "selected_tab": "public_entities",
-        "title": "%s budget %s  - vulekamali"
-        % (public_entity.name, selected_year.slug),
-        "description": "%s public entity: %s budget data for the %s financial year %s"
+        "title": "%s expenditure %s  - vulekamali"
+        % (selected_public_entity.name, selected_year.slug),
+        "description": "%s public entity: Expenditure data for the %s financial year %s"
         % (
-            govt_label,
-            public_entity.name,
+            selected_public_entity.name,
             selected_year.slug,
             COMMON_DESCRIPTION_ENDING,
         ),
+        "public_entity": selected_public_entity,
+        "total_amount": total_amount,
+        "total_department_amount": total_department_amount,
+        "percentage_of_total_amount": percentage_of_total_amount,
+        "percentage_of_total_department_amount": percentage_of_total_department_amount,
+        "department_public_entities": department_public_entities,
+        "chart_data": chart_data,
+        "public_entity_expenditure": public_entity_expenditure,
     }
     context["navbar"] = MainMenuItem.objects.prefetch_related("children").all()
     context["latest_year"] = FinancialYear.get_latest_year().slug
@@ -586,7 +606,7 @@ def public_entity_page(
         str(settings.ROOT_DIR.path("_data/global_values.yaml"))
     )
     context["admin_url"] = reverse(
-        "admin:budgetportal_department_change", args=(public_entity.pk,)
+        "admin:budgetportal_department_change", args=(selected_public_entity.pk,)
     )
 
     return render(request, "public_entity.html", context)
@@ -1157,7 +1177,7 @@ def department_list(request, financial_year_id):
 
 
 def latest_public_entity_list(request):
-    department = request.GET.get('department', None)
+    department = request.GET.get("department", None)
     url = reverse("public-entity-list", args=(FinancialYear.get_latest_year().slug,))
     url = f"{url}?department={department}" if department else url
     return redirect(url, permanent=False)

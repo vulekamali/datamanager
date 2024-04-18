@@ -57,3 +57,4 @@ import './components/Share/scripts.js';
 import './scenes/homepage/Hero/scripts.js';
 
 import './embeds/equitable-share/index.js';
+import './embeds/chart-bubbles/index.js';
