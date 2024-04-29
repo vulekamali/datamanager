@@ -1700,7 +1700,7 @@ class PublicEntity(models.Model):
     slug = AutoSlugField(
         populate_from="name", max_length=200, always_update=True, editable=True
     )
-    intro = models.TextField(default="A description of this public entity.")
+    intro = models.TextField(default="", blank=True)
 
     pfma = models.CharField(
         max_length=10, blank=False, null=False, choices=PFMA_CHOICES
