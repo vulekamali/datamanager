@@ -22,7 +22,7 @@ def make_financial_year(year):
 
 
 # Open the CSV file
-with open("ENT_ENE_CashFlow_202324 - Data.csv", newline="") as csvfile:
+with open("ENT_ENE_CashFlow_202324 - Data.csv", newline="") as csvfile: 
     # Create a DictReader object with named columns
     csvreader = csv.DictReader(csvfile)
 
@@ -37,7 +37,7 @@ with open("ENT_ENE_CashFlow_202324 - Data.csv", newline="") as csvfile:
     count = 0
     # Loop through each row in the CSV file
     for row in csvreader:
-        if count >= 1000000:
+        if count >= 10:
             break
 
         # Increment the counter

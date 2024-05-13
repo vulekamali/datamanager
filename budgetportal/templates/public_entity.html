@@ -1,6 +1,7 @@
 {% extends 'page-shell.html' %}
 {% load humanize %}
 {% load define_action %}
+{% load custom_filters %}
 {% block page_content %}
   <div class="Page-content">
     <main class="Page-contentInner is-padding-bottom-0">
@@ -69,6 +70,11 @@
       <table class="is-width-100-percent has-font-size-0-75-em has-border-bottom-1 has-line-height-2">
         <thead>
           <tr>
+            <th colspan="9" align="right"><small>
+              All Financial Values: R'000
+            </small></th>
+          </tr>
+          <tr>
             <th class="is-text-no-wrap">Consol indi</th>
             <th class="is-text-no-wrap">Classification 1</th>
             <th class="is-text-no-wrap">Classification 2</th>
@@ -91,7 +97,7 @@
               <td title="{{ expenditure.economic_classification5 }}">{{ expenditure.economic_classification5|truncatechars:40 }}</td>
               <td title="{{ expenditure.economic_classification6 }}">{{ expenditure.economic_classification6|truncatechars:40 }}</td>
               <td title="{{ expenditure.budget_phase }}" class="is-text-no-wrap">{{ expenditure.budget_phase|truncatechars:40 }}</td>
-              <td title="{{ expenditure.amount }}">{{ expenditure.amount|intcomma }}</td>
+              <td title="{{ expenditure.amount }}">{{ expenditure.amount|divide:1000|floatformat:"0"|intcomma }}</td>
             </tr>
           {% endfor %}
         </tbody>
