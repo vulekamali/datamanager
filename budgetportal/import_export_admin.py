@@ -116,6 +116,30 @@ class DepartmentInstanceLoader(ModelInstanceLoader):
 
         return None
 
+class PublicEntityInstanceLoader(ModelInstanceLoader):
+    """
+    Class to find a Public Entity model instance from a row.
+    """
+
+    def get_instance(self, row):
+        """
+        Gets a Public Entity instance by either a unique government-slug or
+        government-name combination.
+        """
+        name = self.resource.fields["name"].clean(row)
+        slug = slugify(name)
+        government = self.resource.fields["government"].clean(row)
+
+        q = Q(name=name, government=government)
+        q |= Q(slug=slug, government=government)
+
+        try:
+            return models.PublicEntity.objects.get(q)
+        except models.PublicEntity.DoesNotExist:
+            pass
+
+        return None
+
 
 class DepartmentResource(resources.ModelResource):
     """
@@ -155,12 +179,53 @@ class DepartmentResource(resources.ModelResource):
             self.fields["government"].widget.set_sphere(self.sphere)
 
 
+class PublicEntityResource(resources.ModelResource):
+    """
+    Class to help django-import-export know how to map the rows in public entity
+    import files to django models.
+    """
+
+    name = Field(attribute="name", column_name="entity_name")
+    pfma = Field(attribute="pfma", column_name="pfma")
+    functiongroup1 = Field(attribute="functiongroup1", column_name="functiongroup1")
+    government = Field(
+        attribute="government",
+        column_name="government",
+        widget=CustomGovernmentWidget(),
+    )
+
+    class Meta:
+        model = models.PublicEntity
+        fields = (
+            "government",
+            "name",
+            "pfma",
+            "functiongroup1"
+            )
+        instance_loader_class = PublicEntityInstanceLoader
+        import_id_fields = ["government", "name"]
+
+    def __init__(self, *args, **kwargs):
+        if "sphere" in kwargs:
+            self.sphere = kwargs["sphere"]
+            self.fields["government"].widget.set_sphere(self.sphere)
+
+
 class DepartmentImportForm(ImportForm):
     """
     Form class to use to upload a CSV file to import departments.
     """
 
     sphere = forms.ModelChoiceField(queryset=models.Sphere.objects.all(), required=True)
+
+
+class PublicEntityImportForm(ImportForm):
+    """
+    Form class to use to upload a CSV file to import public entities.
+    """
+
+    sphere = forms.ModelChoiceField(queryset=models.Sphere.objects.all(), required=True)
+
 
 
 class InfrastructureProjectProvinceField(Field):

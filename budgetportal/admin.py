@@ -10,10 +10,13 @@ from django.contrib.sites.models import Site
 from django.views.generic import TemplateView
 from import_export.admin import ImportMixin
 from import_export.formats.base_formats import CSV, XLSX
+from budgetportal.models.government import PublicEntityExpenditure
 
 from .import_export_admin import (
     DepartmentImportForm,
     DepartmentResource,
+    PublicEntityImportForm,
+    PublicEntityResource,
     InfrastructureProjectResource,
 )
 
@@ -72,6 +75,52 @@ class DepartmentAdmin(ImportMixin, admin.ModelAdmin):
         "get_financial_year",
     )
     list_display_links = ("vote_number", "name")
+    list_filter = (
+        "government__sphere__financial_year__slug",
+        "government__sphere__name",
+        "government__name",
+    )
+    search_fields = (
+        "government__sphere__financial_year__slug",
+        "government__sphere__name",
+        "government__name",
+        "name",
+    )
+    readonly_fields = ("slug",)
+    list_per_page = 20
+
+    def get_government(self, obj):
+        return obj.government.name
+
+    def get_sphere(self, obj):
+        return obj.government.sphere.name
+
+    def get_financial_year(self, obj):
+        return obj.government.sphere.financial_year.slug
+
+
+class PublicEntityAdmin(ImportMixin, admin.ModelAdmin):
+    # Resource class to be used by the django-import-export package
+    resource_class = PublicEntityResource
+
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        """
+        Get the kwargs to send on to the public entity resource when
+        we import public entities.
+        """
+        if "sphere" in request.POST:
+            return {"sphere": request.POST["sphere"]}
+        return {}
+
+    list_display = (
+        "name",
+        "functiongroup1",
+        "department",
+        "get_financial_year",
+    )
+    
+    list_display_links = ("name", "functiongroup1")
+
     list_filter = (
         "government__sphere__financial_year__slug",
         "government__sphere__name",
@@ -224,11 +273,29 @@ class ShowcaseItemAdmin(SortableAdmin):
     model = models.ShowcaseItem
 
 
+class PublicEntityExpenditureAdmin(admin.ModelAdmin):
+    list_display = (
+        "public_entity",
+        "amount",
+        "budget_phase",
+        "expenditure_type",
+        "economic_classification1",
+        "economic_classification2",
+        "economic_classification3",
+        "economic_classification4",
+        "economic_classification5",
+        "economic_classification6",
+        "consol_indi",
+    )
+
+
+admin.site.register(PublicEntityExpenditure, PublicEntityExpenditureAdmin)
 admin.site.register(models.FinancialYear, FinancialYearAdmin)
 admin.site.register(models.Sphere, SphereAdmin)
 admin.site.register(models.Government, GovernmentAdmin)
 admin.site.register(models.GovtFunction, GovtFunctionAdmin)
 admin.site.register(models.Department, DepartmentAdmin)
+admin.site.register(models.PublicEntity, PublicEntityAdmin)
 admin.site.register(models.InfrastructureProjectPart, InfrastructureProjectAdmin)
 admin.site.register(models.Programme, ProgrammeAdmin)
 admin.site.register(User, UserAdmin)

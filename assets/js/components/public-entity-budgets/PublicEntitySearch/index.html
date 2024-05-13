@@ -1,0 +1,7 @@
+{% load define_action %}
+<div
+        class="js-initPublicEntitySearch"
+        data-public-entities-json='{ "data": {{ public_entities | jsonify | escape }} }'
+        data-year='{{ selected_financial_year }}'
+>
+</div>

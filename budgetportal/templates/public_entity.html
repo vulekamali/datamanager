@@ -1,0 +1,107 @@
+{% extends 'page-shell.html' %}
+{% load humanize %}
+{% load define_action %}
+{% load custom_filters %}
+{% block page_content %}
+  <div class="Page-content">
+    <main class="Page-contentInner is-padding-bottom-0">
+      <div class="Section is-invisible">
+        <a href="/">vulekamali</a>
+        <span>/</span>
+        <a href="/{{ selected_financial_year }}/public-entities">Public Entities</a>
+        <span>/ {{ name }}</span>
+      </div>
+      <p class="Page-pre-title">
+        <a href="/{{ selected_financial_year }}/national/departments/{{ department_slug }}">{{ department }}</a>
+      </p>
+      <h1 class="Page-mainHeading u-marginTop15">{{ name }}</h1>
+      <div class="is-padding-left-40 is-padding-right-40">
+        <div class="is-grid-2fr-1fr">
+          <div>
+            <h2 class="is-font-size-1-em">Entity information:</h2>
+            <p>{{ intro }}</p>
+            <table class="is-width-100-percent has-border-bottom-1 has-line-height-2">
+              <tr>
+                <td>PFMA Schedule:</td>
+                <td align="right">{{ public_entity.pfma }}</td>
+              </tr>
+              <tr>
+                <td>Total expenditure ({{ selected_financial_year }}):</td>
+                <td align="right">R{{ public_entity.amount|intcomma }}</td>
+              </tr>
+              <tr>
+                <td>Total expenditure as % of {{ department }}:</td>
+                <td align="right">{{ percentage_of_total_department_amount|stringformat:".2f%%" }}</td>
+              </tr>
+              <tr>
+                <td>
+                  Total expenditure as % of <a href="/{{ selected_financial_year }}/public-entities">all entities</a>:
+                </td>
+                <td align="right">{{ percentage_of_total_amount|stringformat:".2f%%" }}</td>
+              </tr>
+            </table>
+          </div>
+          <div>
+            <h2 class="is-font-size-1-em">{{ department }} expenditure:</h2>
+            <div class="Section is-padding-less">
+              <p class="is-text-align-center is-margin-0">
+                {{ department }}
+                <br />
+                R{{ total_department_amount|intcomma }}
+              </p>
+              <svg id="vis"
+                   width="300"
+                   height="300"
+                   data-public-entities-bubbles='{{ chart_data | jsonify | escape }}'>
+              </svg>
+              <p class="is-margin-0">
+                <span class="is-orange-circle"></span>
+                {{ name }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="is-padding-left-40 is-padding-right-40">
+    <h2 class="pull-left">Detailed financial information:</h2>
+    <div class="Section u-marginBottom20">
+      <table class="is-width-100-percent has-font-size-0-75-em has-border-bottom-1 has-line-height-2">
+        <thead>
+          <tr>
+            <th colspan="9" align="right"><small>
+              All Financial Values: R'000
+            </small></th>
+          </tr>
+          <tr>
+            <th class="is-text-no-wrap">Consol indi</th>
+            <th class="is-text-no-wrap">Classification 1</th>
+            <th class="is-text-no-wrap">Classification 2</th>
+            <th class="is-text-no-wrap">Classification 3</th>
+            <th class="is-text-no-wrap">Classification 4</th>
+            <th class="is-text-no-wrap">Classification 5</th>
+            <th class="is-text-no-wrap">Classification 6</th>
+            <th class="is-text-no-wrap">Budget phase</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for expenditure in public_entity_expenditure %}
+            <tr>
+              <td title="{{ expenditure.consol_indi }}">{{ expenditure.consol_indi }}</td>
+              <td title="{{ expenditure.economic_classification1 }}">{{ expenditure.economic_classification1|truncatechars:40 }}</td>
+              <td title="{{ expenditure.economic_classification2 }}">{{ expenditure.economic_classification2|truncatechars:40 }}</td>
+              <td title="{{ expenditure.economic_classification3 }}">{{ expenditure.economic_classification3|truncatechars:40 }}</td>
+              <td title="{{ expenditure.economic_classification4 }}">{{ expenditure.economic_classification4|truncatechars:40 }}</td>
+              <td title="{{ expenditure.economic_classification5 }}">{{ expenditure.economic_classification5|truncatechars:40 }}</td>
+              <td title="{{ expenditure.economic_classification6 }}">{{ expenditure.economic_classification6|truncatechars:40 }}</td>
+              <td title="{{ expenditure.budget_phase }}" class="is-text-no-wrap">{{ expenditure.budget_phase|truncatechars:40 }}</td>
+              <td title="{{ expenditure.amount }}">{{ expenditure.amount|divide:1000|floatformat:"0"|intcomma }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

@@ -1,211 +1,256 @@
 [
-{
-  "model": "budgetportal.mainmenuitem",
-  "pk": 1,
-  "fields": {
-    "name": "revenue-spending",
-    "label": "Revenue and Spending",
-    "url": null,
-    "align_right": false,
-    "main_menu_item_order": 2
+  {
+    "model": "budgetportal.mainmenuitem",
+    "pk": 1,
+    "fields": {
+      "name": "revenue-spending",
+      "label": "Revenue and Spending",
+      "url": null,
+      "align_right": false,
+      "main_menu_item_order": 2
+    }
+  },
+  {
+    "model": "budgetportal.mainmenuitem",
+    "pk": 2,
+    "fields": {
+      "name": "about",
+      "label": "About",
+      "url": "/about",
+      "align_right": true,
+      "main_menu_item_order": 6
+    }
+  },
+  {
+    "model": "budgetportal.mainmenuitem",
+    "pk": 4,
+    "fields": {
+      "name": "homepage",
+      "label": "Homepage",
+      "url": "/",
+      "align_right": false,
+      "main_menu_item_order": 1
+    }
+  },
+  {
+    "model": "budgetportal.mainmenuitem",
+    "pk": 5,
+    "fields": {
+      "name": "learning",
+      "label": "Learning",
+      "url": null,
+      "align_right": true,
+      "main_menu_item_order": 7
+    }
+  },
+  {
+    "model": "budgetportal.mainmenuitem",
+    "pk": 6,
+    "fields": {
+      "name": "infrastructure",
+      "label": "Infrastructure",
+      "url": null,
+      "align_right": false,
+      "main_menu_item_order": 3
+    }
+  },
+  {
+    "model": "budgetportal.mainmenuitem",
+    "pk": 7,
+    "fields": {
+      "name": "data",
+      "label": "Data and Analysis",
+      "url": "/datasets",
+      "align_right": false,
+      "main_menu_item_order": 5
+    }
+  },
+  {
+    "model": "budgetportal.mainmenuitem",
+    "pk": 9,
+    "fields": {
+      "name": "public-entities",
+      "label": "Public Entities",
+      "url": "/latest/public-entities",
+      "align_right": false,
+      "main_menu_item_order": 4,
+      "highlight_as_new": true
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 1,
+    "fields": {
+      "parent": 1,
+      "name": "departments",
+      "label": "Department budgets",
+      "url": "/latest/departments",
+      "sub_menu_item_order": 1
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 4,
+    "fields": {
+      "parent": 2,
+      "name": "background",
+      "label": "Background",
+      "url": "/about#background",
+      "sub_menu_item_order": 4
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 5,
+    "fields": {
+      "parent": 2,
+      "name": "development",
+      "label": "Development",
+      "url": "/about#development",
+      "sub_menu_item_order": 5
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 6,
+    "fields": {
+      "parent": 2,
+      "name": "project-status",
+      "label": "Project Status",
+      "url": "/about#project-status",
+      "sub_menu_item_order": 6
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 7,
+    "fields": {
+      "parent": 2,
+      "name": "your-contribution",
+      "label": "Your Contribution",
+      "url": "/about#your-contribution",
+      "sub_menu_item_order": 7
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 8,
+    "fields": {
+      "parent": 2,
+      "name": "contacts",
+      "label": "Contacts",
+      "url": "/about#contacts",
+      "sub_menu_item_order": 8
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 9,
+    "fields": {
+      "parent": 2,
+      "name": "media-and-other-information",
+      "label": "Media & Other Information",
+      "url": "/about#media-and-other-information",
+      "sub_menu_item_order": 9
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 10,
+    "fields": {
+      "parent": 2,
+      "name": "data-scientists",
+      "label": "Information for Developers and Data Scientists",
+      "url": "/about#data-scientists",
+      "sub_menu_item_order": 10
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 11,
+    "fields": {
+      "parent": 5,
+      "name": "glossary",
+      "label": "Glossary",
+      "url": "/learning-resources/glossary",
+      "sub_menu_item_order": 14
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 12,
+    "fields": {
+      "parent": 5,
+      "name": "resources",
+      "label": "Resources",
+      "url": "/learning-resources/resources/",
+      "sub_menu_item_order": 13
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 13,
+    "fields": {
+      "parent": 5,
+      "name": "guides",
+      "label": "Dataset Guides",
+      "url": "/learning-resources/guides/",
+      "sub_menu_item_order": 12
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 14,
+    "fields": {
+      "parent": 6,
+      "name": "ppp",
+      "label": "PPP & major national department projects",
+      "url": "/infrastructure-projects/",
+      "sub_menu_item_order": 14
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 15,
+    "fields": {
+      "parent": 6,
+      "name": "full",
+      "label": "Government department projects",
+      "url": "/infrastructure-projects/full/",
+      "sub_menu_item_order": 15
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 16,
+    "fields": {
+      "parent": 5,
+      "name": "faq",
+      "label": "FAQ",
+      "url": "/faq",
+      "sub_menu_item_order": 15
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 17,
+    "fields": {
+      "parent": 1,
+      "name": "revenue",
+      "label": "Division of revenue",
+      "url": "/learning-resources/guides/division-revenue-raised-nationally/",
+      "sub_menu_item_order": 17
+    }
+  },
+  {
+    "model": "budgetportal.submenuitem",
+    "pk": 18,
+    "fields": {
+      "parent": 5,
+      "name": "videos",
+      "label": "Videos",
+      "url": "/learning-resources/videos/",
+      "sub_menu_item_order": 11
+    }
   }
-},
-{
-  "model": "budgetportal.mainmenuitem",
-  "pk": 2,
-  "fields": {
-    "name": "about",
-    "label": "About",
-    "url": "/about",
-    "align_right": true,
-    "main_menu_item_order": 6
-  }
-},
-{
-  "model": "budgetportal.mainmenuitem",
-  "pk": 3,
-  "fields": {
-    "name": "faq",
-    "label": "FAQ",
-    "url": "/faq",
-    "align_right": true,
-    "main_menu_item_order": 7
-  }
-},
-{
-  "model": "budgetportal.mainmenuitem",
-  "pk": 4,
-  "fields": {
-    "name": "homepage",
-    "label": "Homepage",
-    "url": "/",
-    "align_right": false,
-    "main_menu_item_order": 1
-  }
-},
-{
-  "model": "budgetportal.mainmenuitem",
-  "pk": 5,
-  "fields": {
-    "name": "learning",
-    "label": "Learning",
-    "url": "/learning-resources",
-    "align_right": false,
-    "main_menu_item_order": 3
-  }
-},
-{
-  "model": "budgetportal.mainmenuitem",
-  "pk": 6,
-  "fields": {
-    "name": "infrastructure",
-    "label": "Infrastructure",
-    "url": null,
-    "align_right": false,
-    "main_menu_item_order": 4
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 1,
-  "fields": {
-    "parent": 1,
-    "name": "departments",
-    "label": "Department budgets",
-    "url": "/latest/departments",
-    "sub_menu_item_order": 1
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 4,
-  "fields": {
-    "parent": 2,
-    "name": "background",
-    "label": "Background",
-    "url": "/about#background",
-    "sub_menu_item_order": 4
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 5,
-  "fields": {
-    "parent": 2,
-    "name": "development",
-    "label": "Development",
-    "url": "/about#development",
-    "sub_menu_item_order": 5
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 6,
-  "fields": {
-    "parent": 2,
-    "name": "project-status",
-    "label": "Project Status",
-    "url": "/about#project-status",
-    "sub_menu_item_order": 6
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 7,
-  "fields": {
-    "parent": 2,
-    "name": "your-contribution",
-    "label": "Your Contribution",
-    "url": "/about#your-contribution",
-    "sub_menu_item_order": 7
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 8,
-  "fields": {
-    "parent": 2,
-    "name": "contacts",
-    "label": "Contacts",
-    "url": "/about#contacts",
-    "sub_menu_item_order": 8
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 9,
-  "fields": {
-    "parent": 2,
-    "name": "media-and-other-information",
-    "label": "Media & Other Information",
-    "url": "/about#media-and-other-information",
-    "sub_menu_item_order": 9
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 10,
-  "fields": {
-    "parent": 2,
-    "name": "data-scientists",
-    "label": "Information for Developers and Data Scientists",
-    "url": "/about#data-scientists",
-    "sub_menu_item_order": 10
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 11,
-  "fields": {
-    "parent": 5,
-    "name": "glossary",
-    "label": "Glossary",
-    "url": "/learning-resources/glossary",
-    "sub_menu_item_order": 11
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 12,
-  "fields": {
-    "parent": 5,
-    "name": "resources",
-    "label": "Resources",
-    "url": "/learning-resources/resources/",
-    "sub_menu_item_order": 12
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 13,
-  "fields": {
-    "parent": 5,
-    "name": "guides",
-    "label": "Dataset Guides",
-    "url": "/learning-resources/guides/",
-    "sub_menu_item_order": 13
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 14,
-  "fields": {
-    "parent": 6,
-    "name": "ppp",
-    "label": "PPP & major national department projects",
-    "url": "/infrastructure-projects/",
-    "sub_menu_item_order": 14
-  }
-},
-{
-  "model": "budgetportal.submenuitem",
-  "pk": 15,
-  "fields": {
-    "parent": 6,
-    "name": "full",
-    "label": "Government department projects",
-    "url": "/infrastructure-projects/full/",
-    "sub_menu_item_order": 15
-  }
-}
 ]

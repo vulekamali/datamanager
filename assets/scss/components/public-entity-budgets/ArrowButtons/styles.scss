@@ -1,0 +1,168 @@
+
+.ArrowButtons {
+  display: none;
+
+  @supports (display: flex) {
+    display: block;
+
+    &--fixed {
+      position: fixed;
+      padding: 0.25rem;
+      background-color: #f0f0f0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999999;
+      overflow: hidden;
+      transform: translateY(-100px);
+      transition: transform 0.4s;
+      box-shadow:
+        0 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0 4px 5px 0 rgba(0, 0, 0, 0.14),
+        0 1px 10px 0 rgba(0, 0, 0, 0.12);
+
+      &.is-active {
+        transform: translateY(47px);
+        overflow: visible;
+      }
+    }
+  }
+}
+
+.ArrowButtons-list {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  max-width: 810px;
+  margin: 0 auto;
+}
+
+.ArrowButtons-item {
+  width: 100%;
+  margin: 0 0.5rem;
+}
+
+.ArrowButtons-button {
+  padding-right: 1rem;
+  position: relative;
+  color: white;
+  display: block;
+  text-decoration: none;
+
+  @media screen and (min-width: 900px) {
+    &.is-responsive {
+      padding-right: 3rem;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 1rem solid transparent;
+    border-left: 1rem solid #aaa;
+    border-bottom: 1rem solid transparent;
+  }
+
+  @media screen and (min-width: 900px) {
+    &.is-responsive::after {
+      border-top: 3rem solid transparent;
+      border-left: 3rem solid #aaa;
+      border-bottom: 3rem solid transparent;
+    }
+  }
+
+  &--green.active::after {
+    border-left-color: #7bb344;
+  }
+
+  &--orange.active::after {
+    border-left-color: #ee9f31;
+  }
+
+  &--purple.active::after {
+    border-left-color: #ad3c64;
+  }
+
+  &--link.ArrowButtons-button--green.active:hover::after {
+    border-left-color: darken(#7bb344, 15%);
+  }
+
+  &--link.ArrowButtons-button--orange.active:hover::after {
+    border-left-color: darken(#ee9f31, 15%);
+  }
+
+  &--link.ArrowButtons-button--purple.active:hover::after {
+    border-left-color: darken(#ad3c64, 15%);
+  }
+}
+
+.ArrowButtons-box {
+  height: 2rem;
+  background-color: #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 0.5rem;
+
+  @media screen and (min-width: 900px) {
+    &.is-responsive {
+      height: 6rem;
+      padding: 0 2rem;
+    }
+  }
+
+  .ArrowButtons-button.active &--green {
+    background-color: #7bb344;
+  }
+
+  .ArrowButtons-button--link.active:hover &--green {
+    background-color: darken(#7bb344, 15%);
+  }
+
+  .ArrowButtons-button.active &--orange {
+    background-color: #ee9f31;
+  }
+
+  .ArrowButtons-button--link.active:hover &--orange {
+    background-color: darken(#ee9f31, 15%);
+  }
+
+  .ArrowButtons-button.active &--purple {
+    background-color: #ad3c64;
+  }
+
+  .ArrowButtons-button--link.active:hover &--purple {
+    background-color: darken(#ad3c64, 15%);
+  }
+}
+
+.ArrowButtons-description {
+  display: none;
+
+  @media screen and (min-width: 900px) {
+    &.is-responsive {
+      line-height: 1.2;
+      display: block;
+    }
+  }
+}
+
+.ArrowButtons-heading {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 2;
+
+  @media screen and (min-width: 900px) {
+    &.is-responsive {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+  }
+}

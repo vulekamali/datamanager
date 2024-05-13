@@ -3,6 +3,10 @@
     @return 10;
   }
 
+  @if $name == 'PublicEntitySearch-select' {
+    @return 10;
+  }
+
   @if $name == 'SearchResult-item' {
     @return 10;
   }
