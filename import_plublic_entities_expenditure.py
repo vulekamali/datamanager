@@ -37,7 +37,7 @@ with open("ENT_ENE_CashFlow_202324 - Data.csv", newline="") as csvfile:
     count = 0
     # Loop through each row in the CSV file
     for row in csvreader:
-        if count >= 100000:
+        if count >= 1000000:
             break
 
         # Increment the counter
