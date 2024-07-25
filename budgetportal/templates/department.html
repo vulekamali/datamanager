@@ -86,6 +86,29 @@
             {% endif %}
             {% include 'components/department-budgets/IntroSection/index.html' with description=intro datasets=treasury_datasets location=department_location %}
 
+            {% if public_entities %}
+            <div class="IntroSection">
+                <div class="IntroSection-textWrap">
+                  <div class="js-initIntroSection">
+                    <div class="IntroSection-text">
+                        <div class="IntroSection-content">
+                                <h2>
+                                    <span class="Navbar-Tag-new">New</span> <a href="/latest/public-entities?department={{name}}">Public Entities</a> associated with this department:
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="DepartmentPublicEntity-list">
+                    {% for entity in public_entities %}
+                        <li>
+                            <a href="{{ entity.url_path }}">{{ entity.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+              </div>
+              {% endif %}
+
             <div class="Page-subHeading u-marginTop15 u-supportsFlex u-textAlignCenter u-marginBottom25">
                 The Budget Cycle
             </div>

@@ -51,6 +51,12 @@ department_urlpatterns = [
     ),
 ]
 
+public_entity_urlpatterns = [
+    url(
+        r"^$", cache_page(CACHE_MINUTES_SECS)(views.public_entity_page), name="public-entity"
+    ),
+]
+
 urlpatterns = [
     url("sentry-debug/", trigger_error),
     url(
@@ -244,6 +250,25 @@ urlpatterns = [
         "/(?P<department_slug>[\w-]+)/",
         include((department_urlpatterns, "provincial"), namespace="provincial"),
     ),
+    # Public Entities List
+    url(
+        r"^latest/public-entities$",
+        views.latest_public_entity_list,
+        name="latest-public-entity-list",
+    ),
+    url(
+        r"^(?P<financial_year_id>\d{4}-\d{2})/public-entities$",
+        cache_page(CACHE_MINUTES_SECS)(views.public_entity_list),
+        name="public-entity-list",
+    ),
+    # Public Entity detail
+    # - National
+    url(
+        r"^(?P<financial_year_id>\d{4}-\d{2})/national/public-entities/(?P<public_entity_slug>[\w-]+)/",
+        include((public_entity_urlpatterns, "national"), namespace="national"),
+        kwargs={"sphere_slug": "national", "government_slug": "south-africa"},
+        name="national-public-entity",
+    ),
     url(
         r"^robots\.txt$",
         views.robots,
@@ -275,6 +300,12 @@ urlpatterns = [
         cache_page(CACHE_MINUTES_SECS)(sitemap_views.sitemap),
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
+    ),
+    # Public Entities List
+    url(
+        r"^public-entities$",
+        views.public_entity_list,
+        name="public-entity-list",
     ),
     url("^", include(webflow_urls.urlpatterns)),
     re_path(r"^cms/", include(wagtailadmin_urls)),

@@ -59,6 +59,7 @@
   }
 }
 
+.Page-pre-title,
 .Page-title,
 .Page-mainHeading {
   color: #3f3f3f;
@@ -74,6 +75,18 @@
 
   @media ($tablet-breakpoint) {
     margin: 45px 40px 30px;
+  }
+}
+
+.Page-pre-title {
+  font-size: 1em;
+  color: #979797;
+  margin-bottom: 0;
+  margin-top: 25px;
+  font-weight: normal;
+
+  a {
+    color: #5e5d5d;
   }
 }
 

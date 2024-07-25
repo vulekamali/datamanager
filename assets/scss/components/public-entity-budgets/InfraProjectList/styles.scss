@@ -1,0 +1,21 @@
+#InfraSection * {
+    td, th {
+        padding-bottom: 10px;
+    }
+
+    tr:hover {
+        background-color: #f4f1f1;
+    }
+
+    @media (max-width: 768px) {
+        .hidden-sm {
+            display: none;
+        }
+    }
+
+        @media (max-width: 992px) {
+        .hidden-md {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,47 @@
+.PublicEntityControls {
+  @include clearfix;
+}
+
+.PublicEntityControls-keywords {
+  width: 100%;
+  max-width: 600px;
+
+  @media screen and (min-width: 1000px) {
+    width: 350px;
+    float: left;
+  }
+}
+
+.PublicEntityControls-in {
+  float: left;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.PublicEntityControls-dropdown {
+  float: left;
+  width: 230px;
+}
+
+.PublicEntityControls-itemWrap {
+  padding: 10px 0;
+  @include clearfix;
+
+  @media screen and (min-width: 1000px) {
+    float: left;
+    padding: 0;
+  }
+}
+
+.DepartmentPublicEntity-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+
+  li {
+    list-style-type: none;
+  }
+}
