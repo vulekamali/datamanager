@@ -33,11 +33,6 @@ import './components/department-budgets/IntroSection/scripts.jsx';
 import './components/department-budgets/ArrowButtons/scripts.js';
 import './components/department-budgets/PerformanceIndicators/scripts.jsx';
 
-import './components/public-entity-budgets/PublicEntitySearch/scripts.jsx';
-import './components/public-entity-budgets/IntroSection/scripts.jsx';
-import './components/public-entity-budgets/ArrowButtons/scripts.js';
-import './components/public-entity-budgets/PerformanceIndicators/scripts.jsx';
-
 import './components/performance/Table/scripts.jsx';
 
 import './components/contributed-data/CsoMeta/scripts.js';
@@ -57,4 +52,3 @@ import './components/Share/scripts.js';
 import './scenes/homepage/Hero/scripts.js';
 
 import './embeds/equitable-share/index.js';
-import './embeds/chart-bubbles/index.js';

@@ -28,9 +28,7 @@ RUN set -ex; \
 
 RUN pip install --upgrade pip
 RUN pip install -U poetry==1.7.1
-RUN poetry config virtualenvs.create false
-
-RUN pip install --no-cache-dir --use-pep517 "django-allauth==0.50.0"
+RUN poetry config installer.max-workers 1
 
 # Copy, then install requirements before copying rest for a requirements cache layer.
 COPY pyproject.toml poetry.lock /tmp/
@@ -53,6 +51,6 @@ USER containeruser
 WORKDIR /app
 
 RUN set -ex; \
-  NODE_ENV=development yarn --ignore-optional;
+   NODE_ENV=development yarn --ignore-optional;
 
 CMD /app/bin/start.sh
