@@ -30,7 +30,6 @@ from .government import (
     Government,
     GovtFunction,
     Department,
-    PublicEntity,
     Programme,
     SPHERE_SLUG_CHOICES,
     NATIONAL_SLUG,
@@ -707,9 +706,6 @@ class MainMenuItem(SortableMixin):
     align_right = models.BooleanField()
     main_menu_item_order = models.PositiveIntegerField(
         default=0, editable=False, db_index=True
-    )
-    highlight_as_new = models.BooleanField(
-        default=False,
     )
 
     class Meta:

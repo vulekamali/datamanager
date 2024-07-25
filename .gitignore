@@ -4,7 +4,6 @@ env
 staticfiles/
 docs/_build
 *.sqlite3
-*.sql
 .tox
 .coverage
 /.vscode/
